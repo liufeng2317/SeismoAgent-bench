@@ -8,7 +8,7 @@
 - Phase: reference calibration and data preparation
 - Status: `v1 benchmark window frozen`
 - Primary reference: Lanza et al. (2019) for location quality
-- Secondary reference: Tan et al. (2024) SUGAR for dense detection
+- Secondary references: Tan et al. (2024) SUGAR for dense detection; Chamberlain et al. (2021) for dependent matched-filter expansion
 - Frozen v1 primary window: 2016-12-01 to 2016-12-09 UTC
 - Optional stress window: 2016-11-13 to 2016-11-20
 
@@ -29,34 +29,34 @@ Complex multi-fault Mw 7.8 sequence. This is a hard case for 3-D location, relat
 | Expected difficulty | High |
 | Primary role | Complex 3-D location/relocation and uncertainty |
 
-Lanza starts from approximately 2,700 GeoNet-reviewed ML≥3 events, obtains 2,655 initially relocated events and retains 2,013 final clustered hypoDD events. The study uses phase and waveform cross-correlation differential times with 100 bootstrap relocation samples. Tan reports 46,440 relocated events and a 41,392-event clustered set, but with a different event population and quality target.
+Lanza starts from 2,768 GeoNet-reviewed approximately-ML≥3 events, obtains 2,655 simul2014 initial locations, and reports 2,013 final clustered HypoDD events (the local XML contains 2,012 HypoDD origins). The study uses phase and waveform cross-correlation differential times with 100 bootstrap relocation samples. Tan reports 46,440 relocated events and a 41,392-event clustered set, but with a different event population and quality target.
 
 ## Reference evaluation matrix
 
 | Reference | Evaluation role | Time scope | Spatial scope | Quality tier | Network / observation condition |
 |---|---|---|---|---|---|
-| Lanza et al. (2019) | Primary: absolute/relative location, 3-D relocation and uncertainty | Full: 2016-11-13–2017-05-13; benchmark: 2016-12-01–12-08 | Kaikōura aftershock region covered by clustered events; freeze offshore/bbox rule | **Q1** location/relative relocation/uncertainty; **Q3** small-event completeness | GeoNet permanent + 24 STREWN temporary instruments; 3-D model and bootstrap |
+| Lanza et al. (2019) | Primary: absolute/relative location, 3-D relocation and uncertainty | Full: 2016-11-13–2017-05-13; benchmark: 2016-12-01–12-08 | Kaikōura aftershock region covered by clustered events; freeze offshore/bbox rule | **Q1** location/relative relocation/uncertainty; **Q3** small-event completeness | 81 listed stations (24 STREWN + 57 GeoNet); 3-D model and bootstrap; XML benchmark 122 common-mask rows (generic M) |
 | Tan et al. (2024) SUGAR | Secondary: high-rate detection, association and event separation | Same sequence; subset to primary window | Broader detected aftershock population; apply same spatial rule before comparison | **Q2** automatic detection/relative clusters; limited absolute uncertainty | GeoNet waveform data with computer-vision source detection |
 | Chamberlain et al. (2021) GrowClust | Dependent secondary: long-duration matched-filter expansion and relative geometry | 2009-01-01–2020-01-01; benchmark subset to primary window | Broad fault-zone catalog; common 0–60 km mask gives 2,214 events | **Q2** overall; metric-specific **Q1** for reported relative relocations | 21 GeoNet stations for detection; STREWN/CRSZ added only for location; templates inherited from Lanza |
 | GeoNet reviewed catalog | Baseline | Same frozen window | Same region | **Q3** operational baseline | GeoNet permanent network |
 
-Lanza and Tan should never be reduced to a single event-count leaderboard. Lanza is the location/uncertainty target; Tan is the dense detection target. The early 2016-11-13–11-20 window should remain a separate permanent-network stress condition.
+Lanza, Tan and Chamberlain should never be reduced to a single event-count leaderboard. Lanza is the location/uncertainty target; Tan is the dense detection target. The early 2016-11-13–11-20 window should remain a separate permanent-network stress condition.
 
 ## Reference products
 
 | Product | Role | Current issue |
 |---|---|---|
-| Lanza et al. (2019) | Primary location/relocation reference | Paper and supplement are staged under `references/LANZA2019_GL082780/`; supplement includes text SI, Tables 1, and the 134.8 MB relocation/source XML. Exact station subset and benchmark-window event count still need extraction. It is not a completeness target for small events. |
+| Lanza et al. (2019) | Primary location/relocation reference | Paper reading, Text SI/Table S1, and the 134.8 MB Data Set S1 XML are audited. Narrative SI remains under `references/LANZA2019_GL082780/supplement/`; the XML is correctly staged under `catalogs/LANZA2019_GL082780/raw/` and ignored by Git because it exceeds remote-file limits. Local audit: 2,655 event objects, 2,012 HypoDD origins, 123 time-only / 122 common-mask rows. Magnitude type is generic `M`, so 122 must not be called 122 ML≥3. |
 | Tan et al. (2024) SUGAR | Secondary high-rate detection reference | Paper, five supplements, Table S10 (67,660-event catalog), Table S11 (46,440 relocated events), and 1,172 associated phase files are staged under `references/TAN2024_JB028735/` and `catalogs/TAN2024_JB028735/`. The final 41,392-event cluster-filtered product is described in the paper but is not separately released as a CSV. |
 | GeoNet reviewed catalog | Baseline | Confirm release and stable identifiers. |
 | Chamberlain et al. (2021) GrowClust | Dependent secondary catalog | Paper reading and catalog audit are complete: [`paper_reading`](../references/CHAMBERLAIN2021_JB022304/paper/CHAMBERLAIN2021_JB022304__paper_reading.md) and [`catalog_summary`](../catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md). Use the corrected 33,328-unique-event CSV as canonical; retain the legacy 34,704-row export only for provenance comparison. |
 
 ## Calibration checklist
 
-- [x] Obtain and audit the Chamberlain corrected catalog; the Lanza/Tan uncertainty products remain separately tracked.
-- [ ] Extract the STREWN and GeoNet station list from the supplementary material.
+- [x] Obtain and audit the Chamberlain corrected catalog and Lanza Data Set S1 XML.
+- [x] Extract the Lanza station inventory (81 listed stations; station-day availability remains unresolved).
 - [ ] Verify UTC/local-date conventions around the mainshock.
-- [ ] Separate ML>=3 relocation evaluation from small-event detection evaluation.
+- [ ] Separate the article's approximate ML>=3 selection from the XML generic-M sensitivity and small-event detection evaluation.
 - [ ] Subset Lanza and Tan catalogs independently to the same time/space window.
 - [ ] Document 3-D velocity-model and bootstrap uncertainty fields.
 
@@ -69,24 +69,27 @@ The 2016-12-01 to 2016-12-08 window is preferred because the temporary STREWN de
 | Field | Frozen value |
 |---|---|
 | Time window | 2016-12-01 00:00:00 to 2016-12-09 00:00:00 UTC (8 days) |
-| Event counts | Lanza: 122 ML≥3 relocated events; Tan S10: 9,720 SUGAR events; Tan S11: 6,973 relocated events; Chamberlain corrected: 2,273 time-only / 2,214 after the common 0–60 km mask |
+| Event counts | Lanza: 123 XML rows time-only / 122 after the common mask (120 generic-M≥3 sensitivity only); Tan S10: 9,720 SUGAR events; Tan S11: 6,973 relocated events; Chamberlain corrected: 2,273 time-only / 2,214 after the common 0–60 km mask |
 | Spatial rule | −43.5 to −41.2°S, 172.0 to 175.2°E, depth 0–60 km; apply the same mask to all products before comparison |
-| Observed ranges | Lanza: lat −42.930 to −41.562°, lon 172.768–175.180°E, depth 2.67–37.01 km; Tan S11: lat −43.157 to −41.490°, lon 172.325–174.692°E, depth −1.56–59.64 km, M −0.53–4.87; Chamberlain common-mask: lat −42.973 to −41.500°, lon 172.603–175.183°E, depth 0.008–45.516 km, ML 0.475–5.304 |
+| Observed ranges | Lanza common-mask: lat −42.929 to −41.562°, lon 172.768–175.180°E, depth 1.921–37.01 km, generic M 2.2–5.8; Tan S11: lat −43.157 to −41.490°, lon 172.325–174.692°E, depth −1.56–59.64 km, M −0.53–4.87; Chamberlain common-mask: lat −42.973 to −41.500°, lon 172.603–175.183°E, depth 0.008–45.516 km, ML 0.475–5.304 |
 | Network condition | 46 GeoNet/STREWN stations, 3-component channels where available; retain permanent versus temporary station flags |
 | Waveform volume | Design upper bound: ~33.5 GB for 46 × 3 components × 100 Hz × int32 × 8 days continuous; use actual GeoNet gaps in the prepared manifest |
-| Reference quality and role | Lanza: Q1 absolute/relative location and uncertainty, low completeness; Tan S10/S11: Q2 high-rate detection/relative relocation; Chamberlain: Q2 dependent matched-filter expansion, Q1 only for its reported relative-location subset; GeoNet: Q3 operational baseline |
+| Reference quality and role | Lanza: Q1 absolute/relative location and uncertainty, low completeness (generic-M XML); Tan S10/S11: Q2 high-rate detection/relative relocation; Chamberlain: Q2 dependent matched-filter expansion, Q1 only for its reported relative-location subset; GeoNet: Q3 operational baseline |
 
 ## Main risks
 
 1. Lanza and Tan optimize different event populations.
 2. Temporary-network availability must be matched exactly.
 3. Absolute and relative location errors must not be conflated.
-4. Chamberlain's matched-filter detections inherit Lanza template selection; treat the catalog as a dependent expansion, not a fourth independent truth layer.
-5. The corrected CSV has 1,756 complete focal-mechanism rows while the abstract says 1,755; retain this release discrepancy in any focal-mechanism metric.
+4. Lanza's distributed XML preserves a generic `M` scale and 2,012 HypoDD origins versus the article's 2,013; retain both discrepancies.
+5. Chamberlain's matched-filter detections inherit Lanza template selection; treat the catalog as a dependent expansion, not a fourth independent truth layer.
+6. The corrected CSV has 1,756 complete focal-mechanism rows while the abstract says 1,755; retain this release discrepancy in any focal-mechanism metric.
 
 ## Sources
 
 - `../references/LANZA2019_GL082780/paper/LANZA2019_GL082780__paper.pdf`
+- `../references/LANZA2019_GL082780/paper/LANZA2019_GL082780__paper_reading.md`
+- `../catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md`
 - `../references/TAN2024_JB028735/paper/TAN2024_JB028735__paper.pdf`
 - `../references/CHAMBERLAIN2021_JB022304/paper/CHAMBERLAIN2021_JB022304__paper_reading.md`
 - `../catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md`
@@ -118,7 +121,7 @@ Cesca et al. (2017), DOI https://doi.org/10.1016/j.epsl.2017.08.024, provides a 
 
 ### Audit conclusion
 
-**Sufficiency verdict:** Sufficient after adding Chamberlain as a dependent secondary catalog, which is now locally available. Lanza–Tan–Chamberlain–GeoNet covers location, dense detection, dependent relative expansion, and operational baseline; no single catalog should be used for all dimensions.
+**Sufficiency verdict:** Sufficient after auditing Lanza as the primary location reference and adding Tan/Chamberlain as complementary detection and dependent-expansion layers. Lanza–Tan–Chamberlain–GeoNet covers location, dense detection, dependent relative expansion, and operational baseline; no single catalog should be used for all dimensions.
 
 #### A. Case information
 
@@ -153,9 +156,9 @@ Cesca et al. (2017), DOI https://doi.org/10.1016/j.epsl.2017.08.024, provides a 
 | **Priority** | **Primary for location quality** |
 | **Reference type** | Expert-reviewed-event + high-precision 3-D relocation reference |
 | **Paper** | GRL DOI 10.1029/2019GL082780 |
-| **Initial event population** | ~2,700 GeoNet-reviewed events with ML ≥ 3 |
+| **Initial event population** | 2,768 GeoNet-reviewed events selected at approximately ML ≥ 3 (article summary often rounds this to ~2,700) |
 | **Span** | 2016-11-13 to 2017-05-13 UTC |
-| **Stations** | **24 STREWN temporary instruments + selected GeoNet permanent instruments**; exact total used should be extracted from Table S1 before benchmark freeze |
+| **Stations** | **81 listed stations: 24 STREWN temporary + 57 GeoNet entries**; station-day availability is not encoded in Table S1 |
 | **Picking** | REST automatic phase picking, explicitly compared on a 138-event subset with analyst picks |
 | **Initial relocation** | simul2014 using a 3-D velocity model |
 | **Final relocation** | hypoDD 3-D with phase and waveform cross-correlation differential times |
@@ -164,11 +167,11 @@ Cesca et al. (2017), DOI https://doi.org/10.1016/j.epsl.2017.08.024, provides a 
 | **Final clustered hypoDD events** | **2,013** |
 | **Independent uncertainty assessment** | 100 bootstrap relocation samples |
 | **Reported median 95% error-ellipse semiaxes** | ~592 m, 358 m, 426 m in the model-aligned x/y/z directions |
-| **Data access** | GeoNet permanent waveforms + temporary STREWN data described in the study; supporting information includes relocation products/uncertainties |
+| **Data access** | GeoNet permanent waveforms + temporary STREWN data; local Data Set S1 QuakeML is staged under `catalogs/LANZA2019_GL082780/raw/` (ignored from Git because it is 131.6 MB) |
 | **Provisional reference quality** | **High** |
 | **Reference independence** | **High–Medium** relative to a generic modern Agent because it uses reviewed events, explicit pick validation, 3-D relocation, waveform cross-correlation, and bootstrap uncertainty |
 | **Best benchmark use** | Location/relocation quality, relative geometry, uncertainty calibration |
-| **Main limitation** | Focuses on ML≥3, well-observed events and discards many poorly clustered/offshore events; not a completeness target for small earthquakes. |
+| **Main limitation** | Focuses on approximately ML≥3, well-observed events and discards many poorly clustered/offshore events; the released XML uses generic `M`, reports 2,012 HypoDD origins rather than the article's 2,013, and is not a completeness target for small earthquakes. |
 
 ##### B2. Secondary reference — Tan et al. (2024) SUGAR catalog
 
@@ -203,11 +206,11 @@ Cesca et al. (2017), DOI https://doi.org/10.1016/j.epsl.2017.08.024, provides a 
 |---|---|
 | **Recommended for core benchmark?** | **Yes, but use after the easier U.S. cases are operational** |
 | **Primary target** | Lanza et al. for location reliability |
-| **Secondary target** | Tan et al. for high-rate detection/association stress testing |
+| **Secondary target** | Tan et al. for high-rate detection/association stress testing; Chamberlain for dependent matched-filter expansion and relative geometry |
 | **Baseline** | GeoNet reviewed catalog |
 | **Recommended primary window** | 2016-12-01 to 2016-12-08 |
 | **Optional stress window** | 2016-11-13 to 2016-11-20 |
-| **Short-window target event count** | Lanza 122; Tan S10 9,720; Tan S11 6,973; Chamberlain corrected 2,214 after the common time/space/depth mask (2,273 time-only) |
+| **Short-window target event count** | Lanza 122 released XML rows after the common mask (120 generic-M≥3 sensitivity); Tan S10 9,720; Tan S11 6,973; Chamberlain corrected 2,214 after the common mask (2,273 time-only) |
 | **Approximate waveform volume** | ~33.5 GB continuous upper bound for 46 stations × 3C × 100 Hz × int32 × 8 days |
 | **Expected compute cost** | High |
 | **Key benchmark risk** | Primary and secondary catalogs optimize different event populations and use different network/time conditions; direct event-count ranking would be misleading |
