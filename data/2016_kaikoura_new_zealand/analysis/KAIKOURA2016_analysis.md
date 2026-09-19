@@ -37,6 +37,7 @@ Lanza starts from approximately 2,700 GeoNet-reviewed ML≥3 events, obtains 2,6
 |---|---|---|---|---|---|
 | Lanza et al. (2019) | Primary: absolute/relative location, 3-D relocation and uncertainty | Full: 2016-11-13–2017-05-13; benchmark: 2016-12-01–12-08 | Kaikōura aftershock region covered by clustered events; freeze offshore/bbox rule | **Q1** location/relative relocation/uncertainty; **Q3** small-event completeness | GeoNet permanent + 24 STREWN temporary instruments; 3-D model and bootstrap |
 | Tan et al. (2024) SUGAR | Secondary: high-rate detection, association and event separation | Same sequence; subset to primary window | Broader detected aftershock population; apply same spatial rule before comparison | **Q2** automatic detection/relative clusters; limited absolute uncertainty | GeoNet waveform data with computer-vision source detection |
+| Chamberlain et al. (2021) GrowClust | Dependent secondary: long-duration matched-filter expansion and relative geometry | 2009-01-01–2020-01-01; benchmark subset to primary window | Broad fault-zone catalog; common 0–60 km mask gives 2,214 events | **Q2** overall; metric-specific **Q1** for reported relative relocations | 21 GeoNet stations for detection; STREWN/CRSZ added only for location; templates inherited from Lanza |
 | GeoNet reviewed catalog | Baseline | Same frozen window | Same region | **Q3** operational baseline | GeoNet permanent network |
 
 Lanza and Tan should never be reduced to a single event-count leaderboard. Lanza is the location/uncertainty target; Tan is the dense detection target. The early 2016-11-13–11-20 window should remain a separate permanent-network stress condition.
@@ -48,11 +49,11 @@ Lanza and Tan should never be reduced to a single event-count leaderboard. Lanza
 | Lanza et al. (2019) | Primary location/relocation reference | Paper and supplement are staged under `references/LANZA2019_GL082780/`; supplement includes text SI, Tables 1, and the 134.8 MB relocation/source XML. Exact station subset and benchmark-window event count still need extraction. It is not a completeness target for small events. |
 | Tan et al. (2024) SUGAR | Secondary high-rate detection reference | Paper, five supplements, Table S10 (67,660-event catalog), Table S11 (46,440 relocated events), and 1,172 associated phase files are staged under `references/TAN2024_JB028735/` and `catalogs/TAN2024_JB028735/`. The final 41,392-event cluster-filtered product is described in the paper but is not separately released as a CSV. |
 | GeoNet reviewed catalog | Baseline | Confirm release and stable identifiers. |
-| Chamberlain et al. (2021) GrowClust | Dependent secondary catalog | Original Zenodo CSV and a separately staged corrected focal-mechanism CSV are available under `catalogs/CHAMBERLAIN2021_JB022304/`; retain both schemas for cross-version comparison. |
+| Chamberlain et al. (2021) GrowClust | Dependent secondary catalog | Paper reading and catalog audit are complete: [`paper_reading`](../references/CHAMBERLAIN2021_JB022304/paper/CHAMBERLAIN2021_JB022304__paper_reading.md) and [`catalog_summary`](../catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md). Use the corrected 33,328-unique-event CSV as canonical; retain the legacy 34,704-row export only for provenance comparison. |
 
 ## Calibration checklist
 
-- [ ] Obtain distributed catalogs and supporting uncertainty products.
+- [x] Obtain and audit the Chamberlain corrected catalog; the Lanza/Tan uncertainty products remain separately tracked.
 - [ ] Extract the STREWN and GeoNet station list from the supplementary material.
 - [ ] Verify UTC/local-date conventions around the mainshock.
 - [ ] Separate ML>=3 relocation evaluation from small-event detection evaluation.
@@ -68,23 +69,27 @@ The 2016-12-01 to 2016-12-08 window is preferred because the temporary STREWN de
 | Field | Frozen value |
 |---|---|
 | Time window | 2016-12-01 00:00:00 to 2016-12-09 00:00:00 UTC (8 days) |
-| Event counts | Lanza: 122 ML≥3 relocated events after the common 0–60 km mask; Tan S10: 9,720 SUGAR events; Tan S11: 6,973 relocated events in the same window |
+| Event counts | Lanza: 122 ML≥3 relocated events; Tan S10: 9,720 SUGAR events; Tan S11: 6,973 relocated events; Chamberlain corrected: 2,273 time-only / 2,214 after the common 0–60 km mask |
 | Spatial rule | −43.5 to −41.2°S, 172.0 to 175.2°E, depth 0–60 km; apply the same mask to all products before comparison |
-| Observed ranges | Lanza: lat −42.930 to −41.562°, lon 172.768–175.180°E, depth 2.67–37.01 km; Tan S11: lat −43.157 to −41.490°, lon 172.325–174.692°E, depth −1.56–59.64 km, M −0.53–4.87 |
+| Observed ranges | Lanza: lat −42.930 to −41.562°, lon 172.768–175.180°E, depth 2.67–37.01 km; Tan S11: lat −43.157 to −41.490°, lon 172.325–174.692°E, depth −1.56–59.64 km, M −0.53–4.87; Chamberlain common-mask: lat −42.973 to −41.500°, lon 172.603–175.183°E, depth 0.008–45.516 km, ML 0.475–5.304 |
 | Network condition | 46 GeoNet/STREWN stations, 3-component channels where available; retain permanent versus temporary station flags |
 | Waveform volume | Design upper bound: ~33.5 GB for 46 × 3 components × 100 Hz × int32 × 8 days continuous; use actual GeoNet gaps in the prepared manifest |
-| Reference quality and role | Lanza: Q1 absolute/relative location and uncertainty, low completeness; Tan S10/S11: Q2 high-rate detection/relative relocation; GeoNet: Q3 operational baseline |
+| Reference quality and role | Lanza: Q1 absolute/relative location and uncertainty, low completeness; Tan S10/S11: Q2 high-rate detection/relative relocation; Chamberlain: Q2 dependent matched-filter expansion, Q1 only for its reported relative-location subset; GeoNet: Q3 operational baseline |
 
 ## Main risks
 
 1. Lanza and Tan optimize different event populations.
 2. Temporary-network availability must be matched exactly.
 3. Absolute and relative location errors must not be conflated.
+4. Chamberlain's matched-filter detections inherit Lanza template selection; treat the catalog as a dependent expansion, not a fourth independent truth layer.
+5. The corrected CSV has 1,756 complete focal-mechanism rows while the abstract says 1,755; retain this release discrepancy in any focal-mechanism metric.
 
 ## Sources
 
 - `../references/LANZA2019_GL082780/paper/LANZA2019_GL082780__paper.pdf`
 - `../references/TAN2024_JB028735/paper/TAN2024_JB028735__paper.pdf`
+- `../references/CHAMBERLAIN2021_JB022304/paper/CHAMBERLAIN2021_JB022304__paper_reading.md`
+- `../catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md`
 - Lanza et al. (2019), DOI: https://doi.org/10.1029/2019GL082780
 - Tan et al. (2024), DOI: https://doi.org/10.1029/2024JB028735
 ## Full inventory record (migrated from `docs/01_Case_details.md`)
@@ -95,9 +100,10 @@ The 2016-12-01 to 2016-12-08 window is preferred because the temporary STREWN de
 ### Added dependent reference — Chamberlain et al. (2021) matched-filter/GrowClust catalog
 
 - Public catalog: https://zenodo.org/record/5035841
-- Local copy: `../catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust.csv` (34,704 event rows; Zenodo CSV export, SHA-256 recorded in `data/REFERENCES_MANIFEST.md`).
-- Method: matched-filter workflow using Lanza events as templates followed by GrowClust relocation.
-- Recommended role: **Q2 dense-detection/relative-location secondary reference**.
+- Canonical local copy: `../catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust_corrected_focal_mechanisms.csv` (33,328 unique events; SHA-256 recorded in the catalog summary).
+- Legacy comparison copy: `../catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust.csv` (34,704 rows, duplicate/malformed legacy export; do not use for benchmark counts).
+- Method: matched-filter workflow using Lanza events as templates followed by NonLinLoc, GrowClust and HypoDD relocation.
+- Recommended role: **Q2 dense-detection/relative-location secondary reference**, with a metric-specific Q1 subset for the reported GrowClust relocations.
 - Limitation: it is not independent of Lanza because the template population derives from that catalog; use it to measure catalog expansion and dense relative structure, not as an independent absolute-location truth set.
 
 ### Verified core products
@@ -189,7 +195,7 @@ Cesca et al. (2017), DOI https://doi.org/10.1016/j.epsl.2017.08.024, provides a 
 | Product | Role |
 |---|---|
 | GeoNet reviewed catalog | Operational baseline |
-| Chamberlain et al. (2021), DOI 10.1029/2021JB022304 | Useful matched-filter/GrowClust comparison, but the study spans a much longer interval and should not be a core target in the short-window benchmark |
+| Chamberlain et al. (2021), DOI 10.1029/2021JB022304 | Dependent matched-filter/GrowClust comparison; use corrected CSV (2,214 common-mask events) for expansion/relative-geometry metrics, not as an independent truth catalog |
 
 #### C. Benchmark suitability
 
@@ -201,7 +207,7 @@ Cesca et al. (2017), DOI https://doi.org/10.1016/j.epsl.2017.08.024, provides a 
 | **Baseline** | GeoNet reviewed catalog |
 | **Recommended primary window** | 2016-12-01 to 2016-12-08 |
 | **Optional stress window** | 2016-11-13 to 2016-11-20 |
-| **Short-window target event count** | Lanza 122; Tan S10 9,720; Tan S11 6,973 after the common time/space/depth mask |
+| **Short-window target event count** | Lanza 122; Tan S10 9,720; Tan S11 6,973; Chamberlain corrected 2,214 after the common time/space/depth mask (2,273 time-only) |
 | **Approximate waveform volume** | ~33.5 GB continuous upper bound for 46 stations × 3C × 100 Hz × int32 × 8 days |
 | **Expected compute cost** | High |
 | **Key benchmark risk** | Primary and secondary catalogs optimize different event populations and use different network/time conditions; direct event-count ranking would be misleading |
