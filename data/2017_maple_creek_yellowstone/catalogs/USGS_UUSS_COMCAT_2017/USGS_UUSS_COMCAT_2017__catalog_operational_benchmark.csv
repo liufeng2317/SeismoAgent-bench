@@ -1,0 +1,6 @@
+time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,type,horizontalError,depthError,magError,magNst,status,locationSource,magSource
+2017-06-14T04:22:59.810Z,44.5933333,-110.3751667,4.02,1.52,md,8,106,0.03326,0.1,uu,uu60202567,2017-06-15T19:06:12.620Z,"49 km SSE of Mammoth, Wyoming",earthquake,0.71,0.51,0.365,4,reviewed,uu,uu
+2017-06-14T04:33:47.050Z,44.5956667,-110.3728333,2.2,1.33,md,12,106,0.03612,0.22,uu,uu60202572,2017-06-15T19:11:53.740Z,"49 km SSE of Mammoth, Wyoming",earthquake,0.53,2.9,0.352,7,reviewed,uu,uu
+2017-06-14T04:34:02.660Z,44.601,-110.3811667,3.81,1.86,ml,10,108,0.03824,0.1,uu,uu60010774,2017-06-15T19:16:02.560Z,"48 km SSE of Mammoth, Wyoming",earthquake,0.32,0.66,0.29,3,reviewed,uu,uu
+2017-06-14T04:46:02.790Z,44.594,-110.3801667,4.67,1.35,md,11,104,0.0321,0.11,uu,uu60202577,2017-06-15T19:19:40.710Z,"49 km SSE of Mammoth, Wyoming",earthquake,0.29,0.4,0.315,6,reviewed,uu,uu
+2017-06-16T09:54:17.500Z,44.56,-110.3676667,3.13,1.01,md,8,131,0.02369,0.09,uu,uu60203822,2017-06-21T16:26:02.380Z,"53 km SSE of Mammoth, Wyoming",earthquake,0.57,0.87,0.419,3,reviewed,uu,uu
