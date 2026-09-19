@@ -1,0 +1,59 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+
+# Python and editor artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.idea/
+.vscode/
+
+# Runtime logs and task state
+**/logs/
+*.log
+**/batch_tasks.json
+**/summary.json
+**/summary.csv
+
+# MinerU generated bundles duplicate the source PDF and can be very large.
+**/paper/mineru/
+**/paper/*__mineru.zip
+
+# Copyrighted / bulky source material: keep provenance in README and manifest.
+**/paper/*.pdf
+**/supplement/*.pdf
+**/supplement/*.docx
+**/supplement/*.xlsx
+**/supplement/*.xml
+**/supplement/*.zip
+**/supplement/*.mp4
+**/references/**/*.zip
+**/references/**/*.docx
+**/references/**/*.xlsx
+**/references/**/*.xml
+**/references/**/*.mp4
+
+# Raw archives and machine-scale phase-arrival products stay local.
+**/catalogs/**/raw/
+**/catalogs/**/*.zip
+**/catalogs/**/*.tar
+**/catalogs/**/*.tar.gz
+**/catalogs/**/*.h5
+**/catalogs/**/*.hdf5
+
+# Large source catalogs; small canonical tables can be force-added explicitly.
+data/**/*.csv
+data/**/*.txt
+data/**/*.xml
+
+# Temporary downloads and OS metadata
+**/.DS_Store
+**/__MACOSX/
+*.part
+*.tmp
