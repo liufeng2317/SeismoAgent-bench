@@ -7,6 +7,8 @@
 - Case ID: `PRAGUE2011`
 - Phase: reference calibration and data preparation
 - Status: `v1 benchmark window frozen`
+- Information extraction: Cochran paper and catalog audit completed; remaining
+  references are pending the same structured extraction.
 - Primary reference: Cochran et al. (2020) enhanced catalog
 - Frozen v1 core window: 2011-11-11 to 2011-11-19 UTC
 - Optional stress window: 2011-11-04 to 2011-11-11
@@ -48,6 +50,14 @@ The 5,446-event release and 5,262-event paper-filtered set must remain separate 
 | Cochran et al. (2020) local catalog | Primary detection and location reference | 8,810 event rows; subset to frozen window gives 2,078 events. |
 | McMahon et al. (2017) / 998-event reviewed seed | Secondary workflow and expert anchor | McMahon's 5,262/5,446 counts are not the local Cochran file and should not be mixed without an explicit crosswalk. |
 | Regional/operational catalog | Baseline | Identify exact release and coverage. |
+
+The detailed first-pass extraction is maintained beside the source products:
+
+- [Cochran paper reading](../references/COCHRAN2020_GJIGGAA153/paper/COCHRAN2020_GJIGGAA153__paper_reading.md)
+- [Cochran catalog summary](../catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md)
+
+These files distinguish article-reported values from local-file audit values;
+the case-level tables above remain the benchmark decision record.
 
 ## Calibration checklist
 
