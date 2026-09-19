@@ -49,12 +49,17 @@ The 5,446-event release and 5,262-event paper-filtered set must remain separate 
 |---|---|---|
 | Cochran et al. (2020) local catalog | Primary detection and location reference | 8,811 event rows; time-only frozen window gives 2,078 events; the rounded spatial/depth mask gives 2,076. Magnitude range is −1.36–4.99 overall and its type is unresolved. |
 | McMahon et al. (2017) / 998-event reviewed seed | Secondary workflow and expert anchor | McMahon's 5,262/5,446 counts are not the local Cochran file and should not be mixed without an explicit crosswalk. |
+| Isken & Mooney (2017) Table S3 | Sparse structural/location anchor | 13 manually picked M>3 events; 7 fall in the canonical core window; not a completeness catalog. |
 | Regional/operational catalog | Baseline | Identify exact release and coverage. |
 
 The detailed first-pass extraction is maintained beside the source products:
 
 - [Cochran paper reading](../references/COCHRAN2020_GJIGGAA153/paper/COCHRAN2020_GJIGGAA153__paper_reading.md)
 - [Cochran catalog summary](../catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md)
+- [McMahon paper reading](../references/MCMAHON2017_GL072944/paper/MCMAHON2017_GL072944__paper_reading.md)
+- [McMahon catalog summary](../catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md)
+- [Isken paper reading](../references/ISKEN2017_BSSA0120160150/paper/ISKEN2017_BSSA0120160150__paper_reading.md)
+- [Isken catalog summary](../catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md)
 
 These files distinguish article-reported values from local-file audit values;
 the case-level tables above remain the benchmark decision record.
@@ -64,10 +69,13 @@ the case-level tables above remain the benchmark decision record.
 - [x] Download and locally validate the Cochran catalog release.
 - [x] Inspect event schema, time standard, coordinates, depth, and magnitude fields.
 - [x] Preserve the McMahon 5,446-event release separately; reconcile the paper's 5,262 filtered subset only through an explicit event/quality crosswalk.
-- [ ] Confirm the station list and deployment dates.
+- [x] Extract McMahon paper/catalog construction and local E/P schema.
+- [x] Extract Isken Table S3 paper/catalog construction and sparse-anchor role.
+- [ ] Confirm the station list and deployment dates from McMahon Table S1 and Isken Table S1.
 - [ ] Identify archive provenance for ZQ and NEIC waveform subsets.
 - [ ] Subset all references to the same time and spatial window.
 - [ ] Record the primary reference's inclusion and uncertainty filters.
+- [ ] Acquire McMahon SI/Table S1–S2 and resolve P-record timestamp semantics.
 
 ## Window and data preparation
 

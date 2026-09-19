@@ -7,3 +7,5 @@
 - Metadata: `raw/MCMAHON2017_GL072944__metadata.xml`.
 
 The text file uses the USGS release format: `E` lines contain event origin/location/magnitude fields and `P` lines contain phase arrivals. The release contains 5,446 detected and relocated events over 2011-11-04 to 2011-12-05. This is an independent subspace-detection/relocation product relative to the Cochran template-enhanced catalog; retain both rather than merging rows.
+
+- Detailed catalog audit: [`MCMAHON2017_GL072944__catalog_summary.md`](./MCMAHON2017_GL072944__catalog_summary.md).
