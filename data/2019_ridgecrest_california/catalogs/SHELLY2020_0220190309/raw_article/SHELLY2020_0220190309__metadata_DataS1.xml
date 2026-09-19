@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <idinfo>
+    <citation>
+      <citeinfo>
+        <origin>David R. Shelly</origin>
+        <pubdate>20200102</pubdate>
+        <title>A High-Resolution Seismic Catalog for the Initial 2019 Ridgecrest Earthquake Sequence</title>
+        <geoform>tabular digital data</geoform>
+        <othercit>Accompanying manuscript:  A High-Resolution Seismic Catalog for the Initial 2019 Ridgecrest Earthquake Sequence: Foreshocks, Aftershocks, and Faulting Complexity, IP-113928</othercit>
+        <onlink>https://doi.org/10.5066/P9JN6H0N</onlink>
+        <lworkcit>
+          <citeinfo>
+            <origin>David R. Shelly</origin>
+            <pubdate>20200122</pubdate>
+            <title>A High-Resolution Seismic Catalog for the Initial 2019 Ridgecrest Earthquake Sequence: Foreshocks, Aftershocks, and Faulting Complexity</title>
+            <geoform>publication</geoform>
+            <pubinfo>
+              <pubplace>n/a</pubplace>
+              <publish>Seismological Society of America (SSA)</publish>
+            </pubinfo>
+            <onlink>https://doi.org/10.1785/0220190309</onlink>
+          </citeinfo>
+        </lworkcit>
+      </citeinfo>
+    </citation>
+    <descript>
+      <abstract>I use template matching and precise relative relocation techniques to develop a high-resolution earthquake catalog for the initial portion of the 2019 Ridgecrest earthquake sequence, from July 4-16, encompassing the foreshock sequence and the first 10+ days of aftershocks following the Mw 7.1 mainshock.  Using 13,525 routinely cataloged events as waveform templates, I detect and precisely locate a total of 34,091 events.  Precisely located earthquakes reveal numerous cross-cutting fault structures with dominantly perpendicular SW- and NW-strikes.  Foreshocks of the Mw 6.4 event appear to align on a NW-striking fault.  Aftershocks of the Mw 6.4 event suggest that it further ruptured this NW-striking fault, as well as the SW-striking fault where surface rupture was observed.  Finally, aftershocks of the Mw 7.1 show a highly complex distribution, illuminating a primary NW-striking fault zone consistent with surface rupture, but also numerous cross-cutting SW-striking faults.  Aftershock relocations suggest that the Mw 7.1 event ruptured adjacent to the previous NW-striking rupture of the Mw 6.4, perhaps activating a subparallel structure southwest of the earlier rupture.  Both the NW and SE rupture termini of the Mw 7.1 rupture exhibited multiple-fault branching, with particularly high rates of aftershocks and multiple fault orientations in the dilatational quadrant NE of the NW rupture terminus.</abstract>
+      <purpose>Data constrain structure and behavior of 2019 Ridgecrest earthquake sequence</purpose>
+    </descript>
+    <timeperd>
+      <timeinfo>
+        <rngdates>
+          <begdate>20190704</begdate>
+          <enddate>20190716</enddate>
+        </rngdates>
+      </timeinfo>
+      <current>ground condition</current>
+    </timeperd>
+    <status>
+      <progress>Complete</progress>
+      <update>None planned</update>
+    </status>
+    <spdom>
+      <bounding>
+        <westbc>-180.0</westbc>
+        <eastbc>180.0</eastbc>
+        <northbc>90.0</northbc>
+        <southbc>-90.0</southbc>
+      </bounding>
+      <descgeog>World</descgeog>
+    </spdom>
+    <keywords>
+      <theme>
+        <themekt>ISO 19115 Topic Category</themekt>
+        <themekey>biota</themekey>
+      </theme>
+      <theme>
+        <themekt>Marine Realms Information Bank (MRIB) keywords</themekt>
+        <themekey>volcanology</themekey>
+      </theme>
+      <theme>
+        <themekt>USGS Thesaurus</themekt>
+        <themekey>earthquake occurrences</themekey>
+      </theme>
+      <theme>
+        <themekt>USGS Metadata Identifier</themekt>
+        <themekey>USGS:5dd715f3e4b0695797650d18</themekey>
+      </theme>
+      <place>
+        <placekt>Common geographic areas</placekt>
+        <placekey>California South</placekey>
+      </place>
+    </keywords>
+    <accconst>None.  Please see 'Distribution Info' for details.</accconst>
+    <useconst>None.  Users are advised to read the data set's metadata thoroughly to understand appropriate use and data limitations.</useconst>
+    <ptcontac>
+      <cntinfo>
+        <cntorgp>
+          <cntorg>U.S. Geological Survey - ScienceBase</cntorg>
+        </cntorgp>
+        <cntaddr>
+          <addrtype>mailing</addrtype>
+          <address>Denver Federal Center, Building 810, Mail Stop 302</address>
+          <city>Denver</city>
+          <state>CO</state>
+          <postal>80225</postal>
+        </cntaddr>
+        <cntvoice>1-888-275-8747</cntvoice>
+        <cntemail>sciencebase@usgs.govplace</cntemail>
+      </cntinfo>
+    </ptcontac>
+  </idinfo>
+  <dataqual>
+    <attracc>
+      <attraccr>Not assessed</attraccr>
+    </attracc>
+    <logic>See accompanying manuscript</logic>
+    <complete>See accompanying manuscript</complete>
+    <lineage>
+      <procstep>
+        <procdesc>See accompanying manuscript</procdesc>
+        <procdate>20190701</procdate>
+      </procstep>
+    </lineage>
+  </dataqual>
+  <eainfo>
+    <overview>
+      <eaover>YYYY  year of earthquake origin time
+MM   month
+dd day
+hh hour
+mm  minute
+ss.sss seconds
+lat  latitude(degrees)
+lon longitude(degrees)
+depth  depth in km below Kilauea summit at 1.2 km above see level)
+mag  earthquake magnitude
+ID  event identifier</eaover>
+      <eadetcit>High resolution earthquake catalogs from the 2019 Ridgecrest earthquake sequence</eadetcit>
+    </overview>
+  </eainfo>
+  <distinfo>
+    <distrib>
+      <cntinfo>
+        <cntperp>
+          <cntper>GS ScienceBase</cntper>
+          <cntorg>U.S. Geological Survey</cntorg>
+        </cntperp>
+        <cntaddr>
+          <addrtype>mailing address</addrtype>
+          <address>Denver Federal Center, Building 810, Mail Stop 302</address>
+          <city>Denver</city>
+          <state>CO</state>
+          <postal>80225</postal>
+          <country>United States</country>
+        </cntaddr>
+        <cntvoice>1-888-275-8747</cntvoice>
+        <cntemail>sciencebase@usgs.gov</cntemail>
+      </cntinfo>
+    </distrib>
+    <distliab>Unless otherwise stated, all data, metadata and related materials are considered to satisfy the quality standards relative to the purpose for which the data were collected. Although these data and associated metadata have been reviewed for accuracy and completeness and approved for release by the U.S. Geological Survey (USGS), no warranty expressed or implied is made regarding the display or utility of the data on any other system or for general or scientific purposes, nor shall the act of distribution constitute any such warranty.</distliab>
+    <stdorder>
+      <digform>
+        <digtinfo>
+          <formname>Digital Data</formname>
+        </digtinfo>
+        <digtopt>
+          <onlinopt>
+            <computer>
+              <networka>
+                <networkr>https://doi.org/10.5066/P9JN6H0N</networkr>
+              </networka>
+            </computer>
+          </onlinopt>
+        </digtopt>
+      </digform>
+      <fees>None</fees>
+    </stdorder>
+  </distinfo>
+  <metainfo>
+    <metd>20200818</metd>
+    <metc>
+      <cntinfo>
+        <cntorgp>
+          <cntorg>U.S. Geological Survey - ScienceBase</cntorg>
+        </cntorgp>
+        <cntaddr>
+          <addrtype>mailing</addrtype>
+          <address>Denver Federal Center, Building 810, Mail Stop 302</address>
+          <city>Denver</city>
+          <state>CO</state>
+          <postal>80225</postal>
+        </cntaddr>
+        <cntvoice>1-888-275-8747</cntvoice>
+        <cntemail>sciencebase@usgs.gov</cntemail>
+      </cntinfo>
+    </metc>
+    <metstdn>FGDC Biological Data Profile of the Content Standard for Digital Geospatial Metadata</metstdn>
+    <metstdv>FGDC-STD-001.1-1999</metstdv>
+  </metainfo>
+</metadata>
