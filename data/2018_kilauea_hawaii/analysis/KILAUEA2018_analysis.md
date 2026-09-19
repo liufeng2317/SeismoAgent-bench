@@ -1,6 +1,6 @@
 # KILAUEA2018 — Case Analysis
 
-> **Source of truth:** This file is the detailed, mutable analysis record for `KILAUEA2018`. The cross-case summary is maintained in [`Docs/01_Case_details.md`](../../../Docs/01_Case_details.md).
+> **Source of truth:** This file is the detailed, mutable analysis record for `KILAUEA2018`. The cross-case summary is maintained in [`docs/01_Case_details.md`](../../../docs/01_Case_details.md).
 
 ## Status
 
@@ -82,7 +82,7 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 - `../references/USGS2019_SCIENCE_OVERVIEW/paper/USGS2019_SCIENCE_OVERVIEW__paper.pdf`
 - Shelly & Thelen (2019), DOI: https://doi.org/10.1029/2019GL085636
 - Wei et al. (2022), DOI: https://doi.org/10.1029/2021EA001979
-## Full inventory record (migrated from `Docs/01_Case_details.md`)
+## Full inventory record (migrated from `docs/01_Case_details.md`)
 ### 2018 Kīlauea Eruption / Caldera-Collapse Seismicity
 
 ## Literature and catalog gap audit

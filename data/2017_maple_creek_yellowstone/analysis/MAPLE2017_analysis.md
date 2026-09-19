@@ -1,6 +1,6 @@
 # MAPLE2017 — Case Analysis
 
-> **Source of truth:** This file is the detailed, mutable analysis record for `MAPLE2017`. The cross-case summary is maintained in [`Docs/01_Case_details.md`](../../../Docs/01_Case_details.md).
+> **Source of truth:** This file is the detailed, mutable analysis record for `MAPLE2017`. The cross-case summary is maintained in [`docs/01_Case_details.md`](../../../docs/01_Case_details.md).
 
 ## Status
 
@@ -82,7 +82,7 @@ The primary catalog is suitable for a template-enhanced swarm benchmark, but ref
 - `../references/PANG2019_GL082376/`
 - `../references/MAPLE_RELATED_OPEN/paper/MAPLE_RELATED_OPEN__paper.pdf`
 - Shelly & Hardebeck (2019), DOI: https://doi.org/10.1029/2018GL081607
-## Full inventory record (migrated from `Docs/01_Case_details.md`)
+## Full inventory record (migrated from `docs/01_Case_details.md`)
 ### 2017 Maple Creek Earthquake Swarm, Yellowstone
 
 ## Literature and catalog gap audit

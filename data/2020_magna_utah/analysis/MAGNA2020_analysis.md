@@ -1,6 +1,6 @@
 # MAGNA2020 — Case Analysis
 
-> **Source of truth:** This file is the detailed, mutable analysis record for `MAGNA2020`. The cross-case summary is maintained in [`Docs/01_Case_details.md`](../../../Docs/01_Case_details.md).
+> **Source of truth:** This file is the detailed, mutable analysis record for `MAGNA2020`. The cross-case summary is maintained in [`docs/01_Case_details.md`](../../../docs/01_Case_details.md).
 
 ## Status
 
@@ -86,7 +86,7 @@ The v1 raw-waveform task should use the Pang-compatible permanent/telemetered ne
 - Baker et al. (2021), DOI: https://doi.org/10.1785/0220200316
 - Pang catalog, ISC DOI: https://doi.org/10.31905/9IE6PAF2
 - Baker catalog, ISC DOI: https://doi.org/10.31905/LGR1456Y
-## Full inventory record (migrated from `Docs/01_Case_details.md`)
+## Full inventory record (migrated from `docs/01_Case_details.md`)
 ### 2020 Magna, Utah Earthquake Sequence
 
 ## Literature and catalog gap audit

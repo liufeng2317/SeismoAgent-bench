@@ -1,6 +1,6 @@
 # RIDGE2019 — Case Analysis
 
-> **Source of truth:** This file is the detailed, mutable analysis record for `RIDGE2019`. The cross-case summary is maintained in [`Docs/01_Case_details.md`](../../../Docs/01_Case_details.md).
+> **Source of truth:** This file is the detailed, mutable analysis record for `RIDGE2019`. The cross-case summary is maintained in [`docs/01_Case_details.md`](../../../docs/01_Case_details.md).
 
 ## Status
 
@@ -87,7 +87,7 @@ The inter-mainshock interval is the preferred core because it is compact and sci
 - Shelly (2020), DOI: https://doi.org/10.1785/0220190309
 - Ross et al. (2019), DOI: https://doi.org/10.1126/science.aaz0109
 - USGS release, DOI: https://doi.org/10.5066/P9JN6H0N
-## Full inventory record (migrated from `Docs/01_Case_details.md`)
+## Full inventory record (migrated from `docs/01_Case_details.md`)
 ### 2019 Ridgecrest Earthquake Sequence
 
 ## Literature and catalog gap audit
