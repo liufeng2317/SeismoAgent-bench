@@ -58,10 +58,35 @@ def complete(out: Path) -> bool:
     return any(out.rglob("*.md")) and any(out.rglob("*_model.json"))
 
 
+def parsed_markdown(out: Path) -> Path | None:
+    """Select the canonical MinerU Markdown result from an output bundle."""
+    if not out.is_dir():
+        return None
+    candidates = sorted(out.rglob("full.md")) or sorted(out.rglob("*.md"))
+    return candidates[0] if candidates else None
+
+
+def sync_stable_markdown(pdf: Path, out: Path | None = None) -> bool:
+    """Copy an existing local MinerU result beside its source PDF."""
+    out = out or output_dir(pdf)
+    parsed = parsed_markdown(out)
+    if parsed is None:
+        return False
+    text = parsed.read_text(encoding="utf-8")
+    parsed_parent = parsed.parent.relative_to(out)
+    image_prefix = (Path("mineru") / pdf.stem / parsed_parent / "images").as_posix().strip("./") + "/"
+    text = re.sub(r"\]\(images/", f"]({image_prefix}", text)
+    text = re.sub(r"(src=[\"'])images/", rf"\1{image_prefix}", text)
+    (pdf.parent / f"{pdf.stem}__mineru.md").write_text(text, encoding="utf-8")
+    return True
+
+
 def parse_one(args, pdf: Path, parse_local_pdfs) -> str:
     out = output_dir(pdf)
     if complete(out) and not args.force:
-        return f"SKIP  {pdf} (already parsed; use --force to redo)"
+        synced = sync_stable_markdown(pdf, out)
+        suffix = "; stable Markdown synced" if synced else "; stable Markdown unavailable"
+        return f"SKIP  {pdf} (already parsed{suffix}; use --force to redo)"
 
     # Knowledge_Graph's PaperProcessor reads MINERU_API_BASE/MINERU_API_KEY
     # from the environment and owns the official upload/poll/download flow.
@@ -88,18 +113,8 @@ def parse_one(args, pdf: Path, parse_local_pdfs) -> str:
     if result.get("successful", 0) != 1:
         raise RuntimeError(f"Knowledge_Graph official MinerU parser failed: {result}")
 
-    parsed_candidates = sorted(out.rglob("*.md"))
-    parsed = parsed_candidates[0] if parsed_candidates else None
-    if parsed is not None:
-        # Keep a stable, discoverable derivative beside the source PDF.
-        text = parsed.read_text(encoding="utf-8")
-        # result.md is written inside mineru/<stem>/, while the stable copy is
-        # one directory higher; keep downloaded image links valid there.
-        parsed_parent = parsed.parent.relative_to(out)
-        image_prefix = (Path("mineru") / pdf.stem / parsed_parent / "images").as_posix().strip("./") + "/"
-        text = re.sub(r"\]\(images/", f"]({image_prefix}", text)
-        text = re.sub(r"(src=[\"'])images/", rf"\1{image_prefix}", text)
-        (pdf.parent / f"{pdf.stem}__mineru.md").write_text(text, encoding="utf-8")
+    if not sync_stable_markdown(pdf, out):
+        raise RuntimeError(f"MinerU task succeeded but no Markdown result was found under {out}")
     return f"OK    {pdf} -> {out}"
 
 
@@ -111,6 +126,7 @@ def main() -> int:
     parser.add_argument("--list", action="store_true", help="List discovered PDFs without submitting tasks")
     parser.add_argument("--dry-run", action="store_true", help="Alias for --list")
     parser.add_argument("--force", action="store_true", help="Reparse completed outputs")
+    parser.add_argument("--sync-stable", action="store_true", help="Copy existing local MinerU Markdown beside each PDF; no API call")
     parser.add_argument("--model-version", default="vlm", choices=("vlm", "pipeline"))
     parser.add_argument("--lang", default="auto")
     parser.add_argument("--timeout", type=int, default=3600)
@@ -131,6 +147,15 @@ def main() -> int:
         print(f"{pdf}")
     if args.list or args.dry_run:
         return 0
+    if args.sync_stable:
+        failures = 0
+        for pdf in pdfs:
+            if complete(output_dir(pdf)) and sync_stable_markdown(pdf):
+                print(f"SYNC  {pdf}", flush=True)
+            else:
+                failures += 1
+                print(f"MISS  {pdf}: no complete local MinerU bundle", file=sys.stderr, flush=True)
+        return 1 if failures else 0
 
     # Load this project's credentials first and explicitly override any stale
     # MINERU_* values inherited from the shell or Knowledge_Graph environment.

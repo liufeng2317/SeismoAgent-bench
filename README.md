@@ -93,10 +93,12 @@ the next stage, after the data and reference conditions are frozen.
 ## Repository map
 
 ```text
-Docs/
+docs/
   00_Research_Plan.md       benchmark design and research questions
   01_Case_details.md        compact case index and summary
   02_Case_Data_Audit.md     data and provenance audit
+  03_Information_Extraction_Schema.md  extraction contract
+  04_Paper_Parsing_Audit.md   MinerU output audit
 
 data/
   REFERENCES_MANIFEST.md    paper/supplement/catalog readiness
@@ -156,9 +158,11 @@ catalogs, and official operational snapshots. The next deliverables are:
 
 ## Documentation
 
-- [Research plan](Docs/00_Research_Plan.md)
-- [Case details](Docs/01_Case_details.md)
-- [Case data audit](Docs/02_Case_Data_Audit.md)
+- [Research plan](docs/00_Research_Plan.md)
+- [Case details](docs/01_Case_details.md)
+- [Case data audit](docs/02_Case_Data_Audit.md)
+- [Information extraction schema](docs/03_Information_Extraction_Schema.md)
+- [Paper parsing audit](docs/04_Paper_Parsing_Audit.md)
 - [Reference manifest](data/REFERENCES_MANIFEST.md)
 - [Data organization rules](data/README.md)
 

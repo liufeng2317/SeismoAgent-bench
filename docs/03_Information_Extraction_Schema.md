@@ -90,6 +90,13 @@ Every numerical statement should be traceable to a page, table, figure,
 supplement file, or catalog README. If the article and local file disagree,
 record both values and explain the discrepancy.
 
+MinerU's concatenated Markdown does not reliably preserve page boundaries.
+Each extracted claim must therefore include an evidence anchor such as
+`PDF p. 4, Fig. 2`, `content_list_v2 page 7`, or a supplement filename. HTML
+tables must be parsed as tables, and any Unicode replacement character or
+ambiguous OCR symbol in a quantitative passage must be visually checked
+against the source PDF before it is treated as authoritative.
+
 ## Catalog-level extraction
 
 For each `CATALOG_ID`, create `<CATALOG_ID>__catalog_summary.md` beside the

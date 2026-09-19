@@ -23,6 +23,7 @@ __pycache__/
 
 # MinerU generated bundles duplicate the source PDF and can be very large.
 **/paper/mineru/
+**/paper/*__mineru.md
 **/paper/*__mineru.zip
 
 # Copyrighted / bulky source material: keep provenance in README and manifest.

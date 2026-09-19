@@ -17,10 +17,10 @@ paper/
 ├── SOURCE__paper.pdf
 ├── SOURCE__paper__mineru.md
 └── mineru/SOURCE__paper/
-    ├── result.md
-    ├── result.json
-    ├── mineru_model.json
-    ├── task_meta.json
+    ├── full.md
+    ├── *_content_list*.json
+    ├── *_model.json
+    ├── layout.json
     └── images/
 ```
 
@@ -45,5 +45,27 @@ python scripts/01_pdf_parsing/parse_papers_with_mineru.py \
 ```
 
 The script skips outputs that already contain both a parsed Markdown file and
-MinerU's `*_model.json`; use `--force` to reparse. Official API credentials
-are never printed or copied into this repository.
+MinerU's `*_model.json`; use `--force` to reparse. To create the stable
+`paper/<stem>__mineru.md` derivatives from already downloaded local bundles
+without contacting MinerU, run:
+
+```bash
+python scripts/01_pdf_parsing/parse_papers_with_mineru.py --sync-stable
+```
+
+Audit existing outputs without submitting new MinerU jobs:
+
+```bash
+python scripts/01_pdf_parsing/audit_mineru_outputs.py \
+  --report docs/04_Paper_Parsing_Audit.md
+```
+
+The audit checks task success, page-count agreement between MinerU model and
+content-list outputs, HTML tables, image links, OCR replacement characters, and
+stable Markdown derivatives. It intentionally does not treat a successful
+paper parse as proof that supplementary catalog products were parsed.
+
+Official API credentials are never printed or copied into this repository.
+The parser covers source paper PDFs; supplementary PDFs/DOCX/XLSX/XML must be
+audited separately because their thresholds and catalog schemas can be
+essential to reproducing a reference catalog.
