@@ -1,6 +1,6 @@
 # PRAGUE2011 — Case Analysis
 
-> **Source of truth:** This file is the detailed, mutable analysis record for `PRAGUE2011`. The cross-case summary is maintained in [`Docs/01_Case_details.md`](../../../Docs/01_Case_details.md).
+> **Source of truth:** This file is the detailed, mutable analysis record for `PRAGUE2011`. The cross-case summary is maintained in [`docs/01_Case_details.md`](../../../docs/01_Case_details.md).
 
 ## Status
 
@@ -47,7 +47,7 @@ The 5,446-event release and 5,262-event paper-filtered set must remain separate 
 
 | Product | Role | Current issue |
 |---|---|---|
-| Cochran et al. (2020) local catalog | Primary detection and location reference | 8,810 event rows; subset to frozen window gives 2,078 events. |
+| Cochran et al. (2020) local catalog | Primary detection and location reference | 8,811 event rows; time-only frozen window gives 2,078 events; the rounded spatial/depth mask gives 2,076. Magnitude range is −1.36–4.99 overall and its type is unresolved. |
 | McMahon et al. (2017) / 998-event reviewed seed | Secondary workflow and expert anchor | McMahon's 5,262/5,446 counts are not the local Cochran file and should not be mixed without an explicit crosswalk. |
 | Regional/operational catalog | Baseline | Identify exact release and coverage. |
 
@@ -79,11 +79,11 @@ The stable-network window is preferred for the core benchmark because the last t
 |---|---|
 | Time window | 2011-11-11 00:00:00 to 2011-11-19 00:00:00 UTC (half-open; 8 days) |
 | Primary event count | 2,078 Cochran events in the local catalog |
-| Spatial rule | 35.4523–35.5576°N, 96.8723–96.7334°W; preserve this as the event envelope, not a rectangular waveform query expansion |
-| Depth range | 1.02–9.62 km in the primary catalog |
-| Magnitude range | ML approximately −0.96 to 3.22 in the primary window |
+| Spatial rule | Descriptive extrema of the canonical time-only window: 35.45231–35.55757°N, −96.87233–−96.73343°E. Rounded bounds are retained only for the 2,076-event sensitivity audit. |
+| Depth range | Time-only window: 1.016–9.618 km; rounded displayed mask: 1.02–9.62 km. |
+| Magnitude range | −0.96–3.22 in the time-only window; magnitude type is unresolved, so do not label it ML. |
 | Network condition | 31-station heterogeneous RAMP/USArray/Oklahoma network; use only channels available during the full window and retain deployment masks |
-| Waveform volume | Design upper bound: ~22.5 GB for 31 × 3 components × 100 Hz × int32 × 8 days continuous; actual volume is lower after gaps/channel filtering |
+| Waveform volume | Design upper bound: 25.71264 GB decimal (23.95 GiB) for 31 × 3 components × 100 Hz × int32 × 8 days continuous; actual volume is lower after gaps/channel filtering. |
 | Reference quality and role | Cochran: Q2 enhanced detection/location reference; McMahon filtered set: Q1 location/QC subset; Isken Table S3: Q1 local structural anchor, 13 events only |
 
 ## Main risks
@@ -98,7 +98,7 @@ The stable-network window is preferred for the core benchmark because the last t
 - `../references/MCMAHON2017_DISSERTATION/paper/MCMAHON2017_DISSERTATION__paper.pdf`
 - McMahon et al. (2017), DOI: https://doi.org/10.1002/2017GL072944
 - USGS release, DOI: https://doi.org/10.5066/F7FJ2FNT
-## Full inventory record (migrated from `Docs/01_Case_details.md`)
+## Full inventory record (migrated from `docs/01_Case_details.md`)
 ### 2011 Prague, Oklahoma Earthquake Sequence
 
 ## Literature and catalog gap audit
@@ -107,10 +107,10 @@ The stable-network window is preferred for the core benchmark because the last t
 
 - Paper: *Activation of optimally and unfavourably oriented faults in a uniform local stress field during the 2011 Prague, Oklahoma, sequence*.
 - DOI: https://doi.org/10.1093/gji/ggaa153
-- Product: 8,811 relocated events, comprising 900 template events and 7,911 detections; reported median relative uncertainties are approximately 112 m horizontal and 133 m vertical.
+- Product: 8,811 events (900 template events + 7,911 relocated detections); reported median relative uncertainties are approximately 112 m horizontal and 133 m vertical for the relocated detection population.
 - Coverage: approximately three months; the input 900-event catalog begins on 2011-11-07.
-- Recommended role: **Q1 relative-location / Q2 detection secondary reference** and an important cross-check against McMahon's subspace/Bayesloc catalog.
-- Status: the extended catalog is locally staged and already subset to the frozen benchmark window; no further acquisition is required. Keep its template-derived lineage explicit when evaluating independence.
+- Recommended role: **Q2 enhanced-detection/relative-location reference**, with a metric-specific Q1 structural auxiliary role for differential geometry; it is an important cross-check against McMahon's subspace/Bayesloc catalog.
+- Status: the full extended catalog is locally staged; the frozen-window counts are computed by an analysis mask and the source file remains immutable. Keep its template-derived lineage explicit when evaluating independence.
 
 ### Important supporting catalogs
 
@@ -134,7 +134,7 @@ The stable-network window is preferred for the core benchmark because the last t
 | **Scientific significance** | Dense temporary/permanent observations; subspace-detection study substantially expanded and precisely located the aftershock population. |
 | **Published study span** | 2011-11-04 to 2011-12-05 |
 | **Network timing** | The last temporary stations became fully operational on **2011-11-11**. |
-| **Recommended compact benchmark window** | **Core stable-network window:** 2011-11-11 to 2011-11-18 (7 days). **Optional hard window:** 2011-11-04 to 2011-11-11, where network availability evolves. |
+| **Recommended compact benchmark window** | **Canonical v1 core:** 2011-11-11 00:00 to 2011-11-19 00:00 UTC (8 days). **Optional hard window:** 2011-11-04 to 2011-11-11, where network availability evolves; do not mix it into the core score. |
 | **Network context** | Temporary Oklahoma RAMP + USArray Transportable Array + Oklahoma Seismic Network; 31 stations used in the subspace workflow. |
 | **Raw waveform access** | Most data were obtained from the IRIS DMC / current EarthScope archive; ZQ Oklahoma RAMP data are archived as an open PASSCAL network. The paper notes LC01–LC08 data came from USGS NEIC archives. |
 | **Expected benchmark difficulty** | Medium–High |
@@ -197,11 +197,11 @@ The stable-network window is preferred for the core benchmark because the last t
 | **Recommended for core benchmark?** | **Yes** |
 | **Primary target** | USGS McMahon catalog |
 | **Secondary target** | 998-event manually reviewed seed set |
-| **Recommended core window** | 2011-11-11 to 2011-11-18 to avoid the most severe deployment-transition confound |
+| **Recommended core window** | 2011-11-11 00:00 to 2011-11-19 00:00 UTC (8 days); an earlier 7-day window is retained only as a sensitivity comparison |
 | **Optional stress-test window** | 2011-11-04 to 2011-11-11 |
 | **Suggested Agent input** | Continuous waveform + station metadata; optional baseline catalog condition |
 | **Short-window target event count** | 2,078 Cochran events in the frozen 8-day window |
-| **Approximate waveform volume** | ~22.5 GB continuous upper bound for 31 stations × 3C × 100 Hz × int32 × 8 days |
+| **Approximate waveform volume** | 25.71264 GB decimal (23.95 GiB) continuous upper bound for 31 stations × 3C × 100 Hz × int32 × 8 days |
 | **Expected compute cost** | Medium |
 | **Key benchmark risk** | The network evolves strongly before Nov. 11; some source data came from different archives; paper vs release event-count discrepancy must be reconciled |
 | **Overall assessment** | Very strong benchmark for failure handling and network/data heterogeneity, not just catalog reproduction. |

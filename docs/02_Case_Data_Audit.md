@@ -4,7 +4,7 @@
 
 ## Prague, Oklahoma — `2011_prague_oklahoma`
 
-主目录 `COCHRAN2020_GJIGGAA153` 已闭合，`COCHRAN2020_GJIGGAA153__catalog_primary.txt` 有 8,810 个事件行。`ISKEN2017_BSSA0120160150` 已补充官方 Table S3，包含 13 个高质量重定位余震，适合作为深度/结构校验，不是完整区域目录。McMahon 文章和 dissertation 是结构背景。剩余工作是冻结时间窗、台站和波形量；analysis 中相关 TBD/checklist 仍未回填。
+主目录 `COCHRAN2020_GJIGGAA153` 已闭合，`COCHRAN2020_GJIGGAA153__catalog_primary.txt` 有 **8,811** 个事件行（唯一 ID 8,811；精确重复行 0）。`ISKEN2017_BSSA0120160150` 已补充官方 Table S3，包含 13 个高质量重定位余震，适合作为深度/结构校验，不是完整区域目录。McMahon 文章和 dissertation 是结构背景。当前时间窗已冻结为 2011-11-11 00:00–2011-11-19 00:00 UTC；时间筛选得到 **2,078** 行，若另加现有四舍五入的空间/深度边界则为 **2,076** 行，二者必须在 manifest 中明确区分。全目录震级范围为 **−1.36–4.99**，震级类型仍未由无头目录/SI确认，不能直接标记为 ML。台站可用性和实际波形量仍待补齐；31×3C×100 Hz×int32×8日的连续上限为 **25.71264 GB（23.95 GiB）**。
 
 ## Kaikōura, New Zealand — `2016_kaikoura_new_zealand`
 

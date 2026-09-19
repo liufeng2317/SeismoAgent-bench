@@ -18,7 +18,7 @@
 | Case | Full primary-reference size | Primary quality profile | Secondary / auxiliary products | Main reference risk |
 |---|---:|---|---|---|
 | Ridgecrest | 34,091 | Q1 detection/relative location; Q2 absolute location/completeness | Ross Q1 relative structure; SCSN Q3 baseline | Shared SCSN/template lineage |
-| Prague | 8,810 local Cochran event rows | Q2 enhanced detection; Isken Q1 local structural anchor | McMahon context; operational Q3 | McMahon and Cochran are separate products; changing network |
+| Prague | 8,811 local Cochran event rows | Q2 enhanced detection; metric-specific Q1 structural auxiliary | McMahon context; operational Q3 | Time-only core count 2,078; rounded spatial/depth mask 2,076; changing network |
 | Magna | 5,623 relocated | Q1 relative location; Q2 detection/absolute location | Baker Q2 ML/nodal; UUSS Q3 baseline | Pang/Baker network mismatch |
 | Maple Creek | 15,912 well located | Q1 relative location; Q2 enhanced detection | Routine Q3; phase products Q4 unless independent | Strong template lineage |
 | Kīlauea | 44,188 summit events | Q1 summit relative geometry; Q2 summit detection | Wei Q2 broad detection/3-D location; HVO Q3 | Summit vs island-wide scope mismatch |
@@ -28,7 +28,7 @@
 
 | Case | UTC window and event count | Spatial / depth / magnitude rule | Network condition | Waveform upper bound | Reference role |
 |---|---|---|---|---:|---|
-| Prague | 2011-11-11–11-19; Cochran 2,078 | 35.452–35.558°N, −96.872–−96.733°W; 1.02–9.62 km; −0.96–3.22 | 31-station RAMP/USArray/Oklahoma heterogeneous network | 22.5 GB | Cochran Q2 primary; Isken Q1 13-event structural anchor |
+| Prague | 2011-11-11–11-19; Cochran 2,078 time-only (2,076 rounded mask) | 35.45231–35.55757°N, −96.87233–−96.73343°E; 1.016–9.618 km; magnitude type unresolved | 31-station RAMP/USArray/Oklahoma heterogeneous network | 25.71264 GB decimal (23.95 GiB) | Cochran Q2 primary; Isken metric-specific structural anchor |
 | Kaikōura | 2016-12-01–12-09; Lanza 122 / Tan S10 9,720 / S11 6,973 | −43.5–−41.2°S, 172.0–175.2°E; 0–60 km; Tan S11 M −0.53–4.87 | 46 GeoNet/STREWN stations, permanent/temporary flags retained | 33.5 GB | Lanza Q1 location; Tan Q2 high-rate detection |
 | Maple Creek | 2017-06-11–06-19; 22,858 phase IDs (not validated events) | 44.45–44.75°N, 110.55–110.15°W; 0–15 km; magnitude unavailable from phase-only release | 27-station Yellowstone/EarthScope–IRIS setup | 19.6 GB | Shelly Q1/Q2; phase release Q4 auxiliary |
 | Kīlauea | 2018-05-01–05-09; Shelly 1,902 / Wei 1,930 | Summit: 19.30–19.50°N, −155.40–−155.15°W; 0–20 km; Shelly M −0.72–4.80 | 66 HVO stations; Wei broader network kept separate | 47.9 GB | Shelly Q1/Q2 summit; Wei Q2 cross-check |
