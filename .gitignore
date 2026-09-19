@@ -39,6 +39,11 @@ __pycache__/
 **/references/**/*.xml
 **/references/**/*.mp4
 
+# Large tabular supplementary products and extracted phase directories
+data/**/*.xlsx
+data/**/phases/
+data/**/context/
+
 # Raw archives and machine-scale phase-arrival products stay local.
 **/catalogs/**/raw/
 **/catalogs/**/*.zip
