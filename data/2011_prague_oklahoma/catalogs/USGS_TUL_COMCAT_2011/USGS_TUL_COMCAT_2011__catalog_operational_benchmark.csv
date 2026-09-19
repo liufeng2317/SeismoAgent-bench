@@ -1,0 +1,12 @@
+time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,type,horizontalError,depthError,magError,magNst,status,locationSource,magSource
+2011-11-11T19:19:16.000Z,35.537,-96.753,3.6,3.2,ml,28,57,,,us,usp000jaq6,2014-11-07T01:46:20.170Z,"8 km NW of Prague, Oklahoma",earthquake,,,,,reviewed,tul,tul
+2011-11-12T01:41:03.000Z,35.532,-96.753,6.2,3.2,ml,10,79.9,,,us,usp000jaqe,2014-11-07T01:46:20.196Z,"7 km NW of Prague, Oklahoma",earthquake,,,,,reviewed,tul,tul
+2011-11-13T09:01:25.000Z,35.464,-96.869,3.3,2.5,ml,14,109.3,,,us,usp000jatr,2017-06-26T21:31:10.329Z,"5 km SE of Meeker, Oklahoma",earthquake,,,,,reviewed,tul,tul
+2011-11-14T05:31:42.000Z,35.521,-96.782,3.1,3.2,ml,42,33.9,,,us,usp000jav4,2022-08-08T20:10:06.919Z,"9 km WNW of Prague, Oklahoma",earthquake,,,,,reviewed,tul,tul
+2011-11-14T20:26:39.000Z,35.543,-96.752,3.3,2.5,md,12,75.2,,,us,usp000javy,2014-11-07T01:46:21.213Z,"8 km NW of Prague, Oklahoma",earthquake,,,,,reviewed,tul,tul
+2011-11-14T23:48:37.000Z,35.476,-96.868,5,2.4,ml,17,63.5,,,us,usp000jaw2,2022-08-08T20:10:59.523Z,"4 km SE of Meeker, Oklahoma",earthquake,,,,,reviewed,tul,tul
+2011-11-15T00:57:12.000Z,35.521,-96.775,5,2.2,ml,10,89.1,,,us,usp000jaw4,2014-11-07T01:46:21.236Z,"9 km WNW of Prague, Oklahoma",earthquake,,,,,reviewed,tul,tul
+2011-11-16T05:17:11.000Z,35.521,-96.785,5,2.8,ml,17,61.1,,,us,usp000jaxq,2022-08-08T20:11:57.192Z,"9 km WNW of Prague, Oklahoma",earthquake,,,,,reviewed,tul,tul
+2011-11-16T15:27:16.000Z,35.518,-96.779,5,2.7,ml,10,65.3,,,us,usp000jay8,2014-11-07T01:46:21.729Z,"9 km WNW of Prague, Oklahoma",earthquake,,,,,reviewed,tul,tul
+2011-11-16T17:10:52.000Z,35.505,-96.803,5,3.2,ml,19,59.7,,,us,usp000jaye,2017-06-26T21:30:13.364Z,"9 km E of Meeker, Oklahoma",earthquake,,,,,reviewed,tul,tul
+2011-11-18T07:41:08.000Z,35.541,-96.762,7.4,3.3,ml,22,62.7,,,us,usp000jb1g,2022-08-08T20:14:38.774Z,"9 km SE of Sparks, Oklahoma",earthquake,,,,,reviewed,tul,tul
