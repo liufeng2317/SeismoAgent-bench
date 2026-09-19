@@ -14,6 +14,9 @@ The benchmark is built around real, published earthquake and volcanic
 sequences. It separates data preparation and scientific reference validation
 from the later task of reproducing catalogs with agents.
 
+The extraction contract for paper methods, catalog schemas, and case-level
+synthesis is defined in [`docs/03_Information_Extraction_Schema.md`](docs/03_Information_Extraction_Schema.md).
+
 ## What this project does
 
 - Curates six information-rich seismic benchmark cases.
