@@ -24,7 +24,7 @@
         "note": "Identity, sequence scope and catalog-construction purpose."
       },
       {
-        "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md",
+        "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
         "locator": "Catalog-construction workflow; Reported populations and local alignment",
         "note": "Interpreted article counts and article/local distinction."
       },
@@ -79,7 +79,7 @@
         "magnitude_scope": null,
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
             "locator": "Catalog-construction workflow / VELEST",
             "note": "Article reports 16,112 events after VELEST quality filtering; table is not locally released."
           }
@@ -125,7 +125,7 @@
         "magnitude_scope": null,
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
             "locator": "Reported populations and local alignment",
             "note": "Article gives P and S arrival counts; no separate local phase table."
           }
@@ -183,7 +183,7 @@
           "note": "Rows, SHA-256, ranges, duplicate-time and 6,242-row common-mask results."
         },
         {
-          "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md",
+          "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
           "locator": "Reported populations and local alignment",
           "note": "Article/local reconciliation."
         }
@@ -212,7 +212,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md",
+          "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
           "locator": "Benchmark interpretation",
           "note": "Quality tier, role and metric conditions."
         },
@@ -266,7 +266,8 @@
           }
         ]
       }
-    }
+    },
+    "quality_tier_detail": "Independent raw-waveform ML detection and relocation catalog; final hypoDD product is the strongest local subset."
   },
   "construction_workflow": {
     "summary": "Continuous IRIS/SCEDC waveforms are picked by PhaseNet, associated and initially located by REAL, refined with VELEST, relatively relocated with hypoDD, and assigned local magnitudes before Table S1 export.",
@@ -283,7 +284,7 @@
         "availability_conditions": "41 permanent plus 4 temporary stations; changing availability",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
             "locator": "Scientific scope and observation conditions",
             "note": "Station geometry and missing fixed channel/sample-rate detail."
           }
@@ -301,7 +302,7 @@
         "availability_conditions": null,
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
             "locator": "Scientific scope and observation conditions",
             "note": "Initial velocity model."
           }
@@ -357,7 +358,7 @@
         "dependencies": "Requires waveform availability and model inference.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
             "locator": "Picking and association",
             "note": "PhaseNet threshold and input components."
           }
@@ -462,7 +463,7 @@
         "dependencies": "Depends on REAL origins and velocity model.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
             "locator": "Catalog-construction workflow / VELEST",
             "note": "Model-update subset and quality criteria."
           }
@@ -570,7 +571,7 @@
     "final_output": "15,445-row Table S1 final hypoDD event catalog; the local frozen benchmark mask contains 6,242 rows under the shared Ridgecrest rule.",
     "evidence": [
       {
-        "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md",
+        "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
         "locator": "Catalog-construction workflow",
         "note": "End-to-end method chain."
       },
@@ -609,7 +610,7 @@
         "count_or_scope": "Article-only comparison",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
             "locator": "Reported populations and local alignment",
             "note": "Internal article discrepancy."
           }
@@ -625,7 +626,7 @@
         "count_or_scope": "Missing local files",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
             "locator": "Identity and evidence status",
             "note": "Movies cited but not archived."
           }

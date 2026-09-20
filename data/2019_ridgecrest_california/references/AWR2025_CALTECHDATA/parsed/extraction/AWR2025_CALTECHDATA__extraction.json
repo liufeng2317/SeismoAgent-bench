@@ -22,7 +22,7 @@
         "note": "Article identity and workflow."
       },
       {
-        "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+        "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
         "locator": "Catalog-construction workflow; Reported products and limitations",
         "note": "Article counts and product semantics."
       },
@@ -54,7 +54,7 @@
         "magnitude_scope": null,
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "Hypocenter catalog",
             "note": "Article reports 326,345 GaMMA events; no separate local table."
           }
@@ -72,7 +72,7 @@
         "magnitude_scope": "Release-specific gamma magnitude −0.723–4.585; frozen common 0.056–4.585; not ML/Mw.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "Hypocenter catalog; Reported products",
             "note": "Article count and method thresholds."
           },
@@ -95,7 +95,7 @@
         "magnitude_scope": null,
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "Moment-tensor catalog",
             "note": "Article measurement count; table not separately released locally."
           }
@@ -113,7 +113,7 @@
         "magnitude_scope": null,
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "Moment-tensor catalog",
             "note": "Article candidate count; candidates not separately released."
           }
@@ -131,7 +131,7 @@
         "magnitude_scope": "Local moment magnitude field 1.366–4.115; frozen common 1.8739–4.1146.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "Moment-tensor catalog; Reported products",
             "note": "Article candidate/accepted counts and thresholds."
           },
@@ -167,7 +167,7 @@
           "note": "Local Version 2 DOI, paths, row counts and checksums."
         },
         {
-          "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+          "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
           "locator": "Catalog release",
           "note": "Article supplementary release DOI references."
         }
@@ -224,7 +224,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+          "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
           "locator": "Benchmark interpretation",
           "note": "Role, tier and algorithm overlap."
         },
@@ -314,7 +314,8 @@
           }
         ]
       }
-    }
+    },
+    "quality_tier_detail": "Long-term PhaseNO/GaMMA/HypoSVI/GrowClust and moment-tensor release; network and version effects matter."
   },
   "construction_workflow": {
     "summary": "PhaseNO detects P/S arrivals on a changing 66-station network; GaMMA associates them; HypoSVI provides absolute locations; GrowClust refines relative hypocenters; signed P amplitudes feed a separately filtered moment-tensor release.",
@@ -331,7 +332,7 @@
         "availability_conditions": "Neural graph uses 18 stations; station-day inventory not locally extracted.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "Scientific scope and observation conditions",
             "note": "Station count, region and filtering."
           }
@@ -349,7 +350,7 @@
         "availability_conditions": null,
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "Hypocenter catalog",
             "note": "HypoSVI model."
           }
@@ -367,7 +368,7 @@
         "availability_conditions": "226,615 measurements from 45,684 events reported in article.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "Moment-tensor catalog",
             "note": "Measurement population."
           }
@@ -409,7 +410,7 @@
         "dependencies": "Requires changing station availability.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "Catalog-construction workflow",
             "note": "PhaseNO and network."
           }
@@ -457,7 +458,7 @@
         "dependencies": "Depends on detected picks and station graph.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "Hypocenter catalog",
             "note": "GaMMA parameters and count."
           }
@@ -500,7 +501,7 @@
         "dependencies": "Depends on GaMMA origins and velocity model.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "Hypocenter catalog",
             "note": "Model, iterations and uncertainty statement."
           }
@@ -543,7 +544,7 @@
         "dependencies": "Depends on waveform overlap and station availability.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "Hypocenter catalog",
             "note": "GrowClust criteria and article count."
           }
@@ -586,7 +587,7 @@
         "dependencies": "Requires amplitude signs, locations and uncertainty estimation.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "Moment-tensor catalog",
             "note": "Candidate/accepted counts and thresholds."
           }
@@ -601,7 +602,7 @@
         "note": "Local outputs."
       },
       {
-        "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+        "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
         "locator": "Reported products and limitations",
         "note": "Article output counts."
       }
@@ -619,7 +620,7 @@
         "count_or_scope": "Missing local archive/manifest",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "Catalog release",
             "note": "Article supplementary and DOI references."
           }
@@ -649,7 +650,7 @@
         "scope": "April 2019–May 2023",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "Moment-tensor catalog; scientific scope",
             "note": "Product purpose."
           }
@@ -661,7 +662,7 @@
         "scope": "Long-term catalog",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "Scientific scope and observation conditions",
             "note": "Changing 66-station network."
           }

@@ -20,7 +20,7 @@
         "note": "Article identity and primary catalog contribution."
       },
       {
-        "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+        "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
         "locator": "Reported products and limitations; Catalog-construction workflow",
         "note": "Article counts, method parameters and product distinction."
       },
@@ -52,7 +52,7 @@
         "magnitude_scope": "SCSN preferred magnitude retained for template events.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
             "locator": "Templates and detection",
             "note": "Article reports 13,525 routine template events."
           }
@@ -70,7 +70,7 @@
         "magnitude_scope": "Mixed SCSN preferred and calibrated ML; full local range −0.34–7.10.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
             "locator": "Relocation and magnitude; Reported products",
             "note": "Article count and relocation criterion."
           },
@@ -130,7 +130,7 @@
           "note": "Canonical Data S1 and official ScienceBase release."
         },
         {
-          "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+          "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
           "locator": "Local provenance and next actions",
           "note": "Data S1 and metadata paths."
         }
@@ -185,7 +185,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+          "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
           "locator": "Benchmark interpretation",
           "note": "Tier, role and caveats."
         },
@@ -263,7 +263,8 @@
           }
         ]
       }
-    }
+    },
+    "quality_tier_detail": "High-resolution template-matched event catalog with differential-time relocation; phase CSV is auxiliary."
   },
   "construction_workflow": {
     "summary": "SCSN routine templates are scanned in daily blocks with multichannel template matching; catalog and correlation differential times are combined, relocated with hypoDD and exported as Data S1 with calibrated magnitudes.",
@@ -280,7 +281,7 @@
         "availability_conditions": "Template population and preferred magnitudes inherited from routine catalog.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
             "locator": "Templates and detection",
             "note": "13,525 is an event/template count, not a station count."
           }
@@ -298,7 +299,7 @@
         "availability_conditions": "Changing real-time station availability; exact station-day inventory not stated.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
             "locator": "Scientific scope and observation conditions",
             "note": "Network names and waveform parameters."
           }
@@ -316,7 +317,7 @@
         "availability_conditions": null,
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
             "locator": "Relocation and magnitude",
             "note": "hypoDD velocity model."
           }
@@ -367,7 +368,7 @@
         "dependencies": "Requires seed picks and waveform availability.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
             "locator": "Waveform processing; Templates and detection",
             "note": "Template lengths, filter and count."
           }
@@ -422,7 +423,7 @@
         "dependencies": "Depends on station waveform availability.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
             "locator": "Templates and detection",
             "note": "Thresholds and differential-time totals."
           }
@@ -452,7 +453,7 @@
         "dependencies": "Requires SCSN catalog and detected matches.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
             "locator": "Templates and detection",
             "note": "Article differential-time totals."
           }
@@ -502,7 +503,7 @@
         "dependencies": "Depends on valid differential-time network and velocity model.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
             "locator": "Relocation and magnitude; Reported products",
             "note": "Criterion and final count."
           }
@@ -539,7 +540,7 @@
         "dependencies": "Requires SCSN calibration reference.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
             "locator": "Relocation and magnitude",
             "note": "Magnitude calibration and final output."
           }
@@ -554,7 +555,7 @@
         "note": "Local output audit."
       },
       {
-        "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+        "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
         "locator": "Catalog-construction workflow",
         "note": "Article workflow."
       }
@@ -604,7 +605,7 @@
         "count_or_scope": "Missing local files",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
             "locator": "Identity and evidence status",
             "note": "Supplement is cited but not locally parsed."
           }
@@ -618,7 +619,7 @@
         "scope": "Initial Ridgecrest sequence",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
             "locator": "Templates and detection; Reported products",
             "note": "Article event-count interpretation."
           }
@@ -630,7 +631,7 @@
         "scope": "Post-mainshock intervals",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
             "locator": "Reported products and limitations",
             "note": "Time-varying completeness warning."
           }

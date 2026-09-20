@@ -33,7 +33,7 @@
         "note": "Article identity and structural catalog purpose."
       },
       {
-        "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+        "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
         "locator": "Catalog-construction interpretation; Reported products and limitations",
         "note": "Conservative workflow and article scope."
       },
@@ -65,7 +65,7 @@
         "magnitude_scope": "Article statement uses M greater than 0.5; local QTM includes a wider magnitude range.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
             "locator": "Scientific scope and observation conditions; Reported products",
             "note": "Article's approximate more-than-111,000 M>0.5 statement."
           }
@@ -88,7 +88,7 @@
             "note": "111,918 rows, span and ranges."
           },
           {
-            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
             "locator": "Reported products and limitations",
             "note": "Initial/relocated mixture."
           }
@@ -149,7 +149,7 @@
           "note": "Official SCEDC archive and checksum."
         },
         {
-          "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+          "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
           "locator": "Catalog release",
           "note": "QTM page and article data availability."
         }
@@ -207,7 +207,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+          "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
           "locator": "Benchmark interpretation",
           "note": "Tier and role."
         },
@@ -289,7 +289,8 @@
           }
         ]
       }
-    }
+    },
+    "quality_tier_detail": "High-quality relative fault-geometry/QTM reference; exact article subset parameters require Science DC1."
   },
   "construction_workflow": {
     "summary": "SCSN/SCEDC routine waveforms seed template matching and hidden-event detection; differential times are clustered and relatively relocated into the SCEDC QTM format. Exact thresholds remain in the missing Science DC1.",
@@ -306,7 +307,7 @@
         "availability_conditions": "Station count and exact availability require DC1.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
             "locator": "Scientific scope and observation conditions",
             "note": "Network lineage and missing station count."
           }
@@ -324,7 +325,7 @@
         "availability_conditions": "Exact template population and thresholds are in DC1.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
             "locator": "Catalog-construction interpretation",
             "note": "Conservative chain due missing DC1."
           }
@@ -356,7 +357,7 @@
         "dependencies": "Requires Science DC1 for reproducibility.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
             "locator": "Catalog-construction interpretation",
             "note": "Conservative workflow."
           }
@@ -446,7 +447,7 @@
         "dependencies": "Depends on official SCEDC release.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
             "locator": "Reported products and limitations",
             "note": "Structural interpretation and mainshock caveat."
           }
@@ -461,7 +462,7 @@
         "note": "Local final output."
       },
       {
-        "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+        "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
         "locator": "Catalog-construction interpretation",
         "note": "Article workflow and missing DC1."
       }
@@ -479,7 +480,7 @@
         "count_or_scope": "Missing local supplement",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
             "locator": "Identity and evidence status",
             "note": "DC1 missing status."
           }
@@ -495,7 +496,7 @@
         "count_or_scope": "Single-event operational solution",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
             "locator": "Reported products and limitations",
             "note": "Mainshock-depth recommendation."
           }
@@ -525,7 +526,7 @@
         "scope": "First 21 days of Ridgecrest",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
             "locator": "Catalog-construction interpretation; Reported products",
             "note": "Article resolution and structural use."
           }
