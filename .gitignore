@@ -26,6 +26,12 @@ __pycache__/
 **/paper/*__mineru.md
 **/paper/*__mineru.zip
 
+# Parsed MinerU task bundles duplicate source PDFs, images, and model JSON.
+# Keep the stable Markdown sidecars and extraction JSONs under parsed/ tracked,
+# but keep these reproducible intermediate bundles local.
+**/parsed/paper/mineru/
+**/parsed/supplement/mineru/
+
 # Copyrighted / bulky source material: keep provenance in README and manifest.
 **/paper/*.pdf
 **/supplement/*.pdf
