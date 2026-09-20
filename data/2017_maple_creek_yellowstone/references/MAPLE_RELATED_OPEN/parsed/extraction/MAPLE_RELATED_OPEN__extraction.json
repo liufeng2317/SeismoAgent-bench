@@ -1,0 +1,520 @@
+{
+  "article": {
+    "source_id": "MAPLE_RELATED_OPEN",
+    "case_id": "2017_maple_creek_yellowstone",
+    "title": "Unraveling the Evolution of an Unusually Active Earthquake Sequence Near Sheldon, Nevada",
+    "authors": [
+      "D. T. Trugman",
+      "W. H. Savran",
+      "C. J. Ruhl",
+      "K. D. Smith"
+    ],
+    "year": 2023,
+    "journal": null,
+    "doi": null,
+    "article_type": "research_article_catalog_construction_out_of_case_context",
+    "scientific_question": "Characterize the unusual Sheldon, Nevada earthquake sequence using routine locations, high-precision relocations, machine-learning detections, moment tensors, and source spectra.",
+    "sequence": "Sheldon Wildlife Refuge, northwest Nevada; sequence began July 2014 and remained highly active through 2016 (paper also describes a longer 40-month detection record).",
+    "catalog_relationship": "Real catalog-construction research, but not a Yellowstone Maple Creek source. It is retained only as out-of-case context and must not supply Maple event labels or counts.",
+    "evidence": [
+      {
+        "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+        "locator": "title, abstract, Introduction",
+        "note": "Article identity, Sheldon location, purpose, and approximate detection/located-event statistics."
+      },
+      {
+        "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper_reading.md",
+        "locator": "Identity and Scope check",
+        "note": "Local reading explicitly classifies the article as Sheldon/Nevada context-only for the Maple case."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "MAPLE_RELATED_OPEN_SHELDON_CONTEXT",
+    "name": "Sheldon Nevada sequence products (out-of-case context)",
+    "product_type": "context_catalog",
+    "role": "not_a_catalog",
+    "quality_tier": "not_applicable_for_Maple",
+    "scientific_purpose": "Context for how a sparse-network sequence can combine routine locations, relative relocation, and single-station ML detection; not a Yellowstone benchmark reference.",
+    "event_definition": "Article describes several distinct populations: routinely located NSL/ComCat events, a GrowClust-relocated M_L >= 1 subset, and COLR single-station machine-learning detections.",
+    "product_semantics": {
+      "routine_locations": "Analyst-reviewed NSL/ComCat origins; article reports 7,966 located events.",
+      "growclust_subset": "Relative relocation subset; article reports 3,811 of 6,533 M_L >= 1 events.",
+      "colr_detections": "Single-station EQ-Transformer detections at COLR; article reports nearly 70,000 detections over the high-activity record.",
+      "moment_tensor_subset": "Quality-controlled moment-tensor solutions; article reports 93 with variance reduction >40%."
+    },
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "routine NSL/ComCat located events (Sheldon, out of case)",
+        "unit": "events",
+        "count_article": 7966,
+        "count_local": null,
+        "selection_rule": "Reviewed and cataloged event origins in the NSL/ComCat study region; exact release table is not staged here.",
+        "time_range": "Sequence began July 2014; article describes high activity through 2016.",
+        "spatial_depth_scope": "Sheldon Wildlife Refuge, northwest Nevada; article describes an approximately 5 km x 5 km footprint for the sequence.",
+        "magnitude_scope": "Includes events sufficient for regional location; exact range not extracted as a local catalog.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "locator": "§2.1 Catalog and Waveform Data",
+            "note": "NSL database and 7,966 located events."
+          },
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper_reading.md",
+            "locator": "Scope check",
+            "note": "Context-only classification and count summary."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "GrowClust3D relative-relocation subset (Sheldon, out of case)",
+        "unit": "events",
+        "count_article": 3811,
+        "count_local": null,
+        "selection_rule": "3,811 of 6,533 M_L >= 1 events retained after differential-time QC; article requires correlation value >=0.65 and at least 8 qualifying differential times per pair.",
+        "time_range": "Subset of the Sheldon sequence; exact local event table is not staged.",
+        "spatial_depth_scope": "Sheldon sequence; exact relocated coordinate envelope not locally audited.",
+        "magnitude_scope": "M_L >= 1 input subset.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "locator": "§2.2 Earthquake Locations",
+            "note": "GrowClust3D workflow, 6,533 input events, 3,811 relocated events, and QC thresholds."
+          }
+        ]
+      },
+      {
+        "population_id": "P3",
+        "label": "COLR machine-learning detections (Sheldon, out of case)",
+        "unit": "detections",
+        "count_article": 70000,
+        "count_local": null,
+        "selection_rule": "Nearly 70,000 detections reported; EQ-Transformer probabilities >0.1, duplicate/low-SNR removal, and temporal clustering are described. Number is approximate as stated by the article.",
+        "time_range": "COLR continuous data from November 2014 through February 2016 for the detection experiment; station operated through February 6, 2018.",
+        "spatial_depth_scope": "Approximate local sequence footprint ~5 km x 5 km; single-station detections have approximate locations.",
+        "magnitude_scope": "Single-station M_L estimates from Wood-Anderson displacement and an approximate 16 km distance.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "locator": "§2.4 Earthquake Detections at Station COLR",
+            "note": "Detection model, thresholds, time span, and magnitude approximation."
+          },
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper_reading.md",
+            "locator": "Scope check",
+            "note": "Article-level nearly 70,000 detection count."
+          }
+        ]
+      },
+      {
+        "population_id": "P4",
+        "label": "quality-controlled moment tensors (Sheldon, out of case)",
+        "unit": "solutions",
+        "count_article": 93,
+        "count_local": null,
+        "selection_rule": "Variance reduction >40%; not an event catalog.",
+        "time_range": "Sheldon sequence; exact solution dates not locally extracted.",
+        "spatial_depth_scope": "Regional waveform inversion; no local event table staged.",
+        "magnitude_scope": "Mid-magnitude events suitable for long-period inversion; no exact range asserted.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "locator": "§2.3 Moment Tensor Inversions",
+            "note": "93 quality-controlled solutions and >40% variance-reduction threshold."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "https://doi.org/10.5281/zenodo.8030954",
+      "version": null,
+      "source_files": [
+        {
+          "path": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/paper/MAPLE_RELATED_OPEN__paper.pdf",
+          "format": "PDF",
+          "checksum": "5ad7ec4c6dee6afd0af470c730271655d624f0dba17fb9dc840a7d6f6394a791",
+          "role": "paper_context_only"
+        },
+        {
+          "path": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+          "format": "MinerU Markdown",
+          "checksum": null,
+          "role": "parsed_article"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+          "locator": "Data and code availability section",
+          "note": "Article states that derived datasets and the velocity model are archived on Zenodo."
+        },
+        {
+          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/README.md",
+          "locator": "Role in this case",
+          "note": "README records Zenodo DOI but explicitly says products belong to Sheldon, Nevada, not Yellowstone."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": null,
+      "row_count": null,
+      "time_range": null,
+      "latitude_longitude_depth_range": null,
+      "magnitude_range": null,
+      "article_local_discrepancy": "No Sheldon catalog or Zenodo product is staged under this Maple case; all population counts above are article-reported and local counts remain null.",
+      "product_counts": {},
+      "evidence": [
+        {
+          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper_reading.md",
+          "locator": "Scope check",
+          "note": "Local audit explicitly says no Sheldon catalog is staged under the Maple case."
+        }
+      ]
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "Method-context comparison for multi-population catalog construction",
+        "Qualitative comparison of sparse-network and single-station detection QC"
+      ],
+      "unsuitable_metrics": [
+        "Maple Creek event recall/precision, origin-time matching, spatial residuals, or any metric requiring Yellowstone event truth"
+      ],
+      "independence_conditions": [
+        "Treat Sheldon products as a different sequence, network, velocity model, and archive. Do not use Zenodo Sheldon events as Maple labels or baseline rows."
+      ],
+      "limitations": [
+        "No local event table is staged; article-level counts span different products; exact released schemas and checksums were not audited here."
+      ],
+      "evidence": [
+        {
+          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper_reading.md",
+          "locator": "Benchmark decision",
+          "note": "Source is context-only and excluded from the Maple reference matrix and event-count comparisons."
+        },
+        {
+          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/README.md",
+          "locator": "Role in this case",
+          "note": "README repeats the out-of-case restriction."
+        }
+      ]
+    },
+    "product_schemas": {
+      "context_only": {
+        "role": "out_of_case_products_not_staged",
+        "identifier_field": null,
+        "fields": [],
+        "units": {},
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper_reading.md",
+            "locator": "Scope check",
+            "note": "No Sheldon machine-readable release is staged under this case."
+          }
+        ]
+      }
+    }
+  },
+  "construction_workflow": {
+    "summary": "For Sheldon (not Maple), the article combines NSL/ComCat analyst phase arrivals and waveforms, NonLinLoc absolute locations, GrowClust3D differential-time relative relocation, and COLR EQ-Transformer single-station detections; moment tensors and source spectra are additional products.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "NSL/partner network phase arrivals, origins, and waveforms",
+        "type": "phase_picks",
+        "provider_or_network": "Nevada Seismological Laboratory and partner networks NC, BK, UO, UW",
+        "temporal_spatial_scope": "Sheldon sequence, stations within 250 km for routine products",
+        "station_count": null,
+        "channels_sampling": null,
+        "role": "primary_input",
+        "availability_conditions": "Sparse regional coverage; temporary COLR station installed 2014-11-18 and operated through 2018-02-06.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "locator": "§2.1 Catalog and Waveform Data",
+            "note": "Input database, partner networks, 250 km extraction, and COLR deployment."
+          }
+        ]
+      },
+      {
+        "source_id": "S2",
+        "name": "COLR continuous three-component waveforms",
+        "type": "waveform",
+        "provider_or_network": "NSL temporary station COLR",
+        "temporal_spatial_scope": "November 2014–February 2016 detection interval; station operated through 2018-02-06",
+        "station_count": 1,
+        "channels_sampling": "Three-component broadband/strong-motion; exact sample rate not extracted",
+        "role": "primary_input",
+        "availability_conditions": "Reliable cellular communications and high signal quality near the sequence.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "locator": "§2.1 and §2.4",
+            "note": "COLR waveform period and single-station detection input."
+          }
+        ]
+      },
+      {
+        "source_id": "S3",
+        "name": "1-D velocity model and station corrections",
+        "type": "velocity_model",
+        "provider_or_network": "NSL study workflow",
+        "temporal_spatial_scope": "Sheldon sequence",
+        "station_count": null,
+        "channels_sampling": null,
+        "role": "model",
+        "availability_conditions": "Used for NonLinLoc and GrowClust3D station-specific travel-time grids.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "locator": "§2.2 Earthquake Locations",
+            "note": "NonLinLoc correction and GrowClust3D travel-time grids."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "Routine absolute locations",
+        "category": "location",
+        "purpose": "Estimate absolute origins from analyst phase arrivals.",
+        "inputs": [
+          "S1"
+        ],
+        "outputs": [
+          "NSL/ComCat located events"
+        ],
+        "method": "NonLinLoc with an initial station-phase correction run followed by a corrected run.",
+        "software_or_model": "NonLinLoc",
+        "parameters": [],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "7,966 located events reported.",
+        "analyst_intervention": "Analyst-reviewed phase arrivals are the starting bulletin.",
+        "dependencies": "S3 velocity model and station corrections.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "locator": "§2.2 Earthquake Locations",
+            "note": "Two-step NonLinLoc workflow."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "Relative relocation",
+        "category": "relocation",
+        "purpose": "Refine locations using waveform differential times.",
+        "inputs": [
+          "S1",
+          "S3"
+        ],
+        "outputs": [
+          "GrowClust3D relocated subset"
+        ],
+        "method": "Pair events within 5 km; cross-correlate P/S windows; retain correlation >=0.65 and at least 8 qualifying differential times per pair.",
+        "software_or_model": "GrowClust3D.jl",
+        "parameters": [
+          {
+            "name": "pair_distance",
+            "value": 5,
+            "unit": "km",
+            "note": "Nearby event pairs."
+          },
+          {
+            "name": "bandpass",
+            "value": "1–12",
+            "unit": "Hz",
+            "note": "Waveform correlation band."
+          },
+          {
+            "name": "minimum_correlation",
+            "value": 0.65,
+            "unit": "coefficient",
+            "note": "Differential-time QC."
+          },
+          {
+            "name": "minimum_qualifying_differential_times",
+            "value": 8,
+            "unit": "measurements per pair",
+            "note": "Pair retention criterion."
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Discard cross-correlation measurements with peak sidelobe within 0.10 amplitude units of the peak."
+        ],
+        "intermediate_result": "3,811 of 6,533 M_L >= 1 events relocated.",
+        "analyst_intervention": "The article specifies analyst arrivals and quality-control thresholds.",
+        "dependencies": "S1 waveforms/phases and S3 travel-time grids.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "locator": "§2.2 Earthquake Locations",
+            "note": "Differential-time and GrowClust3D details."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST3",
+        "order": 3,
+        "name": "Single-station ML detection",
+        "category": "detection",
+        "purpose": "Recover small events below the regional-network location threshold.",
+        "inputs": [
+          "S2"
+        ],
+        "outputs": [
+          "COLR detection population and single-station M_L estimates"
+        ],
+        "method": "EQ-Transformer phase detection, duplicate/low-SNR filtering, temporal association, and Wood-Anderson amplitude magnitude estimate.",
+        "software_or_model": "SeisBench EQ-Transformer trained on STEAD",
+        "parameters": [
+          {
+            "name": "detection_probability",
+            "value": 0.1,
+            "unit": "probability",
+            "note": "Arrivals retained above threshold."
+          },
+          {
+            "name": "distance_assumption",
+            "value": 16,
+            "unit": "km",
+            "note": "Approximate source-to-COLR distance for M_L correction."
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Remove duplicate arrivals and unusually low-SNR arrivals; associate by temporal clustering and short S–P time."
+        ],
+        "intermediate_result": "Nearly 70,000 detections reported; approximate count, not locally audited.",
+        "analyst_intervention": "The article describes a source-locality assumption for arrivals not seen at distant stations.",
+        "dependencies": "COLR continuity and sparse regional background.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "locator": "§2.4 Earthquake Detections at Station COLR",
+            "note": "Model, filtering, association, and magnitude method."
+          }
+        ]
+      }
+    ],
+    "final_output": "Multiple Sheldon products (routine locations, GrowClust3D subset, COLR detections, moment tensors, and source spectra) archived by the article; none are a Maple Creek release in this repository.",
+    "evidence": [
+      {
+        "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+        "locator": "§2 Data and Methods; Data and code availability",
+        "note": "Article workflow and Zenodo statement."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [
+      {
+        "product_id": "DP1",
+        "name": "Sheldon velocity model and derived datasets",
+        "type": "other",
+        "file_path": "https://doi.org/10.5281/zenodo.8030954",
+        "catalog_relation": "Out-of-case Sheldon archive; not staged locally.",
+        "scientific_use": "Potential method/context reference only.",
+        "count_or_scope": "Article says derived datasets and velocity model are archived; exact file inventory not audited.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/README.md",
+            "locator": "Zenodo statement",
+            "note": "Archive belongs to Sheldon, Nevada."
+          }
+        ]
+      },
+      {
+        "product_id": "DP2",
+        "name": "Moment tensor solutions",
+        "type": "focal_mechanism",
+        "file_path": null,
+        "catalog_relation": "Derived Sheldon product, not an event catalog.",
+        "scientific_use": "Faulting-style context only.",
+        "count_or_scope": "93 quality-controlled solutions reported.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "locator": "§2.3 Moment Tensor Inversions",
+            "note": "Count and variance-reduction criterion."
+          }
+        ]
+      }
+    ],
+    "scientific_findings": [
+      {
+        "statement": "The Sheldon sequence is characterized by an east-dipping normal fault intersecting a secondary subvertical cross fault.",
+        "depends_on": "GrowClust3D relocated subset",
+        "scope": "Sheldon, Nevada only",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "locator": "Abstract and §2.2",
+            "note": "Article structural interpretation."
+          }
+        ]
+      },
+      {
+        "statement": "Sparse station coverage motivated a separate COLR single-station detection product below the routine network threshold.",
+        "depends_on": "COLR detection workflow",
+        "scope": "Sheldon, Nevada only",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "locator": "§2.1 and §2.4",
+            "note": "Network limitation and detection rationale."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "Not a Maple quality tier; article products are scientifically substantive but sequence/network specific.",
+      "recommended_role": "Out-of-case method context only; exclude from Maple benchmark reference matrix.",
+      "comparison_or_baseline_sources": "Compare only with other Sheldon/Walker Lane studies if a separate case is created.",
+      "valid_comparisons": "Workflow-level comparisons (e.g., relative relocation QC) are valid; event-level Maple comparisons are invalid.",
+      "caveats": "Do not substitute Sheldon counts for Pang or Shelly Yellowstone counts; no local release is available for row-level matching.",
+      "evidence": [
+        {
+          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper_reading.md",
+          "locator": "Benchmark decision",
+          "note": "Explicit context-only decision."
+        },
+        {
+          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/README.md",
+          "locator": "Role in this case",
+          "note": "README exclusion rule."
+        }
+      ]
+    },
+    "missing_information": [
+      "A locally staged Zenodo file inventory/checksums",
+      "Machine-readable Sheldon event/phase tables",
+      "Exact journal/DOI metadata if required for citation",
+      "Any evidence that would connect this sequence to the 2017 Maple Creek case (none found)"
+    ]
+  },
+  "extraction_quality": {
+    "status": "partial",
+    "extraction_confidence": "medium",
+    "completed_sections": [
+      "article identity and out-of-case scope",
+      "article-reported population counts",
+      "construction workflow",
+      "benchmark exclusion decision"
+    ],
+    "missing_core_fields": [
+      "local catalog rows and schema",
+      "local checksum for any catalog product",
+      "exact journal/DOI metadata",
+      "release-level validation"
+    ],
+    "warnings": [
+      "All event counts are article-reported; no Sheldon catalog is staged under the Maple case.",
+      "This is intentionally a context/not_a_catalog extraction, not a Yellowstone reference."
+    ],
+    "needs_human_review": true
+  }
+}

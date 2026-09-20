@@ -1,0 +1,178 @@
+{
+  "article": {
+    "source_id": "MCMAHON2017_DISSERTATION",
+    "case_id": "2011_prague_oklahoma",
+    "title": null,
+    "authors": [],
+    "year": null,
+    "journal": null,
+    "doi": null,
+    "article_type": "dissertation",
+    "scientific_question": null,
+    "sequence": "Prague, Oklahoma context is indicated by the project inventory; the dissertation scope was not machine-readable locally.",
+    "catalog_relationship": "Context-only pending a successful parse; no catalog claim is extracted from the PDF.",
+    "evidence": [
+      {
+        "source": "data/REFERENCES_MANIFEST.md",
+        "locator": "Per-reference readiness matrix / MCMAHON2017_DISSERTATION",
+        "note": "Project inventory labels this item as a dissertation used for structural context and states that no catalog product is expected."
+      },
+      {
+        "source": "docs/01_4_Paper_Parsing_Audit.md",
+        "locator": "Failed or unresolved outputs",
+        "note": "MinerU failed with “MinerU result missing or post-processing failed”; no local Markdown/model output is present."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "MCMAHON2017_DISSERTATION_CONTEXT_ONLY",
+    "name": "No catalog product extracted (dissertation context only)",
+    "product_type": "not_a_catalog",
+    "role": "not_a_catalog",
+    "quality_tier": "not_applicable",
+    "scientific_purpose": "Retain provenance for possible structural/method context; do not use as an event reference until the dissertation is successfully parsed and any cited release is independently verified.",
+    "event_definition": null,
+    "product_semantics": {
+      "context_only": "The local inventory explicitly says no catalog product is expected; no event rows, phases, or schema are asserted."
+    },
+    "populations": [],
+    "release": {
+      "doi_or_url": null,
+      "version": null,
+      "source_files": [
+        {
+          "path": "data/2011_prague_oklahoma/references/MCMAHON2017_DISSERTATION/paper/MCMAHON2017_DISSERTATION__paper.pdf",
+          "format": "PDF",
+          "checksum": "1231621c734bef57aa9393632f6ee51b2d065cd1ac1f09fcfacba09f12da326e",
+          "role": "paper_context_only"
+        },
+        {
+          "path": "data/2011_prague_oklahoma/references/MCMAHON2017_DISSERTATION/parsed/paper/mineru/processing_summary_20260920_051841.json",
+          "format": "JSON processing summary",
+          "checksum": null,
+          "role": "parse_audit"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/REFERENCES_MANIFEST.md",
+          "locator": "Per-reference readiness matrix / MCMAHON2017_DISSERTATION",
+          "note": "The PDF is staged, but the item is marked context-ready rather than catalog-ready."
+        },
+        {
+          "source": "docs/01_4_Paper_Parsing_Audit.md",
+          "locator": "Failed or unresolved outputs",
+          "note": "The parse failure is recorded locally."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": null,
+      "row_count": null,
+      "time_range": null,
+      "latitude_longitude_depth_range": null,
+      "magnitude_range": null,
+      "article_local_discrepancy": "No parsed article text or machine-readable catalog is available locally; no catalog statistics are inferred.",
+      "product_counts": {},
+      "evidence": [
+        {
+          "source": "data/2011_prague_oklahoma/references/MCMAHON2017_DISSERTATION/parsed/paper/mineru/processing_summary_20260920_051841.json",
+          "locator": "errors[0]",
+          "note": "MinerU processing summary reports the failed result."
+        }
+      ]
+    },
+    "evaluation_use": {
+      "suitable_metrics": [],
+      "unsuitable_metrics": [
+        "All event detection, association, location, magnitude, and catalog-completeness metrics until the paper and any release are parsed and audited."
+      ],
+      "independence_conditions": [
+        "Treat any future catalog cited by the dissertation as a separate product; do not merge it with Cochran or McMahon journal releases without a crosswalk."
+      ],
+      "limitations": [
+        "No stable parsed text; title, authors, methods, counts, and release provenance remain unresolved."
+      ],
+      "evidence": [
+        {
+          "source": "docs/01_4_Paper_Parsing_Audit.md",
+          "locator": "What this audit does not claim",
+          "note": "The failed dissertation is explicitly not treated as parsed."
+        }
+      ]
+    },
+    "product_schemas": {
+      "context_only": {
+        "role": "no_event_product",
+        "identifier_field": null,
+        "fields": [],
+        "units": {},
+        "evidence": [
+          {
+            "source": "data/REFERENCES_MANIFEST.md",
+            "locator": "Per-reference readiness matrix / MCMAHON2017_DISSERTATION",
+            "note": "No catalog product is expected."
+          }
+        ]
+      }
+    }
+  },
+  "construction_workflow": {
+    "summary": null,
+    "input_data": [],
+    "stages": [],
+    "final_output": null,
+    "evidence": [
+      {
+        "source": "docs/01_4_Paper_Parsing_Audit.md",
+        "locator": "Failed or unresolved outputs",
+        "note": "A workflow cannot be reconstructed from the failed parse."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [],
+    "scientific_findings": [],
+    "benchmark_context": {
+      "quality_interpretation": "Not applicable as a catalog reference.",
+      "recommended_role": "Context/provenance only; exclude from benchmark event-count comparisons.",
+      "comparison_or_baseline_sources": "Use the separately audited Cochran, McMahon journal, and Isken products.",
+      "valid_comparisons": "None until a successful parse and independent product audit are available.",
+      "caveats": "Do not describe this source as parsed or catalog-bearing.",
+      "evidence": [
+        {
+          "source": "data/REFERENCES_MANIFEST.md",
+          "locator": "Per-reference readiness matrix / MCMAHON2017_DISSERTATION",
+          "note": "Context-ready status and no-catalog expectation."
+        }
+      ]
+    },
+    "missing_information": [
+      "Successful MinerU or alternate text extraction",
+      "Bibliographic title/authors/year/DOI",
+      "Any catalog or supplementary release cited by the dissertation",
+      "A method and quality audit if this source is later promoted beyond context-only"
+    ]
+  },
+  "extraction_quality": {
+    "status": "blocked",
+    "extraction_confidence": "low",
+    "completed_sections": [
+      "source identity/role classification",
+      "local parse-failure audit",
+      "not-a-catalog decision"
+    ],
+    "missing_core_fields": [
+      "article identity",
+      "catalog product",
+      "construction workflow",
+      "catalog schema",
+      "event counts and benchmark window"
+    ],
+    "warnings": [
+      "MinerU result missing or post-processing failed; no parsed Markdown/model output exists.",
+      "This file intentionally records a blocked context decision, not article content."
+    ],
+    "needs_human_review": true
+  }
+}
