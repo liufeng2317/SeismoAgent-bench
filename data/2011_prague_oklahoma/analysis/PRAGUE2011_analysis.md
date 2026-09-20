@@ -11,6 +11,7 @@
   references are pending the same structured extraction.
 - Primary reference: Cochran et al. (2020) enhanced catalog
 - Frozen v1 core window: 2011-11-11 to 2011-11-19 UTC
+- Catalog processing pilot: [catalog_processing_index.md](./catalog_processing_index.md)
 - Optional stress window: 2011-11-04 to 2011-11-11
 
 ## Scientific role
