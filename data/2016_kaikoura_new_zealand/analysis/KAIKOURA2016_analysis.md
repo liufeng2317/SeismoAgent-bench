@@ -47,7 +47,7 @@ Lanza, Tan and Chamberlain should never be reduced to a single event-count leade
 | Product | Role | Current issue |
 |---|---|---|
 | Lanza et al. (2019) | Primary location/relocation reference | Paper reading, Text SI/Table S1, and the 134.8 MB Data Set S1 XML are audited. Narrative SI remains under `references/LANZA2019_GL082780/supplement/`; the XML is correctly staged under `catalogs/LANZA2019_GL082780/raw/` and ignored by Git because it exceeds remote-file limits. Local audit: 2,655 event objects, 2,012 HypoDD origins, 123 time-only / 122 common-mask rows. Magnitude type is generic `M`, so 122 must not be called 122 ML≥3. |
-| Tan et al. (2024) SUGAR | Secondary high-rate detection reference | Paper, five supplements, Table S10 (67,660-event catalog), Table S11 (46,440 relocated events), and 1,172 associated phase files are staged under `references/TAN2024_JB028735/` and `catalogs/TAN2024_JB028735/`. The final 41,392-event cluster-filtered product is described in the paper but is not separately released as a CSV. |
+| Tan et al. (2024) SUGAR | Secondary high-rate detection reference | Paper, five supplements, Table S10 (67,660-event catalog), Table S11 (46,440 relocated events), and 1,165 associated `.dat` phase files (1,172 ZIP entries including metadata) are staged under `references/TAN2024_JB028735/` and `catalogs/TAN2024_JB028735/`. The final 41,392-event cluster-filtered product is described in the paper but is not separately released as a CSV. |
 | GeoNet reviewed catalog | Baseline | Confirm release and stable identifiers. |
 | Chamberlain et al. (2021) GrowClust | Dependent secondary catalog | Paper reading and catalog audit are complete: [`paper_reading`](../references/CHAMBERLAIN2021_JB022304/paper/CHAMBERLAIN2021_JB022304__paper_reading.md) and [`catalog_summary`](../catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md). Use the corrected 33,328-unique-event CSV as canonical; retain the legacy 34,704-row export only for provenance comparison. |
 
@@ -69,7 +69,7 @@ The 2016-12-01 to 2016-12-08 window is preferred because the temporary STREWN de
 | Field | Frozen value |
 |---|---|
 | Time window | 2016-12-01 00:00:00 to 2016-12-09 00:00:00 UTC (8 days) |
-| Event counts | Lanza: 123 XML rows time-only / 122 after the common mask (120 generic-M≥3 sensitivity only); Tan S10: 9,720 SUGAR events; Tan S11: 6,973 relocated events; Chamberlain corrected: 2,273 time-only / 2,214 after the common 0–60 km mask |
+| Event counts | Lanza: 123 XML rows time-only / 122 after the common mask (120 generic-M≥3 sensitivity only); Tan S10: 9,720 SUGAR events; Tan S11: 6,973 relocated events / 6,955 after the common mask; Chamberlain corrected: 2,273 time-only / 2,214 after the common 0–60 km mask |
 | Spatial rule | −43.5 to −41.2°S, 172.0 to 175.2°E, depth 0–60 km; apply the same mask to all products before comparison |
 | Observed ranges | Lanza common-mask: lat −42.929 to −41.562°, lon 172.768–175.180°E, depth 1.921–37.01 km, generic M 2.2–5.8; Tan S11: lat −43.157 to −41.490°, lon 172.325–174.692°E, depth −1.56–59.64 km, M −0.53–4.87; Chamberlain common-mask: lat −42.973 to −41.500°, lon 172.603–175.183°E, depth 0.008–45.516 km, ML 0.475–5.304 |
 | Network condition | 46 GeoNet/STREWN stations, 3-component channels where available; retain permanent versus temporary station flags |
@@ -91,6 +91,8 @@ The 2016-12-01 to 2016-12-08 window is preferred because the temporary STREWN de
 - `../references/LANZA2019_GL082780/paper/LANZA2019_GL082780__paper_reading.md`
 - `../catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md`
 - `../references/TAN2024_JB028735/paper/TAN2024_JB028735__paper.pdf`
+- `../references/TAN2024_JB028735/paper/TAN2024_JB028735__paper_reading.md`
+- `../catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_summary.md`
 - `../references/CHAMBERLAIN2021_JB022304/paper/CHAMBERLAIN2021_JB022304__paper_reading.md`
 - `../catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md`
 - Lanza et al. (2019), DOI: https://doi.org/10.1029/2019GL082780
@@ -210,7 +212,7 @@ Cesca et al. (2017), DOI https://doi.org/10.1016/j.epsl.2017.08.024, provides a 
 | **Baseline** | GeoNet reviewed catalog |
 | **Recommended primary window** | 2016-12-01 to 2016-12-08 |
 | **Optional stress window** | 2016-11-13 to 2016-11-20 |
-| **Short-window target event count** | Lanza 122 released XML rows after the common mask (120 generic-M≥3 sensitivity); Tan S10 9,720; Tan S11 6,973; Chamberlain corrected 2,214 after the common mask (2,273 time-only) |
+| **Short-window target event count** | Lanza 122 released XML rows after the common mask (120 generic-M≥3 sensitivity); Tan S10 9,720; Tan S11 6,973 time-only / 6,955 common-mask; Chamberlain corrected 2,214 after the common mask (2,273 time-only) |
 | **Approximate waveform volume** | ~33.5 GB continuous upper bound for 46 stations × 3C × 100 Hz × int32 × 8 days |
 | **Expected compute cost** | High |
 | **Key benchmark risk** | Primary and secondary catalogs optimize different event populations and use different network/time conditions; direct event-count ranking would be misleading |
