@@ -1,0 +1,52 @@
+# USGS_UUSS_COMCAT_2020 — official operational baseline audit
+
+## Provenance and query
+
+| Field | Value |
+|---|---|
+| Provider | USGS ANSS ComCat |
+| Operational source | University of Utah Seismograph Stations (`UU`) via ComCat |
+| Service | [`https://earthquake.usgs.gov/fdsnws/event/1/query`](https://earthquake.usgs.gov/fdsnws/event/1/query) |
+| Configuration | [`scripts/00_catalog_downloading/official_baseline_windows.json`](../../../../scripts/00_catalog_downloading/official_baseline_windows.json), `2020_magna_utah` entry |
+| Download timestamp | 2026-09-19T16:46:52Z (directory README) |
+| Role | Q3 official operational baseline; not a high-resolution truth catalog |
+
+The full snapshot covers `2020-03-18T00:00:00` to `2020-05-02T00:00:00`,
+latitude 40.69–40.88°N, longitude −112.18–−111.93°E, and depth −2 to 20 km.
+The frozen benchmark is `2020-03-18T00:00:00Z <= time < 2020-03-26T00:00:00Z`,
+latitude 40.69–40.84°N, longitude −112.14–−111.94°E, and depth −1.3–13.1 km.
+Thirty-day chunks were merged and de-duplicated by stable event ID.
+
+## Files and integrity
+
+| Snapshot | File | Rows | Unique `id` | SHA-256 |
+|---|---|---:|---:|---|
+| Full | [`USGS_UUSS_COMCAT_2020__catalog_operational_full.csv`](./USGS_UUSS_COMCAT_2020__catalog_operational_full.csv) | 2,078 | 2,078 | `4766e5826688a92664ecedd7c9a968a425b3ab0635ea7803aa86f310b3dddc7a` |
+| Benchmark | [`USGS_UUSS_COMCAT_2020__catalog_operational_benchmark.csv`](./USGS_UUSS_COMCAT_2020__catalog_operational_benchmark.csv) | 1,432 | 1,432 | `84866d7f3ed7dd965d93c24d32d9585c446575527b2d7b7a3fdfe5d7194b6df0` |
+
+The native ComCat CSV schema and all service fields are retained.  IDs and
+timestamps are unique and valid in both snapshots.
+
+## Local audit
+
+| Selection | Time (observed UTC) | Latitude | Longitude | Depth (km) | Magnitude | Magnitude types | Source/status |
+|---|---|---|---|---|---|---|---|
+| Full | 2020-03-18T13:09:31.530Z – 2020-05-01T22:30:00.980Z | 40.69333–40.8655°N | −112.174–−111.9385°E | −1.71–13.42 | −0.56–5.7 | md 1,311; ml 764; mw 3 | `uu` 2,077, `us` 1; all reviewed; location/magnitude source `uu` 2,077 / `us` 1 |
+| Frozen benchmark | 2020-03-18T13:09:31.530Z – 2020-03-25T23:48:34.620Z | 40.69333–40.83683°N | −112.1375–−111.94133°E | −1.28–13.02 | −0.56–5.7 | md 821; ml 608; mw 3 | `uu` 1,431, `us` 1; all reviewed |
+
+The operational benchmark is substantially smaller than the Pang matched-
+filter and Baker ML/nodal products.  That difference is expected: ComCat is a
+routine operational baseline, while the research catalogs deliberately recover
+smaller events and/or additional picks.
+
+## Q3 role and limitations
+
+- Use as the official UUSS operational anchor for event-ID, location, and
+  routine magnitude comparison with Pang and Baker.
+- Do **not** use it as the primary Magna event truth set, completeness estimate,
+  or substitute for the 39-station matched-filter or temporary-node conditions.
+- Magnitudes mix `md`, `ml`, and `mw`; negative values are valid source values
+  in this snapshot, but no cross-catalog magnitude conversion is implied.
+- The full export includes events outside the frozen mask and historical ComCat
+  revisions (one `us` source row and future `updated` timestamps).  Preserve
+  source/update fields, query parameters, retrieval timestamp, and checksums.
