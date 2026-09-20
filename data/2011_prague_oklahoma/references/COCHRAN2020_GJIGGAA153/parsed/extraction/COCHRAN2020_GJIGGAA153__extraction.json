@@ -1,0 +1,627 @@
+{
+  "article": {
+    "source_id": "COCHRAN2020_GJIGGAA153",
+    "case_id": "2011_prague_oklahoma",
+    "title": "Activation of optimally and unfavourably oriented faults in a uniform local stress field during the 2011 Prague, Oklahoma, sequence",
+    "authors": [
+      "Elizabeth S. Cochran",
+      "Robert J. Skoumal",
+      "Devin McPhillips",
+      "Zachary E. Ross",
+      "Katie M. Keranen"
+    ],
+    "year": 2020,
+    "journal": "Geophysical Journal International",
+    "doi": "10.1093/gji/ggaa153",
+    "article_type": "research_article_catalog_construction_and_relative_relocation",
+    "scientific_question": "Determine whether activated Prague fault planes are optimally oriented in the local stress field and use an expanded catalog to assess fault activation and structure.",
+    "sequence": "Induced/triggered 2011 Prague, Oklahoma sequence; Mw 5.7 mainshock on 2011-11-06.",
+    "catalog_relationship": "Genuine catalog-construction paper: a 900-event Sumy starting catalog is expanded by template matching and the detections are relatively relocated with GrowClust.",
+    "evidence": [
+      {
+        "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+        "locator": "title block, Summary and Introduction",
+        "note": "Article identity, purpose and sequence."
+      },
+      {
+        "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+        "locator": "Identity and evidence convention; Sequence and scientific scope",
+        "note": "Local extraction separates article claims from local-file audits."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "COCHRAN2020_GJIGGAA153_PRIMARY",
+    "name": "Cochran Prague template-matched event catalog",
+    "product_type": "event_catalog",
+    "role": "primary",
+    "quality_tier": "Q2 enhanced detection/relative location; metric-specific Q1 structural auxiliary",
+    "scientific_purpose": "High-sensitivity event support, relative geometry, and fault-structure analysis for the Prague sequence.",
+    "event_definition": "One row per released event: 900 starting/template events plus 7,911 waveform-matched detections; detections are linked and relatively relocated with GrowClust.",
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "full released event catalog",
+        "unit": "events",
+        "count_article": 8811,
+        "count_local": 8811,
+        "selection_rule": "900 starting/template events plus 7,911 relocated template-matched detections.",
+        "time_range": "2011-11-06 01:50:50.880 to 2012-01-31 23:50:19.578 UTC (local file)",
+        "spatial_depth_scope": "Local full-file latitude 35.45013–35.56470 N; longitude -96.87954–-96.72730 E; depth 0.261–13.280 km.",
+        "magnitude_scope": "Numeric range -1.36–4.99; magnitude type/units unresolved.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+            "locator": "Local audit table",
+            "note": "Row count, ranges and unresolved magnitude type."
+          },
+          {
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "locator": "Published product and local-file audit",
+            "note": "Article/local population reconciliation."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "Prague v1 canonical time-only window",
+        "unit": "events",
+        "count_article": null,
+        "count_local": 2078,
+        "selection_rule": "2011-11-11T00:00:00Z <= origin_time < 2011-11-19T00:00:00Z; no extra spatial/depth clipping.",
+        "time_range": "2011-11-11T00:00:00Z to 2011-11-19T00:00:00Z (half-open)",
+        "spatial_depth_scope": "Lat 35.45231–35.55757 N; lon -96.87233–-96.73343; depth 1.016–9.618 km (descriptive extrema).",
+        "magnitude_scope": "-0.96–3.22; type unresolved.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+            "locator": "Frozen benchmark selection audit",
+            "note": "Local time-only count and extrema."
+          },
+          {
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "locator": "Frozen benchmark extraction record",
+            "note": "Canonical selector and distinction from rounded mask."
+          }
+        ]
+      },
+      {
+        "population_id": "P3",
+        "label": "rounded displayed envelope sensitivity mask",
+        "unit": "events",
+        "count_article": null,
+        "count_local": 2076,
+        "selection_rule": "Canonical time window plus rounded lat/lon/depth displayed bounds; two rows excluded solely by rounding.",
+        "time_range": "Same half-open Prague v1 interval.",
+        "spatial_depth_scope": "35.4523–35.5576 N; -96.8723–-96.7334; depth 1.02–9.62 km.",
+        "magnitude_scope": "Same source rows; type unresolved.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+            "locator": "Frozen benchmark selection audit",
+            "note": "Secondary 2,076-row sensitivity count."
+          },
+          {
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "locator": "Frozen benchmark extraction record",
+            "note": "Warns not to replace canonical 2,078 count."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "10.1093/gji/ggaa153",
+      "version": null,
+      "source_files": [
+        {
+          "path": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_primary.txt",
+          "format": "headerless whitespace text",
+          "checksum": "1b4fe6aee4bc6b5523dafeb36d1fc4ae9b8ceaa93fe24a93c9c37aa7c2076ca7",
+          "role": "canonical_event_catalog"
+        },
+        {
+          "path": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/Supp_Prague_SWS-Faults_JR1__extracted.md",
+          "format": "supplement-derived Markdown",
+          "checksum": null,
+          "role": "schema_and_auxiliary_product_notes"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+          "locator": "Provenance and Supplement linkage",
+          "note": "Canonical file, checksum and supplement relationship."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": 8811,
+      "row_count": 8811,
+      "unique_event_ids": 8811,
+      "exact_duplicate_rows": 0,
+      "time_range": "2011-11-06 01:50:50.880 to 2012-01-31 23:50:19.578 UTC",
+      "latitude_longitude_depth_range": "lat 35.45013–35.56470 N; lon -96.87954–-96.72730; depth 0.261–13.280 km",
+      "magnitude_range": "-1.36–4.99; magnitude type/units unresolved",
+      "benchmark_counts": {
+        "time_only_8_day": 2078,
+        "rounded_spatial_depth_sensitivity": 2076
+      },
+      "article_local_discrepancy": "Local release includes a first row on 2011-11-06 although the article template search starts 2011-11-07; it is a mixed starting/template and detection population.",
+      "evidence": [
+        {
+          "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+          "locator": "Local audit and Frozen benchmark selection audit",
+          "note": "All local counts, ranges, checksum and mask values."
+        }
+      ]
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "event-support recovery",
+        "relative geometry and fault-plane structure",
+        "release-level QC",
+        "uncertainty-aware relative-location comparisons"
+      ],
+      "unsuitable_metrics": [
+        "universal event-existence truth",
+        "independent absolute depth/location truth",
+        "magnitude-completeness claims"
+      ],
+      "independence_conditions": [
+        "Dependence is reduced when an agent uses the same LC waveforms, starting templates or inherited velocity model."
+      ],
+      "limitations": [
+        "Template-family and changing-station availability make completeness time-varying.",
+        "Magnitude type remains unresolved in the local headerless release.",
+        "Reported 112 m horizontal and 133 m vertical uncertainties apply to relocated detections, not automatically to all rows."
+      ],
+      "evidence": [
+        {
+          "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+          "locator": "Benchmark interpretation and Population bias",
+          "note": "Role, metric suitability and lineage caveats."
+        },
+        {
+          "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+          "locator": "Benchmark role and limitations",
+          "note": "Catalog-level use restrictions."
+        }
+      ]
+    },
+    "product_semantics": {
+      "source_population": "Mixed 900 starting/template events and continuous waveform detections; not homogeneous analyst picks.",
+      "time_rule": "Seconds retain three decimal places; UTC is the working convention because no timezone field is present.",
+      "magnitude_rule": "Keep numeric magnitude values but set magnitude_type=unresolved until release metadata/SI verifies calibration.",
+      "auxiliary_not_catalog": [
+        "SWS-ALL is a shear-wave-splitting measurement table; cellAzErrWeight is a structural grid summary."
+      ],
+      "evidence": [
+        {
+          "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+          "locator": "Reconstructed schema and Supplement linkage",
+          "note": "Field interpretation and auxiliary-product distinction."
+        }
+      ]
+    },
+    "product_schemas": {
+      "event_catalog": {
+        "role": "canonical_event_catalog",
+        "identifier_field": "event_id",
+        "fields": [
+          "year",
+          "month",
+          "day",
+          "hour",
+          "minute",
+          "second",
+          "event_id",
+          "latitude",
+          "longitude",
+          "depth_km",
+          "magnitude"
+        ],
+        "units": {
+          "time": "UTC working convention",
+          "latitude": "decimal degrees",
+          "longitude": "decimal degrees",
+          "depth": "km below reference surface",
+          "magnitude": "numeric, type unresolved"
+        },
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+            "locator": "Reconstructed schema and parsing rules",
+            "note": "Eleven-field source schema and units caveats."
+          }
+        ]
+      },
+      "SWS-ALL": {
+        "role": "shear_wave_splitting_measurements_not_event_catalog",
+        "identifier_field": null,
+        "fields": [
+          "event year",
+          "decimal day",
+          "station",
+          "delay time",
+          "delay uncertainty",
+          "fast direction",
+          "fast-direction uncertainty",
+          "quality"
+        ],
+        "units": {
+          "delay time": "s",
+          "uncertainties": "source-defined",
+          "fast direction": "degree"
+        },
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/SWS-ALL__extracted.md",
+            "locator": "header and extracted rows",
+            "note": "Supplement measurement schema; multiple measurements per event."
+          }
+        ]
+      },
+      "cellAzErrWeight": {
+        "role": "structural_grid_summary_not_event_catalog",
+        "identifier_field": null,
+        "fields": [
+          "quadtree grid principal azimuth",
+          "azimuth error",
+          "weight"
+        ],
+        "units": {
+          "azimuth": "degree",
+          "error": "degree",
+          "weight": "source-defined"
+        },
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/cellAzErrWeight__extracted.md",
+            "locator": "header and extracted rows",
+            "note": "Structural analysis grid product."
+          }
+        ]
+      }
+    }
+  },
+  "construction_workflow": {
+    "summary": "A 900-event manually picked starting catalog is converted to 2-s P/S templates, scanned against continuous data, screened, linked by differential times and relatively relocated with GrowClust; bootstrap uncertainties support downstream fault analysis.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "Sumy starting event catalog",
+        "type": "event_and_phase_seed",
+        "provider_or_network": "Sumy et al.",
+        "temporal_spatial_scope": "2011-11-07 through end of 2011; Prague sequence",
+        "station_count": null,
+        "channels_sampling": null,
+        "role": "template_seed",
+        "availability_conditions": "900 events with manual P/S arrivals and relocated hypocenters.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+            "locator": "Data and Methods; Template matching",
+            "note": "Starting-catalog provenance and size."
+          }
+        ]
+      },
+      {
+        "source_id": "S2",
+        "name": "temporary and regional continuous waveforms",
+        "type": "waveform",
+        "provider_or_network": "LC temporary/local and regional/permanent observations",
+        "temporal_spatial_scope": "approximately 90 days through 2012-02-01",
+        "station_count": 31,
+        "channels_sampling": "2-s P/S templates; sample-rate table not local",
+        "role": "primary_input",
+        "availability_conditions": "Station-day availability matrix not published in local note.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "locator": "Observation and network conditions",
+            "note": "31 seismometers, 18 LC stations and availability caveat."
+          }
+        ]
+      },
+      {
+        "source_id": "S3",
+        "name": "inherited velocity model",
+        "type": "velocity_model",
+        "provider_or_network": "Sumy/HypoDD lineage",
+        "temporal_spatial_scope": "Prague sequence",
+        "station_count": null,
+        "channels_sampling": null,
+        "role": "location_model",
+        "availability_conditions": "Exact model table requires cited supplementary material.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "locator": "Relative relocation and uncertainty",
+            "note": "GrowClust uses inherited velocity model."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "template formation",
+        "category": "preprocessing",
+        "purpose": "Represent seed events with P/S waveform templates.",
+        "inputs": [
+          "S1 starting catalog",
+          "S2 continuous waveforms"
+        ],
+        "outputs": [
+          "2-s P/S templates"
+        ],
+        "method": "2.0-s windows beginning 0.5 s before picks; P window shortened to S–P when needed.",
+        "software_or_model": null,
+        "parameters": [
+          {
+            "name": "template_window",
+            "value": 2,
+            "unit": "s"
+          },
+          {
+            "name": "pre_arrival",
+            "value": 0.5,
+            "unit": "s"
+          }
+        ],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "Template family from 900 seed events.",
+        "analyst_intervention": "Manual picks inherited from seed catalog.",
+        "dependencies": "Starting-family coverage and station availability.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+            "locator": "Template matching section",
+            "note": "Template construction rules."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "continuous matched-filter detection",
+        "category": "detection",
+        "purpose": "Find template-like events in day-long waveform chunks.",
+        "inputs": [
+          "S2 continuous waveforms",
+          "P/S templates"
+        ],
+        "outputs": [
+          "candidate detections"
+        ],
+        "method": "Correlation functions summed over phases/channels; retain detections with at least nine channels above 9×MAD; suppress duplicates in 2-s windows.",
+        "software_or_model": "template matching",
+        "parameters": [
+          {
+            "name": "channel_minimum",
+            "value": 9,
+            "unit": "channels"
+          },
+          {
+            "name": "threshold",
+            "value": "9×median absolute deviation",
+            "unit": "score"
+          },
+          {
+            "name": "duplicate_window",
+            "value": 2,
+            "unit": "s"
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Within a 2-s window retain the largest average correlation."
+        ],
+        "intermediate_result": "Candidate waveform detections.",
+        "analyst_intervention": null,
+        "dependencies": "Template families and continuous data availability.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "locator": "Detection and screening",
+            "note": "Detection threshold and duplicate suppression."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST3",
+        "order": 3,
+        "name": "differential-time measurement and GrowClust relocation",
+        "category": "relocation",
+        "purpose": "Estimate relative hypocenters and uncertainties.",
+        "inputs": [
+          "candidate detections",
+          "waveform cross-correlation pairs",
+          "inherited velocity model"
+        ],
+        "outputs": [
+          "relocated detections and bootstrap uncertainty estimates"
+        ],
+        "method": "Use differential times for pairs with CC≥0.7; template-template weights ×100; GrowClust with 100 bootstrap iterations.",
+        "software_or_model": "GrowClust",
+        "parameters": [
+          {
+            "name": "link_correlation",
+            "value": 0.7,
+            "unit": "coefficient"
+          },
+          {
+            "name": "template_pair_weight",
+            "value": 100,
+            "unit": "multiplier"
+          },
+          {
+            "name": "bootstrap_iterations",
+            "value": 100,
+            "unit": "runs"
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "CC≥0.7 is a relocation link criterion, not the detection threshold."
+        ],
+        "intermediate_result": "7,911 relocated detections plus 900 starting/template rows.",
+        "analyst_intervention": null,
+        "dependencies": "Waveform pairs and inherited model.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "locator": "Relative relocation and uncertainty",
+            "note": "Relocation parameters and reported relative uncertainty."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST4",
+        "order": 4,
+        "name": "fault and structural interpretation",
+        "category": "downstream_analysis",
+        "purpose": "Interpret fault geometry and stress orientation.",
+        "inputs": [
+          "relocated catalog",
+          "S-wave splitting/structural supplements"
+        ],
+        "outputs": [
+          "FaultID planes and structural summaries"
+        ],
+        "method": "DBSCAN/RANSAC/FaultID and MFAST; not an event-inclusion stage.",
+        "software_or_model": "FaultID; MFAST",
+        "parameters": [],
+        "qc_and_rejection_rules": [
+          "Do not count 8,569 SWS measurements as catalog events."
+        ],
+        "intermediate_result": "Structural products.",
+        "analyst_intervention": null,
+        "dependencies": "Relocated event geometry and auxiliary measurements.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "locator": "Downstream fault-geometry processing; Separate S-wave-splitting analysis",
+            "note": "Distinguishes interpretation products from event catalog."
+          }
+        ]
+      }
+    ],
+    "final_output": "8,811-row local event catalog; canonical benchmark extraction is the 2,078-row time-only Prague v1 subset.",
+    "evidence": [
+      {
+        "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+        "locator": "Catalog-construction workflow and Frozen benchmark extraction record",
+        "note": "End-to-end workflow and selection rule."
+      },
+      {
+        "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+        "locator": "Construction and quality interpretation",
+        "note": "Catalog-level workflow audit."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [
+      {
+        "product_id": "A1",
+        "name": "SWS-ALL shear-wave-splitting measurements",
+        "type": "measurement_table",
+        "file_path": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/SWS-ALL__extracted.md",
+        "catalog_relation": "Auxiliary measurements; not event rows.",
+        "scientific_use": "S-wave splitting and anisotropy analysis.",
+        "count_or_scope": "8,569 high-quality measurements reported in article.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/SWS-ALL__extracted.md",
+            "locator": "header/rows",
+            "note": "Local supplement extraction."
+          }
+        ]
+      },
+      {
+        "product_id": "A2",
+        "name": "cellAzErrWeight structural grid",
+        "type": "grid_summary",
+        "file_path": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/cellAzErrWeight__extracted.md",
+        "catalog_relation": "Structural-analysis grid; not event rows.",
+        "scientific_use": "Principal azimuth/error/weight summaries.",
+        "count_or_scope": "No event count asserted.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/cellAzErrWeight__extracted.md",
+            "locator": "header/rows",
+            "note": "Local supplement extraction."
+          }
+        ]
+      }
+    ],
+    "scientific_findings": [
+      {
+        "statement": "The enhanced catalog supports fault activation and stress-orientation interpretation, but relative uncertainties are not absolute location errors.",
+        "depends_on": "GrowClust lineage and starting catalog",
+        "scope": "Prague sequence",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "locator": "Sequence and scientific scope; Relative relocation and uncertainty",
+            "note": "Article interpretation and uncertainty distinction."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "Q2 primary enhanced-detection/relative-location reference; metric-specific Q1 structural auxiliary.",
+      "recommended_role": "Event support, relative geometry and structural comparisons under explicit lineage conditions.",
+      "comparison_or_baseline_sources": "Compare with McMahon and operational baseline only after identical masks/crosswalks.",
+      "valid_comparisons": "Event-support recovery, relative geometry, clustering, release QC.",
+      "caveats": "Not independent absolute-location truth; magnitude type unresolved; station-day availability missing.",
+      "evidence": [
+        {
+          "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+          "locator": "Benchmark interpretation",
+          "note": "Role and caveats."
+        }
+      ]
+    },
+    "missing_information": [
+      "Complete station/channel/sample-rate and station-day availability metadata.",
+      "Verified magnitude type/calibration from official release/SI.",
+      "Derived plots and explicit cross-catalog crosswalk."
+    ],
+    "evidence": [
+      {
+        "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+        "locator": "Required next checks",
+        "note": "Outstanding local audit items."
+      }
+    ]
+  },
+  "extraction_quality": {
+    "status": "partial",
+    "extraction_confidence": "high for article workflow and local event schema; medium for station/magnitude metadata.",
+    "completed_sections": [
+      "article",
+      "catalog",
+      "construction_workflow",
+      "additional_information"
+    ],
+    "missing_core_fields": [
+      "station-day availability",
+      "verified magnitude type/calibration",
+      "complete release metadata"
+    ],
+    "warnings": [
+      "Article-reported relative uncertainty must not be attached to all rows.",
+      "SWS and structural supplement tables are not event catalogs.",
+      "Canonical 2,078 time-only count must not be replaced by 2,076 rounded sensitivity count."
+    ],
+    "needs_human_review": true,
+    "evidence": [
+      {
+        "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+        "locator": "Extraction status and evidence convention",
+        "note": "Article/local distinction and unresolved actions."
+      }
+    ]
+  }
+}
