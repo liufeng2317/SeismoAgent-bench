@@ -2,8 +2,8 @@
 """Parse SeismoAgentBench paper PDFs with the existing Knowledge_Graph MinerU service.
 
 The source PDF stays in ``references/<SOURCE_ID>/paper``.  MinerU artifacts are
-written to ``paper/mineru/<pdf-stem>/`` and the parsed Markdown is additionally
-copied to ``paper/<pdf-stem>__mineru.md`` for convenient reading.
+written to ``parsed/paper/mineru/<pdf-stem>/`` and the parsed Markdown is additionally
+copied to ``parsed/paper/<pdf-stem>__mineru.md`` for convenient reading.
 
 This wrapper intentionally reuses the login, submit, polling, image download,
 and result-writing functions from Knowledge_Graph rather than maintaining a
@@ -48,8 +48,16 @@ def discover_pdfs(root: Path, case: str | None, source: str | None) -> list[Path
     return selected
 
 
+def parsed_root(pdf: Path) -> Path:
+    """Return the per-reference parsed tree for a paper or supplement PDF."""
+    kind = pdf.parent.name
+    if kind not in {"paper", "supplement"}:
+        raise ValueError(f"Expected a paper or supplement PDF, got: {pdf}")
+    return pdf.parent.parent / "parsed" / kind
+
+
 def output_dir(pdf: Path) -> Path:
-    return pdf.parent / "mineru" / pdf.stem
+    return parsed_root(pdf) / "mineru" / pdf.stem
 
 
 def complete(out: Path) -> bool:
@@ -77,7 +85,9 @@ def sync_stable_markdown(pdf: Path, out: Path | None = None) -> bool:
     image_prefix = (Path("mineru") / pdf.stem / parsed_parent / "images").as_posix().strip("./") + "/"
     text = re.sub(r"\]\(images/", f"]({image_prefix}", text)
     text = re.sub(r"(src=[\"'])images/", rf"\1{image_prefix}", text)
-    (pdf.parent / f"{pdf.stem}__mineru.md").write_text(text, encoding="utf-8")
+    stable_dir = parsed_root(pdf)
+    stable_dir.mkdir(parents=True, exist_ok=True)
+    (stable_dir / f"{pdf.stem}__mineru.md").write_text(text, encoding="utf-8")
     return True
 
 

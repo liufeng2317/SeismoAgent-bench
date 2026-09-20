@@ -42,13 +42,14 @@ def latest_summary(folder: Path) -> dict | None:
 
 def audit_pdf(pdf: Path) -> dict:
     paper_dir = pdf.parent
-    out_dir = paper_dir / "mineru" / pdf.stem
+    parsed_dir = paper_dir.parent / "parsed" / "paper"
+    out_dir = parsed_dir / "mineru" / pdf.stem
     full = out_dir / "full.md"
     if not full.exists():
         candidates = sorted(out_dir.rglob("*.md")) if out_dir.is_dir() else []
         full = candidates[0] if candidates else None
 
-    summary = latest_summary(paper_dir / "mineru")
+    summary = latest_summary(parsed_dir / "mineru")
     status = "unknown"
     errors = []
     if summary:
@@ -91,8 +92,8 @@ def audit_pdf(pdf: Path) -> dict:
         "status": status,
         "errors": errors,
         "full_markdown": str(full) if full else None,
-        "stable_markdown": str(paper_dir / f"{pdf.stem}__mineru.md"),
-        "stable_markdown_exists": (paper_dir / f"{pdf.stem}__mineru.md").exists(),
+        "stable_markdown": str(parsed_dir / f"{pdf.stem}__mineru.md"),
+        "stable_markdown_exists": (parsed_dir / f"{pdf.stem}__mineru.md").exists(),
         "chars": len(text),
         "lines": text.count("\n") + 1 if text else 0,
         "replacement_chars": text.count("\ufffd"),
@@ -128,7 +129,7 @@ def markdown_report(records: list[dict]) -> str:
         f"- Paper PDFs discovered: **{total}**",
         f"- Successful MinerU tasks: **{success}**",
         f"- Failed or unresolved tasks: **{total - success}**",
-        f"- Stable `paper/*__mineru.md` derivatives present: **{stable}/{total}**",
+        f"- Stable `parsed/paper/*__mineru.md` derivatives present: **{stable}/{total}**",
         f"- Outputs with Unicode replacement characters: **{len(replacement)}**",
         f"- Outputs with missing image references: **{len(missing_images)}**",
         "",

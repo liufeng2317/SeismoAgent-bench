@@ -14,7 +14,9 @@ the source paper:
 
 ```text
 paper/
-├── SOURCE__paper.pdf
+└── SOURCE__paper.pdf
+
+parsed/paper/
 ├── SOURCE__paper__mineru.md
 └── mineru/SOURCE__paper/
     ├── full.md
@@ -46,7 +48,7 @@ python scripts/01_pdf_parsing/parse_papers_with_mineru.py \
 
 The script skips outputs that already contain both a parsed Markdown file and
 MinerU's `*_model.json`; use `--force` to reparse. To create the stable
-`paper/<stem>__mineru.md` derivatives from already downloaded local bundles
+`parsed/paper/<stem>__mineru.md` derivatives from already downloaded local bundles
 without contacting MinerU, run:
 
 ```bash
@@ -69,3 +71,19 @@ Official API credentials are never printed or copied into this repository.
 The parser covers source paper PDFs; supplementary PDFs/DOCX/XLSX/XML must be
 audited separately because their thresholds and catalog schemas can be
 essential to reproducing a reference catalog.
+
+
+## Supplementary PDFs
+
+Supplementary-information PDFs use the same official MinerU service but are
+discovered under `references/*/supplement/`:
+
+```bash
+python scripts/01_pdf_parsing/parse_supplement_pdfs_with_mineru.py --list
+python scripts/01_pdf_parsing/parse_supplement_pdfs_with_mineru.py \
+  --case 2016_kaikoura_new_zealand
+```
+
+Outputs are written under `parsed/supplement/mineru/<stem>/` and
+`parsed/supplement/<stem>__mineru.md`. DOCX/XLSX/TXT/XML processing remains in
+`02_supplement_processing/`.
