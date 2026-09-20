@@ -97,7 +97,7 @@ conditioning on method and network is invalid.
 - Magnitudes combine SCSN preferred values and calibrated ML for newly detected
   events. Small-event completeness changes strongly after each mainshock.
 
-See [`SHELLY2020_0220190309__paper_reading.md`](../references/SHELLY2020_0220190309/paper/SHELLY2020_0220190309__paper_reading.md) and
+See [`SHELLY2020_0220190309__paper_reading.md`](../references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md) and
 [`SHELLY2020_0220190309__catalog_summary.md`](../catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md).
 
 ### Liu independent secondary
@@ -109,7 +109,7 @@ See [`SHELLY2020_0220190309__paper_reading.md`](../references/SHELLY2020_0220190
   truncation, close-event suppression, coda burial and poor geometry.
 - The paper reports 7,425 routine events in Section 2 but 7,743 in the Conclusion; this internal discrepancy is retained and is not used to alter Table S1.
 
-See [`LIU2020_GL086189__paper_reading.md`](../references/LIU2020_GL086189/paper/LIU2020_GL086189__paper_reading.md) and
+See [`LIU2020_GL086189__paper_reading.md`](../references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md) and
 [`LIU2020_GL086189__catalog_summary.md`](../catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_summary.md).
 
 ### Ross QTM secondary
@@ -121,7 +121,7 @@ See [`LIU2020_GL086189__paper_reading.md`](../references/LIU2020_GL086189/paper/
 - The missing Science DC1 is a real gap in method reproducibility, not evidence
   that the QTM archive is absent.
 
-See [`ROSS2019_SCIENCE__paper_reading.md`](../references/ROSS2019_SCIENCE/paper/ROSS2019_SCIENCE__paper_reading.md) and
+See [`ROSS2019_SCIENCE__paper_reading.md`](../references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md) and
 [`ROSS2019_SCIENCE__catalog_summary.md`](../catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md).
 
 ### AWR long-term auxiliary
@@ -132,7 +132,7 @@ See [`ROSS2019_SCIENCE__paper_reading.md`](../references/ROSS2019_SCIENCE/paper/
   row counts differ from the article. `magnitude_gamma` remains a native field,
   not ML/Mw.
 
-See [`AWR2025_CALTECHDATA__paper_reading.md`](../references/AWR2025_CALTECHDATA/paper/AWR2025_CALTECHDATA__paper_reading.md) and
+See [`AWR2025_CALTECHDATA__paper_reading.md`](../references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md) and
 [`AWR2025_CALTECHDATA__catalog_summary.md`](../catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md).
 
 ## Network and waveform preparation
@@ -163,12 +163,12 @@ See [`AWR2025_CALTECHDATA__paper_reading.md`](../references/AWR2025_CALTECHDATA/
 
 ## Local source index
 
-- [`references/SHELLY2020_0220190309/paper/SHELLY2020_0220190309__paper_reading.md`](../references/SHELLY2020_0220190309/paper/SHELLY2020_0220190309__paper_reading.md)
+- [`references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md`](../references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md)
 - [`catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md`](../catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md)
-- [`references/LIU2020_GL086189/paper/LIU2020_GL086189__paper_reading.md`](../references/LIU2020_GL086189/paper/LIU2020_GL086189__paper_reading.md)
+- [`references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md`](../references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md)
 - [`catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_summary.md`](../catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_summary.md)
-- [`references/ROSS2019_SCIENCE/paper/ROSS2019_SCIENCE__paper_reading.md`](../references/ROSS2019_SCIENCE/paper/ROSS2019_SCIENCE__paper_reading.md)
+- [`references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md`](../references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md)
 - [`catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md`](../catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md)
-- [`references/AWR2025_CALTECHDATA/paper/AWR2025_CALTECHDATA__paper_reading.md`](../references/AWR2025_CALTECHDATA/paper/AWR2025_CALTECHDATA__paper_reading.md)
+- [`references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md`](../references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md)
 - [`catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md`](../catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md)
 - [`catalogs/USGS_SCSN_COMCAT_2019/README.md`](../catalogs/USGS_SCSN_COMCAT_2019/README.md)

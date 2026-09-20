@@ -79,6 +79,6 @@ supplementary ZIP or release manifest.
 
 ## Local outputs
 
-- Paper reading: `../../references/AWR2025_CALTECHDATA/paper/AWR2025_CALTECHDATA__paper_reading.md`
+- Paper reading: `../../references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md`
 - Case synthesis: `../../analysis/RIDGE2019_analysis.md`
 - Source README: `README.md`

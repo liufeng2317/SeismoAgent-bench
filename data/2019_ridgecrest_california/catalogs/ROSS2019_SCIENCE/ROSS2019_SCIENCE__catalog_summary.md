@@ -83,7 +83,7 @@ metric-specific relocated target is `6,463` under the same mask.
 
 ## Local outputs
 
-- Paper reading: `../../references/ROSS2019_SCIENCE/paper/ROSS2019_SCIENCE__paper_reading.md`
+- Paper reading: `../../references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md`
 - Case synthesis: `../../analysis/RIDGE2019_analysis.md`
 - Raw archive is preserved unchanged; extract an ignored working copy only when
   generating plots or normalized derivatives.

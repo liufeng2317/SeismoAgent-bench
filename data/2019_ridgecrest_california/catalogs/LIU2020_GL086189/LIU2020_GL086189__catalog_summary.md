@@ -60,6 +60,6 @@ Rule: half-open UTC time interval 2019-07-04 through 2019-07-07, common latitude
 
 ## Local outputs
 
-- Paper reading: `../../references/LIU2020_GL086189/paper/LIU2020_GL086189__paper_reading.md`
+- Paper reading: `../../references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md`
 - SI: `../../references/LIU2020_GL086189/supplement/Liu2020_Ridgecrest_SI.docx`
 - Case synthesis: `../../analysis/RIDGE2019_analysis.md`

@@ -79,7 +79,7 @@ event catalog.
 
 ## Local outputs
 
-- Paper reading: `../../references/SHELLY2020_0220190309/paper/SHELLY2020_0220190309__paper_reading.md`
+- Paper reading: `../../references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md`
 - Case synthesis: `../../analysis/RIDGE2019_analysis.md`
 - Raw files remain unchanged under `raw_article/` and `raw/`; any figures or
   normalized derivatives should be written below a separate `figures/` or
