@@ -143,6 +143,5 @@ different event populations or use different networks.
 references/<SOURCE_ID>/paper/<SOURCE_ID>__paper_reading.md
 references/<SOURCE_ID>/supplement/<SOURCE_ID>__supplement_notes.md  # if needed
 catalogs/<CATALOG_ID>/<CATALOG_ID>__catalog_summary.md
-analysis/<CASE>__literature_synthesis.md
-analysis/<CASE>__catalog_comparison.md
+analysis/<CASE>_analysis.md  # consolidated case synthesis and comparison
 ```

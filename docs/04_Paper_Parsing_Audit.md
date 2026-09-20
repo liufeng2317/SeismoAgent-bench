@@ -53,6 +53,7 @@
 ## Failed or unresolved outputs
 
 - `2011_prague_oklahoma/MCMAHON2017_DISSERTATION`: [{'file': 'MCMAHON2017_DISSERTATION__paper.pdf', 'error': 'MinerU result missing or post-processing failed'}]
+  A local retry is currently blocked before submission because the active Python environment cannot import the official parser dependency `loguru`; no claim of a successful retry is made.
 
 ## OCR/encoding review queue
 
@@ -60,3 +61,42 @@
 - `2017_maple_creek_yellowstone/MAPLE_RELATED_OPEN`: 4 replacement characters
 - `2018_kilauea_hawaii/QUAKEFLOW_GJI_GGAC355`: 4 replacement characters
 - `2018_kilauea_hawaii/WEI2022_EA001979`: 3 replacement characters
+
+The audit also flags control-character or broken-formula review for
+`LENGLINE2021_EPSL116653` and `AWR2025_CALTECHDATA`, even though their Markdown
+contains no U+FFFD count.
+
+## Readiness decision
+
+### Sufficient for
+
+- locating the article's scientific question, catalog lineage, network description,
+  detection/association/relocation workflow, and qualitative limitations for the
+  22 successful paper bundles;
+- drafting a first-pass paper reading note when reported numbers are checked
+  against the source PDF and an evidence anchor is recorded;
+- identifying which local catalogs are genuinely associated with each article.
+
+### Not yet sufficient for
+
+- final machine-readable extraction of exact thresholds, formula parameters,
+  signs, units, or table values from the OCR/control-character review queue;
+- claiming complete reference preparation, because supplementary products are
+  not covered by this paper-only parser;
+- treating `MCMAHON2017_DISSERTATION` as parsed (its task failed and has no local
+  Markdown/model output);
+- treating `MAPLE_RELATED_OPEN` as Yellowstone evidence or the QuakeFlow
+  evaluation deck as a Kīlauea event catalog.
+
+### Ordered remediation queue
+
+1. Retry `MCMAHON2017_DISSERTATION` only if the dissertation is needed as a
+   method source; it is not a primary catalog target.
+2. Manually audit catalog-bearing supplementary PDFs and local XLSX/XML/DOCX
+   products when exact thresholds or schema fields are needed; the core event
+   tables have already been audited where machine-readable files are present.
+3. Perform a visual PDF pass for every quantitative claim containing a replacement
+   character or broken formula, then add page/figure/table anchors to the paper
+   reading notes.
+4. Build station-day/channel availability and waveform manifests; MinerU success
+   alone does not establish catalog or waveform readiness.

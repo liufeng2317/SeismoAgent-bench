@@ -196,7 +196,7 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 |---|---|
 | HVO operational catalog | Routine baseline |
 | USGS correlation-derived arrival release (P13JCJ2I) | Pick-level auxiliary reference; shares methodology with Shelly study |
-| Matoza et al. (2021) | Island-wide Q1-relative/Q2-broad auxiliary; local revised release has 1,044 relocated rows in the common summit mask |
+| Matoza et al. (2021) | Island-wide Q1-relative/Q2-broad auxiliary; local revised release has 984 relocated-coordinate rows (or 1,044 starting-coordinate rows) in the common summit mask |
 | Lengliné et al. (2021) | East Rift Zone dike auxiliary; no absolute depth/magnitude in native table |
 | Matoza et al. (2014) | Historical LP auxiliary; no 2018 temporal overlap |
 | ComCat | Large-event / operational cross-check |
