@@ -53,9 +53,6 @@
 ## Failed or unresolved outputs
 
 - `2011_prague_oklahoma/MCMAHON2017_DISSERTATION`: [{'file': 'MCMAHON2017_DISSERTATION__paper.pdf', 'error': 'MinerU result missing or post-processing failed'}]
-  A local retry is currently blocked before submission because the active
-  Python environment cannot import the official parser dependency `loguru`;
-  no claim of a successful retry is made.
 
 ## OCR/encoding review queue
 
@@ -63,47 +60,3 @@
 - `2017_maple_creek_yellowstone/MAPLE_RELATED_OPEN`: 4 replacement characters
 - `2018_kilauea_hawaii/QUAKEFLOW_GJI_GGAC355`: 4 replacement characters
 - `2018_kilauea_hawaii/WEI2022_EA001979`: 3 replacement characters
-
-The audit also flags control-character or broken-formula review for
-`LENGLINE2021_EPSL116653` and `AWR2025_CALTECHDATA`, even though their Markdown
-contains no U+FFFD count.
-
-## Readiness decision
-
-### Sufficient for
-
-- locating the article's scientific question, catalog lineage, network description,
-  detection/association/relocation workflow, and qualitative limitations for the
-  22 successful paper bundles;
-- drafting a first-pass paper reading note when all reported numbers are checked
-  against the source PDF and an evidence anchor is recorded;
-- identifying which local catalogs are genuinely associated with each article.
-
-### Not yet sufficient for
-
-- final machine-readable extraction of exact thresholds, formula parameters,
-  signs, units, or table values from the four U+FFFD review cases and the
-  additional control-character/formula cases (Lengliné and AWR);
-- claiming complete reference preparation, because supplementary products are
-  not covered by this paper-only parser;
-- treating `MCMAHON2017_DISSERTATION` as parsed (its task failed and has no local
-  Markdown/model output);
-- treating `MAPLE_RELATED_OPEN` as Yellowstone evidence or the QuakeFlow
-  evaluation deck as a Kīlauea event catalog.
-
-### Ordered remediation queue
-
-1. Restore the official-parser environment dependency and retry
-   `MCMAHON2017_DISSERTATION` only if the dissertation is needed as a method
-   source; it is not a primary catalog target.
-2. Parse or manually audit the catalog-bearing supplementary PDFs:
-   TAN2024, Pang/Shelly Yellowstone, Wei2022, Shelly Kīlauea, and Lengliné
-   `mmc2`. These are higher priority than the dissertation for benchmark
-   extraction.
-3. Extract structured tables directly from the local XLSX/XML/DOCX products
-   (Lanza, Tan, Cochran, Liu) and record their schema/version/checksum in the
-   catalog summaries.
-4. Perform a visual PDF pass for every quantitative claim containing a
-   replacement character or a broken formula, then add page/figure/table
-   anchors to the paper reading notes.
-5. Only after steps 2–4, mark a reference as `extraction-ready` in the manifest.
