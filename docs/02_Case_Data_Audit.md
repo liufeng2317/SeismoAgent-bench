@@ -1,85 +1,82 @@
-# Phase I six-case data audit
+# Phase I Six-Case Data Audit
 
-本文件是跨 case 的文件、目录和数据准备审计；逐篇论文的方法提取见各
-`references/<SOURCE_ID>/paper/*__paper_reading.md`，逐个目录的字段审计见
-`catalogs/<CATALOG_ID>/*__catalog_summary.md`，冻结窗口的解释见各 case 的
-`analysis/*_analysis.md`。
+This document audits cross-case files, catalogs, and data-preparation status. Paper-level method extraction is recorded in
+`references/<SOURCE_ID>/paper/*__paper_reading.md`; catalog-level field audits are recorded in
+`catalogs/<CATALOG_ID>/*__catalog_summary.md`; and frozen-window interpretation is recorded in each case's
+`analysis/*_analysis.md`.
 
 ## Prague, Oklahoma — `2011_prague_oklahoma`
 
-`COCHRAN2020_GJIGGAA153` 已闭合：本地目录 8,811 行、唯一 ID 8,811，冻结
-窗口（2011-11-11T00:00–2011-11-19T00:00 UTC）时间筛选 2,078 行；若使用
-显示的四舍五入空间/深度边界则为 2,076 行。全目录震级范围为 −1.36–4.99，
-震级类型仍未由 release/SI 确认，不能标成 ML。McMahon 公开 release（5,446
-行）和 Isken Table S3（13 个人工重定位事件）作为独立 secondary/structural
-reference 保留，不与 Cochran 合并。31 台混合临时/区域台站和实际 station-day
-可用性仍待波形阶段确认；25.71264 GB 是 31×3C×100 Hz×int32×8 日的连续上限，
-不是已下载体积。
+`COCHRAN2020_GJIGGAA153` is complete: the local catalog contains 8,811 rows and 8,811 unique IDs. In the frozen
+window (`2011-11-11T00:00–2011-11-19T00:00 UTC`), the time-only selection contains 2,078 rows; applying the displayed
+rounded spatial/depth bounds gives 2,076 rows. The full catalog magnitude range is −1.36–4.99, but the magnitude type
+has not been confirmed from the release or SI and must not be labeled ML. The McMahon public release (5,446 rows) and
+Isken Table S3 (13 manually relocated events) are retained as independent secondary/structural references and must
+not be merged with Cochran. The 31-station mixed temporary/regional network and actual station-day availability still
+require confirmation during waveform preparation; 25.71264 GB is the continuous-data upper bound for
+31 × 3C × 100 Hz × int32 × 8 days, not a measured downloaded volume.
 
 ## Kaikōura, New Zealand — `2016_kaikoura_new_zealand`
 
-Lanza、Tan、Chamberlain 的论文、supplement/目录及本地审计均已归档。冻结窗口
-（2016-12-01–12-09 UTC）的 common-mask 计数为 Lanza 122、Tan S10 9,720、
-Tan S11 6,955（时间-only 6,973）、Chamberlain 2,214；Tan 的 1,165 个 phase
-文件也已单独保存。Tan 论文中的最终 41,392-event cluster-filtered 集没有独立
-CSV，Wiley Movie SI-S01 仍是可选缺口；Chamberlain CSV 没有明确 relocation
-membership 标志。46 个 GeoNet/STREWN 台站和 33.5 GB 连续上限已作为设计条件
-记录，实际 station-day/channel 可用性尚未冻结。
+The Lanza, Tan, and Chamberlain papers, supplements/catalogs, and local audits are archived. In the frozen window
+(`2016-12-01–12-09 UTC`), the common-mask counts are Lanza 122, Tan S10 9,720, Tan S11 6,955 (6,973 time-only),
+and Chamberlain 2,214. Tan's 1,165 phase files are also stored separately. The final 41,392-event cluster-filtered
+set described by Tan is not released as a separate CSV, and the Wiley Movie SI-S01 remains an optional gap;
+the Chamberlain CSV does not explicitly encode relocation membership. The 46 GeoNet/STREWN stations and 33.5 GB
+continuous-data upper bound are recorded as design conditions, while actual station-day/channel availability is not
+frozen yet.
 
 ## Maple Creek, Yellowstone — `2017_maple_creek_yellowstone`
 
-Shelly & Hardebeck 论文、SI、USGS correlation-phase release 和官方 UUSS baseline
-均已归档。8 天冻结窗口（2017-06-11–06-19 UTC）含 23,660 个 phase-associated
-IDs；旧的 7 天口径为 22,858。该 CSV/XML 没有 origin time、坐标或 event-level
-uncertainty，不能当作 15,912/30,411 个文章事件表。冻结阶段观测到 27 个
-network-station pairs，19.6 GB 仅为连续数据设计上限。Pang 的真实 3,345-event
-HYPOINVERSE+GrowClust 论文已解析，但机器可读 event table 仍未找到，不能用
-Shelly release 代替。
+The Shelly & Hardebeck paper, SI, USGS correlation-phase release, and official UUSS baseline are archived. The
+8-day frozen window (`2017-06-11–06-19 UTC`) contains 23,660 phase-associated IDs; the historical 7-day convention
+contains 22,858. The CSV/XML has no origin time, coordinates, or event-level uncertainty, so it must not be treated
+as the article's 15,912/30,411-event table. The frozen phase release covers 27 network-station pairs, and 19.6 GB
+is only the continuous-data design upper bound. The genuine Pang 3,345-event HYPOINVERSE + GrowClust paper has been
+parsed, but its machine-readable event table has not been located; the Shelly release must not be substituted for it.
 
 ## Kīlauea, Hawaiʻi — `2018_kilauea_hawaii`
 
-Shelly S1/S2、Wei S1、Matoza 2021、Matoza 2014 和 Lengliné 产品均已按来源
-分开归档。冻结 summit window（2018-05-01–05-09 UTC；19.30–19.50°N、
-−155.40–−155.15°、0–20 km）中，Shelly S1/S2 为 1,883/1,877 common-mask
-（time-only 1,902/1,896），Wei 为 2,369 行（其中 1,930 个数值震级）。Matoza
-2021 的字段定义必须保留：`latR/lonR/depR`（relocated 坐标）掩膜为 1,130 行、
-其中 984 行 `nbranch>1`；`latC/lonC/depC`（starting 坐标）掩膜为 1,190 行、
-其中 1,044 行 `nbranch>1`。Lengliné 有 6,049 行时间重叠但只有相对 x/y，
-Matoza 2014 为历史 LP 目录且窗口为 0 行。QuakeFlow 只有论文/评估材料和代码，
-没有可核验的 Hawaiʻi event-catalog release。HVO 临时台阵的 station-day/channel
-inventory 和实际波形体积仍待冻结。
+The Shelly S1/S2, Wei S1, Matoza 2021, Matoza 2014, and Lengliné products are archived separately by source. In
+the frozen summit window (`2018-05-01–05-09 UTC`; 19.30–19.50°N, −155.40–−155.15°, 0–20 km), Shelly S1/S2 contain
+1,883/1,877 common-mask rows (1,902/1,896 time-only), and Wei contains 2,369 rows, including 1,930 with numeric
+magnitudes. The Matoza 2021 field definitions must be preserved: the `latR/lonR/depR` relocated-coordinate mask
+contains 1,130 rows, of which 984 have `nbranch>1`; the `latC/lonC/depC` starting-coordinate mask contains 1,190
+rows, of which 1,044 have `nbranch>1`. Lengliné has 6,049 temporally overlapping rows but only relative x/y;
+Matoza 2014 is a historical LP catalog with zero rows in the frozen window. QuakeFlow has only the paper/evaluation
+materials and code, with no verifiable Hawaiʻi event-catalog release. The HVO temporary-array station-day/channel
+inventory and actual waveform volume remain to be frozen.
 
 ## Ridgecrest, California — `2019_ridgecrest_california`
 
-Shelly Data S1（34,091 行）、Liu Table S1（15,445）、Ross SCEDC QTM
-（111,918，其中 46,512 个 `nbranch>1`）和 AWR v2（222,864 hypocenters、
-4,890 MT）均已完成 paper/catalog 对齐审计；USGS/SCSN 作为 Q3 baseline 也已
-保存。冻结 72 小时窗口（2019-07-04–07-07 UTC；35.45–36.05°N、
-−117.90–−117.20°、0–20 km）的 common-mask 计数分别为 Shelly 7,716、Liu
-6,242、Ross 12,768（其中 6,463 relocated）、AWR 5,737 hypo/254 MT、SCSN
-6,566。不同产品使用不同检测和台站条件，不能按事件数排序；Shelly 论文没有固定
-station count，Liu 报告 41 permanent+4 temporary，AWR 使用 66 broadband
-3C。Ross Science DC1 仍缺，station-day/channel manifest 和 28.3 GB 连续上限
-的实际下载量待补。
+Shelly Data S1 (34,091 rows), Liu Table S1 (15,445), Ross SCEDC QTM (111,918 rows, including 46,512 with
+`nbranch>1`), and AWR v2 (222,864 hypocenters and 4,890 moment tensors) have all passed paper/catalog alignment
+audits; the USGS/SCSN export is also preserved as the Q3 baseline. In the 72-hour frozen window
+(`2019-07-04–07-07 UTC`; 35.45–36.05°N, −117.90–−117.20°, 0–20 km), common-mask counts are Shelly 7,716,
+Liu 6,242, Ross 12,768 (6,463 relocated), AWR 5,737 hypocenters/254 moment tensors, and SCSN 6,566. The
+products use different detection and station conditions, so they must not be ranked by event count. The Shelly
+paper does not state a fixed station count; Liu reports 41 permanent plus 4 temporary stations, and AWR uses 66
+broadband 3C stations. Ross Science DC1 is still missing, as are the station-day/channel manifest and the measured
+waveform volume corresponding to the 28.3 GB continuous-data upper bound.
 
 ## Magna, Utah — `2020_magna_utah`
 
-Pang ISC event catalog（5,739 行/唯一 ID）和 Baker ISC pick release（329,611
-pick rows、5,885 个事件）均已完成字段审计。冻结 8 天窗口（2020-03-18–03-26
-UTC）的 Pang 严格解析为 4,163 time-only / 4,162 common-mask，其中
-`Mc>-4` 分别为 4,102/4,101；Baker 为 3,782/3,712 个事件，对应 164,276/
-161,567 picks。Pang 的 39 台/226 channel 条件和 Baker 的 180-node 条件必须
-分开；62.5 GB Pang channel 上限和 Baker 的 provisional nodal 上限不是实测
-波形量。Pang S1 supplement 与 Baker article PDF 仍缺，故 Baker 维持 partial。
+The Pang ISC event catalog (5,739 rows/unique IDs) and Baker ISC pick release (329,611 pick rows and 5,885 events)
+have completed field audits. In the frozen 8-day window (`2020-03-18–03-26 UTC`), strict Pang parsing yields 4,163
+time-only rows and 4,162 common-mask rows; the corresponding `Mc>-4` counts are 4,102 and 4,101. Baker yields
+3,782/3,712 events and 164,276/161,567 picks for the time-only/common-mask selections. Pang's 39-station/226-channel
+condition and Baker's 180-node condition must remain separate; the 62.5 GB Pang channel upper bound and Baker's
+provisional nodal upper bound are not measured waveform volumes. The Pang S1 supplement and Baker article PDF are
+still missing, so Baker remains partial.
 
-## 总体结论
+## Overall conclusions
 
-1. 六个 case 的 canonical 目录结构、paper reading、catalog summary 和
-   `analysis/` 冻结记录已经互相对齐；数字以各 case analysis 为准。
-2. 仍真正缺少机器可读主目录的是 Maple Pang 和 Hawaiʻi QuakeFlow；不能用相邻
-   研究目录替代。
-3. 仍缺文章 PDF 的是 Magna Baker；Pang S1、Ross DC1、Tan Movie SI 和部分
-   station metadata 是可选/复现级缺口，不应伪造为已下载。
-4. 当前 waveform 数字都是可复算的连续数据 upper bound。实际下载前必须生成
-   station-day/channel availability、采样率、缺口和 checksum manifest；这不会
-   改变已冻结的时间窗或 reference 角色。
+1. The canonical directory structure, paper-reading records, catalog summaries, and `analysis/` freeze records for
+   all six cases are mutually aligned; the case analysis files are the source of truth for numerical details.
+2. The references still missing a machine-readable primary catalog are Pang (Maple Creek) and QuakeFlow (Hawaiʻi);
+   adjacent research catalogs must not be substituted.
+3. The Magna Baker article PDF is still missing. Pang S1, Ross DC1, Tan Movie SI, and some station metadata are
+   optional/reproduction-level gaps and must not be represented as downloaded.
+4. All current waveform numbers are reproducible continuous-data upper bounds. Before waveform acquisition, generate
+   station-day/channel availability, sample-rate, gap, and checksum manifests; this will not change the frozen time
+   windows or reference roles.
