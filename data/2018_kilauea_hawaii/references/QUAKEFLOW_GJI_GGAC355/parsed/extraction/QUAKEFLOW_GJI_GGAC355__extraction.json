@@ -1,0 +1,304 @@
+{
+  "article": {
+    "source_id": "QUAKEFLOW_GJI_GGAC355",
+    "case_id": "2018_kilauea_hawaii",
+    "title": "QuakeFlow: a scalable machine-learning-based earthquake monitoring workflow with cloud computing",
+    "authors": [
+      "W. Zhu",
+      "A. B. Hou",
+      "R. Yang",
+      "A. Datta",
+      "S. M. Mousavi",
+      "W. L. Ellsworth",
+      "G. C. Beroza"
+    ],
+    "year": 2022,
+    "journal": "Geophysical Journal International",
+    "doi": "10.1093/gji/ggac355",
+    "article_type": "workflow_method_paper",
+    "scientific_question": "Can a scalable PhaseNet–GaMMA monitoring workflow process continuous seismic data and improve event detection across regional applications?",
+    "sequence": "Hawaii application including Kīlauea context",
+    "catalog_relationship": "Describes a workflow and Hawaii application, but no dedicated machine-readable Hawaii event catalog is released locally or identified by the paper.",
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
+        "locator": "title, abstract, Hawaii application and Data Availability",
+        "note": "Peer-reviewed workflow identity."
+      },
+      {
+        "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+        "locator": "scope and article–catalog alignment",
+        "note": "Evaluation document explicitly separates method paper from catalog."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": null,
+    "name": "No dedicated QuakeFlow Hawaii catalog",
+    "product_type": "method_context",
+    "role": "not_a_catalog",
+    "quality_tier": "unknown",
+    "scientific_purpose": "Method context and future reproduction target for automated earthquake monitoring.",
+    "event_definition": null,
+    "product_semantics": {},
+    "populations": [],
+    "release": {
+      "doi_or_url": "https://github.com/AI4EPS/QuakeFlow; https://doi.org/10.5281/zenodo.7023970",
+      "version": null,
+      "source_files": [],
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
+          "locator": "Data Availability",
+          "note": "Code release is not an event-catalog release."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": null,
+      "row_count": null,
+      "product_counts": {},
+      "time_range": null,
+      "latitude_longitude_depth_range": null,
+      "magnitude_range": null,
+      "article_local_discrepancy": "The article's qualitative 'more events than HVO' statement has no released numerator/denominator or frozen query locally.",
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+          "locator": "article–catalog alignment decision",
+          "note": "No local QuakeFlow event table."
+        }
+      ]
+    },
+    "product_schemas": {},
+    "evaluation_use": {
+      "suitable_metrics": [
+        "workflow design",
+        "catalog-QC procedure design",
+        "future reproduction comparison"
+      ],
+      "unsuitable_metrics": [
+        "event-level scoring now",
+        "catalog recall/precision",
+        "using HVO/Wei/Shelly files as QuakeFlow output"
+      ],
+      "independence_conditions": [
+        "obtain and freeze a genuine QuakeFlow Hawaii event/pick release before scoring"
+      ],
+      "limitations": [
+        "no Hawaii event file",
+        "no exact Hawaii time/space window",
+        "no station-day or waveform manifest"
+      ],
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+          "locator": "benchmark role and acquisition/reproduction gate",
+          "note": "Current role and missing release."
+        }
+      ]
+    },
+    "quality_tier_detail": "Method paper/context only; no dedicated Hawaii event release is identified."
+  },
+  "construction_workflow": {
+    "summary": "Continuous waveforms → PhaseNet phase picking → GaMMA association → event location/magnitude → database/web application; Hawaii application is not accompanied by a released event table.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "Continuous seismic waveforms",
+        "type": "waveform",
+        "provider_or_network": "HVO/USGS and other named data centers",
+        "temporal_spatial_scope": "application-dependent; Hawaii exact bounds not specified",
+        "station_count": null,
+        "channels_sampling": null,
+        "role": "primary_input",
+        "availability_conditions": "no Hawaii request manifest locally",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
+            "locator": "Data Availability and workflow description",
+            "note": "Named waveform sources."
+          },
+          {
+            "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+            "locator": "input data and observation conditions",
+            "note": "No reproducible Hawaii manifest."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "neural phase picking",
+        "category": "picking",
+        "purpose": "Detect P/S phases from continuous waveforms",
+        "inputs": [
+          "continuous waveforms"
+        ],
+        "outputs": [
+          "phase picks"
+        ],
+        "method": "PhaseNet-style machine-learning phase picking",
+        "software_or_model": "PhaseNet",
+        "parameters": [],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": null,
+        "analyst_intervention": null,
+        "dependencies": "waveform quality and station metadata",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
+            "locator": "workflow architecture and processing sections",
+            "note": "Generic workflow stage."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "phase association",
+        "category": "association",
+        "purpose": "Group picks into event hypotheses",
+        "inputs": [
+          "P/S picks"
+        ],
+        "outputs": [
+          "associated events"
+        ],
+        "method": "Gaussian-mixture association",
+        "software_or_model": "GaMMA",
+        "parameters": [],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": null,
+        "analyst_intervention": null,
+        "dependencies": "station geometry and travel-time structure",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
+            "locator": "workflow architecture and Hawaii application",
+            "note": "Association stage."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST3",
+        "order": 3,
+        "name": "location and catalog QC",
+        "category": "location",
+        "purpose": "Create event records and compare against reference catalog",
+        "inputs": [
+          "associated picks",
+          "velocity/location model"
+        ],
+        "outputs": [
+          "event records in application database"
+        ],
+        "method": "regional event location and catalog comparison/QC",
+        "software_or_model": null,
+        "parameters": [],
+        "qc_and_rejection_rules": [
+          "evaluation guidance distinguishes MATCH, MISSED and NEW events"
+        ],
+        "intermediate_result": "No local Hawaii event table",
+        "analyst_intervention": null,
+        "dependencies": "application-specific data and reference snapshot",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+            "locator": "catalog-QC guidance",
+            "note": "Evaluation procedure, not a released catalog."
+          }
+        ]
+      }
+    ],
+    "final_output": "Method workflow and qualitative Hawaii comparison; no locally scored event catalog.",
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
+        "locator": "workflow architecture",
+        "note": "End-to-end method."
+      },
+      {
+        "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+        "locator": "article–catalog alignment decision",
+        "note": "No catalog substitution."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [
+      {
+        "product_id": "DP1",
+        "name": "catalog evaluation guidance",
+        "type": "evaluation_method",
+        "file_path": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+        "catalog_relation": "methodological context, not event data",
+        "scientific_use": "define MATCH/MISSED/NEW and snapshot requirements",
+        "count_or_scope": "no event rows",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+            "locator": "catalog fields and QC guidance",
+            "note": "Evaluation concepts."
+          }
+        ]
+      }
+    ],
+    "scientific_findings": [
+      {
+        "statement": "The paper reports qualitative improvement over HVO in Hawaii, but the exact event table and numerator/denominator are not locally available.",
+        "depends_on": null,
+        "scope": "Hawaii application including Kīlauea context",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+            "locator": "benchmark role and limitations",
+            "note": "Current benchmark decision."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "Method paper/context only; no dedicated Hawaii event release is identified.",
+      "recommended_role": "Future reproduction target; do not substitute any independent Kīlauea catalog as QuakeFlow output.",
+      "comparison_or_baseline_sources": null,
+      "valid_comparisons": null,
+      "caveats": "Future reproduction target; do not substitute any independent Kīlauea catalog as QuakeFlow output.",
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+          "locator": "benchmark role and limitations",
+          "note": "Current benchmark decision."
+        }
+      ]
+    },
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+        "locator": "benchmark role and limitations",
+        "note": "Current benchmark decision."
+      }
+    ]
+  },
+  "extraction_quality": {
+    "status": "verified",
+    "extraction_confidence": "high",
+    "completed_sections": [
+      "article",
+      "catalog",
+      "construction_workflow",
+      "additional_information"
+    ],
+    "missing_core_fields": [
+      "dedicated Hawaii event/pick release",
+      "exact Hawaii time/space window",
+      "station/waveform manifest"
+    ],
+    "warnings": [
+      "Intentionally marked not_a_catalog; code DOI and HVO comparison must not be treated as a catalog release."
+    ],
+    "needs_human_review": false
+  }
+}

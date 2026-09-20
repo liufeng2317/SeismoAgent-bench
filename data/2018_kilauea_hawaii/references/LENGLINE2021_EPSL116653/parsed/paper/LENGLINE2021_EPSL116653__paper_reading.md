@@ -82,6 +82,6 @@ dike-related recovery and migration timing, not uniform catalog completeness.
 ## Local provenance
 
 - Paper: `paper/LENGLINE2021_EPSL116653__paper.pdf`
-- Parsed paper: `paper/LENGLINE2021_EPSL116653__paper__mineru.md`
+- Parsed paper: `parsed/LENGLINE2021_EPSL116653__paper__mineru.md`
 - Supplement/event table: `catalogs/LENGLINE2021_EPSL116653/raw/loc_events.txt`
 - Supporting text/PDF: `references/LENGLINE2021_EPSL116653/supplement/`

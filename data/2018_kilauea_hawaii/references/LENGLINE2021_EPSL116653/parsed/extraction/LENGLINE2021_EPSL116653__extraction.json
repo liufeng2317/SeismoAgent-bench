@@ -1,0 +1,322 @@
+{
+  "article": {
+    "source_id": "LENGLINE2021_EPSL116653",
+    "case_id": "2018_kilauea_hawaii",
+    "title": "Tracking dike propagation leading to the 2018 Kīlauea eruption",
+    "authors": [
+      "Olivier Lengliné",
+      "Zacharie Duputel",
+      "P. G. Okubo"
+    ],
+    "year": 2021,
+    "journal": "Earth and Planetary Science Letters",
+    "doi": "10.1016/j.epsl.2020.116653",
+    "article_type": "research_article",
+    "scientific_question": "How did seismicity migrate during the 2018 Kīlauea dike intrusion?",
+    "sequence": "2018 lower East Rift Zone dike intrusion",
+    "catalog_relationship": "Builds a narrow template-matched event-coordinate product for dike migration; not a general hypocenter/magnitude catalog.",
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/LENGLINE2021_EPSL116653/parsed/paper/LENGLINE2021_EPSL116653__paper__mineru.md",
+        "locator": "title, abstract and Sections 2–4",
+        "note": "Article identity and product role."
+      },
+      {
+        "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md",
+        "locator": "provenance and schema",
+        "note": "Local product identity."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "LENGLINE2021_EPSL116653_LOC_EVENTS",
+    "name": "Lengliné dike-propagation event coordinates",
+    "product_type": "relative_event_coordinate_product",
+    "role": "auxiliary",
+    "quality_tier": "Q2",
+    "scientific_purpose": "Event-rate and dike-migration chronology.",
+    "event_definition": "Template-matched detections from 280 shallow HVO template events using a focused four-channel configuration.",
+    "product_semantics": {
+      "detected_events": "6,327 article and local rows",
+      "coordinates": "native x/y metres relative to 19.3864°N, −155.1050°E; no depth/magnitude/ID"
+    },
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "dike-study detections",
+        "unit": "events",
+        "count_article": 6327,
+        "count_local": 6327,
+        "selection_rule": "template matching with focused channel set",
+        "time_range": "2018-04-29 to 2018-05-04 UTC",
+        "spatial_depth_scope": "native x −358–24,140 m; y −506.0241–10,000 m",
+        "magnitude_scope": null,
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/LENGLINE2021_EPSL116653/parsed/paper/LENGLINE2021_EPSL116653__paper__mineru.md",
+            "locator": "Sections 2–4, detection/product description",
+            "note": "Article count and method."
+          },
+          {
+            "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md",
+            "locator": "local audit",
+            "note": "Rows and native frame."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "10.1016/j.epsl.2020.116653",
+      "version": null,
+      "source_files": [
+        {
+          "product_id": "dike_events",
+          "path": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/raw/loc_events.txt",
+          "format": "text",
+          "checksum": "556f4d6f5ba8c6688f5c36c165c94b12c0c623e5d3f33183911aca2888ed18ca",
+          "role": "canonical"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md",
+          "locator": "provenance and schema",
+          "note": "Release file."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": 6327,
+      "row_count": 6327,
+      "product_counts": {
+        "dike_events": 6327
+      },
+      "time_range": "2018-04-29 00:06:33.984 to 2018-05-04 23:58:59.520 UTC",
+      "latitude_longitude_depth_range": "N/A; native x/y only",
+      "magnitude_range": "N/A",
+      "article_local_discrepancy": "No count discrepancy; product lacks depth, magnitude and stable event IDs.",
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md",
+          "locator": "local audit and frozen-window fields",
+          "note": "Local statistics."
+        }
+      ]
+    },
+    "product_schemas": {
+      "dike_events": {
+        "role": "native_relative_coordinate_table",
+        "identifier_field": null,
+        "fields": [
+          "time_days_since_2018-04-29",
+          "x_m",
+          "y_m"
+        ],
+        "units": {
+          "time": "days",
+          "x": "m",
+          "y": "m"
+        },
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md",
+            "locator": "native columns",
+            "note": "Schema and reference point."
+          }
+        ]
+      }
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "migration chronology",
+        "event-rate progression",
+        "native-plane spatial trend"
+      ],
+      "unsuitable_metrics": [
+        "absolute hypocenter residual",
+        "depth/magnitude comparison",
+        "island-wide completeness"
+      ],
+      "independence_conditions": [
+        "preserve native coordinate frame and template/channel condition"
+      ],
+      "limitations": [
+        "no depth/magnitude/event ID",
+        "common summit mask not applicable"
+      ],
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md",
+          "locator": "benchmark role",
+          "note": "Role limits."
+        }
+      ]
+    },
+    "quality_tier_detail": "Focused dike-migration detection product; it is not a full hypocenter/magnitude catalog."
+  },
+  "construction_workflow": {
+    "summary": "280 shallow HVO templates → focused four-channel waveform matching → event times and native x/y coordinates → dike migration interpretation.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "HVO waveforms",
+        "type": "waveform",
+        "provider_or_network": "HVO via IRIS",
+        "temporal_spatial_scope": "2018-04-29 to 2018-05-04",
+        "station_count": null,
+        "channels_sampling": "three components at JOKA plus vertical KUPD/KLUD",
+        "role": "primary_input",
+        "availability_conditions": "focused channel subset",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/LENGLINE2021_EPSL116653/parsed/paper/LENGLINE2021_EPSL116653__paper__mineru.md",
+            "locator": "Methods/network paragraph",
+            "note": "Channel condition."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "template selection",
+        "category": "preprocessing",
+        "purpose": "Seed dike-related waveform templates",
+        "inputs": [
+          "HVO catalog events"
+        ],
+        "outputs": [
+          "280 shallow templates"
+        ],
+        "method": "select shallow HVO events",
+        "software_or_model": null,
+        "parameters": [],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "280 templates",
+        "analyst_intervention": null,
+        "dependencies": "HVO catalog",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/LENGLINE2021_EPSL116653/parsed/paper/LENGLINE2021_EPSL116653__paper__mineru.md",
+            "locator": "Methods, template description",
+            "note": "Template population."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "template matching and coordinate release",
+        "category": "detection",
+        "purpose": "Detect migrating dike seismicity",
+        "inputs": [
+          "templates",
+          "continuous waveforms"
+        ],
+        "outputs": [
+          "6,327 event x/y/time rows"
+        ],
+        "method": "template matching and event-coordinate conversion",
+        "software_or_model": null,
+        "parameters": [],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "native loc_events table",
+        "analyst_intervention": null,
+        "dependencies": "channel availability and template family",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md",
+            "locator": "provenance and schema",
+            "note": "Released product."
+          }
+        ]
+      }
+    ],
+    "final_output": "6,327-row native x/y/time dike event product.",
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/LENGLINE2021_EPSL116653/parsed/paper/LENGLINE2021_EPSL116653__paper__mineru.md",
+        "locator": "Sections 2–4",
+        "note": "Workflow."
+      },
+      {
+        "source": "data/2018_kilauea_hawaii/references/LENGLINE2021_EPSL116653/parsed/supplement/1-s2.0-S0012821X20305975-mmc1__extracted.md",
+        "locator": "supplementary product",
+        "note": "Supplement context."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [
+      {
+        "product_id": "DP1",
+        "name": "Supplementary dike-migration coordinate/data product (MMC2)",
+        "type": "event_subset",
+        "file_path": "data/2018_kilauea_hawaii/references/LENGLINE2021_EPSL116653/parsed/supplement/LENGLINE2021_EPSL116653__supplement__mmc2__mineru.md",
+        "catalog_relation": "supplementary interpretation/data product for the native x/y/time release",
+        "scientific_use": "reproduce the dike-propagation coordinate interpretation; not a replacement for the event catalog",
+        "count_or_scope": "PDF supplementary methods/figures; no additional tabular event rows asserted",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/LENGLINE2021_EPSL116653/parsed/supplement/LENGLINE2021_EPSL116653__supplement__mmc2__mineru.md",
+            "locator": "supplementary PDF parsed sidecar",
+            "note": "Stable parsed path for MMC2."
+          }
+        ]
+      }
+    ],
+    "scientific_findings": [
+      {
+        "statement": "Seismicity migration constrains dike propagation during the lower-ERZ intrusion.",
+        "depends_on": null,
+        "scope": "2018 lower East Rift Zone dike intrusion",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/LENGLINE2021_EPSL116653/parsed/paper/LENGLINE2021_EPSL116653__paper__mineru.md",
+            "locator": "Results and discussion",
+            "note": "Interpretation."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "Focused dike-migration detection product; it is not a full hypocenter/magnitude catalog.",
+      "recommended_role": "Auxiliary dike-migration product; do not merge with summit catalogs.",
+      "comparison_or_baseline_sources": null,
+      "valid_comparisons": null,
+      "caveats": "Auxiliary dike-migration product; do not merge with summit catalogs.",
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/references/LENGLINE2021_EPSL116653/parsed/paper/LENGLINE2021_EPSL116653__paper__mineru.md",
+          "locator": "Results and discussion",
+          "note": "Interpretation."
+        }
+      ]
+    },
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/LENGLINE2021_EPSL116653/parsed/paper/LENGLINE2021_EPSL116653__paper__mineru.md",
+        "locator": "Results and discussion",
+        "note": "Interpretation."
+      }
+    ]
+  },
+  "extraction_quality": {
+    "status": "partial",
+    "extraction_confidence": "medium",
+    "completed_sections": [
+      "article",
+      "catalog",
+      "construction_workflow",
+      "additional_information"
+    ],
+    "missing_core_fields": [
+      "depth/magnitude/event-ID fields absent by design"
+    ],
+    "warnings": [
+      "Native x/y cannot be subjected to the common lat/lon/depth mask."
+    ],
+    "needs_human_review": true
+  }
+}

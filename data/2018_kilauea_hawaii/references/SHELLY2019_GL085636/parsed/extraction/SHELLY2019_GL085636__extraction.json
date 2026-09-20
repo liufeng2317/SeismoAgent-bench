@@ -16,12 +16,12 @@
     "catalog_relationship": "S1 is the high-resolution hypocentroid event catalog; S2 is its polarity-cluster subset; the phase CSV is a separate pick/association auxiliary product.",
     "evidence": [
       {
-        "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+        "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper__mineru.md",
         "locator": "Identity and evidence status; Scientific scope",
         "note": "Article identity, scope, DOI, and catalog relationship."
       },
       {
-        "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+        "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/SHELLY2019_GL085636__supplement__mineru.md",
         "locator": "Text S1; Table S1; Data Set S1/S2",
         "note": "Supplementary methods and product definitions."
       }
@@ -32,7 +32,7 @@
     "name": "Shelly–Thelen Kīlauea 2018 high-resolution summit catalog",
     "product_type": "multi_product_release",
     "role": "primary",
-    "quality_tier": "Q1/Q2",
+    "quality_tier": "Q1",
     "scientific_purpose": "High-rate summit event recovery, hypoDD relative geometry, and correlation-polarity family structure.",
     "event_definition": "Template-derived detections retaining at least 10 P and 10 S correlation-derived differential-time constraints after hypoDD; S2 adds polarity clusters.",
     "populations": [
@@ -48,7 +48,7 @@
         "magnitude_scope": "HVO template magnitudes",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper__mineru.md",
             "locator": "Scientific scope and observation conditions",
             "note": "Article reports about 2,823 starting templates."
           }
@@ -66,7 +66,7 @@
         "magnitude_scope": "Approximate source-native magnitude −1.17–5.4; not a calibrated b-value scale.",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper__mineru.md",
             "locator": "Reported products and quality controls",
             "note": "Article final count and retention rule."
           },
@@ -89,7 +89,7 @@
         "magnitude_scope": "Approximate source-native magnitude −1.17–5.4.",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/SHELLY2019_GL085636__supplement__mineru.md",
             "locator": "Data Set S2; Text S1",
             "note": "Supplement defines the 43,950-row cluster product."
           },
@@ -149,7 +149,7 @@
           "note": "USGS release identity, roles, checksums, and schemas."
         },
         {
-          "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+          "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/SHELLY2019_GL085636__supplement__mineru.md",
           "locator": "Data Set S1/S2 descriptions",
           "note": "Supplement confirms product semantics."
         }
@@ -207,7 +207,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+          "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper__mineru.md",
           "locator": "Benchmark interpretation",
           "note": "Article role and biases."
         },
@@ -253,7 +253,7 @@
         },
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/SHELLY2019_GL085636__supplement__mineru.md",
             "locator": "Data Set S1 header",
             "note": "Supplement lists S1 fields and summit depth datum."
           }
@@ -279,7 +279,7 @@
         },
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/SHELLY2019_GL085636__supplement__mineru.md",
             "locator": "Data Set S2 header",
             "note": "Supplement lists S2 fields."
           }
@@ -314,7 +314,8 @@
           }
         ]
       }
-    }
+    },
+    "quality_tier_detail": "High-resolution summit event catalog; S2 polarity clusters and phase arrivals are derived/auxiliary products."
   },
   "construction_workflow": {
     "summary": "HVO template events were scanned through continuous HVO/IRIS waveforms; correlation-derived differential times were inverted with hypoDD, then approximate magnitudes and polarity clusters were produced.",
@@ -331,7 +332,7 @@
         "availability_conditions": "Later runs preferentially used analyst-refined templates.",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper__mineru.md",
             "locator": "Scientific scope and observation conditions",
             "note": "Article template provenance."
           }
@@ -349,7 +350,7 @@
         "availability_conditions": "Waveform availability and processing runs change through sequence.",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper__mineru.md",
             "locator": "Scientific scope and observation conditions",
             "note": "Article waveform source and network caveat."
           }
@@ -405,7 +406,7 @@
         "dependencies": "HVO picks and waveform availability.",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/SHELLY2019_GL085636__supplement__mineru.md",
             "locator": "Text S1. Supporting Methods, Event detection and location procedure",
             "note": "Exact template/filter parameters."
           }
@@ -449,7 +450,7 @@
         "dependencies": "Template channel coverage.",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/SHELLY2019_GL085636__supplement__mineru.md",
             "locator": "Text S1. Supporting Methods, Event detection and location procedure",
             "note": "Detection thresholds and weighting."
           }
@@ -499,7 +500,7 @@
         "dependencies": "Differential-time quality and starting locations.",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/SHELLY2019_GL085636__supplement__mineru.md",
             "locator": "Text S1; Table S1",
             "note": "Relocation model, station radii, and run populations."
           }
@@ -529,7 +530,7 @@
         "dependencies": "HVO magnitude calibration events.",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper__mineru.md",
             "locator": "Magnitudes and polarity grouping",
             "note": "Article magnitude caveat."
           }
@@ -566,12 +567,12 @@
         "dependencies": "Correlation phase measurements.",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper__mineru.md",
             "locator": "Magnitudes and polarity grouping",
             "note": "Article interpretation."
           },
           {
-            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/SHELLY2019_GL085636__supplement__mineru.md",
             "locator": "Data Set S2 description",
             "note": "Product definition."
           }
@@ -581,12 +582,12 @@
     "final_output": "S1 high-resolution event catalog, S2 polarity-cluster subset, and separate phase-arrival auxiliary CSV.",
     "evidence": [
       {
-        "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+        "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper__mineru.md",
         "locator": "Catalog-construction workflow; Reported products and quality controls",
         "note": "Article workflow."
       },
       {
-        "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+        "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/SHELLY2019_GL085636__supplement__mineru.md",
         "locator": "Text S1; Data Set S1/S2",
         "note": "Supplement details and release headers."
       }
@@ -618,7 +619,7 @@
         "scope": "Kīlauea summit, 2018 eruption",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper__mineru.md",
             "locator": "Scientific scope and Catalog-construction workflow",
             "note": "Article interpretation."
           }
@@ -630,7 +631,7 @@
         "scope": "Study interval",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/SHELLY2019_GL085636__supplement__mineru.md",
             "locator": "Table S1",
             "note": "Run boundaries and retained-event counts."
           }

@@ -10,7 +10,7 @@
 | DOI | [10.1029/2021EA001979](https://doi.org/10.1029/2021EA001979) | DOI / landing page |
 | Article type | Research article that constructs a new event catalog | Abstract, Sections 2–6 |
 | Associated release | Article Data Set S1 / Dryad [10.5061/dryad.np5hqbzw9](https://doi.org/10.5061/dryad.np5hqbzw9) | PDF Data Availability Statement; local README |
-| Local paper parse | `paper/WEI2022_EA001979__paper__mineru.md` | 14-page MinerU `content_list_v2`; page boundaries retained in this note as content-list page anchors |
+| Local paper parse | `parsed/WEI2022_EA001979__paper__mineru.md` | 14-page MinerU `content_list_v2`; page boundaries retained in this note as content-list page anchors |
 | Supporting information | `supplement/Wei2022_Kilauea_SI.pdf` | Present locally; Text S1–S11 and Tables S1–S4 are referenced by the paper. The SI PDF has not been independently text-extracted here, so exact SI-only numerical parameters remain provisional. |
 
 This is a genuine catalog-construction paper, not an overview or a method-only
@@ -165,7 +165,7 @@ guarantee.
 ## Local provenance and open actions
 
 - Paper PDF: `data/2018_kilauea_hawaii/references/WEI2022_EA001979/paper/WEI2022_EA001979__paper.pdf`
-- MinerU text: `data/2018_kilauea_hawaii/references/WEI2022_EA001979/paper/WEI2022_EA001979__paper__mineru.md`
+- MinerU text: `data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/WEI2022_EA001979__paper__mineru.md`
 - Supporting information: `data/2018_kilauea_hawaii/references/WEI2022_EA001979/supplement/Wei2022_Kilauea_SI.pdf`
 - Catalog README and audit: `data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/README.md` and `WEI2022_EA001979__catalog_summary.md`
 - Source release: [Dryad 10.5061/dryad.np5hqbzw9](https://doi.org/10.5061/dryad.np5hqbzw9)

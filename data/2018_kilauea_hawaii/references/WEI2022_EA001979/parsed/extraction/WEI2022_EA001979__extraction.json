@@ -1,0 +1,426 @@
+{
+  "article": {
+    "source_id": "WEI2022_EA001979",
+    "case_id": "2018_kilauea_hawaii",
+    "title": "An Improved Earthquake Catalog During the 2018 Kīlauea Eruption From Combined Onshore and Offshore Seismic Arrays",
+    "authors": [
+      "XiaoZhuo Wei",
+      "Yang Shen",
+      "Jacqueline Caplan-Auerbach",
+      "Julia K. Morgan"
+    ],
+    "year": 2022,
+    "journal": "Earth and Space Science",
+    "doi": "10.1029/2021EA001979",
+    "article_type": "research_article",
+    "scientific_question": "Can combined onshore/offshore arrays improve detection and 3-D location during the 2018 eruption?",
+    "sequence": "2018 Kīlauea eruption",
+    "catalog_relationship": "Constructs a broad automatic event catalog using STA/LTA, automatic P/S picking, NonLinLoc and mixed networks.",
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+        "locator": "title, abstract and Sections 2–6",
+        "note": "Article identity."
+      },
+      {
+        "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/supplement/WEI2022_EA001979__supplement__mineru.md",
+        "locator": "supporting information",
+        "note": "SI methods and tables."
+      },
+      {
+        "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md",
+        "locator": "provenance",
+        "note": "Local release."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "WEI2022_EA001979_S1",
+    "name": "Wei improved Kīlauea catalog",
+    "product_type": "broad_automatic_event_catalog",
+    "role": "secondary",
+    "quality_tier": "Q2",
+    "scientific_purpose": "Broad-island/flank/offshore detection and 3-D location comparison.",
+    "event_definition": "Events retained after trigger association, automatic P/S picks, NonLinLoc location, re-association, duplicate removal and magnitude estimation.",
+    "product_semantics": {
+      "final_catalog": "375,736 rows",
+      "numeric_magnitude": "308,017 rows",
+      "summit_window": "2,369 rows; 1,930 numeric magnitude"
+    },
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "final published catalog",
+        "unit": "events",
+        "count_article": 375736,
+        "count_local": 375736,
+        "selection_rule": "automatic association/location/QC and duplicate removal",
+        "time_range": "2018-03-01 to 2018-09-30 UTC",
+        "spatial_depth_scope": "lat 18.691332–20.392835; lon −156.289628–−154.385413; depth −4.121094–69.853516 km",
+        "magnitude_scope": "d/l/Unk; 308,017 numeric",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+            "locator": "Sections 4–6",
+            "note": "Article final count."
+          },
+          {
+            "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md",
+            "locator": "full-file audit",
+            "note": "Local count and ranges."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "summit benchmark subset",
+        "unit": "events",
+        "count_article": null,
+        "count_local": 2369,
+        "selection_rule": "2018-05-01–05-09 summit spatial/depth mask",
+        "time_range": "2018-05-01 to 2018-05-09 UTC",
+        "spatial_depth_scope": "19.30–19.50°N, −155.40–−155.15°, 0–20 km",
+        "magnitude_scope": "1,930 numeric; 439 Unk",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md",
+            "locator": "frozen summit benchmark mask",
+            "note": "Local subset and ranges."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "10.5061/dryad.np5hqbzw9",
+      "version": "Dryad v8",
+      "source_files": [
+        {
+          "product_id": "catalog_S1",
+          "path": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_S1.txt",
+          "format": "whitespace text",
+          "checksum": "f95ae0b17eb519c169c17248b9986eb15885c2a42ca28102a1d25ca7a28eb339",
+          "role": "canonical"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md",
+          "locator": "provenance",
+          "note": "Dryad release."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": 375736,
+      "row_count": 375736,
+      "product_counts": {
+        "catalog_S1": 375736,
+        "summit_mask": 2369,
+        "numeric_magnitude": 308017
+      },
+      "time_range": "2018-03-01T00:10:39.787552Z to 2018-09-30T23:59:32.912631Z",
+      "latitude_longitude_depth_range": "lat 18.691332–20.392835; lon −156.289628–−154.385413; depth −4.121094–69.853516 km",
+      "magnitude_range": "−2.25–7.14 numeric",
+      "article_local_discrepancy": "No row-count discrepancy; 67,719 rows have Unk magnitude type.",
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md",
+          "locator": "full-file audit and frozen mask",
+          "note": "Local stats."
+        }
+      ]
+    },
+    "product_schemas": {
+      "catalog_S1": {
+        "role": "automatic_event_catalog",
+        "identifier_field": "SourceTime (unique but no explicit ID)",
+        "fields": [
+          "SourceTime",
+          "Lat",
+          "Lon",
+          "Dep",
+          "AzimuthalGap",
+          "MinDist",
+          "Nobs",
+          "RMS",
+          "StdX",
+          "StdY",
+          "StdZ",
+          "Mag",
+          "MagType",
+          "StdMag"
+        ],
+        "units": {
+          "time": "UTC",
+          "depth": "km",
+          "latitude": "degree",
+          "longitude": "degree"
+        },
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md",
+            "locator": "native schema and missing values",
+            "note": "14-field header."
+          }
+        ]
+      }
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "broad detection/association/location",
+        "flank/offshore recovery",
+        "network sensitivity"
+      ],
+      "unsuitable_metrics": [
+        "unconditional truth",
+        "daily-rate comparison without deployment covariates",
+        "direct summit relative-location ranking"
+      ],
+      "independence_conditions": [
+        "common mask with Shelly and explicit network metadata"
+      ],
+      "limitations": [
+        "no stable event ID",
+        "automatic heterogeneous network",
+        "67,719 missing magnitude type"
+      ],
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md",
+          "locator": "benchmark role",
+          "note": "Evaluation role."
+        }
+      ]
+    },
+    "quality_tier_detail": "Broad automatic detection/location catalog using mixed onshore and offshore networks."
+  },
+  "construction_workflow": {
+    "summary": "Filtered components → STA/LTA triggers → travel-time association → polarization/kurtosis P/S picks → NonLinLoc with topography mask → arrival/misfit QC → re-association → coda/local magnitude → duplicate removal → Data Set S1.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "Onshore/offshore seismic arrays",
+        "type": "waveform",
+        "provider_or_network": "IRIS/HVO and temporary arrays",
+        "temporal_spatial_scope": "2018 Kīlauea eruption",
+        "station_count": null,
+        "channels_sampling": "variable; noisy nodal/OBS components documented",
+        "role": "primary_input",
+        "availability_conditions": "network changes and offshore quality differences",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+            "locator": "Sections 2–3",
+            "note": "Network conditions."
+          },
+          {
+            "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/supplement/WEI2022_EA001979__supplement__mineru.md",
+            "locator": "supporting methods",
+            "note": "Array details."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "STA/LTA triggering and association",
+        "category": "detection",
+        "purpose": "Generate candidate events",
+        "inputs": [
+          "filtered waveforms"
+        ],
+        "outputs": [
+          "triggers/associated candidates"
+        ],
+        "method": "STA/LTA with travel-time windows",
+        "software_or_model": null,
+        "parameters": [],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "650,899 associated candidates article-reported",
+        "analyst_intervention": null,
+        "dependencies": "network deployment and velocity model",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+            "locator": "Section 3, detection/association paragraphs",
+            "note": "Trigger workflow."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "automatic P/S picking",
+        "category": "picking",
+        "purpose": "Identify arrivals and polarities",
+        "inputs": [
+          "associated waveforms"
+        ],
+        "outputs": [
+          "P/S picks"
+        ],
+        "method": "polarization/kurtosis-based automatic picking",
+        "software_or_model": null,
+        "parameters": [],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "503,339 successfully located article-reported",
+        "analyst_intervention": null,
+        "dependencies": "signal quality and station coverage",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+            "locator": "Section 3, picking paragraph",
+            "note": "Picking method."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST3",
+        "order": 3,
+        "name": "NonLinLoc location and QC",
+        "category": "location",
+        "purpose": "Locate and filter events",
+        "inputs": [
+          "P/S picks",
+          "3-D model/topography"
+        ],
+        "outputs": [
+          "located events"
+        ],
+        "method": "NonLinLoc, re-association and duplicate removal",
+        "software_or_model": "NonLinLoc",
+        "parameters": [
+          {
+            "name": "minimum P arrivals",
+            "value": 1,
+            "unit": null
+          },
+          {
+            "name": "minimum valid arrivals",
+            "value": 4,
+            "unit": null
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "weight/RMS criteria; duplicate origins <1 s merged"
+        ],
+        "intermediate_result": "375,736 final rows",
+        "analyst_intervention": null,
+        "dependencies": "velocity model and topography mask",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+            "locator": "Sections 3–4, location/QC paragraphs",
+            "note": "Location workflow."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST4",
+        "order": 4,
+        "name": "magnitude estimation and export",
+        "category": "qc_and_export",
+        "purpose": "Assign coda/local magnitudes and release catalog",
+        "inputs": [
+          "located events",
+          "coda/amplitude measurements"
+        ],
+        "outputs": [
+          "Data Set S1"
+        ],
+        "method": "coda/duration magnitude; ML for large/overlapping events",
+        "software_or_model": null,
+        "parameters": [
+          {
+            "name": "station magnitude minimum",
+            "value": 2,
+            "unit": "stations"
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "retain Unk magnitude when measurement unavailable"
+        ],
+        "intermediate_result": "308,017 numeric magnitudes",
+        "analyst_intervention": null,
+        "dependencies": "event overlap/noise and network",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+            "locator": "Section 4.2, magnitude paragraph",
+            "note": "Magnitude rules."
+          }
+        ]
+      }
+    ],
+    "final_output": "375,736-row Data Set S1 with mixed d/l/Unk magnitude types.",
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+        "locator": "Sections 2–6",
+        "note": "Workflow."
+      },
+      {
+        "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/supplement/WEI2022_EA001979__supplement__mineru.md",
+        "locator": "supporting methods",
+        "note": "Supplement details."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [],
+    "scientific_findings": [
+      {
+        "statement": "Combined arrays improve broad event coverage but introduce deployment- and offshore-quality-dependent detection changes.",
+        "depends_on": null,
+        "scope": "2018 Kīlauea eruption",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+            "locator": "Results/discussion",
+            "note": "Findings."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "Broad automatic detection/location catalog using mixed onshore and offshore networks.",
+      "recommended_role": "Q2 secondary broad reference against Shelly summit catalog and HVO Q3 baseline.",
+      "comparison_or_baseline_sources": null,
+      "valid_comparisons": null,
+      "caveats": "Q2 secondary broad reference against Shelly summit catalog and HVO Q3 baseline.",
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+          "locator": "Results/discussion",
+          "note": "Findings."
+        }
+      ]
+    },
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+        "locator": "Results/discussion",
+        "note": "Findings."
+      }
+    ]
+  },
+  "extraction_quality": {
+    "status": "partial",
+    "extraction_confidence": "medium",
+    "completed_sections": [
+      "article",
+      "catalog",
+      "construction_workflow",
+      "additional_information"
+    ],
+    "missing_core_fields": [
+      "SI station/table details not independently summarized in stable sidecar"
+    ],
+    "warnings": [
+      "Do not collapse 2,369 all rows and 1,930 numeric-magnitude rows."
+    ],
+    "needs_human_review": true
+  }
+}

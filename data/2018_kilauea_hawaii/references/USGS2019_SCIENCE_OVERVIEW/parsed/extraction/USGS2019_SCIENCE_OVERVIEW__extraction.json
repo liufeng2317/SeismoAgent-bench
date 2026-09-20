@@ -1,0 +1,247 @@
+{
+  "article": {
+    "source_id": "USGS2019_SCIENCE_OVERVIEW",
+    "case_id": "2018_kilauea_hawaii",
+    "title": "The 2018 rift eruption and summit collapse of Kīlauea Volcano",
+    "authors": [
+      "C. A. Neal",
+      "S. R. Brantley",
+      "L. Antolik",
+      "J. L. Babb",
+      "M. Burgess",
+      "K. Calles",
+      "M. Cappos",
+      "J. C. Chang",
+      "S. Conway",
+      "L. Desmither",
+      "P. Dotray",
+      "T. Elias",
+      "P. Fukunaga",
+      "S. Fuke",
+      "I. A. Johanson",
+      "K. Kamibayashi",
+      "J. Kauahikaua",
+      "R. L. Lee",
+      "S. Pekalib",
+      "A. Miklius",
+      "W. Million",
+      "C. J. Moniz",
+      "P. A. Nadeau",
+      "P. Okubo",
+      "C. Parcheta",
+      "M. R. Patrick",
+      "B. Shiro",
+      "D. A. Swanson",
+      "W. Tollett",
+      "F. Trusdell",
+      "E. F. Younger",
+      "M. H. Zoeller",
+      "E. K. Montgomery-Brown",
+      "K. R. Anderson",
+      "M. P. Poland",
+      "J. L. Ball",
+      "J. Bard",
+      "M. Coombs",
+      "H. R. Dietterich",
+      "C. Kern",
+      "W. A. Thelen",
+      "P. F. Cervelli",
+      "T. Orr",
+      "B. F. Houghton",
+      "C. Gansecki",
+      "R. Hazlett",
+      "P. Lundgren",
+      "A. K. Diefenbach",
+      "A. H. Lerner",
+      "G. Waite",
+      "P. Kelly",
+      "L. Clor",
+      "C. Werner",
+      "K. Mulliken",
+      "G. Fisher",
+      "D. Damby"
+    ],
+    "year": 2019,
+    "journal": "Science",
+    "doi": "10.1126/science.aav7046",
+    "article_type": "science_overview",
+    "scientific_question": "How did the 2018 Kīlauea lower-East-Rift-Zone eruption and summit collapse evolve, and what observations constrain the coupled volcanic and seismic processes?",
+    "sequence": "2018 Kīlauea eruption, flank earthquake and summit collapse",
+    "catalog_relationship": "Provides event/eruption context and cites USGS/HVO seismic products; it does not construct or release a machine-readable event catalog.",
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+        "locator": "title, abstract paragraph, and Data and materials availability",
+        "note": "Overview identity and data role."
+      },
+      {
+        "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+        "locator": "citation line / DOI in reference metadata",
+        "note": "DOI 10.1126/science.aav7046 is present in the parsed article text."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": null,
+    "name": "No article-specific catalog",
+    "product_type": "context_overview",
+    "role": "not_a_catalog",
+    "quality_tier": "unknown",
+    "scientific_purpose": "Context for the Kīlauea benchmark event sequence and monitoring conditions.",
+    "event_definition": null,
+    "product_semantics": {},
+    "populations": [],
+    "release": {
+      "doi_or_url": null,
+      "version": null,
+      "source_files": [],
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+          "locator": "Data and materials availability",
+          "note": "The overview points to external geologic/seismic data sources, not an article catalog release."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": null,
+      "row_count": null,
+      "product_counts": {},
+      "time_range": "2018 eruption context",
+      "latitude_longitude_depth_range": null,
+      "magnitude_range": "article narrative includes Mw 6.9 flank earthquake and Mw 4.7–5.4 collapse signals",
+      "article_local_discrepancy": "No local event table is expected for this context reference.",
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+          "locator": "Data and materials availability; figures 1–6",
+          "note": "No event-table release."
+        }
+      ]
+    },
+    "product_schemas": {},
+    "evaluation_use": {
+      "suitable_metrics": [],
+      "unsuitable_metrics": [
+        "event detection recall",
+        "catalog location error",
+        "event-level matching"
+      ],
+      "independence_conditions": [],
+      "limitations": [
+        "overview narrative rather than catalog-construction paper",
+        "external HVO/USGS products require separate provenance"
+      ],
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+          "locator": "Data availability and cited USGS catalog reference",
+          "note": "Role limitation."
+        }
+      ]
+    },
+    "quality_tier_detail": "Context overview; it is not a benchmark catalog."
+  },
+  "construction_workflow": {
+    "summary": null,
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "HVO/USGS seismic, geodetic, gas and imagery observations",
+        "type": "multi_sensor_context",
+        "provider_or_network": "Hawaiian Volcano Observatory and partner agencies",
+        "temporal_spatial_scope": "2018 Kīlauea eruption",
+        "station_count": null,
+        "channels_sampling": null,
+        "role": "context_only",
+        "availability_conditions": "not released as an article-specific benchmark bundle",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+            "locator": "figures 1–6 and Data and materials availability",
+            "note": "Monitoring modalities and external data references."
+          }
+        ]
+      }
+    ],
+    "stages": [],
+    "final_output": "No catalog output; use only for case context and interpretation.",
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+        "locator": "main narrative and figures",
+        "note": "Overview rather than construction workflow."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [
+      {
+        "product_id": "DP1",
+        "name": "HVO/USGS operational catalog references",
+        "type": "context_reference",
+        "file_path": null,
+        "catalog_relation": "external independent baseline; not an output of this article",
+        "scientific_use": "case context",
+        "count_or_scope": "not specified in article",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+            "locator": "reference 41 and Data and materials availability",
+            "note": "External catalog citation."
+          }
+        ]
+      }
+    ],
+    "scientific_findings": [
+      {
+        "statement": "The eruption coupled lower-ERZ intrusion, Mw 6.9 flank faulting, lava effusion, and near-daily summit collapses.",
+        "depends_on": null,
+        "scope": "2018 Kīlauea eruption, flank earthquake and summit collapse",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+            "locator": "abstract, Lower ERZ eruption, Summit collapse and Synthesis sections",
+            "note": "Scientific context."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "Context overview; it is not a benchmark catalog.",
+      "recommended_role": "Context-only reference; never substitute it for Shelly, Wei, Matoza, Lengliné or the official HVO baseline.",
+      "comparison_or_baseline_sources": null,
+      "valid_comparisons": null,
+      "caveats": "Context-only reference; never substitute it for Shelly, Wei, Matoza, Lengliné or the official HVO baseline.",
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+          "locator": "abstract, Lower ERZ eruption, Summit collapse and Synthesis sections",
+          "note": "Scientific context."
+        }
+      ]
+    },
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+        "locator": "abstract, Lower ERZ eruption, Summit collapse and Synthesis sections",
+        "note": "Scientific context."
+      }
+    ]
+  },
+  "extraction_quality": {
+    "status": "verified",
+    "extraction_confidence": "high",
+    "completed_sections": [
+      "article",
+      "catalog",
+      "construction_workflow",
+      "additional_information"
+    ],
+    "missing_core_fields": [],
+    "warnings": [
+      "This source is intentionally marked not_a_catalog."
+    ],
+    "needs_human_review": false
+  }
+}

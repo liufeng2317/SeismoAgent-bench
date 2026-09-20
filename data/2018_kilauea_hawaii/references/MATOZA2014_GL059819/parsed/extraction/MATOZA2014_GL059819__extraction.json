@@ -1,0 +1,362 @@
+{
+  "article": {
+    "source_id": "MATOZA2014_GL059819",
+    "case_id": "2018_kilauea_hawaii",
+    "title": "High-precision relocation of long-period events beneath the summit region of Kīlauea Volcano, Hawaiʻi, from 1986 to 2009",
+    "authors": [
+      "Robin S. Matoza",
+      "Peter M. Shearer",
+      "Paul G. Okubo"
+    ],
+    "year": 2014,
+    "journal": "Geophysical Research Letters",
+    "doi": "10.1002/2014GL059819",
+    "article_type": "research_article",
+    "scientific_question": "Can automated LP classification and relative relocation resolve summit LP-event structure?",
+    "sequence": "1986–2009 Kīlauea summit LP events",
+    "catalog_relationship": "Constructs a historical LP classification/relocation catalog; it has no temporal overlap with the 2018 benchmark window.",
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/MATOZA2014_GL059819/parsed/paper/MATOZA2014_GL059819__paper__mineru.md",
+        "locator": "title, abstract and Sections 2–3",
+        "note": "Article identity and counts."
+      },
+      {
+        "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md",
+        "locator": "provenance and frozen-window audit",
+        "note": "Local product role."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "MATOZA2014_GL059819_LP_SUMMIT",
+    "name": "Matoza historical LP summit catalog",
+    "product_type": "lp_event_catalog",
+    "role": "auxiliary",
+    "quality_tier": "Q1",
+    "scientific_purpose": "Historical LP classification and relative relocation.",
+    "event_definition": "HVO summit events passing P-spectrum SNR and frequency-index LP criteria.",
+    "product_semantics": {
+      "LP_selected": "12,290 LP events classified by FI ≤ −1",
+      "cross_correlation_relocated_article": "5,327 LP events relocated using waveform cross-correlation and cluster analysis",
+      "SSST_aligned_final": "5,199 of the relocated events after the SSST cluster-centroid alignment criterion"
+    },
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "LP-selected events",
+        "unit": "events",
+        "count_article": 12290,
+        "count_local": 12290,
+        "selection_rule": "frequency index FI≤−1 after P-spectrum SNR checks",
+        "time_range": "1986-01-02 to 2009-03-31 UTC",
+        "spatial_depth_scope": "lat 19.31194–19.50323; lon −155.3645–−155.1515; depth −0.505–21.472 km",
+        "magnitude_scope": "native CUSP magnitude 0–4.56",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/MATOZA2014_GL059819/parsed/paper/MATOZA2014_GL059819__paper__mineru.md",
+            "locator": "Section 2, LP selection",
+            "note": "Selection count."
+          },
+          {
+            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md",
+            "locator": "local audit",
+            "note": "Rows and ranges."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "Cross-correlation/cluster relocated LP events",
+        "unit": "events",
+        "count_article": 5327,
+        "count_local": null,
+        "selection_rule": "Average P-wave correlation >0.45, at least eight differential-time measurements with correlation >0.75 and source–station distance <80 km.",
+        "time_range": "1986-01-02 to 2009-03-31 UTC",
+        "spatial_depth_scope": "Relocated LP products; native local coordinates",
+        "magnitude_scope": "Inherited CUSP magnitude",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/MATOZA2014_GL059819/parsed/paper/MATOZA2014_GL059819__paper__mineru.md",
+            "locator": "Abstract paragraph; §3, cross-correlation and relocation paragraph",
+            "note": "Article reports 5,327 cross-correlation/cluster relocations."
+          }
+        ]
+      },
+      {
+        "population_id": "P3",
+        "label": "SSST-aligned final relocated LP events",
+        "unit": "events",
+        "count_article": 5199,
+        "count_local": 5199,
+        "selection_rule": "Relocated clusters with at least 10 events and 20% of events having independent SSST locations; cluster centroids shifted to SSST centroids.",
+        "time_range": "1986-01-02 to 2009-03-31 UTC",
+        "spatial_depth_scope": "Final local rows with relocation flag=1",
+        "magnitude_scope": "Inherited CUSP magnitude",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/MATOZA2014_GL059819/parsed/paper/MATOZA2014_GL059819__paper__mineru.md",
+            "locator": "§3, SSST alignment paragraph; Figure 4 caption",
+            "note": "Article/local archive distinguish the 5,199 final SSST-aligned rows."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "10.1002/2014GL059819",
+      "version": null,
+      "source_files": [
+        {
+          "product_id": "lp_events",
+          "path": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_lp_summit.txt",
+          "format": "text",
+          "checksum": "a7b948486279e37349834705aa103603d3a1738e2e2845c574bfd0f4012f29c5",
+          "role": "canonical"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md",
+          "locator": "provenance and schema",
+          "note": "Release file."
+        },
+        {
+          "source": "data/2018_kilauea_hawaii/references/MATOZA2014_GL059819/parsed/paper/MATOZA2014_GL059819__paper__mineru.md",
+          "locator": "Data availability; §3 product accounting",
+          "note": "Supporting-information release contains the relocated catalog."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": 12290,
+      "row_count": 12290,
+      "product_counts": {
+        "lp_events": 12290,
+        "SSST_aligned_final": 5199
+      },
+      "time_range": "1986-01-02 to 2009-03-31 UTC",
+      "latitude_longitude_depth_range": "lat 19.31194–19.50323; lon −155.3645–−155.1515; depth −0.505–21.472 km",
+      "magnitude_range": "0–4.56",
+      "article_local_discrepancy": "Article reports 5,327 cross-correlation/cluster relocations and 5,199 final SSST-aligned events; the local archive exposes the 5,199 relocation-flag rows but not a separate 5,327 membership flag.",
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md",
+          "locator": "local audit and frozen-window audit",
+          "note": "Full-file stats and empty overlap."
+        }
+      ]
+    },
+    "product_schemas": {
+      "lp_events": {
+        "role": "historical_lp_catalog",
+        "identifier_field": "CUSP ID",
+        "fields": [
+          "UTC time",
+          "CUSP ID",
+          "latitude",
+          "longitude",
+          "depth",
+          "magnitude",
+          "quality",
+          "cluster",
+          "relative errors",
+          "relocation flag"
+        ],
+        "units": {
+          "depth": "km",
+          "latitude": "degree",
+          "longitude": "degree"
+        },
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md",
+            "locator": "native schema",
+            "note": "17-field archive schema."
+          }
+        ]
+      }
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "historical LP classification",
+        "relative relocation geometry"
+      ],
+      "unsuitable_metrics": [
+        "2018 event detection",
+        "2018 completeness",
+        "cross-catalog event denominator"
+      ],
+      "independence_conditions": [
+        "preserve historical time range and relocation flag"
+      ],
+      "limitations": [
+        "zero 2018 window overlap"
+      ],
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md",
+          "locator": "benchmark role",
+          "note": "Auxiliary role."
+        }
+      ]
+    },
+    "quality_tier_detail": "High-precision historical LP relative-relocation product; it has no 2018-window events."
+  },
+  "construction_workflow": {
+    "summary": "HVO event stream → P-spectrum SNR screening → frequency-index LP classification → correlation clustering → relative relocation/SSST alignment → release.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "HVO permanent network waveforms",
+        "type": "waveform",
+        "provider_or_network": "HVO",
+        "temporal_spatial_scope": "1986–2009 summit",
+        "station_count": 50,
+        "channels_sampling": null,
+        "role": "primary_input",
+        "availability_conditions": "historical changing network",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/MATOZA2014_GL059819/parsed/paper/MATOZA2014_GL059819__paper__mineru.md",
+            "locator": "Observation/method section",
+            "note": "Approximate network."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "LP classification",
+        "category": "detection",
+        "purpose": "Select long-period events",
+        "inputs": [
+          "HVO events/waveforms"
+        ],
+        "outputs": [
+          "12,290 LP events"
+        ],
+        "method": "frequency-index and SNR criteria",
+        "software_or_model": null,
+        "parameters": [
+          {
+            "name": "FI threshold",
+            "value": "≤−1",
+            "unit": null
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "P-spectrum SNR screening"
+        ],
+        "intermediate_result": "12,290 LP rows",
+        "analyst_intervention": null,
+        "dependencies": "HVO event triggers",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/MATOZA2014_GL059819/parsed/paper/MATOZA2014_GL059819__paper__mineru.md",
+            "locator": "Section 2",
+            "note": "LP criterion."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "relative relocation",
+        "category": "relocation",
+        "purpose": "Resolve LP-event geometry",
+        "inputs": [
+          "LP events",
+          "waveform correlations"
+        ],
+        "outputs": [
+          "5,327 cross-correlation/cluster relocations",
+          "5,199 SSST-aligned final events"
+        ],
+        "method": "cluster analysis and source-specific station corrections",
+        "software_or_model": "SSST/relative relocation",
+        "parameters": [],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "5,327 article relocations; 5,199 final SSST-aligned rows",
+        "analyst_intervention": null,
+        "dependencies": "event clustering and station coverage",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/MATOZA2014_GL059819/parsed/paper/MATOZA2014_GL059819__paper__mineru.md",
+            "locator": "§3, paragraphs on 5,327 relocation and 5,199 SSST alignment",
+            "note": "Separate intermediate and final products."
+          }
+        ]
+      }
+    ],
+    "final_output": "12,290-row historical LP catalog with relocation flags.",
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/MATOZA2014_GL059819/parsed/paper/MATOZA2014_GL059819__paper__mineru.md",
+        "locator": "Sections 2–3",
+        "note": "Workflow."
+      },
+      {
+        "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md",
+        "locator": "local audit",
+        "note": "Release."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [],
+    "scientific_findings": [
+      {
+        "statement": "LP events form historical summit clusters with high relative-location precision.",
+        "depends_on": null,
+        "scope": "1986–2009 Kīlauea summit LP events",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/MATOZA2014_GL059819/parsed/paper/MATOZA2014_GL059819__paper__mineru.md",
+            "locator": "Results",
+            "note": "Scientific use."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "High-precision historical LP relative-relocation product; it has no 2018-window events.",
+      "recommended_role": "Historical auxiliary reference only; zero overlap with 2018 window.",
+      "comparison_or_baseline_sources": null,
+      "valid_comparisons": null,
+      "caveats": "Historical auxiliary reference only; zero overlap with 2018 window.",
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/references/MATOZA2014_GL059819/parsed/paper/MATOZA2014_GL059819__paper__mineru.md",
+          "locator": "Results",
+          "note": "Scientific use."
+        }
+      ]
+    },
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/MATOZA2014_GL059819/parsed/paper/MATOZA2014_GL059819__paper__mineru.md",
+        "locator": "Results",
+        "note": "Scientific use."
+      }
+    ]
+  },
+  "extraction_quality": {
+    "status": "partial",
+    "extraction_confidence": "medium",
+    "completed_sections": [
+      "article",
+      "catalog",
+      "construction_workflow",
+      "additional_information"
+    ],
+    "missing_core_fields": [
+      "exact station/channel metadata"
+    ],
+    "warnings": [
+      "No rows fall in the 2018 benchmark window."
+    ],
+    "needs_human_review": true
+  }
+}

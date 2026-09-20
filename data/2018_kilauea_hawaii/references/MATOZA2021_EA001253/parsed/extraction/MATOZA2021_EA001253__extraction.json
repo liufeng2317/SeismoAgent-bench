@@ -1,0 +1,348 @@
+{
+  "article": {
+    "source_id": "MATOZA2021_EA001253",
+    "case_id": "2018_kilauea_hawaii",
+    "title": "Comprehensive High-Precision Relocation of Seismicity on the Island of Hawaiʻi 1986–2018",
+    "authors": [
+      "Robin S. Matoza",
+      "Paul G. Okubo",
+      "Peter M. Shearer"
+    ],
+    "year": 2020,
+    "journal": "Earth and Space Science",
+    "doi": "10.1029/2020EA001253",
+    "article_type": "research_article",
+    "scientific_question": "Can a long HVO catalog be systematically relocated to reveal Hawaiian seismicity structure?",
+    "sequence": "1986–2018 Hawaiian Islands seismicity",
+    "catalog_relationship": "Provides an island-wide HVO-triggered starting/relocated catalog and a useful Kīlauea relative-location auxiliary reference.",
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+        "locator": "title, abstract and Sections 2–4",
+        "note": "Article identity and workflow."
+      },
+      {
+        "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+        "locator": "provenance and frozen summit window",
+        "note": "Local release and role."
+      },
+      {
+        "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+        "locator": "citation block, lines 27–39",
+        "note": "Citation gives 2020 and full author names; source ID is retained for repository compatibility."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "MATOZA2021_EA001253_ISLANDWIDE",
+    "name": "Matoza island-wide relocated catalog",
+    "product_type": "islandwide_event_catalog_plus_relocation",
+    "role": "secondary",
+    "quality_tier": "Q1",
+    "scientific_purpose": "Island-wide relative geometry and historical HVO seismicity context.",
+    "event_definition": "HVO CUSP/AQMS event triggers with waveform cross-correlation differential times; nbranch>1 marks successful relocation.",
+    "product_semantics": {
+      "all_rows": "347,446 local rows",
+      "relocated": "299,966 nbranch>1",
+      "summit_relocated_window": "984 rows using relocated coordinate mask"
+    },
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "full island catalog",
+        "unit": "events",
+        "count_article": 347445,
+        "count_local": 347446,
+        "selection_rule": "HVO-triggered events, relocation where branch support exists",
+        "time_range": "1986-01-01 to 2018-12-31 UTC",
+        "spatial_depth_scope": "relocated lat 18.5633–21.1791; lon −156.49609–−154.37070; depth −0.003–202.48 km",
+        "magnitude_scope": "native mag −0.77–9.0",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+            "locator": "abstract/Section 2",
+            "note": "Article population."
+          },
+          {
+            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+            "locator": "full-file audit",
+            "note": "Local versioned count."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "summit-window relocated subset",
+        "unit": "events",
+        "count_article": null,
+        "count_local": 984,
+        "selection_rule": "2018-05-01–05-09, summit mask, nbranch>1",
+        "time_range": "2018-05-01 to 2018-05-09 UTC",
+        "spatial_depth_scope": "19.300–19.500°N, −155.40–−155.15°, 0–20 km using latR/lonR/depR",
+        "magnitude_scope": "0.00–4.66",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+            "locator": "frozen summit window table",
+            "note": "Benchmark subset."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "10.1029/2020EA001253",
+      "version": "revised archive",
+      "source_files": [
+        {
+          "product_id": "islandwide_events",
+          "path": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_islandwide.txt",
+          "format": "whitespace text",
+          "checksum": "1e3b7c878e93b0f426b312c41fbe6cadd01be15cd452cfef1ad605e645a76877",
+          "role": "canonical"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+          "locator": "provenance and schema",
+          "note": "Release file."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": 347446,
+      "row_count": 347446,
+      "product_counts": {
+        "islandwide_events": 347446,
+        "relocated": 299966,
+        "summit_relocated": 984
+      },
+      "time_range": "1986-01-01 02:45:11.425 to 2018-12-31 23:27:25.830 UTC",
+      "latitude_longitude_depth_range": "relocated lat 18.5633–21.1791; lon −156.49609–−154.37070; depth −0.003–202.48 km",
+      "magnitude_range": "−0.77–9.0",
+      "article_local_discrepancy": "Article reports 347,445/275,009 and 79%; revised local release reports 347,446/299,966.",
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+          "locator": "full-file audit and frozen window",
+          "note": "Counts/ranges."
+        }
+      ]
+    },
+    "product_schemas": {
+      "islandwide_events": {
+        "role": "event_catalog",
+        "identifier_field": "event ID; cluster key (cID, polynum)",
+        "fields": [
+          "time",
+          "relocated lat/lon/depth",
+          "starting lat/lon/depth",
+          "magnitude",
+          "qID",
+          "cID",
+          "nbranch",
+          "differential-time counts",
+          "RMS"
+        ],
+        "units": {
+          "time": "UTC",
+          "depth": "km",
+          "latitude": "degree",
+          "longitude": "degree"
+        },
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+            "locator": "native schema",
+            "note": "26-field archive README."
+          }
+        ]
+      }
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "relative location",
+        "island-wide/flank detection",
+        "nbranch-conditioned geometry"
+      ],
+      "unsuitable_metrics": [
+        "unconditional absolute truth",
+        "daily-rate comparison without network covariates"
+      ],
+      "independence_conditions": [
+        "record HVO trigger/association inheritance",
+        "use relocated versus starting coordinates explicitly"
+      ],
+      "limitations": [
+        "1-D model and HVO-trigger bias",
+        "variable network coverage",
+        "article/local version discrepancy"
+      ],
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+          "locator": "benchmark role and limitations",
+          "note": "Evaluation role."
+        }
+      ]
+    },
+    "quality_tier_detail": "Broad island-wide high-precision relative-relocation reference with heterogeneous historical coverage."
+  },
+  "construction_workflow": {
+    "summary": "HVO CUSP/AQMS events → waveform cross-correlation differential times → GrowClust-style relocation → nbranch/cluster quality fields → revised island-wide release.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "HVO CUSP/AQMS waveforms and event triggers",
+        "type": "waveform_and_seed_catalog",
+        "provider_or_network": "HVO",
+        "temporal_spatial_scope": "1986–2018 Hawaiian Islands",
+        "station_count": null,
+        "channels_sampling": "variable historical channel availability",
+        "role": "primary_input",
+        "availability_conditions": "no fixed station count; HVO trigger lineage",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+            "locator": "Sections 2–3",
+            "note": "Input and network."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "event-pair waveform correlation",
+        "category": "relocation",
+        "purpose": "Measure differential times",
+        "inputs": [
+          "HVO event waveforms"
+        ],
+        "outputs": [
+          "differential-time pairs"
+        ],
+        "method": "pair at least 100 nearest neighbours or within distance; correlation r>0.65",
+        "software_or_model": null,
+        "parameters": [
+          {
+            "name": "correlation",
+            "value": ">0.65",
+            "unit": "coefficient"
+          }
+        ],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "pair/differential-time fields",
+        "analyst_intervention": null,
+        "dependencies": "available channels and event proximity",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+            "locator": "Methods, correlation/relocation paragraph",
+            "note": "Pairing criterion."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "relative relocation and release",
+        "category": "relocation",
+        "purpose": "Produce relocated coordinates and quality flags",
+        "inputs": [
+          "differential times",
+          "starting hypocenters"
+        ],
+        "outputs": [
+          "latR/lonR/depR, nbranch, clusters"
+        ],
+        "method": "relative relocation with 1-D model",
+        "software_or_model": "GrowClust/relative relocation",
+        "parameters": [],
+        "qc_and_rejection_rules": [
+          "nbranch>1 denotes successful relocation"
+        ],
+        "intermediate_result": "299,966 relocated rows",
+        "analyst_intervention": null,
+        "dependencies": "HVO trigger catalog",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+            "locator": "native schema and full-file audit",
+            "note": "Release flags."
+          }
+        ]
+      }
+    ],
+    "final_output": "347,446-row island-wide event table with relocated and starting coordinates.",
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+        "locator": "Sections 2–4",
+        "note": "Workflow."
+      },
+      {
+        "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+        "locator": "provenance and schema",
+        "note": "Release."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [],
+    "scientific_findings": [
+      {
+        "statement": "High-precision relative relocation reveals Hawaiian seismicity structure and summit/flank patterns.",
+        "depends_on": null,
+        "scope": "1986–2018 Hawaiian Islands seismicity",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+            "locator": "Results and discussion",
+            "note": "Scientific findings."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "Broad island-wide high-precision relative-relocation reference with heterogeneous historical coverage.",
+      "recommended_role": "Secondary island-wide reference; use 984 nbranch-qualified summit-window events for relative geometry.",
+      "comparison_or_baseline_sources": null,
+      "valid_comparisons": null,
+      "caveats": "Secondary island-wide reference; use 984 nbranch-qualified summit-window events for relative geometry.",
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+          "locator": "Results and discussion",
+          "note": "Scientific findings."
+        }
+      ]
+    },
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+        "locator": "Results and discussion",
+        "note": "Scientific findings."
+      }
+    ]
+  },
+  "extraction_quality": {
+    "status": "partial",
+    "extraction_confidence": "medium",
+    "completed_sections": [
+      "article",
+      "catalog",
+      "construction_workflow",
+      "additional_information"
+    ],
+    "missing_core_fields": [
+      "exact station-day/channel manifest",
+      "SI parameter details"
+    ],
+    "warnings": [
+      "Preserve revised local release versus article counts."
+    ],
+    "needs_human_review": true
+  }
+}

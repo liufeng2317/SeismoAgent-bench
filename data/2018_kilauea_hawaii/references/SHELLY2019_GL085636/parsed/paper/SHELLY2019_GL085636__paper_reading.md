@@ -11,7 +11,7 @@
 | Article type | Research article that constructs a waveform-detection and double-difference summit catalog, then applies correlation-derived polarity clustering | Abstract; §§2–3 |
 | Public data release | USGS [10.5066/P9DMIFMW](https://doi.org/10.5066/P9DMIFMW); local S1/S2 products and metadata are preserved | Article reference/data release; local files |
 | Supporting information | `supplement/Shelly2019_Kilauea_Figure_SI.pdf` is present; it is figure-based and has not been treated as a machine-readable catalog | Local provenance |
-| Local paper parse | `paper/SHELLY2019_GL085636__paper__mineru.md`; methods anchors below use MinerU content-list pages because concatenated Markdown has no page breaks | Local parse audit |
+| Local paper parse | `parsed/SHELLY2019_GL085636__paper__mineru.md`; methods anchors below use MinerU content-list pages because concatenated Markdown has no page breaks | Local parse audit |
 
 This is a genuine catalog-construction paper and the strongest summit-relative
 reference in this case. It is not an island-wide completeness truth set: the
@@ -130,7 +130,7 @@ not identical.
 ## Local provenance and open actions
 
 - Paper PDF: `data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/paper/SHELLY2019_GL085636__paper.pdf`
-- Parsed paper: `data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/paper/SHELLY2019_GL085636__paper__mineru.md`
+- Parsed paper: `data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/SHELLY2019_GL085636__paper__mineru.md`
 - Figure SI: `data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/supplement/Shelly2019_Kilauea_Figure_SI.pdf`
 - Canonical event products: `data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_S1.txt` and `...__catalog_S2.txt`
 - Raw USGS phase release: `data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/raw/Kilauea_2018_correlation_phase_arrivals.csv` (607,958,927 bytes; SHA-256 `be6bab5bca8dff5355d763495ac2f9a5c54d157f80b0f315095e3d3caf1d8dc4`; local-only due size)
