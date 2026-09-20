@@ -53,7 +53,7 @@ published and are not recoded as missing).
 |---|---:|---:|---|---:|---:|---:|---:|
 | Relocated (`latR/lonR/depR`), time-only | 2,999 | 2,579 | 2018-05-01T00:13:40.685–2018-05-08T23:56:20.588 | 18.911330–19.883330 | −155.788620–−154.618830 | −7.915–63.517 | 0.00–6.90 |
 | Relocated + summit mask | 1,130 | 984 | same | 19.300520–19.495500 | −155.396330–−155.150200 | 0.007–19.237 | 0.00–4.66 |
-| Starting (`latC/lonC/depC`) + summit mask | 1,190 | 1,044 | same | 19.272970–19.495500 | −155.409790–−154.876810 | −3.986–19.237 | 0.00–4.66 |
+| Starting (`latC/lonC/depC`) + summit mask | 1,190 | 1,044 | same | 19.300330–19.491170 | −155.396330–−155.150160 | 0.000–18.640 | 0.00–4.66 |
 
 For metrics that require a relocated event geometry, use the second row and
 filter `nbranch > 1` (984 events). For provenance or starting-catalog bias
