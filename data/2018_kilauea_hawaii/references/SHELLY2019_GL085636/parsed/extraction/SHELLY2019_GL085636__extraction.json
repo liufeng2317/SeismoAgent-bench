@@ -1,0 +1,679 @@
+{
+  "article": {
+    "source_id": "SHELLY2019_GL085636",
+    "case_id": "2018_kilauea_hawaii",
+    "title": "Anatomy of a Caldera Collapse: Kīlauea 2018 Summit Seismicity Sequence in High Resolution",
+    "authors": [
+      "David R. Shelly",
+      "Weston A. Thelen"
+    ],
+    "year": 2019,
+    "journal": "Geophysical Research Letters",
+    "doi": "10.1029/2019GL085636",
+    "article_type": "research_article",
+    "scientific_question": "Resolve high-rate summit seismicity and collapse-cycle geometry during the 2018 Kīlauea eruption with waveform correlation and relative relocation.",
+    "sequence": "2018-04-29 through 2018-08-06 UTC; Kīlauea summit caldera-collapse sequence.",
+    "catalog_relationship": "S1 is the high-resolution hypocentroid event catalog; S2 is its polarity-cluster subset; the phase CSV is a separate pick/association auxiliary product.",
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+        "locator": "Identity and evidence status; Scientific scope",
+        "note": "Article identity, scope, DOI, and catalog relationship."
+      },
+      {
+        "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+        "locator": "Text S1; Table S1; Data Set S1/S2",
+        "note": "Supplementary methods and product definitions."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "SHELLY2019_S1_S2",
+    "name": "Shelly–Thelen Kīlauea 2018 high-resolution summit catalog",
+    "product_type": "multi_product_release",
+    "role": "primary",
+    "quality_tier": "Q1/Q2",
+    "scientific_purpose": "High-rate summit event recovery, hypoDD relative geometry, and correlation-polarity family structure.",
+    "event_definition": "Template-derived detections retaining at least 10 P and 10 S correlation-derived differential-time constraints after hypoDD; S2 adds polarity clusters.",
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "HVO template events",
+        "unit": "events",
+        "count_article": 2823,
+        "count_local": null,
+        "selection_rule": "HVO catalog templates spanning the study period; later runs favored analyst-refined templates.",
+        "time_range": "2018-04-29–2018-08-06 UTC",
+        "spatial_depth_scope": "Kīlauea summit",
+        "magnitude_scope": "HVO template magnitudes",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+            "locator": "Scientific scope and observation conditions",
+            "note": "Article reports about 2,823 starting templates."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "S1 high-resolution event catalog",
+        "unit": "events",
+        "count_article": 44188,
+        "count_local": 44188,
+        "selection_rule": "At least 10 P and 10 S correlation-derived differential times retained in hypoDD.",
+        "time_range": "2018-04-29 01:24:11.320–2018-08-06 23:54:33.800 UTC",
+        "spatial_depth_scope": "Summit datum; lat 19.329439–19.469961, lon −155.365674–−155.193571, depth −0.729–27.3 km",
+        "magnitude_scope": "Approximate source-native magnitude −1.17–5.4; not a calibrated b-value scale.",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+            "locator": "Reported products and quality controls",
+            "note": "Article final count and retention rule."
+          },
+          {
+            "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md",
+            "locator": "Full-file audit; Frozen summit benchmark mask",
+            "note": "Local count, ranges, and window counts."
+          }
+        ]
+      },
+      {
+        "population_id": "P3",
+        "label": "S2 polarity-cluster event catalog",
+        "unit": "events",
+        "count_article": 43950,
+        "count_local": 43950,
+        "selection_rule": "S1 events receiving a correlation-derived polarity cluster label; 50 hierarchical clusters.",
+        "time_range": "2018-04-29–2018-08-06 UTC",
+        "spatial_depth_scope": "Same summit-referenced coordinates as S1; 238 S1 IDs have no S2 row.",
+        "magnitude_scope": "Approximate source-native magnitude −1.17–5.4.",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+            "locator": "Data Set S2; Text S1",
+            "note": "Supplement defines the 43,950-row cluster product."
+          },
+          {
+            "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md",
+            "locator": "Checksums and native formats; Full-file audit",
+            "note": "Local subset relation and cluster count."
+          }
+        ]
+      },
+      {
+        "population_id": "P4",
+        "label": "Correlation-derived P/S phase-arrival auxiliary",
+        "unit": "phase rows",
+        "count_article": null,
+        "count_local": 8582492,
+        "selection_rule": "Template/match phase-arrival rows; multiple rows per event.",
+        "time_range": "2018-04-29 00:27:50.5581–2018-08-06 23:55:36.9803 UTC",
+        "spatial_depth_scope": "25 unique HV stations locally observed.",
+        "magnitude_scope": "Auxiliary source fields, not event magnitudes.",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md",
+            "locator": "Checksums and native formats; Full-file audit",
+            "note": "7,460,986 P and 1,121,506 S rows; not events."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "https://doi.org/10.5066/P9DMIFMW",
+      "version": "USGS release 2020-01-03",
+      "source_files": [
+        {
+          "path": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_S1.txt",
+          "format": "whitespace-delimited text",
+          "checksum": "6868428a91ce91b04283b3776633961a6373d257edbf7eb79ea99db154ee8abf",
+          "role": "canonical event catalog"
+        },
+        {
+          "path": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_S2.txt",
+          "format": "whitespace-delimited text",
+          "checksum": "112b8079cbc9970b7db5b8910bad90a7b9d30e3db19161deae22fb0307d3db13",
+          "role": "canonical polarity-cluster catalog"
+        },
+        {
+          "path": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/raw/Kilauea_2018_correlation_phase_arrivals.csv",
+          "format": "CSV",
+          "checksum": "be6bab5bca8dff5355d763495ac2f9a5c54d157f80b0f315095e3d3caf1d8dc4",
+          "role": "pick-level auxiliary release"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md",
+          "locator": "Provenance and products; Checksums and native formats",
+          "note": "USGS release identity, roles, checksums, and schemas."
+        },
+        {
+          "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+          "locator": "Data Set S1/S2 descriptions",
+          "note": "Supplement confirms product semantics."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": 44188,
+      "row_count": 44188,
+      "time_range": "2018-04-29 01:24:11.320–2018-08-06 23:54:33.800 UTC",
+      "latitude_longitude_depth_range": "S1: lat 19.329439–19.469961°, lon −155.365674–−155.193571°, depth −0.729–27.3 km (summit datum)",
+      "magnitude_range": "S1/S2 −1.17–5.4; approximate with broad scatter.",
+      "article_local_discrepancy": "S1 and S2 article/release counts align. Phase CSV is a many-row auxiliary product, not a third event catalog.",
+      "product_counts": {
+        "S1": 44188,
+        "S2": 43950,
+        "phase_arrivals": 8582492,
+        "S1_only_without_S2": 238,
+        "polarity_clusters": 50,
+        "benchmark_S1_time_only": 1902,
+        "benchmark_S1_common_mask": 1883,
+        "benchmark_S2_time_only": 1896,
+        "benchmark_S2_common_mask": 1877
+      },
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md",
+          "locator": "Full-file audit; Frozen summit benchmark mask",
+          "note": "Local counts, ranges, checksums, and frozen-window counts."
+        }
+      ]
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "Summit event matching under the frozen mask",
+        "Relative epicenter/depth and cluster geometry",
+        "Detection support conditional on HVO/IRIS network availability",
+        "Polarity-family and sequence-structure recovery"
+      ],
+      "unsuitable_metrics": [
+        "Island-wide absolute-location truth",
+        "Uniform completeness through changing eruption/network conditions",
+        "Uncalibrated fine magnitude or b-value scoring",
+        "Treating phase rows as independent events"
+      ],
+      "independence_conditions": [
+        "Keep HVO template lineage and IRIS waveform dependence explicit.",
+        "Score phase/pick products separately from S1/S2 event rows and retain station availability."
+      ],
+      "limitations": [
+        "Template conditioning and changing processing runs",
+        "Summit-only spatial scope and summit-referenced depth",
+        "Approximate magnitudes and near-source bias",
+        "S2 omits 238 S1 events",
+        "No fixed station count is reported by the article; local phase CSV has 25 HV station codes."
+      ],
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+          "locator": "Benchmark interpretation",
+          "note": "Article role and biases."
+        },
+        {
+          "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md",
+          "locator": "Benchmark role and limitations",
+          "note": "Local alignment and comparison rules."
+        }
+      ]
+    },
+    "product_semantics": {
+      "S1": "Canonical 44,188-event high-resolution hypocentroid catalog.",
+      "S2": "43,950-row S1 subset with 50 correlation-derived polarity clusters.",
+      "phase_arrivals": "8,582,492-row P/S pick/association auxiliary; multiple rows per event; not an event denominator."
+    },
+    "product_schemas": {
+      "S1": {
+        "role": "high_resolution_event_catalog",
+        "identifier_field": "eventID",
+        "fields": [
+          "year",
+          "month",
+          "day",
+          "hour",
+          "minute",
+          "second",
+          "latitude",
+          "longitude",
+          "depth",
+          "x",
+          "y",
+          "z",
+          "magnitude",
+          "eventID"
+        ],
+        "units": {
+          "time": "UTC",
+          "latitude": "degree",
+          "longitude": "degree",
+          "depth": "km below summit datum",
+          "x/y/z": "m",
+          "magnitude": "approximate source-native scale"
+        },
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+            "locator": "Data Set S1 header",
+            "note": "Supplement lists S1 fields and summit depth datum."
+          }
+        ]
+      },
+      "S2": {
+        "role": "polarity_cluster_event_catalog",
+        "identifier_field": "event identity crosswalked to S1",
+        "fields": [
+          "cluster number",
+          "UTC time",
+          "latitude",
+          "longitude",
+          "depth",
+          "magnitude"
+        ],
+        "units": {
+          "time": "UTC",
+          "latitude": "degree",
+          "longitude": "degree",
+          "depth": "km below summit datum",
+          "magnitude": "approximate source-native scale"
+        },
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+            "locator": "Data Set S2 header",
+            "note": "Supplement lists S2 fields."
+          }
+        ]
+      },
+      "phase_arrivals": {
+        "role": "pick_level_auxiliary",
+        "identifier_field": "template_id/match_id (not S1/S2 eventID)",
+        "fields": [
+          "template_id",
+          "match_id",
+          "network",
+          "station",
+          "phase",
+          "arrival",
+          "weight",
+          "mag",
+          "ccmax",
+          "ccdiff",
+          "chanloc"
+        ],
+        "units": {
+          "arrival": "UTC/source time representation",
+          "weight": "source-native",
+          "mag": "source-native auxiliary"
+        },
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md",
+            "locator": "Full-file audit; Checksums and native formats",
+            "note": "Local header and many-row semantics."
+          }
+        ]
+      }
+    }
+  },
+  "construction_workflow": {
+    "summary": "HVO template events were scanned through continuous HVO/IRIS waveforms; correlation-derived differential times were inverted with hypoDD, then approximate magnitudes and polarity clusters were produced.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "HVO template events and phase picks",
+        "type": "seed_catalog",
+        "provider_or_network": "HVO",
+        "temporal_spatial_scope": "2018-04-29–2018-08-06; Kīlauea summit",
+        "station_count": null,
+        "channels_sampling": "Template channels from HVO waveforms",
+        "role": "seed_catalog",
+        "availability_conditions": "Later runs preferentially used analyst-refined templates.",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+            "locator": "Scientific scope and observation conditions",
+            "note": "Article template provenance."
+          }
+        ]
+      },
+      {
+        "source_id": "S2",
+        "name": "Continuous seismic waveforms",
+        "type": "waveform",
+        "provider_or_network": "HVO / IRIS DMC",
+        "temporal_spatial_scope": "Study interval; summit-focused stations",
+        "station_count": null,
+        "channels_sampling": "Station/channel dependent",
+        "role": "primary_input",
+        "availability_conditions": "Waveform availability and processing runs change through sequence.",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+            "locator": "Scientific scope and observation conditions",
+            "note": "Article waveform source and network caveat."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "Template construction",
+        "category": "preprocessing",
+        "purpose": "Create P/S templates from catalog picks and estimate missing phase times.",
+        "inputs": [
+          "S1"
+        ],
+        "outputs": [
+          "P/S waveform templates"
+        ],
+        "method": "Phase-centered templates started 0.2 s before estimated arrivals; vp/vs 1.75 when one phase was absent.",
+        "software_or_model": "Shelly et al. (2016)-style correlation workflow",
+        "parameters": [
+          {
+            "name": "P template length",
+            "value": 2.5,
+            "unit": "s",
+            "note": "Some truncated to avoid overlap."
+          },
+          {
+            "name": "S template length",
+            "value": 4.0,
+            "unit": "s",
+            "note": "Source SI."
+          },
+          {
+            "name": "filter",
+            "value": "3–15",
+            "unit": "Hz",
+            "note": "Source SI."
+          },
+          {
+            "name": "vp/vs for missing phase",
+            "value": 1.75,
+            "unit": "ratio",
+            "note": "Source SI."
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Channels require at least one P or S pick."
+        ],
+        "intermediate_result": "Template bank for rolling scans.",
+        "analyst_intervention": "Later runs use analyst-refined templates where available.",
+        "dependencies": "HVO picks and waveform availability.",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+            "locator": "Text S1. Supporting Methods, Event detection and location procedure",
+            "note": "Exact template/filter parameters."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "Continuous correlation detection",
+        "category": "detection",
+        "purpose": "Find similar events and precise differential arrivals.",
+        "inputs": [
+          "P/S templates",
+          "continuous waveforms"
+        ],
+        "outputs": [
+          "candidate detections",
+          "correlation-derived differential times"
+        ],
+        "method": "Sum channel correlation coefficients; derive detection reference/origin times and per-channel differential times.",
+        "software_or_model": "Correlation implementation following Shelly et al. (2016a)",
+        "parameters": [
+          {
+            "name": "summed-correlation threshold",
+            "value": "8 × daily MAD",
+            "unit": "MAD",
+            "note": "Source SI."
+          },
+          {
+            "name": "individual differential-time threshold",
+            "value": "7 × MAD",
+            "unit": "MAD",
+            "note": "Source SI."
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Allow positive and negative correlation peaks."
+        ],
+        "intermediate_result": "Candidate event/phase associations.",
+        "analyst_intervention": "None specified at scan stage.",
+        "dependencies": "Template channel coverage.",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+            "locator": "Text S1. Supporting Methods, Event detection and location procedure",
+            "note": "Detection thresholds and weighting."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST3",
+        "order": 3,
+        "name": "HypoDD relative relocation",
+        "category": "relocation",
+        "purpose": "Sharpen event geometry using correlation and catalog differential times.",
+        "inputs": [
+          "candidate detections",
+          "differential times",
+          "HVO starting locations"
+        ],
+        "outputs": [
+          "relocated S1 event catalog"
+        ],
+        "method": "hypoDD double-difference inversion with 1-D velocity model; waveform stations within 20 km and catalog picks within 70 km.",
+        "software_or_model": "hypoDD; Dawson et al. (1999)-like 1-D model",
+        "parameters": [
+          {
+            "name": "minimum pair differential measurements",
+            "value": 4,
+            "unit": "measurements",
+            "note": "Source SI."
+          },
+          {
+            "name": "vp/vs",
+            "value": 1.78,
+            "unit": "ratio",
+            "note": "Source SI."
+          },
+          {
+            "name": "correlation differential times",
+            "value": "~25 million",
+            "unit": "measurements",
+            "note": "~20M P and ~5.5M S."
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Final retention requires at least 10 P and 10 S correlation-derived differential times."
+        ],
+        "intermediate_result": "S1 high-resolution hypocentroid catalog.",
+        "analyst_intervention": "HVO log runs and analyst-refined templates retained as provenance.",
+        "dependencies": "Differential-time quality and starting locations.",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+            "locator": "Text S1; Table S1",
+            "note": "Relocation model, station radii, and run populations."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST4",
+        "order": 4,
+        "name": "Approximate magnitude estimation",
+        "category": "magnitude",
+        "purpose": "Assign relative/approximate magnitudes to newly detected events.",
+        "inputs": [
+          "S1 event waveforms",
+          "HVO catalog magnitudes"
+        ],
+        "outputs": [
+          "approximate event magnitudes"
+        ],
+        "method": "Waveform amplitude ratios to HVO catalog earthquakes.",
+        "software_or_model": "Article method",
+        "parameters": [],
+        "qc_and_rejection_rules": [
+          "Do not use uncalibrated values for fine b-value scoring."
+        ],
+        "intermediate_result": "Magnitude field in S1/S2.",
+        "analyst_intervention": "No manual calibration in release.",
+        "dependencies": "HVO magnitude calibration events.",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+            "locator": "Magnitudes and polarity grouping",
+            "note": "Article magnitude caveat."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST5",
+        "order": 5,
+        "name": "Correlation-polarity clustering",
+        "category": "other",
+        "purpose": "Group events by correlation-derived phase polarity.",
+        "inputs": [
+          "correlation measurements",
+          "S1 events"
+        ],
+        "outputs": [
+          "S2 cluster labels"
+        ],
+        "method": "Hierarchical clustering of approximately 25 million polarity measurements.",
+        "software_or_model": "Article clustering workflow",
+        "parameters": [
+          {
+            "name": "clusters",
+            "value": 50,
+            "unit": "clusters",
+            "note": "Local S2 product."
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "S2 contains events receiving a polarity cluster label."
+        ],
+        "intermediate_result": "43,950-row S2 product.",
+        "analyst_intervention": "No focal-mechanism inversion; clusters are source-family indicators.",
+        "dependencies": "Correlation phase measurements.",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+            "locator": "Magnitudes and polarity grouping",
+            "note": "Article interpretation."
+          },
+          {
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+            "locator": "Data Set S2 description",
+            "note": "Product definition."
+          }
+        ]
+      }
+    ],
+    "final_output": "S1 high-resolution event catalog, S2 polarity-cluster subset, and separate phase-arrival auxiliary CSV.",
+    "evidence": [
+      {
+        "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+        "locator": "Catalog-construction workflow; Reported products and quality controls",
+        "note": "Article workflow."
+      },
+      {
+        "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+        "locator": "Text S1; Data Set S1/S2",
+        "note": "Supplement details and release headers."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [
+      {
+        "product_id": "R1",
+        "name": "USGS/HVO operational catalog baseline",
+        "type": "event_subset",
+        "file_path": "data/2018_kilauea_hawaii/catalogs/USGS_HVO_COMCAT_2018/USGS_HVO_COMCAT_2018__catalog_operational_full.csv",
+        "catalog_relation": "Independent Q3 operational baseline; not Shelly S1/S2.",
+        "scientific_use": "Operational-vs-enhanced comparison under matched masks.",
+        "count_or_scope": "See USGS_HVO_COMCAT_2018 summary.",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/catalogs/USGS_HVO_COMCAT_2018/USGS_HVO_COMCAT_2018__catalog_summary.md",
+            "locator": "Provenance and full-file audit",
+            "note": "Baseline staged separately."
+          }
+        ]
+      }
+    ],
+    "scientific_findings": [
+      {
+        "statement": "Summit seismicity is resolved at high relative precision and organized into polarity/source families during repeated collapse cycles.",
+        "depends_on": "S1/S2 relative locations and clusters",
+        "scope": "Kīlauea summit, 2018 eruption",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md",
+            "locator": "Scientific scope and Catalog-construction workflow",
+            "note": "Article interpretation."
+          }
+        ]
+      },
+      {
+        "statement": "Run-level counts and station coverage change over time; rate comparisons require network/process covariates.",
+        "depends_on": "Table S1 and phase release",
+        "scope": "Study interval",
+        "evidence": [
+          {
+            "source": "data/2018_kilauea_hawaii/references/SHELLY2019_GL085636/parsed/supplement/mineru/Shelly2019_Kilauea_Figure_SI/full.md",
+            "locator": "Table S1",
+            "note": "Run boundaries and retained-event counts."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "Q1 for relative summit geometry of retained events; Q2 for dense detection under HVO/IRIS conditions.",
+      "recommended_role": "Primary summit reference; keep S1/S2 events and phase-level product separate.",
+      "comparison_or_baseline_sources": "Wei S1, Matoza 2021, Lengliné auxiliary, and USGS HVO operational baseline.",
+      "valid_comparisons": "Matched summit time/space/depth mask, event matching, relative geometry, and cluster recovery.",
+      "caveats": "Do not score island-wide completeness, absolute truth, or uncalibrated magnitudes; preserve summit depth datum and station lineage.",
+      "evidence": [
+        {
+          "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md",
+          "locator": "Benchmark role and limitations",
+          "note": "Local benchmark interpretation."
+        }
+      ]
+    },
+    "missing_information": [
+      "Exact per-run station inventory and station-day waveform coverage are not in the local extraction.",
+      "No independent event-to-phase crosswalk beyond source fields."
+    ]
+  },
+  "extraction_quality": {
+    "status": "verified",
+    "extraction_confidence": "high",
+    "completed_sections": [
+      "article identity and scope",
+      "supplementary detection/relocation parameters",
+      "S1/S2/phase product semantics",
+      "local audit and frozen-window role"
+    ],
+    "missing_core_fields": [
+      "fixed station count (not reported by article)",
+      "full per-run station availability"
+    ],
+    "warnings": [
+      "Approximate magnitudes are not a calibrated uniform scale.",
+      "Phase CSV row count is not an event count.",
+      "Summit-referenced depths require explicit datum handling."
+    ],
+    "needs_human_review": false
+  }
+}
