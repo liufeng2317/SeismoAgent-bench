@@ -147,14 +147,18 @@ and network condition separately.
 
 ## Project status
 
-Phase I has six cases, archived reference materials, published research
-catalogs, and official operational snapshots. The next deliverables are:
+Phase I has six cases, archived reference materials, paper-level extraction
+records, research-catalog audits, and official operational snapshots. The
+current reference-calibration baseline is frozen at the case/window level;
+remaining gaps are explicit in `REFERENCES_MANIFEST.md` and the case analyses.
 
-- article-level reading and method extraction;
-- catalog summaries and consistent visualizations;
-- common-window and network-condition manifests;
-- waveform preparation;
-- controlled agent reproduction and evaluation.
+Next deliverables are:
+
+- comparable catalog visualizations under each catalog product;
+- station-day/channel availability and waveform manifests;
+- recovery of confirmed missing products (for example Pang Maple Creek,
+  Ross DC1, and the Magna Baker paper) without substituting unrelated data;
+- controlled agent reproduction and role-specific evaluation.
 
 ## Documentation
 
