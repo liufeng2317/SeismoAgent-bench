@@ -1,0 +1,32 @@
+schema_id: seismoagent.catalog.relative_event
+schema_version: 1
+kind: relative_event
+scope: catalogs released in local coordinates without universal absolute hypocenters
+identifier:
+  event_id: short local ID (E000001...), scoped to source_ref/product_id
+columns:
+  - name: event_id
+    type: string
+    description: Short local identifier; not a cross-catalog join key.
+  - name: native_event_id
+    type: string
+    description: Empty when the source provides no event identifier.
+  - name: origin_time_utc
+    type: datetime
+    unit: UTC
+    description: Derived from the published relative-time origin.
+  - name: relative_day
+    type: number
+    unit: day
+  - name: x_m
+    type: number
+    unit: m
+    description: Native relative x coordinate.
+  - name: y_m
+    type: number
+    unit: m
+    description: Native relative y coordinate.
+  - name: source_row
+    type: integer
+  - name: extras_json
+    type: object

@@ -1,0 +1,38 @@
+schema_id: seismoagent.catalog.event
+schema_version: 1
+kind: event
+scope: normalized event tables
+identifier:
+  event_id: short local ID (E000001...), scoped to source_ref/product_id
+  native_event_id: unchanged source-native event identifier when available
+columns:
+  - name: event_id
+    type: string
+    description: Short local identifier; never a cross-catalog join key.
+  - name: native_event_id
+    type: string
+    description: Original source identifier, or empty when the source has none.
+  - name: origin_time_utc
+    type: datetime
+    unit: UTC
+  - name: latitude_deg
+    type: number
+    unit: degree
+  - name: longitude_deg
+    type: number
+    unit: degree
+  - name: depth_km
+    type: number
+    unit: km
+  - name: magnitude
+    type: number
+    description: Native magnitude where available.
+  - name: magnitude_type
+    type: string
+  - name: network
+    type: string
+  - name: source_row
+    type: integer
+  - name: extras_json
+    type: object
+    description: Product-specific fields serialized as JSON in CSV output.

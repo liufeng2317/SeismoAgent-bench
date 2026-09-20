@@ -1,0 +1,47 @@
+schema_id: seismoagent.catalog.absolute_approx
+schema_version: 1
+kind: derived_absolute_coordinates
+scope: explicitly approximate derivative of a relative-coordinate catalog
+status: approximate_assumption
+source_product: relative_events
+assumptions:
+  projection: WGS84 azimuthal equidistant centered at the published reference point
+  axis: x=east_positive, y=north_positive
+  depth_km: 3.0
+  depth_status: fixed_model_assumption
+columns:
+  - name: event_id
+    type: string
+    description: Short local ID scoped to source_ref/product_id.
+  - name: origin_time_utc
+    type: datetime
+    unit: UTC
+  - name: relative_day
+    type: number
+    unit: day
+  - name: x_m
+    type: number
+    unit: m
+  - name: y_m
+    type: number
+    unit: m
+  - name: longitude_deg
+    type: number
+    unit: degree
+    description: Derived WGS84 longitude; approximate.
+  - name: latitude_deg
+    type: number
+    unit: degree
+    description: Derived WGS84 latitude; approximate.
+  - name: depth_km
+    type: number
+    unit: km
+    description: Fixed model assumption, not event-specific depth.
+  - name: depth_status
+    type: string
+  - name: coordinate_status
+    type: string
+  - name: coordinate_transform
+    type: string
+  - name: source_row
+    type: integer

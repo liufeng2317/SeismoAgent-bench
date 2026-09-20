@@ -1,0 +1,35 @@
+schema_id: seismoagent.catalog.correlation_phase
+schema_version: 1
+kind: correlation_phase
+scope: correlation-derived phase-arrival tables
+identifier:
+  match_id: correlation match identifier, not an event ID
+  template_id: correlation template identifier, not an event ID
+columns:
+  - name: template_id
+    type: string
+  - name: match_id
+    type: string
+  - name: network
+    type: string
+  - name: station
+    type: string
+  - name: phase
+    type: string
+    description: P or S phase label.
+  - name: arrival_epoch_s
+    type: number
+    unit: Unix seconds
+  - name: arrival_utc
+    type: datetime
+    unit: UTC
+  - name: weight
+    type: number
+  - name: mag
+    type: number
+  - name: ccmax
+    type: number
+  - name: ccdiff
+    type: number
+  - name: chanloc
+    type: string

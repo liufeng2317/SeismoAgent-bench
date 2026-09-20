@@ -1,0 +1,25 @@
+schema_id: seismoagent.catalog.parent_phase
+schema_version: 1
+kind: parent_event_phase
+scope: phase rows linked to a parent event record
+identifier:
+  native_event_id: parent event identifier; phase rows are not independent events
+columns:
+  - name: native_event_id
+    type: string
+    description: Parent E-record event ID.
+  - name: network
+    type: string
+  - name: station
+    type: string
+  - name: phase
+    type: string
+  - name: parent_origin_time_utc
+    type: datetime
+    unit: UTC
+    description: Parent origin time used for selection.
+  - name: phase_time_raw
+    type: string
+    description: Unmodified source phase-time tokens.
+  - name: source_row
+    type: integer
