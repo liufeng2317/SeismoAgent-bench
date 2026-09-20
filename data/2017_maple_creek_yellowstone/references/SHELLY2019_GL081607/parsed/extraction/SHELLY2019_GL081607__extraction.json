@@ -1,0 +1,583 @@
+{
+  "article": {
+    "source_id": "SHELLY2019_GL081607",
+    "case_id": "2017_maple_creek_yellowstone",
+    "title": "Illuminating Faulting Complexity of the 2017 Yellowstone Maple Creek Earthquake Swarm",
+    "authors": [
+      "David R. Shelly",
+      "Jeanne L. Hardebeck"
+    ],
+    "year": 2019,
+    "journal": "Geophysical Research Letters",
+    "doi": "10.1029/2018GL081607",
+    "article_type": "research_letter_enhanced_detection_magnitude_relocation_and_focal_mechanisms",
+    "scientific_question": "Resolve dense Maple Creek swarm detection, relative hypocenter geometry, migration and focal-mechanism complexity beyond the routine catalog.",
+    "sequence": "2017 Yellowstone Maple Creek swarm; largest event Mw 4.4 on 2017-06-16; study detections June–September 2017.",
+    "catalog_relationship": "Genuine catalog-construction paper; article event populations and local USGS phase-arrival release are related but not the same product.",
+    "evidence": [
+      {
+        "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
+        "locator": "title block, Abstract and Methods",
+        "note": "Identity, purpose and catalog type."
+      },
+      {
+        "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+        "locator": "Identity and evidence status; Scientific scope",
+        "note": "Article/local product distinction."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "SHELLY2019_GL081607_ARTICLE_PLUS_PHASE_RELEASE",
+    "name": "Shelly Maple Creek enhanced catalog and USGS correlation-phase release",
+    "product_type": "article_event_catalog_plus_phase_auxiliary",
+    "role": "primary",
+    "quality_tier": "Q1 relative geometry / Q2 template-enhanced detection; local phase file Q4 auxiliary",
+    "scientific_purpose": "Dense swarm detection and relative geometry; local phase release supports timing/template diagnostics only.",
+    "event_definition": "Article event catalog uses matched-filter detections, hypoDD relocation and observation-count filters; local CSV has one row per phase/station observation.",
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "article routine templates",
+        "unit": "events",
+        "count_article": 2289,
+        "count_local": null,
+        "selection_rule": "Routine catalog template events, 2017-06-11 through 2017-09-06.",
+        "time_range": "2017-06-11 to 2017-09-06.",
+        "spatial_depth_scope": "Maple Creek swarm zone; article processing setup.",
+        "magnitude_scope": "Routine coda magnitude lineage; exact local event table unavailable.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "locator": "Scientific scope; Observation and network conditions",
+            "note": "Article template population."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "article well-located catalog",
+        "unit": "events",
+        "count_article": 15912,
+        "count_local": null,
+        "selection_rule": "At least 50 P and 50 S correlation observations after hypoDD.",
+        "time_range": "Scanned June–September; exact event-table span not locally auditable.",
+        "spatial_depth_scope": "Swarm zone; no local event-origin table.",
+        "magnitude_scope": "Relative-location population; type not a uniform independent truth scale.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "locator": "Catalog-construction workflow; Article-reported quality and limitations",
+            "note": "Article count and QC rule."
+          }
+        ]
+      },
+      {
+        "population_id": "P3",
+        "label": "article magnitude population",
+        "unit": "events",
+        "count_article": 30411,
+        "count_local": null,
+        "selection_rule": "At least 15 P and 30 S observations for magnitude/location superset.",
+        "time_range": "Article study span.",
+        "spatial_depth_scope": "Swarm zone; event table missing.",
+        "magnitude_scope": "Template-amplitude/UUSS coda-derived Mc-like scale.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "locator": "Article-reported quality and limitations",
+            "note": "Magnitude population and caveat."
+          }
+        ]
+      },
+      {
+        "population_id": "P4",
+        "label": "local USGS correlation-phase release",
+        "unit": "phase_rows",
+        "count_article": null,
+        "count_local": 6260580,
+        "selection_rule": "All rows in released CSV; rows are phase/station observations, not events.",
+        "time_range": "2017-06-11T06:09:19.444800Z to 2017-09-17T16:13:09.091100Z local arrivals.",
+        "spatial_depth_scope": "Unavailable: no origin coordinates/depth in file.",
+        "magnitude_scope": "Finite mag -6.99 to 5.17 plus invalid/extreme values; XML declared domain 0.35–3.65 differs.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+            "locator": "Full-file audit",
+            "note": "Rows, ranges and phase-only semantics."
+          }
+        ]
+      },
+      {
+        "population_id": "P5",
+        "label": "local frozen 8-day phase-associated IDs",
+        "unit": "phase_rows_and_ids",
+        "count_article": null,
+        "count_local": 23660,
+        "selection_rule": "2017-06-11 <= arrival_time < 2017-06-19; unique match_id count; not validated events.",
+        "time_range": "Frozen eight-day v1 window.",
+        "spatial_depth_scope": "Cannot apply case spatial/depth mask without event-origin table.",
+        "magnitude_scope": "No valid event-level magnitude population from phase file.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+            "locator": "Frozen benchmark-window audit",
+            "note": "1,591,090 rows / 23,660 IDs and 27 station pairs."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "10.1029/2018GL081607; USGS 10.5066/P13JCJ2I; ScienceBase item 667b1415d34e6151c9d6bcfd",
+      "version": null,
+      "source_files": [
+        {
+          "path": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/raw/Yellowstone_2017_correlation_phase_arrivals.csv",
+          "format": "CSV phase-arrival release",
+          "checksum": "a1828099eb2a51339e01ffca191d6e4d98df27ad889c18837aa41278dd128d6c",
+          "role": "raw_phase_auxiliary"
+        },
+        {
+          "path": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/raw/Correlation-derived_seismic_phase_arrival_times_v2.xml",
+          "format": "XML metadata",
+          "checksum": "547cbc7e43b11d47b2c10098850904151b4b63de5b95dc6c2d1edb147f1a96e5",
+          "role": "release_metadata"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+          "locator": "Provenance and product identity",
+          "note": "USGS release identity and checksums."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": null,
+      "row_count": 6260580,
+      "unique_event_ids": 115448,
+      "unique_template_ids": 1147,
+      "phase_rows": {
+        "P": 3933935,
+        "S": 2326645
+      },
+      "time_range": "2017-06-11T06:09:19.444800Z to 2017-09-17T16:13:09.091100Z",
+      "latitude_longitude_depth_range": null,
+      "magnitude_range": "Finite -6.99 to 5.17; 9 -inf rows; four finite values below -10 flagged; XML domain 0.35–3.65 differs.",
+      "benchmark_counts": {
+        "7_day": {
+          "phase_rows": 1536742,
+          "unique_match_id": 22858
+        },
+        "8_day_frozen": {
+          "phase_rows": 1591090,
+          "unique_match_id": 23660,
+          "unique_template_id": 1119,
+          "station_pairs": 27
+        }
+      },
+      "article_local_discrepancy": "Article event tables (15,912/30,411) are not locally staged; local CSV is phase-only and extends beyond XML/article coverage.",
+      "evidence": [
+        {
+          "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+          "locator": "Full-file audit; Frozen benchmark-window audit",
+          "note": "All local counts and discrepancies."
+        }
+      ]
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "phase timing and detector diagnostics",
+        "template/match lineage",
+        "matched-event recovery only with an event-origin product",
+        "relative-geometry metrics after acquiring article event table"
+      ],
+      "unsuitable_metrics": [
+        "counting phase rows or match_id as validated earthquakes",
+        "spatial/depth metrics from phase CSV alone",
+        "independent truth scoring for correlation-based agents"
+      ],
+      "independence_conditions": [
+        "Low independence against matched-filter/correlation differential-time agents sharing study lineage."
+      ],
+      "limitations": [
+        "Article event-level table absent locally.",
+        "No origin time/coordinates/depth/event QC flag in CSV.",
+        "Magnitude anomalies and XML/local coverage mismatch.",
+        "Station-day availability and template crosswalk remain pending."
+      ],
+      "evidence": [
+        {
+          "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+          "locator": "Local release interpretation; Benchmark decision",
+          "note": "Product distinction and valid metrics."
+        },
+        {
+          "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+          "locator": "Quality tier and use; Reproducibility and pending work",
+          "note": "Catalog-level limitations."
+        }
+      ]
+    },
+    "product_semantics": {
+      "article_product": "15,912 well-located and 30,411 magnitude populations are article-reported and not recoverable from local phase CSV.",
+      "local_product": "`match_id` repeats across station/phase rows; `arrival` is epoch seconds from template pick plus differential time.",
+      "window_count_rule": "Report phase rows and unique IDs separately; 23,660 is an ID count, not event count.",
+      "evidence": [
+        {
+          "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+          "locator": "Native schema; Frozen benchmark-window audit",
+          "note": "Field semantics and count convention."
+        }
+      ]
+    },
+    "product_schemas": {
+      "local_phase_release": {
+        "role": "phase_arrival_auxiliary",
+        "identifier_field": "match_id (repeated across rows)",
+        "fields": [
+          "template_id",
+          "match_id",
+          "network",
+          "station",
+          "phase",
+          "arrival",
+          "weight",
+          "mag",
+          "ccmax",
+          "ccdiff",
+          "chanloc"
+        ],
+        "units": {
+          "arrival": "epoch seconds UTC",
+          "phase": "P or S",
+          "mag": "repeated numeric value with invalid/extreme rows",
+          "weight": "release-defined correlation weight"
+        },
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+            "locator": "Native schema",
+            "note": "Header and field meanings."
+          }
+        ]
+      },
+      "article_event_catalog": {
+        "role": "not_locally_staged",
+        "identifier_field": null,
+        "fields": null,
+        "units": null,
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "locator": "Local release interpretation; Benchmark decision",
+            "note": "Article event table is not the downloaded CSV and is not staged."
+          }
+        ]
+      }
+    }
+  },
+  "construction_workflow": {
+    "summary": "Routine UUSS events become waveform templates; continuous matched filtering yields correlation/differential times, hypoDD relocates events, observation-count thresholds define article populations, and amplitudes/polarities support magnitude and focal mechanisms.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "UUSS routine catalog and phase picks",
+        "type": "event_and_phase_seed",
+        "provider_or_network": "University of Utah / EarthScope-IRIS context",
+        "temporal_spatial_scope": "2017 Maple Creek swarm",
+        "station_count": 27,
+        "channels_sampling": "100 Hz article processing; exact channel-day inventory unavailable",
+        "role": "template_seed",
+        "availability_conditions": "2,289 routine template events; local CSV has 1,147 template IDs.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "locator": "Observation and network conditions",
+            "note": "Template and network setup."
+          }
+        ]
+      },
+      {
+        "source_id": "S2",
+        "name": "continuous waveforms",
+        "type": "waveform",
+        "provider_or_network": "EarthScope/IRIS and Yellowstone network",
+        "temporal_spatial_scope": "2017-06-11 through 2017-09-14 article scan",
+        "station_count": 27,
+        "channels_sampling": "Three-component broadband; 2–15 Hz bandpass; 100 Hz",
+        "role": "primary_input",
+        "availability_conditions": "Station availability changes; local release has 29 full-file pairs and 27 in frozen window.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "locator": "Observation and network conditions",
+            "note": "Waveform parameters and availability caveat."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "template formation",
+        "category": "preprocessing",
+        "purpose": "Build waveform templates from routine catalog events.",
+        "inputs": [
+          "S1 routine catalog",
+          "S2 waveforms"
+        ],
+        "outputs": [
+          "2,289 article templates"
+        ],
+        "method": "2–15 Hz bandpass, 100 Hz templates; local release template IDs are not equivalent to article count.",
+        "software_or_model": "matched-filter workflow",
+        "parameters": [
+          {
+            "name": "frequency_band",
+            "value": "2–15",
+            "unit": "Hz"
+          },
+          {
+            "name": "sampling_rate",
+            "value": 100,
+            "unit": "Hz"
+          }
+        ],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "Template family.",
+        "analyst_intervention": "Routine catalog seed events.",
+        "dependencies": "Template coverage and station availability.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "locator": "Observation and network conditions; Catalog-construction workflow",
+            "note": "Template parameters."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "continuous matched filtering",
+        "category": "detection",
+        "purpose": "Detect template-like events and measure differential times.",
+        "inputs": [
+          "continuous waveforms",
+          "templates"
+        ],
+        "outputs": [
+          "correlation/differential times"
+        ],
+        "method": "Continuous matched-filter scans at 0.01-s increments; weights use correlation coefficient, daily MAD and nearby-peak separation.",
+        "software_or_model": "matched filter",
+        "parameters": [
+          {
+            "name": "scan_increment",
+            "value": 0.01,
+            "unit": "s"
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Article reports 34.1M correlation and 1.3M routine-catalog differential times."
+        ],
+        "intermediate_result": "Detected matches and differential-time observations.",
+        "analyst_intervention": null,
+        "dependencies": "Template family and waveform lineage.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "locator": "Catalog-construction workflow",
+            "note": "Detection and differential-time process."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST3",
+        "order": 3,
+        "name": "hypoDD relative relocation",
+        "category": "relocation",
+        "purpose": "Refine relative hypocenter geometry.",
+        "inputs": [
+          "differential times",
+          "template/event network"
+        ],
+        "outputs": [
+          "15,912 well-located article events"
+        ],
+        "method": "Double-difference relocation with >=50 P and >=50 S observations for well-located population.",
+        "software_or_model": "hypoDD",
+        "parameters": [
+          {
+            "name": "minimum_P_observations",
+            "value": 50,
+            "unit": "observations"
+          },
+          {
+            "name": "minimum_S_observations",
+            "value": 50,
+            "unit": "observations"
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Well-located threshold defines article relative-location population."
+        ],
+        "intermediate_result": "15,912 events.",
+        "analyst_intervention": null,
+        "dependencies": "Differential-time quality and template lineage.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "locator": "Catalog-construction workflow; Article-reported quality and limitations",
+            "note": "Relocation and threshold."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST4",
+        "order": 4,
+        "name": "magnitude and focal-mechanism products",
+        "category": "magnitude_and_interpretation",
+        "purpose": "Estimate relative amplitudes and cluster focal-mechanism polarities.",
+        "inputs": [
+          "relocated events",
+          "amplitudes",
+          "polarities"
+        ],
+        "outputs": [
+          "30,411 magnitude population; 100 focal-mechanism clusters"
+        ],
+        "method": "Magnitude superset uses >=15 P and >=30 S observations; polarity clustering/HASH variant is downstream interpretation.",
+        "software_or_model": "relative-amplitude magnitude; weighted HASH variant",
+        "parameters": [
+          {
+            "name": "minimum_P_for_magnitude",
+            "value": 15,
+            "unit": "observations"
+          },
+          {
+            "name": "minimum_S_for_magnitude",
+            "value": 30,
+            "unit": "observations"
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Do not treat focal-mechanism clusters as independent truth."
+        ],
+        "intermediate_result": "Magnitude and mechanism products.",
+        "analyst_intervention": null,
+        "dependencies": "Matched-filter amplitudes and polarity quality.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "locator": "Article-reported quality and limitations",
+            "note": "Population criteria and mechanism distinction."
+          }
+        ]
+      }
+    ],
+    "final_output": "Article-level event catalog is not locally staged; local machine-readable product is phase-only USGS release.",
+    "evidence": [
+      {
+        "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+        "locator": "Catalog-construction workflow; Local release interpretation",
+        "note": "Workflow/output distinction."
+      },
+      {
+        "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+        "locator": "Provenance and Quality tier",
+        "note": "Local release audit."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [
+      {
+        "product_id": "A1",
+        "name": "USGS/UUSS operational baseline",
+        "type": "operational_event_catalog",
+        "file_path": "data/2017_maple_creek_yellowstone/catalogs/USGS_UUSS_COMCAT_2017/",
+        "catalog_relation": "Independent Q3 context; not the Shelly phase release.",
+        "scientific_use": "Operational recovery comparison.",
+        "count_or_scope": "Frozen baseline count recorded separately.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "locator": "Benchmark decision",
+            "note": "Baseline role."
+          }
+        ]
+      }
+    ],
+    "scientific_findings": [
+      {
+        "statement": "The local release cannot support spatial/depth event summaries because it lacks event-origin fields; article-level populations must remain separate.",
+        "depends_on": "Event-level catalog acquisition",
+        "scope": "Maple Creek swarm",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+            "locator": "Native schema; Frozen benchmark-window audit",
+            "note": "Phase-only limitation."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "Article Q1 relative geometry/Q2 enhanced detection; local phase release Q4 auxiliary.",
+      "recommended_role": "Use article event table when acquired; use current CSV only for phase/timing diagnostics.",
+      "comparison_or_baseline_sources": "Pang as independent secondary (currently missing) and USGS Q3 baseline.",
+      "valid_comparisons": "Phase timing, template lineage, event geometry after event table acquisition.",
+      "caveats": "23,660 frozen IDs are not validated event count; no spatial mask can be applied locally.",
+      "evidence": [
+        {
+          "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+          "locator": "Quality tier and use",
+          "note": "Role and caveats."
+        }
+      ]
+    },
+    "missing_information": [
+      "Article 15,912/30,411 event-level table with coordinates/depth/origin fields.",
+      "Station-day availability and template/event crosswalk.",
+      "QC flags and corrected magnitude schema."
+    ],
+    "evidence": [
+      {
+        "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+        "locator": "Reproducibility and pending work",
+        "note": "Open acquisition tasks."
+      }
+    ]
+  },
+  "extraction_quality": {
+    "status": "partial",
+    "extraction_confidence": "high for local phase release and article workflow; low for event-level catalog",
+    "completed_sections": [
+      "article",
+      "catalog_article_reported",
+      "catalog_local_phase_audit",
+      "construction_workflow",
+      "additional_information"
+    ],
+    "missing_core_fields": [
+      "article event table",
+      "event coordinates/depth",
+      "event-level QC and magnitude type"
+    ],
+    "warnings": [
+      "23,660 is unique match_id count in an 8-day phase window, not event count.",
+      "Do not substitute Pang or USGS data for Shelly event catalog.",
+      "Keep 7-day 22,858 as historical sensitivity only."
+    ],
+    "needs_human_review": true,
+    "evidence": [
+      {
+        "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+        "locator": "Frozen benchmark-window audit; Quality tier and use",
+        "note": "Count semantics and missing event table."
+      }
+    ]
+  }
+}

@@ -1,0 +1,553 @@
+{
+  "article": {
+    "source_id": "MCMAHON2017_GL072944",
+    "case_id": "2011_prague_oklahoma",
+    "title": "Spatiotemporal evolution of the 2011 Prague, Oklahoma, aftershock sequence revealed using subspace detection and relocation",
+    "authors": [
+      "Nicole D. McMahon",
+      "Richard C. Aster",
+      "William L. Yeck",
+      "Daniel E. McNamara",
+      "Harley M. Benz"
+    ],
+    "year": 2017,
+    "journal": "Geophysical Research Letters",
+    "doi": "10.1002/2017GL072944",
+    "article_type": "research_letter_catalog_construction_and_relocation",
+    "scientific_question": "Lower magnitude of completeness and resolve the spatiotemporal geometry of the Meeker–Prague/Wilzetta fault system, including shallow Arbuckle Group seismicity.",
+    "sequence": "Induced/triggered 2011 Prague sequence; Mw 4.8 foreshock, Mw 5.7 mainshock and Mw 4.8 largest aftershock.",
+    "catalog_relationship": "Genuine S-phase subspace-detection and Bayesloc relocation catalog; article final quality-filtered population and distributed USGS release are distinct products.",
+    "evidence": [
+      {
+        "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper__mineru.md",
+        "locator": "title block, Sections 2–4",
+        "note": "Identity, purpose and catalog workflow."
+      },
+      {
+        "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+        "locator": "Identity and evidence status; Scientific scope and observations",
+        "note": "Article/release distinction and sequence context."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "MCMAHON2017_GL072944_RELEASE",
+    "name": "McMahon subspace/Bayesloc event-phase release",
+    "product_type": "event_phase_release",
+    "role": "secondary",
+    "quality_tier": "Q2 enhanced detection/relocation; metric-specific Q1 uncertainty-filtered location subset",
+    "scientific_purpose": "Independent S-phase detection, association and absolute hypocenter comparison under evolving Prague network conditions.",
+    "event_definition": "Distributed release contains E event records and P phase records; article final 5,262-event population is an uncertainty-filtered lineage subset, not equivalent to all 5,446 released E rows.",
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "article final quality-filtered catalog",
+        "unit": "events",
+        "count_article": 5262,
+        "count_local": null,
+        "selection_rule": "Located events retained after epicentral uncertainty <0.5 km and depth uncertainty <1 km, with final merge accounting reported by article.",
+        "time_range": "Study interval 2011-11-04 to 2011-12-05; exact final population span not separately released locally.",
+        "spatial_depth_scope": "Prague sequence; article/release metadata bounds differ from local extrema.",
+        "magnitude_scope": "Mc completeness ≈0.8; b≈0.52 for complete catalog; field type unresolved locally.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "locator": "Association, location, and magnitude; Article and local-release audit",
+            "note": "Article count and quality filter."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "distributed USGS E/P release",
+        "unit": "E events + P phase rows",
+        "count_article": null,
+        "count_local": 5446,
+        "selection_rule": "All local E records and associated P records preserved in official release; broader than article final count.",
+        "time_range": "2011-11-05 07:12:44.310 to 2011-12-05 22:40:33.9144 UTC (local E rows).",
+        "spatial_depth_scope": "Lat 35.376253–35.633400 N; lon -96.934000–-96.544800; depth 0.4–14.4 km.",
+        "magnitude_scope": "-2.176413–5.6; type/calibration unresolved.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+            "locator": "Local event audit",
+            "note": "E count, ranges and release lineage."
+          }
+        ]
+      },
+      {
+        "population_id": "P3",
+        "label": "Prague v1 time-only local E subset",
+        "unit": "events",
+        "count_article": null,
+        "count_local": 2384,
+        "selection_rule": "2011-11-11T00:00:00Z <= origin_time < 2011-11-19T00:00:00Z; no Cochran spatial clipping.",
+        "time_range": "2011-11-11 00:03:45.251 to 2011-11-18 23:53:13.538 UTC.",
+        "spatial_depth_scope": "Lat 35.376253–35.566070 N; lon -96.908400–-96.570300; depth 0.5086–10.2712 km.",
+        "magnitude_scope": "-2.133371–4.0; type unresolved.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+            "locator": "Frozen Prague window",
+            "note": "Local time-only mask and ranges."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "10.1002/2017GL072944; USGS ScienceBase 10.5066/F7FJ2FNT",
+      "version": null,
+      "source_files": [
+        {
+          "path": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/raw/MCMAHON2017_GL072944__catalog_subspace_5446events.txt",
+          "format": "E/P whitespace text",
+          "checksum": "f9259a512b883f1dcd3cb368ccc2753e1f8bf0ec8665d2b34ef74858874509a",
+          "role": "raw_event_phase_release"
+        },
+        {
+          "path": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/raw/MCMAHON2017_GL072944__metadata.xml",
+          "format": "XML metadata",
+          "checksum": null,
+          "role": "release_metadata"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+          "locator": "Provenance and Native record structure",
+          "note": "Release DOI, checksum and E/P records."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": 5446,
+      "row_count": 5446,
+      "phase_row_count": 82537,
+      "unique_event_ids": 5446,
+      "time_range": "2011-11-05 07:12:44.310 to 2011-12-05 22:40:33.9144 UTC",
+      "latitude_longitude_depth_range": "lat 35.376253–35.633400 N; lon -96.934000–-96.544800; depth 0.4–14.4 km",
+      "magnitude_range": "-2.176413–5.6; type/calibration unresolved",
+      "benchmark_counts": {
+        "time_only_8_day": 2384,
+        "referenced_phase_rows": 37171
+      },
+      "article_local_discrepancy": "Article final 5,262-event uncertainty-filtered population differs from broader 5,446-E distributed release. P-record timestamp schema also conflicts with XML metadata.",
+      "evidence": [
+        {
+          "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+          "locator": "Native record structure; Local event audit; Frozen Prague window",
+          "note": "Local counts, ranges and unresolved schema issues."
+        }
+      ]
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "event-support recovery",
+        "S-phase association",
+        "absolute hypocenter QC",
+        "network-transition robustness"
+      ],
+      "unsuitable_metrics": [
+        "universal completeness truth",
+        "independent magnitude truth",
+        "single absolute reference across all time/network conditions"
+      ],
+      "independence_conditions": [
+        "Detector/locator family differs from Cochran template/GrowClust, but waveform archives and initial-catalog lineage overlap."
+      ],
+      "limitations": [
+        "S-only detector misses some large events; original P/S events are merged back.",
+        "Station availability changes until 2011-11-11.",
+        "Distributed release has broader lineage than article final count."
+      ],
+      "evidence": [
+        {
+          "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+          "locator": "Benchmark interpretation",
+          "note": "Role, bias and independence."
+        },
+        {
+          "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+          "locator": "Benchmark role",
+          "note": "Catalog-level restrictions."
+        }
+      ]
+    },
+    "product_semantics": {
+      "event_record": "E records carry event_id, origin time, latitude, longitude, depth and numeric magnitude.",
+      "phase_record": "P records are phase observations; local rows expose an ambiguous reduced timestamp schema relative to XML metadata.",
+      "count_rule": "Count E records as events; count P rows separately; never equate 5,446 release rows with 5,262 article final rows.",
+      "evidence": [
+        {
+          "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+          "locator": "Native record structure and Construction and quality",
+          "note": "Record semantics and count distinction."
+        }
+      ]
+    },
+    "product_schemas": {
+      "E": {
+        "role": "event_origin_record",
+        "identifier_field": "event_id",
+        "fields": [
+          "record_type(E)",
+          "event_id",
+          "year",
+          "month",
+          "day",
+          "hour",
+          "minute",
+          "second",
+          "latitude",
+          "longitude",
+          "depth",
+          "magnitude"
+        ],
+        "units": {
+          "time": "UTC working convention",
+          "latitude": "decimal degrees",
+          "longitude": "decimal degrees",
+          "depth": "km",
+          "magnitude": "numeric type unresolved"
+        },
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+            "locator": "Native record structure",
+            "note": "E token schema."
+          }
+        ]
+      },
+      "P": {
+        "role": "phase_observation_record",
+        "identifier_field": "event_id or local association key (exact linkage requires release documentation)",
+        "fields": [
+          "record_type(P)",
+          "phase/station fields",
+          "year",
+          "month",
+          "day",
+          "minute",
+          "second",
+          "additional phase fields"
+        ],
+        "units": {
+          "time": "ambiguous; XML claims full timestamp but local rows visibly omit some temporal tokens"
+        },
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+            "locator": "Native record structure",
+            "note": "P token count and metadata discrepancy."
+          }
+        ]
+      }
+    }
+  },
+  "construction_workflow": {
+    "summary": "A 998-event manually reviewed seed catalog drives station-specific S-phase multichannel subspace detectors; detections are associated, merged with original large-event P/S phases, located with Bayesloc and filtered by uncertainty.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "McNamara initial reviewed catalog",
+        "type": "event_and_phase_seed",
+        "provider_or_network": "McNamara et al.",
+        "temporal_spatial_scope": "Month after foreshock",
+        "station_count": null,
+        "channels_sampling": null,
+        "role": "detector_templates",
+        "availability_conditions": "998 manually identified/located/reviewed events.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "locator": "Scientific scope and observations; Detector construction and detection",
+            "note": "Seed population and use."
+          }
+        ]
+      },
+      {
+        "source_id": "S2",
+        "name": "Prague temporary/permanent waveforms",
+        "type": "waveform",
+        "provider_or_network": "ZQ RAMP, GS, TA, OK",
+        "temporal_spatial_scope": "2011-11-04 to 2011-12-05, station deployment starts vary",
+        "station_count": 31,
+        "channels_sampling": "Multichannel S-phase templates; exact sample metadata requires SI.",
+        "role": "primary_input",
+        "availability_conditions": "21 temporary + 9 TA + 1 OK; last temporary stations fully operational 2011-11-11.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "locator": "Scientific scope and observations",
+            "note": "Network and study interval."
+          }
+        ]
+      },
+      {
+        "source_id": "S3",
+        "name": "McNamara velocity model",
+        "type": "velocity_model",
+        "provider_or_network": "McNamara et al.",
+        "temporal_spatial_scope": "Prague sequence",
+        "station_count": null,
+        "channels_sampling": null,
+        "role": "absolute_location",
+        "availability_conditions": "Exact model parameters require supporting files.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "locator": "Association, location, and magnitude",
+            "note": "Bayesloc model lineage."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "S-phase subspace detector construction",
+        "category": "detection",
+        "purpose": "Represent station-specific waveform energy with a reduced multichannel template basis.",
+        "inputs": [
+          "S1 seed events",
+          "S2 waveforms"
+        ],
+        "outputs": [
+          "1,116 subspace templates from 14,150 event observations"
+        ],
+        "method": "11–91 multichannel templates per station representing about 90% waveform energy.",
+        "software_or_model": "subspace detector",
+        "parameters": [
+          {
+            "name": "template_count",
+            "value": "11–91 per station",
+            "unit": "templates"
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Exact numerical detection threshold is not exposed in main text."
+        ],
+        "intermediate_result": "Station-specific detector banks.",
+        "analyst_intervention": "Seed catalog manually reviewed.",
+        "dependencies": "Station-specific operation starts and template coverage.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "locator": "Detector construction and detection",
+            "note": "Template compression and threshold caveat."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "continuous S-phase detection",
+        "category": "detection",
+        "purpose": "Detect waveform-consistent S arrivals over the study interval.",
+        "inputs": [
+          "S2 waveforms",
+          "subspace detectors"
+        ],
+        "outputs": [
+          "577,040 detected S arrivals (article-reported)"
+        ],
+        "method": "Station-specific continuous correlation from deployment/start dates through 2011-12-05.",
+        "software_or_model": "S-phase multichannel subspace detection",
+        "parameters": [],
+        "qc_and_rejection_rules": [
+          "Threshold deliberately high but exact value requires missing SI.",
+          "Large Mw>3 events can be missed by small-event S templates."
+        ],
+        "intermediate_result": "S-arrival detections.",
+        "analyst_intervention": null,
+        "dependencies": "Changing network availability.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "locator": "Detector construction and detection",
+            "note": "Detection scope and biases."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST3",
+        "order": 3,
+        "name": "association and Bayesloc location",
+        "category": "association_and_location",
+        "purpose": "Group arrivals into events and estimate hypocenters.",
+        "inputs": [
+          "S arrivals",
+          "original P/S phases for large events"
+        ],
+        "outputs": [
+          "20,788 associated events at >=5 stations; 21,786 located events (article-reported)"
+        ],
+        "method": "Arrival-time association followed by Bayesloc with McNamara velocity model.",
+        "software_or_model": "Bayesloc",
+        "parameters": [
+          {
+            "name": "minimum_station_observations",
+            "value": 5,
+            "unit": "stations"
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Retained associated set requires observations at >=5 stations."
+        ],
+        "intermediate_result": "Associated and located event population.",
+        "analyst_intervention": "Original P/S phases merged for large events.",
+        "dependencies": "Phase association and velocity model.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "locator": "Association, location, and magnitude",
+            "note": "Association counts and Bayesloc."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST4",
+        "order": 4,
+        "name": "uncertainty filtering and release merge",
+        "category": "qc_and_export",
+        "purpose": "Retain high-quality hypocenters and merge with original catalog.",
+        "inputs": [
+          "located events",
+          "original P/S catalog"
+        ],
+        "outputs": [
+          "article final 5,262 events; local broader 5,446 E release"
+        ],
+        "method": "Epicentral uncertainty <0.5 km and depth uncertainty <1 km; final paper accounting excludes 184 original events failing criteria.",
+        "software_or_model": "Bayesloc quality filtering",
+        "parameters": [
+          {
+            "name": "epicentral_uncertainty_max",
+            "value": 0.5,
+            "unit": "km"
+          },
+          {
+            "name": "depth_uncertainty_max",
+            "value": 1,
+            "unit": "km"
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Article filter and release population must remain separate."
+        ],
+        "intermediate_result": "Paper-filtered and distributed-release lineages.",
+        "analyst_intervention": null,
+        "dependencies": "Row-level uncertainty fields not exposed in current E file.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "locator": "Association, location, and magnitude; Article and local-release audit",
+            "note": "Filter thresholds and discrepancy."
+          }
+        ]
+      }
+    ],
+    "final_output": "Article final 5,262-event catalog is not byte-identical to local 5,446-E release; local benchmark uses 2,384 E rows in the Prague v1 time window.",
+    "evidence": [
+      {
+        "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+        "locator": "Catalog-construction workflow; Prague v1 benchmark window",
+        "note": "Workflow and local selection."
+      },
+      {
+        "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+        "locator": "Construction and quality; Frozen Prague window",
+        "note": "Release lineage and counts."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [
+      {
+        "product_id": "A1",
+        "name": "McMahon supporting information",
+        "type": "missing_supplement",
+        "file_path": null,
+        "catalog_relation": "Needed for exact detector/station parameters, but not locally staged.",
+        "scientific_use": "Reproduction of threshold and station metadata.",
+        "count_or_scope": null,
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "locator": "Identity and evidence status; Local provenance and open actions",
+            "note": "SI gap is explicit."
+          }
+        ]
+      }
+    ],
+    "scientific_findings": [
+      {
+        "statement": "The subspace/Bayesloc path is methodologically distinct from Cochran template/GrowClust but shares waveform/archive lineage.",
+        "depends_on": "Detector and locator family",
+        "scope": "Prague sequence",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "locator": "Identity and evidence status; Benchmark interpretation",
+            "note": "Independence caveat."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "Q2 secondary enhanced-detection/relocation reference; metric-specific Q1 location/QC subset only.",
+      "recommended_role": "Cross-method event support, association and location QC under changing network conditions.",
+      "comparison_or_baseline_sources": "Compare with Cochran and operational baseline after explicit crosswalk.",
+      "valid_comparisons": "Event support, association, absolute hypocenter quality, network transition.",
+      "caveats": "Release/article counts differ; P schema and magnitude type unresolved; S-only bias.",
+      "evidence": [
+        {
+          "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+          "locator": "Benchmark role",
+          "note": "Use and caveats."
+        }
+      ]
+    },
+    "missing_information": [
+      "Supporting Information S1/S2 and Data Sets S1/S2.",
+      "Exact detector threshold and station/sample-rate metadata.",
+      "Verified P-record timestamp schema and row-level uncertainty fields."
+    ],
+    "evidence": [
+      {
+        "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+        "locator": "Required follow-up",
+        "note": "Open acquisition and audit items."
+      }
+    ]
+  },
+  "extraction_quality": {
+    "status": "partial",
+    "extraction_confidence": "high for article workflow and E-record audit; medium for P schema/QC threshold",
+    "completed_sections": [
+      "article",
+      "catalog",
+      "construction_workflow",
+      "additional_information"
+    ],
+    "missing_core_fields": [
+      "supplement parameters",
+      "exact detector threshold",
+      "P timestamp schema",
+      "row-level uncertainty fields"
+    ],
+    "warnings": [
+      "Do not replace article 5,262 with local 5,446 without lineage label.",
+      "Do not use P-row timestamps until metadata discrepancy is resolved."
+    ],
+    "needs_human_review": true,
+    "evidence": [
+      {
+        "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+        "locator": "Extraction status and evidence status",
+        "note": "Missing SI and unresolved release details."
+      }
+    ]
+  }
+}

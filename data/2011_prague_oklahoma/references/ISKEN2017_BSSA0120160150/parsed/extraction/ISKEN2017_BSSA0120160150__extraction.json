@@ -1,0 +1,473 @@
+{
+  "article": {
+    "source_id": "ISKEN2017_BSSA0120160150",
+    "case_id": "2011_prague_oklahoma",
+    "title": "Relocated Hypocenters and Structural Analysis from Waveform Modeling of Aftershocks from the 2011 Prague, Oklahoma, Earthquake Sequence",
+    "authors": [
+      "Marius P. Isken",
+      "Walter D. Mooney"
+    ],
+    "year": 2017,
+    "journal": "Bulletin of the Seismological Society of America",
+    "doi": "10.1785/0120160150",
+    "article_type": "research_article_selective_manual_relocation_and_waveform_modeling",
+    "scientific_question": "Use a selected set of relocated aftershocks and waveform modeling to assess focal depths and explain strong S-wave coda scattering in the Prague sequence.",
+    "sequence": "2011 Prague, Oklahoma earthquake sequence; Table S3 contains selected M_L>3 aftershocks.",
+    "catalog_relationship": "Table S3 is a 13-event manually picked/relocalized structural anchor, not a complete sequence catalog.",
+    "evidence": [
+      {
+        "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
+        "locator": "title block, Abstract, Data and Methodology",
+        "note": "Identity and purpose."
+      },
+      {
+        "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+        "locator": "Identity and evidence status; Sequence and scientific scope",
+        "note": "Catalog relationship and scientific goal."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "ISKEN2017_BSSA0120160150_TABLE_S3",
+    "name": "Isken Table S3 relocated aftershock table",
+    "product_type": "selective_relocated_table",
+    "role": "auxiliary",
+    "quality_tier": "Q1 selective high-quality location/structure anchor; not complete event-existence truth",
+    "scientific_purpose": "Absolute/depth-location and structural sanity check for selected M_L>3 aftershocks.",
+    "event_definition": "13 numbered Table S3 rows selected for manual P/S relocation and waveform interpretation.",
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "full Table S3",
+        "unit": "events",
+        "count_article": 13,
+        "count_local": 13,
+        "selection_rule": "Selected aftershocks, manually picked at local stations; article discusses M_L>3 selection.",
+        "time_range": "2011-11-11 19:19:00 to 2011-12-09 16:46:00 UTC in local table.",
+        "spatial_depth_scope": "Lat 35.452–35.546 N; lon -96.897–-96.737; depth 4.63–10.08 km.",
+        "magnitude_scope": "Mw 3.1–3.4 in official table; do not relabel as ML.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+            "locator": "Schema and local audit",
+            "note": "13-row local derivative and ranges."
+          },
+          {
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+            "locator": "Sequence and scientific scope",
+            "note": "Article selection versus table magnitude distinction."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "Prague v1 core-window subset",
+        "unit": "events",
+        "count_article": null,
+        "count_local": 7,
+        "selection_rule": "2011-11-11T00:00:00Z <= origin_time < 2011-11-19T00:00:00Z; no extra spatial/depth clipping.",
+        "time_range": "Same half-open core window; rows 1–7 retained.",
+        "spatial_depth_scope": "No additional clipping; cross-catalog matching requires explicit tolerance.",
+        "magnitude_scope": "Table Mw 3.1–3.4 for retained rows; article selection wording remains M_L>3.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+            "locator": "Frozen-window cross-reference",
+            "note": "Seven in-window rows."
+          },
+          {
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+            "locator": "Frozen benchmark extraction record",
+            "note": "Sparse anchor interpretation."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "10.1785/0120160150; https://www.seismosoc.org/Publications/BSSA_html/bssa_107-2/2016150-esupp/",
+      "version": null,
+      "source_files": [
+        {
+          "path": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__source_tableS3.html",
+          "format": "official HTML table",
+          "checksum": null,
+          "role": "source_authority"
+        },
+        {
+          "path": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv",
+          "format": "normalized CSV",
+          "checksum": "a8a6df207ff71395d6201fac2bf79693481fbcee9c487aa3f1ca1ad8a2c35199",
+          "role": "analysis_derivative"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+          "locator": "Provenance",
+          "note": "Official supplement and source/normalized files."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": 13,
+      "row_count": 13,
+      "unique_event_ids": 13,
+      "exact_duplicate_rows": 0,
+      "time_range": "2011-11-11 19:19:00 to 2011-12-09 16:46:00 UTC",
+      "latitude_longitude_depth_range": "lat 35.452–35.546 N; lon -96.897–-96.737; depth 4.63–10.08 km",
+      "magnitude_range": "Mw 3.1–3.4",
+      "benchmark_counts": {
+        "time_only_core_window": 7
+      },
+      "article_local_discrepancy": "Figure 1 caption says 11 November–31 December, while distributed Table S3 ends 9 December; retain both statements. Formal ERH/ERZ fields differ from prose uncertainty on order 1 km.",
+      "evidence": [
+        {
+          "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+          "locator": "Schema and local audit; Frozen-window cross-reference",
+          "note": "Rows, ranges and discrepancies."
+        }
+      ]
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "matched-event origin-time/epicenter/depth residuals",
+        "ERH/ERZ-aware location QC",
+        "fault-plane/relative structural geometry"
+      ],
+      "unsuitable_metrics": [
+        "detection recall",
+        "event-count agreement",
+        "daily rate",
+        "magnitude completeness",
+        "claim that unmatched agent events are false"
+      ],
+      "independence_conditions": [
+        "Manual picks + HYPOINVERSE differ from template/subspace workflows, but sequence/stations/waveforms overlap."
+      ],
+      "limitations": [
+        "Only 13 selected events; completeness unknown.",
+        "Accuracy conditional on local 19-station geometry and velocity model.",
+        "Magnitude label differs between article selection M_L and table Mw.",
+        "ERH/ERZ formal fields versus prose uncertainty unresolved."
+      ],
+      "evidence": [
+        {
+          "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+          "locator": "Benchmark interpretation",
+          "note": "Role and invalid metrics."
+        },
+        {
+          "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+          "locator": "Benchmark role and Required next checks",
+          "note": "Sparse anchor limitations."
+        }
+      ]
+    },
+    "product_semantics": {
+      "event_id_rule": "`no` is article row number only; not a cross-catalog event ID.",
+      "time_rule": "UTC, second precision in source table; normalized ISO derivative.",
+      "uncertainty_rule": "Preserve ERH/ERZ and prose uncertainty separately until formal definitions resolved.",
+      "evidence": [
+        {
+          "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+          "locator": "Provenance; Schema and local audit",
+          "note": "Field authority and semantics."
+        }
+      ]
+    },
+    "product_schemas": {
+      "Table_S3": {
+        "role": "selective_relocated_event_table",
+        "identifier_field": "no",
+        "fields": [
+          "no",
+          "time_utc",
+          "latitude_deg",
+          "longitude_deg",
+          "depth_km",
+          "erh_km",
+          "erz_km",
+          "rms_s",
+          "Mw"
+        ],
+        "units": {
+          "time": "UTC",
+          "latitude": "degree",
+          "longitude": "degree",
+          "depth": "km",
+          "erh": "km",
+          "erz": "km",
+          "rms": "s",
+          "Mw": "moment magnitude"
+        },
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+            "locator": "Schema and local audit",
+            "note": "Nine normalized fields and ranges."
+          }
+        ]
+      }
+    }
+  },
+  "construction_workflow": {
+    "summary": "Selected M_L>3 aftershocks are manually picked on 19 nearby stations, relocated with HYPOINVERSE 2000 using a gradient 1-D model, and exported as Table S3; 2-D sofi2D modeling is downstream interpretation.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "ZQ/RAMP and LA waveforms",
+        "type": "waveform",
+        "provider_or_network": "IRIS ZQ/RAMP and USGS Pasadena LA array",
+        "temporal_spatial_scope": "2011 Prague sequence; selected aftershocks",
+        "station_count": 19,
+        "channels_sampling": "Three-component observations; exact station table in missing electronic supplement",
+        "role": "manual_pick_input",
+        "availability_conditions": "19 available local stations used for relocation.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+            "locator": "Observation and network conditions",
+            "note": "ZQ/LA provenance and 19-station condition."
+          }
+        ]
+      },
+      {
+        "source_id": "S2",
+        "name": "1-D gradient velocity model",
+        "type": "velocity_model",
+        "provider_or_network": "Toth et al. sonic-log constraints",
+        "temporal_spatial_scope": "Prague sequence",
+        "station_count": null,
+        "channels_sampling": null,
+        "role": "hypocenter_location",
+        "availability_conditions": "Exact model/S1 metadata not staged locally.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+            "locator": "Phase picking and location",
+            "note": "Velocity-model lineage."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "manual event selection and P/S picking",
+        "category": "selection_and_picking",
+        "purpose": "Select clearly recorded M_L>3 aftershocks and obtain phase arrivals.",
+        "inputs": [
+          "S1 waveforms"
+        ],
+        "outputs": [
+          "25–34 P/S arrivals per event for 13 events"
+        ],
+        "method": "Manual P and S picks at available local stations.",
+        "software_or_model": null,
+        "parameters": [
+          {
+            "name": "station_count",
+            "value": 19,
+            "unit": "stations"
+          },
+          {
+            "name": "picks_per_event",
+            "value": "25–34",
+            "unit": "P/S arrivals"
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Selection is sparse/manual; no automatic completeness threshold published."
+        ],
+        "intermediate_result": "13 selected aftershocks.",
+        "analyst_intervention": "Manual picks and selection.",
+        "dependencies": "Local station coverage and clear arrivals.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+            "locator": "Starting population and selection; Phase picking and location",
+            "note": "Selection and picks."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "HYPOINVERSE relocation",
+        "category": "location",
+        "purpose": "Estimate hypocenters and travel-time residuals.",
+        "inputs": [
+          "manual P/S picks",
+          "1-D gradient model"
+        ],
+        "outputs": [
+          "Table S3 origins, errors, RMS and Mw"
+        ],
+        "method": "HYPOINVERSE 2000 inversion/relocation; velocity varied within model constraints.",
+        "software_or_model": "HYPOINVERSE 2000",
+        "parameters": [
+          {
+            "name": "rms_range",
+            "value": "0.03–0.05",
+            "unit": "s"
+          },
+          {
+            "name": "formal_erh",
+            "value": "0.1",
+            "unit": "km"
+          },
+          {
+            "name": "formal_erz",
+            "value": "0.1–0.2",
+            "unit": "km"
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "RMS residuals and reported error fields retained; exact ERH/ERZ interpretation unresolved."
+        ],
+        "intermediate_result": "13-row Table S3.",
+        "analyst_intervention": null,
+        "dependencies": "Manual picks, station geometry, velocity model.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+            "locator": "Phase picking and location; Table S3 product and field semantics",
+            "note": "Location method and QC fields."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST3",
+        "order": 3,
+        "name": "2-D waveform modeling",
+        "category": "downstream_interpretation",
+        "purpose": "Test depth/coda-scattering interpretation.",
+        "inputs": [
+          "relocated events",
+          "crustal models"
+        ],
+        "outputs": [
+          "sofi2D synthetic comparisons"
+        ],
+        "method": "Finite-difference waveform modeling; not an event inclusion rule.",
+        "software_or_model": "sofi2D",
+        "parameters": [],
+        "qc_and_rejection_rules": [
+          "Do not count synthetic/model outputs as catalog rows."
+        ],
+        "intermediate_result": "Structural/coda interpretation.",
+        "analyst_intervention": null,
+        "dependencies": "Relocated depths and layered model.",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+            "locator": "Waveform modeling is downstream",
+            "note": "Separation from catalog construction."
+          }
+        ]
+      }
+    ],
+    "final_output": "13-row selective relocation table; seven rows overlap Prague v1 core window.",
+    "evidence": [
+      {
+        "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+        "locator": "Catalog-construction workflow; Frozen-window cross-reference",
+        "note": "Workflow and count."
+      },
+      {
+        "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+        "locator": "Construction and quality interpretation",
+        "note": "Local product audit."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [
+      {
+        "product_id": "A1",
+        "name": "Electronic station/velocity supplements",
+        "type": "missing_supplement",
+        "file_path": null,
+        "catalog_relation": "Needed to reproduce station geometry and velocity assumptions.",
+        "scientific_use": "Uncertainty/relocation interpretation.",
+        "count_or_scope": null,
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+            "locator": "Observation and network conditions; Local provenance and unresolved actions",
+            "note": "S1/S2 absence."
+          }
+        ]
+      }
+    ],
+    "scientific_findings": [
+      {
+        "statement": "The 13 relocated events provide a sparse structural/depth anchor, not a completeness catalog.",
+        "depends_on": "Manual event selection and local relocation",
+        "scope": "Prague sequence",
+        "evidence": [
+          {
+            "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+            "locator": "Benchmark role",
+            "note": "Sparse-anchor conclusion."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "Q1 selective location/structure auxiliary.",
+      "recommended_role": "Matched-event depth/location sanity checks and structural geometry.",
+      "comparison_or_baseline_sources": "Cross-match to Cochran/McMahon by time/space tolerance, never row number.",
+      "valid_comparisons": "Matched-event origin time, epicenter, depth, ERH/ERZ-aware residuals.",
+      "caveats": "No recall/event-rate denominator; table row number is not stable ID.",
+      "evidence": [
+        {
+          "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+          "locator": "Benchmark interpretation",
+          "note": "Metric use and caveats."
+        }
+      ]
+    },
+    "missing_information": [
+      "Electronic Tables S1/S2 and empirical/synthetic products.",
+      "Formal ERH/ERZ definition reconciliation.",
+      "Explicit time/space crosswalk to larger catalogs."
+    ],
+    "evidence": [
+      {
+        "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+        "locator": "Required next checks",
+        "note": "Open actions."
+      }
+    ]
+  },
+  "extraction_quality": {
+    "status": "partial",
+    "extraction_confidence": "high for 13-row table and workflow; medium for supplement/model metadata",
+    "completed_sections": [
+      "article",
+      "catalog",
+      "construction_workflow",
+      "additional_information"
+    ],
+    "missing_core_fields": [
+      "station table",
+      "velocity-model supplement",
+      "formal uncertainty definitions"
+    ],
+    "warnings": [
+      "Do not call Mw column ML.",
+      "Do not use 13 rows for completeness or recall metrics.",
+      "Do not treat sofi2D outputs as catalog records."
+    ],
+    "needs_human_review": true,
+    "evidence": [
+      {
+        "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+        "locator": "Extraction status and evidence convention",
+        "note": "Article/local distinction and unresolved actions."
+      }
+    ]
+  }
+}

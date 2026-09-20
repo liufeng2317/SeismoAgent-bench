@@ -1,0 +1,464 @@
+{
+  "article": {
+    "source_id": "PANG2019_GL082376",
+    "case_id": "2017_maple_creek_yellowstone",
+    "title": "The 2017–2018 Maple Creek Earthquake Sequence in Yellowstone National Park, USA",
+    "authors": [
+      "Guanning Pang",
+      "Keith D. Koper",
+      "J. Mark Hale",
+      "Relu Burlacu",
+      "Jamie Farrell",
+      "Robert B. Smith"
+    ],
+    "year": 2019,
+    "journal": "Geophysical Research Letters",
+    "doi": "10.1029/2019GL082376",
+    "article_type": "research_letter_catalog_construction_and_relative_relocation",
+    "scientific_question": "Construct an absolute and high-precision relative catalog to characterize the Maple Creek sequence and its spatial/temporal structure.",
+    "sequence": "2017–2018 Maple Creek Yellowstone sequence, 2017-06-12 through 2018-03-13.",
+    "catalog_relationship": "Genuine 3,345-event HYPOINVERSE catalog with 3,257 GrowClust relocations; the machine-readable event table is not locally staged.",
+    "evidence": [
+      {
+        "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
+        "locator": "title block, Abstract and Sections 2–3",
+        "note": "Identity and catalog purpose."
+      },
+      {
+        "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+        "locator": "Identity and evidence status; Scientific scope",
+        "note": "Article/release status."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "PANG2019_GL082376_EVENT_CATALOG",
+    "name": "Pang Maple Creek absolute/GrowClust catalog",
+    "product_type": "event_catalog_missing",
+    "role": "secondary",
+    "quality_tier": "Q1/Q2 secondary location reference; not independently reviewed truth",
+    "scientific_purpose": "Absolute-location baseline and high-precision relative geometry comparison against Shelly.",
+    "event_definition": "Article-reported absolute event catalog and GrowClust-relocated subset; row-level event definition cannot be audited without source table.",
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "article absolute catalog",
+        "unit": "events",
+        "count_article": 3345,
+        "count_local": null,
+        "selection_rule": "UUSS routine detections/phase picks located with HYPOINVERSE; exact row-level filter unavailable locally.",
+        "time_range": "2017-06-12 through 2018-03-13.",
+        "spatial_depth_scope": "Maple Creek Yellowstone; >97% reported at 6–14 km depth beneath surface.",
+        "magnitude_scope": "Coda Mc -1.7 to 4.4; completeness about Mc 0.5; b≈0.96.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+            "locator": "Scientific scope; Catalog-construction workflow",
+            "note": "Article population and ranges."
+          },
+          {
+            "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+            "locator": "What is known from the article",
+            "note": "Article-only values."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "GrowClust relocated subset",
+        "unit": "events",
+        "count_article": 3257,
+        "count_local": null,
+        "selection_rule": "BCSEIS waveform differential times followed by GrowClust; exact membership unavailable locally.",
+        "time_range": "Same article sequence span; exact row-level range not auditable.",
+        "spatial_depth_scope": "Relative relocated geometry; article reports ~500 m horizontal/730 m depth absolute errors and ~62/86 m relative bootstrap errors.",
+        "magnitude_scope": "Magnitude scale inherited from article catalog; exact field schema unavailable.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+            "locator": "Catalog-construction workflow",
+            "note": "Relocation count and errors."
+          },
+          {
+            "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+            "locator": "What is known from the article",
+            "note": "Article-only relocation values."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "10.1029/2019GL082376",
+      "version": null,
+      "source_files": [
+        {
+          "path": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
+          "format": "MinerU Markdown",
+          "checksum": null,
+          "role": "article_parse"
+        },
+        {
+          "path": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/supplement/PANG2019_GL082376__supplement_notes.md",
+          "format": "supplement audit note",
+          "checksum": null,
+          "role": "SI_audit"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+          "locator": "Provenance and Acquisition guidance",
+          "note": "No verified event-table URL/DOI; SI is present but not event table."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": null,
+      "row_count": null,
+      "unique_event_ids": null,
+      "exact_duplicate_rows": null,
+      "time_range": null,
+      "latitude_longitude_depth_range": null,
+      "magnitude_range": null,
+      "benchmark_counts": null,
+      "article_local_discrepancy": "Catalog is missing locally; no local row count, schema, checksum, ranges or frozen-window count may be asserted.",
+      "evidence": [
+        {
+          "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+          "locator": "Provenance; What is known from the article; Frozen benchmark mask",
+          "note": "Explicit missing status and article/local separation."
+        }
+      ]
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "future absolute/relative location comparison after verified acquisition",
+        "event geometry and relocation error",
+        "method-specific cross-check against Shelly"
+      ],
+      "unsuitable_metrics": [
+        "current local event-count scoring",
+        "phase-pick scoring without event table",
+        "treating Shelly phase-arrival CSV as Pang catalog"
+      ],
+      "independence_conditions": [
+        "HYPOINVERSE + BCSEIS + GrowClust differs from Shelly matched-filter + hypoDD, but public waveforms/UUSS routine lineage overlap."
+      ],
+      "limitations": [
+        "Machine-readable 3,345-row table absent.",
+        "No local schema or row-level uncertainty/relocation flag.",
+        "Do not infer fields from figures or substitute Shelly release."
+      ],
+      "evidence": [
+        {
+          "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+          "locator": "Benchmark interpretation; Supporting information audit",
+          "note": "Role and missing-catalog constraints."
+        },
+        {
+          "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+          "locator": "Acquisition guidance",
+          "note": "Validation gates."
+        }
+      ]
+    },
+    "product_semantics": {
+      "status": "not_observed_locally",
+      "article_counts_are": "article-reported only, not local file audits",
+      "future_normalization_rule": "Require origin time, coordinates, explicit absolute/GrowClust status, magnitude definition and checksum before marking ready.",
+      "evidence": [
+        {
+          "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+          "locator": "Frozen benchmark mask to apply after acquisition; Acquisition guidance",
+          "note": "Expected fields and acquisition checks."
+        }
+      ]
+    },
+    "product_schemas": {
+      "future_normalized_event_table": {
+        "role": "expected_schema_only",
+        "identifier_field": "event_id (not yet observed)",
+        "fields": [
+          "event_id",
+          "origin_time_utc",
+          "latitude",
+          "longitude",
+          "depth_km",
+          "magnitude",
+          "magnitude_type",
+          "location_method",
+          "relocation_status",
+          "horizontal_error_km",
+          "vertical_error_km",
+          "source_row_hash"
+        ],
+        "units": {
+          "time": "UTC",
+          "latitude": "degree",
+          "longitude": "degree",
+          "depth": "km",
+          "errors": "must verify source units",
+          "magnitude": "must verify source scale"
+        },
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+            "locator": "Frozen benchmark mask to apply after acquisition",
+            "note": "Expected output fields are a future normalization specification, not a local schema."
+          }
+        ]
+      }
+    }
+  },
+  "construction_workflow": {
+    "summary": "UUSS routine detections and phase picks are absolutely located with HYPOINVERSE, waveform differential times are measured with BCSEIS, and GrowClust provides hierarchical relative relocations with bootstrap uncertainty.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "UUSS routine detections and phase picks",
+        "type": "event_and_phase_seed",
+        "provider_or_network": "University of Utah Seismograph Stations",
+        "temporal_spatial_scope": "2017 Maple Creek/Yellowstone sequence",
+        "station_count": null,
+        "channels_sampling": null,
+        "role": "absolute_catalog_seed",
+        "availability_conditions": "Exact release table absent locally.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+            "locator": "Observation and network conditions; Catalog-construction workflow",
+            "note": "Routine catalog and network context."
+          }
+        ]
+      },
+      {
+        "source_id": "S2",
+        "name": "waveforms for differential times",
+        "type": "waveform",
+        "provider_or_network": "IRIS/EarthScope and Yellowstone network",
+        "temporal_spatial_scope": "Maple Creek sequence",
+        "station_count": 24,
+        "channels_sampling": "P/S waveform windows; exact sample metadata not extracted",
+        "role": "relative_relocation_input",
+        "availability_conditions": "22 local + 2 regional stations selected for quality/azimuth; no station-day table.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+            "locator": "Observation and network conditions",
+            "note": "Station setup and network codes."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "absolute routine location",
+        "category": "location",
+        "purpose": "Provide initial event origins and coda magnitudes.",
+        "inputs": [
+          "S1 routine detections/picks"
+        ],
+        "outputs": [
+          "absolute event hypotheses"
+        ],
+        "method": "HYPOINVERSE with regional 1-D velocity model.",
+        "software_or_model": "HYPOINVERSE",
+        "parameters": [],
+        "qc_and_rejection_rules": [
+          "Exact row-level filters unavailable locally."
+        ],
+        "intermediate_result": "3,345 article absolute events.",
+        "analyst_intervention": "Routine UUSS detection/phase processing.",
+        "dependencies": "UUSS network and regional model.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+            "locator": "Catalog-construction workflow",
+            "note": "Absolute-location stage."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "waveform differential-time measurement",
+        "category": "differential_measurement",
+        "purpose": "Measure precise P/S pair delays for relative relocation.",
+        "inputs": [
+          "S2 waveforms",
+          "absolute event hypotheses"
+        ],
+        "outputs": [
+          "~4.4 million differential times"
+        ],
+        "method": "BCSEIS cross-correlation on P and S windows; article reports 73% P and 27% S.",
+        "software_or_model": "BCSEIS",
+        "parameters": [
+          {
+            "name": "differential_time_count",
+            "value": "~4.4 million",
+            "unit": "measurements"
+          },
+          {
+            "name": "phase_fraction",
+            "value": "73% P / 27% S",
+            "unit": "percent"
+          }
+        ],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "Pairwise differential-time set.",
+        "analyst_intervention": null,
+        "dependencies": "Waveform quality and station geometry.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+            "locator": "Catalog-construction workflow",
+            "note": "BCSEIS and differential-time totals."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST3",
+        "order": 3,
+        "name": "GrowClust relative relocation",
+        "category": "relocation",
+        "purpose": "Refine relative event geometry and quantify uncertainty.",
+        "inputs": [
+          "absolute catalog",
+          "BCSEIS differential times"
+        ],
+        "outputs": [
+          "3,257 article GrowClust relocations"
+        ],
+        "method": "Hierarchical sequential grid-search relocation with 100 bootstrap runs.",
+        "software_or_model": "GrowClust",
+        "parameters": [
+          {
+            "name": "bootstrap_runs",
+            "value": 100,
+            "unit": "runs"
+          },
+          {
+            "name": "median_relative_error",
+            "value": "~62 horizontal / ~86 vertical",
+            "unit": "m"
+          }
+        ],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "3,257 relocated events.",
+        "analyst_intervention": null,
+        "dependencies": "Absolute starting catalog and waveform pairs.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+            "locator": "Catalog-construction workflow; Scientific scope",
+            "note": "GrowClust count and error estimates."
+          }
+        ]
+      }
+    ],
+    "final_output": "Article reports 3,345 absolute and 3,257 relocated events; no local event-table output is available.",
+    "evidence": [
+      {
+        "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+        "locator": "Catalog-construction workflow; Supporting information audit",
+        "note": "End-to-end method and release gap."
+      },
+      {
+        "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+        "locator": "Acquisition guidance",
+        "note": "No substitution rule."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [
+      {
+        "product_id": "A1",
+        "name": "Pang publisher supplementary information",
+        "type": "method_context_pdf",
+        "file_path": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/supplement/mineru/Pang2019_MapleCreek_SI/full.md",
+        "catalog_relation": "Method/figure/velocity-model context; not a machine-readable catalog.",
+        "scientific_use": "Review relocation diagnostics and parameters.",
+        "count_or_scope": "No 3,345-row event table found.",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/supplement/PANG2019_GL082376__supplement_notes.md",
+            "locator": "Supplementary information audit",
+            "note": "PDF is present but no CSV/QuakeML/XLSX/text event table."
+          }
+        ]
+      }
+    ],
+    "scientific_findings": [
+      {
+        "statement": "Pang is the independent secondary location reference for Maple, but its catalog cannot be scored locally until the original event table is verified.",
+        "depends_on": "Verified 3,345-row release",
+        "scope": "Maple Creek sequence",
+        "evidence": [
+          {
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+            "locator": "Benchmark interpretation",
+            "note": "Readiness and role."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "Q1/Q2 secondary high-resolution location reference; currently catalog-missing.",
+      "recommended_role": "Future independent absolute/relative location comparison against Shelly after acquisition.",
+      "comparison_or_baseline_sources": "Do not substitute Shelly phase release or USGS baseline.",
+      "valid_comparisons": "Only after row-level table, provenance and common mask are verified.",
+      "caveats": "Article values are not local audits; no event count can be asserted in frozen window.",
+      "evidence": [
+        {
+          "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+          "locator": "Frozen benchmark mask; Acquisition guidance",
+          "note": "Mask and acquisition gates."
+        }
+      ]
+    },
+    "missing_information": [
+      "Verified author/publisher/repository/DOI for machine-readable 3,345-event table.",
+      "Row-level fields, relocation membership, uncertainty units and checksum.",
+      "Local frozen-window count after acquisition."
+    ],
+    "evidence": [
+      {
+        "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+        "locator": "Acquisition guidance",
+        "note": "Explicit missing information."
+      }
+    ]
+  },
+  "extraction_quality": {
+    "status": "draft",
+    "extraction_confidence": "medium for article workflow; low for catalog fields because table missing",
+    "completed_sections": [
+      "article",
+      "catalog_article_reported",
+      "construction_workflow",
+      "additional_information"
+    ],
+    "missing_core_fields": [
+      "local event catalog",
+      "observed schema",
+      "local ranges",
+      "frozen-window count"
+    ],
+    "warnings": [
+      "Do not label catalog partial/ready until a real event table is found.",
+      "Do not infer fields from SI figures or substitute Shelly CSV."
+    ],
+    "needs_human_review": true,
+    "evidence": [
+      {
+        "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+        "locator": "Catalog status",
+        "note": "Catalog explicitly missing, not partial."
+      }
+    ]
+  }
+}
