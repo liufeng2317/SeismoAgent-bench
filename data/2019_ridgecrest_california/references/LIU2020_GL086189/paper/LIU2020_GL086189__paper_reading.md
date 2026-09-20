@@ -76,7 +76,7 @@ continuous IRIS/SCEDC waveforms
 
 | Processing stage | Article value | Local evidence |
 |---|---:|---|
-| SCSN routine comparison | 7,425 (4–9 July) | Article Section 2 |
+| SCSN routine comparison | 7,425 in Section 2 (1,708 + 5,717); the Conclusion says 7,743 | Article Sections 2 and 5; internal article discrepancy retained |
 | REAL associated catalog | 16,563 | Article Section 2 |
 | VELEST relocated catalog | 16,112 | Article Section 2 |
 | hypoDD final catalog | 15,445 | Table S1 has 15,445 rows |
@@ -85,6 +85,9 @@ continuous IRIS/SCEDC waveforms
 The local Table S1 is therefore the final hypoDD event product, not the larger
 REAL or VELEST intermediate catalog. It has no explicit event identifier or
 uncertainty columns; row identity is the complete origin-time/coordinate record.
+The article itself gives two routine-catalog comparison counts (7,425 in Section 2
+versus 7,743 in the Conclusion); neither number should be substituted for the
+15,445-row Table S1 product.
 
 ## Benchmark interpretation
 

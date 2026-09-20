@@ -107,6 +107,7 @@ See [`SHELLY2020_0220190309__paper_reading.md`](../references/SHELLY2020_0220190
   <80 km, phase probability >0.7).
 - SI Text S3 documents 884 routine events missed by strict thresholds, depth
   truncation, close-event suppression, coda burial and poor geometry.
+- The paper reports 7,425 routine events in Section 2 but 7,743 in the Conclusion; this internal discrepancy is retained and is not used to alter Table S1.
 
 See [`LIU2020_GL086189__paper_reading.md`](../references/LIU2020_GL086189/paper/LIU2020_GL086189__paper_reading.md) and
 [`LIU2020_GL086189__catalog_summary.md`](../catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_summary.md).
