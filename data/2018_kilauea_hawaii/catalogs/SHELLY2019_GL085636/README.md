@@ -1,10 +1,10 @@
-# Shelly & Thelen (2019) Kīlauea phase-arrival and catalog products
+# Catalog: Shelly & Thelen (2019) Kīlauea
 
 - `source_ref`: `SHELLY2019_GL085636`
-
-- Source: Shelly & Thelen (2019), DOI [10.1029/2019GL085636](https://doi.org/10.1029/2019GL085636).
-- Combined USGS phase-arrival release: [10.5066/P13JCJ2I](https://doi.org/10.5066/P13JCJ2I), ScienceBase item `667b1415d34e6151c9d6bcfd`.
-- Core phase-arrival file: `raw/Kilauea_2018_correlation_phase_arrivals.csv` (8,582,492 data rows plus header).
-- Additional high-resolution event-location products from the same study are retained in `raw/` (`data_S1_*`, `data_S2_*`, metadata XML, and `loc_events.txt`).
-- The separate `loc_events.txt` product is staged under `catalogs/LENGLINE2021_EPSL116653/`; the Shelly bundle retains only its phase-arrival and S1/S2 summit products.
-- Article Data Set S1 and S2 are staged at the catalog root as `SHELLY2019_GL085636__catalog_S1.txt` (44,188 events) and `SHELLY2019_GL085636__catalog_S2.txt` (43,950 clustered events); the Figure SI PDF is under the corresponding reference supplement.
+- DOI: `10.1029/2019GL085636`
+- USGS event release: [10.5066/P9DMIFMW](https://doi.org/10.5066/P9DMIFMW)
+- Auxiliary phase release: [10.5066/P13JCJ2I](https://doi.org/10.5066/P13JCJ2I)
+- Canonical event products: `SHELLY2019_GL085636__catalog_S1.txt` (44,188 rows) and `SHELLY2019_GL085636__catalog_S2.txt` (43,950 rows).
+- Auxiliary raw products: `raw/data_S1_hyposOTC_noXYZ_header.txt`, `raw/data_S2_clustersOTC_header.txt`, metadata XML, and `raw/Kilauea_2018_correlation_phase_arrivals.csv` (8,582,492 phase rows; 607,958,927 bytes; local-only).
+- Full audit: [`SHELLY2019_GL085636__catalog_summary.md`](SHELLY2019_GL085636__catalog_summary.md).
+- Use the common summit mask in the summary for cross-catalog counts: S1=1,883 and S2=1,877; time-only counts are 1,902 and 1,896.

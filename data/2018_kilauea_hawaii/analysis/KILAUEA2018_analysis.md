@@ -8,7 +8,7 @@
 - Phase: reference calibration and data preparation
 - Status: `v1 benchmark window frozen`
 - Primary reference: Shelly & Thelen (2019) summit catalog
-- Secondary reference: Wei et al. (2022) broader onshore/offshore catalog
+- Secondary reference: Wei et al. (2022) broader onshore/offshore catalog; HVO remains the Q3 operational baseline
 - Frozen v1 summit window: 2018-05-01 to 2018-05-09 UTC
 
 ## Scientific role
@@ -28,14 +28,14 @@ High-rate volcanic seismicity associated with eruption and caldera-collapse proc
 | Expected difficulty | High |
 | Primary role | Volcanic high-rate monitoring and event recovery |
 
-Shelly & Thelen report 2,823 template events and 44,188 final high-resolution summit earthquakes. Wei et al. report 375,736 earthquakes from a broader onshore/offshore workflow; the two products require explicit spatial matching.
+Shelly & Thelen report 2,823 template events and 44,188 final high-resolution summit earthquakes. Wei et al. report 375,736 earthquakes from a broader onshore/offshore workflow. In the frozen summit mask, Shelly S1/S2 contribute 1,883/1,877 common-mask rows, while Wei contributes 2,369 rows (1,930 with numeric magnitudes); these are different observation products and require explicit matching.
 
 ## Reference evaluation matrix
 
 | Reference | Evaluation role | Time scope | Spatial scope | Quality tier | Network / observation condition |
 |---|---|---|---|---|---|
-| Shelly & Thelen (2019) | Primary for summit detection and relative location | Full: 2018-04-29–08-06; frozen benchmark: 2018-05-01–05-09 UTC | Frozen summit box 19.30–19.50°N, −155.40 to −155.15°E, depth 0–20 km | **Q1** relative geometry; **Q2** summit detection/completeness; **Q3** island-wide claims | HVO summit network and correlation-derived phases |
-| Wei et al. (2022) | Secondary for broader detection and absolute-location comparison | Approximately half-year eruption interval; subset to same week | Broader onshore/offshore island domain; must be spatially filtered | **Q2** broad detection/3-D location; not directly equivalent to Shelly | HV, PT, Z1, Z6, 4S and AM onshore/offshore networks |
+| Shelly & Thelen (2019) | Primary for summit detection and relative location | Full: 2018-04-29–08-06; frozen benchmark: 2018-05-01–05-09 UTC | Frozen summit box 19.30–19.50°N, −155.40 to −155.15°E, depth 0–20 km; S1/S2 common-mask rows 1,883/1,877 | **Q1** relative geometry; **Q2** summit detection/completeness; **Q3** island-wide claims | Article does not state one fixed count; local phase release has 25 unique HV stations; run/network metadata remains separate |
+| Wei et al. (2022) | Secondary for broader detection and absolute-location comparison | 2018-03-01–09-30; subset to same week | Broader onshore/offshore island domain; common summit mask gives 2,369 rows, 1,930 with numeric magnitude | **Q2** broad detection/3-D location; not directly equivalent to Shelly | HV, PT, Z1, Z6, 4S and AM; rapidly changing temporary arrays |
 | HVO operational catalog | Baseline: routine volcanic monitoring | Same frozen window | Same selected domain | **Q3** operational baseline | HVO operational network |
 
 Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) or `broader island task` (Wei-centered). The two references cannot be ranked by event count without fixing the spatial domain and network condition.
@@ -44,16 +44,16 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 
 | Product | Role | Current issue |
 |---|---|---|
-| Shelly & Thelen (2019) | Primary summit detection and relative-location reference | Summit-only scope; station count and exact QC fields require SI extraction. |
-| Wei et al. (2022) | Secondary broader detection/location reference | Different spatial domain, networks, and location workflow; cannot be treated as a directly equivalent target. |
+| Shelly & Thelen (2019) | Primary summit detection and relative-location reference | Paper reading and S1/S2 catalog audit are complete; common-mask counts are S1=1,883 and S2=1,877. Exact run-specific thresholds/station masks remain in the figure SI and are not yet tabulated. |
+| Wei et al. (2022) | Secondary broader detection/location reference | Paper reading and 375,736-row S1 audit are complete; common summit mask has 2,369 rows, of which 1,930 have numeric magnitudes. Different spatial domain, networks, and location workflow prevent direct event-count ranking. |
 | HVO operational catalog | Baseline | Confirm release and coverage. |
 
 ## Calibration checklist
 
-- [ ] Obtain the primary and secondary catalog files.
-- [ ] Freeze whether the benchmark region is summit-only or broader island/flank.
-- [ ] Extract station/network availability for the selected week.
-- [ ] Reconcile event and phase schema differences.
+- [x] Obtain and audit the primary and secondary catalog files.
+- [x] Freeze the v1 summit region; keep a separate broader-island task for Wei/Matoza.
+- [ ] Extract station/network availability for the selected week (Shelly run metadata and Wei temporary-array gaps remain).
+- [x] Reconcile event and phase schema differences at the catalog-summary level.
 - [ ] Separate high-rate detection evaluation from absolute-location evaluation.
 - [ ] Record template-derived and 3-D-location-derived fields separately.
 
@@ -65,21 +65,27 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 |---|---|
 | Time window | 2018-05-01 00:00:00 to 2018-05-09 00:00:00 UTC (8 days) |
 | Spatial rule | Summit box 19.30–19.50°N, −155.40 to −155.15°E, depth 0–20 km |
-| Event counts | Shelly S1: 1,902 events; Wei S1 after the same summit/depth mask: 1,930 events |
-| Observed ranges | Shelly: lat 19.329–19.470°, lon −155.366 to −155.194°, depth −0.69–15.10 km, M −0.72–4.80; Wei masked: lat 19.300–19.499°, lon −155.397 to −155.150°, depth 0.02–19.46 km, M −0.79–5.82 |
-| Network condition | 66 HVO stations, 3-component channels where available; keep summit HVO channels separate from Wei's broader HV/PT/Z1/Z6/4S/AM network |
-| Waveform volume | Design upper bound: ~47.9 GB for 66 × 3 components × 100 Hz × int32 × 8 days continuous; actual HVO gaps and channel selection reduce this |
-| Reference quality and role | Shelly: Q1 relative summit geometry/Q2 high-rate summit detection; Wei: Q2 broader detection/3-D location cross-check; HVO routine: Q3 baseline; QuakeFlow: methodological context, catalog missing |
+| Event counts | Shelly S1: 1,902 time-only / **1,883 common-mask** events; Shelly S2: 1,896 time-only / **1,877 common-mask** events; Wei: 2,369 common-mask rows, of which 1,930 have numeric magnitudes |
+| Observed ranges | Shelly S1 common mask: lat 19.329–19.470°, lon −155.366 to −155.194°, depth 0.010–15.103 km, M −0.72–4.80; Wei mask: lat 19.300–19.499°, lon −155.397 to −155.150°, depth 0.017–19.902 km, M −0.79–5.82 when present |
+| Network condition | Shelly: article has no fixed station count; local phase release has 25 HV station codes. Wei: HV/PT/Z1/Z6/4S/AM with changing temporary-array coverage; preserve network/deployment flags separately |
+| Waveform volume | Not frozen from the current catalogs: derive from an explicit station/channel/day manifest. The prior 66-station/47.9-GB estimate is provisional and not supported by the local Shelly phase release |
+| Reference quality and role | Shelly S1/S2: Q1 relative summit geometry/Q2 high-rate summit detection; Wei: Q2 broad detection/3-D location cross-check (2,369 rows, 1,930 numeric-M); HVO routine: Q3 baseline; QuakeFlow: methodological context, catalog missing |
 
 ## Main risks
 
 1. Primary and secondary catalogs cover different spatial domains.
 2. The sequence and network are strongly time-dependent.
 3. Template-based summit completeness is not island-wide ground truth.
+4. Shelly S1/S2 time-only and common-mask counts differ; Wei rows without numeric magnitude must not be silently discarded.
+5. The local Shelly phase CSV measures 25 HV station codes, not a complete station-day inventory.
 
 ## Sources
 
 - `../references/USGS2019_SCIENCE_OVERVIEW/paper/USGS2019_SCIENCE_OVERVIEW__paper.pdf`
+- `../references/SHELLY2019_GL085636/paper/SHELLY2019_GL085636__paper_reading.md`
+- `../catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md`
+- `../references/WEI2022_EA001979/paper/WEI2022_EA001979__paper_reading.md`
+- `../catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md`
 - Shelly & Thelen (2019), DOI: https://doi.org/10.1029/2019GL085636
 - Wei et al. (2022), DOI: https://doi.org/10.1029/2021EA001979
 ## Full inventory record (migrated from `docs/01_Case_details.md`)
@@ -117,7 +123,7 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 | **Major regional event** | Mw 6.9 south-flank earthquake on 2018-05-04; summit collapse sequence intensified later |
 | **Scientific significance** | Extremely high-rate volcanic monitoring problem with strong temporal evolution, collapse cycles, and changing network/data conditions. |
 | **Primary reference span** | 2018-04-29 to 2018-08-06 |
-| **Recommended compact benchmark window** | **2018-05-01 to 2018-05-08 (7 days)** for eruption-onset/high-rate monitoring. A later 3–7 day summit-collapse window can be added after checking target density and station availability. |
+| **Recommended compact benchmark window** | **2018-05-01T00:00:00Z <= t < 2018-05-09T00:00:00Z (8 days; display dates May 1–8)** for eruption-onset/high-rate monitoring. A later 3–7 day summit-collapse window can be added after checking target density and station availability. |
 | **Benchmark region** | The benchmark should explicitly specify whether it targets the **summit catalog** (Shelly & Thelen) or the broader island/flank catalog (Wei et al.). |
 | **Raw waveform access** | HVO and other network data are publicly available through EarthScope/IRIS; the broader Wei study used HV, PT, Z1, Z6, 4S and AM networks. |
 | **Expected benchmark difficulty** | High |
@@ -145,15 +151,15 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 | **Public release** | USGS DOI 10.5066/P9DMIFMW; public / CC0 |
 | **Span** | 2018-04-29 to 2018-08-06 |
 | **HVO template events** | **2,823 cataloged earthquakes** |
-| **Final high-resolution catalog** | **44,188 summit earthquakes** with at least 10 P and 10 S correlation-derived differential times after hypoDD inversion |
+| **Final high-resolution catalog** | **44,188 summit earthquakes** with at least 10 P and 10 S correlation-derived differential times after hypoDD inversion; common-mask v1 count 1,883 |
 | **Core processing** | Waveform-based detection + correlation-derived differential times + hypoDD |
 | **Template quality policy** | During May, automatic + analyst-refined events were used; later processing switched to analyst-refined templates because of their higher quality |
-| **Station count** | **66 HVO stations for the frozen summit task; Wei's broader network remains a secondary condition.** |
+| **Station count** | The article depicts a full HVO network but does not state one fixed count; the local phase CSV contains 25 unique HV stations. Do not use the old 66-station estimate without a station inventory. |
 | **Open access** | Public catalog; HVO waveform data are openly archived through EarthScope/IRIS |
 | **Provisional reference quality** | **High** |
 | **Reference independence** | Medium |
 | **Best benchmark use** | Dense summit event recovery, relative relocation, high-rate monitoring |
-| **Main limitation** | Summit-focused, template-dependent reference; not a complete island-wide or offshore ground truth. |
+| **Main limitation** | Summit-focused, template-dependent reference; magnitudes are approximate and depth is summit-referenced; not a complete island-wide or offshore ground truth. |
 
 ##### B2. Secondary reference — Wei et al. (2022) onshore + offshore catalog
 
@@ -163,7 +169,7 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 | **Reference type** | Broader detection/association/absolute-location reference |
 | **Paper** | Earth and Space Science, DOI 10.1029/2021EA001979; open access |
 | **Catalog span** | Approximately half a year during the 2018 eruption |
-| **Catalog size** | **375,736 earthquakes** |
+| **Catalog size** | **375,736 rows**; common summit mask 2,369 rows, 1,930 with numeric magnitudes |
 | **Detection** | STA/LTA candidate detection |
 | **Association/picking** | Detections associated into events; automatic P/S picking |
 | **Location** | NonLinLoc with a 3-D velocity model and topographic constraints |
@@ -173,7 +179,7 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 | **Provisional reference quality** | Medium–High |
 | **Reference independence** | Medium–High relative to Shelly because detection/location workflow and network coverage differ substantially |
 | **Best benchmark use** | Cross-method comparison; broader flank/offshore completeness; sensitivity to network coverage |
-| **Main limitation** | Much larger temporal/spatial scope and observation set than the summit catalog; use only a carefully matched short-window/region subset for benchmark comparison. |
+| **Main limitation** | Much larger temporal/spatial scope and changing observation set than the summit catalog; 67,719 rows have no magnitude, so use the all-row count for detection and a separate numeric-M sensitivity for magnitude metrics. |
 
 ##### B3. Baseline / auxiliary references
 
@@ -190,10 +196,10 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 | **Recommended for core benchmark?** | **Yes, but scope must be tightly defined** |
 | **Primary target** | Shelly & Thelen summit catalog |
 | **Secondary target** | Wei et al. short-window/region subset |
-| **Recommended window** | 2018-05-01 to 2018-05-08 for v1 |
-| **Short-window target event count** | Shelly 1,902; Wei summit/depth-matched 1,930 |
-| **Station count** | 66 HVO stations for primary; Wei network labels retained separately |
-| **Approximate waveform volume** | ~47.9 GB continuous upper bound for 66 stations × 3C × 100 Hz × int32 × 8 days |
+| **Recommended window** | 2018-05-01T00:00:00Z <= t < 2018-05-09T00:00:00Z (display dates May 1–8) for v1 |
+| **Short-window target event count** | Shelly S1 1,883 and S2 1,877 after the common mask (time-only 1,902/1,896); Wei 2,369 rows, with 1,930 numeric-magnitude rows |
+| **Station count** | Shelly local phase release: 25 HV codes; complete run/station-day inventory pending. Wei network labels and deployments retained separately |
+| **Approximate waveform volume** | Not frozen; derive from the station/channel/day manifest before waveform acquisition |
 | **Expected compute cost** | Medium–High |
 | **Key benchmark risk** | Different catalogs target different spatial domains and use different station sets; comparison is invalid unless space/time/network conditions are explicitly matched |
 | **Overall assessment** | Scientifically valuable because it tests a regime very different from tectonic aftershock sequences. |
