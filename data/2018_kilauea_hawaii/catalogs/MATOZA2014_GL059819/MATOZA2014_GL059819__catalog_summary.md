@@ -23,7 +23,7 @@
   expected and is the reason this catalog remains auxiliary rather than a
   competing 2018 reference.
 
-### Frozen Kīlauea summit-window audit
+## Frozen Kīlauea summit-window audit
 
 The common case rule is
 `2018-05-01T00:00:00Z <= origin_time < 2018-05-09T00:00:00Z`,
