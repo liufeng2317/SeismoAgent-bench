@@ -24,7 +24,7 @@
         "note": "Article identity, purpose and sequence."
       },
       {
-        "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+        "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
         "locator": "Identity and evidence convention; Sequence and scientific scope",
         "note": "Local extraction separates article claims from local-file audits."
       }
@@ -35,7 +35,7 @@
     "name": "Cochran Prague template-matched event catalog",
     "product_type": "event_catalog",
     "role": "primary",
-    "quality_tier": "Q2 enhanced detection/relative location; metric-specific Q1 structural auxiliary",
+    "quality_tier": "Q2",
     "scientific_purpose": "High-sensitivity event support, relative geometry, and fault-structure analysis for the Prague sequence.",
     "event_definition": "One row per released event: 900 starting/template events plus 7,911 waveform-matched detections; detections are linked and relatively relocated with GrowClust.",
     "populations": [
@@ -56,7 +56,7 @@
             "note": "Row count, ranges and unresolved magnitude type."
           },
           {
-            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Published product and local-file audit",
             "note": "Article/local population reconciliation."
           }
@@ -79,7 +79,7 @@
             "note": "Local time-only count and extrema."
           },
           {
-            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Frozen benchmark extraction record",
             "note": "Canonical selector and distinction from rounded mask."
           }
@@ -102,7 +102,7 @@
             "note": "Secondary 2,076-row sensitivity count."
           },
           {
-            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Frozen benchmark extraction record",
             "note": "Warns not to replace canonical 2,078 count."
           }
@@ -177,7 +177,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+          "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
           "locator": "Benchmark interpretation and Population bias",
           "note": "Role, metric suitability and lineage caveats."
         },
@@ -282,7 +282,8 @@
           }
         ]
       }
-    }
+    },
+    "quality_tier_detail": "Enhanced detection/relative location; metric-specific Q1 structural auxiliary."
   },
   "construction_workflow": {
     "summary": "A 900-event manually picked starting catalog is converted to 2-s P/S templates, scanned against continuous data, screened, linked by differential times and relatively relocated with GrowClust; bootstrap uncertainties support downstream fault analysis.",
@@ -317,7 +318,7 @@
         "availability_conditions": "Station-day availability matrix not published in local note.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Observation and network conditions",
             "note": "31 seismometers, 18 LC stations and availability caveat."
           }
@@ -335,7 +336,7 @@
         "availability_conditions": "Exact model table requires cited supplementary material.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Relative relocation and uncertainty",
             "note": "GrowClust uses inherited velocity model."
           }
@@ -422,7 +423,7 @@
         "dependencies": "Template families and continuous data availability.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Detection and screening",
             "note": "Detection threshold and duplicate suppression."
           }
@@ -469,7 +470,7 @@
         "dependencies": "Waveform pairs and inherited model.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Relative relocation and uncertainty",
             "note": "Relocation parameters and reported relative uncertainty."
           }
@@ -499,7 +500,7 @@
         "dependencies": "Relocated event geometry and auxiliary measurements.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Downstream fault-geometry processing; Separate S-wave-splitting analysis",
             "note": "Distinguishes interpretation products from event catalog."
           }
@@ -509,7 +510,7 @@
     "final_output": "8,811-row local event catalog; canonical benchmark extraction is the 2,078-row time-only Prague v1 subset.",
     "evidence": [
       {
-        "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+        "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
         "locator": "Catalog-construction workflow and Frozen benchmark extraction record",
         "note": "End-to-end workflow and selection rule."
       },
@@ -562,7 +563,7 @@
         "scope": "Prague sequence",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Sequence and scientific scope; Relative relocation and uncertainty",
             "note": "Article interpretation and uncertainty distinction."
           }
@@ -577,7 +578,7 @@
       "caveats": "Not independent absolute-location truth; magnitude type unresolved; station-day availability missing.",
       "evidence": [
         {
-          "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+          "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
           "locator": "Benchmark interpretation",
           "note": "Role and caveats."
         }
@@ -618,7 +619,7 @@
     "needs_human_review": true,
     "evidence": [
       {
-        "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md",
+        "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
         "locator": "Extraction status and evidence convention",
         "note": "Article/local distinction and unresolved actions."
       }

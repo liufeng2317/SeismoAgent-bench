@@ -54,11 +54,11 @@ The 5,446-event release and 5,262-event paper-filtered set must remain separate 
 
 The detailed first-pass extraction is maintained beside the source products:
 
-- [Cochran paper reading](../references/COCHRAN2020_GJIGGAA153/paper/COCHRAN2020_GJIGGAA153__paper_reading.md)
+- [Cochran paper reading](../references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md)
 - [Cochran catalog summary](../catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md)
-- [McMahon paper reading](../references/MCMAHON2017_GL072944/paper/MCMAHON2017_GL072944__paper_reading.md)
+- [McMahon paper reading](../references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md)
 - [McMahon catalog summary](../catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md)
-- [Isken paper reading](../references/ISKEN2017_BSSA0120160150/paper/ISKEN2017_BSSA0120160150__paper_reading.md)
+- [Isken paper reading](../references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md)
 - [Isken catalog summary](../catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md)
 
 These files distinguish article-reported values from local-file audit values;

@@ -19,7 +19,7 @@ values.
 | Article type | Research article with a small manually picked/hypocenter-relocated aftershock reference and 2-D finite-difference waveform modeling | Abstract; Data; Methodology |
 | Catalog relationship | Table S3 is an article-associated set of 13 relocated aftershocks; it is not a complete sequence catalog | Supplement title and PDF p. 3, 5–7 |
 | Local paper | `paper/ISKEN2017_BSSA0120160150__paper.pdf` | Local provenance |
-| Parsed text | `paper/mineru/ISKEN2017_BSSA0120160150__paper/full.md` and its `content_list_v2.json` | MinerU output |
+| Parsed text | `parsed/mineru/ISKEN2017_BSSA0120160150__paper/full.md` and its `content_list_v2.json` | MinerU output |
 
 The article's central scientific goal is to use relocation and waveform
 modeling to assess focal depths and explain strong S-wave coda scattering in
@@ -135,7 +135,7 @@ following fields:
 | `Mw` | Moment magnitude as labeled by official table | 3.1–3.4; do not substitute `ML` |
 
 The complete 13-row table is retained in
-[`ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv`](../../../catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv),
+[`ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv`](../../../../catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv),
 with the downloaded official HTML source preserved beside it. The local CSV
 contains 13 rows, no exact duplicate rows, and no missing cells. Its SHA-256
 is recorded in the catalog summary.
@@ -161,7 +161,7 @@ events rather than dropping them silently.
 ## Local provenance and unresolved actions
 
 - Paper PDF: `data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/paper/ISKEN2017_BSSA0120160150__paper.pdf`
-- MinerU extraction: `data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/paper/mineru/`
+- MinerU extraction: `data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/mineru/`
 - Catalog README: `data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/README.md`
 - Normalized catalog: `data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv`
 - Official source table: `data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__source_tableS3.html`

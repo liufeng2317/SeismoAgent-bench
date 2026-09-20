@@ -17,7 +17,7 @@ authoritative source if the parsed text and a local note disagree.
 | DOI / landing page | [10.1093/gji/ggaa153](https://doi.org/10.1093/gji/ggaa153) | DOI link |
 | Article type | Research article with a new template-matched and relatively relocated event catalog; the paper also contains S-wave-splitting and fault-geometry analysis | Summary, Data and Methods, Template matching, Results |
 | Local paper | `paper/COCHRAN2020_GJIGGAA153__paper.pdf` | Local provenance |
-| Parsed text | `paper/COCHRAN2020_GJIGGAA153__paper__mineru.md` and `paper/mineru/` | MinerU output |
+| Parsed text | `parsed/COCHRAN2020_GJIGGAA153__paper__mineru.md` and `mineru/` | MinerU output |
 
 The article is a genuine catalog-construction/relocation paper, but its
 scientific conclusions use the catalog to study fault activation and stress
@@ -168,7 +168,7 @@ before gaps, compression, channel filtering, or station-day availability.
 ## Local provenance and unresolved actions
 
 - Paper PDF: `data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/paper/COCHRAN2020_GJIGGAA153__paper.pdf`
-- MinerU extraction: `data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/paper/mineru/`
+- MinerU extraction: `data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/mineru/`
 - Supplement: `data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/supplement/`
 - Catalog README: `data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/README.md`
 - Catalog file: `data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_primary.txt`
@@ -176,3 +176,23 @@ before gaps, compression, channel filtering, or station-day availability.
   the official supplementary package; extract station/channel/sample-rate and
   station-day availability metadata; generate plots without modifying the
   source file.
+
+
+## Supplementary-material analysis (case processing)
+
+The supplementary package was inspected against the article's catalog description. It contains three scientifically different products:
+
+| Supplement | Scientific role | Catalog action |
+|---|---|---|
+| `Supp_Prague_SWS-Faults_JR1.docx` | Supplement text, FaultID workflow/figures, and data dictionary for the released products | Keep under `references/COCHRAN2020_GJIGGAA153/supplement`; its description confirms that `Catalog.txt` is the primary catalog, but that file is already represented by `catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_primary.txt` |
+| `SWS-ALL.txt` | MFAST shear-wave-splitting measurements; columns are event year, decimal day, station, delay time, uncertainty, fast direction, uncertainty, and quality | Not an earthquake catalog. Keep as a separate SWS measurement product; do not merge rows into the event catalog |
+| `cellAzErrWeight.txt` | Quadtree-grid principal azimuth, error, and weight values used for Figure 6A | Not a catalog. Keep as a structural-analysis product; do not move to `catalogs/` |
+| `Prague_fault_animation.mp4` | Visualization of FaultID plane fits | Keep as a supplement visualization |
+
+The DOCX is therefore not merely explanatory: it provides the authoritative schema interpretation for the three text products. The main released event catalog remains the only catalog-level benchmark input from this supplement. `SWS-ALL` and `cellAzErrWeight` should be exposed as optional auxiliary products for evaluating shear-wave-splitting and structural-inference agents, respectively.
+
+### Supplement-derived corrections
+
+- The article's **8,811 earthquake rows** must not be confused with the **8,569 SWS measurements** in `SWS-ALL.txt`; the latter contains multiple station measurements per event.
+- `cellAzErrWeight.txt` contains grid-cell structural summaries, not event hypotheses; it cannot be used for event recovery or catalog completeness scoring.
+- No supplement file should replace the primary catalog or be migrated into `catalogs/`; the current placement is scientifically correct.

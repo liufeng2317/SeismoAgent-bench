@@ -21,7 +21,7 @@
         "note": "Identity and purpose."
       },
       {
-        "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+        "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
         "locator": "Identity and evidence status; Sequence and scientific scope",
         "note": "Catalog relationship and scientific goal."
       }
@@ -32,7 +32,7 @@
     "name": "Isken Table S3 relocated aftershock table",
     "product_type": "selective_relocated_table",
     "role": "auxiliary",
-    "quality_tier": "Q1 selective high-quality location/structure anchor; not complete event-existence truth",
+    "quality_tier": "Q1",
     "scientific_purpose": "Absolute/depth-location and structural sanity check for selected M_L>3 aftershocks.",
     "event_definition": "13 numbered Table S3 rows selected for manual P/S relocation and waveform interpretation.",
     "populations": [
@@ -53,7 +53,7 @@
             "note": "13-row local derivative and ranges."
           },
           {
-            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
             "locator": "Sequence and scientific scope",
             "note": "Article selection versus table magnitude distinction."
           }
@@ -76,7 +76,7 @@
             "note": "Seven in-window rows."
           },
           {
-            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
             "locator": "Frozen benchmark extraction record",
             "note": "Sparse anchor interpretation."
           }
@@ -152,7 +152,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+          "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
           "locator": "Benchmark interpretation",
           "note": "Role and invalid metrics."
         },
@@ -208,7 +208,8 @@
           }
         ]
       }
-    }
+    },
+    "quality_tier_detail": "Selective high-quality absolute/depth locations; not a complete event-existence catalog."
   },
   "construction_workflow": {
     "summary": "Selected M_L>3 aftershocks are manually picked on 19 nearby stations, relocated with HYPOINVERSE 2000 using a gradient 1-D model, and exported as Table S3; 2-D sofi2D modeling is downstream interpretation.",
@@ -225,7 +226,7 @@
         "availability_conditions": "19 available local stations used for relocation.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
             "locator": "Observation and network conditions",
             "note": "ZQ/LA provenance and 19-station condition."
           }
@@ -243,7 +244,7 @@
         "availability_conditions": "Exact model/S1 metadata not staged locally.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
             "locator": "Phase picking and location",
             "note": "Velocity-model lineage."
           }
@@ -285,7 +286,7 @@
         "dependencies": "Local station coverage and clear arrivals.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
             "locator": "Starting population and selection; Phase picking and location",
             "note": "Selection and picks."
           }
@@ -331,7 +332,7 @@
         "dependencies": "Manual picks, station geometry, velocity model.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
             "locator": "Phase picking and location; Table S3 product and field semantics",
             "note": "Location method and QC fields."
           }
@@ -361,7 +362,7 @@
         "dependencies": "Relocated depths and layered model.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
             "locator": "Waveform modeling is downstream",
             "note": "Separation from catalog construction."
           }
@@ -371,7 +372,7 @@
     "final_output": "13-row selective relocation table; seven rows overlap Prague v1 core window.",
     "evidence": [
       {
-        "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+        "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
         "locator": "Catalog-construction workflow; Frozen-window cross-reference",
         "note": "Workflow and count."
       },
@@ -394,7 +395,7 @@
         "count_or_scope": null,
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
             "locator": "Observation and network conditions; Local provenance and unresolved actions",
             "note": "S1/S2 absence."
           }
@@ -423,7 +424,7 @@
       "caveats": "No recall/event-rate denominator; table row number is not stable ID.",
       "evidence": [
         {
-          "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+          "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
           "locator": "Benchmark interpretation",
           "note": "Metric use and caveats."
         }
@@ -464,7 +465,7 @@
     "needs_human_review": true,
     "evidence": [
       {
-        "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md",
+        "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
         "locator": "Extraction status and evidence convention",
         "note": "Article/local distinction and unresolved actions."
       }

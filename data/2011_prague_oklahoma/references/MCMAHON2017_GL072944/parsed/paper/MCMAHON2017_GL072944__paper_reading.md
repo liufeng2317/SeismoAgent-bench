@@ -129,7 +129,7 @@ spatial mask is a separate case-level operation.
 ## Local provenance and open actions
 
 - Paper PDF: `data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/paper/MCMAHON2017_GL072944__paper.pdf`
-- MinerU text: `data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/paper/mineru/MCMAHON2017_GL072944__paper/full.md`
+- MinerU text: `data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/mineru/MCMAHON2017_GL072944__paper/full.md`
 - Catalog README: `data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/README.md`
 - Catalog release: `data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/raw/MCMAHON2017_GL072944__catalog_subspace_5446events.txt`
 - Metadata: `data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/raw/MCMAHON2017_GL072944__metadata.xml`

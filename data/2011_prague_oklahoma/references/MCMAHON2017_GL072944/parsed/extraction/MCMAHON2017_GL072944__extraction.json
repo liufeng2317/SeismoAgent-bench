@@ -24,7 +24,7 @@
         "note": "Identity, purpose and catalog workflow."
       },
       {
-        "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+        "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper__mineru.md",
         "locator": "Identity and evidence status; Scientific scope and observations",
         "note": "Article/release distinction and sequence context."
       }
@@ -35,7 +35,7 @@
     "name": "McMahon subspace/Bayesloc event-phase release",
     "product_type": "event_phase_release",
     "role": "secondary",
-    "quality_tier": "Q2 enhanced detection/relocation; metric-specific Q1 uncertainty-filtered location subset",
+    "quality_tier": "Q2",
     "scientific_purpose": "Independent S-phase detection, association and absolute hypocenter comparison under evolving Prague network conditions.",
     "event_definition": "Distributed release contains E event records and P phase records; article final 5,262-event population is an uncertainty-filtered lineage subset, not equivalent to all 5,446 released E rows.",
     "populations": [
@@ -51,7 +51,7 @@
         "magnitude_scope": "Mc completeness ≈0.8; b≈0.52 for complete catalog; field type unresolved locally.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper__mineru.md",
             "locator": "Association, location, and magnitude; Article and local-release audit",
             "note": "Article count and quality filter."
           }
@@ -162,7 +162,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+          "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper__mineru.md",
           "locator": "Benchmark interpretation",
           "note": "Role, bias and independence."
         },
@@ -242,7 +242,8 @@
           }
         ]
       }
-    }
+    },
+    "quality_tier_detail": "Enhanced S-phase detection and relocation; uncertainty-filtered subset is useful as a Q1 location anchor."
   },
   "construction_workflow": {
     "summary": "A 998-event manually reviewed seed catalog drives station-specific S-phase multichannel subspace detectors; detections are associated, merged with original large-event P/S phases, located with Bayesloc and filtered by uncertainty.",
@@ -259,7 +260,7 @@
         "availability_conditions": "998 manually identified/located/reviewed events.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper__mineru.md",
             "locator": "Scientific scope and observations; Detector construction and detection",
             "note": "Seed population and use."
           }
@@ -277,7 +278,7 @@
         "availability_conditions": "21 temporary + 9 TA + 1 OK; last temporary stations fully operational 2011-11-11.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper__mineru.md",
             "locator": "Scientific scope and observations",
             "note": "Network and study interval."
           }
@@ -295,7 +296,7 @@
         "availability_conditions": "Exact model parameters require supporting files.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper__mineru.md",
             "locator": "Association, location, and magnitude",
             "note": "Bayesloc model lineage."
           }
@@ -333,7 +334,7 @@
         "dependencies": "Station-specific operation starts and template coverage.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper__mineru.md",
             "locator": "Detector construction and detection",
             "note": "Template compression and threshold caveat."
           }
@@ -364,7 +365,7 @@
         "dependencies": "Changing network availability.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper__mineru.md",
             "locator": "Detector construction and detection",
             "note": "Detection scope and biases."
           }
@@ -400,7 +401,7 @@
         "dependencies": "Phase association and velocity model.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper__mineru.md",
             "locator": "Association, location, and magnitude",
             "note": "Association counts and Bayesloc."
           }
@@ -441,7 +442,7 @@
         "dependencies": "Row-level uncertainty fields not exposed in current E file.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper__mineru.md",
             "locator": "Association, location, and magnitude; Article and local-release audit",
             "note": "Filter thresholds and discrepancy."
           }
@@ -451,7 +452,7 @@
     "final_output": "Article final 5,262-event catalog is not byte-identical to local 5,446-E release; local benchmark uses 2,384 E rows in the Prague v1 time window.",
     "evidence": [
       {
-        "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+        "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper__mineru.md",
         "locator": "Catalog-construction workflow; Prague v1 benchmark window",
         "note": "Workflow and local selection."
       },
@@ -474,7 +475,7 @@
         "count_or_scope": null,
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper__mineru.md",
             "locator": "Identity and evidence status; Local provenance and open actions",
             "note": "SI gap is explicit."
           }
@@ -488,7 +489,7 @@
         "scope": "Prague sequence",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+            "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper__mineru.md",
             "locator": "Identity and evidence status; Benchmark interpretation",
             "note": "Independence caveat."
           }
@@ -544,7 +545,7 @@
     "needs_human_review": true,
     "evidence": [
       {
-        "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md",
+        "source": "data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper__mineru.md",
         "locator": "Extraction status and evidence status",
         "note": "Missing SI and unresolved release details."
       }

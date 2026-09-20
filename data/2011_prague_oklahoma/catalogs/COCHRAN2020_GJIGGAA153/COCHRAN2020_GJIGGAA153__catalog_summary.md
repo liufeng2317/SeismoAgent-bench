@@ -120,3 +120,8 @@ not silently replace the canonical count.
 - Cross-match the 2,078 time-window rows (or 2,076 explicitly masked rows)
   against McMahon and the operational baseline only after applying identical
   time/space/depth rules.
+
+
+## Supplement linkage
+
+The associated supplementary package was processed separately. `Supp_Prague_SWS-Faults_JR1.docx` defines the released products; `SWS-ALL.txt` is a shear-wave-splitting measurement table (8,569 measurements reported in the article), and `cellAzErrWeight.txt` is a grid-cell structural summary. Neither is an earthquake catalog and neither is merged into this catalog directory. The event catalog remains `COCHRAN2020_GJIGGAA153__catalog_primary.txt`.

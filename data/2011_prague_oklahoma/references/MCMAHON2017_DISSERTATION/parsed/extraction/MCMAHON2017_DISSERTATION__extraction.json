@@ -29,7 +29,7 @@
     "name": "No catalog product extracted (dissertation context only)",
     "product_type": "not_a_catalog",
     "role": "not_a_catalog",
-    "quality_tier": "not_applicable",
+    "quality_tier": "unknown",
     "scientific_purpose": "Retain provenance for possible structural/method context; do not use as an event reference until the dissertation is successfully parsed and any cited release is independently verified.",
     "event_definition": null,
     "product_semantics": {
@@ -115,7 +115,8 @@
           }
         ]
       }
-    }
+    },
+    "quality_tier_detail": "Context-only source; no catalog quality can be assigned until the dissertation is parsed."
   },
   "construction_workflow": {
     "summary": null,
