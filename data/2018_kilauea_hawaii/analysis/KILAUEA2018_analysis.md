@@ -10,6 +10,7 @@
 - Primary reference: Shelly & Thelen (2019) summit catalog
 - Secondary reference: Wei et al. (2022) broader onshore/offshore catalog; HVO remains the Q3 operational baseline
 - Frozen v1 summit window: 2018-05-01 to 2018-05-09 UTC
+- Catalog processing pilot: [catalog_processing_index.md](./catalog_processing_index.md)
 
 ## Scientific role
 
@@ -47,7 +48,7 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 | Shelly & Thelen (2019) | Primary summit detection and relative-location reference | Paper reading and S1/S2 catalog audit are complete; common-mask counts are S1=1,883 and S2=1,877. Exact run-specific thresholds/station masks remain in the figure SI and are not yet tabulated. |
 | Wei et al. (2022) | Secondary broader detection/location reference | Paper reading and 375,736-row S1 audit are complete; common summit mask has 2,369 rows, of which 1,930 have numeric magnitudes. Different spatial domain, networks, and location workflow prevent direct event-count ranking. |
 | Matoza et al. (2021) | Island-wide relative-location auxiliary | 347,446-row revised release; 299,966 `nbranch>1`; relocated-coordinate summit mask 1,130/984 (`nbranch>1`), starting-coordinate mask 1,190/1,044. Use for broader spatial role, not a replacement for Shelly. |
-| Lengliné et al. (2021) | East Rift Zone/dike auxiliary | 6,327 template-matched events; 6,049 overlap the v1 time interval but native table has only relative x/y and no depth/magnitude. |
+| Lengliné et al. (2021) | East Rift Zone/dike auxiliary | 6,327 template-matched events; 6,049 overlap the v1 time interval. Native table has relative x/y only; an assumption-labelled absolute derivative is available, but no observed event-specific depth/magnitude. |
 | Matoza et al. (2014) | Historical LP source-type auxiliary | 12,290 LP events from 1986–2009; zero rows in the 2018 window. |
 | HVO operational catalog | Baseline | Confirm release and coverage. |
 
@@ -115,7 +116,7 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 - Matoza et al. (2021) paper: `../references/MATOZA2021_EA001253/paper/MATOZA2021_EA001253__paper.pdf`.
 - Local LP summit auxiliary: `../catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_lp_summit.txt` (12,290 LP events; Matoza et al. 2014).
 - Matoza et al. (2014) paper: `../references/MATOZA2014_GL059819/paper/MATOZA2014_GL059819__paper.pdf`.
-- Local Lengliné product: `../catalogs/LENGLINE2021_EPSL116653/raw/loc_events.txt`; the file is kept separate from the Shelly summit S1/S2 products.
+- Local Lengliné product: `../catalogs/LENGLINE2021_EPSL116653/raw/loc_events.txt`; the native relative file is kept separate from the Shelly summit S1/S2 products. An approximate absolute derivative and transform specification are under `../catalogs/LENGLINE2021_EPSL116653/analysis/derived/relative_events/`.
 - QuakeFlow (Zhu et al., GJI, DOI https://doi.org/10.1093/gji/ggac355) is retained as a **modern automated-workflow comparison**, not independent truth. The local paper and evaluation document are under `../references/QUAKEFLOW_GJI_GGAC355/`. The paper identifies HVO/USGS network catalogs as the data sources and archives code (https://doi.org/10.5281/zenodo.7023970), but no stable downloadable Hawaii QuakeFlow-generated event catalog was found. It must remain catalog-missing until an original output or frozen reproducible run is obtained.
 
 ### Audit conclusion
@@ -197,7 +198,7 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 | HVO operational catalog | Routine baseline |
 | USGS correlation-derived arrival release (P13JCJ2I) | Pick-level auxiliary reference; shares methodology with Shelly study |
 | Matoza et al. (2021) | Island-wide Q1-relative/Q2-broad auxiliary; local revised release has 984 relocated-coordinate rows (or 1,044 starting-coordinate rows) in the common summit mask |
-| Lengliné et al. (2021) | East Rift Zone dike auxiliary; no absolute depth/magnitude in native table |
+| Lengliné et al. (2021) | East Rift Zone dike auxiliary; native table has no absolute depth/magnitude; derived lat/lon are assumption-labelled only |
 | Matoza et al. (2014) | Historical LP auxiliary; no 2018 temporal overlap |
 | ComCat | Large-event / operational cross-check |
 

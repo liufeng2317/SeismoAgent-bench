@@ -1,0 +1,33 @@
+{
+  "case_id": "2018_kilauea_hawaii",
+  "source_ref": "LENGLINE2021_EPSL116653",
+  "product_id": "absolute_approx_v1",
+  "derivative_version": "absolute-approx-v1",
+  "source_product": "relative_events",
+  "source_path": "raw/loc_events.txt",
+  "source_sha256": "556f4d6f5ba8c6688f5c36c165c94b12c0c623e5d3f33183911aca2888ed18ca",
+  "coordinate_status": "approximate_assumption",
+  "coordinate_transform": "local_EN_assumption_v1",
+  "depth_km": 3.0,
+  "axis_assumption": "x=east, y=north",
+  "selection": "full",
+  "row_count": 6327,
+  "ranges": {
+    "latitude_deg": [
+      19.381828725059595,
+      19.476590997444546
+    ],
+    "longitude_deg": [
+      -155.10840804338554,
+      -154.87507034034311
+    ],
+    "x_m": [
+      -358.0,
+      24140.0
+    ],
+    "y_m": [
+      -506.0241,
+      10000.0
+    ]
+  }
+}
