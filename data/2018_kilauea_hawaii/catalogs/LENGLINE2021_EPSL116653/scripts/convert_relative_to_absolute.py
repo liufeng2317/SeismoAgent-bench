@@ -142,17 +142,6 @@ depth in its two-dimensional localization model.
 """
     (OUT / "coordinate_transform.md").write_text(transform_doc, encoding="utf-8")
 
-    readme_path = OUT / "README.md"
-    readme = readme_path.read_text(encoding="utf-8") if readme_path.exists() else ""
-    marker = "## Approximate absolute derivative"
-    if marker not in readme:
-        readme += (
-            "\n\n" + marker + "\n\n"
-            "Schema: `docs/schemas/catalog_absolute_approx.schema.yaml`\n\n"
-            "Assumptions and evidence: `coordinate_transform.md`\n"
-        )
-        readme_path.write_text(readme, encoding="utf-8")
-
     subsets = {
         "full": records,
         "time_only": [

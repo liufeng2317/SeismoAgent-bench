@@ -304,21 +304,6 @@ def schema_reference(kind):
     return "docs/schemas/catalog_event.schema.yaml"
 
 
-def write_schema(product):
-    out = DERIVED_ROOT / product["id"]
-    out.mkdir(parents=True, exist_ok=True)
-    schema_ref = schema_reference(product["kind"])
-    readme = (
-        f"# {product['id']} normalized output\n\n"
-        f"{product['note']}\n\n"
-        f"Raw input: `{product['path']}`\n\n"
-        f"Schema: `{schema_ref}`\n"
-        "The shared schema is authoritative; this product's `product_id` and "
-        "`kind` are recorded in the accompanying statistics JSON.\n"
-    )
-    (out / "README.md").write_text(readme, encoding="utf-8")
-
-
 def write_normalized(product):
     if product["kind"] == "phase_csv":
         return None
@@ -360,7 +345,6 @@ def profile_product(product):
                     sample_rows.append(record.get("raw", {}))
             else:
                 accumulators[selection].add_event(record)
-    write_schema(product)
     normalized_path = write_normalized(product)
     output_dir = STATS_ROOT / product["id"]
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -678,7 +662,7 @@ def write_catalog_report(all_stats, paths):
     lines += ["", "## Product semantics", ""]
     for product in PRODUCTS:
         figure_note = f"`analysis/figures/{product['id']}/`" if _plot_policy(product) else "stats only in minimal profile"
-        lines += [f"### `{product['id']}`", "", product["note"], "", f"- Native input: `{product['path']}`", f"- Derived output: `{paths.get(product['id']) or 'phase sample only; raw phase table is retained'}`", f"- Statistics: `analysis/stats/{product['id']}/`", f"- Figures: {figure_note}", ""]
+        lines += [f"### `{product['id']}`", "", product["note"], "", f"- Native input: `{product['path']}`", f"- Derived output: `{paths.get(product['id']) or 'phase sample only; raw phase table is retained'}`", f"- Schema: `{schema_reference(product['kind'])}`", f"- Statistics: `analysis/stats/{product['id']}/`", f"- Figures: {figure_note}", ""]
     lines += ["## Interpretation", "", "Event products are summarized as event rows and unique native IDs. Phase/pick products are summarized by phase-row count, template/match IDs, station and phase composition; their row count is not an event count. The common summit mask is applied only where latitude, longitude and depth are available. Relative-coordinate products retain native coordinates and use time-only selection.", ""]
     (ANALYSIS_ROOT / "catalog_analysis.md").write_text("\n".join(lines), encoding="utf-8")
 
@@ -699,8 +683,7 @@ def main():
     for product in selected:
         cached = load_cached_product(product)
         if cached is not None:
-            write_schema(product)
-            stats, normalized_path = cached, None
+                    stats, normalized_path = cached, None
         else:
             stats, normalized_path = profile_product(product)
         all_stats[product["id"]] = stats; paths[product["id"]] = normalized_path

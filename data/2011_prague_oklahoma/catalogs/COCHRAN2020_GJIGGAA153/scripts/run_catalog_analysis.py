@@ -351,21 +351,6 @@ def schema_reference(kind):
     return "docs/schemas/catalog_event.schema.yaml"
 
 
-def write_schema(product):
-    out = DERIVED_ROOT / product["id"]
-    out.mkdir(parents=True, exist_ok=True)
-    schema_ref = schema_reference(product["kind"])
-    readme = (
-        f"# {product['id']} normalized output\n\n"
-        f"{product['note']}\n\n"
-        f"Raw input: `{product['path']}`\n\n"
-        f"Schema: `{schema_ref}`\n"
-        "The shared schema is authoritative; this product's `product_id` and "
-        "`kind` are recorded in the accompanying statistics JSON.\n"
-    )
-    (out / "README.md").write_text(readme, encoding="utf-8")
-
-
 def write_normalized(product):
     if product["kind"] == "mcmahon_phase":
         return None
@@ -406,7 +391,6 @@ def profile_product(product):
                     phase_sample.append(record)
             else:
                 accumulators[selection].add_event(record)
-    write_schema(product)
     normalized_path = write_normalized(product)
     out = STATS_ROOT / product["id"]
     out.mkdir(parents=True, exist_ok=True)
@@ -558,7 +542,7 @@ def write_report(all_stats, paths):
     lines += ["", "## Product semantics", ""]
     for product in PRODUCTS:
         figure_note = f"`analysis/figures/{product['id']}/`" if plot_policy(product) else "stats only in minimal profile"
-        lines += [f"### `{product['id']}`", "", product["note"], "", f"- Native input: `{product['path']}`", f"- Derived output: `{paths.get(product['id']) or 'phase sample only; raw phase table is retained'}`", f"- Statistics: `analysis/stats/{product['id']}/`", f"- Figures: {figure_note}", ""]
+        lines += [f"### `{product['id']}`", "", product["note"], "", f"- Native input: `{product['path']}`", f"- Derived output: `{paths.get(product['id']) or 'phase sample only; raw phase table is retained'}`", f"- Schema: `{schema_reference(product['kind'])}`", f"- Statistics: `analysis/stats/{product['id']}/`", f"- Figures: {figure_note}", ""]
     lines += ["## Interpretation", "", "Cochran, McMahon, Isken and ComCat are separate reference populations. McMahon P rows are pick-level observations and use parent E-record origin time for the frozen selection because the distributed P schema omits an hour token; the raw phase tokens are retained unchanged. Isken is a sparse manual relocation anchor, not a completeness catalog. Magnitude types remain source-native or unresolved.", ""]
     (ANALYSIS_ROOT / "catalog_analysis.md").write_text("\n".join(lines), encoding="utf-8")
 
