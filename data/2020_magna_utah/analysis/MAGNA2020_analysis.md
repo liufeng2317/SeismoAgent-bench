@@ -45,7 +45,7 @@ count or station count cannot be compared across the two products.
 
 Detailed source notes:
 
-- [Pang paper reading](../references/PANG2020_GL089798/paper/PANG2020_GL089798__paper_reading.md)
+- [Pang paper reading](../references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper_reading.md)
   separates article-reported populations from local release counts.
 - [Pang catalog audit](../catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md)
   records byte identity, timestamp anomalies, and strict/normalized window counts.
@@ -165,7 +165,7 @@ comparison track after the missing article and nodal metadata are recovered.
 ## Sources and local files
 
 - Pang paper: [`../references/PANG2020_GL089798/paper/PANG2020_GL089798__paper.pdf`](../references/PANG2020_GL089798/paper/PANG2020_GL089798__paper.pdf)
-- Pang reading note: [`../references/PANG2020_GL089798/paper/PANG2020_GL089798__paper_reading.md`](../references/PANG2020_GL089798/paper/PANG2020_GL089798__paper_reading.md)
+- Pang reading note: [`../references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper_reading.md`](../references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper_reading.md)
 - Pang catalog: [`../catalogs/PANG2020_GL089798/`](../catalogs/PANG2020_GL089798/)
 - Baker catalog: [`../catalogs/BAKER2021_0220200316/`](../catalogs/BAKER2021_0220200316/)
 - Baker reference status: [`../references/BAKER2021_0220200316/README.md`](../references/BAKER2021_0220200316/README.md)
