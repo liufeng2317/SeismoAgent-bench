@@ -9,5 +9,5 @@
 - Returned data rows: 2078
 - Full snapshot: `USGS_UUSS_COMCAT_2020__catalog_operational_full.csv` (2,078 rows, 2020-03-18–05-02)
 - Frozen-window snapshot: `USGS_UUSS_COMCAT_2020__catalog_operational_benchmark.csv` (1,432 rows)
-- Exact full and benchmark filters are versioned in `scripts/official_baseline_windows.json`.
+- Exact full and benchmark filters are versioned in `scripts/00_catalog_downloading/official_baseline_windows.json`.
 - Service fields and rows are preserved; time chunks are merged and de-duplicated by stable event ID.
