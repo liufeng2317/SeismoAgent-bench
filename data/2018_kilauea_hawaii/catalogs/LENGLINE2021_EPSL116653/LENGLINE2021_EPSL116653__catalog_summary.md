@@ -40,7 +40,7 @@
 | Common summit-mask rows | **N/A — no defensible spatial/depth mask in native coordinates** |
 
 Network conditions are documented in the paired paper-reading note:
-[`LENGLINE2021_EPSL116653__paper_reading.md`](../../references/LENGLINE2021_EPSL116653/paper/LENGLINE2021_EPSL116653__paper_reading.md).
+[`LENGLINE2021_EPSL116653__paper_reading.md`](../../references/LENGLINE2021_EPSL116653/parsed/paper/LENGLINE2021_EPSL116653__paper_reading.md).
 The detector used 280 shallow HVO templates and four selected channels (three
 components at JOKA plus the vertical component of KUPD or KLUD), with HVO
 waveforms accessed through IRIS; this is a focused network condition, not the

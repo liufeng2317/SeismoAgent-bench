@@ -85,15 +85,15 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 ## Sources
 
 - `../references/USGS2019_SCIENCE_OVERVIEW/paper/USGS2019_SCIENCE_OVERVIEW__paper.pdf`
-- `../references/SHELLY2019_GL085636/paper/SHELLY2019_GL085636__paper_reading.md`
+- `../references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md`
 - `../catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md`
-- `../references/WEI2022_EA001979/paper/WEI2022_EA001979__paper_reading.md`
+- `../references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper_reading.md`
 - `../catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md`
-- `../references/MATOZA2021_EA001253/paper/MATOZA2021_EA001253__paper_reading.md`
+- `../references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper_reading.md`
 - `../catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md`
-- `../references/MATOZA2014_GL059819/paper/MATOZA2014_GL059819__paper_reading.md`
+- `../references/MATOZA2014_GL059819/parsed/paper/MATOZA2014_GL059819__paper_reading.md`
 - `../catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md`
-- `../references/LENGLINE2021_EPSL116653/paper/LENGLINE2021_EPSL116653__paper_reading.md`
+- `../references/LENGLINE2021_EPSL116653/parsed/paper/LENGLINE2021_EPSL116653__paper_reading.md`
 - `../catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md`
 - Shelly & Thelen (2019), DOI: https://doi.org/10.1029/2019GL085636
 - Wei et al. (2022), DOI: https://doi.org/10.1029/2021EA001979

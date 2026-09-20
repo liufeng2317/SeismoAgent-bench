@@ -87,7 +87,7 @@ auxiliary pick release, not the article's event table; use separate metrics.
 
 ## Local outputs
 
-- Paper reading: `../../references/SHELLY2019_GL085636/paper/SHELLY2019_GL085636__paper_reading.md`
+- Paper reading: `../../references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md`
 - Case synthesis: `../../analysis/KILAUEA2018_analysis.md`
 - Future plots should be written under a dedicated `figures/` directory or
 `raw/` derivative area without modifying the source-native catalogs.
