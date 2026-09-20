@@ -1,0 +1,268 @@
+{
+  "article": {
+    "source_id": "BAKER2021_0220200316",
+    "case_id": "2020_magna_utah",
+    "title": "Monitoring the 2020 Magna, Utah, Earthquake Sequence with Nodal Seismometers and Machine Learning",
+    "authors": [],
+    "year": 2021,
+    "journal": "Bulletin of the Seismological Society of America",
+    "doi": "10.1785/0220200316",
+    "article_type": "research_article",
+    "scientific_question": null,
+    "sequence": "2020 Magna, Utah earthquake sequence",
+    "catalog_relationship": "Article-associated ISC pick-level release; article PDF is not local, so method claims remain unextracted.",
+    "evidence": [
+      {
+        "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+        "locator": "provenance and evidence status",
+        "note": "Title/DOI and missing-PDF status."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "BAKER2021_0220200316_PICKS",
+    "name": "Baker Magna ISC pick-level catalog",
+    "product_type": "pick_level_catalog",
+    "role": "secondary",
+    "quality_tier": "Q3",
+    "scientific_purpose": "Pick timing, association density and network-condition comparison.",
+    "event_definition": "Rows are P/S picks with repeated event-level fields; event identity is event_number/catalog_evid.",
+    "product_semantics": {
+      "pick_rows": "329,611 local rows",
+      "events": "5,885 unique events",
+      "network": "UU and GS streams"
+    },
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "pick rows",
+        "unit": "rows",
+        "count_article": null,
+        "count_local": 329611,
+        "selection_rule": "all rows in ISC release",
+        "time_range": "2020-03-18 to 2020-04-29 UTC",
+        "spatial_depth_scope": "40.4445–40.9786667°N, -112.3006667–-111.8111667°E, depth -3.41–19.89 km",
+        "magnitude_scope": "heterogeneous source types; -9.99 sentinel",
+        "evidence": [
+          {
+            "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+            "locator": "row, event and field audit",
+            "note": "Pick-row count."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "unique events",
+        "unit": "events",
+        "count_article": null,
+        "count_local": 5885,
+        "selection_rule": "collapse repeated rows by event_number/catalog_evid",
+        "time_range": "2020-03-18 to 2020-04-29 UTC",
+        "spatial_depth_scope": "same event fields",
+        "magnitude_scope": "Mxc/d/l/h/w/missing",
+        "evidence": [
+          {
+            "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+            "locator": "row, event and field audit",
+            "note": "Unique event count."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "10.31905/LGR1456Y",
+      "version": null,
+      "source_files": [
+        {
+          "product_id": "pick_rows",
+          "path": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_picks.csv",
+          "format": "CSV",
+          "checksum": "103ff3f3a91b19baf64ae56e1ece5193fa373ca4491819cff77cb3dceab750d1",
+          "role": "canonical"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+          "locator": "provenance and evidence status",
+          "note": "ISC release identity."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": 5885,
+      "row_count": 329611,
+      "product_counts": {
+        "pick_rows": 329611,
+        "unique_events": 5885
+      },
+      "time_range": "2020-03-18 13:09:31.390 to 2020-04-29 17:41:46.790 UTC",
+      "latitude_longitude_depth_range": "lat 40.4445–40.9786667; lon -112.3006667–-111.8111667; depth -3.41–19.89 km",
+      "magnitude_range": "-9.99–5.70; -9.99 sentinel",
+      "article_local_discrepancy": "Local file ends 29 April; article workflow awaits verified PDF.",
+      "evidence": [
+        {
+          "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+          "locator": "row, event and field audit",
+          "note": "Local audit."
+        }
+      ]
+    },
+    "product_schemas": {
+      "pick_rows": {
+        "role": "canonical_pick_level_release",
+        "identifier_field": "event_number/catalog_evid plus pick fields",
+        "fields": [
+          "event_number",
+          "catalog_evid",
+          "network",
+          "station",
+          "channel",
+          "phase",
+          "arrival_time",
+          "event_latitude",
+          "event_longitude",
+          "event_depth",
+          "origin_time",
+          "magnitude",
+          "magnitude_type",
+          "Mj"
+        ],
+        "units": {
+          "time": "UTC",
+          "depth": "source convention",
+          "latitude": "degree",
+          "longitude": "degree"
+        },
+        "evidence": [
+          {
+            "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+            "locator": "source-native field semantics",
+            "note": "ISC README meanings."
+          }
+        ]
+      }
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "pick timing",
+        "event association density",
+        "network sensitivity"
+      ],
+      "unsuitable_metrics": [
+        "329,611 as event count",
+        "single homogeneous magnitude comparison",
+        "absolute truth without article"
+      ],
+      "independence_conditions": [
+        "separate pick-level and event-level scoring"
+      ],
+      "limitations": [
+        "missing PDF",
+        "heterogeneous magnitude types",
+        "station type not encoded"
+      ],
+      "evidence": [
+        {
+          "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+          "locator": "catalog role and comparison rules",
+          "note": "Scope limitations."
+        }
+      ]
+    },
+    "quality_tier_detail": "Pick-level/association product; article PDF and normalized event-level release are still missing."
+  },
+  "construction_workflow": {
+    "summary": null,
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "ISC/UUSS and nodal pick streams",
+        "type": "phase_picks",
+        "provider_or_network": "ISC release; UU/GS rows",
+        "temporal_spatial_scope": "2020 Magna sequence",
+        "station_count": 207,
+        "channels_sampling": "six channel codes; 205 UU and 2 GS stations",
+        "role": "primary_input",
+        "availability_conditions": "station type not encoded",
+        "evidence": [
+          {
+            "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+            "locator": "row, event and field audit",
+            "note": "Network inventory."
+          }
+        ]
+      }
+    ],
+    "stages": [],
+    "final_output": "Local pick-level CSV; article workflow awaits verified PDF.",
+    "evidence": [
+      {
+        "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+        "locator": "article PDF status and local audit",
+        "note": "Catalog-first extraction."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [
+      {
+        "product_id": "DP1",
+        "name": "ISC archive",
+        "type": "raw_release",
+        "file_path": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/raw/ISC_catalogForISC.zip",
+        "catalog_relation": "source archive",
+        "scientific_use": "provenance",
+        "count_or_scope": "README plus magna2020MLCatalog.csv",
+        "evidence": [
+          {
+            "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+            "locator": "provenance and evidence status",
+            "note": "Archive identity."
+          }
+        ]
+      }
+    ],
+    "scientific_findings": [],
+    "benchmark_context": {
+      "quality_interpretation": "Pick-level/association product; article PDF and normalized event-level release are still missing.",
+      "recommended_role": "Pick-level/network-condition reference only until article parsing is complete.",
+      "comparison_or_baseline_sources": null,
+      "valid_comparisons": null,
+      "caveats": "Pick-level/network-condition reference only until article parsing is complete.",
+      "evidence": [
+        {
+          "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+          "locator": "catalog role and comparison rules",
+          "note": "Scope limitation."
+        }
+      ]
+    },
+    "evidence": [
+      {
+        "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+        "locator": "catalog role and comparison rules",
+        "note": "Scope limitation."
+      }
+    ]
+  },
+  "extraction_quality": {
+    "status": "partial",
+    "extraction_confidence": "medium",
+    "completed_sections": [
+      "catalog",
+      "additional_information"
+    ],
+    "missing_core_fields": [
+      "paper PDF and parsed article",
+      "article-level construction parameters",
+      "event-level normalized catalog"
+    ],
+    "warnings": [
+      "Catalog-first extraction; do not infer article claims from CSV.",
+      "329,611 rows are picks, not events."
+    ],
+    "needs_human_review": true
+  }
+}

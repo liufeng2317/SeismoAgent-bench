@@ -1,0 +1,401 @@
+{
+  "article": {
+    "source_id": "PANG2020_GL089798",
+    "case_id": "2020_magna_utah",
+    "title": "Seismic Analysis of the 2020 Magna, Utah, Earthquake Sequence: Evidence for a Listric Wasatch Fault",
+    "authors": [
+      "Guanning Pang",
+      "Keith D. Koper",
+      "Maria Mesimeri",
+      "Kristine L. Pankow",
+      "Ben Baker",
+      "Jamie Farrell",
+      "James Holt",
+      "J. Mark Hale",
+      "Paul Roberson",
+      "Relu Burlacu",
+      "James C. Pechmann",
+      "Katherine Whidden",
+      "Monique M. Holt",
+      "Amir Allam",
+      "Christopher DuRoss"
+    ],
+    "year": 2020,
+    "journal": "Geophysical Research Letters",
+    "doi": "10.1029/2020GL089798",
+    "article_type": "research_article",
+    "scientific_question": "What does matched-filter detection and relative relocation reveal about the 2020 Magna aftershock sequence?",
+    "sequence": "2020 Magna, Utah earthquake sequence",
+    "catalog_relationship": "Constructs a 39-station/226-channel matched-filter and relative-location event release deposited at ISC.",
+    "evidence": [
+      {
+        "source": "data/2020_magna_utah/references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper__mineru.md",
+        "locator": "title, abstract and Sections 3–5",
+        "note": "Article identity and method."
+      },
+      {
+        "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+        "locator": "provenance and row audit",
+        "note": "Local release."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "PANG2020_GL089798_PRIMARY",
+    "name": "Pang Magna matched-filter catalog",
+    "product_type": "matched_filter_event_catalog_plus_relocation",
+    "role": "primary",
+    "quality_tier": "Q1",
+    "scientific_purpose": "High-precision relative geometry and enhanced detection under permanent UUSS conditions.",
+    "event_definition": "UUSS routine and matched-filter detections in an ISC event-level release; relocation membership is not explicitly flagged.",
+    "product_semantics": {
+      "local_rows": "5,739 unique event IDs",
+      "template_matching_labels": "3,595",
+      "routine/other": "2,144 blank eventType",
+      "article_relocated": "5,623 reported but not identifiable by local flag"
+    },
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "ISC event release",
+        "unit": "events",
+        "count_article": 5623,
+        "count_local": 5739,
+        "selection_rule": "UUSS routine plus matched-filter release",
+        "time_range": "2020-03-18 to 2020-05-08 local snapshot",
+        "spatial_depth_scope": "lat 40.6933–40.8562; lon −112.1713–−111.9383; depth −1.28–13.02 km",
+        "magnitude_scope": "source Mc/coda field; ≤−4 sentinel-like values",
+        "evidence": [
+          {
+            "source": "data/2020_magna_utah/references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper__mineru.md",
+            "locator": "Sections 3–5 and Data Availability",
+            "note": "Article population."
+          },
+          {
+            "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+            "locator": "row and field audit",
+            "note": "Local release."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "recommended common benchmark subset",
+        "unit": "events",
+        "count_article": null,
+        "count_local": 4162,
+        "selection_rule": "strict parser, 2020-03-18–03-26, common spatial/depth mask",
+        "time_range": "2020-03-18 to 2020-03-26 UTC",
+        "spatial_depth_scope": "40.69–40.84°N, −112.14–−111.94°, −1.3–13.1 km",
+        "magnitude_scope": "Mc −8.8–5.67; Mc>-4 sensitivity 4,101",
+        "evidence": [
+          {
+            "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+            "locator": "frozen benchmark window audit",
+            "note": "Recommended subset."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "10.31905/9IE6PAF2",
+      "version": null,
+      "source_files": [
+        {
+          "product_id": "event_release",
+          "path": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_primary.txt",
+          "format": "whitespace text",
+          "checksum": "e26957771d2ad607c610fd91d211eac3bb32297d8ec3225fe1d8e9a83d5cb48a",
+          "role": "canonical"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+          "locator": "provenance and file identity",
+          "note": "ISC release."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": 5739,
+      "row_count": 5739,
+      "product_counts": {
+        "event_release": 5739,
+        "benchmark_strict": 4162,
+        "template_matching": 3595
+      },
+      "time_range": "2020-03-18 13:09:31.530 to 2020-05-08 18:54:03.355 UTC",
+      "latitude_longitude_depth_range": "lat 40.6933–40.8562; lon −112.1713–−111.9383; depth −1.28–13.02 km",
+      "magnitude_range": "−9.9–5.67; 80 sentinel/low values",
+      "article_local_discrepancy": "Article reports 5,623 relocated aftershocks and 5,501 matched-filter events; local release has 5,739 rows and no relocation flag.",
+      "evidence": [
+        {
+          "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+          "locator": "article-versus-release alignment",
+          "note": "Release discrepancies."
+        }
+      ]
+    },
+    "product_schemas": {
+      "event_release": {
+        "role": "event_catalog",
+        "identifier_field": "eventId",
+        "fields": [
+          "date",
+          "time",
+          "latitude",
+          "longitude",
+          "depth",
+          "coda",
+          "magnitude",
+          "eventId",
+          "eventType"
+        ],
+        "units": {
+          "time": "UTC",
+          "depth": "km",
+          "latitude": "degree",
+          "longitude": "degree"
+        },
+        "evidence": [
+          {
+            "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+            "locator": "provenance and field audit",
+            "note": "Source header."
+          }
+        ]
+      }
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "relative geometry",
+        "matched-event recovery",
+        "cluster sensitivity"
+      ],
+      "unsuitable_metrics": [
+        "universal completeness",
+        "raw count ranking",
+        "magnitude cross-scale comparison with Baker"
+      ],
+      "independence_conditions": [
+        "separate UUSS routine/template populations",
+        "retain strict versus normalized time policy"
+      ],
+      "limitations": [
+        "missing S1 supplementary table",
+        "no relocation flag",
+        "8 noncanonical seconds"
+      ],
+      "evidence": [
+        {
+          "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+          "locator": "benchmark role and normalization rules",
+          "note": "Evaluation rules."
+        }
+      ]
+    },
+    "quality_tier_detail": "High-resolution Magna matched-filter/relative-location reference; local release lacks an explicit relocation flag."
+  },
+  "construction_workflow": {
+    "summary": "UUSS routine catalog/picks → 39-station/226-channel selection → P/S template windows → matched-filter detection → ≥5 detections and DBSCAN/duplicate QC → magnitude → relative relocation → ISC release.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "UUSS waveforms",
+        "type": "waveform",
+        "provider_or_network": "UUSS/IRIS",
+        "temporal_spatial_scope": "2020 Magna sequence",
+        "station_count": 39,
+        "channels_sampling": "226 channels within 40 km",
+        "role": "primary_input",
+        "availability_conditions": "permanent-network subset",
+        "evidence": [
+          {
+            "source": "data/2020_magna_utah/references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper__mineru.md",
+            "locator": "Section 3.3, network paragraph",
+            "note": "Matched-filter network."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "template preparation",
+        "category": "preprocessing",
+        "purpose": "Prepare P/S templates",
+        "inputs": [
+          "UUSS catalog picks",
+          "waveforms"
+        ],
+        "outputs": [
+          "template waveforms"
+        ],
+        "method": "P window −0.2 to 1.6 s; S window −0.2 to 2.6 s",
+        "software_or_model": null,
+        "parameters": [],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "routine/template populations",
+        "analyst_intervention": null,
+        "dependencies": "UUSS analyst picks",
+        "evidence": [
+          {
+            "source": "data/2020_magna_utah/references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper__mineru.md",
+            "locator": "Section 3.3, template paragraph",
+            "note": "Template windows."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "matched-filter detection and association",
+        "category": "detection",
+        "purpose": "Find additional events",
+        "inputs": [
+          "templates",
+          "continuous waveforms"
+        ],
+        "outputs": [
+          "candidate events"
+        ],
+        "method": "correlation threshold, ≥5 detections, DBSCAN time clustering and ±5 s suppression",
+        "software_or_model": null,
+        "parameters": [
+          {
+            "name": "minimum detections",
+            "value": 5,
+            "unit": null
+          },
+          {
+            "name": "DBSCAN spread",
+            "value": "≤0.3",
+            "unit": "s"
+          },
+          {
+            "name": "duplicate window",
+            "value": "±5",
+            "unit": "s"
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "remove duplicate/routine-catalog-near events"
+        ],
+        "intermediate_result": "5,501 article matched-filter events",
+        "analyst_intervention": null,
+        "dependencies": "station availability and template morphology",
+        "evidence": [
+          {
+            "source": "data/2020_magna_utah/references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper__mineru.md",
+            "locator": "Section 3.3, detection/QC paragraphs",
+            "note": "Thresholds and counts."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST3",
+        "order": 3,
+        "name": "relative relocation and ISC export",
+        "category": "relocation",
+        "purpose": "Refine event geometry and publish release",
+        "inputs": [
+          "routine and matched-filter events",
+          "differential times"
+        ],
+        "outputs": [
+          "ISC event release"
+        ],
+        "method": "hierarchical clustered relative relocation",
+        "software_or_model": null,
+        "parameters": [],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "5,623 article relocated events; local membership implicit",
+        "analyst_intervention": null,
+        "dependencies": "correlation support",
+        "evidence": [
+          {
+            "source": "data/2020_magna_utah/references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper__mineru.md",
+            "locator": "relative-relocation section",
+            "note": "Method/count."
+          },
+          {
+            "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+            "locator": "article-versus-release alignment",
+            "note": "Local limitation."
+          }
+        ]
+      }
+    ],
+    "final_output": "5,739-row local ISC event release; article/local populations are not one-to-one.",
+    "evidence": [
+      {
+        "source": "data/2020_magna_utah/references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper__mineru.md",
+        "locator": "Sections 3–5",
+        "note": "Workflow."
+      },
+      {
+        "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+        "locator": "provenance and audit",
+        "note": "Release."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [],
+    "scientific_findings": [
+      {
+        "statement": "Matched-filter detections reveal a dense aftershock population and west-dipping relative geometry.",
+        "depends_on": null,
+        "scope": "2020 Magna, Utah earthquake sequence",
+        "evidence": [
+          {
+            "source": "data/2020_magna_utah/references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper__mineru.md",
+            "locator": "Results and discussion",
+            "note": "Findings."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "High-resolution Magna matched-filter/relative-location reference; local release lacks an explicit relocation flag.",
+      "recommended_role": "Primary Magna relative-location reference; keep separate from Baker pick-level product.",
+      "comparison_or_baseline_sources": null,
+      "valid_comparisons": null,
+      "caveats": "Primary Magna relative-location reference; keep separate from Baker pick-level product.",
+      "evidence": [
+        {
+          "source": "data/2020_magna_utah/references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper__mineru.md",
+          "locator": "Results and discussion",
+          "note": "Findings."
+        }
+      ]
+    },
+    "evidence": [
+      {
+        "source": "data/2020_magna_utah/references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper__mineru.md",
+        "locator": "Results and discussion",
+        "note": "Findings."
+      }
+    ]
+  },
+  "extraction_quality": {
+    "status": "partial",
+    "extraction_confidence": "medium",
+    "completed_sections": [
+      "article",
+      "catalog",
+      "construction_workflow",
+      "additional_information"
+    ],
+    "missing_core_fields": [
+      "S1 supplementary table",
+      "explicit relocation membership crosswalk"
+    ],
+    "warnings": [
+      "Do not equate eventType labels with article matched-filter/relocated populations."
+    ],
+    "needs_human_review": true
+  }
+}

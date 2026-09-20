@@ -162,10 +162,10 @@ waveforms do not correlate with the template family.
 
 ## Local provenance and remaining actions
 
-- Paper PDF: [`PANG2020_GL089798__paper.pdf`](./PANG2020_GL089798__paper.pdf)
+- Paper PDF: [`PANG2020_GL089798__paper.pdf`](../../paper/PANG2020_GL089798__paper.pdf)
 - MinerU text: [`PANG2020_GL089798__paper__mineru.md`](./PANG2020_GL089798__paper__mineru.md)
-- ISC release: [`PANG2020_GL089798__catalog_primary.txt`](../../../catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_primary.txt)
-- Catalog audit: [`PANG2020_GL089798__catalog_summary.md`](../../../catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md)
+- ISC release: [`PANG2020_GL089798__catalog_primary.txt`](../../../../catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_primary.txt)
+- Catalog audit: [`PANG2020_GL089798__catalog_summary.md`](../../../../catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md)
 - ISC DOI: [10.31905/9IE6PAF2](https://doi.org/10.31905/9IE6PAF2)
 - Paper DOI: [10.1029/2020GL089798](https://doi.org/10.1029/2020GL089798)
 

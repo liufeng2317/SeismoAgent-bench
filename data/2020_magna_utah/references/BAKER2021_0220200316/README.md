@@ -11,3 +11,4 @@ A paper-reading note is intentionally not fabricated while the article PDF is
 missing.  The local CSV/ISC README supports file-level pick and event audits
 only; detector, deployment, and quality-control claims should be confirmed
 from the paper when it is obtained.
+- Structured extraction: [`parsed/extraction/BAKER2021_0220200316__extraction.json`](parsed/extraction/BAKER2021_0220200316__extraction.json).
