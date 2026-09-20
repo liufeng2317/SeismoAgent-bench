@@ -46,10 +46,13 @@ rule identifies successful relocation.
   depth −0.003–202.48 km; magnitudes −0.77–9.0. The local release's counts and
   fields supersede older article counts for file auditing, but both values are
   retained because the article and revised release differ.
-- 2018-05-01–05-09 UTC: 2,999 rows total, 2,579 successfully relocated. Under
-  the common summit mask (19.30–19.50°N, −155.40–−155.15°E, 0–20 km), there are
-  1,190 rows using relocated coordinates, 1,044 of which have `nbranch > 1`.
-  The starting-coordinate mask gives 1,130/984 respectively.
+- 2018-05-01–05-09 UTC: 2,999 rows total, 2,579 successfully relocated.
+  The archive README maps columns 8–10 to relocated (`latR/lonR/depR`) and
+  columns 23–25 to starting (`latC/lonC/depC`) coordinates. Under the common
+  summit mask, the relocated-coordinate selection is 1,130 rows (984 with
+  `nbranch > 1`); the starting-coordinate selection is 1,190 rows (1,044 with
+  `nbranch > 1`). The detailed time/lat/lon/depth/magnitude ranges are recorded
+  in the paired catalog summary.
 
 ## Benchmark interpretation
 
