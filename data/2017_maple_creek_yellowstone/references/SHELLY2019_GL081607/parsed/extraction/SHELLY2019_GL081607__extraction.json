@@ -21,7 +21,7 @@
         "note": "Identity, purpose and catalog type."
       },
       {
-        "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+        "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
         "locator": "Identity and evidence status; Scientific scope",
         "note": "Article/local product distinction."
       }
@@ -32,7 +32,7 @@
     "name": "Shelly Maple Creek enhanced catalog and USGS correlation-phase release",
     "product_type": "article_event_catalog_plus_phase_auxiliary",
     "role": "primary",
-    "quality_tier": "Q1 relative geometry / Q2 template-enhanced detection; local phase file Q4 auxiliary",
+    "quality_tier": "Q1",
     "scientific_purpose": "Dense swarm detection and relative geometry; local phase release supports timing/template diagnostics only.",
     "event_definition": "Article event catalog uses matched-filter detections, hypoDD relocation and observation-count filters; local CSV has one row per phase/station observation.",
     "populations": [
@@ -48,7 +48,7 @@
         "magnitude_scope": "Routine coda magnitude lineage; exact local event table unavailable.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Scientific scope; Observation and network conditions",
             "note": "Article template population."
           }
@@ -66,7 +66,7 @@
         "magnitude_scope": "Relative-location population; type not a uniform independent truth scale.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Catalog-construction workflow; Article-reported quality and limitations",
             "note": "Article count and QC rule."
           }
@@ -84,7 +84,7 @@
         "magnitude_scope": "Template-amplitude/UUSS coda-derived Mc-like scale.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Article-reported quality and limitations",
             "note": "Magnitude population and caveat."
           }
@@ -208,7 +208,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+          "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
           "locator": "Local release interpretation; Benchmark decision",
           "note": "Product distinction and valid metrics."
         },
@@ -269,13 +269,14 @@
         "units": null,
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Local release interpretation; Benchmark decision",
             "note": "Article event table is not the downloaded CSV and is not staged."
           }
         ]
       }
-    }
+    },
+    "quality_tier_detail": "High-quality relative geometry and template-enhanced detection; the local phase release is an auxiliary observation table."
   },
   "construction_workflow": {
     "summary": "Routine UUSS events become waveform templates; continuous matched filtering yields correlation/differential times, hypoDD relocates events, observation-count thresholds define article populations, and amplitudes/polarities support magnitude and focal mechanisms.",
@@ -292,7 +293,7 @@
         "availability_conditions": "2,289 routine template events; local CSV has 1,147 template IDs.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Observation and network conditions",
             "note": "Template and network setup."
           }
@@ -310,7 +311,7 @@
         "availability_conditions": "Station availability changes; local release has 29 full-file pairs and 27 in frozen window.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Observation and network conditions",
             "note": "Waveform parameters and availability caveat."
           }
@@ -351,7 +352,7 @@
         "dependencies": "Template coverage and station availability.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Observation and network conditions; Catalog-construction workflow",
             "note": "Template parameters."
           }
@@ -387,7 +388,7 @@
         "dependencies": "Template family and waveform lineage.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Catalog-construction workflow",
             "note": "Detection and differential-time process."
           }
@@ -428,7 +429,7 @@
         "dependencies": "Differential-time quality and template lineage.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Catalog-construction workflow; Article-reported quality and limitations",
             "note": "Relocation and threshold."
           }
@@ -470,7 +471,7 @@
         "dependencies": "Matched-filter amplitudes and polarity quality.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Article-reported quality and limitations",
             "note": "Population criteria and mechanism distinction."
           }
@@ -480,7 +481,7 @@
     "final_output": "Article-level event catalog is not locally staged; local machine-readable product is phase-only USGS release.",
     "evidence": [
       {
-        "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+        "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
         "locator": "Catalog-construction workflow; Local release interpretation",
         "note": "Workflow/output distinction."
       },
@@ -503,7 +504,7 @@
         "count_or_scope": "Frozen baseline count recorded separately.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Benchmark decision",
             "note": "Baseline role."
           }

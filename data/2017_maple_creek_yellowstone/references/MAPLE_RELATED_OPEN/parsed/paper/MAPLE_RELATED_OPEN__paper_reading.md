@@ -5,7 +5,7 @@
 - Title: Unraveling the Evolution of an Unusually Active Earthquake Sequence Near Sheldon, Nevada.
 - Authors: D. T. Trugman, W. H. Savran, C. J. Ruhl, and K. D. Smith.
 - Local paper: paper/MAPLE_RELATED_OPEN__paper.pdf.
-- Local MinerU parse: paper/MAPLE_RELATED_OPEN__paper__mineru.md.
+- Local MinerU parse: parsed/MAPLE_RELATED_OPEN__paper__mineru.md.
 - Article data statement: a Sheldon catalog, velocity model, and moment-tensor
   products are archived at Zenodo 10.5281/zenodo.8030954.
 

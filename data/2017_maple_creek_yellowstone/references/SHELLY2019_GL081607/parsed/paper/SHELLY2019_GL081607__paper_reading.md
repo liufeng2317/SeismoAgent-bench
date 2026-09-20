@@ -9,7 +9,7 @@
 | Journal / citation | *Geophysical Research Letters*, 46, 2544–2552 (2019) | PDF citation block |
 | DOI | [10.1029/2018GL081607](https://doi.org/10.1029/2018GL081607) | Article and source README |
 | Article type | Research letter that constructs an enhanced detection, magnitude, relative-location, and focal-mechanism catalog | Abstract and Methods |
-| Local paper parse | `paper/SHELLY2019_GL081607__paper__mineru.md` | MinerU output; source PDF is preserved beside it |
+| Local paper parse | `parsed/SHELLY2019_GL081607__paper__mineru.md` | MinerU output; source PDF is preserved beside it |
 | Associated release | USGS [10.5066/P13JCJ2I](https://doi.org/10.5066/P13JCJ2I) | Local XML metadata and article data statement |
 
 This is a genuine catalog-construction paper. The article's event catalog is
@@ -123,7 +123,7 @@ which is recorded as a release discrepancy in the catalog summary.
 ## Local paths
 
 - Paper PDF: `data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/paper/SHELLY2019_GL081607__paper.pdf`
-- Parsed paper: `data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/paper/SHELLY2019_GL081607__paper__mineru.md`
+- Parsed paper: `data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/SHELLY2019_GL081607__paper__mineru.md`
 - Supplement: `data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/supplement/Shelly2019_MapleCreek_SI.pdf`
 - Phase release and XML metadata: `data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/raw/`
 - Catalog-level audit: `../../../catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md` (created alongside this note)

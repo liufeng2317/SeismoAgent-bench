@@ -9,4 +9,5 @@ Refuge sequence in northwest Nevada. It is not a Maple Creek/Yellowstone paper.
 - The article does construct catalogs and cites a Zenodo archive
   https://doi.org/10.5281/zenodo.8030954, but those products belong to Sheldon,
   Nevada, not Yellowstone.
-- Local paper parse: paper/MAPLE_RELATED_OPEN__paper__mineru.md.
+- Local paper parse: parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md.
+- Structured extraction: [`parsed/extraction/MAPLE_RELATED_OPEN__extraction.json`](parsed/extraction/MAPLE_RELATED_OPEN__extraction.json).

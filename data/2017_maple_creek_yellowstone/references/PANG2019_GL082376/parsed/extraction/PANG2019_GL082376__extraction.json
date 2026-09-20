@@ -25,7 +25,7 @@
         "note": "Identity and catalog purpose."
       },
       {
-        "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+        "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
         "locator": "Identity and evidence status; Scientific scope",
         "note": "Article/release status."
       }
@@ -36,7 +36,7 @@
     "name": "Pang Maple Creek absolute/GrowClust catalog",
     "product_type": "event_catalog_missing",
     "role": "secondary",
-    "quality_tier": "Q1/Q2 secondary location reference; not independently reviewed truth",
+    "quality_tier": "Q1",
     "scientific_purpose": "Absolute-location baseline and high-precision relative geometry comparison against Shelly.",
     "event_definition": "Article-reported absolute event catalog and GrowClust-relocated subset; row-level event definition cannot be audited without source table.",
     "populations": [
@@ -52,7 +52,7 @@
         "magnitude_scope": "Coda Mc -1.7 to 4.4; completeness about Mc 0.5; b≈0.96.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
             "locator": "Scientific scope; Catalog-construction workflow",
             "note": "Article population and ranges."
           },
@@ -75,7 +75,7 @@
         "magnitude_scope": "Magnitude scale inherited from article catalog; exact field schema unavailable.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
             "locator": "Catalog-construction workflow",
             "note": "Relocation count and errors."
           },
@@ -151,7 +151,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+          "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
           "locator": "Benchmark interpretation; Supporting information audit",
           "note": "Role and missing-catalog constraints."
         },
@@ -208,7 +208,8 @@
           }
         ]
       }
-    }
+    },
+    "quality_tier_detail": "Article describes a high-quality absolute/GrowClust reference, but the local machine-readable release is missing."
   },
   "construction_workflow": {
     "summary": "UUSS routine detections and phase picks are absolutely located with HYPOINVERSE, waveform differential times are measured with BCSEIS, and GrowClust provides hierarchical relative relocations with bootstrap uncertainty.",
@@ -225,7 +226,7 @@
         "availability_conditions": "Exact release table absent locally.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
             "locator": "Observation and network conditions; Catalog-construction workflow",
             "note": "Routine catalog and network context."
           }
@@ -243,7 +244,7 @@
         "availability_conditions": "22 local + 2 regional stations selected for quality/azimuth; no station-day table.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
             "locator": "Observation and network conditions",
             "note": "Station setup and network codes."
           }
@@ -274,7 +275,7 @@
         "dependencies": "UUSS network and regional model.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
             "locator": "Catalog-construction workflow",
             "note": "Absolute-location stage."
           }
@@ -313,7 +314,7 @@
         "dependencies": "Waveform quality and station geometry.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
             "locator": "Catalog-construction workflow",
             "note": "BCSEIS and differential-time totals."
           }
@@ -352,7 +353,7 @@
         "dependencies": "Absolute starting catalog and waveform pairs.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
             "locator": "Catalog-construction workflow; Scientific scope",
             "note": "GrowClust count and error estimates."
           }
@@ -362,7 +363,7 @@
     "final_output": "Article reports 3,345 absolute and 3,257 relocated events; no local event-table output is available.",
     "evidence": [
       {
-        "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+        "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
         "locator": "Catalog-construction workflow; Supporting information audit",
         "note": "End-to-end method and release gap."
       },
@@ -379,7 +380,7 @@
         "product_id": "A1",
         "name": "Pang publisher supplementary information",
         "type": "method_context_pdf",
-        "file_path": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/supplement/mineru/Pang2019_MapleCreek_SI/full.md",
+        "file_path": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/supplement/PANG2019_GL082376__supplement__mineru.md",
         "catalog_relation": "Method/figure/velocity-model context; not a machine-readable catalog.",
         "scientific_use": "Review relocation diagnostics and parameters.",
         "count_or_scope": "No 3,345-row event table found.",
@@ -399,7 +400,7 @@
         "scope": "Maple Creek sequence",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
             "locator": "Benchmark interpretation",
             "note": "Readiness and role."
           }

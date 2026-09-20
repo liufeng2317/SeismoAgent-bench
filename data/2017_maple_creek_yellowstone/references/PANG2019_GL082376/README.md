@@ -6,8 +6,10 @@
 - Article product: 3,345 events; 3,257 GrowClust relocations.
 - Local paper: paper/PANG2019_GL082376__paper.pdf.
 - Local SI: supplement/Pang2019_MapleCreek_SI.pdf.
-- Paper reading: paper/PANG2019_GL082376__paper_reading.md.
+- Paper reading: parsed/paper/PANG2019_GL082376__paper_reading.md.
 - Catalog audit: catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md.
 - Readiness: paper and SI are present; the machine-readable 3,345-event
   catalog is missing. Do not use the Shelly USGS phase-arrival CSV as a Pang
   catalog substitute.
+- Structured extraction: [`parsed/extraction/PANG2019_GL082376__extraction.json`](parsed/extraction/PANG2019_GL082376__extraction.json).
+- Parsed SI sidecar: parsed/supplement/PANG2019_GL082376__supplement__mineru.md.

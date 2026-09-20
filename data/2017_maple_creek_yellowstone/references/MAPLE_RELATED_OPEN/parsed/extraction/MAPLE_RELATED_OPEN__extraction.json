@@ -23,7 +23,7 @@
         "note": "Article identity, Sheldon location, purpose, and approximate detection/located-event statistics."
       },
       {
-        "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper_reading.md",
+        "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
         "locator": "Identity and Scope check",
         "note": "Local reading explicitly classifies the article as Sheldon/Nevada context-only for the Maple case."
       }
@@ -34,7 +34,7 @@
     "name": "Sheldon Nevada sequence products (out-of-case context)",
     "product_type": "context_catalog",
     "role": "not_a_catalog",
-    "quality_tier": "not_applicable_for_Maple",
+    "quality_tier": "unknown",
     "scientific_purpose": "Context for how a sparse-network sequence can combine routine locations, relative relocation, and single-station ML detection; not a Yellowstone benchmark reference.",
     "event_definition": "Article describes several distinct populations: routinely located NSL/ComCat events, a GrowClust-relocated M_L >= 1 subset, and COLR single-station machine-learning detections.",
     "product_semantics": {
@@ -61,7 +61,7 @@
             "note": "NSL database and 7,966 located events."
           },
           {
-            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "Scope check",
             "note": "Context-only classification and count summary."
           }
@@ -102,7 +102,7 @@
             "note": "Detection model, thresholds, time span, and magnitude approximation."
           },
           {
-            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "Scope check",
             "note": "Article-level nearly 70,000 detection count."
           }
@@ -167,7 +167,7 @@
       "product_counts": {},
       "evidence": [
         {
-          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper_reading.md",
+          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
           "locator": "Scope check",
           "note": "Local audit explicitly says no Sheldon catalog is staged under the Maple case."
         }
@@ -189,7 +189,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper_reading.md",
+          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
           "locator": "Benchmark decision",
           "note": "Source is context-only and excluded from the Maple reference matrix and event-count comparisons."
         },
@@ -208,13 +208,14 @@
         "units": {},
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper_reading.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "Scope check",
             "note": "No Sheldon machine-readable release is staged under this case."
           }
         ]
       }
-    }
+    },
+    "quality_tier_detail": "Out-of-case context paper; not a Yellowstone benchmark catalog."
   },
   "construction_workflow": {
     "summary": "For Sheldon (not Maple), the article combines NSL/ComCat analyst phase arrivals and waveforms, NonLinLoc absolute locations, GrowClust3D differential-time relative relocation, and COLR EQ-Transformer single-station detections; moment tensors and source spectra are additional products.",
@@ -478,7 +479,7 @@
       "caveats": "Do not substitute Sheldon counts for Pang or Shelly Yellowstone counts; no local release is available for row-level matching.",
       "evidence": [
         {
-          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper_reading.md",
+          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
           "locator": "Benchmark decision",
           "note": "Explicit context-only decision."
         },

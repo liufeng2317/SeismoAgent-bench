@@ -9,7 +9,7 @@
 | Journal | Geophysical Research Letters, 46, 4653-4663 (2019) | PDF citation block |
 | DOI | https://doi.org/10.1029/2019GL082376 | Article |
 | Article type | Research letter that constructs absolute locations and GrowClust relative relocations for a 3,345-event sequence | Abstract and Sections 2-3 |
-| Local paper parse | references/PANG2019_GL082376/paper/PANG2019_GL082376__paper__mineru.md | MinerU output |
+| Local paper parse | references/PANG2019_GL082376/parsed/PANG2019_GL082376__paper__mineru.md | MinerU output |
 | Supplement | references/PANG2019_GL082376/supplement/Pang2019_MapleCreek_SI.pdf | Local PDF; no machine-readable event table found in the local supplement folder |
 
 This is a genuine catalog-construction paper and is methodologically distinct from
@@ -99,6 +99,6 @@ machine-readable GrowClust table. Therefore:
 ## Local paths
 
 - Paper PDF: references/PANG2019_GL082376/paper/PANG2019_GL082376__paper.pdf
-- Parsed paper: references/PANG2019_GL082376/paper/PANG2019_GL082376__paper__mineru.md
+- Parsed paper: references/PANG2019_GL082376/parsed/PANG2019_GL082376__paper__mineru.md
 - Supplement PDF: references/PANG2019_GL082376/supplement/Pang2019_MapleCreek_SI.pdf
 - Catalog status note: catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md
