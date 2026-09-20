@@ -6,3 +6,4 @@
 - Core file: `raw/loc_events.txt`.
 - The file contains 6,327 detected-event coordinates with time measured in days from 2018-04-29 and is kept separate from the Shelly & Thelen S1/S2 summit products.
 - Full audit: `LENGLINE2021_EPSL116653__catalog_summary.md`.
+- Approximate absolute derivative: `analysis/derived/relative_events/LENGLINE2021_EPSL116653__relative_events__absolute_approx_v1.csv`; assumptions and evidence are in `coordinate_transform.md`.

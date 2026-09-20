@@ -10,3 +10,4 @@
 - Detailed catalog audit: [`ISKEN2017_BSSA0120160150__catalog_summary.md`](./ISKEN2017_BSSA0120160150__catalog_summary.md).
 
 The table contains 13 aftershocks from the 2011 Oklahoma sequence, relocated with a gradient half-space model. Fields include origin time, latitude, longitude, depth, horizontal/depth errors, RMS residual, and Mw. It is a small high-quality relocation reference, not a complete regional earthquake catalog.
+- Local processing report: [`analysis/catalog_analysis.md`](analysis/catalog_analysis.md).

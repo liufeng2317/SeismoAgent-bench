@@ -11,3 +11,4 @@
 - Frozen-window snapshot: `USGS_TUL_COMCAT_2011__catalog_operational_benchmark.csv` (11 rows)
 - Exact full and benchmark filters are versioned in `scripts/00_catalog_downloading/official_baseline_windows.json`.
 - Service fields and rows are preserved; time chunks are merged and de-duplicated by stable event ID.
+- Local processing report: [`analysis/catalog_analysis.md`](analysis/catalog_analysis.md).
