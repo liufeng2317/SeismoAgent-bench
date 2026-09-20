@@ -1,0 +1,69 @@
+{
+  "case_id": "2017_maple_creek_yellowstone",
+  "source_ref": "USGS_UUSS_COMCAT_2017",
+  "product_id": "operational_benchmark",
+  "kind": "usgs_csv",
+  "unit": "event",
+  "selection": "time_only",
+  "selection_rule": "[2017-06-11T00:00:00Z, 2017-06-19T00:00:00Z); common Maple Creek mask where applicable",
+  "parser_version": "maple-local-v1-compact",
+  "source_path": "USGS_UUSS_COMCAT_2017__catalog_operational_benchmark.csv",
+  "source_sha256": "1adf50e3a3ea5893bff52cf343148e1cfb98af14febcec73d55160f61ae88f97",
+  "generated_utc": "2026-09-20T20:12:52+00:00",
+  "stats": {
+    "kind": "usgs_csv",
+    "row_count": 5,
+    "unique_native_event_ids": 5,
+    "duplicate_native_event_ids": 0,
+    "missing": {
+      "x_m": 5,
+      "y_m": 5
+    },
+    "ranges": {
+      "latitude_deg": [
+        44.56,
+        44.601
+      ],
+      "longitude_deg": [
+        -110.3811667,
+        -110.3676667
+      ],
+      "depth_km": [
+        2.2,
+        4.67
+      ],
+      "magnitude": [
+        1.01,
+        1.86
+      ],
+      "x_m": [
+        null,
+        null
+      ],
+      "y_m": [
+        null,
+        null
+      ]
+    },
+    "magnitude_types": {
+      "md": 4,
+      "ml": 1
+    },
+    "networks": {
+      "uu": 5
+    },
+    "stations": {},
+    "phases": {},
+    "unique_template_ids": null,
+    "unique_match_ids": null,
+    "relocation_flags": {},
+    "daily_counts": {
+      "2017-06-14": 4,
+      "2017-06-16": 1
+    },
+    "hourly_counts": {
+      "2017-06-14T04": 4,
+      "2017-06-16T09": 1
+    }
+  }
+}

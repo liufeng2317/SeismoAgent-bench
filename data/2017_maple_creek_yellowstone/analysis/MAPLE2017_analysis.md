@@ -4,6 +4,8 @@
 > docs/01_1_Case_details.md; source-specific reading and file-level audits live
 > beside each paper or catalog.
 
+> Compact catalog-processing index: [catalog_processing_index.md](catalog_processing_index.md).
+
 ## 1. Case identity and benchmark purpose
 
 | Field | Frozen/working value |
