@@ -24,6 +24,7 @@ __pycache__/
 # MinerU generated bundles duplicate the source PDF and can be very large.
 **/paper/mineru/
 **/paper/*__mineru.md
+!**/parsed/paper/*__mineru.md
 **/paper/*__mineru.zip
 
 # Parsed MinerU task bundles duplicate source PDFs, images, and model JSON.
