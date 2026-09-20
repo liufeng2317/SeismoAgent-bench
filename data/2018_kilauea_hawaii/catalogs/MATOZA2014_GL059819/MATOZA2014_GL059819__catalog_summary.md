@@ -23,6 +23,17 @@
   expected and is the reason this catalog remains auxiliary rather than a
   competing 2018 reference.
 
+### Frozen Kīlauea summit-window audit
+
+The common case rule is
+`2018-05-01T00:00:00Z <= origin_time < 2018-05-09T00:00:00Z`,
+`19.30 <= latitude <= 19.50`, `-155.40 <= longitude <= -155.15`, and
+`0 <= depth_km <= 20`. Applying this rule to the native 1986–2009 LP catalog
+returns **0 rows**. Consequently, benchmark-window time, latitude, longitude,
+depth, and magnitude ranges are **N/A (empty intersection)**; the full-file
+ranges above remain the applicable statistics. This product is historical
+context only and must not be used as a 2018 event denominator.
+
 ## Benchmark role
 
 Use for historical LP/relative-relocation method comparison only. Preserve

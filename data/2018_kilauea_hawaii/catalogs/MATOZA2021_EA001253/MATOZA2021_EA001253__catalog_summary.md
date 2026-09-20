@@ -33,10 +33,33 @@
 0 <= depth_km <= 20
 ```
 
-Using relocated coordinates: 2,999 rows fall in the time window; 1,190 satisfy
-the summit mask, of which 1,044 have `nbranch > 1`. Using starting coordinates
-gives 1,130 mask rows, of which 984 are successfully relocated. The distinction
-is retained because the source file contains both coordinate versions.
+The source README defines columns 8–10 (`latR/lonR/depR`) as relocated
+coordinates and columns 23–25 (`latC/lonC/depC`) as starting coordinates. The
+local audit therefore gives 1,130 summit-mask rows (984 successfully relocated)
+when the relocated coordinates are used, versus 1,190 rows (1,044 with
+`nbranch > 1`) when the starting coordinates are used. This distinction is
+material near the summit-box boundary and is retained rather than collapsed
+into one count. (Earlier versions of this summary had these two labels
+reversed.)
+
+### Frozen-window ranges
+
+All rows below use the half-open UTC time rule above. `nbranch > 1` is the
+release's successful-relocation flag; it is reported separately from the
+coordinate basis. Magnitude is the native `mag` field (zeros are retained as
+published and are not recoded as missing).
+
+| Coordinate basis / selection | Rows | `nbranch > 1` | Time range (UTC) | Latitude (°) | Longitude (°) | Depth (km) | Magnitude |
+|---|---:|---:|---|---:|---:|---:|---:|
+| Relocated (`latR/lonR/depR`), time-only | 2,999 | 2,579 | 2018-05-01T00:13:40.685–2018-05-08T23:56:20.588 | 18.911330–19.883330 | −155.788620–−154.618830 | −7.915–63.517 | 0.00–6.90 |
+| Relocated + summit mask | 1,130 | 984 | same | 19.300520–19.495500 | −155.396330–−155.150200 | 0.007–19.237 | 0.00–4.66 |
+| Starting (`latC/lonC/depC`) + summit mask | 1,190 | 1,044 | same | 19.272970–19.495500 | −155.409790–−154.876810 | −3.986–19.237 | 0.00–4.66 |
+
+For metrics that require a relocated event geometry, use the second row and
+filter `nbranch > 1` (984 events). For provenance or starting-catalog bias
+analysis, retain the third row and its 1,044-event successfully relocated
+subset; do not compare the two counts as if they were different event
+populations.
 
 ## Benchmark role and limitations
 
