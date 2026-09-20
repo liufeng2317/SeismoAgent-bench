@@ -1,0 +1,228 @@
+# SeismoAgentBench paper/catalog extraction schema v1.2.
+#
+# Compact design:
+#   article                 - brief paper identity and scope
+#   catalog                 - event populations, catalog schema, quality and role
+#   construction_workflow   - inputs, ordered construction stages, intermediate outputs
+#   additional_information  - supplementary products, scientific findings, benchmark use
+#   extraction_quality      - extraction completeness and unresolved questions
+#
+# Evidence is intentionally embedded inside the object it supports. There is
+# no detached top-level evidence registry: each claim carries an `evidence`
+# list with path and locator information.
+#
+# Read both parsed/paper and parsed/supplement. Use null/[] when absent; do not
+# infer silently. Keep article-reported and local-file values separate.
+
+article:
+  # Keep paper-level information brief. This is identity/context, not a review.
+  source_id: string | null
+  case_id: string | null
+  title: string | null
+  authors:
+    - string
+  year: integer | null
+  journal: string | null
+  doi: string | null
+  article_type: string | null # research_article, data_paper, overview, dissertation, context, other.
+  scientific_question: string | null
+  sequence: string | null
+  catalog_relationship: string | null
+  evidence:
+    - source: string | null
+      locator: string | null
+      note: string | null
+
+catalog:
+  # The main extraction target: what event product exists and what it contains.
+  catalog_id: string | null
+  name: string | null
+  product_type: string | null # event_catalog, phase_catalog, event_subset, operational_catalog, other.
+  role: string | null # primary, secondary, auxiliary, baseline, not_a_catalog, unknown.
+  quality_tier: string | null # Compact machine label: Q1, Q2, Q3, Q4, unknown.
+  quality_tier_detail: string | null # Human-readable rationale; keep separate from the compact label.
+  scientific_purpose: string | null
+  event_definition: string | null
+  product_semantics:
+    <product_id>: string | null # Explicit meaning of each released product/count.
+  populations:
+    # Keep events, phases, measurements, clusters, and stations distinct.
+    - population_id: string | null # P1, P2, ...
+      label: string | null
+      unit: string | null
+      count_article: number | null
+      count_local: number | null
+      selection_rule: string | null
+      time_range: string | null
+      spatial_depth_scope: string | null
+      magnitude_scope: string | null
+      evidence:
+        - source: string | null
+          locator: string | null
+          note: string | null
+  release:
+    doi_or_url: string | null
+    version: string | null
+    source_files:
+      - path: string | null
+        format: string | null
+        checksum: string | null
+        role: string | null # canonical, raw_release, normalized, auxiliary.
+    evidence:
+      - source: string | null
+        locator: string | null
+        note: string | null
+  local_audit:
+    event_count: number | null
+    row_count: number | null
+    time_range: string | null
+    latitude_longitude_depth_range: string | null
+    magnitude_range: string | null
+    article_local_discrepancy: string | null
+    product_counts:
+      <product_id>: number | null
+    evidence:
+      - source: string | null
+        locator: string | null
+        note: string | null
+  # Prefer one schema per released product when fields differ (S10/S11/S12).
+  product_schemas:
+    <product_id>:
+      role: string | null
+      identifier_field: string | null
+      fields:
+        - string
+      units:
+        <field_name>: string | null
+      evidence:
+        - source: string | null
+          locator: string | null
+          note: string | null
+  schema: # Legacy single-product form; omit when product_schemas is used.
+    identifier_field: string | null
+    uniqueness_and_duplicates: string | null
+    time_precision: string | null
+    coordinate_system: string | null
+    magnitude_types:
+      - string
+    fields:
+      - name: string | null
+        type: string | null
+        unit: string | null
+        description: string | null
+        role: string | null # time, location, magnitude, uncertainty, quality, phase, other.
+        missing_value: string | null
+    uncertainty_fields:
+      - string
+    evidence:
+      - source: string | null
+        locator: string | null
+        note: string | null
+  evaluation_use:
+    suitable_metrics:
+      - string
+    unsuitable_metrics:
+      - string
+    independence_conditions:
+      - string
+    limitations:
+      - string
+    evidence:
+      - source: string | null
+        locator: string | null
+        note: string | null
+
+construction_workflow:
+  # The central source-to-catalog reconstruction. Usually 4-9 stages.
+  summary: string | null
+  input_data:
+    - source_id: string | null # S1, S2, ...
+      name: string | null
+      type: string | null # waveform, station_metadata, seed_catalog, phase_picks, velocity_model, map, other.
+      provider_or_network: string | null
+      temporal_spatial_scope: string | null
+      station_count: number | null
+      channels_sampling: string | null
+      role: string | null # primary_input, auxiliary_input, seed_catalog, model, mask, calibration.
+      availability_conditions: string | null
+      evidence:
+        - source: string | null
+          locator: string | null
+          note: string | null
+  stages:
+    - stage_id: string | null # ST1, ST2, ...
+      order: integer | null
+      name: string | null
+      category: string | null # acquisition, preprocessing, detection, picking, association, location, magnitude, relocation, qc, export, other.
+      purpose: string | null
+      inputs:
+        - string
+      outputs:
+        - string
+      method: string | null
+      software_or_model: string | null
+      parameters:
+        - name: string | null
+          value: string | number | null
+          unit: string | null
+          note: string | null
+      qc_and_rejection_rules:
+        - string
+      intermediate_result: string | null
+      analyst_intervention: string | null
+      dependencies: string | null
+      evidence:
+        - source: string | null
+          locator: string | null
+          note: string | null
+  final_output: string | null
+  evidence:
+    - source: string | null
+      locator: string | null
+      note: string | null
+
+additional_information:
+  # Keep secondary material together rather than creating separate top-level blocks.
+  related_products:
+    - product_id: string | null # DP1, DP2, ...
+      name: string | null
+      type: string | null # station_table, phase_table, focal_mechanism, structural_product, uncertainty_product, measurement_table, cluster_table, event_subset, figure, other.
+      file_path: string | null
+      catalog_relation: string | null
+      scientific_use: string | null
+      count_or_scope: string | null
+      evidence:
+        - source: string | null
+          locator: string | null
+          note: string | null
+  scientific_findings:
+    - statement: string | null
+      depends_on: string | null
+      scope: string | null
+      evidence:
+        - source: string | null
+          locator: string | null
+          note: string | null
+  benchmark_context:
+    quality_interpretation: string | null
+    recommended_role: string | null
+    comparison_or_baseline_sources: string | null
+    valid_comparisons: string | null
+    caveats: string | null
+    evidence:
+      - source: string | null
+        locator: string | null
+        note: string | null
+  missing_information:
+    - string
+
+extraction_quality:
+  status: string | null # draft, partial, verified, blocked.
+  extraction_confidence: string | null # high, medium, low.
+  completed_sections:
+    - string
+  missing_core_fields:
+    - string
+  warnings:
+    - string
+  needs_human_review: boolean | null

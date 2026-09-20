@@ -8,7 +8,7 @@
 - Paper PDFs discovered: **23**
 - Successful MinerU tasks: **22**
 - Failed or unresolved tasks: **1**
-- Stable `paper/*__mineru.md` derivatives present: **22/23**
+- Stable `parsed/paper/*__mineru.md` derivatives present: **22/23**
 - Outputs with Unicode replacement characters: **4**
 - Outputs with missing image references: **0**
 

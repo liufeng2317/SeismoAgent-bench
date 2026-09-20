@@ -1,7 +1,7 @@
 # Phase I Six-Case Data Audit
 
 This document audits cross-case files, catalogs, and data-preparation status. Paper-level method extraction is recorded in
-`references/<SOURCE_ID>/paper/*__paper_reading.md`; catalog-level field audits are recorded in
+`references/<SOURCE_ID>/parsed/paper/*__paper_reading.md`; catalog-level field audits are recorded in
 `catalogs/<CATALOG_ID>/*__catalog_summary.md`; and frozen-window interpretation is recorded in each case's
 `analysis/*_analysis.md`.
 
