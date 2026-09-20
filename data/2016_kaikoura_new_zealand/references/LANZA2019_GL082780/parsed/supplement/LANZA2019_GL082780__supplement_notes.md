@@ -94,7 +94,7 @@ count.
 
 ## Evidence anchors
 
-- Main paper: `paper/LANZA2019_GL082780__paper__mineru.md`, especially the
+- Main paper: `parsed/paper/LANZA2019_GL082780__paper__mineru.md`, especially the
   `Data Sets`, `Methods`, §§4.1–4.2, and §6 conclusion blocks (MinerU
   `content_list_v2` pages 2–7).
 - Text SI: `Text S1` for REST and pick QC; `Text S2` for NonLinLoc;

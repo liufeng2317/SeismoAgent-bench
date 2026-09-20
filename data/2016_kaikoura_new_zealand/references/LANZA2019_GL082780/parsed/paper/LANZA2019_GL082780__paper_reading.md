@@ -17,7 +17,7 @@ output; supplementary claims cite the specific Text S or Table S1 product.
 | Article type | Research letter with a new high-precision aftershock relocation catalog; not an operational catalog paper | Abstract, §§2–4 |
 | Catalog relationship | The paper's primary output is the relocated hypocenter/pick product distributed as Data Set S1 (QuakeML) | Main-paper acknowledgements/conclusion; Text SI Data Set S1 caption |
 | Local paper | `paper/LANZA2019_GL082780__paper.pdf` | Local provenance |
-| Parsed text | `paper/LANZA2019_GL082780__paper__mineru.md` and `paper/mineru/.../content_list_v2.json` | MinerU output |
+| Parsed text | `parsed/LANZA2019_GL082780__paper__mineru.md` and `mineru/.../content_list_v2.json` | MinerU output |
 
 The article is a genuine catalog-construction and relocation study. It starts
 from a reviewed GeoNet event population, improves phase picks with REST/kpick,
@@ -201,11 +201,11 @@ count.
 ## Local provenance and remaining actions
 
 - Paper PDF: `data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/paper/LANZA2019_GL082780__paper.pdf`
-- MinerU text: `data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/paper/LANZA2019_GL082780__paper__mineru.md`
+- MinerU text: `data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/LANZA2019_GL082780__paper__mineru.md`
 - Text SI: `data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/supplement/grl59060-sup-0001-text_si-s01.docx`
 - Station Table S1: `data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/supplement/grl59060-sup-0002-tables1.xlsx`
 - QuakeML Data Set S1: `data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/raw/grl59060-sup-0003-ds01.xml`
-- Supplement notes: `../supplement/LANZA2019_GL082780__supplement_notes.md`
+- Supplement notes: `../parsed/supplement/LANZA2019_GL082780__supplement_notes.md`
 
 Before benchmark freeze, resolve or explicitly retain:
 

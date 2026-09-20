@@ -8,7 +8,7 @@
 | Title | *Next Generation Seismic Source Detection by Computer Vision: Untangling the Complexity of the 2016 Kaikōura Earthquake Sequence* | PDF title/abstract |
 | Journal / DOI | *Journal of Geophysical Research: Solid Earth*; DOI [10.1029/2024JB028735](https://doi.org/10.1029/2024JB028735) | Article metadata |
 | Article type | Research article that introduces SUGAR and constructs a machine-assisted event catalog, then relocates a quality-controlled subset with GrowClust | Abstract; §§2–4 |
-| Local paper parse | `paper/TAN2024_JB028735__paper__mineru.md` | MinerU output; quantitative claims below retain section/figure/SI anchors |
+| Local paper parse | `parsed/TAN2024_JB028735__paper__mineru.md` | MinerU output; quantitative claims below retain section/figure/SI anchors |
 | Public products | Wiley SI S09–S12 and Zenodo software/phase archive [10.5281/zenodo.10937462](https://doi.org/10.5281/zenodo.10937462) | Local files and article Data Availability statement |
 
 This is a genuine catalog-construction paper, not merely a review or method
@@ -146,7 +146,7 @@ not a guarantee for other windows.
 ## Local provenance and open actions
 
 - Paper PDF: `data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/paper/TAN2024_JB028735__paper.pdf`
-- Parsed paper: `.../paper/TAN2024_JB028735__paper__mineru.md`
+- Parsed paper: `.../parsed/TAN2024_JB028735__paper__mineru.md`
 - Supporting PDF and tables: `.../supplement/2024jb028735-sup-0001-supporting information si-s01.pdf` and `.../si-s09.xlsx`–`si-s12.xlsx`
 - Canonical catalog files: `.../catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_sugar_S10.xlsx` and `...__catalog_sugar_relocated_S11.xlsx`
 - Phase archive: `.../TAN2024_JB028735__phases_associated.zip`; extracted `.dat` files are under `phases/`.

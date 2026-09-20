@@ -1,0 +1,859 @@
+{
+  "article": {
+    "source_id": "TAN2024_JB028735",
+    "case_id": "2016_kaikoura_new_zealand",
+    "title": "Next Generation Seismic Source Detection by Computer Vision: Untangling the Complexity of the 2016 Kaikōura Earthquake Sequence",
+    "authors": [
+      "Fengzhou Tan",
+      "Honn Kao",
+      "Kwang Moo Yi",
+      "Edwin Nissen",
+      "Chet Goerzen",
+      "Jesse Hutchinson",
+      "Dawei Gao",
+      "Amir M. Farahbod"
+    ],
+    "year": 2024,
+    "journal": "Journal of Geophysical Research: Solid Earth",
+    "doi": "10.1029/2024JB028735",
+    "article_type": "research_article",
+    "scientific_question": "Can computer-vision source scanning and guided phase picking detect and locate the dense 2016 Kaikōura sequence, and can a quality-controlled subset be precisely relocated?",
+    "sequence": "2016 Mw 7.8 Kaikōura earthquake and immediate aftershock sequence",
+    "catalog_relationship": "Introduces SUGAR and publishes an event catalog (S10), a GrowClust-relocated intermediate product (S11), and focal-mechanism products (S12).",
+    "evidence": [
+      {
+        "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+        "locator": "title, abstract, author/DOI metadata",
+        "note": "Paper identity and catalog-construction purpose."
+      },
+      {
+        "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0001-supporting-information-si-s01__mineru.md",
+        "locator": "supplementary-information contents and data-product sections",
+        "note": "Supplementary material contains construction details and data products."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "TAN2024_JB028735_SUGAR",
+    "name": "SUGAR Kaikōura event catalog",
+    "product_type": "multi_product_release",
+    "role": "primary",
+    "quality_tier": "Q2",
+    "scientific_purpose": "Dense event detection, association, location, and relative relocation for the 2016 Kaikōura sequence.",
+    "event_definition": "Events detected and located by the SUGAR workflow; mainshock and largest aftershock GeoNet solutions are manually added because point-source/training assumptions and the picker are unreliable for very large events.",
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "SUGAR detected/located catalog S10",
+        "unit": "events",
+        "count_article": 67660,
+        "count_local": 67660,
+        "selection_rule": "SUGAR detection, guided picking, association, maximum-intersection location and magnitude estimation.",
+        "time_range": "2016-11-13 through 2016-12-31 23:59:15.180 UTC",
+        "spatial_depth_scope": "Northern South Island; initial source scan uses fixed 10 km depth, later maximum-intersection search 0–60 km.",
+        "magnitude_scope": "Local magnitude column M; article/local range in frozen window approximately -0.53 to 4.87.",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0003-table si-s10__extracted.md",
+            "locator": "sheet Sheet1, header and 67,660 data rows",
+            "note": "Local S10 table audit."
+          },
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "locator": "Section 4, S10 discussion; Supplementary Table S10 description",
+            "note": "Article-reported S10 population and construction."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "GrowClust relocated S11 intermediate table",
+        "unit": "events",
+        "count_article": 46440,
+        "count_local": 46440,
+        "selection_rule": "At least eight waveform cross-correlation coefficients above 0.65 for event-pair relocation support.",
+        "time_range": "2016-11-13 through 2016-12-31 UTC",
+        "spatial_depth_scope": "Relocated hypocenters; local full-table ranges are recorded in the catalog summary.",
+        "magnitude_scope": "Uses the S10 magnitude field; do not infer a separate magnitude scale.",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0004-table si-s11__extracted.md",
+            "locator": "sheet Sheet1, header and 46,440 data rows",
+            "note": "Local S11 table audit."
+          },
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "locator": "Section 4, GrowClust paragraph; Supplementary Table S11 description",
+            "note": "Article-reported relocation count and method."
+          }
+        ]
+      },
+      {
+        "population_id": "P3",
+        "label": "Cluster-filtered high-quality set",
+        "unit": "events",
+        "count_article": 41392,
+        "count_local": null,
+        "selection_rule": "Retain clusters containing at least 10 events. A separate final 41,392-row file is not present locally.",
+        "time_range": "2016-11-13 through 2016-12-31 UTC",
+        "spatial_depth_scope": null,
+        "magnitude_scope": null,
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "locator": "Section 4, paragraph describing clusters with at least 10 events",
+            "note": "Article reports 41,392 after cluster-size filtering."
+          },
+          {
+            "source": "data/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_summary.md",
+            "locator": "release reconciliation",
+            "note": "S11 is the released 46,440-row intermediate; final membership is not separately released."
+          }
+        ]
+      },
+      {
+        "population_id": "P4",
+        "label": "Focal-mechanism measurements",
+        "unit": "measurements",
+        "count_article": 55,
+        "count_local": 55,
+        "selection_rule": "Events with focal mechanisms in Table S12; this is not the full event catalog.",
+        "time_range": "2016-11-13 onward",
+        "spatial_depth_scope": null,
+        "magnitude_scope": "M field in S12.",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0005-table si-s12__extracted.md",
+            "locator": "sheet Sheet1, header and 55 data rows",
+            "note": "Local focal-mechanism table audit."
+          },
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "locator": "Supplementary Table S12 discussion and mechanism-table description",
+            "note": "Article-reported focal-mechanism count."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "10.1029/2024JB028735; https://doi.org/10.5281/zenodo.10937462",
+      "version": null,
+      "source_files": [
+        {
+          "path": "data/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_sugar_S10.xlsx",
+          "format": "xlsx",
+          "checksum": null,
+          "role": "canonical"
+        },
+        {
+          "path": "data/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_sugar_relocated_S11.xlsx",
+          "format": "xlsx",
+          "checksum": null,
+          "role": "canonical"
+        },
+        {
+          "path": "data/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/TAN2024_JB028735__phases_associated.zip",
+          "format": "zip of phase files",
+          "checksum": null,
+          "role": "raw_release"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+          "locator": "Data Availability",
+          "note": "Zenodo software/phase archive and Wiley supplementary products."
+        },
+        {
+          "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0001-supporting-information-si-s01__mineru.md",
+          "locator": "Data products and supplementary tables",
+          "note": "Stable supplementary sidecar used for extraction review."
+        },
+        {
+          "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0001-supporting-information-si-s01__mineru.md",
+          "locator": "Data products and supplementary tables",
+          "note": "Stable supplementary sidecar used for extraction review."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": null,
+      "row_count": null,
+      "time_range": "S10: 2016-11-13 to 2016-12-31 23:59:15.180 UTC; S11: same sequence span",
+      "latitude_longitude_depth_range": "Frozen case window: S10 lat -43.420057 to -41.218655, lon 172.032762 to 175.133776, depth 0–60 km; S11 common-mask ranges are narrower.",
+      "magnitude_range": "Frozen common window: approximately -0.53 to 4.87 for S10/S11 M field.",
+      "article_local_discrepancy": "S10 (67,660), S11 (46,440), and S12 (55) match local products; 41,392 is article-reported final membership without a local standalone file.",
+      "evidence": [
+        {
+          "source": "data/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_summary.md",
+          "locator": "local audit tables",
+          "note": "Counts, ranges, masks and release reconciliation."
+        }
+      ],
+      "product_counts": {
+        "S10": 67660,
+        "S11": 46440,
+        "S12": 55,
+        "final_cluster_filtered_reported": 41392
+      }
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "dense event recovery",
+        "association and origin-time comparison",
+        "relative relocation/cluster geometry using S11",
+        "phase-support and station-coverage analysis"
+      ],
+      "unsuitable_metrics": [
+        "universal absolute-location truth",
+        "direct b-value comparison without magnitude calibration",
+        "treating S11 as the final 41,392-event cluster-filtered file"
+      ],
+      "independence_conditions": [
+        "Different detection workflow from Lanza/Chamberlain, but shares GeoNet waveforms and regional velocity-model context.",
+        "Do not expose S10/S11 during an autonomous benchmark run."
+      ],
+      "limitations": [
+        "SUGAR model is site/network specific and trained with synthetic data for Kaikōura geometry.",
+        "Initial source scan uses fixed 10 km depth.",
+        "Large events are manually inserted from GeoNet solutions.",
+        "Absolute errors are expected to be a few kilometres; relative bootstrap uncertainty is below 1 km.",
+        "S11 is an intermediate released table before final >=10-event cluster filtering."
+      ],
+      "evidence": [
+        {
+          "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+          "locator": "§4–§5 and benchmark interpretation",
+          "note": "Quality, independence, and applicability limitations."
+        }
+      ]
+    },
+    "product_semantics": {
+      "S10": "67,660-row SUGAR detected/located catalog; local canonical event table.",
+      "S11": "46,440-row GrowClust-relocated intermediate table; not the final filtered set.",
+      "final_cluster_filtered": "41,392 events reported by the article after retaining clusters with at least 10 events; standalone membership file is not local.",
+      "S12": "55 focal-mechanism measurements; derived product, not a complete event catalog."
+    },
+    "product_schemas": {
+      "S10": {
+        "role": "detected_located_catalog",
+        "identifier_field": "ID",
+        "fields": [
+          "Time",
+          "Lat",
+          "Lon",
+          "Dep",
+          "M",
+          "Picks",
+          "AI score",
+          "Brightness",
+          "Q_e",
+          "residual",
+          "ID"
+        ],
+        "units": {
+          "Time": "UTC",
+          "Lat": "degree",
+          "Lon": "degree",
+          "Dep": "km",
+          "M": "unspecified catalog magnitude"
+        },
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0003-table si-s10__extracted.md",
+            "locator": "Sheet1 header: Time, Lat, Lon, Dep, M, Picks, AI score, Brightness, Q_e, residual, ID",
+            "note": "S10 product-specific fields."
+          }
+        ]
+      },
+      "S11": {
+        "role": "relocated_intermediate_catalog",
+        "identifier_field": "event identity carried from S10; exact ID mapping requires row-level audit",
+        "fields": [
+          "split origin-time fields",
+          "relocated latitude",
+          "relocated longitude",
+          "relocated depth",
+          "magnitude",
+          "cluster id",
+          "events in cluster"
+        ],
+        "units": {
+          "time": "UTC",
+          "latitude": "degree",
+          "longitude": "degree",
+          "depth": "km",
+          "magnitude": "inherited/unspecified M"
+        },
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0004-table si-s11__extracted.md",
+            "locator": "Sheet1 header: relocation and cluster columns",
+            "note": "S11 product-specific fields."
+          }
+        ]
+      },
+      "S12": {
+        "role": "focal_mechanism_derived_product",
+        "identifier_field": "event identifier in S12",
+        "fields": [
+          "event identity",
+          "origin time",
+          "location",
+          "M",
+          "strike",
+          "dip",
+          "rake",
+          "mechanism quality fields"
+        ],
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0005-table si-s12__extracted.md",
+            "locator": "Sheet1 header and 55 data rows",
+            "note": "S12 is a derived focal-mechanism product, not the full catalog."
+          }
+        ]
+      }
+    },
+    "quality_tier_detail": "Dense SUGAR detection/location catalog; S11 relative relocation is stronger for geometry than for absolute truth."
+  },
+  "construction_workflow": {
+    "summary": "GeoNet waveforms from a 46-station network are preprocessed into source-scanning brightness videos, analyzed by a 3-D U-Net, merged into candidates, phase-picked and associated, located and magnitude-estimated, then relatively relocated with GrowClust and cluster-filtered.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "GeoNet seismic waveforms",
+        "type": "waveform",
+        "provider_or_network": "GeoNet",
+        "temporal_spatial_scope": "2016-11-13 to 2016-12-31; northern South Island Kaikōura region",
+        "station_count": 46,
+        "channels_sampling": "Vertical and two horizontal channels; sample rate not specified in current extraction.",
+        "role": "primary_input",
+        "availability_conditions": "9 selected stations had approximately ±1 s timing errors; paper reports little effect.",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0002-table si-s09__extracted.md",
+            "locator": "TableS80 station rows",
+            "note": "46 GeoNet stations and coordinates/channels."
+          },
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "locator": "§4 and Table S9",
+            "note": "Network and timing conditions."
+          }
+        ]
+      },
+      {
+        "source_id": "S2",
+        "name": "New Zealand 3-D seismic velocity model 2.3",
+        "type": "velocity_model",
+        "provider_or_network": "New Zealand regional model",
+        "temporal_spatial_scope": "Kaikōura application",
+        "station_count": null,
+        "channels_sampling": null,
+        "role": "model",
+        "availability_conditions": null,
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "locator": "§4 real-data application",
+            "note": "Velocity model used for application."
+          }
+        ]
+      },
+      {
+        "source_id": "S3",
+        "name": "Synthetic training samples",
+        "type": "synthetic_training_data",
+        "provider_or_network": null,
+        "temporal_spatial_scope": "Synthetic training domain",
+        "station_count": null,
+        "channels_sampling": null,
+        "role": "calibration",
+        "availability_conditions": "194,559 samples; 20 training epochs.",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "locator": "§2.1–§3.1",
+            "note": "U-Net synthetic training description."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "waveform preprocessing and source scanning",
+        "category": "preprocessing",
+        "purpose": "Create source-scanning brightness videos from the regional waveform network.",
+        "inputs": [
+          "S1 GeoNet waveforms",
+          "S2 velocity model"
+        ],
+        "outputs": [
+          "hourly brightness video",
+          "candidate source grids"
+        ],
+        "method": "5–20 Hz filtering; stack 1.5 s before to 4.5 s after predicted arrivals; 4 km horizontal grid and fixed 10 km initial depth.",
+        "software_or_model": null,
+        "parameters": [
+          {
+            "name": "frequency_band",
+            "value": "5–20",
+            "unit": "Hz",
+            "note": "Preprocessing band."
+          },
+          {
+            "name": "horizontal_grid",
+            "value": 4,
+            "unit": "km",
+            "note": "Brightness grid spacing."
+          },
+          {
+            "name": "initial_depth",
+            "value": 10,
+            "unit": "km",
+            "note": "Fixed initial source-scan depth."
+          }
+        ],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "Brightness videos and local maxima candidates.",
+        "analyst_intervention": "None reported for scanning.",
+        "dependencies": "Sequence-specific station geometry and predicted arrivals.",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "locator": "Section 2.2.1, source-scanning brightness-video construction paragraph",
+            "note": "Brightness-video construction."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "3-D U-Net source segmentation",
+        "category": "detection",
+        "purpose": "Predict source locations and identify candidate maxima in the 3-D source volume.",
+        "inputs": [
+          "brightness/video representation",
+          "S3 synthetic training samples"
+        ],
+        "outputs": [
+          "U-Net prediction-score video",
+          "U-Net candidate maxima"
+        ],
+        "method": "3-D U-Net semantic segmentation.",
+        "software_or_model": "3-D U-Net",
+        "parameters": [
+          {
+            "name": "input_block",
+            "value": "60×60×60",
+            "unit": "pixels",
+            "note": "Input volume."
+          },
+          {
+            "name": "output_block",
+            "value": "20×20×20",
+            "unit": "pixels",
+            "note": "Central output volume."
+          },
+          {
+            "name": "time_pixel",
+            "value": 0.5,
+            "unit": "s",
+            "note": "Temporal resolution."
+          },
+          {
+            "name": "prediction_threshold",
+            "value": 1.0,
+            "unit": "score",
+            "note": "Real-data threshold."
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Synthetic test precision reported >0.93 at selected threshold; this is not the real-event catalog precision."
+        ],
+        "intermediate_result": "Merged brightness/U-Net candidate list.",
+        "analyst_intervention": "Model trained on synthetic samples; no event-catalog labels used for training.",
+        "dependencies": "Kaikōura-specific geometry and training distribution.",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "locator": "Sections 2.1–3.1, 3-D U-Net architecture/training paragraphs and real-data threshold",
+            "note": "U-Net dimensions, training and threshold."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST3",
+        "order": 3,
+        "name": "candidate merging and guided phase picking",
+        "category": "picking",
+        "purpose": "Convert source candidates into phase observations suitable for association.",
+        "inputs": [
+          "brightness candidates",
+          "U-Net candidates",
+          "S1 waveforms"
+        ],
+        "outputs": [
+          "P/S phase picks"
+        ],
+        "method": "Candidate merging followed by Earthquake Transformer guided picking on the real data.",
+        "software_or_model": "Earthquake Transformer",
+        "parameters": [
+          {
+            "name": "candidate_station_selection",
+            "value": "20 closest stations",
+            "unit": null,
+            "note": "Stations considered around predicted source."
+          },
+          {
+            "name": "phase_window",
+            "value": "predicted-arrival windows",
+            "unit": null,
+            "note": "Candidate phases constrained around predictions."
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Delete candidate if fewer than two qualified P or two qualified S phases."
+        ],
+        "intermediate_result": "Candidate phase sets.",
+        "analyst_intervention": "No routine manual picking reported; mainshock and largest aftershock are manually inserted later from GeoNet solutions.",
+        "dependencies": "Predicted arrivals and station geometry.",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "locator": "Section 2.2.3, candidate merging and guided P/S picking paragraph",
+            "note": "Guided P/S picking and minimum phase rules."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST4",
+        "order": 4,
+        "name": "phase association and maximum-intersection location",
+        "category": "association_and_location",
+        "purpose": "Associate phases to events and refine hypocenters.",
+        "inputs": [
+          "P/S phase picks",
+          "S2 velocity model"
+        ],
+        "outputs": [
+          "associated events",
+          "located S10 candidates"
+        ],
+        "method": "Distance-dependent P/S residual association and maximum-intersection search.",
+        "software_or_model": "Maximum-intersection location procedure",
+        "parameters": [
+          {
+            "name": "magnitude_residual",
+            "value": "<1.2",
+            "unit": "magnitude units",
+            "note": "Association magnitude residual criterion."
+          },
+          {
+            "name": "search_range",
+            "value": "±6 km latitude/longitude; 0–60 km depth",
+            "unit": "km",
+            "note": "Maximum-intersection refinement volume."
+          },
+          {
+            "name": "intersection_quality",
+            "value": "Q_e >= 0.6 or total phases >= 10",
+            "unit": null,
+            "note": "Event retention criterion."
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Fewer than two qualified P or two qualified S phases deletes candidate.",
+          "Retain when Q_e >= 0.6 or total phase count >= 10."
+        ],
+        "intermediate_result": "SUGAR event catalog S10 (67,660 rows).",
+        "analyst_intervention": "GeoNet mainshock and largest aftershock solutions manually added.",
+        "dependencies": "Distance-dependent residual thresholds and velocity model.",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "locator": "Section 2.2.3, Equations 5–7 and event-retention paragraph",
+            "note": "Association and location rules."
+          },
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0003-table si-s10__extracted.md",
+            "locator": "header and rows",
+            "note": "S10 released event table."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST5",
+        "order": 5,
+        "name": "local magnitude estimation",
+        "category": "magnitude",
+        "purpose": "Estimate local magnitudes for associated located events.",
+        "inputs": [
+          "located events",
+          "waveform amplitudes",
+          "station corrections"
+        ],
+        "outputs": [
+          "S10 magnitude field"
+        ],
+        "method": "Local Richter-style equation with synthesized Wood–Anderson amplitudes, Rhoades et al. (2021) constants, P-wave amplitude factor-of-two correction, and station correction in final pass.",
+        "software_or_model": "Rhoades et al. (2021) magnitude constants; synthetic Wood–Anderson response",
+        "parameters": [
+          {
+            "name": "p_wave_amplitude_correction",
+            "value": 2,
+            "unit": "factor",
+            "note": "Correction used in magnitude calculation."
+          }
+        ],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "Magnitude-bearing S10/S11 records.",
+        "analyst_intervention": null,
+        "dependencies": "Station corrections and amplitude calibration.",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "locator": "Sections 2.2.3–2.2.4, local-magnitude equation and station-correction paragraph",
+            "note": "Magnitude equation and corrections."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST6",
+        "order": 6,
+        "name": "waveform differential-time relocation",
+        "category": "relocation",
+        "purpose": "Improve relative locations for a quality-controlled event subset.",
+        "inputs": [
+          "S10 events and P/S picks",
+          "S1 waveforms"
+        ],
+        "outputs": [
+          "S11 relocated table"
+        ],
+        "method": "1–10 Hz waveform cross-correlation on 2 s P/S windows followed by GrowClust.",
+        "software_or_model": "GrowClust",
+        "parameters": [
+          {
+            "name": "frequency_band",
+            "value": "1–10",
+            "unit": "Hz",
+            "note": "Relocation filtering."
+          },
+          {
+            "name": "window_length",
+            "value": 2,
+            "unit": "s",
+            "note": "P/S correlation windows."
+          },
+          {
+            "name": "pair_support",
+            "value": 8,
+            "unit": "cross-correlation coefficients",
+            "note": "At least eight coefficients above threshold."
+          },
+          {
+            "name": "correlation_threshold",
+            "value": 0.65,
+            "unit": "coefficient",
+            "note": "Pair inclusion threshold."
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Event pairs require at least eight coefficients above 0.65."
+        ],
+        "intermediate_result": "46,440-row S11 relocated intermediate table.",
+        "analyst_intervention": null,
+        "dependencies": "S10 event hypotheses and waveform availability.",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "locator": "Section 4, GrowClust relocation paragraph and Supplementary Table S11 description",
+            "note": "GrowClust settings and count."
+          },
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0004-table si-s11__extracted.md",
+            "locator": "header and rows",
+            "note": "S11 fields and local row count."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST7",
+        "order": 7,
+        "name": "cluster filtering and supplementary mechanisms",
+        "category": "qc_and_export",
+        "purpose": "Select dense clusters for the final high-quality set and provide focal mechanisms.",
+        "inputs": [
+          "S11 relocated table",
+          "S12 focal-mechanism subset"
+        ],
+        "outputs": [
+          "reported 41,392-event cluster-filtered set",
+          "55 focal mechanisms"
+        ],
+        "method": "Retain clusters with at least 10 events; focal mechanisms provided separately.",
+        "software_or_model": null,
+        "parameters": [
+          {
+            "name": "minimum_cluster_size",
+            "value": 10,
+            "unit": "events",
+            "note": "Final cluster filter."
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "S11 is an intermediate release; final cluster membership is not separately archived locally."
+        ],
+        "intermediate_result": "Article reports 41,392 events; local S12 has 55 rows.",
+        "analyst_intervention": "Large-event manual insertion occurs before this stage.",
+        "dependencies": "S11 cluster id/events-in-cluster fields.",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "locator": "Section 4, cluster-size filtering paragraph and Supplementary Table S12 discussion",
+            "note": "Cluster filter and focal-mechanism product."
+          },
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0005-table si-s12__extracted.md",
+            "locator": "header and 55 rows",
+            "note": "Local S12 table."
+          }
+        ]
+      }
+    ],
+    "final_output": "S10 canonical detected/located catalog; S11 canonical released relocated intermediate; article-reported 41,392-event cluster-filtered subset is not separately available locally.",
+    "evidence": [
+      {
+        "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+        "locator": "workflow §§2–4",
+        "note": "End-to-end workflow reconstructed from article and SI."
+      },
+      {
+        "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0001-supporting-information-si-s01__mineru.md",
+        "locator": "supplementary-information method and data-product sections",
+        "note": "Supplementary construction material is part of the source evidence."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [
+      {
+        "product_id": "DP1",
+        "name": "GeoNet station inventory",
+        "type": "station_table",
+        "file_path": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0002-table si-s09__extracted.md",
+        "catalog_relation": "Input network metadata, not an event catalog.",
+        "scientific_use": "Defines the 46-station network and channel geometry.",
+        "count_or_scope": "46 GeoNet station rows.",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0002-table si-s09__extracted.md",
+            "locator": "TableS80 header and rows",
+            "note": "Station names, coordinates and channels."
+          }
+        ]
+      },
+      {
+        "product_id": "DP2",
+        "name": "Associated phase archive",
+        "type": "phase_table",
+        "file_path": "data/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/TAN2024_JB028735__phases_associated.zip",
+        "catalog_relation": "Phase-level support for SUGAR events; not an event catalog.",
+        "scientific_use": "Phase support and station-coverage analysis.",
+        "count_or_scope": "Local audit: 1,165 .dat files, approximately 1,382,337 phase rows.",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_summary.md",
+            "locator": "phase archive audit",
+            "note": "Phase-file count and schema audit."
+          }
+        ]
+      },
+      {
+        "product_id": "DP3",
+        "name": "Focal mechanisms",
+        "type": "focal_mechanism",
+        "file_path": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0005-table si-s12__extracted.md",
+        "catalog_relation": "55-event subset associated with the sequence; not the main catalog.",
+        "scientific_use": "Faulting-style and mechanism interpretation.",
+        "count_or_scope": "55 rows; 12 events >M4 plus 43 smaller events reported.",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0005-table si-s12__extracted.md",
+            "locator": "header and data rows",
+            "note": "Strike, dip, rake, location and magnitude fields."
+          }
+        ]
+      }
+    ],
+    "scientific_findings": [
+      {
+        "statement": "The dense SUGAR catalog resolves complex overlapping seismicity, while the final cluster-filtered set is intended as a high-quality relative-geometry product.",
+        "depends_on": "S10/S11 and cluster filtering",
+        "scope": "2016 Kaikōura sequence",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "locator": "abstract, §4 and conclusions",
+            "note": "Catalog-based scientific interpretation."
+          }
+        ]
+      },
+      {
+        "statement": "Absolute locations are expected to have errors of a few kilometres, whereas relative bootstrap uncertainties are reported below 1 km.",
+        "depends_on": "S11 GrowClust relocation",
+        "scope": "relocated event geometry",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "locator": "§4 uncertainty discussion",
+            "note": "Absolute versus relative uncertainty distinction."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "Q2 dense-detection/association and relative-relocation reference; metric-specific Q1 for the reported clustered relative geometry only.",
+      "recommended_role": "Primary target for dense event recovery, phase association, and relative relocation stress tests in the Kaikōura case.",
+      "comparison_or_baseline_sources": "Compare with Lanza/Chamberlain products and GeoNet operational baseline only after identical time/space/depth masks.",
+      "valid_comparisons": "Event recovery, origin-time, relative geometry, cluster structure, phase support, and station-coverage metrics.",
+      "caveats": "Shared GeoNet observations reduce observational independence; SUGAR model is site-specific; do not treat S11 as the final 41,392-row file.",
+      "evidence": [
+        {
+          "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+          "locator": "benchmark interpretation and §5",
+          "note": "Role and limitations."
+        }
+      ]
+    },
+    "missing_information": [
+      "Stable sidecar Markdown for the SI PDF is not yet copied from the MinerU bundle; the bundle full.md is available.",
+      "A separate 41,392-row final cluster-membership file is not local; recompute from S11 cluster fields if required.",
+      "Exact row-level uncertainty fields and magnitude calibration/type require further catalog audit."
+    ]
+  },
+  "extraction_quality": {
+    "status": "partial",
+    "extraction_confidence": "medium",
+    "completed_sections": [
+      "article",
+      "catalog",
+      "construction_workflow",
+      "additional_information"
+    ],
+    "missing_core_fields": [
+      "sample rate/channel completeness beyond S9 station table",
+      "row-level uncertainty schema"
+    ],
+    "warnings": [
+      "S10/S11 generic M field must not be relabeled as ML without calibration.",
+      "Article-reported final 41,392-event product is not a local file.",
+      "Exact row-level uncertainty fields and magnitude calibration/type need review."
+    ],
+    "needs_human_review": true
+  }
+}

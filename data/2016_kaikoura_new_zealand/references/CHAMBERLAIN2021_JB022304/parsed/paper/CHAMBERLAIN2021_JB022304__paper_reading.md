@@ -11,7 +11,7 @@
 | Article type | Research article that constructs a 10-year matched-filter catalog, then performs absolute and relative location/relocation | Abstract; Sections 2–3 |
 | Official data/code release | Zenodo record [6763130](https://zenodo.org/record/6763130); article data availability says CSV and QuakeML are provided | PDF pp. 21–22 |
 | Version status | The PDF includes a correction notice: the initial focal-mechanism catalog was erroneous; data, SI, figures and software were replaced. The corrected version is the version of record. | PDF p. 24 erratum |
-| Local paper parse | `paper/CHAMBERLAIN2021_JB022304__paper__mineru.md`; MinerU `content_list` page indices were used as PDF-page anchors | Local parse audit |
+| Local paper parse | `parsed/CHAMBERLAIN2021_JB022304__paper__mineru.md`; MinerU `content_list` page indices were used as PDF-page anchors | Local parse audit |
 
 This is a genuine catalog-construction paper. It is not an independent absolute
 truth set: its template population is inherited from Lanza et al. (2019), and
@@ -165,7 +165,7 @@ count is the catalog-local time audit; 2,214 is the comparable benchmark count.
 ## Local provenance and open actions
 
 - Paper PDF: `data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/paper/CHAMBERLAIN2021_JB022304__paper.pdf`
-- Parsed paper: `data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md`
+- Parsed paper: `data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/CHAMBERLAIN2021_JB022304__paper__mineru.md`
 - Corrected canonical catalog: `data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust_corrected_focal_mechanisms.csv`
 - Legacy Zenodo CSV: `data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust.csv`
 - Official release: [Zenodo 5035841](https://zenodo.org/records/5035841) for the legacy product; corrected data/code archive is identified by the article as Zenodo 6763130.

@@ -1,0 +1,534 @@
+{
+  "article": {
+    "source_id": "CHAMBERLAIN2021_JB022304",
+    "case_id": "2016_kaikoura_new_zealand",
+    "title": "Illuminating the Pre-, Co-, and Post-Seismic Phases of the 2016 M7.8 Kaikōura Earthquake With 10 Years of Seismicity",
+    "authors": [
+      "C. J. Chamberlain",
+      "W. B. Frank",
+      "F. Lanza",
+      "J. Townend",
+      "E. Warren-Smith"
+    ],
+    "year": 2021,
+    "journal": "Journal of Geophysical Research: Solid Earth",
+    "doi": "10.1029/2021JB022304",
+    "article_type": "research_article",
+    "scientific_question": "Can a decade-long matched-filter catalog illuminate pre-, co-, and post-seismic activity around Kaikōura?",
+    "sequence": "2016 Mw 7.8 Kaikōura sequence and 2009–2020 surrounding seismicity",
+    "catalog_relationship": "Constructs an EQcorrscan/NonLinLoc/GrowClust catalog from Lanza-derived templates and supplies corrected focal mechanisms.",
+    "evidence": [
+      {
+        "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+        "locator": "title, abstract and Sections 2–3",
+        "note": "Paper identity and catalog purpose."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "CHAMBERLAIN2021_JB022304_GROWCLUST_CORRECTED",
+    "name": "Chamberlain decade-long matched-filter catalog",
+    "product_type": "matched_filter_event_catalog_plus_relocation_and_mechanisms",
+    "role": "secondary",
+    "quality_tier": "Q2",
+    "scientific_purpose": "Long-duration detection expansion, relative geometry and focal mechanisms.",
+    "event_definition": "EQcorrscan detections with at least five station picks, HYPOCENTER RMS QC, and NonLinLoc absolute locations; GrowClust/HypoDD and mechanisms are derived products.",
+    "product_semantics": {
+      "final_events": "33,328 corrected CSV rows",
+      "inside_study_region": "32,939 article-reported NonLinLoc events",
+      "growclust_subset": "27,431 article-reported relative relocations; no explicit local flag",
+      "focal_mechanisms": "1,755 article versus 1,756 complete local rows"
+    },
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "Matched-filter final events",
+        "unit": "events",
+        "count_article": 33328,
+        "count_local": 33328,
+        "selection_rule": "≥5 station picks, iterative HYPOCENTER RMS QC",
+        "time_range": "2009-01-01 to 2020-01-01",
+        "spatial_depth_scope": "article study region; 389 outside it",
+        "magnitude_scope": "ML/local magnitude; 50 missing locally",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "locator": "Section 3, detection/QC paragraphs",
+            "note": "Article count."
+          },
+          {
+            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+            "locator": "corrected catalog audit",
+            "note": "Local count."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "GrowClust relative relocations",
+        "unit": "events",
+        "count_article": 27431,
+        "count_local": null,
+        "selection_rule": "relative relocation subset with template/correlation support",
+        "time_range": "2009-01-01 to 2020-01-01",
+        "spatial_depth_scope": "not separately reconstructable from CSV",
+        "magnitude_scope": "inherited event magnitude",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "locator": "Sections 3–4, relative-relocation paragraph",
+            "note": "Article subset."
+          },
+          {
+            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+            "locator": "benchmark role and limitations",
+            "note": "No local flag."
+          }
+        ]
+      },
+      {
+        "population_id": "P3",
+        "label": "Focal-mechanism rows",
+        "unit": "measurements",
+        "count_article": 1755,
+        "count_local": 1756,
+        "selection_rule": "manual P-polarity inversion with >8 stations",
+        "time_range": "template subset",
+        "spatial_depth_scope": null,
+        "magnitude_scope": "associated catalog magnitude",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "locator": "Section 3, focal-mechanism paragraph",
+            "note": "Method/count."
+          },
+          {
+            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+            "locator": "corrected catalog audit",
+            "note": "Local rows."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "https://zenodo.org/records/6763130",
+      "version": "corrected version of record",
+      "source_files": [
+        {
+          "product_id": "final_events",
+          "path": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust_corrected_focal_mechanisms.csv",
+          "format": "CSV",
+          "checksum": "6f00695585998c365a81132a60bc3c7ebe058abdd352e8d8d8f802489559137a",
+          "role": "canonical"
+        },
+        {
+          "product_id": "legacy_control",
+          "path": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust.csv",
+          "format": "CSV",
+          "checksum": "b2f7c6e60198b309274051764b564a5a544ae039e45a142e2e31034e0068fc2b",
+          "role": "provenance_control"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+          "locator": "provenance and product lineage",
+          "note": "Corrected release and legacy control."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": 33328,
+      "row_count": 33328,
+      "product_counts": {
+        "final_events": 33328,
+        "focal_mechanism_rows": 1756
+      },
+      "time_range": "2009-01-02 22:33:53.563403 to 2020-01-01 16:04:54.216000 UTC",
+      "latitude_longitude_depth_range": "lat -43.878229 to -39.975169; lon 171.971969–177.414826; depth -2.990234–97.898 km",
+      "magnitude_range": "0.234392–6.312942; 50 missing",
+      "article_local_discrepancy": "33,328 headline rows match; 27,431 relocation membership is implicit; focal mechanisms differ by one row.",
+      "evidence": [
+        {
+          "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+          "locator": "corrected catalog audit",
+          "note": "Rows, ranges and mechanism audit."
+        }
+      ]
+    },
+    "product_schemas": {
+      "final_events": {
+        "role": "canonical_event_catalog",
+        "identifier_field": "event_id",
+        "fields": [
+          "time",
+          "latitude",
+          "longitude",
+          "depth",
+          "magnitude",
+          "phase/station counts",
+          "uncertainties",
+          "event_id",
+          "template-id",
+          "strike",
+          "dip",
+          "rake",
+          "Slip style"
+        ],
+        "units": {
+          "depth": "m in source; convert to km",
+          "latitude": "degree",
+          "longitude": "degree"
+        },
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+            "locator": "native schema and corrected catalog audit",
+            "note": "CSV fields and units."
+          }
+        ]
+      },
+      "focal_mechanisms": {
+        "role": "derived_mechanism_product",
+        "identifier_field": "event_id",
+        "fields": [
+          "strike",
+          "dip",
+          "rake",
+          "kappa",
+          "scalar error",
+          "Slip style"
+        ],
+        "units": {
+          "strike": "degree",
+          "dip": "degree",
+          "rake": "degree"
+        },
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+            "locator": "complete mechanism rows",
+            "note": "Corrected fields."
+          }
+        ]
+      }
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "matched-event recovery",
+        "relative-location residuals",
+        "cluster geometry",
+        "uncertainty calibration"
+      ],
+      "unsuitable_metrics": [
+        "universal completeness",
+        "absolute truth for every event",
+        "raw event-count ranking"
+      ],
+      "independence_conditions": [
+        "record Lanza-template and shared-waveform dependence"
+      ],
+      "limitations": [
+        "no local relocation flag",
+        "corrected/legacy focal-mechanism lineage",
+        "time-varying detection"
+      ],
+      "evidence": [
+        {
+          "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+          "locator": "benchmark role and limitations",
+          "note": "Evaluation role."
+        }
+      ]
+    },
+    "quality_tier_detail": "Long-duration matched-filter catalog with a high-quality relative-relocation subset and focal mechanisms."
+  },
+  "construction_workflow": {
+    "summary": "Lanza templates → 21-station waveform extraction → 30-Hz/1.5–12-Hz filtering → 4-s P/S templates and SNR≥4 → EQcorrscan → pick correction → HYPOCENTER RMS QC → NonLinLoc NZ3D v2.2 → Wood–Anderson magnitude → GrowClust/HypoDD → focal mechanisms.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "GeoNet and IRIS waveforms",
+        "type": "waveform",
+        "provider_or_network": "GeoNet/IRIS Z1",
+        "temporal_spatial_scope": "2009–2020 Kaikōura region",
+        "station_count": 21,
+        "channels_sampling": "30-Hz resampling",
+        "role": "primary_input",
+        "availability_conditions": "STREWN/strong-motion stations added for location/mechanisms, not detection",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "locator": "Section 2, network paragraph",
+            "note": "Detection network."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "template preparation",
+        "category": "preprocessing",
+        "purpose": "Prepare Lanza templates",
+        "inputs": [
+          "waveforms",
+          "Lanza picks"
+        ],
+        "outputs": [
+          "2,584 templates"
+        ],
+        "method": "30-Hz resampling, 1.5–12-Hz Butterworth, 4-s P/S windows, SNR≥4",
+        "software_or_model": null,
+        "parameters": [],
+        "qc_and_rejection_rules": [
+          "remove channels SNR<4 and templates with <5 stations"
+        ],
+        "intermediate_result": "2,584 templates",
+        "analyst_intervention": null,
+        "dependencies": "Lanza population",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "locator": "Section 3, template paragraph",
+            "note": "Template settings."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "EQcorrscan detection",
+        "category": "detection",
+        "purpose": "Detect template-like events",
+        "inputs": [
+          "templates",
+          "continuous waveforms"
+        ],
+        "outputs": [
+          "detections and picks"
+        ],
+        "method": "summed normalized correlation with separation/duplicate rules",
+        "software_or_model": "EQcorrscan",
+        "parameters": [
+          {
+            "name": "pick correlation",
+            "value": ">0.4",
+            "unit": "coefficient"
+          },
+          {
+            "name": "template separation",
+            "value": 4,
+            "unit": "s"
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "retain highest-correlation detection within 1 s",
+          "require ≥5 station picks"
+        ],
+        "intermediate_result": "33,343 detections / 899,460 picks",
+        "analyst_intervention": null,
+        "dependencies": "station availability/template morphology",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "locator": "Section 3, detection/picking paragraphs",
+            "note": "Detection settings; exact MAD symbol needs PDF visual check."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST3",
+        "order": 3,
+        "name": "HYPOCENTER and NonLinLoc",
+        "category": "location",
+        "purpose": "QC detections and obtain absolute origins",
+        "inputs": [
+          "detections/picks",
+          "Okada 1-D and NZ3D v2.2"
+        ],
+        "outputs": [
+          "33,328 locations"
+        ],
+        "method": "iterative largest-residual removal to RMS<1 s, then NonLinLoc",
+        "software_or_model": "HYPOCENTER; NonLinLoc",
+        "parameters": [
+          {
+            "name": "RMS threshold",
+            "value": "<1",
+            "unit": "s"
+          },
+          {
+            "name": "minimum stations",
+            "value": 5,
+            "unit": "stations"
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "remove 30 detections"
+        ],
+        "intermediate_result": "32,939 inside study region",
+        "analyst_intervention": null,
+        "dependencies": "velocity models/stations",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "locator": "Section 3, location paragraphs",
+            "note": "Location QC/counts."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST4",
+        "order": 4,
+        "name": "magnitude and relative relocation",
+        "category": "relocation",
+        "purpose": "Estimate magnitude and relative geometry",
+        "inputs": [
+          "located events",
+          "amplitudes",
+          "differential times"
+        ],
+        "outputs": [
+          "magnitude and relocation subsets"
+        ],
+        "method": "Wood–Anderson; GrowClust and HypoDD 2.1b",
+        "software_or_model": "GrowClust; HypoDD",
+        "parameters": [],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "27,431 article-reported relocations",
+        "analyst_intervention": null,
+        "dependencies": "template correlation and models",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "locator": "Section 3, magnitude/relocation paragraphs",
+            "note": "Methods/count."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST5",
+        "order": 5,
+        "name": "focal mechanisms and export",
+        "category": "qc_and_export",
+        "purpose": "Provide mechanisms and corrected CSV",
+        "inputs": [
+          "manual P polarities",
+          "catalog"
+        ],
+        "outputs": [
+          "mechanism fields"
+        ],
+        "method": "Bayesian first-motion inversion",
+        "software_or_model": "Walsh et al. (2009)",
+        "parameters": [
+          {
+            "name": "polarity stations",
+            "value": ">8",
+            "unit": "stations"
+          }
+        ],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "1,755 article / 1,756 local rows",
+        "analyst_intervention": "manual P-polarity picks",
+        "dependencies": "strong-motion/STREWN observations",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "locator": "Section 3, focal-mechanism paragraph",
+            "note": "Mechanism method/count."
+          }
+        ]
+      }
+    ],
+    "final_output": "Corrected 33,328-row CSV; relocation membership remains implicit.",
+    "evidence": [
+      {
+        "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+        "locator": "Sections 2–3",
+        "note": "End-to-end workflow."
+      },
+      {
+        "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+        "locator": "provenance and audit",
+        "note": "Corrected product."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [
+      {
+        "product_id": "DP1",
+        "name": "legacy CSV",
+        "type": "provenance_control",
+        "file_path": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust.csv",
+        "catalog_relation": "superseded mechanism release",
+        "scientific_use": "lineage comparison",
+        "count_or_scope": "34,704 rows; do not merge",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+            "locator": "legacy-versus-corrected comparison",
+            "note": "Correction lineage."
+          }
+        ]
+      }
+    ],
+    "scientific_findings": [
+      {
+        "statement": "Long-duration matched filtering reveals pre-, co-, and post-seismic activity, but template conditioning limits completeness.",
+        "depends_on": null,
+        "scope": "2016 Mw 7.8 Kaikōura sequence and 2009–2020 surrounding seismicity",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "locator": "abstract and discussion",
+            "note": "Scientific interpretation."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "Long-duration matched-filter catalog with a high-quality relative-relocation subset and focal mechanisms.",
+      "recommended_role": "Secondary dense detection reference; relative-location subset is a metric-specific high-quality target.",
+      "comparison_or_baseline_sources": null,
+      "valid_comparisons": null,
+      "caveats": "Secondary dense detection reference; relative-location subset is a metric-specific high-quality target.",
+      "evidence": [
+        {
+          "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+          "locator": "abstract and discussion",
+          "note": "Scientific interpretation."
+        }
+      ]
+    },
+    "evidence": [
+      {
+        "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+        "locator": "abstract and discussion",
+        "note": "Scientific interpretation."
+      }
+    ]
+  },
+  "extraction_quality": {
+    "status": "partial",
+    "extraction_confidence": "medium",
+    "completed_sections": [
+      "article",
+      "catalog",
+      "construction_workflow",
+      "additional_information"
+    ],
+    "missing_core_fields": [
+      "explicit row-level relocation-status flag",
+      "exact threshold symbol in MinerU text"
+    ],
+    "warnings": [
+      "Use corrected focal-mechanism release; legacy CSV is provenance only.",
+      "27,431 relocation membership cannot be reconstructed from one obvious CSV flag."
+    ],
+    "needs_human_review": true
+  }
+}

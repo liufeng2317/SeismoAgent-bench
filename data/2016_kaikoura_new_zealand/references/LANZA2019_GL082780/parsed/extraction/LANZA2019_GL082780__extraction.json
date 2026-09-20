@@ -1,0 +1,567 @@
+{
+  "article": {
+    "source_id": "LANZA2019_GL082780",
+    "case_id": "2016_kaikoura_new_zealand",
+    "title": "Crustal Fault Connectivity of the M 7.8 2016 Kaikōura Earthquake Constrained by Aftershock Relocations",
+    "authors": [
+      "F. Lanza",
+      "C. J. Chamberlain",
+      "K. Jacobs",
+      "E. Warren-Smith",
+      "H. J. Godfrey",
+      "M. Kortink",
+      "C. H. Thurber",
+      "M. K. Savage",
+      "J. Townend",
+      "S. Roecker",
+      "D. Eberhart-Phillips"
+    ],
+    "year": 2019,
+    "journal": "Geophysical Research Letters",
+    "doi": "10.1029/2019GL082780",
+    "article_type": "research_article",
+    "scientific_question": "Whether high-precision aftershock hypocenters reveal connectivity between surface-rupturing faults and possible interface seismicity.",
+    "sequence": "2016 Mw 7.8 Kaikōura earthquake and northern South Island aftershocks",
+    "catalog_relationship": "Constructs relocated QuakeML Data Set S1 from reviewed GeoNet events, REST/kpick picks, simul2014 locations and 3-D HypoDD relocation.",
+    "evidence": [
+      {
+        "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+        "locator": "title, abstract, Sections 2–4",
+        "note": "Paper identity and catalog purpose."
+      },
+      {
+        "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
+        "locator": "source bundle and Data Set S1 description",
+        "note": "Supplementary workflow and release lineage."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "LANZA2019_GL082780_DATASET_S1",
+    "name": "Lanza Kaikōura relocated aftershock catalog",
+    "product_type": "relocated_event_catalog_plus_picks",
+    "role": "primary",
+    "quality_tier": "Q1",
+    "scientific_purpose": "High-precision absolute/relative hypocenters for fault connectivity and aftershock geometry.",
+    "event_definition": "Approximately ML≥3 GeoNet-reviewed inputs processed by REST/kpick, simul2014, and clustered 3-D HypoDD; the release retains SIMUL-only and HypoDD origins.",
+    "product_semantics": {
+      "event_objects": "2,655 local QuakeML events; 2,012 have HypoDD origins",
+      "hypodd_subset_article": "2,013 reported by article; one-event discrepancy with local XML",
+      "picks": "110,810 P plus 72,149 S elements locally"
+    },
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "GeoNet-reviewed input events",
+        "unit": "events",
+        "count_article": 2768,
+        "count_local": null,
+        "selection_rule": "ML≥3, 2016-11-13 to 2017-05-13; article rectangle",
+        "time_range": "2016-11-13 to 2017-05-13 UTC",
+        "spatial_depth_scope": "40.80–43.00°S, 172.75–175.20°E",
+        "magnitude_scope": "article ML≥3",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+            "locator": "Section 2, event-selection paragraph",
+            "note": "Starting population."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "SIMUL initial locations",
+        "unit": "events",
+        "count_article": 2655,
+        "count_local": 2655,
+        "selection_rule": "simul2014 3-D model locations",
+        "time_range": "2016-11-13 to 2017-05-13 UTC",
+        "spatial_depth_scope": "local XML full-origin range",
+        "magnitude_scope": "generic M",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+            "locator": "Section 4.1, initial-location paragraph",
+            "note": "Article count."
+          },
+          {
+            "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md",
+            "locator": "local audit: event objects and origins",
+            "note": "Local count."
+          }
+        ]
+      },
+      {
+        "population_id": "P3",
+        "label": "HypoDD clustered relocations",
+        "unit": "events",
+        "count_article": 2013,
+        "count_local": 2012,
+        "selection_rule": "phase/waveform differential times; separation ≤10 km; correlation >0.65",
+        "time_range": "2016-11-13 to 2017-05-13 UTC",
+        "spatial_depth_scope": "preferred HypoDD origins 0.045–41.389 km locally",
+        "magnitude_scope": "generic M",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+            "locator": "Section 4.2, HypoDD paragraph",
+            "note": "Article count and thresholds."
+          },
+          {
+            "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md",
+            "locator": "local audit: HypoDD origins",
+            "note": "Local count and discrepancy."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "10.1029/2019GL082780",
+      "version": null,
+      "source_files": [
+        {
+          "product_id": "event_objects",
+          "path": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/raw/grl59060-sup-0003-ds01.xml",
+          "format": "QuakeML XML",
+          "checksum": null,
+          "role": "canonical"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
+          "locator": "Data Set S1 description",
+          "note": "Machine-readable catalog release."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": 2655,
+      "row_count": 2655,
+      "product_counts": {
+        "event_objects": 2655,
+        "hypodd_origins": 2012,
+        "P_picks": 110810,
+        "S_picks": 72149
+      },
+      "time_range": "2016-11-13T11:02:56.460000Z to 2017-05-13T18:03:47.100000Z",
+      "latitude_longitude_depth_range": "preferred-origin lat -43.28217 to -40.08467; lon 172.06067–175.26200; depth -0.94–164.12 km",
+      "magnitude_range": "2.2–7.4, generic M",
+      "article_local_discrepancy": "Article reports 2,013 clustered HypoDD events; local XML contains 2,012 HypoDD origins.",
+      "evidence": [
+        {
+          "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md",
+          "locator": "local audit tables",
+          "note": "QuakeML counts, ranges and pick inventory."
+        }
+      ]
+    },
+    "product_schemas": {
+      "event_objects": {
+        "role": "canonical_quakeml_events",
+        "identifier_field": "event publicID",
+        "fields": [
+          "origins",
+          "preferred origin",
+          "magnitude",
+          "picks",
+          "arrivals"
+        ],
+        "units": {
+          "time": "UTC",
+          "depth": "km",
+          "latitude": "degree",
+          "longitude": "degree"
+        },
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md",
+            "locator": "native schema and local audit",
+            "note": "QuakeML structure."
+          }
+        ]
+      },
+      "hypodd_origins": {
+        "role": "relative_relocation_subset",
+        "identifier_field": "event publicID",
+        "fields": [
+          "HypoDD origin time",
+          "latitude",
+          "longitude",
+          "depth"
+        ],
+        "units": {
+          "depth": "km"
+        },
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md",
+            "locator": "origin objects and preferred-origin behavior",
+            "note": "HypoDD subset semantics."
+          }
+        ]
+      },
+      "picks": {
+        "role": "phase_pick_product",
+        "identifier_field": "pick id",
+        "fields": [
+          "phase",
+          "time",
+          "uncertainty",
+          "station",
+          "methodID"
+        ],
+        "units": {
+          "time": "UTC",
+          "uncertainty": "s"
+        },
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md",
+            "locator": "pick audit",
+            "note": "Released P/S picks."
+          }
+        ]
+      }
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "matched-event origin/relative-location residuals",
+        "fault geometry",
+        "uncertainty-aware scores"
+      ],
+      "unsuitable_metrics": [
+        "universal detection recall",
+        "small-event completeness"
+      ],
+      "independence_conditions": [
+        "do not treat all non-Lanza events as false",
+        "record shared GeoNet/STREWN waveform dependence"
+      ],
+      "limitations": [
+        "generic magnitude",
+        "one-event HypoDD discrepancy",
+        "no station-day matrix"
+      ],
+      "evidence": [
+        {
+          "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md",
+          "locator": "benchmark interpretation",
+          "note": "Role and limitations."
+        }
+      ]
+    },
+    "quality_tier_detail": "High-precision absolute/relative relocation reference; completeness is lower than the dense detection products."
+  },
+  "construction_workflow": {
+    "summary": "GeoNet-reviewed events → REST onset estimation → kpick phase supplementation/QC → simul2014 3-D initial locations → 3-D HypoDD differential-time relocation → 100-sample bootstrap → QuakeML release.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "GeoNet and STREWN waveforms",
+        "type": "waveform",
+        "provider_or_network": "GeoNet/IRIS Z1",
+        "temporal_spatial_scope": "2016-11-13 to 2017-05-13; northern South Island",
+        "station_count": 81,
+        "channels_sampling": "STREWN 100 samples/s; 24 temporary plus 57 GeoNet",
+        "role": "primary_input",
+        "availability_conditions": "temporary coverage incomplete at earliest sequence",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
+            "locator": "network and station product",
+            "note": "81-station inventory and sampling."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "REST detection and onset estimation",
+        "category": "detection",
+        "purpose": "Generate candidate phases/locations",
+        "inputs": [
+          "waveforms"
+        ],
+        "outputs": [
+          "candidate picks"
+        ],
+        "method": "modified nearest-neighbor similarity plus autoregressive onset estimator",
+        "software_or_model": "REST",
+        "parameters": [
+          {
+            "name": "filter",
+            "value": "1–20",
+            "unit": "Hz"
+          },
+          {
+            "name": "window",
+            "value": 420,
+            "unit": "s"
+          },
+          {
+            "name": "grid",
+            "value": "536×660×400 km at 4 km",
+            "unit": null
+          }
+        ],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "2,765 of 2,768 inputs picked/located",
+        "analyst_intervention": null,
+        "dependencies": "station geometry and 3-D model",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
+            "locator": "Text S1 §1.1",
+            "note": "REST parameters."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "kpick phase supplementation and QC",
+        "category": "picking",
+        "purpose": "Add S/P picks and reject poor observations",
+        "inputs": [
+          "REST picks"
+        ],
+        "outputs": [
+          "quality-controlled P/S picks"
+        ],
+        "method": "kpick plus uncertainty/residual/P–S pairing rules",
+        "software_or_model": "kpick",
+        "parameters": [
+          {
+            "name": "S uncertainty",
+            "value": "≤0.6",
+            "unit": "s"
+          },
+          {
+            "name": "P residual",
+            "value": "<0.2",
+            "unit": "s"
+          },
+          {
+            "name": "absolute residual",
+            "value": "<2",
+            "unit": "s"
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "remove unpaired S and high-residual picks"
+        ],
+        "intermediate_result": "published SI and XML totals differ",
+        "analyst_intervention": null,
+        "dependencies": "REST phases",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
+            "locator": "Text S1 §1.2",
+            "note": "Pick QC thresholds."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST3",
+        "order": 3,
+        "name": "simul2014 initial locations",
+        "category": "location",
+        "purpose": "Obtain absolute initial origins",
+        "inputs": [
+          "quality-controlled picks",
+          "3-D Vp/Vp/Vs models"
+        ],
+        "outputs": [
+          "2,655 SIMUL origins"
+        ],
+        "method": "weighted pick uncertainty and simul2014",
+        "software_or_model": "simul2014",
+        "parameters": [
+          {
+            "name": "inversion region",
+            "value": "340×500",
+            "unit": "km"
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "110 poor-depth events excluded from clustered interpretation"
+        ],
+        "intermediate_result": "2,655 initial locations",
+        "analyst_intervention": null,
+        "dependencies": "New Zealand 3-D model",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+            "locator": "Sections 3–4.1, initial-location paragraphs",
+            "note": "Initial location method."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST4",
+        "order": 4,
+        "name": "3-D HypoDD relocation",
+        "category": "relocation",
+        "purpose": "Improve relative locations",
+        "inputs": [
+          "SIMUL origins",
+          "phase/waveform differential times"
+        ],
+        "outputs": [
+          "HypoDD origins"
+        ],
+        "method": "3-D HypoDD",
+        "software_or_model": "HypoDD",
+        "parameters": [
+          {
+            "name": "max separation",
+            "value": 10,
+            "unit": "km"
+          },
+          {
+            "name": "correlation",
+            "value": ">0.65",
+            "unit": "coefficient"
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "clustered subset only"
+        ],
+        "intermediate_result": "2,013 article / 2,012 local HypoDD origins",
+        "analyst_intervention": null,
+        "dependencies": "waveform differential times and 3-D model",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+            "locator": "Section 4.2, HypoDD paragraph",
+            "note": "Relocation parameters and count."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST5",
+        "order": 5,
+        "name": "bootstrap uncertainty and QuakeML export",
+        "category": "qc_and_export",
+        "purpose": "Quantify relocation uncertainty and release origins/picks",
+        "inputs": [
+          "HypoDD solutions"
+        ],
+        "outputs": [
+          "QuakeML Data Set S1"
+        ],
+        "method": "100 bootstrap resamples",
+        "software_or_model": null,
+        "parameters": [
+          {
+            "name": "bootstrap samples",
+            "value": 100,
+            "unit": null
+          }
+        ],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": "median 95% axes approximately 592, 358, 426 m",
+        "analyst_intervention": null,
+        "dependencies": "clustered HypoDD population",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+            "locator": "Section 4.2, bootstrap paragraph; Text S4/S5",
+            "note": "Uncertainty and release."
+          }
+        ]
+      }
+    ],
+    "final_output": "QuakeML events containing SIMUL/HypoDD origins, generic magnitudes and REST-labelled P/S picks.",
+    "evidence": [
+      {
+        "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+        "locator": "Sections 2–4",
+        "note": "End-to-end workflow."
+      },
+      {
+        "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
+        "locator": "Text S1–S5 and Data Set S1 description",
+        "note": "Supplementary implementation details."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [
+      {
+        "product_id": "DP1",
+        "name": "Table S1 station inventory",
+        "type": "station_table",
+        "file_path": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/grl59060-sup-0002-tables1__extracted.md",
+        "catalog_relation": "network metadata",
+        "scientific_use": "station geometry and network condition",
+        "count_or_scope": "81 stations",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/grl59060-sup-0002-tables1__extracted.md",
+            "locator": "station rows",
+            "note": "Permanent/temporary inventory."
+          }
+        ]
+      }
+    ],
+    "scientific_findings": [
+      {
+        "statement": "Relocated geometry constrains fault connectivity; only a small number of likely interface events are identified.",
+        "depends_on": null,
+        "scope": "2016 Mw 7.8 Kaikōura earthquake and northern South Island aftershocks",
+        "evidence": [
+          {
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+            "locator": "Sections 5–6",
+            "note": "Interpretive findings."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "High-precision absolute/relative relocation reference; completeness is lower than the dense detection products.",
+      "recommended_role": "Primary high-precision location reference; not a universal completeness catalog.",
+      "comparison_or_baseline_sources": null,
+      "valid_comparisons": null,
+      "caveats": "Primary high-precision location reference; not a universal completeness catalog.",
+      "evidence": [
+        {
+          "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+          "locator": "Sections 5–6",
+          "note": "Interpretive findings."
+        }
+      ]
+    },
+    "evidence": [
+      {
+        "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+        "locator": "Sections 5–6",
+        "note": "Interpretive findings."
+      }
+    ]
+  },
+  "extraction_quality": {
+    "status": "partial",
+    "extraction_confidence": "medium",
+    "completed_sections": [
+      "article",
+      "catalog",
+      "construction_workflow",
+      "additional_information"
+    ],
+    "missing_core_fields": [
+      "exact article-versus-XML HypoDD count reconciliation",
+      "station-day availability matrix",
+      "row-level bootstrap uncertainty table"
+    ],
+    "warnings": [
+      "XML magnitude is generic M; do not relabel as ML.",
+      "SI pick totals differ from released XML totals."
+    ],
+    "needs_human_review": true
+  }
+}
