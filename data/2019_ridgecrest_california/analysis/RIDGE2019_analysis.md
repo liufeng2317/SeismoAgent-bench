@@ -1,214 +1,173 @@
-# RIDGE2019 — Case Analysis
+# RIDGE2019 — Ridgecrest case analysis
 
-> **Source of truth:** This file is the detailed, mutable analysis record for `RIDGE2019`. The cross-case summary is maintained in [`docs/01_Case_details.md`](../../../docs/01_Case_details.md).
+> This file is the case-level synthesis. Paper-specific extraction is kept next to each paper and catalog-specific audits are kept next to each catalog; links below are the canonical entry points.
 
-## Status
+## Status and frozen benchmark rule
 
-- Case ID: `RIDGE2019`
-- Phase: reference calibration and data preparation
-- Status: `v1 benchmark window frozen`
-- Primary reference: Shelly (2020)
-- Secondary reference: Ross et al. (2019)
-- Frozen v1 core window: 2019-07-04 to 2019-07-07 UTC (72 hours)
+- **Case ID:** `2019_ridgecrest_california`
+- **Phase:** reference calibration and data preparation
+- **Status:** v1 time/space/depth rule frozen; station-day waveform manifest still pending
+- **Scientific sequence:** Mw 6.4 foreshock on 2019-07-04, Mw 7.1 mainshock on 2019-07-06, dense foreshock–aftershock activity
+- **Frozen window:** `2019-07-04T00:00:00Z <= origin_time < 2019-07-07T00:00:00Z` (72 h)
+- **Common mask:** `35.45 <= latitude <= 36.05`, `-117.90 <= longitude <= -117.20`, `0 <= depth_km <= 20`
+- **Depth convention:** each source keeps its native datum; the mask is a numerical comparison rule, not a claim that all absolute depths share the same reference surface.
 
-## Scientific role
+The compact 72-hour window covers the foreshock, the Mw 6.4 event, the
+inter-mainshock interval and the first ~21 hours after Mw 7.1. A 34-hour
+inter-mainshock subset can be generated later, but it is not the frozen v1
+window because it would exclude the initial foreshock and immediate post-mainshock
+stress conditions.
 
-Dense foreshock-mainshock-aftershock sequence with extreme event overlap and complex fault geometry. This is the preferred first case for validating the data-preparation pipeline.
+## How references were selected
 
-## Case information from v0.2 inventory
+The selection is deliberate, not a list of arbitrary search hits. A product is
+kept as a benchmark reference only when it satisfies all of the following:
 
-| Field | Information |
-|---|---|
-| Region | Eastern California / Southern California, USA |
-| Sequence type | Major foreshock–mainshock–aftershock sequence; complex strike-slip fault system |
-| Key events | Mw 6.4 on 2019-07-04; Mw 7.1 about 34 h later on 2019-07-06 |
-| Scientific significance | Intersecting/orthogonal fault structures and multiple high-resolution catalogs |
-| Full Shelly span | 2019-07-04 to 2019-07-16 |
-| Network | Dense Caltech/USGS Southern California Seismic Network (SCSN; CI) |
-| Raw waveform access | Public through SCEDC |
-| Expected difficulty | High |
-| Primary role | Dense detection, association, relative relocation and fault geometry |
+1. the paper is a real research or data-release article that constructs, relocates,
+   or explicitly publishes an event catalog;
+2. the local file can be tied to an authoritative DOI, USGS/SCEDC/CaltechDATA
+   release, or article-associated supplement;
+3. the product's evaluation role is dimension-specific (detection, association,
+   absolute location, relative geometry, focal mechanism or operational baseline);
+4. shared waveform/template lineage and method overlap are recorded separately
+   from the quality tier; and
+5. article-reported populations are kept distinct from local release-version
+   counts.
 
-Shelly reports 13,525 routine template events and 34,091 detected and precisely located events. Ross provides a GrowClust-format relocated product with differential-time counts, residuals and estimated errors.
+No catalog is treated as universal ground truth. The Q1–Q4 tiers in
+[`docs/01_Case_details.md`](../../../docs/01_Case_details.md) are applied by
+metric and role.
 
 ## Reference evaluation matrix
 
-| Reference | Evaluation role | Time scope | Spatial scope | Quality tier | Network / observation condition |
-|---|---|---|---|---|---|
-| Shelly (2020) | Primary: detection recovery, association stress, relative geometry | Full: 2019-07-04–07-16; benchmark: inter-mainshock core or 2019-07-04–07-07 extended window | Ridgecrest sequence region; exact benchmark bbox to be frozen | **Q1** detection/relative location; **Q2** absolute location/completeness | SCSN/CI continuous waveforms; template-derived high-resolution product |
-| Ross et al. (2019) QTM/GrowClust | Secondary: fault geometry and relocation diagnostics | Published sequence window; subset to the primary benchmark window | Same SCSN Ridgecrest region; exclude/flag poorly constrained Mw 7.1 depth | **Q1** relative structure; **Q2–Q3** absolute mainshock depth | SCSN/SCEDC waveform lineage; correlation/relocation product |
-| SCSN routine catalog | Baseline: operational recovery and completeness comparison | Same frozen window | Same region | **Q3** operational baseline | Routine SCSN network/catalog |
+| Reference / local product | Evaluation role | Article / release scope | Common-mask count | Quality tier and limitations | Network condition / independence |
+|---|---|---|---:|---|---|
+| Shelly (2020) Data S1 | **Primary** dense detection, association and relative geometry | Article: 2019-07-04–07-16; 34,091 final events | **7,716** (7,773 time-only) | **Q1** relative/detection structure; **Q2** absolute location/completeness. Mostly unreviewed; mainshock centroids are not preferred absolute hypocenters. | SCSN/SCEDC; routine SCSN templates; medium independence from Ross/routine baseline |
+| Liu et al. (2020) Table S1 | Independent-method secondary for raw-waveform detection and hypoDD geometry | 2019-07-04–07-09; article reports 16,563 REAL, 16,112 VELEST and 15,445 final hypoDD events | **6,242** (6,329 time-only) | **Q2** automatic independent catalog; strong method cross-check, but no event IDs/uncertainty columns and magnitude scale differs | 41 permanent + 4 temporary stations within 120 km; higher algorithmic independence because no routine event prior |
+| Ross et al. (2019) SCEDC QTM | Secondary structural/relocation diagnostics | Archive 2019-07-04–07-25; 111,918 rows, 46,512 successfully relocated (`nbranch>1`) | **12,768** total / **6,463** relocated | **Q1** relative geometry/QC for relocated subset; Q2–Q3 for initial-only rows and Mw 7.1 depth | SCSN/SCEDC; medium independence. Science DC1 methods supplement is missing locally |
+| Atterholt–Wilding–Ross (2025) Version 2 | Long-term relocation and moment-tensor auxiliary | Hypocenters 2019-04–2023-05; MT 2019-04–2023-04; local v2 222,864 / 4,890 | **5,737** hypo / **254** MT | **Q2** long-term methodological auxiliary; metric-specific Q1 for accepted relative/MT uncertainty fields. Article reports 214,467/4,892, so release version must be preserved. | 66 multi-network broadband 3C stations, changing availability; PhaseNO/GaMMA/HypoSVI/GrowClust overlap with future Agent methods |
+| USGS/SCSN ComCat snapshot | **Q3 baseline** operational recovery and large-event anchor | Full 2019-07-04–07-17; benchmark CSV is already frozen | **6,566** | **Q3** routine operational catalog; not a high-resolution truth set | SCSN/CI operational network; independent release but same regional observations |
 
-The primary benchmark should not combine these products into one undifferentiated truth set. Shelly and Ross are complementary and share raw-data lineage, so independence is `Medium`.
+### Why Shelly is primary
 
-## Reference products
+Shelly is the best Phase-I target because it has a verified article-associated
+34,091-event release, explicit matched-filter and hypoDD criteria, public
+waveform lineage, and a compact high-rate sequence. It is not “best” for every
+metric: Liu is the key independent raw-waveform check, Ross is the strongest
+structural/QTM diagnostic, and AWR is valuable for long-term and moment-tensor
+comparisons.
 
-| Product | Role | Current issue |
-|---|---|---|
-| Shelly (2020) | Primary detection and relative-location reference | Exact window event count, station list, and event-level QC fields must be extracted. |
-| Ross et al. (2019) QTM/GrowClust catalog | Secondary structural/relocation reference | Official SCEDC QTM archive is now staged under `catalogs/ROSS2019_SCIENCE/`; mainshock depth is poorly constrained, so do not use it as universal absolute truth. |
-| SCSN routine catalog | Baseline | Lower-magnitude coverage is incomplete and must not be treated as high-resolution truth. |
+## Article–catalog alignment audit
 
-## Calibration checklist
+| Source | Is the paper genuinely a catalog-construction paper? | Local product alignment | Decision |
+|---|---|---|---|
+| Shelly 2020 | Yes: template matching + hypoDD relative relocation | Article 34,091 matches Data S1 34,091; phase CSV is a separate auxiliary product | Use Data S1 as primary; never count phase rows as events |
+| Liu 2020 | Yes: PhaseNet → REAL → VELEST → hypoDD | Article final 15,445 matches Table S1 15,445; REAL/VELEST intermediates are not local | Use Table S1 as final hypoDD secondary |
+| Ross 2019 | Yes: high-resolution template-matched/relocated seismicity catalog | Official QTM archive has 111,918 rows, but only `nbranch>1` (46,512) are successful relocations; article DC1 absent | Use relocated subset for Q1 structure; obtain DC1 before exact reproduction |
+| AWR 2025 | Yes: PhaseNO → GaMMA → HypoSVI → GrowClust + Bayesian MT inversion | Local v2 has 222,864 hypocenters and 4,890 MT vs article 214,467/4,892 | Keep local v2 intact and record article/release discrepancy; do not trim by guesswork |
+| USGS SCSN | No research construction article is attached | Official operational query snapshot only | Baseline, not a research truth catalog |
 
-- [ ] Download USGS/Shelly and SCEDC/Ross catalog files.
-- [ ] Inspect stable IDs, origin-time precision, location fields, and QC columns.
-- [ ] Reconcile the catalog time coverage and spatial region.
-- [ ] Subset primary and secondary catalogs to the core and extended windows.
-- [ ] Determine active SCSN stations/channels and data gaps.
-- [ ] Document shared waveform/template lineage and reference independence.
+## Catalog comparison under the common rule
 
-## Window and data preparation
+| Product | Full rows / span | Time-only | Common mask | Common-mask time / spatial / depth / magnitude range |
+|---|---:|---:|---:|---|
+| Shelly Data S1 | 34,091; 2019-07-04–07-16 | 7,773 | 7,716 | 2019-07-04 15:35:29.400–07-06 23:59:47.320; 35.4852–36.0128, −117.8192–−117.2557, 0.159–19.953 km, M −0.10–7.10 |
+| Liu Table S1 | 15,445; 2019-07-04–07-09 | 6,329 | 6,242 | 2019-07-04 00:56:37.520–07-06 23:59:30.040; 35.5040–36.0473, −117.8836–−117.2759, 0.002–14.126 km, M −0.20–5.50 |
+| Ross QTM all rows | 111,918; 2019-07-04–07-25 | 12,806 | 12,768 | 2019-07-04 03:26:19.848–07-06 23:59:47.190; 35.5017–36.0496, −117.8955–−117.2225, 0.018–19.700 km, M −0.82–7.10 |
+| Ross QTM relocated only | 46,512 | 6,470 | 6,463 | Same mask; filter `nbranch>1` before relative-location metrics |
+| AWR v2 hypocenters | 222,864; 2019-04–2023-05 | 5,842 | 5,737 | 2019-07-04 04:03:01.162–07-06 23:59:20.494; 35.5052–36.0500, −117.8779–−117.2677, 0.692–14.732 km, gamma-M 0.056–4.585 |
+| AWR v2 moment tensors | 4,890; 2019-04–2023-04 | 258 | 254 | 2019-07-04 16:13:43.096–07-06 23:56:34.234; 35.5484–36.0389, −117.8478–−117.3660, 0.921–12.866 km, M 1.874–4.115 |
+| USGS/SCSN benchmark | 6,566; 2019-07-04–07-07 | 6,566 | 6,566 | 35.4935–36.0495, −117.8912–−117.2680, 0–19.09 km, M 0.14–7.10 |
 
-The inter-mainshock interval is the preferred core because it is compact and scientifically information-rich. The July 4–7 interval should remain an extended condition rather than replacing the core window.
+The counts target different populations: Shelly and Ross are template/correlation
+products, Liu is pick-based and independent of the routine event prior, AWR is a
+long-term modern workflow, and SCSN is operational. Event-count ranking without
+conditioning on method and network is invalid.
 
-### Frozen v1 benchmark window
+## Catalog construction and quality notes
 
-| Field | Frozen value |
-|---|---|
-| Time window | 2019-07-04 00:00:00 to 2019-07-07 00:00:00 UTC (72 hours; includes the two mainshock stages) |
-| Spatial/depth rule | 35.45–36.05°N, −117.90 to −117.20°W, depth 0–20 km; exclude 57 Shelly rows outside the depth/space QC envelope |
-| Event counts | Shelly Data S1: 7,716 QC-passing events (7,773 raw rows); AWR hypocenter catalog: 5,737 events after the same mask |
-| Observed ranges | Shelly QC: lat 35.485–36.013°, lon −117.819 to −117.256°, depth 0.16–19.95 km, M −0.10–7.10; AWR: lat 35.505–36.050°, lon −117.878 to −117.268°, depth 0.69–14.73 km, γ-magnitude 0.056–4.585 |
-| Network condition | CI/SCSN continuous waveforms; v1 uses a 39-station, 3-component subset within ~100 km, with station availability recorded per day |
-| Waveform volume | Design upper bound: ~28.3 GB for 39 × 3 components × 100 Hz × int32 × 72 hours continuous; actual SCEDC gaps/channel selection reduce this |
-| Reference quality and role | Shelly: Q1 detection/relative-location reference; Liu/AWR: Q1–Q2 relocation/structure cross-checks; routine SCSN: Q3 baseline; Ross: structural context/secondary relocation lineage |
+### Shelly primary
 
-## Main risks
+- 13,525 SCSN template events → daily 100-Hz template scans → correlation and
+  differential-time weighting → hypoDD.
+- Detection thresholds: 8× daily MAD for summed correlation and 7× MAD for
+  individual differential-time correlations; max differential times 0.5 s (P)
+  and 0.85 s (S).
+- Final event criterion: at least 12 P and 12 S correlation differential times.
+- Magnitudes combine SCSN preferred values and calibrated ML for newly detected
+  events. Small-event completeness changes strongly after each mainshock.
 
-1. Primary and secondary references share the SCSN raw-data lineage.
-2. Template-derived catalog completeness is not absolute truth.
-3. High event rate can cause overlapping events and duplicate matching problems.
+See [`SHELLY2020_0220190309__paper_reading.md`](../references/SHELLY2020_0220190309/paper/SHELLY2020_0220190309__paper_reading.md) and
+[`SHELLY2020_0220190309__catalog_summary.md`](../catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md).
 
-## Sources
+### Liu independent secondary
 
-- `../references/SHELLY2020_0220190309/paper/SHELLY2020_0220190309__paper.pdf` (journal article; former PDF retained as `../references/SHELLY2020_0220190309/context/SHELLY2020_0220190309__poster.pdf`)
-- `../references/ROSS2019_SCIENCE/paper/ROSS2019_SCIENCE__paper.pdf`
-- Shelly (2020), DOI: https://doi.org/10.1785/0220190309
-- Ross et al. (2019), DOI: https://doi.org/10.1126/science.aaz0109
-- USGS release, DOI: https://doi.org/10.5066/P9JN6H0N
-## Full inventory record (migrated from `docs/01_Case_details.md`)
-### 2019 Ridgecrest Earthquake Sequence
+- PhaseNet probability picks (0.5) → REAL grid association (≥5 P and ≥13 total
+  picks, 0–20 km) → VELEST (<200° gap, <0.6 s residual) → hypoDD (stations
+  <80 km, phase probability >0.7).
+- SI Text S3 documents 884 routine events missed by strict thresholds, depth
+  truncation, close-event suppression, coda burial and poor geometry.
 
-## Literature and catalog gap audit
+See [`LIU2020_GL086189__paper_reading.md`](../references/LIU2020_GL086189/paper/LIU2020_GL086189__paper_reading.md) and
+[`LIU2020_GL086189__catalog_summary.md`](../catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_summary.md).
 
-### Added independent reference — Liu et al. (2020) ML catalog
+### Ross QTM secondary
 
-- Paper: *Rapid Characterization of the July 2019 Ridgecrest, California, Earthquake Sequence From Raw Seismic Data Using Machine-Learning Phase Picker*.
-- DOI: https://doi.org/10.1029/2019GL086189
-- Coverage: 2019-07-04 to 2019-07-09.
-- Product: 15,445-event hypoDD catalog versus 7,743 routine events, constructed from continuous waveforms without using the routine catalog as the event prior.
-- Recommended role: **Q2 independent-method secondary reference** for raw-waveform detection, association and end-to-end catalog construction.
-- Status: the supporting-information catalog and SI document are locally staged; test overlap with the core and extended windows while retaining its independent-from-routine-catalog provenance.
-- Local core table: `../catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_tableS1.txt`; SI document: `../references/LIU2020_GL086189/supplement/Liu2020_Ridgecrest_SI.docx`.
+- The SCEDC schema retains initial and relocated locations plus differential-time
+  counts, RMS residuals, errors and cluster IDs.
+- Use `nbranch>1` as the relocation flag. The Mw 7.1 QTM depth is explicitly
+  poorly constrained; use SCSN for the mainshock absolute anchor.
+- The missing Science DC1 is a real gap in method reproducibility, not evidence
+  that the QTM archive is absent.
 
-### Important expansion reference — Atterholt, Wilding & Ross (2025)
+See [`ROSS2019_SCIENCE__paper_reading.md`](../references/ROSS2019_SCIENCE/paper/ROSS2019_SCIENCE__paper_reading.md) and
+[`ROSS2019_SCIENCE__catalog_summary.md`](../catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md).
 
-- Paper DOI: https://doi.org/10.1093/gji/ggaf001
-- Local paper: `../references/AWR2025_CALTECHDATA/paper/AWR2025_CALTECHDATA__paper.pdf`.
-- Local catalog release: `../catalogs/AWR2025_CALTECHDATA/` (hypocenter and moment-tensor CSVs), with provenance at https://stp2.gps.caltech.edu/data/alt-2025-atterholt.html and https://doi.org/10.22002/5af05-cah73.
-- Catalog DOI: https://doi.org/10.22002/5af05-cah73
-- Product: long-term relocated hypocenter and moment-tensor catalogs; current preferred release is Version 2.
-- Recommended role: **Q2 methodological/long-term auxiliary**, not the Phase I primary, because it extends beyond the compact window and uses a modern PhaseNO–GaMMA–HypoSVI–GrowClust workflow that may overlap with Agent pipelines.
+### AWR long-term auxiliary
 
-### Audit conclusion
+- PhaseNO → GaMMA → HypoSVI → GrowClust; accepted MT rows require at least 15
+  P-amplitude picks and angular uncertainties below 7.5°.
+- Local Version 2 is authoritative for the files in this repository, but its
+  row counts differ from the article. `magnitude_gamma` remains a native field,
+  not ML/Mw.
 
-**Sufficiency verdict:** Conditionally sufficient after adding Liu et al. as the independent secondary catalog. Shelly–Ross–SCSN is sufficient for the core detection/relative-geometry task; it is not sufficient for independent raw-waveform validation or absolute-location claims without Liu and the SCSN anchor. The 2025 long-term catalog remains expansion-only.
+See [`AWR2025_CALTECHDATA__paper_reading.md`](../references/AWR2025_CALTECHDATA/paper/AWR2025_CALTECHDATA__paper_reading.md) and
+[`AWR2025_CALTECHDATA__catalog_summary.md`](../catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md).
 
-#### A. Case information
+## Network and waveform preparation
 
-| Field | Information |
-|---|---|
-| **Case ID** | RIDGE2019 |
-| **Region** | Eastern California / Southern California, USA |
-| **Sequence type** | Major foreshock–mainshock–aftershock sequence; complex strike-slip fault system |
-| **Key events** | Mw 6.4 on 2019-07-04; Mw 7.1 about 34 h later on 2019-07-06 |
-| **Scientific significance** | Exceptionally well recorded sequence with intersecting/orthogonal fault structures and multiple independently produced catalogs. |
-| **Full reference span** | Shelly reference: 2019-07-04 to 2019-07-16 |
-| **Recommended compact benchmark window** | **Core:** Mw 6.4–Mw 7.1 inter-mainshock interval (~34 h). **Extended:** 2019-07-04 to 2019-07-07 (~3 days). |
-| **Network context** | Dense Caltech/USGS Southern California Seismic Network (SCSN; network CI). |
-| **Raw waveform access** | Public through SCEDC; SCSN waveform and parametric data are archived at SCEDC. |
-| **Routine catalog / picks** | SCSN/SCEDC operational catalog and event phase information available. |
-| **Expected benchmark difficulty** | High: intense event rate, overlapping aftershocks, complex fault geometry. |
-| **Primary benchmark role** | End-to-end dense catalog reconstruction; detection completeness; association under high event rate; relative relocation/fault geometry. |
+- Shelly, Ross, Liu and SCSN all use the SCSN/SCEDC regional archive, but their
+  station subsets and processing windows differ.
+- Liu reports 41 permanent + 4 temporary stations within 120 km; AWR reports 66
+  broadband 3C stations selected in a 200 × 200 km region over four years.
+- Shelly's article does not state a fixed station count; the auxiliary phase CSV
+  has 30 network-station pairs (5,703,270 rows), which is not a station inventory.
+- A provisional continuous-waveform storage upper bound for a future 72-hour
+  39-station/3C/100-Hz/int32 condition is ~28.3 GB, but this is a design bound,
+  not a frozen observed volume. The station-day/channel manifest must be built
+  from SCEDC availability before waveform volume is used as a benchmark metric.
 
-##### Key sources
+## Readiness and open actions
 
-- Shelly (2020), *A High-Resolution Seismic Catalog for the Initial 2019 Ridgecrest Earthquake Sequence: Foreshocks, Aftershocks, and Faulting Complexity*. DOI: <https://doi.org/10.1785/0220190309>
-- USGS catalog release. DOI: <https://doi.org/10.5066/P9JN6H0N>
-- Ross et al. (2019), *Hierarchical interlocked orthogonal faulting in the 2019 Ridgecrest earthquake sequence*. DOI: <https://doi.org/10.1126/science.aaz0109>
-- SCEDC Ridgecrest QTM catalog: <https://scedc.caltech.edu/data/qtm-ridgecrest.html>
-- SCSN/SCEDC waveform archive: <https://scedc.caltech.edu/>
-- Correlation-derived phase arrivals for Ridgecrest, Maple Creek, and Kīlauea. DOI: <https://doi.org/10.5066/P13JCJ2I>
-- Article-associated Data S1 catalog: `../catalogs/SHELLY2020_0220190309/raw_article/SHELLY2020_0220190309__catalog_DataS1.txt`; metadata: `../catalogs/SHELLY2020_0220190309/raw_article/SHELLY2020_0220190309__metadata_DataS1.xml`.
-- Local Ridgecrest phase-arrival CSV: `../catalogs/SHELLY2020_0220190309/raw/Ridgecrest_2019_correlation_phase_arrivals.csv` (auxiliary, not the article's Data S1 event catalog).
+- [x] Shelly article, Data S1, XML metadata and auxiliary phase CSV staged and hashed.
+- [x] Liu article, SI DOCX and final Table S1 staged and hashed.
+- [x] Ross article and official SCEDC QTM archive staged and field-audited.
+- [x] AWR article and local Version 2 hypocenter/MT files staged and hashed.
+- [x] USGS/SCSN full and benchmark operational snapshots staged.
+- [ ] Download/attach Ross Science DC1 and extract exact template/relocation parameters.
+- [ ] Obtain an exact AWR article-supplement/release manifest to explain 214,467 vs 222,864 and 4,892 vs 4,890.
+- [ ] Build station-day/channel availability and waveform-volume manifest for the frozen 72-hour window.
+- [ ] Normalize event IDs only in derived files; never edit source catalogs.
+- [ ] Generate comparable map/time/depth/magnitude plots under each catalog's `raw/` or `figures/` directory.
 
-#### B. Reference catalog candidates
+## Local source index
 
-##### B1. Primary reference — Shelly (2020) high-resolution catalog
-
-| Field | Information |
-|---|---|
-| **Priority** | **Primary** |
-| **Reference type** | Detection reference + high-resolution relative-location reference |
-| **Reference paper** | Shelly (2020), SRL, DOI 10.1785/0220190309 |
-| **Public data release** | USGS DOI 10.5066/P9JN6H0N; public / CC0 |
-| **Catalog span** | 2019-07-04 to 2019-07-16 |
-| **Routine templates** | 13,525 routinely cataloged events |
-| **High-resolution catalog size** | **34,091 detected and precisely located events** |
-| **Core processing** | Waveform template matching + precise relative relocation |
-| **Station count** | **To verify from the catalog/method metadata before benchmark freeze.** The accessible USGS landing page does not state one definitive station count. |
-| **Waveform source** | SCSN/SCEDC continuous data |
-| **Initial catalog source** | Routine SCSN catalog |
-| **Manual/expert component** | Routine catalog events form the templates; the final enhanced product is waveform based. |
-| **Uncertainty / QC** | Precise relative-location workflow; exact event-level uncertainty fields and thresholds should be extracted from the paper/SI before scoring is frozen. |
-| **Open access** | Yes — catalog and underlying SCSN waveforms are public. |
-| **Provisional reference quality** | **High** |
-| **Reference independence** | **Medium** — same raw network data, but high-resolution template/relative-location processing provides a stronger target than the routine catalog. |
-| **Best benchmark use** | Event recovery, relative geometry, fine-scale seismicity structure |
-| **Main limitation** | Should not be treated as absolute hypocentral ground truth; template-based detection inherits the coverage of the template population. |
-
-##### B2. Secondary reference — Ross et al. (2019) Ridgecrest QTM / relocated catalog
-
-| Field | Information |
-|---|---|
-| **Priority** | Secondary |
-| **Reference type** | Structural + relocation reference |
-| **Reference paper** | Ross et al. (2019), *Science*, DOI 10.1126/science.aaz0109 |
-| **Catalog access** | Public through SCEDC |
-| **Catalog representation** | GrowClust-format relocated catalog |
-| **Available QC fields** | Initial and relocated locations; differential-time counts; P/S differential-time RMS; estimated horizontal, vertical, and origin-time errors |
-| **Waveform source** | SCSN/SCEDC |
-| **Open access** | Yes |
-| **Provisional reference quality** | High for structural comparison |
-| **Reference independence** | Medium |
-| **Best benchmark use** | Fault geometry, relocation consistency, event-level relocation diagnostics |
-| **Main limitation** | SCEDC explicitly notes that the Mw 7.1 mainshock depth is poorly constrained in this catalog and recommends the SCSN hypocenter for the mainshock. The catalog should therefore not be used as a universal absolute-location truth set. |
-| **Catalog event count** | AWR has 5,737 events after the frozen 3-day space/depth mask; Shelly remains the primary target. |
-
-##### B3. Baseline / auxiliary references
-
-| Product | Role | Important caveat |
-|---|---|---|
-| **SCSN routine catalog** | Baseline / initial operational catalog | SCEDC notes that the Ridgecrest sequence remains largely unreviewed below M2.5, so it should not be used as the high-resolution target. |
-| **USGS 2024 correlation-derived arrivals (P13JCJ2I)** | Phase-arrival auxiliary reference | Valuable for pick-level checks; generated from matched-filter studies and therefore not fully independent of the Shelly workflow. |
-
-#### C. Benchmark suitability
-
-| Field | Assessment |
-|---|---|
-| **Recommended for core benchmark?** | **Yes — highest priority** |
-| **Primary target** | Shelly (2020) |
-| **Secondary target** | Ross et al. (2019) |
-| **Baseline** | SCSN routine catalog |
-| **Suggested Agent input** | Continuous waveform + station metadata; routine catalog/picks can be a separately controlled condition |
-| **Recommended window** | 34 h inter-mainshock interval or 3-day July 4–7 window |
-| **Short-window target event count** | Shelly 7,716 QC-passing rows; AWR 5,737 events under the same mask |
-| **Approximate waveform volume** | ~28.3 GB continuous upper bound for 39 stations × 3C × 100 Hz × int32 × 72 hours |
-| **Expected compute cost** | Medium–High |
-| **Key benchmark risk** | Target-method leakage if target papers/parameter details are exposed to the Agent; shared waveform/template lineage among references |
-| **Overall assessment** | Excellent first benchmark because reference quality, public data, and scientific difficulty are all strong. |
-
----
-
----
+- [`references/SHELLY2020_0220190309/paper/SHELLY2020_0220190309__paper_reading.md`](../references/SHELLY2020_0220190309/paper/SHELLY2020_0220190309__paper_reading.md)
+- [`catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md`](../catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md)
+- [`references/LIU2020_GL086189/paper/LIU2020_GL086189__paper_reading.md`](../references/LIU2020_GL086189/paper/LIU2020_GL086189__paper_reading.md)
+- [`catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_summary.md`](../catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_summary.md)
+- [`references/ROSS2019_SCIENCE/paper/ROSS2019_SCIENCE__paper_reading.md`](../references/ROSS2019_SCIENCE/paper/ROSS2019_SCIENCE__paper_reading.md)
+- [`catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md`](../catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md)
+- [`references/AWR2025_CALTECHDATA/paper/AWR2025_CALTECHDATA__paper_reading.md`](../references/AWR2025_CALTECHDATA/paper/AWR2025_CALTECHDATA__paper_reading.md)
+- [`catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md`](../catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md)
+- [`catalogs/USGS_SCSN_COMCAT_2019/README.md`](../catalogs/USGS_SCSN_COMCAT_2019/README.md)
