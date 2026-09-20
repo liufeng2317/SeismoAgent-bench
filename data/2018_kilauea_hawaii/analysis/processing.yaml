@@ -1,0 +1,97 @@
+schema_version: 1
+case_id: 2018_kilauea_hawaii
+role: case-level catalog-processing manifest
+runtime_note: Declarative provenance record; catalog-local scripts remain the execution
+  entry points.
+processing_policy:
+  plot_profile: minimal
+  figure_format: png
+  figure_dpi: 300
+benchmark_window:
+  start: 2018-05-01 00:00:00+00:00
+  end: 2018-05-09 00:00:00+00:00
+  latitude:
+  - 19.3
+  - 19.5
+  longitude:
+  - -155.4
+  - -155.15
+  depth_km:
+  - 0
+  - 20
+catalogs:
+- source_ref: LENGLINE2021_EPSL116653
+  catalog_dir: catalogs/LENGLINE2021_EPSL116653
+  parser_version: kilauea-local-v2-compact
+  script: catalogs/LENGLINE2021_EPSL116653/scripts/run_catalog_analysis.py
+  products:
+  - product_id: relative_events
+    kind: lengline
+    unit: relative_event
+    role: auxiliary
+    source_path: raw/loc_events.txt
+- source_ref: MATOZA2014_GL059819
+  catalog_dir: catalogs/MATOZA2014_GL059819
+  parser_version: kilauea-local-v2-compact
+  script: catalogs/MATOZA2014_GL059819/scripts/run_catalog_analysis.py
+  products:
+  - product_id: lp_events
+    kind: matoza14
+    unit: event
+    role: auxiliary
+    source_path: MATOZA2014_GL059819__catalog_lp_summit.txt
+- source_ref: MATOZA2021_EA001253
+  catalog_dir: catalogs/MATOZA2021_EA001253
+  parser_version: kilauea-local-v2-compact
+  script: catalogs/MATOZA2021_EA001253/scripts/run_catalog_analysis.py
+  products:
+  - product_id: relocated_events
+    kind: matoza21
+    unit: event
+    role: auxiliary
+    source_path: MATOZA2021_EA001253__catalog_islandwide.txt
+- source_ref: SHELLY2019_GL085636
+  catalog_dir: catalogs/SHELLY2019_GL085636
+  parser_version: kilauea-local-v2-compact
+  script: catalogs/SHELLY2019_GL085636/scripts/run_catalog_analysis.py
+  products:
+  - product_id: events_s1
+    kind: shelly_s1
+    unit: event
+    role: primary
+    source_path: SHELLY2019_GL085636__catalog_S1.txt
+  - product_id: events_s2
+    kind: shelly_s2
+    unit: event
+    role: secondary
+    source_path: SHELLY2019_GL085636__catalog_S2.txt
+  - product_id: phase_arrivals
+    kind: phase_csv
+    unit: phase_pick
+    role: auxiliary
+    source_path: raw/Kilauea_2018_correlation_phase_arrivals.csv
+- source_ref: USGS_HVO_COMCAT_2018
+  catalog_dir: catalogs/USGS_HVO_COMCAT_2018
+  parser_version: kilauea-local-v2-compact
+  script: catalogs/USGS_HVO_COMCAT_2018/scripts/run_catalog_analysis.py
+  products:
+  - product_id: operational_full
+    kind: usgs_csv
+    unit: event
+    role: baseline
+    source_path: USGS_HVO_COMCAT_2018__catalog_operational_full.csv
+  - product_id: operational_benchmark
+    kind: usgs_csv
+    unit: event
+    role: baseline
+    source_path: USGS_HVO_COMCAT_2018__catalog_operational_benchmark.csv
+- source_ref: WEI2022_EA001979
+  catalog_dir: catalogs/WEI2022_EA001979
+  parser_version: kilauea-local-v2-compact
+  script: catalogs/WEI2022_EA001979/scripts/run_catalog_analysis.py
+  products:
+  - product_id: events_s1
+    kind: wei
+    unit: event
+    role: secondary
+    source_path: WEI2022_EA001979__catalog_S1.txt

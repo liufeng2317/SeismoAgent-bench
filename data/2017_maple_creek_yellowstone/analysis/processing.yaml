@@ -1,0 +1,47 @@
+schema_version: 1
+case_id: 2017_maple_creek_yellowstone
+role: case-level catalog-processing manifest
+runtime_note: Declarative provenance record; catalog-local scripts remain the execution
+  entry points.
+processing_policy:
+  plot_profile: minimal
+  figure_format: png
+  figure_dpi: 300
+benchmark_window:
+  start: 2017-06-11 00:00:00+00:00
+  end: 2017-06-19 00:00:00+00:00
+  latitude:
+  - 44.45
+  - 44.75
+  longitude:
+  - -110.55
+  - -110.15
+  depth_km:
+  - 0
+  - 15
+catalogs:
+- source_ref: SHELLY2019_GL081607
+  catalog_dir: catalogs/SHELLY2019_GL081607
+  parser_version: maple-local-v1-compact
+  script: catalogs/SHELLY2019_GL081607/scripts/run_catalog_analysis.py
+  products:
+  - product_id: phase_arrivals
+    kind: phase_csv
+    unit: phase_pick
+    role: primary_auxiliary
+    source_path: raw/Yellowstone_2017_correlation_phase_arrivals.csv
+- source_ref: USGS_UUSS_COMCAT_2017
+  catalog_dir: catalogs/USGS_UUSS_COMCAT_2017
+  parser_version: maple-local-v1-compact
+  script: catalogs/USGS_UUSS_COMCAT_2017/scripts/run_catalog_analysis.py
+  products:
+  - product_id: operational_full
+    kind: usgs_csv
+    unit: event
+    role: baseline
+    source_path: USGS_UUSS_COMCAT_2017__catalog_operational_full.csv
+  - product_id: operational_benchmark
+    kind: usgs_csv
+    unit: event
+    role: baseline
+    source_path: USGS_UUSS_COMCAT_2017__catalog_operational_benchmark.csv
