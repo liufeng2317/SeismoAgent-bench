@@ -1,0 +1,683 @@
+{
+  "article": {
+    "source_id": "SHELLY2020_0220190309",
+    "case_id": "2019_ridgecrest_california",
+    "title": "A High-Resolution Seismic Catalog for the Initial 2019 Ridgecrest Earthquake Sequence: Foreshocks, Aftershocks, and Faulting Complexity",
+    "authors": [
+      "David R. Shelly"
+    ],
+    "year": 2020,
+    "journal": "Seismological Research Letters",
+    "doi": "10.1785/0220190309",
+    "article_type": "research_article",
+    "scientific_question": "Can multichannel template matching and double-difference relocation reveal the dense foreshock, aftershock and faulting structure that is missed by routine detection?",
+    "sequence": "2019 Ridgecrest Mw 6.4 foreshock, Mw 7.1 mainshock and initial sequence from 2019-07-04 through 2019-07-16 UTC.",
+    "catalog_relationship": "The canonical Data S1 is a 34,091-event detected/relocated catalog; the later multi-million-row phase-arrival release is auxiliary and must not be counted as an event catalog.",
+    "evidence": [
+      {
+        "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
+        "locator": "title, abstract and Methods",
+        "note": "Article identity and primary catalog contribution."
+      },
+      {
+        "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+        "locator": "Reported products and limitations; Catalog-construction workflow",
+        "note": "Article counts, method parameters and product distinction."
+      },
+      {
+        "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+        "locator": "Provenance and product distinction",
+        "note": "Canonical Data S1 versus auxiliary phase release."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "SHELLY2020_0220190309_DATAS1",
+    "name": "Shelly initial Ridgecrest high-resolution Data S1 catalog",
+    "product_type": "multi_product_release",
+    "role": "primary",
+    "quality_tier": "Q1",
+    "scientific_purpose": "Dense template-matched event recovery, differential-time association and relative hypocenter relocation for the initial Ridgecrest sequence.",
+    "event_definition": "SCSN template events and newly detected template matches that pass multichannel correlation thresholds and the hypoDD requirement of at least 12 P and 12 S correlation-derived differential times.",
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "SCSN template events",
+        "unit": "events",
+        "count_article": 13525,
+        "count_local": null,
+        "selection_rule": "Routine SCSN events used as waveform templates; scans performed in daily blocks from 3–18 July.",
+        "time_range": "2019-07-03 through 2019-07-18 operational template set",
+        "spatial_depth_scope": "Ridgecrest SCSN/SCEDC network; exact fixed station count not stated.",
+        "magnitude_scope": "SCSN preferred magnitude retained for template events.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "locator": "Templates and detection",
+            "note": "Article reports 13,525 routine template events."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "Final detected and relocated Data S1 events",
+        "unit": "events",
+        "count_article": 34091,
+        "count_local": 34091,
+        "selection_rule": "Accepted differential times passed to hypoDD; retain events with at least 12 P and at least 12 S correlation-derived differential times.",
+        "time_range": "2019-07-04 15:35:29.400 through 2019-07-16 23:59:26.500 UTC locally",
+        "spatial_depth_scope": "Full local range: lat 35.469906–36.036100 degrees N; lon −117.943498–−117.213200 degrees; depth 0.089–556.580 km relative to approximately 0.7 km asl.",
+        "magnitude_scope": "Mixed SCSN preferred and calibrated ML; full local range −0.34–7.10.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "locator": "Relocation and magnitude; Reported products",
+            "note": "Article count and relocation criterion."
+          },
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+            "locator": "Canonical Data S1 schema and checksum; Frozen benchmark-window audit",
+            "note": "Local count, ranges and checksum."
+          }
+        ]
+      },
+      {
+        "population_id": "P3",
+        "label": "Correlation-derived phase-arrival table",
+        "unit": "phase_arrivals",
+        "count_article": null,
+        "count_local": 5703270,
+        "selection_rule": "Rows represent template/match/station/phase arrivals, not unique events; use match_id for grouping.",
+        "time_range": "2019-07-04 00:56:40.090300 through 2019-07-16 23:59:55.419000 UTC",
+        "spatial_depth_scope": "30 network-station pairs in local release; no event hypocenter per row.",
+        "magnitude_scope": null,
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+            "locator": "Auxiliary phase-arrival release audit",
+            "note": "5,703,270 rows, 209,213 match IDs and P/S counts."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "10.1785/0220190309; https://doi.org/10.5066/P9JN6H0N",
+      "version": null,
+      "source_files": [
+        {
+          "path": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/raw_article/SHELLY2020_0220190309__catalog_DataS1.txt",
+          "format": "whitespace-delimited text",
+          "checksum": "aaa79453a2c599fe2b386a544c78e8e98383492aacf57212a8dc98d82373a9f1",
+          "role": "canonical"
+        },
+        {
+          "path": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/raw_article/SHELLY2020_0220190309__metadata_DataS1.xml",
+          "format": "metadata XML",
+          "checksum": null,
+          "role": "auxiliary"
+        },
+        {
+          "path": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/raw/Ridgecrest_2019_correlation_phase_arrivals.csv",
+          "format": "CSV",
+          "checksum": "0b77237b497265ebc94768acd955a9de5eb4c7f78f130922254e4c9ed4122d9f",
+          "role": "auxiliary"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+          "locator": "Provenance and product distinction; checksum table",
+          "note": "Canonical Data S1 and official ScienceBase release."
+        },
+        {
+          "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+          "locator": "Local provenance and next actions",
+          "note": "Data S1 and metadata paths."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": 34091,
+      "row_count": 34091,
+      "time_range": "2019-07-04 15:35:29.400–2019-07-16 23:59:26.500 UTC",
+      "latitude_longitude_depth_range": "Full: lat 35.469906–36.036100 degrees N; lon −117.943498–−117.213200 degrees; depth 0.089–556.580 km. Frozen common mask: lat 35.485217–36.012817 degrees N; lon −117.819198–−117.255697 degrees; depth 0.159–19.953 km.",
+      "magnitude_range": "Full: −0.34–7.10 with 195 negative rows; frozen common mask: −0.10–7.10.",
+      "article_local_discrepancy": "Data S1 article count 34,091 matches local rows. The auxiliary phase CSV has 5,703,270 pick-level rows and is not an event-count discrepancy.",
+      "product_counts": {
+        "DataS1_events": 34091,
+        "template_events_article": 13525,
+        "phase_arrival_rows": 5703270,
+        "phase_match_ids_local": 209213
+      },
+      "evidence": [
+        {
+          "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+          "locator": "Canonical Data S1 schema and checksum; Frozen benchmark-window audit",
+          "note": "Rows, unique IDs, ranges, duplicate times and 7,716-row common mask."
+        },
+        {
+          "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+          "locator": "Auxiliary phase-arrival release audit",
+          "note": "Pick-level row and station-pair statistics."
+        }
+      ]
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "dense event recovery and temporal clustering",
+        "template-match association and relative geometry",
+        "differential-time support and relocation diagnostics",
+        "sensitivity to coda-saturated overlapping events"
+      ],
+      "unsuitable_metrics": [
+        "universal absolute hypocenter truth for Mw 6.4/Mw 7.1",
+        "stationary completeness or b-value comparisons across the entire sequence",
+        "treating the phase CSV as an event catalog"
+      ],
+      "independence_conditions": [
+        "Shares SCSN/SCEDC waveform lineage and routine templates with operational/Ross products.",
+        "Do not expose Data S1 or the phase-arrival release during autonomous detection evaluation."
+      ],
+      "limitations": [
+        "Mostly unreviewed; article warns that some errors may be large.",
+        "Depth datum is relative to approximately 0.7 km asl, and one 556.58-km outlier is retained in raw data.",
+        "Exact station-day availability and per-event uncertainty are not encoded in Data S1."
+      ],
+      "evidence": [
+        {
+          "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+          "locator": "Benchmark interpretation",
+          "note": "Tier, role and caveats."
+        },
+        {
+          "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+          "locator": "Full catalog audit; Quality and limitations",
+          "note": "Outlier and mask handling."
+        }
+      ]
+    },
+    "product_semantics": {
+      "DataS1": "34,091-row event catalog with origin, location, magnitude and stable ID; canonical article product.",
+      "phase_arrivals": "5,703,270 row-per-template/match/station/phase auxiliary table; not a catalog of 5.7 million events.",
+      "templates": "13,525 SCSN routine events used to seed waveform templates; inherited population, not independent detections."
+    },
+    "product_schemas": {
+      "DataS1": {
+        "role": "canonical_event_catalog",
+        "identifier_field": "ID",
+        "fields": [
+          "YYYY",
+          "MM",
+          "dd",
+          "hh",
+          "mm",
+          "ss.sss",
+          "lat",
+          "lon",
+          "depth",
+          "mag",
+          "ID"
+        ],
+        "units": {
+          "time_fields": "UTC; millisecond precision",
+          "lat": "degree",
+          "lon": "degree",
+          "depth": "km relative to approximately 0.7 km asl surface datum",
+          "mag": "SCSN preferred or calibrated ML"
+        },
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+            "locator": "Canonical Data S1 schema",
+            "note": "Eleven native fields, stable IDs and depth datum."
+          }
+        ]
+      },
+      "phase_arrivals": {
+        "role": "pick_level_auxiliary_table",
+        "identifier_field": "match_id",
+        "fields": [
+          "template_id",
+          "match_id",
+          "network",
+          "station",
+          "phase",
+          "arrival",
+          "weight",
+          "mag",
+          "ccmax",
+          "ccdiff",
+          "chanloc"
+        ],
+        "units": {
+          "arrival": "UTC",
+          "phase": "P or S",
+          "ccmax": "correlation coefficient",
+          "ccdiff": "differential correlation"
+        },
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+            "locator": "Auxiliary phase-arrival release audit",
+            "note": "Phase-level schema and counts."
+          }
+        ]
+      }
+    }
+  },
+  "construction_workflow": {
+    "summary": "SCSN routine templates are scanned in daily blocks with multichannel template matching; catalog and correlation differential times are combined, relocated with hypoDD and exported as Data S1 with calibrated magnitudes.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "SCSN routine template events",
+        "type": "seed_catalog",
+        "provider_or_network": "SCSN/SCEDC",
+        "temporal_spatial_scope": "2019-07-03 through 2019-07-18 template scans",
+        "station_count": 13525,
+        "channels_sampling": null,
+        "role": "seed_catalog",
+        "availability_conditions": "Template population and preferred magnitudes inherited from routine catalog.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "locator": "Templates and detection",
+            "note": "13,525 is an event/template count, not a station count."
+          }
+        ]
+      },
+      {
+        "source_id": "S2",
+        "name": "Continuous seismic waveforms",
+        "type": "waveform",
+        "provider_or_network": "Caltech, USGS, UNAVCO and University of Nevada Reno stations",
+        "temporal_spatial_scope": "Ridgecrest sequence; daily scans",
+        "station_count": null,
+        "channels_sampling": "100 samples/s; 2–12 Hz bandpass; P templates 2.5 s and S templates 4.0 s",
+        "role": "primary_input",
+        "availability_conditions": "Changing real-time station availability; exact station-day inventory not stated.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "locator": "Scientific scope and observation conditions",
+            "note": "Network names and waveform parameters."
+          }
+        ]
+      },
+      {
+        "source_id": "S3",
+        "name": "1-D velocity model",
+        "type": "velocity_model",
+        "provider_or_network": "Article Table 1",
+        "temporal_spatial_scope": "Ridgecrest",
+        "station_count": null,
+        "channels_sampling": "Vp 4.74–7.8 km/s; Vp/Vs 1.73",
+        "role": "model",
+        "availability_conditions": null,
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "locator": "Relocation and magnitude",
+            "note": "hypoDD velocity model."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "Template preparation",
+        "category": "preprocessing",
+        "purpose": "Build P/S waveform templates from routine SCSN events.",
+        "inputs": [
+          "S1",
+          "S2"
+        ],
+        "outputs": [
+          "P/S waveform templates"
+        ],
+        "method": "Use daily scans, 2–12 Hz bandpass and windows beginning 0.3 s before picks.",
+        "software_or_model": "Template matching",
+        "parameters": [
+          {
+            "name": "P_template_length",
+            "value": 2.5,
+            "unit": "s",
+            "note": null
+          },
+          {
+            "name": "S_template_length",
+            "value": 4,
+            "unit": "s",
+            "note": null
+          },
+          {
+            "name": "pre_pick_offset",
+            "value": 0.3,
+            "unit": "s",
+            "note": null
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Use available station components and preserve SCSN template identities."
+        ],
+        "intermediate_result": "13,525 routine template events.",
+        "analyst_intervention": null,
+        "dependencies": "Requires seed picks and waveform availability.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "locator": "Waveform processing; Templates and detection",
+            "note": "Template lengths, filter and count."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "Multichannel correlation detection",
+        "category": "detection",
+        "purpose": "Detect hidden events and measure differential times.",
+        "inputs": [
+          "P/S waveform templates",
+          "S2"
+        ],
+        "outputs": [
+          "Correlation detections and differential times"
+        ],
+        "method": "Scan daily blocks and use summed and individual correlation thresholds.",
+        "software_or_model": "Multichannel template matching",
+        "parameters": [
+          {
+            "name": "summed_threshold",
+            "value": "8 times daily MAD",
+            "unit": null,
+            "note": null
+          },
+          {
+            "name": "individual_threshold",
+            "value": "7 times daily MAD",
+            "unit": null,
+            "note": null
+          },
+          {
+            "name": "max_P_differential_time",
+            "value": 0.5,
+            "unit": "s",
+            "note": null
+          },
+          {
+            "name": "max_S_differential_time",
+            "value": 0.85,
+            "unit": "s",
+            "note": null
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Reject detections below correlation/MAD thresholds or outside differential-time windows."
+        ],
+        "intermediate_result": "8.6 million correlation P and 15.8 million correlation S differential times (article).",
+        "analyst_intervention": null,
+        "dependencies": "Depends on station waveform availability.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "locator": "Templates and detection",
+            "note": "Thresholds and differential-time totals."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST3",
+        "order": 3,
+        "name": "Combine catalog and correlation picks",
+        "category": "association",
+        "purpose": "Construct the differential-time network for relocation.",
+        "inputs": [
+          "Correlation differential times",
+          "SCSN catalog differential times"
+        ],
+        "outputs": [
+          "Combined differential-time set"
+        ],
+        "method": "Combine correlation-derived and SCSN catalog-derived P/S differential times.",
+        "software_or_model": "Custom merge",
+        "parameters": [],
+        "qc_and_rejection_rules": [
+          "Retain phase/station associations and weights for hypoDD."
+        ],
+        "intermediate_result": "Article reports 6.6 million SCSN-catalog P and 2.9 million SCSN-catalog S differential times.",
+        "analyst_intervention": null,
+        "dependencies": "Requires SCSN catalog and detected matches.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "locator": "Templates and detection",
+            "note": "Article differential-time totals."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST4",
+        "order": 4,
+        "name": "hypoDD relocation",
+        "category": "relocation",
+        "purpose": "Estimate high-resolution relative hypocenters.",
+        "inputs": [
+          "Combined differential-time set",
+          "S3"
+        ],
+        "outputs": [
+          "Relocated event catalog"
+        ],
+        "method": "Run hypoDD with article 1-D model and retain events with sufficient correlation differential times.",
+        "software_or_model": "hypoDD",
+        "parameters": [
+          {
+            "name": "minimum_P_correlation_differential_times",
+            "value": 12,
+            "unit": "per event",
+            "note": null
+          },
+          {
+            "name": "minimum_S_correlation_differential_times",
+            "value": 12,
+            "unit": "per event",
+            "note": null
+          },
+          {
+            "name": "VpVs",
+            "value": 1.73,
+            "unit": "ratio",
+            "note": null
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Require at least 12 P and 12 S correlation-derived differential times.",
+          "Article warns that some residual errors may remain."
+        ],
+        "intermediate_result": "34,091 events.",
+        "analyst_intervention": null,
+        "dependencies": "Depends on valid differential-time network and velocity model.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "locator": "Relocation and magnitude; Reported products",
+            "note": "Criterion and final count."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST5",
+        "order": 5,
+        "name": "Magnitude calibration and Data S1 export",
+        "category": "magnitude",
+        "purpose": "Assign magnitudes to new detections and preserve template magnitudes.",
+        "inputs": [
+          "Relocated event catalog",
+          "S1"
+        ],
+        "outputs": [
+          "Data S1 event catalog"
+        ],
+        "method": "Calibrate new detections to SCSN ML; factor ten in amplitude corresponds to approximately 0.831 magnitude units.",
+        "software_or_model": "SCSN ML calibration",
+        "parameters": [
+          {
+            "name": "amplitude_to_magnitude",
+            "value": 0.831,
+            "unit": "magnitude units per tenfold amplitude",
+            "note": null
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Keep SCSN preferred magnitudes for template events; flag mixed scale for comparison."
+        ],
+        "intermediate_result": "Data S1: 34,091 rows.",
+        "analyst_intervention": null,
+        "dependencies": "Requires SCSN calibration reference.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "locator": "Relocation and magnitude",
+            "note": "Magnitude calibration and final output."
+          }
+        ]
+      }
+    ],
+    "final_output": "Canonical Data S1 with 34,091 event rows; frozen three-day common mask contains 7,716 events. The 5,703,270-row phase CSV remains a separate pick-level auxiliary product.",
+    "evidence": [
+      {
+        "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+        "locator": "Canonical Data S1 schema and checksum",
+        "note": "Local output audit."
+      },
+      {
+        "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+        "locator": "Catalog-construction workflow",
+        "note": "Article workflow."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [
+      {
+        "product_id": "DP1",
+        "name": "USGS ScienceBase metadata",
+        "type": "other",
+        "file_path": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/raw_article/SHELLY2020_0220190309__metadata_DataS1.xml",
+        "catalog_relation": "Metadata sidecar for Data S1; not a second event catalog.",
+        "scientific_use": "Verify release provenance and fields.",
+        "count_or_scope": "FGDC/ISO XML",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+            "locator": "Provenance and product distinction",
+            "note": "Official DOI and metadata path."
+          }
+        ]
+      },
+      {
+        "product_id": "DP2",
+        "name": "Correlation phase-arrival release",
+        "type": "phase_table",
+        "file_path": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/raw/Ridgecrest_2019_correlation_phase_arrivals.csv",
+        "catalog_relation": "Auxiliary pick-level table; do not substitute for Data S1.",
+        "scientific_use": "Station/phase coverage and pick-level metrics.",
+        "count_or_scope": "5,703,270 rows; 209,213 match IDs; 30 network-station pairs",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+            "locator": "Auxiliary phase-arrival release audit",
+            "note": "Local schema and counts."
+          }
+        ]
+      },
+      {
+        "product_id": "DP3",
+        "name": "Supplementary movies",
+        "type": "figure",
+        "file_path": null,
+        "catalog_relation": "Article supplementary visualization; not currently parsed/local.",
+        "scientific_use": "Qualitative detection/sequence review.",
+        "count_or_scope": "Missing local files",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "locator": "Identity and evidence status",
+            "note": "Supplement is cited but not locally parsed."
+          }
+        ]
+      }
+    ],
+    "scientific_findings": [
+      {
+        "statement": "Template matching reveals more than 20,000 events beyond the routine SCSN template population and resolves complex faulting.",
+        "depends_on": "P2 Data S1 and article figures",
+        "scope": "Initial Ridgecrest sequence",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "locator": "Templates and detection; Reported products",
+            "note": "Article event-count interpretation."
+          }
+        ]
+      },
+      {
+        "statement": "Completeness changes sharply after the mainshocks because coda saturation and noise alter detection sensitivity.",
+        "depends_on": "P2 and waveform conditions",
+        "scope": "Post-mainshock intervals",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md",
+            "locator": "Reported products and limitations",
+            "note": "Time-varying completeness warning."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "Q1 for dense detection and relative geometry; Q2 for absolute hypocenters and completeness because the catalog is mostly unreviewed and template-conditioned.",
+      "recommended_role": "Primary dense recovery, association and relative-relocation reference for the Ridgecrest short-window benchmark.",
+      "comparison_or_baseline_sources": "Compare with Liu Table S1, Ross SCEDC QTM and AWR only under the common mask; use SCSN/operational products as a separate baseline.",
+      "valid_comparisons": "Event support, temporal clustering, relative geometry and differential-time/phase metrics.",
+      "caveats": "Do not treat the phase rows as events; do not use mainshock correlation centroids as universal absolute hypocenters; retain the raw depth outlier and mask it only for benchmark comparison.",
+      "evidence": [
+        {
+          "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+          "locator": "Benchmark role and limitations; Frozen benchmark-window audit",
+          "note": "Tier and 7,716-row common mask."
+        }
+      ]
+    },
+    "missing_information": [
+      "Exact station-day waveform availability and per-event uncertainty are not in Data S1.",
+      "Supplementary movies and any machine-readable station inventory are not locally parsed.",
+      "Data S1 metadata XML contains a copied Kilauea depth description; Ridgecrest article/header datum is authoritative."
+    ]
+  },
+  "extraction_quality": {
+    "status": "partial",
+    "extraction_confidence": "high",
+    "completed_sections": [
+      "article identity and catalog relationship",
+      "Data S1 and phase-table schema",
+      "article/local counts and checksums",
+      "construction workflow",
+      "benchmark window",
+      "quality and role"
+    ],
+    "missing_core_fields": [
+      "station-day waveform volume",
+      "event-level uncertainty fields",
+      "parsed supplementary movies/station inventory"
+    ],
+    "warnings": [
+      "Do not count phase-arrival rows as events.",
+      "Raw Data S1 includes a 556.58-km depth outlier and mixed magnitude provenance.",
+      "Metadata XML has an incorrect Kilauea depth phrase; use article and Data S1 comments."
+    ],
+    "needs_human_review": true
+  }
+}
