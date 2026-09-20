@@ -1,0 +1,715 @@
+{
+  "article": {
+    "source_id": "AWR2025_CALTECHDATA",
+    "case_id": "2019_ridgecrest_california",
+    "title": "The evolution of fault orientation in the 2019 Ridgecrest earthquake sequence with a new long-term catalogue of seismicity and moment tensors",
+    "authors": [
+      "James Atterholt",
+      "John D. Wilding",
+      "Zachary E. Ross"
+    ],
+    "year": 2025,
+    "journal": "Geophysical Journal International",
+    "doi": "10.1093/gji/ggaf001",
+    "article_type": "research_article",
+    "scientific_question": "How does fault orientation evolve through the 2019 Ridgecrest sequence and its multi-year recovery when a long-term automatically detected, relocated and moment-tensor catalog is constructed?",
+    "sequence": "Ridgecrest catalog spanning April 2019 through May 2023, including foreshock, mainshock, aftershocks and long-term recovery.",
+    "catalog_relationship": "Constructs a long-term hypocenter catalog and a quality-filtered moment-tensor product; local CaltechDATA Version 2 files are related to, but not proven byte-identical with, the article's cited release.",
+    "evidence": [
+      {
+        "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
+        "locator": "title, abstract, catalog/methods sections",
+        "note": "Article identity and workflow."
+      },
+      {
+        "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+        "locator": "Catalog-construction workflow; Reported products and limitations",
+        "note": "Article counts and product semantics."
+      },
+      {
+        "source": "data/2019_ridgecrest_california/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md",
+        "locator": "Provenance and files; Article-versus-release reconciliation",
+        "note": "Local Version 2 provenance and discrepancies."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "AWR2025_CALTECHDATA_V2",
+    "name": "Atterholt–Wilding–Ross long-term Ridgecrest hypocenter and moment-tensor release",
+    "product_type": "multi_product_release",
+    "role": "auxiliary",
+    "quality_tier": "Q2",
+    "scientific_purpose": "Long-term event-rate, relative-location, fault-orientation and focal-mechanism cross-check over changing network conditions.",
+    "event_definition": "PhaseNO detections associated by GaMMA, absolutely located by HypoSVI, relatively relocated with GrowClust where sufficient correlation support exists, with a separate signed-P-amplitude moment-tensor subset.",
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "GaMMA associated events",
+        "unit": "events",
+        "count_article": 326345,
+        "count_local": null,
+        "selection_rule": "At least 15 picks, maximum phase error 2 s, in 10-s association windows.",
+        "time_range": "April 2019 through May 2023",
+        "spatial_depth_scope": "Broad 200 × 200 km region around Ridgecrest; 66-station multi-network input.",
+        "magnitude_scope": null,
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "locator": "Hypocenter catalog",
+            "note": "Article reports 326,345 GaMMA events; no separate local table."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "Article retained relocated hypocenters / local Version 2 hypocenters",
+        "unit": "events",
+        "count_article": 214467,
+        "count_local": 222864,
+        "selection_rule": "Article retained relocated catalog after HypoSVI/GrowClust; local v2 CSV preserves all released hypocenters and QC fields.",
+        "time_range": "Local: 2019-04-04 01:47:41.335–2023-05-01 20:55:26.801 UTC",
+        "spatial_depth_scope": "Local full: lat 34.910170–36.573010 degrees N; lon −118.612600–−116.740580 degrees; depth −0.599–19.539 km. Frozen common: lat 35.505180–36.050000 degrees N; lon −117.877930–−117.267740 degrees; depth 0.692–14.732 km.",
+        "magnitude_scope": "Release-specific gamma magnitude −0.723–4.585; frozen common 0.056–4.585; not ML/Mw.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "locator": "Hypocenter catalog; Reported products",
+            "note": "Article count and method thresholds."
+          },
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md",
+            "locator": "Native schema; Full release audit; Frozen benchmark-window audit",
+            "note": "Local count, ranges and checksum."
+          }
+        ]
+      },
+      {
+        "population_id": "P3",
+        "label": "Signed P-amplitude measurements",
+        "unit": "measurements",
+        "count_article": 226615,
+        "count_local": null,
+        "selection_rule": "Automated signed P amplitudes from 45,684 events used for moment-tensor inversion.",
+        "time_range": "Long-term sequence",
+        "spatial_depth_scope": "66-station multi-network waveform region; measurements are not event rows.",
+        "magnitude_scope": null,
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "locator": "Moment-tensor catalog",
+            "note": "Article measurement count; table not separately released locally."
+          }
+        ]
+      },
+      {
+        "population_id": "P4",
+        "label": "Moment-tensor candidate inversions",
+        "unit": "events",
+        "count_article": 7645,
+        "count_local": null,
+        "selection_rule": "At least 15 measured amplitudes before angular-uncertainty filtering.",
+        "time_range": "Long-term sequence",
+        "spatial_depth_scope": "Subset of associated/localized events.",
+        "magnitude_scope": null,
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "locator": "Moment-tensor catalog",
+            "note": "Article candidate count; candidates not separately released."
+          }
+        ]
+      },
+      {
+        "population_id": "P5",
+        "label": "Accepted moment tensors",
+        "unit": "events",
+        "count_article": 4892,
+        "count_local": 4890,
+        "selection_rule": "At least 15 amplitudes and strike/dip/rake angular standard deviations below 7.5 degrees.",
+        "time_range": "Local: 2019-04-07 18:52:58.223–2023-04-21 07:11:10.306 UTC",
+        "spatial_depth_scope": "Local full: lat 35.196190–36.462740 degrees N; lon −118.598140–−117.023630 degrees; depth −0.210–13.573 km. Frozen common: lat 35.548390–36.038930 degrees N; lon −117.847810–−117.366030 degrees; depth 0.921–12.866 km.",
+        "magnitude_scope": "Local moment magnitude field 1.366–4.115; frozen common 1.8739–4.1146.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "locator": "Moment-tensor catalog; Reported products",
+            "note": "Article candidate/accepted counts and thresholds."
+          },
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md",
+            "locator": "Native schema; Frozen benchmark-window audit",
+            "note": "Local count, QC and ranges."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "10.22002/5af05-cah73; article-cited 10.22002/f40da-hww21; 10.1093/gji/ggaf001",
+      "version": "CaltechDATA Version 2 (local staging)",
+      "source_files": [
+        {
+          "path": "data/2019_ridgecrest_california/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_hypocenters_v2.csv",
+          "format": "CSV",
+          "checksum": "fa87745528bddc66e7b1d25a94cba8d2448d38f67c6157c566ae451a84fa3ea8",
+          "role": "canonical"
+        },
+        {
+          "path": "data/2019_ridgecrest_california/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_moment_tensors_v2.csv",
+          "format": "CSV",
+          "checksum": "0746e6bbc694cf63d06112517305e91bf282a80833e660d6e6b0ea77578a33e7",
+          "role": "canonical"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2019_ridgecrest_california/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md",
+          "locator": "Provenance and files",
+          "note": "Local Version 2 DOI, paths, row counts and checksums."
+        },
+        {
+          "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+          "locator": "Catalog release",
+          "note": "Article supplementary release DOI references."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": null,
+      "row_count": null,
+      "time_range": "Hypocenters: 2019-04-04 01:47:41.335–2023-05-01 20:55:26.801 UTC; moment tensors: 2019-04-07 18:52:58.223–2023-04-21 07:11:10.306 UTC.",
+      "latitude_longitude_depth_range": "Hypocenters full lat 34.910170–36.573010 degrees N, lon −118.612600–−116.740580 degrees, depth −0.599–19.539 km; MT full lat 35.196190–36.462740 degrees N, lon −118.598140–−117.023630 degrees, depth −0.210–13.573 km. Frozen common ranges are recorded in P2/P5.",
+      "magnitude_range": "Hypocenters gamma −0.723–4.585; MT magnitude 1.366–4.115; frozen common gamma 0.056–4.585 and MT 1.8739–4.1146.",
+      "article_local_discrepancy": "Article reports 214,467 relocated hypocenters and 4,892 accepted MTs; local Version 2 has 222,864 and 4,890. Exact article supplementary/release manifest is not local, so no silent trimming is applied.",
+      "product_counts": {
+        "hypocenters_v2": 222864,
+        "moment_tensors_v2": 4890,
+        "article_relocated_hypocenters": 214467,
+        "article_accepted_moment_tensors": 4892,
+        "frozen_hypocenters_common": 5737,
+        "frozen_moment_tensors_common": 254
+      },
+      "evidence": [
+        {
+          "source": "data/2019_ridgecrest_california/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md",
+          "locator": "Full release audit; Frozen benchmark-window audit",
+          "note": "Rows, ranges, duplicate times and window counts."
+        },
+        {
+          "source": "data/2019_ridgecrest_california/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md",
+          "locator": "Article-versus-release reconciliation",
+          "note": "Version discrepancy."
+        }
+      ]
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "long-term event-rate evolution",
+        "relative geometry and relocation diagnostics",
+        "moment-tensor orientation and uncertainty calibration",
+        "cross-method comparison when release version and time span are harmonized"
+      ],
+      "unsuitable_metrics": [
+        "direct event-count ranking against short-window catalogs",
+        "direct gamma-magnitude comparison with ML/Mw",
+        "treating local v2 as byte-identical to the article's 214,467/4,892 products"
+      ],
+      "independence_conditions": [
+        "Method overlap with likely autonomous agents is substantial: PhaseNO, GaMMA, HypoSVI and GrowClust.",
+        "Use as an auxiliary reference and keep hidden from training/evaluation inputs when method leakage matters."
+      ],
+      "limitations": [
+        "66-station network and availability change from 2019–2023.",
+        "Exact article supplementary ZIP/release manifest is missing locally.",
+        "Hypocenter magnitude_gamma is not labeled ML or Mw."
+      ],
+      "evidence": [
+        {
+          "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+          "locator": "Benchmark interpretation",
+          "note": "Role, tier and algorithm overlap."
+        },
+        {
+          "source": "data/2019_ridgecrest_california/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md",
+          "locator": "Benchmark role and limitations",
+          "note": "Network and magnitude caveats."
+        }
+      ]
+    },
+    "product_semantics": {
+      "hypocenters_v2": "Local 222,864-row long-term hypocenter CSV; article retained count 214,467 is release/version-specific.",
+      "moment_tensors_v2": "Local 4,890-row accepted MT CSV; all rows satisfy local n_picks_used >=15 and angular standard deviations below 7.5 degrees.",
+      "magnitude_gamma": "Release-specific amplitude/gamma magnitude; do not relabel as ML/Mw.",
+      "article_release": "Article cites 10.22002/f40da-hww21 while local staging uses 10.22002/5af05-cah73 Version 2; identity is unresolved."
+    },
+    "product_schemas": {
+      "hypocenters_v2": {
+        "role": "long_term_hypocenter_catalog",
+        "identifier_field": "evid",
+        "fields": [
+          "evid",
+          "time",
+          "latitude",
+          "longitude",
+          "depth_km",
+          "magnitude_gamma",
+          "qnpair",
+          "qndiffP",
+          "qndiffS",
+          "rmsP",
+          "rmsS"
+        ],
+        "units": {
+          "time": "UTC",
+          "latitude": "degree",
+          "longitude": "degree",
+          "depth_km": "km",
+          "magnitude_gamma": "release-specific gamma magnitude",
+          "qnpair": "pair count",
+          "qndiffP": "differential P count",
+          "qndiffS": "differential S count",
+          "rmsP": "s",
+          "rmsS": "s"
+        },
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md",
+            "locator": "Native schema; Full release audit",
+            "note": "Unique IDs, fields and ranges."
+          }
+        ]
+      },
+      "moment_tensors_v2": {
+        "role": "accepted_moment_tensor_catalog",
+        "identifier_field": "evid",
+        "fields": [
+          "evid",
+          "time",
+          "latitude",
+          "longitude",
+          "depth_km",
+          "magnitude",
+          "moment",
+          "tensor components",
+          "isotropic/CLVD terms",
+          "uncertainties",
+          "nodal planes",
+          "strike/dip/rake standard deviations",
+          "n_picks_used"
+        ],
+        "units": {
+          "time": "UTC",
+          "latitude": "degree",
+          "longitude": "degree",
+          "depth_km": "km",
+          "magnitude": "release MT magnitude",
+          "moment": "seismic moment",
+          "n_picks_used": "count",
+          "angular standard deviations": "degree"
+        },
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md",
+            "locator": "Native schema; Frozen benchmark-window audit",
+            "note": "All local rows meet pick and angular-QC criteria."
+          }
+        ]
+      }
+    }
+  },
+  "construction_workflow": {
+    "summary": "PhaseNO detects P/S arrivals on a changing 66-station network; GaMMA associates them; HypoSVI provides absolute locations; GrowClust refines relative hypocenters; signed P amplitudes feed a separately filtered moment-tensor release.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "Continuous multi-network 3C waveforms",
+        "type": "waveform",
+        "provider_or_network": "66 broadband stations, multiple networks",
+        "temporal_spatial_scope": "April 2019 through May 2023; broad 200 × 200 km region",
+        "station_count": 66,
+        "channels_sampling": "Three-component; above 1 Hz high-pass; changing availability",
+        "role": "primary_input",
+        "availability_conditions": "Neural graph uses 18 stations; station-day inventory not locally extracted.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "locator": "Scientific scope and observation conditions",
+            "note": "Station count, region and filtering."
+          }
+        ]
+      },
+      {
+        "source_id": "S2",
+        "name": "Southern California velocity model",
+        "type": "velocity_model",
+        "provider_or_network": "Hadley–Kanamori smoothed model",
+        "temporal_spatial_scope": "Ridgecrest/Southern California",
+        "station_count": null,
+        "channels_sampling": null,
+        "role": "model",
+        "availability_conditions": null,
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "locator": "Hypocenter catalog",
+            "note": "HypoSVI model."
+          }
+        ]
+      },
+      {
+        "source_id": "S3",
+        "name": "Signed P-wave amplitude measurements",
+        "type": "measurements",
+        "provider_or_network": "PhaseNO/GaMMA waveform picks",
+        "temporal_spatial_scope": "Long-term sequence",
+        "station_count": null,
+        "channels_sampling": null,
+        "role": "auxiliary_input",
+        "availability_conditions": "226,615 measurements from 45,684 events reported in article.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "locator": "Moment-tensor catalog",
+            "note": "Measurement population."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "Neural P/S detection",
+        "category": "picking",
+        "purpose": "Generate phase arrivals from continuous waveforms.",
+        "inputs": [
+          "S1"
+        ],
+        "outputs": [
+          "P/S phase picks"
+        ],
+        "method": "Apply PhaseNO to 3C data with above-1-Hz high-pass.",
+        "software_or_model": "PhaseNO",
+        "parameters": [
+          {
+            "name": "high_pass",
+            "value": ">1",
+            "unit": "Hz",
+            "note": null
+          },
+          {
+            "name": "neural_graph_stations",
+            "value": 18,
+            "unit": "stations",
+            "note": null
+          }
+        ],
+        "qc_and_rejection_rules": [],
+        "intermediate_result": null,
+        "analyst_intervention": null,
+        "dependencies": "Requires changing station availability.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "locator": "Catalog-construction workflow",
+            "note": "PhaseNO and network."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "GaMMA association",
+        "category": "association",
+        "purpose": "Associate phase picks into event hypotheses.",
+        "inputs": [
+          "P/S phase picks"
+        ],
+        "outputs": [
+          "Associated event catalog"
+        ],
+        "method": "Use 10-s subwindows, minimum 15 picks and maximum phase error 2 s.",
+        "software_or_model": "GaMMA",
+        "parameters": [
+          {
+            "name": "minimum_picks",
+            "value": 15,
+            "unit": "picks/event",
+            "note": null
+          },
+          {
+            "name": "max_phase_error",
+            "value": 2,
+            "unit": "s",
+            "note": null
+          },
+          {
+            "name": "association_window",
+            "value": 10,
+            "unit": "s",
+            "note": null
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Reject associations below pick/error criteria."
+        ],
+        "intermediate_result": "326,345 events reported.",
+        "analyst_intervention": null,
+        "dependencies": "Depends on detected picks and station graph.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "locator": "Hypocenter catalog",
+            "note": "GaMMA parameters and count."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST3",
+        "order": 3,
+        "name": "Amplitude magnitudes and HypoSVI absolute locations",
+        "category": "location",
+        "purpose": "Estimate source locations and station terms before relative relocation.",
+        "inputs": [
+          "Associated event catalog",
+          "S2"
+        ],
+        "outputs": [
+          "Absolute hypocenters and amplitudes"
+        ],
+        "method": "Run HypoSVI with smoothed model and source-specific station terms for eight iterations.",
+        "software_or_model": "HypoSVI",
+        "parameters": [
+          {
+            "name": "iterations",
+            "value": 8,
+            "unit": "passes",
+            "note": null
+          },
+          {
+            "name": "uncertainty_target",
+            "value": "90 percent: horizontal below 700 m; vertical below 1 km",
+            "unit": null,
+            "note": "For retained non-relocated events."
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Retain QC fields qnpair, qndiff and RMS in release."
+        ],
+        "intermediate_result": "Article reports 90-percent uncertainty thresholds for retained non-relocated events.",
+        "analyst_intervention": null,
+        "dependencies": "Depends on GaMMA origins and velocity model.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "locator": "Hypocenter catalog",
+            "note": "Model, iterations and uncertainty statement."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST4",
+        "order": 4,
+        "name": "Waveform cross-correlation and GrowClust",
+        "category": "relocation",
+        "purpose": "Refine relative event geometry where differential observations support clustering.",
+        "inputs": [
+          "Absolute hypocenters",
+          "S1"
+        ],
+        "outputs": [
+          "Relocated hypocenter catalog"
+        ],
+        "method": "Use waveform cross-correlation and GrowClust pairwise differential times.",
+        "software_or_model": "GrowClust",
+        "parameters": [
+          {
+            "name": "minimum_CC",
+            "value": 0.65,
+            "unit": null,
+            "note": null
+          },
+          {
+            "name": "minimum_differential_observations",
+            "value": 6,
+            "unit": "per pair",
+            "note": null
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Require CC at least 0.65 and at least 6 differential observations per pair."
+        ],
+        "intermediate_result": "Article: 214,467 retained relocated; local v2: 222,864 rows.",
+        "analyst_intervention": null,
+        "dependencies": "Depends on waveform overlap and station availability.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "locator": "Hypocenter catalog",
+            "note": "GrowClust criteria and article count."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST5",
+        "order": 5,
+        "name": "Moment-tensor inversion and angular QC",
+        "category": "qc",
+        "purpose": "Invert tensors from signed P amplitudes and retain stable focal mechanisms.",
+        "inputs": [
+          "S3",
+          "Absolute/relative hypocenters"
+        ],
+        "outputs": [
+          "Moment-tensor product"
+        ],
+        "method": "Invert tensors from signed P amplitudes; filter by pick count and strike/dip/rake standard deviations.",
+        "software_or_model": "Bayesian P-amplitude inversion",
+        "parameters": [
+          {
+            "name": "minimum_amplitudes",
+            "value": 15,
+            "unit": "measurements/event",
+            "note": null
+          },
+          {
+            "name": "angular_std_max",
+            "value": 7.5,
+            "unit": "degree",
+            "note": "Strike, dip and rake."
+          }
+        ],
+        "qc_and_rejection_rules": [
+          "Retain candidates with at least 15 amplitudes and all angular standard deviations below 7.5 degrees."
+        ],
+        "intermediate_result": "Article: 7,645 candidates and 4,892 accepted; local: 4,890 accepted rows.",
+        "analyst_intervention": null,
+        "dependencies": "Requires amplitude signs, locations and uncertainty estimation.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "locator": "Moment-tensor catalog",
+            "note": "Candidate/accepted counts and thresholds."
+          }
+        ]
+      }
+    ],
+    "final_output": "Local Version 2 contains 222,864 hypocenter rows and 4,890 accepted moment tensors; frozen common mask yields 5,737 and 254 respectively. Article counts (214,467 and 4,892) remain separate.",
+    "evidence": [
+      {
+        "source": "data/2019_ridgecrest_california/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md",
+        "locator": "Full release audit; Frozen benchmark-window audit",
+        "note": "Local outputs."
+      },
+      {
+        "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+        "locator": "Reported products and limitations",
+        "note": "Article output counts."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [
+      {
+        "product_id": "DP1",
+        "name": "Article supplementary AWR Catalogs.zip",
+        "type": "other",
+        "file_path": null,
+        "catalog_relation": "Article-cited release; exact archive is not local and may correspond to DOI 10.22002/f40da-hww21.",
+        "scientific_use": "Resolve article/local byte identity and reproduce article counts.",
+        "count_or_scope": "Missing local archive/manifest",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "locator": "Catalog release",
+            "note": "Article supplementary and DOI references."
+          }
+        ]
+      },
+      {
+        "product_id": "DP2",
+        "name": "CaltechDATA Version 2 release",
+        "type": "event_catalog",
+        "file_path": "data/2019_ridgecrest_california/catalogs/AWR2025_CALTECHDATA/",
+        "catalog_relation": "Current local release with separate hypocenter and MT CSVs.",
+        "scientific_use": "Long-term auxiliary comparison.",
+        "count_or_scope": "222,864 hypocenters; 4,890 moment tensors",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md",
+            "locator": "Provenance and files",
+            "note": "Version 2 files and checksums."
+          }
+        ]
+      }
+    ],
+    "scientific_findings": [
+      {
+        "statement": "Fault orientation evolves through the sequence and long-term recovery; accepted moment tensors provide an orientation-focused subset rather than a complete event catalog.",
+        "depends_on": "P2/P5 and article figures",
+        "scope": "April 2019–May 2023",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "locator": "Moment-tensor catalog; scientific scope",
+            "note": "Product purpose."
+          }
+        ]
+      },
+      {
+        "statement": "Network and algorithm availability vary over years, so event-rate changes combine seismicity with observation-condition changes.",
+        "depends_on": "S1 and P2",
+        "scope": "Long-term catalog",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md",
+            "locator": "Scientific scope and observation conditions",
+            "note": "Changing 66-station network."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "Q2 long-term auxiliary overall; metric-specific Q1 for accepted relative geometry and moment-tensor uncertainty fields.",
+      "recommended_role": "Long-duration cross-check for relocation, focal mechanisms and method robustness; not the primary short-window hidden target.",
+      "comparison_or_baseline_sources": "Compare with Shelly, Liu and Ross only after restricting to the common July window and separating gamma magnitude from ML/Mw.",
+      "valid_comparisons": "Relative geometry, orientation, uncertainty calibration and long-term rate trends with explicit network/time conditioning.",
+      "caveats": "PhaseNO/GaMMA/HypoSVI/GrowClust overlap with likely Agent components; local Version 2 does not reproduce article counts without exact release manifest.",
+      "evidence": [
+        {
+          "source": "data/2019_ridgecrest_california/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md",
+          "locator": "Benchmark role and limitations; Article-versus-release reconciliation",
+          "note": "Tier, leakage and version caveats."
+        }
+      ]
+    },
+    "missing_information": [
+      "Article supplementary ZIP/release manifest is not local.",
+      "Exact station-day availability and waveform volume are not extracted.",
+      "GaMMA, amplitude and candidate-MT intermediate tables are not released locally.",
+      "Byte-level identity between DOI 10.22002/5af05-cah73 and article-cited 10.22002/f40da-hww21 is unresolved."
+    ]
+  },
+  "extraction_quality": {
+    "status": "partial",
+    "extraction_confidence": "medium",
+    "completed_sections": [
+      "article identity and scope",
+      "hypocenter/MT product semantics",
+      "local schema/checksum/range audit",
+      "construction workflow",
+      "frozen window",
+      "quality and leakage role"
+    ],
+    "missing_core_fields": [
+      "article supplementary archive and exact release manifest",
+      "station-day waveform volume",
+      "intermediate GaMMA/amplitude/candidate-MT products"
+    ],
+    "warnings": [
+      "Article/local counts differ (214,467 versus 222,864 hypocenters; 4,892 versus 4,890 MTs).",
+      "Do not relabel magnitude_gamma as ML or Mw.",
+      "Long-term network changes invalidate unconditioned event-count comparisons."
+    ],
+    "needs_human_review": true
+  }
+}
