@@ -1,0 +1,590 @@
+{
+  "article": {
+    "source_id": "ROSS2019_SCIENCE",
+    "case_id": "2019_ridgecrest_california",
+    "title": "Hierarchical interlocked orthogonal faulting in the 2019 Ridgecrest earthquake sequence",
+    "authors": [
+      "Zachary E. Ross",
+      "Benjamín Idini",
+      "Zhe Jia",
+      "Oliver L. Stephenson",
+      "Minyan Zhong",
+      "Xin Wang",
+      "Zhongwen Zhan",
+      "Mark Simons",
+      "Eric J. Fielding",
+      "Sang-Ho Yun",
+      "Egill Hauksson",
+      "Angelyn W. Moore",
+      "Zhen Liu",
+      "JungKyo Jung"
+    ],
+    "year": 2019,
+    "journal": "Science",
+    "doi": "10.1126/science.aaz0109",
+    "article_type": "research_article",
+    "scientific_question": "What hierarchical, orthogonal fault geometry and rupture structure explains the 2019 Ridgecrest sequence when dense template-matched seismicity is relatively relocated?",
+    "sequence": "2019 Mw 6.4 foreshock, Mw 7.1 mainshock and first 21 days of aftershocks.",
+    "catalog_relationship": "Constructs/uses a high-resolution template-matched and relatively relocated catalog released as the official SCEDC QTM product; QTM mixes successfully relocated and initial-only rows.",
+    "evidence": [
+      {
+        "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
+        "locator": "title, abstract, main results",
+        "note": "Article identity and structural catalog purpose."
+      },
+      {
+        "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+        "locator": "Catalog-construction interpretation; Reported products and limitations",
+        "note": "Conservative workflow and article scope."
+      },
+      {
+        "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+        "locator": "Provenance and native schema",
+        "note": "Official QTM release and field definitions."
+      }
+    ]
+  },
+  "catalog": {
+    "catalog_id": "ROSS2019_SCIENCE_QTM",
+    "name": "SCEDC QTM Ridgecrest template-matched catalog",
+    "product_type": "multi_product_release",
+    "role": "secondary",
+    "quality_tier": "Q1",
+    "scientific_purpose": "Relative fault geometry, cluster structure and relocation diagnostics for the Ridgecrest sequence.",
+    "event_definition": "Template-matched event rows with initial and, when supported by differential-time clustering, relocated hypocenters; nbranch greater than 1 marks successful multi-event relocation.",
+    "populations": [
+      {
+        "population_id": "P1",
+        "label": "Article first-21-day event population",
+        "unit": "events",
+        "count_article": null,
+        "count_local": null,
+        "selection_rule": "Article reports more than 111,000 events with M greater than 0.5; exact article subset definition is in missing Science DC1.",
+        "time_range": "2019-07-04 through approximately 2019-07-25 UTC",
+        "spatial_depth_scope": "Ridgecrest sequence; exact article spatial mask is not stated in main text.",
+        "magnitude_scope": "Article statement uses M greater than 0.5; local QTM includes a wider magnitude range.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "locator": "Scientific scope and observation conditions; Reported products",
+            "note": "Article's approximate more-than-111,000 M>0.5 statement."
+          }
+        ]
+      },
+      {
+        "population_id": "P2",
+        "label": "All local QTM rows",
+        "unit": "events",
+        "count_article": null,
+        "count_local": 111918,
+        "selection_rule": "Official SCEDC archive rows; includes nbranch=1 initial/operational locations and nbranch>1 relocated solutions.",
+        "time_range": "2019-07-04 03:14:14.128 through 2019-07-25 14:59:51.550 UTC",
+        "spatial_depth_scope": "Relocated fields full range: lat 35.305300–36.137000 degrees N; lon −118.016000–−117.011500 degrees; depth −0.740–24.900 km.",
+        "magnitude_scope": "Local M −2.82–7.10; article M>0.5 statement is not a row filter applied locally.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "locator": "Full archive audit",
+            "note": "111,918 rows, span and ranges."
+          },
+          {
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "locator": "Reported products and limitations",
+            "note": "Initial/relocated mixture."
+          }
+        ]
+      },
+      {
+        "population_id": "P3",
+        "label": "Successfully relocated QTM rows",
+        "unit": "events",
+        "count_article": null,
+        "count_local": 46512,
+        "selection_rule": "nbranch greater than 1, with differential-time support; use qnpair/qndiffP/qndiffS and error fields for metric-specific QC.",
+        "time_range": "Within local QTM span; frozen common mask has 6,463 rows.",
+        "spatial_depth_scope": "Frozen common relocated-field range: lat 35.501700–36.049560 degrees N; lon −117.895500–−117.222500 degrees; depth 0.018–19.700 km.",
+        "magnitude_scope": "Frozen common M −0.82–7.10.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "locator": "Full archive audit; Frozen benchmark-window audit",
+            "note": "46,512 full rows and 6,463 common-mask rows with nbranch>1."
+          }
+        ]
+      },
+      {
+        "population_id": "P4",
+        "label": "Initial-only QTM rows",
+        "unit": "events",
+        "count_article": null,
+        "count_local": 65406,
+        "selection_rule": "nbranch equals 1; no multi-event differential relocation support in the local release.",
+        "time_range": "Within local QTM span; frozen common mask has 6,305 rows.",
+        "spatial_depth_scope": "Use latC/lonC/depC for initial solution; relocated fields do not represent a successful relocation for this population.",
+        "magnitude_scope": "Local M −2.82–7.10.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "locator": "Provenance and native schema; Full archive audit",
+            "note": "nbranch semantics and count."
+          }
+        ]
+      }
+    ],
+    "release": {
+      "doi_or_url": "https://scedc.caltech.edu/data/qtm-ridgecrest.html",
+      "version": null,
+      "source_files": [
+        {
+          "path": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/raw/ROSS2019_SCIENCE__catalog_qtm.tar.gz",
+          "format": "tar.gz archive containing ridgecrest_qtm.cat",
+          "checksum": "dcb0035f69c6ea9a960e45544f31bdacb38cb7f502c3d29af827da4ff6850849",
+          "role": "canonical"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+          "locator": "Provenance and native schema",
+          "note": "Official SCEDC archive and checksum."
+        },
+        {
+          "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+          "locator": "Catalog release",
+          "note": "QTM page and article data availability."
+        }
+      ]
+    },
+    "local_audit": {
+      "event_count": 111918,
+      "row_count": 111918,
+      "time_range": "2019-07-04 03:14:14.128–2019-07-25 14:59:51.550 UTC",
+      "latitude_longitude_depth_range": "Relocated fields full: lat 35.305300–36.137000 degrees N; lon −118.016000–−117.011500 degrees; depth −0.740–24.900 km. Frozen common: lat 35.501700–36.049560 degrees N; lon −117.895500–−117.222500 degrees; depth 0.018–19.700 km.",
+      "magnitude_range": "Full M −2.82–7.10; frozen common M −0.82–7.10.",
+      "article_local_discrepancy": "Article gives an approximate more-than-111,000 M>0.5 first-21-day population; local archive has 111,918 rows across mixed nbranch/status and is not asserted to be an exact M>0.5 subset.",
+      "product_counts": {
+        "all_rows": 111918,
+        "successfully_relocated_nbranch_gt_1": 46512,
+        "initial_only_nbranch_eq_1": 65406,
+        "distinct_clusters": 68112,
+        "frozen_common_rows": 12768,
+        "frozen_common_relocated": 6463,
+        "frozen_common_initial_only": 6305
+      },
+      "evidence": [
+        {
+          "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+          "locator": "Full archive audit; Frozen benchmark-window audit",
+          "note": "Rows, checksum, ranges, nbranch and mask counts."
+        },
+        {
+          "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+          "locator": "Quality and limitations",
+          "note": "DC1 missing caveat."
+        }
+      ]
+    },
+    "evaluation_use": {
+      "suitable_metrics": [
+        "relative fault geometry and cluster reconstruction",
+        "relocation support and differential-time diagnostics",
+        "location-error calibration using eh/ez/et",
+        "comparison of initial versus relocated solutions"
+      ],
+      "unsuitable_metrics": [
+        "treating all 111,918 rows as equally relocated",
+        "using QTM Mw 7.1 depth as absolute truth",
+        "exact reproduction of detection/relocation thresholds before obtaining Science DC1"
+      ],
+      "independence_conditions": [
+        "Shares SCSN/SCEDC waveform lineage with Shelly and operational baseline, but QTM is a distinct template/cluster release.",
+        "Use nbranch>1 for structural metrics and retain initial-only rows as a separate population."
+      ],
+      "limitations": [
+        "Science DC1 is not local, so exact template/differential-time parameters and station counts remain unknown.",
+        "Mainshock depth is poorly constrained; use SCSN hypocenter for absolute comparison.",
+        "13 duplicate origin times exist despite unique event IDs."
+      ],
+      "evidence": [
+        {
+          "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+          "locator": "Benchmark interpretation",
+          "note": "Tier and role."
+        },
+        {
+          "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+          "locator": "Quality and limitations",
+          "note": "nbranch, DC1 and mainshock-depth caveats."
+        }
+      ]
+    },
+    "product_semantics": {
+      "qtm_all": "111,918-row official SCEDC archive combining initial and relocated solutions.",
+      "relocated_subset": "Rows with nbranch >1; 46,512 full-release rows and 6,463 under frozen common mask.",
+      "initial_subset": "Rows with nbranch =1; 65,406 full-release rows and 6,305 under frozen common mask.",
+      "error_fields": "eh, ez and et use −1 for unavailable values; do not treat −1 as a physical error."
+    },
+    "product_schemas": {
+      "qtm": {
+        "role": "mixed_initial_and_relocated_event_catalog",
+        "identifier_field": "eID",
+        "fields": [
+          "yr",
+          "mo",
+          "day",
+          "hr",
+          "min",
+          "sec",
+          "eID",
+          "latR",
+          "lonR",
+          "depR",
+          "mag",
+          "qID",
+          "cID",
+          "nbranch",
+          "qnpair",
+          "qndiffP",
+          "qndiffS",
+          "rmsP",
+          "rmsS",
+          "eh",
+          "ez",
+          "et",
+          "latC",
+          "lonC",
+          "depC"
+        ],
+        "units": {
+          "time_fields": "UTC; millisecond precision",
+          "latR": "degree",
+          "lonR": "degree",
+          "depR": "km",
+          "mag": "catalog magnitude",
+          "qID": "event serial",
+          "cID": "cluster serial",
+          "nbranch": "event count/support in cluster",
+          "qnpair": "pair count",
+          "qndiffP": "differential P count",
+          "qndiffS": "differential S count",
+          "rmsP": "s",
+          "rmsS": "s",
+          "eh": "km; −1 unavailable",
+          "ez": "km; −1 unavailable",
+          "et": "s; −1 unavailable",
+          "latC": "degree",
+          "lonC": "degree",
+          "depC": "km"
+        },
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "locator": "Provenance and native schema",
+            "note": "Official SCEDC column definitions."
+          },
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "locator": "Frozen benchmark-window audit",
+            "note": "Relocated-field mask choice."
+          }
+        ]
+      }
+    }
+  },
+  "construction_workflow": {
+    "summary": "SCSN/SCEDC routine waveforms seed template matching and hidden-event detection; differential times are clustered and relatively relocated into the SCEDC QTM format. Exact thresholds remain in the missing Science DC1.",
+    "input_data": [
+      {
+        "source_id": "S1",
+        "name": "SCSN/SCEDC waveform and routine-event archive",
+        "type": "waveform",
+        "provider_or_network": "Southern California Seismic Network / SCEDC",
+        "temporal_spatial_scope": "2019 Ridgecrest sequence, first 21 days",
+        "station_count": null,
+        "channels_sampling": "Not specified in main article parse",
+        "role": "primary_input",
+        "availability_conditions": "Station count and exact availability require DC1.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "locator": "Scientific scope and observation conditions",
+            "note": "Network lineage and missing station count."
+          }
+        ]
+      },
+      {
+        "source_id": "S2",
+        "name": "Routine events/picks for templates",
+        "type": "seed_catalog",
+        "provider_or_network": "SCSN/SCEDC",
+        "temporal_spatial_scope": "Ridgecrest sequence",
+        "station_count": null,
+        "channels_sampling": null,
+        "role": "seed_catalog",
+        "availability_conditions": "Exact template population and thresholds are in DC1.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "locator": "Catalog-construction interpretation",
+            "note": "Conservative chain due missing DC1."
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage_id": "ST1",
+        "order": 1,
+        "name": "Template matching and hidden-event detection",
+        "category": "detection",
+        "purpose": "Recover events below routine network thresholds.",
+        "inputs": [
+          "S1",
+          "S2"
+        ],
+        "outputs": [
+          "Template detections and picks"
+        ],
+        "method": "Apply the article's template-matching workflow; do not infer unreported thresholds.",
+        "software_or_model": "Template matching (details in Science DC1)",
+        "parameters": [],
+        "qc_and_rejection_rules": [
+          "Exact thresholds, template lengths and station selection unresolved."
+        ],
+        "intermediate_result": null,
+        "analyst_intervention": null,
+        "dependencies": "Requires Science DC1 for reproducibility.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "locator": "Catalog-construction interpretation",
+            "note": "Conservative workflow."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST2",
+        "order": 2,
+        "name": "Differential-time measurement",
+        "category": "association",
+        "purpose": "Build pairwise arrival-time constraints.",
+        "inputs": [
+          "Template detections and picks"
+        ],
+        "outputs": [
+          "Differential-time network"
+        ],
+        "method": "Measure differential times among template-related events.",
+        "software_or_model": "Article/SCEDC processing (details in DC1)",
+        "parameters": [],
+        "qc_and_rejection_rules": [
+          "Use qndiffP, qndiffS and RMS fields in released rows."
+        ],
+        "intermediate_result": null,
+        "analyst_intervention": null,
+        "dependencies": "Depends on template matches and waveform overlap.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "locator": "Native schema",
+            "note": "Differential-time fields."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST3",
+        "order": 3,
+        "name": "Clustered relative relocation",
+        "category": "relocation",
+        "purpose": "Estimate high-resolution relative hypocenters.",
+        "inputs": [
+          "Differential-time network"
+        ],
+        "outputs": [
+          "QTM initial and relocated locations"
+        ],
+        "method": "Cluster events and solve relative locations; release marks successful solutions with nbranch greater than 1.",
+        "software_or_model": "GrowClust-format QTM",
+        "parameters": [],
+        "qc_and_rejection_rules": [
+          "Separate nbranch>1 from nbranch=1.",
+          "Retain error fields and interpret −1 as unavailable.",
+          "Exact solver thresholds require DC1."
+        ],
+        "intermediate_result": "46,512 successfully relocated rows locally.",
+        "analyst_intervention": null,
+        "dependencies": "Requires differential-time support.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "locator": "Full archive audit",
+            "note": "nbranch semantics and counts."
+          }
+        ]
+      },
+      {
+        "stage_id": "ST4",
+        "order": 4,
+        "name": "Quality/export and structural interpretation",
+        "category": "export",
+        "purpose": "Publish mixed QTM schema and use relocated subset for fault geometry.",
+        "inputs": [
+          "QTM initial and relocated locations"
+        ],
+        "outputs": [
+          "SCEDC QTM archive"
+        ],
+        "method": "Export latR/lonR/depR, latC/lonC/depC, cluster/QC/error fields.",
+        "software_or_model": "SCEDC QTM release",
+        "parameters": [],
+        "qc_and_rejection_rules": [
+          "Use SCSN hypocenter for Mw 7.1 absolute depth.",
+          "Do not treat all rows as relocated."
+        ],
+        "intermediate_result": "111,918 rows; 12,768 frozen common rows.",
+        "analyst_intervention": null,
+        "dependencies": "Depends on official SCEDC release.",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "locator": "Reported products and limitations",
+            "note": "Structural interpretation and mainshock caveat."
+          }
+        ]
+      }
+    ],
+    "final_output": "Official SCEDC QTM archive with 111,918 rows, including 46,512 nbranch>1 relocated solutions and 65,406 initial-only rows; frozen common mask contains 12,768 rows (6,463 relocated).",
+    "evidence": [
+      {
+        "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+        "locator": "Full archive audit; Frozen benchmark-window audit",
+        "note": "Local final output."
+      },
+      {
+        "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+        "locator": "Catalog-construction interpretation",
+        "note": "Article workflow and missing DC1."
+      }
+    ]
+  },
+  "additional_information": {
+    "related_products": [
+      {
+        "product_id": "DP1",
+        "name": "Science supplementary DC1",
+        "type": "other",
+        "file_path": null,
+        "catalog_relation": "Materials and Methods, figures and tables cited by article but not local.",
+        "scientific_use": "Recover exact template, differential-time, relocation and station parameters.",
+        "count_or_scope": "Missing local supplement",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "locator": "Identity and evidence status",
+            "note": "DC1 missing status."
+          }
+        ]
+      },
+      {
+        "product_id": "DP2",
+        "name": "SCSN hypocenter for Mw 7.1",
+        "type": "event_subset",
+        "file_path": null,
+        "catalog_relation": "Recommended absolute-location comparator because QTM depth is poorly constrained.",
+        "scientific_use": "Absolute mainshock location check.",
+        "count_or_scope": "Single-event operational solution",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "locator": "Reported products and limitations",
+            "note": "Mainshock-depth recommendation."
+          }
+        ]
+      },
+      {
+        "product_id": "DP3",
+        "name": "SCEDC QTM field definition page",
+        "type": "other",
+        "file_path": "https://scedc.caltech.edu/data/qtm-ridgecrest.html",
+        "catalog_relation": "Authoritative schema and archive provenance.",
+        "scientific_use": "Interpret nbranch, qndiff and error fields.",
+        "count_or_scope": "Official online documentation",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "locator": "Provenance and native schema",
+            "note": "SCEDC source."
+          }
+        ]
+      }
+    ],
+    "scientific_findings": [
+      {
+        "statement": "The relocated subset resolves hierarchical interlocked orthogonal faulting and supports structural comparison at roughly 100 m horizontal and 350 m vertical relative resolution.",
+        "depends_on": "P3 and QTM relative fields",
+        "scope": "First 21 days of Ridgecrest",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md",
+            "locator": "Catalog-construction interpretation; Reported products",
+            "note": "Article resolution and structural use."
+          }
+        ]
+      },
+      {
+        "statement": "Initial-only and successfully relocated rows must be separated because the archive combines operational locations with differential-time-supported solutions.",
+        "depends_on": "nbranch semantics",
+        "scope": "All QTM analyses",
+        "evidence": [
+          {
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "locator": "Provenance and native schema; Full archive audit",
+            "note": "nbranch definition."
+          }
+        ]
+      }
+    ],
+    "benchmark_context": {
+      "quality_interpretation": "Q1 for nbranch>1 relative fault geometry and relocation diagnostics; Q2–Q3 for initial-only rows and absolute mainshock depth.",
+      "recommended_role": "Secondary structural/relocation reference against Shelly and Liu, with nbranch-specific metrics.",
+      "comparison_or_baseline_sources": "Compare with Shelly Data S1 and Liu Table S1 under the common mask; use SCSN hypocenter for absolute mainshock checks.",
+      "valid_comparisons": "Cluster geometry, relative location, differential-time support, error-field calibration and initial-versus-relocated contrast.",
+      "caveats": "Do not infer missing DC1 parameters or treat all rows as high-quality relocations; preserve duplicate times and event IDs.",
+      "evidence": [
+        {
+          "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+          "locator": "Quality and limitations; Frozen benchmark-window audit",
+          "note": "Tier, counts and mask."
+        }
+      ]
+    },
+    "missing_information": [
+      "Science DC1 is not archived locally.",
+      "Exact template-matching thresholds, station counts, station-day availability and relocation settings are unresolved.",
+      "Article's approximate more-than-111,000 M>0.5 population is not directly reproducible from local mixed QTM rows without DC1 definition."
+    ]
+  },
+  "extraction_quality": {
+    "status": "partial",
+    "extraction_confidence": "medium",
+    "completed_sections": [
+      "article identity and structural catalog role",
+      "QTM schema and nbranch semantics",
+      "local checksum/range/population audit",
+      "conservative construction workflow",
+      "frozen window",
+      "quality and role"
+    ],
+    "missing_core_fields": [
+      "Science DC1 methods and parameters",
+      "station-day waveform volume",
+      "exact article subset definition"
+    ],
+    "warnings": [
+      "Only nbranch>1 rows should be used for relocated-geometry metrics.",
+      "Error values of −1 mean unavailable, not negative uncertainty.",
+      "QTM mainshock depth is not an absolute truth reference."
+    ],
+    "needs_human_review": true
+  }
+}
