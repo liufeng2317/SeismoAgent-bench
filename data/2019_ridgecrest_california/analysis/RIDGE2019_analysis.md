@@ -35,7 +35,7 @@ kept as a benchmark reference only when it satisfies all of the following:
    counts.
 
 No catalog is treated as universal ground truth. The Q1–Q4 tiers in
-[`docs/01_Case_details.md`](../../../docs/01_Case_details.md) are applied by
+[`docs/01_1_Case_details.md`](../../../docs/01_1_Case_details.md) are applied by
 metric and role.
 
 ## Reference evaluation matrix

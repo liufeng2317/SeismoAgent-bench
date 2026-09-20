@@ -1,6 +1,6 @@
 # KAIKOURA2016 — Case Analysis
 
-> **Source of truth:** This file is the detailed, mutable analysis record for `KAIKOURA2016`. The cross-case summary is maintained in [`docs/01_Case_details.md`](../../../docs/01_Case_details.md).
+> **Source of truth:** This file is the detailed, mutable analysis record for `KAIKOURA2016`. The cross-case summary is maintained in [`docs/01_1_Case_details.md`](../../../docs/01_1_Case_details.md).
 
 ## Status
 
@@ -97,7 +97,7 @@ The 2016-12-01 to 2016-12-08 window is preferred because the temporary STREWN de
 - `../catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md`
 - Lanza et al. (2019), DOI: https://doi.org/10.1029/2019GL082780
 - Tan et al. (2024), DOI: https://doi.org/10.1029/2024JB028735
-## Full inventory record (migrated from `docs/01_Case_details.md`)
+## Full inventory record (migrated from `docs/01_1_Case_details.md`)
 ### 2016 Kaikōura Earthquake Sequence
 
 ## Literature and catalog gap audit

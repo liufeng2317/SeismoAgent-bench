@@ -1,6 +1,6 @@
 # PRAGUE2011 — Case Analysis
 
-> **Source of truth:** This file is the detailed, mutable analysis record for `PRAGUE2011`. The cross-case summary is maintained in [`docs/01_Case_details.md`](../../../docs/01_Case_details.md).
+> **Source of truth:** This file is the detailed, mutable analysis record for `PRAGUE2011`. The cross-case summary is maintained in [`docs/01_1_Case_details.md`](../../../docs/01_1_Case_details.md).
 
 ## Status
 
@@ -106,7 +106,7 @@ The stable-network window is preferred for the core benchmark because the last t
 - `../references/MCMAHON2017_DISSERTATION/paper/MCMAHON2017_DISSERTATION__paper.pdf`
 - McMahon et al. (2017), DOI: https://doi.org/10.1002/2017GL072944
 - USGS release, DOI: https://doi.org/10.5066/F7FJ2FNT
-## Full inventory record (migrated from `docs/01_Case_details.md`)
+## Full inventory record (migrated from `docs/01_1_Case_details.md`)
 ### 2011 Prague, Oklahoma Earthquake Sequence
 
 ## Literature and catalog gap audit

@@ -15,7 +15,7 @@ sequences. It separates data preparation and scientific reference validation
 from the later task of reproducing catalogs with agents.
 
 The extraction contract for paper methods, catalog schemas, and case-level
-synthesis is defined in [`docs/03_Information_Extraction_Schema.md`](docs/03_Information_Extraction_Schema.md).
+synthesis is defined in [`docs/01_3_Information_Extraction_Schema.md`](docs/01_3_Information_Extraction_Schema.md).
 
 ## What this project does
 
@@ -163,10 +163,10 @@ Next deliverables are:
 ## Documentation
 
 - [Research plan](docs/00_Research_Plan.md)
-- [Case details](docs/01_Case_details.md)
-- [Case data audit](docs/02_Case_Data_Audit.md)
-- [Information extraction schema](docs/03_Information_Extraction_Schema.md)
-- [Paper parsing audit](docs/04_Paper_Parsing_Audit.md)
+- [Case details](docs/01_1_Case_details.md)
+- [Case data audit](docs/01_2_Case_Data_Audit.md)
+- [Information extraction schema](docs/01_3_Information_Extraction_Schema.md)
+- [Paper parsing audit](docs/01_4_Paper_Parsing_Audit.md)
 - [Reference manifest](data/REFERENCES_MANIFEST.md)
 - [Data organization rules](data/README.md)
 

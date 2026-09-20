@@ -1,7 +1,7 @@
 # MAPLE2017 - 2017 Maple Creek, Yellowstone case analysis
 
 > This is the detailed case audit. Cross-case summary belongs in
-> docs/01_Case_details.md; source-specific reading and file-level audits live
+> docs/01_1_Case_details.md; source-specific reading and file-level audits live
 > beside each paper or catalog.
 
 ## 1. Case identity and benchmark purpose
