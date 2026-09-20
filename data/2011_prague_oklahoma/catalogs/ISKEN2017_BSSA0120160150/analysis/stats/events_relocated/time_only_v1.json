@@ -1,0 +1,63 @@
+{
+  "case_id": "2011_prague_oklahoma",
+  "source_ref": "ISKEN2017_BSSA0120160150",
+  "product_id": "events_relocated",
+  "kind": "isken_event",
+  "unit": "event",
+  "selection": "time_only",
+  "selection_rule": "[2011-11-11T00:00:00Z, 2011-11-19T00:00:00Z); rounded common Prague mask where applicable",
+  "time_basis": "native origin time",
+  "parser_version": "prague-local-v1-compact",
+  "source_path": "ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv",
+  "source_sha256": "a8a6df207ff71395d6201fac2bf79693481fbcee9c487aa3f1ca1ad8a2c35199",
+  "generated_utc": "2026-09-20T20:12:38+00:00",
+  "stats": {
+    "kind": "isken_event",
+    "row_count": 7,
+    "unique_native_event_ids": 7,
+    "duplicate_native_event_ids": 0,
+    "missing": {},
+    "ranges": {
+      "latitude_deg": [
+        35.457,
+        35.546
+      ],
+      "longitude_deg": [
+        -96.893,
+        -96.737
+      ],
+      "depth_km": [
+        5.4,
+        9.82
+      ],
+      "magnitude": [
+        3.1,
+        3.3
+      ]
+    },
+    "magnitude_types": {
+      "Mw": 7
+    },
+    "networks": {
+      "mixed": 7
+    },
+    "stations": {},
+    "phases": {},
+    "daily_counts": {
+      "2011-11-11": 1,
+      "2011-11-12": 2,
+      "2011-11-13": 1,
+      "2011-11-14": 1,
+      "2011-11-16": 1,
+      "2011-11-18": 1
+    },
+    "hourly_counts": {
+      "2011-11-11T19": 1,
+      "2011-11-12T01": 2,
+      "2011-11-13T09": 1,
+      "2011-11-14T05": 1,
+      "2011-11-16T17": 1,
+      "2011-11-18T07": 1
+    }
+  }
+}

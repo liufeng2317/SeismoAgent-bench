@@ -1,0 +1,70 @@
+{
+  "case_id": "2011_prague_oklahoma",
+  "source_ref": "USGS_TUL_COMCAT_2011",
+  "product_id": "operational_benchmark",
+  "kind": "usgs_csv",
+  "unit": "event",
+  "selection": "full",
+  "selection_rule": "[2011-11-11T00:00:00Z, 2011-11-19T00:00:00Z); rounded common Prague mask where applicable",
+  "time_basis": "native origin time",
+  "parser_version": "prague-local-v1-compact",
+  "source_path": "USGS_TUL_COMCAT_2011__catalog_operational_benchmark.csv",
+  "source_sha256": "4a3edd5fd565aaa55a6ddbb2fc0e71189d6a0007af6bbd648dc292a4432932e9",
+  "generated_utc": "2026-09-20T20:12:46+00:00",
+  "stats": {
+    "kind": "usgs_csv",
+    "row_count": 11,
+    "unique_native_event_ids": 11,
+    "duplicate_native_event_ids": 0,
+    "missing": {},
+    "ranges": {
+      "latitude_deg": [
+        35.464,
+        35.543
+      ],
+      "longitude_deg": [
+        -96.869,
+        -96.752
+      ],
+      "depth_km": [
+        3.1,
+        7.4
+      ],
+      "magnitude": [
+        2.2,
+        3.3
+      ]
+    },
+    "magnitude_types": {
+      "ml": 10,
+      "md": 1
+    },
+    "networks": {
+      "us": 11
+    },
+    "stations": {},
+    "phases": {},
+    "daily_counts": {
+      "2011-11-11": 1,
+      "2011-11-12": 1,
+      "2011-11-13": 1,
+      "2011-11-14": 3,
+      "2011-11-15": 1,
+      "2011-11-16": 3,
+      "2011-11-18": 1
+    },
+    "hourly_counts": {
+      "2011-11-11T19": 1,
+      "2011-11-12T01": 1,
+      "2011-11-13T09": 1,
+      "2011-11-14T05": 1,
+      "2011-11-14T20": 1,
+      "2011-11-14T23": 1,
+      "2011-11-15T00": 1,
+      "2011-11-16T05": 1,
+      "2011-11-16T15": 1,
+      "2011-11-16T17": 1,
+      "2011-11-18T07": 1
+    }
+  }
+}
