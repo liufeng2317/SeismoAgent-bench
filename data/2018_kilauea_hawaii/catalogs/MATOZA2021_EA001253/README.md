@@ -4,3 +4,4 @@
 - DOI: `10.1029/2020EA001253`
 - Core file: `MATOZA2021_EA001253__catalog_islandwide.txt`
 - Original archive: `raw/HVO1DXC8618V2.zip`
+- Full audit: `MATOZA2021_EA001253__catalog_summary.md`.

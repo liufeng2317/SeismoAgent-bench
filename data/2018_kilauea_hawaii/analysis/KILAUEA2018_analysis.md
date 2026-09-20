@@ -46,6 +46,9 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 |---|---|---|
 | Shelly & Thelen (2019) | Primary summit detection and relative-location reference | Paper reading and S1/S2 catalog audit are complete; common-mask counts are S1=1,883 and S2=1,877. Exact run-specific thresholds/station masks remain in the figure SI and are not yet tabulated. |
 | Wei et al. (2022) | Secondary broader detection/location reference | Paper reading and 375,736-row S1 audit are complete; common summit mask has 2,369 rows, of which 1,930 have numeric magnitudes. Different spatial domain, networks, and location workflow prevent direct event-count ranking. |
+| Matoza et al. (2021) | Island-wide relative-location auxiliary | 347,446-row revised release; 299,966 `nbranch>1`; summit common mask 1,044 relocated rows. Use for broader spatial role, not a replacement for Shelly. |
+| Lengliné et al. (2021) | East Rift Zone/dike auxiliary | 6,327 template-matched events; 6,049 overlap the v1 time interval but native table has only relative x/y and no depth/magnitude. |
+| Matoza et al. (2014) | Historical LP source-type auxiliary | 12,290 LP events from 1986–2009; zero rows in the 2018 window. |
 | HVO operational catalog | Baseline | Confirm release and coverage. |
 
 ## Calibration checklist
@@ -86,6 +89,12 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 - `../catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md`
 - `../references/WEI2022_EA001979/paper/WEI2022_EA001979__paper_reading.md`
 - `../catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md`
+- `../references/MATOZA2021_EA001253/paper/MATOZA2021_EA001253__paper_reading.md`
+- `../catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md`
+- `../references/MATOZA2014_GL059819/paper/MATOZA2014_GL059819__paper_reading.md`
+- `../catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md`
+- `../references/LENGLINE2021_EPSL116653/paper/LENGLINE2021_EPSL116653__paper_reading.md`
+- `../catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md`
 - Shelly & Thelen (2019), DOI: https://doi.org/10.1029/2019GL085636
 - Wei et al. (2022), DOI: https://doi.org/10.1029/2021EA001979
 ## Full inventory record (migrated from `docs/01_Case_details.md`)
@@ -187,6 +196,9 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 |---|---|
 | HVO operational catalog | Routine baseline |
 | USGS correlation-derived arrival release (P13JCJ2I) | Pick-level auxiliary reference; shares methodology with Shelly study |
+| Matoza et al. (2021) | Island-wide Q1-relative/Q2-broad auxiliary; local revised release has 1,044 relocated rows in the common summit mask |
+| Lengliné et al. (2021) | East Rift Zone dike auxiliary; no absolute depth/magnitude in native table |
+| Matoza et al. (2014) | Historical LP auxiliary; no 2018 temporal overlap |
 | ComCat | Large-event / operational cross-check |
 
 #### C. Benchmark suitability

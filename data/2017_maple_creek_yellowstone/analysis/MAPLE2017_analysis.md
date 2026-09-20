@@ -1,193 +1,159 @@
-# MAPLE2017 — Case Analysis
+# MAPLE2017 - 2017 Maple Creek, Yellowstone case analysis
 
-> **Source of truth:** This file is the detailed, mutable analysis record for `MAPLE2017`. The cross-case summary is maintained in [`docs/01_Case_details.md`](../../../docs/01_Case_details.md).
+> This is the detailed case audit. Cross-case summary belongs in
+> docs/01_Case_details.md; source-specific reading and file-level audits live
+> beside each paper or catalog.
 
-## Status
+## 1. Case identity and benchmark purpose
 
-- Case ID: `MAPLE2017`
-- Phase: reference calibration and data preparation
-- Status: `v1 benchmark window frozen`
-- Primary reference: Shelly & Hardebeck (2019)
-- Frozen v1 core window: 2017-06-11 to 2017-06-19 UTC
-
-## Scientific role
-
-Prolific Yellowstone earthquake swarm, useful for testing event recovery, swarm structure, waveform-similarity detection, and relative relocation outside a mainshock-aftershock setting.
-
-## Case information from v0.2 inventory
-
-| Field | Information |
+| Field | Frozen/working value |
 |---|---|
-| Region | Yellowstone region, Wyoming/Montana, USA |
-| Sequence type | Earthquake swarm |
+| Canonical case ID | 2017_maple_creek_yellowstone |
+| Sequence | Maple Creek earthquake swarm, Yellowstone region, Wyoming/Montana |
+| Main activity | 2017-06-12 onward; article follows the 2017-2018 sequence |
 | Largest event | Mw 4.4 on 2017-06-16 |
-| Scientific significance | One of the most prolific and best-recorded Yellowstone swarms after network upgrades |
-| Recommended window | 2017-06-11 to 2017-06-18 |
-| Network | Published 27-station setup; EarthScope/IRIS Yellowstone data |
-| Expected difficulty | Medium–High |
-| Primary role | Swarm detection and relative relocation |
+| Scientific role | Swarm detection, relative location, migration, and fault-network geometry |
+| v1 benchmark window | 2017-06-11T00:00:00Z <= t < 2017-06-19T00:00:00Z |
+| Frozen spatial/depth mask | 44.45 <= latitude <= 44.75; -110.55 <= longitude <= -110.15; 0 <= depth_km <= 15 |
+| Network design | Yellowstone/UUSS plus EarthScope/IRIS; preserve station and template lineage |
+| Waveform design upper bound | About 19.6 GB for 27 stations x 3 components x 100 Hz x int32 x 8 days; actual volume depends on gaps and selected channels |
 
-The Shelly & Hardebeck reference contains 15,912 well-located events and a large differential-time set processed with template matching and hypoDD.
+The eight-day interval is frozen for consistency with the official baseline query.
+The older inventory also records a compact seven-day interval ending 2017-06-18;
+both phase-only counts are retained below so that the historical choice remains
+traceable.
 
-## Reference evaluation matrix
+## 2. Reference evaluation matrix
 
-| Reference | Evaluation role | Time scope | Spatial scope | Quality tier | Network / observation condition |
+| Source | What it really is | Role | Quality tier | Independence | Readiness |
 |---|---|---|---|---|---|
-| Shelly & Hardebeck (2019) | Primary: swarm event recovery, relative relocation and cluster geometry | Published swarm study; frozen benchmark: 2017-06-11–06-19 UTC | Frozen Maple Creek input box; exact event polygon unavailable in phase-only release | **Q1** relative location; **Q2** template-enhanced detection; **Q3** absolute location | Published 27-station Yellowstone setup; EarthScope/IRIS data |
-| Routine Yellowstone catalog | Baseline: operational detection and catalog expansion | Same frozen window | Same swarm region | **Q3** operational baseline | Routine Yellowstone network/catalog |
-| Published phase/differential-time products | Auxiliary: phase/relative-location diagnostics | Match primary window only | Same event clusters | **Q4** auxiliary unless independent provenance is demonstrated | Correlation/template-derived products unless proven otherwise |
+| Shelly & Hardebeck 2019, DOI 10.1029/2018GL081607 | Genuine enhanced catalog paper; local USGS file is phase-only | Primary article-level target for template-enhanced detection and relative geometry | Q1 relative geometry; Q2 detection; Q3 absolute location | Low-Medium against matched-filter agents | Paper, SI, phase release ready; article event table not locally staged |
+| Pang et al. 2019, DOI 10.1029/2019GL082376 | Genuine 3,345-event HYPOINVERSE + GrowClust paper | Independent high-resolution secondary location reference | Q1/Q2 | Medium-High method independence; shared UUSS/IRIS waveforms | Paper and SI ready; machine-readable event catalog missing |
+| USGS/UUSS ComCat snapshot | Official operational export, not research truth | Q3 baseline and interoperability check | Q3 | Higher operational independence, but not independent of routine network | Full and frozen CSV snapshots ready; only 9/5 rows returned |
+| MAPLE_RELATED_OPEN | Sheldon, Nevada 2023 paper, not Yellowstone | Context only; exclude from benchmark | N/A for Maple | N/A | Kept only to document misclassification |
 
-The primary catalog is suitable for a template-enhanced swarm benchmark, but reference independence is `Low–Medium` against a similar template/correlation Agent. It should not be used as an absolute-location truth set.
+### Interpretation
 
-## Reference products
+Shelly is the best local primary reference for a template-enhanced swarm
+benchmark, but the event-level relocated table is not present in the staged
+USGS release. Pang is the key independent location reference and should not be
+dropped merely because its table is currently missing. The official ComCat
+snapshot provides a reproducible low-resolution baseline, but its five events
+in the frozen mask must not be interpreted as catalog completeness.
 
-| Product | Role | Current issue |
+## 3. Shelly article and local phase release
+
+### Article-reported populations
+
+- 2,289 routinely cataloged events supplied waveform templates from 11 June to
+  6 September 2017.
+- Continuous scanning covered 11 June to 14 September.
+- 34.1 million correlation-derived differential times and 1.3 million
+  routine-catalog differential times entered hypoDD.
+- 15,912 events retained at least 50 P and 50 S correlation observations and
+  were considered well located.
+- A less stringent threshold (at least 15 P and 30 S) yielded a 30,411-event
+  magnitude catalog.
+- The article states nearly 2,500 routine events and magnitudes up to Mw 4.4.
+
+These are article values, not local CSV row counts.
+
+### Local USGS phase release audit
+
+File:
+catalogs/SHELLY2019_GL081607/raw/Yellowstone_2017_correlation_phase_arrivals.csv
+
+- 6,260,580 data rows, no malformed rows under the 11-column parser.
+- 115,448 unique match IDs and 1,147 unique template IDs.
+- P rows 3,933,935; S rows 2,326,645.
+- Networks: WY 4,864,384; PB 1,394,725; US 872; TA 371; IW 228.
+- 29 network-station pairs in the full file; 27 in the frozen eight-day time
+  interval.
+- Arrival span 2017-06-11T06:09:19.444800Z to 2017-09-17T16:13:09.091100Z.
+- SHA-256 CSV:
+  a1828099eb2a51339e01ffca191d6e4d98df27ad889c18837aa41278dd128d6c.
+- The companion XML SHA-256 is
+  547cbc7e43b11d47b2c10098850904151b4b63de5b95dc6c2d1edb147f1a96e5.
+
+The phase file has no origin time, latitude, longitude, depth, or event-level
+uncertainty. match_id is repeated across station/phase rows and cannot be
+treated as an independently located event count. The local magnitude column
+contains nine -inf values and four finite values below -10; finite values span
+-6.99 to 5.17. This conflicts with the XML's declared magnitude domain and
+requires QC before any magnitude metric.
+
+### Time-only window counts
+
+| Window | Phase rows | Unique match IDs | Interpretation |
+|---|---:|---:|---|
+| 2017-06-11 <= t < 2017-06-18 | 1,536,742 | 22,858 | Historical seven-day compact window; phase-associated IDs |
+| 2017-06-11 <= t < 2017-06-19 | 1,591,090 | 23,660 | Frozen eight-day v1 window; phase-associated IDs |
+
+The spatial/depth mask cannot be applied to this release. The article-level
+15,912 and 30,411 event populations must be reported separately.
+
+## 4. Pang article and missing event table
+
+Pang genuinely constructs a 3,345-event catalog over 2017-06-12 to 2018-03-13.
+It uses UUSS HYPOINVERSE absolute locations, about 4.4 million BCSEIS
+differential times, and GrowClust relocation of 3,257 events. Twenty-two local
+and two regional stations were used; median absolute errors are about 500 m
+horizontal and 730 m depth, while bootstrap relative errors are about 62 m
+horizontal and 86 m vertical. Coda magnitudes span Mc -1.7 to 4.4 with
+completeness near Mc 0.5.
+
+The local supplementary PDF is method/figure material, not a CSV, QuakeML, or
+spreadsheet event table. No verified public machine-readable 3,345-row table
+has been staged. Therefore:
+
+- Pang remains a real, important secondary reference.
+- The Pang catalog column is missing, not partial.
+- No Pang row count, coordinate range, or frozen-window count is asserted as a
+  local audit.
+- The Shelly USGS phase release cannot be relabeled as Pang.
+- The next acquisition action is to find an author/publisher/repository release
+  whose provenance explicitly identifies the 3,345-event table and relocation
+  status.
+
+## 5. Official baseline audit
+
+Query definition is versioned in
+scripts/00_catalog_downloading/official_baseline_windows.json.
+
+| Snapshot | Rows | Local range | Notes |
+|---|---:|---|---|
+| Full 2017-06-11 to 2017-09-15 | 9 | M 0.16-1.86; depth 2.08-5.97 km | All reviewed, network uu |
+| Frozen 2017-06-11 to 2017-06-19 and spatial/depth mask | 5 | M 1.01-1.86; depth 2.20-4.67 km | All reviewed, network uu |
+
+The low count likely reflects the exact ComCat/UUSS query and source filters;
+it is not a statement that the swarm had five events. Preserve the snapshots
+for reproducibility but do not use them as a completeness truth set.
+
+## 6. Catalog comparability and valid metrics
+
+| Comparison | Valid now? | Rationale |
 |---|---|---|
-| Shelly & Hardebeck (2019) | Primary detection and relative-location reference | Template/differential-time lineage and exact window subset require documentation. |
-| Routine Yellowstone catalog | Baseline | Identify exact release and event IDs. |
-| Published phase/differential-time products | Auxiliary | Determine whether they are independently usable or inherit the same template lineage. |
+| Shelly article event catalog vs Pang event catalog | Not yet | Pang machine-readable table missing; acquire before event-level overlap |
+| Shelly phase release vs waveform phase picker | Yes, with lineage labels | Both are phase observations; evaluate timing/association, not locations |
+| Shelly phase release vs ComCat events | Limited | Requires explicit phase-to-origin association; no coordinates in phase release |
+| Pang article-reported counts vs ComCat rows | No | Different populations and detection thresholds |
+| Common spatial/depth event benchmark | Only for ComCat currently | Shelly local phase release and Pang local table lack event coordinates |
 
-## Calibration checklist
+Do not collapse phase rows, article event counts, and official baseline rows into a
+single leaderboard. Keep event detection, phase timing, absolute location, and
+relative location as separate tasks.
 
-- [ ] Parse the main catalog and supplementary files.
-- [ ] Confirm event, phase, and uncertainty fields.
-- [ ] Determine the station/channel set active during 2017-06-11 to 2017-06-18.
-- [ ] Quantify catalog overlap with the routine baseline.
-- [ ] Mark template-derived versus independently reviewed information.
-- [ ] Freeze the spatial region and event inclusion rules.
+## 7. Remaining data-preparation actions
 
-## Window and data preparation
-
-### Frozen v1 benchmark window
-
-| Field | Frozen value |
-|---|---|
-| Time window | 2017-06-11 00:00:00 to 2017-06-19 00:00:00 UTC (8 days) |
-| Event count | The phase release contains 1,536,742 phase rows and 22,858 unique `match_id` values in this window; this is a phase-associated ID count, not a validated event-catalog count. The published Shelly catalog total is 15,912 well-located events for the study. |
-| Spatial rule | Maple Creek swarm envelope, approximately 44.45–44.75°N, 110.55–110.15°W; this is the frozen input box because the local product is phase-only |
-| Depth/magnitude rule | Retain 0–15 km depth and all reported magnitudes when the event catalog is obtained; observed depth/magnitude ranges cannot be computed from the phase-only release |
-| Network condition | Published 27-station Yellowstone/EarthScope–IRIS setup; preserve station availability and template/match lineage |
-| Waveform volume | Design upper bound: ~19.6 GB for 27 × 3 components × 100 Hz × int32 × 8 days continuous; actual volume depends strongly on channel gaps |
-| Reference quality and role | Shelly: Q1 relative geometry/Q2 template-enhanced detection; routine Yellowstone catalog: Q3 baseline; phase release: Q4 auxiliary, not independent event truth; Pang: context only until its 3,345-event table is obtained |
-
-## Main risks
-
-1. The primary reference is strongly template-based.
-2. Template lineage may reduce reference independence.
-3. Swarm completeness should not be inferred from a single catalog.
-
-## Sources
-
-- `../references/SHELLY2019_GL081607/`
-- `../references/PANG2019_GL082376/`
-- `../references/MAPLE_RELATED_OPEN/paper/MAPLE_RELATED_OPEN__paper.pdf`
-- Shelly & Hardebeck (2019), DOI: https://doi.org/10.1029/2018GL081607
-## Full inventory record (migrated from `docs/01_Case_details.md`)
-### 2017 Maple Creek Earthquake Swarm, Yellowstone
-
-## Literature and catalog gap audit
-
-### Core omission — Pang et al. (2019) independent relocation catalog
-
-- Paper: *The 2017–2018 Maple Creek Earthquake Sequence in Yellowstone National Park, USA*.
-- DOI: https://doi.org/10.1029/2019GL082376
-- Product: 3,345-event catalog with regional 1-D absolute locations and GrowClust relative relocation; the paper reports median horizontal/depth standard errors of approximately 500/730 m for the starting locations.
-- Networks: MB, PB, TA, US and WY; waveform data are openly available through IRIS/EarthScope.
-- Recommended role: **Q1/Q2 independent location secondary reference**, especially valuable because the present primary is template-matching-heavy.
-- Action: retain the article SI and IRIS waveform links; no public 3,345-event machine-readable GrowClust table was identified in the article or its SI. The related [USGS 2025 phase-arrival release](https://doi.org/10.5066/P13JCJ2I) is Shelly & Hardebeck's Maple Creek product and is auxiliary only; it must not be substituted for Pang's catalog without provenance review.
-
-### Existing primary remains valid
-
-Shelly & Hardebeck remains the stronger detection-completeness and dense relative-geometry target (15,912 well-located events; 30,411-event magnitude catalog). Pang provides the missing independent location view rather than replacing Shelly.
-
-### Audit conclusion
-
-**Sufficiency verdict:** Conditionally sufficient at the paper level, but the Pang machine-readable catalog remains an acquisition gap. Shelly & Hardebeck alone is not sufficient for independent validation because of its strong template/correlation lineage; a three-level Shelly–Pang–routine comparison becomes possible only after the Pang event table is obtained or reconstructed with explicit provenance.
-
-#### A. Case information
-
-| Field | Information |
-|---|---|
-| **Case ID** | MAPLE2017 |
-| **Region** | Yellowstone region, Wyoming/Montana, USA |
-| **Sequence type** | Earthquake swarm |
-| **Largest event** | Mw 4.4 on 2017-06-16 |
-| **Scientific significance** | One of the most prolific Yellowstone swarms in recent decades and the best-recorded large Yellowstone swarm following network upgrades. |
-| **Routine activity** | Nearly 2,500 routinely detected events during the main June–September phase |
-| **Full high-resolution processing span** | Templates: 2017-06-11 to 2017-09-06; continuous scanning through 2017-09-14 |
-| **Recommended compact benchmark window** | **2017-06-11 to 2017-06-18 (7 days)**, covering swarm onset and the Mw 4.4 event |
-| **Network context** | 27 stations within 70 km; upgraded three-component broadband coverage |
-| **Raw waveform access** | Continuous seismic data used with UUSS routine catalog and picks; Yellowstone network data are distributed through EarthScope/IRIS. |
-| **Expected benchmark difficulty** | Medium–High |
-| **Primary benchmark role** | Swarm monitoring without a classic mainshock–aftershock structure; template-based detection; dense relative relocation; migration/fault-network geometry. |
-
-##### Key sources
-
-- Shelly & Hardebeck (2019), *Illuminating Faulting Complexity of the 2017 Yellowstone Maple Creek Earthquake Swarm*. DOI: <https://doi.org/10.1029/2018GL081607>
-- Public supporting datasets are attached to the article.
-- USGS correlation-derived phase arrivals for the same study. DOI: <https://doi.org/10.5066/P13JCJ2I>
-- Local phase-arrival CSV: `../catalogs/SHELLY2019_GL081607/raw/Yellowstone_2017_correlation_phase_arrivals.csv`
-- Yellowstone National Park Seismograph Network (WY) is distributed by EarthScope/IRIS.
-
-#### B. Reference catalog candidates
-
-##### B1. Primary reference — Shelly & Hardebeck (2019) high-resolution catalog
-
-| Field | Information |
-|---|---|
-| **Priority** | **Primary** |
-| **Reference type** | Detection + high-precision relative-location reference |
-| **Paper** | GRL DOI 10.1029/2018GL081607 |
-| **Catalog/data access** | Supporting data publicly attached to the article |
-| **Routine templates** | **2,289 events** from 2017-06-11 to 2017-09-06 |
-| **Stations** | **27 stations within 70 km** |
-| **Continuous scan** | 2017-06-11 to 2017-09-14 |
-| **Detection** | Waveform template matching / correlation-based detection |
-| **Differential times** | 34.1 million correlation-derived + 1.3 million catalog-derived differential times |
-| **Relocation** | hypoDD double-difference relocation |
-| **Well-located events** | **15,912 events** retaining at least 50 P and 50 S correlation observations |
-| **Magnitudes** | Magnitudes estimated for >30,000 events |
-| **Initial catalog/picks** | Routine catalog + phase picks from University of Utah Seismograph Stations |
-| **Provisional reference quality** | **High** |
-| **Reference independence** | Medium |
-| **Best benchmark use** | Event recovery, dense swarm relative location, fine-scale fault/migration structure |
-| **Main limitation** | Template coverage and correlation requirements favor events similar to catalog templates; not absolute-location ground truth. |
-
-##### B2. Auxiliary reference — USGS correlation-derived arrival-time release
-
-| Field | Information |
-|---|---|
-| **Priority** | Auxiliary |
-| **Reference type** | Phase-arrival reference |
-| **Data release** | USGS DOI 10.5066/P13JCJ2I |
-| **Coverage** | Includes Maple Creek 2017, Kīlauea 2018, Ridgecrest 2019 |
-| **Best benchmark use** | Pick timing / phase-arrival consistency for matched events |
-| **Independence** | Low relative to the Shelly catalog because the arrivals are derived from the same matched-filter studies |
-| **Main limitation** | Not a second independent catalog. |
-
-##### B3. Baseline
-
-| Product | Role |
-|---|---|
-| UUSS routine catalog + phase picks | Operational baseline / template seed |
-| WY network metadata/waveforms | Raw observation source |
-
-#### C. Benchmark suitability
-
-| Field | Assessment |
-|---|---|
-| **Recommended for core benchmark?** | **Yes** |
-| **Primary target** | Shelly & Hardebeck |
-| **Secondary independent high-resolution catalog** | None confirmed in this first survey; do not fabricate one merely to reach three references |
-| **Auxiliary reference** | USGS correlation-derived arrivals |
-| **Recommended window** | 2017-06-11 to 2017-06-18 |
-| **Short-window target event count** | 22,858 unique phase-associated match IDs (not a validated event count); published Shelly total is 15,912 well-located events |
-| **Stations** | 27 in the published processing |
-| **Approximate waveform volume** | ~19.6 GB continuous upper bound for 27 stations × 3C × 100 Hz × int32 × 8 days |
-| **Expected compute cost** | Medium |
-| **Key benchmark risk** | Primary target and phase-arrival auxiliary product share the same underlying matched-filter methodology |
-| **Overall assessment** | Excellent swarm benchmark and strong complement to mainshock–aftershock cases. |
-
----
-
----
+1. Acquire and checksum Pang's 3,345-event machine-readable table, preferably
+   from an author/publisher/repository DOI.
+2. Locate the Shelly article's event-level relocated/magnitude table, if it is
+   distinct from the USGS phase release; record whether it contains 15,912,
+   30,411, or another filtered population.
+3. Obtain station metadata and station-day availability for the 27-station
+   Shelly setup and the 24-station Pang relocation setup.
+4. Download the common eight-day waveforms only after station/channel selection
+   is frozen; retain network and template lineage.
+5. Generate derived plots under each catalog directory: daily phase/event rate,
+   station availability, spatial/depth map when event tables are available,
+   magnitude-frequency curves with QC flags, and phase-quality distributions.
