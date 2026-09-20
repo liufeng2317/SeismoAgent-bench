@@ -113,7 +113,7 @@ release metadata issues.
 
 ## Local outputs and next actions
 
-- Paper reading: `../../references/CHAMBERLAIN2021_JB022304/paper/CHAMBERLAIN2021_JB022304__paper_reading.md`
+- Paper reading: `../../references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper_reading.md`
 - Case synthesis: `../../analysis/KAIKOURA2016_analysis.md`
 - Raw/source CSVs are preserved in this directory; future plots should be
 written under `raw/` or a dedicated `figures/` subdirectory without modifying

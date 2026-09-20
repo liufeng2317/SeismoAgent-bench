@@ -109,7 +109,7 @@ no conversion to ML/Mw is applied here.
 
 ## Local outputs and normalization
 
-- Paper reading: `../../references/TAN2024_JB028735/paper/TAN2024_JB028735__paper_reading.md`
+- Paper reading: `../../references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper_reading.md`
 - Case synthesis: `../../analysis/KAIKOURA2016_analysis.md`
 - Source-native XLSX files are not rewritten. For analysis, parse S10 ISO-8601
   timestamps as UTC and S11 split time fields as UTC; preserve negative depths

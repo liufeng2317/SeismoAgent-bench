@@ -49,7 +49,7 @@ Lanza, Tan and Chamberlain should never be reduced to a single event-count leade
 | Lanza et al. (2019) | Primary location/relocation reference | Paper reading, Text SI/Table S1, and the 134.8 MB Data Set S1 XML are audited. Narrative SI remains under `references/LANZA2019_GL082780/supplement/`; the XML is correctly staged under `catalogs/LANZA2019_GL082780/raw/` and ignored by Git because it exceeds remote-file limits. Local audit: 2,655 event objects, 2,012 HypoDD origins, 123 time-only / 122 common-mask rows. Magnitude type is generic `M`, so 122 must not be called 122 ML≥3. |
 | Tan et al. (2024) SUGAR | Secondary high-rate detection reference | Paper, five supplements, Table S10 (67,660-event catalog), Table S11 (46,440 relocated events), and 1,165 associated `.dat` phase files (1,172 ZIP entries including metadata) are staged under `references/TAN2024_JB028735/` and `catalogs/TAN2024_JB028735/`. The final 41,392-event cluster-filtered product is described in the paper but is not separately released as a CSV. |
 | GeoNet reviewed catalog | Baseline | Confirm release and stable identifiers. |
-| Chamberlain et al. (2021) GrowClust | Dependent secondary catalog | Paper reading and catalog audit are complete: [`paper_reading`](../references/CHAMBERLAIN2021_JB022304/paper/CHAMBERLAIN2021_JB022304__paper_reading.md) and [`catalog_summary`](../catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md). Use the corrected 33,328-unique-event CSV as canonical; retain the legacy 34,704-row export only for provenance comparison. |
+| Chamberlain et al. (2021) GrowClust | Dependent secondary catalog | Paper reading and catalog audit are complete: [`paper_reading`](../references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper_reading.md) and [`catalog_summary`](../catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md). Use the corrected 33,328-unique-event CSV as canonical; retain the legacy 34,704-row export only for provenance comparison. |
 
 ## Calibration checklist
 
@@ -88,12 +88,12 @@ The 2016-12-01 to 2016-12-08 window is preferred because the temporary STREWN de
 ## Sources
 
 - `../references/LANZA2019_GL082780/paper/LANZA2019_GL082780__paper.pdf`
-- `../references/LANZA2019_GL082780/paper/LANZA2019_GL082780__paper_reading.md`
+- `../references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper_reading.md`
 - `../catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md`
 - `../references/TAN2024_JB028735/paper/TAN2024_JB028735__paper.pdf`
-- `../references/TAN2024_JB028735/paper/TAN2024_JB028735__paper_reading.md`
+- `../references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper_reading.md`
 - `../catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_summary.md`
-- `../references/CHAMBERLAIN2021_JB022304/paper/CHAMBERLAIN2021_JB022304__paper_reading.md`
+- `../references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper_reading.md`
 - `../catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md`
 - Lanza et al. (2019), DOI: https://doi.org/10.1029/2019GL082780
 - Tan et al. (2024), DOI: https://doi.org/10.1029/2024JB028735

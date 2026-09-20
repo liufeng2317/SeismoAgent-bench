@@ -165,8 +165,8 @@ common mask**, with the `M >= 3` count retained only as a sensitivity audit.
 
 ## Provenance and related files
 
-- Paper reading: `../../references/LANZA2019_GL082780/paper/LANZA2019_GL082780__paper_reading.md`
-- Supplement notes: `../../references/LANZA2019_GL082780/supplement/LANZA2019_GL082780__supplement_notes.md`
+- Paper reading: `../../references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper_reading.md`
+- Supplement notes: `../../references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md`
 - Paper PDF SHA-256: `efbff3c2516dabbb1d26c1dd97e612ac06822322b27b1a844c301b08e0cd93e0`
 - Text SI SHA-256: `19b7c2e8ff6d22826b0b4ac7a2c9a0746a77ddf5ce03e1b4c70402ae50e0cf41`
 - Table S1 SHA-256: `1711333f28b6c60cd87305450e68b824ecc3a7ddc24ea7c266118a85ee770384`
