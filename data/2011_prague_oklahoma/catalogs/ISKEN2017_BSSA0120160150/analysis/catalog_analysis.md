@@ -21,6 +21,7 @@ Sparse manually selected Table S3 relocations; high-quality location anchor, not
 
 - Native input: `ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv`
 - Derived output: `analysis/derived/events_relocated/ISKEN2017_BSSA0120160150__events_relocated__normalized_v1.csv`
+- Schema: `docs/schemas/catalog_event.schema.yaml`
 - Statistics: `analysis/stats/events_relocated/`
 - Figures: `analysis/figures/events_relocated/`
 

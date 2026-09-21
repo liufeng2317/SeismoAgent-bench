@@ -22,6 +22,7 @@ Full OGS/ANSS ComCat operational snapshot.
 
 - Native input: `USGS_TUL_COMCAT_2011__catalog_operational_full.csv`
 - Derived output: `analysis/derived/operational_full/USGS_TUL_COMCAT_2011__operational_full__normalized_v1.csv`
+- Schema: `docs/schemas/catalog_event.schema.yaml`
 - Statistics: `analysis/stats/operational_full/`
 - Figures: stats only in minimal profile
 
@@ -31,6 +32,7 @@ Frozen official operational benchmark snapshot.
 
 - Native input: `USGS_TUL_COMCAT_2011__catalog_operational_benchmark.csv`
 - Derived output: `analysis/derived/operational_benchmark/USGS_TUL_COMCAT_2011__operational_benchmark__normalized_v1.csv`
+- Schema: `docs/schemas/catalog_event.schema.yaml`
 - Statistics: `analysis/stats/operational_benchmark/`
 - Figures: `analysis/figures/operational_benchmark/`
 

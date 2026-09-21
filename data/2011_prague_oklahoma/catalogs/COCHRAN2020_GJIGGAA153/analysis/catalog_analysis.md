@@ -21,6 +21,7 @@ Cochran extended template-matched event catalog; magnitude type remains unresolv
 
 - Native input: `COCHRAN2020_GJIGGAA153__catalog_primary.txt`
 - Derived output: `analysis/derived/events_primary/COCHRAN2020_GJIGGAA153__events_primary__normalized_v1.csv`
+- Schema: `docs/schemas/catalog_event.schema.yaml`
 - Statistics: `analysis/stats/events_primary/`
 - Figures: `analysis/figures/events_primary/`
 

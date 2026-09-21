@@ -22,6 +22,7 @@ McMahon subspace/Bayesloc E-record event catalog.
 
 - Native input: `raw/MCMAHON2017_GL072944__catalog_subspace_5446events.txt`
 - Derived output: `analysis/derived/events_subspace/MCMAHON2017_GL072944__events_subspace__normalized_v1.csv`
+- Schema: `docs/schemas/catalog_event.schema.yaml`
 - Statistics: `analysis/stats/events_subspace/`
 - Figures: `analysis/figures/events_subspace/`
 
@@ -31,6 +32,7 @@ McMahon P-record phase observations; row count is not an event count and release
 
 - Native input: `raw/MCMAHON2017_GL072944__catalog_subspace_5446events.txt`
 - Derived output: `phase sample only; raw phase table is retained`
+- Schema: `docs/schemas/catalog_parent_phase.schema.yaml`
 - Statistics: `analysis/stats/phase_arrivals/`
 - Figures: `analysis/figures/phase_arrivals/`
 
