@@ -21,6 +21,7 @@ Island-wide release; relocated coordinates are the default geometry.
 
 - Native input: `MATOZA2021_EA001253__catalog_islandwide.txt`
 - Derived output: `analysis/derived/relocated_events/MATOZA2021_EA001253__relocated_events__normalized_v1.csv`
+- Schema: `docs/schemas/catalog_event.schema.yaml`
 - Statistics: `analysis/stats/relocated_events/`
 - Figures: `analysis/figures/relocated_events/`
 

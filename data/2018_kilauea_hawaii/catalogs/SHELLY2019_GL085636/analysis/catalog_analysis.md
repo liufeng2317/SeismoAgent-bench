@@ -23,6 +23,7 @@ Shelly high-resolution hypocentroid product S1.
 
 - Native input: `SHELLY2019_GL085636__catalog_S1.txt`
 - Derived output: `analysis/derived/events_s1/SHELLY2019_GL085636__events_s1__normalized_v1.csv`
+- Schema: `docs/schemas/catalog_event.schema.yaml`
 - Statistics: `analysis/stats/events_s1/`
 - Figures: `analysis/figures/events_s1/`
 
@@ -32,6 +33,7 @@ Shelly polarity-cluster product S2; separate event table.
 
 - Native input: `SHELLY2019_GL085636__catalog_S2.txt`
 - Derived output: `analysis/derived/events_s2/SHELLY2019_GL085636__events_s2__normalized_v1.csv`
+- Schema: `docs/schemas/catalog_event.schema.yaml`
 - Statistics: `analysis/stats/events_s2/`
 - Figures: `analysis/figures/events_s2/`
 
@@ -41,6 +43,7 @@ USGS correlation-derived phase arrivals; template_id and match_id are not event 
 
 - Native input: `raw/Kilauea_2018_correlation_phase_arrivals.csv`
 - Derived output: `phase sample only; raw phase table is retained`
+- Schema: `docs/schemas/catalog_correlation_phase.schema.yaml`
 - Statistics: `analysis/stats/phase_arrivals/`
 - Figures: `analysis/figures/phase_arrivals/`
 

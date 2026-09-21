@@ -21,6 +21,7 @@ Relative x/y/time dike-propagation detections; no universal depth, magnitude or 
 
 - Native input: `raw/loc_events.txt`
 - Derived output: `analysis/derived/relative_events/LENGLINE2021_EPSL116653__relative_events__normalized_v1.csv`
+- Schema: `docs/schemas/catalog_relative_event.schema.yaml`
 - Statistics: `analysis/stats/relative_events/`
 - Figures: `analysis/figures/relative_events/`
 

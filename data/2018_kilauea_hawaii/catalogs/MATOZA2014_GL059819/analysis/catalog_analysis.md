@@ -21,6 +21,7 @@ Historical LP summit catalog, 1986–2009; no 2018 benchmark overlap.
 
 - Native input: `MATOZA2014_GL059819__catalog_lp_summit.txt`
 - Derived output: `analysis/derived/lp_events/MATOZA2014_GL059819__lp_events__normalized_v1.csv`
+- Schema: `docs/schemas/catalog_event.schema.yaml`
 - Statistics: `analysis/stats/lp_events/`
 - Figures: stats only in minimal profile
 

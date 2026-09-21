@@ -62,8 +62,7 @@ The case-level processing manifest is `analysis/processing.yaml`; it records the
 catalogs/<SOURCE_REF>/
 ├── raw/                         # source-native files; untouched
 ├── scripts/
-│   ├── run_catalog_analysis.py
-│   └── README.md
+│   └── run_catalog_analysis.py
 └── analysis/
     ├── catalog_analysis.md
     ├── derived/<PRODUCT_ID>/    # normalized/sample tables; shared schemas in `docs/schemas/`

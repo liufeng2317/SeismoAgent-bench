@@ -22,6 +22,7 @@ Full HVO/ComCat operational snapshot.
 
 - Native input: `USGS_HVO_COMCAT_2018__catalog_operational_full.csv`
 - Derived output: `analysis/derived/operational_full/USGS_HVO_COMCAT_2018__operational_full__normalized_v1.csv`
+- Schema: `docs/schemas/catalog_event.schema.yaml`
 - Statistics: `analysis/stats/operational_full/`
 - Figures: stats only in minimal profile
 
@@ -31,6 +32,7 @@ Frozen HVO/ComCat benchmark snapshot.
 
 - Native input: `USGS_HVO_COMCAT_2018__catalog_operational_benchmark.csv`
 - Derived output: `analysis/derived/operational_benchmark/USGS_HVO_COMCAT_2018__operational_benchmark__normalized_v1.csv`
+- Schema: `docs/schemas/catalog_event.schema.yaml`
 - Statistics: `analysis/stats/operational_benchmark/`
 - Figures: `analysis/figures/operational_benchmark/`
 

@@ -21,6 +21,7 @@ Wei combined onshore/offshore event rows; native release has no stable event ID.
 
 - Native input: `WEI2022_EA001979__catalog_S1.txt`
 - Derived output: `analysis/derived/events_s1/WEI2022_EA001979__events_s1__normalized_v1.csv`
+- Schema: `docs/schemas/catalog_event.schema.yaml`
 - Statistics: `analysis/stats/events_s1/`
 - Figures: `analysis/figures/events_s1/`
 
