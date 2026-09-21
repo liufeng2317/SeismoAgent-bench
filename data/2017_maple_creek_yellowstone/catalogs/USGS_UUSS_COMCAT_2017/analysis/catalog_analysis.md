@@ -22,6 +22,7 @@ Full UUSS/WY ComCat operational snapshot.
 
 - Native input: `USGS_UUSS_COMCAT_2017__catalog_operational_full.csv`
 - Derived output: `analysis/derived/operational_full/USGS_UUSS_COMCAT_2017__operational_full__normalized_v1.csv`
+- Schema: `docs/schemas/catalog_event.schema.yaml`
 - Statistics: `analysis/stats/operational_full/`
 - Figures: stats only in minimal profile
 
@@ -31,6 +32,7 @@ Frozen UUSS/WY operational benchmark snapshot.
 
 - Native input: `USGS_UUSS_COMCAT_2017__catalog_operational_benchmark.csv`
 - Derived output: `analysis/derived/operational_benchmark/USGS_UUSS_COMCAT_2017__operational_benchmark__normalized_v1.csv`
+- Schema: `docs/schemas/catalog_event.schema.yaml`
 - Statistics: `analysis/stats/operational_benchmark/`
 - Figures: `analysis/figures/operational_benchmark/`
 

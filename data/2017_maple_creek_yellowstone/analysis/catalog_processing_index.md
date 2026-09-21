@@ -59,7 +59,7 @@ The case-level processing manifest is `analysis/processing.yaml`; it records the
 ```text
 catalogs/<SOURCE_REF>/
 ├── raw/                         # source-native files; untouched
-├── scripts/                    # parser and README
+├── scripts/                    # catalog-local parser
 └── analysis/
     ├── catalog_analysis.md
     ├── derived/<PRODUCT_ID>/    # normalized/sample tables; shared schemas in `docs/schemas/`

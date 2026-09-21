@@ -21,6 +21,7 @@ Shelly/USGS correlation-derived phase arrivals; match_id and template_id are not
 
 - Native input: `raw/Yellowstone_2017_correlation_phase_arrivals.csv`
 - Derived output: `phase sample only; raw phase table is retained`
+- Schema: `docs/schemas/catalog_correlation_phase.schema.yaml`
 - Statistics: `analysis/stats/phase_arrivals/`
 - Figures: `analysis/figures/phase_arrivals/`
 
