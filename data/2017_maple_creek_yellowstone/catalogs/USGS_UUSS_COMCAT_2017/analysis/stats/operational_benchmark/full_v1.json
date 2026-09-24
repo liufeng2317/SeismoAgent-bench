@@ -9,7 +9,7 @@
   "parser_version": "maple-local-v1-compact",
   "source_path": "USGS_UUSS_COMCAT_2017__catalog_operational_benchmark.csv",
   "source_sha256": "1adf50e3a3ea5893bff52cf343148e1cfb98af14febcec73d55160f61ae88f97",
-  "generated_utc": "2026-09-20T20:12:52+00:00",
+  "generated_utc": "2026-09-23T13:45:19+00:00",
   "stats": {
     "kind": "usgs_csv",
     "row_count": 5,
