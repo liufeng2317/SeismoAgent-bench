@@ -1,174 +1,120 @@
-# RIDGE2019 — Ridgecrest case analysis
+# RIDGE2019 — 科学设计与参考目录核验
 
-> This file is the case-level synthesis. Paper-specific extraction is kept next to each paper and catalog-specific audits are kept next to each catalog; links below are the canonical entry points.
+当前阶段：**候选科学设计与本地参考数据核验**。`window_status: not_frozen`；尚未验证台站逐日波形可用性，未开展 Agent 实验，未冻结评测条件。历史文档中的 “frozen/v1” 不代表正式批准。
 
-## Status and frozen benchmark rule
+配置入口：[processing.yaml](processing.yaml)；可复算结果：[reference_audit.json](reference_audit.json)；核验程序：[audit_references.py](../scripts/audit_references.py)。本次核验日期为 2026-09-24，数据来源与校验和随结果保存。
 
-- **Case ID:** `2019_ridgecrest_california`
-- **Phase:** reference calibration and data preparation
-- **Status:** v1 time/space/depth rule frozen; station-day waveform manifest still pending
-- **Scientific sequence:** Mw 6.4 foreshock on 2019-07-04, Mw 7.1 mainshock on 2019-07-06, dense foreshock–aftershock activity
-- **Frozen window:** `2019-07-04T00:00:00Z <= origin_time < 2019-07-07T00:00:00Z` (72 h)
-- **Common mask:** `35.45 <= latitude <= 36.05`, `-117.90 <= longitude <= -117.20`, `0 <= depth_km <= 20`
-- **Depth convention:** each source keeps its native datum; the mask is a numerical comparison rule, not a claim that all absolute depths share the same reference surface.
+## 1. 此案例要检验什么
 
-The compact 72-hour window covers the foreshock, the Mw 6.4 event, the
-inter-mainshock interval and the first ~21 hours after Mw 7.1. A 34-hour
-inter-mainshock subset can be generated later, but it is not the frozen v1
-window because it would exclude the initial foreshock and immediate post-mainshock
-stress conditions.
+核心问题：**在相同连续波形和台站元数据条件下，Agent 能否构建可用的地震目录，并在两次大震前后事件密度和尾波条件变化时保持可靠性？**
 
-## How references were selected
+Ridgecrest 的价值在于同一案例包含 Mw 6.4、Mw 7.1 及密集前震—余震活动，可以分阶段观察漏检、关联混淆、定位稳定性和工作流恢复能力。参考目录数量较多，但方法、台站、筛选条件和版本不同；它们共同约束评测，不能选出一个目录作为全部指标的真值。
 
-The selection is deliberate, not a list of arbitrary search hits. A product is
-kept as a benchmark reference only when it satisfies all of the following:
+初期任务限定为离线目录构建：输入连续波形、台站坐标与响应，以及预先声明的速度模型和工具；输出事件目录、关联震相、处理参数、质量标记和执行记录。事件至少保留 UTC 发震时间、本地唯一 ID、经纬度、深度及其基准；提供震级时必须注明震级类型和计算方法。资源消耗、失败恢复、可复现性与科学指标分别记录。
 
-1. the paper is a real research or data-release article that constructs, relocates,
-   or explicitly publishes an event catalog;
-2. the local file can be tied to an authoritative DOI, USGS/SCEDC/CaltechDATA
-   release, or article-associated supplement;
-3. the product's evaluation role is dimension-specific (detection, association,
-   absolute location, relative geometry, focal mechanism or operational baseline);
-4. shared waveform/template lineage and method overlap are recorded separately
-   from the quality tier; and
-5. article-reported populations are kept distinct from local release-version
-   counts.
+建议预注册以下比较条件：
 
-No catalog is treated as universal ground truth. The Q1–Q4 tiers in
-[`docs/01_1_Case_details.md`](../../../docs/01_1_Case_details.md) are applied by
-metric and role.
+- 主条件：仅原始波形与台站元数据；固定算法流水线作为实际运行的基线，与 Agent 使用相同观测和资源预算。
+- 辅助条件：提供常规目录，或提供震相，分别单列；不能与从波形独立构建目录的结果混算。
+- 指导条件：封闭参考、经清理的公开文献、专家指导分别实验；允许的模型、参数建议和文献内容需有清单。
 
-## Reference evaluation matrix
+目标时段的参考目录、震相表、论文提取答案和本核验输出属于评测侧材料。公开文献条件也需处理包含目标事件表和答案的附件。Shelly 使用后续日期下载的模板资料，因此参考产品适合回顾性评测，不能据此声称实时性能。开发/评测划分、模型训练数据污染风险和资源预算尚待定义；单案例结果仅支持可行性结论。
 
-| Reference / local product | Evaluation role | Article / release scope | Common-mask count | Quality tier and limitations | Network condition / independence |
-|---|---|---|---:|---|---|
-| Shelly (2020) Data S1 | **Primary** dense detection, association and relative geometry | Article: 2019-07-04–07-16; 34,091 final events | **7,716** (7,773 time-only) | **Q1** relative/detection structure; **Q2** absolute location/completeness. Mostly unreviewed; mainshock centroids are not preferred absolute hypocenters. | SCSN/SCEDC; routine SCSN templates; medium independence from Ross/routine baseline |
-| Liu et al. (2020) Table S1 | Independent-method secondary for raw-waveform detection and hypoDD geometry | 2019-07-04–07-09; article reports 16,563 REAL, 16,112 VELEST and 15,445 final hypoDD events | **6,242** (6,329 time-only) | **Q2** automatic independent catalog; strong method cross-check, but no event IDs/uncertainty columns and magnitude scale differs | 41 permanent + 4 temporary stations within 120 km; higher algorithmic independence because no routine event prior |
-| Ross et al. (2019) SCEDC QTM | Secondary structural/relocation diagnostics | Archive 2019-07-04–07-25; 111,918 rows, 46,512 successfully relocated (`nbranch>1`) | **12,768** total / **6,463** relocated | **Q1** relative geometry/QC for relocated subset; Q2–Q3 for initial-only rows and Mw 7.1 depth | SCSN/SCEDC; medium independence. Science DC1 methods supplement is missing locally |
-| Atterholt–Wilding–Ross (2025) Version 2 | Long-term relocation and moment-tensor auxiliary | Hypocenters 2019-04–2023-05; MT 2019-04–2023-04; local v2 222,864 / 4,890 | **5,737** hypo / **254** MT | **Q2** long-term methodological auxiliary; metric-specific Q1 for accepted relative/MT uncertainty fields. Article reports 214,467/4,892, so release version must be preserved. | 66 multi-network broadband 3C stations, changing availability; PhaseNO/GaMMA/HypoSVI/GrowClust overlap with future Agent methods |
-| USGS/SCSN ComCat snapshot | **Q3 baseline** operational recovery and large-event anchor | Full 2019-07-04–07-17; benchmark CSV is already frozen | **6,566** | **Q3** routine operational catalog; not a high-resolution truth set | SCSN/CI operational network; independent release but same regional observations |
+## 2. 候选时窗与分阶段设计
 
-### Why Shelly is primary
+保留已有 72 小时方案作为设计起点：`2019-07-04T00:00:00Z <= t < 2019-07-07T00:00:00Z`。探索性空间条件为纬度 `[35.45, 36.05]`、经度 `[-117.90, -117.20]`、原生深度 `[0, 20] km`，空间边界包含端点。**不同目录深度基准未统一，这只是数值筛选，不能直接作为正式物理范围。**
 
-Shelly is the best Phase-I target because it has a verified article-associated
-34,091-event release, explicit matched-filter and hypoDD criteria, public
-waveform lineage, and a compact high-rate sequence. It is not “best” for every
-metric: Liu is the key independent raw-waveform check, Ross is the strongest
-structural/QTM diagnostic, and AWR is valuable for long-term and moment-tensor
-comparisons.
+以官方快照 `ci38443183`（07-04 17:33:49.000 UTC）和 `ci38457511`（07-06 03:19:53.040 UTC）为分段时间锚点。以下各段互斥，均左闭右开；计数已应用上述原生数值筛选。
 
-## Article–catalog alignment audit
+| 阶段（UTC，2019 年） | 时段 | Shelly | Liu | Ross 已重定位 | 官方 earthquake |
+|---|---|---:|---:|---:|---:|
+| Mw 6.4 前 | 07-04 00:00 → 17:33:49 | 36 | 19 | 37 | 18 |
+| Mw 6.4 后首小时 | 07-04 17:33:49 → 18:33:49 | 164 | 129 | 127 | 172 |
+| 两次大震间剩余时段 | 07-04 18:33:49 → 07-06 03:19:53.04 | 4,505 | 3,281 | 4,011 | 3,305 |
+| Mw 7.1 后首小时 | 07-06 03:19:53.04 → 04:19:53.04 | 128 | 147 | 84 | 235 |
+| Mw 7.1 后续时段 | 07-06 04:19:53.04 → 07-07 00:00 | 2,883 | 2,666 | 2,204 | 2,834 |
+| 合计 | 72 小时 | 7,716 | 6,242 | 6,463 | 6,564 |
 
-| Source | Is the paper genuinely a catalog-construction paper? | Local product alignment | Decision |
-|---|---|---|---|
-| Shelly 2020 | Yes: template matching + hypoDD relative relocation | Article 34,091 matches Data S1 34,091; phase CSV is a separate auxiliary product | Use Data S1 as primary; never count phase rows as events |
-| Liu 2020 | Yes: PhaseNet → REAL → VELEST → hypoDD | Article final 15,445 matches Table S1 15,445; REAL/VELEST intermediates are not local | Use Table S1 as final hypoDD secondary |
-| Ross 2019 | Yes: high-resolution template-matched/relocated seismicity catalog | Official QTM archive has 111,918 rows, but only `nbranch>1` (46,512) are successful relocations; article DC1 absent | Use relocated subset for Q1 structure; obtain DC1 before exact reproduction |
-| AWR 2025 | Yes: PhaseNO → GaMMA → HypoSVI → GrowClust + Bayesian MT inversion | Local v2 has 222,864 hypocenters and 4,890 MT vs article 214,467/4,892 | Keep local v2 intact and record article/release discrepancy; do not trim by guesswork |
-| USGS SCSN | No research construction article is attached | Official operational query snapshot only | Baseline, not a research truth catalog |
+这组计数说明不同产品在高事件密度阶段保留的事件群体不同，不代表某方法已经更好。首个已记录事件的时间也不等于波形覆盖起点或此前没有地震。各目录原生发震时间存在差异，紧贴阶段边界的同一事件可能落在相邻段；正式评分需按匹配后的事件身份处理边界和两个大震，不应把这种差异计为阶段漏检。
 
-## Catalog comparison under the common rule
+波形前后缓冲、处理分块和台站选择仍未定。先核验永久台网的 station-day/channel 可用性，再决定是否增加临时台站条件；震相表中出现某台站不能证明该台站连续覆盖整个时窗。
 
-| Product | Full rows / span | Time-only | Common mask | Common-mask time / spatial / depth / magnitude range |
+## 3. 参考产品与核验结果
+
+本次直接重读 7 个原始事件产品和 1 个震相产品，检查 SHA-256、字段解析、时间、坐标、事件 ID 和重复记录；事件产品解析错误为 0，校验和均符合配置。原始文件未修改。
+
+| 产品 | 全量记录 | 仅候选时窗 | 原生数值筛选后 | 建议角色与限制 |
 |---|---:|---:|---:|---|
-| Shelly Data S1 | 34,091; 2019-07-04–07-16 | 7,773 | 7,716 | 2019-07-04 15:35:29.400–07-06 23:59:47.320; 35.4852–36.0128, −117.8192–−117.2557, 0.159–19.953 km, M −0.10–7.10 |
-| Liu Table S1 | 15,445; 2019-07-04–07-09 | 6,329 | 6,242 | 2019-07-04 00:56:37.520–07-06 23:59:30.040; 35.5040–36.0473, −117.8836–−117.2759, 0.002–14.126 km, M −0.20–5.50 |
-| Ross QTM all rows | 111,918; 2019-07-04–07-25 | 12,806 | 12,768 | 2019-07-04 03:26:19.848–07-06 23:59:47.190; 35.5017–36.0496, −117.8955–−117.2225, 0.018–19.700 km, M −0.82–7.10 |
-| Ross QTM relocated only | 46,512 | 6,470 | 6,463 | Same mask; filter `nbranch>1` before relative-location metrics |
-| AWR v2 hypocenters | 222,864; 2019-04–2023-05 | 5,842 | 5,737 | 2019-07-04 04:03:01.162–07-06 23:59:20.494; 35.5052–36.0500, −117.8779–−117.2677, 0.692–14.732 km, gamma-M 0.056–4.585 |
-| AWR v2 moment tensors | 4,890; 2019-04–2023-04 | 258 | 254 | 2019-07-04 16:13:43.096–07-06 23:56:34.234; 35.5484–36.0389, −117.8478–−117.3660, 0.921–12.866 km, M 1.874–4.115 |
-| USGS/SCSN benchmark | 6,566; 2019-07-04–07-07 | 6,566 | 6,566 | 35.4935–36.0495, −117.8912–−117.2680, 0–19.09 km, M 0.14–7.10 |
+| [Shelly Data S1](../catalogs/SHELLY2020_0220190309/README.md) | 34,091 | 7,773 | 7,716 | 密集检测和相对结构的主要参考；大量记录未经逐个审核，不能提供普适完整性真值 |
+| [Liu Table S1](../catalogs/LIU2020_GL086189/README.md) | 15,445 | 6,329 | 6,242 | 拾取—关联路线的交叉核验；无原生 ID 和逐事件不确定度，算法不同不等于观测独立 |
+| [Ross QTM 全部记录](../catalogs/ROSS2019_SCIENCE/README.md) | 111,918 | 12,806 | 12,768 | 保留初始与重定位字段，全部记录不能都当作成功重定位 |
+| Ross `nbranch > 1` | 46,512 | 6,470 | 6,463 | 相对几何的辅助参考；不是另一个独立产品 |
+| [AWR v2 hypocenters](../catalogs/AWR2025_CALTECHDATA/README.md) | 222,864 | 5,842 | 5,737 | 长期方法学辅助；`magnitude_gamma` 不改称 ML/Mw |
+| AWR v2 moment tensors | 4,890 | 258 | 254 | 机制解辅助；不纳入首轮目录构建任务 |
+| [官方 full 快照](../catalogs/USGS_SCSN_COMCAT_2019/README.md) | 17,959 | 6,565 | 6,563 | 与候选窗口快照分别保留，不能假定后者就是其严格子集 |
+| 官方候选窗口快照 | 6,566 | 6,566 | 6,566 | 其中地震 6,564、quarry blast 2；按类型显式选择 |
 
-The counts target different populations: Shelly and Ross are template/correlation
-products, Liu is pick-based and independent of the routine event prior, AWR is a
-long-term modern workflow, and SCSN is operational. Event-count ranking without
-conditioning on method and network is invalid.
+### 必须带入设计的限制
 
-## Catalog construction and quality notes
+1. **深度和大震位置。** Shelly Data S1 表头说明深度参考面约为海拔 0.7 km，ID 不是 CISN ID；论文指出结果更接近 hypocentroid，大震位置不宜直接当作精确起裂点。全量有 17 条深度超过 100 km 的记录，最大 556.58 km，保留原值并标记，不能猜测单位或自动修正。当前官方 Mw 7.1 深度为 8 km，但 `depthError=31.61 km`；它可以提供身份和时间锚点，不能直接充当精确绝对深度真值。参见 [Shelly 论文第 4 页](../references/SHELLY2020_0220190309/paper/SHELLY2020_0220190309__paper.pdf#page=4)。
+2. **ID 与重复时间。** Liu 无原生事件 ID，派生数据应使用包含源版本与源行号的本地 ID，并保留原生字段；不凭时间宣称跨目录事件身份。Shelly、Ross、AWR hypocenters 的全量重复时间额外行数分别为 2、13、2。官方候选快照有 3 组同时间双 ID，而 ID 本身唯一；这些行的坐标/震级并不完全相同，暂不合并。
+3. **官方快照版本。** 文件下载于 2026-09-19，包含后续修订，只能称为回顾性常规目录比较，不能代表 2019 年实时可得知识。候选快照中 3 个 ID 不在 full 快照内，均属于下面的同时间组；具体事件身份与修订关系尚待权威记录核实。
+4. **震相不等于事件。** Shelly correlation CSV 共 5,703,270 行（P 2,536,859；S 3,166,411），`arrival` 为 Unix 秒。候选窗口内有 1,449,723 条到时记录；它们按到时筛选，不能替代按发震时间统计事件。全量有 6,744 个 template ID、209,213 个 match ID、30 个 network.station 组合；与 Data S1 的事件映射尚未核实。
+5. **论文—版本对应。** Shelly 的 34,091 和 Liu 最终 hypoDD 的 15,445 与本地产品一致。AWR 本地 v2 的 222,864/4,890 与论文 214,467/4,892 不同，保持版本区分，不按论文数字裁剪文件。Ross Science DC1 方法附件仍缺失，完整方法复现尚有缺口；QTM 目录本身已在本地核验。
+6. **完整性和震级。** Shelly 模板路线、Liu PhaseNet→REAL→VELEST→hypoDD、Ross QTM 和 AWR 的筛选不同，共享区域波形或模板谱系。Liu SI Text S3 还讨论严格阈值、深度截断和尾波造成的漏检。震级类型与时间变化的完整性必须单列，不能直接比较总体 b 值或按事件总数排名。详细方法、阈值和原始资料继续维护在各目录 README 与论文阅读记录中。
 
-### Shelly primary
+官方同时间记录（均保留，未认定为重复事件）：
 
-- 13,525 SCSN template events → daily 100-Hz template scans → correlation and
-  differential-time weighting → hypoDD.
-- Detection thresholds: 8× daily MAD for summed correlation and 7× MAD for
-  individual differential-time correlations; max differential times 0.5 s (P)
-  and 0.85 s (S).
-- Final event criterion: at least 12 P and 12 S correlation differential times.
-- Magnitudes combine SCSN preferred values and calibrated ML for newly detected
-  events. Small-event completeness changes strongly after each mainshock.
+| UTC 时间 | full 中已有 ID | 仅候选快照中出现的 ID |
+|---|---|---|
+| 2019-07-05 18:33:32.420 | ci37437669 | ci38453959 |
+| 2019-07-06 13:45:19.050 | ci38463919 | ci37483725 |
+| 2019-07-06 22:30:44.490 | ci37503829 | ci37484197 |
 
-See [`SHELLY2020_0220190309__paper_reading.md`](../references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md) and
-[`SHELLY2020_0220190309__catalog_summary.md`](../catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md).
+坐标、震级和更新时间见核验 JSON 的 `official_duplicate_time_groups`，不在此复制第二份明细。
 
-### Liu independent secondary
+## 4. 跨目录对应诊断与指标方案
 
-- PhaseNet probability picks (0.5) → REAL grid association (≥5 P and ≥13 total
-  picks, 0–20 km) → VELEST (<200° gap, <0.6 s residual) → hypoDD (stations
-  <80 km, phase probability >0.7).
-- SI Text S3 documents 884 routine events missed by strict thresholds, depth
-  truncation, close-event suppression, coda burial and poor geometry.
-- The paper reports 7,425 routine events in Section 2 but 7,743 in the Conclusion; this internal discrepancy is retained and is not used to alter Table S1.
+当前诊断在候选原生数值筛选后，测试时间容差 `{0.5, 1, 2} s` 与水平距离容差 `{2, 5} km` 的组合。仅接受两侧都恰有一个候选的对应关系，其余保留为歧义；不使用未统一基准的深度作为匹配门限。下表展示 `1 s / 5 km`，完整 24 组结果保存在 JSON。
 
-See [`LIU2020_GL086189__paper_reading.md`](../references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md) and
-[`LIU2020_GL086189__catalog_summary.md`](../catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_summary.md).
+| 左目录—右目录 | 双向唯一对应数 | 发震时间绝对差中位数（s） | 水平距离中位数（km） | 左/右有候选但未解决的记录 |
+|---|---:|---:|---:|---:|
+| Shelly—Liu | 4,927 | 0.14 | 0.247 | 130 / 65 |
+| Shelly—Ross 已重定位 | 4,670 | 0.09 | 0.470 | 90 / 54 |
+| Shelly—官方 earthquake | 4,588 | 0.10 | 0.363 | 116 / 91 |
+| Liu—官方 earthquake | 4,566 | 0.11 | 0.376 | 19 / 38 |
 
-### Ross QTM secondary
+这些是**参考产品间的一致性诊断**，不是 Agent 的 precision/recall，也不是相对于真值的定位误差。未对应记录可能是独有检测、筛选差异、时间/空间偏移或参考错误，不能自动标为假阳性。深度差只保存原生数值诊断，不解释为定位偏差或自动校正量。
 
-- The SCEDC schema retains initial and relocated locations plus differential-time
-  counts, RMS residuals, errors and cluster IDs.
-- Use `nbranch>1` as the relocation flag. The Mw 7.1 QTM depth is explicitly
-  poorly constrained; use SCSN for the mainshock absolute anchor.
-- The missing Science DC1 is a real gap in method reproducibility, not evidence
-  that the QTM archive is absent.
+正式指标建议按维度定义：
 
-See [`ROSS2019_SCIENCE__paper_reading.md`](../references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md) and
-[`ROSS2019_SCIENCE__catalog_summary.md`](../catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md).
+- 检测：分别报告相对 Shelly、Liu 和地震类型官方目录的恢复率，按阶段、参考震级类型和预定义质量层分组；没有独立验证时，未匹配输出只标为“待验证”。
+- 关联：先核验震相—事件映射及可比台站，再计算关联指标；当前辅助表不足以直接当作全量关联真值。
+- 定位：对已匹配事件报告时间/水平位置差和相对几何；深度基准及不确定度解决前不进行绝对深度评分。
+- 工程表现：相同输入和资源条件下报告成功率、人工干预、耗时与可复算性；需实际运行，现有目录不能替代算法基线实验。
 
-### AWR long-term auxiliary
+正式一对一匹配规则、歧义处理和阈值只在开发数据上校准后冻结。当前保守匹配程序用于诊断，尚不是最终评分器；尤其不能用本表反向调参后声称盲测。
 
-- PhaseNO → GaMMA → HypoSVI → GrowClust; accepted MT rows require at least 15
-  P-amplitude picks and angular uncertainties below 7.5°.
-- Local Version 2 is authoritative for the files in this repository, but its
-  row counts differ from the article. `magnitude_gamma` remains a native field,
-  not ML/Mw.
+## 5. 就绪程度与后续顺序
 
-See [`AWR2025_CALTECHDATA__paper_reading.md`](../references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md) and
-[`AWR2025_CALTECHDATA__catalog_summary.md`](../catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md).
+| 环节 | 当前状态 | 下一步完成条件 |
+|---|---|---|
+| 原始参考完整性 | 已完成本地核验 | 校验和、严格解析与来源版本随结果留存 |
+| 科学问题与候选分段 | 已形成设计 | 确认任务输出、辅助条件和比较维度 |
+| 参考可比性 | 已发现并记录限制 | 解决深度基准、官方同时间 ID、震相映射；补齐必要方法/版本说明 |
+| 台站与观测 | 尚未核验 | 建立逐日逐通道可用性、采样率、响应、缺口和实际体量清单 |
+| 信息边界与评测协议 | 尚未冻结 | 定义开发/评测划分、参考隔离、模型/文献权限、资源预算与匹配规则 |
+| 基线和 Agent 实验 | 尚未开始 | 先在开发片段打通一个固定流水线，再比较 Agent 条件 |
 
-## Network and waveform preparation
+优先处理参考语义和版本问题，再核验台站可用性、确定输入方案，随后冻结协议并开展小规模实验。现阶段可以完成候选设计与本地目录核验，但不能据此宣布整个 case 已经具备正式评测条件。
 
-- Shelly, Ross, Liu and SCSN all use the SCSN/SCEDC regional archive, but their
-  station subsets and processing windows differ.
-- Liu reports 41 permanent + 4 temporary stations within 120 km; AWR reports 66
-  broadband 3C stations selected in a 200 × 200 km region over four years.
-- Shelly's article does not state a fixed station count; the auxiliary phase CSV
-  has 30 network-station pairs (5,703,270 rows), which is not a station inventory.
-- A provisional continuous-waveform storage upper bound for a future 72-hour
-  39-station/3C/100-Hz/int32 condition is ~28.3 GB, but this is a design bound,
-  not a frozen observed volume. The station-day/channel manifest must be built
-  from SCEDC availability before waveform volume is used as a benchmark metric.
+## 6. 复算与文件维护
 
-## Readiness and open actions
+从仓库根目录运行（需 PyYAML）：
 
-- [x] Shelly article, Data S1, XML metadata and auxiliary phase CSV staged and hashed.
-- [x] Liu article, SI DOCX and final Table S1 staged and hashed.
-- [x] Ross article and official SCEDC QTM archive staged and field-audited.
-- [x] AWR article and local Version 2 hypocenter/MT files staged and hashed.
-- [x] USGS/SCSN full and benchmark operational snapshots staged.
-- [ ] Download/attach Ross Science DC1 and extract exact template/relocation parameters.
-- [ ] Obtain an exact AWR article-supplement/release manifest to explain 214,467 vs 222,864 and 4,892 vs 4,890.
-- [ ] Build station-day/channel availability and waveform-volume manifest for the frozen 72-hour window.
-- [ ] Normalize event IDs only in derived files; never edit source catalogs.
-- [ ] Generate comparable map/time/depth/magnitude plots under each catalog's `raw/` or `figures/` directory.
+```bash
+python -B data/2019_ridgecrest_california/scripts/audit_references.py
+python -B -m unittest discover -s data/2019_ridgecrest_california/scripts -p 'test_*.py' -v
+```
 
-## Local source index
-
-- [`references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md`](../references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md)
-- [`catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md`](../catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md)
-- [`references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md`](../references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md)
-- [`catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_summary.md`](../catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_summary.md)
-- [`references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md`](../references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md)
-- [`catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md`](../catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md)
-- [`references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md`](../references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md)
-- [`catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md`](../catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_summary.md)
-- [`catalogs/USGS_SCSN_COMCAT_2019/README.md`](../catalogs/USGS_SCSN_COMCAT_2019/README.md)
+程序校验原始文件后生成一个 `reference_audit.json`，不修改原目录、不下载波形、不设置冻结状态。目录自身 README 保存来源与产品细节，本文件只维护科学设计和跨产品结论，避免重新拆出大量零散报告。公共派生 ID 与输出约定见 [数据组织规则](../../README.md#processing-and-output-policy)。

@@ -1,0 +1,1936 @@
+{
+  "audit_version": 1,
+  "case_id": "2019_ridgecrest_california",
+  "window_status": "not_frozen",
+  "config_sha256": "c3d3f17160032ca3de40cd43def9474ef897079a0fb674d2d59a40d8ef129444",
+  "candidate_window": {
+    "start_utc": "2019-07-04T00:00:00Z",
+    "end_utc": "2019-07-07T00:00:00Z",
+    "interval": "half_open",
+    "native_comparison_bounds": {
+      "latitude": [
+        35.45,
+        36.05
+      ],
+      "longitude": [
+        -117.9,
+        -117.2
+      ],
+      "depth_km": [
+        0,
+        20
+      ]
+    },
+    "status": "exploratory_legacy_mask_not_scientific_freeze",
+    "depth_datum_harmonized": false
+  },
+  "sources": {
+    "shelly": {
+      "path": "catalogs/SHELLY2020_0220190309/raw_article/SHELLY2020_0220190309__catalog_DataS1.txt",
+      "sha256": "aaa79453a2c599fe2b386a544c78e8e98383492aacf57212a8dc98d82373a9f1",
+      "parse_errors": [],
+      "full": {
+        "row_count": 34091,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 2,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-07-04T15:35:29.400000+00:00",
+          "2019-07-16T23:59:26.500000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.469906,
+            36.0361
+          ],
+          "longitude": [
+            -117.943498,
+            -117.2132
+          ],
+          "depth_km": [
+            0.089,
+            556.58
+          ],
+          "magnitude": [
+            -0.34,
+            7.1
+          ]
+        },
+        "event_types": {
+          "not_supplied": 34091
+        }
+      },
+      "candidate_time_only": {
+        "row_count": 7773,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 1,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-07-04T15:35:29.400000+00:00",
+          "2019-07-06T23:59:47.320000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.475,
+            36.012817
+          ],
+          "longitude": [
+            -117.819198,
+            -117.255697
+          ],
+          "depth_km": [
+            0.159,
+            239.53
+          ],
+          "magnitude": [
+            -0.1,
+            7.1
+          ]
+        },
+        "event_types": {
+          "not_supplied": 7773
+        }
+      },
+      "candidate_native_mask": {
+        "row_count": 7716,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 1,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-07-04T15:35:29.400000+00:00",
+          "2019-07-06T23:59:47.320000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.485217,
+            36.012817
+          ],
+          "longitude": [
+            -117.819198,
+            -117.255697
+          ],
+          "depth_km": [
+            0.159,
+            19.953
+          ],
+          "magnitude": [
+            -0.1,
+            7.1
+          ]
+        },
+        "event_types": {
+          "not_supplied": 7716
+        }
+      },
+      "native_mask_exclusions": {
+        "latitude": 0,
+        "longitude": 0,
+        "depth_km": 57
+      },
+      "depth_outliers_above_100km": [
+        {
+          "native_id": "70463619",
+          "source_row": 76,
+          "depth_km": 183.31
+        },
+        {
+          "native_id": "70470703",
+          "source_row": 400,
+          "depth_km": 119.13
+        },
+        {
+          "native_id": "70530065",
+          "source_row": 2171,
+          "depth_km": 131.69
+        },
+        {
+          "native_id": "70531190",
+          "source_row": 2212,
+          "depth_km": 141.75
+        },
+        {
+          "native_id": "70541355",
+          "source_row": 2580,
+          "depth_km": 113.56
+        },
+        {
+          "native_id": "70581744",
+          "source_row": 4223,
+          "depth_km": 126.98
+        },
+        {
+          "native_id": "70583816",
+          "source_row": 4290,
+          "depth_km": 119.49
+        },
+        {
+          "native_id": "70607843",
+          "source_row": 4616,
+          "depth_km": 116.83
+        },
+        {
+          "native_id": "70627051",
+          "source_row": 5375,
+          "depth_km": 197.46
+        },
+        {
+          "native_id": "70634599",
+          "source_row": 5688,
+          "depth_km": 214.09
+        },
+        {
+          "native_id": "70650696",
+          "source_row": 6407,
+          "depth_km": 239.53
+        },
+        {
+          "native_id": "70665390",
+          "source_row": 7016,
+          "depth_km": 145.28
+        },
+        {
+          "native_id": "70667198",
+          "source_row": 7081,
+          "depth_km": 139.77
+        },
+        {
+          "native_id": "71081090",
+          "source_row": 19544,
+          "depth_km": 216.66
+        },
+        {
+          "native_id": "71459655",
+          "source_row": 29064,
+          "depth_km": 342.87
+        },
+        {
+          "native_id": "71529583",
+          "source_row": 30506,
+          "depth_km": 556.58
+        },
+        {
+          "native_id": "71607236",
+          "source_row": 32144,
+          "depth_km": 106.44
+        }
+      ]
+    },
+    "liu": {
+      "path": "catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_tableS1.txt",
+      "sha256": "8582363962b168c8034e339a8859407fb2ed63fc83eb4e01ac9d88546583cd88",
+      "parse_errors": [],
+      "full": {
+        "row_count": 15445,
+        "rows_without_native_id": 15445,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 0,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-07-04T00:56:37.520000+00:00",
+          "2019-07-09T23:59:40.560000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.330306,
+            36.271517
+          ],
+          "longitude": [
+            -117.979354,
+            -117.234489
+          ],
+          "depth_km": [
+            0.001,
+            14.126
+          ],
+          "magnitude": [
+            -0.2,
+            5.5
+          ]
+        },
+        "event_types": {
+          "not_supplied": 15445
+        }
+      },
+      "candidate_time_only": {
+        "row_count": 6329,
+        "rows_without_native_id": 6329,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 0,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-07-04T00:56:37.520000+00:00",
+          "2019-07-06T23:59:30.040000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.369373,
+            36.184733
+          ],
+          "longitude": [
+            -117.979354,
+            -117.275936
+          ],
+          "depth_km": [
+            0.002,
+            14.126
+          ],
+          "magnitude": [
+            -0.2,
+            5.5
+          ]
+        },
+        "event_types": {
+          "not_supplied": 6329
+        }
+      },
+      "candidate_native_mask": {
+        "row_count": 6242,
+        "rows_without_native_id": 6242,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 0,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-07-04T04:03:01.380000+00:00",
+          "2019-07-06T23:59:30.040000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.503996,
+            36.047262
+          ],
+          "longitude": [
+            -117.883626,
+            -117.275936
+          ],
+          "depth_km": [
+            0.002,
+            14.126
+          ],
+          "magnitude": [
+            -0.2,
+            5.5
+          ]
+        },
+        "event_types": {
+          "not_supplied": 6242
+        }
+      },
+      "native_mask_exclusions": {
+        "latitude": 86,
+        "longitude": 7,
+        "depth_km": 0
+      },
+      "depth_outliers_above_100km": []
+    },
+    "ross": {
+      "path": "catalogs/ROSS2019_SCIENCE/raw/ROSS2019_SCIENCE__catalog_qtm.tar.gz",
+      "sha256": "dcb0035f69c6ea9a960e45544f31bdacb38cb7f502c3d29af827da4ff6850849",
+      "parse_errors": [],
+      "full": {
+        "row_count": 111918,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 13,
+        "duplicate_time_location_magnitude_rows": 2,
+        "observed_time_range_utc": [
+          "2019-07-04T03:14:14.128000+00:00",
+          "2019-07-25T14:59:51.550000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.3053,
+            36.137
+          ],
+          "longitude": [
+            -118.016,
+            -117.0115
+          ],
+          "depth_km": [
+            -0.74,
+            24.9
+          ],
+          "magnitude": [
+            -2.82,
+            7.1
+          ]
+        },
+        "event_types": {
+          "not_supplied": 111918
+        }
+      },
+      "candidate_time_only": {
+        "row_count": 12806,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 2,
+        "duplicate_time_location_magnitude_rows": 1,
+        "observed_time_range_utc": [
+          "2019-07-04T03:14:14.128000+00:00",
+          "2019-07-06T23:59:47.190000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.37418,
+            36.11168
+          ],
+          "longitude": [
+            -117.90963,
+            -117.0115
+          ],
+          "depth_km": [
+            -0.417,
+            24.5
+          ],
+          "magnitude": [
+            -0.82,
+            7.1
+          ]
+        },
+        "event_types": {
+          "not_supplied": 12806
+        }
+      },
+      "candidate_native_mask": {
+        "row_count": 12768,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 2,
+        "duplicate_time_location_magnitude_rows": 1,
+        "observed_time_range_utc": [
+          "2019-07-04T03:26:19.848000+00:00",
+          "2019-07-06T23:59:47.190000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.5017,
+            36.04956
+          ],
+          "longitude": [
+            -117.8955,
+            -117.2225
+          ],
+          "depth_km": [
+            0.018,
+            19.7
+          ],
+          "magnitude": [
+            -0.82,
+            7.1
+          ]
+        },
+        "event_types": {
+          "not_supplied": 12768
+        }
+      },
+      "native_mask_exclusions": {
+        "latitude": 18,
+        "longitude": 6,
+        "depth_km": 14
+      },
+      "depth_outliers_above_100km": [],
+      "relocated": {
+        "rule": "nbranch > 1",
+        "full_rows": 46512,
+        "candidate_time_only_rows": 6470,
+        "candidate_native_mask_rows": 6463
+      }
+    },
+    "awr_hypocenters": {
+      "path": "catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_hypocenters_v2.csv",
+      "sha256": "fa87745528bddc66e7b1d25a94cba8d2448d38f67c6157c566ae451a84fa3ea8",
+      "parse_errors": [],
+      "full": {
+        "row_count": 222864,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 2,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-04-04T01:47:41.335000+00:00",
+          "2023-05-01T20:55:26.801000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            34.91017,
+            36.57301
+          ],
+          "longitude": [
+            -118.6126,
+            -116.74058
+          ],
+          "depth_km": [
+            -0.599,
+            19.539
+          ],
+          "magnitude": [
+            -0.723,
+            4.585
+          ]
+        },
+        "event_types": {
+          "not_supplied": 222864
+        }
+      },
+      "candidate_time_only": {
+        "row_count": 5842,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 0,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-07-04T00:46:47.326000+00:00",
+          "2019-07-06T23:59:20.494000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.32327,
+            36.19059
+          ],
+          "longitude": [
+            -118.55405,
+            -117.26774
+          ],
+          "depth_km": [
+            0.692,
+            14.732
+          ],
+          "magnitude": [
+            -0.198,
+            4.585
+          ]
+        },
+        "event_types": {
+          "not_supplied": 5842
+        }
+      },
+      "candidate_native_mask": {
+        "row_count": 5737,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 0,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-07-04T04:03:01.162000+00:00",
+          "2019-07-06T23:59:20.494000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.50518,
+            36.05
+          ],
+          "longitude": [
+            -117.87793,
+            -117.26774
+          ],
+          "depth_km": [
+            0.692,
+            14.732
+          ],
+          "magnitude": [
+            0.056,
+            4.585
+          ]
+        },
+        "event_types": {
+          "not_supplied": 5737
+        }
+      },
+      "native_mask_exclusions": {
+        "latitude": 101,
+        "longitude": 14,
+        "depth_km": 0
+      },
+      "depth_outliers_above_100km": []
+    },
+    "awr_moment_tensors": {
+      "path": "catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_moment_tensors_v2.csv",
+      "sha256": "0746e6bbc694cf63d06112517305e91bf282a80833e660d6e6b0ea77578a33e7",
+      "parse_errors": [],
+      "full": {
+        "row_count": 4890,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 0,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-04-07T18:52:58.223000+00:00",
+          "2023-04-21T07:11:10.306000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.19619,
+            36.46274
+          ],
+          "longitude": [
+            -118.59814,
+            -117.02363
+          ],
+          "depth_km": [
+            -0.21,
+            13.573
+          ],
+          "magnitude": [
+            1.3660722124544407,
+            4.114593087421847
+          ]
+        },
+        "event_types": {
+          "not_supplied": 4890
+        }
+      },
+      "candidate_time_only": {
+        "row_count": 258,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 0,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-07-04T16:13:43.096000+00:00",
+          "2019-07-06T23:56:34.234000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.4487,
+            36.1163
+          ],
+          "longitude": [
+            -117.87373,
+            -117.31539
+          ],
+          "depth_km": [
+            0.921,
+            12.866
+          ],
+          "magnitude": [
+            1.873925208914296,
+            4.114593087421847
+          ]
+        },
+        "event_types": {
+          "not_supplied": 258
+        }
+      },
+      "candidate_native_mask": {
+        "row_count": 254,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 0,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-07-04T16:13:43.096000+00:00",
+          "2019-07-06T23:56:34.234000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.54839,
+            36.03893
+          ],
+          "longitude": [
+            -117.84781,
+            -117.36603
+          ],
+          "depth_km": [
+            0.921,
+            12.866
+          ],
+          "magnitude": [
+            1.873925208914296,
+            4.114593087421847
+          ]
+        },
+        "event_types": {
+          "not_supplied": 254
+        }
+      },
+      "native_mask_exclusions": {
+        "latitude": 4,
+        "longitude": 0,
+        "depth_km": 0
+      },
+      "depth_outliers_above_100km": []
+    },
+    "official_full": {
+      "path": "catalogs/USGS_SCSN_COMCAT_2019/USGS_SCSN_COMCAT_2019__catalog_operational_full.csv",
+      "sha256": "c1c61e21b7c7cf687566cfcb4ccf92120f47a78fa36ddfcb4349316ee0b82db5",
+      "parse_errors": [],
+      "full": {
+        "row_count": 17959,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 0,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-07-04T04:03:01.480000+00:00",
+          "2019-07-16T23:58:52.910000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.4781667,
+            36.05
+          ],
+          "longitude": [
+            -117.9456667,
+            -117.204
+          ],
+          "depth_km": [
+            0.0,
+            19.98
+          ],
+          "magnitude": [
+            0.0,
+            7.1
+          ]
+        },
+        "event_types": {
+          "earthquake": 17956,
+          "quarry blast": 3
+        }
+      },
+      "candidate_time_only": {
+        "row_count": 6565,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 0,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-07-04T04:03:01.480000+00:00",
+          "2019-07-06T23:59:47.120000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.4935,
+            36.0495
+          ],
+          "longitude": [
+            -117.9398333,
+            -117.268
+          ],
+          "depth_km": [
+            0.0,
+            19.09
+          ],
+          "magnitude": [
+            0.14,
+            7.1
+          ]
+        },
+        "event_types": {
+          "earthquake": 6563,
+          "quarry blast": 2
+        }
+      },
+      "candidate_native_mask": {
+        "row_count": 6563,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 0,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-07-04T04:03:01.480000+00:00",
+          "2019-07-06T23:59:47.120000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.4935,
+            36.0495
+          ],
+          "longitude": [
+            -117.8911667,
+            -117.268
+          ],
+          "depth_km": [
+            0.0,
+            19.09
+          ],
+          "magnitude": [
+            0.14,
+            7.1
+          ]
+        },
+        "event_types": {
+          "earthquake": 6561,
+          "quarry blast": 2
+        }
+      },
+      "native_mask_exclusions": {
+        "latitude": 0,
+        "longitude": 2,
+        "depth_km": 0
+      },
+      "depth_outliers_above_100km": []
+    },
+    "official_snapshot": {
+      "path": "catalogs/USGS_SCSN_COMCAT_2019/USGS_SCSN_COMCAT_2019__catalog_operational_benchmark.csv",
+      "sha256": "2e6f472c88874431042138c468d91259156213e70d0126205ca55ac25c35036e",
+      "parse_errors": [],
+      "full": {
+        "row_count": 6566,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 3,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-07-04T04:03:01.480000+00:00",
+          "2019-07-06T23:59:47.120000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.4935,
+            36.0495
+          ],
+          "longitude": [
+            -117.8911667,
+            -117.268
+          ],
+          "depth_km": [
+            0.0,
+            19.09
+          ],
+          "magnitude": [
+            0.14,
+            7.1
+          ]
+        },
+        "event_types": {
+          "earthquake": 6564,
+          "quarry blast": 2
+        }
+      },
+      "candidate_time_only": {
+        "row_count": 6566,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 3,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-07-04T04:03:01.480000+00:00",
+          "2019-07-06T23:59:47.120000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.4935,
+            36.0495
+          ],
+          "longitude": [
+            -117.8911667,
+            -117.268
+          ],
+          "depth_km": [
+            0.0,
+            19.09
+          ],
+          "magnitude": [
+            0.14,
+            7.1
+          ]
+        },
+        "event_types": {
+          "earthquake": 6564,
+          "quarry blast": 2
+        }
+      },
+      "candidate_native_mask": {
+        "row_count": 6566,
+        "rows_without_native_id": 0,
+        "duplicate_native_id_rows": 0,
+        "duplicate_origin_time_rows": 3,
+        "duplicate_time_location_magnitude_rows": 0,
+        "observed_time_range_utc": [
+          "2019-07-04T04:03:01.480000+00:00",
+          "2019-07-06T23:59:47.120000+00:00"
+        ],
+        "ranges": {
+          "latitude": [
+            35.4935,
+            36.0495
+          ],
+          "longitude": [
+            -117.8911667,
+            -117.268
+          ],
+          "depth_km": [
+            0.0,
+            19.09
+          ],
+          "magnitude": [
+            0.14,
+            7.1
+          ]
+        },
+        "event_types": {
+          "earthquake": 6564,
+          "quarry blast": 2
+        }
+      },
+      "native_mask_exclusions": {
+        "latitude": 0,
+        "longitude": 0,
+        "depth_km": 0
+      },
+      "depth_outliers_above_100km": []
+    }
+  },
+  "anchors": {
+    "mw6_4": {
+      "time": "2019-07-04T17:33:49+00:00",
+      "timestamp": 1562261629.0,
+      "latitude": 35.7053333,
+      "longitude": -117.5038333,
+      "depth_km": 10.5,
+      "magnitude": 6.4,
+      "native_id": "ci38443183",
+      "source_row": 20,
+      "event_type": "earthquake",
+      "magnitude_type": "mw",
+      "updated": "2025-12-22T18:14:43.508Z",
+      "depth_error_km": 0.36
+    },
+    "mw7_1": {
+      "time": "2019-07-06T03:19:53.040000+00:00",
+      "timestamp": 1562383193.04,
+      "latitude": 35.7695,
+      "longitude": -117.5993333,
+      "depth_km": 8.0,
+      "magnitude": 7.1,
+      "native_id": "ci38457511",
+      "source_row": 3498,
+      "event_type": "earthquake",
+      "magnitude_type": "mw",
+      "updated": "2026-09-03T03:30:03.671Z",
+      "depth_error_km": 31.61
+    }
+  },
+  "stages": [
+    {
+      "stage": "before_mw6_4",
+      "start_utc": "2019-07-04T00:00:00+00:00",
+      "end_utc": "2019-07-04T17:33:49+00:00",
+      "hours": 17.56361111111111,
+      "native_mask_rows": {
+        "shelly": 36,
+        "liu": 19,
+        "ross": 88,
+        "awr_hypocenters": 20,
+        "awr_moment_tensors": 5,
+        "official_full": 18,
+        "official_snapshot": 18,
+        "ross_relocated": 37,
+        "official_earthquake": 18
+      }
+    },
+    {
+      "stage": "first_hour_after_mw6_4",
+      "start_utc": "2019-07-04T17:33:49+00:00",
+      "end_utc": "2019-07-04T18:33:49+00:00",
+      "hours": 1.0,
+      "native_mask_rows": {
+        "shelly": 164,
+        "liu": 129,
+        "ross": 237,
+        "awr_hypocenters": 114,
+        "awr_moment_tensors": 7,
+        "official_full": 172,
+        "official_snapshot": 172,
+        "ross_relocated": 127,
+        "official_earthquake": 172
+      }
+    },
+    {
+      "stage": "later_between_large_events",
+      "start_utc": "2019-07-04T18:33:49+00:00",
+      "end_utc": "2019-07-06T03:19:53.040000+00:00",
+      "hours": 32.76778888888889,
+      "native_mask_rows": {
+        "shelly": 4505,
+        "liu": 3281,
+        "ross": 7757,
+        "awr_hypocenters": 3125,
+        "awr_moment_tensors": 140,
+        "official_full": 3305,
+        "official_snapshot": 3306,
+        "ross_relocated": 4011,
+        "official_earthquake": 3305
+      }
+    },
+    {
+      "stage": "first_hour_after_mw7_1",
+      "start_utc": "2019-07-06T03:19:53.040000+00:00",
+      "end_utc": "2019-07-06T04:19:53.040000+00:00",
+      "hours": 1.0,
+      "native_mask_rows": {
+        "shelly": 128,
+        "liu": 147,
+        "ross": 235,
+        "awr_hypocenters": 87,
+        "awr_moment_tensors": 1,
+        "official_full": 235,
+        "official_snapshot": 235,
+        "ross_relocated": 84,
+        "official_earthquake": 235
+      }
+    },
+    {
+      "stage": "later_after_mw7_1",
+      "start_utc": "2019-07-06T04:19:53.040000+00:00",
+      "end_utc": "2019-07-07T00:00:00+00:00",
+      "hours": 19.6686,
+      "native_mask_rows": {
+        "shelly": 2883,
+        "liu": 2666,
+        "ross": 4451,
+        "awr_hypocenters": 2391,
+        "awr_moment_tensors": 101,
+        "official_full": 2833,
+        "official_snapshot": 2835,
+        "ross_relocated": 2204,
+        "official_earthquake": 2834
+      }
+    }
+  ],
+  "phase_auxiliary": {
+    "row_count": 5703270,
+    "unit": "phase_pick",
+    "arrival_encoding": "unix_seconds",
+    "arrival_time_only_rows": 1449723,
+    "origin_time_not_supplied": true,
+    "event_catalog_crosswalk_verified": false,
+    "phase_counts": {
+      "P": 2536859,
+      "S": 3166411
+    },
+    "network_station_pairs": 30,
+    "template_ids": 6744,
+    "match_ids": 209213,
+    "observed_arrival_time_range_utc": [
+      "2019-07-04T00:56:40.090300+00:00",
+      "2019-07-16T23:59:55.419000+00:00"
+    ],
+    "interpretation": "Station occurrences do not establish station-day waveform availability; match IDs are not validated event IDs.",
+    "path": "catalogs/SHELLY2020_0220190309/raw/Ridgecrest_2019_correlation_phase_arrivals.csv",
+    "sha256": "0b77237b497265ebc94768acd955a9de5eb4c7f78f130922254e4c9ed4122d9f"
+  },
+  "official_snapshot_not_in_full_ids": [
+    "ci37483725",
+    "ci37484197",
+    "ci38453959"
+  ],
+  "reference_overlap_diagnostics": [
+    {
+      "left": "shelly",
+      "right": "liu",
+      "time_tolerance_s": 0.5,
+      "horizontal_tolerance_km": 2.0,
+      "left_rows": 7716,
+      "right_rows": 6242,
+      "candidate_edges": 4735,
+      "reciprocal_unique_pairs": 4635,
+      "left_without_candidate": 2981,
+      "right_without_candidate": 1557,
+      "left_multiple_candidates": 0,
+      "right_multiple_candidates": 50,
+      "left_with_candidate_but_unresolved": 100,
+      "right_with_candidate_but_unresolved": 50,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.12000012397766113,
+        "p90": 0.280000114440918,
+        "max": 0.5
+      },
+      "horizontal_difference_km": {
+        "min": 0.0035716233494592197,
+        "p50": 0.2427145412517836,
+        "p90": 0.5219014925678818,
+        "max": 1.9984899023159166
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -9.350999999999999,
+        "p50": -0.7789999999999999,
+        "p90": 0.8620000000000001,
+        "max": 14.427999999999999
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "shelly",
+      "right": "liu",
+      "time_tolerance_s": 0.5,
+      "horizontal_tolerance_km": 5.0,
+      "left_rows": 7716,
+      "right_rows": 6242,
+      "candidate_edges": 4819,
+      "reciprocal_unique_pairs": 4719,
+      "left_without_candidate": 2897,
+      "right_without_candidate": 1473,
+      "left_multiple_candidates": 0,
+      "right_multiple_candidates": 50,
+      "left_with_candidate_but_unresolved": 100,
+      "right_with_candidate_but_unresolved": 50,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.12999987602233887,
+        "p90": 0.29000020027160645,
+        "max": 0.5
+      },
+      "horizontal_difference_km": {
+        "min": 0.0035716233494592197,
+        "p50": 0.24707108354537888,
+        "p90": 0.5635999997463778,
+        "max": 4.986230953151952
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -9.350999999999999,
+        "p50": -0.7769999999999992,
+        "p90": 0.9153999999999989,
+        "max": 14.427999999999999
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "shelly",
+      "right": "liu",
+      "time_tolerance_s": 1.0,
+      "horizontal_tolerance_km": 2.0,
+      "left_rows": 7716,
+      "right_rows": 6242,
+      "candidate_edges": 4952,
+      "reciprocal_unique_pairs": 4826,
+      "left_without_candidate": 2764,
+      "right_without_candidate": 1353,
+      "left_multiple_candidates": 0,
+      "right_multiple_candidates": 63,
+      "left_with_candidate_but_unresolved": 126,
+      "right_with_candidate_but_unresolved": 63,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.13000011444091797,
+        "p90": 0.3399999141693115,
+        "max": 1.0
+      },
+      "horizontal_difference_km": {
+        "min": 0.0035716233494592197,
+        "p50": 0.24264233781218364,
+        "p90": 0.5252109787199244,
+        "max": 1.9984899023159166
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -9.350999999999999,
+        "p50": -0.7814999999999999,
+        "p90": 0.8749999999999996,
+        "max": 14.427999999999999
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "shelly",
+      "right": "liu",
+      "time_tolerance_s": 1.0,
+      "horizontal_tolerance_km": 5.0,
+      "left_rows": 7716,
+      "right_rows": 6242,
+      "candidate_edges": 5057,
+      "reciprocal_unique_pairs": 4927,
+      "left_without_candidate": 2659,
+      "right_without_candidate": 1250,
+      "left_multiple_candidates": 0,
+      "right_multiple_candidates": 65,
+      "left_with_candidate_but_unresolved": 130,
+      "right_with_candidate_but_unresolved": 65,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.1399998664855957,
+        "p90": 0.3599998950958252,
+        "max": 1.0
+      },
+      "horizontal_difference_km": {
+        "min": 0.0035716233494592197,
+        "p50": 0.2473212390855345,
+        "p90": 0.5801220894162522,
+        "max": 4.986230953151952
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -9.350999999999999,
+        "p50": -0.7770000000000001,
+        "p90": 0.9319999999999986,
+        "max": 14.427999999999999
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "shelly",
+      "right": "liu",
+      "time_tolerance_s": 2.0,
+      "horizontal_tolerance_km": 2.0,
+      "left_rows": 7716,
+      "right_rows": 6242,
+      "candidate_edges": 4963,
+      "reciprocal_unique_pairs": 4831,
+      "left_without_candidate": 2753,
+      "right_without_candidate": 1345,
+      "left_multiple_candidates": 0,
+      "right_multiple_candidates": 66,
+      "left_with_candidate_but_unresolved": 132,
+      "right_with_candidate_but_unresolved": 66,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.13000011444091797,
+        "p90": 0.3399999141693115,
+        "max": 1.2999999523162842
+      },
+      "horizontal_difference_km": {
+        "min": 0.0035716233494592197,
+        "p50": 0.24260259287097694,
+        "p90": 0.5248118976372925,
+        "max": 1.9984899023159166
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -9.350999999999999,
+        "p50": -0.782,
+        "p90": 0.875,
+        "max": 14.427999999999999
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "shelly",
+      "right": "liu",
+      "time_tolerance_s": 2.0,
+      "horizontal_tolerance_km": 5.0,
+      "left_rows": 7716,
+      "right_rows": 6242,
+      "candidate_edges": 5078,
+      "reciprocal_unique_pairs": 4940,
+      "left_without_candidate": 2638,
+      "right_without_candidate": 1233,
+      "left_multiple_candidates": 0,
+      "right_multiple_candidates": 69,
+      "left_with_candidate_but_unresolved": 138,
+      "right_with_candidate_but_unresolved": 69,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.1399998664855957,
+        "p90": 0.3599998950958252,
+        "max": 1.75
+      },
+      "horizontal_difference_km": {
+        "min": 0.0035716233494592197,
+        "p50": 0.24743848580509673,
+        "p90": 0.58682676890004,
+        "max": 4.986230953151952
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -9.350999999999999,
+        "p50": -0.7780000000000002,
+        "p90": 0.9414000000000013,
+        "max": 14.427999999999999
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "shelly",
+      "right": "ross_relocated",
+      "time_tolerance_s": 0.5,
+      "horizontal_tolerance_km": 2.0,
+      "left_rows": 7716,
+      "right_rows": 6463,
+      "candidate_edges": 4473,
+      "reciprocal_unique_pairs": 4395,
+      "left_without_candidate": 3248,
+      "right_without_candidate": 2024,
+      "left_multiple_candidates": 5,
+      "right_multiple_candidates": 34,
+      "left_with_candidate_but_unresolved": 73,
+      "right_with_candidate_but_unresolved": 44,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.08299994468688965,
+        "p90": 0.26800012588500977,
+        "max": 0.49900007247924805
+      },
+      "horizontal_difference_km": {
+        "min": 0.029271636774177493,
+        "p50": 0.46660017417808974,
+        "p90": 0.8805259003837816,
+        "max": 1.9924974855336814
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -9.535,
+        "p50": -0.05400000000000027,
+        "p90": 1.6852000000000003,
+        "max": 17.897000000000002
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "shelly",
+      "right": "ross_relocated",
+      "time_tolerance_s": 0.5,
+      "horizontal_tolerance_km": 5.0,
+      "left_rows": 7716,
+      "right_rows": 6463,
+      "candidate_edges": 4535,
+      "reciprocal_unique_pairs": 4455,
+      "left_without_candidate": 3186,
+      "right_without_candidate": 1963,
+      "left_multiple_candidates": 5,
+      "right_multiple_candidates": 35,
+      "left_with_candidate_but_unresolved": 75,
+      "right_with_candidate_but_unresolved": 45,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.0839998722076416,
+        "p90": 0.2739999294281006,
+        "max": 0.49900007247924805
+      },
+      "horizontal_difference_km": {
+        "min": 0.029271636774177493,
+        "p50": 0.4691353858137507,
+        "p90": 0.9311850342054951,
+        "max": 4.73488287178923
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -9.535,
+        "p50": -0.057000000000000384,
+        "p90": 1.7040000000000002,
+        "max": 17.897000000000002
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "shelly",
+      "right": "ross_relocated",
+      "time_tolerance_s": 1.0,
+      "horizontal_tolerance_km": 2.0,
+      "left_rows": 7716,
+      "right_rows": 6463,
+      "candidate_edges": 4684,
+      "reciprocal_unique_pairs": 4592,
+      "left_without_candidate": 3037,
+      "right_without_candidate": 1820,
+      "left_multiple_candidates": 5,
+      "right_multiple_candidates": 41,
+      "left_with_candidate_but_unresolved": 87,
+      "right_with_candidate_but_unresolved": 51,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.08800005912780762,
+        "p90": 0.32400009632110593,
+        "max": 0.9820001125335693
+      },
+      "horizontal_difference_km": {
+        "min": 0.029271636774177493,
+        "p50": 0.4668335455787663,
+        "p90": 0.8801479454886946,
+        "max": 1.9928452559814553
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -8.833,
+        "p50": -0.06399999999999961,
+        "p90": 1.6898000000000006,
+        "max": 17.897000000000002
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "shelly",
+      "right": "ross_relocated",
+      "time_tolerance_s": 1.0,
+      "horizontal_tolerance_km": 5.0,
+      "left_rows": 7716,
+      "right_rows": 6463,
+      "candidate_edges": 4766,
+      "reciprocal_unique_pairs": 4670,
+      "left_without_candidate": 2956,
+      "right_without_candidate": 1739,
+      "left_multiple_candidates": 6,
+      "right_multiple_candidates": 42,
+      "left_with_candidate_but_unresolved": 90,
+      "right_with_candidate_but_unresolved": 54,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.08999991416931152,
+        "p90": 0.33599998950958254,
+        "max": 0.9820001125335693
+      },
+      "horizontal_difference_km": {
+        "min": 0.029271636774177493,
+        "p50": 0.47006679186017786,
+        "p90": 0.9410970467467716,
+        "max": 4.73488287178923
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -8.833,
+        "p50": -0.0645,
+        "p90": 1.7209000000000039,
+        "max": 17.897000000000002
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "shelly",
+      "right": "ross_relocated",
+      "time_tolerance_s": 2.0,
+      "horizontal_tolerance_km": 2.0,
+      "left_rows": 7716,
+      "right_rows": 6463,
+      "candidate_edges": 4700,
+      "reciprocal_unique_pairs": 4599,
+      "left_without_candidate": 3022,
+      "right_without_candidate": 1808,
+      "left_multiple_candidates": 6,
+      "right_multiple_candidates": 45,
+      "left_with_candidate_but_unresolved": 95,
+      "right_with_candidate_but_unresolved": 56,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.08800005912780762,
+        "p90": 0.3269999027252197,
+        "max": 1.3359999656677246
+      },
+      "horizontal_difference_km": {
+        "min": 0.029271636774177493,
+        "p50": 0.46670210220168934,
+        "p90": 0.879692419952275,
+        "max": 1.9928452559814553
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -8.833,
+        "p50": -0.06400000000000006,
+        "p90": 1.6909999999999994,
+        "max": 17.897000000000002
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "shelly",
+      "right": "ross_relocated",
+      "time_tolerance_s": 2.0,
+      "horizontal_tolerance_km": 5.0,
+      "left_rows": 7716,
+      "right_rows": 6463,
+      "candidate_edges": 4793,
+      "reciprocal_unique_pairs": 4686,
+      "left_without_candidate": 2930,
+      "right_without_candidate": 1717,
+      "left_multiple_candidates": 7,
+      "right_multiple_candidates": 47,
+      "left_with_candidate_but_unresolved": 100,
+      "right_with_candidate_but_unresolved": 60,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.09000003337860107,
+        "p90": 0.34150004386901855,
+        "max": 1.7920000553131104
+      },
+      "horizontal_difference_km": {
+        "min": 0.029271636774177493,
+        "p50": 0.47026794680094264,
+        "p90": 0.9493605295988463,
+        "max": 4.9776361465492185
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -8.833,
+        "p50": -0.0645,
+        "p90": 1.7365,
+        "max": 17.897000000000002
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "shelly",
+      "right": "official_earthquake",
+      "time_tolerance_s": 0.5,
+      "horizontal_tolerance_km": 2.0,
+      "left_rows": 7716,
+      "right_rows": 6564,
+      "candidate_edges": 4341,
+      "reciprocal_unique_pairs": 4231,
+      "left_without_candidate": 3390,
+      "right_without_candidate": 2263,
+      "left_multiple_candidates": 15,
+      "right_multiple_candidates": 40,
+      "left_with_candidate_but_unresolved": 95,
+      "right_with_candidate_but_unresolved": 70,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.08999991416931152,
+        "p90": 0.26999998092651367,
+        "max": 0.5
+      },
+      "horizontal_difference_km": {
+        "min": 0.004354960460234059,
+        "p50": 0.3511696373162505,
+        "p90": 0.9499926236958204,
+        "max": 1.9656621981569382
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -10.579999999999998,
+        "p50": -0.13500000000000023,
+        "p90": 1.2270000000000003,
+        "max": 17.001
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "shelly",
+      "right": "official_earthquake",
+      "time_tolerance_s": 0.5,
+      "horizontal_tolerance_km": 5.0,
+      "left_rows": 7716,
+      "right_rows": 6564,
+      "candidate_edges": 4483,
+      "reciprocal_unique_pairs": 4371,
+      "left_without_candidate": 3248,
+      "right_without_candidate": 2122,
+      "left_multiple_candidates": 15,
+      "right_multiple_candidates": 41,
+      "left_with_candidate_but_unresolved": 97,
+      "right_with_candidate_but_unresolved": 71,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.08999991416931152,
+        "p90": 0.2799999713897705,
+        "max": 0.5
+      },
+      "horizontal_difference_km": {
+        "min": 0.004354960460234059,
+        "p50": 0.36043028082969397,
+        "p90": 1.072418795428264,
+        "max": 4.8766882484749114
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -10.579999999999998,
+        "p50": -0.14300000000000068,
+        "p90": 1.2690000000000001,
+        "max": 17.001
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "shelly",
+      "right": "official_earthquake",
+      "time_tolerance_s": 1.0,
+      "horizontal_tolerance_km": 2.0,
+      "left_rows": 7716,
+      "right_rows": 6564,
+      "candidate_edges": 4532,
+      "reciprocal_unique_pairs": 4404,
+      "left_without_candidate": 3203,
+      "right_without_candidate": 2077,
+      "left_multiple_candidates": 19,
+      "right_multiple_candidates": 45,
+      "left_with_candidate_but_unresolved": 109,
+      "right_with_candidate_but_unresolved": 83,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.09000015258789062,
+        "p90": 0.31999993324279785,
+        "max": 0.9700000286102295
+      },
+      "horizontal_difference_km": {
+        "min": 0.004354960460234059,
+        "p50": 0.3515968311090961,
+        "p90": 0.9558087841419446,
+        "max": 1.9770067821934791
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -10.579999999999998,
+        "p50": -0.12899999999999978,
+        "p90": 1.2407,
+        "max": 17.001
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "shelly",
+      "right": "official_earthquake",
+      "time_tolerance_s": 1.0,
+      "horizontal_tolerance_km": 5.0,
+      "left_rows": 7716,
+      "right_rows": 6564,
+      "candidate_edges": 4726,
+      "reciprocal_unique_pairs": 4588,
+      "left_without_candidate": 3012,
+      "right_without_candidate": 1885,
+      "left_multiple_candidates": 22,
+      "right_multiple_candidates": 47,
+      "left_with_candidate_but_unresolved": 116,
+      "right_with_candidate_but_unresolved": 91,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.09999990463256836,
+        "p90": 0.35000014305114746,
+        "max": 1.0
+      },
+      "horizontal_difference_km": {
+        "min": 0.004354960460234059,
+        "p50": 0.3629543476860899,
+        "p90": 1.1485026248630066,
+        "max": 4.914461582371001
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -10.579999999999998,
+        "p50": -0.14299999999999946,
+        "p90": 1.282,
+        "max": 17.001
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "shelly",
+      "right": "official_earthquake",
+      "time_tolerance_s": 2.0,
+      "horizontal_tolerance_km": 2.0,
+      "left_rows": 7716,
+      "right_rows": 6564,
+      "candidate_edges": 4549,
+      "reciprocal_unique_pairs": 4406,
+      "left_without_candidate": 3191,
+      "right_without_candidate": 2065,
+      "left_multiple_candidates": 24,
+      "right_multiple_candidates": 50,
+      "left_with_candidate_but_unresolved": 119,
+      "right_with_candidate_but_unresolved": 93,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.09000015258789062,
+        "p90": 0.3200000524520874,
+        "max": 1.2999999523162842
+      },
+      "horizontal_difference_km": {
+        "min": 0.004354960460234059,
+        "p50": 0.3515968311090961,
+        "p90": 0.9556595498951252,
+        "max": 1.9770067821934791
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -10.579999999999998,
+        "p50": -0.128,
+        "p90": 1.2435,
+        "max": 17.001
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "shelly",
+      "right": "official_earthquake",
+      "time_tolerance_s": 2.0,
+      "horizontal_tolerance_km": 5.0,
+      "left_rows": 7716,
+      "right_rows": 6564,
+      "candidate_edges": 4761,
+      "reciprocal_unique_pairs": 4589,
+      "left_without_candidate": 2991,
+      "right_without_candidate": 1856,
+      "left_multiple_candidates": 36,
+      "right_multiple_candidates": 53,
+      "left_with_candidate_but_unresolved": 136,
+      "right_with_candidate_but_unresolved": 119,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.09999990463256836,
+        "p90": 0.3599998950958252,
+        "max": 1.869999885559082
+      },
+      "horizontal_difference_km": {
+        "min": 0.004354960460234059,
+        "p50": 0.3633061854856677,
+        "p90": 1.1570199181446001,
+        "max": 4.914461582371001
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -10.663,
+        "p50": -0.14199999999999946,
+        "p90": 1.2874000000000003,
+        "max": 17.001
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "liu",
+      "right": "official_earthquake",
+      "time_tolerance_s": 0.5,
+      "horizontal_tolerance_km": 2.0,
+      "left_rows": 6242,
+      "right_rows": 6564,
+      "candidate_edges": 4471,
+      "reciprocal_unique_pairs": 4449,
+      "left_without_candidate": 1782,
+      "right_without_candidate": 2093,
+      "left_multiple_candidates": 11,
+      "right_multiple_candidates": 0,
+      "left_with_candidate_but_unresolved": 11,
+      "right_with_candidate_but_unresolved": 22,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.1099998950958252,
+        "p90": 0.17999987602233886,
+        "max": 0.48000001907348633
+      },
+      "horizontal_difference_km": {
+        "min": 0.0015468813453149701,
+        "p50": 0.36699770118486025,
+        "p90": 0.89216659344183,
+        "max": 1.9960392670614868
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -6.838,
+        "p50": 0.5789999999999997,
+        "p90": 1.9906000000000021,
+        "max": 7.237
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "liu",
+      "right": "official_earthquake",
+      "time_tolerance_s": 0.5,
+      "horizontal_tolerance_km": 5.0,
+      "left_rows": 6242,
+      "right_rows": 6564,
+      "candidate_edges": 4573,
+      "reciprocal_unique_pairs": 4549,
+      "left_without_candidate": 1681,
+      "right_without_candidate": 1991,
+      "left_multiple_candidates": 12,
+      "right_multiple_candidates": 0,
+      "left_with_candidate_but_unresolved": 12,
+      "right_with_candidate_but_unresolved": 24,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.1099998950958252,
+        "p90": 0.18000006675720215,
+        "max": 0.49000000953674316
+      },
+      "horizontal_difference_km": {
+        "min": 0.0015468813453149701,
+        "p50": 0.3729029350178829,
+        "p90": 0.9639397674349066,
+        "max": 4.989434289308075
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -9.957,
+        "p50": 0.5670000000000002,
+        "p90": 1.9969999999999999,
+        "max": 8.825999999999999
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "liu",
+      "right": "official_earthquake",
+      "time_tolerance_s": 1.0,
+      "horizontal_tolerance_km": 2.0,
+      "left_rows": 6242,
+      "right_rows": 6564,
+      "candidate_edges": 4475,
+      "reciprocal_unique_pairs": 4449,
+      "left_without_candidate": 1780,
+      "right_without_candidate": 2089,
+      "left_multiple_candidates": 13,
+      "right_multiple_candidates": 0,
+      "left_with_candidate_but_unresolved": 13,
+      "right_with_candidate_but_unresolved": 26,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.1099998950958252,
+        "p90": 0.18000006675720215,
+        "max": 0.5399999618530273
+      },
+      "horizontal_difference_km": {
+        "min": 0.0015468813453149701,
+        "p50": 0.36702495402295565,
+        "p90": 0.8922320385499785,
+        "max": 1.9960392670614868
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -9.261000000000001,
+        "p50": 0.5779999999999998,
+        "p90": 1.9969999999999999,
+        "max": 7.237
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "liu",
+      "right": "official_earthquake",
+      "time_tolerance_s": 1.0,
+      "horizontal_tolerance_km": 5.0,
+      "left_rows": 6242,
+      "right_rows": 6564,
+      "candidate_edges": 4604,
+      "reciprocal_unique_pairs": 4566,
+      "left_without_candidate": 1657,
+      "right_without_candidate": 1960,
+      "left_multiple_candidates": 19,
+      "right_multiple_candidates": 0,
+      "left_with_candidate_but_unresolved": 19,
+      "right_with_candidate_but_unresolved": 38,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.1099998950958252,
+        "p90": 0.18999981880187988,
+        "max": 0.8600001335144043
+      },
+      "horizontal_difference_km": {
+        "min": 0.0015468813453149701,
+        "p50": 0.375939634619802,
+        "p90": 0.9855610749566976,
+        "max": 4.994157388217207
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -9.957,
+        "p50": 0.5655000000000006,
+        "p90": 2.0015000000000005,
+        "max": 8.825999999999999
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "liu",
+      "right": "official_earthquake",
+      "time_tolerance_s": 2.0,
+      "horizontal_tolerance_km": 2.0,
+      "left_rows": 6242,
+      "right_rows": 6564,
+      "candidate_edges": 4480,
+      "reciprocal_unique_pairs": 4444,
+      "left_without_candidate": 1780,
+      "right_without_candidate": 2084,
+      "left_multiple_candidates": 18,
+      "right_multiple_candidates": 0,
+      "left_with_candidate_but_unresolved": 18,
+      "right_with_candidate_but_unresolved": 36,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.1099998950958252,
+        "p90": 0.18000006675720215,
+        "max": 0.5399999618530273
+      },
+      "horizontal_difference_km": {
+        "min": 0.0015468813453149701,
+        "p50": 0.36724906675862107,
+        "p90": 0.8922758150930102,
+        "max": 1.9960392670614868
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -9.261000000000001,
+        "p50": 0.5784999999999998,
+        "p90": 1.9969999999999999,
+        "max": 7.237
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    },
+    {
+      "left": "liu",
+      "right": "official_earthquake",
+      "time_tolerance_s": 2.0,
+      "horizontal_tolerance_km": 5.0,
+      "left_rows": 6242,
+      "right_rows": 6564,
+      "candidate_edges": 4621,
+      "reciprocal_unique_pairs": 4555,
+      "left_without_candidate": 1654,
+      "right_without_candidate": 1943,
+      "left_multiple_candidates": 33,
+      "right_multiple_candidates": 0,
+      "left_with_candidate_but_unresolved": 33,
+      "right_with_candidate_but_unresolved": 66,
+      "absolute_origin_time_difference_s": {
+        "min": 0.0,
+        "p50": 0.1099998950958252,
+        "p90": 0.18999981880187988,
+        "max": 1.9800000190734863
+      },
+      "horizontal_difference_km": {
+        "min": 0.0015468813453149701,
+        "p50": 0.3761161302582396,
+        "p90": 0.9909438136893359,
+        "max": 4.994157388217207
+      },
+      "native_depth_difference_left_minus_right_km": {
+        "min": -9.957,
+        "p50": 0.5659999999999998,
+        "p90": 2.003,
+        "max": 8.825999999999999
+      },
+      "interpretation": "Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized."
+    }
+  ],
+  "official_duplicate_time_groups": [
+    {
+      "origin_time_utc": "2019-07-05T18:33:32.420000+00:00",
+      "records": [
+        {
+          "native_id": "ci37437669",
+          "latitude": 35.7635,
+          "longitude": -117.569,
+          "depth_km": 6.33,
+          "magnitude": 1.34,
+          "updated": "2020-03-13T17:53:33.473Z"
+        },
+        {
+          "native_id": "ci38453959",
+          "latitude": 35.7663333,
+          "longitude": -117.5681667,
+          "depth_km": 6.55,
+          "magnitude": 1.33,
+          "updated": "2019-07-05T19:21:50.165Z"
+        }
+      ],
+      "identity_resolution": "unresolved; equal origin times alone do not establish duplicate events"
+    },
+    {
+      "origin_time_utc": "2019-07-06T13:45:19.050000+00:00",
+      "records": [
+        {
+          "native_id": "ci38463919",
+          "latitude": 35.6258333,
+          "longitude": -117.4303333,
+          "depth_km": 7.74,
+          "magnitude": 2.67,
+          "updated": "2021-11-02T17:46:33.458Z"
+        },
+        {
+          "native_id": "ci37483725",
+          "latitude": 35.6273333,
+          "longitude": -117.43,
+          "depth_km": 7.96,
+          "magnitude": 2.56,
+          "updated": "2021-10-28T20:32:49.747Z"
+        }
+      ],
+      "identity_resolution": "unresolved; equal origin times alone do not establish duplicate events"
+    },
+    {
+      "origin_time_utc": "2019-07-06T22:30:44.490000+00:00",
+      "records": [
+        {
+          "native_id": "ci37503829",
+          "latitude": 35.8228333,
+          "longitude": -117.6516667,
+          "depth_km": 5.71,
+          "magnitude": 1.78,
+          "updated": "2022-06-16T20:19:43.120Z"
+        },
+        {
+          "native_id": "ci37484197",
+          "latitude": 35.845,
+          "longitude": -117.6775,
+          "depth_km": 0.94,
+          "magnitude": 2.26,
+          "updated": "2021-11-02T21:22:34.173Z"
+        }
+      ],
+      "identity_resolution": "unresolved; equal origin times alone do not establish duplicate events"
+    }
+  ],
+  "limitations": [
+    "Observed first/last events do not establish data availability or completeness.",
+    "Native numerical depth masks are not physically harmonized across datums.",
+    "No waveform access, published method reproduction, or evaluation freeze is asserted.",
+    "Overlap uses reciprocal-unique candidates and leaves ambiguity unresolved."
+  ]
+}
