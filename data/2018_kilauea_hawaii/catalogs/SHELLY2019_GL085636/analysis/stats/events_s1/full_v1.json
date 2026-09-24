@@ -9,7 +9,7 @@
   "parser_version": "kilauea-local-v2-compact",
   "source_path": "SHELLY2019_GL085636__catalog_S1.txt",
   "source_sha256": "6868428a91ce91b04283b3776633961a6373d257edbf7eb79ea99db154ee8abf",
-  "generated_utc": "2026-09-20T20:13:49+00:00",
+  "generated_utc": "2026-09-23T13:46:25+00:00",
   "stats": {
     "kind": "shelly_s1",
     "row_count": 44188,

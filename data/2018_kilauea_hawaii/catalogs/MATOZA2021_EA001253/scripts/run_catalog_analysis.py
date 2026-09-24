@@ -517,7 +517,7 @@ def plot_event_product(product, stats):
     has_map = bool(points)
     has_rate = bool(dates)
     has_depth = bool(policy.get("depth") and points and depths)
-    has_magnitude = bool(FULL_PLOTS and mags)
+    has_magnitude = bool(mags)
     n_panels = int(has_map) + int(has_rate) + int(has_depth) + int(has_magnitude)
     if n_panels == 0:
         return
@@ -568,6 +568,31 @@ def plot_event_product(product, stats):
     fig.suptitle(f"{SOURCE_REF} · {product['id']} · {selection}", x=0.01, ha="left", fontsize=9)
     savefig(fig, out / "catalog_overview_v1")
 
+
+
+def plot_extended_event_diagnostics(product, stats):
+    """Unified 2x2 event diagnostics: three views plus depth histogram."""
+    if not _plot_policy(product).get("overview"): return
+    selection, records = _event_records_for_plot(product, stats)
+    out=FIGURES_ROOT/product["id"]; out.mkdir(parents=True,exist_ok=True)
+    xyz=[r for r in records if all(r.get(k) is not None for k in ("longitude_deg","latitude_deg","depth_km"))]
+    if xyz:
+        fig,ax=plt.subplots(2,2,figsize=(7.2,6.4))
+        for a,x,y,xl,yl,inv in ((ax[0,0],"longitude_deg","latitude_deg","Longitude (°)","Latitude (°)",False),(ax[0,1],"depth_km","latitude_deg","Depth (km)","Latitude (°)",False),(ax[1,0],"longitude_deg","depth_km","Longitude (°)","Depth (km)",True)):
+            a.scatter([r[x] for r in xyz],[r[y] for r in xyz],s=5,alpha=.4,c=NATURE_BLUE,linewidths=0,rasterized=True); a.set(xlabel=xl,ylabel=yl); _style_axes(a,grid=False)
+            if inv: a.invert_yaxis()
+        depths=[r["depth_km"] for r in xyz]
+        ax[1,1].hist(depths,bins="auto",orientation="horizontal",color=NATURE_TEAL,edgecolor="white",linewidth=.3); ax[1,1].invert_yaxis(); ax[1,1].set(xlabel="Events",ylabel="Depth (km)"); _style_axes(ax[1,1])
+        ax[1,1].text(.98,.04,f"n = {len(xyz):,}",transform=ax[1,1].transAxes,ha="right",va="bottom",fontsize=8)
+        savefig(fig,out/"spatial_three_views_v2")
+    timed=sorted([r for r in records if r.get("datetime") is not None],key=lambda r:r["datetime"])
+    if timed:
+        daily={}
+        for r in timed: daily[r["datetime"].date()]=daily.get(r["datetime"].date(),0)+1
+        fig,ax=plt.subplots(figsize=(7.2,3.2)); days=sorted(daily); ax.bar(days,[daily[d] for d in days],color=NATURE_BLUE,width=.85); ax.set(xlabel="Origin time (UTC)",ylabel="Events per day"); _style_axes(ax); savefig(fig,out/"seismicity_time_v2")
+    mags=[r for r in timed if r.get("magnitude") is not None]
+    if mags:
+        fig,ax=plt.subplots(1,2,figsize=(7.2,3.2)); ax[0].hist([r["magnitude"] for r in mags],bins="auto",color=NATURE_BLUE,edgecolor="white",linewidth=.3); ax[0].set(xlabel="Native magnitude",ylabel="Events"); _style_axes(ax[0]); ax[1].scatter([r["datetime"] for r in mags],[r["magnitude"] for r in mags],s=5,c=NATURE_ORANGE,alpha=.45,linewidths=0,rasterized=True); ax[1].set(xlabel="Origin time (UTC)",ylabel="Native magnitude"); _style_axes(ax[1]); savefig(fig,out/"magnitude_diagnostics_v2")
 
 def plot_relative_product(product, stats):
     out = FIGURES_ROOT / product["id"]
@@ -689,7 +714,9 @@ def main():
         all_stats[product["id"]] = stats; paths[product["id"]] = normalized_path
         if product["kind"] == "phase_csv": plot_phase_product(product, stats)
         elif product["kind"] == "lengline": plot_relative_product(product, stats)
-        else: plot_event_product(product, stats)
+        else:
+            plot_event_product(product, stats)
+            plot_extended_event_diagnostics(product, stats)
     if len(selected) == len(PRODUCTS):
         write_catalog_report(all_stats, paths)
     print(json.dumps({k: {s: v.get("row_count", 0) for s, v in stats.items()} for k, stats in all_stats.items()}, indent=2))

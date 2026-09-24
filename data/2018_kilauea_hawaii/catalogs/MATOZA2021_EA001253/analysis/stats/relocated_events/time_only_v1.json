@@ -9,7 +9,7 @@
   "parser_version": "kilauea-local-v2-compact",
   "source_path": "MATOZA2021_EA001253__catalog_islandwide.txt",
   "source_sha256": "1e3b7c878e93b0f426b312c41fbe6cadd01be15cd452cfef1ad605e645a76877",
-  "generated_utc": "2026-09-20T20:13:39+00:00",
+  "generated_utc": "2026-09-23T13:46:09+00:00",
   "stats": {
     "kind": "matoza21",
     "row_count": 2999,

@@ -9,7 +9,7 @@
   "parser_version": "kilauea-local-v2-compact",
   "source_path": "raw/loc_events.txt",
   "source_sha256": "556f4d6f5ba8c6688f5c36c165c94b12c0c623e5d3f33183911aca2888ed18ca",
-  "generated_utc": "2026-09-20T20:12:54+00:00",
+  "generated_utc": "2026-09-23T13:45:24+00:00",
   "stats": {
     "kind": "lengline",
     "row_count": 6049,

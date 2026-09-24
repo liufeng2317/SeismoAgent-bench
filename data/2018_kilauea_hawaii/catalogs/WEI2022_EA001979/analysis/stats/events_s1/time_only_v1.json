@@ -9,7 +9,7 @@
   "parser_version": "kilauea-local-v2-compact",
   "source_path": "WEI2022_EA001979__catalog_S1.txt",
   "source_sha256": "f95ae0b17eb519c169c17248b9986eb15885c2a42ca28102a1d25ca7a28eb339",
-  "generated_utc": "2026-09-20T20:14:34+00:00",
+  "generated_utc": "2026-09-23T13:47:18+00:00",
   "stats": {
     "kind": "wei",
     "row_count": 11640,

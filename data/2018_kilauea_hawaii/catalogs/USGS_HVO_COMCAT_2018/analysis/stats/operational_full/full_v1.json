@@ -9,7 +9,7 @@
   "parser_version": "kilauea-local-v2-compact",
   "source_path": "USGS_HVO_COMCAT_2018__catalog_operational_full.csv",
   "source_sha256": "b80a2553a29209c5ff2c46346f599e80362ef55578ad797491a784779ea1b41c",
-  "generated_utc": "2026-09-20T20:14:01+00:00",
+  "generated_utc": "2026-09-23T13:46:42+00:00",
   "stats": {
     "kind": "usgs_csv",
     "row_count": 40095,
