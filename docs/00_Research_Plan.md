@@ -177,11 +177,11 @@ The primary reference should be selected using:
 
 ### Reference quality and case-level evaluation
 
-Reference catalogs are not absolute ground truth. Each case may contain multiple reference products with different quality, scope, and scientific roles. The quality hierarchy and required case-level reference record are defined in [`01_Case_details.md`](./01_Case_details.md); the benchmark design uses those records when selecting targets and assigning metrics.
+Reference catalogs are not absolute ground truth. Each case may contain multiple reference products with different quality, scope, and scientific roles. The quality hierarchy and required case-level reference record are defined in [`01_1_Case_details.md`](./01_1_Case_details.md); the benchmark design uses those records when selecting targets and assigning metrics.
 
 ### Reference independence and multi-role evaluation
 
-Reference quality, evaluation role, and methodological independence must be kept separate. A case may use several products for detection, phase timing, association, absolute location, relative relocation, completeness, and uncertainty; no single catalog should be treated as complete truth for every dimension. The detailed quality tiers, scope fields, and allowed metrics are specified in [`01_Case_details.md`](./01_Case_details.md).
+Reference quality, evaluation role, and methodological independence must be kept separate. A case may use several products for detection, phase timing, association, absolute location, relative relocation, completeness, and uncertainty; no single catalog should be treated as complete truth for every dimension. The detailed quality tiers, scope fields, and allowed metrics are specified in [`01_1_Case_details.md`](./01_1_Case_details.md).
 
 ---
 

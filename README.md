@@ -95,10 +95,9 @@ the next stage, after the data and reference conditions are frozen.
 ```text
 docs/
   00_Research_Plan.md       benchmark design and research questions
-  01_Case_details.md        compact case index and summary
-  02_Case_Data_Audit.md     data and provenance audit
-  03_Information_Extraction_Schema.md  extraction contract
-  04_Paper_Parsing_Audit.md   MinerU output audit
+  01_1_Case_details.md        compact case index and summary
+  01_3_Information_Extraction_Schema.md  extraction contract
+  01_4_Paper_Parsing_Audit.md   MinerU output audit
 
 data/
   REFERENCES_MANIFEST.md    paper/supplement/catalog readiness
@@ -108,7 +107,10 @@ data/
 
 scripts/
   01_pdf_parsing/           official MinerU paper parsing wrapper
-  download_official_baselines.py
+  00_catalog_downloading/  official baseline download and audit
+  02_supplement_processing/ supplement conversion
+  03_information_extraction/ reusable extraction validation
+  04_catalog_analysis/     catalog manifest generation
 ```
 
 Detailed organization rules belong in [data/README.md](data/README.md), and
@@ -134,7 +136,7 @@ python scripts/01_pdf_parsing/parse_papers_with_mineru.py \
 Download official operational baseline snapshots:
 
 ```bash
-python scripts/download_official_baselines.py --direct --scope full
+python scripts/00_catalog_downloading/download_official_baselines.py --direct --scope full
 ```
 
 ## Reference interpretation
@@ -149,12 +151,13 @@ and network condition separately.
 
 Phase I has six cases, archived reference materials, paper-level extraction
 records, research-catalog audits, and official operational snapshots. The
-current reference-calibration baseline is frozen at the case/window level;
-remaining gaps are explicit in `REFERENCES_MANIFEST.md` and the case analyses.
+current case configurations explicitly mark benchmark windows as `not_frozen`;
+existing masked statistics and figures are exploratory. Remaining gaps are
+recorded in `REFERENCES_MANIFEST.md` and the case analyses.
 
 Next deliverables are:
 
-- comparable catalog visualizations under each catalog product;
+- consolidation of scientific window choices and existing exploratory figures;
 - station-day/channel availability and waveform manifests;
 - recovery of confirmed missing products (for example Pang Maple Creek,
   Ross DC1, and the Magna Baker paper) without substituting unrelated data;
@@ -164,11 +167,11 @@ Next deliverables are:
 
 - [Research plan](docs/00_Research_Plan.md)
 - [Case details](docs/01_1_Case_details.md)
-- [Case data audit](docs/01_2_Case_Data_Audit.md)
 - [Information extraction schema](docs/01_3_Information_Extraction_Schema.md)
 - [Paper parsing audit](docs/01_4_Paper_Parsing_Audit.md)
 - [Reference manifest](data/REFERENCES_MANIFEST.md)
 - [Data organization rules](data/README.md)
+- [Repository cleanup and retention decisions](docs/02_Repository_Cleanup.md)
 
 **Canonical project name:** `SeismoAgentBench`  \
 **Repository slug:** `seismoagent-bench`  \
