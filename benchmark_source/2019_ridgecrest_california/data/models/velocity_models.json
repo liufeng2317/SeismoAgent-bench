@@ -1,0 +1,112 @@
+{
+  "case_id": "2019_ridgecrest_california",
+  "models": {
+    "shelly_table1": {
+      "status": "numeric_table_transcribed",
+      "source": "references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",
+      "source_sha256": "0a220b38c9bb382b0a9c9f94fe8135140a95e99f99e141044297a931fa2b1182",
+      "locator": "Table 1; following model-description paragraph",
+      "doi": "10.1785/0220190309",
+      "role": "hypoDD relative relocation",
+      "derivation": "Approximation to SCEC Community Velocity Model with gradual transitions; not an unmodified CVM release",
+      "units": {
+        "top_of_layer": "km",
+        "vp": "km/s",
+        "vs": "km/s"
+      },
+      "vp_vs_ratio": 1.73,
+      "vs_provenance": "Derived as Vp / 1.73; not an independently tabulated measurement",
+      "depth_reference": "Table labels top of layer; exact model-coordinate/elevation handling must be checked in original implementation. Catalog nominal surface is 0.7 km above sea level; no automatic depth conversion applied.",
+      "rows": [
+        {
+          "top_of_layer_km": 0,
+          "vp_km_s": 4.74,
+          "vs_km_s": 2.739884393063584
+        },
+        {
+          "top_of_layer_km": 1,
+          "vp_km_s": 5.01,
+          "vs_km_s": 2.8959537572254335
+        },
+        {
+          "top_of_layer_km": 2,
+          "vp_km_s": 5.35,
+          "vs_km_s": 3.092485549132948
+        },
+        {
+          "top_of_layer_km": 3,
+          "vp_km_s": 5.71,
+          "vs_km_s": 3.300578034682081
+        },
+        {
+          "top_of_layer_km": 4,
+          "vp_km_s": 6.07,
+          "vs_km_s": 3.508670520231214
+        },
+        {
+          "top_of_layer_km": 5,
+          "vp_km_s": 6.17,
+          "vs_km_s": 3.566473988439306
+        },
+        {
+          "top_of_layer_km": 6,
+          "vp_km_s": 6.27,
+          "vs_km_s": 3.6242774566473988
+        },
+        {
+          "top_of_layer_km": 7,
+          "vp_km_s": 6.34,
+          "vs_km_s": 3.6647398843930636
+        },
+        {
+          "top_of_layer_km": 8,
+          "vp_km_s": 6.39,
+          "vs_km_s": 3.6936416184971095
+        },
+        {
+          "top_of_layer_km": 30,
+          "vp_km_s": 7.8,
+          "vs_km_s": 4.508670520231214
+        }
+      ]
+    },
+    "liu_coso_initial": {
+      "status": "numeric_values_unresolved",
+      "source": "references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
+      "locator": "Section 2",
+      "reference": "Feng & Lees (1998)",
+      "missing": [
+        "layer depths and Vp/Vs table",
+        "model depth datum"
+      ]
+    },
+    "liu_velest_updated": {
+      "status": "numeric_values_unresolved",
+      "source": "references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
+      "locator": "Section 2",
+      "missing": [
+        "updated velocity table",
+        "station corrections",
+        "configuration and inversion event selection"
+      ]
+    },
+    "awr_smoothed_hadley_kanamori": {
+      "status": "numeric_values_unresolved",
+      "source": "references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
+      "locator": "HypoSVI catalog construction paragraph",
+      "reference": "Hadley & Kanamori (1977), smoothed version",
+      "missing": [
+        "actual smoothed numerical profile",
+        "smoothing procedure",
+        "source-specific station terms"
+      ]
+    },
+    "ross": {
+      "status": "method_supplement_missing",
+      "missing": [
+        "Science DC1",
+        "confirmed model and numerical parameters"
+      ]
+    }
+  }
+}
