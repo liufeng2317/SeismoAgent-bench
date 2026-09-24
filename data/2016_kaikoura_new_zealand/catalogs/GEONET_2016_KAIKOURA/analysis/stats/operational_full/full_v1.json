@@ -1,0 +1,43 @@
+{
+  "case_id": "2016_kaikoura_new_zealand",
+  "source_ref": "GEONET_2016_KAIKOURA",
+  "product_id": "operational_full",
+  "selection": "full",
+  "parser_version": "kaikoura-geonet-v1",
+  "source_path": "GEONET_2016_KAIKOURA__catalog_operational_full.txt",
+  "source_sha256": "5a21b838538b9da69fdf0be48c6e7db3e398822f5f5b4b11a2984fac4d7a48de",
+  "stats": {
+    "row_count": 15948,
+    "unique_native_event_ids": 15948,
+    "duplicate_native_event_ids": 0,
+    "magnitude_types": {
+      "M": 15920,
+      "Mw(mB)": 2,
+      "MLv": 7,
+      "ML": 19
+    },
+    "event_types": {
+      "unknown": 10548,
+      "earthquake": 5399,
+      "not locatable": 1
+    },
+    "ranges": {
+      "latitude_deg": [
+        -43.495,
+        -41.201
+      ],
+      "longitude_deg": [
+        172.001,
+        175.195
+      ],
+      "depth_km": [
+        0.1,
+        59.8
+      ],
+      "magnitude": [
+        0.8,
+        7.8
+      ]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "case_id": "2016_kaikoura_new_zealand",
+  "source_ref": "LANZA2019_GL082780",
+  "product_id": "preferred_origins",
+  "selection": "time_only",
+  "parser_version": "kaikoura-lanza-quakeml-v1",
+  "source_path": "raw/grl59060-sup-0003-ds01.xml",
+  "source_sha256": "c87a16de4fb28be7cd873b03e93b3d410c6e2237d7ed443affbe798670fbd478",
+  "stats": {
+    "row_count": 123,
+    "unique_native_event_ids": 123,
+    "duplicate_native_event_ids": 0,
+    "origin_methods": {
+      "HypoDD": 110,
+      "SIMUL": 13
+    },
+    "ranges": {
+      "latitude_deg": [
+        -42.92922,
+        -41.56183
+      ],
+      "longitude_deg": [
+        172.76817,
+        175.18033
+      ],
+      "depth_km": [
+        1.921,
+        75.91
+      ]
+    }
+  }
+}

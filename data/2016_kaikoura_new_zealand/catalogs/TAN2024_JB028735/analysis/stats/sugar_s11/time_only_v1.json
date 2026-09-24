@@ -1,0 +1,31 @@
+{
+  "case_id": "2016_kaikoura_new_zealand",
+  "source_ref": "TAN2024_JB028735",
+  "product_id": "sugar_s11",
+  "selection": "time_only",
+  "parser_version": "kaikoura-tan-v1",
+  "stats": {
+    "row_count": 6973,
+    "unique_native_event_ids": 6973,
+    "duplicate_native_event_ids": 0,
+    "ranges": {
+      "latitude_deg": [
+        -43.15744,
+        -41.49009
+      ],
+      "longitude_deg": [
+        172.32524,
+        174.69211
+      ],
+      "depth_km": [
+        -1.556,
+        59.641
+      ],
+      "magnitude": [
+        -0.53,
+        4.87
+      ]
+    },
+    "cluster_size_ge_10": 6262
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "case_id": "2016_kaikoura_new_zealand",
+  "source_ref": "CHAMBERLAIN2021_JB022304",
+  "product_id": "growclust_corrected",
+  "selection": "full",
+  "parser_version": "kaikoura-chamberlain-v1",
+  "source_path": "CHAMBERLAIN2021_JB022304__catalog_growclust_corrected_focal_mechanisms.csv",
+  "source_sha256": "6f00695585998c365a81132a60bc3c7ebe058abdd352e8d8d8f802489559137a",
+  "stats": {
+    "row_count": 33328,
+    "unique_native_event_ids": 33328,
+    "duplicate_native_event_ids": 0,
+    "missing_magnitude": 50,
+    "complete_focal_mechanisms": 1756,
+    "slip_styles": {
+      "Unknown": 8818,
+      "Strike-slip": 17172,
+      "Normal": 3071,
+      "Reverse": 4267
+    },
+    "ranges": {
+      "latitude_deg": [
+        -43.878229,
+        -39.975169
+      ],
+      "longitude_deg": [
+        171.971969,
+        177.414826
+      ],
+      "depth_km": [
+        -2.990234,
+        97.898
+      ],
+      "magnitude": [
+        0.234391781077,
+        6.31294216961
+      ]
+    }
+  }
+}

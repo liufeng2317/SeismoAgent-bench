@@ -1,0 +1,30 @@
+{
+  "case_id": "2016_kaikoura_new_zealand",
+  "source_ref": "TAN2024_JB028735",
+  "product_id": "sugar_s10",
+  "selection": "time_only",
+  "parser_version": "kaikoura-tan-v1",
+  "stats": {
+    "row_count": 9720,
+    "unique_native_event_ids": 9720,
+    "duplicate_native_event_ids": 0,
+    "ranges": {
+      "latitude_deg": [
+        -43.420057,
+        -41.218655
+      ],
+      "longitude_deg": [
+        172.032762,
+        175.133776
+      ],
+      "depth_km": [
+        0.0,
+        60.0
+      ],
+      "magnitude": [
+        -0.53,
+        4.87
+      ]
+    }
+  }
+}

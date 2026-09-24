@@ -1,0 +1,13 @@
+{
+  "row_count": 55,
+  "columns": [
+    "Time",
+    "Lat",
+    "Lon",
+    "Dep",
+    "Strike",
+    "Dip",
+    "Rake",
+    "M"
+  ]
+}

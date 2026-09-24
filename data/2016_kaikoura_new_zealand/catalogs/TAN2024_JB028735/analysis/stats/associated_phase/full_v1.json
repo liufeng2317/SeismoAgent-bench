@@ -1,0 +1,39 @@
+{
+  "case_id": "2016_kaikoura_new_zealand",
+  "source_ref": "TAN2024_JB028735",
+  "product_id": "associated_phase",
+  "kind": "phase",
+  "parser_version": "kaikoura-tan-v1",
+  "stats": {
+    "file_count": 1165,
+    "phase_rows": 1382337,
+    "unique_event_ids": 68462,
+    "stations": 45,
+    "phase_types": {
+      "Pg": 679865,
+      "Sg": 702472
+    },
+    "top_stations": {
+      "BSWZ": 71274,
+      "CRSZ": 63570,
+      "THZ": 60439,
+      "KHZ": 59623,
+      "TUWZ": 58968,
+      "TCW": 58850,
+      "WDFS": 57242,
+      "MOLS": 56533,
+      "SEDS": 54601,
+      "GVZ": 49599,
+      "CMWZ": 48660,
+      "KEKS": 46316,
+      "MRNZ": 45797,
+      "LTZ": 45146,
+      "NNZ": 41839,
+      "HAVS": 40939,
+      "CECS": 39361,
+      "KIKS": 38715,
+      "OXZ": 35145,
+      "HSES": 33305
+    }
+  }
+}
