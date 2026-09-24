@@ -48,7 +48,7 @@
         "magnitude_scope": "Mw 3.1–3.4 in official table; do not relabel as ML.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+            "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/README.md",
             "locator": "Schema and local audit",
             "note": "13-row local derivative and ranges."
           },
@@ -71,7 +71,7 @@
         "magnitude_scope": "Table Mw 3.1–3.4 for retained rows; article selection wording remains M_L>3.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+            "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/README.md",
             "locator": "Frozen-window cross-reference",
             "note": "Seven in-window rows."
           },
@@ -102,7 +102,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+          "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/README.md",
           "locator": "Provenance",
           "note": "Official supplement and source/normalized files."
         }
@@ -122,7 +122,7 @@
       "article_local_discrepancy": "Figure 1 caption says 11 November–31 December, while distributed Table S3 ends 9 December; retain both statements. Formal ERH/ERZ fields differ from prose uncertainty on order 1 km.",
       "evidence": [
         {
-          "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+          "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/README.md",
           "locator": "Schema and local audit; Frozen-window cross-reference",
           "note": "Rows, ranges and discrepancies."
         }
@@ -157,7 +157,7 @@
           "note": "Role and invalid metrics."
         },
         {
-          "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+          "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/README.md",
           "locator": "Benchmark role and Required next checks",
           "note": "Sparse anchor limitations."
         }
@@ -169,7 +169,7 @@
       "uncertainty_rule": "Preserve ERH/ERZ and prose uncertainty separately until formal definitions resolved.",
       "evidence": [
         {
-          "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+          "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/README.md",
           "locator": "Provenance; Schema and local audit",
           "note": "Field authority and semantics."
         }
@@ -202,7 +202,7 @@
         },
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+            "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/README.md",
             "locator": "Schema and local audit",
             "note": "Nine normalized fields and ranges."
           }
@@ -377,7 +377,7 @@
         "note": "Workflow and count."
       },
       {
-        "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+        "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/README.md",
         "locator": "Construction and quality interpretation",
         "note": "Local product audit."
       }
@@ -409,7 +409,7 @@
         "scope": "Prague sequence",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+            "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/README.md",
             "locator": "Benchmark role",
             "note": "Sparse-anchor conclusion."
           }
@@ -437,7 +437,7 @@
     ],
     "evidence": [
       {
-        "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md",
+        "source": "data/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/README.md",
         "locator": "Required next checks",
         "note": "Open actions."
       }

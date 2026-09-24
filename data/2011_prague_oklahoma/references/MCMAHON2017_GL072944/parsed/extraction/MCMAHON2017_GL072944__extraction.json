@@ -69,7 +69,7 @@
         "magnitude_scope": "-2.176413–5.6; type/calibration unresolved.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+            "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/README.md",
             "locator": "Local event audit",
             "note": "E count, ranges and release lineage."
           }
@@ -87,7 +87,7 @@
         "magnitude_scope": "-2.133371–4.0; type unresolved.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+            "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/README.md",
             "locator": "Frozen Prague window",
             "note": "Local time-only mask and ranges."
           }
@@ -113,7 +113,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+          "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/README.md",
           "locator": "Provenance and Native record structure",
           "note": "Release DOI, checksum and E/P records."
         }
@@ -134,7 +134,7 @@
       "article_local_discrepancy": "Article final 5,262-event uncertainty-filtered population differs from broader 5,446-E distributed release. P-record timestamp schema also conflicts with XML metadata.",
       "evidence": [
         {
-          "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+          "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/README.md",
           "locator": "Native record structure; Local event audit; Frozen Prague window",
           "note": "Local counts, ranges and unresolved schema issues."
         }
@@ -167,7 +167,7 @@
           "note": "Role, bias and independence."
         },
         {
-          "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+          "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/README.md",
           "locator": "Benchmark role",
           "note": "Catalog-level restrictions."
         }
@@ -179,7 +179,7 @@
       "count_rule": "Count E records as events; count P rows separately; never equate 5,446 release rows with 5,262 article final rows.",
       "evidence": [
         {
-          "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+          "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/README.md",
           "locator": "Native record structure and Construction and quality",
           "note": "Record semantics and count distinction."
         }
@@ -212,7 +212,7 @@
         },
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+            "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/README.md",
             "locator": "Native record structure",
             "note": "E token schema."
           }
@@ -236,7 +236,7 @@
         },
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+            "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/README.md",
             "locator": "Native record structure",
             "note": "P token count and metadata discrepancy."
           }
@@ -457,7 +457,7 @@
         "note": "Workflow and local selection."
       },
       {
-        "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+        "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/README.md",
         "locator": "Construction and quality; Frozen Prague window",
         "note": "Release lineage and counts."
       }
@@ -504,7 +504,7 @@
       "caveats": "Release/article counts differ; P schema and magnitude type unresolved; S-only bias.",
       "evidence": [
         {
-          "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+          "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/README.md",
           "locator": "Benchmark role",
           "note": "Use and caveats."
         }
@@ -517,7 +517,7 @@
     ],
     "evidence": [
       {
-        "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md",
+        "source": "data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/README.md",
         "locator": "Required follow-up",
         "note": "Open acquisition and audit items."
       }

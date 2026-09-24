@@ -1,5 +1,8 @@
 # PRAGUE2011 — Case Analysis
 
+> Current preparation state: `window_status: not_frozen` in [processing.yaml](processing.yaml). Earlier “frozen/v1” windows and counts below are retained as exploratory audit history, not approved evaluation inputs.
+
+
 > **Source of truth:** This file is the detailed, mutable analysis record for `PRAGUE2011`. The cross-case summary is maintained in [`docs/01_1_Case_details.md`](../../../docs/01_1_Case_details.md).
 
 ## Status
@@ -11,7 +14,6 @@
   references are pending the same structured extraction.
 - Primary reference: Cochran et al. (2020) enhanced catalog
 - Frozen v1 core window: 2011-11-11 to 2011-11-19 UTC
-- Catalog processing pilot: [catalog_processing_index.md](./catalog_processing_index.md)
 - Optional stress window: 2011-11-04 to 2011-11-11
 
 ## Scientific role
@@ -56,11 +58,11 @@ The 5,446-event release and 5,262-event paper-filtered set must remain separate 
 The detailed first-pass extraction is maintained beside the source products:
 
 - [Cochran paper reading](../references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md)
-- [Cochran catalog summary](../catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md)
+- [Cochran catalog summary](../catalogs/COCHRAN2020_GJIGGAA153/README.md)
 - [McMahon paper reading](../references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md)
-- [McMahon catalog summary](../catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md)
+- [McMahon catalog summary](../catalogs/MCMAHON2017_GL072944/README.md)
 - [Isken paper reading](../references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md)
-- [Isken catalog summary](../catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md)
+- [Isken catalog summary](../catalogs/ISKEN2017_BSSA0120160150/README.md)
 
 These files distinguish article-reported values from local-file audit values;
 the case-level tables above remain the benchmark decision record.
@@ -216,3 +218,43 @@ The stable-network window is preferred for the core benchmark because the last t
 | **Overall assessment** | Very strong benchmark for failure handling and network/data heterogeneity, not just catalog reproduction. |
 
 ---
+
+## Catalog processing
+
+Processing entry points and product declarations are in [processing.yaml](processing.yaml). Shared identifier and output rules are maintained in [data organization](../../README.md#processing-and-output-policy). File-level counts, schemas and figures belong to the catalog README and its generated analysis, rather than a second case index.
+
+### Interpretation
+
+Cochran and McMahon are separate enhanced-detection populations with different
+waveform/template lineages and release filters; they must not be concatenated.
+Isken provides a high-quality but deliberately sparse location/fault anchor.
+The McMahon phase table is a pick-level product and its 82,537 rows are not an
+event count. ComCat is an operational baseline. Magnitudes remain source-native
+or unresolved and should not be ranked across products without calibration.
+
+The 2,078 Cochran time-only count is the canonical v1 primary denominator; 2,076
+is the rounded spatial/depth sensitivity. The 11-row ComCat benchmark is retained
+as downloaded, even though the rounded research mask also returns 11 rows.
+
+### Next preparation steps
+
+1. Build the Prague station-day/channel manifest for the 31-station reference
+   condition and verify ZQ/TA/OK/US/GS archive availability.
+2. Keep the 2011-11-04–11-11 changing-network interval as a separate stress
+   window; do not mix it into the v1 score.
+3. Resolve McMahon P-record timestamp semantics and recover the missing SI/Data
+   Set files before attempting exact phase-level reproduction.
+4. Construct an explicit origin-time/space crosswalk for Cochran, McMahon,
+   Isken and ComCat; do not join native event IDs directly.
+
+### Re-run commands
+
+From the repository root:
+
+```bash
+python3 data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/scripts/run_catalog_analysis.py
+python3 data/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/scripts/run_catalog_analysis.py
+```
+
+Use `--only <product_id>` for a targeted product and `--full-plots` only when
+an exploratory diagnostic is needed.

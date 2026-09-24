@@ -51,7 +51,7 @@
         "magnitude_scope": "Numeric range -1.36–4.99; magnitude type/units unresolved.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+            "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/README.md",
             "locator": "Local audit table",
             "note": "Row count, ranges and unresolved magnitude type."
           },
@@ -74,7 +74,7 @@
         "magnitude_scope": "-0.96–3.22; type unresolved.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+            "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/README.md",
             "locator": "Frozen benchmark selection audit",
             "note": "Local time-only count and extrema."
           },
@@ -97,7 +97,7 @@
         "magnitude_scope": "Same source rows; type unresolved.",
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+            "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/README.md",
             "locator": "Frozen benchmark selection audit",
             "note": "Secondary 2,076-row sensitivity count."
           },
@@ -128,7 +128,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+          "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/README.md",
           "locator": "Provenance and Supplement linkage",
           "note": "Canonical file, checksum and supplement relationship."
         }
@@ -149,7 +149,7 @@
       "article_local_discrepancy": "Local release includes a first row on 2011-11-06 although the article template search starts 2011-11-07; it is a mixed starting/template and detection population.",
       "evidence": [
         {
-          "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+          "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/README.md",
           "locator": "Local audit and Frozen benchmark selection audit",
           "note": "All local counts, ranges, checksum and mask values."
         }
@@ -182,7 +182,7 @@
           "note": "Role, metric suitability and lineage caveats."
         },
         {
-          "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+          "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/README.md",
           "locator": "Benchmark role and limitations",
           "note": "Catalog-level use restrictions."
         }
@@ -197,7 +197,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+          "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/README.md",
           "locator": "Reconstructed schema and Supplement linkage",
           "note": "Field interpretation and auxiliary-product distinction."
         }
@@ -229,7 +229,7 @@
         },
         "evidence": [
           {
-            "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+            "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/README.md",
             "locator": "Reconstructed schema and parsing rules",
             "note": "Eleven-field source schema and units caveats."
           }
@@ -515,7 +515,7 @@
         "note": "End-to-end workflow and selection rule."
       },
       {
-        "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+        "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/README.md",
         "locator": "Construction and quality interpretation",
         "note": "Catalog-level workflow audit."
       }
@@ -591,7 +591,7 @@
     ],
     "evidence": [
       {
-        "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md",
+        "source": "data/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/README.md",
         "locator": "Required next checks",
         "note": "Outstanding local audit items."
       }

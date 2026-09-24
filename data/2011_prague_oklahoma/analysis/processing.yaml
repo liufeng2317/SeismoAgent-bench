@@ -7,18 +7,7 @@ processing_policy:
   plot_profile: minimal
   figure_format: png
   figure_dpi: 300
-benchmark_window:
-  start: 2011-11-11 00:00:00+00:00
-  end: 2011-11-19 00:00:00+00:00
-  latitude:
-  - 35.4523
-  - 35.5576
-  longitude:
-  - -96.8723
-  - -96.7334
-  depth_km:
-  - 1.02
-  - 9.62
+window_status: not_frozen
 catalogs:
 - source_ref: COCHRAN2020_GJIGGAA153
   catalog_dir: catalogs/COCHRAN2020_GJIGGAA153
