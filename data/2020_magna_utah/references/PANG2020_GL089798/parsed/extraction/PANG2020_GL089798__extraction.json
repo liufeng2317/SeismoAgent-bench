@@ -34,7 +34,7 @@
         "note": "Article identity and method."
       },
       {
-        "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+        "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/README.md",
         "locator": "provenance and row audit",
         "note": "Local release."
       }
@@ -72,7 +72,7 @@
             "note": "Article population."
           },
           {
-            "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+            "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/README.md",
             "locator": "row and field audit",
             "note": "Local release."
           }
@@ -90,7 +90,7 @@
         "magnitude_scope": "Mc −8.8–5.67; Mc>-4 sensitivity 4,101",
         "evidence": [
           {
-            "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+            "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/README.md",
             "locator": "frozen benchmark window audit",
             "note": "Recommended subset."
           }
@@ -111,7 +111,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+          "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/README.md",
           "locator": "provenance and file identity",
           "note": "ISC release."
         }
@@ -131,7 +131,7 @@
       "article_local_discrepancy": "Article reports 5,623 relocated aftershocks and 5,501 matched-filter events; local release has 5,739 rows and no relocation flag.",
       "evidence": [
         {
-          "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+          "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/README.md",
           "locator": "article-versus-release alignment",
           "note": "Release discrepancies."
         }
@@ -160,7 +160,7 @@
         },
         "evidence": [
           {
-            "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+            "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/README.md",
             "locator": "provenance and field audit",
             "note": "Source header."
           }
@@ -189,7 +189,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+          "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/README.md",
           "locator": "benchmark role and normalization rules",
           "note": "Evaluation rules."
         }
@@ -321,7 +321,7 @@
             "note": "Method/count."
           },
           {
-            "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+            "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/README.md",
             "locator": "article-versus-release alignment",
             "note": "Local limitation."
           }
@@ -336,7 +336,7 @@
         "note": "Workflow."
       },
       {
-        "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md",
+        "source": "data/2020_magna_utah/catalogs/PANG2020_GL089798/README.md",
         "locator": "provenance and audit",
         "note": "Release."
       }

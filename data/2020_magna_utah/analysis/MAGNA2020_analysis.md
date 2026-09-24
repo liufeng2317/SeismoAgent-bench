@@ -1,5 +1,8 @@
 # MAGNA2020 — Magna, Utah case analysis
 
+> Current preparation state: `window_status: not_frozen` in [processing.yaml](processing.yaml). Earlier “frozen/v1” windows and counts below are retained as exploratory audit history, not approved evaluation inputs.
+
+
 > This is the case-level synthesis.  Paper reading and file-level catalog
 > audits live beside their source products; this file records how to use them
 > together without conflating event, pick, network, or quality populations.
@@ -47,9 +50,9 @@ Detailed source notes:
 
 - [Pang paper reading](../references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper_reading.md)
   separates article-reported populations from local release counts.
-- [Pang catalog audit](../catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md)
+- [Pang catalog audit](../catalogs/PANG2020_GL089798/README.md)
   records byte identity, timestamp anomalies, and strict/normalized window counts.
-- [Baker catalog audit](../catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md)
+- [Baker catalog audit](../catalogs/BAKER2021_0220200316/README.md)
   treats the CSV as pick-level and aggregates event counts explicitly.
 
 ## Paper-derived construction details
@@ -170,3 +173,15 @@ comparison track after the missing article and nodal metadata are recovered.
 - Baker catalog: [`../catalogs/BAKER2021_0220200316/`](../catalogs/BAKER2021_0220200316/)
 - Baker reference status: [`../references/BAKER2021_0220200316/README.md`](../references/BAKER2021_0220200316/README.md)
 - UUSS/USGS baseline: [`../catalogs/USGS_UUSS_COMCAT_2020/`](../catalogs/USGS_UUSS_COMCAT_2020/)
+
+## Catalog processing
+
+Processing entry points and product declarations are in [processing.yaml](processing.yaml). Shared identifier and output rules are maintained in [data organization](../../README.md#processing-and-output-policy). File-level counts, schemas and figures belong to the catalog README and its generated analysis, rather than a second case index.
+
+### Product-specific rules
+
+| Catalog | Targeted handling |
+|---|---|
+| BAKER2021_0220200316 | picks are not event rows; compare the Baker event/location product with the ISC archive separately |
+| PANG2020_GL089798 | high-resolution relocated catalog is primary research product; ISC archive remains a comparison baseline |
+| USGS_UUSS_COMCAT_2020 | official operational baseline; retain native network, magnitude, and event type fields |

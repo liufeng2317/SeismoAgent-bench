@@ -1,0 +1,15 @@
+case_id: 2020_magna_utah
+window_status: not_frozen
+products:
+  - source_ref: BAKER2021_0220200316
+    role: dense_pick_and_location_reference
+    products: [picks, ISC_comparison_archive]
+    rule: distinguish event/pick rows and retain ISC archive as comparison product
+  - source_ref: PANG2020_GL089798
+    role: high_resolution_relocated_reference
+    products: [primary_catalog, ISC_archive]
+    rule: retain Pang relocated product separately from ISC baseline
+  - source_ref: USGS_UUSS_COMCAT_2020
+    role: official_operational_baseline
+    products: [operational_full, official_query_snapshot]
+    rule: preserve network, magnitude scale, event type, and the original official snapshot filename

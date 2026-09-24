@@ -13,7 +13,7 @@
     "catalog_relationship": "Article-associated ISC pick-level release; article PDF is not local, so method claims remain unextracted.",
     "evidence": [
       {
-        "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+        "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/README.md",
         "locator": "provenance and evidence status",
         "note": "Title/DOI and missing-PDF status."
       }
@@ -45,7 +45,7 @@
         "magnitude_scope": "heterogeneous source types; -9.99 sentinel",
         "evidence": [
           {
-            "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+            "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/README.md",
             "locator": "row, event and field audit",
             "note": "Pick-row count."
           }
@@ -63,7 +63,7 @@
         "magnitude_scope": "Mxc/d/l/h/w/missing",
         "evidence": [
           {
-            "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+            "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/README.md",
             "locator": "row, event and field audit",
             "note": "Unique event count."
           }
@@ -84,7 +84,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+          "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/README.md",
           "locator": "provenance and evidence status",
           "note": "ISC release identity."
         }
@@ -103,7 +103,7 @@
       "article_local_discrepancy": "Local file ends 29 April; article workflow awaits verified PDF.",
       "evidence": [
         {
-          "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+          "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/README.md",
           "locator": "row, event and field audit",
           "note": "Local audit."
         }
@@ -137,7 +137,7 @@
         },
         "evidence": [
           {
-            "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+            "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/README.md",
             "locator": "source-native field semantics",
             "note": "ISC README meanings."
           }
@@ -165,7 +165,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+          "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/README.md",
           "locator": "catalog role and comparison rules",
           "note": "Scope limitations."
         }
@@ -188,7 +188,7 @@
         "availability_conditions": "station type not encoded",
         "evidence": [
           {
-            "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+            "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/README.md",
             "locator": "row, event and field audit",
             "note": "Network inventory."
           }
@@ -199,7 +199,7 @@
     "final_output": "Local pick-level CSV; article workflow awaits verified PDF.",
     "evidence": [
       {
-        "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+        "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/README.md",
         "locator": "article PDF status and local audit",
         "note": "Catalog-first extraction."
       }
@@ -217,7 +217,7 @@
         "count_or_scope": "README plus magna2020MLCatalog.csv",
         "evidence": [
           {
-            "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+            "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/README.md",
             "locator": "provenance and evidence status",
             "note": "Archive identity."
           }
@@ -233,7 +233,7 @@
       "caveats": "Pick-level/network-condition reference only until article parsing is complete.",
       "evidence": [
         {
-          "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+          "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/README.md",
           "locator": "catalog role and comparison rules",
           "note": "Scope limitation."
         }
@@ -241,7 +241,7 @@
     },
     "evidence": [
       {
-        "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md",
+        "source": "data/2020_magna_utah/catalogs/BAKER2021_0220200316/README.md",
         "locator": "catalog role and comparison rules",
         "note": "Scope limitation."
       }
