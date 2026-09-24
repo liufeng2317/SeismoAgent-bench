@@ -123,4 +123,4 @@ python -B -m unittest discover -s benchmark_source/2019_ridgecrest_california/sc
 
 来源元数据已集中到 `processing.yaml` 的 `sources`，来源组说明在 `source_groups`。核验分段边界、源目录选择和派生子集改为 `reference_audit` 声明；窗口、阈值和科学解释保持原状。
 
-案例脚本保留原生字段解析和来源特有检查，共享的路径/哈希检查、时间空间筛选与对应诊断移到 [source 工具模块](../../../seismoagentbench/)。本次只整理 source，不新增评测流程；既有科学设计仍是候选背景资料。
+案例脚本保留原生字段解析和来源特有检查，共享的路径/哈希检查、时间空间筛选与对应诊断移到 [source 工具模块](../../../SeismoAgentBench/utils/source_prepare/)。本次只整理 source，不新增评测流程；既有科学设计仍是候选背景资料。

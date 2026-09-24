@@ -8,8 +8,8 @@ import unittest
 
 import yaml
 
-from seismoagentbench.catalog import sha256, utc
-from seismoagentbench.sources import (
+from SeismoAgentBench.utils.source_prepare.catalog import sha256, utc
+from SeismoAgentBench.utils.source_prepare.sources import (
     SourceError, case_path, inventory, load_case, resolve_stages, select_subset, validate_sources,
 )
 
@@ -45,7 +45,7 @@ class SourceRegistryTests(unittest.TestCase):
 
     def test_cli_reports_integrity_failures_with_nonzero_exit(self):
         (self.case / 'source.txt').write_text('changed')
-        result = subprocess.run([sys.executable, '-B', '-m', 'seismoagentbench',
+        result = subprocess.run([sys.executable, '-B', '-m', 'SeismoAgentBench.utils.source_prepare',
             'validate-sources', '--case-dir', str(self.case), '--verify-files'],
             cwd=Path(__file__).resolve().parents[1], capture_output=True, text=True)
         self.assertEqual(result.returncode, 1)
@@ -53,7 +53,7 @@ class SourceRegistryTests(unittest.TestCase):
 
     def test_cli_can_inventory_missing_payload_without_claiming_verification(self):
         (self.case / 'source.txt').unlink()
-        result = subprocess.run([sys.executable, '-B', '-m', 'seismoagentbench',
+        result = subprocess.run([sys.executable, '-B', '-m', 'SeismoAgentBench.utils.source_prepare',
             'inventory', '--case-dir', str(self.case)],
             cwd=Path(__file__).resolve().parents[1], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0)

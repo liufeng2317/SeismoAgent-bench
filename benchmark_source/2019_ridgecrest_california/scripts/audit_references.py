@@ -19,9 +19,9 @@ import sys
 
 # Keep the case-local command usable without an installation step.
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
-from seismoagentbench.catalog import (utc, origin, finite, sha256, event, within,
+from SeismoAgentBench.utils.source_prepare.catalog import (utc, origin, finite, sha256, event, within,
                                      quantiles, horizontal_km, overlap, summary)
-from seismoagentbench.sources import load_case, resolve_stages, select_subset, case_path
+from SeismoAgentBench.utils.source_prepare.sources import load_case, resolve_stages, select_subset, case_path
 
 CASE = Path(__file__).resolve().parents[1]
 UTC = timezone.utc

@@ -108,7 +108,10 @@ The consolidation decisions and removed-file inventory are recorded in [reposito
 SeismoAgentBench/
 ├── README.md                         # 项目入口
 ├── docs/                             # 研究方案、案例选择、提取约定、历史整理说明
-├── scripts/                          # 跨案例下载、解析、验证与清单工具
+├── scripts/                          # 跨案例下载、解析、验证与清单入口
+├── SeismoAgentBench/                 # 项目专业代码与通用工具
+│   └── utils/source_prepare/         # 来源整理工具子包
+├── tests/                            # 共享代码测试
 └── benchmark_source/
     ├── README.md                     # 组织规范与结构评估（本文件）
     ├── REFERENCES_MANIFEST.md        # 文献/来源就绪状态
@@ -161,7 +164,7 @@ SeismoAgentBench/
 
 这一层只维护资料来源、文件、版本、解析与核验。**评测代码和评测配置后续放到独立目录**，不在这里添加运行器、评分器、实验条件、资源预算或冻结审批。案例原有科学说明保留为背景；source 工具不依赖其中的评测就绪判断。
 
-数据仍采用现有案例目录；共享代码放在仓库的 [seismoagentbench/](../seismoagentbench/)，来源契约测试放在 [tests/](../tests/)。不复制原始文件，也不为每个来源再增加一份登记 YAML。
+数据仍采用现有案例目录；项目代码统一放在 [SeismoAgentBench/](../SeismoAgentBench/README.md)，其中 source 整理工具位于 [utils/source_prepare/](../SeismoAgentBench/utils/source_prepare/)，来源契约测试放在 [tests/](../tests/)。不复制原始文件，也不为每个来源再增加一份登记 YAML。
 
 ```text
 analysis/processing.yaml
@@ -169,9 +172,9 @@ analysis/processing.yaml
   ├── sources                   产品键 → 路径、版本、单位、解析器、SHA-256
   └── reference_audit            按产品键引用的核验规则，不重复写路径/哈希
              │
-             ├── seismoagentbench/sources.py   契约校验、文件盘点、分段/子集
+             ├── SeismoAgentBench/utils/source_prepare/sources.py   契约校验、文件盘点、分段/子集
              ├── 案例 scripts/                原生列解析、来源特有核验
-             └── seismoagentbench/catalog.py  时间/空间筛选与目录对应诊断
+             └── SeismoAgentBench/utils/source_prepare/catalog.py  时间/空间筛选与目录对应诊断
                           ↓
                 analysis/reference_audit.json
 ```
@@ -199,9 +202,9 @@ Ridgecrest 目前登记 5 个来源组和 8 个文件产品。Ross 重定位子�
 在仓库根目录运行，使用现有 Python 3.10+ 和 PyYAML 环境：
 
 ```bash
-python -B -m seismoagentbench validate-sources --case-dir benchmark_source/2019_ridgecrest_california
-python -B -m seismoagentbench inventory --case-dir benchmark_source/2019_ridgecrest_california
-python -B -m seismoagentbench validate-sources --case-dir benchmark_source/2019_ridgecrest_california --verify-files
+python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir benchmark_source/2019_ridgecrest_california
+python -B -m SeismoAgentBench.utils.source_prepare inventory --case-dir benchmark_source/2019_ridgecrest_california
+python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir benchmark_source/2019_ridgecrest_california --verify-files
 python -B benchmark_source/2019_ridgecrest_california/scripts/audit_references.py
 ```
 
