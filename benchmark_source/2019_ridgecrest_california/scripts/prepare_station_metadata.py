@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import math
 import signal
 from collections import defaultdict
 from datetime import datetime, timezone
@@ -128,8 +129,8 @@ def export_catalog_views(rows, latest, all_shelly, selected_shelly):
                             'Original DOCX Fig. S1: 45 station labels; channel choices are not specified by this station list.'),
         'SHELLY2020_0220190309': (all_shelly, selected_shelly, 'auxiliary_phase_arrival_station_subset',
                                 'Auxiliary phase release: station IDs selected by arrival time, not the original paper station inventory.'),
-        'AWR2025_CALTECHDATA': (None, None, 'unresolved', 'Exact paper station list not verified; regional discovery inventory is not assigned to this catalog.'),
-        'ROSS2019_SCIENCE': (None, None, 'unresolved', 'Exact paper station list requires missing method evidence; no automatic station assignment.'),
+        'AWR2025_CALTECHDATA': (None, None, 'unresolved', 'Supplement Fig. S1 confirms CI, GS, NN, PB, ZY networks but has no station labels; exact station list unresolved. Regional discovery inventory is not assigned to this catalog.'),
+        'ROSS2019_SCIENCE': (None, None, 'unresolved', 'DC1 p. 2 confirms SCEDC EH/HH within 80 km; exact historical station list remains unresolved. See ross_rule_candidates in station_preparation.json; candidates are not assigned as verified paper inputs.'),
         'USGS_SCSN_COMCAT_2019': (None, None, 'unresolved', 'Operational event snapshot does not identify its complete waveform station inputs.'),
     }
     outputs = {}
@@ -180,6 +181,34 @@ def export_catalog_views(rows, latest, all_shelly, selected_shelly):
                                 selection_path=str((folder/'selection.json').relative_to(CASE)),
                                 selection_sha256=digest(folder/'selection.json'), files=manifest['files'])
     return outputs
+
+
+
+def ross_rule_candidates(rows):
+    """Infer candidates from DC1 selection rules, never assert historical usage."""
+    def distance(row):
+        lat1, lon1 = map(math.radians, (PARAMS['latitude'], PARAMS['longitude']))
+        lat2, lon2 = map(math.radians, (row['latitude'], row['longitude']))
+        a = math.sin((lat2-lat1)/2)**2 + math.cos(lat1)*math.cos(lat2)*math.sin((lon2-lon1)/2)**2
+        return 6371.0088 * 2 * math.asin(min(1, math.sqrt(a)))
+    candidates = [dict(r, distance_to_mainshock_km=distance(r)) for r in rows
+                  if r['candidate_overlap_seconds'] > 0 and r['channel'].startswith(('EH', 'HH'))
+                  and r['latitude'] is not None and r['longitude'] is not None and distance(r) <= 80]
+    path = OUT/'by_catalog/ROSS2019_SCIENCE/rule_candidate_channels.json'
+    write(path, candidates)
+    source = CASE/'references/ROSS2019_SCIENCE/supplement/ROSS2019_SCIENCE__supplement_DC1.pdf'
+    return dict(status='rule_based_candidates_not_confirmed_paper_stations',
+                source=str(source.relative_to(CASE)), source_sha256=digest(source), locator='PDF page 2',
+                rule=dict(channel_prefixes=['EH', 'HH'], max_distance_km=80,
+                          center_latitude=PARAMS['latitude'], center_longitude=PARAMS['longitude'],
+                          earth_radius_km=6371.0088, epoch_overlap='candidate window'),
+                limitations=['Retrospective official mainshock center used; original selection center not recovered.',
+                             'Discovery metadata provider is not proof of historical SCEDC waveform availability.',
+                             'LB.DAC is a geographic/channel candidate, not a confirmed Ross station.',
+                             'Epoch overlap does not prove continuous samples or original channel selection.'],
+                station_ids=sorted({r['network']+'.'+r['station'] for r in candidates}),
+                channel_epoch_variants=len(candidates),
+                artifact=dict(path=str(path.relative_to(CASE)), bytes=path.stat().st_size, sha256=digest(path)))
 
 
 def main():
@@ -239,7 +268,7 @@ def main():
                              providers=sorted({p for r in variants for p in r['providers']})))
     write(OUT/'station_inventory.json', stations)
     catalog_views = export_catalog_views(rows, latest, all_stations, selected_stations)
-    report = dict(catalog_views=catalog_views, candidate_window=['2019-07-04T00:00:00Z','2019-07-07T00:00:00Z'],
+    report = dict(ross_rule_candidates=ross_rule_candidates(rows), catalog_views=catalog_views, candidate_window=['2019-07-04T00:00:00Z','2019-07-07T00:00:00Z'],
                   discovery_query=PARAMS,
                   query_reason='1.5 degree radius contains the paper 120-km circle and approximate 200-km square; extended through July 9 to detect later temporary-station deployment. Not a paper station-list reconstruction.',
                   semantics='Metadata epoch overlap only; not waveform availability. Identical descriptive channel epochs merged with providers retained; conflicting metadata retained. Responses remain in provider XML and are not assumed equivalent.',

@@ -88,9 +88,9 @@ modern Agent pipelines (PhaseNO/GaMMA/HypoSVI/GrowClust).
 | Suitable metrics | Long-term event-rate evolution, relative geometry, moment-tensor uncertainty/calibration, method comparison |
 | Unsuitable metric | Direct event-count ranking against Shelly/Liu/Ross without harmonizing release version, time span, detection threshold and magnitude scale |
 | Independence | Medium–Low for algorithmic benchmarking because PhaseNO/GaMMA/HypoSVI/GrowClust overlap with likely Agent components; high value as a documented research reference |
-| Network condition | 66 broadband 3C stations selected in a broad region, with changing availability from 2019–2023; exact station-day inventory remains to be extracted from SI Fig. S1 |
+| Network condition | 66 broadband 3C stations selected in a broad region, with changing availability from 2019–2023; SI Fig. S1 confirms CI/GS/NN/PB/ZY networks, but has no labels or station-day inventory |
 
-## Frozen Ridgecrest benchmark window
+## Candidate Ridgecrest benchmark window (not frozen)
 
 Applying the case-wide time/space/depth rule to the local Version 2 products
 (`2019-07-04T00:00:00Z <= time < 2019-07-07T00:00:00Z`, 35.45–36.05°N,
@@ -113,6 +113,8 @@ amplitude magnitude and must not be relabeled as ML or Mw.
 - Local catalogs: `../../../../data/catalogs/AWR2025_CALTECHDATA/`
 - Provenance: [CaltechDATA 10.22002/5af05-cah73](https://doi.org/10.22002/5af05-cah73),
   article release DOI [10.22002/f40da-hww21](https://doi.org/10.22002/f40da-hww21)
-- Open actions: archive the exact article supplementary ZIP or a release manifest,
-  and extract station-day metadata from SI Fig. S1 before freezing waveform
-  volume or claiming byte-level reproduction of the 214,467/4,892 article counts.
+- Open actions: recover the actual 66 station IDs and time-dependent channels from processing configuration or a station table; reconcile the archived article ZIP with Version 2 before claiming byte-level reproduction.
+
+## Direct reading of original paper and SI — 2026-09-25
+
+Main-paper physical PDF page 2 gives 66 three-component broadband instruments in a 200 × 200 km region, April 2019–May 2023; detection uses vertical and north components. The 18-station neural graph is not the full array. Supplement physical PDF page 2, Fig. S1, shows five network labels: CI, GS, NN, PB and ZY. It does not label individual stations. The ZIP supplies supplementary figures, two catalog CSVs and a movie, with no explicit station table. Consequently neither 66 names nor their July 4–7 availability can be recovered from this figure alone. See reference README for original-file hashes; no inferred station identities were promoted to confirmed inputs.

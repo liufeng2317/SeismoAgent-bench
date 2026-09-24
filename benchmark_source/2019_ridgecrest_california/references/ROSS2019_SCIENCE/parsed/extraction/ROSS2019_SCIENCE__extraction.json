@@ -59,7 +59,7 @@
         "unit": "events",
         "count_article": null,
         "count_local": null,
-        "selection_rule": "Article reports more than 111,000 events with M greater than 0.5; exact article subset definition is in missing Science DC1.",
+        "selection_rule": "Preserve article M>0.5 statement separately from all QTM rows; DC1 confirms 111,918 detections without establishing that all satisfy this magnitude cut.",
         "time_range": "2019-07-04 through approximately 2019-07-25 UTC",
         "spatial_depth_scope": "Ridgecrest sequence; exact article spatial mask is not stated in main text.",
         "magnitude_scope": "Article statement uses M greater than 0.5; local QTM includes a wider magnitude range.",
@@ -180,7 +180,7 @@
         {
           "source": "benchmark_source/2019_ridgecrest_california/data/catalogs/ROSS2019_SCIENCE/README.md",
           "locator": "Quality and limitations",
-          "note": "DC1 missing caveat."
+          "note": "DC1 missing caveat. Historical extraction note; superseded by the 2026-09-25 direct DC1 audit."
         }
       ]
     },
@@ -194,14 +194,14 @@
       "unsuitable_metrics": [
         "treating all 111,918 rows as equally relocated",
         "using QTM Mw 7.1 depth as absolute truth",
-        "exact reproduction of detection/relocation thresholds before obtaining Science DC1"
+        "exact reproduction of detection/relocation thresholds without the original input inventory and implementation configuration"
       ],
       "independence_conditions": [
         "Shares SCSN/SCEDC waveform lineage with Shelly and operational baseline, but QTM is a distinct template/cluster release.",
         "Use nbranch>1 for structural metrics and retain initial-only rows as a separate population."
       ],
       "limitations": [
-        "Science DC1 is not local, so exact template/differential-time parameters and station counts remain unknown.",
+        "DC1 is now local; exact station IDs, coverage and implementation configuration remain unresolved.",
         "Mainshock depth is poorly constrained; use SCSN hypocenter for absolute comparison.",
         "13 duplicate origin times exist despite unique event IDs."
       ],
@@ -290,26 +290,31 @@
         ]
       }
     },
-    "quality_tier_detail": "High-quality relative fault-geometry/QTM reference; exact article subset parameters require Science DC1."
+    "quality_tier_detail": "High-quality relative fault-geometry/QTM reference; DC1 methods verified; station inventory and numerical model configuration remain incomplete."
   },
   "construction_workflow": {
-    "summary": "SCSN/SCEDC routine waveforms seed template matching and hidden-event detection; differential times are clustered and relatively relocated into the SCEDC QTM format. Exact thresholds remain in the missing Science DC1.",
+    "summary": "SCEDC EH/HH within 80 km → SCSN July 4–25 templates within 60 km → template matching → differential times → GrowClust (CC≥0.75; ≥8 times/pair). DC1 PDF p. 2 verified; historical station IDs unresolved.",
     "input_data": [
       {
         "source_id": "S1",
         "name": "SCSN/SCEDC waveform and routine-event archive",
         "type": "waveform",
-        "provider_or_network": "Southern California Seismic Network / SCEDC",
-        "temporal_spatial_scope": "2019 Ridgecrest sequence, first 21 days",
+        "provider_or_network": "SCEDC waveform archive; actual network list unresolved (not necessarily CI only)",
+        "temporal_spatial_scope": "Continuous sequence data starting July 4; stations within 80 km of mainshock",
         "station_count": null,
-        "channels_sampling": "Not specified in main article parse",
+        "channels_sampling": "EH and HH; 2–15 Hz zero-phase Butterworth; native sampling rate not specified here",
         "role": "primary_input",
-        "availability_conditions": "Station count and exact availability require DC1.",
+        "availability_conditions": "DC1 specifies selection rules, not a full station/channel inventory or actual coverage.",
         "evidence": [
           {
             "source": "benchmark_source/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
             "locator": "Scientific scope and observation conditions",
             "note": "Network lineage and missing station count."
+          },
+          {
+            "source": "benchmark_source/2019_ridgecrest_california/references/ROSS2019_SCIENCE/supplement/ROSS2019_SCIENCE__supplement_DC1.pdf",
+            "locator": "Physical PDF page 2",
+            "note": "Original supplemental methods read directly on 2026-09-25."
           }
         ]
       },
@@ -318,16 +323,21 @@
         "name": "Routine events/picks for templates",
         "type": "seed_catalog",
         "provider_or_network": "SCSN/SCEDC",
-        "temporal_spatial_scope": "Ridgecrest sequence",
+        "temporal_spatial_scope": "SCSN July 4–25 events within 60 km of mainshock",
         "station_count": null,
         "channels_sampling": null,
         "role": "seed_catalog",
-        "availability_conditions": "Exact template population and thresholds are in DC1.",
+        "availability_conditions": "Seed pool extends beyond candidate three-day window; exact event snapshot and implementation still needed.",
         "evidence": [
           {
             "source": "benchmark_source/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
             "locator": "Catalog-construction interpretation",
-            "note": "Conservative chain due missing DC1."
+            "note": "Conservative chain due missing DC1. Historical extraction note; superseded by the 2026-09-25 direct DC1 audit."
+          },
+          {
+            "source": "benchmark_source/2019_ridgecrest_california/references/ROSS2019_SCIENCE/supplement/ROSS2019_SCIENCE__supplement_DC1.pdf",
+            "locator": "Physical PDF page 2",
+            "note": "Original supplemental methods read directly on 2026-09-25."
           }
         ]
       }
@@ -350,16 +360,21 @@
         "software_or_model": "Template matching (details in Science DC1)",
         "parameters": [],
         "qc_and_rejection_rules": [
-          "Exact thresholds, template lengths and station selection unresolved."
+          "DC1: EH/HH within 80 km, 2–15 Hz; template events July 4–25 within 60 km. Detection threshold/configuration requires cited implementation."
         ],
         "intermediate_result": null,
         "analyst_intervention": null,
-        "dependencies": "Requires Science DC1 for reproducibility.",
+        "dependencies": "Original implementation/configuration cited to Science aaw6888 still needed.",
         "evidence": [
           {
             "source": "benchmark_source/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
             "locator": "Catalog-construction interpretation",
             "note": "Conservative workflow."
+          },
+          {
+            "source": "benchmark_source/2019_ridgecrest_california/references/ROSS2019_SCIENCE/supplement/ROSS2019_SCIENCE__supplement_DC1.pdf",
+            "locator": "Physical PDF page 2",
+            "note": "Original supplemental methods read directly on 2026-09-25."
           }
         ]
       },
@@ -375,7 +390,7 @@
         "outputs": [
           "Differential-time network"
         ],
-        "method": "Measure differential times among template-related events.",
+        "method": "Cross-correlate with 100 nearest templates; 1.5-s windows start 0.25 s before arrivals; source–receiver distance ≤80 km, hypocentral event separation ≤5 km.",
         "software_or_model": "Article/SCEDC processing (details in DC1)",
         "parameters": [],
         "qc_and_rejection_rules": [
@@ -389,6 +404,11 @@
             "source": "benchmark_source/2019_ridgecrest_california/data/catalogs/ROSS2019_SCIENCE/README.md",
             "locator": "Native schema",
             "note": "Differential-time fields."
+          },
+          {
+            "source": "benchmark_source/2019_ridgecrest_california/references/ROSS2019_SCIENCE/supplement/ROSS2019_SCIENCE__supplement_DC1.pdf",
+            "locator": "Physical PDF page 2",
+            "note": "Original supplemental methods read directly on 2026-09-25."
           }
         ]
       },
@@ -405,12 +425,12 @@
           "QTM initial and relocated locations"
         ],
         "method": "Cluster events and solve relative locations; release marks successful solutions with nbranch greater than 1.",
-        "software_or_model": "GrowClust-format QTM",
+        "software_or_model": "GrowClust",
         "parameters": [],
         "qc_and_rejection_rules": [
           "Separate nbranch>1 from nbranch=1.",
           "Retain error fields and interpret −1 as unavailable.",
-          "Exact solver thresholds require DC1."
+          "DC1: CC ≥0.75 and at least 8 differential times per event pair."
         ],
         "intermediate_result": "46,512 successfully relocated rows locally.",
         "analyst_intervention": null,
@@ -420,6 +440,11 @@
             "source": "benchmark_source/2019_ridgecrest_california/data/catalogs/ROSS2019_SCIENCE/README.md",
             "locator": "Full archive audit",
             "note": "nbranch semantics and counts."
+          },
+          {
+            "source": "benchmark_source/2019_ridgecrest_california/references/ROSS2019_SCIENCE/supplement/ROSS2019_SCIENCE__supplement_DC1.pdf",
+            "locator": "Physical PDF page 2",
+            "note": "Original supplemental methods read directly on 2026-09-25."
           }
         ]
       },
@@ -464,7 +489,7 @@
       {
         "source": "benchmark_source/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
         "locator": "Catalog-construction interpretation",
-        "note": "Article workflow and missing DC1."
+        "note": "Article workflow and missing DC1. Historical extraction note; superseded by the 2026-09-25 direct DC1 audit."
       }
     ]
   },
@@ -474,15 +499,15 @@
         "product_id": "DP1",
         "name": "Science supplementary DC1",
         "type": "other",
-        "file_path": null,
-        "catalog_relation": "Materials and Methods, figures and tables cited by article but not local.",
+        "file_path": "benchmark_source/2019_ridgecrest_california/references/ROSS2019_SCIENCE/supplement/ROSS2019_SCIENCE__supplement_DC1.pdf",
+        "catalog_relation": "Original archived Materials and Methods",
         "scientific_use": "Recover exact template, differential-time, relocation and station parameters.",
-        "count_or_scope": "Missing local supplement",
+        "count_or_scope": "35-page PDF; catalog methods on page 2",
         "evidence": [
           {
             "source": "benchmark_source/2019_ridgecrest_california/references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper__mineru.md",
             "locator": "Identity and evidence status",
-            "note": "DC1 missing status."
+            "note": "DC1 missing status. Historical extraction note; superseded by the 2026-09-25 direct DC1 audit."
           }
         ]
       },
@@ -550,7 +575,7 @@
       "recommended_role": "Secondary structural/relocation reference against Shelly and Liu, with nbranch-specific metrics.",
       "comparison_or_baseline_sources": "Compare with Shelly Data S1 and Liu Table S1 under the common mask; use SCSN hypocenter for absolute mainshock checks.",
       "valid_comparisons": "Cluster geometry, relative location, differential-time support, error-field calibration and initial-versus-relocated contrast.",
-      "caveats": "Do not infer missing DC1 parameters or treat all rows as high-quality relocations; preserve duplicate times and event IDs.",
+      "caveats": "Preserve duplicate times and event IDs; not all rows are high-quality relocations. Station inventory and numerical model configuration remain unresolved.",
       "evidence": [
         {
           "source": "benchmark_source/2019_ridgecrest_california/data/catalogs/ROSS2019_SCIENCE/README.md",
@@ -560,9 +585,9 @@
       ]
     },
     "missing_information": [
-      "Science DC1 is not archived locally.",
-      "Exact template-matching thresholds, station counts, station-day availability and relocation settings are unresolved.",
-      "Article's approximate more-than-111,000 M>0.5 population is not directly reproducible from local mixed QTM rows without DC1 definition."
+      "Exact historical station/channel inventory and continuous coverage",
+      "Template-matching implementation settings referenced to Ross et al. (2019), Science aaw6888",
+      "Numerical velocity models and original template snapshot"
     ]
   },
   "extraction_quality": {
@@ -577,8 +602,8 @@
       "quality and role"
     ],
     "missing_core_fields": [
-      "Science DC1 methods and parameters",
-      "station-day waveform volume",
+      "historical station-day waveform coverage",
+      "numerical models and original processing configuration",
       "exact article subset definition"
     ],
     "warnings": [

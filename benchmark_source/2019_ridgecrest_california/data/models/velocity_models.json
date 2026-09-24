@@ -102,11 +102,18 @@
       ]
     },
     "ross": {
-      "status": "method_supplement_missing",
+      "status": "model_reference_identified_numeric_configuration_unresolved",
+      "source": "references/ROSS2019_SCIENCE/supplement/ROSS2019_SCIENCE__supplement_DC1.pdf",
+      "source_sha256": "a88f3b53ec14e6ef1a3ec5d52530fbfb67a48b6922a810eaa854d5df26267a46",
+      "locator": "PDF page 2, reference 33",
+      "reference": "Hauksson (2000), DOI 10.1029/2000JB900016",
+      "role": "3D individual template locations followed by hypoDD; 1D arrival predictions where picks missing",
       "missing": [
-        "Science DC1",
-        "confirmed model and numerical parameters"
-      ]
+        "actual 3D numerical model and processing configuration",
+        "1D arrival-prediction model",
+        "GrowClust numerical velocity configuration"
+      ],
+      "caution": "Supplement Table S1 is an elastic model for other analyses, not confirmed as QTM catalog relocation model."
     }
   }
 }

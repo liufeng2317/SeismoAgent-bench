@@ -14,3 +14,12 @@ and moment-tensor CSVs. The article reports 214,467/4,892 final products,
 whereas local Version 2 contains 222,864/4,890 rows; both values are retained
 as an explicit release-version discrepancy.
 - Structured extraction: [`parsed/extraction/AWR2025_CALTECHDATA__extraction.json`](parsed/extraction/AWR2025_CALTECHDATA__extraction.json).
+
+## Original-source audit — 2026-09-25
+
+- `supplement/AWR2025_CALTECHDATA__supplement.zip`: 27,425,957 bytes; SHA-256 `65e9c3b2424177b009ce24640c4754bbfafac1a09f28994c39f80343640e776c`. Source: https://doi.org/10.1093/gji/ggaf001.
+- `supplement/AWR2025_CALTECHDATA__supplement_figures.pdf`: 3,568,815 bytes; SHA-256 `bdb2fdf664ff2d9080453f6e4a912b33aceae2f92de6c489cd0106a01fc617a8`. Source: ZIP member Atterholt_Wilding_Ross_GJI_SI_Rev.pdf.
+
+The publisher supporting-information link supplied the ZIP (no temporary signed URL stored). Its nested `AWR_Catalogs.zip` contains hypocenter and moment-tensor CSVs, not a station list. Only the supplementary PDF was extracted; existing Version 2 catalogs were not replaced. PDF page 2, Fig. S1, directly confirms networks CI, GS, NN, PB and ZY but provides no station labels or station-day table. Article-release byte equivalence with local Version 2 remains unverified.
+
+Large original PDFs/ZIPs remain local and ignored by Git; this record tracks their source and checksums.

@@ -1,4 +1,64 @@
 {
+  "ross_rule_candidates": {
+    "status": "rule_based_candidates_not_confirmed_paper_stations",
+    "source": "references/ROSS2019_SCIENCE/supplement/ROSS2019_SCIENCE__supplement_DC1.pdf",
+    "source_sha256": "a88f3b53ec14e6ef1a3ec5d52530fbfb67a48b6922a810eaa854d5df26267a46",
+    "locator": "PDF page 2",
+    "rule": {
+      "channel_prefixes": [
+        "EH",
+        "HH"
+      ],
+      "max_distance_km": 80,
+      "center_latitude": 35.7695,
+      "center_longitude": -117.5993333,
+      "earth_radius_km": 6371.0088,
+      "epoch_overlap": "candidate window"
+    },
+    "limitations": [
+      "Retrospective official mainshock center used; original selection center not recovered.",
+      "Discovery metadata provider is not proof of historical SCEDC waveform availability.",
+      "LB.DAC is a geographic/channel candidate, not a confirmed Ross station.",
+      "Epoch overlap does not prove continuous samples or original channel selection."
+    ],
+    "station_ids": [
+      "CI.CCA",
+      "CI.CCC",
+      "CI.CLC",
+      "CI.DAW",
+      "CI.DTP",
+      "CI.ISA",
+      "CI.JRC2",
+      "CI.LRL",
+      "CI.MPM",
+      "CI.SLA",
+      "CI.SRT",
+      "CI.TOW2",
+      "CI.WBM",
+      "CI.WBS",
+      "CI.WCS2",
+      "CI.WHF",
+      "CI.WLH2",
+      "CI.WMF",
+      "CI.WNM",
+      "CI.WOR",
+      "CI.WRC2",
+      "CI.WRV2",
+      "CI.WVP2",
+      "LB.DAC",
+      "NN.QSM",
+      "PB.B916",
+      "PB.B917",
+      "PB.B918",
+      "PB.B921"
+    ],
+    "channel_epoch_variants": 81,
+    "artifact": {
+      "path": "data/waveforms/stations/by_catalog/ROSS2019_SCIENCE/rule_candidate_channels.json",
+      "bytes": 61495,
+      "sha256": "0e0788c88086f895aa81da1e8162138b972ca68d1c4105bd7413fc9fd78a399b"
+    }
+  },
   "catalog_views": {
     "LIU2020_GL086189": {
       "status": "paper_station_labels",
@@ -34,14 +94,14 @@
       "status": "unresolved",
       "station_count": null,
       "selection_path": "data/waveforms/stations/by_catalog/AWR2025_CALTECHDATA/selection.json",
-      "selection_sha256": "4a704a17a8e87686aaf432f9fb61a26f650c4642ecb54eacc3751dd8d02be940",
+      "selection_sha256": "9438fca6ffdaafd9bc2f9c366bf9518e0a65a93a3ccb6efe1815ba34778f7b14",
       "files": {}
     },
     "ROSS2019_SCIENCE": {
       "status": "unresolved",
       "station_count": null,
       "selection_path": "data/waveforms/stations/by_catalog/ROSS2019_SCIENCE/selection.json",
-      "selection_sha256": "7c811697f62b64495df74b3b915ae832e0c25ccc5c08b8874f48944a7c55361d",
+      "selection_sha256": "ee9d644c04fd26db0962113e010216fe2f3659d66f2d63ec336b19d83c05ac40",
       "files": {}
     },
     "USGS_SCSN_COMCAT_2019": {
@@ -153,7 +213,7 @@
   "inputs": {
     "data/catalogs/SHELLY2020_0220190309/raw/Ridgecrest_2019_correlation_phase_arrivals.csv": "0b77237b497265ebc94768acd955a9de5eb4c7f78f130922254e4c9ed4122d9f"
   },
-  "script_sha256": "2ec5960aef172ecff8710e6ae35ffa401d2e41a648860c76f59c234de2928193",
+  "script_sha256": "2ddd3ded5d9df40ef72263a9d5805c097bbc687a865936238a3770d27e02ac3b",
   "liu": {
     "source": "references/LIU2020_GL086189/supplement/Liu2020_Ridgecrest_SI.docx",
     "locator": "Fig. S1, word/media/image2.jpeg, manually read labels including inset",

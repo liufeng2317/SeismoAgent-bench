@@ -10,7 +10,7 @@ contains relocated origin parameters, event and cluster IDs, differential-pair
 counts, residuals, location errors and initial catalog locations. Successful
 relocations are flagged by `nbranch > 1`; the Mw 7.1 mainshock depth is poorly
 constrained, so use the SCSN hypocenter for that event. The paper's Science DC1
-supplement is not yet local.
+supplement was archived and directly read on 2026-09-25; see the reference README and paper reading for the methods audit.
 
 ## Local catalog audit
 
@@ -93,9 +93,10 @@ metric-specific relocated target is `6,463` under the same mask.
   hypocenter for that event.
 - The local archive has 13 duplicate origin times but unique event IDs; retain
   IDs for joins and do not deduplicate on time alone.
-- Detailed article processing parameters are in Science DC1, which is missing
-  locally. This summary therefore uses only the official SCEDC schema and local
-  field audit for exact reproducibility.
+- Science DC1 is now archived; EH/HH selection and relocation thresholds have
+  been verified. Historical station/channel inventory, continuous coverage and
+  numerical model configuration remain unresolved. Catalog statistics above
+  remain the earlier official-schema/local-field audit.
 
 ### Local outputs
 

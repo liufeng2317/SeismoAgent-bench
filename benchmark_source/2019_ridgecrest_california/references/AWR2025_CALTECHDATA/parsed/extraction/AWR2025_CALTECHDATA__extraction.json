@@ -179,7 +179,7 @@
       "time_range": "Hypocenters: 2019-04-04 01:47:41.335–2023-05-01 20:55:26.801 UTC; moment tensors: 2019-04-07 18:52:58.223–2023-04-21 07:11:10.306 UTC.",
       "latitude_longitude_depth_range": "Hypocenters full lat 34.910170–36.573010 degrees N, lon −118.612600–−116.740580 degrees, depth −0.599–19.539 km; MT full lat 35.196190–36.462740 degrees N, lon −118.598140–−117.023630 degrees, depth −0.210–13.573 km. Frozen common ranges are recorded in P2/P5.",
       "magnitude_range": "Hypocenters gamma −0.723–4.585; MT magnitude 1.366–4.115; frozen common gamma 0.056–4.585 and MT 1.8739–4.1146.",
-      "article_local_discrepancy": "Article reports 214,467 relocated hypocenters and 4,892 accepted MTs; local Version 2 has 222,864 and 4,890. Exact article supplementary/release manifest is not local, so no silent trimming is applied.",
+      "article_local_discrepancy": "Article reports 214,467 relocated hypocenters and 4,892 accepted MTs; local Version 2 has 222,864 and 4,890. Article supplemental ZIP is now local; equivalence with Version 2 remains unverified, so no silent trimming is applied.",
       "product_counts": {
         "hypocenters_v2": 222864,
         "moment_tensors_v2": 4890,
@@ -219,7 +219,7 @@
       ],
       "limitations": [
         "66-station network and availability change from 2019–2023.",
-        "Exact article supplementary ZIP/release manifest is missing locally.",
+        "Article supplementary ZIP archived on 2026-09-25; station inventory absent and release equivalence unverified.",
         "Hypocenter magnitude_gamma is not labeled ML or Mw."
       ],
       "evidence": [
@@ -324,12 +324,12 @@
         "source_id": "S1",
         "name": "Continuous multi-network 3C waveforms",
         "type": "waveform",
-        "provider_or_network": "Waveform archive: SCEDC citation in Data Availability; 66-station multi-network array citing University of Nevada Reno, USGS and SCEDC. Exact network codes and current service endpoints require verification.",
+        "provider_or_network": "Waveform archive: SCEDC citation in Data Availability; 66-station multi-network array citing University of Nevada Reno, USGS and SCEDC. SI Fig. S1 directly confirms CI, GS, NN, PB and ZY; actual station/day inventory remains unresolved.",
         "temporal_spatial_scope": "April 2019 through May 2023; broad 200 × 200 km region",
         "station_count": 66,
         "channels_sampling": "Three-component broadband instruments; vertical and north components used for detection; high-pass above 1 Hz. Native channel codes and sample rates are not specified here.",
         "role": "primary_input",
-        "availability_conditions": "66 stations across the long-term study, not a verified simultaneous 72-hour subset; neural graph uses 18 stations. Distribution is in supplementary Fig. S1; station-day inventory is not locally extracted.",
+        "availability_conditions": "SI Fig. S1 confirms CI/GS/NN/PB/ZY, without station labels. 66 is the long-term array, not a verified simultaneous 72-hour subset; graph size is 18.",
         "evidence": [
           {
             "source": "benchmark_source/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
@@ -340,6 +340,11 @@
             "source": "benchmark_source/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "CONSTRUCT ING A SEISMICITY AND MOMENT TENSOR CATALOGUE, first paragraph; DATA AVAILABILITY",
             "note": "Checked local article text for waveform archive citation, 66-station study array, vertical/north detection components, and supplementary Fig. S1. Does not establish current endpoint or candidate-window availability."
+          },
+          {
+            "source": "benchmark_source/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/supplement/AWR2025_CALTECHDATA__supplement_figures.pdf",
+            "locator": "Physical PDF page 2, Fig. S1",
+            "note": "Original figure read directly: CI, GS, NN, PB, ZY; no station labels."
           }
         ]
       },
@@ -619,10 +624,10 @@
         "product_id": "DP1",
         "name": "Article supplementary AWR Catalogs.zip",
         "type": "other",
-        "file_path": null,
-        "catalog_relation": "Article-cited release; exact archive is not local and may correspond to DOI 10.22002/f40da-hww21.",
+        "file_path": "benchmark_source/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/supplement/AWR2025_CALTECHDATA__supplement.zip",
+        "catalog_relation": "Publisher supplementary ZIP; contains nested AWR_Catalogs.zip. Equivalence with CaltechDATA versions unverified.",
         "scientific_use": "Resolve article/local byte identity and reproduce article counts.",
-        "count_or_scope": "Missing local archive/manifest",
+        "count_or_scope": "Two catalog CSVs in nested ZIP; supplementary PDF and movie; no independent station table",
         "evidence": [
           {
             "source": "benchmark_source/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
@@ -689,7 +694,7 @@
       ]
     },
     "missing_information": [
-      "Article supplementary ZIP/release manifest is not local.",
+      "Article ZIP archived; release equivalence with local Version 2 remains unresolved.",
       "Exact station-day availability and waveform volume are not extracted.",
       "GaMMA, amplitude and candidate-MT intermediate tables are not released locally.",
       "Byte-level identity between DOI 10.22002/5af05-cah73 and article-cited 10.22002/f40da-hww21 is unresolved."
@@ -707,7 +712,7 @@
       "quality and leakage role"
     ],
     "missing_core_fields": [
-      "article supplementary archive and exact release manifest",
+      "article ZIP versus Version 2 release reconciliation",
       "station-day waveform volume",
       "intermediate GaMMA/amplitude/candidate-MT products"
     ],
