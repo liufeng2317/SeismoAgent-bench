@@ -119,15 +119,10 @@ def stars(ax, audit, annotate=False):
                         bbox={'fc':'white','ec':'none','alpha':.9,'pad':1.2},zorder=6)
 
 
-def heading(fig, title, subtitle):
-    fig.text(.085,.969,title,fontsize=11,fontweight='bold',va='top')
-    fig.text(.085,.928,subtitle,fontsize=7,color='#555555',va='top')
-
-
 def overview(out, cfg, audit, data):
     bounds = cfg['scientific_design']['candidate_window']['native_comparison_bounds']
-    fig = plt.figure(figsize=(WIDTH_INCHES,5.3))
-    grid = fig.add_gridspec(2,2,width_ratios=[1.15,1],left=.085,right=.97,bottom=.28,top=.855,wspace=.32,hspace=.55)
+    fig = plt.figure(figsize=(WIDTH_INCHES,4.5))
+    grid = fig.add_gridspec(2,2,width_ratios=[1.15,1],left=.085,right=.97,bottom=.22,top=.93,wspace=.32,hspace=.55)
     axmap = fig.add_subplot(grid[:,0]); axtime = fig.add_subplot(grid[0,1]); axdepth = fig.add_subplot(grid[1,1])
     reference = data[0]; norm = Normalize(0,72)
     points = axmap.scatter(reference['longitude'],reference['latitude'],c=reference['hour'],norm=norm,cmap='cividis',s=1.5,linewidths=0,rasterized=True)
@@ -157,17 +152,14 @@ def overview(out, cfg, audit, data):
     axdepth.set_xticks([-117.8,-117.5,-117.2],labels=['117.8','117.5','117.2']);axdepth.set_yticks([0,10,20])
     axdepth.set_xlabel('Longitude (°W)');axdepth.set_ylabel('Native depth (km)')
     panel_label(axdepth,'c','Shelly depth projection')
-    cax=fig.add_axes([.095,.14,.40,.017]);bar=fig.colorbar(points,cax=cax,orientation='horizontal',ticks=[0,24,48,72])
+    cax=fig.add_axes([.095,.085,.40,.017]);bar=fig.colorbar(points,cax=cax,orientation='horizontal',ticks=[0,24,48,72])
     bar.ax.set_xticklabels(['4 Jul','5 Jul','6 Jul','7 Jul']);bar.set_label('Origin time · 2019 (UTC)',labelpad=3)
-    heading(fig,'2019 Ridgecrest earthquake sequence','4–7 July 2019 · 72-hour exploratory comparison · stars: official epicentres')
-    fig.text(.56,.13,'Mw 6.4  ·  4 Jul, 17:33:49 UTC\nMw 7.1  ·  6 Jul, 03:19:53 UTC',fontsize=7,linespacing=1.6)
-    fig.text(.085,.022,'Common numerical mask: 35.45–36.05°N, 117.90–117.20°W, native depth 0–20 km.\nHourly bins are UTC-aligned; counts reflect different catalog populations, not detection skill.',fontsize=6.3,color='#555555',linespacing=1.5)
     save_figure(fig,out/'01_sequence_overview');plt.close(fig)
 
 
 def spatial(out, cfg, audit, data):
-    fig = plt.figure(figsize=(WIDTH_INCHES,6.7))
-    grid=fig.add_gridspec(2,3,left=.085,right=.975,bottom=.23,top=.85,wspace=.30,hspace=.38)
+    fig = plt.figure(figsize=(WIDTH_INCHES,5.9))
+    grid=fig.add_gridspec(2,3,left=.085,right=.975,bottom=.20,top=.93,wspace=.30,hspace=.38)
     bounds=cfg['scientific_design']['candidate_window']['native_comparison_bounds']
     for i,record in enumerate(data):
         ax=fig.add_subplot(grid[i//3,i%3])
@@ -182,16 +174,13 @@ def spatial(out, cfg, audit, data):
     ax.set_xticks([0,4000,8000],labels=['0','4,000','8,000']);ax.set_xlabel('Selected catalog records')
     for i,record in enumerate(data):ax.text(len(record['rows'])+170,i,f'{len(record["rows"]):,}',va='center',fontsize=6.5)
     panel_label(ax,'f','Population size')
-    cax=fig.add_axes([.09,.11,.51,.017]);bar=fig.colorbar(scatter,cax=cax,orientation='horizontal',ticks=[0,5,10,15,20]);bar.set_label('Native depth (km)',labelpad=3)
-    heading(fig,'Spatial expression across five catalogs','Identical time, geographic and numerical depth selection; all selected records shown')
-    fig.text(.65,.095,'Stars: Mw 6.4 and Mw 7.1\nSame limits and geographic aspect\nNo cross-catalog deduplication',fontsize=6.4,linespacing=1.5)
-    fig.text(.085,.018,'Depth datums are not harmonized. Ross: nbranch > 1; official: type = earthquake.\nSmall-scale density also depends on selection, relocation and overlapping symbol coverage.',fontsize=6.3,color='#555555',linespacing=1.5)
+    cax=fig.add_axes([.09,.075,.51,.017]);bar=fig.colorbar(scatter,cax=cax,orientation='horizontal',ticks=[0,5,10,15,20]);bar.set_label('Native depth (km)',labelpad=3)
     save_figure(fig,out/'02_catalog_spatial_comparison');plt.close(fig)
 
 
 def diagnostics(out, cfg, audit, data):
-    fig=plt.figure(figsize=(WIDTH_INCHES,6.15))
-    grid=fig.add_gridspec(2,2,left=.14,right=.96,bottom=.22,top=.865,wspace=.54,hspace=.52)
+    fig=plt.figure(figsize=(WIDTH_INCHES,5.65))
+    grid=fig.add_gridspec(2,2,left=.14,right=.96,bottom=.20,top=.93,wspace=.54,hspace=.52)
     amag=fig.add_subplot(grid[0,0]);adepth=fig.add_subplot(grid[0,1]);arate=fig.add_subplot(grid[1,0]);amatch=fig.add_subplot(grid[1,1])
     for r in data:
         magnitude=np.sort(r['magnitude'][np.isfinite(r['magnitude'])])
@@ -199,10 +188,9 @@ def diagnostics(out, cfg, audit, data):
         amag.step(values,(len(magnitude)-first)/len(magnitude),where='pre',color=r['color'],label=r['label'])
         depths=np.sort(r['depth_km']);adepth.step(depths,np.arange(1,len(depths)+1)/len(depths),where='post',color=r['color'])
     amag.set_yscale('log');amag.set_ylim(1e-4,1.1);amag.set_xlim(-1,7.3)
-    amag.set_xlabel('Native magnitude (scales differ)');amag.set_ylabel('Fraction with magnitude ≥ M')
+    amag.set_xlabel('Native magnitude');amag.set_ylabel('Fraction with magnitude ≥ M')
     amag.legend(frameon=False,fontsize=6,loc='upper right',handlelength=1.8,labelspacing=.30)
     adepth.set_xlim(0,20);adepth.set_ylim(0,1);adepth.set_xlabel('Native depth (km)');adepth.set_ylabel('Cumulative fraction')
-    adepth.text(.35,.10,'Depth datum unresolved',transform=adepth.transAxes,va='top',fontsize=6.3,color='#666666')
     panel_label(amag,'a','Magnitude populations');panel_label(adepth,'b','Depth distributions')
     rates=np.array([[stage['native_mask_rows'][r['key']]/stage['hours'] for r in data] for stage in audit['stages']])
     im=arate.imshow(rates,cmap='YlGnBu',norm=LogNorm(vmin=1,vmax=300),aspect='auto')
@@ -223,8 +211,6 @@ def diagnostics(out, cfg, audit, data):
     amatch.set_ylim(3.6,-.9);amatch.set_xlim(0,1.35);amatch.set_xlabel('Horizontal reference difference (km)')
     amatch.legend(handles=[Line2D([],[],marker='o',color='#245775',ls='',ms=4,label='Median'),Line2D([],[],marker='D',mfc='white',mec='#245775',ls='',ms=4,label='90th percentile')],frameon=False,fontsize=6,loc='upper left',bbox_to_anchor=(-.01,1.02))
     panel_label(amatch,'d','Unambiguous event correspondence')
-    heading(fig,'Catalog populations and reference agreement','Distributional diagnostics within the same exploratory 72-hour numerical mask')
-    fig.text(.10,.018,'Native magnitudes and depths are not cross-calibrated; no b-value or completeness fit is inferred.\nPanel d: reciprocal unique candidates within 1 s and 5 km; ambiguity is retained. Differences are not truth errors.',fontsize=6.2,color='#555555',linespacing=1.5)
     save_figure(fig,out/'03_catalog_population_diagnostics');plt.close(fig)
     return rates
 

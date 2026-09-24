@@ -2,7 +2,7 @@
   "case_id": "2019_ridgecrest_california",
   "config_sha256": "6f1763fba1ec6b7febfa2fc50b351efcae95f6705c988909661952dd3d1b96b5",
   "audit_sha256": "c6ce721799d4042d673fbfa64d9e17c73e41ebd636fc7cdd29d7b29eeea3658b",
-  "script_sha256": "4479d9409c2bba802f61dd3726ff81b9df89e4715d9a3be5e3e0c8cc58bfd33a",
+  "script_sha256": "8ae941d20dfd16011c16bb99abab2b9bf8a71aeaa9f5bd88e3a1acd3914a3530",
   "versions": {
     "matplotlib": "3.10.9",
     "numpy": "2.4.4"
@@ -106,28 +106,28 @@
   },
   "figures": {
     "01_sequence_overview.pdf": {
-      "sha256": "61e355d1a9dd106a1578159c5386150100cf353a13ec09c3efd5952b2f2f32f8",
-      "bytes": 470026
+      "sha256": "cb5f439c3b37f6884b2e2d74d787c572c57e198123f3376dcef709bcdf3a52d1",
+      "bytes": 473144
     },
     "01_sequence_overview.png": {
-      "sha256": "237ec60065c834d90852889192aeb8f522cdf59c2187f52f51dba0d41c1a9a34",
-      "bytes": 560094
+      "sha256": "099f3836942e233f2cccd8b2591d0ab76d10e49c6c6d22fd12fa201b2d83433f",
+      "bytes": 489321
     },
     "02_catalog_spatial_comparison.pdf": {
-      "sha256": "5c18d95db184cebecf006a4cb39e29b5c5c11d8af9a4bc51d1377bce24d5c3d6",
-      "bytes": 597817
+      "sha256": "3f28e54665b97865ff7c80a8f8108ab693d9bd1beb9713bb20f4b874705a6c5c",
+      "bytes": 619156
     },
     "02_catalog_spatial_comparison.png": {
-      "sha256": "8a4840acaef65f39a0354fafabeb04eea1663db953753556ef1e90ce9fc69742",
-      "bytes": 662659
+      "sha256": "c81418ec67e44bba326b4af2f9720d205c250aac8f460c4d645a1ef01ab9a436",
+      "bytes": 583732
     },
     "03_catalog_population_diagnostics.pdf": {
-      "sha256": "d98993de0a95c2fe0a8f9420da211bb827675805698c2a86cabc51e9e0b15473",
-      "bytes": 102050
+      "sha256": "c58550814e1185e77b86f45a1644dad6cd1ccdb87bce66332bd23e055e13b23c",
+      "bytes": 99526
     },
     "03_catalog_population_diagnostics.png": {
-      "sha256": "320daca2a7df914faff969b3c18f78751a22f6d4ca5d8cb224eb22e244053331",
-      "bytes": 390264
+      "sha256": "800d311ffa0ff4f5ba55dfab846e1282504d20244f64566be16eb181b0313bc7",
+      "bytes": 307703
     }
   }
 }

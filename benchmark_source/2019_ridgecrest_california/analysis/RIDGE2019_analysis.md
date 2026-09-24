@@ -156,14 +156,14 @@ python -B -m unittest discover -s tests/source_prepare -v
 
 ## 7. 目录可视化比较
 
-本轮以已有本地目录制作期刊风格的多面板图：统一字体、面板编号、配色与坐标范围，宽度 180 mm，PNG 为 320 dpi，PDF 保留矢量文字和坐标、点云以 450 dpi 栅格嵌入。属于探索性 source 分析，尚未按特定期刊投稿要求定稿。
+本轮以已有本地目录制作期刊风格的多面板图：统一字体、面板编号、配色与坐标范围，宽度 180 mm，PNG 为 320 dpi，PDF 保留矢量文字和坐标、点云以 450 dpi 栅格嵌入。图内只保留面板编号、简短面板名称、坐标轴、图例、色标及必要事件标注；总标题、副标题、方法说明和比较限制统一放在本文图注中。属于探索性 source 分析，尚未按特定期刊投稿要求定稿。
 
 所有图采用半开时间窗 `[2019-07-04 00:00:00, 2019-07-07 00:00:00) UTC`，经纬度与原生深度数值范围沿用候选配置。完整绘制筛选后的记录，不抽样、不跨目录去重。Ross 仅使用 `nbranch > 1` 子集，官方目录仅使用 `type = earthquake`；官方同时间不同 ID 的记录仍保留。AWR 使用 v2 hypocenters，震相和震源机制表不作为事件目录混入。
 
 | 图件 | 内容与图注 | 文件 |
 |---|---|---|
-| 1：序列概览 | a：Shelly 事件水平分布，颜色表示发震时间；星号为官方 Mw 6.4、Mw 7.1 震中。b：五个目录按 UTC 整点分箱的小时事件数，纵轴采用含零的对称对数尺度。c：Shelly 经度—原生深度投影，投影包含整个纬度范围，不是沿断层剖面。比例尺为局地近似。 | [PNG](figures/catalog_comparison/01_sequence_overview.png) · [PDF](figures/catalog_comparison/01_sequence_overview.pdf) |
-| 2：空间分布比较 | a–e：五个目录使用一致的地图边界、地理纵横比和原生深度色标。f：同一数值筛选下的记录数。点云密集程度受检测、筛选、重定位和符号遮盖共同影响；图中没有加入断层线或台站位置。 | [PNG](figures/catalog_comparison/02_catalog_spatial_comparison.png) · [PDF](figures/catalog_comparison/02_catalog_spatial_comparison.pdf) |
+| 1：序列概览 | a：Shelly 事件水平分布，颜色表示发震时间；星号为官方 Mw 6.4（7 月 4 日 17:33:49 UTC）、Mw 7.1（7 月 6 日 03:19:53 UTC）震中。b：五个目录按 UTC 整点分箱的小时事件数，纵轴采用含零的对称对数尺度。c：Shelly 经度—原生深度投影，投影包含整个纬度范围，不是沿断层剖面。比例尺为局地近似。 | [PNG](figures/catalog_comparison/01_sequence_overview.png) · [PDF](figures/catalog_comparison/01_sequence_overview.pdf) |
+| 2：空间分布比较 | a–e：五个目录使用一致的地图边界、地理纵横比和原生深度色标。星号表示上述两次大震的官方震中。f：同一数值筛选下的记录数。点云密集程度受检测、筛选、重定位和符号遮盖共同影响；图中没有加入断层线或台站位置。 | [PNG](figures/catalog_comparison/02_catalog_spatial_comparison.png) · [PDF](figures/catalog_comparison/02_catalog_spatial_comparison.pdf) |
 | 3：分布与对应诊断 | a：原生震级的经验超越比例；b：原生深度经验累积分布；c：五个科学阶段的每小时平均记录数，以阶段时长归一化；d：`1 s / 5 km` 双向唯一对应的水平距离中位数与第 90 百分位，连线不是置信区间。阶段边界沿用核验配置，“later”排除对应大震后的首小时。 | [PNG](figures/catalog_comparison/03_catalog_population_diagnostics.png) · [PDF](figures/catalog_comparison/03_catalog_population_diagnostics.pdf) |
 
 目前可以支持的观察：
