@@ -38,7 +38,7 @@ context.
 `*__paper_reading.md` holds human-readable paper notes; catalog provenance and field audits are consolidated in `catalogs/<CATALOG_ID>/README.md`.
 They may be retained for navigation, but new factual extraction should be
 written to JSON and should not depend on prose notes as the canonical record.
-Case-level comparison remains in `data/<CASE>/analysis/`.
+Case-level comparison remains in `benchmark_source/<CASE>/analysis/`.
 
 ## 3. Compact extraction object
 

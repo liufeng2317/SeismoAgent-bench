@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def discover(case=None, source=None):
-    paths = sorted((ROOT / "data").glob("*/references/*/supplement/*.pdf"))
+    paths = sorted((ROOT / "benchmark_source").glob("*/references/*/supplement/*.pdf"))
     out=[]
     for p in paths:
         if case and p.parents[3].name != case: continue

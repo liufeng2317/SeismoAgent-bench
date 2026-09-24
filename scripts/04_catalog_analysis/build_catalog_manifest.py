@@ -65,11 +65,15 @@ def build_manifest(data: Path) -> str:
     def link(path: Path) -> str:
         return "./" + quote(path.relative_to(data).as_posix(), safe="/")
 
-    cases = sorted(p for p in data.iterdir() if (p / "catalogs").is_dir())
+    def catalog_root(case: Path) -> Path:
+        nested = case / "data/catalogs"
+        return nested if nested.is_dir() else case / "catalogs"
+
+    cases = sorted(p for p in data.iterdir() if catalog_root(p).is_dir())
     inventory = {}
     for case in cases:
         catalogs = []
-        for catalog in sorted(p for p in (case / "catalogs").iterdir() if p.is_dir()):
+        for catalog in sorted(p for p in catalog_root(case).iterdir() if p.is_dir()):
             products = []
             for path in sorted((catalog / "analysis/stats").rglob("*.json")):
                 product = full_product(path)
@@ -127,7 +131,7 @@ def main() -> None:
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--output", type=Path, help="Optional output path for a preview")
     args = parser.parse_args()
-    data = args.root.resolve() / "data"
+    data = args.root.resolve() / "benchmark_source"
     output = args.output or data / "CATALOGS_MANIFEST.md"
     output.write_text(build_manifest(data), encoding="utf-8")
 

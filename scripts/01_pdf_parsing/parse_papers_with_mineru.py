@@ -21,7 +21,7 @@ from dotenv import load_dotenv
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-KG_ROOT = Path("/liufeng1afs/project/03_LLM/Knowledge_Graph")
+KG_ROOT = Path(os.environ.get("KNOWLEDGE_GRAPH_ROOT", str(PROJECT_ROOT.parent.parent / "Knowledge_Graph")))
 
 
 def load_official_parser():
@@ -34,7 +34,7 @@ def load_official_parser():
 
 
 def discover_pdfs(root: Path, case: str | None, source: str | None) -> list[Path]:
-    papers = root / "data"
+    papers = root / "benchmark_source"
     paths = sorted(papers.glob("*/references/*/paper/*.pdf"))
     selected = []
     for path in paths:

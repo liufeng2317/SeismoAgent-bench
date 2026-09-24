@@ -64,12 +64,12 @@ The central question is:
 
 | Case | Regime | Main challenge |
 |---|---|---|
-| [Prague, Oklahoma](data/2011_prague_oklahoma/) | Mainshock–aftershock | Changing heterogeneous network |
-| [Kaikōura, New Zealand](data/2016_kaikoura_new_zealand/) | Dense aftershock sequence | Temporary network and relocation |
-| [Maple Creek, Yellowstone](data/2017_maple_creek_yellowstone/) | Earthquake swarm | Sparse routine catalog |
-| [Kīlauea, Hawaiʻi](data/2018_kilauea_hawaii/) | Volcanic eruption sequence | High-rate changing sources |
-| [Ridgecrest, California](data/2019_ridgecrest_california/) | Dense faulting sequence | Overlapping events and complex geometry |
-| [Magna, Utah](data/2020_magna_utah/) | Moderate earthquake sequence | Permanent versus nodal networks |
+| [Prague, Oklahoma](benchmark_source/2011_prague_oklahoma) | Mainshock–aftershock | Changing heterogeneous network |
+| [Kaikōura, New Zealand](benchmark_source/2016_kaikoura_new_zealand) | Dense aftershock sequence | Temporary network and relocation |
+| [Maple Creek, Yellowstone](benchmark_source/2017_maple_creek_yellowstone) | Earthquake swarm | Sparse routine catalog |
+| [Kīlauea, Hawaiʻi](benchmark_source/2018_kilauea_hawaii) | Volcanic eruption sequence | High-rate changing sources |
+| [Ridgecrest, California](benchmark_source/2019_ridgecrest_california) | Dense faulting sequence | Overlapping events and complex geometry |
+| [Magna, Utah](benchmark_source/2020_magna_utah) | Moderate earthquake sequence | Permanent versus nodal networks |
 
 The cases are deliberately different. The goal is not one leaderboard, but a
 capability profile showing where an agent succeeds, fails, or needs expert
@@ -99,10 +99,12 @@ docs/
   01_3_Information_Extraction_Schema.md  extraction contract
   01_4_Paper_Parsing_Audit.md   MinerU output audit
 
-data/
+benchmark_source/
   REFERENCES_MANIFEST.md    paper/supplement/catalog readiness
   <case>/references/        source papers and supplementary materials
-  <case>/catalogs/          source catalogs and catalog-level products
+  <case>/data/catalogs/     Ridgecrest/Kīlauea catalogs and analysis products
+  <case>/data/waveforms/    local waveform payloads (ignored by Git)
+  <case>/catalogs/          retained layout in the other four cases
   <case>/analysis/          cross-reference case conclusions
 
 scripts/
@@ -113,9 +115,9 @@ scripts/
   04_catalog_analysis/     catalog manifest generation
 ```
 
-Detailed organization rules belong in [data/README.md](data/README.md), and
+Detailed organization rules belong in [benchmark_source/README.md](benchmark_source/README.md), and
 the current reference readiness belongs in
-[data/REFERENCES_MANIFEST.md](data/REFERENCES_MANIFEST.md).
+[benchmark_source/REFERENCES_MANIFEST.md](benchmark_source/REFERENCES_MANIFEST.md).
 
 ## Quick start
 
@@ -169,8 +171,8 @@ Next deliverables are:
 - [Case details](docs/01_1_Case_details.md)
 - [Information extraction schema](docs/01_3_Information_Extraction_Schema.md)
 - [Paper parsing audit](docs/01_4_Paper_Parsing_Audit.md)
-- [Reference manifest](data/REFERENCES_MANIFEST.md)
-- [Data organization rules](data/README.md)
+- [Reference manifest](benchmark_source/REFERENCES_MANIFEST.md)
+- [Data organization rules](benchmark_source/README.md)
 - [Repository cleanup and retention decisions](docs/02_Repository_Cleanup.md)
 
 **Canonical project name:** `SeismoAgentBench`  \

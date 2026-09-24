@@ -9,7 +9,7 @@ duplicate the API client and does **not** use the retired `mineru_local` service
 The existing Knowledge_Graph parser reads `MINERU_API_BASE` and
 `MINERU_API_KEY` from the SeismoAgentBench `.env` file.
 
-It discovers PDFs under `data/*/references/*/paper/` and writes results beside
+It discovers PDFs under `benchmark_source/*/references/*/paper/` and writes results beside
 the source paper:
 
 ```text

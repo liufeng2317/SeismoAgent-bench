@@ -48,9 +48,9 @@ __pycache__/
 **/references/**/*.mp4
 
 # Large tabular supplementary products and extracted phase directories
-data/**/*.xlsx
-data/**/phases/
-data/**/context/
+benchmark_source/**/*.xlsx
+benchmark_source/**/phases/
+benchmark_source/**/context/
 
 # Raw archives and machine-scale phase-arrival products stay local.
 **/catalogs/**/raw/
@@ -61,12 +61,15 @@ data/**/context/
 **/catalogs/**/*.hdf5
 
 # Large source catalogs; small canonical tables can be force-added explicitly.
-data/**/*.csv
-data/**/*.txt
-data/**/*.xml
+benchmark_source/**/*.csv
+benchmark_source/**/*.txt
+benchmark_source/**/*.xml
 
 # Temporary downloads and OS metadata
 **/.DS_Store
 **/__MACOSX/
 *.part
 *.tmp
+
+# Continuous waveforms remain local after the source-layout migration.
+benchmark_source/**/waveforms/

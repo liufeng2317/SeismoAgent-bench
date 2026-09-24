@@ -11,7 +11,7 @@ The script deliberately has no third-party document dependency:
   assessment.
 
 Catalog migration is opt-in (``--migrate-catalogs``).  Only high-confidence
-event-table candidates are moved to ``data/<CASE>/catalogs/<SOURCE>/raw``;
+event-table candidates are moved to ``benchmark_source/<CASE>/catalogs/<SOURCE>/raw``;
 ambiguous tables remain in the supplement directory and are reported.
 """
 from __future__ import annotations
@@ -161,7 +161,7 @@ def plain_to_md(path: Path) -> tuple[str, dict]:
 
 def discover(root: Path, case: str | None, source: str | None) -> list[Path]:
     paths = []
-    for p in sorted((root / "data").glob("*/references/*/supplement/*")):
+    for p in sorted((root / "benchmark_source").glob("*/references/*/supplement/*")):
         if p.suffix.lower() not in SUPPORTED or p.suffix.lower() in IGNORE:
             continue
         if case and p.parents[3].name != case:
@@ -185,7 +185,9 @@ def process_one(path: Path, migrate: bool) -> dict:
     elif suffix == ".xlsx":
         text, confident, extra = xlsx_to_md(path); out_path.write_text(text, encoding="utf-8"); meta.update(extra)
         if confident and migrate:
-            target_dir = ROOT / "data" / case / "catalogs" / source / "raw"; target_dir.mkdir(parents=True, exist_ok=True)
+            case_dir = ROOT / "benchmark_source" / case
+            catalogs = case_dir / "data/catalogs" if (case_dir / "data").is_dir() else case_dir / "catalogs"
+            target_dir = catalogs / source / "raw"; target_dir.mkdir(parents=True, exist_ok=True)
             target = target_dir / path.name
             if not target.exists():
                 shutil.move(str(path), str(target)); meta.update({"status": "migrated_catalog", "migrated_to": str(target.relative_to(ROOT))})
@@ -212,7 +214,7 @@ def main() -> int:
     for r in records:
         role = r.get("role", r.get("status", "")); dest = r.get("migrated_to", r.get("output", ""))
         lines.append(f"| `{r['case']}` | `{r['source']}` | `{Path(r['file']).name}` | `{r['type']}` | `{role}` | `{dest}` |")
-    lines += ["", "## Interpretation rules", "", "- `catalog_candidate` is only a high-confidence automated flag; verify against the paper and schema before using it as a benchmark catalog.", "- Supplementary parameter, uncertainty, figure, and station tables remain under `references/<SOURCE>/supplement`.", "- Catalog files belong under `data/<CASE>/catalogs/<SOURCE>/raw`; migration is performed only with `--migrate-catalogs`.", "- The generated `__extracted.md` files are machine-readable derivatives, not replacements for the original supplements.", ""]
+    lines += ["", "## Interpretation rules", "", "- `catalog_candidate` is only a high-confidence automated flag; verify against the paper and schema before using it as a benchmark catalog.", "- Supplementary parameter, uncertainty, figure, and station tables remain under `references/<SOURCE>/supplement`.", "- Catalog files belong under `benchmark_source/<CASE>/catalogs/<SOURCE>/raw`; migration is performed only with `--migrate-catalogs`.", "- The generated `__extracted.md` files are machine-readable derivatives, not replacements for the original supplements.", ""]
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
         args.report.write_text("\n".join(lines), encoding="utf-8")
