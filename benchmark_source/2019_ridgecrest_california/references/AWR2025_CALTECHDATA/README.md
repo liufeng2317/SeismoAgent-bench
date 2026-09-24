@@ -23,3 +23,9 @@ as an explicit release-version discrepancy.
 The publisher supporting-information link supplied the ZIP (no temporary signed URL stored). Its nested `AWR_Catalogs.zip` contains hypocenter and moment-tensor CSVs, not a station list. Only the supplementary PDF was extracted; existing Version 2 catalogs were not replaced. PDF page 2, Fig. S1, directly confirms networks CI, GS, NN, PB and ZY but provides no station labels or station-day table. Article-release byte equivalence with local Version 2 remains unverified.
 
 Large original PDFs/ZIPs remain local and ignored by Git; this record tracks their source and checksums.
+
+## Velocity-model acquisition
+
+Hutton (2010) PDF archived at `supplement/HUTTON2010__paper.pdf`, Table 5 providing a documented SCSN HK implementation. UCVM modified HK and HypoSVI Julia example files downloaded as supporting candidates; none is confirmed as the actual AWR smoothed model or station terms.
+
+File sources, fixed repository revisions, sizes and hashes: [model acquisition manifest](../../data/models/acquisition_manifest.json). Model roles and numeric status: [velocity models](../../data/models/velocity_models.json). Manual follow-up links are maintained in the [case analysis](../../analysis/RIDGE2019_analysis.md).

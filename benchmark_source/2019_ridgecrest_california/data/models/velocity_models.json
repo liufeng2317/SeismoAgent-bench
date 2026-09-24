@@ -72,21 +72,21 @@
     },
     "liu_coso_initial": {
       "status": "cited_model_numeric_table_transcribed",
-      "source": "User-provided image in conversation, identified by user as Feng & Lees (1998), Table 1",
-      "locator": "Table 1: Coso regional velocity model; caption below table",
+      "source": "references/LIU2020_GL086189/supplement/FENG_LEES1998__paper.pdf",
+      "locator": "Physical PDF page 3, printed page 223, Table 1",
       "reference": "Feng & Lees (1998), Tectonophysics 289, 221–238",
       "missing": [
         "model depth datum and numerical implementation conventions",
         "verification of the actual Liu initial input file against this cited table"
       ],
-      "source_sha256": null,
+      "source_sha256": "200b2bce7e050aebba3bed0f39beac9548a32b0439da9c4ecda81983a4ae0840",
       "doi": "10.1016/S0040-1951(97)00317-X",
       "role": "Published model cited as initial model by Liu et al. (2020); not the VELEST-updated model",
       "liu_usage_evidence": {
         "source": "references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
         "locator": "Section 2"
       },
-      "provenance_note": "Manually transcribed from the user-supplied image; image is visible in conversation but not archived as a local file, so no file hash is claimed.",
+      "provenance_note": "Originally transcribed from user image; now independently verified against downloaded author-hosted PDF Table 1. All 12 rows agree.",
       "units": {
         "p_depth": "km",
         "vp": "km/s",
@@ -182,21 +182,181 @@
         "actual smoothed numerical profile",
         "smoothing procedure",
         "source-specific station terms"
+      ],
+      "candidate_model_ids": [
+        "scsn_hk_hutton2010",
+        "ucvm_modified_hk",
+        "hyposvi_julia_example"
       ]
     },
     "ross": {
-      "status": "model_reference_identified_numeric_configuration_unresolved",
+      "status": "public_3d_candidate_downloaded_exact_input_unverified",
       "source": "references/ROSS2019_SCIENCE/supplement/ROSS2019_SCIENCE__supplement_DC1.pdf",
       "source_sha256": "a88f3b53ec14e6ef1a3ec5d52530fbfb67a48b6922a810eaa854d5df26267a46",
       "locator": "PDF page 2, reference 33",
       "reference": "Hauksson (2000), DOI 10.1029/2000JB900016",
       "role": "3D individual template locations followed by hypoDD; 1D arrival predictions where picks missing",
       "missing": [
-        "actual 3D numerical model and processing configuration",
+        "exact downloaded 3D archive correspondence to Hauksson (2000) and Ross input",
+        "confirmed native 3D block schema, coordinates/datum and interpolation configuration",
         "1D arrival-prediction model",
         "GrowClust numerical velocity configuration"
       ],
-      "caution": "Supplement Table S1 is an elastic model for other analyses, not confirmed as QTM catalog relocation model."
+      "caution": "Supplement Table S1 is an elastic model for other analyses, not confirmed as QTM catalog relocation model.",
+      "candidate_model_id": "scedc_socal_3d"
+    }
+  },
+  "supporting_models": {
+    "scsn_hk_hutton2010": {
+      "status": "published_numeric_table_transcribed_not_confirmed_awr_input",
+      "source": "references/AWR2025_CALTECHDATA/supplement/HUTTON2010__paper.pdf",
+      "source_sha256": "f167f9c02d5bfb4aab610a099a9e4efb8f66a11211c819f05e62ff25ab93f325",
+      "locator": "PDF page 8, printed page 430, Table 5",
+      "units": {
+        "top_of_layer": "km",
+        "vp": "km/s",
+        "vs": "km/s"
+      },
+      "vp_vs_ratio": 1.73,
+      "vs_provenance": "Derived Vp/1.73 as specified by Table 5; Vs not separately tabulated",
+      "rows": [
+        {
+          "top_of_layer_km": 0,
+          "vp_km_s": 5.5,
+          "vs_km_s": 3.179190751445087
+        },
+        {
+          "top_of_layer_km": 5.5,
+          "vp_km_s": 6.3,
+          "vs_km_s": 3.6416184971098264
+        },
+        {
+          "top_of_layer_km": 16,
+          "vp_km_s": 6.7,
+          "vs_km_s": 3.8728323699421967
+        },
+        {
+          "top_of_layer_km": 32,
+          "vp_km_s": 7.8,
+          "vs_km_s": 4.508670520231214
+        }
+      ],
+      "caution": "SCSN implementation documented in Hutton 2010, not verified as exact original 1977 or AWR smoothed model."
+    },
+    "ucvm_modified_hk": {
+      "status": "public_implementation_downloaded_not_confirmed_awr_input",
+      "source": "data/models/raw/UCVM_HK_1D/1d.conf",
+      "source_sha256": "3bbedbb3cd8c44695e301fddbd38c9dd58ea36d18a1168c8266af38ab39af642",
+      "repository_commit": "f9254ce76872fd4d8252d589eb1ca8544204702b",
+      "units": {
+        "depth": "km",
+        "vp": "km/s"
+      },
+      "rows": [
+        {
+          "depth_km": 1,
+          "vp_km_s": 5
+        },
+        {
+          "depth_km": 5,
+          "vp_km_s": 5.5
+        },
+        {
+          "depth_km": 6,
+          "vp_km_s": 6.3
+        },
+        {
+          "depth_km": 10,
+          "vp_km_s": 6.3
+        },
+        {
+          "depth_km": 15.5,
+          "vp_km_s": 6.4
+        },
+        {
+          "depth_km": 16.5,
+          "vp_km_s": 6.7
+        },
+        {
+          "depth_km": 22,
+          "vp_km_s": 6.75
+        },
+        {
+          "depth_km": 31,
+          "vp_km_s": 6.8
+        },
+        {
+          "depth_km": 33,
+          "vp_km_s": 7.8
+        }
+      ],
+      "interpolation": "Linear between depth nodes; implementation retained in raw/UCVM_HK_1D/ucvm_model_1d.c",
+      "vs_provenance": "UCVM computes density from Vp and Vs from Vp/density; do not replace with constant Vp/Vs.",
+      "caution": "Modified SCEC/UCVM background; not original HK or confirmed AWR smooth profile."
+    },
+    "hyposvi_julia_example": {
+      "status": "example_downloaded_not_confirmed_awr_input",
+      "source": "data/models/raw/HYPOSVI_JULIA_EXAMPLE/velmod.csv",
+      "source_sha256": "99aaa8835f08db4ddb3f0b98baa328fca39cc1f65668398e040799b9493b1625",
+      "repository_commit": "1b76c01380d1693ed63d37f1dbee31c9147397cd",
+      "row_count": 39,
+      "native_columns": [
+        "depth",
+        "vp",
+        "vs"
+      ],
+      "depth_range_native": [
+        -5,
+        80
+      ],
+      "interpolation": "LinearInterpolation for both Vp and Vs in Eikonet.jl",
+      "caution": "CSV has no unit headers or original-paper provenance. Do not infer AWR identity, smoothing, depth datum or applicability from repository name."
+    },
+    "scedc_socal_3d": {
+      "status": "official_archive_downloaded_exact_catalog_input_unverified",
+      "source": "data/models/raw/SCEDC_SOCAL_3D/vel.sc8196ord1_sc04.07qd.out.Z",
+      "source_sha256": "bdb4082683ce91203af543f3e8c6ee9c717c9da9629e1287ab0bcc9e8ad70a5a",
+      "inspection": {
+        "layer_sections": 27,
+        "property_blocks": 3,
+        "depth_levels_km": [
+          1.0,
+          4.0,
+          6.0,
+          10.0,
+          15.0,
+          17.0,
+          22.0,
+          31.0,
+          33.0
+        ],
+        "nodes_per_layer": 1107,
+        "nodes_per_property": 9963,
+        "values_by_block_min_max": [
+          [
+            3.34,
+            8.23
+          ],
+          [
+            1.33,
+            4.79
+          ],
+          [
+            1.2,
+            3.15
+          ]
+        ],
+        "xyz_equal_across_blocks": true,
+        "inferred_block_order": [
+          "Vp",
+          "Vs",
+          "Vp/Vs"
+        ],
+        "block_order_status": "Inferred from numerical ranges and ratio consistency, not confirmed by accompanying schema",
+        "max_abs_block1_div_block2_minus_block3": 0.009285714285714564,
+        "ready_for_location": false
+      },
+      "caution": "Grid depths are consistent with cited regional model, but exact release/processing identity and native schema remain unverified. Do not substitute the older LA Basin files."
     }
   }
 }

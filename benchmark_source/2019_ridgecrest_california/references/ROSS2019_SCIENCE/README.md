@@ -21,3 +21,9 @@ constrained and recommends the SCSN hypocenter for that event.
 Official MD5 `50a84ce87d19cbbf47985eddc1720b04` matches the downloaded 35-page PDF. Physical PDF page 2 contains catalog methods; subevent-inversion station counts on page 3 and the elastic layers in Table S1 belong to other analyses and must not be assigned to the QTM input. Exact station IDs and continuous coverage remain unresolved.
 
 Large original PDFs/ZIPs remain local and ignored by Git; this record tracks their source and checksums.
+
+## Velocity-model acquisition
+
+Hauksson (2000) original PDF archived at `supplement/HAUKSSON2000__paper.pdf`, MD5 `2dbe004e8518cd156aef4cfba86a3842`. SCEDC Socal_3Dmodel payload was downloaded and inspected; exact version correspondence to Ross and native schema still need confirmation. The older LA Basin model under hauksson/vmodels was excluded.
+
+File sources, fixed repository revisions, sizes and hashes: [model acquisition manifest](../../data/models/acquisition_manifest.json). Model roles and numeric status: [velocity models](../../data/models/velocity_models.json). Manual follow-up links are maintained in the [case analysis](../../analysis/RIDGE2019_analysis.md).

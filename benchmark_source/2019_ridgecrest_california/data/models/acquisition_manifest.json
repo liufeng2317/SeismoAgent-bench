@@ -1,0 +1,192 @@
+{
+  "case_id": "2019_ridgecrest_california",
+  "retrieved_utc": "2026-09-24T18:54:00.097303+00:00",
+  "scope": "Model sources and candidate implementations; downloaded does not mean identical to a catalog input.",
+  "files": [
+    {
+      "path": "references/LIU2020_GL086189/supplement/FENG_LEES1998__paper.pdf",
+      "url": "https://leesj.sites.oasis.unc.edu/FETCH/Papers/Feng_Lees_coso_stress_1997.pdf",
+      "bytes": 8487101,
+      "sha256": "200b2bce7e050aebba3bed0f39beac9548a32b0439da9c4ecda81983a4ae0840",
+      "note": "Coso cited original; PDF p. 3 / printed p. 223 Table 1"
+    },
+    {
+      "path": "references/ROSS2019_SCIENCE/supplement/HAUKSSON2000__paper.pdf",
+      "url": "https://authors.library.caltech.edu/records/f3y2q-gz382/files/jgrb12222.pdf?download=1",
+      "bytes": 4159781,
+      "sha256": "7431d8a2e3dd708d02cf20dc9b7dda79b0f715baca48cff7461aad19dd897652",
+      "note": "Cited paper; official MD5 2dbe004e8518cd156aef4cfba86a3842 verified"
+    },
+    {
+      "path": "references/AWR2025_CALTECHDATA/supplement/HUTTON2010__paper.pdf",
+      "url": "https://scedc.caltech.edu/eq-catalogs/BSSA_2010_Hutton_SCSN_cat.pdf",
+      "bytes": 3993522,
+      "sha256": "f167f9c02d5bfb4aab610a099a9e4efb8f66a11211c819f05e62ff25ab93f325",
+      "note": "SCSN implementation of HK; PDF p. 8 / printed p. 430 Table 5; not AWR actual model"
+    },
+    {
+      "path": "data/models/raw/UCVM_HK_1D/1d.conf",
+      "url": "https://raw.githubusercontent.com/SCECcode/ucvm/f9254ce76872fd4d8252d589eb1ca8544204702b/model/1d/1d.conf",
+      "bytes": 446,
+      "sha256": "3bbedbb3cd8c44695e301fddbd38c9dd58ea36d18a1168c8266af38ab39af642",
+      "note": "Modified HK, 9 depth/Vp nodes, linear interpolation"
+    },
+    {
+      "path": "data/models/raw/UCVM_HK_1D/ucvm_model_1d.c",
+      "url": "https://raw.githubusercontent.com/SCECcode/ucvm/f9254ce76872fd4d8252d589eb1ca8544204702b/src/ucvm/ucvm_model_1d.c",
+      "bytes": 7725,
+      "sha256": "50268df78fe445cf93f2dfc56975be50d46c07f6b540d193040b859ba1b5c043",
+      "note": "Original implementation retained as evidence; not executed or installed"
+    },
+    {
+      "path": "data/models/raw/HYPOSVI_JULIA_EXAMPLE/velmod.csv",
+      "url": "https://raw.githubusercontent.com/interseismic/eikonet_julia/1b76c01380d1693ed63d37f1dbee31c9147397cd/velmod.csv",
+      "bytes": 1325,
+      "sha256": "99aaa8835f08db4ddb3f0b98baa328fca39cc1f65668398e040799b9493b1625",
+      "note": "Example model, exact AWR correspondence unverified"
+    },
+    {
+      "path": "data/models/raw/HYPOSVI_JULIA_EXAMPLE/Eikonet.jl",
+      "url": "https://raw.githubusercontent.com/interseismic/eikonet_julia/1b76c01380d1693ed63d37f1dbee31c9147397cd/Eikonet.jl",
+      "bytes": 8670,
+      "sha256": "c98a0e5cd37de6ebf78c0f550f5862b4595ce37ae92a309d0d82f18b560f950f",
+      "note": "Reader uses LinearInterpolation independently for Vp and Vs; no evidence of AWR smoothing"
+    },
+    {
+      "path": "data/models/raw/HYPOSVI_JULIA_EXAMPLE/eikonet.json",
+      "url": "https://raw.githubusercontent.com/interseismic/eikonet_julia/1b76c01380d1693ed63d37f1dbee31c9147397cd/eikonet.json",
+      "bytes": 232,
+      "sha256": "f0b59eab88d54b2730ca3c0280ca475fbc2f1d390160bc317a6e5ad3f0002184",
+      "note": "References ./velmod.csv; example config not a Ridgecrest release declaration"
+    },
+    {
+      "path": "data/models/raw/SCEDC_SOCAL_3D/vel.sc8196ord1_sc04.07qd.out.Z",
+      "url": "https://service.scedc.caltech.edu/ftp/catalogs/hauksson/Socal_3Dmodel/vel.sc8196ord1_sc04.07qd.out.Z",
+      "bytes": 350479,
+      "sha256": "bdb4082683ce91203af543f3e8c6ee9c717c9da9629e1287ab0bcc9e8ad70a5a",
+      "note": "Public Hauksson SoCal grid archive; exact paper/release identity not established by directory alone"
+    },
+    {
+      "path": "data/models/raw/SCEDC_SOCAL_3D/vel.sc8196ord1_sc04.07qd.out",
+      "url": null,
+      "bytes": 1863756,
+      "sha256": "f09e5a9e170cefd2e2e8fdc4d4781e1bf65f6bfa492d9e10afc05c3c9d84c952",
+      "note": "Decompressed with gzip -dc; no numerical conversion"
+    },
+    {
+      "path": "data/models/raw/SCEDC_SOCAL_3D/index.html",
+      "url": "https://service.scedc.caltech.edu/ftp/catalogs/hauksson/Socal_3Dmodel/",
+      "bytes": 995,
+      "sha256": "9dc5c6093fbe7830d4bbb9b76bbd2a67179292c788381ddfa2d65b1c646c4701",
+      "note": "Directory listing provides no README/version mapping"
+    },
+    {
+      "path": "data/models/raw/UCVM_HK_1D/scec_hk.html",
+      "url": "https://strike.scec.org/scecpedia/Hadley-Kanamori",
+      "bytes": 15913,
+      "sha256": "f9b45a328bd0f6cf9e6f912fd79c3c7c6ec86fed5cb44b6b81eff27fcfd5b67a",
+      "note": "Distinguishes SCSN 4-layer and SCEC modified HK models"
+    }
+  ],
+  "repository_revisions": {
+    "SCECcode/ucvm": "f9254ce76872fd4d8252d589eb1ca8544204702b",
+    "interseismic/eikonet_julia": "1b76c01380d1693ed63d37f1dbee31c9147397cd",
+    "Dal-mzhang/REAL": "6435ace552d1efe72e633e8f82a5f9d8467f1049",
+    "Dal-mzhang/LOC-FLOW": "a7eda475b9d4e6d84b206be314ba7a71b192819a"
+  },
+  "excluded_candidates": [
+    {
+      "url": "https://service.scedc.caltech.edu/ftp/hauksson/vmodels/",
+      "reason": "Downloaded to temporary inspection only; README cites Hauksson & Haase greater Los Angeles Basin model, not Hauksson 2000 SoCal model. Not assigned to Ridgecrest."
+    },
+    {
+      "url": "https://github.com/Dal-mzhang/REAL/tree/6435ace552d1efe72e633e8f82a5f9d8467f1049/demo_real/VELEST",
+      "reason": "italy.mod / itvel.nd are Italy demo inputs, not Liu Ridgecrest model."
+    },
+    {
+      "url": "https://github.com/Dal-mzhang/LOC-FLOW/blob/a7eda475b9d4e6d84b206be314ba7a71b192819a/GrowClust/IN/vzmodel.txt",
+      "reason": "Public example lacks provenance tying it to Liu 2020. Not used to fill updated model."
+    }
+  ],
+  "manual_followup": [
+    {
+      "model": "Liu VELEST-updated model",
+      "status": "exact_release_not_located",
+      "links": [
+        "https://doi.org/10.1029/2019GL086189",
+        "https://github.com/Dal-mzhang/REAL",
+        "https://github.com/Dal-mzhang/LOC-FLOW"
+      ],
+      "request": "2019 Ridgecrest final VELEST Vp/Vs layers, station corrections, velest.cmn and hypoDD input; repo examples are not proof of identity."
+    },
+    {
+      "model": "AWR smoothed HK and station terms",
+      "status": "exact_release_not_located",
+      "links": [
+        "https://doi.org/10.1093/gji/ggaf001",
+        "https://data.caltech.edu/records/5af05-cah73",
+        "https://github.com/interseismic/eikonet_julia"
+      ],
+      "request": "Actual HypoSVI depth/Vp/Vs file, smoothing code/parameters, eight-iteration station terms and GrowClust velocity/TT configuration."
+    },
+    {
+      "model": "Ross 3D and 1D implementation",
+      "status": "public_3d_candidate_downloaded_exact_input_unverified",
+      "links": [
+        "https://service.scedc.caltech.edu/ftp/catalogs/hauksson/Socal_3Dmodel/",
+        "https://authors.library.caltech.edu/records/f3y2q-gz382",
+        "https://authors.library.caltech.edu/records/3x9hs-fzr27"
+      ],
+      "request": "Confirm downloaded 3D archive version, three block meanings, coordinate/datum/interpolation conventions and identity to Ross template-location input; obtain 1D arrival-prediction and GrowClust models."
+    },
+    {
+      "model": "Hadley & Kanamori 1977 original paper",
+      "status": "repository_metadata_only",
+      "links": [
+        "https://authors.library.caltech.edu/records/tq3ny-6te18",
+        "https://doi.org/10.1130/0016-7606(1977)88%3C1469:SSOTTR%3E2.0.CO;2"
+      ],
+      "request": "Original paper/table and definitions if accessible via institution; acquired Hutton/UCVM versions remain separately labeled."
+    }
+  ],
+  "socal_3d_inspection": {
+    "layer_sections": 27,
+    "property_blocks": 3,
+    "depth_levels_km": [
+      1.0,
+      4.0,
+      6.0,
+      10.0,
+      15.0,
+      17.0,
+      22.0,
+      31.0,
+      33.0
+    ],
+    "nodes_per_layer": 1107,
+    "nodes_per_property": 9963,
+    "values_by_block_min_max": [
+      [
+        3.34,
+        8.23
+      ],
+      [
+        1.33,
+        4.79
+      ],
+      [
+        1.2,
+        3.15
+      ]
+    ],
+    "xyz_equal_across_blocks": true,
+    "inferred_block_order": [
+      "Vp",
+      "Vs",
+      "Vp/Vs"
+    ],
+    "block_order_status": "Inferred from numerical ranges and ratio consistency, not confirmed by accompanying schema",
+    "max_abs_block1_div_block2_minus_block3": 0.009285714285714564,
+    "ready_for_location": false
+  }
+}

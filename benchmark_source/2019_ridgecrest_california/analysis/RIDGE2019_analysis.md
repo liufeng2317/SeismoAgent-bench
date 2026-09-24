@@ -106,7 +106,7 @@ Ridgecrest 的价值在于同一案例包含 Mw 6.4、Mw 7.1 及密集前震—�
 | 目录可视化比较 | 已完成候选窗口的三张多面板图，见第 7 节；绘图数量与既有核验逐项一致 | 随来源核验更新解释，窗口冻结后重新生成 | 统一筛选、可追溯原件与版本，并明确原生震级/深度的比较限制 |
 | 各工作观测与方法依赖 | 已直接核读原始正文及 Liu/Ross/AWR 附件，更新选站规则、网络代码与模型线索；见下方依赖表 | 补齐引用附件、版本和可执行参数，区分论文描述与本地载荷 | 每条获取需求能回溯到来源及具体章节；未核实项明确保留 |
 | 台站分布预分析 | 已核对 Liu Fig. S1 的 45 站，41 站在候选窗口有通道有效期；Shelly 窗口内辅助震相的 24 站均包含于其中 | 补 Shelly/AWR 完整名单，核查 Ross EH/HH 80 km 候选的历史 SCEDC 可用性 | 形成可追溯的候选台站几何、分阶段可用性及与事件的距离/方位覆盖；论文台站总数不作为可用数 |
-| 速度模型与台站修正 | 部分完成：Shelly Table 1 与 Feng & Lees Table 1 的 12 行 Coso 初始模型数值已保存；Liu 更新模型及 AWR 平滑模型仍缺实际数值 | 核对层定义、Vp/Vs、深度基准、平滑与台站修正；补实际模型文件 | 模型数值、单位、出处和使用阶段明确；初始模型与反演得到的模型分开 |
+| 速度模型与台站修正 | 部分完成：Shelly Table 1 与 Feng & Lees Table 1 的 12 行 Coso 初始模型数值已保存；已下载 SCSN/UCVM HK、HypoSVI 示例与 SoCal 三维候选；Liu 更新模型及 AWR 实际平滑版本仍缺 | 核对层定义、Vp/Vs、深度基准、平滑与台站修正；补实际模型文件 | 模型数值、单位、出处和使用阶段明确；初始模型与反演得到的模型分开 |
 | 断层与地表破裂资料 | 部分完成：Shelly/Liu 图注指向 Kendrick 等的地表破裂调查；本地未发现独立断层矢量产品 | 核对原始发布、版本、坐标参考系和几何类型 | 区分实测地表破裂、区域既有断层与目录推断结构；有独立来源及不确定性说明 |
 | 目录构建流程预分析 | 已整理四条方法链；尚未复现运行；Ross DC1 已补齐，实际运行配置仍需获取 | 按波形→拾取/模板→关联→定位→重定位→质量筛选核对依赖 | 每阶段的输入、输出、软件/权重版本、参数及必要中间产物可追溯 |
 | 观测获取范围 | 部分完成：已有 2019-07-04 至 07-07 的 72 小时候选窗口；台站集合、通道和缓冲时长未定 | 根据来源论文及实际元数据确定候选台站、通道、时间范围和预计体量 | 查询条件及选择理由可复算；目录事件空间范围不直接充当台站筛选范围 |
@@ -217,7 +217,33 @@ Liu 的 45 个标识来自其 Fig. S1 的人工转录，并与正文“41 永久
 
 上述日期是返回元数据的有效期证据，不能推断某台仪器在此之前物理上不存在；同样，存在响应与有效期不等于连续波形无缺口。当前数据是现时服务返回的历史 epoch 描述，并非 2019 年当时的元数据快照。
 
-[速度模型数值表](../data/models/velocity_models.json)已收录 Shelly Table 1 的 10 层层顶与 Vp，Vs 明确标为 `Vp / 1.73` 的派生值。Feng & Lees (1998) Table 1 的 Coso 模型已根据用户提供的原表截图转录 12 行深度、Vp、Vs，保存在 `liu_coso_initial`；Vs 为原表直接给出的数值，不由固定比值推算。原表列名为 `P-depth`，保留为 `p_depth_km`，不擅自认定深度基准或插值规则。截图当前仅在会话中，未声明已归档原图或文件哈希；Liu 正文明确引用该初始模型，但其实际输入文件与原表的一致性尚待核实。Liu 的 VELEST 更新模型/站项和 AWR 的平滑 Hadley–Kanamori 模型仍保留数值缺口；不能用同名标准模型替代论文实际采用的版本，也没有把示例速度 5.74 km/s 当成完整模型。
+[速度模型数值表](../data/models/velocity_models.json)已收录 Shelly Table 1 的 10 层层顶与 Vp，Vs 明确标为 `Vp / 1.73` 的派生值。Feng & Lees (1998) Table 1 的 Coso 模型已根据用户提供的原表截图转录 12 行深度、Vp、Vs，保存在 `liu_coso_initial`；Vs 为原表直接给出的数值，不由固定比值推算。原表列名为 `P-depth`，保留为 `p_depth_km`，不擅自认定深度基准或插值规则。现已从作者网站下载 Feng & Lees 原始 PDF，逐项核对第 223 页 Table 1，12 行均与截图一致，原文路径和哈希已归档；Liu 正文明确引用该初始模型，但其实际输入文件与原表的一致性尚待核实。Liu 的 VELEST 更新模型/站项和 AWR 的平滑 Hadley–Kanamori 模型仍保留数值缺口；不能用同名标准模型替代论文实际采用的版本，也没有把示例速度 5.74 km/s 当成完整模型。
+
+### 速度模型下载与手动补充入口
+
+本轮采用直接 HTTPS 获取原始资料。小型索引见 [acquisition_manifest.json](../data/models/acquisition_manifest.json)：记录每份载荷的 URL、大小、SHA-256、仓库固定提交及用途；数值和适用性统一维护于 [velocity_models.json](../data/models/velocity_models.json)。原始数值文件保存在 `data/models/raw/`，支撑论文 PDF 保存在对应 reference 的 `supplement/`。这些下载原件不进入 Git；没有下载波形、安装模型软件或更改已选定的目录模型。
+
+| 资料 | 本轮结果 | 能否作为论文实际输入 |
+|---|---|---|
+| Feng & Lees Coso | 作者网站原始 PDF 已取得，Table 1 的 12 行与用户截图一致；补齐原文文件及哈希 | 引用基础模型已核实；Liu 实际输入文件一致性仍需确认，不替代 VELEST 更新结果 |
+| SCSN Hadley–Kanamori（Hutton 2010 Table 5） | 原文 PDF 已取得；4 层 Vp 和 Vp/Vs=1.73 已整理，Vs 标为推导值 | 已知 SCSN 实现，不能等同于 AWR 平滑模型或声称逐字等同 1977 原表 |
+| UCVM modified HK | 下载官方 `1d.conf` 和其实现代码，9 个深度/Vp 节点；线性插值，Vs 根据 Vp/密度计算 | 是 SCEC 修订背景模型，不替代 AWR 实际配置 |
+| HypoSVI Julia 示例 | 下载 `velmod.csv`（39 行）、读取代码和配置；代码对 Vp/Vs 分别线性插值 | 未找到与 AWR release 的对应证据；CSV 无单位栏，保留为示例，不能从文件名认定其为 AWR 的平滑模型 |
+| SCEDC SoCal 三维模型 | 下载 `vel.sc8196ord1_sc04.07qd.out.Z`（350,479 bytes），解压 1,863,756 bytes；3 组 × 9 层 × 1,107 节点 | 深度节点与 Hauksson 2000 的研究层位相容；缺版本/字段说明和 Ross 实际配置，保留为公开候选，不标为可直接运行 |
+| Hauksson 2000 原文 | PDF 已取得；MD5 与 Caltech 公布值一致 | 用于追溯模型定义与原始发布，不等于已取得全部运行输入 |
+
+三维载荷的三组节点坐标相同，数值范围依次为 3.34–8.23、1.33–4.79、1.20–3.15，第一组除以第二组与第三组的最大差约 0.00929；据此推断 Vp、Vs、Vp/Vs 顺序，尚未用原始格式说明确认。深度层为 1、4、6、10、15、17、22、31、33 km，边界层和插值/深度基准必须在实际定位前核对。原始文件保持不变，未生成伪装为已确认格式的三维模型。
+
+同时排除了两个容易误用的来源：REAL 的 `italy.mod` 为意大利示例；SCEDC `hauksson/vmodels` 的 README 指向 Hauksson & Haase 洛杉矶盆地模型，不能冒充 Hauksson 2000。LOC-FLOW 的公开示例也没有证据对应 Liu 2020 本案例。下载成功不构成论文输入版本相同的证据。
+
+| 手动补充项 | 可打开的入口 | 需要寻找/索取的内容；当前阻碍 |
+|---|---|---|
+| **Liu 更新模型（优先）** | [论文及 Supporting Information](https://doi.org/10.1029/2019GL086189)、[REAL 作者仓库](https://github.com/Dal-mzhang/REAL)、[LOC-FLOW](https://github.com/Dal-mzhang/LOC-FLOW) | Ridgecrest 实际 VELEST 最终深度/Vp/Vs、台站修正、`velest.cmn`、hypoDD 输入；已查附件和仓库未定位到对应本研究的文件，需要作者运行产物或明确版本声明 |
+| **AWR 平滑模型（优先）** | [论文及 Supporting Information](https://doi.org/10.1093/gji/ggaf001)、[CaltechDATA v2](https://data.caltech.edu/records/5af05-cah73)、[HypoSVI Julia 示例](https://github.com/interseismic/eikonet_julia) | 实际速度数组、平滑方法/参数、8 轮台站项及 GrowClust 速度/走时设置；公开目录和示例均未证明提供了这套输入 |
+| **Ross 精确配置** | [已下载三维载荷的 SCEDC 目录](https://service.scedc.caltech.edu/ftp/catalogs/hauksson/Socal_3Dmodel/)、[Hauksson 2000](https://authors.library.caltech.edu/records/f3y2q-gz382)、[Ross DC1](https://authors.library.caltech.edu/records/3x9hs-fzr27) | 确认该三维载荷的发布版本、字段、坐标基准与 Ross 使用关系；补缺拾取时的一维预测模型和 GrowClust 运行模型/走时表。当前主要是版本与配置证据缺失，不是三维文件无法下载 |
+| Hadley & Kanamori 1977 原文 | [Caltech 记录](https://authors.library.caltech.edu/records/tq3ny-6te18)、[出版社 DOI](https://doi.org/10.1130/0016-7606(1977)88%3C1469:SSOTTR%3E2.0.CO;2) | Caltech 仅元数据、没有 PDF，可通过机构访问出版社；需完整原文及表/模型定义。已有 Hutton/UCVM 实现不能擅自改称 1977 原始数值 |
+
+这些入口中，论文和仓库用于追索，不是声称其中一定有尚缺文件的直接下载链接。拿到文件后应保留原名、来源和版本，优先核对深度基准、单位、Vp/Vs 定义、插值与所用处理阶段。
 
 断层资料已定位到两项权威发布：[Ponti 等地表破裂与变形制图，DOI 10.5066/P9BZ5IJ9](https://www.usgs.gov/data/digital-datasets-documenting-surface-fault-rupture-and-ground-deformation-features-produced)提供线状 GIS/KMZ 等产品；[DuRoss 等地表位移观测，DOI 10.5066/P986ILE2](https://www.usgs.gov/data/surface-displacement-observations-2019-ridgecrest-california-earthquake-sequence)提供经过整理的位移观测。二者有关联但产品类型不同，后者不能替代断层线。它们也尚未证明与各论文使用的 Kendrick 2019 图层逐字节相同。本轮 ScienceBase 条目访问返回 HTTP 403，因此未声称已下载或核验矢量坐标系/版本；后续取得载荷后再检查这些内容。
 

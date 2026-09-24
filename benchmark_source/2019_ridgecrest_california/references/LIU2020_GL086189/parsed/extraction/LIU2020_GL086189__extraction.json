@@ -299,7 +299,7 @@
         "station_count": null,
         "channels_sampling": null,
         "role": "model",
-        "availability_conditions": "Cited Feng & Lees (1998) Table 1 transcribed from user-supplied image: 12 depth/Vp/Vs rows in data/models/velocity_models.json, liu_coso_initial. Actual Liu input-file equivalence and depth conventions unresolved; VELEST-updated model remains missing.",
+        "availability_conditions": "Feng & Lees Table 1: 12 rows originally transcribed from user image, now independently verified against downloaded original PDF p. 3 / printed p. 223. Exact Liu input identity/depth conventions and VELEST-updated model remain unresolved.",
         "evidence": [
           {
             "source": "benchmark_source/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
@@ -310,6 +310,11 @@
             "source": "User-provided image in conversation (not archived locally)",
             "locator": "Feng & Lees (1998), Table 1 and caption",
             "note": "Direct visual transcription of P-depth, P velocity and S velocity; no source-file hash available."
+          },
+          {
+            "source": "benchmark_source/2019_ridgecrest_california/references/LIU2020_GL086189/supplement/FENG_LEES1998__paper.pdf",
+            "locator": "PDF page 3 / printed page 223, Table 1",
+            "note": "Original downloaded from author website; SHA-256 in data/models/acquisition_manifest.json."
           }
         ]
       },

@@ -129,7 +129,7 @@ Using the case-wide rule
 
 ## Coso initial-model table supplied by user
 
-The user supplied an image identified as Feng & Lees (1998), Table 1, “Coso regional velocity model”. Its 12 rows of P-depth, P velocity and S velocity have been transcribed into `data/models/velocity_models.json`, entry `liu_coso_initial` (case-relative path). Both velocities are explicitly tabulated; S velocity is not derived from a fixed ratio. The image does not establish depth datum or interpolation conventions. The image remains in the conversation, not an archived local source file. Liu §2 cites this initial model, but the actual input-file identity remains unverified. This table does not provide the model or station corrections subsequently inverted by VELEST.
+The user supplied an image identified as Feng & Lees (1998), Table 1, “Coso regional velocity model”. Its 12 rows of P-depth, P velocity and S velocity have been transcribed into `data/models/velocity_models.json`, entry `liu_coso_initial` (case-relative path). Both velocities are explicitly tabulated; S velocity is not derived from a fixed ratio. The image does not establish depth datum or interpolation conventions. The image remains in the conversation. The author-hosted original PDF is now archived as `supplement/FENG_LEES1998__paper.pdf` under this reference; physical page 3 / printed page 223 Table 1 independently confirms all 12 rows. Its hash is in the case model acquisition manifest. Liu §2 cites this initial model, but the actual input-file identity remains unverified. This table does not provide the model or station corrections subsequently inverted by VELEST.
 
 ## Supporting-information cross-check from user-supplied text
 

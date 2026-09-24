@@ -73,3 +73,6 @@ benchmark_source/**/*.xml
 
 # Continuous waveforms remain local after the source-layout migration.
 benchmark_source/**/waveforms/
+
+# Native velocity-model downloads and third-party implementation evidence stay local.
+benchmark_source/**/data/models/raw/
