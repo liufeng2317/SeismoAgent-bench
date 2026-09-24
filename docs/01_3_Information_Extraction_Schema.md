@@ -35,7 +35,7 @@ context.
 | Parsed text | `parsed/paper/`, `parsed/supplement/` | MinerU Markdown, DOCX/XLSX/TXT derivatives and images |
 | Structured extraction | `parsed/extraction/*.json` | Machine-readable facts, workflow, products, and evidence |
 
-`paper_reading.md` and `catalog_summary.md` are legacy human-readable notes.
+`*__paper_reading.md` holds human-readable paper notes; catalog provenance and field audits are consolidated in `catalogs/<CATALOG_ID>/README.md`.
 They may be retained for navigation, but new factual extraction should be
 written to JSON and should not depend on prose notes as the canonical record.
 Case-level comparison remains in `data/<CASE>/analysis/`.

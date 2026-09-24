@@ -70,6 +70,8 @@ def validate(path: Path, root: Path) -> tuple[list[str], list[str], dict]:
         warnings.append("partial/draft should normally keep needs_human_review=true")
 
     catalog = d.get("catalog", {})
+    if catalog.get("product_type") == "event_catalog_plus_relocated_subset":
+        errors.append("catalog product_type still implies an undifferentiated merged product")
     tier = catalog.get("quality_tier")
     if tier not in {None, "Q1", "Q2", "Q3", "Q4", "unknown"}:
         errors.append(f"quality_tier must be Q1/Q2/Q3/Q4/unknown, got {tier!r}")
@@ -95,6 +97,10 @@ def validate(path: Path, root: Path) -> tuple[list[str], list[str], dict]:
 
     source_files = catalog.get("release", {}).get("source_files", [])
     counts = catalog.get("local_audit", {}).get("product_counts", {})
+    if d.get("article", {}).get("source_id") == "TAN2024_JB028735":
+        final_count = counts.get("final_cluster_filtered_reported")
+        if final_count is not None and final_count == counts.get("S11"):
+            errors.append("final cluster-filtered count is incorrectly merged with S11 count")
     for item in source_files if isinstance(source_files, list) else []:
         if not isinstance(item, dict):
             continue
