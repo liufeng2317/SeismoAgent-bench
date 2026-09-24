@@ -1,0 +1,29 @@
+{
+  "case_id": "2019_ridgecrest_california",
+  "source_ref": "LIU2020_GL086189",
+  "product_id": "event_catalog",
+  "selection": "full",
+  "stats": {
+    "row_count": 15445,
+    "unique_native_event_ids": 15445,
+    "duplicate_native_event_ids": 0,
+    "ranges": {
+      "latitude_deg": [
+        35.330306,
+        36.271517
+      ],
+      "longitude_deg": [
+        -117.979354,
+        -117.234489
+      ],
+      "depth_km": [
+        0.001,
+        14.126
+      ],
+      "magnitude": [
+        -0.2,
+        5.5
+      ]
+    }
+  }
+}

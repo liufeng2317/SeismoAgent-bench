@@ -1,0 +1,29 @@
+{
+  "case_id": "2019_ridgecrest_california",
+  "source_ref": "ROSS2019_SCIENCE",
+  "product_id": "qtm_event_catalog",
+  "selection": "benchmark",
+  "stats": {
+    "row_count": 12768,
+    "unique_native_event_ids": 12768,
+    "duplicate_native_event_ids": 0,
+    "ranges": {
+      "latitude_deg": [
+        35.5017,
+        36.04956
+      ],
+      "longitude_deg": [
+        -117.8955,
+        -117.2225
+      ],
+      "depth_km": [
+        0.018,
+        19.7
+      ],
+      "magnitude": [
+        -0.82,
+        7.1
+      ]
+    }
+  }
+}

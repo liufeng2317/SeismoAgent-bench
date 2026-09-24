@@ -1,0 +1,29 @@
+{
+  "case_id": "2019_ridgecrest_california",
+  "source_ref": "USGS_SCSN_COMCAT_2019",
+  "product_id": "operational_full",
+  "selection": "time_only",
+  "stats": {
+    "row_count": 6565,
+    "unique_native_event_ids": 6565,
+    "duplicate_native_event_ids": 0,
+    "ranges": {
+      "latitude_deg": [
+        35.4935,
+        36.0495
+      ],
+      "longitude_deg": [
+        -117.9398333,
+        -117.268
+      ],
+      "depth_km": [
+        0.0,
+        19.09
+      ],
+      "magnitude": [
+        0.14,
+        7.1
+      ]
+    }
+  }
+}

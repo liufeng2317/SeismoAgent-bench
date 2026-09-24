@@ -1,0 +1,29 @@
+{
+  "case_id": "2019_ridgecrest_california",
+  "source_ref": "AWR2025_CALTECHDATA",
+  "product_id": "moment_tensors",
+  "selection": "time_only",
+  "stats": {
+    "row_count": 298,
+    "unique_native_event_ids": 298,
+    "duplicate_native_event_ids": 0,
+    "ranges": {
+      "latitude_deg": [
+        35.4487,
+        36.17209
+      ],
+      "longitude_deg": [
+        -117.87373,
+        -117.31539
+      ],
+      "depth_km": [
+        0.921,
+        12.894
+      ],
+      "magnitude": [
+        1.873925208914296,
+        4.114593087421847
+      ]
+    }
+  }
+}

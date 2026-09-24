@@ -1,0 +1,30 @@
+{
+  "case_id": "2019_ridgecrest_california",
+  "source_ref": "SHELLY2020_0220190309",
+  "product_id": "DataS1_event_catalog",
+  "selection": "time_only",
+  "source_sha256": "aaa79453a2c599fe2b386a544c78e8e98383492aacf57212a8dc98d82373a9f1",
+  "stats": {
+    "row_count": 7773,
+    "unique_native_event_ids": 7773,
+    "duplicate_native_event_ids": 0,
+    "ranges": {
+      "latitude_deg": [
+        35.475,
+        36.012817
+      ],
+      "longitude_deg": [
+        -117.819198,
+        -117.255697
+      ],
+      "depth_km": [
+        0.159,
+        239.53
+      ],
+      "magnitude": [
+        -0.1,
+        7.1
+      ]
+    }
+  }
+}

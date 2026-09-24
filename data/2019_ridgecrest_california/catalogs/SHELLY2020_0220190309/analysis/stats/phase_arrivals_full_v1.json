@@ -1,0 +1,37 @@
+{
+  "case_id": "2019_ridgecrest_california",
+  "source_ref": "SHELLY2020_0220190309",
+  "product_id": "correlation_phase_arrivals",
+  "source_sha256": "0b77237b497265ebc94768acd955a9de5eb4c7f78f130922254e4c9ed4122d9f",
+  "stats": {
+    "row_count": 5703270,
+    "unique_match_ids": 209213,
+    "network_stations": 30,
+    "phase_types": {
+      "P": 2536859,
+      "S": 3166411
+    },
+    "top_stations": {
+      "PB.B918": 516641,
+      "CI.WRC2": 361176,
+      "PB.B917": 344425,
+      "CI.SRT": 339240,
+      "PB.B921": 338341,
+      "CI.WBM": 333367,
+      "CI.TOW2": 302735,
+      "CI.WBS": 291017,
+      "CI.LRL": 246117,
+      "PB.B916": 240831,
+      "CI.MPM": 239700,
+      "CI.CLC": 224767,
+      "CI.CCC": 216284,
+      "CI.WOR": 195318,
+      "CI.JRC2": 185750,
+      "CI.SLA": 178610,
+      "CI.WMF": 155004,
+      "GS.CA02": 152082,
+      "CI.DTP": 131171,
+      "CI.WRV2": 129444
+    }
+  }
+}

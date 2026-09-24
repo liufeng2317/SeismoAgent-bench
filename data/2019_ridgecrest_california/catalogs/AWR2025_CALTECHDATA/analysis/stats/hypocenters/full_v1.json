@@ -1,0 +1,29 @@
+{
+  "case_id": "2019_ridgecrest_california",
+  "source_ref": "AWR2025_CALTECHDATA",
+  "product_id": "hypocenters",
+  "selection": "full",
+  "stats": {
+    "row_count": 222864,
+    "unique_native_event_ids": 222864,
+    "duplicate_native_event_ids": 0,
+    "ranges": {
+      "latitude_deg": [
+        34.91017,
+        36.57301
+      ],
+      "longitude_deg": [
+        -118.6126,
+        -116.74058
+      ],
+      "depth_km": [
+        -0.599,
+        19.539
+      ],
+      "magnitude": [
+        -0.723,
+        4.585
+      ]
+    }
+  }
+}
