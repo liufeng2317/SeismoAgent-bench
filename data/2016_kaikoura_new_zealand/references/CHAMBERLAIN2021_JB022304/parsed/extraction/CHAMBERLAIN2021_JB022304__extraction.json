@@ -57,7 +57,7 @@
             "note": "Article count."
           },
           {
-            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/README.md",
             "locator": "corrected catalog audit",
             "note": "Local count."
           }
@@ -80,7 +80,7 @@
             "note": "Article subset."
           },
           {
-            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/README.md",
             "locator": "benchmark role and limitations",
             "note": "No local flag."
           }
@@ -103,7 +103,7 @@
             "note": "Method/count."
           },
           {
-            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/README.md",
             "locator": "corrected catalog audit",
             "note": "Local rows."
           }
@@ -131,7 +131,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+          "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/README.md",
           "locator": "provenance and product lineage",
           "note": "Corrected release and legacy control."
         }
@@ -150,7 +150,7 @@
       "article_local_discrepancy": "33,328 headline rows match; 27,431 relocation membership is implicit; focal mechanisms differ by one row.",
       "evidence": [
         {
-          "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+          "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/README.md",
           "locator": "corrected catalog audit",
           "note": "Rows, ranges and mechanism audit."
         }
@@ -182,7 +182,7 @@
         },
         "evidence": [
           {
-            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/README.md",
             "locator": "native schema and corrected catalog audit",
             "note": "CSV fields and units."
           }
@@ -206,7 +206,7 @@
         },
         "evidence": [
           {
-            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/README.md",
             "locator": "complete mechanism rows",
             "note": "Corrected fields."
           }
@@ -235,7 +235,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+          "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/README.md",
           "locator": "benchmark role and limitations",
           "note": "Evaluation role."
         }
@@ -451,7 +451,7 @@
         "note": "End-to-end workflow."
       },
       {
-        "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+        "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/README.md",
         "locator": "provenance and audit",
         "note": "Corrected product."
       }
@@ -469,7 +469,7 @@
         "count_or_scope": "34,704 rows; do not merge",
         "evidence": [
           {
-            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md",
+            "source": "data/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/README.md",
             "locator": "legacy-versus-corrected comparison",
             "note": "Correction lineage."
           }

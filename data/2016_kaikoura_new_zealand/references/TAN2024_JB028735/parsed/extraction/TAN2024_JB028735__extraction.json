@@ -105,7 +105,7 @@
             "note": "Article reports 41,392 after cluster-size filtering."
           },
           {
-            "source": "data/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_summary.md",
+            "source": "data/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/README.md",
             "locator": "release reconciliation",
             "note": "S11 is the released 46,440-row intermediate; final membership is not separately released."
           }
@@ -185,7 +185,7 @@
       "article_local_discrepancy": "S10 (67,660), S11 (46,440), and S12 (55) match local products; 41,392 is article-reported final membership without a local standalone file.",
       "evidence": [
         {
-          "source": "data/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_summary.md",
+          "source": "data/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/README.md",
           "locator": "local audit tables",
           "note": "Counts, ranges, masks and release reconciliation."
         }
@@ -767,7 +767,7 @@
         "count_or_scope": "Local audit: 1,165 .dat files, approximately 1,382,337 phase rows.",
         "evidence": [
           {
-            "source": "data/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_summary.md",
+            "source": "data/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/README.md",
             "locator": "phase archive audit",
             "note": "Phase-file count and schema audit."
           }

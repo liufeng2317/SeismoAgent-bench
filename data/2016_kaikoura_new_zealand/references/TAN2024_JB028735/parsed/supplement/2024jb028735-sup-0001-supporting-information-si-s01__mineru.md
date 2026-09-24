@@ -72,80 +72,80 @@ We show four example events in the real testing hour with various qualities. The
 
 Movie S1. The complete brightness and score videos for the example in the section 3.2 “Solving the phase association ambiguity”.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/6e0d94f39abbfbb7eb76fe7d47e6479cfd0df2e0da05375ca265b34a7d27bf7a.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/6e0d94f39abbfbb7eb76fe7d47e6479cfd0df2e0da05375ca265b34a7d27bf7a.jpg)
 Figure S1. Synthetic training events distribution. Color represents the focal depth.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/81783553100c72e5792891fd90987a4cc304482ae697d283db73d09961c4be9f.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/81783553100c72e5792891fd90987a4cc304482ae697d283db73d09961c4be9f.jpg)
 Figure S2. Mean $F _ { 1 }$ value for all five testing hours. Each black dot represents a test with the corresponding score threshold. The y coordinate of the star represents the analyst’s mean $F _ { 1 }$ value for the five hours. While the analyst does not have a threshold, the x coordinate of the star represents the score threshold which maximizes the $F _ { 1 }$ value of SUGAR.
 
 ![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/2e60c24d584237de98098f3d10a918c2e1ea0b89815ffe89be169cc913253e8d.jpg)
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/d48c8b5bbbe1282d278ee158a84558092d16a4d707bad16185651b79390f604a.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/d48c8b5bbbe1282d278ee158a84558092d16a4d707bad16185651b79390f604a.jpg)
 Figure S3. A comparison between the analyst and the SUGAR in testing hour No. 2. Symbols and layout are the same as that in Figure 5.
 
 ![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/c222401a695f7ed0860e12c93e1756f6c8746153530b79704ecc17e1ca3ea570.jpg)
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/5ea775ada1cea1f106002fdba171864b00a23bda5da891952cb2430693f7c275.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/5ea775ada1cea1f106002fdba171864b00a23bda5da891952cb2430693f7c275.jpg)
 Figure S4. A comparison between the analyst and the SUGAR in testing hour No. 3. Symbols and layout are the same as that in Figure 5.
 
 ![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/d7f9ad3892e4110b216dc030ac2b8e29503ef1c008297e4ab94b9076c5b019c7.jpg)
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/3dea7effdaa9d3266b8d80f011267d0d77ed1865d4da19428bbcdad181736655.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/3dea7effdaa9d3266b8d80f011267d0d77ed1865d4da19428bbcdad181736655.jpg)
 Figure S5. A comparison between the analyst and the SUGAR in testing hour No. 4. Symbols and layout are the same as that in Figure 5.
 
 ![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/bd67254f0c4e7fa84313d56dcd6a80114241a80329502cc074d8e9ef88fbcb59.jpg)
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/6a760bf3f8a616a7f56fd7fba67734ed39ff1b00d6afba3ffd4cacf6f121f0af.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/6a760bf3f8a616a7f56fd7fba67734ed39ff1b00d6afba3ffd4cacf6f121f0af.jpg)
 Figure S6. A comparison between the analyst and the SUGAR in testing hour No. 5. Symbols and layout are the same as that in Figure 5.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/51965b2e000e26cef0ad9df99249c66b4578f97d1de6628d05818d8169553ae1.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/51965b2e000e26cef0ad9df99249c66b4578f97d1de6628d05818d8169553ae1.jpg)
 Figure S7.
 
 Example synthetic waveforms (filtered to 5–20 Hz) for visual inspection. (a), waveforms of the event No. 4 in Figure 6. Red and blue marks show SUGAR P and S picks, respectively. Curves with corresponding colors indicate expected arrival times. The title writes the AI score, origin time and epicentral errors of the SUGAR detection compared with the ground truth. (b), waveforms of the event No. 1 in Figure 6. (c), waveforms of the event No. 2 in Figure 6. (d), waveforms of the $8 2 ^ { t h }$ SUGAR detection in the testing hour No. 1. (e), waveforms of the 398<sup>th</sup> SUGAR detection in the testing hour No. 1.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/fb42530309c8d060f488a2ba6775438e1e538ac2544811188b834eea77f0224b.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/fb42530309c8d060f488a2ba6775438e1e538ac2544811188b834eea77f0224b.jpg)
 Figure S8. Spectrograms of the nearest 10 stations in Figure S7a. Red and blue dashed lines mark P and S picks made by SUGAR, respectively.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/ea5c7eaf64eac4d813b802a849fbeea0a62e3937e082263b4551ff03320aeba2.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/ea5c7eaf64eac4d813b802a849fbeea0a62e3937e082263b4551ff03320aeba2.jpg)
 Figure S9. Spectrograms of the nearest 10 stations in Figure S7b. Red and blue dashed lines mark P and S picks made by SUGAR, respectively.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/6a7d49ffa520a5d7397adba90159197a3ad09bf650892b27fe38bb4482d83d1f.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/6a7d49ffa520a5d7397adba90159197a3ad09bf650892b27fe38bb4482d83d1f.jpg)
 Figure S10. Spectrograms of the nearest 10 stations in Figure S7c. Red and blue dashed lines mark P and S picks made by SUGAR, respectively.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/51ab9976d29aaaba4878d20e931da2c2722459d34b3ef92fa103b0d3fe274843.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/51ab9976d29aaaba4878d20e931da2c2722459d34b3ef92fa103b0d3fe274843.jpg)
 Figure S11. Spectrograms of the nearest 10 stations in Figure S7d. Red and blue dashed lines mark P and S picks made by SUGAR, respectively.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/80aef79e2a9ef1b030900187963b34393ba2f207fb41742d73d9ba1503ae9fa8.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/80aef79e2a9ef1b030900187963b34393ba2f207fb41742d73d9ba1503ae9fa8.jpg)
 Figure S12. Spectrograms of the nearest 10 stations in Figure S7e. Red and blue dashed lines mark P and S picks made by SUGAR, respectively.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/0eeccde0354b119a0cbd027c41aa8e5905dc39c3970e49d7e8fcae27e9073a73.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/0eeccde0354b119a0cbd027c41aa8e5905dc39c3970e49d7e8fcae27e9073a73.jpg)
 Figure S13. Station coverage for analyst A in the real data test. Purple dots represent stations used for SUGAR. Blue triangles represent additional stations for analyst A. The red star shows the epicenter location of the $M _ { w }$ 7.8 mainshock.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/8c6d00cbc46cb638310a3c3d9aa5313a6b7bf17a1a656e68ab8301dcc7e9b060.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/8c6d00cbc46cb638310a3c3d9aa5313a6b7bf17a1a656e68ab8301dcc7e9b060.jpg)
 Figure S14.  
 April 10, 2024, 2:14pm
 
 Four example events in the real testing hour. (a), an event at 340 s that has been detected by all the workflows and analysts. The left panel shows the vertical channel (filtered to 5–20 Hz) of the closest stations sorted by epicentral distance. Red and blue marks indicate P and S phases picked by SUGAR, respectively. Curves with corresponding colors indicate expected arrival times. The middle panel is the brightness video snapshot of the time that the event has been detected by SUGAR. The right panel is the corresponding AI score video snapshot. (b), an event at 564 s that has been detected only by SUGAR and analyst B. (c), an event at 1463 s that has only been detected by SUGAR. (d), an event at 177 s that has only been detected by SUGAR.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/439729ec07cb9165ea6b38453c149482625873e5a5bd7fc22e91a89fd654a5cb.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/439729ec07cb9165ea6b38453c149482625873e5a5bd7fc22e91a89fd654a5cb.jpg)
 Figure S15. Horizontal channels of the event in Figure S14a. The closest 25 stations are sorted by epicentral distance. Red and blue marks indicate P and S phases picked by SUGAR, respectively.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/4d5717700ffb857586dd8462a07642287b1d6f00cf68a4e71b784fa705a9f916.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/4d5717700ffb857586dd8462a07642287b1d6f00cf68a4e71b784fa705a9f916.jpg)
 Figure S16. Spectrograms of the nearest 10 stations in Figure S14a. Red and blue dashed lines mark P and S picks made by SUGAR, respectively.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/8ef30ae1a5909ddc145d4260563a3121658a108f09642f0be7e3e82a532a3236.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/8ef30ae1a5909ddc145d4260563a3121658a108f09642f0be7e3e82a532a3236.jpg)
 Figure S17. Spectrograms of the nearest 10 stations in Figure S14b. Red and blue dashed lines mark P and S picks made by SUGAR, respectively.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/df82ad8c04910f8966f7feac1b27f7f8cba27c34e4f8596c6f8b64db1b636e13.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/df82ad8c04910f8966f7feac1b27f7f8cba27c34e4f8596c6f8b64db1b636e13.jpg)
 Figure S18. Spectrograms of the nearest 10 stations in Figure S14c. Red and blue dashed lines mark P and S picks made by SUGAR, respectively.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/78a50527f215749da62b22d0418c260df65cdf9254b3f5a9a39e8b3325a750c1.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/78a50527f215749da62b22d0418c260df65cdf9254b3f5a9a39e8b3325a750c1.jpg)
 Figure S19. Spectrograms of the nearest 10 stations in Figure S14d. Red and blue dashed lines mark P and S picks made by SUGAR, respectively.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/cae5602a38baf59108cf5c5f506b1b1eba0df4c6f3fc7eb0fd24d0ec5bacfca9.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/cae5602a38baf59108cf5c5f506b1b1eba0df4c6f3fc7eb0fd24d0ec5bacfca9.jpg)
 Figure S20. The raw SUGAR-derived catalog of the Kaikōura aftershocks from Nov. 13, 2016, to Dec. 31, 2016. Red lines are mainshock surface ruptures (Litchfield et al., 2018).
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/0a76209af8a4eceee1e89ecb858c5220b1392608fdde76aeaa10448e1807150a.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/0a76209af8a4eceee1e89ecb858c5220b1392608fdde76aeaa10448e1807150a.jpg)
 Figure S21. A comparison between the SUGAR magnitude and Hutchinson et al. (2024) magnitude. The Hutchinson et al. (2024) magnitude is 0.15 larger than the SUGAR magnitude on average.
 
 ![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/1b405283ebd46f7cf80c45ef65ddab22722405e73f91985b908d7871c355525f.jpg)
@@ -164,13 +164,13 @@ Figure S21. A comparison between the SUGAR magnitude and Hutchinson et al. (2024
 
 ![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/8992910cf5ebc436239f531b485819dfd58893276545471a9423203642f5541c.jpg)
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/c492f51cfd028ef62d3ef4f55cc5d8b3ea69f4a001108c64f2554f8046168736.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/c492f51cfd028ef62d3ef4f55cc5d8b3ea69f4a001108c64f2554f8046168736.jpg)
 Figure S22. The magnitude distribution of events in SUGAR and GeoNet catalogs. The magnitude of the GeoNet catalog is from Hutchinson et al. (2024) and the systematic magnitude diference of 0.15 has been removed. Vertical lines show the magnitude of completeness for the two catalogs. The lines connecting to dots indicate the magnitude range that is used to calculate the b value.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/0af3bd7f3dda12221d1a1d510c7d3a99981f82c6697e0a232cc0bf6fa027bcde.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/0af3bd7f3dda12221d1a1d510c7d3a99981f82c6697e0a232cc0bf6fa027bcde.jpg)
 Figure S23. Waveforms and SUGAR picks of an M 4.8 earthquake 4 m after the mainshock.
 
-![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/f47e83f13eb4dac5576e505264b57f3ec606cad0a82b7d48e88ceee196fa1a79.jpg)  
+![](mineru/2024jb028735-sup-0001-supporting information si-s01/images/f47e83f13eb4dac5576e505264b57f3ec606cad0a82b7d48e88ceee196fa1a79.jpg)
 Figure S24. Waveforms and SUGAR picks of an M 4.6 earthquake 23 m after the mainshock.
 
 Table S1. Focal mechanisms used in the synthetic dataset

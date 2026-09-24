@@ -1,0 +1,63 @@
+schema_version: 1
+case_id: 2016_kaikoura_new_zealand
+role: case-level catalog-processing manifest
+runtime_note: Declarative provenance record; each catalog owns a product-specific
+  parser.
+processing_policy:
+  plot_profile: minimal
+  figure_format: png
+  figure_dpi: 300
+window_status: not_frozen
+catalogs:
+- source_ref: CHAMBERLAIN2021_JB022304
+  catalog_dir: catalogs/CHAMBERLAIN2021_JB022304
+  parser: catalogs/CHAMBERLAIN2021_JB022304/scripts/run_catalog_analysis.py
+  products:
+  - product_id: growclust_corrected
+    kind: event
+    role: primary
+    source_path: CHAMBERLAIN2021_JB022304__catalog_growclust_corrected_focal_mechanisms.csv
+  - product_id: growclust_legacy
+    kind: event
+    role: provenance_control
+    source_path: CHAMBERLAIN2021_JB022304__catalog_growclust.csv
+- source_ref: LANZA2019_GL082780
+  catalog_dir: catalogs/LANZA2019_GL082780
+  parser: catalogs/LANZA2019_GL082780/scripts/run_catalog_analysis.py
+  products:
+  - product_id: quakeml_preferred_origins
+    kind: event
+    role: primary
+    source_path: raw/grl59060-sup-0003-ds01.xml
+- source_ref: TAN2024_JB028735
+  catalog_dir: catalogs/TAN2024_JB028735
+  parser: catalogs/TAN2024_JB028735/scripts/run_catalog_analysis.py
+  products:
+  - product_id: sugar_s10
+    kind: event
+    role: primary_detection
+    source_path: TAN2024_JB028735__catalog_sugar_S10.xlsx
+  - product_id: sugar_s11
+    kind: event
+    role: primary_relocated_intermediate
+    source_path: TAN2024_JB028735__catalog_sugar_relocated_S11.xlsx
+  - product_id: associated_phase
+    kind: phase
+    role: auxiliary
+    source_path: TAN2024_JB028735__phases_associated.zip
+  - product_id: focal_mechanisms_s12
+    kind: moment_or_mechanism
+    role: auxiliary
+    source_path: ../references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0005-table_si-s12.xlsx
+- source_ref: GEONET_2016_KAIKOURA
+  catalog_dir: catalogs/GEONET_2016_KAIKOURA
+  parser: catalogs/GEONET_2016_KAIKOURA/scripts/run_catalog_analysis.py
+  products:
+  - product_id: operational_full
+    kind: event
+    role: baseline
+    source_path: GEONET_2016_KAIKOURA__catalog_operational_full.txt
+  - product_id: operational_benchmark
+    kind: event
+    role: baseline
+    source_path: GEONET_2016_KAIKOURA__catalog_operational_benchmark.txt

@@ -85,7 +85,7 @@
             "note": "Article count."
           },
           {
-            "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md",
+            "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/README.md",
             "locator": "local audit: event objects and origins",
             "note": "Local count."
           }
@@ -108,7 +108,7 @@
             "note": "Article count and thresholds."
           },
           {
-            "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md",
+            "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/README.md",
             "locator": "local audit: HypoDD origins",
             "note": "Local count and discrepancy."
           }
@@ -150,7 +150,7 @@
       "article_local_discrepancy": "Article reports 2,013 clustered HypoDD events; local XML contains 2,012 HypoDD origins.",
       "evidence": [
         {
-          "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md",
+          "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/README.md",
           "locator": "local audit tables",
           "note": "QuakeML counts, ranges and pick inventory."
         }
@@ -175,7 +175,7 @@
         },
         "evidence": [
           {
-            "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md",
+            "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/README.md",
             "locator": "native schema and local audit",
             "note": "QuakeML structure."
           }
@@ -195,7 +195,7 @@
         },
         "evidence": [
           {
-            "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md",
+            "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/README.md",
             "locator": "origin objects and preferred-origin behavior",
             "note": "HypoDD subset semantics."
           }
@@ -217,7 +217,7 @@
         },
         "evidence": [
           {
-            "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md",
+            "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/README.md",
             "locator": "pick audit",
             "note": "Released P/S picks."
           }
@@ -245,7 +245,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md",
+          "source": "data/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/README.md",
           "locator": "benchmark interpretation",
           "note": "Role and limitations."
         }

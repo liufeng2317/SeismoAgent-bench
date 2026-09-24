@@ -1,5 +1,8 @@
 # KAIKOURA2016 — Case Analysis
 
+> Current preparation state: `window_status: not_frozen` in [processing.yaml](processing.yaml). Earlier “frozen/v1” windows and counts below are retained as exploratory audit history, not approved evaluation inputs.
+
+
 > **Source of truth:** This file is the detailed, mutable analysis record for `KAIKOURA2016`. The cross-case summary is maintained in [`docs/01_1_Case_details.md`](../../../docs/01_1_Case_details.md).
 
 ## Status
@@ -49,7 +52,7 @@ Lanza, Tan and Chamberlain should never be reduced to a single event-count leade
 | Lanza et al. (2019) | Primary location/relocation reference | Paper reading, Text SI/Table S1, and the 134.8 MB Data Set S1 XML are audited. Narrative SI remains under `references/LANZA2019_GL082780/supplement/`; the XML is correctly staged under `catalogs/LANZA2019_GL082780/raw/` and ignored by Git because it exceeds remote-file limits. Local audit: 2,655 event objects, 2,012 HypoDD origins, 123 time-only / 122 common-mask rows. Magnitude type is generic `M`, so 122 must not be called 122 ML≥3. |
 | Tan et al. (2024) SUGAR | Secondary high-rate detection reference | Paper, five supplements, Table S10 (67,660-event catalog), Table S11 (46,440 relocated events), and 1,165 associated `.dat` phase files (1,172 ZIP entries including metadata) are staged under `references/TAN2024_JB028735/` and `catalogs/TAN2024_JB028735/`. The final 41,392-event cluster-filtered product is described in the paper but is not separately released as a CSV. |
 | GeoNet reviewed catalog | Baseline | Confirm release and stable identifiers. |
-| Chamberlain et al. (2021) GrowClust | Dependent secondary catalog | Paper reading and catalog audit are complete: [`paper_reading`](../references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper_reading.md) and [`catalog_summary`](../catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md). Use the corrected 33,328-unique-event CSV as canonical; retain the legacy 34,704-row export only for provenance comparison. |
+| Chamberlain et al. (2021) GrowClust | Dependent secondary catalog | Paper reading and catalog audit are complete: [`paper_reading`](../references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper_reading.md) and [`catalog_summary`](../catalogs/CHAMBERLAIN2021_JB022304/README.md). Use the corrected 33,328-unique-event CSV as canonical; retain the legacy 34,704-row export only for provenance comparison. |
 
 ## Calibration checklist
 
@@ -89,12 +92,12 @@ The 2016-12-01 to 2016-12-08 window is preferred because the temporary STREWN de
 
 - `../references/LANZA2019_GL082780/paper/LANZA2019_GL082780__paper.pdf`
 - `../references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper_reading.md`
-- `../catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md`
+- `../catalogs/LANZA2019_GL082780/README.md`
 - `../references/TAN2024_JB028735/paper/TAN2024_JB028735__paper.pdf`
 - `../references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper_reading.md`
-- `../catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_summary.md`
+- `../catalogs/TAN2024_JB028735/README.md`
 - `../references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper_reading.md`
-- `../catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md`
+- `../catalogs/CHAMBERLAIN2021_JB022304/README.md`
 - Lanza et al. (2019), DOI: https://doi.org/10.1029/2019GL082780
 - Tan et al. (2024), DOI: https://doi.org/10.1029/2024JB028735
 ## Full inventory record (migrated from `docs/01_1_Case_details.md`)
@@ -221,3 +224,26 @@ Cesca et al. (2017), DOI https://doi.org/10.1016/j.epsl.2017.08.024, provides a 
 ---
 
 ---
+
+## Catalog processing
+
+Processing entry points and product declarations are in [processing.yaml](processing.yaml). Shared identifier and output rules are maintained in [data organization](../../README.md#processing-and-output-policy). File-level counts, schemas and figures belong to the catalog README and its generated analysis, rather than a second case index.
+
+### Product-specific processing matrix
+
+| Catalog | Product(s) | Role | Special handling |
+|---|---|---|---|
+| Chamberlain | corrected GrowClust; legacy release | Primary corrected event/focal-mechanism reference | Compare legacy IDs and focal mechanisms; never concatenate. |
+| Lanza | QuakeML preferred origins | Relocated event reference | Prefer HypoDD origin; retain SIMUL-only events and origin method. |
+| Tan SUGAR | S10, S11, phase archive, S12 | Detection, relocation, picks, mechanisms | Keep S10/S11 separate; reconstruct 41,392 cluster filter; phase rows are not events. |
+| GeoNet | Full and frozen operational snapshots | Q3 baseline | Preserve EventID and native M/ML labels; not high-resolution truth. |
+
+### Expected outputs
+
+- Event products: compact map, daily rate, and depth panel where coordinates exist.
+- Chamberlain: corrected-versus-legacy release comparison.
+- Lanza: origin-method composition and preferred-origin map.
+- Tan: S10/S11 maps and cluster-size distribution; phase station/phase summary; S12 focal-mechanism counts.
+- GeoNet: operational benchmark map/rate figure; full snapshot statistics-only.
+
+Existing catalog summaries contain the detailed file-level audits. The parsers must reproduce those counts and preserve strict/normalized parsing sensitivities.
