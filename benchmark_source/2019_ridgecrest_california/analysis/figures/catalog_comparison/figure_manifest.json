@@ -1,0 +1,134 @@
+{
+  "case_id": "2019_ridgecrest_california",
+  "config_sha256": "6f1763fba1ec6b7febfa2fc50b351efcae95f6705c988909661952dd3d1b96b5",
+  "audit_sha256": "c6ce721799d4042d673fbfa64d9e17c73e41ebd636fc7cdd29d7b29eeea3658b",
+  "script_sha256": "3475480de8a8be752bf755e2404096baf67461b038640a99fbbd2ffe4216db12",
+  "style_sha256": "7c6835b2e472da39f803e49d98b86262546da139e0607a2998baf4e3b1e3112c",
+  "versions": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4"
+  },
+  "inputs": {
+    "shelly": {
+      "path": "data/catalogs/SHELLY2020_0220190309/raw_article/SHELLY2020_0220190309__catalog_DataS1.txt",
+      "sha256": "aaa79453a2c599fe2b386a544c78e8e98383492aacf57212a8dc98d82373a9f1",
+      "plotted_records": 7716,
+      "selection": "shelly"
+    },
+    "liu": {
+      "path": "data/catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_tableS1.txt",
+      "sha256": "8582363962b168c8034e339a8859407fb2ed63fc83eb4e01ac9d88546583cd88",
+      "plotted_records": 6242,
+      "selection": "liu"
+    },
+    "ross": {
+      "path": "data/catalogs/ROSS2019_SCIENCE/raw/ROSS2019_SCIENCE__catalog_qtm.tar.gz",
+      "sha256": "dcb0035f69c6ea9a960e45544f31bdacb38cb7f502c3d29af827da4ff6850849",
+      "plotted_records": 6463,
+      "selection": "ross_relocated"
+    },
+    "awr_hypocenters": {
+      "path": "data/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_hypocenters_v2.csv",
+      "sha256": "fa87745528bddc66e7b1d25a94cba8d2448d38f67c6157c566ae451a84fa3ea8",
+      "plotted_records": 5737,
+      "selection": "awr_hypocenters"
+    },
+    "official_snapshot": {
+      "path": "data/catalogs/USGS_SCSN_COMCAT_2019/USGS_SCSN_COMCAT_2019__catalog_operational_benchmark.csv",
+      "sha256": "2e6f472c88874431042138c468d91259156213e70d0126205ca55ac25c35036e",
+      "plotted_records": 6564,
+      "selection": "official_earthquake"
+    }
+  },
+  "selection": {
+    "start_utc": "2019-07-04T00:00:00Z",
+    "end_utc": "2019-07-07T00:00:00Z",
+    "interval": "half_open",
+    "native_comparison_bounds": {
+      "latitude": [
+        35.45,
+        36.05
+      ],
+      "longitude": [
+        -117.9,
+        -117.2
+      ],
+      "depth_km": [
+        0,
+        20
+      ]
+    },
+    "status": "exploratory_legacy_mask_not_scientific_freeze",
+    "depth_datum_harmonized": false
+  },
+  "stage_rates_per_hour": {
+    "before_mw6_4": {
+      "shelly": 2.049692387986525,
+      "liu": 1.081782093659555,
+      "ross_relocated": 2.1066282876528177,
+      "awr_hypocenters": 1.1387179933258473,
+      "official_earthquake": 1.0248461939932625
+    },
+    "first_hour_after_mw6_4": {
+      "shelly": 164.0,
+      "liu": 129.0,
+      "ross_relocated": 127.0,
+      "awr_hypocenters": 114.0,
+      "official_earthquake": 172.0
+    },
+    "later_between_large_events": {
+      "shelly": 137.4825751983401,
+      "liu": 100.12881891803639,
+      "ross_relocated": 122.40679447736785,
+      "awr_hypocenters": 95.36804605878199,
+      "official_earthquake": 100.86124551176783
+    },
+    "first_hour_after_mw7_1": {
+      "shelly": 128.0,
+      "liu": 147.0,
+      "ross_relocated": 84.0,
+      "awr_hypocenters": 87.0,
+      "official_earthquake": 235.0
+    },
+    "later_after_mw7_1": {
+      "shelly": 146.57881089655592,
+      "liu": 135.54599717315924,
+      "ross_relocated": 112.05678085883082,
+      "awr_hypocenters": 121.5643207955828,
+      "official_earthquake": 144.08753037836956
+    }
+  },
+  "output_policy": {
+    "width_mm": 180,
+    "png_dpi": 320,
+    "pdf_raster_dpi": 450,
+    "pdf_text": "embedded TrueType",
+    "point_sampling": "none"
+  },
+  "figures": {
+    "01_sequence_overview.pdf": {
+      "sha256": "61e355d1a9dd106a1578159c5386150100cf353a13ec09c3efd5952b2f2f32f8",
+      "bytes": 470026
+    },
+    "01_sequence_overview.png": {
+      "sha256": "237ec60065c834d90852889192aeb8f522cdf59c2187f52f51dba0d41c1a9a34",
+      "bytes": 560094
+    },
+    "02_catalog_spatial_comparison.pdf": {
+      "sha256": "5c18d95db184cebecf006a4cb39e29b5c5c11d8af9a4bc51d1377bce24d5c3d6",
+      "bytes": 597817
+    },
+    "02_catalog_spatial_comparison.png": {
+      "sha256": "8a4840acaef65f39a0354fafabeb04eea1663db953753556ef1e90ce9fc69742",
+      "bytes": 662659
+    },
+    "03_catalog_population_diagnostics.pdf": {
+      "sha256": "d98993de0a95c2fe0a8f9420da211bb827675805698c2a86cabc51e9e0b15473",
+      "bytes": 102050
+    },
+    "03_catalog_population_diagnostics.png": {
+      "sha256": "320daca2a7df914faff969b3c18f78751a22f6d4ca5d8cb224eb22e244053331",
+      "bytes": 390264
+    }
+  }
+}
