@@ -177,6 +177,10 @@ Ridgecrest 的价值在于同一案例包含 Mw 6.4、Mw 7.1 及密集前震—�
 | `ROSS2019_SCIENCE/` | `selection.json` 标为 `unresolved`，不生成 StationXML | 方法/台站证据未齐全，不自动分配共享台站 |
 | `USGS_SCSN_COMCAT_2019/` | `selection.json` 标为 `unresolved`，不生成 StationXML | 事件快照不能确定完整波形输入台站 |
 
+台站分布图：[PNG](figures/station_distribution.png) · [PDF](figures/station_distribution.pdf)。左图为区域分布，虚线框对应右图放大范围。蓝色三角为 Liu 名单与 Shelly 窗口内辅助震相共有的 24 站，橙色三角为已核实名单中其余 17 个 Liu 站；紫色空心菱形为窗口后生效的 4 个临时站，不能计入三天输入。星号为官方两次大震震中。图不包含尚未核实的 AWR/Ross 名单，也不表示已下载连续波形。坐标取自官方通道元数据：有效站仅使用与窗口相交的 epoch，后部署站使用扩展查询 epoch；CI.FUR 的两个水平坐标相差约 18 m，绘图取唯一坐标的中位数，变体保留在 [图件清单](figures/station_distribution.json)。比例尺采用局地近似，未叠加未经核验的断层或地形底图。
+
+复算：`python -B benchmark_source/2019_ridgecrest_california/scripts/plot_station_distribution.py`。
+
 分组文件从同一官方原件本地导出，不重复网络下载；每份选择文件记录选择依据、窗口、缺失名单及原件/导出件哈希。论文目录、台站归属和原始波形均未合并成一个 catalog。后续针对某个 catalog 取数据应从其 `selection.json` 开始，不能将共享区域清单直接当作该论文输入。
 
 上述日期是返回元数据的有效期证据，不能推断某台仪器在此之前物理上不存在；同样，存在响应与有效期不等于连续波形无缺口。当前数据是现时服务返回的历史 epoch 描述，并非 2019 年当时的元数据快照。
