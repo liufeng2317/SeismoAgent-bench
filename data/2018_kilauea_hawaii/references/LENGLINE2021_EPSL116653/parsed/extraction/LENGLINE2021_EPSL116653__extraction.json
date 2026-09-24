@@ -22,7 +22,7 @@
         "note": "Article identity and product role."
       },
       {
-        "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md",
+        "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/README.md",
         "locator": "provenance and schema",
         "note": "Local product identity."
       }
@@ -58,7 +58,7 @@
             "note": "Article count and method."
           },
           {
-            "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md",
+            "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/README.md",
             "locator": "local audit",
             "note": "Rows and native frame."
           }
@@ -79,7 +79,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md",
+          "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/README.md",
           "locator": "provenance and schema",
           "note": "Release file."
         }
@@ -97,7 +97,7 @@
       "article_local_discrepancy": "No count discrepancy; product lacks depth, magnitude and stable event IDs.",
       "evidence": [
         {
-          "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md",
+          "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/README.md",
           "locator": "local audit and frozen-window fields",
           "note": "Local statistics."
         }
@@ -119,7 +119,7 @@
         },
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md",
+            "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/README.md",
             "locator": "native columns",
             "note": "Schema and reference point."
           }
@@ -146,7 +146,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md",
+          "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/README.md",
           "locator": "benchmark role",
           "note": "Role limits."
         }
@@ -226,7 +226,7 @@
         "dependencies": "channel availability and template family",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md",
+            "source": "data/2018_kilauea_hawaii/catalogs/LENGLINE2021_EPSL116653/README.md",
             "locator": "provenance and schema",
             "note": "Released product."
           }

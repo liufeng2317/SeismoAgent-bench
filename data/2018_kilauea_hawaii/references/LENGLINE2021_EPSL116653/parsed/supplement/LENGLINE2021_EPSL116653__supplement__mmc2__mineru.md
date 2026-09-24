@@ -12,10 +12,10 @@ Olivier Lengliné<sup>a,∗</sup>, Zacharie Duputel<sup>a</sup>, P. G. Okubo<sup
 
 • Figure S2: Distance along the dike path as a function of time for the template events (as initially located in the USGS catalog) (red circles), and our results (black dots). Despite a gross inference of the dike
 
-![](images/19b08d09bf03c0d841de9cf9d411a3ec5b83be82651384694f2b24868fb62d7e.jpg)  
+![](mineru/1-s2.0-S0012821X20305975-mmc2/images/19b08d09bf03c0d841de9cf9d411a3ec5b83be82651384694f2b24868fb62d7e.jpg)
 Figure S1:  
 dynamics could have been already determined from the original catalog, our approach reveals a more complex dike induced earthquake sequence.  
 • Catalog of detected events: Columns are $\# 1 .$ , Time in days since 2018/04/29; $\# 2 .$ , x location (in m); $\# 3 .$ y location (in m). Locations are defined relative to the reference point of coordinates (Latitude = 19.3864; Longitude = -155.1050).
 
-![](images/533084e963aa6cd689434b872ee29014ed073bcf46a7bc0cdd9e8f03e3dcb787.jpg)  
+![](mineru/1-s2.0-S0012821X20305975-mmc2/images/533084e963aa6cd689434b872ee29014ed073bcf46a7bc0cdd9e8f03e3dcb787.jpg)
 Figure S2:

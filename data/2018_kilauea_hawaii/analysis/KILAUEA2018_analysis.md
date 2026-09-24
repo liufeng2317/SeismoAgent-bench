@@ -1,5 +1,8 @@
 # KILAUEA2018 — Case Analysis
 
+> Current preparation state: `window_status: not_frozen` in [processing.yaml](processing.yaml). Earlier “frozen/v1” windows and counts below are retained as exploratory audit history, not approved evaluation inputs.
+
+
 > **Source of truth:** This file is the detailed, mutable analysis record for `KILAUEA2018`. The cross-case summary is maintained in [`docs/01_1_Case_details.md`](../../../docs/01_1_Case_details.md).
 
 ## Status
@@ -10,7 +13,6 @@
 - Primary reference: Shelly & Thelen (2019) summit catalog
 - Secondary reference: Wei et al. (2022) broader onshore/offshore catalog; HVO remains the Q3 operational baseline
 - Frozen v1 summit window: 2018-05-01 to 2018-05-09 UTC
-- Catalog processing pilot: [catalog_processing_index.md](./catalog_processing_index.md)
 
 ## Scientific role
 
@@ -87,15 +89,15 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 
 - `../references/USGS2019_SCIENCE_OVERVIEW/paper/USGS2019_SCIENCE_OVERVIEW__paper.pdf`
 - `../references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md`
-- `../catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md`
+- `../catalogs/SHELLY2019_GL085636/README.md`
 - `../references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper_reading.md`
-- `../catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md`
+- `../catalogs/WEI2022_EA001979/README.md`
 - `../references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper_reading.md`
-- `../catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md`
+- `../catalogs/MATOZA2021_EA001253/README.md`
 - `../references/MATOZA2014_GL059819/parsed/paper/MATOZA2014_GL059819__paper_reading.md`
-- `../catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md`
+- `../catalogs/MATOZA2014_GL059819/README.md`
 - `../references/LENGLINE2021_EPSL116653/parsed/paper/LENGLINE2021_EPSL116653__paper_reading.md`
-- `../catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md`
+- `../catalogs/LENGLINE2021_EPSL116653/README.md`
 - Shelly & Thelen (2019), DOI: https://doi.org/10.1029/2019GL085636
 - Wei et al. (2022), DOI: https://doi.org/10.1029/2021EA001979
 ## Full inventory record (migrated from `docs/01_1_Case_details.md`)
@@ -218,3 +220,33 @@ Kīlauea must be treated as two possible tasks: `summit task` (Shelly primary) o
 | **Overall assessment** | Scientifically valuable because it tests a regime very different from tectonic aftershock sequences. |
 
 ---
+
+## Catalog processing
+
+Processing entry points and product declarations are in [processing.yaml](processing.yaml). Shared identifier and output rules are maintained in [data organization](../../README.md#processing-and-output-policy). File-level counts, schemas and figures belong to the catalog README and its generated analysis, rather than a second case index.
+
+### Pilot conclusions
+
+1. **Primary summit task:** Shelly S1 is the principal high-resolution
+   detection/relative-location reference; S2 is a separate sensitivity product.
+2. **Broad detection/location cross-check:** Wei should be compared only after
+   applying the same space/time mask and retaining its 1,930 numeric-magnitude
+   subset as a separate sensitivity population.
+3. **Official baseline:** HVO `operational_benchmark` is the Q3 baseline;
+   it must not be merged with research catalogs.
+4. **Auxiliary products:** Matoza 2021, Lengliné, and Matoza 2014 answer
+   different scientific questions and should remain product-specific.
+5. **Next preparation step:** derive station/channel/day manifests and waveform
+   download windows; do not infer waveform volume from event-row counts.
+
+### Re-run commands
+
+From the repository root:
+
+```bash
+python3 data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/scripts/run_catalog_analysis.py
+python3 data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/scripts/run_catalog_analysis.py
+```
+
+Use `--only <product_id>` for a targeted product and `--force` only when
+the raw source has changed or the parser has been deliberately revised.

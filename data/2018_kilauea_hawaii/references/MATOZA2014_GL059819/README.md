@@ -4,5 +4,5 @@
 - Role: LP summit-event auxiliary. Original ZIP and extracted catalog are under `catalogs/MATOZA2014_GL059819/`.
 - Paper: `paper/MATOZA2014_GL059819__paper.pdf` (PDF header verified).
 - Paper extraction: `parsed/paper/MATOZA2014_GL059819__paper_reading.md`.
-- Catalog audit: `catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md`.
+- Catalog audit: `catalogs/MATOZA2014_GL059819/README.md`.
 - Structured extraction: [`parsed/extraction/MATOZA2014_GL059819__extraction.json`](parsed/extraction/MATOZA2014_GL059819__extraction.json).

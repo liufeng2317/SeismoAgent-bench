@@ -175,13 +175,13 @@ Shiro, B., Burgess, M. K., Chang, J. C., Dotray, P., Okubo, P., Thelen, W. A., .
 Wei, X., Shen, Y., Caplan-Auerbach, J., & Morgan, J. K. (2021). An OBS array to investigate ofshore seismicity during the 2018 K¯ılauea eruption. Seismological Research Letters, 92(1), 603–612. doi: 10.1785/0220200206
 
 (a)  
-![](images/dfbceb1143029eacfd336751b08a755e8212581f51372bc089b8d684d81db7f7.jpg)
+![](mineru/Wei2022_Kilauea_SI/images/dfbceb1143029eacfd336751b08a755e8212581f51372bc089b8d684d81db7f7.jpg)
 
 (b)  
-![](images/705dbe18ca38d06ff1227b20f8900b44fd30abc74478decc7ca30fba1c7a17fd.jpg)
+![](mineru/Wei2022_Kilauea_SI/images/705dbe18ca38d06ff1227b20f8900b44fd30abc74478decc7ca30fba1c7a17fd.jpg)
 
 (c)  
-![](images/8ff5b64883d2d52837e0a08efc23d6b1d91080d9fb74dd3783088d0ecb8cd266.jpg)
+![](mineru/Wei2022_Kilauea_SI/images/8ff5b64883d2d52837e0a08efc23d6b1d91080d9fb74dd3783088d0ecb8cd266.jpg)
 
 Figure S1. The P-wave velocity model used in this study at the depth of (a) -1 km (1 km above sea level, which only afect the summits of the volcanoes), (b) 2 km and (c) 8 km, respectively. Table S1. The overlap percentage threshold against the distance, in the association process.
 
@@ -202,20 +202,20 @@ the three existing catalogs. Only the corresponding overlapped time spans were a
 <table><tr><td>Catalog</td><td>Shared events</td><td>Missing events</td></tr><tr><td>the HVO catalog</td><td>60,793</td><td>8,893</td></tr><tr><td>Shiro et al. (2018)</td><td>87.2%</td><td>12.8%</td></tr><tr><td>the caldera catalog</td><td>40,188</td><td>3,753</td></tr><tr><td>Shelly and Thelen (2019)</td><td>90.9%</td><td>9.1%</td></tr><tr><td>the East Rift Zone catalog</td><td>386</td><td>5,547</td></tr><tr><td>Lengliné et al. (2021)</td><td>6.1%</td><td>93.9%</td></tr></table>
 
 (a)  
-![](images/0e724d7a92349cd93f02628334eeb4c457f1b29e3236e13a49aa75ecf9364ead.jpg)
+![](mineru/Wei2022_Kilauea_SI/images/0e724d7a92349cd93f02628334eeb4c457f1b29e3236e13a49aa75ecf9364ead.jpg)
 
 (b)  
-![](images/c99027a306a58fc330f62bdbee344a140c68907b563f105db56980c60b470976.jpg)
+![](mineru/Wei2022_Kilauea_SI/images/c99027a306a58fc330f62bdbee344a140c68907b563f105db56980c60b470976.jpg)
 
 (c)  
-![](images/626d08bcfe754cc586608c0911fb3a07dbf1966e16e2d06b6788d8488562e466.jpg)
+![](mineru/Wei2022_Kilauea_SI/images/626d08bcfe754cc586608c0911fb3a07dbf1966e16e2d06b6788d8488562e466.jpg)
 
 (d)  
-![](images/ff7efb80627565c20a06f51d44ff917526bac5ac2956d4a3fffcb0338767b3a3.jpg)
+![](mineru/Wei2022_Kilauea_SI/images/ff7efb80627565c20a06f51d44ff917526bac5ac2956d4a3fffcb0338767b3a3.jpg)
 
 (e)  
-![](images/143d62972ba27e795819ea85fd1cc203362af1c5e7cc5b66358c227bbe2b9e31.jpg)
+![](mineru/Wei2022_Kilauea_SI/images/143d62972ba27e795819ea85fd1cc203362af1c5e7cc5b66358c227bbe2b9e31.jpg)
 
 (f)  
-![](images/ec2f5d34afc196503aba1743a804df12e2ac0bc18a84aff8dfe96ebca8d6c55f.jpg)  
+![](mineru/Wei2022_Kilauea_SI/images/ec2f5d34afc196503aba1743a804df12e2ac0bc18a84aff8dfe96ebca8d6c55f.jpg)
 Figure S2. The frequency distribution of arrival time diference between our picks and the HVO picks, for (a) the P-wave and (b) the S-wave, respectively. (c) The source time, (d) horizontal location, (e) depth and (f) magnitude diference frequency distribution between our catalog and the HVO catalog, respectively.

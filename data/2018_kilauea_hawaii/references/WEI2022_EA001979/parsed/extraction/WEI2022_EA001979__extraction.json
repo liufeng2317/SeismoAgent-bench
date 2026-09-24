@@ -28,7 +28,7 @@
         "note": "SI methods and tables."
       },
       {
-        "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md",
+        "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/README.md",
         "locator": "provenance",
         "note": "Local release."
       }
@@ -65,7 +65,7 @@
             "note": "Article final count."
           },
           {
-            "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md",
+            "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/README.md",
             "locator": "full-file audit",
             "note": "Local count and ranges."
           }
@@ -83,7 +83,7 @@
         "magnitude_scope": "1,930 numeric; 439 Unk",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md",
+            "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/README.md",
             "locator": "frozen summit benchmark mask",
             "note": "Local subset and ranges."
           }
@@ -104,7 +104,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md",
+          "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/README.md",
           "locator": "provenance",
           "note": "Dryad release."
         }
@@ -124,7 +124,7 @@
       "article_local_discrepancy": "No row-count discrepancy; 67,719 rows have Unk magnitude type.",
       "evidence": [
         {
-          "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md",
+          "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/README.md",
           "locator": "full-file audit and frozen mask",
           "note": "Local stats."
         }
@@ -158,7 +158,7 @@
         },
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md",
+            "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/README.md",
             "locator": "native schema and missing values",
             "note": "14-field header."
           }
@@ -186,7 +186,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_summary.md",
+          "source": "data/2018_kilauea_hawaii/catalogs/WEI2022_EA001979/README.md",
           "locator": "benchmark role",
           "note": "Evaluation role."
         }

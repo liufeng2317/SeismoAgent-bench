@@ -22,7 +22,7 @@
         "note": "Article identity and workflow."
       },
       {
-        "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+        "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/README.md",
         "locator": "provenance and frozen summit window",
         "note": "Local release and role."
       },
@@ -64,7 +64,7 @@
             "note": "Article population."
           },
           {
-            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/README.md",
             "locator": "full-file audit",
             "note": "Local versioned count."
           }
@@ -82,7 +82,7 @@
         "magnitude_scope": "0.00–4.66",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/README.md",
             "locator": "frozen summit window table",
             "note": "Benchmark subset."
           }
@@ -103,7 +103,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/README.md",
           "locator": "provenance and schema",
           "note": "Release file."
         }
@@ -123,7 +123,7 @@
       "article_local_discrepancy": "Article reports 347,445/275,009 and 79%; revised local release reports 347,446/299,966.",
       "evidence": [
         {
-          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/README.md",
           "locator": "full-file audit and frozen window",
           "note": "Counts/ranges."
         }
@@ -152,7 +152,7 @@
         },
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/README.md",
             "locator": "native schema",
             "note": "26-field archive README."
           }
@@ -180,7 +180,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/README.md",
           "locator": "benchmark role and limitations",
           "note": "Evaluation role."
         }
@@ -268,7 +268,7 @@
         "dependencies": "HVO trigger catalog",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/README.md",
             "locator": "native schema and full-file audit",
             "note": "Release flags."
           }
@@ -283,7 +283,7 @@
         "note": "Workflow."
       },
       {
-        "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md",
+        "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2021_EA001253/README.md",
         "locator": "provenance and schema",
         "note": "Release."
       }

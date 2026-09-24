@@ -71,7 +71,7 @@
             "note": "Article final count and retention rule."
           },
           {
-            "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md",
+            "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/README.md",
             "locator": "Full-file audit; Frozen summit benchmark mask",
             "note": "Local count, ranges, and window counts."
           }
@@ -94,7 +94,7 @@
             "note": "Supplement defines the 43,950-row cluster product."
           },
           {
-            "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md",
+            "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/README.md",
             "locator": "Checksums and native formats; Full-file audit",
             "note": "Local subset relation and cluster count."
           }
@@ -112,7 +112,7 @@
         "magnitude_scope": "Auxiliary source fields, not event magnitudes.",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md",
+            "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/README.md",
             "locator": "Checksums and native formats; Full-file audit",
             "note": "7,460,986 P and 1,121,506 S rows; not events."
           }
@@ -144,7 +144,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md",
+          "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/README.md",
           "locator": "Provenance and products; Checksums and native formats",
           "note": "USGS release identity, roles, checksums, and schemas."
         },
@@ -175,7 +175,7 @@
       },
       "evidence": [
         {
-          "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md",
+          "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/README.md",
           "locator": "Full-file audit; Frozen summit benchmark mask",
           "note": "Local counts, ranges, checksums, and frozen-window counts."
         }
@@ -212,7 +212,7 @@
           "note": "Article role and biases."
         },
         {
-          "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md",
+          "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/README.md",
           "locator": "Benchmark role and limitations",
           "note": "Local alignment and comparison rules."
         }
@@ -308,7 +308,7 @@
         },
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md",
+            "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/README.md",
             "locator": "Full-file audit; Checksums and native formats",
             "note": "Local header and many-row semantics."
           }
@@ -605,7 +605,7 @@
         "count_or_scope": "See USGS_HVO_COMCAT_2018 summary.",
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/catalogs/USGS_HVO_COMCAT_2018/USGS_HVO_COMCAT_2018__catalog_summary.md",
+            "source": "data/2018_kilauea_hawaii/catalogs/USGS_HVO_COMCAT_2018/README.md",
             "locator": "Provenance and full-file audit",
             "note": "Baseline staged separately."
           }
@@ -646,7 +646,7 @@
       "caveats": "Do not score island-wide completeness, absolute truth, or uncalibrated magnitudes; preserve summit depth datum and station lineage.",
       "evidence": [
         {
-          "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/SHELLY2019_GL085636__catalog_summary.md",
+          "source": "data/2018_kilauea_hawaii/catalogs/SHELLY2019_GL085636/README.md",
           "locator": "Benchmark role and limitations",
           "note": "Local benchmark interpretation."
         }

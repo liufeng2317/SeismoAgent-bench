@@ -22,7 +22,7 @@
         "note": "Article identity and counts."
       },
       {
-        "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md",
+        "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/README.md",
         "locator": "provenance and frozen-window audit",
         "note": "Local product role."
       }
@@ -59,7 +59,7 @@
             "note": "Selection count."
           },
           {
-            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md",
+            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/README.md",
             "locator": "local audit",
             "note": "Rows and ranges."
           }
@@ -116,7 +116,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md",
+          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/README.md",
           "locator": "provenance and schema",
           "note": "Release file."
         },
@@ -140,7 +140,7 @@
       "article_local_discrepancy": "Article reports 5,327 cross-correlation/cluster relocations and 5,199 final SSST-aligned events; the local archive exposes the 5,199 relocation-flag rows but not a separate 5,327 membership flag.",
       "evidence": [
         {
-          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md",
+          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/README.md",
           "locator": "local audit and frozen-window audit",
           "note": "Full-file stats and empty overlap."
         }
@@ -169,7 +169,7 @@
         },
         "evidence": [
           {
-            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md",
+            "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/README.md",
             "locator": "native schema",
             "note": "17-field archive schema."
           }
@@ -194,7 +194,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md",
+          "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/README.md",
           "locator": "benchmark role",
           "note": "Auxiliary role."
         }
@@ -298,7 +298,7 @@
         "note": "Workflow."
       },
       {
-        "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md",
+        "source": "data/2018_kilauea_hawaii/catalogs/MATOZA2014_GL059819/README.md",
         "locator": "local audit",
         "note": "Release."
       }
