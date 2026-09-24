@@ -149,10 +149,62 @@ SeismoAgentBench/
 
 ### 真正值得继续调整的项目
 
-1. **优先统一配置契约。** 目前 Prague、Maple、Kīlauea 主要使用 `catalogs[].script`，Kaikōura 使用 `catalogs[].parser` 路径，而 Magna 和 Ridgecrest 的 `products` 更接近角色声明。建议后续统一产品 ID、单位、来源文件、脚本入口和路径基准；Ridgecrest 核验中的 `parser` 是解析器类型，不能机械改名为脚本路径。此轮只修复路径，不改写科学角色或假装配置已经统一。
+1. **逐个迁移来源配置契约。** Ridgecrest 已试用下述 `schema_version: 2` 来源登记表；其余五个案例仍使用旧配置。Prague、Maple、Kīlauea 的 `catalogs[].script`、Kaikōura 的 `catalogs[].parser` 路径和 Magna 的角色声明需要逐产品核验后再迁移。登记表中的 `parser` 是解析器标识，不是可直接执行的路径。
 2. **逐步提取共享解析与绘图工具。** 24 个 `run_catalog_analysis.py` 中存在反复出现的日期解析、校验和、筛选、统计和绘图函数；例如 12 个脚本定义了 `finite_float`。先核实行为差异并建立回归样例，再把相同部分提取成共享模块，来源专属字段解析仍留在产品目录。暂不把整个项目重构为软件包。
 3. **未来分开维护来源资料与实际实验输入。** `benchmark_source/` 包含目标目录和答案证据，不能整体挂载给受测 Agent。实验运行器实现时，再定义可追溯的输入导出、评测参考和运行产物目录，并控制文件访问；仅改文件夹名字不能防止答案泄漏。
 4. **台站信息应跟随观测数据建立。** 开始波形准备时，在案例 `data/` 下增加台站/通道清单、响应、可用性与缺口记录；现在不创建没有内容的 `stations/`、`metadata/` 或 `runs/`。波形存储位置可以是外部数据盘，配置记录位置，Git 保存小型清单与来源。
 5. **保持原始材料和派生产物边界。** 已有来源文件可继续保留在 catalog 根目录，原始发布包留在 `raw/` 或 `raw_article/`；不为外观整齐再次移动全部载荷。生成统计、图件和标准化事件表继续放在产品 `analysis/` 下，不能混入来源原件。
 
 不建议继续拆分更多手工状态报告，或立即重命名所有 v1/v2 图件与统计。当前三个全局清单分别回答来源是否就绪、有哪些产品、官方快照是否符合查询条件，职责不同；保留它们，并通过案例 README 导航，比复制多份进度表更易维护。
+
+## 通用 source 架构：Ridgecrest 试点
+
+这一层只维护资料来源、文件、版本、解析与核验。**评测代码和评测配置后续放到独立目录**，不在这里添加运行器、评分器、实验条件、资源预算或冻结审批。案例原有科学说明保留为背景；source 工具不依赖其中的评测就绪判断。
+
+数据仍采用现有案例目录；共享代码放在仓库的 [seismoagentbench/](../seismoagentbench/)，来源契约测试放在 [tests/](../tests/)。不复制原始文件，也不为每个来源再增加一份登记 YAML。
+
+```text
+analysis/processing.yaml
+  ├── source_groups             来源说明和产品所属关系
+  ├── sources                   产品键 → 路径、版本、单位、解析器、SHA-256
+  └── reference_audit            按产品键引用的核验规则，不重复写路径/哈希
+             │
+             ├── seismoagentbench/sources.py   契约校验、文件盘点、分段/子集
+             ├── 案例 scripts/                原生列解析、来源特有核验
+             └── seismoagentbench/catalog.py  时间/空间筛选与目录对应诊断
+                          ↓
+                analysis/reference_audit.json
+```
+
+### 来源配置 v2
+
+| 字段 | 含义与维护规则 |
+|---|---|
+| `schema_version` / `case_id` | 明确来源契约版本和案例身份；旧配置不隐式升级 |
+| `source_groups.<SOURCE_ID>` | 来源级角色说明及唯一 catalog README 入口；DOI、原始下载地址和方法细节继续由 README 维护 |
+| `sources.<product_key>.source_ref` | 关联来源组；同一来源可包含多个文件产品 |
+| `path` | 从案例根目录出发的相对路径；不允许逃逸到案例外部，案例内软链接可用 |
+| `expected_sha256` | 本地发布版本的文件级指纹；不把文件名当作版本证明 |
+| `version` | 可核实的版本标签；未声明发布编号时明确以 SHA-256 固定本地文件 |
+| `unit` | `event`、`relative_event`、`phase_pick` 或 `focal_mechanism`；不统称事件数 |
+| `format` / `parser` | 文件容器与原生解析器标识分别声明；仅通过校验不意味着任意解析器已实现 |
+| `reference_audit` | 可选的案例核验配置：选择哪些源、派生子集、时间分段及目录对应诊断参数 |
+
+Ridgecrest 目前登记 5 个来源组和 8 个文件产品。Ross 重定位子集是源目录的筛选结果，不另复制一个原始文件；Shelly 震相表按 pick 计数；AWR 机制解与事件目录分开登记。派生记录的可追溯身份应包含产品键、源文件哈希和源行号，原生事件 ID 单独保留，不凭时间自动合并事件。
+
+路径和哈希只在 `sources` 登记一次，核验配置通过产品键引用。`reference_audit.json` 是带配置哈希的生成结果，可以重新计算，不是第二份手工登记表。不要额外提交每次文件盘点的完整副本。
+
+### 使用方式与边界
+
+在仓库根目录运行，使用现有 Python 3.10+ 和 PyYAML 环境：
+
+```bash
+python -B -m seismoagentbench validate-sources --case-dir benchmark_source/2019_ridgecrest_california
+python -B -m seismoagentbench inventory --case-dir benchmark_source/2019_ridgecrest_california
+python -B -m seismoagentbench validate-sources --case-dir benchmark_source/2019_ridgecrest_california --verify-files
+python -B benchmark_source/2019_ridgecrest_california/scripts/audit_references.py
+```
+
+前两个命令不读取全部大文件计算哈希：资料登记有效与本地载荷已下载是两个状态。`--verify-files` 才执行 SHA-256 核验，发现本地缺失或内容不符时以非零状态退出。目录统计仍由案例解析器完成；登记表校验不会虚构记录数、波形覆盖、完备性或科学质量。
+
+通用代码已通过一个不包含任何评测字段的合成案例测试。当前真实案例接入范围只有 Ridgecrest；下一步按同一契约逐个登记其余案例的文件产品，再逐步迁移共享解析函数。已有 catalog 专属处理脚本暂时保留，避免未经验证地替换不同来源的科学处理规则。

@@ -177,3 +177,5 @@ Next deliverables are:
 **Canonical project name:** `SeismoAgentBench`  \
 **Repository slug:** `seismoagent-bench`  \
 **Short form:** `SABench`
+
+Source registry tools are available in [`seismoagentbench/`](seismoagentbench/) with regression tests in [`tests/`](tests/). Ridgecrest is the first case using the versioned source registry; see the [source architecture and commands](benchmark_source/README.md#通用-source-架构ridgecrest-试点). Evaluation will be implemented separately.
