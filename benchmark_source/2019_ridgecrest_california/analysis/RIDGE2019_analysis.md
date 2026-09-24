@@ -153,7 +153,7 @@ Ridgecrest 的价值在于同一案例包含 Mw 6.4、Mw 7.1 及密集前震—�
 
 ### 台站有效期、共享观测与模型核验结果
 
-复算入口：[prepare_station_metadata.py](../scripts/prepare_station_metadata.py)；可跟踪摘要：[station_preparation.json](station_preparation.json)。StationXML 和通道级明细留在 `data/waveforms/stations/`，不按 catalog 复制。本轮成功的 EarthScope 响应约 42.8 MB（含全区域仪器响应），覆盖 404 个台站标识、4,509 个通道 epoch，其中 255 站、4,011 个 epoch 与候选窗口相交；这些数值包含区域内其他台阵和辅助通道，不是最终选站规模。SCEDC 原始查询超时，缩小到 Liu 名单的查询耗时超过 210 秒后取消；本轮仅一个提供方成功，不能据此宣称跨提供方一致性已核验。同一 NSLC 及 epoch 的描述字段一致时合并来源，不同坐标/方位/采样率等变体保留；仪器响应保留在提供方原始 XML 中，不因描述字段相同就认定响应等价。半开候选窗口的有效期交集同时考虑 Network、Station、Channel 边界。
+复算入口：[prepare_station_metadata.py](../scripts/prepare_station_metadata.py)；可跟踪摘要：[station_preparation.json](station_preparation.json)。官方原始 StationXML 和区域通道明细共享保存在 `data/waveforms/stations/`；各 catalog 独立入口位于其下 `by_catalog/<source_id>/`。本轮成功的 EarthScope 响应约 42.8 MB（含全区域仪器响应），覆盖 404 个台站标识、4,509 个通道 epoch，其中 255 站、4,011 个 epoch 与候选窗口相交；这些数值包含区域内其他台阵和辅助通道，不是最终选站规模。SCEDC 原始查询超时，缩小到 Liu 名单的查询耗时超过 210 秒后取消；本轮仅一个提供方成功，不能据此宣称跨提供方一致性已核验。同一 NSLC 及 epoch 的描述字段一致时合并来源，不同坐标/方位/采样率等变体保留；仪器响应保留在提供方原始 XML 中，不因描述字段相同就认定响应等价。半开候选窗口的有效期交集同时考虑 Network、Station、Channel 边界。
 
 查询以 Mw 7.1 官方位置为中心、半径 1.5°，作为覆盖 Liu 120 km 圆与 AWR 约 200 km 方形的宽松发现范围，并延长到 7 月 10 日 00:00 UTC 以核对后部署台站。这个区域查询不是 AWR/Ross 的论文台站全集，也不是最终波形选站。所有返回通道均保留，包括辅助通道；后续须按响应单位、仪器类型、分量与采样率选择实际地震波形通道。
 
@@ -166,6 +166,18 @@ Ridgecrest 的价值在于同一案例包含 Mw 6.4、Mw 7.1 及密集前震—�
 | GS.CA04 | 已返回的通道最早有效期起点：2019-07-09 18:00 UTC |
 | Shelly 辅助震相 | 全表 30 个台站；按到时落在候选三天内筛得 24 个台站，全部有对应元数据，且全部属于 Liu 的上述 41 站。该辅助表不是 Shelly 论文原始台站全集 |
 | 重叠含义 | 可共享存储同一台站/通道/有效期元数据，但同站不代表同通道、同片段、同预处理或独立参考。AWR/Ross 精确台站名单未解决，不给出虚构的四目录重叠率 |
+
+按 catalog 拆分后的使用入口：
+
+| 子目录（相对于 `data/waveforms/stations/by_catalog/`） | 当前内容 | 适用边界 |
+|---|---|---|
+| `LIU2020_GL086189/` | 独立 `selection.json` 与提供方 StationXML；候选窗口 41 站 | 选择文件保留论文 45 站及未进入窗口的 4 站；XML 包含有效站的返回通道，不代表论文精确通道配置 |
+| `SHELLY2020_0220190309/` | 独立 `selection.json` 与提供方 StationXML；候选窗口 24 站 | 从辅助震相到时筛出的台站子集，不命名为 Shelly 论文完整台站表 |
+| `AWR2025_CALTECHDATA/` | `selection.json` 标为 `unresolved`，不生成 StationXML | 66 站论文名单尚未核实，不以区域 255 站或 Liu 名单替代 |
+| `ROSS2019_SCIENCE/` | `selection.json` 标为 `unresolved`，不生成 StationXML | 方法/台站证据未齐全，不自动分配共享台站 |
+| `USGS_SCSN_COMCAT_2019/` | `selection.json` 标为 `unresolved`，不生成 StationXML | 事件快照不能确定完整波形输入台站 |
+
+分组文件从同一官方原件本地导出，不重复网络下载；每份选择文件记录选择依据、窗口、缺失名单及原件/导出件哈希。论文目录、台站归属和原始波形均未合并成一个 catalog。后续针对某个 catalog 取数据应从其 `selection.json` 开始，不能将共享区域清单直接当作该论文输入。
 
 上述日期是返回元数据的有效期证据，不能推断某台仪器在此之前物理上不存在；同样，存在响应与有效期不等于连续波形无缺口。当前数据是现时服务返回的历史 epoch 描述，并非 2019 年当时的元数据快照。
 

@@ -119,6 +119,69 @@ def parse(path, provider):
                            candidate_overlap_seconds=max(0, (b-a).total_seconds()), provider=provider)
 
 
+
+def export_catalog_views(rows, latest, all_shelly, selected_shelly):
+    """Keep paper/auxiliary selection distinct from the shared discovery inventory."""
+    active = {r['network'] + '.' + r['station'] for r in rows if r['candidate_overlap_seconds'] > 0}
+    specs = {
+        'LIU2020_GL086189': (set(LIU), set(LIU), 'paper_station_labels',
+                            'Original DOCX Fig. S1: 45 station labels; channel choices are not specified by this station list.'),
+        'SHELLY2020_0220190309': (all_shelly, selected_shelly, 'auxiliary_phase_arrival_station_subset',
+                                'Auxiliary phase release: station IDs selected by arrival time, not the original paper station inventory.'),
+        'AWR2025_CALTECHDATA': (None, None, 'unresolved', 'Exact paper station list not verified; regional discovery inventory is not assigned to this catalog.'),
+        'ROSS2019_SCIENCE': (None, None, 'unresolved', 'Exact paper station list requires missing method evidence; no automatic station assignment.'),
+        'USGS_SCSN_COMCAT_2019': (None, None, 'unresolved', 'Operational event snapshot does not identify its complete waveform station inputs.'),
+    }
+    outputs = {}
+    for catalog, (source_ids, requested, status, evidence) in specs.items():
+        folder = OUT/'by_catalog'/catalog
+        selected = requested & active if requested is not None else set()
+        manifest = dict(catalog_id=catalog, status=status, evidence=evidence,
+                        candidate_window=[START.isoformat(), END.isoformat()],
+                        source_station_ids=sorted(source_ids) if source_ids is not None else None,
+                        requested_candidate_station_ids=sorted(requested) if requested is not None else None,
+                        metadata_present_station_ids=sorted(selected) if requested is not None else None,
+                        missing_candidate_metadata=sorted(requested-active) if requested is not None else None,
+                        channel_policy='All returned channels at selected stations with epoch overlap; not a reconstruction of the paper channel selection. Metadata overlap does not establish waveform availability.',
+                        files={})
+        if requested is not None:
+            wanted = {(r['network'],r['station'],r['location'],r['channel'],r['start'],r['end'])
+                      for r in rows if r['candidate_overlap_seconds']>0 and r['network']+'.'+r['station'] in selected}
+            for provider, request in latest.items():
+                root = ET.parse(OUT/request['path']).getroot()
+                kept = 0
+                for net in list(root.findall('s:Network', NS)):
+                    for sta in list(net.findall('s:Station', NS)):
+                        for cha in list(sta.findall('s:Channel', NS)):
+                            identity = (net.get('code'),sta.get('code'),cha.get('locationCode',''),cha.get('code'),cha.get('startDate'),cha.get('endDate'))
+                            if identity not in wanted:
+                                sta.remove(cha)
+                            else:
+                                kept += 1
+                        if not sta.findall('s:Channel', NS):
+                            net.remove(sta)
+                        for tag in ('TotalNumberChannels','SelectedNumberChannels'):
+                            for child in list(sta.findall('s:'+tag, NS)):
+                                sta.remove(child)
+                    if not net.findall('s:Station', NS):
+                        root.remove(net)
+                    for tag in ('TotalNumberStations','SelectedNumberStations'):
+                        for child in list(net.findall('s:'+tag, NS)):
+                            net.remove(child)
+                if kept:
+                    folder.mkdir(parents=True, exist_ok=True)
+                    target = folder/(provider+'.stationxml')
+                    ET.register_namespace('', NS['s'])
+                    ET.ElementTree(root).write(target, encoding='utf-8', xml_declaration=True)
+                    manifest['files'][target.name] = dict(channel_epochs=kept,bytes=target.stat().st_size,sha256=digest(target),
+                                                         shared_source=request['path'],shared_source_sha256=request['sha256'])
+        write(folder/'selection.json', manifest)
+        outputs[catalog] = dict(status=status, station_count=len(selected) if requested is not None else None,
+                                selection_path=str((folder/'selection.json').relative_to(CASE)),
+                                selection_sha256=digest(folder/'selection.json'), files=manifest['files'])
+    return outputs
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--download', action='store_true')
@@ -175,7 +238,8 @@ def main():
                              earliest_effective_start=min((r['effective_start'] for r in variants if r['effective_start']), default=None),
                              providers=sorted({p for r in variants for p in r['providers']})))
     write(OUT/'station_inventory.json', stations)
-    report = dict(candidate_window=['2019-07-04T00:00:00Z','2019-07-07T00:00:00Z'],
+    catalog_views = export_catalog_views(rows, latest, all_stations, selected_stations)
+    report = dict(catalog_views=catalog_views, candidate_window=['2019-07-04T00:00:00Z','2019-07-07T00:00:00Z'],
                   discovery_query=PARAMS,
                   query_reason='1.5 degree radius contains the paper 120-km circle and approximate 200-km square; extended through July 9 to detect later temporary-station deployment. Not a paper station-list reconstruction.',
                   semantics='Metadata epoch overlap only; not waveform availability. Identical descriptive channel epochs merged with providers retained; conflicting metadata retained. Responses remain in provider XML and are not assumed equivalent.',

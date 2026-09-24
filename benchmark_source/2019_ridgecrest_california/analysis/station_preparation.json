@@ -1,4 +1,57 @@
 {
+  "catalog_views": {
+    "LIU2020_GL086189": {
+      "status": "paper_station_labels",
+      "station_count": 41,
+      "selection_path": "data/waveforms/stations/by_catalog/LIU2020_GL086189/selection.json",
+      "selection_sha256": "8fa549e5069da90eeb3bd406a9adb7ae2c2051b7d251fed42494f85fefb0068d",
+      "files": {
+        "earthscope.stationxml": {
+          "channel_epochs": 1517,
+          "bytes": 11044910,
+          "sha256": "c25e8304d0e04033474863fd3d3e4dd8d305f9824967caf4ed8dfbc6fe746673",
+          "shared_source": "earthscope.stationxml",
+          "shared_source_sha256": "c6b61fd1777f7711c38bc5ef31ec3fc489a3d34002a82baae1bdabec69d82bda"
+        }
+      }
+    },
+    "SHELLY2020_0220190309": {
+      "status": "auxiliary_phase_arrival_station_subset",
+      "station_count": 24,
+      "selection_path": "data/waveforms/stations/by_catalog/SHELLY2020_0220190309/selection.json",
+      "selection_sha256": "ad8a538812b3c3d957e36714f3b3afce29a121dd8728055507b12f50a4c12de2",
+      "files": {
+        "earthscope.stationxml": {
+          "channel_epochs": 954,
+          "bytes": 6417221,
+          "sha256": "78e7b377591be74bf79145768ce61b37a0ed064335ddbdf95f91d5dd962c1fd5",
+          "shared_source": "earthscope.stationxml",
+          "shared_source_sha256": "c6b61fd1777f7711c38bc5ef31ec3fc489a3d34002a82baae1bdabec69d82bda"
+        }
+      }
+    },
+    "AWR2025_CALTECHDATA": {
+      "status": "unresolved",
+      "station_count": null,
+      "selection_path": "data/waveforms/stations/by_catalog/AWR2025_CALTECHDATA/selection.json",
+      "selection_sha256": "4a704a17a8e87686aaf432f9fb61a26f650c4642ecb54eacc3751dd8d02be940",
+      "files": {}
+    },
+    "ROSS2019_SCIENCE": {
+      "status": "unresolved",
+      "station_count": null,
+      "selection_path": "data/waveforms/stations/by_catalog/ROSS2019_SCIENCE/selection.json",
+      "selection_sha256": "7c811697f62b64495df74b3b915ae832e0c25ccc5c08b8874f48944a7c55361d",
+      "files": {}
+    },
+    "USGS_SCSN_COMCAT_2019": {
+      "status": "unresolved",
+      "station_count": null,
+      "selection_path": "data/waveforms/stations/by_catalog/USGS_SCSN_COMCAT_2019/selection.json",
+      "selection_sha256": "a42f77fd5fa34303f7222a8cd5bf23962fcb162eefb78bd585f21398f2d14450",
+      "files": {}
+    }
+  },
   "candidate_window": [
     "2019-07-04T00:00:00Z",
     "2019-07-07T00:00:00Z"
@@ -100,7 +153,7 @@
   "inputs": {
     "data/catalogs/SHELLY2020_0220190309/raw/Ridgecrest_2019_correlation_phase_arrivals.csv": "0b77237b497265ebc94768acd955a9de5eb4c7f78f130922254e4c9ed4122d9f"
   },
-  "script_sha256": "4414e21a85d3681773c81160adaa0a46af343a8be2c223742b1f3a58c2044c01",
+  "script_sha256": "2ec5960aef172ecff8710e6ae35ffa401d2e41a648860c76f59c234de2928193",
   "liu": {
     "source": "references/LIU2020_GL086189/supplement/Liu2020_Ridgecrest_SI.docx",
     "locator": "Fig. S1, word/media/image2.jpeg, manually read labels including inset",
