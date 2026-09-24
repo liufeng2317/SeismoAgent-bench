@@ -275,10 +275,10 @@
         "type": "seed_catalog",
         "provider_or_network": "SCSN/SCEDC",
         "temporal_spatial_scope": "2019-07-03 through 2019-07-18 template scans",
-        "station_count": 13525,
+        "station_count": null,
         "channels_sampling": null,
         "role": "seed_catalog",
-        "availability_conditions": "Template population and preferred magnitudes inherited from routine catalog.",
+        "availability_conditions": "13,525 routine template events (not stations); template population and preferred magnitudes inherited from routine catalog.",
         "evidence": [
           {
             "source": "benchmark_source/2019_ridgecrest_california/references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md",

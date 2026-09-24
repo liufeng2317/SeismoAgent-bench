@@ -324,17 +324,22 @@
         "source_id": "S1",
         "name": "Continuous multi-network 3C waveforms",
         "type": "waveform",
-        "provider_or_network": "66 broadband stations, multiple networks",
+        "provider_or_network": "Waveform archive: SCEDC citation in Data Availability; 66-station multi-network array citing University of Nevada Reno, USGS and SCEDC. Exact network codes and current service endpoints require verification.",
         "temporal_spatial_scope": "April 2019 through May 2023; broad 200 × 200 km region",
         "station_count": 66,
-        "channels_sampling": "Three-component; above 1 Hz high-pass; changing availability",
+        "channels_sampling": "Three-component broadband instruments; vertical and north components used for detection; high-pass above 1 Hz. Native channel codes and sample rates are not specified here.",
         "role": "primary_input",
-        "availability_conditions": "Neural graph uses 18 stations; station-day inventory not locally extracted.",
+        "availability_conditions": "66 stations across the long-term study, not a verified simultaneous 72-hour subset; neural graph uses 18 stations. Distribution is in supplementary Fig. S1; station-day inventory is not locally extracted.",
         "evidence": [
           {
             "source": "benchmark_source/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
             "locator": "Scientific scope and observation conditions",
             "note": "Station count, region and filtering."
+          },
+          {
+            "source": "benchmark_source/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md",
+            "locator": "CONSTRUCT ING A SEISMICITY AND MOMENT TENSOR CATALOGUE, first paragraph; DATA AVAILABILITY",
+            "note": "Checked local article text for waveform archive citation, 66-station study array, vertical/north detection components, and supplementary Fig. S1. Does not establish current endpoint or candidate-window availability."
           }
         ]
       },
@@ -388,7 +393,7 @@
         "outputs": [
           "P/S phase picks"
         ],
-        "method": "Apply PhaseNO to 3C data with above-1-Hz high-pass.",
+        "method": "Apply PhaseNO to vertical and north components from three-component broadband instruments, with high-pass above 1 Hz.",
         "software_or_model": "PhaseNO",
         "parameters": [
           {
