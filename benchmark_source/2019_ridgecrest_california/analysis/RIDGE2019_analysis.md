@@ -177,7 +177,11 @@ Ridgecrest 的价值在于同一案例包含 Mw 6.4、Mw 7.1 及密集前震—�
 | `ROSS2019_SCIENCE/` | `selection.json` 标为 `unresolved`，不生成 StationXML | 方法/台站证据未齐全，不自动分配共享台站 |
 | `USGS_SCSN_COMCAT_2019/` | `selection.json` 标为 `unresolved`，不生成 StationXML | 事件快照不能确定完整波形输入台站 |
 
-台站分布图：[PNG](figures/station_distribution.png) · [PDF](figures/station_distribution.pdf)。左图为区域分布，虚线框对应右图放大范围。蓝色三角为 Liu 名单与 Shelly 窗口内辅助震相共有的 24 站，橙色三角为已核实名单中其余 17 个 Liu 站；紫色空心菱形为窗口后生效的 4 个临时站，不能计入三天输入。星号为官方两次大震震中。图不包含尚未核实的 AWR/Ross 名单，也不表示已下载连续波形。坐标取自官方通道元数据：有效站仅使用与窗口相交的 epoch，后部署站使用扩展查询 epoch；CI.FUR 的两个水平坐标相差约 18 m，绘图取唯一坐标的中位数，变体保留在 [图件清单](figures/station_distribution.json)。比例尺采用局地近似，未叠加未经核验的断层或地形底图。
+**完整性结论：当前图和分组不是所有论文的完整输入台网。** Shelly 的 24 是候选三天内辅助震相表涉及的台站数，30 是该辅助表全时段的台站数，两者均未被证明等于论文实际使用的全部台站。该表的 [原始发布元数据](../data/catalogs/SHELLY2020_0220190309/raw/Correlation-derived_seismic_phase_arrival_times_v2.xml) 明确将产品定位为支持神经网络震相拾取研究；论文 Methods 还合并常规 SCSN 与互相关差分走时，辅助表不能恢复其完整输入。论文 Fig. 1 另展示了主图外台站，尚需对照原始台站/通道配置及模板、常规到时和互相关观测清单确认完整性。全表比三天子集多的 6 个标识为 `GS.CA01–CA06`，不是当前图漏画了窗口内这 6 站。
+
+Liu 的 45 个标识来自其 Fig. S1 的人工转录，并与正文“41 永久站 + 4 临时站”相符；它只支持该论文所示台站名单层面的核对，尚不证明完整通道配置或连续波形覆盖。区域查询返回的 255 个窗口内台站标识也不能直接补进任何论文名单，它们包含其他台阵/通道；AWR/Ross 的论文选站仍待核实。当前图有意只画 Liu 名单及其与辅助震相子集的交集，因此比区域元数据清单稀疏。
+
+台站分布图：[PNG](figures/station_distribution.png) · [PDF](figures/station_distribution.pdf)。左图为已核实选择的区域分布，虚线框对应右图放大范围；不是区域全部台站。蓝色三角为 Liu 名单与 Shelly 窗口内辅助震相共有的 24 站，橙色三角为已核实名单中其余 17 个 Liu 站；紫色空心菱形为窗口后生效的 4 个临时站，不能计入三天输入。星号为官方两次大震震中。图不包含尚未核实的 AWR/Ross 名单，也不表示已下载连续波形。坐标取自官方通道元数据：有效站仅使用与窗口相交的 epoch，后部署站使用扩展查询 epoch；CI.FUR 的两个水平坐标相差约 18 m，绘图取唯一坐标的中位数，变体保留在 [图件清单](figures/station_distribution.json)。比例尺采用局地近似，未叠加未经核验的断层或地形底图。
 
 复算：`python -B benchmark_source/2019_ridgecrest_california/scripts/plot_station_distribution.py`。
 

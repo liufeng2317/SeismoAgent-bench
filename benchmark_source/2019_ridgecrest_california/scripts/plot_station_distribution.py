@@ -62,7 +62,7 @@ def main():
             ax.set_xlabel('Longitude (°W)'); ax.set_ylabel('Latitude (°N)')
             ax.grid(color='#e8e8e8', lw=.45, zorder=0)
             for edge in ('top','right'): ax.spines[edge].set_visible(True)
-            ax.set_title(('a  Regional stations','b  Sequence area')[i],loc='left',pad=10,fontsize=9)
+            ax.set_title(('a  Selected stations','b  Sequence area')[i],loc='left',pad=10,fontsize=9)
             for station in stations:
                 x,y=station['longitude'],station['latitude'];kind=station['category']
                 if not (ax.get_xlim()[0] <= x <= ax.get_xlim()[1] and ax.get_ylim()[0] <= y <= ax.get_ylim()[1]):
