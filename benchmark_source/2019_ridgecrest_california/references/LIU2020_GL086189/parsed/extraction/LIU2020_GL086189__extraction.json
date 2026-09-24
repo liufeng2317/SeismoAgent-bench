@@ -409,10 +409,17 @@
             "value": 13,
             "unit": "picks",
             "note": null
+          },
+          {
+            "name": "competing_event_window",
+            "value": 5,
+            "unit": "s",
+            "note": "SI Text S3: retain the most reliable event within a limited window; exact implementation/window anchoring not specified here."
           }
         ],
         "qc_and_rejection_rules": [
-          "Require at least five P and 13 total P+S picks."
+          "Require at least five P and 13 total P+S picks.",
+          "Keep the most reliable event within the 5-s window; nearby events can be lost. Do not reinterpret this as a benchmark matching tolerance."
         ],
         "intermediate_result": "16,563 events; 195,869 P and 204,349 S arrivals.",
         "analyst_intervention": null,
@@ -422,6 +429,11 @@
             "source": "benchmark_source/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
             "locator": "REAL association/results",
             "note": "Search grid, pick thresholds and intermediate counts."
+          },
+          {
+            "source": "benchmark_source/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/supplement/Liu2020_Ridgecrest_SI__extracted.md",
+            "locator": "Text S3, items 1–3",
+            "note": "Five P / thirteen total picks, limited depth search and 5-s competing-event selection. Cross-checked against user-supplied SI text."
           }
         ]
       },
@@ -451,17 +463,17 @@
             "name": "gap_max",
             "value": 200,
             "unit": "degree",
-            "note": null
+            "note": "Strictly below 200 degrees."
           },
           {
-            "name": "rms_max",
+            "name": "travel_time_residual_max",
             "value": 0.6,
             "unit": "s",
-            "note": null
+            "note": "Strictly below 0.6 s; SI calls this travel-time residual, without defining aggregation."
           }
         ],
         "qc_and_rejection_rules": [
-          "Retain station gap below 200 degrees and RMS below 0.6 s."
+          "Retain station gap <200 degrees and travel-time residual <0.6 s; the supplied SI does not specify the residual aggregation formula."
         ],
         "intermediate_result": "16,112 events.",
         "analyst_intervention": null,
@@ -471,6 +483,11 @@
             "source": "benchmark_source/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
             "locator": "Catalog-construction workflow / VELEST",
             "note": "Model-update subset and quality criteria."
+          },
+          {
+            "source": "benchmark_source/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/supplement/Liu2020_Ridgecrest_SI__extracted.md",
+            "locator": "Text S3, item 5",
+            "note": "Station gap and travel-time residual criteria. Cross-checked against user-supplied SI text."
           }
         ]
       },
@@ -494,7 +511,7 @@
             "name": "station_distance",
             "value": 80,
             "unit": "km",
-            "note": null
+            "note": "Strict epicentral distance <80 km, not a mainshock-centered download radius."
           },
           {
             "name": "phase_probability",
@@ -506,18 +523,18 @@
             "name": "P_residual_outlier",
             "value": 0.8,
             "unit": "s",
-            "note": "SI Text S2."
+            "note": "Remove deviations larger than threshold from the main empirical P/S travel-time trend; not explicitly defined as theoretical-model residual."
           },
           {
             "name": "S_residual_outlier",
             "value": 1.2,
             "unit": "s",
-            "note": "SI Text S2."
+            "note": "Remove deviations larger than threshold from the main empirical P/S travel-time trend; not explicitly defined as theoretical-model residual."
           }
         ],
         "qc_and_rejection_rules": [
-          "Remove P outliers above 0.8 s and S outliers above 1.2 s.",
-          "Retain supported differential pairs."
+          "Epicentral distance <80 km; remove P/S picks deviating from the main travel-time trend by >0.8/>1.2 s, respectively.",
+          "Main-text condition: phase probability >0.7, with probabilities used as phase weights."
         ],
         "intermediate_result": "15,445 final events.",
         "analyst_intervention": null,
@@ -542,13 +559,15 @@
         "category": "magnitude",
         "purpose": "Estimate local magnitudes and write Table S1.",
         "inputs": [
-          "Final hypoDD catalog",
-          "S1"
+          "REAL event catalog",
+          "P/S arrival table",
+          "S1",
+          "Final hypoDD catalog"
         ],
         "outputs": [
           "Table S1 event catalog"
         ],
-        "method": "Deconvolve horizontal amplitudes, apply Wood–Anderson response and Hutton–Boore attenuation.",
+        "method": "Remove instrument response from horizontal waveforms, convolve theoretical Wood–Anderson response, measure maximum amplitudes and use Hutton–Boore attenuation for ML; window starts P−0.5 s and lasts 2×predicted(S−P).",
         "software_or_model": "Custom amplitude workflow",
         "parameters": [
           {
@@ -556,19 +575,42 @@
             "value": "ML",
             "unit": null,
             "note": "Local magnitude; station selection documented in SI."
+          },
+          {
+            "name": "amplitude_window_start_relative_to_P",
+            "value": -0.5,
+            "unit": "s",
+            "note": "SI Text S1; start 0.5 s before P arrival."
+          },
+          {
+            "name": "amplitude_window_duration_SP_multiplier",
+            "value": 2,
+            "unit": null,
+            "note": "Duration is twice the predicted S–P time; this does not specify the end as S+0.5 s."
+          },
+          {
+            "name": "magnitude_station_epicentral_distance_max",
+            "value": 100,
+            "unit": "km",
+            "note": "Strictly less than 100 km (SI Text S1)."
           }
         ],
         "qc_and_rejection_rules": [
-          "Retain complete origin/coordinate/magnitude rows."
+          "Magnitude station distance <100 km; multi-station amplitude aggregation and detailed response settings remain unspecified here."
         ],
         "intermediate_result": "Table S1: 15,445 rows.",
         "analyst_intervention": null,
-        "dependencies": "Requires waveform amplitudes and hypoDD origins.",
+        "dependencies": "Requires horizontal waveforms, instrument responses, phase timing and predicted S–P time. SI discusses magnitudes already in the REAL catalog; this grouped magnitude/export stage is not evidence that all magnitude estimation followed hypoDD.",
         "evidence": [
           {
             "source": "benchmark_source/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/supplement/Liu2020_Ridgecrest_SI__extracted.md",
             "locator": "SI Text S1",
             "note": "Magnitude formula and amplitude processing."
+          },
+          {
+            "source": "benchmark_source/2019_ridgecrest_california/references/LIU2020_GL086189/parsed/supplement/Liu2020_Ridgecrest_SI__extracted.md",
+            "locator": "Text S1; Fig. S15",
+            "note": "Amplitude-window definition, response processing and magnitude bias caveats. Cross-checked against user-supplied SI text."
           }
         ]
       }
@@ -682,7 +724,9 @@
       "Separate machine-readable REAL/VELEST intermediate catalogs are not locally available.",
       "Table S1 lacks event IDs, phase/station counts and uncertainties.",
       "Station-day waveform availability and exact channel/sample-rate inventory are not in the local SI extraction.",
-      "Movies S1–S2 are not archived locally."
+      "Movies S1–S2 are not archived locally.",
+      "VELEST-updated depth/Vp/Vs table and station corrections are not provided in the supplied SI text.",
+      "Fig. S17 value 5.74 km/s is an illustrative P-wave slope, not a full velocity model; Figures S5/S16 show travel-time trends."
     ]
   },
   "extraction_quality": {

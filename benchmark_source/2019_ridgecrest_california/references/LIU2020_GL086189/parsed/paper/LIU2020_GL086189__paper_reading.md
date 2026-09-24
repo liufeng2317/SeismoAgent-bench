@@ -32,8 +32,10 @@ continuous IRIS/SCEDC waveforms
     → REAL association and grid-search initial locations
     → VELEST absolute relocation + station corrections
     → hypoDD relative relocation with filtered high-probability picks
-    → local magnitude (Hutton–Boore amplitude relation)
     → Table S1 final hypoDD event catalog
+
+REAL events + horizontal waveforms/response
+    → local magnitude (Hutton–Boore amplitude relation; already discussed for REAL)
 ```
 
 ### Picking and association
@@ -51,7 +53,7 @@ continuous IRIS/SCEDC waveforms
 
 - VELEST refines the full REAL catalog using 1,633 events with at least 30 high-
   quality picks (probability >0.8) to update the velocity model and station
-  corrections. Events are retained when station gap <200° and travel-time RMS
+  corrections. Events are retained when station gap <200° and travel-time residual
   <0.6 s, yielding 16,112 relocated events (MinerU line 60).
 - hypoDD then uses stations within 80 km, picks close to the main P/S travel-time
   trends (SI Text S2), and phase probabilities >0.7 as weights. The paper reports
@@ -100,7 +102,7 @@ versus 7,743 in the Conclusion); neither number should be substituted for the
 | Independence | Higher than Shelly/Ross at the algorithm level because the event prior is not the routine catalog; waveform archive and SCSN comparison remain shared |
 | Canonical local input | `data/catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_tableS1.txt` |
 
-## Frozen Ridgecrest benchmark window
+## Candidate Ridgecrest benchmark window (not frozen)
 
 Using the case-wide rule
 `2019-07-04T00:00:00Z <= origin_time < 2019-07-07T00:00:00Z`, latitude
@@ -128,3 +130,19 @@ Using the case-wide rule
 ## Coso initial-model table supplied by user
 
 The user supplied an image identified as Feng & Lees (1998), Table 1, “Coso regional velocity model”. Its 12 rows of P-depth, P velocity and S velocity have been transcribed into `data/models/velocity_models.json`, entry `liu_coso_initial` (case-relative path). Both velocities are explicitly tabulated; S velocity is not derived from a fixed ratio. The image does not establish depth datum or interpolation conventions. The image remains in the conversation, not an archived local source file. Liu §2 cites this initial model, but the actual input-file identity remains unverified. This table does not provide the model or station corrections subsequently inverted by VELEST.
+
+## Supporting-information cross-check from user-supplied text
+
+The supplied Texts S1–S3 and figure captions agree with the corresponding local SI extraction on the processing parameters below; they are merged here without duplicating the full SI or author contact details. The supplied text contains captions, not the figure images or numerical model files.
+
+| Stage / source | Verified detail | Interpretation limit |
+|---|---|---|
+| Magnitude, Text S1 | Horizontal maximum amplitudes after instrument-response removal and theoretical Wood–Anderson convolution; Hutton–Boore attenuation; station epicentral distance <100 km | REAL magnitudes are already discussed; magnitude estimation is not proven to occur only after hypoDD |
+| Magnitude window, Text S1 | Start at P−0.5 s; duration 2×predicted(S−P) | End is start plus duration; S–P predictions require a model. Station aggregation and response settings remain unspecified |
+| hypoDD picks, Text S2 | Epicentral distance <80 km; reject P/S deviations >0.8/>1.2 s from the main travel-time trends | Trends are not explicitly defined as theoretical-model residuals. Probability >0.7 comes from the main paper, not this SI paragraph |
+| REAL omissions, Text S3 | ≥5 P and ≥13 total picks; limited depth search; keep most reliable event within 5 s | 5 s is a competing-detection window, not an event-matching tolerance |
+| VELEST QC, Text S3 | Station gap <200° and travel-time residual <0.6 s | SI does not define the residual aggregation formula; do not automatically call it RMS |
+
+SI reports 884 missed routine events (about 12%): insufficient picks, out-of-range depth, close events, coda burial and poor geometry/residuals. It identifies 359 routine events with fewer than 13 picks and 113 missed routine events deeper than 20 km; these are not demonstrated to be disjoint partitions of the 884, so they must not be summed into an exhaustive attribution. Magnitude differences above 4 are attributed to possible formula/type differences, restricted station distances and coda effects, not a universal correction to apply to our catalogs.
+
+No VELEST-updated velocity table or station corrections occur in the supplied text. Figures S5/S16 concern travel-time trends; the 5.74 km/s line in Fig. S17 is illustrative. The separate `Ridgecrest2019catalog.txt` is the final event catalog, not a velocity table. Coso initial-model values remain those independently transcribed from the Feng & Lees table supplied earlier.

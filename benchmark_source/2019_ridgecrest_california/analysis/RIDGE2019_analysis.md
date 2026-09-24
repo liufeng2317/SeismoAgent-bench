@@ -151,6 +151,15 @@ Ridgecrest 的价值在于同一案例包含 Mw 6.4、Mw 7.1 及密集前震—�
 
 台站元数据依用户指定落在 `data/waveforms/stations/`，速度模型数值保存在 `data/models/velocity_models.json`；断层载荷未取得，不创建空的 `data/faults/`。预分析结论与状态继续在本节维护，案例特有处理代码只放 `scripts/`。
 
+### Liu 补充材料参数核对
+
+用户补充的 SI Text S1–S3 与本地对应文本核对后，已合并到 [Liu 阅读记录](../references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md)及结构化 extraction，不另存一份重复全文。
+
+- **震级输入：** 水平分量去仪器响应后卷积 Wood–Anderson 响应，取最大振幅并采用 Hutton–Boore 衰减关系；台站震中距 <100 km。振幅窗从 P 到时前 0.5 s 开始，长度为预测 S–P 时差的 2 倍。SI 已讨论 REAL 目录震级，因此不能把震级计算强行解释为仅在 hypoDD 后发生。
+- **分阶段筛选：** REAL 至少 5 个 P、13 个 P+S 拾取，5 s 窗口保留最可靠事件；hypoDD 仅用震中距 <80 km 的拾取，剔除偏离 P/S 主要走时趋势 >0.8/>1.2 s 的点；VELEST 保留站间方位缺口 <200°、走时残差 <0.6 s 的事件。SI 未给出残差汇总公式，不能自动称为 RMS；hypoDD 概率 >0.7 的依据仍是正文。
+- **遗漏解释：** 884 个遗漏事件的五类原因并非互斥计数；359 个低拾取数事件与 113 个超深遗漏事件不能直接相加解释全部遗漏。台站输入一致后，算法自身的距离、深度、时间竞争和质量筛选仍会造成目录差异。
+- **模型状态不变：** 这份 SI 没有更新后的速度数值或台站修正；Fig. S17 的 5.74 km/s 只是示意斜率，独立表格 `Ridgecrest2019catalog.txt` 是事件目录。Coso 初始模型已补齐，Liu 的 VELEST 更新模型仍待补。
+
 ### 原始论文与补充材料复核（2026-09-25）
 
 本轮直接读取正文 PDF、Liu 原始 DOCX 台站图，以及新取得的 Ross DC1 和 AWR 原始补充 PDF/ZIP；以下判断不以旧 extraction 为唯一依据。Ross 附件 MD5 与 [CaltechAUTHORS 公布值](https://authors.library.caltech.edu/records/3x9hs-fzr27) 一致；AWR 附件来自 [原文 Supporting Information](https://doi.org/10.1093/gji/ggaf001)。来源、字节数与 SHA-256 保存在各参考 README；大文件只保存在本地。
