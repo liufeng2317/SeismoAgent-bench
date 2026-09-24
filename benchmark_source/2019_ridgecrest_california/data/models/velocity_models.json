@@ -71,13 +71,96 @@
       ]
     },
     "liu_coso_initial": {
-      "status": "numeric_values_unresolved",
-      "source": "references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
-      "locator": "Section 2",
-      "reference": "Feng & Lees (1998)",
+      "status": "cited_model_numeric_table_transcribed",
+      "source": "User-provided image in conversation, identified by user as Feng & Lees (1998), Table 1",
+      "locator": "Table 1: Coso regional velocity model; caption below table",
+      "reference": "Feng & Lees (1998), Tectonophysics 289, 221–238",
       "missing": [
-        "layer depths and Vp/Vs table",
-        "model depth datum"
+        "model depth datum and numerical implementation conventions",
+        "verification of the actual Liu initial input file against this cited table"
+      ],
+      "source_sha256": null,
+      "doi": "10.1016/S0040-1951(97)00317-X",
+      "role": "Published model cited as initial model by Liu et al. (2020); not the VELEST-updated model",
+      "liu_usage_evidence": {
+        "source": "references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md",
+        "locator": "Section 2"
+      },
+      "provenance_note": "Manually transcribed from the user-supplied image; image is visible in conversation but not archived as a local file, so no file hash is claimed.",
+      "units": {
+        "p_depth": "km",
+        "vp": "km/s",
+        "vs": "km/s"
+      },
+      "original_column_labels": [
+        "P-depth (km)",
+        "P-velocity (km/s)",
+        "S-velocity (km/s)"
+      ],
+      "vs_provenance": "Directly tabulated S velocities; not computed from a fixed Vp/Vs ratio",
+      "depth_reference": "Original heading is P-depth; datum, interpolation/layer semantics and bottom extrapolation are not established by this image. No depth conversion applied.",
+      "derivation": "One-dimensional travel-time inversion constrained by well-log data and vertical seismic profiles (table caption).",
+      "rows": [
+        {
+          "p_depth_km": 0.0,
+          "vp_km_s": 1.82,
+          "vs_km_s": 1.05
+        },
+        {
+          "p_depth_km": 0.09,
+          "vp_km_s": 2.76,
+          "vs_km_s": 1.59
+        },
+        {
+          "p_depth_km": 0.15,
+          "vp_km_s": 3.67,
+          "vs_km_s": 2.12
+        },
+        {
+          "p_depth_km": 0.31,
+          "vp_km_s": 4.34,
+          "vs_km_s": 2.5
+        },
+        {
+          "p_depth_km": 0.52,
+          "vp_km_s": 5.0,
+          "vs_km_s": 2.9
+        },
+        {
+          "p_depth_km": 1.22,
+          "vp_km_s": 5.32,
+          "vs_km_s": 3.07
+        },
+        {
+          "p_depth_km": 2.44,
+          "vp_km_s": 5.58,
+          "vs_km_s": 3.22
+        },
+        {
+          "p_depth_km": 3.66,
+          "vp_km_s": 5.77,
+          "vs_km_s": 3.33
+        },
+        {
+          "p_depth_km": 5.48,
+          "vp_km_s": 5.99,
+          "vs_km_s": 3.46
+        },
+        {
+          "p_depth_km": 12.19,
+          "vp_km_s": 6.05,
+          "vs_km_s": 3.49
+        },
+        {
+          "p_depth_km": 15.0,
+          "vp_km_s": 7.2,
+          "vs_km_s": 4.15
+        },
+        {
+          "p_depth_km": 18.28,
+          "vp_km_s": 8.0,
+          "vs_km_s": 4.62
+        }
       ]
     },
     "liu_velest_updated": {

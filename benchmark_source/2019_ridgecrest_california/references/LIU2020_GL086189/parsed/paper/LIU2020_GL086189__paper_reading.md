@@ -124,3 +124,7 @@ Using the case-wide rule
 - Open action: preserve/locate the separate Movies and any station inventory if
   waveform-volume reproduction is needed; the local SI DOCX contains figures and
   text but does not provide a machine-readable station-day manifest.
+
+## Coso initial-model table supplied by user
+
+The user supplied an image identified as Feng & Lees (1998), Table 1, “Coso regional velocity model”. Its 12 rows of P-depth, P velocity and S velocity have been transcribed into `data/models/velocity_models.json`, entry `liu_coso_initial` (case-relative path). Both velocities are explicitly tabulated; S velocity is not derived from a fixed ratio. The image does not establish depth datum or interpolation conventions. The image remains in the conversation, not an archived local source file. Liu §2 cites this initial model, but the actual input-file identity remains unverified. This table does not provide the model or station corrections subsequently inverted by VELEST.
