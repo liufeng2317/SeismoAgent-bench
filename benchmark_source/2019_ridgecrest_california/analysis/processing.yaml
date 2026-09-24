@@ -1,39 +1,10 @@
+schema_version: 2
 case_id: 2019_ridgecrest_california
 window_status: not_frozen
-products:
-- source_ref: AWR2025_CALTECHDATA
-  role: long_term_methodological_auxiliary
-  products:
-  - hypocenters_v2
-  - moment_tensors_v2
-  rule: retain gamma magnitude separately; compare release counts with article counts
-- source_ref: LIU2020_GL086189
-  role: independent_relocated_event_reference
-  products:
-  - hypoDD_tableS1
-  rule: origin-time tuple is the native reproducibility key; no supplied event ID
-- source_ref: ROSS2019_SCIENCE
-  role: relative_relocation_reference
-  products:
-  - SCEDC_QTM
-  rule: retain all rows but expose nbranch_gt_1 as the metric-specific relocated subset
-- source_ref: SHELLY2020_0220190309
-  role: matched_filter_event_reference
-  products:
-  - DataS1_event_catalog
-  - correlation_phase_arrivals
-  rule: phase arrivals are auxiliary pick-level data, not events
-- source_ref: USGS_SCSN_COMCAT_2019
-  role: official_operational_baseline
-  products:
-  - operational_full
-  - official_query_snapshot
-  rule: preserve source-native magnitude, event type, and the original official snapshot
-    filename
 scientific_design:
   status: candidate_design_reference_audit_only
-  primary_question: Can an agent construct a usable earthquake catalog from identical
-    observations across low-rate and mainshock-coda conditions?
+  primary_question: Can an agent construct a usable earthquake catalog from identical observations across
+    low-rate and mainshock-coda conditions?
   candidate_window:
     start_utc: '2019-07-04T00:00:00Z'
     end_utc: '2019-07-07T00:00:00Z'
@@ -61,14 +32,11 @@ scientific_design:
   - closed_reference
   - open_literature_sanitized
   - expert_guided
-  station_policy: permanent_network_candidate; station/channel availability not yet
-    verified
+  station_policy: permanent_network_candidate; station/channel availability not yet verified
   reference_policy:
-    detection: Shelly with Liu and earthquake-only SCSN cross-checks; no universal
-      truth set
+    detection: Shelly with Liu and earthquake-only SCSN cross-checks; no universal truth set
     relative_geometry: Shelly and Ross nbranch>1; compare matched-event geometry
-    absolute_location: reference differences only until depth datums and uncertainty
-      are checked
+    absolute_location: reference differences only until depth datums and uncertainty are checked
     moment_tensors: AWR auxiliary, outside initial catalog-construction task
   hidden_materials:
   - target_event_catalogs
@@ -83,38 +51,6 @@ scientific_design:
   - input_information_boundary_enforced
   - development_evaluation_split_defined
 reference_audit:
-  sources:
-    shelly:
-      path: data/catalogs/SHELLY2020_0220190309/raw_article/SHELLY2020_0220190309__catalog_DataS1.txt
-      parser: shelly
-      expected_sha256: aaa79453a2c599fe2b386a544c78e8e98383492aacf57212a8dc98d82373a9f1
-    liu:
-      path: data/catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_tableS1.txt
-      parser: liu
-      expected_sha256: 8582363962b168c8034e339a8859407fb2ed63fc83eb4e01ac9d88546583cd88
-    ross:
-      path: data/catalogs/ROSS2019_SCIENCE/raw/ROSS2019_SCIENCE__catalog_qtm.tar.gz
-      parser: ross
-      expected_sha256: dcb0035f69c6ea9a960e45544f31bdacb38cb7f502c3d29af827da4ff6850849
-    awr_hypocenters:
-      path: data/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_hypocenters_v2.csv
-      parser: awr_hypo
-      expected_sha256: fa87745528bddc66e7b1d25a94cba8d2448d38f67c6157c566ae451a84fa3ea8
-    awr_moment_tensors:
-      path: data/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_moment_tensors_v2.csv
-      parser: awr_mt
-      expected_sha256: 0746e6bbc694cf63d06112517305e91bf282a80833e660d6e6b0ea77578a33e7
-    official_full:
-      path: data/catalogs/USGS_SCSN_COMCAT_2019/USGS_SCSN_COMCAT_2019__catalog_operational_full.csv
-      parser: official
-      expected_sha256: c1c61e21b7c7cf687566cfcb4ccf92120f47a78fa36ddfcb4349316ee0b82db5
-    official_snapshot:
-      path: data/catalogs/USGS_SCSN_COMCAT_2019/USGS_SCSN_COMCAT_2019__catalog_operational_benchmark.csv
-      parser: official
-      expected_sha256: 2e6f472c88874431042138c468d91259156213e70d0126205ca55ac25c35036e
-  phase_source:
-    path: data/catalogs/SHELLY2020_0220190309/raw/Ridgecrest_2019_correlation_phase_arrivals.csv
-    expected_sha256: 0b77237b497265ebc94768acd955a9de5eb4c7f78f130922254e4c9ed4122d9f
   overlap_diagnostic:
     method: reciprocal_unique_candidates_only
     formal_scoring: false
@@ -134,3 +70,125 @@ reference_audit:
       - official_earthquake
     - - liu
       - official_earthquake
+  event_sources:
+  - shelly
+  - liu
+  - ross
+  - awr_hypocenters
+  - awr_moment_tensors
+  - official_full
+  - official_snapshot
+  phase_source: shelly_phase_arrivals
+  anchor_source: official_snapshot
+  stage_names:
+  - before_mw6_4
+  - first_hour_after_mw6_4
+  - later_between_large_events
+  - first_hour_after_mw7_1
+  - later_after_mw7_1
+  stage_boundaries:
+  - anchor: window_start
+  - anchor: mw6_4
+  - anchor: mw6_4
+    offset_s: 3600
+  - anchor: mw7_1
+  - anchor: mw7_1
+    offset_s: 3600
+  - anchor: window_end
+  subsets:
+    ross_relocated:
+      source: ross
+      field: nbranch
+      operator: gt
+      value: 1
+    official_earthquake:
+      source: official_snapshot
+      field: event_type
+      operator: eq
+      value: earthquake
+source_groups:
+  AWR2025_CALTECHDATA:
+    role: long_term_methodological_auxiliary
+    interpretation: retain gamma magnitude separately; compare release counts with article counts
+    readme: data/catalogs/AWR2025_CALTECHDATA/README.md
+  LIU2020_GL086189:
+    role: independent_relocated_event_reference
+    interpretation: origin-time tuple is the native reproducibility key; no supplied event ID
+    readme: data/catalogs/LIU2020_GL086189/README.md
+  ROSS2019_SCIENCE:
+    role: relative_relocation_reference
+    interpretation: retain all rows but expose nbranch_gt_1 as the metric-specific relocated subset
+    readme: data/catalogs/ROSS2019_SCIENCE/README.md
+  SHELLY2020_0220190309:
+    role: matched_filter_event_reference
+    interpretation: phase arrivals are auxiliary pick-level data, not events
+    readme: data/catalogs/SHELLY2020_0220190309/README.md
+  USGS_SCSN_COMCAT_2019:
+    role: official_operational_baseline
+    interpretation: preserve source-native magnitude, event type, and the original official snapshot filename
+    readme: data/catalogs/USGS_SCSN_COMCAT_2019/README.md
+sources:
+  shelly:
+    path: data/catalogs/SHELLY2020_0220190309/raw_article/SHELLY2020_0220190309__catalog_DataS1.txt
+    parser: shelly
+    expected_sha256: aaa79453a2c599fe2b386a544c78e8e98383492aacf57212a8dc98d82373a9f1
+    source_ref: SHELLY2020_0220190309
+    unit: event
+    format: text
+    version: local_release_pinned_by_sha256
+  liu:
+    path: data/catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_tableS1.txt
+    parser: liu
+    expected_sha256: 8582363962b168c8034e339a8859407fb2ed63fc83eb4e01ac9d88546583cd88
+    source_ref: LIU2020_GL086189
+    unit: event
+    format: text
+    version: local_release_pinned_by_sha256
+  ross:
+    path: data/catalogs/ROSS2019_SCIENCE/raw/ROSS2019_SCIENCE__catalog_qtm.tar.gz
+    parser: ross
+    expected_sha256: dcb0035f69c6ea9a960e45544f31bdacb38cb7f502c3d29af827da4ff6850849
+    source_ref: ROSS2019_SCIENCE
+    unit: event
+    format: tar.gz
+    version: local_release_pinned_by_sha256
+  awr_hypocenters:
+    path: data/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_hypocenters_v2.csv
+    parser: awr_hypo
+    expected_sha256: fa87745528bddc66e7b1d25a94cba8d2448d38f67c6157c566ae451a84fa3ea8
+    source_ref: AWR2025_CALTECHDATA
+    unit: event
+    format: csv
+    version: local_v2
+  awr_moment_tensors:
+    path: data/catalogs/AWR2025_CALTECHDATA/AWR2025_CALTECHDATA__catalog_moment_tensors_v2.csv
+    parser: awr_mt
+    expected_sha256: 0746e6bbc694cf63d06112517305e91bf282a80833e660d6e6b0ea77578a33e7
+    source_ref: AWR2025_CALTECHDATA
+    unit: focal_mechanism
+    format: csv
+    version: local_v2
+  official_full:
+    path: data/catalogs/USGS_SCSN_COMCAT_2019/USGS_SCSN_COMCAT_2019__catalog_operational_full.csv
+    parser: official
+    expected_sha256: c1c61e21b7c7cf687566cfcb4ccf92120f47a78fa36ddfcb4349316ee0b82db5
+    source_ref: USGS_SCSN_COMCAT_2019
+    unit: event
+    format: csv
+    version: query_snapshot_2026-09-19
+  official_snapshot:
+    path: data/catalogs/USGS_SCSN_COMCAT_2019/USGS_SCSN_COMCAT_2019__catalog_operational_benchmark.csv
+    parser: official
+    expected_sha256: 2e6f472c88874431042138c468d91259156213e70d0126205ca55ac25c35036e
+    source_ref: USGS_SCSN_COMCAT_2019
+    unit: event
+    format: csv
+    version: query_snapshot_2026-09-19
+  shelly_phase_arrivals:
+    path: data/catalogs/SHELLY2020_0220190309/raw/Ridgecrest_2019_correlation_phase_arrivals.csv
+    expected_sha256: 0b77237b497265ebc94768acd955a9de5eb4c7f78f130922254e4c9ed4122d9f
+    source_ref: SHELLY2020_0220190309
+    unit: phase_pick
+    format: csv
+    parser: shelly_correlation_arrivals
+    version: local_release_pinned_by_sha256

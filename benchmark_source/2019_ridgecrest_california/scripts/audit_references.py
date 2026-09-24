@@ -7,57 +7,24 @@ Requires PyYAML to read the existing case configuration.
 from __future__ import annotations
 
 import argparse
-from bisect import bisect_left, bisect_right
 from collections import Counter
 import csv
 from datetime import datetime, timedelta, timezone
-import hashlib
 import io
 import json
-import math
 from pathlib import Path
 import tarfile
 
-import yaml
+import sys
+
+# Keep the case-local command usable without an installation step.
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from seismoagentbench.catalog import (utc, origin, finite, sha256, event, within,
+                                     quantiles, horizontal_km, overlap, summary)
+from seismoagentbench.sources import load_case, resolve_stages, select_subset, case_path
 
 CASE = Path(__file__).resolve().parents[1]
 UTC = timezone.utc
-
-
-def utc(value):
-    parsed = datetime.fromisoformat(value.replace('Z', '+00:00'))
-    return parsed.replace(tzinfo=UTC) if parsed.tzinfo is None else parsed.astimezone(UTC)
-
-
-def origin(columns):
-    seconds = float(columns[5])
-    if not math.isfinite(seconds) or not 0 <= seconds < 60:
-        raise ValueError('seconds outside [0, 60)')
-    return datetime(*map(int, columns[:5]), tzinfo=UTC) + timedelta(seconds=seconds)
-
-
-def finite(value):
-    number = float(value)
-    if not math.isfinite(number):
-        raise ValueError('non-finite number')
-    return number
-
-
-def sha256(path):
-    h = hashlib.sha256()
-    with path.open('rb') as f:
-        for block in iter(lambda: f.read(1024 * 1024), b''):
-            h.update(block)
-    return h.hexdigest()
-
-
-def event(time, lat, lon, depth, magnitude, native_id, line, **extra):
-    lat, lon, depth = map(finite, (lat, lon, depth))
-    if not -90 <= lat <= 90 or not -180 <= lon <= 180:
-        raise ValueError('invalid geographical coordinates')
-    return dict(time=time, timestamp=time.timestamp(), latitude=lat, longitude=lon,
-                depth_km=depth, magnitude=finite(magnitude) if magnitude not in ('', None) else None,
-                native_id=native_id, source_row=line, **extra)
 
 
 def read_events(path, kind):
@@ -105,82 +72,6 @@ def read_events(path, kind):
     return rows, errors
 
 
-def within(row, start, end, bounds=None):
-    if not start <= row['time'] < end:
-        return False
-    return bounds is None or all(bounds[key][0] <= row[key] <= bounds[key][1]
-                                 for key in ('latitude', 'longitude', 'depth_km'))
-
-
-def quantiles(values):
-    values = sorted(values)
-    if not values:
-        return None
-    def q(p):
-        i = (len(values) - 1) * p
-        lo = int(i)
-        return values[lo] + (values[min(lo + 1, len(values) - 1)] - values[lo]) * (i - lo)
-    return {'min': values[0], 'p50': q(.5), 'p90': q(.9), 'max': values[-1]}
-
-
-def horizontal_km(a, b):
-    lat1, lat2 = math.radians(a['latitude']), math.radians(b['latitude'])
-    dlat = lat2 - lat1
-    dlon = math.radians(b['longitude'] - a['longitude'])
-    v = math.sin(dlat / 2) ** 2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2) ** 2
-    return 2 * 6371.0088 * math.asin(math.sqrt(min(1.0, max(0.0, v))))
-
-
-def overlap(left, right, time_seconds, distance_km):
-    """Accept only reciprocal degree-one edges; ambiguous components stay unresolved."""
-    right = sorted(right, key=lambda r: r['timestamp'])
-    times = [r['timestamp'] for r in right]
-    candidates = []
-    degrees = Counter()
-    for a in left:
-        js = []
-        for j in range(bisect_left(times, a['timestamp'] - time_seconds),
-                       bisect_right(times, a['timestamp'] + time_seconds)):
-            if horizontal_km(a, right[j]) <= distance_km:
-                js.append(j)
-                degrees[j] += 1
-        candidates.append(js)
-    pairs = [(a, right[js[0]]) for a, js in zip(left, candidates)
-             if len(js) == 1 and degrees[js[0]] == 1]
-    return {
-        'time_tolerance_s': time_seconds, 'horizontal_tolerance_km': distance_km,
-        'left_rows': len(left), 'right_rows': len(right), 'candidate_edges': sum(map(len, candidates)),
-        'reciprocal_unique_pairs': len(pairs),
-        'left_without_candidate': sum(not js for js in candidates),
-        'right_without_candidate': len(right) - len(degrees),
-        'left_multiple_candidates': sum(len(js) > 1 for js in candidates),
-        'right_multiple_candidates': sum(n > 1 for n in degrees.values()),
-        'left_with_candidate_but_unresolved': sum(bool(js) for js in candidates) - len(pairs),
-        'right_with_candidate_but_unresolved': len(degrees) - len(pairs),
-        'absolute_origin_time_difference_s': quantiles([abs(a['timestamp']-b['timestamp']) for a,b in pairs]),
-        'horizontal_difference_km': quantiles([horizontal_km(a,b) for a,b in pairs]),
-        'native_depth_difference_left_minus_right_km': quantiles([a['depth_km']-b['depth_km'] for a,b in pairs]),
-        'interpretation': 'Reference overlap diagnostic, not precision/recall or truth error; native depth datums are not harmonized.',
-    }
-
-
-def summary(rows):
-    ids = [r['native_id'] for r in rows if r['native_id'] is not None]
-    times = [r['time'].isoformat() for r in rows]
-    tuples = [(r['timestamp'], r['latitude'], r['longitude'], r['depth_km'], r['magnitude']) for r in rows]
-    return {
-        'row_count': len(rows), 'rows_without_native_id': len(rows)-len(ids),
-        'duplicate_native_id_rows': len(ids)-len(set(ids)),
-        'duplicate_origin_time_rows': len(times)-len(set(times)),
-        'duplicate_time_location_magnitude_rows': len(tuples)-len(set(tuples)),
-        'observed_time_range_utc': [min(times), max(times)] if times else None,
-        'ranges': {key: [min(v),max(v)] if v else None
-                   for key in ('latitude','longitude','depth_km','magnitude')
-                   for v in [[r[key] for r in rows if r[key] is not None]]},
-        'event_types': dict(sorted(Counter(r.get('event_type','not_supplied') for r in rows).items())),
-    }
-
-
 def phase_summary(path, start, end):
     total = selected = 0
     counts = Counter(); stations = Counter(); ids = set(); matched = set(); minimum = maximum = None
@@ -201,12 +92,13 @@ def phase_summary(path, start, end):
 
 
 def run(case):
-    config_path=case/'analysis/processing.yaml';cfg=yaml.safe_load(config_path.read_text())
+    config_path=case/'analysis/processing.yaml';cfg=load_case(case)
     design=cfg['scientific_design'];window=design['candidate_window'];bounds=window['native_comparison_bounds']
     start,end=utc(window['start_utc']),utc(window['end_utc'])
-    sources=cfg['reference_audit']['sources'];outputs={};data={}
+    audit=cfg['reference_audit']
+    sources={key:cfg['sources'][key] for key in audit['event_sources']};outputs={};data={}
     for key,spec in sources.items():
-        path=case/spec['path'];actual=sha256(path)
+        path=case_path(case,spec['path']);actual=sha256(path)
         if spec.get('expected_sha256') and actual!=spec['expected_sha256']:
             raise ValueError(f'Source checksum mismatch: {key}')
         rows,errors=read_events(path,spec['parser'])
@@ -227,24 +119,18 @@ def run(case):
                 'candidate_native_mask_rows':sum(r['nbranch']>1 for r in spatial)}
     anchors={}
     for name,eid in design['anchor_event_ids'].items():
-        matches=[r for r in data['official_snapshot'] if r['native_id']==eid]
+        matches=[r for r in data[audit['anchor_source']] if r['native_id']==eid]
         if len(matches)!=1:raise ValueError(f'Anchor {eid}: {len(matches)} rows')
         anchors[name]=matches[0]
-    t64=anchors['mw6_4']['time'];t71=anchors['mw7_1']['time']
-    stages=[('before_mw6_4',start,t64),('first_hour_after_mw6_4',t64,t64+timedelta(hours=1)),
-            ('later_between_large_events',t64+timedelta(hours=1),t71),
-            ('first_hour_after_mw7_1',t71,t71+timedelta(hours=1)),('later_after_mw7_1',t71+timedelta(hours=1),end)]
-    if not start<t64<t64+timedelta(hours=1)<t71<t71+timedelta(hours=1)<end:
-        raise ValueError('Candidate window does not contain the five proposed stages')
+    stages=resolve_stages(design, audit, {key: row['time'] for key,row in anchors.items()})
+    subsets={key:select_subset(data[spec['source']],spec) for key,spec in audit['subsets'].items()}
     stages_out=[]
     for label,a,b in stages:
         counts={key:sum(within(r,a,b,bounds) for r in rows) for key,rows in data.items()}
-        counts['ross_relocated']=sum(within(r,a,b,bounds) and r['nbranch']>1 for r in data['ross'])
-        counts['official_earthquake']=sum(within(r,a,b,bounds) and r['event_type']=='earthquake' for r in data['official_snapshot'])
+        counts.update({key:sum(within(r,a,b,bounds) for r in rows) for key,rows in subsets.items()})
         stages_out.append({'stage':label,'start_utc':a.isoformat(),'end_utc':b.isoformat(),'hours':(b-a).total_seconds()/3600,'native_mask_rows':counts})
     selected={key:[r for r in rows if within(r,start,end,bounds)] for key,rows in data.items()}
-    selected['ross_relocated']=[r for r in selected['ross'] if r['nbranch']>1]
-    selected['official_earthquake']=[r for r in selected['official_snapshot'] if r['event_type']=='earthquake']
+    selected.update({key:[r for r in rows if within(r,start,end,bounds)] for key,rows in subsets.items()})
     diagnostic=cfg['reference_audit']['overlap_diagnostic'];comparisons=[]
     for left,right in diagnostic['pairs']:
         for dt in diagnostic['time_tolerances_s']:
@@ -260,9 +146,10 @@ def run(case):
                    for r in data['official_snapshot'] if r['time']==t],
         'identity_resolution':'unresolved; equal origin times alone do not establish duplicate events',
     } for t,n in sorted(time_counts.items()) if n>1]
-    phase_path=case/cfg['reference_audit']['phase_source']['path']
+    phase_spec=cfg['sources'][audit['phase_source']]
+    phase_path=case_path(case,phase_spec['path'])
     phase_sha=sha256(phase_path)
-    if phase_sha!=cfg['reference_audit']['phase_source']['expected_sha256']:
+    if phase_sha!=phase_spec['expected_sha256']:
         raise ValueError('Phase source checksum mismatch')
     phase=phase_summary(phase_path,start,end)
     phase.update(path=str(phase_path.relative_to(case)),sha256=phase_sha)
@@ -286,7 +173,7 @@ def main():
     result=run(case)
     output=args.output or case/'analysis/reference_audit.json'
     output.write_text(json.dumps(result,indent=2,ensure_ascii=False,default=lambda v:v.isoformat())+'\n')
-    print(f'Audited {len(result["sources"])} event products and one phase auxiliary -> {output}')
+    print(f'Audited {len(result["sources"])} catalog products and one phase auxiliary -> {output}')
 
 
 if __name__=='__main__':
