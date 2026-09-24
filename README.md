@@ -102,9 +102,8 @@ docs/
 benchmark_source/
   REFERENCES_MANIFEST.md    paper/supplement/catalog readiness
   <case>/references/        source papers and supplementary materials
-  <case>/data/catalogs/     Ridgecrest/Kīlauea catalogs and analysis products
+  <case>/data/catalogs/     source catalogs and catalog-level analysis products
   <case>/data/waveforms/    local waveform payloads (ignored by Git)
-  <case>/catalogs/          retained layout in the other four cases
   <case>/analysis/          cross-reference case conclusions
 
 scripts/

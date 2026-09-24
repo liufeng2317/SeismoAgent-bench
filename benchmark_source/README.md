@@ -6,7 +6,7 @@ Use [`CATALOGS_MANIFEST.md`](CATALOGS_MANIFEST.md) for a single cross-case view 
 
 Use [`OFFICIAL_BASELINE_AUDIT.md`](OFFICIAL_BASELINE_AUDIT.md) to verify the USGS/GeoNet baseline downloads and distinguish routine-catalog sparsity from acquisition errors.
 
-The source root is `benchmark_source/`. Ridgecrest and Kīlauea use the layout below; the other four cases currently retain `catalogs/` directly under the case root. Shared inventory tools support both layouts.
+All six cases use the same source layout under `benchmark_source/`. Case-level `scripts/` exists only when there are executable case-level tools; empty placeholders are unnecessary. The ignored waveform directory is a local reservation, not evidence of downloaded observations.
 
 ```text
 <case>/references/<SOURCE_ID>/
@@ -86,15 +86,73 @@ a separate data release without changing the source/catalog identifiers.
 ## Processing and output policy
 
 - `analysis/processing.yaml` records case product declarations and `window_status`; all six cases currently say `not_frozen`. Earlier selections, statistics and plots remain exploratory. A filename containing `benchmark` does not imply a formal freeze.
-- `catalogs/<CATALOG_ID>/README.md` is the single authored catalog entry point. Keep DOI, source-file checksums, native schema, release discrepancies and original publisher notes there.
-- `catalogs/<CATALOG_ID>/scripts/` holds executable native parsers. `analysis/{derived,stats,figures}/` contains reproducible products; generated `catalog_analysis.md` documents those runs. Do not copy the same statistics into additional hand-maintained indices.
+- `data/catalogs/<CATALOG_ID>/README.md` is the single authored catalog entry point. Keep DOI, source-file checksums, native schema, release discrepancies and original publisher notes there.
+- `data/catalogs/<CATALOG_ID>/scripts/` holds executable native parsers. `analysis/{derived,stats,figures}/` contains reproducible products; generated `catalog_analysis.md` documents those runs. Do not copy the same statistics into additional hand-maintained indices.
+- Path bases are explicit: `catalog_dir` and script-entry paths are relative to the case root; a product `source_path` is relative to its catalog directory. Ridgecrest `reference_audit.sources[].path` and `phase_source.path` are relative to the case root. Preserve these distinctions until the configuration schema is unified.
 - Local sequential `event_id` values such as `E000001` are scoped to `source_ref/product_id`. Preserve `native_event_id`; cross-catalog identity requires a crosswalk. Phase `match_id`/`template_id` values are not located event IDs.
 - Keep event, relative-coordinate, phase/pick and focal-mechanism products separate. Separate release versions, coordinate bases, and official query snapshots are not redundant just because they overlap.
 - Use compact PNG figures for inspection. Keep existing v1/v2 and alternate-mask figures until scientific equivalence and all callers have been checked; this cleanup does not choose a new scientific window or plot policy.
 - Preserve source PDFs, original data archives, canonical catalogs, structured extraction JSON, reading notes, OCR page/model JSON and referenced images. OCR evidence and machine-readable extraction have different functions.
 - MinerU transport ZIPs can be discarded only after every member is verified against extracted files. Byte-identical PDFs copied into MinerU output can be removed when the original PDF is retained. Keep `full.md` for parser resynchronization.
-- For identical publisher tables that also serve as canonical catalogs, keep one payload under `catalogs/` and a relative symlink under `supplement/` so original names and converter discovery still work. Current S10/S11 aliases are local-only, like the ignored XLSX payloads.
+- For identical publisher tables that also serve as canonical catalogs, keep one payload under `data/catalogs/` and a relative symlink under `supplement/` so original names and converter discovery still work. Current S10/S11 aliases are local-only, like the ignored XLSX payloads.
 - Delete Python caches and operating-system metadata; never treat `.env` or source data as disposable runtime clutter.
 - Do not add one-time scripts that hardcode a second copy of reviewed extraction JSON. Edit the canonical records with evidence, then run the reusable validator.
 
 The consolidation decisions and removed-file inventory are recorded in [repository cleanup](../docs/02_Repository_Cleanup.md).
+
+## 目录结构评估与后续调整
+
+当前六个案例已统一为以下职责划分。顶层只保留项目入口、全局方法文档、案例资料和共享工具，暂不为尚未实现的实验系统建立空目录。
+
+```text
+SeismoAgentBench/
+├── README.md                         # 项目入口
+├── docs/                             # 研究方案、案例选择、提取约定、历史整理说明
+├── scripts/                          # 跨案例下载、解析、验证与清单工具
+└── benchmark_source/
+    ├── README.md                     # 组织规范与结构评估（本文件）
+    ├── REFERENCES_MANIFEST.md        # 文献/来源就绪状态
+    ├── CATALOGS_MANIFEST.md          # 自动生成的产品清单
+    ├── OFFICIAL_BASELINE_AUDIT.md    # 官方快照核验
+    └── <case>/
+        ├── README.md                # 导航；不复制统计或科学结论
+        ├── analysis/                # 案例级设计、配置、跨目录核验
+        │   ├── <CASE>_analysis.md
+        │   └── processing.yaml
+        ├── data/
+        │   ├── catalogs/<SOURCE_ID>/
+        │   │   ├── README.md        # 来源、字段、版本、质量限制
+        │   │   ├── <source files>   # 现有规范化命名的来源文件
+        │   │   ├── raw/             # 原始发布包，按需存在
+        │   │   ├── scripts/         # 产品专属解析器，按需存在
+        │   │   └── analysis/        # derived / stats / figures / 生成报告
+        │   └── waveforms/           # 本地载荷，Git 忽略
+        ├── references/<SOURCE_ID>/
+        │   ├── paper/               # 论文原件
+        │   ├── supplement/          # 保留出版物原名的附件
+        │   └── parsed/              # paper / supplement / extraction
+        └── scripts/                 # 案例级核验工具，按需存在
+```
+
+上图中的 `raw/`、`scripts/` 和文献附件按实际内容创建，不要求每个来源都有空目录。`analysis/` 分别位于案例和产品下是有意的：前者保存科学设计及跨产品结论，后者保存单一产品的可复算结果。
+
+### 各案例的结构判断
+
+| 案例 | 当前应保留的组织差异 | 后续优先改进 |
+|---|---|---|
+| [Prague](2011_prague_oklahoma/README.md) | 主事件、重定位、子空间事件及震相分产品保存 | 配置产品条目较详细，可作为统一产品字段的候选样例 |
+| [Kaikōura](2016_kaikoura_new_zealand/README.md) | GrowClust 多版本、S10/S11、震相和机制解分别保存 | 统一脚本路径字段；来源表软链接只保留一份载荷；此次已修复 S12 配置路径与附件定位 |
+| [Maple Creek](2017_maple_creek_yellowstone/README.md) | 缺失或仅辅助资料的来源仍保留说明入口 | 保持 missing/partial 状态显式可见，不以空目录或表行数推定事件就绪 |
+| [Kīlauea](2018_kilauea_hawaii/README.md) | 相对坐标、近似绝对坐标、LP 与不同目录版本分开 | 大型生成统计留在本地；未来精简统计前先确认其使用方 |
+| [Ridgecrest](2019_ridgecrest_california/README.md) | 案例级核验脚本和一个跨参考审计 JSON | 作为首个精细案例推进；台站/波形清单建立后再定义运行输入与隐藏参考的导出规则 |
+| [Magna](2020_magna_utah/README.md) | 拾取表、重定位事件、ISC 档案及官方快照分开 | 补齐机器可读的产品路径和单位声明，保持记录单位清晰 |
+
+### 真正值得继续调整的项目
+
+1. **优先统一配置契约。** 目前 Prague、Maple、Kīlauea 主要使用 `catalogs[].script`，Kaikōura 使用 `catalogs[].parser` 路径，而 Magna 和 Ridgecrest 的 `products` 更接近角色声明。建议后续统一产品 ID、单位、来源文件、脚本入口和路径基准；Ridgecrest 核验中的 `parser` 是解析器类型，不能机械改名为脚本路径。此轮只修复路径，不改写科学角色或假装配置已经统一。
+2. **逐步提取共享解析与绘图工具。** 24 个 `run_catalog_analysis.py` 中存在反复出现的日期解析、校验和、筛选、统计和绘图函数；例如 12 个脚本定义了 `finite_float`。先核实行为差异并建立回归样例，再把相同部分提取成共享模块，来源专属字段解析仍留在产品目录。暂不把整个项目重构为软件包。
+3. **未来分开维护来源资料与实际实验输入。** `benchmark_source/` 包含目标目录和答案证据，不能整体挂载给受测 Agent。实验运行器实现时，再定义可追溯的输入导出、评测参考和运行产物目录，并控制文件访问；仅改文件夹名字不能防止答案泄漏。
+4. **台站信息应跟随观测数据建立。** 开始波形准备时，在案例 `data/` 下增加台站/通道清单、响应、可用性与缺口记录；现在不创建没有内容的 `stations/`、`metadata/` 或 `runs/`。波形存储位置可以是外部数据盘，配置记录位置，Git 保存小型清单与来源。
+5. **保持原始材料和派生产物边界。** 已有来源文件可继续保留在 catalog 根目录，原始发布包留在 `raw/` 或 `raw_article/`；不为外观整齐再次移动全部载荷。生成统计、图件和标准化事件表继续放在产品 `analysis/` 下，不能混入来源原件。
+
+不建议继续拆分更多手工状态报告，或立即重命名所有 v1/v2 图件与统计。当前三个全局清单分别回答来源是否就绪、有哪些产品、官方快照是否符合查询条件，职责不同；保留它们，并通过案例 README 导航，比复制多份进度表更易维护。
