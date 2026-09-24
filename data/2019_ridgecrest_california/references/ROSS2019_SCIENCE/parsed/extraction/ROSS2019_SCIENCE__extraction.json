@@ -38,7 +38,7 @@
         "note": "Conservative workflow and article scope."
       },
       {
-        "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+        "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/README.md",
         "locator": "Provenance and native schema",
         "note": "Official QTM release and field definitions."
       }
@@ -83,7 +83,7 @@
         "magnitude_scope": "Local M −2.82–7.10; article M>0.5 statement is not a row filter applied locally.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/README.md",
             "locator": "Full archive audit",
             "note": "111,918 rows, span and ranges."
           },
@@ -106,7 +106,7 @@
         "magnitude_scope": "Frozen common M −0.82–7.10.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/README.md",
             "locator": "Full archive audit; Frozen benchmark-window audit",
             "note": "46,512 full rows and 6,463 common-mask rows with nbranch>1."
           }
@@ -124,7 +124,7 @@
         "magnitude_scope": "Local M −2.82–7.10.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/README.md",
             "locator": "Provenance and native schema; Full archive audit",
             "note": "nbranch semantics and count."
           }
@@ -144,7 +144,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+          "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/README.md",
           "locator": "Provenance and native schema",
           "note": "Official SCEDC archive and checksum."
         },
@@ -173,12 +173,12 @@
       },
       "evidence": [
         {
-          "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+          "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/README.md",
           "locator": "Full archive audit; Frozen benchmark-window audit",
           "note": "Rows, checksum, ranges, nbranch and mask counts."
         },
         {
-          "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+          "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/README.md",
           "locator": "Quality and limitations",
           "note": "DC1 missing caveat."
         }
@@ -212,7 +212,7 @@
           "note": "Tier and role."
         },
         {
-          "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+          "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/README.md",
           "locator": "Quality and limitations",
           "note": "nbranch, DC1 and mainshock-depth caveats."
         }
@@ -278,12 +278,12 @@
         },
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/README.md",
             "locator": "Provenance and native schema",
             "note": "Official SCEDC column definitions."
           },
           {
-            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/README.md",
             "locator": "Frozen benchmark-window audit",
             "note": "Relocated-field mask choice."
           }
@@ -386,7 +386,7 @@
         "dependencies": "Depends on template matches and waveform overlap.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/README.md",
             "locator": "Native schema",
             "note": "Differential-time fields."
           }
@@ -417,7 +417,7 @@
         "dependencies": "Requires differential-time support.",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/README.md",
             "locator": "Full archive audit",
             "note": "nbranch semantics and counts."
           }
@@ -457,7 +457,7 @@
     "final_output": "Official SCEDC QTM archive with 111,918 rows, including 46,512 nbranch>1 relocated solutions and 65,406 initial-only rows; frozen common mask contains 12,768 rows (6,463 relocated).",
     "evidence": [
       {
-        "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+        "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/README.md",
         "locator": "Full archive audit; Frozen benchmark-window audit",
         "note": "Local final output."
       },
@@ -512,7 +512,7 @@
         "count_or_scope": "Official online documentation",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/README.md",
             "locator": "Provenance and native schema",
             "note": "SCEDC source."
           }
@@ -538,7 +538,7 @@
         "scope": "All QTM analyses",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/README.md",
             "locator": "Provenance and native schema; Full archive audit",
             "note": "nbranch definition."
           }
@@ -553,7 +553,7 @@
       "caveats": "Do not infer missing DC1 parameters or treat all rows as high-quality relocations; preserve duplicate times and event IDs.",
       "evidence": [
         {
-          "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md",
+          "source": "data/2019_ridgecrest_california/catalogs/ROSS2019_SCIENCE/README.md",
           "locator": "Quality and limitations; Frozen benchmark-window audit",
           "note": "Tier, counts and mask."
         }

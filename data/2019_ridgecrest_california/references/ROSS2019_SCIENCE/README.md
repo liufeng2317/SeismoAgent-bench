@@ -5,7 +5,7 @@
 - Paper: `paper/ROSS2019_SCIENCE__paper.pdf`
 - Paper reading: [`parsed/paper/ROSS2019_SCIENCE__paper_reading.md`](parsed/paper/ROSS2019_SCIENCE__paper_reading.md)
 - Catalog archive: `../../catalogs/ROSS2019_SCIENCE/raw/ROSS2019_SCIENCE__catalog_qtm.tar.gz`
-- Catalog summary: [`../../catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md`](../../catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md)
+- Catalog summary: [`../../catalogs/ROSS2019_SCIENCE/README.md`](../../catalogs/ROSS2019_SCIENCE/README.md)
 - Supplementary Materials DC1: **missing locally** (needed for exact template/relocation-method reproduction).
 
 The SCEDC release is the article-associated QTM/GrowClust-format catalog. It

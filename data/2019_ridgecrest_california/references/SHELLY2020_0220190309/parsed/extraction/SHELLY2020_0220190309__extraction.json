@@ -25,7 +25,7 @@
         "note": "Article counts, method parameters and product distinction."
       },
       {
-        "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+        "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/README.md",
         "locator": "Provenance and product distinction",
         "note": "Canonical Data S1 versus auxiliary phase release."
       }
@@ -75,7 +75,7 @@
             "note": "Article count and relocation criterion."
           },
           {
-            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/README.md",
             "locator": "Canonical Data S1 schema and checksum; Frozen benchmark-window audit",
             "note": "Local count, ranges and checksum."
           }
@@ -93,7 +93,7 @@
         "magnitude_scope": null,
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/README.md",
             "locator": "Auxiliary phase-arrival release audit",
             "note": "5,703,270 rows, 209,213 match IDs and P/S counts."
           }
@@ -125,7 +125,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+          "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/README.md",
           "locator": "Provenance and product distinction; checksum table",
           "note": "Canonical Data S1 and official ScienceBase release."
         },
@@ -151,12 +151,12 @@
       },
       "evidence": [
         {
-          "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+          "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/README.md",
           "locator": "Canonical Data S1 schema and checksum; Frozen benchmark-window audit",
           "note": "Rows, unique IDs, ranges, duplicate times and 7,716-row common mask."
         },
         {
-          "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+          "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/README.md",
           "locator": "Auxiliary phase-arrival release audit",
           "note": "Pick-level row and station-pair statistics."
         }
@@ -190,7 +190,7 @@
           "note": "Tier, role and caveats."
         },
         {
-          "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+          "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/README.md",
           "locator": "Full catalog audit; Quality and limitations",
           "note": "Outlier and mask handling."
         }
@@ -227,7 +227,7 @@
         },
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/README.md",
             "locator": "Canonical Data S1 schema",
             "note": "Eleven native fields, stable IDs and depth datum."
           }
@@ -257,7 +257,7 @@
         },
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/README.md",
             "locator": "Auxiliary phase-arrival release audit",
             "note": "Phase-level schema and counts."
           }
@@ -550,7 +550,7 @@
     "final_output": "Canonical Data S1 with 34,091 event rows; frozen three-day common mask contains 7,716 events. The 5,703,270-row phase CSV remains a separate pick-level auxiliary product.",
     "evidence": [
       {
-        "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+        "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/README.md",
         "locator": "Canonical Data S1 schema and checksum",
         "note": "Local output audit."
       },
@@ -573,7 +573,7 @@
         "count_or_scope": "FGDC/ISO XML",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/README.md",
             "locator": "Provenance and product distinction",
             "note": "Official DOI and metadata path."
           }
@@ -589,7 +589,7 @@
         "count_or_scope": "5,703,270 rows; 209,213 match IDs; 30 network-station pairs",
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/README.md",
             "locator": "Auxiliary phase-arrival release audit",
             "note": "Local schema and counts."
           }
@@ -646,7 +646,7 @@
       "caveats": "Do not treat the phase rows as events; do not use mainshock correlation centroids as universal absolute hypocenters; retain the raw depth outlier and mask it only for benchmark comparison.",
       "evidence": [
         {
-          "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md",
+          "source": "data/2019_ridgecrest_california/catalogs/SHELLY2020_0220190309/README.md",
           "locator": "Benchmark role and limitations; Frozen benchmark-window audit",
           "note": "Tier and 7,716-row common mask."
         }

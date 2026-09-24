@@ -5,7 +5,7 @@
 - Paper: `paper/SHELLY2020_0220190309__paper.pdf`
 - Paper reading: [`parsed/paper/SHELLY2020_0220190309__paper_reading.md`](parsed/paper/SHELLY2020_0220190309__paper_reading.md)
 - Canonical event catalog: `../../catalogs/SHELLY2020_0220190309/raw_article/SHELLY2020_0220190309__catalog_DataS1.txt`
-- Catalog summary: [`../../catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md`](../../catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md)
+- Catalog summary: [`../../catalogs/SHELLY2020_0220190309/README.md`](../../catalogs/SHELLY2020_0220190309/README.md)
 
 The Data S1 file is the article-associated 34,091-event event catalog for
 2019-07-04–07-16. The later USGS phase-arrival CSV under `catalogs/.../raw/`

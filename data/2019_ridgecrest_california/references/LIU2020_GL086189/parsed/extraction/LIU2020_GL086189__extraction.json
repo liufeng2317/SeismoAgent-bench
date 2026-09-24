@@ -61,7 +61,7 @@
             "note": "Article reports 16,563 associated events and 195,869 P plus 204,349 S arrivals."
           },
           {
-            "source": "data/2019_ridgecrest_california/catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/LIU2020_GL086189/README.md",
             "locator": "Full catalog audit; intermediate-product note",
             "note": "REAL is not a separate local file."
           }
@@ -107,7 +107,7 @@
             "note": "HypoDD phase-distance and residual filters."
           },
           {
-            "source": "data/2019_ridgecrest_california/catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/LIU2020_GL086189/README.md",
             "locator": "Canonical table and full/frozen audits",
             "note": "Local row count, ranges and checksum."
           }
@@ -151,7 +151,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2019_ridgecrest_california/catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_summary.md",
+          "source": "data/2019_ridgecrest_california/catalogs/LIU2020_GL086189/README.md",
           "locator": "Provenance and schema; checksum table",
           "note": "Canonical Table S1 audit."
         },
@@ -178,7 +178,7 @@
       },
       "evidence": [
         {
-          "source": "data/2019_ridgecrest_california/catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_summary.md",
+          "source": "data/2019_ridgecrest_california/catalogs/LIU2020_GL086189/README.md",
           "locator": "Full catalog audit; Frozen benchmark-window audit",
           "note": "Rows, SHA-256, ranges, duplicate-time and 6,242-row common-mask results."
         },
@@ -255,7 +255,7 @@
         },
         "evidence": [
           {
-            "source": "data/2019_ridgecrest_california/catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_summary.md",
+            "source": "data/2019_ridgecrest_california/catalogs/LIU2020_GL086189/README.md",
             "locator": "Native header; Full catalog audit",
             "note": "No event ID, phase, station or uncertainty columns."
           },
@@ -576,7 +576,7 @@
         "note": "End-to-end method chain."
       },
       {
-        "source": "data/2019_ridgecrest_california/catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_summary.md",
+        "source": "data/2019_ridgecrest_california/catalogs/LIU2020_GL086189/README.md",
         "locator": "Frozen benchmark-window audit",
         "note": "Local final output and benchmark count."
       }
@@ -667,7 +667,7 @@
       "caveats": "Do not claim universal completeness or direct ML/Mw ranking; shared waveform lineage remains a dependence.",
       "evidence": [
         {
-          "source": "data/2019_ridgecrest_california/catalogs/LIU2020_GL086189/LIU2020_GL086189__catalog_summary.md",
+          "source": "data/2019_ridgecrest_california/catalogs/LIU2020_GL086189/README.md",
           "locator": "Quality and comparison notes; Frozen benchmark-window audit",
           "note": "Tier and 6,242-row mask."
         }
