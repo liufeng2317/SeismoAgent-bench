@@ -2,8 +2,7 @@
   "case_id": "2019_ridgecrest_california",
   "config_sha256": "6f1763fba1ec6b7febfa2fc50b351efcae95f6705c988909661952dd3d1b96b5",
   "audit_sha256": "c6ce721799d4042d673fbfa64d9e17c73e41ebd636fc7cdd29d7b29eeea3658b",
-  "script_sha256": "3475480de8a8be752bf755e2404096baf67461b038640a99fbbd2ffe4216db12",
-  "style_sha256": "7c6835b2e472da39f803e49d98b86262546da139e0607a2998baf4e3b1e3112c",
+  "script_sha256": "4479d9409c2bba802f61dd3726ff81b9df89e4715d9a3be5e3e0c8cc58bfd33a",
   "versions": {
     "matplotlib": "3.10.9",
     "numpy": "2.4.4"

@@ -181,4 +181,4 @@ python -B -m unittest discover -s tests/source_prepare -v
 python -B benchmark_source/2019_ridgecrest_california/scripts/plot_catalog_comparison.py
 ```
 
-[绘图脚本](../scripts/plot_catalog_comparison.py)负责案例内容；共享绘图模块仅保留字体、面板标记和导出约定。脚本先检查配置、原件哈希及与既有分阶段核验的数量一致性，再生成六个图件和一个 [复算清单](figures/catalog_comparison/figure_manifest.json)，记录输入、选择规则、依赖版本、代码与图件哈希。更新原件或配置后须先重新运行 `audit_references.py`；本过程不获取台站或波形。
+[绘图脚本](../scripts/plot_catalog_comparison.py)集中保存本案例的比较逻辑、字体、面板标记和导出约定；公共代码包仅提供通用来源读取配置、筛选和哈希工具。脚本先检查配置、原件哈希及与既有分阶段核验的数量一致性，再生成六个图件和一个 [复算清单](figures/catalog_comparison/figure_manifest.json)，记录输入、选择规则、依赖版本、代码与图件哈希。更新原件或配置后须先重新运行 `audit_references.py`；本过程不获取台站或波形。

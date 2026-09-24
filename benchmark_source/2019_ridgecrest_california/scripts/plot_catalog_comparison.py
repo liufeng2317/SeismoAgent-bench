@@ -17,7 +17,6 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
 from SeismoAgentBench.utils.source_prepare.catalog import sha256, utc, within
 from SeismoAgentBench.utils.source_prepare.sources import load_case, select_subset
-from SeismoAgentBench.utils.source_prepare.plotting import WIDTH_INCHES, panel_label, publication_style, save_figure
 from audit_references import read_events
 
 CASE = Path(__file__).resolve().parents[1]
@@ -29,6 +28,37 @@ SPECS = [
     ('official_earthquake', 'official_snapshot', 'Official earthquakes', '#34383C'),
 ]
 SHORT = ['Shelly', 'Liu', 'Ross rel.', 'AWR v2', 'Official']
+
+
+# Layout and export choices for these Ridgecrest figures.
+WIDTH_INCHES = 180 / 25.4
+
+
+def publication_style():
+    return matplotlib.rc_context({
+        'font.family': 'DejaVu Sans', 'font.size': 7.5, 'axes.titlesize': 8,
+        'axes.labelsize': 7.5, 'xtick.labelsize': 6.5, 'ytick.labelsize': 6.5,
+        'legend.fontsize': 6.5, 'axes.linewidth': .65,
+        'lines.linewidth': 1.1, 'xtick.major.width': .6, 'ytick.major.width': .6,
+        'xtick.major.size': 2.8, 'ytick.major.size': 2.8,
+        'axes.spines.top': False, 'axes.spines.right': False,
+        'axes.unicode_minus': True, 'pdf.fonttype': 42, 'ps.fonttype': 42,
+        'savefig.facecolor': 'white', 'figure.facecolor': 'white',
+    })
+
+
+def panel_label(ax, letter, title):
+    ax.set_title(title, loc='left', pad=9, fontweight='normal')
+    ax.text(-.14, 1.065, letter, transform=ax.transAxes,
+            fontsize=10, fontweight='bold', va='bottom', ha='left')
+
+
+def save_figure(fig, stem):
+    stem = Path(stem)
+    stem.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(stem.with_suffix('.png'), dpi=320, pil_kwargs={'optimize': True})
+    fig.savefig(stem.with_suffix('.pdf'), dpi=450,
+                metadata={'Creator': 'SeismoAgentBench', 'CreationDate': None, 'ModDate': None})
 
 
 def load_data(case):
@@ -212,7 +242,6 @@ def main():
     report={'case_id':cfg['case_id'],'config_sha256':sha256(case/'analysis/processing.yaml'),
             'audit_sha256':sha256(case/'analysis/reference_audit.json'),
             'script_sha256':sha256(Path(__file__)),
-            'style_sha256':sha256(ROOT/'SeismoAgentBench/utils/source_prepare/plotting.py'),
             'versions':{'matplotlib':matplotlib.__version__,'numpy':np.__version__},
             'inputs':inputs,'selection':cfg['scientific_design']['candidate_window'],
             'stage_rates_per_hour':{stage['stage']:{r['key']:float(rates[i,j]) for j,r in enumerate(data)} for i,stage in enumerate(audit['stages'])},
