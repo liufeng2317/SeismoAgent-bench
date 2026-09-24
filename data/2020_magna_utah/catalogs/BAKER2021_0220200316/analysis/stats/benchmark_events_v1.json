@@ -1,0 +1,38 @@
+{
+  "case_id": "2020_magna_utah",
+  "source_ref": "BAKER2021_0220200316",
+  "product_id": "event_collapse",
+  "selection": "benchmark",
+  "stats": {
+    "row_count": 3712,
+    "unique_native_event_ids": 3712,
+    "duplicate_native_event_ids": 0,
+    "pick_rows": 161567,
+    "magnitude_types": {
+      "w": 3,
+      "d": 748,
+      "Mxc": 2011,
+      "l": 590,
+      "": 347,
+      "h": 13
+    },
+    "ranges": {
+      "latitude_deg": [
+        40.6905,
+        40.8285
+      ],
+      "longitude_deg": [
+        -112.13966666666668,
+        -111.94633333333331
+      ],
+      "depth_km": [
+        0.1,
+        13.1
+      ],
+      "magnitude": [
+        -9.99,
+        5.7
+      ]
+    }
+  }
+}

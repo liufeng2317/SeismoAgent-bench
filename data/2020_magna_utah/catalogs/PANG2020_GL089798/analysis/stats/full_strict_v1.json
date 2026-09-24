@@ -1,0 +1,33 @@
+{
+  "case_id": "2020_magna_utah",
+  "source_ref": "PANG2020_GL089798",
+  "product_id": "primary_event_catalog",
+  "selection": "full",
+  "stats": {
+    "row_count": 5739,
+    "unique_native_event_ids": 5739,
+    "duplicate_native_event_ids": 0,
+    "event_types": {
+      "UUSS/other": 2144,
+      "Template-Matching": 3595
+    },
+    "ranges": {
+      "latitude_deg": [
+        40.6933,
+        40.8562
+      ],
+      "longitude_deg": [
+        -112.1713,
+        -111.9383
+      ],
+      "depth_km": [
+        -1.28,
+        13.02
+      ],
+      "magnitude": [
+        -9.9,
+        5.67
+      ]
+    }
+  }
+}

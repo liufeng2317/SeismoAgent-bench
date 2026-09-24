@@ -1,0 +1,1 @@
+# PANG2020_GL089798 catalog analysis\n\nPang ISC event-level release. Strict parsing preserves source rows with canonical seconds; normalized parsing is a sensitivity only.\n\n| Selection | Strict rows | Mc > -4 | Template-Matching |\n|---|---:|---:|---:|\n| Full | 5739 | 5659 | 3595 |\n| Benchmark | 4162 | 4101 | 2706 |\n\nSchema: `docs/schemas/catalog_event.schema.yaml`.\n

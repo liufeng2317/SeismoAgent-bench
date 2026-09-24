@@ -1,0 +1,13 @@
+{
+  "case_id": "2020_magna_utah",
+  "source_ref": "BAKER2021_0220200316",
+  "product_id": "pick_rows",
+  "stats": {
+    "row_count": 329611,
+    "phase_types": {
+      "P": 141972,
+      "S": 187639
+    },
+    "stations": 207
+  }
+}

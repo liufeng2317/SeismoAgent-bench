@@ -1,0 +1,37 @@
+{
+  "case_id": "2020_magna_utah",
+  "source_ref": "USGS_UUSS_COMCAT_2020",
+  "product_id": "operational_benchmark",
+  "selection": "benchmark",
+  "stats": {
+    "row_count": 1432,
+    "unique_native_event_ids": 1432,
+    "duplicate_native_event_ids": 0,
+    "magnitude_types": {
+      "mw": 3,
+      "md": 821,
+      "ml": 608
+    },
+    "event_types": {
+      "earthquake": 1432
+    },
+    "ranges": {
+      "latitude_deg": [
+        40.6933333,
+        40.8368333
+      ],
+      "longitude_deg": [
+        -112.1375,
+        -111.9413333
+      ],
+      "depth_km": [
+        -1.28,
+        13.02
+      ],
+      "magnitude": [
+        -0.56,
+        5.7
+      ]
+    }
+  }
+}
