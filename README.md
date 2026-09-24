@@ -179,3 +179,5 @@ Next deliverables are:
 **Short form:** `SABench`
 
 The project code package is [`SeismoAgentBench/`](SeismoAgentBench/README.md). Source registry tools are one utility under [`utils/source_prepare/`](SeismoAgentBench/utils/source_prepare/), with regression tests in [`tests/`](tests/). Ridgecrest is the first case using the versioned source registry; see the [source architecture and commands](benchmark_source/README.md#通用-source-架构ridgecrest-试点). Evaluation will be implemented separately.
+
+Automated regressions use one entry point: `python -B -m unittest discover -s tests -v`. Follow the [test maintenance rules](tests/AGENTS.md) when adding or changing tests.

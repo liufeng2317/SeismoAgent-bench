@@ -114,7 +114,7 @@ Ridgecrest 的价值在于同一案例包含 Mw 6.4、Mw 7.1 及密集前震—�
 
 ```bash
 python -B benchmark_source/2019_ridgecrest_california/scripts/audit_references.py
-python -B -m unittest discover -s benchmark_source/2019_ridgecrest_california/scripts -p 'test_*.py' -v
+python -B -m unittest discover -s tests/source_prepare -v
 ```
 
 程序校验原始文件后生成一个 `reference_audit.json`，不修改原目录、不下载波形、不设置冻结状态。目录自身 README 保存来源与产品细节，本文件只维护科学设计和跨产品结论，避免重新拆出大量零散报告。公共派生 ID 与输出约定见 [数据组织规则](../../README.md#processing-and-output-policy)。
