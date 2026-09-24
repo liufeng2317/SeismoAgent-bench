@@ -66,8 +66,9 @@ def build_manifest(data: Path) -> str:
         return "./" + quote(path.relative_to(data).as_posix(), safe="/")
 
     def catalog_root(case: Path) -> Path:
-        nested = case / "data/catalogs"
-        return nested if nested.is_dir() else case / "catalogs"
+        if (case / "catalogs").is_dir():
+            raise ValueError(f"Legacy catalog layout at {case}; move catalogs to data/catalogs")
+        return case / "data/catalogs"
 
     cases = sorted(p for p in data.iterdir() if catalog_root(p).is_dir())
     inventory = {}

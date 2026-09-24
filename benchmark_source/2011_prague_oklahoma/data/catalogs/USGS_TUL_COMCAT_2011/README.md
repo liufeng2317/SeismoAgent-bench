@@ -24,7 +24,7 @@
 | Provider | USGS ANSS ComCat |
 | Operational source | OGS/Tulsa (`tul`) attribution through ComCat |
 | Service | [`https://earthquake.usgs.gov/fdsnws/event/1/query`](https://earthquake.usgs.gov/fdsnws/event/1/query) |
-| Configuration | [`scripts/00_catalog_downloading/official_baseline_windows.json`](../../../../scripts/00_catalog_downloading/official_baseline_windows.json), `2011_prague_oklahoma` entry |
+| Configuration | [`scripts/00_catalog_downloading/official_baseline_windows.json`](../../../../../scripts/00_catalog_downloading/official_baseline_windows.json), `2011_prague_oklahoma` entry |
 | Download timestamp | 2026-09-19T16:42:23Z (directory README) |
 | Role | Q3 official operational baseline; not a high-resolution truth catalog |
 

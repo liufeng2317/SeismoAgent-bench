@@ -20,14 +20,14 @@ This report checks local CSV snapshots against the configured full/benchmark tim
 
 ### `2011_prague_oklahoma`
 
-- Full: `benchmark_source/2011_prague_oklahoma/catalogs/USGS_TUL_COMCAT_2011/USGS_TUL_COMCAT_2011__catalog_operational_full.csv`; benchmark: `benchmark_source/2011_prague_oklahoma/catalogs/USGS_TUL_COMCAT_2011/USGS_TUL_COMCAT_2011__catalog_operational_benchmark.csv`
+- Full: `benchmark_source/2011_prague_oklahoma/data/catalogs/USGS_TUL_COMCAT_2011/USGS_TUL_COMCAT_2011__catalog_operational_full.csv`; benchmark: `benchmark_source/2011_prague_oklahoma/data/catalogs/USGS_TUL_COMCAT_2011/USGS_TUL_COMCAT_2011__catalog_operational_benchmark.csv`
 - Full source fields: networks `{'us': 71}`, location sources `{'tul': 64, 'us': 7}`
 - Full type fields: `{'earthquake': 71}`
 - Benchmark subset of full: `True`
 
 ### `2017_maple_creek_yellowstone`
 
-- Full: `benchmark_source/2017_maple_creek_yellowstone/catalogs/USGS_UUSS_COMCAT_2017/USGS_UUSS_COMCAT_2017__catalog_operational_full.csv`; benchmark: `benchmark_source/2017_maple_creek_yellowstone/catalogs/USGS_UUSS_COMCAT_2017/USGS_UUSS_COMCAT_2017__catalog_operational_benchmark.csv`
+- Full: `benchmark_source/2017_maple_creek_yellowstone/data/catalogs/USGS_UUSS_COMCAT_2017/USGS_UUSS_COMCAT_2017__catalog_operational_full.csv`; benchmark: `benchmark_source/2017_maple_creek_yellowstone/data/catalogs/USGS_UUSS_COMCAT_2017/USGS_UUSS_COMCAT_2017__catalog_operational_benchmark.csv`
 - Full source fields: networks `{'uu': 9}`, location sources `{'uu': 9}`
 - Full type fields: `{'earthquake': 9}`
 - Benchmark subset of full: `True`
@@ -48,7 +48,7 @@ This report checks local CSV snapshots against the configured full/benchmark tim
 
 ### `2020_magna_utah`
 
-- Full: `benchmark_source/2020_magna_utah/catalogs/USGS_UUSS_COMCAT_2020/USGS_UUSS_COMCAT_2020__catalog_operational_full.csv`; benchmark: `benchmark_source/2020_magna_utah/catalogs/USGS_UUSS_COMCAT_2020/USGS_UUSS_COMCAT_2020__catalog_operational_benchmark.csv`
+- Full: `benchmark_source/2020_magna_utah/data/catalogs/USGS_UUSS_COMCAT_2020/USGS_UUSS_COMCAT_2020__catalog_operational_full.csv`; benchmark: `benchmark_source/2020_magna_utah/data/catalogs/USGS_UUSS_COMCAT_2020/USGS_UUSS_COMCAT_2020__catalog_operational_benchmark.csv`
 - Full source fields: networks `{'uu': 2077, 'us': 1}`, location sources `{'uu': 2077, 'us': 1}`
 - Full type fields: `{'earthquake': 2078}`
 - Benchmark subset of full: `True`

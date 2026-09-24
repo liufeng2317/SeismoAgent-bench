@@ -10,9 +10,9 @@ processing_policy:
 window_status: not_frozen
 catalogs:
 - source_ref: COCHRAN2020_GJIGGAA153
-  catalog_dir: catalogs/COCHRAN2020_GJIGGAA153
+  catalog_dir: data/catalogs/COCHRAN2020_GJIGGAA153
   parser_version: prague-local-v1-compact
-  script: catalogs/COCHRAN2020_GJIGGAA153/scripts/run_catalog_analysis.py
+  script: data/catalogs/COCHRAN2020_GJIGGAA153/scripts/run_catalog_analysis.py
   products:
   - product_id: events_primary
     kind: cochran_event
@@ -20,9 +20,9 @@ catalogs:
     role: primary
     source_path: COCHRAN2020_GJIGGAA153__catalog_primary.txt
 - source_ref: ISKEN2017_BSSA0120160150
-  catalog_dir: catalogs/ISKEN2017_BSSA0120160150
+  catalog_dir: data/catalogs/ISKEN2017_BSSA0120160150
   parser_version: prague-local-v1-compact
-  script: catalogs/ISKEN2017_BSSA0120160150/scripts/run_catalog_analysis.py
+  script: data/catalogs/ISKEN2017_BSSA0120160150/scripts/run_catalog_analysis.py
   products:
   - product_id: events_relocated
     kind: isken_event
@@ -30,9 +30,9 @@ catalogs:
     role: structural_anchor
     source_path: ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv
 - source_ref: MCMAHON2017_GL072944
-  catalog_dir: catalogs/MCMAHON2017_GL072944
+  catalog_dir: data/catalogs/MCMAHON2017_GL072944
   parser_version: prague-local-v1-compact
-  script: catalogs/MCMAHON2017_GL072944/scripts/run_catalog_analysis.py
+  script: data/catalogs/MCMAHON2017_GL072944/scripts/run_catalog_analysis.py
   products:
   - product_id: events_subspace
     kind: mcmahon_event
@@ -45,9 +45,9 @@ catalogs:
     role: auxiliary
     source_path: raw/MCMAHON2017_GL072944__catalog_subspace_5446events.txt
 - source_ref: USGS_TUL_COMCAT_2011
-  catalog_dir: catalogs/USGS_TUL_COMCAT_2011
+  catalog_dir: data/catalogs/USGS_TUL_COMCAT_2011
   parser_version: prague-local-v1-compact
-  script: catalogs/USGS_TUL_COMCAT_2011/scripts/run_catalog_analysis.py
+  script: data/catalogs/USGS_TUL_COMCAT_2011/scripts/run_catalog_analysis.py
   products:
   - product_id: operational_full
     kind: usgs_csv

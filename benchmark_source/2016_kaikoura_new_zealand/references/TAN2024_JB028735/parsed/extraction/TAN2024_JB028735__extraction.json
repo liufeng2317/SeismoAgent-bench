@@ -105,7 +105,7 @@
             "note": "Article reports 41,392 after cluster-size filtering."
           },
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/README.md",
+            "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/README.md",
             "locator": "release reconciliation",
             "note": "S11 is the released 46,440-row intermediate; final membership is not separately released."
           }
@@ -140,19 +140,19 @@
       "version": null,
       "source_files": [
         {
-          "path": "benchmark_source/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_sugar_S10.xlsx",
+          "path": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_sugar_S10.xlsx",
           "format": "xlsx",
           "checksum": null,
           "role": "canonical"
         },
         {
-          "path": "benchmark_source/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_sugar_relocated_S11.xlsx",
+          "path": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_sugar_relocated_S11.xlsx",
           "format": "xlsx",
           "checksum": null,
           "role": "canonical"
         },
         {
-          "path": "benchmark_source/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/TAN2024_JB028735__phases_associated.zip",
+          "path": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/TAN2024_JB028735__phases_associated.zip",
           "format": "zip of phase files",
           "checksum": null,
           "role": "raw_release"
@@ -185,7 +185,7 @@
       "article_local_discrepancy": "S10 (67,660), S11 (46,440), and S12 (55) match local products; 41,392 is article-reported final membership without a local standalone file.",
       "evidence": [
         {
-          "source": "benchmark_source/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/README.md",
+          "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/README.md",
           "locator": "local audit tables",
           "note": "Counts, ranges, masks and release reconciliation."
         }
@@ -761,13 +761,13 @@
         "product_id": "DP2",
         "name": "Associated phase archive",
         "type": "phase_table",
-        "file_path": "benchmark_source/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/TAN2024_JB028735__phases_associated.zip",
+        "file_path": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/TAN2024_JB028735__phases_associated.zip",
         "catalog_relation": "Phase-level support for SUGAR events; not an event catalog.",
         "scientific_use": "Phase support and station-coverage analysis.",
         "count_or_scope": "Local audit: 1,165 .dat files, approximately 1,382,337 phase rows.",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/README.md",
+            "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/README.md",
             "locator": "phase archive audit",
             "note": "Phase-file count and schema audit."
           }

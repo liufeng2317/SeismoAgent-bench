@@ -6,7 +6,7 @@
 - Paper: [`paper/PANG2020_GL089798__paper.pdf`](paper/PANG2020_GL089798__paper.pdf)
 - MinerU parse: [`parsed/paper/PANG2020_GL089798__paper__mineru.md`](parsed/paper/PANG2020_GL089798__paper__mineru.md)
 - Reading/audit note: [`parsed/paper/PANG2020_GL089798__paper_reading.md`](parsed/paper/PANG2020_GL089798__paper_reading.md)
-- Catalog and catalog audit are separated under [`../../catalogs/PANG2020_GL089798/`](../../catalogs/PANG2020_GL089798).
+- Catalog and catalog audit are separated under [`../../data/catalogs/PANG2020_GL089798`](../../data/catalogs/PANG2020_GL089798).
 
 The article lists Supporting Information S1, but that file is not currently
 staged.  Do not mark the reference bundle fully closed until the SI is obtained

@@ -11,7 +11,7 @@ The script deliberately has no third-party document dependency:
   assessment.
 
 Catalog migration is opt-in (``--migrate-catalogs``).  Only high-confidence
-event-table candidates are moved to ``benchmark_source/<CASE>/catalogs/<SOURCE>/raw``;
+event-table candidates are moved to ``benchmark_source/<CASE>/data/catalogs/<SOURCE>/raw``;
 ambiguous tables remain in the supplement directory and are reported.
 """
 from __future__ import annotations
@@ -186,7 +186,7 @@ def process_one(path: Path, migrate: bool) -> dict:
         text, confident, extra = xlsx_to_md(path); out_path.write_text(text, encoding="utf-8"); meta.update(extra)
         if confident and migrate:
             case_dir = ROOT / "benchmark_source" / case
-            catalogs = case_dir / "data/catalogs" if (case_dir / "data").is_dir() else case_dir / "catalogs"
+            catalogs = case_dir / "data/catalogs"
             target_dir = catalogs / source / "raw"; target_dir.mkdir(parents=True, exist_ok=True)
             target = target_dir / path.name
             if not target.exists():
@@ -214,7 +214,7 @@ def main() -> int:
     for r in records:
         role = r.get("role", r.get("status", "")); dest = r.get("migrated_to", r.get("output", ""))
         lines.append(f"| `{r['case']}` | `{r['source']}` | `{Path(r['file']).name}` | `{r['type']}` | `{role}` | `{dest}` |")
-    lines += ["", "## Interpretation rules", "", "- `catalog_candidate` is only a high-confidence automated flag; verify against the paper and schema before using it as a benchmark catalog.", "- Supplementary parameter, uncertainty, figure, and station tables remain under `references/<SOURCE>/supplement`.", "- Catalog files belong under `benchmark_source/<CASE>/catalogs/<SOURCE>/raw`; migration is performed only with `--migrate-catalogs`.", "- The generated `__extracted.md` files are machine-readable derivatives, not replacements for the original supplements.", ""]
+    lines += ["", "## Interpretation rules", "", "- `catalog_candidate` is only a high-confidence automated flag; verify against the paper and schema before using it as a benchmark catalog.", "- Supplementary parameter, uncertainty, figure, and station tables remain under `references/<SOURCE>/supplement`.", "- Catalog files belong under `benchmark_source/<CASE>/data/catalogs/<SOURCE>/raw`; migration is performed only with `--migrate-catalogs`.", "- The generated `__extracted.md` files are machine-readable derivatives, not replacements for the original supplements.", ""]
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
         args.report.write_text("\n".join(lines), encoding="utf-8")

@@ -10,8 +10,8 @@ processing_policy:
 window_status: not_frozen
 catalogs:
 - source_ref: CHAMBERLAIN2021_JB022304
-  catalog_dir: catalogs/CHAMBERLAIN2021_JB022304
-  parser: catalogs/CHAMBERLAIN2021_JB022304/scripts/run_catalog_analysis.py
+  catalog_dir: data/catalogs/CHAMBERLAIN2021_JB022304
+  parser: data/catalogs/CHAMBERLAIN2021_JB022304/scripts/run_catalog_analysis.py
   products:
   - product_id: growclust_corrected
     kind: event
@@ -22,16 +22,16 @@ catalogs:
     role: provenance_control
     source_path: CHAMBERLAIN2021_JB022304__catalog_growclust.csv
 - source_ref: LANZA2019_GL082780
-  catalog_dir: catalogs/LANZA2019_GL082780
-  parser: catalogs/LANZA2019_GL082780/scripts/run_catalog_analysis.py
+  catalog_dir: data/catalogs/LANZA2019_GL082780
+  parser: data/catalogs/LANZA2019_GL082780/scripts/run_catalog_analysis.py
   products:
   - product_id: quakeml_preferred_origins
     kind: event
     role: primary
     source_path: raw/grl59060-sup-0003-ds01.xml
 - source_ref: TAN2024_JB028735
-  catalog_dir: catalogs/TAN2024_JB028735
-  parser: catalogs/TAN2024_JB028735/scripts/run_catalog_analysis.py
+  catalog_dir: data/catalogs/TAN2024_JB028735
+  parser: data/catalogs/TAN2024_JB028735/scripts/run_catalog_analysis.py
   products:
   - product_id: sugar_s10
     kind: event
@@ -48,10 +48,10 @@ catalogs:
   - product_id: focal_mechanisms_s12
     kind: moment_or_mechanism
     role: auxiliary
-    source_path: ../references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0005-table_si-s12.xlsx
+    source_path: ../../../references/TAN2024_JB028735/supplement/2024jb028735-sup-0005-table si-s12.xlsx
 - source_ref: GEONET_2016_KAIKOURA
-  catalog_dir: catalogs/GEONET_2016_KAIKOURA
-  parser: catalogs/GEONET_2016_KAIKOURA/scripts/run_catalog_analysis.py
+  catalog_dir: data/catalogs/GEONET_2016_KAIKOURA
+  parser: data/catalogs/GEONET_2016_KAIKOURA/scripts/run_catalog_analysis.py
   products:
   - product_id: operational_full
     kind: event

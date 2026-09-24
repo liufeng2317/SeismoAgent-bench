@@ -4,8 +4,8 @@
 - Data release: ISC DOI `10.31905/LGR1456Y`
 - Role: machine-learning picks, association, and dense temporary-array secondary catalog
 - Article PDF: **missing locally** (no verified PDF was found elsewhere in the project)
-- Catalog and source archive: [`../../catalogs/BAKER2021_0220200316/`](../../catalogs/BAKER2021_0220200316)
-- Catalog audit: [`../../catalogs/BAKER2021_0220200316/README.md`](../../catalogs/BAKER2021_0220200316/README.md)
+- Catalog and source archive: [`../../data/catalogs/BAKER2021_0220200316`](../../data/catalogs/BAKER2021_0220200316)
+- Catalog audit: [`../../data/catalogs/BAKER2021_0220200316/README.md`](../../data/catalogs/BAKER2021_0220200316/README.md)
 
 A paper-reading note is intentionally not fabricated while the article PDF is
 missing.  The local CSV/ISC README supports file-level pick and event audits

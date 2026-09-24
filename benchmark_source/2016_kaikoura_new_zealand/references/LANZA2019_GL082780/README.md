@@ -7,7 +7,7 @@
 - Narrative supplement: two official AGU/Wiley files are stored under
   `supplement/`: Text SI (`.docx`) and Table S1 (`.xlsx`).
 - Catalog: Data Set S1 QuakeML is staged separately under
-  `../../catalogs/LANZA2019_GL082780/raw/grl59060-sup-0003-ds01.xml`.
+  `../../data/catalogs/LANZA2019_GL082780/raw/grl59060-sup-0003-ds01.xml`.
 - Supplement audit: `parsed/supplement/LANZA2019_GL082780__supplement_notes.md`.
 
 The article reports approximately 2,700 selected events, 2,655 initial

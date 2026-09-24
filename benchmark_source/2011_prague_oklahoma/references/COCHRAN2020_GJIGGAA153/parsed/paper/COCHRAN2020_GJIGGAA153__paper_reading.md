@@ -170,8 +170,8 @@ before gaps, compression, channel filtering, or station-day availability.
 - Paper PDF: `benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/paper/COCHRAN2020_GJIGGAA153__paper.pdf`
 - MinerU extraction: `benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/mineru/`
 - Supplement: `benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/supplement/`
-- Catalog README: `benchmark_source/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/README.md`
-- Catalog file: `benchmark_source/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_primary.txt`
+- Catalog README: `benchmark_source/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md`
+- Catalog file: `benchmark_source/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_primary.txt`
 - Remaining checks: verify the catalog-release URL and magnitude definition from
   the official supplementary package; extract station/channel/sample-rate and
   station-day availability metadata; generate plots without modifying the

@@ -50,9 +50,9 @@ Detailed source notes:
 
 - [Pang paper reading](../references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper_reading.md)
   separates article-reported populations from local release counts.
-- [Pang catalog audit](../catalogs/PANG2020_GL089798/README.md)
+- [Pang catalog audit](../data/catalogs/PANG2020_GL089798/README.md)
   records byte identity, timestamp anomalies, and strict/normalized window counts.
-- [Baker catalog audit](../catalogs/BAKER2021_0220200316/README.md)
+- [Baker catalog audit](../data/catalogs/BAKER2021_0220200316/README.md)
   treats the CSV as pick-level and aggregates event counts explicitly.
 
 ## Paper-derived construction details
@@ -169,10 +169,10 @@ comparison track after the missing article and nodal metadata are recovered.
 
 - Pang paper: [`../references/PANG2020_GL089798/paper/PANG2020_GL089798__paper.pdf`](../references/PANG2020_GL089798/paper/PANG2020_GL089798__paper.pdf)
 - Pang reading note: [`../references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper_reading.md`](../references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper_reading.md)
-- Pang catalog: [`../catalogs/PANG2020_GL089798/`](../catalogs/PANG2020_GL089798)
-- Baker catalog: [`../catalogs/BAKER2021_0220200316/`](../catalogs/BAKER2021_0220200316)
+- Pang catalog: [`../data/catalogs/PANG2020_GL089798`](../data/catalogs/PANG2020_GL089798)
+- Baker catalog: [`../data/catalogs/BAKER2021_0220200316`](../data/catalogs/BAKER2021_0220200316)
 - Baker reference status: [`../references/BAKER2021_0220200316/README.md`](../references/BAKER2021_0220200316/README.md)
-- UUSS/USGS baseline: [`../catalogs/USGS_UUSS_COMCAT_2020/`](../catalogs/USGS_UUSS_COMCAT_2020)
+- UUSS/USGS baseline: [`../data/catalogs/USGS_UUSS_COMCAT_2020`](../data/catalogs/USGS_UUSS_COMCAT_2020)
 
 ## Catalog processing
 

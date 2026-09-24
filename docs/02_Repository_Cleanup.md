@@ -27,8 +27,8 @@
 - [文献清单](../benchmark_source/REFERENCES_MANIFEST.md)：文献与补充材料可用性、未解决问题及 extraction 导航。
 - [目录清单](../benchmark_source/CATALOGS_MANIFEST.md)：由 full-product JSON 生成的单位明确的统计。
 - [数据组织规则](../benchmark_source/README.md)：保留策略、命名、备份和处理产物规则。
-- `benchmark_source/<case>/catalogs/<catalog>/README.md`：人工维护的来源、字段、质量、原文说明。
-- `benchmark_source/<case>/catalogs/<catalog>/analysis/catalog_analysis.md`：脚本生成的处理报告。
+- `benchmark_source/<case>/data/catalogs/<catalog>/README.md`：人工维护的来源、字段、质量、原文说明。
+- `benchmark_source/<case>/data/catalogs/<catalog>/analysis/catalog_analysis.md`：脚本生成的处理报告。
 
 目录清单生成器同步修复：读取 selection/product 元数据，覆盖 `event_full_v1.json` 等不同命名；不再把 phase 行数写到事件列，不按最大行数推断主参考；保留不同产品/版本的独立行。`ready` 只表示存在非空完整事件或原生相对事件统计，不等于科学评测就绪。
 
@@ -135,17 +135,17 @@
 
 ### 目录摘要合并
 
-- `benchmark_source/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md` → [保留位置](../benchmark_source/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/README.md)
-- `benchmark_source/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md` → [保留位置](../benchmark_source/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/README.md)
-- `benchmark_source/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md` → [保留位置](../benchmark_source/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/README.md)
-- `benchmark_source/2011_prague_oklahoma/catalogs/USGS_TUL_COMCAT_2011/USGS_TUL_COMCAT_2011__catalog_summary.md` → [保留位置](../benchmark_source/2011_prague_oklahoma/catalogs/USGS_TUL_COMCAT_2011/README.md)
-- `benchmark_source/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md` → [保留位置](../benchmark_source/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/README.md)
-- `benchmark_source/2016_kaikoura_new_zealand/catalogs/GEONET_2016_KAIKOURA/GEONET_2016_KAIKOURA__catalog_summary.md` → [保留位置](../benchmark_source/2016_kaikoura_new_zealand/catalogs/GEONET_2016_KAIKOURA/README.md)
-- `benchmark_source/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md` → [保留位置](../benchmark_source/2016_kaikoura_new_zealand/catalogs/LANZA2019_GL082780/README.md)
-- `benchmark_source/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_summary.md` → [保留位置](../benchmark_source/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/README.md)
-- `benchmark_source/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md` → [保留位置](../benchmark_source/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/README.md)
-- `benchmark_source/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md` → [保留位置](../benchmark_source/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/README.md)
-- `benchmark_source/2017_maple_creek_yellowstone/catalogs/USGS_UUSS_COMCAT_2017/USGS_UUSS_COMCAT_2017__catalog_summary.md` → [保留位置](../benchmark_source/2017_maple_creek_yellowstone/catalogs/USGS_UUSS_COMCAT_2017/README.md)
+- `benchmark_source/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_summary.md` → [保留位置](../benchmark_source/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md)
+- `benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_summary.md` → [保留位置](../benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md)
+- `benchmark_source/2011_prague_oklahoma/data/catalogs/MCMAHON2017_GL072944/MCMAHON2017_GL072944__catalog_summary.md` → [保留位置](../benchmark_source/2011_prague_oklahoma/data/catalogs/MCMAHON2017_GL072944/README.md)
+- `benchmark_source/2011_prague_oklahoma/data/catalogs/USGS_TUL_COMCAT_2011/USGS_TUL_COMCAT_2011__catalog_summary.md` → [保留位置](../benchmark_source/2011_prague_oklahoma/data/catalogs/USGS_TUL_COMCAT_2011/README.md)
+- `benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_summary.md` → [保留位置](../benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md)
+- `benchmark_source/2016_kaikoura_new_zealand/data/catalogs/GEONET_2016_KAIKOURA/GEONET_2016_KAIKOURA__catalog_summary.md` → [保留位置](../benchmark_source/2016_kaikoura_new_zealand/data/catalogs/GEONET_2016_KAIKOURA/README.md)
+- `benchmark_source/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/LANZA2019_GL082780__catalog_summary.md` → [保留位置](../benchmark_source/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/README.md)
+- `benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_summary.md` → [保留位置](../benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/README.md)
+- `benchmark_source/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md` → [保留位置](../benchmark_source/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md)
+- `benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md` → [保留位置](../benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md)
+- `benchmark_source/2017_maple_creek_yellowstone/data/catalogs/USGS_UUSS_COMCAT_2017/USGS_UUSS_COMCAT_2017__catalog_summary.md` → [保留位置](../benchmark_source/2017_maple_creek_yellowstone/data/catalogs/USGS_UUSS_COMCAT_2017/README.md)
 - `benchmark_source/2018_kilauea_hawaii/data/catalogs/LENGLINE2021_EPSL116653/LENGLINE2021_EPSL116653__catalog_summary.md` → [保留位置](../benchmark_source/2018_kilauea_hawaii/data/catalogs/LENGLINE2021_EPSL116653/README.md)
 - `benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2014_GL059819/MATOZA2014_GL059819__catalog_summary.md` → [保留位置](../benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2014_GL059819/README.md)
 - `benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_summary.md` → [保留位置](../benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md)
@@ -157,9 +157,9 @@
 - `benchmark_source/2019_ridgecrest_california/data/catalogs/ROSS2019_SCIENCE/ROSS2019_SCIENCE__catalog_summary.md` → [保留位置](../benchmark_source/2019_ridgecrest_california/data/catalogs/ROSS2019_SCIENCE/README.md)
 - `benchmark_source/2019_ridgecrest_california/data/catalogs/SHELLY2020_0220190309/SHELLY2020_0220190309__catalog_summary.md` → [保留位置](../benchmark_source/2019_ridgecrest_california/data/catalogs/SHELLY2020_0220190309/README.md)
 - `benchmark_source/2019_ridgecrest_california/data/catalogs/USGS_SCSN_COMCAT_2019/USGS_SCSN_COMCAT_2019__catalog_summary.md` → [保留位置](../benchmark_source/2019_ridgecrest_california/data/catalogs/USGS_SCSN_COMCAT_2019/README.md)
-- `benchmark_source/2020_magna_utah/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md` → [保留位置](../benchmark_source/2020_magna_utah/catalogs/BAKER2021_0220200316/README.md)
-- `benchmark_source/2020_magna_utah/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md` → [保留位置](../benchmark_source/2020_magna_utah/catalogs/PANG2020_GL089798/README.md)
-- `benchmark_source/2020_magna_utah/catalogs/USGS_UUSS_COMCAT_2020/USGS_UUSS_COMCAT_2020__catalog_summary.md` → [保留位置](../benchmark_source/2020_magna_utah/catalogs/USGS_UUSS_COMCAT_2020/README.md)
+- `benchmark_source/2020_magna_utah/data/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_summary.md` → [保留位置](../benchmark_source/2020_magna_utah/data/catalogs/BAKER2021_0220200316/README.md)
+- `benchmark_source/2020_magna_utah/data/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_summary.md` → [保留位置](../benchmark_source/2020_magna_utah/data/catalogs/PANG2020_GL089798/README.md)
+- `benchmark_source/2020_magna_utah/data/catalogs/USGS_UUSS_COMCAT_2020/USGS_UUSS_COMCAT_2020__catalog_summary.md` → [保留位置](../benchmark_source/2020_magna_utah/data/catalogs/USGS_UUSS_COMCAT_2020/README.md)
 
 ### 一次性创建/迁移脚本
 
@@ -172,8 +172,8 @@
 
 ### 重复 XLSX 替换为相对链接
 
-- `benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/supplement/2024jb028735-sup-0003-table si-s10.xlsx` → [保留位置](../benchmark_source/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_sugar_S10.xlsx)
-- `benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/supplement/2024jb028735-sup-0004-table si-s11.xlsx` → [保留位置](../benchmark_source/2016_kaikoura_new_zealand/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_sugar_relocated_S11.xlsx)
+- `benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/supplement/2024jb028735-sup-0003-table si-s10.xlsx` → [保留位置](../benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_sugar_S10.xlsx)
+- `benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/supplement/2024jb028735-sup-0004-table si-s11.xlsx` → [保留位置](../benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_sugar_relocated_S11.xlsx)
 
 ### 重复跨案例审查
 
@@ -187,8 +187,8 @@
 
 - `benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2014_GL059819/README_legacy.txt` → [保留位置](../benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2014_GL059819/README.md)
 - `benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README_legacy.txt` → [保留位置](../benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md)
-- `benchmark_source/2020_magna_utah/catalogs/BAKER2021_0220200316/README_legacy.txt` → [保留位置](../benchmark_source/2020_magna_utah/catalogs/BAKER2021_0220200316/README.md)
-- `benchmark_source/2020_magna_utah/catalogs/PANG2020_GL089798/README_legacy.txt` → [保留位置](../benchmark_source/2020_magna_utah/catalogs/PANG2020_GL089798/README.md)
+- `benchmark_source/2020_magna_utah/data/catalogs/BAKER2021_0220200316/README_legacy.txt` → [保留位置](../benchmark_source/2020_magna_utah/data/catalogs/BAKER2021_0220200316/README.md)
+- `benchmark_source/2020_magna_utah/data/catalogs/PANG2020_GL089798/README_legacy.txt` → [保留位置](../benchmark_source/2020_magna_utah/data/catalogs/PANG2020_GL089798/README.md)
 
 ## 验证
 

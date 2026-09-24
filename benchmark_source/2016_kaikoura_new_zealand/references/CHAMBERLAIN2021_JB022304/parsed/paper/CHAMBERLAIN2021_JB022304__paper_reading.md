@@ -166,7 +166,7 @@ count is the catalog-local time audit; 2,214 is the comparable benchmark count.
 
 - Paper PDF: `benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/paper/CHAMBERLAIN2021_JB022304__paper.pdf`
 - Parsed paper: `benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/CHAMBERLAIN2021_JB022304__paper__mineru.md`
-- Corrected canonical catalog: `benchmark_source/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust_corrected_focal_mechanisms.csv`
-- Legacy Zenodo CSV: `benchmark_source/2016_kaikoura_new_zealand/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust.csv`
+- Corrected canonical catalog: `benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust_corrected_focal_mechanisms.csv`
+- Legacy Zenodo CSV: `benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust.csv`
 - Official release: [Zenodo 5035841](https://zenodo.org/records/5035841) for the legacy product; corrected benchmark_source/code archive is identified by the article as Zenodo 6763130.
 - Required follow-up: preserve the Zenodo QuakeML/software archive if exact relocation-status flags, focal-mechanism provenance, or reproducibility of the 27,431 subset is required; visually verify the `10× MAD` threshold in the source PDF.

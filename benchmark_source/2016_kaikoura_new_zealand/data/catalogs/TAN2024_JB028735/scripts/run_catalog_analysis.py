@@ -8,7 +8,7 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-CASE_ID="2016_kaikoura_new_zealand"; SOURCE_REF="TAN2024_JB028735"; ROOT=Path(__file__).resolve().parents[1]; ANALYSIS=ROOT/"analysis"; SUP=ROOT.parent.parent/"references"/SOURCE_REF/"supplement"; UTC=timezone.utc
+CASE_ID="2016_kaikoura_new_zealand"; SOURCE_REF="TAN2024_JB028735"; ROOT=Path(__file__).resolve().parents[1]; ANALYSIS=ROOT/"analysis"; SUP=ROOT.parents[2]/"references"/SOURCE_REF/"supplement"; UTC=timezone.utc
 START=datetime(2016,12,1,tzinfo=UTC); END=datetime(2016,12,9,tzinfo=UTC); LAT_MIN,LAT_MAX=-43.5,-41.2; LON_MIN,LON_MAX=172,175.2; DEPTH_MIN,DEPTH_MAX=0,60
 S10=ROOT/"TAN2024_JB028735__catalog_sugar_S10.xlsx"; S11=ROOT/"TAN2024_JB028735__catalog_sugar_relocated_S11.xlsx"; PHASE=ROOT/"TAN2024_JB028735__phases_associated.zip"; S12=SUP/"2024jb028735-sup-0005-table si-s12.xlsx"
 def tag(e):return e.tag.rsplit('}',1)[-1]

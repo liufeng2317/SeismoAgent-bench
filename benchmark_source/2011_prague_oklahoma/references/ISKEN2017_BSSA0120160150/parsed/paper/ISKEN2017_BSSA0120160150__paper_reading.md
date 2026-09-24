@@ -135,7 +135,7 @@ following fields:
 | `Mw` | Moment magnitude as labeled by official table | 3.1–3.4; do not substitute `ML` |
 
 The complete 13-row table is retained in
-[`ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv`](../../../../catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv),
+[`ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv`](../../../../data/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv),
 with the downloaded official HTML source preserved beside it. The local CSV
 contains 13 rows, no exact duplicate rows, and no missing cells. Its SHA-256
 is recorded in the catalog summary.
@@ -162,9 +162,9 @@ events rather than dropping them silently.
 
 - Paper PDF: `benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/paper/ISKEN2017_BSSA0120160150__paper.pdf`
 - MinerU extraction: `benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/mineru/`
-- Catalog README: `benchmark_source/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/README.md`
-- Normalized catalog: `benchmark_source/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv`
-- Official source table: `benchmark_source/2011_prague_oklahoma/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__source_tableS3.html`
+- Catalog README: `benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md`
+- Normalized catalog: `benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv`
+- Official source table: `benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__source_tableS3.html`
 - Official supplement landing page: <https://www.seismosoc.org/Publications/BSSA_html/bssa_107-2/2016150-esupp/>
 
 Remaining checks before using this reference in a scored benchmark:

@@ -22,7 +22,7 @@
 |---|---|
 | Provider | GeoNet / GNS Science |
 | Service | [`https://service.geonet.org.nz/fdsnws/event/1/query`](https://service.geonet.org.nz/fdsnws/event/1/query) |
-| Configuration | [`scripts/00_catalog_downloading/official_baseline_windows.json`](../../../../scripts/00_catalog_downloading/official_baseline_windows.json), `2016_kaikoura_new_zealand` entry |
+| Configuration | [`scripts/00_catalog_downloading/official_baseline_windows.json`](../../../../../scripts/00_catalog_downloading/official_baseline_windows.json), `2016_kaikoura_new_zealand` entry |
 | Download timestamp | 2026-09-19T16:48:25Z (directory README) |
 | Role | Q3 official operational baseline; not a high-resolution truth catalog |
 | Format | GeoNet pipe-delimited text export; source header and fields preserved |

@@ -57,15 +57,21 @@ class ManifestRegressionTests(unittest.TestCase):
             'selection': 'benchmark', 'stats': {'row_count': 11},
         }))
 
-    def test_nested_data_catalogs_are_included_alongside_legacy_cases(self):
-        for case, layout in [('nested', 'data/catalogs'), ('legacy', 'catalogs')]:
+    def test_all_nested_case_catalogs_are_included(self):
+        for case, layout in [('first', 'data/catalogs'), ('second', 'data/catalogs')]:
             self.stat(f'benchmark_source/{case}/{layout}/C/analysis/stats/events/full_v1.json', {
                 'product_id': 'events', 'selection': 'full',
                 'stats': {'row_count': 3, 'ranges': {}},
             })
         result = build_manifest(self.root / 'benchmark_source')
-        self.assertIn('./nested/data/catalogs/C/README.md', result)
-        self.assertIn('./legacy/catalogs/C/README.md', result)
+        self.assertIn('./first/data/catalogs/C/README.md', result)
+        self.assertIn('./second/data/catalogs/C/README.md', result)
+
+    def test_legacy_layout_is_rejected_instead_of_silently_omitted(self):
+        data = self.root / 'benchmark_source'
+        (data / 'case/catalogs').mkdir(parents=True)
+        with self.assertRaisesRegex(ValueError, 'data/catalogs'):
+            build_manifest(data)
 
     def test_window_status_and_all_release_versions_are_preserved(self):
         data = self.root / 'benchmark_source'
@@ -73,7 +79,7 @@ class ManifestRegressionTests(unittest.TestCase):
         (case / 'analysis').mkdir(parents=True)
         (case / 'analysis/processing.yaml').write_text('window_status: not_frozen\n')
         for product, count in [('growclust_corrected', 33328), ('growclust_legacy', 34704)]:
-            self.stat(f'benchmark_source/case/catalogs/C/analysis/stats/{product}/full_v1.json', {
+            self.stat(f'benchmark_source/case/data/catalogs/C/analysis/stats/{product}/full_v1.json', {
                 'product_id': product, 'selection': 'full',
                 'stats': {'row_count': count, 'ranges': {}},
             })

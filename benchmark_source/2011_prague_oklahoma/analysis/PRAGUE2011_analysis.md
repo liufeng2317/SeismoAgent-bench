@@ -58,11 +58,11 @@ The 5,446-event release and 5,262-event paper-filtered set must remain separate 
 The detailed first-pass extraction is maintained beside the source products:
 
 - [Cochran paper reading](../references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper_reading.md)
-- [Cochran catalog summary](../catalogs/COCHRAN2020_GJIGGAA153/README.md)
+- [Cochran catalog summary](../data/catalogs/COCHRAN2020_GJIGGAA153/README.md)
 - [McMahon paper reading](../references/MCMAHON2017_GL072944/parsed/paper/MCMAHON2017_GL072944__paper_reading.md)
-- [McMahon catalog summary](../catalogs/MCMAHON2017_GL072944/README.md)
+- [McMahon catalog summary](../data/catalogs/MCMAHON2017_GL072944/README.md)
 - [Isken paper reading](../references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md)
-- [Isken catalog summary](../catalogs/ISKEN2017_BSSA0120160150/README.md)
+- [Isken catalog summary](../data/catalogs/ISKEN2017_BSSA0120160150/README.md)
 
 These files distinguish article-reported values from local-file audit values;
 the case-level tables above remain the benchmark decision record.
@@ -125,8 +125,8 @@ The stable-network window is preferred for the core benchmark because the last t
 
 ### Important supporting catalogs
 
-- Isken & Mooney (2017), *Relocated Hypocenters and Structural Analysis from Waveform Modeling of Aftershocks...*, DOI https://doi.org/10.1785/0120160150. The official BSSA supplement Table S3 is now archived at `../catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv`; it contains 13 high-quality relocated aftershocks and is a **Q2 structural/location auxiliary**, not a complete catalog.
-- Cochran source bundle: `../references/COCHRAN2020_GJIGGAA153/`; core catalog: `../catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_primary.txt`.
+- Isken & Mooney (2017), *Relocated Hypocenters and Structural Analysis from Waveform Modeling of Aftershocks...*, DOI https://doi.org/10.1785/0120160150. The official BSSA supplement Table S3 is now archived at `../data/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv`; it contains 13 high-quality relocated aftershocks and is a **Q2 structural/location auxiliary**, not a complete catalog.
+- Cochran source bundle: `../references/COCHRAN2020_GJIGGAA153/`; core catalog: `../data/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_primary.txt`.
 - McNamara et al. (2015), DOI https://doi.org/10.1002/2014GL062730. Contains a broader 3,639-event central Oklahoma HD-relocation catalog and is useful as a regional structural anchor, but not as the principal compact-window completeness target.
 - Keranen et al. (2013), DOI https://doi.org/10.1130/G34045.1. Important scientific-context and early-aftershock reference, but not a replacement for the enhanced catalogs.
 
@@ -252,8 +252,8 @@ as downloaded, even though the rounded research mask also returns 11 rows.
 From the repository root:
 
 ```bash
-python3 benchmark_source/2011_prague_oklahoma/catalogs/COCHRAN2020_GJIGGAA153/scripts/run_catalog_analysis.py
-python3 benchmark_source/2011_prague_oklahoma/catalogs/MCMAHON2017_GL072944/scripts/run_catalog_analysis.py
+python3 benchmark_source/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/scripts/run_catalog_analysis.py
+python3 benchmark_source/2011_prague_oklahoma/data/catalogs/MCMAHON2017_GL072944/scripts/run_catalog_analysis.py
 ```
 
 Use `--only <product_id>` for a targeted product and `--full-plots` only when
