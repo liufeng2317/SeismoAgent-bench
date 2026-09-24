@@ -512,6 +512,32 @@ def plot_event_product(product, stats):
     savefig(fig, out / "catalog_overview_v1")
 
 
+def plot_extended_event_diagnostics(product, stats):
+    """Four required event diagnostics for Prague event products."""
+    if not plot_policy(product).get("event"): return
+    selection=plot_selection(stats); records=[r for r in iter_records(product) if matches_selection(r, selection)]
+    out=FIGURES_ROOT/product["id"]; out.mkdir(parents=True,exist_ok=True)
+    xyz=[r for r in records if all(r.get(k) is not None for k in ("longitude_deg","latitude_deg","depth_km"))]
+    if xyz:
+        fig,ax=plt.subplots(2,2,figsize=(7.2,6.4));
+        for a,x,y,xl,yl,inv in ((ax[0,0],"longitude_deg","latitude_deg","Longitude (°)","Latitude (°)",False),(ax[0,1],"depth_km","latitude_deg","Depth (km)","Latitude (°)",True),(ax[1,0],"longitude_deg","depth_km","Longitude (°)","Depth (km)",True)):
+            a.scatter([r[x] for r in xyz],[r[y] for r in xyz],s=5,alpha=.4,c=NATURE_BLUE,linewidths=0,rasterized=True); a.set(xlabel=xl,ylabel=yl); style_axes(a,grid=False)
+            if inv and x!="depth_km": a.invert_yaxis()
+        depths=[r["depth_km"] for r in records if r.get("depth_km") is not None]
+        if depths:
+            ax[1,1].hist(depths,bins="auto",orientation="horizontal",color=NATURE_TEAL,edgecolor="white",linewidth=.3)
+            ax[1,1].invert_yaxis(); ax[1,1].set(xlabel="Events",ylabel="Depth (km)")
+        else:
+            ax[1,1].axis("off")
+        ax[1,1].text(.98,.04,f"n = {len(xyz):,}",transform=ax[1,1].transAxes,va="bottom",ha="right",fontsize=8)
+        savefig(fig,out/"spatial_three_views_v2")
+    timed=sorted([r for r in records if r.get("datetime") is not None],key=lambda r:r["datetime"])
+    if timed:
+        daily=Counter(r["datetime"].date() for r in timed); days=sorted(daily); fig,ax=plt.subplots(figsize=(7.2,3.2)); ax.bar(days,[daily[d] for d in days],color=NATURE_BLUE,width=.85); ax.set(xlabel="Origin time (UTC)",ylabel="Events per day"); style_axes(ax); savefig(fig,out/"seismicity_time_v2")
+    mags=[r for r in timed if r.get("magnitude") is not None]
+    if mags:
+        fig,ax=plt.subplots(1,2,figsize=(7.2,3.2)); ax[0].hist([r["magnitude"] for r in mags],bins="auto",color=NATURE_BLUE,edgecolor="white",linewidth=.3); ax[0].set(xlabel="Native magnitude",ylabel="Events"); style_axes(ax[0]); ax[1].scatter([r["datetime"] for r in mags],[r["magnitude"] for r in mags],s=5,c=NATURE_ORANGE,alpha=.45,linewidths=0,rasterized=True); ax[1].set(xlabel="Origin time (UTC)",ylabel="Native magnitude"); style_axes(ax[1]); savefig(fig,out/"magnitude_diagnostics_v2")
+
 def plot_phase_product(product, stats):
     out = FIGURES_ROOT / product["id"]
     clean_figure_dir(out)
@@ -565,6 +591,7 @@ def main():
             plot_phase_product(product, stats)
         else:
             plot_event_product(product, stats)
+            plot_extended_event_diagnostics(product, stats)
     if len(selected) == len(PRODUCTS):
         write_report(all_stats, paths)
     print(json.dumps({key: {selection: value.get("row_count", 0) for selection, value in stats.items()} for key, stats in all_stats.items()}, indent=2))

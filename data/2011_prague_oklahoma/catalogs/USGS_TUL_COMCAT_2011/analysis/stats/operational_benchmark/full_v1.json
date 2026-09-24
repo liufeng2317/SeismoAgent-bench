@@ -10,7 +10,7 @@
   "parser_version": "prague-local-v1-compact",
   "source_path": "USGS_TUL_COMCAT_2011__catalog_operational_benchmark.csv",
   "source_sha256": "4a3edd5fd565aaa55a6ddbb2fc0e71189d6a0007af6bbd648dc292a4432932e9",
-  "generated_utc": "2026-09-20T20:12:46+00:00",
+  "generated_utc": "2026-09-23T03:02:17+00:00",
   "stats": {
     "kind": "usgs_csv",
     "row_count": 11,

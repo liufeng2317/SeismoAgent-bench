@@ -10,7 +10,7 @@
   "parser_version": "prague-local-v1-compact",
   "source_path": "COCHRAN2020_GJIGGAA153__catalog_primary.txt",
   "source_sha256": "1b4fe6aee4bc6b5523dafeb36d1fc4ae9b8ceaa93fe24a93c9c37aa7c2076ca7",
-  "generated_utc": "2026-09-20T20:12:35+00:00",
+  "generated_utc": "2026-09-23T03:02:00+00:00",
   "stats": {
     "kind": "cochran_event",
     "row_count": 8811,
