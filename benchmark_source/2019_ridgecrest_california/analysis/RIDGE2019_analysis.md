@@ -1,305 +1,86 @@
-# RIDGE2019 — 科学设计与参考目录核验
+# RIDGE2019 — 案例设计与 Source 准备
 
-当前阶段：**候选科学设计与本地参考数据核验**。`window_status: not_frozen`；尚未验证台站逐日波形可用性，未开展 Agent 实验，未冻结评测条件。历史文档中的 “frozen/v1” 不代表正式批准。
+当前阶段为**候选科学设计与资料整理**。时窗未冻结（`not_frozen`），连续波形尚未下载，逐日覆盖尚未核验。**速度模型获取暂时暂停**，已收集资料和未解决项保留；评测实现另行组织。
 
-配置入口：[processing.yaml](processing.yaml)；可复算结果：[reference_audit.json](reference_audit.json)；核验程序：[audit_references.py](../scripts/audit_references.py)。本次核验日期为 2026-09-24，数据来源与校验和随结果保存。
+本文维护跨来源结论和唯一的准备进度表。参数、原始证据、下载记录及逐条核验结果通过文末入口查阅。
 
-## 1. 此案例要检验什么
+## 1. 案例目标与候选范围
 
-核心问题：**在相同连续波形和台站元数据条件下，Agent 能否构建可用的地震目录，并在两次大震前后事件密度和尾波条件变化时保持可靠性？**
+核心问题：在相同连续波形和台站元数据条件下，能否稳定构建 Ridgecrest 地震目录，尤其是在 Mw 6.4、Mw 7.1 后事件密集和尾波显著的时段？当前先准备可追溯的观测、模型和参考产品，不指定任何一个发表目录为完整真值。
 
-Ridgecrest 的价值在于同一案例包含 Mw 6.4、Mw 7.1 及密集前震—余震活动，可以分阶段观察漏检、关联混淆、定位稳定性和工作流恢复能力。参考目录数量较多，但方法、台站、筛选条件和版本不同；它们共同约束评测，不能选出一个目录作为全部指标的真值。
-
-初期任务限定为离线目录构建：输入连续波形、台站坐标与响应，以及预先声明的速度模型和工具；输出事件目录、关联震相、处理参数、质量标记和执行记录。事件至少保留 UTC 发震时间、本地唯一 ID、经纬度、深度及其基准；提供震级时必须注明震级类型和计算方法。资源消耗、失败恢复、可复现性与科学指标分别记录。
-
-建议预注册以下比较条件：
-
-- 主条件：仅原始波形与台站元数据；固定算法流水线作为实际运行的基线，与 Agent 使用相同观测和资源预算。
-- 辅助条件：提供常规目录，或提供震相，分别单列；不能与从波形独立构建目录的结果混算。
-- 指导条件：封闭参考、经清理的公开文献、专家指导分别实验；允许的模型、参数建议和文献内容需有清单。
-
-目标时段的参考目录、震相表、论文提取答案和本核验输出属于评测侧材料。公开文献条件也需处理包含目标事件表和答案的附件。Shelly 使用后续日期下载的模板资料，因此参考产品适合回顾性评测，不能据此声称实时性能。开发/评测划分、模型训练数据污染风险和资源预算尚待定义；单案例结果仅支持可行性结论。
-
-## 2. 候选时窗与分阶段设计
-
-保留已有 72 小时方案作为设计起点：`2019-07-04T00:00:00Z <= t < 2019-07-07T00:00:00Z`。探索性空间条件为纬度 `[35.45, 36.05]`、经度 `[-117.90, -117.20]`、原生深度 `[0, 20] km`，空间边界包含端点。**不同目录深度基准未统一，这只是数值筛选，不能直接作为正式物理范围。**
-
-以官方快照 `ci38443183`（07-04 17:33:49.000 UTC）和 `ci38457511`（07-06 03:19:53.040 UTC）为分段时间锚点。以下各段互斥，均左闭右开；计数已应用上述原生数值筛选。
-
-| 阶段（UTC，2019 年） | 时段 | Shelly | Liu | Ross 已重定位 | 官方 earthquake |
-|---|---|---:|---:|---:|---:|
-| Mw 6.4 前 | 07-04 00:00 → 17:33:49 | 36 | 19 | 37 | 18 |
-| Mw 6.4 后首小时 | 07-04 17:33:49 → 18:33:49 | 164 | 129 | 127 | 172 |
-| 两次大震间剩余时段 | 07-04 18:33:49 → 07-06 03:19:53.04 | 4,505 | 3,281 | 4,011 | 3,305 |
-| Mw 7.1 后首小时 | 07-06 03:19:53.04 → 04:19:53.04 | 128 | 147 | 84 | 235 |
-| Mw 7.1 后续时段 | 07-06 04:19:53.04 → 07-07 00:00 | 2,883 | 2,666 | 2,204 | 2,834 |
-| 合计 | 72 小时 | 7,716 | 6,242 | 6,463 | 6,564 |
-
-这组计数说明不同产品在高事件密度阶段保留的事件群体不同，不代表某方法已经更好。首个已记录事件的时间也不等于波形覆盖起点或此前没有地震。各目录原生发震时间存在差异，紧贴阶段边界的同一事件可能落在相邻段；正式评分需按匹配后的事件身份处理边界和两个大震，不应把这种差异计为阶段漏检。
-
-波形前后缓冲、处理分块和台站选择仍未定。先核验永久台网的 station-day/channel 可用性，再决定是否增加临时台站条件；震相表中出现某台站不能证明该台站连续覆盖整个时窗。
-
-## 3. 参考产品与核验结果
-
-本次直接重读 7 个目录产品（含机制解）和 1 个震相产品，检查 SHA-256、字段解析、时间、坐标、事件 ID 和重复记录；事件产品解析错误为 0，校验和均符合配置。原始文件未修改。
-
-| 产品 | 全量记录 | 仅候选时窗 | 原生数值筛选后 | 建议角色与限制 |
-|---|---:|---:|---:|---|
-| [Shelly Data S1](../data/catalogs/SHELLY2020_0220190309/README.md) | 34,091 | 7,773 | 7,716 | 密集检测和相对结构的主要参考；大量记录未经逐个审核，不能提供普适完整性真值 |
-| [Liu Table S1](../data/catalogs/LIU2020_GL086189/README.md) | 15,445 | 6,329 | 6,242 | 拾取—关联路线的交叉核验；无原生 ID 和逐事件不确定度，算法不同不等于观测独立 |
-| [Ross QTM 全部记录](../data/catalogs/ROSS2019_SCIENCE/README.md) | 111,918 | 12,806 | 12,768 | 保留初始与重定位字段，全部记录不能都当作成功重定位 |
-| Ross `nbranch > 1` | 46,512 | 6,470 | 6,463 | 相对几何的辅助参考；不是另一个独立产品 |
-| [AWR v2 hypocenters](../data/catalogs/AWR2025_CALTECHDATA/README.md) | 222,864 | 5,842 | 5,737 | 长期方法学辅助；`magnitude_gamma` 不改称 ML/Mw |
-| AWR v2 moment tensors | 4,890 | 258 | 254 | 机制解辅助；不纳入首轮目录构建任务 |
-| [官方 full 快照](../data/catalogs/USGS_SCSN_COMCAT_2019/README.md) | 17,959 | 6,565 | 6,563 | 与候选窗口快照分别保留，不能假定后者就是其严格子集 |
-| 官方候选窗口快照 | 6,566 | 6,566 | 6,566 | 其中地震 6,564、quarry blast 2；按类型显式选择 |
-
-### 必须带入设计的限制
-
-1. **深度和大震位置。** Shelly Data S1 表头说明深度参考面约为海拔 0.7 km，ID 不是 CISN ID；论文指出结果更接近 hypocentroid，大震位置不宜直接当作精确起裂点。全量有 17 条深度超过 100 km 的记录，最大 556.58 km，保留原值并标记，不能猜测单位或自动修正。当前官方 Mw 7.1 深度为 8 km，但 `depthError=31.61 km`；它可以提供身份和时间锚点，不能直接充当精确绝对深度真值。参见 [Shelly 论文第 4 页](../references/SHELLY2020_0220190309/paper/SHELLY2020_0220190309__paper.pdf#page=4)。
-2. **ID 与重复时间。** Liu 无原生事件 ID，派生数据应使用包含源版本与源行号的本地 ID，并保留原生字段；不凭时间宣称跨目录事件身份。Shelly、Ross、AWR hypocenters 的全量重复时间额外行数分别为 2、13、2。官方候选快照有 3 组同时间双 ID，而 ID 本身唯一；这些行的坐标/震级并不完全相同，暂不合并。
-3. **官方快照版本。** 文件下载于 2026-09-19，包含后续修订，只能称为回顾性常规目录比较，不能代表 2019 年实时可得知识。候选快照中 3 个 ID 不在 full 快照内，均属于下面的同时间组；具体事件身份与修订关系尚待权威记录核实。
-4. **震相不等于事件。** Shelly correlation CSV 共 5,703,270 行（P 2,536,859；S 3,166,411），`arrival` 为 Unix 秒。候选窗口内有 1,449,723 条到时记录；它们按到时筛选，不能替代按发震时间统计事件。全量有 6,744 个 template ID、209,213 个 match ID、30 个 network.station 组合；与 Data S1 的事件映射尚未核实。
-5. **论文—版本对应。** Shelly 的 34,091 和 Liu 最终 hypoDD 的 15,445 与本地产品一致。AWR 本地 v2 的 222,864/4,890 与论文 214,467/4,892 不同，保持版本区分，不按论文数字裁剪文件。Ross Science DC1 已于 2026-09-25 取得并直接核读；历史台站/通道配置与模型数值仍有缺口；QTM 目录本身已在本地核验。
-6. **完整性和震级。** Shelly 模板路线、Liu PhaseNet→REAL→VELEST→hypoDD、Ross QTM 和 AWR 的筛选不同，共享区域波形或模板谱系。Liu SI Text S3 还讨论严格阈值、深度截断和尾波造成的漏检。震级类型与时间变化的完整性必须单列，不能直接比较总体 b 值或按事件总数排名。详细方法、阈值和原始资料继续维护在各目录 README 与论文阅读记录中。
-
-官方同时间记录（均保留，未认定为重复事件）：
-
-| UTC 时间 | full 中已有 ID | 仅候选快照中出现的 ID |
-|---|---|---|
-| 2019-07-05 18:33:32.420 | ci37437669 | ci38453959 |
-| 2019-07-06 13:45:19.050 | ci38463919 | ci37483725 |
-| 2019-07-06 22:30:44.490 | ci37503829 | ci37484197 |
-
-坐标、震级和更新时间见核验 JSON 的 `official_duplicate_time_groups`，不在此复制第二份明细。
-
-## 4. 跨目录对应诊断与指标方案
-
-当前诊断在候选原生数值筛选后，测试时间容差 `{0.5, 1, 2} s` 与水平距离容差 `{2, 5} km` 的组合。仅接受两侧都恰有一个候选的对应关系，其余保留为歧义；不使用未统一基准的深度作为匹配门限。下表展示 `1 s / 5 km`，完整 24 组结果保存在 JSON。
-
-| 左目录—右目录 | 双向唯一对应数 | 发震时间绝对差中位数（s） | 水平距离中位数（km） | 左/右有候选但未解决的记录 |
-|---|---:|---:|---:|---:|
-| Shelly—Liu | 4,927 | 0.14 | 0.247 | 130 / 65 |
-| Shelly—Ross 已重定位 | 4,670 | 0.09 | 0.470 | 90 / 54 |
-| Shelly—官方 earthquake | 4,588 | 0.10 | 0.363 | 116 / 91 |
-| Liu—官方 earthquake | 4,566 | 0.11 | 0.376 | 19 / 38 |
-
-这些是**参考产品间的一致性诊断**，不是 Agent 的 precision/recall，也不是相对于真值的定位误差。未对应记录可能是独有检测、筛选差异、时间/空间偏移或参考错误，不能自动标为假阳性。深度差只保存原生数值诊断，不解释为定位偏差或自动校正量。
-
-正式指标建议按维度定义：
-
-- 检测：分别报告相对 Shelly、Liu 和地震类型官方目录的恢复率，按阶段、参考震级类型和预定义质量层分组；没有独立验证时，未匹配输出只标为“待验证”。
-- 关联：先核验震相—事件映射及可比台站，再计算关联指标；当前辅助表不足以直接当作全量关联真值。
-- 定位：对已匹配事件报告时间/水平位置差和相对几何；深度基准及不确定度解决前不进行绝对深度评分。
-- 工程表现：相同输入和资源条件下报告成功率、人工干预、耗时与可复算性；需实际运行，现有目录不能替代算法基线实验。
-
-正式一对一匹配规则、歧义处理和阈值只在开发数据上校准后冻结。当前保守匹配程序用于诊断，尚不是最终评分器；尤其不能用本表反向调参后声称盲测。
-
-## 5. Source 准备进度与下一步
-
-更新日期：2026-09-25。状态依据已有参考核验结果及本地文件盘点。台站/通道/响应元数据已开始入库并记录查询与哈希，连续波形尚未下载。元数据有效期不代表实际连续数据覆盖。下面是本案例 source 准备的唯一手工进度表，不另建 `progress.md`，也不把评测实施状态混入资料获取进度。
-
-| 工作项 | 当前状态与证据 | 下一步动作 | 完成条件 |
-|---|---|---|---|
-| 参考文件与版本登记 | 已完成本地核验：`processing.yaml` 登记 8 个产品，`reference_audit.json` 覆盖 7 个目录产品和 1 个震相产品 | 来源更新时按版本重核，不反复下载已有原件 | 文件哈希、原生字段和版本差异可追溯 |
-| 参考语义与缺口 | 部分完成：深度基准、同时间不同 ID、震相事件映射和 AWR 版本对应仍有待核实；Ross DC1 已归档核读 | 按已有问题逐项补充证据，与观测准备并行 | 各限制有明确解释或保留为未解决项，不擅自合并/修正 |
-| 目录可视化比较 | 已完成候选窗口的三张多面板图，见第 7 节；绘图数量与既有核验逐项一致 | 随来源核验更新解释，窗口冻结后重新生成 | 统一筛选、可追溯原件与版本，并明确原生震级/深度的比较限制 |
-| 各工作观测与方法依赖 | 已直接核读原始正文及 Liu/Ross/AWR 附件，更新选站规则、网络代码与模型线索；见下方依赖表 | 补齐引用附件、版本和可执行参数，区分论文描述与本地载荷 | 每条获取需求能回溯到来源及具体章节；未核实项明确保留 |
-| 台站分布预分析 | 已核对 Liu Fig. S1 的 45 站，41 站在候选窗口有通道有效期；Shelly 窗口内辅助震相的 24 站均包含于其中 | 补 Shelly/AWR 完整名单，核查 Ross EH/HH 80 km 候选的历史 SCEDC 可用性 | 形成可追溯的候选台站几何、分阶段可用性及与事件的距离/方位覆盖；论文台站总数不作为可用数 |
-| 速度模型与台站修正 | 部分完成：Shelly Table 1 与 Feng & Lees Table 1 的 12 行 Coso 初始模型数值已保存；已下载 SCSN/UCVM HK、HypoSVI 示例与 SoCal 三维候选；Liu 更新模型及 AWR 实际平滑版本仍缺 | 核对层定义、Vp/Vs、深度基准、平滑与台站修正；补实际模型文件 | 模型数值、单位、出处和使用阶段明确；初始模型与反演得到的模型分开 |
-| 断层与地表破裂资料 | 部分完成：Shelly/Liu 图注指向 Kendrick 等的地表破裂调查；本地未发现独立断层矢量产品 | 核对原始发布、版本、坐标参考系和几何类型 | 区分实测地表破裂、区域既有断层与目录推断结构；有独立来源及不确定性说明 |
-| 目录构建流程预分析 | 已整理四条方法链；尚未复现运行；Ross DC1 已补齐，实际运行配置仍需获取 | 按波形→拾取/模板→关联→定位→重定位→质量筛选核对依赖 | 每阶段的输入、输出、软件/权重版本、参数及必要中间产物可追溯 |
-| 观测获取范围 | 部分完成：已有 2019-07-04 至 07-07 的 72 小时候选窗口；台站集合、通道和缓冲时长未定 | 根据来源论文及实际元数据确定候选台站、通道、时间范围和预计体量 | 查询条件及选择理由可复算；目录事件空间范围不直接充当台站筛选范围 |
-| 台站与响应元数据 | 已获取官方 StationXML，按用户指定保存在 `data/waveforms/stations/`；来源、有效期和冲突详见 `station_preparation.json` | 检查最终选用通道的响应完整性与来源冲突；继续补文献明确使用的台站 | 可以明确定位到 network/station/location/channel 及其有效时间段，缺失响应单列 |
-| 连续数据可用性 | 未开始：尚无观测可用性清单 | 按台站—通道—时间段盘点连续数据、缺口、重叠及来源 | 实际覆盖与查询范围可核对；震相表中出现台站不能替代连续波形可用性证据 |
-| 小批量观测试下载 | 未开始：尚无连续波形载荷；该目录内现有文件为 station 元数据 | 选少量台站和短连续片段，覆盖一般时段与大震后时段，验证下载与读入 | 请求范围、实际起止时间、通道、采样率和元数据匹配；缺口及解码失败有记录 |
-| 候选窗口完整获取与归档 | 未开始，依赖试下载验收 | 按清单分块获取，记录失败重试、实际覆盖、体量及文件哈希 | 每个请求项都有成功、部分覆盖或失败状态；文件可读且能关联来源/响应；不以下载成功率替代科学质量 |
-
-**当前工作范围：台站元数据获取、有效期与跨工作重叠核验、速度模型数值整理和断层来源核查。已实现 station 获取；连续波形下载仍留待后续。**
-
-后续执行顺序为：将提取结果转成观测/模型依赖 → 核对候选台站、模型和附件缺口 → 确定获取范围 → 编写获取与核验代码 → 台站/响应与可用性盘点 → 小批量试下载 → 获取完整候选窗口。断层背景资料可并行整理，不作为波形获取的前置条件。进度表只维护状态，以下依赖表维护跨工作的获取依据，不复制完整 extraction。
-
-### 各工作观测与方法依赖：获取前的预分析
-
-本节依据已有 extraction 和本地论文/补充材料，不代表在线服务、连续覆盖或载荷已经核验。证据层级分为：论文描述、结构化提取、实际文件核验、候选窗口可用性核验；前两者不能替代后两者。旧提取和阅读记录中的 “frozen” 是历史表述，当前窗口状态仍以 `processing.yaml` 的 `not_frozen` 为准。
-
-| 工作与提取入口 | 波形来源及研究范围 | 台站分布和候选窗口限制 | 定位/结构相关资料 |
-|---|---|---|---|
-| [Shelly](../references/SHELLY2020_0220190309/parsed/extraction/SHELLY2020_0220190309__extraction.json) | 论文 Data and Resources 指向 SCEDC；台站运营方包括 Caltech、USGS、UNAVCO、UNR。文中连续数据按 100 samples/s、2–12 Hz 处理，模板逐日扫描 7 月 3–18 日，不能把扫描期、下载期和最终目录期混为一谈 | 短周期/宽频带台站，按可用分量使用；没有从论文确认固定台站总数。辅助震相表的 30 个 network.station 组合只提供台站线索，不能充当论文台站全集或连续覆盖证明 | Table 1 的一维模型近似 SCEC Community Velocity Model 并调整过渡；Vp/Vs = 1.73。图中地表破裂来自 Kendrick 等；名义深度面为海拔 0.7 km |
-| [Liu](../references/LIU2020_GL086189/parsed/extraction/LIU2020_GL086189__extraction.json) | 论文致谢明确 IRIS/SCEDC；研究期 7 月 4–9 日。原生 channel code、采样率和当前服务端点待核 | Mw 7.1 周围 120 km 内 41 个永久站和 4 个临时站，名字见 SI Fig. S1；这是论文选站条件。REAL 使用距离条件与 hypoDD 的 <80 km 筛选属于不同处理阶段，不能直接用作统一下载半径；4 个临时站的最早通道有效期均晚于候选窗口末端，详见下表 | Coso 一维初始模型（Feng & Lees, 1998）→ VELEST 更新模型与台站修正；地表破裂图注指向 Kendrick 等。已回查 SI 原始 DOCX 的 Fig. S1 图像并转录 45 个标识，坐标/有效期以官方 StationXML 核对 |
-| [Ross](../references/ROSS2019_SCIENCE/parsed/extraction/ROSS2019_SCIENCE__extraction.json) | DC1 PDF 第 2 页：SCEDC 连续 EH/HH、2–15 Hz；模板来自 7 月 4–25 日主震 60 km 内 SCSN 事件 | 波形选站为主震 80 km 内；精确站名、原生采样率及实际覆盖仍待核。现有元数据给出 29 个规则候选，不能认定论文使用了 29 站 | 模板先用 Hauksson (2000) 三维模型定位，再用 hypoDD；检测后 GrowClust 要求 CC≥0.75、每事件对≥8 个差分走时。实际数值模型待补 |
-| [AWR](../references/AWR2025_CALTECHDATA/parsed/extraction/AWR2025_CALTECHDATA__extraction.json) | 正文 Data Availability 引用 SCEDC 波形来源；原文站网引用包括 UNR、USGS、SCEDC。2019 年 4 月至 2023 年 5 月，约 200 × 200 km 范围的 66 台三分量宽频带仪器；检测使用垂直与北向分量，高通 >1 Hz | 已核读补充 Fig. S1，图例明确 CI/GS/NN/PB/ZY；图中无逐站标签，仍缺精确台站—日期清单；本轮区域 StationXML 不能直接当作其论文选站。66 为长期研究台阵规模，18 为 PhaseNO 图的台站数，均不是已验证的 72 小时同时可用数；网络代码取自原始补图，不能据图上位置猜站名 | HypoSVI 使用平滑 Hadley–Kanamori 模型和 8 轮源相关台站项修正，随后 GrowClust；平滑数值模型和站项尚未归档。机制解与目录推导的断层取向属于派生产物，不是独立实测断层矢量 |
-| [官方目录](../data/catalogs/USGS_SCSN_COMCAT_2019/README.md) | 当前文件为回溯事件快照 | 事件 CSV 不包含足够信息恢复每个事件的波形输入和完整台站覆盖 | 提供常规位置与时间比较；不能从事件输出推定完整业务构建流程或采用的模型版本 |
-
-回查依据：[Shelly 原文](../references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper__mineru.md) Methods、Table 1、Data and Resources、Fig. 1；[Liu 原文](../references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper__mineru.md) §2、Fig. 1、致谢及 [SI](../references/LIU2020_GL086189/parsed/supplement/Liu2020_Ridgecrest_SI__extracted.md) Text S2/S3、Fig. S1；[AWR 原文](../references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper__mineru.md) “CONSTRUCT ING A SEISMICITY AND MOMENT TENSOR CATALOGUE” 与 “DATA AVAILABILITY”；[Ross 阅读记录](../references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md) 及本轮取得的 DC1 PDF 第 2 页；AWR 补充 PDF 第 2 页 Fig. S1。原始附件的下载来源与哈希记录在各 reference README；历史波形覆盖尚未验证。
-
-| 工作 | 构建链条 | 获取和复现的关键依赖 |
-|---|---|---|
-| Shelly | SCSN 事件/到时 → P/S 模板 → 多通道匹配 → 合并目录及互相关差分走时 → hypoDD → 质量筛选与震级标定 | 除连续波形外还需模板事件版本、模板波形及到时；论文利用后续日期下载的模板资料，72 小时波形本身不足以原样复现其回顾性结果 |
-| Liu | PhaseNet → REAL → VELEST（模型与台站修正）→ hypoDD → ML/最终目录 | 需模型权重/预处理、分阶段距离与拾取筛选、初始/更新速度模型、台站修正和中间震相；最终 Table S1 不能替代这些输入 |
-| Ross | 常规目录模板 → QTM 检测 → 互相关差分走时 → 聚类相对重定位 → 带 QC 的混合产品 | DC1 已核实模板范围及差分走时/重定位阈值，完整站表与实际配置仍待补；`nbranch > 1` 是输出子集筛选，不能代替重定位算法参数 |
-| AWR | PhaseNO → GaMMA → HypoSVI/台站项 → 互相关/GrowClust → hypocenters；另由带符号 P 振幅反演机制解 | 需逐日台站与分量、PhaseNO 权重/图构造、关联设置、平滑模型及站项、差分走时。机制解还需振幅、极性及其预处理，不与首轮目录构建混作同一获取任务 |
-
-本轮修正两处直接影响获取设计的提取内容：Shelly 的 `station_count=13525` 改为 `null`，13,525 明确保留为模板事件数；AWR 补充 SCEDC 来源证据，并区分三分量仪器与实际使用的垂直/北向检测分量。提取结果仍需回查原文，不能自动转换成下载配置。
-
-### 下一轮预分析的具体产物与完成条件
-
-1. **候选台站几何与覆盖。** 先核对论文台站图、附件和辅助震相台站名；本轮已取得区域元数据并按 network/station/location/channel、坐标/高程、有效期、分量/方位角、采样率与响应登记，后续再确认最终选用子集。再画台站—事件分布、震中距和方位覆盖、分阶段可用台站数；没有坐标和有效期时不伪造台站分布图。论文选站全集、候选窗口有效站和最终处理站分别保留。
-2. **速度模型。** 优先核对已经在本地的 Shelly Table 1（层顶 0、1、2、3、4、5、6、7、8、30 km），Coso 初始模型的 12 行数值已根据用户提供的 Feng & Lees Table 1 截图转录，继续补 Liu 更新模型与 AWR 平滑模型。逐层记录深度定义、Vp、Vs 或 Vp/Vs、单位和出处；台站修正作为单独派生项。准备好数值后比较速度—深度曲线及相同距离/深度下的走时差，不能把各论文模型直接平均为“统一模型”。
-3. **断层背景。** 分开登记实测地表破裂线、既有区域断层和由事件/机制解推断的地下结构；先查原始发布及版本，再核坐标参考系、尺度和验证状态。Kendrick 等目前只是明确来源线索，不等于已经取得 GIS 文件。当前点云不能同时用来生成“独立断层真值”并验证自身。
-4. **数据体量与质量。** 台站和通道范围确定后，按各通道有效时长 × 采样率 × 每样本字节数估算未压缩体量，并单列响应、缓存和中间产物；实测压缩比、缺口、重叠、削波和大震尾波影响留待试下载后验证。论文使用的 100 Hz 或 1 Hz 滤波条件不能替代原生通道元数据。
-
-台站元数据依用户指定落在 `data/waveforms/stations/`，速度模型数值保存在 `data/models/velocity_models.json`；断层载荷未取得，不创建空的 `data/faults/`。预分析结论与状态继续在本节维护，案例特有处理代码只放 `scripts/`。
-
-### Liu 补充材料参数核对
-
-用户补充的 SI Text S1–S3 与本地对应文本核对后，已合并到 [Liu 阅读记录](../references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md)及结构化 extraction，不另存一份重复全文。
-
-- **震级输入：** 水平分量去仪器响应后卷积 Wood–Anderson 响应，取最大振幅并采用 Hutton–Boore 衰减关系；台站震中距 <100 km。振幅窗从 P 到时前 0.5 s 开始，长度为预测 S–P 时差的 2 倍。SI 已讨论 REAL 目录震级，因此不能把震级计算强行解释为仅在 hypoDD 后发生。
-- **分阶段筛选：** REAL 至少 5 个 P、13 个 P+S 拾取，5 s 窗口保留最可靠事件；hypoDD 仅用震中距 <80 km 的拾取，剔除偏离 P/S 主要走时趋势 >0.8/>1.2 s 的点；VELEST 保留站间方位缺口 <200°、走时残差 <0.6 s 的事件。SI 未给出残差汇总公式，不能自动称为 RMS；hypoDD 概率 >0.7 的依据仍是正文。
-- **遗漏解释：** 884 个遗漏事件的五类原因并非互斥计数；359 个低拾取数事件与 113 个超深遗漏事件不能直接相加解释全部遗漏。台站输入一致后，算法自身的距离、深度、时间竞争和质量筛选仍会造成目录差异。
-- **模型状态不变：** 这份 SI 没有更新后的速度数值或台站修正；Fig. S17 的 5.74 km/s 只是示意斜率，独立表格 `Ridgecrest2019catalog.txt` 是事件目录。Coso 初始模型已补齐，Liu 的 VELEST 更新模型仍待补。
-
-### 原始论文与补充材料复核（2026-09-25）
-
-本轮直接读取正文 PDF、Liu 原始 DOCX 台站图，以及新取得的 Ross DC1 和 AWR 原始补充 PDF/ZIP；以下判断不以旧 extraction 为唯一依据。Ross 附件 MD5 与 [CaltechAUTHORS 公布值](https://authors.library.caltech.edu/records/3x9hs-fzr27) 一致；AWR 附件来自 [原文 Supporting Information](https://doi.org/10.1093/gji/ggaf001)。来源、字节数与 SHA-256 保存在各参考 README；大文件只保存在本地。
-
-| 工作 | 原文定位（PDF 物理页码） | 已确认的输入边界 | 尚不能确定 |
-|---|---|---|---|
-| Shelly | 正文第 4 页 Methods，Fig. 1 含远处台站插图 | 实时处理中使用的短周期/宽频带站；可用 E/N/Z 速度分量；100 samples/s、2–12 Hz；模板扫描 7 月 3–18 日 | 完整站名/通道名单。24/30 是辅助震相子集，不能替代正文输入；图中未标名的远站也不能忽略 |
-| Liu | 正文第 2 页 §2；SI Fig. S1、Text S2 | 120 km 内 41 永久 + 4 临时站，共 45 个图示标识；研究 7 月 4–9 日 | 逐日通道和实测覆盖。REAL 的事件—台站 <100 km、hypoDD <80 km 是后续观测筛选，不等于选站半径 |
-| Ross | DC1 第 2 页 Template matching and seismicity relocation | SCEDC 的 EH/HH，主震 80 km 内；SCSN 模板为 7 月 4–25 日、主震 60 km 内事件 | 历史实际站名、location code、采样率和缺口；正文/附件未给出可直接采用的完整站表 |
-| AWR | 正文第 2 页；SI 第 2 页 Fig. S1 | 66 台三分量宽频带，200 × 200 km，2019-04 至 2023-05；检测用 Z/N；图例为 CI、GS、NN、PB、ZY | 补图没有台站名；66 站完整标识和逐日有效集合未恢复，18 是图网络规模；补充 ZIP 无独立站表 |
-
-**Ross 规则候选仅用于进一步查询。** 使用现有官方元数据、当前 Mw 7.1 坐标与球面距离，在三天窗口有 epoch 交集的 EH/HH、80 km 条件下得到 29 站、81 个通道 epoch 变体。复算规则、名单和哈希见 `station_preparation.json → ross_rule_candidates`；通道明细独立保存于 `data/waveforms/stations/by_catalog/ROSS2019_SCIENCE/rule_candidate_channels.json`。其中 `LB.DAC` 也满足空间/通道条件，但不能证明当年可从 SCEDC 获取。不能将 EarthScope 元数据的候选集合直接称为 Ross 实际输入，也不据此生成已确认名单的 StationXML。AWR 图中的 GS/ZY 属长期研究网络，本地三天窗口元数据没有对应有效通道，不能据此认定其长期论文漏站或应补进三天输入。
-
-Ross 附件中的远震/区域波形站数服务于大震子事件反演，不是 QTM 检测站数；Table S1 的弹性分层也不能直接充当目录定位模型。QTM 模板三维定位明确引用 Hauksson (2000)，实际网格、缺拾取时的一维预测模型和运行配置仍需补齐。
-
-**相同原始数据条件需要落实到 NSLC × 时间，而非只保持站数或文件体积一致。** 后续 source 清单应逐项记录 network/station/location/channel、原生采样率、请求与实际有效样本区间、缺口/重叠、响应 epoch 和载荷哈希。所有待比较的运行使用同一份冻结输入；文献原始配置作为独立 provenance 保留，发表目录本身无法追溯性地变成同输入实验。模型、预处理和模板/种子事件也应明确作为可用辅助输入：Ross 使用至 7 月 25 日的模板，会给三天任务引入窗外信息，不能只对齐连续波形就认为信息预算一致。
-
-下一步先取得 Shelly/AWR 的实际处理站表或通道配置，按 Ross 原文规则核对 SCEDC 历史可用性，再盘点候选通道连续覆盖，最后确定统一输入范围。当前不冻结“24 站交集”，不下载连续波形，也不以论文目录条数判断算法优劣。
-
-### 台站有效期、共享观测与模型核验结果
-
-复算入口：[prepare_station_metadata.py](../scripts/prepare_station_metadata.py)；可跟踪摘要：[station_preparation.json](station_preparation.json)。官方原始 StationXML 和区域通道明细共享保存在 `data/waveforms/stations/`；各 catalog 独立入口位于其下 `by_catalog/<source_id>/`。本轮成功的 EarthScope 响应约 42.8 MB（含全区域仪器响应），覆盖 404 个台站标识、4,509 个通道 epoch，其中 255 站、4,011 个 epoch 与候选窗口相交；这些数值包含区域内其他台阵和辅助通道，不是最终选站规模。SCEDC 原始查询超时，缩小到 Liu 名单的查询耗时超过 210 秒后取消；本轮仅一个提供方成功，不能据此宣称跨提供方一致性已核验。同一 NSLC 及 epoch 的描述字段一致时合并来源，不同坐标/方位/采样率等变体保留；仪器响应保留在提供方原始 XML 中，不因描述字段相同就认定响应等价。半开候选窗口的有效期交集同时考虑 Network、Station、Channel 边界。
-
-查询以 Mw 7.1 官方位置为中心、半径 1.5°，作为覆盖 Liu 120 km 圆与 AWR 约 200 km 方形的宽松发现范围，并延长到 7 月 10 日 00:00 UTC 以核对后部署台站。这个区域查询不是 AWR/Ross 的论文台站全集，也不是最终波形选站。所有返回通道均保留，包括辅助通道；后续须按响应单位、仪器类型、分量与采样率选择实际地震波形通道。
-
-| 台站核验项 | 结果及解释 |
+| 条件 | 当前方案 |
 |---|---|
-| Liu Fig. S1 | 从原始 DOCX 内图像转录 45 个标识（CI 35、PB 4、NN 2、GS 4）；41 个标识在三天窗口有通道元数据，且每站至少一个通道 epoch 覆盖整个窗口；其 1,517 个窗口内通道 epoch 均带响应阶段（尚未做传递函数数值验证） |
-| GS.CA01 | 已返回的通道最早有效期起点：2019-07-07 12:00 UTC |
-| GS.CA02 | 已返回的通道最早有效期起点：2019-07-07 20:00 UTC |
-| GS.CA03 | 已返回的通道最早有效期起点：2019-07-08 16:00 UTC |
-| GS.CA04 | 已返回的通道最早有效期起点：2019-07-09 18:00 UTC |
-| Shelly 辅助震相 | 全表 30 个台站；按到时落在候选三天内筛得 24 个台站，全部有对应元数据，且全部属于 Liu 的上述 41 站。该辅助表不是 Shelly 论文原始台站全集 |
-| 重叠含义 | 可共享存储同一台站/通道/有效期元数据，但同站不代表同通道、同片段、同预处理或独立参考。AWR/Ross 精确台站名单未解决，不给出虚构的四目录重叠率 |
+| 时间 | `[2019-07-04 00:00:00, 2019-07-07 00:00:00) UTC`，共 72 小时 |
+| 水平范围 | 纬度 `[35.45, 36.05]`，经度 `[-117.90, -117.20]`，含边界 |
+| 深度 | 各目录原生数值 `[0, 20] km`；基准未统一，暂不解释为统一物理深度范围 |
+| Mw 6.4 锚点 | 官方事件 `ci38443183`，07-04 17:33:49.000 UTC |
+| Mw 7.1 锚点 | 官方事件 `ci38457511`，07-06 03:19:53.040 UTC |
+| 分阶段 | Mw 6.4 前、Mw 6.4 后首小时、两震间剩余时段、Mw 7.1 后首小时、后续时段；各段左闭右开 |
+| 待定 | 最终台站/通道集合、波形前后缓冲、处理分块和实际覆盖 |
 
-按 catalog 拆分后的使用入口：
+共同输入需要落实到 **network/station/location/channel × 有效时间段**，同时记录采样率、缺口/重叠、响应和载荷哈希。同站数或同文件体积不足以保证公平；速度模型、预处理、模板和种子目录也需单列。Ross 使用至 7 月 25 日的模板，Shelly 也使用后续取得的模板资料，不能仅裁剪输出时窗就视为三天独立输入实验或实时结果。
 
-| 子目录（相对于 `data/waveforms/stations/by_catalog/`） | 当前内容 | 适用边界 |
+未来任务以离线目录构建为起点，保留事件时间、唯一标识、位置、深度基准和震级类型，以及震相关联和处理记录。原始波形条件与提供目录/震相的辅助条件应分开；目标参考目录及其提取答案归参考侧管理。具体评分、指导条件和资源预算留待评测阶段确定。
+
+## 2. 参考目录与主要结论
+
+本地核验覆盖 7 个目录产品和 1 个震相产品；事件产品解析错误为 0，哈希符合配置。以下事件数采用第 1 节候选筛选，详细统计见 [reference_audit.json](reference_audit.json)。
+
+| 产品 | 全量记录 | 候选筛选后 | 用途与主要限制 |
+|---|---:|---:|---|
+| [Shelly Data S1](../data/catalogs/SHELLY2020_0220190309/README.md) | 34,091 | 7,716 | 密集检测、相对结构参考；不代表完整真值 |
+| [Liu Table S1](../data/catalogs/LIU2020_GL086189/README.md) | 15,445 | 6,242 | 拾取—关联路线的交叉核验；无原生事件 ID 和逐事件不确定度 |
+| [Ross QTM 全部](../data/catalogs/ROSS2019_SCIENCE/README.md) | 111,918 | 12,768 | 同时包含初始位置和成功重定位记录 |
+| Ross `nbranch > 1` | 46,512 | 6,463 | 空间比较采用此重定位子集，不是另一独立目录 |
+| [AWR v2 hypocenters](../data/catalogs/AWR2025_CALTECHDATA/README.md) | 222,864 | 5,737 | 长期方法学辅助；`magnitude_gamma` 保留原义 |
+| AWR v2 moment tensors | 4,890 | 254 | 机制解辅助，不混入事件检测目录 |
+| [官方 full 快照](../data/catalogs/USGS_SCSN_COMCAT_2019/README.md) | 17,959 | 6,563 | 与候选窗口快照分别保留 |
+| 官方候选窗口快照 | 6,566 | 6,566 | 含地震 6,564、quarry blast 2；比较图只用地震 |
+
+影响后续使用的限制归并如下：
+
+- **深度与大震位置：** Shelly 深度参考面约为海拔 0.7 km，位置更接近 hypocentroid；存在异常深度记录，保留原值。官方 Mw 7.1 深度误差很大，Ross 也明确其大震深度不可靠。深度基准和不确定度解决前，不做绝对深度准确性判断。
+- **身份与版本：** 同时间记录不自动合并；Liu 派生 ID 应包含来源版本与行号。官方 full 与候选快照存在 ID 差异，且均为事后修订快照。AWR v2 的 222,864/4,890 与论文的 214,467/4,892 不同，保持版本区分。
+- **震相语义：** Shelly 辅助表全量约 570 万条到时，与 Data S1 的事件映射未核实；到时行数、模板 ID、检测 ID 都不能直接当成事件数或完整输入台站证据。
+- **比较边界：** 各目录共享观测谱系，但检测、筛选和重定位方法不同；记录数、原生震级分布和未匹配事件不能直接解释为性能优劣。阶段边界附近的记录需先核对事件身份。
+
+现有双向唯一对应诊断（`1 s / 5 km`）中，Shelly—Liu、Shelly—Ross、Shelly—官方和 Liu—官方的水平距离中位数约为 0.25–0.47 km。它描述产品一致性，不是真值定位误差；未对应或歧义记录保留为待核。完整阈值扫描、阶段计数和同时间 ID 明细保存在核验 JSON。
+
+## 3. 观测、方法与模型
+
+### 台站与波形输入
+
+以下结论依据原始论文和附件。台站元数据来自现时服务返回的历史有效期描述；**有效期相交不等于实际波形连续覆盖**。
+
+| 工作 | 原文输入范围 | 当前名单核验与缺口 |
 |---|---|---|
-| `LIU2020_GL086189/` | 独立 `selection.json` 与提供方 StationXML；候选窗口 41 站 | 选择文件保留论文 45 站及未进入窗口的 4 站；XML 包含有效站的返回通道，不代表论文精确通道配置 |
-| `SHELLY2020_0220190309/` | 独立 `selection.json` 与提供方 StationXML；候选窗口 24 站 | 从辅助震相到时筛出的台站子集，不命名为 Shelly 论文完整台站表 |
-| `AWR2025_CALTECHDATA/` | `selection.json` 标为 `unresolved`，不生成 StationXML | 66 站论文名单尚未核实，不以区域 255 站或 Liu 名单替代 |
-| `ROSS2019_SCIENCE/` | `selection.json` 标为 `unresolved`，不生成 StationXML | 已确认 EH/HH、80 km 规则；另存规则候选通道，不自动视为论文确认名单 |
-| `USGS_SCSN_COMCAT_2019/` | `selection.json` 标为 `unresolved`，不生成 StationXML | 事件快照不能确定完整波形输入台站 |
+| [Shelly](../references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md) | SCEDC 短周期/宽频带；按可用 E/N/Z 分量，100 samples/s、2–12 Hz；模板扫描 7 月 3–18 日 | 辅助表全时段 30 站、候选三天 24 站；**均不是已确认的论文完整名单** |
+| [Liu](../references/LIU2020_GL086189/parsed/paper/LIU2020_GL086189__paper_reading.md) | 主震 120 km 内 41 永久站 + 4 临时站，研究 7 月 4–9 日 | Fig. S1 已确认 45 个标识，其中 41 站在候选窗口有有效通道；GS.CA01–CA04 的返回有效期均晚于窗口末端 |
+| [Ross](../references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md) | SCEDC、主震 80 km 内 EH/HH，2–15 Hz；模板为 7 月 4–25 日主震 60 km 内 SCSN 事件 | 现有元数据筛出 29 个规则候选站；实际站名、通道和历史 SCEDC 波形可用性仍未确认 |
+| [AWR](../references/AWR2025_CALTECHDATA/parsed/paper/AWR2025_CALTECHDATA__paper_reading.md) | 2019-04 至 2023-05，200 × 200 km 内 66 台三分量宽频带；检测使用 Z/N | 补图确认 CI/GS/NN/PB/ZY，未列站名；66 是长期台阵规模，18 是神经网络图规模，三天实际集合未知 |
 
-**完整性结论：当前图和分组不是所有论文的完整输入台网。** Shelly 的 24 是候选三天内辅助震相表涉及的台站数，30 是该辅助表全时段的台站数，两者均未被证明等于论文实际使用的全部台站。该表的 [原始发布元数据](../data/catalogs/SHELLY2020_0220190309/raw/Correlation-derived_seismic_phase_arrival_times_v2.xml) 明确将产品定位为支持神经网络震相拾取研究；论文 Methods 还合并常规 SCSN 与互相关差分走时，辅助表不能恢复其完整输入。论文 Fig. 1 另展示了主图外台站，尚需对照原始台站/通道配置及模板、常规到时和互相关观测清单确认完整性。全表比三天子集多的 6 个标识为 `GS.CA01–CA06`，不是当前图漏画了窗口内这 6 站。
+Shelly 辅助表的 24 站均在 Liu 的 41 个窗口内有效站中，但不能据此冻结共同输入。区域元数据发现的 255 个窗口内站也不能直接补入任何论文名单。Liu 的 REAL <100 km、hypoDD <80 km 条件属于事件—台站筛选，不是主震选站半径。
 
-Liu 的 45 个标识来自其 Fig. S1 的人工转录，并与正文“41 永久站 + 4 临时站”相符；它只支持该论文所示台站名单层面的核对，尚不证明完整通道配置或连续波形覆盖。区域查询返回的 255 个窗口内台站标识也不能直接补进任何论文名单，它们包含其他台阵/通道；AWR/Ross 的论文选站仍待核实。当前图有意只画 Liu 名单及其与辅助震相子集的交集，因此比区域元数据清单稀疏。
+原始 StationXML 共享保存在 `data/waveforms/stations/`，各工作入口为其下 `by_catalog/<source_id>/selection.json`。目前只有 Liu 和 Shelly 辅助子集导出了独立 XML；Ross 规则候选单独存储，AWR/Ross/官方实际名单仍未解决。清单、有效期和查询记录见 [station_preparation.json](station_preparation.json)；实际通道选择还需检查响应、坐标差异及覆盖。
 
-台站分布图：[PNG](figures/station_infomation/station_distribution.png) · [PDF](figures/station_infomation/station_distribution.pdf)。左图为已核实选择的区域分布，虚线框对应右图放大范围；不是区域全部台站。蓝色三角为 Liu 名单与 Shelly 窗口内辅助震相共有的 24 站，橙色三角为已核实名单中其余 17 个 Liu 站；紫色空心菱形为窗口后生效的 4 个临时站，不能计入三天输入。星号为官方两次大震震中。图不包含尚未核实的 AWR/Ross 名单，也不表示已下载连续波形。坐标取自官方通道元数据：有效站仅使用与窗口相交的 epoch，后部署站使用扩展查询 epoch；CI.FUR 的两个水平坐标相差约 18 m，绘图取唯一坐标的中位数，变体保留在 [图件清单](figures/station_infomation/station_distribution.json)。比例尺采用局地近似，未叠加未经核验的断层或地形底图。
+### 目录构建与速度模型
 
-复算：`python -B benchmark_source/2019_ridgecrest_california/scripts/plot_station_distribution.py`。
-
-分组文件从同一官方原件本地导出，不重复网络下载；每份选择文件记录选择依据、窗口、缺失名单及原件/导出件哈希。论文目录、台站归属和原始波形均未合并成一个 catalog。后续针对某个 catalog 取数据应从其 `selection.json` 开始，不能将共享区域清单直接当作该论文输入。
-
-上述日期是返回元数据的有效期证据，不能推断某台仪器在此之前物理上不存在；同样，存在响应与有效期不等于连续波形无缺口。当前数据是现时服务返回的历史 epoch 描述，并非 2019 年当时的元数据快照。
-
-[速度模型数值表](../data/models/velocity_models.json)已收录 Shelly Table 1 的 10 层层顶与 Vp，Vs 明确标为 `Vp / 1.73` 的派生值。Feng & Lees (1998) Table 1 的 Coso 模型已根据用户提供的原表截图转录 12 行深度、Vp、Vs，保存在 `liu_coso_initial`；Vs 为原表直接给出的数值，不由固定比值推算。原表列名为 `P-depth`，保留为 `p_depth_km`，不擅自认定深度基准或插值规则。现已从作者网站下载 Feng & Lees 原始 PDF，逐项核对第 223 页 Table 1，12 行均与截图一致，原文路径和哈希已归档；Liu 正文明确引用该初始模型，但其实际输入文件与原表的一致性尚待核实。Liu 的 VELEST 更新模型/站项和 AWR 的平滑 Hadley–Kanamori 模型仍保留数值缺口；不能用同名标准模型替代论文实际采用的版本，也没有把示例速度 5.74 km/s 当成完整模型。
-
-### 速度模型下载与手动补充入口
-
-本轮采用直接 HTTPS 获取原始资料。小型索引见 [acquisition_manifest.json](../data/models/acquisition_manifest.json)：记录每份载荷的 URL、大小、SHA-256、仓库固定提交及用途；数值和适用性统一维护于 [velocity_models.json](../data/models/velocity_models.json)。原始数值文件保存在 `data/models/raw/`，支撑论文 PDF 保存在对应 reference 的 `supplement/`。这些下载原件不进入 Git；没有下载波形、安装模型软件或更改已选定的目录模型。
-
-| 资料 | 本轮结果 | 能否作为论文实际输入 |
+| 工作 | 方法链 | 模型准备状态 |
 |---|---|---|
-| Feng & Lees Coso | 作者网站原始 PDF 已取得，Table 1 的 12 行与用户截图一致；补齐原文文件及哈希 | 引用基础模型已核实；Liu 实际输入文件一致性仍需确认，不替代 VELEST 更新结果 |
-| SCSN Hadley–Kanamori（Hutton 2010 Table 5） | 原文 PDF 已取得；4 层 Vp 和 Vp/Vs=1.73 已整理，Vs 标为推导值 | 已知 SCSN 实现，不能等同于 AWR 平滑模型或声称逐字等同 1977 原表 |
-| UCVM modified HK | 下载官方 `1d.conf` 和其实现代码，9 个深度/Vp 节点；线性插值，Vs 根据 Vp/密度计算 | 是 SCEC 修订背景模型，不替代 AWR 实际配置 |
-| HypoSVI Julia 示例 | 下载 `velmod.csv`（39 行）、读取代码和配置；代码对 Vp/Vs 分别线性插值 | 未找到与 AWR release 的对应证据；CSV 无单位栏，保留为示例，不能从文件名认定其为 AWR 的平滑模型 |
-| SCEDC SoCal 三维模型 | 下载 `vel.sc8196ord1_sc04.07qd.out.Z`（350,479 bytes），解压 1,863,756 bytes；3 组 × 9 层 × 1,107 节点 | 深度节点与 Hauksson 2000 的研究层位相容；缺版本/字段说明和 Ross 实际配置，保留为公开候选，不标为可直接运行 |
-| Hauksson 2000 原文 | PDF 已取得；MD5 与 Caltech 公布值一致 | 用于追溯模型定义与原始发布，不等于已取得全部运行输入 |
+| Shelly | 常规事件模板 → 检测与差分走时 → hypoDD | Table 1 的 10 层 Vp 已整理；Vs 按文中 Vp/Vs=1.73 推导 |
+| Liu | PhaseNet → REAL → VELEST → hypoDD | Feng & Lees Coso 初始模型的 12 行 Vp/Vs 已由原文核实；**VELEST 更新模型和台站修正仍缺** |
+| Ross | SCSN 模板初定位/hypoDD → QTM → GrowClust | 已取得 Hauksson 原文及 SCEDC SoCal 三维候选；**具体版本、原生格式与实际输入对应，以及一维预测/GrowClust 模型仍待核** |
+| AWR | PhaseNO → GaMMA → HypoSVI/台站项 → GrowClust | SCSN/UCVM HK 实现与 HypoSVI 示例已取得；**实际平滑模型和台站项仍缺** |
 
-三维载荷的三组节点坐标相同，数值范围依次为 3.34–8.23、1.33–4.79、1.20–3.15，第一组除以第二组与第三组的最大差约 0.00929；据此推断 Vp、Vs、Vp/Vs 顺序，尚未用原始格式说明确认。深度层为 1、4、6、10、15、17、22、31、33 km，边界层和插值/深度基准必须在实际定位前核对。原始文件保持不变，未生成伪装为已确认格式的三维模型。
+模型数值与适用性见 [velocity_models.json](../data/models/velocity_models.json)，下载原件位于 `data/models/raw/`。获取记录和手动补充链接集中于 [acquisition_manifest.json](../data/models/acquisition_manifest.json) 的 `files`、`manual_followup`；**当前暂停继续获取**。公开实现、示例和模型引用不自动等同于论文实际配置。各方法阈值、震级计算及质量筛选由上方论文阅读记录和对应 extraction 维护。
 
-同时排除了两个容易误用的来源：REAL 的 `italy.mod` 为意大利示例；SCEDC `hauksson/vmodels` 的 README 指向 Hauksson & Haase 洛杉矶盆地模型，不能冒充 Hauksson 2000。LOC-FLOW 的公开示例也没有证据对应 Liu 2020 本案例。下载成功不构成论文输入版本相同的证据。
+### 断层背景
 
-| 手动补充项 | 可打开的入口 | 需要寻找/索取的内容；当前阻碍 |
-|---|---|---|
-| **Liu 更新模型（优先）** | [论文及 Supporting Information](https://doi.org/10.1029/2019GL086189)、[REAL 作者仓库](https://github.com/Dal-mzhang/REAL)、[LOC-FLOW](https://github.com/Dal-mzhang/LOC-FLOW) | Ridgecrest 实际 VELEST 最终深度/Vp/Vs、台站修正、`velest.cmn`、hypoDD 输入；已查附件和仓库未定位到对应本研究的文件，需要作者运行产物或明确版本声明 |
-| **AWR 平滑模型（优先）** | [论文及 Supporting Information](https://doi.org/10.1093/gji/ggaf001)、[CaltechDATA v2](https://data.caltech.edu/records/5af05-cah73)、[HypoSVI Julia 示例](https://github.com/interseismic/eikonet_julia) | 实际速度数组、平滑方法/参数、8 轮台站项及 GrowClust 速度/走时设置；公开目录和示例均未证明提供了这套输入 |
-| **Ross 精确配置** | [已下载三维载荷的 SCEDC 目录](https://service.scedc.caltech.edu/ftp/catalogs/hauksson/Socal_3Dmodel/)、[Hauksson 2000](https://authors.library.caltech.edu/records/f3y2q-gz382)、[Ross DC1](https://authors.library.caltech.edu/records/3x9hs-fzr27) | 确认该三维载荷的发布版本、字段、坐标基准与 Ross 使用关系；补缺拾取时的一维预测模型和 GrowClust 运行模型/走时表。当前主要是版本与配置证据缺失，不是三维文件无法下载 |
-| Hadley & Kanamori 1977 原文 | [Caltech 记录](https://authors.library.caltech.edu/records/tq3ny-6te18)、[出版社 DOI](https://doi.org/10.1130/0016-7606(1977)88%3C1469:SSOTTR%3E2.0.CO;2) | Caltech 仅元数据、没有 PDF，可通过机构访问出版社；需完整原文及表/模型定义。已有 Hutton/UCVM 实现不能擅自改称 1977 原始数值 |
+已定位 [Ponti 地表破裂制图](https://www.usgs.gov/data/digital-datasets-documenting-surface-fault-rupture-and-ground-deformation-features-produced)与 [DuRoss 地表位移观测](https://www.usgs.gov/data/surface-displacement-observations-2019-ridgecrest-california-earthquake-sequence)，载荷尚未取得，也未确认与论文 Kendrick 图层的版本对应。后续分别核验实测破裂线、位移观测和区域既有断层；目录推断结构不作为独立验证来源。
 
-这些入口中，论文和仓库用于追索，不是声称其中一定有尚缺文件的直接下载链接。拿到文件后应保留原名、来源和版本，优先核对深度基准、单位、Vp/Vs 定义、插值与所用处理阶段。
+## 4. 图件与解释
 
-断层资料已定位到两项权威发布：[Ponti 等地表破裂与变形制图，DOI 10.5066/P9BZ5IJ9](https://www.usgs.gov/data/digital-datasets-documenting-surface-fault-rupture-and-ground-deformation-features-produced)提供线状 GIS/KMZ 等产品；[DuRoss 等地表位移观测，DOI 10.5066/P986ILE2](https://www.usgs.gov/data/surface-displacement-observations-2019-ridgecrest-california-earthquake-sequence)提供经过整理的位移观测。二者有关联但产品类型不同，后者不能替代断层线。它们也尚未证明与各论文使用的 Kendrick 2019 图层逐字节相同。本轮 ScienceBase 条目访问返回 HTTP 403，因此未声称已下载或核验矢量坐标系/版本；后续取得载荷后再检查这些内容。
-
-仅复算已有本地元数据（依赖 pandas、requests）：
-
-```bash
-python -B benchmark_source/2019_ridgecrest_california/scripts/prepare_station_metadata.py
-```
-
-重新查询官方元数据可加 `--download`；当前环境代理请求曾返回 403，直接 HTTPS 可用时加 `--direct`，不修改全局代理设置。失败记录、查询参数、成功载荷哈希和来源都保留。脚本只请求 FDSN station 服务，不请求 dataselect 连续波形。
-
-### 观测需求清单：先记录，后实现
-
-以下内容维护在本分析中。Station 请求与产物现已记录在 `station_preparation.json`；连续波形配置待台站/通道选择明确后再实现。
-
-| 需求 | 已有依据 | 后续需要确定的内容 |
-|---|---|---|
-| 时间范围 | 既有 72 小时候选窗口 | 是否沿用、请求边界和前后缓冲；当前不另设下载时窗 |
-| 台站选择 | 来源文献及区域观测背景 | 网络、台站集合、空间范围和选择理由；临时服务查询不构成正式台站名单 |
-| 通道与响应 | 原始观测需要可追溯的元数据 | 通道类型、分量、采样率、有效时间段和响应匹配规则 |
-| 获取与存储 | 已约定波形留本地、小型索引可跟踪 | 提供方、查询条件、分块策略、失败重试、体量估计和本地路径 |
-| 文件清单 | 已有 station 请求/哈希/有效期摘要，尚无连续波形记录 | 请求范围、实际覆盖、文件哈希、缺口/失败状态与元数据关联 |
-| 验收 | 当前仅定义 source 准备边界 | 可解码、时间/通道一致、响应可对应、覆盖与缺口有记录；这些不等同于科学质量合格 |
-
-### 观测资料的预期落点
-
-当前落点与后续约定：
-
-- `data/waveforms/stations/`：按用户指定保存台站/通道元数据、响应和合并后的本地清单；小型可跟踪摘要位于 `analysis/station_preparation.json`。
-- `data/waveforms/`：整体继续保持 Git 忽略；现有 `stations/` 是元数据，未来连续波形载荷另用子目录保存。
-- `data/observations_manifest.json`：小型观测索引，放在被整体忽略的 `waveforms/` 之外；记录查询参数、台站通道、请求/实际覆盖、载荷相对路径、哈希及失败状态。明细过大时拆分保存在本地，Git 只保留小型索引。
-
-当前来源契约 v2 的记录单位是 `event`、`phase_pick`、`focal_mechanism` 等目录产品单位，不能把波形段或台站记录伪装成事件产品。station 元数据采用独立的 `station_preparation.json` 及本地 epoch 清单，连续波形后续再定义专属记录；现在不扩展评测协议或自动冻结候选时窗。
-
-## 6. 复算与文件维护
-
-从仓库根目录运行（需 PyYAML）：
-
-```bash
-python -B benchmark_source/2019_ridgecrest_california/scripts/audit_references.py
-python -B -m unittest discover -s tests/source_prepare -v
-```
-
-程序校验原始文件后生成一个 `reference_audit.json`，不修改原目录、不下载波形、不设置冻结状态。目录自身 README 保存来源与产品细节，本文件只维护科学设计和跨产品结论，避免重新拆出大量零散报告。公共派生 ID 与输出约定见 [数据组织规则](../../README.md#processing-and-output-policy)。
-
-### Source 架构更新
-
-来源元数据已集中到 `processing.yaml` 的 `sources`，来源组说明在 `source_groups`。核验分段边界、源目录选择和派生子集改为 `reference_audit` 声明；窗口、阈值和科学解释保持原状。
-
-案例脚本保留原生字段解析和来源特有检查，共享的路径/哈希检查、时间空间筛选与对应诊断移到 [source 工具模块](../../../SeismoAgentBench/utils/source_prepare/)。本次只整理 source，不新增评测流程；既有科学设计仍是候选背景资料。
-
-## 7. 目录可视化比较
-
-本轮以已有本地目录制作期刊风格的多面板图：统一字体、面板编号、配色与坐标范围，宽度 180 mm，PNG 为 320 dpi，PDF 保留矢量文字和坐标、点云以 450 dpi 栅格嵌入。图内只保留面板编号、简短面板名称、坐标轴、图例、色标及必要事件标注；总标题、副标题、方法说明和比较限制统一放在本文图注中。属于探索性 source 分析，尚未按特定期刊投稿要求定稿。
-
-所有图采用半开时间窗 `[2019-07-04 00:00:00, 2019-07-07 00:00:00) UTC`，经纬度与原生深度数值范围沿用候选配置。完整绘制筛选后的记录，不抽样、不跨目录去重。Ross 仅使用 `nbranch > 1` 子集，官方目录仅使用 `type = earthquake`；官方同时间不同 ID 的记录仍保留。AWR 使用 v2 hypocenters，震相和震源机制表不作为事件目录混入。
+目录比较沿用候选窗口和原生数值筛选：Ross 用重定位子集，官方只用 earthquake，AWR 用 v2 hypocenters。原生深度和震级尚未统一，图件用于探索性比较。
 
 | 图件 | 内容与图注 | 文件 |
 |---|---|---|
@@ -307,19 +88,41 @@ python -B -m unittest discover -s tests/source_prepare -v
 | 2：空间分布比较 | a–e：五个目录使用一致的地图边界、地理纵横比和原生深度色标。星号表示上述两次大震的官方震中。f：同一数值筛选下的记录数。点云密集程度受检测、筛选、重定位和符号遮盖共同影响；图中没有加入断层线或台站位置。 | [PNG](figures/catalog_comparison/02_catalog_spatial_comparison.png) · [PDF](figures/catalog_comparison/02_catalog_spatial_comparison.pdf) |
 | 3：分布与对应诊断 | a：原生震级的经验超越比例；b：原生深度经验累积分布；c：五个科学阶段的每小时平均记录数，以阶段时长归一化；d：`1 s / 5 km` 双向唯一对应的水平距离中位数与第 90 百分位，连线不是置信区间。阶段边界沿用核验配置，“later”排除对应大震后的首小时。 | [PNG](figures/catalog_comparison/03_catalog_population_diagnostics.png) · [PDF](figures/catalog_comparison/03_catalog_population_diagnostics.pdf) |
 
-目前可以支持的观察：
+台站分布图：[PNG](figures/station_infomation/station_distribution.png) · [PDF](figures/station_infomation/station_distribution.pdf)。左图为区域分布，右图为序列区放大；蓝色三角表示 Liu 与 Shelly 辅助子集共有的 24 站，橙色为其余 17 个 Liu 有效站，紫色空心菱形为窗口后生效的 4 站，星号为两次大震。该图不是各论文完整台网，也不表示已下载波形。坐标取通道元数据，变体和绘图处理见 [图件清单](figures/station_infomation/station_distribution.json)。
 
-- 五个目录均展示狭长且具有分支的共同空间形态，但局部散布与记录数量不同；这不能单独判断哪个目录更准确。
-- 筛选后 Shelly、Liu、Ross 已重定位、AWR v2、官方 earthquake 分别为 7,716、6,242、6,463、5,737、6,564 条。这些是各自产品的记录数量，不是独立真值事件数或检测成绩。
-- 大震前后记录率明显不同，目录间差异也随阶段变化。例如 Mw 7.1 后首小时官方为 235 条、Shelly 为 128 条、Ross 已重定位为 84 条；需要结合震相、质量筛选与大震尾波影响进一步解释，不能仅据数量归因。
-- 四组双向唯一对应的水平距离中位数约为 0.25–0.47 km，第 90 百分位约为 0.58–1.15 km。这描述参考目录的一致性，不是相对于真值的误差；未解决歧义仍保存在核验结果中。
+现有图件显示共同的狭长分支形态，以及不同阶段的记录数量和局部散布差异。其原因需要结合观测覆盖、尾波和处理筛选解释，暂不归因于某个算法更优。完整图注保留在本节；分辨率、字体、代码和输入哈希由脚本及 [目录图件清单](figures/catalog_comparison/figure_manifest.json)维护。
 
-震级原生尺度不同（包括 AWR 的 `magnitude_gamma`），深度基准尚未统一，因此图 3 不拟合跨目录统一的完备震级或 b 值，也不把深度曲线差异直接解释为定位偏差。统一数值深度筛选不等于统一物理深度层。官方目录是回溯快照，不能代表 2019 年实时业务产出。Shelly 在图 1 中用于详细展示，不指定为绝对真值。
+## 5. 准备进度与待办
 
-从仓库根目录复算（需 NumPy、Matplotlib、PyYAML）：
+| 工作项 | 当前状态 | 恢复相关工作时的下一步 |
+|---|---|---|
+| 参考目录与图件 | 本地核验、比较图已完成 | 来源或候选范围变更后重核；继续解决深度、版本和事件映射问题 |
+| 台站名单与响应 | 部分完成，已按工作拆分 | 补 Shelly/AWR 实际名单，核对 Ross 候选的历史来源和通道；不能以 24 站交集代替完整核验 |
+| 速度模型 | 已整理可获取资料；**获取暂停** | 按模型清单核实 Liu 更新模型、AWR 平滑版本和 Ross 实际配置 |
+| 断层资料 | 已有发布入口，未取得载荷 | 核对 GIS/位移产品、坐标参考系和论文版本对应 |
+| 观测范围与覆盖 | 候选 72 小时，最终通道/缓冲未定 | 先盘点逐通道实际覆盖、缺口和响应，再确定共同输入范围 |
+| 连续波形 | 未下载，留待后续代码实现 | 覆盖核验后短片段试下载，通过解码与元数据匹配检查再获取完整窗口 |
+
+观测工作恢复后的顺序为：明确名单/通道 → 核验实际覆盖 → 确定范围与缓冲 → 试下载 → 完整获取。未来波形清单至少记录请求与实际覆盖、来源、响应关联、哈希和缺失状态；不能用元数据查询成功代替观测验收。
+
+## 6. 资料入口与维护
+
+| 内容 | 维护位置 |
+|---|---|
+| 候选窗口、来源及筛选配置 | [processing.yaml](processing.yaml) |
+| 目录数量、重复记录、阶段和对应诊断 | [reference_audit.json](reference_audit.json) |
+| 台站名单、有效期与候选筛选 | [station_preparation.json](station_preparation.json) |
+| 模型数值、下载记录与待补链接 | [velocity_models.json](../data/models/velocity_models.json) · [acquisition_manifest.json](../data/models/acquisition_manifest.json) |
+| 各论文证据、参数和来源版本 | `references/<source_id>/README.md`、`parsed/paper/*_reading.md`、`parsed/extraction/` |
+| 各目录的原生字段与产品说明 | `data/catalogs/<source_id>/README.md` |
+
+需要更新派生成果时，从仓库根目录运行相应脚本：
 
 ```bash
+python -B benchmark_source/2019_ridgecrest_california/scripts/audit_references.py
+python -B benchmark_source/2019_ridgecrest_california/scripts/prepare_station_metadata.py
 python -B benchmark_source/2019_ridgecrest_california/scripts/plot_catalog_comparison.py
+python -B benchmark_source/2019_ridgecrest_california/scripts/plot_station_distribution.py
 ```
 
-[绘图脚本](../scripts/plot_catalog_comparison.py)集中保存本案例的比较逻辑、字体、面板标记和导出约定；公共代码包仅提供通用来源读取配置、筛选和哈希工具。脚本先检查配置、原件哈希及与既有分阶段核验的数量一致性，再生成六个图件和一个 [复算清单](figures/catalog_comparison/figure_manifest.json)，记录输入、选择规则、依赖版本、代码与图件哈希。更新原件或配置后须先重新运行 `audit_references.py`；本过程不获取台站或波形。
+以上调用使用本地原件；原件或配置变化时，先更新相应核验结果，再生成依赖它的图件。案例特有代码在 `scripts/`，可复用逻辑在公共 `SeismoAgentBench/utils/`。新增资料应更新对应记录及本页状态，正文不追加下载日志、哈希明细或重复参数表。
