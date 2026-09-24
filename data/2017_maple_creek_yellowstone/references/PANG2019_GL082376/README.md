@@ -7,7 +7,7 @@
 - Local paper: paper/PANG2019_GL082376__paper.pdf.
 - Local SI: supplement/Pang2019_MapleCreek_SI.pdf.
 - Paper reading: parsed/paper/PANG2019_GL082376__paper_reading.md.
-- Catalog audit: catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md.
+- Catalog audit: catalogs/PANG2019_GL082376/README.md.
 - Readiness: paper and SI are present; the machine-readable 3,345-event
   catalog is missing. Do not use the Shelly USGS phase-arrival CSV as a Pang
   catalog substitute.

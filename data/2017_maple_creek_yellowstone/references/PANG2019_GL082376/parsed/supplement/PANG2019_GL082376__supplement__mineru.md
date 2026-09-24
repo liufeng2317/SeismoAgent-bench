@@ -38,60 +38,60 @@ Lin and Shearer (2007) developed an approach to estimate the $\mathrm { V _ { P 
 
 The key concept of bootstrapping is that the original data set is resampled to form a larger number of pseudo data sets. The pseudo data sets may contain a certain datum more than once while omitting other data (Tichelaar and Ruff, 1989). In our work, we require the resampled data set have the same size as the original data set. In GrowClust, the differential times are organized into arrays of length N, where N is the total number of combined P- and S- wave data. For each bootstrap iteration, GrowClust will randomly resample the differential time array with replacement and then invert it to generate a perturbed set of event locations. This procedure will be repeated B times (for relocation, normally B is 100) to generate a distribution of hypocenters for each event. Next, we estimate the uncertainties using the median absolute deviations (MAD) of the bootstrap distribution (Trugman and Shearer, 2017). A similar procedure is applied to PCA and the Vp/Vs ratio estimation. For PCA, we use 500 resamplings and for the Vp/Vs we use 200 resamplings.
 
-![](images/53a87afade6902622e771fc587fb802bb310f652ea2033f1b135bc84e95fadf1.jpg)
+![](mineru/Pang2019_MapleCreek_SI/images/53a87afade6902622e771fc587fb802bb310f652ea2033f1b135bc84e95fadf1.jpg)
 
-![](images/018f03c1beb3e70e95b47c771cc72eedba9695def42b1cbfe72a46d1f4de0c9e.jpg)
+![](mineru/Pang2019_MapleCreek_SI/images/018f03c1beb3e70e95b47c771cc72eedba9695def42b1cbfe72a46d1f4de0c9e.jpg)
 
 (d)  
 (e)  
-![](images/ffacd6502c88cdb3699d8733f6662649651b0f459c38d50bb26d896f548760a2.jpg)
+![](mineru/Pang2019_MapleCreek_SI/images/ffacd6502c88cdb3699d8733f6662649651b0f459c38d50bb26d896f548760a2.jpg)
 
 (c)  
-![](images/d825f2fd1a539ff8543f182697c3291eb88ff3c5def0bf27e3a550796753460e.jpg)  
+![](mineru/Pang2019_MapleCreek_SI/images/d825f2fd1a539ff8543f182697c3291eb88ff3c5def0bf27e3a550796753460e.jpg)
 Figure S1. (a) Earthquake magnitude (M<sub>C</sub>) as a function of time for the 2017–2018 Maple Creek sequence. Red dots represent earthquakes that occurred in 2017 and blue dots are used for earthquakes that occurred in 2018. (b) Cumulative frequency-magnitude curve for the earthquakes. The red triangle indicates the magnitude of completeness (M<sub>C</sub> 0.5) and the red line is the best-fitting Gutenberg-Richter relationship for M<sub>C</sub> 0.5–3.5. (c) Absolute locations using the same color scheme as in (a). The black star marks the largest earthquake and the green triangle is the seismic station closest to the sequence (WY.YMC). The background color is the P-velocity anomaly at 8 km below the sea level from Farrell et al. (2014). The black line is the surface rupture caused by 1959 Hebgen Lake earthquake (Johnson et al., 2018) (d) Absolute locations along the $\mathbf { A } { - } \mathbf { A } ^ { \prime }$ cross section. Depths are relative to sea level and the colors are the same as in (c). (e) Same as (d) but along the B-B’ cross section.
 
-![](images/4b4e2d982865589124a41ef9cf04e86245715a3cda9ccc481ada44101a376525.jpg)  
+![](mineru/Pang2019_MapleCreek_SI/images/4b4e2d982865589124a41ef9cf04e86245715a3cda9ccc481ada44101a376525.jpg)
 Figure S2. Positive Coulomb stress perturbation from Hebgen Lake earthquake (red star) and locations for the 1985–86 swarm (black), the 2010 Madison Plateau swarm (green), and the 2017–18 Maple Creek sequence (red). Cyan lines mark the 0.64 Ma Yellowstone caldera boundary and the red lines mark the 1959 Hebgen Lake surface rupture. Modified from Chang and Smith (2002).
 
-![](images/5ee09d8fc907f82cfd1e8848c0401643035fb16ca561d06896290657631c9218.jpg)
+![](mineru/Pang2019_MapleCreek_SI/images/5ee09d8fc907f82cfd1e8848c0401643035fb16ca561d06896290657631c9218.jpg)
 
 (c)  
-![](images/afeb3e96a2914f671a45380a68ce09fc9cf86518795f3d791b9e4b9766e22a30.jpg)
+![](mineru/Pang2019_MapleCreek_SI/images/afeb3e96a2914f671a45380a68ce09fc9cf86518795f3d791b9e4b9766e22a30.jpg)
 
 (b)  
-![](images/0166f19203bd8dd7b81799375de19853a17f412e283d19068590c61faa0c5c82.jpg)
+![](mineru/Pang2019_MapleCreek_SI/images/0166f19203bd8dd7b81799375de19853a17f412e283d19068590c61faa0c5c82.jpg)
 
 (d)  
-![](images/d4374c13e354dd574a50ec4c991eb669a5fe68da5c626fde615a33f8505da370.jpg)  
+![](mineru/Pang2019_MapleCreek_SI/images/d4374c13e354dd574a50ec4c991eb669a5fe68da5c626fde615a33f8505da370.jpg)
 Figure S3. (a) Horizontal and (b) vertical errors for absolute locations in the UUSS catalog. (c) Horizontal and (d) vertical errors for double-difference relative relocations based on 100 bootstrap resamplings.
 
 (a)  
-![](images/d7953585bf9d50f0c071c01bcbb5c2092bd0ae08a53ec569ae2955a6bec80572.jpg)  
+![](mineru/Pang2019_MapleCreek_SI/images/d7953585bf9d50f0c071c01bcbb5c2092bd0ae08a53ec569ae2955a6bec80572.jpg)
 Depth = 15 Strike = 62 ; 327 Rake = -151 ; -10 Dip = 81 ; 62 M\_ TOT= 4.42 Percent DC = 85 Percent CLVD = 15 Percent ISO = 0 Var. Red. = 78.9
 
-![](images/786d67aabff6ef858cfe5d50c92d18b2e2759814277b4a3c2f8936cd8d04e728.jpg)
+![](mineru/Pang2019_MapleCreek_SI/images/786d67aabff6ef858cfe5d50c92d18b2e2759814277b4a3c2f8936cd8d04e728.jpg)
 
 (b)  
-![](images/232d691bd9beeac868ff101d555668f545103c807a2f50c949cc6bf78b92a79a.jpg)  
+![](mineru/Pang2019_MapleCreek_SI/images/232d691bd9beeac868ff101d555668f545103c807a2f50c949cc6bf78b92a79a.jpg)
 Figure S4. Moment tensor solution for the largest earthquake in the 2017–2018 Maple Creek sequence $( \mathrm { M } _ { \mathrm { w } } 4 . 4$ on June 16, 2017). (a) Comparison of observed (black) and predicted (red dashed) waveforms. The optimal solution is shown on the right. (b) Depth sensitivity of the moment tensor inversion. The blue y-axis on the right marks the variance reduction (VR) and the red y-axis on the left is the residual divided by the double-couple percent in the solution.
 
-![](images/3688a0bcdf26feaca11027e36a48bf226c298d3b1384ba1a1011cd6caf22d7ae.jpg)
+![](mineru/Pang2019_MapleCreek_SI/images/3688a0bcdf26feaca11027e36a48bf226c298d3b1384ba1a1011cd6caf22d7ae.jpg)
 
 (b)  
-![](images/94cd49578f70f89db417b2e440a39b03195faab2aee7de0ea748ab98ab04b727.jpg)  
+![](mineru/Pang2019_MapleCreek_SI/images/94cd49578f70f89db417b2e440a39b03195faab2aee7de0ea748ab98ab04b727.jpg)
 Figure S5. (a) Time evolution of the 2017–2018 Maple Creek sequence. Circles represent earthquakes in 2017 and stars represent earthquakes in 2018. The horizontal color bar refers to events in 2017 and the vertical color bar refers to events in 2018. (b) Time evolution as a function of depth. (c) Time evolution as a function of distance from the two reference points. The solid blue line indicates a constant rate of 0.1 km/hr and the solid red line indicates a constant rate of 0.05 km/hr. The curve consisting of red pluses follows the homogeneous 3D diffusion model of Shapiro et al. (1997) with hydraulic diffusivity (D) of $0 . 4 \mathrm { m } ^ { 2 } / \mathrm { s }$ , and the faint curve consisting of black pluses corresponds to a D of $0 . 0 2 \mathrm { m } ^ { 2 } / \mathrm { s }$
 
 (a)  
-![](images/6be605455025376ef6091861de9b708c3b419183d36ece9ef479a682ac72c5d9.jpg)  
+![](mineru/Pang2019_MapleCreek_SI/images/6be605455025376ef6091861de9b708c3b419183d36ece9ef479a682ac72c5d9.jpg)
 (b)
 
 (c)  
-![](images/c13148364061093e2fce5794579ed6fd7823b5cc53811db06e16dfb7319733f3.jpg)  
+![](mineru/Pang2019_MapleCreek_SI/images/c13148364061093e2fce5794579ed6fd7823b5cc53811db06e16dfb7319733f3.jpg)
 Figure S6. (a) Space-time evolution of Clusters n-II and n-III (circles and squares, respectively, Aug. 2017) and Cluster s-I (stars, July 2017). Each cluster has its own reference point for calculating times and distances: black rectangle (n-II), blue star (n-III), and red triangle (s-I). (b) Time evolution as a function of depth for s-I (left stars), n-II (middle circles), and n-III (right squares). (c) Time evolution as a function of distance for s-I (left stars), n-II (middle circles), and n-III (right squares). The solid blue lines show a rate of 0.1 km/hr, the solid red lines show a rate of 0.05 km/hr, and the solid green lines show a rate of 0.03 km/hr. The curve consisting of red pluses follows the homogeneous 3D diffusion model of Shapiro et al. (1997) with hydraulic diffusivity (D) of 1 $\mathrm { m } ^ { 2 } / \mathrm { s } ,$ and the faint curve consisting of black pluses corresponds to a D of $0 . 0 2 \mathrm { m } ^ { 2 } / \mathrm { s }$
 
-![](images/cb0e2f006f9218e99ffdd2ff69621b58f4d5fca860e52193bc5a57d226c454a4.jpg)
+![](mineru/Pang2019_MapleCreek_SI/images/cb0e2f006f9218e99ffdd2ff69621b58f4d5fca860e52193bc5a57d226c454a4.jpg)
 
-![](images/31879eb2d6ecd2588d286a375da00a44ccbd57b5cb3035e03efde37c9b4ee048.jpg)  
+![](mineru/Pang2019_MapleCreek_SI/images/31879eb2d6ecd2588d286a375da00a44ccbd57b5cb3035e03efde37c9b4ee048.jpg)
 Figure S7. Earthquake divisions by origin time and location for time evolution characterization. The divisions are color matched with Figure 4.
 
 <table><tr><td>Depth (km)</td><td> $V_P$ (km/sec)</td><td> $V_S$ (km/sec)</td></tr><tr><td>0.0</td><td>2.72</td><td>1.66</td></tr><tr><td>1.3</td><td>2.79</td><td>1.74</td></tr><tr><td>4.3</td><td>5.21</td><td>3.23</td></tr><tr><td>7.3</td><td>5.56</td><td>3.42</td></tr><tr><td>10.3</td><td>5.77</td><td>3.49</td></tr><tr><td>14.3</td><td>6.07</td><td>3.68</td></tr><tr><td>18.3</td><td>6.33</td><td>3.78</td></tr><tr><td>23.3</td><td>6.63</td><td>4.00</td></tr><tr><td>52.3</td><td>8.00</td><td>4.85</td></tr></table>

@@ -7,18 +7,7 @@ processing_policy:
   plot_profile: minimal
   figure_format: png
   figure_dpi: 300
-benchmark_window:
-  start: 2017-06-11 00:00:00+00:00
-  end: 2017-06-19 00:00:00+00:00
-  latitude:
-  - 44.45
-  - 44.75
-  longitude:
-  - -110.55
-  - -110.15
-  depth_km:
-  - 0
-  - 15
+window_status: not_frozen
 catalogs:
 - source_ref: SHELLY2019_GL081607
   catalog_dir: catalogs/SHELLY2019_GL081607

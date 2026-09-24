@@ -126,4 +126,4 @@ which is recorded as a release discrepancy in the catalog summary.
 - Parsed paper: `data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/SHELLY2019_GL081607__paper__mineru.md`
 - Supplement: `data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/supplement/Shelly2019_MapleCreek_SI.pdf`
 - Phase release and XML metadata: `data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/raw/`
-- Catalog-level audit: `../../../catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md` (created alongside this note)
+- Catalog-level audit: `../../../catalogs/SHELLY2019_GL081607/README.md` (created alongside this note)

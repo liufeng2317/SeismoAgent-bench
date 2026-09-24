@@ -57,7 +57,7 @@
             "note": "Article population and ranges."
           },
           {
-            "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+            "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/README.md",
             "locator": "What is known from the article",
             "note": "Article-only values."
           }
@@ -80,7 +80,7 @@
             "note": "Relocation count and errors."
           },
           {
-            "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+            "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/README.md",
             "locator": "What is known from the article",
             "note": "Article-only relocation values."
           }
@@ -106,7 +106,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+          "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/README.md",
           "locator": "Provenance and Acquisition guidance",
           "note": "No verified event-table URL/DOI; SI is present but not event table."
         }
@@ -124,7 +124,7 @@
       "article_local_discrepancy": "Catalog is missing locally; no local row count, schema, checksum, ranges or frozen-window count may be asserted.",
       "evidence": [
         {
-          "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+          "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/README.md",
           "locator": "Provenance; What is known from the article; Frozen benchmark mask",
           "note": "Explicit missing status and article/local separation."
         }
@@ -156,7 +156,7 @@
           "note": "Role and missing-catalog constraints."
         },
         {
-          "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+          "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/README.md",
           "locator": "Acquisition guidance",
           "note": "Validation gates."
         }
@@ -168,7 +168,7 @@
       "future_normalization_rule": "Require origin time, coordinates, explicit absolute/GrowClust status, magnitude definition and checksum before marking ready.",
       "evidence": [
         {
-          "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+          "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/README.md",
           "locator": "Frozen benchmark mask to apply after acquisition; Acquisition guidance",
           "note": "Expected fields and acquisition checks."
         }
@@ -202,7 +202,7 @@
         },
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+            "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/README.md",
             "locator": "Frozen benchmark mask to apply after acquisition",
             "note": "Expected output fields are a future normalization specification, not a local schema."
           }
@@ -368,7 +368,7 @@
         "note": "End-to-end method and release gap."
       },
       {
-        "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+        "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/README.md",
         "locator": "Acquisition guidance",
         "note": "No substitution rule."
       }
@@ -415,7 +415,7 @@
       "caveats": "Article values are not local audits; no event count can be asserted in frozen window.",
       "evidence": [
         {
-          "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+          "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/README.md",
           "locator": "Frozen benchmark mask; Acquisition guidance",
           "note": "Mask and acquisition gates."
         }
@@ -428,7 +428,7 @@
     ],
     "evidence": [
       {
-        "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+        "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/README.md",
         "locator": "Acquisition guidance",
         "note": "Explicit missing information."
       }
@@ -456,7 +456,7 @@
     "needs_human_review": true,
     "evidence": [
       {
-        "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md",
+        "source": "data/2017_maple_creek_yellowstone/catalogs/PANG2019_GL082376/README.md",
         "locator": "Catalog status",
         "note": "Catalog explicitly missing, not partial."
       }

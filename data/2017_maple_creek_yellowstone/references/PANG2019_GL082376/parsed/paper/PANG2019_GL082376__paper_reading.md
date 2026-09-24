@@ -101,4 +101,4 @@ machine-readable GrowClust table. Therefore:
 - Paper PDF: references/PANG2019_GL082376/paper/PANG2019_GL082376__paper.pdf
 - Parsed paper: references/PANG2019_GL082376/parsed/PANG2019_GL082376__paper__mineru.md
 - Supplement PDF: references/PANG2019_GL082376/supplement/Pang2019_MapleCreek_SI.pdf
-- Catalog status note: catalogs/PANG2019_GL082376/PANG2019_GL082376__catalog_summary.md
+- Catalog status note: catalogs/PANG2019_GL082376/README.md

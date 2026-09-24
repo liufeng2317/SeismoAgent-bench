@@ -1,10 +1,12 @@
 # MAPLE2017 - 2017 Maple Creek, Yellowstone case analysis
 
+> Current preparation state: `window_status: not_frozen` in [processing.yaml](processing.yaml). Earlier “frozen/v1” windows and counts below are retained as exploratory audit history, not approved evaluation inputs.
+
+
 > This is the detailed case audit. Cross-case summary belongs in
 > docs/01_1_Case_details.md; source-specific reading and file-level audits live
 > beside each paper or catalog.
 
-> Compact catalog-processing index: [catalog_processing_index.md](catalog_processing_index.md).
 
 ## 1. Case identity and benchmark purpose
 
@@ -159,3 +161,27 @@ relative location as separate tasks.
 5. Generate derived plots under each catalog directory: daily phase/event rate,
    station availability, spatial/depth map when event tables are available,
    magnitude-frequency curves with QC flags, and phase-quality distributions.
+
+## Catalog processing
+
+Processing entry points and product declarations are in [processing.yaml](processing.yaml). Shared identifier and output rules are maintained in [data organization](../../README.md#processing-and-output-policy). File-level counts, schemas and figures belong to the catalog README and its generated analysis, rather than a second case index.
+
+### Next preparation steps
+
+1. Acquire and checksum Pang's 3,345-event machine-readable table before any
+   event-level Shelly–Pang comparison.
+2. Keep phase timing, event detection, absolute location and relative location
+   as separate benchmark tasks.
+3. Build station-day/channel manifests for the 27-station Shelly phase release
+   and the 24-station Pang relocation design before waveform download.
+4. Create an explicit cross-catalog event crosswalk; never join local
+   `event_id` values directly.
+
+### Re-run commands
+
+From the repository root:
+
+```bash
+python3 data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/scripts/run_catalog_analysis.py
+python3 data/2017_maple_creek_yellowstone/catalogs/USGS_UUSS_COMCAT_2017/scripts/run_catalog_analysis.py
+```

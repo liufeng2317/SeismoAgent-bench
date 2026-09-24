@@ -102,7 +102,7 @@
         "magnitude_scope": "Finite mag -6.99 to 5.17 plus invalid/extreme values; XML declared domain 0.35–3.65 differs.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+            "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/README.md",
             "locator": "Full-file audit",
             "note": "Rows, ranges and phase-only semantics."
           }
@@ -120,7 +120,7 @@
         "magnitude_scope": "No valid event-level magnitude population from phase file.",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+            "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/README.md",
             "locator": "Frozen benchmark-window audit",
             "note": "1,591,090 rows / 23,660 IDs and 27 station pairs."
           }
@@ -146,7 +146,7 @@
       ],
       "evidence": [
         {
-          "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+          "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/README.md",
           "locator": "Provenance and product identity",
           "note": "USGS release identity and checksums."
         }
@@ -179,7 +179,7 @@
       "article_local_discrepancy": "Article event tables (15,912/30,411) are not locally staged; local CSV is phase-only and extends beyond XML/article coverage.",
       "evidence": [
         {
-          "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+          "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/README.md",
           "locator": "Full-file audit; Frozen benchmark-window audit",
           "note": "All local counts and discrepancies."
         }
@@ -213,7 +213,7 @@
           "note": "Product distinction and valid metrics."
         },
         {
-          "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+          "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/README.md",
           "locator": "Quality tier and use; Reproducibility and pending work",
           "note": "Catalog-level limitations."
         }
@@ -225,7 +225,7 @@
       "window_count_rule": "Report phase rows and unique IDs separately; 23,660 is an ID count, not event count.",
       "evidence": [
         {
-          "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+          "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/README.md",
           "locator": "Native schema; Frozen benchmark-window audit",
           "note": "Field semantics and count convention."
         }
@@ -256,7 +256,7 @@
         },
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+            "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/README.md",
             "locator": "Native schema",
             "note": "Header and field meanings."
           }
@@ -486,7 +486,7 @@
         "note": "Workflow/output distinction."
       },
       {
-        "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+        "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/README.md",
         "locator": "Provenance and Quality tier",
         "note": "Local release audit."
       }
@@ -518,7 +518,7 @@
         "scope": "Maple Creek swarm",
         "evidence": [
           {
-            "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+            "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/README.md",
             "locator": "Native schema; Frozen benchmark-window audit",
             "note": "Phase-only limitation."
           }
@@ -533,7 +533,7 @@
       "caveats": "23,660 frozen IDs are not validated event count; no spatial mask can be applied locally.",
       "evidence": [
         {
-          "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+          "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/README.md",
           "locator": "Quality tier and use",
           "note": "Role and caveats."
         }
@@ -546,7 +546,7 @@
     ],
     "evidence": [
       {
-        "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+        "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/README.md",
         "locator": "Reproducibility and pending work",
         "note": "Open acquisition tasks."
       }
@@ -575,7 +575,7 @@
     "needs_human_review": true,
     "evidence": [
       {
-        "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/SHELLY2019_GL081607__catalog_summary.md",
+        "source": "data/2017_maple_creek_yellowstone/catalogs/SHELLY2019_GL081607/README.md",
         "locator": "Frozen benchmark-window audit; Quality tier and use",
         "note": "Count semantics and missing event table."
       }
