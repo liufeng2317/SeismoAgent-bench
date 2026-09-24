@@ -98,7 +98,7 @@ def main():
                  Line2D([],[],marker='*',mfc='#F0C94E',mec='#222222',ls='',markersize=9,label='Mw 6.4 / Mw 7.1')]
         fig.legend(handles=handles,ncol=2,loc='lower center',bbox_to_anchor=(.52,.025),frameon=False,fontsize=7,
                    columnspacing=2.0,labelspacing=.9)
-        out=CASE/'analysis/figures/station_distribution'
+        out=CASE/'analysis/figures/station_infomation/station_distribution'
         save_figure(fig,out);plt.close(fig)
     manifest=dict(inputs={str(p.relative_to(CASE)):sha(p) for p in [epochs_path,report_path,audit_path]},
                   script_sha256=sha(Path(__file__)),style_script_sha256=sha(Path(__file__).with_name('plot_catalog_comparison.py')),
