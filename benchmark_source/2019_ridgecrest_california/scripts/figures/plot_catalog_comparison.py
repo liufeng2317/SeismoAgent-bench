@@ -13,13 +13,14 @@ from matplotlib.lines import Line2D
 from matplotlib.ticker import FuncFormatter
 import numpy as np
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(ROOT))
 from SeismoAgentBench.utils.source_prepare.catalog import sha256, utc, within
 from SeismoAgentBench.utils.source_prepare.sources import load_case, select_subset
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'catalogs'))
 from audit_references import read_events
 
-CASE = Path(__file__).resolve().parents[1]
+CASE = Path(__file__).resolve().parents[2]
 SPECS = [
     ('shelly', 'shelly', 'Shelly', '#0072B2'),
     ('liu', 'liu', 'Liu', '#D55E00'),

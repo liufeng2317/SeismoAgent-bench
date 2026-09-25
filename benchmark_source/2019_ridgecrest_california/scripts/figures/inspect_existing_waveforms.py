@@ -13,7 +13,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from plot_catalog_comparison import publication_style, save_figure, WIDTH_INCHES
 
-CASE = Path(__file__).resolve().parents[1]
+CASE = Path(__file__).resolve().parents[2]
 OUT = CASE/'analysis/figures/waveform_examples'
 
 
@@ -72,7 +72,8 @@ def main():
                            for p in (base/folder).rglob('*.mseed')}
     a=inventory['waveforms'];r=inventory['waveforms_raw'];common=sorted(a.keys()&r.keys())
     added=sorted(a.keys()-r.keys());changed=[k for k in common if a[k]!=r[k]]
-    report=dict(data_root=str(base),script_sha256=sha(Path(__file__)),
+    report=dict(data_root='external_archive_argument',
+                data_root_note='Resolve the archive root using the data_root argument to inspect_existing_waveforms.py; machine-specific absolute paths are not stored.',script_sha256=sha(Path(__file__)),
                 scope='Full filename/size inventory; all added horizontal files compared against same-day processed Z; common-file content comparison is a stratified sample, not exhaustive.',
                 folders={name:dict(files=len(v),bytes=sum(v.values()),stations=len({k.split('/')[0] for k in v}),
                          channels=dict(sorted(Counter(Path(k).name.split('__')[0].split('.')[-1] for k in v).items())),
@@ -116,7 +117,7 @@ def main():
                 draw(ax,s,origin,'#0072B2',station);ax.axvline(0,color='k',ls=':',lw=.6)
                 ax.set_title(f'{chr(97+row*2+col)}  {station} {ch} · {label}',loc='left');ax.set_xlim(-20,150)
                 if row==2:ax.set_xlabel('Time since origin (s)')
-        save_figure(fig,OUT/'01_raw_event_waveforms');plt.close(fig)
+        save_figure(fig,OUT/'mw6_4_mw7_1_raw_examples');plt.close(fig)
         fig,axes=plt.subplots(3,1,figsize=(WIDTH_INCHES,6.2),layout='constrained')
         cases=[('CI.CCC','HHZ','2019-07-06T03:19:53.04',-5,35),('CI.WBP','HHE','2019-07-12T03:58:45',0,75)]
         for ax,(station,ch,origin,lo,hi),title in zip(axes,cases,['a  Shared waveform','b  Gap handling']):
@@ -131,7 +132,7 @@ def main():
             s=excerpt(base,'waveforms','CI.WNM',ch,str(t.date),t-5,t+35)
             draw(ax,s,t,color,ch,ls=ls)
         ax.set_title('c  Added horizontal channels · CI.WNM',loc='left');ax.legend(loc='upper right');ax.set_xlim(-5,35);ax.set_xlabel('Time since Mw 7.1 origin (s)')
-        save_figure(fig,OUT/'02_directory_comparison');plt.close(fig)
+        save_figure(fig,OUT/'legacy_waveform_directory_comparison');plt.close(fig)
     # Plot inputs include excerpts not otherwise represented by the daily comparison sample.
     plot_paths=set()
     for _,origin in events:
@@ -141,7 +142,7 @@ def main():
     for ch in ['EHZ','EHN','EHE']:plot_paths.add('waveforms/'+file_key('CI.WNM',ch,'2019-07-06'))
     report['plot_inputs']={k:sha(base/k) for k in sorted(plot_paths)}
     report['plot_conventions']='Native digital counts; no response removal, filtering, detrending or normalization. Raw gaps drawn as separate segments; dashed overlays distinguish coincident traces. UTC event origin marks are not phase picks.'
-    report['figures']={p.name:dict(bytes=p.stat().st_size,sha256=sha(p)) for p in sorted(OUT.glob('*')) if p.suffix in ['.png','.pdf']}
+    report['figures']={p.name:dict(bytes=p.stat().st_size,sha256=sha(p)) for p in sorted(OUT.glob('*')) if p.suffix in ['.png','.pdf'] and p.stem in {'mw6_4_mw7_1_raw_examples','legacy_waveform_directory_comparison'}}
     (OUT/'waveform_audit.json').write_text(json.dumps(report,indent=2,ensure_ascii=False)+'\n')
     print('Added equals Z:',sum(x['equals_z_samples_and_timing'] for x in copies),'/',len(copies),flush=True)
     print('Zero merge matches:',sum(x.get('matches_raw_merge_fill_zero',False) for x in checks),'/',len(checks),flush=True)

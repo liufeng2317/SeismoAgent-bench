@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import math
+import re
 import signal
 from collections import defaultdict
 from datetime import datetime, timezone
@@ -14,7 +15,7 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 import requests
 
-CASE = Path(__file__).resolve().parents[1]
+CASE = Path(__file__).resolve().parents[2]
 OUT = CASE / 'data/waveforms/stations'
 NS = {'s': 'http://www.fdsn.org/xml/station/1'}
 START = datetime(2019, 7, 4, tzinfo=timezone.utc)
@@ -45,13 +46,18 @@ def write(path, value):
 def utc(value):
     if not value:
         return None
-    t = datetime.fromisoformat(value.replace('Z', '+00:00'))
+    # Python 3.10 accepts only 3/6 fractional digits; StationXML may use four.
+    normalized = re.sub(r'\.(\d{1,6})(?=[+-]|$)',
+                        lambda m: '.' + m.group(1).ljust(6, '0'),
+                        value.replace('Z', '+00:00'))
+    t = datetime.fromisoformat(normalized)
     return t.replace(tzinfo=timezone.utc) if t.tzinfo is None else t.astimezone(timezone.utc)
 
 
 def fetch(direct):
-    path = OUT / 'requests.json'
-    history = json.loads(path.read_text()) if path.exists() else []
+    path = OUT / 'station_inventory.json'
+    inventory = json.loads(path.read_text()) if path.exists() else {'schema_version': 2}
+    history = inventory.setdefault('requests', [])
     session = requests.Session()
     session.trust_env = not direct
     for provider, endpoint in SERVICES.items():
@@ -88,7 +94,7 @@ def fetch(direct):
             signal.alarm(0)
             signal.signal(signal.SIGALRM, previous_handler)
         history.append(row)
-        write(path, history)
+        write(path, inventory)
 
 
 def parse(path, provider):
@@ -133,7 +139,7 @@ def export_catalog_views(rows, latest, all_shelly, selected_shelly):
         'ROSS2019_SCIENCE': (None, None, 'unresolved', 'DC1 p. 2 confirms SCEDC EH/HH within 80 km; exact historical station list remains unresolved. See ross_rule_candidates in station_preparation.json; candidates are not assigned as verified paper inputs.'),
         'USGS_SCSN_COMCAT_2019': (None, None, 'unresolved', 'Operational event snapshot does not identify its complete waveform station inputs.'),
     }
-    outputs = {}
+    outputs, selections = {}, {}
     for catalog, (source_ids, requested, status, evidence) in specs.items():
         folder = OUT/'by_catalog'/catalog
         selected = requested & active if requested is not None else set()
@@ -176,11 +182,11 @@ def export_catalog_views(rows, latest, all_shelly, selected_shelly):
                     ET.ElementTree(root).write(target, encoding='utf-8', xml_declaration=True)
                     manifest['files'][target.name] = dict(channel_epochs=kept,bytes=target.stat().st_size,sha256=digest(target),
                                                          shared_source=request['path'],shared_source_sha256=request['sha256'])
-        write(folder/'selection.json', manifest)
+        selections[catalog] = manifest
         outputs[catalog] = dict(status=status, station_count=len(selected) if requested is not None else None,
-                                selection_path=str((folder/'selection.json').relative_to(CASE)),
-                                selection_sha256=digest(folder/'selection.json'), files=manifest['files'])
-    return outputs
+                                selection_path='data/waveforms/stations/station_inventory.json',
+                                selection_key='catalogs/' + catalog, files=manifest['files'])
+    return outputs, selections
 
 
 
@@ -194,8 +200,12 @@ def ross_rule_candidates(rows):
     candidates = [dict(r, distance_to_mainshock_km=distance(r)) for r in rows
                   if r['candidate_overlap_seconds'] > 0 and r['channel'].startswith(('EH', 'HH'))
                   and r['latitude'] is not None and r['longitude'] is not None and distance(r) <= 80]
-    path = OUT/'by_catalog/ROSS2019_SCIENCE/rule_candidate_channels.json'
-    write(path, candidates)
+    indices = {json.dumps(r, sort_keys=True): i for i, r in enumerate(rows)}
+    references = []
+    for r in candidates:
+        base = {k:v for k,v in r.items() if k != 'distance_to_mainshock_km'}
+        references.append(dict(channel_epoch_index=indices[json.dumps(base, sort_keys=True)],
+                               distance_to_mainshock_km=r['distance_to_mainshock_km']))
     source = CASE/'references/ROSS2019_SCIENCE/supplement/ROSS2019_SCIENCE__supplement_DC1.pdf'
     return dict(status='rule_based_candidates_not_confirmed_paper_stations',
                 source=str(source.relative_to(CASE)), source_sha256=digest(source), locator='PDF page 2',
@@ -208,7 +218,7 @@ def ross_rule_candidates(rows):
                              'Epoch overlap does not prove continuous samples or original channel selection.'],
                 station_ids=sorted({r['network']+'.'+r['station'] for r in candidates}),
                 channel_epoch_variants=len(candidates),
-                artifact=dict(path=str(path.relative_to(CASE)), bytes=path.stat().st_size, sha256=digest(path)))
+                artifact=dict(path='data/waveforms/stations/station_inventory.json', key='ross_channel_candidates')), references
 
 
 def main():
@@ -219,13 +229,13 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     if args.download:
         fetch(args.direct)
-    requests_log = json.loads((OUT/'requests.json').read_text())
+    requests_log = json.loads((OUT/'station_inventory.json').read_text())['requests']
     latest = {}
     for request in requests_log:
         if request['status'] == 'downloaded':
             latest[request['provider']] = request
     if not latest:
-        raise SystemExit('No successful metadata snapshot; requests.json records failures')
+        raise SystemExit('No successful metadata snapshot; station_inventory.json requests records failures')
     merged = {}
     for provider, request in latest.items():
         path = OUT/request['path']
@@ -240,7 +250,6 @@ def main():
                 merged[key] = dict(row, providers=[])
             merged[key]['providers'].append(provider)
     rows = sorted(merged.values(), key=lambda r: (r['network'], r['station'], r['location'], r['channel'], r['start'] or ''))
-    write(OUT/'channel_epochs.json', rows)
     groups = defaultdict(list)
     for row in rows:
         groups[row['network'] + '.' + row['station']].append(row)
@@ -249,7 +258,6 @@ def main():
     for r in rows:
         same_epoch[(r['network'],r['station'],r['location'],r['channel'],r['start'],r['end'])].append(r)
     conflicts = [dict(identity=list(k), variants=v) for k,v in same_epoch.items() if len(v)>1]
-    write(OUT/'metadata_conflicts.json', conflicts)
     phase = CASE/'data/catalogs/SHELLY2020_0220190309/raw/Ridgecrest_2019_correlation_phase_arrivals.csv'
     all_stations, selected_stations = set(), set()
     for chunk in pd.read_csv(phase, usecols=['network','station','arrival'], chunksize=500000):
@@ -266,9 +274,12 @@ def main():
                              coordinate_variants=sorted({(r['latitude'],r['longitude'],r['elevation_m']) for r in variants}),
                              earliest_effective_start=min((r['effective_start'] for r in variants if r['effective_start']), default=None),
                              providers=sorted({p for r in variants for p in r['providers']})))
-    write(OUT/'station_inventory.json', stations)
-    catalog_views = export_catalog_views(rows, latest, all_stations, selected_stations)
-    report = dict(ross_rule_candidates=ross_rule_candidates(rows), catalog_views=catalog_views, candidate_window=['2019-07-04T00:00:00Z','2019-07-07T00:00:00Z'],
+    catalog_views, selections = export_catalog_views(rows, latest, all_stations, selected_stations)
+    ross, references = ross_rule_candidates(rows)
+    write(OUT/'station_inventory.json', dict(schema_version=2,
+        channel_epochs=rows, stations=stations, catalogs=selections, requests=requests_log,
+        metadata_conflicts=conflicts, ross_channel_candidates=references))
+    report = dict(ross_rule_candidates=ross, catalog_views=catalog_views, candidate_window=['2019-07-04T00:00:00Z','2019-07-07T00:00:00Z'],
                   discovery_query=PARAMS,
                   query_reason='1.5 degree radius contains the paper 120-km circle and approximate 200-km square; extended through July 9 to detect later temporary-station deployment. Not a paper station-list reconstruction.',
                   semantics='Metadata epoch overlap only; not waveform availability. Identical descriptive channel epochs merged with providers retained; conflicting metadata retained. Responses remain in provider XML and are not assumed equivalent.',
@@ -287,7 +298,7 @@ def main():
                   counts=dict(provider_snapshots=len(latest),station_ids=len(groups),candidate_station_ids=len(active),
                               channel_epoch_variants=len(rows),candidate_channel_epoch_variants=sum(r['candidate_overlap_seconds']>0 for r in rows),
                               conflicting_epoch_identities=len(conflicts)),
-                  artifacts={str(p.relative_to(CASE)):dict(bytes=p.stat().st_size,sha256=digest(p)) for p in [OUT/'channel_epochs.json',OUT/'station_inventory.json',OUT/'metadata_conflicts.json']})
+                  artifacts={str(p.relative_to(CASE)):dict(bytes=p.stat().st_size,sha256=digest(p)) for p in [OUT/'station_inventory.json']})
     write(CASE/'analysis/station_preparation.json',report)
     print(json.dumps(report['counts']))
     print('Liu missing in candidate:',report['liu']['missing_in_candidate'])

@@ -20,7 +20,7 @@ def load_script(name, relative_path):
 
 
 manifest = load_script('catalog_manifest', 'scripts/04_catalog_analysis/build_catalog_manifest.py')
-ridgecrest = load_script('ridgecrest_audit', 'benchmark_source/2019_ridgecrest_california/scripts/audit_references.py')
+ridgecrest = load_script('ridgecrest_audit', 'benchmark_source/2019_ridgecrest_california/scripts/catalogs/audit_references.py')
 full_product, catalog_status, build_manifest = manifest.full_product, manifest.catalog_status, manifest.build_manifest
 read_events, phase_summary = ridgecrest.read_events, ridgecrest.phase_summary
 

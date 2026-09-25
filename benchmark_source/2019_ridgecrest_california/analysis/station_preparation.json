@@ -54,17 +54,16 @@
     ],
     "channel_epoch_variants": 81,
     "artifact": {
-      "path": "data/waveforms/stations/by_catalog/ROSS2019_SCIENCE/rule_candidate_channels.json",
-      "bytes": 61495,
-      "sha256": "0e0788c88086f895aa81da1e8162138b972ca68d1c4105bd7413fc9fd78a399b"
+      "path": "data/waveforms/stations/station_inventory.json",
+      "key": "ross_channel_candidates"
     }
   },
   "catalog_views": {
     "LIU2020_GL086189": {
       "status": "paper_station_labels",
       "station_count": 41,
-      "selection_path": "data/waveforms/stations/by_catalog/LIU2020_GL086189/selection.json",
-      "selection_sha256": "8fa549e5069da90eeb3bd406a9adb7ae2c2051b7d251fed42494f85fefb0068d",
+      "selection_path": "data/waveforms/stations/station_inventory.json",
+      "selection_key": "catalogs/LIU2020_GL086189",
       "files": {
         "earthscope.stationxml": {
           "channel_epochs": 1517,
@@ -78,8 +77,8 @@
     "SHELLY2020_0220190309": {
       "status": "auxiliary_phase_arrival_station_subset",
       "station_count": 24,
-      "selection_path": "data/waveforms/stations/by_catalog/SHELLY2020_0220190309/selection.json",
-      "selection_sha256": "ad8a538812b3c3d957e36714f3b3afce29a121dd8728055507b12f50a4c12de2",
+      "selection_path": "data/waveforms/stations/station_inventory.json",
+      "selection_key": "catalogs/SHELLY2020_0220190309",
       "files": {
         "earthscope.stationxml": {
           "channel_epochs": 954,
@@ -93,22 +92,22 @@
     "AWR2025_CALTECHDATA": {
       "status": "unresolved",
       "station_count": null,
-      "selection_path": "data/waveforms/stations/by_catalog/AWR2025_CALTECHDATA/selection.json",
-      "selection_sha256": "9438fca6ffdaafd9bc2f9c366bf9518e0a65a93a3ccb6efe1815ba34778f7b14",
+      "selection_path": "data/waveforms/stations/station_inventory.json",
+      "selection_key": "catalogs/AWR2025_CALTECHDATA",
       "files": {}
     },
     "ROSS2019_SCIENCE": {
       "status": "unresolved",
       "station_count": null,
-      "selection_path": "data/waveforms/stations/by_catalog/ROSS2019_SCIENCE/selection.json",
-      "selection_sha256": "ee9d644c04fd26db0962113e010216fe2f3659d66f2d63ec336b19d83c05ac40",
+      "selection_path": "data/waveforms/stations/station_inventory.json",
+      "selection_key": "catalogs/ROSS2019_SCIENCE",
       "files": {}
     },
     "USGS_SCSN_COMCAT_2019": {
       "status": "unresolved",
       "station_count": null,
-      "selection_path": "data/waveforms/stations/by_catalog/USGS_SCSN_COMCAT_2019/selection.json",
-      "selection_sha256": "a42f77fd5fa34303f7222a8cd5bf23962fcb162eefb78bd585f21398f2d14450",
+      "selection_path": "data/waveforms/stations/station_inventory.json",
+      "selection_key": "catalogs/USGS_SCSN_COMCAT_2019",
       "files": {}
     }
   },
@@ -213,7 +212,7 @@
   "inputs": {
     "data/catalogs/SHELLY2020_0220190309/raw/Ridgecrest_2019_correlation_phase_arrivals.csv": "0b77237b497265ebc94768acd955a9de5eb4c7f78f130922254e4c9ed4122d9f"
   },
-  "script_sha256": "2ddd3ded5d9df40ef72263a9d5805c097bbc687a865936238a3770d27e02ac3b",
+  "script_sha256": "ff5ed35acf5a4a3d621ff39006d3e8c5d9754f05410988d4a6f49a3175bf5376",
   "liu": {
     "source": "references/LIU2020_GL086189/supplement/Liu2020_Ridgecrest_SI.docx",
     "locator": "Fig. S1, word/media/image2.jpeg, manually read labels including inset",
@@ -2792,17 +2791,9 @@
     "conflicting_epoch_identities": 0
   },
   "artifacts": {
-    "data/waveforms/stations/channel_epochs.json": {
-      "bytes": 3184440,
-      "sha256": "0b1e0c1401fc0b9cac4998e211868962cefa209cd21aefd4e3428152bab1b633"
-    },
     "data/waveforms/stations/station_inventory.json": {
-      "bytes": 213330,
-      "sha256": "84ed89e08a4eac82bd3acf6fd61d28ba74168c11c937fbada46a0ab2d05bbe79"
-    },
-    "data/waveforms/stations/metadata_conflicts.json": {
-      "bytes": 3,
-      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      "bytes": 3676009,
+      "sha256": "a8def3aa15d512c70d0cff31b12bbbe2f7568cb820d2cc6908ede6595bdfdcf0"
     }
   }
 }

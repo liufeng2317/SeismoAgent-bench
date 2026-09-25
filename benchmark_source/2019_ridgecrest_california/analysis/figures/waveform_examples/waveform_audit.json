@@ -1,5 +1,5 @@
 {
-  "data_root": "/ai4earthafs/liufeng/ScienceDiscovery/Science2019_Ross_Ridgecrest/data",
+  "data_root": "external_archive_argument",
   "script_sha256": "6b8ce1fac21fb43cdcfea650e4b8faf66deb70d4030b49d98273b57617e5a784",
   "scope": "Full filename/size inventory; all added horizontal files compared against same-day processed Z; common-file content comparison is a stratified sample, not exhaustive.",
   "folders": {
@@ -2179,21 +2179,22 @@
   },
   "plot_conventions": "Native digital counts; no response removal, filtering, detrending or normalization. Raw gaps drawn as separate segments; dashed overlays distinguish coincident traces. UTC event origin marks are not phase picks.",
   "figures": {
-    "01_raw_event_waveforms.pdf": {
+    "mw6_4_mw7_1_raw_examples.pdf": {
       "bytes": 188492,
       "sha256": "6fd12e2c6c59a10f84e0fb84afc2fbeafc97cf7a1f0260c1dfd82f5705d91542"
     },
-    "01_raw_event_waveforms.png": {
+    "mw6_4_mw7_1_raw_examples.png": {
       "bytes": 372904,
       "sha256": "cda0e8212f6af56bf04ab3106d20677c7481c10f7849b5ec6785807b0fc45de4"
     },
-    "02_directory_comparison.pdf": {
+    "legacy_waveform_directory_comparison.pdf": {
       "bytes": 117729,
       "sha256": "69534505bb578c9897a473b7ac82a131f454ec5e730b86cba8709213c30b0eff"
     },
-    "02_directory_comparison.png": {
+    "legacy_waveform_directory_comparison.png": {
       "bytes": 740751,
       "sha256": "9e014003c27f6b034582e8f2bcd8731b352341341bf4f8b5b3efd703d58cbd8f"
     }
-  }
+  },
+  "data_root_note": "Resolve the archive root using the data_root argument to inspect_existing_waveforms.py; machine-specific absolute paths are not stored."
 }

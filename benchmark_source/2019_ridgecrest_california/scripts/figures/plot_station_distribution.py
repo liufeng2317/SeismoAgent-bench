@@ -14,7 +14,7 @@ import numpy as np
 
 from plot_catalog_comparison import publication_style, save_figure, WIDTH_INCHES
 
-CASE = Path(__file__).resolve().parents[1]
+CASE = Path(__file__).resolve().parents[2]
 ZOOM = (-118.04, -117.12, 35.36, 36.34)
 COLORS = {'shared': '#0072B2', 'liu_only': '#D55E00', 'later': '#8B4C9D'}
 
@@ -24,12 +24,12 @@ def sha(path):
 
 
 def main():
-    epochs_path = CASE/'data/waveforms/stations/channel_epochs.json'
+    epochs_path = CASE/'data/waveforms/stations/station_inventory.json'
     report_path = CASE/'analysis/station_preparation.json'
     audit_path = CASE/'analysis/reference_audit.json'
     report = json.loads(report_path.read_text())
     assert sha(epochs_path) == report['artifacts'][str(epochs_path.relative_to(CASE))]['sha256']
-    epochs = json.loads(epochs_path.read_text())
+    epochs = json.loads(epochs_path.read_text())['channel_epochs']
     anchors = json.loads(audit_path.read_text())['anchors']
     shared = set(report['shelly_auxiliary']['arrival_window_station_ids'])
     active = set(report['liu']['metadata_present_in_candidate'])
