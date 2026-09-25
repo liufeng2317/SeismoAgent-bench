@@ -1,6 +1,6 @@
 # RIDGE2019 — 案例设计与 Source 准备
 
-当前阶段为**候选科学设计与资料整理**。时窗未冻结（`not_frozen`），本案例尚未正式纳入连续波形；外部既有下载已发现并初步检查，逐日覆盖尚未完成核验。**速度模型获取暂时暂停**，已收集资料和未解决项保留；评测实现另行组织。
+当前阶段为**候选科学设计与资料整理**。时窗未冻结（`not_frozen`），既有原始波形已复制至统一外部存储并接入 case，候选三天已完成逐点解码与初步质量检查，尚未冻结为共同输入。**速度模型获取暂时暂停**，已收集资料和未解决项保留；评测实现另行组织。
 
 本文维护跨来源结论和唯一的准备进度表。参数、原始证据、下载记录及逐条核验结果通过文末入口查阅。
 
@@ -16,7 +16,7 @@
 | Mw 6.4 锚点 | 官方事件 `ci38443183`，07-04 17:33:49.000 UTC |
 | Mw 7.1 锚点 | 官方事件 `ci38457511`，07-06 03:19:53.040 UTC |
 | 分阶段 | Mw 6.4 前、Mw 6.4 后首小时、两震间剩余时段、Mw 7.1 后首小时、后续时段；各段左闭右开 |
-| 待定 | 最终台站/通道集合、波形前后缓冲、处理分块和实际覆盖 |
+| 待定 | 最终台站/通道集合、波形前后缓冲、处理分块和异常时段策略 |
 
 共同输入需要落实到 **network/station/location/channel × 有效时间段**，同时记录采样率、缺口/重叠、响应和载荷哈希。同站数或同文件体积不足以保证公平；速度模型、预处理、模板和种子目录也需单列。Ross 使用至 7 月 25 日的模板，Shelly 也使用后续取得的模板资料，不能仅裁剪输出时窗就视为三天独立输入实验或实时结果。
 
@@ -61,7 +61,7 @@
 
 Shelly 辅助表的 24 站均在 Liu 的 41 个窗口内有效站中，但不能据此冻结共同输入。区域元数据发现的 255 个窗口内站也不能直接补入任何论文名单。Liu 的 REAL <100 km、hypoDD <80 km 条件属于事件—台站筛选，不是主震选站半径。
 
-原始 StationXML 共享保存在 `data/waveforms/stations/`，各工作入口为其下 `by_catalog/<source_id>/selection.json`。目前只有 Liu 和 Shelly 辅助子集导出了独立 XML；Ross 规则候选单独存储，AWR/Ross/官方实际名单仍未解决。清单、有效期和查询记录见 [station_preparation.json](station_preparation.json)；实际通道选择还需检查响应、坐标差异及覆盖。
+原始 StationXML 共享保存在 `data/waveforms/stations/`，各工作的选择依据集中在 `station_inventory.json` 的 `catalogs/<source_id>` 字段。目前只有 Liu 和 Shelly 辅助子集导出了独立 XML；Ross 规则候选通过同一清单的 `ross_channel_candidates` 引用共享通道记录，AWR/Ross/官方实际名单仍未解决。清单、有效期和查询记录见 [station_preparation.json](station_preparation.json)；实际通道选择还需检查响应、坐标差异及覆盖。
 
 ### 目录构建与速度模型
 
@@ -98,10 +98,20 @@ Shelly 辅助表的 24 站均在 Liu 的 41 个窗口内有效站中，但不能
 
 两目录共有 3,032 个同名文件；分层抽查 33 对，均与 raw 合并断段、缺口补零后的样本及时间信息一致，其中 8 对原本即样本一致，但文件哈希均不同。新增 132 个 E/N 文件全部核实为 CI.WNM、CI.WRV2、CI.WVP2 同日 Z 分量的副本，不能作为独立水平观测。后续优先从 raw 建立输入清单，保留真实缺口，不能将工作副本的补零和复制分量计入有效观测；尚未逐样本比较全部同名文件。
 
-- [两次大震的原始波形](figures/waveform_examples/01_raw_event_waveforms.png)（[PDF](figures/waveform_examples/01_raw_event_waveforms.pdf)）：CI.CCC、CI.CLC、PB.B918 的垂直分量，各展示发震前 20 s 至后 150 s；零点为发震时刻，不是震相拾取。
-- [目录差异对比](figures/waveform_examples/02_directory_comparison.png)（[PDF](figures/waveform_examples/02_directory_comparison.pdf)）：a 为一致波形，b 为 CI.WBP 缺口补零，c 为 CI.WNM 的 Z/E/N 副本重合。两图均使用原生数字计数，未去响应、滤波或归一化；振幅不能直接用于跨仪器物理幅度比较。
+- [两次大震的原始波形](figures/waveform_examples/mw6_4_mw7_1_raw_examples.png)（[PDF](figures/waveform_examples/mw6_4_mw7_1_raw_examples.pdf)）：CI.CCC、CI.CLC、PB.B918 的垂直分量，各展示发震前 20 s 至后 150 s；零点为发震时刻，不是震相拾取。
+- [目录差异对比](figures/waveform_examples/legacy_waveform_directory_comparison.png)（[PDF](figures/waveform_examples/legacy_waveform_directory_comparison.pdf)）：a 为一致波形，b 为 CI.WBP 缺口补零，c 为 CI.WNM 的 Z/E/N 副本重合。两图均使用原生数字计数，未去响应、滤波或归一化；振幅不能直接用于跨仪器物理幅度比较。
 
-只读复算脚本：[inspect_existing_waveforms.py](../scripts/inspect_existing_waveforms.py)，参数为外部 `data` 路径；未复制、修改或删除该目录的波形。
+只读对比复算脚本：[inspect_existing_waveforms.py](../scripts/figures/inspect_existing_waveforms.py)，参数仍为原 `Science2019_Ross_Ridgecrest/data` 路径。原 raw 的 3,032 个文件已独立复制到统一外部存储，逐文件 SHA-256 校验通过；原数据未改动。case 的整个 `data/waveforms` 目录链接到外部统一目录，包含波形、已迁入的 stations、清单和英文 README；内部实体 `data/` 保存原始波形，保留既有访问路径，无需双向同步。路径、台站/日结构与校验清单入口见 [波形存储说明](../data/waveforms/README.md)。 完整副本尚未裁剪；候选三天按头信息识别出 351 文件、4.768 GB、41 站；外部 `waveform_inventory.json` 统一记录来源、路径、大小、通道、样本数与文件内缺口，替代原两个清单。12 个缺失通道日均已补回；CI.WRC2.HHZ 27.39 s 断档仍在，两家服务本次查询均返回无数据；Liu 的 6 个缺失有效站已补齐，其中 CI.APL 为 HN 加速度通道；Ross 规则候选仍缺 2 站。117 个已观测通道均有采样率/有效期匹配且带响应的元数据，响应数值和远端可补性仍待核验；详见同一清单的 `download_assessment`。
+
+Mw 6.4 和 Mw 7.1 发震前后各 10 分钟的垂直波形已分别按各自震中距排序绘制，提供原始 counts 和去响应速度两版；每道独立归一化，仅用于时序和形态比较。图件与距离表见 [Mw 6.4 波形剖面](figures/waveform_examples/mw6_4_record_section.md) 与 [Mw 7.1 波形剖面](figures/waveform_examples/mw7_1_record_section.md)。
+
+### 候选波形质量检查
+
+351 个文件（约 30.33 亿采样点）已逐点解码，未发现解码警告、非有限值或达到设定阈值的精确恒值段。唯一超过 1 s 的缺口为 CI.WRC2..HHZ 的 27.39 s；另外存在少量短缺口和边界偏移。**CI.CCC、CI.WRC2 的主震 HHZ 波形呈明显近似限幅形态，疑似仪器饱和，尚待响应及仪器动态范围核验；恒值筛查通过不代表无饱和。**
+
+已完成原始波形与去趋势、加窗、2–12 Hz 零相位滤波的片段对比；这是离线诊断参数，未去仪器响应，不直接比较不同仪器的物理振幅，也未改写原始数据。覆盖、质量统计、频谱及主震细节共四组图（PNG/PDF）和指标定义见 [质量检查报告](figures/waveform_quality/README.md)。
+
+仪器响应已进一步核验：现有 `stations/earthscope.stationxml` 覆盖全部 117 个已观测通道，响应有效期和采样率匹配，0.5–20 Hz 数值响应检查全部通过，无需重复下载。已用 ObsPy 对 CCC.HHZ、APL.HNZ、WRC2.HHZ 的主震片段去响应，统一输出 m/s；原始数据不变，疑似饱和标记保留。参数、核验表及图件见 [仪器响应报告](figures/instrument_response/README.md)。此结果不等于仪器动态范围或绝对标定已独立验证。
 
 ## 5. 准备进度与待办
 
@@ -111,10 +121,10 @@ Shelly 辅助表的 24 站均在 Liu 的 41 个窗口内有效站中，但不能
 | 台站名单与响应 | 部分完成，已按工作拆分 | 补 Shelly/AWR 实际名单，核对 Ross 候选的历史来源和通道；不能以 24 站交集代替完整核验 |
 | 速度模型 | 已整理可获取资料；**获取暂停** | 按模型清单核实 Liu 更新模型、AWR 平滑版本和 Ross 实际配置 |
 | 断层资料 | 已有发布入口，未取得载荷 | 核对 GIS/位移产品、坐标参考系和论文版本对应 |
-| 观测范围与覆盖 | 候选 72 小时，最终通道/缓冲未定 | 先盘点逐通道实际覆盖、缺口和响应，再确定共同输入范围 |
-| 连续波形 | 外部既有 raw 数据约 36.8 GB，已初步检查；尚未纳入统一输入 | 优先核验既有下载的覆盖、响应和来源；缺失部分再下载，排除复制分量与补零样本 |
+| 观测范围与覆盖 | 候选 72 小时：41 站、117 通道，最低通道覆盖率 99.988870% | 保留 WRC2 的 27.39 s 缺口标记，核验仪器响应与异常时段 |
+| 连续波形 | 候选窗口 351 文件、4.768 GB 已全部解码，无解码错误和非有限值；原始数据未改写 | 优先核查主震期间 HH 波形的疑似饱和，完成响应与处理参数核验后再冻结输入 |
 
-观测工作恢复后的顺序为：明确名单/通道 → 核验实际覆盖 → 确定范围与缓冲 → 试下载 → 完整获取。未来波形清单至少记录请求与实际覆盖、来源、响应关联、哈希和缺失状态；不能用元数据查询成功代替观测验收。
+后续顺序为：核验主震异常波形与仪器响应 → 确定缺口及单分量台站策略 → 校准预处理参数和缓冲 → 冻结共同输入。不能用下载成功或高覆盖率代替观测质量验收。
 
 ## 6. 资料入口与维护
 
@@ -130,10 +140,10 @@ Shelly 辅助表的 24 站均在 Liu 的 41 个窗口内有效站中，但不能
 需要更新派生成果时，从仓库根目录运行相应脚本：
 
 ```bash
-python -B benchmark_source/2019_ridgecrest_california/scripts/audit_references.py
-python -B benchmark_source/2019_ridgecrest_california/scripts/prepare_station_metadata.py
-python -B benchmark_source/2019_ridgecrest_california/scripts/plot_catalog_comparison.py
-python -B benchmark_source/2019_ridgecrest_california/scripts/plot_station_distribution.py
+python -B benchmark_source/2019_ridgecrest_california/scripts/catalogs/audit_references.py
+python -B benchmark_source/2019_ridgecrest_california/scripts/observations/prepare_station_metadata.py
+python -B benchmark_source/2019_ridgecrest_california/scripts/figures/plot_catalog_comparison.py
+python -B benchmark_source/2019_ridgecrest_california/scripts/figures/plot_station_distribution.py
 ```
 
-以上调用使用本地原件；原件或配置变化时，先更新相应核验结果，再生成依赖它的图件。案例特有代码在 `scripts/`，可复用逻辑在公共 `SeismoAgentBench/utils/`。新增资料应更新对应记录及本页状态，正文不追加下载日志、哈希明细或重复参数表。
+以上调用使用本地原件；原件或配置变化时，先更新相应核验结果，再生成依赖它的图件。案例特有代码按 `scripts/catalogs/`、`scripts/figures/`、`scripts/observations/` 分层；补下载入口和参数见 [脚本说明](../scripts/README.md)，Shell 入口默认直连下载，`--action plan` 仅生成计划。可复用逻辑在公共 `SeismoAgentBench/utils/`。新增资料应更新对应记录及本页状态，正文不追加下载日志、哈希明细或重复参数表。

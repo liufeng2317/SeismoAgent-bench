@@ -205,7 +205,7 @@ Ridgecrest 目前登记 5 个来源组和 8 个文件产品。Ross 重定位子�
 python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir benchmark_source/2019_ridgecrest_california
 python -B -m SeismoAgentBench.utils.source_prepare inventory --case-dir benchmark_source/2019_ridgecrest_california
 python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir benchmark_source/2019_ridgecrest_california --verify-files
-python -B benchmark_source/2019_ridgecrest_california/scripts/audit_references.py
+python -B benchmark_source/2019_ridgecrest_california/scripts/catalogs/audit_references.py
 ```
 
 前两个命令不读取全部大文件计算哈希：资料登记有效与本地载荷已下载是两个状态。`--verify-files` 才执行 SHA-256 核验，发现本地缺失或内容不符时以非零状态退出。目录统计仍由案例解析器完成；登记表校验不会虚构记录数、波形覆盖、完备性或科学质量。
