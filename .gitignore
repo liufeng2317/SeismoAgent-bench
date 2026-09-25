@@ -72,7 +72,14 @@ benchmark_source/**/*.xml
 *.tmp
 
 # Continuous waveforms remain local after the source-layout migration.
-benchmark_source/**/waveforms/
+benchmark_source/**/waveforms
 
 # Native velocity-model downloads and third-party implementation evidence stay local.
 benchmark_source/**/data/models/raw/
+
+# Small, reviewed Ridgecrest diagnostic tables accompany their figures.
+!benchmark_source/2019_ridgecrest_california/analysis/figures/waveform_quality/*.csv
+!benchmark_source/2019_ridgecrest_california/analysis/figures/instrument_response/response_audit.csv
+!benchmark_source/2019_ridgecrest_california/analysis/figures/waveform_examples/mw*_record_section.csv
+# Reproducible processed waveform excerpts stay local.
+benchmark_source/2019_ridgecrest_california/analysis/figures/instrument_response/response_examples.npz
