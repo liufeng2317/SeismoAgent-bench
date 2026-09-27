@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "case_id": "2019_ridgecrest_california",
+  "description": "Initial Ridgecrest waveform and station input set for the trusted-development smoke task.",
+  "entries": [
+    {
+      "id": "CI.CCC.HHE.20190704",
+      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms/data/CI.CCC/CI.CCC..HHE__20190704T000000Z__20190705T000000Z.mseed",
+      "kind": "waveform",
+      "read_only": true,
+      "network": "CI",
+      "station": "CCC",
+      "location": "",
+      "channel": "HHE",
+      "start_time": "2019-07-04T00:00:00Z",
+      "end_time": "2019-07-05T00:00:00Z"
+    },
+    {
+      "id": "CI.CCC.HHN.20190704",
+      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms/data/CI.CCC/CI.CCC..HHN__20190704T000000Z__20190705T000000Z.mseed",
+      "kind": "waveform",
+      "read_only": true,
+      "network": "CI",
+      "station": "CCC",
+      "location": "",
+      "channel": "HHN",
+      "start_time": "2019-07-04T00:00:00Z",
+      "end_time": "2019-07-05T00:00:00Z"
+    },
+    {
+      "id": "CI.CCC.HHZ.20190704",
+      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms/data/CI.CCC/CI.CCC..HHZ__20190704T000000Z__20190705T000000Z.mseed",
+      "kind": "waveform",
+      "read_only": true,
+      "network": "CI",
+      "station": "CCC",
+      "location": "",
+      "channel": "HHZ",
+      "start_time": "2019-07-04T00:00:00Z",
+      "end_time": "2019-07-05T00:00:00Z"
+    },
+    {
+      "id": "earthscope.stationxml",
+      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms/stations/earthscope.stationxml",
+      "kind": "stationxml",
+      "read_only": true
+    }
+  ]
+}
