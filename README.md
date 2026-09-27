@@ -17,6 +17,14 @@ from the later task of reproducing catalogs with agents.
 The extraction contract for paper methods, catalog schemas, and case-level
 synthesis is defined in [`docs/01_3_Information_Extraction_Schema.md`](docs/01_3_Information_Extraction_Schema.md).
 
+## Evaluation environment
+
+[Evaluation architecture review](evaluations/environment/ARCHITECTURE_REVIEW.md) defines the formal-run requirements and external-worker direction. The existing [account utility](evaluations/environment/README.md) is development-only, not the formal benchmark backend. [Verification status](evaluations/environment/STATUS.md) distinguishes implemented checks from pending cross-user validation.
+
+## Professional tool snapshots
+
+[seismotools/](seismotools/README.md) contains copied PhaseNet/DPP/EQTransformer models, GaMMA, NonLinLoc and hypoDD sources, local weight identities, usage documentation and validation/build commands. It provides versioned implementation inputs for future controlled tool comparisons; case data and experiment scripts stay separate. Existing expert runs retain their recorded tool paths.
+
 ## What this project does
 
 - Curates six information-rich seismic benchmark cases.
