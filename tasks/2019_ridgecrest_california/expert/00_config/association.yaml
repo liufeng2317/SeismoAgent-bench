@@ -1,0 +1,22 @@
+# Initial association settings; independent of the frozen PhaseNet configuration.
+method: BGMM
+workers: 32
+chunk_seconds: 3600
+buffer_seconds: 120
+projection_center: [-117.55, 35.75]
+# Includes a margin around the planned event region; all 37 stations are retained.
+longitude_bounds: [-118.15, -116.95]
+latitude_bounds: [35.20, 36.30]
+depth_bounds_km: [0, 25]
+reference_elevation_km: 0.7
+velocity_model: shelly_table1
+eikonal_spacing_km: 0.5
+dbscan_eps: 10.0
+dbscan_min_samples: 3
+oversample_factor: 5
+covariance_prior: [3.0]
+min_picks_per_eq: 10
+min_p_picks_per_eq: 4
+min_s_picks_per_eq: 3
+min_stations: 6
+max_sigma11: 1.5

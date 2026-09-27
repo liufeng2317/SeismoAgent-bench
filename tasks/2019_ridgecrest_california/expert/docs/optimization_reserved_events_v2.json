@@ -1,0 +1,26 @@
+{
+  "csv_sha256": "bcf13bd88fd57ced2c1f3cc7f8f627e79b19956f29b54131e03f90e59baf17e9",
+  "eligible_pool": 5927,
+  "excluded_unique_ids": 595,
+  "exposure": "Disjoint from prior small experiment cohorts and consumed first confirmation cohort; also excludes reviewed S-window neighbors. Historical full-catalog comparisons exist, so not never-examined blind data. Event-disjoint, not guaranteed spatially or temporally independent.",
+  "frozen_at_utc": "2026-09-26T05:56:28.940109+00:00",
+  "n": 300,
+  "period_counts": {
+    "after_M7.1": 184,
+    "before_M6.4": 11,
+    "between_mainshocks": 105
+  },
+  "salt": "ridgecrest-confirmation-v2-300",
+  "selection": "Deterministic SHA256 order within period/original-10km-XY strata; sorted-stratum round robin until 300. Not population-proportional. No result/reference-based screening.",
+  "source_sha256": {
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/tasks/2019_ridgecrest_california/expert/03_experiments/05_catalog_optimization/00_reserve_confirmation.py": "56f0caa04ae23c42d0903687f71e45d413a64bf0e1e3c03ffab3653588fc3cf4",
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/tasks/2019_ridgecrest_california/expert/docs/optimization_reserved_events.csv": "d86ce49044b4ce0254a0992cb4563fa3aaae541fcc2bc60c5d1d3ae6a2bf3fc8",
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/tasks/2019_ridgecrest_california/expert/export/10_validate_catalog/events.csv": "330190294bd48c74f2d950ca963fcd3a8e054ce6a3e3d844add643b8235a78f7",
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/tasks/2019_ridgecrest_california/expert/export/12_relative_location_pilot/events.csv": "eb3aa3c2943450bfaba05a8a30fc13540fdcfed058904d317dfa6d5800be43b3",
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/tasks/2019_ridgecrest_california/expert/export/15_validate_transfer/inputs/events.csv": "b687758ed1578e9008ab44ab644d29258a496d9113e4d3b78d189355536c743b",
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/tasks/2019_ridgecrest_california/expert/export/19_s_arrival_review/neighboring_picks.csv": "0b49ac56cae85b18a2892b0696d44c9aa8a31d6c6464193a06f896698562f8c5",
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/tasks/2019_ridgecrest_california/expert/export/19_s_arrival_review/selection.csv": "7929ade69a9cbabf24c77413a4f6865492c68c4b06bfc1bf775e25d34580aeb9"
+  },
+  "status": "reserved_not_used",
+  "use": "Only open for confirmation after a fixed candidate passes transfer gates. Do not tune to this set. If stage29 fails, retain this set unused for a future independently frozen candidate."
+}

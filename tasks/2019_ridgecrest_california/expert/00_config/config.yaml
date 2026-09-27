@@ -1,0 +1,33 @@
+# Paths are resolved relative to the expert root, including for --config overrides.
+data_root: ../../../benchmark_source/2019_ridgecrest_california/data/waveforms
+export_root: export
+candidate_window:
+  start_utc: '2019-07-04T00:00:00Z'
+  end_utc: '2019-07-07T00:00:00Z'
+pilot_window:
+  start_utc: '2019-07-04T16:00:00Z'
+  end_utc: '2019-07-04T16:10:00Z'
+methods:
+  picker: PhaseNet
+  weights: original
+  weight_version: '2'
+  implementation: TRACE-1.1 PhaseNet with SeisBench utilities
+  association: GaMMA
+  association_use_amplitude: false
+  absolute_location: NonLinLoc
+  velocity_model: pending_selection
+channel_policy:
+  primary_families: [HH, EH]
+  require_three_components_for_first_pilot: true
+  rotate_12_using_stationxml: true
+  hn_and_vertical_only: deferred_separate_input_conditions
+
+tools:
+  trace_library: ../../../../TRACE-1.1/seismoagent/library
+picking:
+  p_threshold: 0.3
+  s_threshold: 0.3
+  buffer_seconds: 60
+  cpu_workers: 4
+  cpu_threads: 1
+  batch_size: 32

@@ -1,0 +1,10 @@
+# Fixed before inspecting this experiment's outcomes.
+workers: 8
+validation_seed: 20190704
+validation_per_stratum: 25
+profile_step_km: 0.5
+profile_support_delta_chi2: 1.0
+pick_error_s: {P: 0.10, S: 0.20}
+model_error_s: 0.30
+# Only the selected controlled experiment will be applied to the validation sample.
+control: piecewise_constant_same_velocity_nodes

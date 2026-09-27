@@ -1,0 +1,24 @@
+# Descriptive review settings, not calibrated benchmark acceptance thresholds.
+common_start_utc: '2019-07-04T15:35:29.400Z'
+end_utc: '2019-07-07T00:00:00Z'
+latitude_bounds: [35.45, 36.05]
+longitude_bounds: [-117.90, -117.20]
+matching:
+  primary: [2.0, 5.0] # seconds, km; no depth gate
+  sensitivity: [[1.0, 3.0], [3.0, 10.0]]
+quality:
+  residual_outlier_s: 1.0
+  association_review_min_outliers: 3
+  association_review_fraction: 0.20
+  rms_review_s: 0.6
+  depth_sigma_review_km: 3.0
+  horizontal_shift_review_km: 2.0
+  depth_edge_km: 0.5
+  azimuth_gap_review_deg: 180.0
+waveforms:
+  workers: 4
+  stations_per_example: 8
+  bandpass_hz: [1.0, 15.0]
+  ordinary_window_s: [-10, 70]
+  post_arrival_seconds: 8.0 # shorten ordinary windows after their last selected pick
+  mainshock_window_s: [-20, 100]
