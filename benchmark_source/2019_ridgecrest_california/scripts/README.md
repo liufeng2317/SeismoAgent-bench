@@ -136,3 +136,7 @@ OPENBLAS_NUM_THREADS=1 python -B benchmark_source/2019_ridgecrest_california/scr
 Plots both Mw 6.4 and Mw 7.1 events ±10 minutes by default (`--event mw6_4` or `--event mw7_1` selects one) for each observed station's native vertical channel, ordered by epicentral distance. Raw-count and response-corrected-velocity figures are saved under `analysis/figures/waveform_examples/`, with one CSV and a focused figure description. Traces are independently normalized for readability; vertical spacing represents station rank, with distances labeled explicitly. Original waveforms are unchanged.
 
 Record-section artifacts use `mw6_4_record_section_*` and `mw7_1_record_section_*`. The short two-event example is `mw6_4_mw7_1_raw_examples`, and the historical archive comparison is `legacy_waveform_directory_comparison`.
+
+## Minimal raw-waveform shape screen
+
+`python -B benchmark_source/2019_ridgecrest_california/scripts/figures/screen_waveform_shapes.py` scans candidate raw counts for near-flat elevated platforms and isolated increments. It writes only a per-channel ranking CSV, seven-window diagnostic figure (PNG/PDF), and a short methods note under `analysis/figures/waveform_quality/`. This internal source check does not label ground truth, remove responses, repair data or prescribe agent preprocessing.

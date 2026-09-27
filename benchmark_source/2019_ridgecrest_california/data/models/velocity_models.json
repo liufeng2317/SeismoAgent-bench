@@ -17,6 +17,15 @@
       "vp_vs_ratio": 1.73,
       "vs_provenance": "Derived as Vp / 1.73; not an independently tabulated measurement",
       "depth_reference": "Table labels top of layer; exact model-coordinate/elevation handling must be checked in original implementation. Catalog nominal surface is 0.7 km above sea level; no automatic depth conversion applied.",
+      "layer_semantics": {
+        "published_representation": "Layer-top depths and one constant velocity per layer under the documented standard hypoDD travel-time convention; not linearly interpolated velocity nodes.",
+        "evidence": "Original paper PDF page 4, Table 1; Waldhauser (2001) Appendix B.3.1, TOP/VEL definitions; standard hypoDD ttime.f and vmodel.f.",
+        "software_reference": "https://www.ldeo.columbia.edu/~felixw/papers/Waldhauser_OFR2001.pdf",
+        "author_input_file_verified": false,
+        "implementation_limit": "Author-specific hypoDD release, exact input file and model-coordinate/elevation handling remain unverified.",
+        "expert_baseline_note": "Existing GaMMA/NonLinLoc linear-gradient runs are a distinct expert model variant. The stage-06 layered sensitivity uses the published layer interpretation but is not a reproduction of Shelly's relative-relocation workflow.",
+        "audit": "tasks/2019_ridgecrest_california/expert/export/07_audit_mainshocks/README.md"
+      },
       "rows": [
         {
           "top_of_layer_km": 0,
