@@ -6,3 +6,4 @@ This directory records completed implementation stages. Each stage record lists 
 | --- | --- | --- |
 | Framework foundation | [00_framework_foundation.md](00_framework_foundation.md) | Complete |
 | Output artifact validation | [01_output_artifact_validation.md](01_output_artifact_validation.md) | Complete |
+| Legacy evaluation cleanup | [02_legacy_evaluation_cleanup.md](02_legacy_evaluation_cleanup.md) | Complete |
