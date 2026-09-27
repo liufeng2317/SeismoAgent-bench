@@ -87,3 +87,7 @@ Next step:
 ```
 
 An implementation step is complete only when the objective is defined, the result is validated, the decision is recorded and the focused Git commit exists.
+
+## Backlog commit rule
+
+Before starting a new implementation phase, review all uncommitted work. Group it into small logical commits by function or document, and commit the groups separately. Do not commit large scientific data, raw waveforms, generated bulk products, credentials, personal information or local runtime state. Check the staged file list and `git diff --cached` before each commit.
