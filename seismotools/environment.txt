@@ -1,0 +1,14 @@
+# Observed seismoagent dependencies; not a complete portable lockfile.
+# Python 3.9.25; aarch64; CPU workflow
+numpy==1.26.4
+scipy==1.13.1
+pandas==2.3.0
+obspy==1.4.2
+torch==2.8.0
+seisbench==0.9.0
+scikit-learn==1.6.1
+pyproj==3.6.1
+numba==0.60.0
+tqdm==4.67.1
+packaging==24.2
+PyYAML==6.0.2

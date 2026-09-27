@@ -1,0 +1,1906 @@
+{
+  "schema_version": 1,
+  "description": "Local snapshots used by the Ridgecrest expert workflow; not automatically substituted into frozen runs.",
+  "tools": {
+    "phase_picking": {
+      "implementation": "Local TRACE-1.1 phase_picking model package, SeisBench utilities dependency",
+      "models": {
+        "PhaseNet": "original v2",
+        "EQTransformer": "original_nonconservative v1",
+        "DPPPicker P": "scedc, unversioned local file"
+      },
+      "license_status": "No standalone license file found in local model folder; preserve source notices and verify upstream redistribution terms."
+    },
+    "gamma": {
+      "implementation": "Local GaMMA; setup.py reports GMMA 1.2.17",
+      "license_status": "No standalone license file found in local source; redistribution terms need upstream verification."
+    },
+    "nonlinloc": {
+      "implementation": "NLL7.00_src, actual installed local source",
+      "license_status": "Preserve source and README notices."
+    },
+    "hypodd": {
+      "implementation": "Local hypoDD distribution plus executed stage-53 src/hypoDD and include files",
+      "variants": [
+        "CT",
+        "CT+CC"
+      ],
+      "license_status": "Preserve bundled README, manual and source notices; no new project license applied."
+    }
+  },
+  "files": [
+    {
+      "path": "gamma/docs/README.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/README.md",
+      "bytes": 3909,
+      "sha256": "f3839340009b474e9e636e7531be0f7d4059682f83a4c09006b8b0335980a6cc"
+    },
+    {
+      "path": "gamma/docs/app.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/app.py",
+      "bytes": 4428,
+      "sha256": "86395010d84b6a8cf0bdf55f3ca4c11cdde9ffaf14752307f5ddeb9dfb67b5eb"
+    },
+    {
+      "path": "gamma/docs/assets/2019-07-04T18-02-01.074.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/assets/2019-07-04T18-02-01.074.png",
+      "bytes": 405220,
+      "sha256": "644569333c2f3645b08193c4a2f7ec9561fc72a415a04e15aef37d924b61e0a5"
+    },
+    {
+      "path": "gamma/docs/assets/diagram_gamma_annotated.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/assets/diagram_gamma_annotated.png",
+      "bytes": 224542,
+      "sha256": "0efcc6c33b4aadc7a7a5aac0a3980954f21c6d39a6a8cb73bb3927ad883114ea"
+    },
+    {
+      "path": "gamma/docs/assets/result_eq05_err0.0_fp0.0_amp1.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/assets/result_eq05_err0.0_fp0.0_amp1.png",
+      "bytes": 293953,
+      "sha256": "8cdcda27f7b860ea5d62bacc6e050967acd53df965ec6053c4dfa6304011daab"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/API-Reference.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/API-Reference.md",
+      "bytes": 13844,
+      "sha256": "c81c112d03649e015690bcd7d018b57e53d92416ecc003c4d59346a7d98d4047"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Advanced-Topics.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Advanced-Topics.md",
+      "bytes": 11432,
+      "sha256": "ba9c8e56b5734927d2dfff1f5a19dd5ae2c626f97c6025a8c74c943193f89638"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Base-Classes.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Base-Classes.md",
+      "bytes": 9789,
+      "sha256": "ba51e08a32da3b9a171ca8215e42ef98133b915c721ae1a67684b4baced2a088"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/CI_CD-Pipeline.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/CI_CD-Pipeline.md",
+      "bytes": 8696,
+      "sha256": "70ca1b3ca2f86ccab08efef3cb8bda92864958d1f8709708b913a314af080f06"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Comparison-Tools.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Comparison-Tools.md",
+      "bytes": 10258,
+      "sha256": "128d7a7eb86027a0c5ebdae6487cfb99a9be6bcd8a1bc58d02b7cfc61a9e3bea"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Core-Association-Functions.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Core-Association-Functions.md",
+      "bytes": 12255,
+      "sha256": "a139bff6ee15885dcf72e51fee2abebdf330ddbd1aed55fe25724a455f87cdc7"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Core-Concepts.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Core-Concepts.md",
+      "bytes": 10338,
+      "sha256": "14ff22957fc0856aa858ae083aa3c89105a93c31883f9290551336008b864253"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Custom-Velocity-Models.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Custom-Velocity-Models.md",
+      "bytes": 11435,
+      "sha256": "421857d7ac9042143e5d754c223f6b7ec33a8877a8b567e89aa6412dbe889cea"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Development-Environment.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Development-Environment.md",
+      "bytes": 7199,
+      "sha256": "3d988ba05f58b18ae673dab8ff70f402060d0d19211744caec7db74524b2de28"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Development-and-Deployment.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Development-and-Deployment.md",
+      "bytes": 10358,
+      "sha256": "e722d6575fca3b3a47cfb8472d0e6b73144c5a17afb2d5c5f012478e61f2db5e"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Documentation-System.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Documentation-System.md",
+      "bytes": 8909,
+      "sha256": "79e456f7e571accc204687a2b7e60a652997d94987c92c9a397e1ef1efe2c486"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Examples-and-Tutorials.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Examples-and-Tutorials.md",
+      "bytes": 7446,
+      "sha256": "46dedb4a292f3726c0381f1a81dacae60dc0bbc7f964531cb72700e40687c999"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/FastAPI-Service-Usage.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/FastAPI-Service-Usage.md",
+      "bytes": 10653,
+      "sha256": "858db753ccc00a0a04d2e61d482ecaeb58788a577390b84fa029038705ccdc50"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Gaussian-Mixture-Models.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Gaussian-Mixture-Models.md",
+      "bytes": 10889,
+      "sha256": "43d881addfd87335acd85970ec3c811c37a56ab3f29b99022d7d1153e2d1bd7a"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Installation-and-Setup.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Installation-and-Setup.md",
+      "bytes": 9308,
+      "sha256": "6e1a10a54bc70578590ee39b29bcc9c0d49526f45947647055ec57b8085b6085"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Integration-with-Other-Tools.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Integration-with-Other-Tools.md",
+      "bytes": 9176,
+      "sha256": "149d67283ed66c47ce09b657ae3a65f22cbfc26bd49df13596f6c96fbc50071d"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Mixture-Model-Classes.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Mixture-Model-Classes.md",
+      "bytes": 8497,
+      "sha256": "281332a4bac27c136a7b4355598055c7b4385df81202e61382d1febb1c5cf032"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Overview.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Overview.md",
+      "bytes": 10365,
+      "sha256": "44e8e513e49d539ae138943304db9dfb9a1b93c4dd5620d61e6948bb923551be"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Performance-Analysis.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Performance-Analysis.md",
+      "bytes": 6651,
+      "sha256": "8a6164302b5fcf0b73ee2a3e161445f4ce338fdfd76e858beca91f684adca6e3"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/PhaseNet-Integration.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/PhaseNet-Integration.md",
+      "bytes": 8934,
+      "sha256": "40049186345e0767f66677404b63eb64d87647293763134e9b6d562ec8e04575"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/RANSAC-Integration.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/RANSAC-Integration.md",
+      "bytes": 8656,
+      "sha256": "38dc2ae1f6985b58d7b03695610ee214ec74d6a3bf3ea05a9547e548084b6836"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/README.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/README.md",
+      "bytes": 1610,
+      "sha256": "b76796718c74b4468f425e6f2034c3ce54c5817c4844081d55b8c876f9bebf80"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/SeisbBench-and-Other-Data-Sources.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/SeisbBench-and-Other-Data-Sources.md",
+      "bytes": 8429,
+      "sha256": "e3b456b77da81fd0538b5fffcc3a387df593de0ddf2b93ced9039966a4bbd9a5"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Seismic-Event-Association.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Seismic-Event-Association.md",
+      "bytes": 14503,
+      "sha256": "22cdf9eb6a183d21940c9f65340f8e88c3336cbecd56071f95bfa4ad4d53101c"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Seismic-Operations.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Seismic-Operations.md",
+      "bytes": 9986,
+      "sha256": "5c18ba4b9ba3ddedb35affe4d0333bd8f96ba0be2e5e67e49f4c859598ea3d22"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Synthetic-Data-Examples.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Synthetic-Data-Examples.md",
+      "bytes": 5955,
+      "sha256": "f6e1ade44e3b13691a33a3635ac08223252750093ce52c819b520add80de5efa"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Testing-Framework.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Testing-Framework.md",
+      "bytes": 11502,
+      "sha256": "2efe8a87cc323d137bd9f8026de5c92aab0e4b6549657d0ac2e1dbd7ebd8b605"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Testing-and-Validation.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Testing-and-Validation.md",
+      "bytes": 8878,
+      "sha256": "598a92a05ccf93c49574560f25d00e5120bac21ba6eaf3efb3165fb0b1b3a770"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Travel-Time-Calculation.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Travel-Time-Calculation.md",
+      "bytes": 9441,
+      "sha256": "1bdd613de90f4f529f34571baf591af2d9c60ca80e6d383dfcc841795c7ed631"
+    },
+    {
+      "path": "gamma/docs/deepwiki-document/Web-API.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/deepwiki-document/Web-API.md",
+      "bytes": 8640,
+      "sha256": "3c121428785f25e66765fed038669fc87f2321731314e909788fd5bf8ed35d95"
+    },
+    {
+      "path": "gamma/docs/example_fastapi.ipynb",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/example_fastapi.ipynb",
+      "bytes": 21119,
+      "sha256": "38e3b505af5653227d77baef391e5f3f9be355be9cf1605902991cd8bb439ee5",
+      "source_sha256": "ff68ff4795a9e05f24142e526e0aaddced5934c9c19ff443db4fc95e0202d4de",
+      "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
+    },
+    {
+      "path": "gamma/docs/example_phasenet.ipynb",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/example_phasenet.ipynb",
+      "bytes": 32841,
+      "sha256": "3423e9adda10cc6052c45e58dddfbdc83abe22e35120eefcc3245caba7447aad",
+      "source_sha256": "65efbf35c6f89842e98420013836f3699ff3f188fbfcfa2f048b5c80165ae761",
+      "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
+    },
+    {
+      "path": "gamma/docs/example_phasenet_ncedc.ipynb",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/example_phasenet_ncedc.ipynb",
+      "bytes": 34002,
+      "sha256": "01403acfb5f39ae70c50a3bd3829d321c58c108b99200073e526fc5c8180082d",
+      "source_sha256": "a25e71b3b60a66cf5569b7e5f955fb00f4c645c99e34aaa1e807ab78972fb823",
+      "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
+    },
+    {
+      "path": "gamma/docs/example_seisbench.ipynb",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/example_seisbench.ipynb",
+      "bytes": 19963,
+      "sha256": "930298a7c014c25744f5e51e5df8c50566b9210a16467f2961cc0396b9f6f7a5",
+      "source_sha256": "46a8bbdefec0251b5905a8e368211c198ff32528e010c622b3c4d1cc794ee4a2",
+      "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
+    },
+    {
+      "path": "gamma/docs/example_synthetic.ipynb",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/example_synthetic.ipynb",
+      "bytes": 14192,
+      "sha256": "958c14e5e88a7a5943acdc6f51938e7772f45bed90a35d0cf04ec37b3276cdcc",
+      "source_sha256": "5ffb00fbf056a0ef8b75d47ec14944cbd9230e2f351f7a7418bf7c521b6e7ceb",
+      "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
+    },
+    {
+      "path": "gamma/docs/figures/covariance.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/figures/covariance.png",
+      "bytes": 121745,
+      "sha256": "ecddf7725272ce3fd92e5fcbf67f235481fdcd89ee80f82992bc4d1794c19d18"
+    },
+    {
+      "path": "gamma/docs/figures/earthquake_location.pdf",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/figures/earthquake_location.pdf",
+      "bytes": 74762,
+      "sha256": "9e10c26a377c3fe6973ce60225e5a330015eb82da65e2e9f92942b17e9ea00b2"
+    },
+    {
+      "path": "gamma/docs/figures/earthquake_location.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/figures/earthquake_location.png",
+      "bytes": 457699,
+      "sha256": "17e690553d25064e130ba7c19c219bd63b7f5320fb3a74c089b67954f295d97a"
+    },
+    {
+      "path": "gamma/docs/figures/earthquake_magnitude_frequency.pdf",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/figures/earthquake_magnitude_frequency.pdf",
+      "bytes": 11138,
+      "sha256": "c00f2d8cfaea30c62ffa2576abf01c5c4dbc8246fee691a641f9810089f30eb0"
+    },
+    {
+      "path": "gamma/docs/figures/earthquake_magnitude_frequency.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/figures/earthquake_magnitude_frequency.png",
+      "bytes": 39743,
+      "sha256": "9b2a8c1e25d4ad88a046cac79814e8e2d40b997b8075981f45e4d1d751564c9d"
+    },
+    {
+      "path": "gamma/docs/figures/earthquake_magnitude_time.pdf",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/figures/earthquake_magnitude_time.pdf",
+      "bytes": 24710,
+      "sha256": "15a05434d9a82df0aa9f9891dcbac5567c564d8680b56648557a18c8da077b67"
+    },
+    {
+      "path": "gamma/docs/figures/earthquake_magnitude_time.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/figures/earthquake_magnitude_time.png",
+      "bytes": 68788,
+      "sha256": "5bad9942a18715ccc38e631913c2972f234f825d0d08efb6b31ef3d6a60ca174"
+    },
+    {
+      "path": "gamma/docs/figures/earthquake_number.pdf",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/figures/earthquake_number.pdf",
+      "bytes": 10820,
+      "sha256": "122e93c9931e90e8bfa46c80273e1a26dbcc558a02f953140afae1d1f9b329f7"
+    },
+    {
+      "path": "gamma/docs/figures/earthquake_number.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/figures/earthquake_number.png",
+      "bytes": 47628,
+      "sha256": "cde39fc3c5e47081108a0079e79e7129e2ab4bb6a8cf602bbb3514cbc3d4f4e7"
+    },
+    {
+      "path": "gamma/docs/retrieval_descriptions.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/gamma_embeddings_qwen.jsonl",
+      "bytes": 83203,
+      "sha256": "f1cb38d64a1f3f8cad7b2a5160a68e198fe0d30f6e7ef2b17065a2c604e12797",
+      "source_sha256": "ba0aeadab9f67ec07c602c1ce1bccce0b1b965f368d2190d783fae98be661530",
+      "transformation": "Extracted description text without embedding vectors."
+    },
+    {
+      "path": "gamma/docs/test_data/figures/covariance.pdf",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/test_data/figures/covariance.pdf",
+      "bytes": 80926,
+      "sha256": "8fedc944127de918106855efd410b13cf87f2172013d247816e1a5aa2ff9d231"
+    },
+    {
+      "path": "gamma/docs/test_data/figures/earthquake_location.pdf",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/test_data/figures/earthquake_location.pdf",
+      "bytes": 204396,
+      "sha256": "fde4c54f415eeeb409189312464ad36e4779f1ab0fc0b6eb111de78d1ddd49ba"
+    },
+    {
+      "path": "gamma/docs/test_data/figures/earthquake_magnitude_frequency.pdf",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/test_data/figures/earthquake_magnitude_frequency.pdf",
+      "bytes": 13743,
+      "sha256": "505b4a0865856cf04edf0d6d5366d9b580d739fe266427f2455e5b93cf7667eb"
+    },
+    {
+      "path": "gamma/docs/test_data/figures/earthquake_magnitude_time.pdf",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/test_data/figures/earthquake_magnitude_time.pdf",
+      "bytes": 216373,
+      "sha256": "516a01352386cef402b20247b3fb0f79c53f7eb23e684c5503be829fcf2646bf"
+    },
+    {
+      "path": "gamma/docs/test_data/figures/earthquake_number.pdf",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/docs/test_data/figures/earthquake_number.pdf",
+      "bytes": 13175,
+      "sha256": "6256bd97ed2e9230a4292d9792b0f0bffdc524a1302d9b564ceb6c021fd7505c"
+    },
+    {
+      "path": "gamma/source/gamma/__init__.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/gamma/__init__.py",
+      "bytes": 330,
+      "sha256": "7c180d8f370eab2027037fa88a80b3811c4e94a3eafeafd0941977826701d97c"
+    },
+    {
+      "path": "gamma/source/gamma/_base.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/gamma/_base.py",
+      "bytes": 19630,
+      "sha256": "ebf7f4c1da68272923daa672367a7d86c570bd566e00a4cfb1a6b807e85dd652"
+    },
+    {
+      "path": "gamma/source/gamma/_bayesian_mixture.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/gamma/_bayesian_mixture.py",
+      "bytes": 34661,
+      "sha256": "1026e9617c39c385a207c5182397547a48bf68f58259d7e333f6bb036d793f9e"
+    },
+    {
+      "path": "gamma/source/gamma/_gaussian_mixture.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/gamma/_gaussian_mixture.py",
+      "bytes": 36363,
+      "sha256": "ee2830a50a55cdf99c7eaded150f1fab6cdc402c7ec81fbbd8db61867b3871b7"
+    },
+    {
+      "path": "gamma/source/gamma/seismic_ops.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/gamma/seismic_ops.py",
+      "bytes": 20266,
+      "sha256": "07da19f9c2104e4b1d7b0a4c78b09dc0610e781ae5688be3bb05b2e6ba720ffc"
+    },
+    {
+      "path": "gamma/source/gamma/utils.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/gamma/utils.py",
+      "bytes": 30789,
+      "sha256": "d1331f1ebcfdc6eb1ac9c654a4fadece46962d94213b6e537e5f3d851ee7c59c"
+    },
+    {
+      "path": "gamma/source/requirements.txt",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/requirements.txt",
+      "bytes": 53,
+      "sha256": "a162148b2dda85ef8cb303ebc8907870021d3259ecd6c875d8affb049fc7de82"
+    },
+    {
+      "path": "gamma/source/setup.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/setup.py",
+      "bytes": 313,
+      "sha256": "c62a9f03cc1a8b7c583634cca97015dc8e10594b252534d683e6da149b4db5a6"
+    },
+    {
+      "path": "gamma/source/tests/GaMMA.ipynb",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/GaMMA.ipynb",
+      "bytes": 18759,
+      "sha256": "92aaf94fa08d1a33e3b4151ec4bff26dfaffc484a8a7cc02ad03ed3010406264",
+      "source_sha256": "8170003e806fa34b6d467c3399ea50b5ab76f1efa1b0282b4831789daa9235dc",
+      "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
+    },
+    {
+      "path": "gamma/source/tests/comparison.ipynb",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/comparison.ipynb",
+      "bytes": 45298,
+      "sha256": "44d74e4ca80bbc19aabd2f3e867ea08415468991aaa612502037d25e2093f1ae",
+      "source_sha256": "3e511414143de4b4859eb615317f129ddd8d49e86ca59b89dc32a47c56aa328b",
+      "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
+    },
+    {
+      "path": "gamma/source/tests/comparison/compare_eikogamma.ipynb",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/comparison/compare_eikogamma.ipynb",
+      "bytes": 10460,
+      "sha256": "9e8d03b12f077b3241b6d9964b9af406f7e3c752f257dcf10e4f6f4a17dfb8aa",
+      "source_sha256": "378ffc912cf08a7089a8331e6eac2267a00b281ecf4de1d181839c57a6c224a1",
+      "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
+    },
+    {
+      "path": "gamma/source/tests/comparison/real/run.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/comparison/real/run.py",
+      "bytes": 2739,
+      "sha256": "6ed484bf62098a50e75bed3b4e479734e1464dcce8aca52ca1e3158001c715bc"
+    },
+    {
+      "path": "gamma/source/tests/comparison/real/tt_db/taup_tt.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/comparison/real/tt_db/taup_tt.py",
+      "bytes": 1744,
+      "sha256": "08b980e0021c42f287a594df953cdbe3e0a049c3da5dcb5ff61b80448102e733"
+    },
+    {
+      "path": "gamma/source/tests/comparison/statistics.ipynb",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/comparison/statistics.ipynb",
+      "bytes": 17558,
+      "sha256": "9638459abd91909b0330fb813ba0787bc3e2ee035ee22ff0d7b94fb404f6a3c9",
+      "source_sha256": "291040af784ef428475f8d0693140d9e913c6533edf890513cd98e2a3c021c75",
+      "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
+    },
+    {
+      "path": "gamma/source/tests/comparison/synthetic_ridgecrest_data.ipynb",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/comparison/synthetic_ridgecrest_data.ipynb",
+      "bytes": 16473,
+      "sha256": "0a04ee08622cc86a8f25f320d6c9060092186ef09ede406bf513ce6c5081edc7",
+      "source_sha256": "dc4d120e5cede7fa89367cacf014b7cd49c29bc47216b8dab519e7420939407e",
+      "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
+    },
+    {
+      "path": "gamma/source/tests/comparison/synthetic_ridgecrest_gamma.ipynb",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/comparison/synthetic_ridgecrest_gamma.ipynb",
+      "bytes": 20713,
+      "sha256": "7698f72f47d3e8c4d684b862f1013f3047356443cf998429bc29e9651e3ddf80",
+      "source_sha256": "2be24f26016d345437fc1eea4b99a7f30d64960c68dfb263beb242200578513d",
+      "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
+    },
+    {
+      "path": "gamma/source/tests/diagram_gamma.ipynb",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/diagram_gamma.ipynb",
+      "bytes": 9544,
+      "sha256": "7f57a2b58d6a14fbbbb2c4f6baaf6f989e769e43bfb3a138503713d98145d8b0",
+      "source_sha256": "3486419089d47f1a9db0e888fddef8d5aebfdbf6860d46199735732bef8cfd42",
+      "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
+    },
+    {
+      "path": "gamma/source/tests/example_phasenet.ipynb",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/example_phasenet.ipynb",
+      "bytes": 19415,
+      "sha256": "af3e2ef742e44b81b4610d408d9b0c26f54af7364b847ccce1a77b189b8873d7",
+      "source_sha256": "e2e65cda1462322939f0ae1b3c8875d5518342553c1425597d6dc773f9960cb5",
+      "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
+    },
+    {
+      "path": "gamma/source/tests/example_phasenet_neuma.ipynb",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/example_phasenet_neuma.ipynb",
+      "bytes": 22026,
+      "sha256": "561ad4d9f170873ae535f637d331635502f5283649035f76afaf5b0ec4dd1723",
+      "source_sha256": "145c2e5325d30fec06743b454902c3e4912fd77255c750c8d5df401617b8eee0",
+      "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
+    },
+    {
+      "path": "gamma/source/tests/statistics.ipynb",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/statistics.ipynb",
+      "bytes": 2752,
+      "sha256": "1bf6e77c1c8c8dc5f2085b9eaf2e40a5043cd02851b0e711a9e0df36ba63e419",
+      "source_sha256": "82d8fabe150a4dec24a6bd7c1faf4eb51241f64f458257b90586162be578589e",
+      "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
+    },
+    {
+      "path": "gamma/source/tests/synthetic_example.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/synthetic_example.py",
+      "bytes": 11719,
+      "sha256": "ada753d021418e3a82b6dca3f5d7875d3002504d8b41098939bc702e04767a96"
+    },
+    {
+      "path": "gamma/source/tests/test_seismoc_ops.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/test_seismoc_ops.py",
+      "bytes": 3752,
+      "sha256": "8d4ca953f24a2fd811a4bc7def82b6f697abab38612686867d02a86cf6746570"
+    },
+    {
+      "path": "gamma/source/tests/util.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/util.py",
+      "bytes": 21664,
+      "sha256": "5ac244b4f08486eb60e08d13b2dd053f18ffae11107926f46039a372ac25e931"
+    },
+    {
+      "path": "hypodd/source/README",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/README",
+      "bytes": 3528,
+      "sha256": "d4cd4ed30e75f257c391b539fa3a1fa8a131c487fed19a3f3c0f1477db2dfba5"
+    },
+    {
+      "path": "hypodd/source/doc/README",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/doc/README",
+      "bytes": 377,
+      "sha256": "5cf275bbb44e3e92c494e2cb5539fe227425fd54c5786d698595a81992e4d093"
+    },
+    {
+      "path": "hypodd/source/doc/hypoDD.pdf",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/doc/hypoDD.pdf",
+      "bytes": 599228,
+      "sha256": "d0d70fff59e5dd4fc4a3f5c664a445184711db662f4e0505647ddbf2c6e51baa"
+    },
+    {
+      "path": "hypodd/source/include/README",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/README",
+      "bytes": 315,
+      "sha256": "0f2ba3d58debe7e6b95fb3ee6734ef001a6f397adedb052ae4fdaa2c93880248"
+    },
+    {
+      "path": "hypodd/source/include/compat.h",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/compat.h",
+      "bytes": 368,
+      "sha256": "1a9d6aa4f5f4dd8aa1d4477f2c86ba15a62ae047d40ec7943da4957b2abc0cfb"
+    },
+    {
+      "path": "hypodd/source/include/f77types.h",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/f77types.h",
+      "bytes": 390,
+      "sha256": "bd470be04d7b77095027986f13ca9e8625cc4fa92a6d8f4fc44471bffd809e1e"
+    },
+    {
+      "path": "hypodd/source/include/geocoord.inc",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/geocoord.inc",
+      "bytes": 361,
+      "sha256": "4ee4d47d739a8f44be0618a2ea36205c449df0a9719863cbfa3e1ba4f6a3696d"
+    },
+    {
+      "path": "hypodd/source/include/hypoDD.inc",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/hypoDD.inc",
+      "bytes": 192,
+      "sha256": "471f9ddd3d11162f4018def57240adf1dd5c4653ceb47634faeef4a33f705f51"
+    },
+    {
+      "path": "hypodd/source/include/ph2dt.inc",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/ph2dt.inc",
+      "bytes": 545,
+      "sha256": "c9a6139cd7a4f2f63e80040fca29854e4603ada45727db9e2a206fc4f75beeaa"
+    },
+    {
+      "path": "hypodd/source/src/Makefile",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/Makefile",
+      "bytes": 188,
+      "sha256": "fc4cb83c6e484479c9afe7c0da02e9276dbfe5f52a7921e33499ce7abce14c85"
+    },
+    {
+      "path": "hypodd/source/src/README",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/README",
+      "bytes": 739,
+      "sha256": "7fe51e5c9ac43f0c8289708a168fd6c8ede7e1c73a89200b25a774875e5a8bc1"
+    },
+    {
+      "path": "hypodd/source/src/hista2ddsta/Makefile",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/hista2ddsta/Makefile",
+      "bytes": 594,
+      "sha256": "9f3f5ba2d2387507e906169ee17584c8a60ec5fb5ee9e4ac2e855061d0cc66e0"
+    },
+    {
+      "path": "hypodd/source/src/hista2ddsta/README",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/hista2ddsta/README",
+      "bytes": 1589,
+      "sha256": "24b32d43dfbd01e6459ab05c5d9d378592f3245daf5979cd5dab75db2bf60507"
+    },
+    {
+      "path": "hypodd/source/src/hista2ddsta/hista2ddsta.f",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/hista2ddsta/hista2ddsta.f",
+      "bytes": 901,
+      "sha256": "07ccb31562d23a646c1e7c1100bc5b353ed6cc21e08837b07a4a767a89731c0e"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/Makefile",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/Makefile",
+      "bytes": 2058,
+      "sha256": "19c1bc04499787e8d9fdb38697df396f14c4ecc33f6e31359f80a26afd628a49"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/aprod.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/aprod.f",
+      "bytes": 1136,
+      "sha256": "e659a557ee430ad41d71e4cd2eb94fd98af71901401d57f75c164dcd17193877"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/atoangle.c",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/atoangle.c",
+      "bytes": 650,
+      "sha256": "74f3de0224467d5121b798d49b5ed226905539efbec414b90fe86c13f9234040"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/atoangle_.c",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/atoangle_.c",
+      "bytes": 502,
+      "sha256": "7abd781e46eafa8558b857b0aa628bda0baaa257a22759c423b0c0c756069d7d"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/cluster1.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/cluster1.f",
+      "bytes": 5266,
+      "sha256": "0f0fd0e3023cf70a8c6c4fff086ea49c11a1a141985e64564ac8669ebc6f70c8"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/covar.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/covar.f",
+      "bytes": 525,
+      "sha256": "bc46e0623ddf4d2537af0ea9b1980129ca96dca31e420b05e04e4ebc44a3faaf"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/datetime_.c",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/datetime_.c",
+      "bytes": 529,
+      "sha256": "48cca6b4bdfa3e589e8af7c98f4c71e0a4bd5618478d32b60a98fb941e2f019c"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/datum.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/datum.f",
+      "bytes": 1184,
+      "sha256": "769b9b584a84effa8283597262e0649bfeedc42702b597b279432a809ed1e702"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/delaz.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/delaz.f",
+      "bytes": 1816,
+      "sha256": "4d90ee58f57091f95c41974ba28ae0fa8fbd72c3bc7906996fc26935ee460dd3"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/delaz2.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/delaz2.f",
+      "bytes": 2561,
+      "sha256": "e3650361a2777af4c8e835b98540b60feb2f3e23393952877444f8caf9c0dfe2"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/direct1.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/direct1.f",
+      "bytes": 4956,
+      "sha256": "292bbb091896582d4fd7ac04f01af6d3e61422aaea0350f3d944e19bb940ed15"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/dist.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/dist.f",
+      "bytes": 834,
+      "sha256": "6f2c457cd3d9ec6640896251081d04a30c09585a5a6336fc3e06e2d05aabffda"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/dtres.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/dtres.f",
+      "bytes": 2135,
+      "sha256": "a366d4fedcfc31c5b1ff95f674e52803033205d4edda74004bfe5b768145b5d6"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/exist.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/exist.f",
+      "bytes": 267,
+      "sha256": "c118bf408b8c5fd90db83786b646e212e6576fa07bb0bd9d639f68d15d1e961d"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/freeunit.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/freeunit.f",
+      "bytes": 363,
+      "sha256": "731b860ccb2b1570c4c29b2b2763d62b9a3adf6018eeba539f6c5090bdf93e61"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/getdata.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/getdata.f",
+      "bytes": 18285,
+      "sha256": "00c0e06de2537f4e73a2931ea51603c21b78dd24d6c3ec498b6909e22d8c49c2"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/getinp.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/getinp.f",
+      "bytes": 7863,
+      "sha256": "b15448159a00fcb98ba6f842917c1401e587f0deed45295585f939609e9ee3d6"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/hypoDD.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/hypoDD.f",
+      "bytes": 31871,
+      "sha256": "517e5e2926a20084b3756913e719c65712c5f1a4dfbabc2db70d242914885a03"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/hypot_.c",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/hypot_.c",
+      "bytes": 296,
+      "sha256": "f85dcf757a62858697f64a38b72bd86cad930c4beb5dd12606dd98889e6e8fa0"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/ifindi.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/ifindi.f",
+      "bytes": 938,
+      "sha256": "55ffc3028398f1dd02226d1b66aff7b08c39d151cbac6cc3310e00e74126740a"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/indexxi.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/indexxi.f",
+      "bytes": 1169,
+      "sha256": "ba2bf5eafca24e22cf07cfe35d218bafd085ea213ec5c1c264cb5363f79792e9"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/juliam.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/juliam.f",
+      "bytes": 880,
+      "sha256": "c85825a28c276ba6202ad527f5147f56ed9f48d07e9705829f218a9e84d62992"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/lsfit_lsqr.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/lsfit_lsqr.f",
+      "bytes": 10434,
+      "sha256": "330149078abf2e89f35b03cfad1f6f8ed15ae93ae22fce3f5d2862acdc51c422"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/lsfit_svd.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/lsfit_svd.f",
+      "bytes": 10011,
+      "sha256": "c3a7e95d04a5eb08a1fd76434924d551b71e4b9dedaa94d5542ae877e1c11673"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/lsfit_svd_zfix.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/lsfit_svd_zfix.f",
+      "bytes": 10467,
+      "sha256": "80bec63718eacd72e0225973d77dad4bee0a9853be903fea87e9ad638a708c20"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/lsqr.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/lsqr.f",
+      "bytes": 18829,
+      "sha256": "5f585a5d2bbb1c93aedf4735012fd7666700e620c6699a4d862ac8fba4aa983f"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/matmult1.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/matmult1.f",
+      "bytes": 533,
+      "sha256": "0b890ba4caa2bfbd03645dc3c8e762714d92c3f1c6b144c3bd230007366e0224"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/matmult2.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/matmult2.f",
+      "bytes": 444,
+      "sha256": "58c87259b96d8dca3a5aaaa1f0cbbafd905022e0c90101fb3bbce67357883ae9"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/matmult3.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/matmult3.f",
+      "bytes": 420,
+      "sha256": "9eb526e4010c2a36b80e4522e507faab50d94873b4268dfcc62a04c7a42bcad4"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/mdian1.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/mdian1.f",
+      "bytes": 355,
+      "sha256": "ff1391a235e112f1fabeada976be5ec7b3dc1be7c383521b264d5caf7b3054d5"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/normlz.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/normlz.f",
+      "bytes": 471,
+      "sha256": "6f4336065394771a53eff72bd4cbe97520db5ad4ca8be4fa701e8aa418467b33"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/partials.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/partials.f",
+      "bytes": 3173,
+      "sha256": "515e7a576f70b49170d0f6542fd87bfa8201c85d03fba358b0b8eef0addc9ad1"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/partials_1D.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/partials_1D.f",
+      "bytes": 4406,
+      "sha256": "9dd2e4996ec9a690827f2b866e919a8dc3941f5f013d45fc04c54aab8fdacdc1"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/ran.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/ran.f",
+      "bytes": 402,
+      "sha256": "ab66d6c26b4a4cdb27401a23b92b82a2d52d6c978d4700c9a3565b1be8b1b711"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/redist.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/redist.f",
+      "bytes": 1182,
+      "sha256": "65d12b1d967a6670ccfc90234fbe639c96cb01981aa872dc8ba127cf84b294f4"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/refract.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/refract.f",
+      "bytes": 4286,
+      "sha256": "5a9c9e49e77df4eb9fbd392d827a008ce8003ede51d284a2872b2649fe157917"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/resstat.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/resstat.f",
+      "bytes": 5646,
+      "sha256": "ae4f389d85c8174783e1a212779e3cd300335040322b2da29310a6a6bd686bc6"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/rpad_.c",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/rpad_.c",
+      "bytes": 507,
+      "sha256": "0fec4fc12577f3514c3c8d51421767db163bf00e7146659e408b4cd9f2d887ca"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/scopy.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/scopy.f",
+      "bytes": 1514,
+      "sha256": "0a9799a7b6dfc1f1c02595a2fe407783274589a16c0c19e34629dfd355ba2c1a"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/sdc2.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/sdc2.f",
+      "bytes": 469,
+      "sha256": "73c8e00589dbac6613004149ada063ebc16b1a3a36eff5dafda917bde019a861"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/setorg.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/setorg.f",
+      "bytes": 4761,
+      "sha256": "851e168cea37165cba27c230c7c3642cd1fde3e5b2df1e2d083dc19f96e42e60"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/skip.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/skip.f",
+      "bytes": 8427,
+      "sha256": "8b02fb4779230189e41b79697f10dde018c9fa142648270b698a71e9752e831f"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/snrm2.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/snrm2.f",
+      "bytes": 3831,
+      "sha256": "f0a540cff21eb2c7b8b2aab889897f8d9bc1e41b5cea2ea6d57c2a07c63c8ef3"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/sort.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/sort.f",
+      "bytes": 936,
+      "sha256": "c2eb3fd0ecce053278f206d0fc2ae24bf4e0d4e945489a7d095340e23ed1b56e"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/sorti.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/sorti.f",
+      "bytes": 841,
+      "sha256": "38648412b0110278b927bcd58c99d41dbaba46119d083adda75856f8ecdf4a54"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/sscal.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/sscal.f",
+      "bytes": 1049,
+      "sha256": "d690b80c64004a3f1cd24c37f9c25fe76c1e3fa9ec7190a474434ca4451b282c"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/sscanf3_.c",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/sscanf3_.c",
+      "bytes": 452,
+      "sha256": "38cf3711ec46948e2db92d5d26aef72c5290c77084b188979a7c79ac6f3b9c35"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/svd.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/svd.f",
+      "bytes": 5732,
+      "sha256": "04e02a33a36f4ac5d6958d30678c0ca7793225b3326901c2c37a91a630c028cb"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/tiddid.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/tiddid.f",
+      "bytes": 1998,
+      "sha256": "8876ef5b1e99e598a5899cb116b2eea50b95d622935e9a40706998c60f2295df"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/trialsrc.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/trialsrc.f",
+      "bytes": 2552,
+      "sha256": "a9c0a42318427906fbf0fcc51cb012ca80567829bc8848e9a7c048f971ba41c2"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/trimlen.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/trimlen.f",
+      "bytes": 266,
+      "sha256": "e398112c11a9dcd06caf4226b8fafc72c29238b032e45962da53098b1ad8857e"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/ttime.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/ttime.f",
+      "bytes": 2347,
+      "sha256": "8c9bb28c9d16ab71a91fd85e0ec96f390a0e5bea7c2ec101f88d23f1fdee256e"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/vmodel.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/vmodel.f",
+      "bytes": 1121,
+      "sha256": "35ce1faf8b1be599cf4e33ec5d1f498737a3d3269e01ee224d52674e8d5f8d59"
+    },
+    {
+      "path": "hypodd/source/src/hypoDD/weighting.f",
+      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/weighting.f",
+      "bytes": 6832,
+      "sha256": "5c2a0dca131ed4b15a1d4d8eace8085f60f5c72b32882d741a9cc94b573df5f0"
+    },
+    {
+      "path": "hypodd/source/src/ncsn2pha/Makefile",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/ncsn2pha/Makefile",
+      "bytes": 510,
+      "sha256": "bd5d435494f9166ba470fa87849770d254cd62de5140baa2af0230a2cd7f266b"
+    },
+    {
+      "path": "hypodd/source/src/ncsn2pha/ncsn2pha.f",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/ncsn2pha/ncsn2pha.f",
+      "bytes": 9668,
+      "sha256": "1775df17491e3bf197212dee4d6ceb4e454e9f908508d75eabf56db50451e777"
+    },
+    {
+      "path": "hypodd/source/src/ph2dt/Makefile",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/ph2dt/Makefile",
+      "bytes": 786,
+      "sha256": "41abfddef63906ee5cf3a343b07d97e0848656225323e9481b7ba1ca6559ac29"
+    },
+    {
+      "path": "hypodd/source/src/ph2dt/atoangle.c",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/ph2dt/atoangle.c",
+      "bytes": 649,
+      "sha256": "41706135eda49b71865dbafd77056f48c5afe0c73cfb83e7e8efd63a83e2403a"
+    },
+    {
+      "path": "hypodd/source/src/ph2dt/atoangle_.c",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/ph2dt/atoangle_.c",
+      "bytes": 496,
+      "sha256": "536409c88ff24a47272e6994ee66a02843cd13b86be8e1b777da877cf25e2523"
+    },
+    {
+      "path": "hypodd/source/src/ph2dt/cluster.f",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/ph2dt/cluster.f",
+      "bytes": 4486,
+      "sha256": "7ac7e5232dfaabcc3535851fa7e03f1bb2740c7612326fb8d6a0c3da55a0079b"
+    },
+    {
+      "path": "hypodd/source/src/ph2dt/datetime.f",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/ph2dt/datetime.f",
+      "bytes": 267,
+      "sha256": "aab66974321fd1e0b1d02b96c1114429e73c053119434965c781450dc7869e54"
+    },
+    {
+      "path": "hypodd/source/src/ph2dt/datetime_.c",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/ph2dt/datetime_.c",
+      "bytes": 529,
+      "sha256": "48cca6b4bdfa3e589e8af7c98f4c71e0a4bd5618478d32b60a98fb941e2f019c"
+    },
+    {
+      "path": "hypodd/source/src/ph2dt/delaz.f",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/ph2dt/delaz.f",
+      "bytes": 2438,
+      "sha256": "935b9b4cfc08fcbb52a89279d5a91470683069aa27d50b5feee926f03754c943"
+    },
+    {
+      "path": "hypodd/source/src/ph2dt/ifindi.f",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/ph2dt/ifindi.f",
+      "bytes": 938,
+      "sha256": "55ffc3028398f1dd02226d1b66aff7b08c39d151cbac6cc3310e00e74126740a"
+    },
+    {
+      "path": "hypodd/source/src/ph2dt/indexx.f",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/ph2dt/indexx.f",
+      "bytes": 1079,
+      "sha256": "f41fe39459a624cbc08ba6531da429045b698d35e67a206d48b645478981c310"
+    },
+    {
+      "path": "hypodd/source/src/ph2dt/indexxi.f",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/ph2dt/indexxi.f",
+      "bytes": 1169,
+      "sha256": "ba2bf5eafca24e22cf07cfe35d218bafd085ea213ec5c1c264cb5363f79792e9"
+    },
+    {
+      "path": "hypodd/source/src/ph2dt/ph2dt.f",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/ph2dt/ph2dt.f",
+      "bytes": 21418,
+      "sha256": "fc77ee01c20dbcb82c4338d6d2b0a03e3f2402db401778d5e7e3276ea8a77c9d"
+    },
+    {
+      "path": "hypodd/source/src/ph2dt/rpad_.c",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/ph2dt/rpad_.c",
+      "bytes": 507,
+      "sha256": "0fec4fc12577f3514c3c8d51421767db163bf00e7146659e408b4cd9f2d887ca"
+    },
+    {
+      "path": "hypodd/source/src/ph2dt/sorti.f",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/ph2dt/sorti.f",
+      "bytes": 841,
+      "sha256": "38648412b0110278b927bcd58c99d41dbaba46119d083adda75856f8ecdf4a54"
+    },
+    {
+      "path": "hypodd/source/src/ph2dt/sscanf3_.c",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/ph2dt/sscanf3_.c",
+      "bytes": 452,
+      "sha256": "38cf3711ec46948e2db92d5d26aef72c5290c77084b188979a7c79ac6f3b9c35"
+    },
+    {
+      "path": "hypodd/source/src/ph2dt/trimlen.f",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/src/ph2dt/trimlen.f",
+      "bytes": 266,
+      "sha256": "e398112c11a9dcd06caf4226b8fafc72c29238b032e45962da53098b1ad8857e"
+    },
+    {
+      "path": "hypodd/source/util/README",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_source/util/README",
+      "bytes": 113,
+      "sha256": "df327856acc93b914907f5d004b4f1885f201b5295da55c3f621f6bdf4145093"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/build/html/_static/comment-bright.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/comment-bright.png",
+      "bytes": 756,
+      "sha256": "0737b92f8825f5ed0740482819f3fba7826297908bbd44ff00b64ee95d262d60"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/build/html/_static/comment-close.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/comment-close.png",
+      "bytes": 829,
+      "sha256": "866319c7cf09c3d5b2926ea9d9f068801c8ee0724dac66604b03ac50b1829577"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/build/html/_static/comment.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/comment.png",
+      "bytes": 641,
+      "sha256": "5fb8b0b215a51fc05bc152a12ab32d44cda758721c5df53f2aeab1b1e3490aa5"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/build/html/_static/down-pressed.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/down-pressed.png",
+      "bytes": 222,
+      "sha256": "c89ca40639d0bb71502306afdbc8646f6ef362b79c54a8f9211aa290ad8b3635"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/build/html/_static/down.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/down.png",
+      "bytes": 202,
+      "sha256": "75fc30ab04aa494f8ab239fba636663b950ccff763bd3b95a3c214ee2344ec89"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/build/html/_static/file.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/file.png",
+      "bytes": 286,
+      "sha256": "5c4bc9a16aebf38c4b950f59b8e501ca36495328cb9eb622218bce9064a35e3e"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/build/html/_static/minus.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/minus.png",
+      "bytes": 90,
+      "sha256": "47e7fc50db3699f1ca41ce9a2ffa202c00c5d1d5180c55f62ba859b1bd6cc008"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/build/html/_static/plus.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/plus.png",
+      "bytes": 90,
+      "sha256": "54115199b96a130cba02147c47c0deb43dcc9b9f08b5162bba8642b34980ac63"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/build/html/_static/up-pressed.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/up-pressed.png",
+      "bytes": 214,
+      "sha256": "cfe678a4446900f4081ab8d74ef3d1f8b1002edbf8cae3db292fcca0637310ed"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/build/html/_static/up.png",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/up.png",
+      "bytes": 203,
+      "sha256": "108f280badfe5ec5168738c4f70a59bc6ea9d1e9243ff2b951386fb668e93502"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/index.rst",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/index.rst",
+      "bytes": 2695,
+      "sha256": "5b114caea649db3f5d45c63f23956c11129eff86165d4c9186f791c7c4c1e612"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/markdown/README.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/README.md",
+      "bytes": 485,
+      "sha256": "b5d39156a0e981f41c07de685a806602dd04bfe4c53b0a37a8ca5fb0b0572f6b"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/markdown/index.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/index.md",
+      "bytes": 1782,
+      "sha256": "2311c5b01b7db568dc06e93b51ae1f200ac7e4bfbaf79dd85e4727d13cbaab56"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/markdown/programs.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs.md",
+      "bytes": 1027,
+      "sha256": "54d214b72d4825a20b43ee7f894405daa74d694ea384a8784fbbceed1bda4519"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/markdown/programs/control.ControlFile.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/control.ControlFile.md",
+      "bytes": 69793,
+      "sha256": "f3014c54af574df83082d17af8b3c34534e90021a3e4cb230eae0584c20be649"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/markdown/programs/core.Grid2GMT.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Grid2GMT.md",
+      "bytes": 11946,
+      "sha256": "ee1fa02b7d06f3fdcdb8b2c274d3baa8f9e7abc88110bdef8f5f0f482ac5ee18"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/markdown/programs/core.Grid2Time.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Grid2Time.md",
+      "bytes": 6805,
+      "sha256": "09eee8e506305bd53e924669bcbce574b72dd75231a6250d7c39bdeec7fb5517"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/markdown/programs/core.Loc2ssst.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Loc2ssst.md",
+      "bytes": 2178,
+      "sha256": "7f34b224a36d129df8bede7a736dd95817f12d05dbaa6d93494b21722dfffeec"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/markdown/programs/core.LocSum.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.LocSum.md",
+      "bytes": 3887,
+      "sha256": "ad9d01062cde81f9157525b6ac9c8f3f3d1e6cad07db40bbf39e54231d7b692e"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/markdown/programs/core.NLLoc.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.NLLoc.md",
+      "bytes": 30978,
+      "sha256": "9910e1464993488fa028fb88feff79989eb26310f619fa433312b32799bd6748"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/markdown/programs/core.Time2EQ.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Time2EQ.md",
+      "bytes": 2073,
+      "sha256": "24cc3144e7a4eeff34a0978d1c2cb88f7c5c39cd74014a9519f0c069b068d6ff"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/markdown/programs/core.Vel2Grid.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Vel2Grid.md",
+      "bytes": 2899,
+      "sha256": "7836eac57e9b3b62c2bb41ced3c0588ab19fc609a7c429655ceb5d94a7450abb"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/markdown/programs/core.Vel2Grid3D.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Vel2Grid3D.md",
+      "bytes": 3189,
+      "sha256": "9cf2720c7d22409b4b9c4fa97d19ac596273ef939aea610686f15cb2a86f384d"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/programs.rst",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs.rst",
+      "bytes": 902,
+      "sha256": "1235a6a40d457cddee34678622974f5fbef9dd2e5e99619bdc3ef2e682c3bbab"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/programs/control.ControlFile.rst",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/control.ControlFile.rst",
+      "bytes": 71321,
+      "sha256": "7b1b36c182dbfe36c817568c35b2bd0f439b542ce753ae4fe2bcdb1c225d3ab2"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/programs/core.Grid2GMT.rst",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/core.Grid2GMT.rst",
+      "bytes": 12821,
+      "sha256": "d1152223e3cf1e3ac0e445fe0a6cb3407d4189a3833228d91b087fc4b3237261"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/programs/core.Grid2Time.rst",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/core.Grid2Time.rst",
+      "bytes": 7482,
+      "sha256": "c199b32e44ad5a37fbf63a3fd6cb3b9bbb3e8a6f65ff37520d1ef7bd6b05f82c"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/programs/core.Loc2ssst.rst",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/core.Loc2ssst.rst",
+      "bytes": 2344,
+      "sha256": "9cf40f2bed685a091d435a734b0d1c9526cb25b6361a3cbce2b1152f093d24b9"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/programs/core.LocSum.rst",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/core.LocSum.rst",
+      "bytes": 4495,
+      "sha256": "98a160cdb4769c6cd1c6c6189f7658e0bf9d6fb1a27ba962cfec4d0f531bd92e"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/programs/core.NLLoc.rst",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/core.NLLoc.rst",
+      "bytes": 32818,
+      "sha256": "5554d675947f540fddb497c5fafd53d9bd89af0d6b2b328de37fbd2c9423476c"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/programs/core.Time2EQ.rst",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/core.Time2EQ.rst",
+      "bytes": 2608,
+      "sha256": "a87e498e04d763d9198c83125224c2385f08857c1404dc3829d8253ebe52d036"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/programs/core.Vel2Grid.rst",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/core.Vel2Grid.rst",
+      "bytes": 2991,
+      "sha256": "14ff9ca082fce6c630dabb510f9ea23f4e959924da47f8b3d2c62e99fa19f085"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/Nonlinloc/programs/core.Vel2Grid3D.rst",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/core.Vel2Grid3D.rst",
+      "bytes": 3374,
+      "sha256": "0e3f7ba78b2dafbbf14cc2709da777a038d9f1a522b8366b9e6f6468279f81a5"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/README.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/README.md",
+      "bytes": 11089,
+      "sha256": "ecabb947f626c8933e84327e573fe935085416b827a5aebbb14b7c8f6e44f953"
+    },
+    {
+      "path": "nonlinloc/docs/from_nonlinlocpy/SKILL.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/SKILL.md",
+      "bytes": 6359,
+      "sha256": "ca2be1eaddd4bf6722eeeb6dcc563701511cb63594e2d77e1abe269d5b5af68f"
+    },
+    {
+      "path": "nonlinloc/source/src/CHANGE_NOTES.txt",
+      "source": "installed/NLL7.00_src/src/CHANGE_NOTES.txt",
+      "bytes": 25964,
+      "sha256": "766fa1b1df97cdab92cc7b44bfaf614e18749a7311d05ee5bde612b1dd45faef"
+    },
+    {
+      "path": "nonlinloc/source/src/Grid2GMT.c",
+      "source": "installed/NLL7.00_src/src/Grid2GMT.c",
+      "bytes": 100282,
+      "sha256": "0e66a2e9b308d8ae9c8069eb08a7583f831cb7adb0b1f247dc5e470abbaf378a"
+    },
+    {
+      "path": "nonlinloc/source/src/Grid2Time1.c",
+      "source": "installed/NLL7.00_src/src/Grid2Time1.c",
+      "bytes": 38303,
+      "sha256": "0a20957e2cd2b6ba53c959c01647fe906edbc37068bcf4ce6b5d9204bf347469"
+    },
+    {
+      "path": "nonlinloc/source/src/GridCascadingDecimate.c",
+      "source": "installed/NLL7.00_src/src/GridCascadingDecimate.c",
+      "bytes": 11996,
+      "sha256": "4d2e3ece91a07e583f866c0945f859642eba38fabe0d4be92b56976562672455"
+    },
+    {
+      "path": "nonlinloc/source/src/GridGraphLib.c",
+      "source": "installed/NLL7.00_src/src/GridGraphLib.c",
+      "bytes": 13196,
+      "sha256": "56d33d79504005d8a8d30e5a42d50de0e64d3d2777ad98fa287a0b4d9cd92953"
+    },
+    {
+      "path": "nonlinloc/source/src/GridGraphLib.h",
+      "source": "installed/NLL7.00_src/src/GridGraphLib.h",
+      "bytes": 4908,
+      "sha256": "37bb941a23ce4e9b0b0536baf22d9ad19f2c772a117cd50a330d2a2c698beeea"
+    },
+    {
+      "path": "nonlinloc/source/src/GridLib.c",
+      "source": "installed/NLL7.00_src/src/GridLib.c",
+      "bytes": 195230,
+      "sha256": "240541885a056f7e9c305ee2e27ce506d453c53f7aa74e48cb24477811a9690b"
+    },
+    {
+      "path": "nonlinloc/source/src/GridLib.h",
+      "source": "installed/NLL7.00_src/src/GridLib.h",
+      "bytes": 33606,
+      "sha256": "c020f75d25e2986dbf29f5537055c1170c8d0b84f57260638f0a45d39e913010"
+    },
+    {
+      "path": "nonlinloc/source/src/GridMemLib.c",
+      "source": "installed/NLL7.00_src/src/GridMemLib.c",
+      "bytes": 16478,
+      "sha256": "d70089af1a7a43875365afdd800a69a8eabd638e8dcfd25794d55b17e76e5601"
+    },
+    {
+      "path": "nonlinloc/source/src/GridMemLib.h",
+      "source": "installed/NLL7.00_src/src/GridMemLib.h",
+      "bytes": 1623,
+      "sha256": "92abc65d29738ce79c9c8094d0bdb74f1d3673cc0b23f824b0f2f391ed812071"
+    },
+    {
+      "path": "nonlinloc/source/src/Loc2ddct.c",
+      "source": "installed/NLL7.00_src/src/Loc2ddct.c",
+      "bytes": 10835,
+      "sha256": "8943963808f9bacbd1cedbe2ac8f997281ff88af8e669516d51331a2b6428129"
+    },
+    {
+      "path": "nonlinloc/source/src/LocSum.c",
+      "source": "installed/NLL7.00_src/src/LocSum.c",
+      "bytes": 17051,
+      "sha256": "b83708044617053afdb552c20fafcd26b548098b45730a15af483fe8fafc162b"
+    },
+    {
+      "path": "nonlinloc/source/src/Makefile",
+      "source": "installed/NLL7.00_src/src/Makefile",
+      "bytes": 14680,
+      "sha256": "da7708514fa811d0b549cf6f57500542fbed7ec7f8b81cd1bce3636dad2a7498"
+    },
+    {
+      "path": "nonlinloc/source/src/NLDiffLoc.c",
+      "source": "installed/NLL7.00_src/src/NLDiffLoc.c",
+      "bytes": 78885,
+      "sha256": "7560a389a8fb267dffc2a36387d548c662a09f57e1417dececa2b96a0b9b5b1e"
+    },
+    {
+      "path": "nonlinloc/source/src/NLLoc1.c",
+      "source": "installed/NLL7.00_src/src/NLLoc1.c",
+      "bytes": 25798,
+      "sha256": "5ab28059d92e80c16b2dbfa4acc604b9c2186e97879a1243a65246df14577230"
+    },
+    {
+      "path": "nonlinloc/source/src/NLLocLib.c",
+      "source": "installed/NLL7.00_src/src/NLLocLib.c",
+      "bytes": 524322,
+      "sha256": "6382eb09889131e3c6a4f8e5c0bb66c70a8b61bf7d7119797d2956cafc2b372c"
+    },
+    {
+      "path": "nonlinloc/source/src/NLLocLib.h",
+      "source": "installed/NLL7.00_src/src/NLLocLib.h",
+      "bytes": 24904,
+      "sha256": "8c9841ae6266bc85938674690bae2ad13606c28babe87d030da33c6f578ac347"
+    },
+    {
+      "path": "nonlinloc/source/src/NLLoc_func_test.c",
+      "source": "installed/NLL7.00_src/src/NLLoc_func_test.c",
+      "bytes": 11471,
+      "sha256": "34cd23ac489fff92458a9b6c5f4f1b67e07ffd6a4923c316fbf7c4e8bef90a37"
+    },
+    {
+      "path": "nonlinloc/source/src/NLLoc_main.c",
+      "source": "installed/NLL7.00_src/src/NLLoc_main.c",
+      "bytes": 2891,
+      "sha256": "d0fdaae157374faa18ee5c23b492fc7f52517d18d897edae27b259e5cf4e82ec"
+    },
+    {
+      "path": "nonlinloc/source/src/PhsAssoc.c",
+      "source": "installed/NLL7.00_src/src/PhsAssoc.c",
+      "bytes": 24602,
+      "sha256": "bc6ecb138f81fa39f6f167c87e8f8c7eebf2dc27047a91a64aac8f88f249b113"
+    },
+    {
+      "path": "nonlinloc/source/src/README.txt",
+      "source": "installed/NLL7.00_src/src/README.txt",
+      "bytes": 3026,
+      "sha256": "6c2a4fce6df3547528dbab4977d8c104c07aa262a8e5ce46313f6defa8565002"
+    },
+    {
+      "path": "nonlinloc/source/src/Time2Angles1.c",
+      "source": "installed/NLL7.00_src/src/Time2Angles1.c",
+      "bytes": 15531,
+      "sha256": "9867434527cad72e9b776ba01459e318abf09c65acc70d1f3fd9ad6d3879f4e2"
+    },
+    {
+      "path": "nonlinloc/source/src/Time2EQ1.c",
+      "source": "installed/NLL7.00_src/src/Time2EQ1.c",
+      "bytes": 31769,
+      "sha256": "6ff73a97b19057e555939cddb1d372d366e0f34c10b1907ef91b1f36f04a1c73"
+    },
+    {
+      "path": "nonlinloc/source/src/Time_3d_NLL.c",
+      "source": "installed/NLL7.00_src/src/Time_3d_NLL.c",
+      "bytes": 130390,
+      "sha256": "c73725b47f8ab8d87afbd85be6324a9f8f839f9c9ffc8ff4e16e5fff374b95ee"
+    },
+    {
+      "path": "nonlinloc/source/src/Vel2Grid1.c",
+      "source": "installed/NLL7.00_src/src/Vel2Grid1.c",
+      "bytes": 11166,
+      "sha256": "777c642f30c9ee86b4381439353b8b034d188cf5e35fc79e8b9652cff06e1baf"
+    },
+    {
+      "path": "nonlinloc/source/src/Vel2Grid3D.c",
+      "source": "installed/NLL7.00_src/src/Vel2Grid3D.c",
+      "bytes": 43090,
+      "sha256": "864687ddec3200b61eb105c1e6025f4a4a3ac4641e12d101c39450128b7a8c08"
+    },
+    {
+      "path": "nonlinloc/source/src/alomax_matrix/alomax_matrix.c",
+      "source": "installed/NLL7.00_src/src/alomax_matrix/alomax_matrix.c",
+      "bytes": 15853,
+      "sha256": "49aa383680454a652e6841ae682d04506c4912b2c00f582cf83461a257bf0d4c"
+    },
+    {
+      "path": "nonlinloc/source/src/alomax_matrix/alomax_matrix.h",
+      "source": "installed/NLL7.00_src/src/alomax_matrix/alomax_matrix.h",
+      "bytes": 1187,
+      "sha256": "b90733aef9933c897046e76a97d2412118f8d9a876ec94ae17298bc361f3aea1"
+    },
+    {
+      "path": "nonlinloc/source/src/alomax_matrix/alomax_matrix_svd.c",
+      "source": "installed/NLL7.00_src/src/alomax_matrix/alomax_matrix_svd.c",
+      "bytes": 20205,
+      "sha256": "09eefb67e715ff4d73a1a4cf80df31457907debb4e0d7fc6547f1af0644eeed4"
+    },
+    {
+      "path": "nonlinloc/source/src/alomax_matrix/alomax_matrix_svd.h",
+      "source": "installed/NLL7.00_src/src/alomax_matrix/alomax_matrix_svd.h",
+      "bytes": 372,
+      "sha256": "b4d91289e55c050deed7114ddb7eed354c230dee2b065b676b518849dd6fecc5"
+    },
+    {
+      "path": "nonlinloc/source/src/alomax_matrix/eigv.c",
+      "source": "installed/NLL7.00_src/src/alomax_matrix/eigv.c",
+      "bytes": 16774,
+      "sha256": "f697397e4ecb4ff4c3ac171a22b02d288fd9ca85f825b26280f43b0d45ca0975"
+    },
+    {
+      "path": "nonlinloc/source/src/alomax_matrix/eigv.h",
+      "source": "installed/NLL7.00_src/src/alomax_matrix/eigv.h",
+      "bytes": 352,
+      "sha256": "8bb969e2263eabafe26d86a55d5c8a7c5075d4a531961a41d6cee438f8d34806"
+    },
+    {
+      "path": "nonlinloc/source/src/alomax_matrix/polarization.c",
+      "source": "installed/NLL7.00_src/src/alomax_matrix/polarization.c",
+      "bytes": 7494,
+      "sha256": "0639f84abaa3e6b9b70123a22cd77638899ed98dddb79a0f711b84055b06b1d0"
+    },
+    {
+      "path": "nonlinloc/source/src/alomax_matrix/polarization.h",
+      "source": "installed/NLL7.00_src/src/alomax_matrix/polarization.h",
+      "bytes": 1805,
+      "sha256": "6afb3c12f09afb41a785f488e21eceb865e2f7dfebfec58487c17ec478d49713"
+    },
+    {
+      "path": "nonlinloc/source/src/alomax_matrix/test_real_symmetric_eigen.c",
+      "source": "installed/NLL7.00_src/src/alomax_matrix/test_real_symmetric_eigen.c",
+      "bytes": 1717,
+      "sha256": "b53f44100d7191eb98d70067bc875b2a3ef55eb27abbfa120fb2864885a09b37"
+    },
+    {
+      "path": "nonlinloc/source/src/calc_crust_corr.c",
+      "source": "installed/NLL7.00_src/src/calc_crust_corr.c",
+      "bytes": 6449,
+      "sha256": "ab786977de94878146af9b95555fe87fcef378d7ee054543b9b4e5c9441a8e00"
+    },
+    {
+      "path": "nonlinloc/source/src/calc_crust_corr.h",
+      "source": "installed/NLL7.00_src/src/calc_crust_corr.h",
+      "bytes": 100,
+      "sha256": "b6d53c753b04aef26072ff1959df973f0266cab81c1832fa351a4cf55cdc0eac"
+    },
+    {
+      "path": "nonlinloc/source/src/crust_corr_model.h",
+      "source": "installed/NLL7.00_src/src/crust_corr_model.h",
+      "bytes": 1433,
+      "sha256": "bc69301ab81e48470f0a64cec6b44aa92664010c79efc5427a5edc15567df451"
+    },
+    {
+      "path": "nonlinloc/source/src/crust_type.h",
+      "source": "installed/NLL7.00_src/src/crust_type.h",
+      "bytes": 102308,
+      "sha256": "d146c7398a7704a898e9d9c045b5ad7e8daafaeaad437328d212d09b98513447"
+    },
+    {
+      "path": "nonlinloc/source/src/crust_type_key.h",
+      "source": "installed/NLL7.00_src/src/crust_type_key.h",
+      "bytes": 98740,
+      "sha256": "b2954dfe17c78e7231ebac881c0f43a241e4bead35548607a2745856367df79f"
+    },
+    {
+      "path": "nonlinloc/source/src/fmm2grid.c",
+      "source": "installed/NLL7.00_src/src/fmm2grid.c",
+      "bytes": 18532,
+      "sha256": "8bc72d08bfea3d39cef6c80760af81f275b70f96221bd56f62b62ba3193298f7"
+    },
+    {
+      "path": "nonlinloc/source/src/fpfit2hyp.c",
+      "source": "installed/NLL7.00_src/src/fpfit2hyp.c",
+      "bytes": 6112,
+      "sha256": "90d0e41a6f1db6cca085fce3a550408552122a2dcdb671f88accc199eceecd2a"
+    },
+    {
+      "path": "nonlinloc/source/src/geo.c",
+      "source": "installed/NLL7.00_src/src/geo.c",
+      "bytes": 5356,
+      "sha256": "d733e95573dc368f5273a039b2f5f79764336a478495ea6e4d243c6738e21b75"
+    },
+    {
+      "path": "nonlinloc/source/src/geo.h",
+      "source": "installed/NLL7.00_src/src/geo.h",
+      "bytes": 1236,
+      "sha256": "5c4a5f8530491dd64b3f8c097138c0379e8995a03278ab7a71b076ce63ce73df"
+    },
+    {
+      "path": "nonlinloc/source/src/geometry/geometry.h",
+      "source": "installed/NLL7.00_src/src/geometry/geometry.h",
+      "bytes": 451,
+      "sha256": "522e8ac46d958d42170f73c77780f1b3fc113ca139256319c49585e87908cbf4"
+    },
+    {
+      "path": "nonlinloc/source/src/hypoe2hyp.c",
+      "source": "installed/NLL7.00_src/src/hypoe2hyp.c",
+      "bytes": 9368,
+      "sha256": "b7e2c41475e07178170e32cb20ad0626eab10ebc7e2c1cedd30674d06df89985"
+    },
+    {
+      "path": "nonlinloc/source/src/interface2fmm.c",
+      "source": "installed/NLL7.00_src/src/interface2fmm.c",
+      "bytes": 24798,
+      "sha256": "ed105ef82f97a03a5bcf0b3507983004b104fd5892060ca2d9b221a64a708e50"
+    },
+    {
+      "path": "nonlinloc/source/src/loclist.c",
+      "source": "installed/NLL7.00_src/src/loclist.c",
+      "bytes": 9480,
+      "sha256": "de6807427e2a7755d28d25e71bb22bc10b01f8650b825fb63931d6afdd39f917"
+    },
+    {
+      "path": "nonlinloc/source/src/mag_func_test.c",
+      "source": "installed/NLL7.00_src/src/mag_func_test.c",
+      "bytes": 4568,
+      "sha256": "980922ab24f228618df07d79301d23d52a08d2f87973a35955ec8542cddbe33a"
+    },
+    {
+      "path": "nonlinloc/source/src/map_project.c",
+      "source": "installed/NLL7.00_src/src/map_project.c",
+      "bytes": 18822,
+      "sha256": "b9aa2d52e31b41892c292bfbae52315fa826282e64a907ce2001439fccb2d143"
+    },
+    {
+      "path": "nonlinloc/source/src/map_project.h",
+      "source": "installed/NLL7.00_src/src/map_project.h",
+      "bytes": 764,
+      "sha256": "5c1a114a75bcc8b817ed3d1530b7ce210960e4c8009ab99b104de114319681e6"
+    },
+    {
+      "path": "nonlinloc/source/src/matrix_statistics/matrix_statistics.c",
+      "source": "installed/NLL7.00_src/src/matrix_statistics/matrix_statistics.c",
+      "bytes": 35423,
+      "sha256": "8373649b9df600d987179157306c76a6c307c8fa1357a4020b5f55aee4d03a6c"
+    },
+    {
+      "path": "nonlinloc/source/src/matrix_statistics/matrix_statistics.h",
+      "source": "installed/NLL7.00_src/src/matrix_statistics/matrix_statistics.h",
+      "bytes": 2399,
+      "sha256": "a4bdf0acb664ff651db71d71e0fbc123f6b6ae3cbcd9df736e99da25a51e115c"
+    },
+    {
+      "path": "nonlinloc/source/src/matrix_statistics/matrix_statistics_DEV.c",
+      "source": "installed/NLL7.00_src/src/matrix_statistics/matrix_statistics_DEV.c",
+      "bytes": 18489,
+      "sha256": "8bc7eac788e5abce09b5f662ca163c36a9265762be32cf0703c507a4b40e52c1"
+    },
+    {
+      "path": "nonlinloc/source/src/matrix_statistics/matrix_statistics_DEV.h",
+      "source": "installed/NLL7.00_src/src/matrix_statistics/matrix_statistics_DEV.h",
+      "bytes": 2031,
+      "sha256": "8e42627f219761461b72f093d954898500f8ea542d5ff98bfb733a096dbb2da5"
+    },
+    {
+      "path": "nonlinloc/source/src/matrix_statistics/test_ellipsoid.c",
+      "source": "installed/NLL7.00_src/src/matrix_statistics/test_ellipsoid.c",
+      "bytes": 6519,
+      "sha256": "6695d1a6cbc5cbb739497647385cfbafcb17e6c487956ec4d81f18a1a098b0a0"
+    },
+    {
+      "path": "nonlinloc/source/src/oct2grid.c",
+      "source": "installed/NLL7.00_src/src/oct2grid.c",
+      "bytes": 6524,
+      "sha256": "9a05614a1d8a1c59c3cdba07688bb6ef387d92fa27700a98b5e5c53970d8f7d3"
+    },
+    {
+      "path": "nonlinloc/source/src/octtree/geometry.h",
+      "source": "installed/NLL7.00_src/src/octtree/geometry.h",
+      "bytes": 451,
+      "sha256": "522e8ac46d958d42170f73c77780f1b3fc113ca139256319c49585e87908cbf4"
+    },
+    {
+      "path": "nonlinloc/source/src/octtree/octtree.c",
+      "source": "installed/NLL7.00_src/src/octtree/octtree.c",
+      "bytes": 35407,
+      "sha256": "2b87dea41df654fe789bf70f81ec9dd6a150107f57a264531821c5af2caaaa62"
+    },
+    {
+      "path": "nonlinloc/source/src/octtree/octtree.h",
+      "source": "installed/NLL7.00_src/src/octtree/octtree.h",
+      "bytes": 7323,
+      "sha256": "eb92ae34699b694fa8ed426aeb51eeee39cfb97058f4f60c84523969980a4000"
+    },
+    {
+      "path": "nonlinloc/source/src/octtree/ran1.h",
+      "source": "installed/NLL7.00_src/src/octtree/ran1.h",
+      "bytes": 1297,
+      "sha256": "3217fae5d5934ce022fa080d453620512a3eb88c88c3e0f34274e73bf83d560d"
+    },
+    {
+      "path": "nonlinloc/source/src/otime_limit.c",
+      "source": "installed/NLL7.00_src/src/otime_limit.c",
+      "bytes": 2469,
+      "sha256": "f0989354a497a56bc8a8838dd2049f42211adf638894fb3b5e508c6ffdb071eb"
+    },
+    {
+      "path": "nonlinloc/source/src/otime_limit.h",
+      "source": "installed/NLL7.00_src/src/otime_limit.h",
+      "bytes": 1024,
+      "sha256": "2b79f3b9e3c4480050e260eb9dd9e10d22b2569f11233d20809f2ab8c0c81296"
+    },
+    {
+      "path": "nonlinloc/source/src/phaselist.c",
+      "source": "installed/NLL7.00_src/src/phaselist.c",
+      "bytes": 14639,
+      "sha256": "f42e49f92b63beb8f0b476656d89db3716c723b6bd626fecb8dc2a13b780d3e9"
+    },
+    {
+      "path": "nonlinloc/source/src/phaseloclist.h",
+      "source": "installed/NLL7.00_src/src/phaseloclist.h",
+      "bytes": 6177,
+      "sha256": "2695c18e2cb367c5f13472383c81c6cbf880573f7cdd47ce935f8560cc0099b9"
+    },
+    {
+      "path": "nonlinloc/source/src/ran1/ran1.c",
+      "source": "installed/NLL7.00_src/src/ran1/ran1.c",
+      "bytes": 6034,
+      "sha256": "ed3357aaa4693c35f04e44a13ca9a92fd6f5d24299119e76d74f1a2ca49126de"
+    },
+    {
+      "path": "nonlinloc/source/src/ran1/ran1.h",
+      "source": "installed/NLL7.00_src/src/ran1/ran1.h",
+      "bytes": 1297,
+      "sha256": "3217fae5d5934ce022fa080d453620512a3eb88c88c3e0f34274e73bf83d560d"
+    },
+    {
+      "path": "nonlinloc/source/src/scat2latlon.c",
+      "source": "installed/NLL7.00_src/src/scat2latlon.c",
+      "bytes": 9619,
+      "sha256": "4d2688d14e6e59d1a492429ef02f0567448b62ca89886e3b8767ba620ab00f33"
+    },
+    {
+      "path": "nonlinloc/source/src/ttime_func_test.c",
+      "source": "installed/NLL7.00_src/src/ttime_func_test.c",
+      "bytes": 4689,
+      "sha256": "ef593e42f97a17f5d3585e738674452ebcbc9c515a5d1e05dd7047cd70a1ecbb"
+    },
+    {
+      "path": "nonlinloc/source/src/util.c",
+      "source": "installed/NLL7.00_src/src/util.c",
+      "bytes": 3290,
+      "sha256": "2a897070e2517dc786b902ab2e3f39ed294d2c61ccedb0916e5daa2782d1d377"
+    },
+    {
+      "path": "nonlinloc/source/src/util.h",
+      "source": "installed/NLL7.00_src/src/util.h",
+      "bytes": 2266,
+      "sha256": "a1d9b96c8fa9aa2eab21c0295e139f2a889cf450e3bb8fe1db79f994eeceb15c"
+    },
+    {
+      "path": "nonlinloc/source/src/vector/vector.c",
+      "source": "installed/NLL7.00_src/src/vector/vector.c",
+      "bytes": 1481,
+      "sha256": "fb10db1643e42093c221d09e10f7a6b364ecee625fcd92098c1361dbcf88575c"
+    },
+    {
+      "path": "nonlinloc/source/src/vector/vector.h",
+      "source": "installed/NLL7.00_src/src/vector/vector.h",
+      "bytes": 1015,
+      "sha256": "c0e1b65bc33826ff74e761c44a7d3a28ff25c4dd6b5b158966d4bcfbbbbde7a3"
+    },
+    {
+      "path": "nonlinloc/source/src/velmod.c",
+      "source": "installed/NLL7.00_src/src/velmod.c",
+      "bytes": 66230,
+      "sha256": "7cb8f940562ff8c40af2b5c25e82eae75a72c728c1d97090123f9506724cc85d"
+    },
+    {
+      "path": "nonlinloc/source/src/velmod.h",
+      "source": "installed/NLL7.00_src/src/velmod.h",
+      "bytes": 16905,
+      "sha256": "1b9c97026ad7c2b5e83e51c0cca07028c9cae700a2434c71999bc7ca3c4bfc97"
+    },
+    {
+      "path": "phase_picking/docs/01_inference_test.ipynb",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/script/01_inference_test.ipynb",
+      "bytes": 19250,
+      "sha256": "0271e6fef4d19096479660adc98e7fd3408ae712a761347cb45278c909a874f7",
+      "source_sha256": "c657782d24cb2033ffe839b1f64b31904bdbe9147dba5b98d3079516585f36e2",
+      "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
+    },
+    {
+      "path": "phase_picking/docs/inference/basicphaseae.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/basicphaseae.py",
+      "bytes": 13001,
+      "sha256": "725ed7e79fa56706561f478e6441018b594a11b7e407e72c5c54978ff444532c"
+    },
+    {
+      "path": "phase_picking/docs/inference/dpppickerp.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/dpppickerp.py",
+      "bytes": 7537,
+      "sha256": "d086125c05c94a63eb37a196f77722f5d1bdc53a08b61e080e0c58e9769eb31f"
+    },
+    {
+      "path": "phase_picking/docs/inference/dpppickers.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/dpppickers.py",
+      "bytes": 7543,
+      "sha256": "8be6dd89cb188db5dfd7e7cec967b0e8529c428162bb4118d9307e69800555d9"
+    },
+    {
+      "path": "phase_picking/docs/inference/eqtransformer.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/eqtransformer.py",
+      "bytes": 13076,
+      "sha256": "5dc1774bb76f1dd19eeb4c1ebca8b9507d6a0d1d877ef0c334f1a8e2afa3755f"
+    },
+    {
+      "path": "phase_picking/docs/inference/gpd.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/gpd.py",
+      "bytes": 1516,
+      "sha256": "cbb6c3139a4f2aab6e6d93b1b25bc1c49f534706d81cfac26b91c1c03450b343"
+    },
+    {
+      "path": "phase_picking/docs/inference/obstransformer.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/obstransformer.py",
+      "bytes": 13089,
+      "sha256": "d677874c25ee642e03dabbf8b703390508e9075f48e0a730408945062c9d90a0"
+    },
+    {
+      "path": "phase_picking/docs/inference/phasenet.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/phasenet.py",
+      "bytes": 13156,
+      "sha256": "94fefcde6047f2372bb66dd344de3113545462bbc19ec2eb1a853c02101bf8fa"
+    },
+    {
+      "path": "phase_picking/docs/inference/phasenetlight.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/phasenetlight.py",
+      "bytes": 13093,
+      "sha256": "6fe596e0e241720c885a62623fc54342604a9558ac934f097f9cb8a39ba104f4"
+    },
+    {
+      "path": "phase_picking/docs/inference/skynet.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/skynet.py",
+      "bytes": 13019,
+      "sha256": "fcb72f671db253e1798b0fa016df04782c236ea880f383b19b2e00f5df3ad870"
+    },
+    {
+      "path": "phase_picking/source/phase_picking/model/__init__.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/model/__init__.py",
+      "bytes": 633,
+      "sha256": "04821a372211a3cf5fed5867ef4b521eb4c139dc74ba114592c15176bfd7889e"
+    },
+    {
+      "path": "phase_picking/source/phase_picking/model/base.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/model/base.py",
+      "bytes": 105552,
+      "sha256": "28fdb1725c3fc722f2a43c2d8dda56d36f499b89f1fb64f73e2e9596647097b4"
+    },
+    {
+      "path": "phase_picking/source/phase_picking/model/basicphaseae.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/model/basicphaseae.py",
+      "bytes": 5824,
+      "sha256": "cc287acd50b8b28011d38c55b6d85f6525ca6844a54079047d2c39a08919b6f3"
+    },
+    {
+      "path": "phase_picking/source/phase_picking/model/dpppickerp.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/model/dpppickerp.py",
+      "bytes": 2846,
+      "sha256": "367034caa760c5a6553e2b1f6428866fadb4aeedbe98da28fe0bf05b398fa26c"
+    },
+    {
+      "path": "phase_picking/source/phase_picking/model/dpppickers.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/model/dpppickers.py",
+      "bytes": 2846,
+      "sha256": "367034caa760c5a6553e2b1f6428866fadb4aeedbe98da28fe0bf05b398fa26c"
+    },
+    {
+      "path": "phase_picking/source/phase_picking/model/eqtransformer.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/model/eqtransformer.py",
+      "bytes": 25318,
+      "sha256": "1d149b0d3b41c1a258a7d0322384b0b36dbd8231755dc1cedd7b93878c283916"
+    },
+    {
+      "path": "phase_picking/source/phase_picking/model/gpd.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/model/gpd.py",
+      "bytes": 5430,
+      "sha256": "0bf5b0ee1d232a55557cdd8b9d344e86b6fe3ec142eff2508e9481135f13645e"
+    },
+    {
+      "path": "phase_picking/source/phase_picking/model/obstransformer.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/model/obstransformer.py",
+      "bytes": 1063,
+      "sha256": "e652072aa04166e1106f4fcdd0b21e86fb5982412132d4e1d64da1822c9ac317"
+    },
+    {
+      "path": "phase_picking/source/phase_picking/model/phasenet.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/model/phasenet.py",
+      "bytes": 23081,
+      "sha256": "b30d4bc32dcf792076310fc9cd832f50df8ad9f399383587619d7a3ac2e7b9e7"
+    },
+    {
+      "path": "phase_picking/source/phase_picking/model/phasenetlight.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/model/phasenetlight.py",
+      "bytes": 23081,
+      "sha256": "b30d4bc32dcf792076310fc9cd832f50df8ad9f399383587619d7a3ac2e7b9e7"
+    },
+    {
+      "path": "phase_picking/source/phase_picking/model/skynet.py",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/model/skynet.py",
+      "bytes": 10544,
+      "sha256": "1a07025a12cb7cc473459c95f09a9c0fca5bd2e6c5c7efaa52c7060091e7f858"
+    },
+    {
+      "path": "phase_picking/weights/dpppickerp/scedc.json",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/pretrained/v3/dpppickerp/scedc.json",
+      "bytes": 558,
+      "sha256": "b570ab19b912fa4d4b14c89702a032d27d08cf0ab769417aff05447b55f0b791"
+    },
+    {
+      "path": "phase_picking/weights/dpppickerp/scedc.pt",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/pretrained/v3/dpppickerp/scedc.pt",
+      "bytes": 2189295,
+      "sha256": "6a99c954bd01ec8ecb74e82a58d6ce73f9d6f3d00b55b9ac627121d473ac22e5"
+    },
+    {
+      "path": "phase_picking/weights/eqtransformer/original_nonconservative.json.v1",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/pretrained/v3/eqtransformer/original_nonconservative.json.v1",
+      "bytes": 734,
+      "sha256": "6011413946a683b7c82da194f1a3c0ebade3e331e30b30590c412b15c5fb3404"
+    },
+    {
+      "path": "phase_picking/weights/eqtransformer/original_nonconservative.pt.v1",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/pretrained/v3/eqtransformer/original_nonconservative.pt.v1",
+      "bytes": 1572717,
+      "sha256": "2b9d843994429f73ce6eb5c94d40c75972032d4cdb660d29a1fa8ead6ac357d0"
+    },
+    {
+      "path": "phase_picking/weights/phasenet/original.json.v2",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/pretrained/v3/phasenet/original.json.v2",
+      "bytes": 775,
+      "sha256": "ba96278e9ea11bb8226b9f1cea429e4f1651e9050117f93f8eed1a508143edf8"
+    },
+    {
+      "path": "phase_picking/weights/phasenet/original.pt.v2",
+      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/pretrained/v3/phasenet/original.pt.v2",
+      "bytes": 1112276,
+      "sha256": "184dd85b896eebf8d5967ee15a722a477fa2e4ce479a3b113ecbcb8a6419113f"
+    }
+  ],
+  "validation": {
+    "scope": "Integrity, offline local imports, strict CPU weight loading and native compilation only; no scientific rerun or migration of expert callers.",
+    "models_loaded": [
+      "PhaseNet original v2",
+      "EQTransformer original_nonconservative v1",
+      "DPPPicker P scedc"
+    ],
+    "python_imports": [
+      "local gamma.utils",
+      "local phase_picking.model"
+    ],
+    "native_builds": {
+      "nonlinloc": {
+        "NLLoc": "0a8a53ae17e8447b1a73d973bc9102c772f34d03d55388bbb5abc1fba8bd86f8",
+        "Vel2Grid": "001f4cf8631052471b824c1b3171acb92350a7bdb22a01725f3d6ebe77213928",
+        "Grid2Time": "27bdedbd114c2bd185e76e39c6f56fbba176e3cbdb634357c5bc6c17ff344729"
+      },
+      "hypodd": {
+        "hypoDD": "cdf0e136fbca241ab4393e6b3acb331c29d0af270147ff7850ae5bca6304a9c0"
+      }
+    },
+    "compilers": {
+      "gcc": "gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+      "gfortran": "GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0"
+    },
+    "documentation_update": "Supplemental documents checked against their local sources; notebook source cells preserved with outputs cleared. Runtime implementation and weights unchanged."
+  },
+  "documentation_scope": {
+    "gamma": "All 30 local DeepWiki Markdown pages; docs tutorial notebooks/assets; source/tests Python/notebooks; retrieval description text. Excludes example datasets, historical result tables, archives and vectors.",
+    "nonlinloc": "Installed source plus available Nonlinlocpy docs (Markdown/RST), not the wrapper runtime. Missing upstream manual pages remain unavailable.",
+    "phase_picking": "Original model modules, selected expert weights, top-level inference examples and inference tutorial; excludes backup wrappers, unused weights and agent/RAG notebooks.",
+    "hypodd": "Previously copied native distribution source/manual and executed native source/header; excludes optional hypodd_runner/FDTCC/backup implementations not used by the native expert branch."
+  }
+}

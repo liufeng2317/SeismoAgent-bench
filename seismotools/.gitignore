@@ -1,0 +1,11 @@
+# Source snapshots and model metadata are reviewable; runtime artifacts stay local.
+**/build/
+**/bin/
+**/cache/
+**/logs/
+**/__pycache__/
+**/*.o
+**/*.mod
+**/*.pt
+**/*.pt.v*
+**/*.pdf
