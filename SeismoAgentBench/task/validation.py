@@ -161,8 +161,8 @@ def validate_task(value: Mapping[str, Any]) -> dict[str, Any]:
             item = _object(raw, label, errors)
             if item is None:
                 continue
-            _unknown(item, {"id", "kind", "required"}, label, errors)
-            _required(item, {"id", "kind", "required"}, label, errors)
+            _unknown(item, {"id", "path", "kind", "required"}, label, errors)
+            _required(item, {"id", "path", "kind", "required"}, label, errors)
             artifact_id = item.get("id")
             if not isinstance(artifact_id, str) or not _ID.fullmatch(artifact_id):
                 errors.append(f"{label}.id has an invalid identifier")
@@ -170,6 +170,16 @@ def validate_task(value: Mapping[str, Any]) -> dict[str, Any]:
                 errors.append(f"duplicate task output artifact id {artifact_id!r}")
             else:
                 output_ids.add(artifact_id)
+            artifact_path = item.get("path")
+            unsafe_path = (
+                not isinstance(artifact_path, str)
+                or not artifact_path
+                or Path(artifact_path).is_absolute()
+                or "\x00" in artifact_path
+                or any(part == ".." for part in Path(artifact_path).parts)
+            )
+            if unsafe_path:
+                errors.append(f"{label}.path must be a relative non-traversing path")
             if not isinstance(item.get("kind"), str) or not item.get("kind"):
                 errors.append(f"{label}.kind must be a non-empty string")
             if not isinstance(item.get("required"), bool):

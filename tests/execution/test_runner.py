@@ -12,7 +12,7 @@ TASK = {
     "version": "1",
     "objective": "Test execution records.",
     "input_kinds": ["metadata"],
-    "output_artifacts": [{"id": "result", "kind": "json", "required": True}],
+    "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
     "scorer": {"name": "noop", "version": "1"},
 }
 MANIFEST = {"schema_version": 1, "case_id": "synthetic_case", "entries": [

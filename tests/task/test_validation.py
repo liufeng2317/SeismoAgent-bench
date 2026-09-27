@@ -11,7 +11,7 @@ TASK = {
     "version": "1",
     "objective": "Inspect declared waveform metadata.",
     "input_kinds": ["waveform", "stationxml"],
-    "output_artifacts": [{"id": "summary", "kind": "json", "required": True}],
+    "output_artifacts": [{"id": "summary", "path": "summary.json", "kind": "json", "required": True}],
     "scorer": {"name": "metadata-score", "version": "1"},
 }
 
