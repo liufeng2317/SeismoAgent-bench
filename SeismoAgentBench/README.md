@@ -1,10 +1,13 @@
 # SeismoAgentBench 代码包
 
-整体 benchmark 的控制流程见 [BENCHMARK_WORKFLOW_PLAN.md](BENCHMARK_WORKFLOW_PLAN.md)。该计划定义任务、输入 manifest、执行后端、agent、工具适配器、scorer 和 provenance 的边界；`evaluations/` 是当前开发环境后端的一部分，最终由本包的稳定接口统一调用。`SeismoAgentBench/` 承载项目后续的专业代码和支撑工具。来源整理是 `utils/` 下的一个子功能，不代表整个 benchmark 架构。Python 导入路径区分大小写，统一使用 `SeismoAgentBench`。
+整体 benchmark 的控制流程见 [BENCHMARK_WORKFLOW_PLAN.md](BENCHMARK_WORKFLOW_PLAN.md)。该计划定义任务、输入 manifest、执行后端、agent、工具适配器、scorer 和 provenance 的边界。`SeismoAgentBench/` 承载项目的稳定控制代码和支撑工具；来源整理是 `utils/` 下的一个子功能，不代表整个 benchmark 架构。Python 导入路径区分大小写，统一使用 `SeismoAgentBench`。
 
 ```text
 SeismoAgentBench/
 ├── __init__.py
+├── task/                   # task and input-manifest contracts
+├── execution/              # trusted-development run control
+├── scoring/                # artifact validation and scoring interfaces
 └── utils/
     ├── __init__.py
     └── source_prepare/
@@ -18,7 +21,9 @@ SeismoAgentBench/
 
 | 位置 | 职责 |
 |---|---|
-| `SeismoAgentBench/` 下的专业模块 | 后续可复用的领域对象、算法和业务逻辑；随具体功能建立 |
+| `SeismoAgentBench/task/` | 任务、输入 manifest 及其契约校验 |
+| `SeismoAgentBench/execution/` | 运行目录、命令执行和运行记录 |
+| `SeismoAgentBench/scoring/` | 输出产物校验及后续科学评分接口 |
 | `utils/source_prepare/` | 来源登记、路径/哈希检查、资料盘点与准备阶段的目录诊断 |
 | 根目录 `scripts/` | 下载、转换和批处理入口；逐步调用可复用模块，避免复制实现 |
 | `benchmark_source/<case>/scripts/` | 案例专属原生字段解析、来源核验编排、分析与绘图脚本 |

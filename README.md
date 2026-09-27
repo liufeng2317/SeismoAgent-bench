@@ -19,7 +19,12 @@ synthesis is defined in [`docs/01_3_Information_Extraction_Schema.md`](docs/01_3
 
 ## Evaluation environment
 
-[Evaluation architecture review](evaluations/environment/ARCHITECTURE_REVIEW.md) defines the formal-run requirements and external-worker direction. The existing [account utility](evaluations/environment/README.md) is development-only, not the formal benchmark backend. [Verification status](evaluations/environment/STATUS.md) distinguishes implemented checks from pending cross-user validation.
+The current trusted-development execution path is implemented in
+[`SeismoAgentBench/execution`](SeismoAgentBench/execution). It creates a fresh
+run directory, records the command and environment, applies a timeout, and
+keeps agent execution separate from artifact validation and scoring. Formal
+isolation is a replaceable future execution backend; it is not required by the
+task and scoring contracts.
 
 ## Professional tool snapshots
 

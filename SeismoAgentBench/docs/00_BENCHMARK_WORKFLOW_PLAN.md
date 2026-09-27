@@ -210,7 +210,6 @@ SeismoAgentBench/                 # reusable workflow implementation
   reporting/                      # run artifacts and provenance reports
   utils/                          # small cross-cutting utilities only
 
-evaluations/                      # backend-specific development and evaluation code
 tasks/<instance>/                 # task packages and instance configuration
 benchmark_source/<instance>/      # instance data and source evidence
 seismotools/                      # versioned scientific-tool snapshots
@@ -235,7 +234,6 @@ The following areas remain outside the reusable control library:
 
 | Area | Responsibility |
 | --- | --- |
-| `evaluations/` | Concrete development and future formal execution backends |
 | `tasks/<instance>/` | Task instructions, instance configuration and instance-level scorers |
 | `benchmark_source/<instance>/` | Source data, reference evidence and instance-specific preparation scripts |
 | `seismotools/` | Versioned scientific-tool source, documentation and runtime assets |
