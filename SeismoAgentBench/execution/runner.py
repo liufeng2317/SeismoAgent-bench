@@ -15,7 +15,7 @@ import signal
 import subprocess
 import sys
 import time
-from typing import Any, Sequence
+from typing import Any, Mapping, Sequence
 
 from SeismoAgentBench.task.validation import ValidationError, load_json, validate_manifest, validate_task
 
@@ -73,7 +73,7 @@ def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, 
                       log=run / "execution.log", result=run / "run_result.json")
 
 
-def _environment(context: RunContext) -> dict[str, str]:
+def _environment(context: RunContext, extra_env: Mapping[str, str] | None = None) -> dict[str, str]:
     env = {
         "PATH": "/usr/bin:/bin",
         "LANG": "C.UTF-8",
@@ -86,11 +86,17 @@ def _environment(context: RunContext) -> dict[str, str]:
         "MKL_NUM_THREADS": "1",
     }
     env.update(context.environment)
+    if extra_env:
+        if not all(isinstance(key, str) and key and isinstance(value, str)
+                   for key, value in extra_env.items()):
+            raise ExecutionError("extra_env must map non-empty names to strings")
+        env.update(extra_env)
     return env
 
 
 def run_command(task_path: str | Path, manifest_path: str | Path, command: Sequence[str],
-                run_root: str | Path, run_id: str, *, timeout: float = 600) -> dict[str, Any]:
+                 run_root: str | Path, run_id: str, *, timeout: float = 600,
+                 extra_env: Mapping[str, str] | None = None) -> dict[str, Any]:
     """Validate inputs and run one command in a fresh trusted-development context."""
     if not command or not all(isinstance(item, str) and item for item in command):
         raise ExecutionError("command must be a non-empty sequence of strings")
@@ -114,6 +120,7 @@ def run_command(task_path: str | Path, manifest_path: str | Path, command: Seque
         "manifest_schema_version": manifest["schema_version"],
         "command": list(command),
         "timeout_s": timeout,
+        "injected_environment_keys": sorted(extra_env) if extra_env else [],
         "started_at": _now(),
     }
     _write_json(context.result, result)
@@ -122,7 +129,7 @@ def run_command(task_path: str | Path, manifest_path: str | Path, command: Seque
         try:
             result["state"] = "running"
             _write_json(context.result, result)
-            process = subprocess.Popen(list(command), cwd=context.work, env=_environment(context),
+            process = subprocess.Popen(list(command), cwd=context.work, env=_environment(context, extra_env),
                                        stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT,
                                        start_new_session=True)
             try:

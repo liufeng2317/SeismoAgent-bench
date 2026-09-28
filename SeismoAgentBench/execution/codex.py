@@ -4,11 +4,33 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Sequence
+from typing import Mapping
 
 
 class CodexCommandError(ValueError):
     """Raised when a Codex command declaration is incomplete or unsafe."""
+
+
+def load_env_file(path: str | Path) -> dict[str, str]:
+    """Load simple KEY=VALUE lines without exposing values to run records."""
+    source = Path(path)
+    try:
+        lines = source.read_text(encoding="utf-8").splitlines()
+    except (OSError, UnicodeError) as exc:
+        raise CodexCommandError(f"cannot read env file {source}: {exc}") from exc
+    values: dict[str, str] = {}
+    for number, line in enumerate(lines, start=1):
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        if "=" not in stripped:
+            raise CodexCommandError(f"env file line {number} is not KEY=VALUE")
+        key, value = stripped.split("=", 1)
+        key = key.strip()
+        if not key or "\x00" in key or "\x00" in value:
+            raise CodexCommandError(f"env file line {number} has an invalid variable")
+        values[key] = value
+    return values
 
 
 @dataclass(frozen=True)
