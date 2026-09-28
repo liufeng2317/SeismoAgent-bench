@@ -27,7 +27,7 @@ def _manifest() -> dict:
 
 
 def _station_coordinates(entries: list[dict], stationxml: Path) -> tuple[float, float]:
-    entry = next(item for item in entries if item.get("kind") == "waveform")
+    entry = next(item for item in entries if item.get("data_type") == "waveform")
     network, station = entry["network"], entry["station"]
     inventory = read_inventory(str(stationxml), format="STATIONXML")
     selected = inventory.select(network=network, station=station)
@@ -38,10 +38,10 @@ def _station_coordinates(entries: list[dict], stationxml: Path) -> tuple[float, 
 
 
 def _candidates(entries: list[dict]) -> list[tuple[UTCDateTime, float]]:
-    vertical = [item for item in entries if item.get("kind") == "waveform"
+    vertical = [item for item in entries if item.get("data_type") == "waveform"
                 and str(item.get("channel", "")).endswith("Z")]
     if not vertical:
-        vertical = [item for item in entries if item.get("kind") == "waveform"]
+        vertical = [item for item in entries if item.get("data_type") == "waveform"]
     windows: list[tuple[UTCDateTime, float]] = []
     for entry in vertical:
         stream = read(entry["path"])
@@ -71,7 +71,7 @@ def _candidates(entries: list[dict]) -> list[tuple[UTCDateTime, float]]:
 def main() -> None:
     manifest = _manifest()
     entries = manifest["entries"]
-    stationxml = Path(next(item["path"] for item in entries if item.get("kind") == "stationxml"))
+    stationxml = Path(next(item["path"] for item in entries if item.get("data_type") == "station_metadata"))
     latitude, longitude = _station_coordinates(entries, stationxml)
     candidates = _candidates(entries)
     events = []

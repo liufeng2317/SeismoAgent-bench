@@ -18,7 +18,7 @@ def _load_manifest() -> dict:
 
 def main() -> None:
     manifest = _load_manifest()
-    waveform_entries = [entry for entry in manifest["entries"] if entry["kind"] == "waveform"]
+    waveform_entries = [entry for entry in manifest["entries"] if entry["data_type"] == "waveform"]
     preprocessing = []
     picks = []
     for entry in waveform_entries:

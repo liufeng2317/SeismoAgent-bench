@@ -10,7 +10,7 @@ TASK = {
     "task_id": "synthetic_catalog",
     "version": "1",
     "task_prompt": "Check declared output files.",
-    "input_kinds": ["metadata"],
+    "input_types": ["metadata"],
     "output_artifacts": [
         {"id": "summary", "path": "summary.json", "kind": "json", "required": True},
         {"id": "log", "path": "details.txt", "kind": "text", "required": False},

@@ -12,12 +12,12 @@ TASK = {
     "task_id": "agent-smoke",
     "version": "1",
     "task_prompt": "Run a synthetic agent.",
-    "input_kinds": ["metadata"],
+    "input_types": ["metadata"],
     "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
     "scorer": {"name": "artifact-contract", "version": "1"},
 }
 MANIFEST = {"schema_version": 1, "case_id": "synthetic_case", "entries": [
-    {"id": "metadata", "path": "/tmp/metadata.json", "kind": "metadata", "read_only": True}
+    {"id": "metadata", "path": "/tmp/metadata.json", "data_type": "metadata", "format": "JSON", "read_only": True}
 ]}
 
 

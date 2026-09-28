@@ -11,7 +11,7 @@ from typing import Any, Mapping
 
 _ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]*$")
 _SCOPE_ID = re.compile(r"^[a-z0-9][a-z0-9_-]*$")
-_KINDS = {"waveform", "stationxml", "catalog", "metadata", "other"}
+_INPUT_TYPES = {"waveform", "station_metadata", "catalog", "metadata", "other"}
 
 
 class ValidationError(ValueError):
@@ -85,8 +85,8 @@ def validate_manifest(value: Mapping[str, Any], *, task: Mapping[str, Any] | Non
         errors.append("manifest.entries must be a non-empty list")
         entries = []
     seen: set[str] = set()
-    kinds: set[str] = set()
-    entry_allowed = {"id", "path", "kind", "read_only", "bytes", "network", "station",
+    data_types: set[str] = set()
+    entry_allowed = {"id", "path", "data_type", "format", "read_only", "bytes", "network", "station",
                      "location", "channel", "start_time", "end_time", "sha256", "notes"}
     for index, raw in enumerate(entries):
         label = f"manifest.entries[{index}]"
@@ -94,7 +94,7 @@ def validate_manifest(value: Mapping[str, Any], *, task: Mapping[str, Any] | Non
         if entry is None:
             continue
         _unknown(entry, entry_allowed, label, errors)
-        _required(entry, {"id", "path", "kind", "read_only"}, label, errors)
+        _required(entry, {"id", "path", "data_type", "format", "read_only"}, label, errors)
         entry_id = entry.get("id")
         if not isinstance(entry_id, str) or not _ID.fullmatch(entry_id):
             errors.append(f"{label}.id has an invalid identifier")
@@ -107,11 +107,13 @@ def validate_manifest(value: Mapping[str, Any], *, task: Mapping[str, Any] | Non
             errors.append(f"{label}.path must be an absolute path")
         elif check_paths and (not Path(path).is_file() or Path(path).is_symlink()):
             errors.append(f"{label}.path is not an existing regular file: {path}")
-        kind = entry.get("kind")
-        if kind not in _KINDS:
-            errors.append(f"{label}.kind is not supported")
+        data_type = entry.get("data_type")
+        if data_type not in _INPUT_TYPES:
+            errors.append(f"{label}.data_type is not supported")
         else:
-            kinds.add(kind)
+            data_types.add(data_type)
+        if not isinstance(entry.get("format"), str) or not entry.get("format"):
+            errors.append(f"{label}.format must be a non-empty string")
         if entry.get("read_only") is not True:
             errors.append(f"{label}.read_only must be true")
         if "bytes" in entry and (not isinstance(entry["bytes"], int) or entry["bytes"] < 0):
@@ -122,10 +124,10 @@ def validate_manifest(value: Mapping[str, Any], *, task: Mapping[str, Any] | Non
             if field in entry:
                 _time(entry[field], f"{label}.{field}", errors)
     if task is not None and isinstance(task, Mapping):
-        required_kinds = set(task.get("input_kinds", []))
-        missing = sorted(required_kinds - kinds)
+        required_types = set(task.get("input_types", []))
+        missing = sorted(required_types - data_types)
         if missing:
-            errors.append(f"manifest is missing required input kinds: {', '.join(missing)}")
+            errors.append(f"manifest is missing required input types: {', '.join(missing)}")
     if errors:
         raise ValidationError(errors)
     return dict(value)
@@ -138,9 +140,9 @@ def validate_task(value: Mapping[str, Any]) -> dict[str, Any]:
     if task is None:
         raise ValidationError(errors)
     allowed = {"task_id", "version", "title", "summary", "task_prompt",
-               "input_kinds", "output_artifacts", "scorer"}
+               "input_types", "output_artifacts", "scorer"}
     _unknown(task, allowed, "task", errors)
-    _required(task, {"task_id", "version", "task_prompt", "input_kinds",
+    _required(task, {"task_id", "version", "task_prompt", "input_types",
                      "output_artifacts", "scorer"}, "task", errors)
     if not isinstance(task.get("task_id"), str) or not _ID.fullmatch(task.get("task_id", "")):
         errors.append("task.task_id has an invalid identifier")
@@ -151,11 +153,11 @@ def validate_task(value: Mapping[str, Any]) -> dict[str, Any]:
             errors.append(f"task.{field} must be a non-empty string when provided")
     if not isinstance(task.get("task_prompt"), str) or not task.get("task_prompt"):
         errors.append("task.task_prompt must be a non-empty string")
-    input_kinds = task.get("input_kinds")
-    if not isinstance(input_kinds, list) or not input_kinds or any(kind not in _KINDS for kind in input_kinds):
-        errors.append("task.input_kinds must be a non-empty list of supported kinds")
-    elif len(set(input_kinds)) != len(input_kinds):
-        errors.append("task.input_kinds must not contain duplicates")
+    input_types = task.get("input_types")
+    if not isinstance(input_types, list) or not input_types or any(kind not in _INPUT_TYPES for kind in input_types):
+        errors.append("task.input_types must be a non-empty list of supported input types")
+    elif len(set(input_types)) != len(input_types):
+        errors.append("task.input_types must not contain duplicates")
     outputs = task.get("output_artifacts")
     output_ids: set[str] = set()
     if not isinstance(outputs, list) or not outputs:

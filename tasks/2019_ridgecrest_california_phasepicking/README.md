@@ -14,6 +14,15 @@ replacement for PhaseNet.
 
 This workflow test case is maintained separately from the scientific Ridgecrest case package. It exists to validate the benchmark execution and evaluation path.
 
+## Input manifest vocabulary
+
+The task declares semantic input roles in `task.json` under `input_types`. Each
+manifest entry repeats its role in `data_type` and separately records the
+physical file representation in `format`. For example, a waveform entry uses
+`data_type: waveform` and `format: miniSEED`, while station metadata uses
+`data_type: station_metadata` and `format: StationXML`. This distinction keeps
+the task meaning independent of a particular file format.
+
 ## Run results
 
 The `runs/` entry is a relative symbolic link to the durable run store for

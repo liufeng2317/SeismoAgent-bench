@@ -18,13 +18,13 @@ class ExperimentExecutionTests(unittest.TestCase):
             )
             (base / "task.json").write_text(json.dumps({
                 "task_id": "experiment-task", "version": "1", "task_prompt": "test",
-                "input_kinds": ["metadata"],
+                "input_types": ["metadata"],
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
                 "scorer": {"name": "artifact-contract", "version": "1"},
             }), encoding="utf-8")
             (base / "manifest.json").write_text(json.dumps({
                 "schema_version": 1, "case_id": "synthetic", "entries": [
-                    {"id": "metadata", "path": "/tmp/metadata", "kind": "metadata", "read_only": True}
+                    {"id": "metadata", "path": "/tmp/metadata", "data_type": "metadata", "format": "JSON", "read_only": True}
                 ],
             }), encoding="utf-8")
             (base / "agent.yaml").write_text("harness: python\nmodel: null\nconfig: {}\n", encoding="utf-8")

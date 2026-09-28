@@ -10,7 +10,7 @@ TASK = {
     "task_id": "waveform-inspection",
     "version": "1",
     "task_prompt": "Inspect declared waveform metadata.",
-    "input_kinds": ["waveform", "stationxml"],
+    "input_types": ["waveform", "station_metadata"],
     "output_artifacts": [{"id": "summary", "path": "summary.json", "kind": "json", "required": True}],
     "scorer": {"name": "metadata-score", "version": "1"},
 }
@@ -18,9 +18,9 @@ TASK = {
 
 def manifest():
     return {"schema_version": 1, "case_id": "synthetic_case", "entries": [
-        {"id": "XX.TEST.HHZ", "path": "/tmp/waveform.mseed", "kind": "waveform", "read_only": True,
+        {"id": "XX.TEST.HHZ", "path": "/tmp/waveform.mseed", "data_type": "waveform", "format": "miniSEED", "read_only": True,
          "channel": "HHZ", "start_time": "2020-01-01T00:00:00Z"},
-        {"id": "stationxml", "path": "/tmp/stations.xml", "kind": "stationxml", "read_only": True},
+        {"id": "station_metadata", "path": "/tmp/stations.xml", "data_type": "station_metadata", "format": "StationXML", "read_only": True},
     ]}
 
 
@@ -38,10 +38,19 @@ class ValidationTests(unittest.TestCase):
         self.assertIn("duplicate manifest entry id", str(raised.exception))
         self.assertIn("read_only must be true", str(raised.exception))
 
-    def test_manifest_rejects_missing_required_kind(self):
+    def test_manifest_rejects_missing_required_type(self):
         value = manifest(); value["entries"] = value["entries"][:1]
-        with self.assertRaisesRegex(ValidationError, "missing required input kinds"):
+        with self.assertRaisesRegex(ValidationError, "missing required input types"):
             validate_manifest(value, task=TASK)
+
+    def test_manifest_separates_semantic_type_from_file_format(self):
+        value = manifest()
+        value["entries"][0]["format"] = "miniSEED"
+        value["entries"][1]["format"] = "StationXML"
+        self.assertEqual(validate_manifest(value)["entries"][1]["data_type"], "station_metadata")
+        value["entries"][1].pop("format")
+        with self.assertRaisesRegex(ValidationError, "missing required field 'format'"):
+            validate_manifest(value)
 
     def test_manifest_path_check_is_optional_and_read_only(self):
         value = manifest()

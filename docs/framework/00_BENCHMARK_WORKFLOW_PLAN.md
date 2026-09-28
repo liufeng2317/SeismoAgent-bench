@@ -54,7 +54,7 @@ A task specification MUST NOT contain private reference products or depend on a 
 
 ### 3.2 Input manifest validation
 
-An input manifest MUST be versioned and MUST provide stable logical entry IDs. Each entry MUST declare its data kind, source or resolved path and read-only intent. Optional metadata MAY include byte size, temporal coverage, station/channel identity and integrity information.
+An input manifest MUST be versioned and MUST provide stable logical entry IDs. Each entry MUST declare its semantic `data_type`, physical `format`, source or resolved path and read-only intent. Optional metadata MAY include byte size, temporal coverage, station/channel identity and integrity information.
 
 The controller MUST validate:
 

@@ -16,13 +16,13 @@ class CodexCliTests(unittest.TestCase):
             run_root = base / "runs"
             task.write_text(json.dumps({
                 "task_id": "codex-cli-smoke", "version": "1", "task_prompt": "smoke",
-                "input_kinds": ["metadata"],
+                "input_types": ["metadata"],
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
                 "scorer": {"name": "artifact-contract", "version": "1"},
             }), encoding="utf-8")
             manifest.write_text(json.dumps({
                 "schema_version": 1, "case_id": "synthetic", "entries": [
-                    {"id": "metadata", "path": "/tmp/metadata.json", "kind": "metadata", "read_only": True}
+                    {"id": "metadata", "path": "/tmp/metadata.json", "data_type": "metadata", "format": "JSON", "read_only": True}
                 ],
             }), encoding="utf-8")
             fake.write_text(
@@ -60,13 +60,13 @@ class CodexCliTests(unittest.TestCase):
             root = base / "runs"
             task.write_text(json.dumps({
                 "task_id": "layout-task", "version": "1", "task_prompt": "smoke",
-                "input_kinds": ["metadata"],
+                "input_types": ["metadata"],
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
                 "scorer": {"name": "artifact-contract", "version": "1"},
             }), encoding="utf-8")
             manifest.write_text(json.dumps({
                 "schema_version": 1, "case_id": "synthetic", "entries": [
-                    {"id": "metadata", "path": "/tmp/metadata.json", "kind": "metadata", "read_only": True}
+                    {"id": "metadata", "path": "/tmp/metadata.json", "data_type": "metadata", "format": "JSON", "read_only": True}
                 ],
             }), encoding="utf-8")
             fake.write_text(
@@ -100,13 +100,13 @@ class CodexCliTests(unittest.TestCase):
             run_root = base / "runs"
             task.write_text(json.dumps({
                 "task_id": "retry-task", "version": "1", "task_prompt": "smoke",
-                "input_kinds": ["metadata"],
+                "input_types": ["metadata"],
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
                 "scorer": {"name": "artifact-contract", "version": "1"},
             }), encoding="utf-8")
             manifest.write_text(json.dumps({
                 "schema_version": 1, "case_id": "synthetic", "entries": [
-                    {"id": "metadata", "path": "/tmp/metadata.json", "kind": "metadata", "read_only": True}
+                    {"id": "metadata", "path": "/tmp/metadata.json", "data_type": "metadata", "format": "JSON", "read_only": True}
                 ],
             }), encoding="utf-8")
             fake.write_text(

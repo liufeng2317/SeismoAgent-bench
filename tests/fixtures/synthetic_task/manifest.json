@@ -6,8 +6,9 @@
     {
       "id": "metadata",
       "path": "/tmp/seismoagentbench-synthetic-metadata.json",
-      "kind": "metadata",
-      "read_only": true
+      "read_only": true,
+      "data_type": "metadata",
+      "format": "JSON"
     }
   ]
 }
