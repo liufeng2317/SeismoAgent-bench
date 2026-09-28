@@ -13,3 +13,10 @@ uses a simple STA/LTA trigger for pipeline validation; it is not a scientific
 replacement for PhaseNet.
 
 This workflow test case is maintained separately from the scientific Ridgecrest case package. It exists to validate the benchmark execution and evaluation path.
+
+## Run results
+
+The `runs/` entry is a relative symbolic link to the durable run store for
+this task. It exposes completed and in-progress runs without copying their
+files into the repository. The link target is grouped by the task's stable
+`task_id`, while the physical run store remains outside the source tree.
