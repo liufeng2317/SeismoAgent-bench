@@ -27,13 +27,13 @@ class SyntheticFixtureSmokeTests(unittest.TestCase):
             self.assertEqual(payload["run"]["state"], "scored")
             run = run_root / "smoke-001"
             for relative in (
-                "task_spec.json", "input_manifest.json", "environment.json",
-                "agent_command.json", "execution.log", "output/catalog.json",
-                "artifacts.json", "score/score.json", "run_result.json",
-                "evaluation_report.json",
+                "control/task_spec.json", "control/input_manifest.json", "record/environment.json",
+                "record/agent_command.json", "agent/execution.log", "agent/output/catalog.json",
+                "record/artifact_manifest.json", "evaluation/score.json", "record/run_result.json",
+                "evaluation/report.json",
             ):
                 self.assertTrue((run / relative).is_file(), relative)
-            self.assertEqual(json.loads((run / "score/score.json").read_text())["status"], "passed")
+            self.assertEqual(json.loads((run / "evaluation/score.json").read_text())["status"], "passed")
 
 
 if __name__ == "__main__":

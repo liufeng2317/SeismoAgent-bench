@@ -52,7 +52,7 @@ class RidgecrestPackageTests(unittest.TestCase):
             self.assertEqual(payload["run"]["state"], "scored")
             self.assertEqual(payload["scientific_score"]["metrics"]["candidate_events"], 0)
             self.assertEqual(payload["scientific_score"]["metrics"]["reference_events"], 2)
-            self.assertTrue((run_root / "smoke-001/score/task_summary.json").is_file())
+            self.assertTrue((run_root / "smoke-001/evaluation/task_summary.json").is_file())
 
     def test_deterministic_baseline_generates_and_scores_candidate_catalog(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -75,8 +75,8 @@ class RidgecrestPackageTests(unittest.TestCase):
             self.assertEqual(metrics["matched_events"], 2)
             self.assertEqual(metrics["precision"], 1.0)
             self.assertEqual(metrics["recall"], 1.0)
-            self.assertTrue((run_root / "baseline-001/output/catalog.json").is_file())
-            self.assertTrue((run_root / "baseline-001/evaluation_report.json").is_file())
+            self.assertTrue((run_root / "baseline-001/agent/output/catalog.json").is_file())
+            self.assertTrue((run_root / "baseline-001/evaluation/report.json").is_file())
 
     def test_waveform_baseline_reads_mseed_and_generates_candidates(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -95,7 +95,7 @@ class RidgecrestPackageTests(unittest.TestCase):
             payload = json.loads(result.stdout)
             self.assertEqual(payload["run"]["state"], "scored")
             self.assertGreater(payload["scientific_score"]["metrics"]["candidate_events"], 0)
-            output_catalog = json.loads((run_root / "waveform-001/output/catalog.json").read_text())
+            output_catalog = json.loads((run_root / "waveform-001/agent/output/catalog.json").read_text())
             self.assertTrue(all(event["location_method"] == "station-amplitude-baseline"
                                 for event in output_catalog["events"]))
 

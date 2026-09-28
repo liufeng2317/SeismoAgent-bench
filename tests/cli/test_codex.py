@@ -47,9 +47,9 @@ class CodexCliTests(unittest.TestCase):
             self.assertEqual(payload["run"]["state"], "scored")
             self.assertEqual(payload["codex"]["transcript"], "transcript.jsonl")
             self.assertIn("CODEX_HOME", payload["codex"]["injected_environment_keys"])
-            self.assertIn('"text": "OK"', (run / "transcript.jsonl").read_text())
-            self.assertTrue((run / "codex_command.json").is_file())
-            self.assertNotIn("external-codex-home", (run / "codex_command.json").read_text())
+            self.assertIn('"text": "OK"', (run / "record/transcript.jsonl").read_text())
+            self.assertTrue((run / "record/codex_command.json").is_file())
+            self.assertNotIn("external-codex-home", (run / "record/codex_command.json").read_text())
 
     def test_run_codex_supports_canonical_campaign_layout(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -87,7 +87,7 @@ class CodexCliTests(unittest.TestCase):
             result = subprocess.run(command, capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
             unit = root / "layout-task/run-001"
-            self.assertTrue((unit / "output/result.json").is_file())
+            self.assertTrue((unit / "agent/output/result.json").is_file())
             self.assertEqual(json.loads(result.stdout)["run_layout"]["unit_root"], str(unit))
 
     def test_run_codex_retries_capacity_with_bounded_attempts(self):
@@ -133,8 +133,8 @@ class CodexCliTests(unittest.TestCase):
             unit = run_root / "run-001"
             payload = json.loads(result.stdout)
             self.assertEqual(payload["run"]["state"], "scored")
-            self.assertTrue((unit / "attempts/attempt-001/execution.log").is_file())
-            self.assertTrue((unit / "output/result.json").is_file())
+            self.assertTrue((unit / "attempts/attempt-001/agent/execution.log").is_file())
+            self.assertTrue((unit / "agent/output/result.json").is_file())
 
 
 if __name__ == "__main__":

@@ -29,13 +29,16 @@ class ExecutionError(RuntimeError):
 class RunContext:
     run_id: str
     root: Path
+    control: Path
     task_path: Path
     manifest_path: Path
+    agent: Path
     work: Path
     output: Path
     home: Path
     tmp: Path
     log: Path
+    record: Path
     result: Path
 
     @property
@@ -76,7 +79,7 @@ def _archive_retry(run: Path) -> int:
     number = len(existing) + 1
     archive = attempts / f"attempt-{number:03d}"
     archive.mkdir()
-    preserved = {"task_spec.json", "input_manifest.json", "attempts"}
+    preserved = {"control", "attempts"}
     for item in list(run.iterdir()):
         if item.name in preserved:
             continue
@@ -93,7 +96,7 @@ def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, 
     if run.exists():
         if not resume:
             raise ExecutionError(f"run already exists: {run}")
-        previous_path = run / "run_result.json"
+        previous_path = run / "record" / "run_result.json"
         if not previous_path.is_file():
             raise ExecutionError("cannot resume a run without run_result.json")
         previous = load_json(previous_path)
@@ -102,15 +105,22 @@ def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, 
         attempt = _archive_retry(run) + 1
     else:
         run.mkdir(parents=True)
-    task_path = run / "task_spec.json"
-    manifest_path = run / "input_manifest.json"
+    control = run / "control"
+    agent = run / "agent"
+    record = run / "record"
+    control.mkdir(exist_ok=True)
+    agent.mkdir(exist_ok=True)
+    record.mkdir(exist_ok=True)
+    task_path = control / "task_spec.json"
+    manifest_path = control / "input_manifest.json"
     _write_json(task_path, task)
     _write_json(manifest_path, manifest)
-    directories = {name: run / name for name in ("work", "output", "home", "tmp")}
+    directories = {name: agent / name for name in ("work", "output", "home", "tmp")}
     for directory in directories.values():
         directory.mkdir()
-    return (RunContext(run_id, run, task_path, manifest_path, **directories,
-                       log=run / "execution.log", result=run / "run_result.json"), attempt)
+    return (RunContext(run_id, run, control, task_path, manifest_path, agent, **directories,
+                       log=agent / "execution.log", record=record,
+                       result=record / "run_result.json"), attempt)
 
 
 def _environment(context: RunContext, extra_env: Mapping[str, str] | None = None) -> dict[str, str]:

@@ -36,7 +36,7 @@ class CliTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             payload = json.loads(result.stdout)
             self.assertEqual(payload["run"]["state"], "scored")
-            self.assertTrue((root / "run-001/agent_command.json").is_file())
+            self.assertTrue((root / "run-001/record/agent_command.json").is_file())
 
     def test_failed_agent_returns_nonzero_worker_status(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -33,9 +33,9 @@ class PhasePickingTaskTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             payload = json.loads(result.stdout)
             self.assertEqual(payload["run"]["state"], "scored")
-            picks = json.loads((run_root / "phase-001/output/picks.json").read_text())
+            picks = json.loads((run_root / "phase-001/agent/output/picks.json").read_text())
             self.assertGreater(len(picks["picks"]), 0)
-            preprocessing = json.loads((run_root / "phase-001/output/preprocessing.json").read_text())
+            preprocessing = json.loads((run_root / "phase-001/agent/output/preprocessing.json").read_text())
             self.assertEqual(len(preprocessing["traces"]), 3)
 
 

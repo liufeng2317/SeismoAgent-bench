@@ -39,10 +39,12 @@ class RunnerTests(unittest.TestCase):
         run = self.root / "run-001"
         self.assertEqual(result["state"], "completed")
         self.assertFalse(result["formal_evaluation_eligible"])
-        self.assertTrue((run / "task_spec.json").is_file())
-        self.assertTrue((run / "input_manifest.json").is_file())
-        self.assertTrue((run / "execution.log").is_file())
-        self.assertEqual(json.loads((run / "output/result.json").read_text())["ok"], True)
+        self.assertTrue((run / "control/task_spec.json").is_file())
+        self.assertTrue((run / "control/input_manifest.json").is_file())
+        self.assertTrue((run / "agent/execution.log").is_file())
+        self.assertEqual(json.loads((run / "agent/output/result.json").read_text())["ok"], True)
+        self.assertTrue((run / "record/run_result.json").is_file())
+        self.assertFalse((run / "agent/task_spec.json").exists())
 
     def test_nonzero_command_is_recorded(self):
         result = run_command(self.task, self.manifest, [sys.executable, "-c", "raise SystemExit(7)"], self.root, "run-002", timeout=10)
@@ -73,8 +75,8 @@ class RunnerTests(unittest.TestCase):
                               "run-resume", timeout=10, resume=True)
         self.assertEqual(resumed["state"], "completed")
         run = self.root / "run-resume"
-        self.assertTrue((run / "attempts/attempt-001/execution.log").is_file())
-        self.assertTrue((run / "output/result.json").is_file())
+        self.assertTrue((run / "attempts/attempt-001/agent/execution.log").is_file())
+        self.assertTrue((run / "agent/output/result.json").is_file())
 
     def test_timeout_kills_command(self):
         result = run_command(self.task, self.manifest, [sys.executable, "-c", "import time; time.sleep(10)"], self.root, "run-003", timeout=0.1)

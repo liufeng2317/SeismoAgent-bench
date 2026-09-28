@@ -15,6 +15,7 @@ def _now() -> str:
 
 
 def _write(path: Path, value: Mapping[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
@@ -32,7 +33,7 @@ def write_environment_record(run_dir: str | Path, result: Mapping[str, Any]) -> 
         "working_directory": str(run / "work"),
         "network_policy": "unspecified",
     }
-    _write(run / "environment.json", record)
+    _write(run / "record" / "environment.json", record)
     return record
 
 
@@ -51,17 +52,17 @@ def write_evaluation_report(run_dir: str | Path, result: Mapping[str, Any],
         "agent": dict(agent) if agent is not None else None,
         "reference": dict(reference) if reference is not None else None,
         "records": {
-            "task": "task_spec.json",
-            "input_manifest": "input_manifest.json",
-            "environment": "environment.json",
-            "agent_command": "agent_command.json" if (run / "agent_command.json").is_file() else None,
-            "execution": "execution.log",
-            "artifacts": "artifacts.json" if (run / "artifacts.json").is_file() else None,
-            "score": "score/score.json" if (run / "score/score.json").is_file() else None,
-            "scientific_score": "score/scientific_score.json" if (run / "score/scientific_score.json").is_file() else None,
-            "task_summary": "score/task_summary.json" if (run / "score/task_summary.json").is_file() else None,
-            "run_result": "run_result.json",
+            "task": "control/task_spec.json",
+            "input_manifest": "control/input_manifest.json",
+            "environment": "record/environment.json",
+            "agent_command": "record/agent_command.json" if (run / "record/agent_command.json").is_file() else None,
+            "execution": "agent/execution.log",
+            "artifacts": "record/artifact_manifest.json" if (run / "record/artifact_manifest.json").is_file() else None,
+            "score": "evaluation/score.json" if (run / "evaluation/score.json").is_file() else None,
+            "scientific_score": "evaluation/scientific_score.json" if (run / "evaluation/scientific_score.json").is_file() else None,
+            "task_summary": "evaluation/task_summary.json" if (run / "evaluation/task_summary.json").is_file() else None,
+            "run_result": "record/run_result.json",
         },
     }
-    _write(run / "evaluation_report.json", report)
+    _write(run / "evaluation" / "report.json", report)
     return report

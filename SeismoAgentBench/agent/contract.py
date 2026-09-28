@@ -53,10 +53,12 @@ def run_agent(task_path: str | Path, manifest_path: str | Path, agent: AgentSpec
                       timeout=timeout, reference_manifest=reference_manifest,
                       extra_env=extra_env, resume=resume)
     run = Path(run_root).resolve() / run_id
-    (run / "agent_command.json").write_text(json.dumps(agent.record(), indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    record_dir = run / "record"
+    record_dir.mkdir(exist_ok=True)
+    (record_dir / "agent_command.json").write_text(json.dumps(agent.record(), indent=2, sort_keys=True) + "\n", encoding="utf-8")
     result["agent"] = agent.record()
-    run_result = json.loads((run / "run_result.json").read_text(encoding="utf-8"))
+    run_result = json.loads((record_dir / "run_result.json").read_text(encoding="utf-8"))
     run_result["agent"] = agent.record()
-    (run / "run_result.json").write_text(json.dumps(run_result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    (record_dir / "run_result.json").write_text(json.dumps(run_result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     write_evaluation_report(run, run_result, agent.record())
     return result

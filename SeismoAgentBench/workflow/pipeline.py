@@ -53,10 +53,10 @@ def run_task(task_path: str | Path, manifest_path: str | Path, command: Sequence
         write_evaluation_report(run, result)
         return {"run": result, "score": None}
 
-    task = load_json(run / "task_spec.json")
-    output = run / "output"
-    artifacts_path = run / "artifacts.json"
-    score_dir = run / "score"
+    task = load_json(run / "control" / "task_spec.json")
+    output = run / "agent" / "output"
+    artifacts_path = run / "record" / "artifact_manifest.json"
+    score_dir = run / "evaluation"
     try:
         validation = validate_artifacts(task, output)
     except ArtifactValidationError as exc:
@@ -64,12 +64,12 @@ def run_task(task_path: str | Path, manifest_path: str | Path, command: Sequence
         _write_json(artifacts_path, validation)
         result["state"] = "artifact_invalid"
         result["artifact_validation"] = "failed"
-        _write_json(run / "run_result.json", result)
+        _write_json(run / "record" / "run_result.json", result)
         write_evaluation_report(run, result)
         return {"run": result, "artifacts": validation, "score": None}
 
     _write_json(artifacts_path, validation)
-    score_dir.mkdir()
+    score_dir.mkdir(exist_ok=True)
     try:
         score = score_artifacts(task, validation)
     except ScoreError as exc:
@@ -77,7 +77,7 @@ def run_task(task_path: str | Path, manifest_path: str | Path, command: Sequence
         _write_json(score_dir / "score.json", score)
         result["state"] = "scoring_failed"
         result["scoring_error"] = str(exc)
-        _write_json(run / "run_result.json", result)
+        _write_json(run / "record" / "run_result.json", result)
         write_evaluation_report(run, result)
         return {"run": result, "artifacts": validation, "score": score}
     _write_json(score_dir / "score.json", score)
@@ -105,12 +105,12 @@ def run_task(task_path: str | Path, manifest_path: str | Path, command: Sequence
             result["state"] = "scoring_failed"
             result["scientific_scoring"] = "failed"
             result["scoring_error"] = str(exc)
-            _write_json(run / "run_result.json", result)
+            _write_json(run / "record" / "run_result.json", result)
             write_evaluation_report(run, result, reference=reference_record)
             return {"run": result, "artifacts": validation, "score": score, "scientific_score": failure}
     result["state"] = "scored"
     result["artifact_validation"] = "passed"
-    _write_json(run / "run_result.json", result)
+    _write_json(run / "record" / "run_result.json", result)
     write_evaluation_report(run, result, reference=reference_record)
     output_result = {"run": result, "artifacts": validation, "score": score}
     if reference_manifest is not None:

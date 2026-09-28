@@ -41,8 +41,8 @@ class AgentContractTests(unittest.TestCase):
             result = run_agent(task, manifest, spec, root, "run-001", timeout=10)
             run = root / "run-001"
             self.assertEqual(result["run"]["state"], "scored")
-            self.assertEqual(json.loads((run / "agent_command.json").read_text())["name"], "synthetic-agent")
-            self.assertEqual(json.loads((run / "run_result.json").read_text())["agent"]["version"], "0.1")
+            self.assertEqual(json.loads((run / "record/agent_command.json").read_text())["name"], "synthetic-agent")
+            self.assertEqual(json.loads((run / "record/run_result.json").read_text())["agent"]["version"], "0.1")
 
 
 if __name__ == "__main__":

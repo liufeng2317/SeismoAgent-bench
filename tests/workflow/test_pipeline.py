@@ -42,20 +42,20 @@ class PipelineTests(unittest.TestCase):
         run = self.root / "run-001"
         self.assertEqual(result["run"]["state"], "scored")
         self.assertEqual(result["score"]["metrics"]["contract_compliance"], 1.0)
-        self.assertTrue((run / "artifacts.json").is_file())
-        self.assertTrue((run / "score/score.json").is_file())
-        environment = json.loads((run / "environment.json").read_text())
+        self.assertTrue((run / "record/artifact_manifest.json").is_file())
+        self.assertTrue((run / "evaluation/score.json").is_file())
+        environment = json.loads((run / "record/environment.json").read_text())
         self.assertEqual(environment["execution_profile"], "trusted-development")
-        report = json.loads((run / "evaluation_report.json").read_text())
-        self.assertEqual(report["records"]["score"], "score/score.json")
+        report = json.loads((run / "evaluation/report.json").read_text())
+        self.assertEqual(report["records"]["score"], "evaluation/score.json")
         self.assertIsNone(report["agent"])
 
     def test_missing_required_output_is_not_scored(self):
         result = run_task(self.task, self.manifest, [sys.executable, "-c", "pass"], self.root, "run-002", timeout=10)
         self.assertEqual(result["run"]["state"], "artifact_invalid")
         self.assertIsNone(result["score"])
-        self.assertFalse((self.root / "run-002/score").exists())
-        self.assertEqual(json.loads((self.root / "run-002/evaluation_report.json").read_text())["state"], "artifact_invalid")
+        self.assertFalse((self.root / "run-002/evaluation/score.json").exists())
+        self.assertEqual(json.loads((self.root / "run-002/evaluation/report.json").read_text())["state"], "artifact_invalid")
 
     def test_command_failure_is_not_scored(self):
         result = run_task(self.task, self.manifest, [sys.executable, "-c", "raise SystemExit(9)"], self.root, "run-003", timeout=10)
@@ -98,9 +98,9 @@ class PipelineTests(unittest.TestCase):
         run = self.root / "run-005"
         self.assertEqual(result["run"]["state"], "scored")
         self.assertEqual(result["scientific_score"]["metrics"]["matched_events"], 1)
-        self.assertTrue((run / "score/scientific_score.json").is_file())
-        self.assertTrue((run / "score/task_summary.json").is_file())
-        self.assertEqual(json.loads((run / "evaluation_report.json").read_text())["reference"]["reference_id"], "synthetic-reference")
+        self.assertTrue((run / "evaluation/scientific_score.json").is_file())
+        self.assertTrue((run / "evaluation/task_summary.json").is_file())
+        self.assertEqual(json.loads((run / "evaluation/report.json").read_text())["reference"]["reference_id"], "synthetic-reference")
 
 
 if __name__ == "__main__":

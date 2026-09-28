@@ -94,8 +94,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                     time.sleep(args.retry_delay_s)
             assert result is not None
             run = effective_root / args.run_id
-            (run / "transcript.jsonl").write_bytes((run / "execution.log").read_bytes())
-            (run / "codex_command.json").write_text(
+            record_dir = run / "record"
+            record_dir.mkdir(exist_ok=True)
+            (record_dir / "transcript.jsonl").write_bytes((run / "agent" / "execution.log").read_bytes())
+            (record_dir / "codex_command.json").write_text(
                 json.dumps(spec.record(), indent=2, sort_keys=True) + "\n", encoding="utf-8")
             result["codex"] = {"command_record": "codex_command.json",
                                "transcript": "transcript.jsonl",
