@@ -9,6 +9,7 @@ import re
 from typing import Any, Sequence
 
 from SeismoAgentBench.workflow import run_task
+from SeismoAgentBench.reporting import write_evaluation_report
 
 
 _IDENTIFIER = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]*$")
@@ -52,4 +53,5 @@ def run_agent(task_path: str | Path, manifest_path: str | Path, agent: AgentSpec
     run_result = json.loads((run / "run_result.json").read_text(encoding="utf-8"))
     run_result["agent"] = agent.record()
     (run / "run_result.json").write_text(json.dumps(run_result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    write_evaluation_report(run, run_result, agent.record())
     return result

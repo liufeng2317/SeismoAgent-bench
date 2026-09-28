@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any, Sequence
 
 from SeismoAgentBench.execution import run_command
+from SeismoAgentBench.reporting import write_environment_record, write_evaluation_report
 from SeismoAgentBench.scoring import ArtifactValidationError, score_artifacts, validate_artifacts
 from SeismoAgentBench.task import load_json
 
@@ -26,7 +27,9 @@ def run_task(task_path: str | Path, manifest_path: str | Path, command: Sequence
     """
     result = run_command(task_path, manifest_path, command, run_root, run_id, timeout=timeout)
     run = Path(run_root).resolve() / run_id
+    write_environment_record(run, result)
     if result["state"] != "completed":
+        write_evaluation_report(run, result)
         return {"run": result, "score": None}
 
     task = load_json(run / "task_spec.json")
@@ -41,6 +44,7 @@ def run_task(task_path: str | Path, manifest_path: str | Path, command: Sequence
         result["state"] = "artifact_invalid"
         result["artifact_validation"] = "failed"
         _write_json(run / "run_result.json", result)
+        write_evaluation_report(run, result)
         return {"run": result, "artifacts": validation, "score": None}
 
     _write_json(artifacts_path, validation)
@@ -50,4 +54,5 @@ def run_task(task_path: str | Path, manifest_path: str | Path, command: Sequence
     result["state"] = "scored"
     result["artifact_validation"] = "passed"
     _write_json(run / "run_result.json", result)
+    write_evaluation_report(run, result)
     return {"run": result, "artifacts": validation, "score": score}
