@@ -8,3 +8,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Output artifact validation | [01_output_artifact_validation.md](01_output_artifact_validation.md) | Complete |
 | Legacy evaluation cleanup | [02_legacy_evaluation_cleanup.md](02_legacy_evaluation_cleanup.md) | Complete |
 | Deterministic artifact scorer | [03_deterministic_artifact_scorer.md](03_deterministic_artifact_scorer.md) | Complete |
+| End-to-end task workflow | [04_end_to_end_task_workflow.md](04_end_to_end_task_workflow.md) | Complete |
