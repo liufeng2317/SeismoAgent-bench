@@ -77,6 +77,9 @@ benchmark_source/**/waveforms
 # Native velocity-model downloads and third-party implementation evidence stay local.
 benchmark_source/**/data/models/raw/
 
+# Locally regenerated Kilauea analysis metadata is intentionally excluded.
+benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/analysis/stats/relocated_events/full_v1.json
+
 # Small, reviewed Ridgecrest diagnostic tables accompany their figures.
 !benchmark_source/2019_ridgecrest_california/analysis/figures/waveform_quality/*.csv
 !benchmark_source/2019_ridgecrest_california/analysis/figures/instrument_response/response_audit.csv
