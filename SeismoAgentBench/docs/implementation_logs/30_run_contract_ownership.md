@@ -23,7 +23,8 @@ Run records are written by the runner under `record/`.
 
 The existing workflow still performs compatibility artifact scoring so current
 smoke tasks remain executable. Moving that scorer to a separate external
-`evaluate` command is the next bounded stage.
+`evaluate` command is the next bounded stage. The previously generated
+Ridgecrest runs were migrated to the same ownership layout.
 
 ## Validation
 
