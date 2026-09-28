@@ -8,7 +8,7 @@ from pathlib import Path
 import re
 from typing import Any, Mapping, Sequence
 
-from SeismoAgentBench.execution import run_command
+from SeismoAgentBench.execution import run_command, write_agent_config_snapshot
 from SeismoAgentBench.reporting import write_environment_record
 
 
@@ -47,11 +47,14 @@ def run_agent(task_path: str | Path, manifest_path: str | Path, agent: AgentSpec
               run_root: str | Path, run_id: str, *, timeout: float = 600,
               reference_manifest: str | Path | None = None,
               extra_env: Mapping[str, str] | None = None,
-              resume: bool = False) -> dict[str, Any]:
+              resume: bool = False,
+              agent_config: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Run one declared agent through the standard task workflow."""
     result = run_command(task_path, manifest_path, agent.command, run_root, run_id,
                          timeout=timeout, extra_env=extra_env, resume=resume)
     run = Path(run_root).resolve() / run_id
+    if agent_config is not None:
+        write_agent_config_snapshot(run, agent_config)
     write_environment_record(run, result)
     record_dir = run / "record"
     record_dir.mkdir(exist_ok=True)

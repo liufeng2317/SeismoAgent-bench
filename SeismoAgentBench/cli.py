@@ -11,7 +11,7 @@ from typing import Sequence
 
 from SeismoAgentBench.agent import AgentError, AgentSpec, run_agent
 from SeismoAgentBench.execution import (CodexCommandError, CodexCommandSpec, ExecutionError,
-                                        RunLayout, load_env_file)
+                                        AgentConfigError, RunLayout, load_agent_config, load_env_file)
 from SeismoAgentBench.task import load_json
 from SeismoAgentBench.workflow import evaluate_run
 
@@ -29,6 +29,7 @@ def _parser() -> argparse.ArgumentParser:
     run.add_argument("--agent-version", required=True)
     run.add_argument("--run-root", required=True)
     run.add_argument("--run-id", required=True)
+    run.add_argument("--agent-config", help="YAML Agent runtime configuration snapshot")
     run.add_argument("--timeout", type=float, default=600)
     run.add_argument("--reference-manifest", help="optional authorized reference manifest")
     run.add_argument("command", nargs=argparse.REMAINDER,
@@ -43,6 +44,7 @@ def _parser() -> argparse.ArgumentParser:
     codex.add_argument("--agent-version", required=True)
     codex.add_argument("--run-root", required=True)
     codex.add_argument("--run-id", required=True)
+    codex.add_argument("--agent-config", help="YAML Agent runtime configuration snapshot")
     codex.add_argument("--campaign-id")
     codex.add_argument("--variant", default="base")
     codex.add_argument("--codex-bin", required=True)
@@ -67,14 +69,17 @@ def main(argv: Sequence[str] | None = None) -> int:
             if command and command[0] == "--":
                 command = command[1:]
             agent = AgentSpec.from_command(args.agent_name, args.agent_version, command)
+            agent_config = load_agent_config(args.agent_config) if args.agent_config else None
             result = run_agent(args.task, args.manifest, agent, args.run_root, args.run_id,
-                               timeout=args.timeout, reference_manifest=args.reference_manifest)
+                               timeout=args.timeout, reference_manifest=args.reference_manifest,
+                               agent_config=agent_config)
         elif args.action == "evaluate":
             result = evaluate_run(args.run_dir, reference_manifest=args.reference_manifest)
         else:
             if args.max_attempts < 1 or args.retry_delay_s < 0:
                 raise CodexCommandError("max_attempts must be >= 1 and retry_delay_s must be >= 0")
             env = load_env_file(args.env_file) if args.env_file else {}
+            agent_config = load_agent_config(args.agent_config) if args.agent_config else None
             if args.codex_home:
                 env["CODEX_HOME"] = args.codex_home
             effective_root = Path(args.run_root).resolve()
@@ -93,6 +98,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     args.task, args.manifest, agent, effective_root, args.run_id,
                     timeout=args.timeout, reference_manifest=args.reference_manifest,
                     extra_env=env, resume=args.resume or attempt > 0,
+                    agent_config=agent_config,
                 )
                 if result["run"]["state"] != "execution_retryable" or attempt + 1 >= args.max_attempts:
                     break
@@ -110,7 +116,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                                "injected_environment_keys": sorted(env)}
             if args.campaign_id:
                 result["run_layout"] = layout.record()
-    except (AgentError, CodexCommandError, ExecutionError, OSError, ValueError) as exc:
+    except (AgentError, AgentConfigError, CodexCommandError, ExecutionError, OSError, ValueError) as exc:
         print(json.dumps({"state": "cli_error", "error": str(exc)}, sort_keys=True), file=sys.stderr)
         return 2
     print(json.dumps(result, indent=2, sort_keys=True))
