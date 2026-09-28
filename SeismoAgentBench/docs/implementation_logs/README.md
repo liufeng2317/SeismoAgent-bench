@@ -12,3 +12,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Agent entrypoint contract | [05_agent_entrypoint_contract.md](05_agent_entrypoint_contract.md) | Complete |
 | Run provenance records | [06_run_provenance_records.md](06_run_provenance_records.md) | Complete |
 | Workflow failure states | [07_workflow_failure_states.md](07_workflow_failure_states.md) | Complete |
+| External worker CLI | [08_external_worker_cli.md](08_external_worker_cli.md) | Complete |
