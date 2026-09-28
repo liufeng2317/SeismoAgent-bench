@@ -8,7 +8,7 @@ from typing import Any, Sequence
 
 from SeismoAgentBench.execution import run_command
 from SeismoAgentBench.reporting import write_environment_record, write_evaluation_report
-from SeismoAgentBench.scoring import ArtifactValidationError, score_artifacts, validate_artifacts
+from SeismoAgentBench.scoring import ArtifactValidationError, ScoreError, score_artifacts, validate_artifacts
 from SeismoAgentBench.task import load_json
 
 
@@ -48,8 +48,17 @@ def run_task(task_path: str | Path, manifest_path: str | Path, command: Sequence
         return {"run": result, "artifacts": validation, "score": None}
 
     _write_json(artifacts_path, validation)
-    score = score_artifacts(task, validation)
     score_dir.mkdir()
+    try:
+        score = score_artifacts(task, validation)
+    except ScoreError as exc:
+        score = {"schema_version": 1, "status": "scoring_failed", "errors": [str(exc)]}
+        _write_json(score_dir / "score.json", score)
+        result["state"] = "scoring_failed"
+        result["scoring_error"] = str(exc)
+        _write_json(run / "run_result.json", result)
+        write_evaluation_report(run, result)
+        return {"run": result, "artifacts": validation, "score": score}
     _write_json(score_dir / "score.json", score)
     result["state"] = "scored"
     result["artifact_validation"] = "passed"

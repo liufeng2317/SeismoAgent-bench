@@ -46,12 +46,14 @@ class RunnerTests(unittest.TestCase):
 
     def test_nonzero_command_is_recorded(self):
         result = run_command(self.task, self.manifest, [sys.executable, "-c", "raise SystemExit(7)"], self.root, "run-002", timeout=10)
-        self.assertEqual(result["state"], "command_failed")
+        self.assertEqual(result["state"], "execution_failed")
+        self.assertEqual(result["failure_reason"], "nonzero_exit")
         self.assertEqual(result["exit_code"], 7)
 
     def test_timeout_kills_command(self):
         result = run_command(self.task, self.manifest, [sys.executable, "-c", "import time; time.sleep(10)"], self.root, "run-003", timeout=0.1)
-        self.assertEqual(result["state"], "timeout")
+        self.assertEqual(result["state"], "execution_timeout")
+        self.assertEqual(result["failure_reason"], "timeout")
 
     def test_invalid_inputs_are_rejected_before_run_directory(self):
         bad = dict(TASK); bad["task_id"] = ""

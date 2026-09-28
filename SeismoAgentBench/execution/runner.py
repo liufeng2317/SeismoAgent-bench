@@ -127,13 +127,17 @@ def run_command(task_path: str | Path, manifest_path: str | Path, command: Seque
                                        start_new_session=True)
             try:
                 result["exit_code"] = process.wait(timeout=timeout)
-                result["state"] = "completed" if process.returncode == 0 else "command_failed"
+                result["state"] = "completed" if process.returncode == 0 else "execution_failed"
+                if process.returncode != 0:
+                    result["failure_reason"] = "nonzero_exit"
             except subprocess.TimeoutExpired:
                 os.killpg(process.pid, signal.SIGKILL)
                 process.wait()
-                result["state"] = "timeout"
+                result["state"] = "execution_timeout"
+                result["failure_reason"] = "timeout"
         except OSError as exc:
             result["state"] = "execution_failed"
+            result["failure_reason"] = "launcher_error"
             result["error"] = str(exc)
         finally:
             result["finished_at"] = _now()

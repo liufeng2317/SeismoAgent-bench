@@ -3,7 +3,9 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
+from SeismoAgentBench.scoring import ScoreError
 from SeismoAgentBench.workflow import run_task
 
 
@@ -57,8 +59,15 @@ class PipelineTests(unittest.TestCase):
 
     def test_command_failure_is_not_scored(self):
         result = run_task(self.task, self.manifest, [sys.executable, "-c", "raise SystemExit(9)"], self.root, "run-003", timeout=10)
-        self.assertEqual(result["run"]["state"], "command_failed")
+        self.assertEqual(result["run"]["state"], "execution_failed")
         self.assertIsNone(result["score"])
+
+    def test_scoring_failure_is_recorded(self):
+        code = "import json,os; open(os.path.join(os.environ['BENCH_OUTPUT'],'result.json'),'w').write(json.dumps({'ok': True}))"
+        with patch("SeismoAgentBench.workflow.pipeline.score_artifacts", side_effect=ScoreError("synthetic scorer failure")):
+            result = run_task(self.task, self.manifest, [sys.executable, "-c", code], self.root, "run-004", timeout=10)
+        self.assertEqual(result["run"]["state"], "scoring_failed")
+        self.assertEqual(result["score"]["status"], "scoring_failed")
 
 
 if __name__ == "__main__":
