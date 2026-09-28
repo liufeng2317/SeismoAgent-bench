@@ -8,7 +8,7 @@ import unittest
 from SeismoAgentBench.task import load_json, validate_manifest, validate_task
 
 
-PACKAGE = Path(__file__).resolve().parents[2] / "tasks" / "2019_ridgecrest_california" / "phase_picking"
+PACKAGE = Path(__file__).resolve().parents[2] / "tasks" / "2019_ridgecrest_california_phasepicking"
 
 
 class PhasePickingTaskTests(unittest.TestCase):

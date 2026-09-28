@@ -1,4 +1,4 @@
-# Ridgecrest phase-picking task
+# Ridgecrest phase-picking workflow test case
 
 This task takes the approved waveform and StationXML manifest and asks an
 agent to produce two JSON artifacts:
@@ -11,3 +11,5 @@ The task stops at phase picking. It does not require event association,
 location, magnitude estimation or a reference catalog. The included baseline
 uses a simple STA/LTA trigger for pipeline validation; it is not a scientific
 replacement for PhaseNet.
+
+This workflow test case is maintained separately from the scientific Ridgecrest case package. It exists to validate the benchmark execution and evaluation path.

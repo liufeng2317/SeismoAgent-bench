@@ -44,3 +44,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Dedicated evaluation workflow module | [38_evaluate_run_module.md](38_evaluate_run_module.md) | Complete |
 | Documentation layout separation | [39_documentation_layout.md](39_documentation_layout.md) | Complete |
 | Smoke reference fixture separation | [40_smoke_reference_fixture.md](40_smoke_reference_fixture.md) | Complete |
+| Standalone phase-picking workflow case | [41_standalone_phase_picking_case.md](41_standalone_phase_picking_case.md) | Complete |
