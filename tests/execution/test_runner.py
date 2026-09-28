@@ -50,6 +50,20 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(result["failure_reason"], "nonzero_exit")
         self.assertEqual(result["exit_code"], 7)
 
+    def test_capacity_failure_is_retryable(self):
+        code = "print('Selected model is at capacity', flush=True); raise SystemExit(1)"
+        result = run_command(self.task, self.manifest, [sys.executable, "-c", code], self.root, "run-capacity", timeout=10)
+        self.assertEqual(result["state"], "execution_retryable")
+        self.assertEqual(result["failure_reason"], "capacity")
+        self.assertTrue(result["retryable"])
+
+    def test_usage_limit_is_not_retryable(self):
+        code = "print(\"You've hit your usage limit\", flush=True); raise SystemExit(1)"
+        result = run_command(self.task, self.manifest, [sys.executable, "-c", code], self.root, "run-limit", timeout=10)
+        self.assertEqual(result["state"], "execution_failed")
+        self.assertEqual(result["failure_reason"], "usage_limit")
+        self.assertFalse(result["retryable"])
+
     def test_timeout_kills_command(self):
         result = run_command(self.task, self.manifest, [sys.executable, "-c", "import time; time.sleep(10)"], self.root, "run-003", timeout=0.1)
         self.assertEqual(result["state"], "execution_timeout")

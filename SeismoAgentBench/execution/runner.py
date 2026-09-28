@@ -55,6 +55,19 @@ def _write_json(path: Path, value: Any) -> None:
     path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
+def _failure_class(log: Path) -> tuple[str, bool]:
+    """Classify known provider failures without treating output as success."""
+    try:
+        text = log.read_text(encoding="utf-8", errors="replace").lower()
+    except OSError:
+        return "nonzero_exit", False
+    if "selected model is at capacity" in text or "model is at capacity" in text:
+        return "capacity", True
+    if "usage limit" in text or "hit your usage limit" in text:
+        return "usage_limit", False
+    return "nonzero_exit", False
+
+
 def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, Any]) -> RunContext:
     if not run_id or Path(run_id).name != run_id or run_id in {".", ".."}:
         raise ExecutionError("run_id must be a non-empty single path component")
@@ -136,7 +149,11 @@ def run_command(task_path: str | Path, manifest_path: str | Path, command: Seque
                 result["exit_code"] = process.wait(timeout=timeout)
                 result["state"] = "completed" if process.returncode == 0 else "execution_failed"
                 if process.returncode != 0:
-                    result["failure_reason"] = "nonzero_exit"
+                    reason, retryable = _failure_class(context.log)
+                    result["failure_reason"] = reason
+                    result["retryable"] = retryable
+                    if retryable:
+                        result["state"] = "execution_retryable"
             except subprocess.TimeoutExpired:
                 os.killpg(process.pid, signal.SIGKILL)
                 process.wait()
