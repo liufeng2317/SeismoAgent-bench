@@ -48,3 +48,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Task-local run view | [42_task_local_run_view.md](42_task_local_run_view.md) | Complete |
 | Standard task entrypoint name | [43_standard_task_entrypoint.md](43_standard_task_entrypoint.md) | Complete |
 | Agent task prompt contract | [44_agent_task_prompt_contract.md](44_agent_task_prompt_contract.md) | Complete |
+| Input type and file format contract | [45_input_type_format_contract.md](45_input_type_format_contract.md) | Complete |
