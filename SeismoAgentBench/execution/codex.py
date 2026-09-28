@@ -42,7 +42,7 @@ class CodexCommandSpec:
     """
 
     codex_bin: str
-    model: str
+    model: str | None
     working_dir: str
     prompt: str
     reasoning_effort: str = "medium"
@@ -53,8 +53,8 @@ class CodexCommandSpec:
     def __post_init__(self) -> None:
         if not self.codex_bin:
             raise CodexCommandError("codex_bin must be non-empty")
-        if not self.model:
-            raise CodexCommandError("model must be non-empty")
+        if self.model is not None and not self.model:
+            raise CodexCommandError("model must be non-empty when provided")
         if not self.working_dir or not Path(self.working_dir).is_absolute():
             raise CodexCommandError("working_dir must be an absolute path")
         if not self.prompt:
@@ -69,8 +69,10 @@ class CodexCommandSpec:
         command = [self.codex_bin, "exec", "--json"]
         if self.ephemeral:
             command.append("--ephemeral")
-        command.extend(["--skip-git-repo-check", "--model", self.model,
-                        "-C", self.working_dir,
+        command.append("--skip-git-repo-check")
+        if self.model is not None:
+            command.extend(["--model", self.model])
+        command.extend(["-C", self.working_dir,
                         "-c", f'model_reasoning_effort="{self.reasoning_effort}"'])
         if self.bypass_sandbox:
             command.append("--dangerously-bypass-approvals-and-sandbox")

@@ -31,6 +31,11 @@ class CodexCommandTests(unittest.TestCase):
         with self.assertRaises(CodexCommandError):
             CodexCommandSpec("codex", "gpt-6-astra", "/tmp/work", "test", reasoning_effort="turbo")
 
+    def test_can_use_default_codex_model_routing(self):
+        spec = CodexCommandSpec("/opt/codex", None, "/tmp/work", "test")
+        self.assertNotIn("--model", spec.argv())
+        self.assertIsNone(spec.record()["model"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -42,7 +42,7 @@ def _parser() -> argparse.ArgumentParser:
     codex.add_argument("--campaign-id")
     codex.add_argument("--variant", default="base")
     codex.add_argument("--codex-bin", required=True)
-    codex.add_argument("--model", required=True)
+    codex.add_argument("--model", help="optional model slug; omit to use Codex default routing")
     codex.add_argument("--prompt", required=True)
     codex.add_argument("--reasoning-effort", default="medium")
     codex.add_argument("--env-file", help="external KEY=VALUE file; values are never recorded")
