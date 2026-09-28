@@ -15,7 +15,7 @@ class CodexCliTests(unittest.TestCase):
             fake = base / "fake-codex"
             run_root = base / "runs"
             task.write_text(json.dumps({
-                "task_id": "codex-cli-smoke", "version": "1", "objective": "smoke",
+                "task_id": "codex-cli-smoke", "version": "1", "task_prompt": "smoke",
                 "input_kinds": ["metadata"],
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
                 "scorer": {"name": "artifact-contract", "version": "1"},
@@ -59,7 +59,7 @@ class CodexCliTests(unittest.TestCase):
             fake = base / "fake-codex"
             root = base / "runs"
             task.write_text(json.dumps({
-                "task_id": "layout-task", "version": "1", "objective": "smoke",
+                "task_id": "layout-task", "version": "1", "task_prompt": "smoke",
                 "input_kinds": ["metadata"],
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
                 "scorer": {"name": "artifact-contract", "version": "1"},
@@ -99,7 +99,7 @@ class CodexCliTests(unittest.TestCase):
             counter = base / "counter"
             run_root = base / "runs"
             task.write_text(json.dumps({
-                "task_id": "retry-task", "version": "1", "objective": "smoke",
+                "task_id": "retry-task", "version": "1", "task_prompt": "smoke",
                 "input_kinds": ["metadata"],
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
                 "scorer": {"name": "artifact-contract", "version": "1"},

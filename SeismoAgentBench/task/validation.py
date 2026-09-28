@@ -137,15 +137,20 @@ def validate_task(value: Mapping[str, Any]) -> dict[str, Any]:
     task = _object(value, "task", errors)
     if task is None:
         raise ValidationError(errors)
-    allowed = {"task_id", "version", "objective", "input_kinds", "output_artifacts", "scorer"}
+    allowed = {"task_id", "version", "title", "summary", "task_prompt",
+               "input_kinds", "output_artifacts", "scorer"}
     _unknown(task, allowed, "task", errors)
-    _required(task, allowed, "task", errors)
+    _required(task, {"task_id", "version", "task_prompt", "input_kinds",
+                     "output_artifacts", "scorer"}, "task", errors)
     if not isinstance(task.get("task_id"), str) or not _ID.fullmatch(task.get("task_id", "")):
         errors.append("task.task_id has an invalid identifier")
     if not isinstance(task.get("version"), str) or not task.get("version"):
         errors.append("task.version must be a non-empty string")
-    if not isinstance(task.get("objective"), str) or not task.get("objective"):
-        errors.append("task.objective must be a non-empty string")
+    for field in ("title", "summary"):
+        if field in task and (not isinstance(task[field], str) or not task[field]):
+            errors.append(f"task.{field} must be a non-empty string when provided")
+    if not isinstance(task.get("task_prompt"), str) or not task.get("task_prompt"):
+        errors.append("task.task_prompt must be a non-empty string")
     input_kinds = task.get("input_kinds")
     if not isinstance(input_kinds, list) or not input_kinds or any(kind not in _KINDS for kind in input_kinds):
         errors.append("task.input_kinds must be a non-empty list of supported kinds")

@@ -11,7 +11,7 @@ from SeismoAgentBench.workflow import evaluate_run
 TASK = {
     "task_id": "agent-smoke",
     "version": "1",
-    "objective": "Run a synthetic agent.",
+    "task_prompt": "Run a synthetic agent.",
     "input_kinds": ["metadata"],
     "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
     "scorer": {"name": "artifact-contract", "version": "1"},

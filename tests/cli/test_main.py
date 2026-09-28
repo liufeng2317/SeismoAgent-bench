@@ -9,7 +9,7 @@ import unittest
 TASK = {
     "task_id": "cli-smoke",
     "version": "1",
-    "objective": "Run a synthetic CLI task.",
+    "task_prompt": "Run a synthetic CLI task.",
     "input_kinds": ["metadata"],
     "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
     "scorer": {"name": "artifact-contract", "version": "1"},

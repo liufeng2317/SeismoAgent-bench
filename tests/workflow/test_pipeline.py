@@ -12,7 +12,7 @@ from SeismoAgentBench.workflow import run_task
 TASK = {
     "task_id": "pipeline-smoke",
     "version": "1",
-    "objective": "Run a synthetic end-to-end task.",
+    "task_prompt": "Run a synthetic end-to-end task.",
     "input_kinds": ["metadata"],
     "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
     "scorer": {"name": "artifact-contract", "version": "1"},

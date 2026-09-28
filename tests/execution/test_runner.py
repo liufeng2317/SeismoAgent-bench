@@ -10,7 +10,7 @@ from SeismoAgentBench.execution import ExecutionError, run_command
 TASK = {
     "task_id": "runner-smoke",
     "version": "1",
-    "objective": "Test execution records.",
+    "task_prompt": "Test execution records.",
     "input_kinds": ["metadata"],
     "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
     "scorer": {"name": "noop", "version": "1"},

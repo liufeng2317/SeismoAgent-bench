@@ -17,7 +17,7 @@ class ExperimentExecutionTests(unittest.TestCase):
                 encoding="utf-8",
             )
             (base / "task.json").write_text(json.dumps({
-                "task_id": "experiment-task", "version": "1", "objective": "test",
+                "task_id": "experiment-task", "version": "1", "task_prompt": "test",
                 "input_kinds": ["metadata"],
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
                 "scorer": {"name": "artifact-contract", "version": "1"},

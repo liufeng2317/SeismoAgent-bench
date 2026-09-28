@@ -9,7 +9,7 @@ from SeismoAgentBench.scoring import ScoreError, score_artifacts, validate_artif
 TASK = {
     "task_id": "synthetic_catalog",
     "version": "1",
-    "objective": "Check declared output files.",
+    "task_prompt": "Check declared output files.",
     "input_kinds": ["metadata"],
     "output_artifacts": [
         {"id": "summary", "path": "summary.json", "kind": "json", "required": True},

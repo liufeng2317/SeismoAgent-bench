@@ -9,7 +9,7 @@ from SeismoAgentBench.task import ValidationError, load_json, validate_manifest,
 TASK = {
     "task_id": "waveform-inspection",
     "version": "1",
-    "objective": "Inspect declared waveform metadata.",
+    "task_prompt": "Inspect declared waveform metadata.",
     "input_kinds": ["waveform", "stationxml"],
     "output_artifacts": [{"id": "summary", "path": "summary.json", "kind": "json", "required": True}],
     "scorer": {"name": "metadata-score", "version": "1"},
@@ -56,6 +56,13 @@ class ValidationTests(unittest.TestCase):
             validate_task(value)
         self.assertIn("unknown field", str(raised.exception))
         self.assertIn("duplicate task output artifact id", str(raised.exception))
+
+    def test_task_prompt_is_required_and_objective_is_not_a_task_field(self):
+        legacy = dict(TASK)
+        legacy.pop("task_prompt")
+        legacy["objective"] = "legacy wording"
+        with self.assertRaisesRegex(ValidationError, "unknown field.*objective"):
+            validate_task(legacy)
 
     def test_load_json_requires_object_and_does_not_modify_source(self):
         with tempfile.TemporaryDirectory() as directory:

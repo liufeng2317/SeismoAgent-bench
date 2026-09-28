@@ -37,7 +37,7 @@ The stages are ordered. A stage must not consume artifacts that its predecessor 
 A task specification MUST declare:
 
 - `task_id` and task version;
-- scientific objective;
+- Agent-facing task prompt;
 - required and optional input kinds;
 - agent input contract;
 - required output artifacts and schemas;
