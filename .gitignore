@@ -71,6 +71,9 @@ benchmark_source/**/*.xml
 *.part
 *.tmp
 
+# Local large run outputs are exposed through a machine-specific project link.
+/runs
+
 # Continuous waveforms remain local after the source-layout migration.
 benchmark_source/**/waveforms
 
