@@ -15,3 +15,4 @@ This directory records completed implementation stages. Each stage record lists 
 | External worker CLI | [08_external_worker_cli.md](08_external_worker_cli.md) | Complete |
 | Synthetic CLI smoke fixture | [09_synthetic_cli_smoke.md](09_synthetic_cli_smoke.md) | Complete |
 | Versioned task registry | [10_versioned_task_registry.md](10_versioned_task_registry.md) | Complete |
+| Generic catalog output contract | [11_generic_catalog_output_contract.md](11_generic_catalog_output_contract.md) | Complete |
