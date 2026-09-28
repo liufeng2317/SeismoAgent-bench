@@ -78,6 +78,27 @@ class RidgecrestPackageTests(unittest.TestCase):
             self.assertTrue((run_root / "baseline-001/output/catalog.json").is_file())
             self.assertTrue((run_root / "baseline-001/evaluation_report.json").is_file())
 
+    def test_waveform_baseline_reads_mseed_and_generates_candidates(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            run_root = Path(tmp) / "runs"
+            command = [sys.executable, "-m", "SeismoAgentBench", "run-agent",
+                       "--task", str(PACKAGE / "task.json"),
+                       "--manifest", str(PACKAGE / "input_manifest.json"),
+                       "--agent-name", "ridgecrest-waveform-baseline",
+                       "--agent-version", "1",
+                       "--run-root", str(run_root),
+                       "--run-id", "waveform-001",
+                       "--reference-manifest", str(PACKAGE / "references/usgs_mainshocks/reference_manifest.json"),
+                       "--", sys.executable, str(PACKAGE / "waveform_baseline_agent.py")]
+            result = subprocess.run(command, capture_output=True, text=True, check=False)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["run"]["state"], "scored")
+            self.assertGreater(payload["scientific_score"]["metrics"]["candidate_events"], 0)
+            output_catalog = json.loads((run_root / "waveform-001/output/catalog.json").read_text())
+            self.assertTrue(all(event["location_method"] == "station-amplitude-baseline"
+                                for event in output_catalog["events"]))
+
 
 if __name__ == "__main__":
     unittest.main()
