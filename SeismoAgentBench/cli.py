@@ -14,7 +14,7 @@ from SeismoAgentBench.execution import (CodexCommandError, CodexCommandSpec, Exe
                                         AgentConfigError, RunLayout, expand_experiment,
                                         load_agent_config, load_env_file, load_experiment_spec)
 from SeismoAgentBench.task import load_json
-from SeismoAgentBench.workflow import evaluate_run
+from SeismoAgentBench.workflow import evaluate_run, execute_experiment
 
 
 _RUN_FAILURES = {"execution_failed", "execution_timeout", "artifact_invalid", "scoring_failed"}
@@ -40,6 +40,9 @@ def _parser() -> argparse.ArgumentParser:
     evaluate.add_argument("--reference-manifest", help="optional authorized reference manifest")
     plan = commands.add_parser("plan-experiment", help="validate and expand an experiment spec")
     plan.add_argument("--spec", required=True, help="experiment YAML specification")
+    execute = commands.add_parser("execute-experiment", help="execute an experiment plan serially")
+    execute.add_argument("--spec", required=True, help="experiment YAML specification")
+    execute.add_argument("--limit", type=int, help="execute only the first N planned units")
     codex = commands.add_parser("run-codex", help="run one Codex CLI agent in host-direct mode")
     codex.add_argument("--task", required=True)
     codex.add_argument("--manifest", required=True)
@@ -84,6 +87,9 @@ def main(argv: Sequence[str] | None = None) -> int:
                       "output_root": spec["output_root"],
                       "concurrency": spec["concurrency"],
                       "units": expand_experiment(spec)}
+        elif args.action == "execute-experiment":
+            runs = execute_experiment(args.spec, limit=args.limit)
+            result = {"spec": str(Path(args.spec).resolve()), "runs": runs}
         else:
             if args.max_attempts < 1 or args.retry_delay_s < 0:
                 raise CodexCommandError("max_attempts must be >= 1 and retry_delay_s must be >= 0")
@@ -129,7 +135,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(json.dumps({"state": "cli_error", "error": str(exc)}, sort_keys=True), file=sys.stderr)
         return 2
     print(json.dumps(result, indent=2, sort_keys=True))
-    if args.action == "plan-experiment":
+    if args.action in {"plan-experiment", "execute-experiment"}:
         return 0
     return 0 if result["run"]["state"] in {"completed", "scored"} else 3
 

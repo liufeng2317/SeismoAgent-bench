@@ -41,12 +41,21 @@ def load_experiment_spec(path: str | Path) -> dict[str, Any]:
         agent_ids.add(item["id"])
         if not isinstance(item.get("config"), str) or not item["config"]:
             raise ExperimentSpecError(f"agent {item['id']} must declare config")
+        if not isinstance(item.get("name"), str) or not item["name"]:
+            raise ExperimentSpecError(f"agent {item['id']} must declare name")
+        if not isinstance(item.get("version"), str) or not item["version"]:
+            raise ExperimentSpecError(f"agent {item['id']} must declare version")
+        if not isinstance(item.get("command"), list) or not item["command"] or any(not isinstance(v, str) or not v for v in item["command"]):
+            raise ExperimentSpecError(f"agent {item['id']} command must be a non-empty string list")
     tasks = value["tasks"]
     if not isinstance(tasks, list) or not tasks:
         raise ExperimentSpecError("tasks must be a non-empty list")
     for item in tasks:
-        if not isinstance(item, dict) or not isinstance(item.get("path"), str) or not item["path"]:
-            raise ExperimentSpecError("each task must have a non-empty path")
+        if not isinstance(item, dict) or not isinstance(item.get("id"), str) or not item["id"]:
+            raise ExperimentSpecError("each task must have a non-empty id")
+        for field in ("task_spec", "input_manifest"):
+            if not isinstance(item.get(field), str) or not item[field]:
+                raise ExperimentSpecError(f"task {item['id']} must declare {field}")
         variants = item.get("variants", ["base"])
         if not isinstance(variants, list) or not variants or any(not isinstance(v, str) or not v for v in variants):
             raise ExperimentSpecError(f"task {item['path']} variants must be a non-empty string list")
@@ -62,8 +71,13 @@ def expand_experiment(spec: dict[str, Any]) -> list[dict[str, Any]]:
                 units.append({
                     "experiment_id": spec["experiment_id"],
                     "agent_id": agent["id"],
+                    "agent_name": agent["name"],
+                    "agent_version": agent["version"],
                     "agent_config": agent["config"],
-                    "task": task["path"],
+                    "command": list(agent["command"]),
+                    "task_id": task["id"],
+                    "task_spec": task["task_spec"],
+                    "input_manifest": task["input_manifest"],
                     "variant": variant,
                 })
     return units
