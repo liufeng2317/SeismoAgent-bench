@@ -6,8 +6,9 @@ import json
 from pathlib import Path
 from typing import Any
 
-from SeismoAgentBench.agent import AgentSpec, run_agent
+from SeismoAgentBench.agent import AgentSpec
 from SeismoAgentBench.execution import expand_experiment, load_agent_config, load_experiment_spec
+from .run_agent import run_agent
 
 
 def execute_experiment(spec_path: str | Path, *, limit: int | None = None) -> list[dict[str, Any]]:

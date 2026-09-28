@@ -9,12 +9,12 @@ import sys
 import time
 from typing import Sequence
 
-from SeismoAgentBench.agent import AgentError, AgentSpec, run_agent
+from SeismoAgentBench.agent import AgentError, AgentSpec
 from SeismoAgentBench.execution import (CodexCommandError, CodexCommandSpec, ExecutionError,
                                         AgentConfigError, RunLayout, expand_experiment,
                                         load_agent_config, load_env_file, load_experiment_spec)
 from SeismoAgentBench.task import load_json
-from SeismoAgentBench.workflow import evaluate_run, execute_experiment
+from SeismoAgentBench.workflow import evaluate_run, execute_experiment, run_agent
 
 
 _RUN_FAILURES = {"execution_failed", "execution_timeout", "artifact_invalid", "scoring_failed"}
