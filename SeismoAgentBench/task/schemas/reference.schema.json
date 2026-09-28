@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://seismoagentbench.org/schemas/reference.schema.json",
+  "title": "SeismoAgentBench reference catalog manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "reference_id", "version", "role", "path"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "reference_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"},
+    "version": {"type": "string", "minLength": 1},
+    "role": {"type": "string", "minLength": 1},
+    "path": {"type": "string", "pattern": "^/[^\\u0000]*$"},
+    "description": {"type": "string"},
+    "source_identity": {"type": "string"}
+  }
+}
