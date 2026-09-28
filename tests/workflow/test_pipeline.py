@@ -64,7 +64,7 @@ class PipelineTests(unittest.TestCase):
 
     def test_scoring_failure_is_recorded(self):
         code = "import json,os; open(os.path.join(os.environ['BENCH_OUTPUT'],'result.json'),'w').write(json.dumps({'ok': True}))"
-        with patch("SeismoAgentBench.workflow.pipeline.score_artifacts", side_effect=ScoreError("synthetic scorer failure")):
+        with patch("SeismoAgentBench.workflow.evaluate_run.score_artifacts", side_effect=ScoreError("synthetic scorer failure")):
             result = run_task(self.task, self.manifest, [sys.executable, "-c", code], self.root, "run-004", timeout=10)
         self.assertEqual(result["run"]["state"], "scoring_failed")
         self.assertEqual(result["score"]["status"], "scoring_failed")
