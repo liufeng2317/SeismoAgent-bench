@@ -47,3 +47,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Standalone phase-picking workflow case | [41_standalone_phase_picking_case.md](41_standalone_phase_picking_case.md) | Complete |
 | Task-local run view | [42_task_local_run_view.md](42_task_local_run_view.md) | Complete |
 | Standard task entrypoint name | [43_standard_task_entrypoint.md](43_standard_task_entrypoint.md) | Complete |
+| Agent task prompt contract | [44_agent_task_prompt_contract.md](44_agent_task_prompt_contract.md) | Complete |
