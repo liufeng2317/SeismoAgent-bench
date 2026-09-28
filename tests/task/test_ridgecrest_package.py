@@ -1,5 +1,8 @@
 import json
 from pathlib import Path
+import subprocess
+import sys
+import tempfile
 import unittest
 
 from SeismoAgentBench.scoring import ReferenceSpec, validate_catalog
@@ -29,6 +32,27 @@ class RidgecrestPackageTests(unittest.TestCase):
         self.assertEqual(catalog["events"][1]["magnitude"], 7.1)
         self.assertEqual(validate_catalog(json.loads(reference.path.read_text()))["catalog_id"],
                          "ridgecrest-usgs-mainshocks-smoke")
+
+    def test_case_package_runs_through_cli_without_scientific_agent(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            run_root = Path(tmp) / "runs"
+            code = "import json,os; open(os.path.join(os.environ['BENCH_OUTPUT'],'catalog.json'),'w').write(json.dumps({'schema_version':1,'catalog_id':'dry-run','events':[]}))"
+            command = [sys.executable, "-m", "SeismoAgentBench", "run-agent",
+                       "--task", str(PACKAGE / "task.json"),
+                       "--manifest", str(PACKAGE / "input_manifest.json"),
+                       "--agent-name", "ridgecrest-infrastructure-dry-run",
+                       "--agent-version", "1",
+                       "--run-root", str(run_root),
+                       "--run-id", "smoke-001",
+                       "--reference-manifest", str(PACKAGE / "references/usgs_mainshocks/reference_manifest.json"),
+                       "--", sys.executable, "-c", code]
+            result = subprocess.run(command, capture_output=True, text=True, check=False)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["run"]["state"], "scored")
+            self.assertEqual(payload["scientific_score"]["metrics"]["candidate_events"], 0)
+            self.assertEqual(payload["scientific_score"]["metrics"]["reference_events"], 2)
+            self.assertTrue((run_root / "smoke-001/score/task_summary.json").is_file())
 
 
 if __name__ == "__main__":
