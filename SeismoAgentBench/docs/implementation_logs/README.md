@@ -24,3 +24,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Ridgecrest smoke task package | [17_ridgecrest_smoke_task_package.md](17_ridgecrest_smoke_task_package.md) | Complete |
 | Ridgecrest task infrastructure dry run | [18_ridgecrest_task_dry_run.md](18_ridgecrest_task_dry_run.md) | Complete |
 | Deterministic baseline agent | [19_deterministic_baseline_agent.md](19_deterministic_baseline_agent.md) | Complete |
+| Waveform-driven baseline agent | [20_waveform_baseline_agent.md](20_waveform_baseline_agent.md) | Complete |
