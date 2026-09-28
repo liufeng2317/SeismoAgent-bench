@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "reference_id": "ridgecrest-usgs-mainshocks-smoke",
+  "version": "1",
+  "role": "operational-mainshock-smoke",
+  "path": "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/tasks/2019_ridgecrest_california/references/usgs_mainshocks/catalog.json",
+  "description": "Two-event smoke reference for pipeline verification; not a complete Ridgecrest reference catalog.",
+  "source_identity": "USGS_SCSN_COMCAT_2019__catalog_operational_full.csv rows ci38443183 and ci38457511"
+}

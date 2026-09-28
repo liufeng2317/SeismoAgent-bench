@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "catalog_id": "ridgecrest-usgs-mainshocks-smoke",
+  "description": "Two-event smoke reference extracted from the USGS/SCSN operational catalog; not the full benchmark reference.",
+  "events": [
+    {
+      "event_id": "ci38443183",
+      "origin_time": "2019-07-04T17:33:49.000Z",
+      "latitude": 35.7053333,
+      "longitude": -117.5038333,
+      "depth_km": 10.5,
+      "magnitude": 6.4,
+      "magnitude_type": "Mw"
+    },
+    {
+      "event_id": "ci38457511",
+      "origin_time": "2019-07-06T03:19:53.040Z",
+      "latitude": 35.7695,
+      "longitude": -117.5993333,
+      "depth_km": 8.0,
+      "magnitude": 7.1,
+      "magnitude_type": "Mw"
+    }
+  ]
+}

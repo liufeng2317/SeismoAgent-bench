@@ -28,12 +28,18 @@ class TaskRegistry:
 
     @classmethod
     def from_directory(cls, directory: str | Path) -> "TaskRegistry":
-        """Register files named ``task.json`` below a directory."""
+        """Register task files at a root or one directory below it.
+
+        Shallow discovery avoids traversing scientific exports, waveform trees
+        or other large case directories. Deeper task files must be registered
+        explicitly with :meth:`register`.
+        """
         root = Path(directory)
         if not root.is_dir():
             raise TaskRegistryError(f"task directory does not exist: {root}")
         registry = cls()
-        for path in sorted(root.rglob("task.json")):
+        candidates = list(root.glob("task.json")) + list(root.glob("*/task.json"))
+        for path in sorted(candidates):
             if path.is_file() and not path.is_symlink():
                 registry.register(path)
         return registry

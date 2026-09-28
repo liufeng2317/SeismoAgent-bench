@@ -1,0 +1,18 @@
+{
+  "task_id": "ridgecrest_2019_catalog_smoke",
+  "version": "1",
+  "objective": "Construct an earthquake catalog from the approved Ridgecrest waveform subset.",
+  "input_kinds": ["waveform", "stationxml"],
+  "output_artifacts": [
+    {
+      "id": "catalog",
+      "path": "catalog.json",
+      "kind": "catalog",
+      "required": true
+    }
+  ],
+  "scorer": {
+    "name": "catalog-basic",
+    "version": "1"
+  }
+}
