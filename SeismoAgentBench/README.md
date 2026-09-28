@@ -48,6 +48,21 @@ python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir b
 python -B -m unittest discover -s tests -v
 ```
 
+外部评测 worker 可以通过薄 CLI 运行同一套流程：
+
+```bash
+python -m SeismoAgentBench run-agent \
+  --task task.json \
+  --manifest input_manifest.json \
+  --agent-name example-agent \
+  --agent-version 1 \
+  --run-root runs \
+  --run-id trial-001 \
+  -- python agent_entrypoint.py
+```
+
+CLI 只负责参数解析和退出码映射，执行、产物校验、评分及报告仍由对应模块完成。
+
 库调用使用明确的子模块路径，例如：
 
 ```python
