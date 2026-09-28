@@ -33,3 +33,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Bounded capacity resume | [26_bounded_resume.md](26_bounded_resume.md) | Complete |
 | Default Codex model routing | [27_default_model_routing.md](27_default_model_routing.md) | Complete with host-direct limitation |
 | Project view of run outputs | [28_project_run_link.md](28_project_run_link.md) | Complete |
+| Compact run layout | [29_compact_run_layout.md](29_compact_run_layout.md) | Complete |
