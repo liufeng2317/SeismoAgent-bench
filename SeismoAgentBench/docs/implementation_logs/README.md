@@ -31,3 +31,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Persistent run layout | [24_run_layout.md](24_run_layout.md) | Complete |
 | Retryable provider failures | [25_retryable_failures.md](25_retryable_failures.md) | Complete |
 | Bounded capacity resume | [26_bounded_resume.md](26_bounded_resume.md) | Complete |
+| Default Codex model routing | [27_default_model_routing.md](27_default_model_routing.md) | Complete with host-direct limitation |
