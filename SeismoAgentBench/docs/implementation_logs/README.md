@@ -36,3 +36,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Compact run layout | [29_compact_run_layout.md](29_compact_run_layout.md) | Complete |
 | Run contract ownership layout | [30_run_contract_ownership.md](30_run_contract_ownership.md) | Complete with evaluator follow-up |
 | External evaluation command | [31_external_evaluation_command.md](31_external_evaluation_command.md) | Complete |
+| Agent runtime configuration snapshot | [32_agent_config_snapshot.md](32_agent_config_snapshot.md) | Complete |
