@@ -14,3 +14,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Workflow failure states | [07_workflow_failure_states.md](07_workflow_failure_states.md) | Complete |
 | External worker CLI | [08_external_worker_cli.md](08_external_worker_cli.md) | Complete |
 | Synthetic CLI smoke fixture | [09_synthetic_cli_smoke.md](09_synthetic_cli_smoke.md) | Complete |
+| Versioned task registry | [10_versioned_task_registry.md](10_versioned_task_registry.md) | Complete |
