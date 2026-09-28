@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "case_id": "synthetic_case",
+  "description": "Small fixture for the command-line smoke run.",
+  "entries": [
+    {
+      "id": "metadata",
+      "path": "/tmp/seismoagentbench-synthetic-metadata.json",
+      "kind": "metadata",
+      "read_only": true
+    }
+  ]
+}

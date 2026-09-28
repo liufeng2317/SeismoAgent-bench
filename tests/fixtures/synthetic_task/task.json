@@ -1,0 +1,18 @@
+{
+  "task_id": "synthetic_catalog_smoke",
+  "version": "1",
+  "objective": "Produce a deterministic synthetic catalog output.",
+  "input_kinds": ["metadata"],
+  "output_artifacts": [
+    {
+      "id": "catalog",
+      "path": "catalog.json",
+      "kind": "json",
+      "required": true
+    }
+  ],
+  "scorer": {
+    "name": "artifact-contract",
+    "version": "1"
+  }
+}
