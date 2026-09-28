@@ -22,3 +22,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Transparent catalog metric aggregation | [15_catalog_metric_aggregation.md](15_catalog_metric_aggregation.md) | Complete |
 | Optional scientific workflow scoring | [16_optional_scientific_workflow_scoring.md](16_optional_scientific_workflow_scoring.md) | Complete |
 | Ridgecrest smoke task package | [17_ridgecrest_smoke_task_package.md](17_ridgecrest_smoke_task_package.md) | Complete |
+| Ridgecrest task infrastructure dry run | [18_ridgecrest_task_dry_run.md](18_ridgecrest_task_dry_run.md) | Complete |
