@@ -39,3 +39,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Agent runtime configuration snapshot | [32_agent_config_snapshot.md](32_agent_config_snapshot.md) | Complete |
 | Experiment specification planning | [33_experiment_spec_planning.md](33_experiment_spec_planning.md) | Complete |
 | Serial experiment execution | [34_serial_experiment_execution.md](34_serial_experiment_execution.md) | Complete |
+| Framework tree cleanup | [36_framework_tree_cleanup.md](36_framework_tree_cleanup.md) | Complete |
