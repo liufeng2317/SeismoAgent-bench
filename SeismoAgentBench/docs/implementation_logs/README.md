@@ -37,3 +37,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Run contract ownership layout | [30_run_contract_ownership.md](30_run_contract_ownership.md) | Complete with evaluator follow-up |
 | External evaluation command | [31_external_evaluation_command.md](31_external_evaluation_command.md) | Complete |
 | Agent runtime configuration snapshot | [32_agent_config_snapshot.md](32_agent_config_snapshot.md) | Complete |
+| Experiment specification planning | [33_experiment_spec_planning.md](33_experiment_spec_planning.md) | Complete |
