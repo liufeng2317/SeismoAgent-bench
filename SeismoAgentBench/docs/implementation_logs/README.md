@@ -27,3 +27,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Waveform-driven baseline agent | [20_waveform_baseline_agent.md](20_waveform_baseline_agent.md) | Complete |
 | Phase-picking task | [21_phase_picking_task.md](21_phase_picking_task.md) | Complete |
 | Codex host-direct command layer | [22_codex_host_direct_command.md](22_codex_host_direct_command.md) | Complete |
+| Codex host-direct adapter | [23_codex_host_direct_adapter.md](23_codex_host_direct_adapter.md) | Complete with follow-up |
