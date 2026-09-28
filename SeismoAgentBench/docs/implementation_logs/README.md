@@ -23,3 +23,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Optional scientific workflow scoring | [16_optional_scientific_workflow_scoring.md](16_optional_scientific_workflow_scoring.md) | Complete |
 | Ridgecrest smoke task package | [17_ridgecrest_smoke_task_package.md](17_ridgecrest_smoke_task_package.md) | Complete |
 | Ridgecrest task infrastructure dry run | [18_ridgecrest_task_dry_run.md](18_ridgecrest_task_dry_run.md) | Complete |
+| Deterministic baseline agent | [19_deterministic_baseline_agent.md](19_deterministic_baseline_agent.md) | Complete |
