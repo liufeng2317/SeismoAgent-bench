@@ -37,7 +37,8 @@ def write_environment_record(run_dir: str | Path, result: Mapping[str, Any]) -> 
 
 
 def write_evaluation_report(run_dir: str | Path, result: Mapping[str, Any],
-                            agent: Mapping[str, Any] | None = None) -> dict[str, Any]:
+                            agent: Mapping[str, Any] | None = None,
+                            reference: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Write a compact index of run records and their status."""
     run = Path(run_dir)
     report = {
@@ -48,6 +49,7 @@ def write_evaluation_report(run_dir: str | Path, result: Mapping[str, Any],
         "execution_profile": result["execution_profile"],
         "formal_evaluation_eligible": result["formal_evaluation_eligible"],
         "agent": dict(agent) if agent is not None else None,
+        "reference": dict(reference) if reference is not None else None,
         "records": {
             "task": "task_spec.json",
             "input_manifest": "input_manifest.json",
@@ -56,6 +58,8 @@ def write_evaluation_report(run_dir: str | Path, result: Mapping[str, Any],
             "execution": "execution.log",
             "artifacts": "artifacts.json" if (run / "artifacts.json").is_file() else None,
             "score": "score/score.json" if (run / "score/score.json").is_file() else None,
+            "scientific_score": "score/scientific_score.json" if (run / "score/scientific_score.json").is_file() else None,
+            "task_summary": "score/task_summary.json" if (run / "score/task_summary.json").is_file() else None,
             "run_result": "run_result.json",
         },
     }

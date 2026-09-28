@@ -44,9 +44,11 @@ class AgentSpec:
 
 
 def run_agent(task_path: str | Path, manifest_path: str | Path, agent: AgentSpec,
-              run_root: str | Path, run_id: str, *, timeout: float = 600) -> dict[str, Any]:
+              run_root: str | Path, run_id: str, *, timeout: float = 600,
+              reference_manifest: str | Path | None = None) -> dict[str, Any]:
     """Run one declared agent through the standard task workflow."""
-    result = run_task(task_path, manifest_path, agent.command, run_root, run_id, timeout=timeout)
+    result = run_task(task_path, manifest_path, agent.command, run_root, run_id,
+                      timeout=timeout, reference_manifest=reference_manifest)
     run = Path(run_root).resolve() / run_id
     (run / "agent_command.json").write_text(json.dumps(agent.record(), indent=2, sort_keys=True) + "\n", encoding="utf-8")
     result["agent"] = agent.record()

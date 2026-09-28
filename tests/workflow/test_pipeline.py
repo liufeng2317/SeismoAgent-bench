@@ -69,6 +69,39 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(result["run"]["state"], "scoring_failed")
         self.assertEqual(result["score"]["status"], "scoring_failed")
 
+    def test_reference_manifest_enables_optional_scientific_scoring(self):
+        base = Path(self.tmp.name)
+        task = base / "catalog-task.json"
+        task.write_text(json.dumps({
+            **TASK,
+            "task_id": "catalog-pipeline-smoke",
+            "output_artifacts": [{"id": "catalog", "path": "catalog.json", "kind": "catalog", "required": True}],
+        }), encoding="utf-8")
+        reference_catalog = base / "reference.json"
+        reference_catalog.write_text(json.dumps({
+            "schema_version": 1,
+            "catalog_id": "reference",
+            "events": [{"event_id": "ref-1", "origin_time": "2019-07-04T17:00:00Z",
+                         "latitude": 35.7, "longitude": -117.5, "depth_km": 8.0}],
+        }), encoding="utf-8")
+        reference_manifest = base / "reference_manifest.json"
+        reference_manifest.write_text(json.dumps({
+            "schema_version": 1,
+            "reference_id": "synthetic-reference",
+            "version": "1",
+            "role": "location",
+            "path": str(reference_catalog),
+        }), encoding="utf-8")
+        code = "import json,os; open(os.path.join(os.environ['BENCH_OUTPUT'],'catalog.json'),'w').write(json.dumps({'schema_version':1,'catalog_id':'candidate','events':[{'event_id':'cand-1','origin_time':'2019-07-04T17:00:01Z','latitude':35.7,'longitude':-117.5,'depth_km':8.0}]}))"
+        result = run_task(task, self.manifest, [sys.executable, "-c", code], self.root, "run-005",
+                          timeout=10, reference_manifest=reference_manifest)
+        run = self.root / "run-005"
+        self.assertEqual(result["run"]["state"], "scored")
+        self.assertEqual(result["scientific_score"]["metrics"]["matched_events"], 1)
+        self.assertTrue((run / "score/scientific_score.json").is_file())
+        self.assertTrue((run / "score/task_summary.json").is_file())
+        self.assertEqual(json.loads((run / "evaluation_report.json").read_text())["reference"]["reference_id"], "synthetic-reference")
+
 
 if __name__ == "__main__":
     unittest.main()

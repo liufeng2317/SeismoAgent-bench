@@ -25,6 +25,7 @@ def _parser() -> argparse.ArgumentParser:
     run.add_argument("--run-root", required=True)
     run.add_argument("--run-id", required=True)
     run.add_argument("--timeout", type=float, default=600)
+    run.add_argument("--reference-manifest", help="optional authorized reference manifest")
     run.add_argument("command", nargs=argparse.REMAINDER,
                      help="agent command; place it after `--`")
     return parser
@@ -38,7 +39,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         agent = AgentSpec.from_command(args.agent_name, args.agent_version, command)
         result = run_agent(args.task, args.manifest, agent, args.run_root, args.run_id,
-                           timeout=args.timeout)
+                           timeout=args.timeout, reference_manifest=args.reference_manifest)
     except (AgentError, ExecutionError, OSError, ValueError) as exc:
         print(json.dumps({"state": "cli_error", "error": str(exc)}, sort_keys=True), file=sys.stderr)
         return 2
