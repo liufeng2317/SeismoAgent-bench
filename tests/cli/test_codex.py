@@ -44,7 +44,7 @@ class CodexCliTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             payload = json.loads(result.stdout)
             run = run_root / "run-001"
-            self.assertEqual(payload["run"]["state"], "scored")
+            self.assertEqual(payload["run"]["state"], "completed")
             self.assertEqual(payload["codex"]["transcript"], "transcript.jsonl")
             self.assertIn("CODEX_HOME", payload["codex"]["injected_environment_keys"])
             self.assertIn('"text": "OK"', (run / "record/transcript.jsonl").read_text())
@@ -132,7 +132,7 @@ class CodexCliTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             unit = run_root / "run-001"
             payload = json.loads(result.stdout)
-            self.assertEqual(payload["run"]["state"], "scored")
+            self.assertEqual(payload["run"]["state"], "completed")
             self.assertTrue((unit / "attempts/attempt-001/agent/execution.log").is_file())
             self.assertTrue((unit / "agent/output/result.json").is_file())
 

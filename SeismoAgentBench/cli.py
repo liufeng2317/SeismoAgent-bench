@@ -13,6 +13,7 @@ from SeismoAgentBench.agent import AgentError, AgentSpec, run_agent
 from SeismoAgentBench.execution import (CodexCommandError, CodexCommandSpec, ExecutionError,
                                         RunLayout, load_env_file)
 from SeismoAgentBench.task import load_json
+from SeismoAgentBench.workflow import evaluate_run
 
 
 _RUN_FAILURES = {"execution_failed", "execution_timeout", "artifact_invalid", "scoring_failed"}
@@ -32,6 +33,9 @@ def _parser() -> argparse.ArgumentParser:
     run.add_argument("--reference-manifest", help="optional authorized reference manifest")
     run.add_argument("command", nargs=argparse.REMAINDER,
                      help="agent command; place it after `--`")
+    evaluate = commands.add_parser("evaluate", help="evaluate a completed Agent run")
+    evaluate.add_argument("--run-dir", required=True, help="completed run directory")
+    evaluate.add_argument("--reference-manifest", help="optional authorized reference manifest")
     codex = commands.add_parser("run-codex", help="run one Codex CLI agent in host-direct mode")
     codex.add_argument("--task", required=True)
     codex.add_argument("--manifest", required=True)
@@ -65,6 +69,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             agent = AgentSpec.from_command(args.agent_name, args.agent_version, command)
             result = run_agent(args.task, args.manifest, agent, args.run_root, args.run_id,
                                timeout=args.timeout, reference_manifest=args.reference_manifest)
+        elif args.action == "evaluate":
+            result = evaluate_run(args.run_dir, reference_manifest=args.reference_manifest)
         else:
             if args.max_attempts < 1 or args.retry_delay_s < 0:
                 raise CodexCommandError("max_attempts must be >= 1 and retry_delay_s must be >= 0")
@@ -78,7 +84,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                                    args.variant, args.agent_name, args.run_id)
                 effective_root = layout.run_root
             spec = CodexCommandSpec(args.codex_bin, args.model,
-                                    str(effective_root / args.run_id / "work"),
+                                    str(effective_root / args.run_id / "agent" / "work"),
                                     args.prompt, reasoning_effort=args.reasoning_effort)
             agent = AgentSpec.from_command(args.agent_name, args.agent_version, spec.argv())
             result = None
@@ -108,7 +114,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(json.dumps({"state": "cli_error", "error": str(exc)}, sort_keys=True), file=sys.stderr)
         return 2
     print(json.dumps(result, indent=2, sort_keys=True))
-    return 0 if result["run"]["state"] == "scored" else 3
+    return 0 if result["run"]["state"] in {"completed", "scored"} else 3
 
 
 if __name__ == "__main__":

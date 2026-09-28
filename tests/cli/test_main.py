@@ -20,7 +20,7 @@ MANIFEST = {"schema_version": 1, "case_id": "synthetic_case", "entries": [
 
 
 class CliTests(unittest.TestCase):
-    def test_run_agent_command_returns_json_and_zero_on_scored(self):
+    def test_run_agent_command_returns_completed_run_for_external_evaluation(self):
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)
             task = base / "task.json"
@@ -35,8 +35,13 @@ class CliTests(unittest.TestCase):
             result = subprocess.run(command, capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
             payload = json.loads(result.stdout)
-            self.assertEqual(payload["run"]["state"], "scored")
+            self.assertEqual(payload["run"]["state"], "completed")
             self.assertTrue((root / "run-001/record/agent_command.json").is_file())
+            evaluated = subprocess.run([sys.executable, "-m", "SeismoAgentBench", "evaluate",
+                                        "--run-dir", str(root / "run-001")],
+                                       capture_output=True, text=True, check=False)
+            self.assertEqual(evaluated.returncode, 0, evaluated.stderr)
+            self.assertEqual(json.loads(evaluated.stdout)["run"]["state"], "scored")
 
     def test_failed_agent_returns_nonzero_worker_status(self):
         with tempfile.TemporaryDirectory() as tmp:

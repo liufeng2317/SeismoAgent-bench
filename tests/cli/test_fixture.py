@@ -24,8 +24,12 @@ class SyntheticFixtureSmokeTests(unittest.TestCase):
             result = subprocess.run(command, capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
             payload = json.loads(result.stdout)
-            self.assertEqual(payload["run"]["state"], "scored")
+            self.assertEqual(payload["run"]["state"], "completed")
             run = run_root / "smoke-001"
+            evaluated = subprocess.run([sys.executable, "-m", "SeismoAgentBench", "evaluate",
+                                        "--run-dir", str(run)], capture_output=True, text=True, check=False)
+            self.assertEqual(evaluated.returncode, 0, evaluated.stderr)
+            self.assertEqual(json.loads(evaluated.stdout)["run"]["state"], "scored")
             for relative in (
                 "control/task_spec.json", "control/input_manifest.json", "record/environment.json",
                 "record/agent_command.json", "agent/execution.log", "agent/output/catalog.json",

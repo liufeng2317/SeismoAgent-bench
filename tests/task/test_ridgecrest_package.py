@@ -49,9 +49,15 @@ class RidgecrestPackageTests(unittest.TestCase):
             result = subprocess.run(command, capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
             payload = json.loads(result.stdout)
-            self.assertEqual(payload["run"]["state"], "scored")
-            self.assertEqual(payload["scientific_score"]["metrics"]["candidate_events"], 0)
-            self.assertEqual(payload["scientific_score"]["metrics"]["reference_events"], 2)
+            self.assertEqual(payload["run"]["state"], "completed")
+            evaluated = subprocess.run([sys.executable, "-m", "SeismoAgentBench", "evaluate",
+                                        "--run-dir", str(run_root / "smoke-001"),
+                                        "--reference-manifest", str(PACKAGE / "references/usgs_mainshocks/reference_manifest.json")],
+                                       capture_output=True, text=True, check=False)
+            self.assertEqual(evaluated.returncode, 0, evaluated.stderr)
+            ep = json.loads(evaluated.stdout)
+            self.assertEqual(ep["scientific_score"]["metrics"]["candidate_events"], 0)
+            self.assertEqual(ep["scientific_score"]["metrics"]["reference_events"], 2)
             self.assertTrue((run_root / "smoke-001/evaluation/task_summary.json").is_file())
 
     def test_deterministic_baseline_generates_and_scores_candidate_catalog(self):
@@ -69,8 +75,13 @@ class RidgecrestPackageTests(unittest.TestCase):
             result = subprocess.run(command, capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
             payload = json.loads(result.stdout)
-            self.assertEqual(payload["run"]["state"], "scored")
-            metrics = payload["scientific_score"]["metrics"]
+            self.assertEqual(payload["run"]["state"], "completed")
+            evaluated = subprocess.run([sys.executable, "-m", "SeismoAgentBench", "evaluate",
+                                        "--run-dir", str(run_root / "baseline-001"),
+                                        "--reference-manifest", str(PACKAGE / "references/usgs_mainshocks/reference_manifest.json")],
+                                       capture_output=True, text=True, check=False)
+            self.assertEqual(evaluated.returncode, 0, evaluated.stderr)
+            metrics = json.loads(evaluated.stdout)["scientific_score"]["metrics"]
             self.assertEqual(metrics["candidate_events"], 2)
             self.assertEqual(metrics["matched_events"], 2)
             self.assertEqual(metrics["precision"], 1.0)
@@ -93,8 +104,13 @@ class RidgecrestPackageTests(unittest.TestCase):
             result = subprocess.run(command, capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
             payload = json.loads(result.stdout)
-            self.assertEqual(payload["run"]["state"], "scored")
-            self.assertGreater(payload["scientific_score"]["metrics"]["candidate_events"], 0)
+            self.assertEqual(payload["run"]["state"], "completed")
+            evaluated = subprocess.run([sys.executable, "-m", "SeismoAgentBench", "evaluate",
+                                        "--run-dir", str(run_root / "waveform-001"),
+                                        "--reference-manifest", str(PACKAGE / "references/usgs_mainshocks/reference_manifest.json")],
+                                       capture_output=True, text=True, check=False)
+            self.assertEqual(evaluated.returncode, 0, evaluated.stderr)
+            self.assertGreater(json.loads(evaluated.stdout)["scientific_score"]["metrics"]["candidate_events"], 0)
             output_catalog = json.loads((run_root / "waveform-001/agent/output/catalog.json").read_text())
             self.assertTrue(all(event["location_method"] == "station-amplitude-baseline"
                                 for event in output_catalog["events"]))

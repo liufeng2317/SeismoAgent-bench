@@ -5,6 +5,7 @@ import tempfile
 import unittest
 
 from SeismoAgentBench.agent import AgentError, AgentSpec, run_agent
+from SeismoAgentBench.workflow import evaluate_run
 
 
 TASK = {
@@ -40,9 +41,11 @@ class AgentContractTests(unittest.TestCase):
             spec = AgentSpec.from_command("synthetic-agent", "0.1", [sys.executable, "-c", code])
             result = run_agent(task, manifest, spec, root, "run-001", timeout=10)
             run = root / "run-001"
-            self.assertEqual(result["run"]["state"], "scored")
+            self.assertEqual(result["run"]["state"], "completed")
             self.assertEqual(json.loads((run / "record/agent_command.json").read_text())["name"], "synthetic-agent")
             self.assertEqual(json.loads((run / "record/run_result.json").read_text())["agent"]["version"], "0.1")
+            evaluated = evaluate_run(run)
+            self.assertEqual(evaluated["run"]["state"], "scored")
 
 
 if __name__ == "__main__":

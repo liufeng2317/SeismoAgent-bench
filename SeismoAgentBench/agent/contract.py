@@ -8,8 +8,8 @@ from pathlib import Path
 import re
 from typing import Any, Mapping, Sequence
 
-from SeismoAgentBench.workflow import run_task
-from SeismoAgentBench.reporting import write_evaluation_report
+from SeismoAgentBench.execution import run_command
+from SeismoAgentBench.reporting import write_environment_record
 
 
 _IDENTIFIER = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]*$")
@@ -49,10 +49,10 @@ def run_agent(task_path: str | Path, manifest_path: str | Path, agent: AgentSpec
               extra_env: Mapping[str, str] | None = None,
               resume: bool = False) -> dict[str, Any]:
     """Run one declared agent through the standard task workflow."""
-    result = run_task(task_path, manifest_path, agent.command, run_root, run_id,
-                      timeout=timeout, reference_manifest=reference_manifest,
-                      extra_env=extra_env, resume=resume)
+    result = run_command(task_path, manifest_path, agent.command, run_root, run_id,
+                         timeout=timeout, extra_env=extra_env, resume=resume)
     run = Path(run_root).resolve() / run_id
+    write_environment_record(run, result)
     record_dir = run / "record"
     record_dir.mkdir(exist_ok=True)
     (record_dir / "agent_command.json").write_text(json.dumps(agent.record(), indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -60,5 +60,4 @@ def run_agent(task_path: str | Path, manifest_path: str | Path, agent: AgentSpec
     run_result = json.loads((record_dir / "run_result.json").read_text(encoding="utf-8"))
     run_result["agent"] = agent.record()
     (record_dir / "run_result.json").write_text(json.dumps(run_result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    write_evaluation_report(run, run_result, agent.record())
-    return result
+    return {"run": run_result}

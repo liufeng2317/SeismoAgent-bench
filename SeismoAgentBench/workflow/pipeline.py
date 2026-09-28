@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
-from SeismoAgentBench.execution import run_command
+from SeismoAgentBench.execution import ExecutionError, run_command
 from SeismoAgentBench.reporting import write_environment_record, write_evaluation_report
 from SeismoAgentBench.scoring import (
     AggregationError, ArtifactValidationError, ReferenceError, ScoreError,
@@ -33,22 +33,13 @@ def _catalog_artifact(task: dict[str, Any], output: Path) -> tuple[dict[str, Any
     return item, value
 
 
-def run_task(task_path: str | Path, manifest_path: str | Path, command: Sequence[str],
-             run_root: str | Path, run_id: str, *, timeout: float = 600,
-             reference_manifest: str | Path | None = None,
-             extra_env: Mapping[str, str] | None = None,
-             resume: bool = False) -> dict[str, Any]:
-    """Run a task, validate its output and write a deterministic score record.
-
-    A non-zero command exit is returned as an execution result without scoring.
-    A successful command with invalid declared outputs is returned as
-    ``artifact_invalid``. Scientific scoring is outside this orchestration
-    layer.
-    """
-    result = run_command(task_path, manifest_path, command, run_root, run_id,
-                         timeout=timeout, extra_env=extra_env, resume=resume)
-    run = Path(run_root).resolve() / run_id
-    write_environment_record(run, result)
+def evaluate_run(run_dir: str | Path, *, reference_manifest: str | Path | None = None) -> dict[str, Any]:
+    """Evaluate a completed Agent run without starting the Agent."""
+    run = Path(run_dir).resolve()
+    result_path = run / "record" / "run_result.json"
+    if not result_path.is_file():
+        raise ExecutionError(f"run record is missing: {result_path}")
+    result = load_json(result_path)
     if result["state"] != "completed":
         write_evaluation_report(run, result)
         return {"run": result, "score": None}
@@ -117,3 +108,16 @@ def run_task(task_path: str | Path, manifest_path: str | Path, command: Sequence
         output_result["scientific_score"] = scientific
         output_result["task_summary"] = summary
     return output_result
+
+
+def run_task(task_path: str | Path, manifest_path: str | Path, command: Sequence[str],
+             run_root: str | Path, run_id: str, *, timeout: float = 600,
+             reference_manifest: str | Path | None = None,
+             extra_env: Mapping[str, str] | None = None,
+             resume: bool = False) -> dict[str, Any]:
+    """Compatibility wrapper that executes and then evaluates a task."""
+    result = run_command(task_path, manifest_path, command, run_root, run_id,
+                         timeout=timeout, extra_env=extra_env, resume=resume)
+    run = Path(run_root).resolve() / run_id
+    write_environment_record(run, result)
+    return evaluate_run(run, reference_manifest=reference_manifest)

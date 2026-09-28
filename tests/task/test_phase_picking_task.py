@@ -32,7 +32,11 @@ class PhasePickingTaskTests(unittest.TestCase):
             result = subprocess.run(command, capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
             payload = json.loads(result.stdout)
-            self.assertEqual(payload["run"]["state"], "scored")
+            self.assertEqual(payload["run"]["state"], "completed")
+            evaluated = subprocess.run([sys.executable, "-m", "SeismoAgentBench", "evaluate",
+                                        "--run-dir", str(run_root / "phase-001")],
+                                       capture_output=True, text=True, check=False)
+            self.assertEqual(evaluated.returncode, 0, evaluated.stderr)
             picks = json.loads((run_root / "phase-001/agent/output/picks.json").read_text())
             self.assertGreater(len(picks["picks"]), 0)
             preprocessing = json.loads((run_root / "phase-001/agent/output/preprocessing.json").read_text())
