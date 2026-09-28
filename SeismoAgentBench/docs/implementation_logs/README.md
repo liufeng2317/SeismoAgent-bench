@@ -18,3 +18,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Generic catalog output contract | [11_generic_catalog_output_contract.md](11_generic_catalog_output_contract.md) | Complete |
 | Scientific tool adapter contract | [12_scientific_tool_adapter_contract.md](12_scientific_tool_adapter_contract.md) | Complete |
 | Reference manifest and event matching | [13_reference_manifest_matching.md](13_reference_manifest_matching.md) | Complete |
+| Basic catalog scientific scorer | [14_basic_catalog_scientific_scorer.md](14_basic_catalog_scientific_scorer.md) | Complete |
