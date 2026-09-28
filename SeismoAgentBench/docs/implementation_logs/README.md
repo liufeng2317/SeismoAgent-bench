@@ -11,3 +11,4 @@ This directory records completed implementation stages. Each stage record lists 
 | End-to-end task workflow | [04_end_to_end_task_workflow.md](04_end_to_end_task_workflow.md) | Complete |
 | Agent entrypoint contract | [05_agent_entrypoint_contract.md](05_agent_entrypoint_contract.md) | Complete |
 | Run provenance records | [06_run_provenance_records.md](06_run_provenance_records.md) | Complete |
+| Workflow failure states | [07_workflow_failure_states.md](07_workflow_failure_states.md) | Complete |
