@@ -27,6 +27,9 @@ mixing execution with evaluation.
 ## Validation
 
 - One-unit Ridgecrest-style execution test passed without evaluation output.
+- A real Ridgecrest phase-picking baseline was executed through
+  `execute-experiment` and then evaluated by a separate `evaluate` invocation;
+  both required artifacts passed contract validation.
 - Full test suite: 106 tests passed.
 
 Parallel scheduling and automatic batch evaluation remain separate future
