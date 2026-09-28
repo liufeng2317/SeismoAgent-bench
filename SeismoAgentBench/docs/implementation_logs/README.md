@@ -35,3 +35,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Project view of run outputs | [28_project_run_link.md](28_project_run_link.md) | Complete |
 | Compact run layout | [29_compact_run_layout.md](29_compact_run_layout.md) | Complete |
 | Run contract ownership layout | [30_run_contract_ownership.md](30_run_contract_ownership.md) | Complete with evaluator follow-up |
+| External evaluation command | [31_external_evaluation_command.md](31_external_evaluation_command.md) | Complete |

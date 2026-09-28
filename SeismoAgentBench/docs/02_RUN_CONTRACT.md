@@ -21,7 +21,7 @@ unique for the task. The directory is divided by ownership:
 │   ├── codex_command.json
 │   ├── transcript.jsonl
 │   └── artifact_manifest.json
-└── evaluation/
+└── evaluation/        # created after the Agent exits
     ├── report.json
     └── score files
 ```
