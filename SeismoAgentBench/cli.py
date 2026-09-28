@@ -6,6 +6,7 @@ import argparse
 import json
 from pathlib import Path
 import sys
+import time
 from typing import Sequence
 
 from SeismoAgentBench.agent import AgentError, AgentSpec, run_agent
@@ -48,6 +49,9 @@ def _parser() -> argparse.ArgumentParser:
     codex.add_argument("--codex-home", help="external CODEX_HOME path")
     codex.add_argument("--timeout", type=float, default=600)
     codex.add_argument("--reference-manifest")
+    codex.add_argument("--resume", action="store_true")
+    codex.add_argument("--max-attempts", type=int, default=1)
+    codex.add_argument("--retry-delay-s", type=float, default=0)
     return parser
 
 
@@ -62,6 +66,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             result = run_agent(args.task, args.manifest, agent, args.run_root, args.run_id,
                                timeout=args.timeout, reference_manifest=args.reference_manifest)
         else:
+            if args.max_attempts < 1 or args.retry_delay_s < 0:
+                raise CodexCommandError("max_attempts must be >= 1 and retry_delay_s must be >= 0")
             env = load_env_file(args.env_file) if args.env_file else {}
             if args.codex_home:
                 env["CODEX_HOME"] = args.codex_home
@@ -75,9 +81,18 @@ def main(argv: Sequence[str] | None = None) -> int:
                                     str(effective_root / args.run_id / "work"),
                                     args.prompt, reasoning_effort=args.reasoning_effort)
             agent = AgentSpec.from_command(args.agent_name, args.agent_version, spec.argv())
-            result = run_agent(args.task, args.manifest, agent, effective_root, args.run_id,
-                               timeout=args.timeout, reference_manifest=args.reference_manifest,
-                               extra_env=env)
+            result = None
+            for attempt in range(args.max_attempts):
+                result = run_agent(
+                    args.task, args.manifest, agent, effective_root, args.run_id,
+                    timeout=args.timeout, reference_manifest=args.reference_manifest,
+                    extra_env=env, resume=args.resume or attempt > 0,
+                )
+                if result["run"]["state"] != "execution_retryable" or attempt + 1 >= args.max_attempts:
+                    break
+                if args.retry_delay_s:
+                    time.sleep(args.retry_delay_s)
+            assert result is not None
             run = effective_root / args.run_id
             (run / "transcript.jsonl").write_bytes((run / "execution.log").read_bytes())
             (run / "codex_command.json").write_text(

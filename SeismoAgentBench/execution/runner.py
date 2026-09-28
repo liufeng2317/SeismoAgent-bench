@@ -12,6 +12,7 @@ import json
 import os
 from pathlib import Path
 import signal
+import shutil
 import subprocess
 import sys
 import time
@@ -68,13 +69,39 @@ def _failure_class(log: Path) -> tuple[str, bool]:
     return "nonzero_exit", False
 
 
-def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, Any]) -> RunContext:
+def _archive_retry(run: Path) -> int:
+    attempts = run / "attempts"
+    attempts.mkdir(exist_ok=True)
+    existing = sorted(item for item in attempts.iterdir() if item.is_dir() and item.name.startswith("attempt-"))
+    number = len(existing) + 1
+    archive = attempts / f"attempt-{number:03d}"
+    archive.mkdir()
+    preserved = {"task_spec.json", "input_manifest.json", "attempts"}
+    for item in list(run.iterdir()):
+        if item.name in preserved:
+            continue
+        shutil.move(str(item), str(archive / item.name))
+    return number
+
+
+def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, Any],
+             *, resume: bool = False) -> tuple[RunContext, int]:
     if not run_id or Path(run_id).name != run_id or run_id in {".", ".."}:
         raise ExecutionError("run_id must be a non-empty single path component")
     run = root / run_id
+    attempt = 1
     if run.exists():
-        raise ExecutionError(f"run already exists: {run}")
-    run.mkdir(parents=True)
+        if not resume:
+            raise ExecutionError(f"run already exists: {run}")
+        previous_path = run / "run_result.json"
+        if not previous_path.is_file():
+            raise ExecutionError("cannot resume a run without run_result.json")
+        previous = load_json(previous_path)
+        if previous.get("state") != "execution_retryable":
+            raise ExecutionError("only execution_retryable runs can be resumed")
+        attempt = _archive_retry(run) + 1
+    else:
+        run.mkdir(parents=True)
     task_path = run / "task_spec.json"
     manifest_path = run / "input_manifest.json"
     _write_json(task_path, task)
@@ -82,8 +109,8 @@ def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, 
     directories = {name: run / name for name in ("work", "output", "home", "tmp")}
     for directory in directories.values():
         directory.mkdir()
-    return RunContext(run_id, run, task_path, manifest_path, **directories,
-                      log=run / "execution.log", result=run / "run_result.json")
+    return (RunContext(run_id, run, task_path, manifest_path, **directories,
+                       log=run / "execution.log", result=run / "run_result.json"), attempt)
 
 
 def _environment(context: RunContext, extra_env: Mapping[str, str] | None = None) -> dict[str, str]:
@@ -109,7 +136,8 @@ def _environment(context: RunContext, extra_env: Mapping[str, str] | None = None
 
 def run_command(task_path: str | Path, manifest_path: str | Path, command: Sequence[str],
                  run_root: str | Path, run_id: str, *, timeout: float = 600,
-                 extra_env: Mapping[str, str] | None = None) -> dict[str, Any]:
+                 extra_env: Mapping[str, str] | None = None,
+                 resume: bool = False) -> dict[str, Any]:
     """Validate inputs and run one command in a fresh trusted-development context."""
     if not command or not all(isinstance(item, str) and item for item in command):
         raise ExecutionError("command must be a non-empty sequence of strings")
@@ -122,7 +150,7 @@ def run_command(task_path: str | Path, manifest_path: str | Path, command: Seque
         validate_manifest(manifest, task=task, check_paths=False)
     except ValidationError as exc:
         raise ExecutionError(f"input validation failed: {exc}") from exc
-    context = _context(Path(run_root).resolve(), run_id, task, manifest)
+    context, attempt = _context(Path(run_root).resolve(), run_id, task, manifest, resume=resume)
     result: dict[str, Any] = {
         "run_id": run_id,
         "state": "preparing",
@@ -134,6 +162,7 @@ def run_command(task_path: str | Path, manifest_path: str | Path, command: Seque
         "command": list(command),
         "timeout_s": timeout,
         "injected_environment_keys": sorted(extra_env) if extra_env else [],
+        "attempt": attempt,
         "started_at": _now(),
     }
     _write_json(context.result, result)

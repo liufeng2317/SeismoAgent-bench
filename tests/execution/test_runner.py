@@ -64,6 +64,18 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(result["failure_reason"], "usage_limit")
         self.assertFalse(result["retryable"])
 
+    def test_retryable_run_can_be_resumed_and_archives_previous_attempt(self):
+        first = [sys.executable, "-c", "print('Selected model is at capacity', flush=True); raise SystemExit(1)"]
+        result = run_command(self.task, self.manifest, first, self.root, "run-resume", timeout=10)
+        self.assertEqual(result["state"], "execution_retryable")
+        code = "import json,os,pathlib; pathlib.Path(os.environ['BENCH_OUTPUT'],'result.json').write_text(json.dumps({'ok': True}))"
+        resumed = run_command(self.task, self.manifest, [sys.executable, "-c", code], self.root,
+                              "run-resume", timeout=10, resume=True)
+        self.assertEqual(resumed["state"], "completed")
+        run = self.root / "run-resume"
+        self.assertTrue((run / "attempts/attempt-001/execution.log").is_file())
+        self.assertTrue((run / "output/result.json").is_file())
+
     def test_timeout_kills_command(self):
         result = run_command(self.task, self.manifest, [sys.executable, "-c", "import time; time.sleep(10)"], self.root, "run-003", timeout=0.1)
         self.assertEqual(result["state"], "execution_timeout")

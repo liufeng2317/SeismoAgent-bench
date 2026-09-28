@@ -36,7 +36,8 @@ def _catalog_artifact(task: dict[str, Any], output: Path) -> tuple[dict[str, Any
 def run_task(task_path: str | Path, manifest_path: str | Path, command: Sequence[str],
              run_root: str | Path, run_id: str, *, timeout: float = 600,
              reference_manifest: str | Path | None = None,
-             extra_env: Mapping[str, str] | None = None) -> dict[str, Any]:
+             extra_env: Mapping[str, str] | None = None,
+             resume: bool = False) -> dict[str, Any]:
     """Run a task, validate its output and write a deterministic score record.
 
     A non-zero command exit is returned as an execution result without scoring.
@@ -45,7 +46,7 @@ def run_task(task_path: str | Path, manifest_path: str | Path, command: Sequence
     layer.
     """
     result = run_command(task_path, manifest_path, command, run_root, run_id,
-                         timeout=timeout, extra_env=extra_env)
+                         timeout=timeout, extra_env=extra_env, resume=resume)
     run = Path(run_root).resolve() / run_id
     write_environment_record(run, result)
     if result["state"] != "completed":

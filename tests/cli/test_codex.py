@@ -90,6 +90,52 @@ class CodexCliTests(unittest.TestCase):
             self.assertTrue((unit / "output/result.json").is_file())
             self.assertEqual(json.loads(result.stdout)["run_layout"]["unit_root"], str(unit))
 
+    def test_run_codex_retries_capacity_with_bounded_attempts(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            task = base / "task.json"
+            manifest = base / "manifest.json"
+            fake = base / "fake-codex"
+            counter = base / "counter"
+            run_root = base / "runs"
+            task.write_text(json.dumps({
+                "task_id": "retry-task", "version": "1", "objective": "smoke",
+                "input_kinds": ["metadata"],
+                "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
+                "scorer": {"name": "artifact-contract", "version": "1"},
+            }), encoding="utf-8")
+            manifest.write_text(json.dumps({
+                "schema_version": 1, "case_id": "synthetic", "entries": [
+                    {"id": "metadata", "path": "/tmp/metadata.json", "kind": "metadata", "read_only": True}
+                ],
+            }), encoding="utf-8")
+            fake.write_text(
+                "#!" + sys.executable + "\n"
+                "import json, os, pathlib\n"
+                f"counter=pathlib.Path({str(counter)!r})\n"
+                "if not counter.exists():\n"
+                " counter.write_text('1')\n"
+                " print('Selected model is at capacity', flush=True)\n"
+                " raise SystemExit(1)\n"
+                "print(json.dumps({'type': 'assistant', 'text': 'OK'}), flush=True)\n"
+                "pathlib.Path(os.environ['BENCH_OUTPUT'], 'result.json').write_text(json.dumps({'ok': True}))\n",
+                encoding="utf-8",
+            )
+            fake.chmod(0o755)
+            command = [sys.executable, "-m", "SeismoAgentBench", "run-codex",
+                       "--task", str(task), "--manifest", str(manifest),
+                       "--agent-name", "codex-retry", "--agent-version", "1",
+                       "--run-root", str(run_root), "--run-id", "run-001",
+                       "--codex-bin", str(fake), "--model", "test-model",
+                       "--prompt", "write the result artifact", "--max-attempts", "2"]
+            result = subprocess.run(command, capture_output=True, text=True, check=False)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            unit = run_root / "run-001"
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["run"]["state"], "scored")
+            self.assertTrue((unit / "attempts/attempt-001/execution.log").is_file())
+            self.assertTrue((unit / "output/result.json").is_file())
+
 
 if __name__ == "__main__":
     unittest.main()
