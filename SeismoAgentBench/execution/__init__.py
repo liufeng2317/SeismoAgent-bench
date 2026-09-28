@@ -2,9 +2,11 @@
 
 from .codex import CodexCommandError, CodexCommandSpec, load_env_file
 from .config import AgentConfigError, load_agent_config, write_agent_config_snapshot
+from .experiment import ExperimentSpecError, expand_experiment, load_experiment_spec
 from .paths import RunLayout, RunLayoutError
 from .runner import ExecutionError, RunContext, run_command
 
 __all__ = ["AgentConfigError", "CodexCommandError", "CodexCommandSpec", "ExecutionError",
+           "ExperimentSpecError", "expand_experiment",
            "RunContext", "RunLayout", "RunLayoutError", "load_agent_config", "load_env_file",
-           "run_command", "write_agent_config_snapshot"]
+           "load_experiment_spec", "run_command", "write_agent_config_snapshot"]

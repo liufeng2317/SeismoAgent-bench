@@ -11,7 +11,8 @@ from typing import Sequence
 
 from SeismoAgentBench.agent import AgentError, AgentSpec, run_agent
 from SeismoAgentBench.execution import (CodexCommandError, CodexCommandSpec, ExecutionError,
-                                        AgentConfigError, RunLayout, load_agent_config, load_env_file)
+                                        AgentConfigError, RunLayout, expand_experiment,
+                                        load_agent_config, load_env_file, load_experiment_spec)
 from SeismoAgentBench.task import load_json
 from SeismoAgentBench.workflow import evaluate_run
 
@@ -37,6 +38,8 @@ def _parser() -> argparse.ArgumentParser:
     evaluate = commands.add_parser("evaluate", help="evaluate a completed Agent run")
     evaluate.add_argument("--run-dir", required=True, help="completed run directory")
     evaluate.add_argument("--reference-manifest", help="optional authorized reference manifest")
+    plan = commands.add_parser("plan-experiment", help="validate and expand an experiment spec")
+    plan.add_argument("--spec", required=True, help="experiment YAML specification")
     codex = commands.add_parser("run-codex", help="run one Codex CLI agent in host-direct mode")
     codex.add_argument("--task", required=True)
     codex.add_argument("--manifest", required=True)
@@ -75,6 +78,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                                agent_config=agent_config)
         elif args.action == "evaluate":
             result = evaluate_run(args.run_dir, reference_manifest=args.reference_manifest)
+        elif args.action == "plan-experiment":
+            spec = load_experiment_spec(args.spec)
+            result = {"experiment": spec["experiment_id"],
+                      "output_root": spec["output_root"],
+                      "concurrency": spec["concurrency"],
+                      "units": expand_experiment(spec)}
         else:
             if args.max_attempts < 1 or args.retry_delay_s < 0:
                 raise CodexCommandError("max_attempts must be >= 1 and retry_delay_s must be >= 0")
@@ -120,6 +129,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(json.dumps({"state": "cli_error", "error": str(exc)}, sort_keys=True), file=sys.stderr)
         return 2
     print(json.dumps(result, indent=2, sort_keys=True))
+    if args.action == "plan-experiment":
+        return 0
     return 0 if result["run"]["state"] in {"completed", "scored"} else 3
 
 
