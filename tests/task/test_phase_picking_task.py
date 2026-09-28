@@ -28,7 +28,7 @@ class PhasePickingTaskTests(unittest.TestCase):
                        "--agent-version", "1",
                        "--run-root", str(run_root),
                        "--run-id", "phase-001",
-                       "--", sys.executable, str(PACKAGE / "baseline_agent.py")]
+                       "--", sys.executable, str(PACKAGE / "main.py")]
             result = subprocess.run(command, capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
             payload = json.loads(result.stdout)

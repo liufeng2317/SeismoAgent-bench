@@ -46,3 +46,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Smoke reference fixture separation | [40_smoke_reference_fixture.md](40_smoke_reference_fixture.md) | Complete |
 | Standalone phase-picking workflow case | [41_standalone_phase_picking_case.md](41_standalone_phase_picking_case.md) | Complete |
 | Task-local run view | [42_task_local_run_view.md](42_task_local_run_view.md) | Complete |
+| Standard task entrypoint name | [43_standard_task_entrypoint.md](43_standard_task_entrypoint.md) | Complete |
