@@ -1,0 +1,24 @@
+{
+  "task_id": "ridgecrest_2019_phase_picking",
+  "version": "1",
+  "objective": "Preprocess the approved Ridgecrest waveform subset and produce P/S phase picks.",
+  "input_kinds": ["waveform", "stationxml"],
+  "output_artifacts": [
+    {
+      "id": "preprocessing",
+      "path": "preprocessing.json",
+      "kind": "json",
+      "required": true
+    },
+    {
+      "id": "picks",
+      "path": "picks.json",
+      "kind": "json",
+      "required": true
+    }
+  ],
+  "scorer": {
+    "name": "phase-picking-basic",
+    "version": "1"
+  }
+}
