@@ -7,6 +7,7 @@ SeismoAgentBench/
 ├── __init__.py
 ├── task/                   # task and input-manifest contracts
 ├── execution/              # trusted-development run control
+├── workflow/               # end-to-end stage orchestration
 ├── scoring/                # artifact validation and scoring interfaces
 └── utils/
     ├── __init__.py

@@ -205,6 +205,7 @@ Run directories MUST be uniquely identified and MUST NOT be silently overwritten
 SeismoAgentBench/                 # reusable workflow implementation
   task/                           # task specifications and input manifests
   execution/                      # run control and execution backends
+  workflow/                       # end-to-end stage orchestration
   agent/                          # agent entry points and tool adapters
   scoring/                        # output validation, scoring and metrics
   reporting/                      # run artifacts and provenance reports
@@ -223,6 +224,7 @@ The package is organized by stable workflow responsibilities rather than by ever
 | --- | --- | --- |
 | `task/` | Task records, task versions, input manifests and validation | Agent implementation and reference answers |
 | `execution/` | Run creation, runtime preparation, backend dispatch and limits | Scientific scoring rules |
+| `workflow/` | Ordered execution, artifact validation and score-record orchestration | Scientific algorithms and reference comparisons |
 | `agent/` | Agent entry points and adapters for approved scientific tools | Private references and aggregate metrics |
 | `scoring/` | Output-contract checks, scientific scorers and metric aggregation | Process launching and environment setup |
 | `reporting/` | Run summaries, provenance and exportable reports | Instance-specific analysis scripts |
