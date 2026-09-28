@@ -29,3 +29,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Codex host-direct command layer | [22_codex_host_direct_command.md](22_codex_host_direct_command.md) | Complete |
 | Codex host-direct adapter | [23_codex_host_direct_adapter.md](23_codex_host_direct_adapter.md) | Complete with follow-up |
 | Persistent run layout | [24_run_layout.md](24_run_layout.md) | Complete |
+| Retryable provider failures | [25_retryable_failures.md](25_retryable_failures.md) | Complete |
