@@ -11,9 +11,9 @@ class RunLayoutTests(unittest.TestCase):
                            "codex_gpt6_astra", "run_001")
         self.assertEqual(
             layout.unit_root,
-            Path("/ai4earthafs/runs/campaign_20260928/ridgecrest_2019_phase_picking/base/codex_gpt6_astra/run_001"),
+            Path("/ai4earthafs/runs/ridgecrest_2019_phase_picking/run_001"),
         )
-        self.assertEqual(layout.run_root, layout.unit_root.parent)
+        self.assertEqual(layout.run_root, Path("/ai4earthafs/runs/ridgecrest_2019_phase_picking"))
 
     def test_rejects_relative_root_and_unsafe_component(self):
         with self.assertRaises(RunLayoutError):

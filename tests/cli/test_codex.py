@@ -86,7 +86,7 @@ class CodexCliTests(unittest.TestCase):
                        "--prompt", "write the result artifact"]
             result = subprocess.run(command, capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
-            unit = root / "campaign-001/layout-task/base/codex-smoke/run-001"
+            unit = root / "layout-task/run-001"
             self.assertTrue((unit / "output/result.json").is_file())
             self.assertEqual(json.loads(result.stdout)["run_layout"]["unit_root"], str(unit))
 

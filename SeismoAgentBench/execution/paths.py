@@ -41,8 +41,10 @@ class RunLayout:
 
     @property
     def unit_root(self) -> Path:
-        return (self.root / self.campaign_id / self.task_id / self.variant /
-                self.agent_id / self.run_id)
+        # Identity fields other than task/run are recorded in run metadata.
+        # Keeping them out of the path makes one run easy to locate and avoids
+        # coupling storage layout to the number of experiment dimensions.
+        return self.root / self.task_id / self.run_id
 
     @property
     def run_root(self) -> Path:
