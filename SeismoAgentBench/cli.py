@@ -9,7 +9,9 @@ import sys
 from typing import Sequence
 
 from SeismoAgentBench.agent import AgentError, AgentSpec, run_agent
-from SeismoAgentBench.execution import CodexCommandError, CodexCommandSpec, ExecutionError, load_env_file
+from SeismoAgentBench.execution import (CodexCommandError, CodexCommandSpec, ExecutionError,
+                                        RunLayout, load_env_file)
+from SeismoAgentBench.task import load_json
 
 
 _RUN_FAILURES = {"execution_failed", "execution_timeout", "artifact_invalid", "scoring_failed"}
@@ -36,6 +38,8 @@ def _parser() -> argparse.ArgumentParser:
     codex.add_argument("--agent-version", required=True)
     codex.add_argument("--run-root", required=True)
     codex.add_argument("--run-id", required=True)
+    codex.add_argument("--campaign-id")
+    codex.add_argument("--variant", default="base")
     codex.add_argument("--codex-bin", required=True)
     codex.add_argument("--model", required=True)
     codex.add_argument("--prompt", required=True)
@@ -61,20 +65,28 @@ def main(argv: Sequence[str] | None = None) -> int:
             env = load_env_file(args.env_file) if args.env_file else {}
             if args.codex_home:
                 env["CODEX_HOME"] = args.codex_home
+            effective_root = Path(args.run_root).resolve()
+            if args.campaign_id:
+                task_id = load_json(args.task)["task_id"]
+                layout = RunLayout(effective_root, args.campaign_id, task_id,
+                                   args.variant, args.agent_name, args.run_id)
+                effective_root = layout.run_root
             spec = CodexCommandSpec(args.codex_bin, args.model,
-                                    str(Path(args.run_root).resolve() / args.run_id / "work"),
+                                    str(effective_root / args.run_id / "work"),
                                     args.prompt, reasoning_effort=args.reasoning_effort)
             agent = AgentSpec.from_command(args.agent_name, args.agent_version, spec.argv())
-            result = run_agent(args.task, args.manifest, agent, args.run_root, args.run_id,
+            result = run_agent(args.task, args.manifest, agent, effective_root, args.run_id,
                                timeout=args.timeout, reference_manifest=args.reference_manifest,
                                extra_env=env)
-            run = Path(args.run_root).resolve() / args.run_id
+            run = effective_root / args.run_id
             (run / "transcript.jsonl").write_bytes((run / "execution.log").read_bytes())
             (run / "codex_command.json").write_text(
                 json.dumps(spec.record(), indent=2, sort_keys=True) + "\n", encoding="utf-8")
             result["codex"] = {"command_record": "codex_command.json",
                                "transcript": "transcript.jsonl",
                                "injected_environment_keys": sorted(env)}
+            if args.campaign_id:
+                result["run_layout"] = layout.record()
     except (AgentError, CodexCommandError, ExecutionError, OSError, ValueError) as exc:
         print(json.dumps({"state": "cli_error", "error": str(exc)}, sort_keys=True), file=sys.stderr)
         return 2
