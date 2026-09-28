@@ -25,3 +25,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Ridgecrest task infrastructure dry run | [18_ridgecrest_task_dry_run.md](18_ridgecrest_task_dry_run.md) | Complete |
 | Deterministic baseline agent | [19_deterministic_baseline_agent.md](19_deterministic_baseline_agent.md) | Complete |
 | Waveform-driven baseline agent | [20_waveform_baseline_agent.md](20_waveform_baseline_agent.md) | Complete |
+| Phase-picking task | [21_phase_picking_task.md](21_phase_picking_task.md) | Complete |
