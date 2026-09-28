@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
+from .catalog import CatalogValidationError, validate_catalog
+
 
 class ArtifactValidationError(ValueError):
     """Raised when declared output artifacts are not valid."""
@@ -56,6 +58,12 @@ def validate_artifacts(task: Mapping[str, Any], output_dir: str | Path) -> dict[
                 json.loads(path.read_text(encoding="utf-8"))
             except (OSError, UnicodeError, json.JSONDecodeError) as exc:
                 errors.append(f"artifact {artifact_id!r} is not valid JSON: {exc}")
+                continue
+        if item["kind"].lower() == "catalog":
+            try:
+                validate_catalog(json.loads(path.read_text(encoding="utf-8")))
+            except (OSError, UnicodeError, json.JSONDecodeError, CatalogValidationError) as exc:
+                errors.append(f"artifact {artifact_id!r} is not a valid catalog: {exc}")
                 continue
         inventory.append(record)
     if errors:

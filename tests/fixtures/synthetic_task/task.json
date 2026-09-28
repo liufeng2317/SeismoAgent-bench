@@ -7,7 +7,7 @@
     {
       "id": "catalog",
       "path": "catalog.json",
-      "kind": "json",
+      "kind": "catalog",
       "required": true
     }
   ],

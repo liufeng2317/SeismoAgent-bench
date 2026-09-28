@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://seismoagentbench.org/schemas/catalog.schema.json",
+  "title": "SeismoAgentBench earthquake catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "catalog_id", "events"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "catalog_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"},
+    "description": {"type": "string"},
+    "events": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/event"}
+    }
+  },
+  "$defs": {
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event_id", "origin_time", "latitude", "longitude", "depth_km"],
+      "properties": {
+        "event_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"},
+        "origin_time": {"type": "string", "format": "date-time"},
+        "latitude": {"type": "number", "minimum": -90, "maximum": 90},
+        "longitude": {"type": "number", "minimum": -180, "maximum": 180},
+        "depth_km": {"type": "number", "minimum": 0},
+        "magnitude": {"type": "number"},
+        "magnitude_type": {"type": "string"},
+        "horizontal_uncertainty_km": {"type": "number", "minimum": 0},
+        "depth_uncertainty_km": {"type": "number", "minimum": 0},
+        "origin_time_uncertainty_s": {"type": "number", "minimum": 0},
+        "location_method": {"type": "string"},
+        "picks": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/pick"}
+        }
+      }
+    },
+    "pick": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pick_id", "station_id", "phase", "arrival_time"],
+      "properties": {
+        "pick_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"},
+        "station_id": {"type": "string", "minLength": 1},
+        "phase": {"enum": ["P", "S"]},
+        "arrival_time": {"type": "string", "format": "date-time"},
+        "probability": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    }
+  }
+}
