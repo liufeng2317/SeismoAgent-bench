@@ -54,6 +54,30 @@ class RidgecrestPackageTests(unittest.TestCase):
             self.assertEqual(payload["scientific_score"]["metrics"]["reference_events"], 2)
             self.assertTrue((run_root / "smoke-001/score/task_summary.json").is_file())
 
+    def test_deterministic_baseline_generates_and_scores_candidate_catalog(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            run_root = Path(tmp) / "runs"
+            command = [sys.executable, "-m", "SeismoAgentBench", "run-agent",
+                       "--task", str(PACKAGE / "task.json"),
+                       "--manifest", str(PACKAGE / "input_manifest.json"),
+                       "--agent-name", "ridgecrest-deterministic-baseline",
+                       "--agent-version", "1",
+                       "--run-root", str(run_root),
+                       "--run-id", "baseline-001",
+                       "--reference-manifest", str(PACKAGE / "references/usgs_mainshocks/reference_manifest.json"),
+                       "--", sys.executable, str(PACKAGE / "baseline_agent.py")]
+            result = subprocess.run(command, capture_output=True, text=True, check=False)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["run"]["state"], "scored")
+            metrics = payload["scientific_score"]["metrics"]
+            self.assertEqual(metrics["candidate_events"], 2)
+            self.assertEqual(metrics["matched_events"], 2)
+            self.assertEqual(metrics["precision"], 1.0)
+            self.assertEqual(metrics["recall"], 1.0)
+            self.assertTrue((run_root / "baseline-001/output/catalog.json").is_file())
+            self.assertTrue((run_root / "baseline-001/evaluation_report.json").is_file())
+
 
 if __name__ == "__main__":
     unittest.main()
