@@ -9,4 +9,4 @@ Product-specific processing keeps corrected and legacy releases separate.
 
 The corrected release is the benchmark product. The legacy file is retained for release comparison only; native event IDs are not cross-catalog keys.
 
-Schema: `docs/schemas/catalog_event.schema.yaml`.
+Schema: `docs/framework/schemas/catalog_event.schema.yaml`.

@@ -127,6 +127,6 @@ def main():
  for p in ('sugar_s10','sugar_s11'):lines.append(f"| `{p}` | {result[p]['counts']['full']['row_count']} | {result[p]['counts']['time_only']['row_count']} | {result[p]['counts']['benchmark']['row_count']} |")
  lines.append(f"| `associated_phase` | {result['associated_phase']['phase_rows']} phase rows / {result['associated_phase']['file_count']} files | n/a | n/a |")
  if 'focal_mechanisms_s12' in result:lines.append(f"| `focal_mechanisms_s12` | {result['focal_mechanisms_s12']['row_count']} solutions | n/a | n/a |")
- lines += ['', 'S10 is the detection/located catalog; S11 is the released GrowClust intermediate. The 41,392 article count must be reconstructed from S11 cluster size >=10. Phase rows and S12 mechanisms are not event rows.', '', 'Schemas: `docs/schemas/catalog_event.schema.yaml`; phase product remains product-specific and is not merged into event counts.']
+ lines += ['', 'S10 is the detection/located catalog; S11 is the released GrowClust intermediate. The 41,392 article count must be reconstructed from S11 cluster size >=10. Phase rows and S12 mechanisms are not event rows.', '', 'Schemas: `docs/framework/schemas/catalog_event.schema.yaml`; phase product remains product-specific and is not merged into event counts.']
  (ANALYSIS/'catalog_analysis.md').write_text('\n'.join(lines)+'\n');print(json.dumps(result,indent=2))
 if __name__=='__main__':main()

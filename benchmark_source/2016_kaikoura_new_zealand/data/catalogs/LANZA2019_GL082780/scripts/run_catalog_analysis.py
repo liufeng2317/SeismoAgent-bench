@@ -109,6 +109,6 @@ def main():
     plot_event_diagnostics(sels['benchmark'],'lanza_preferred_origins_benchmark',f'{SOURCE_REF} · preferred origins benchmark')
     lines=['# LANZA2019_GL082780 catalog analysis','','This QuakeML contains multiple origin solutions per event. The parser retains the `preferredOriginID` solution and does not merge SIMUL and HypoDD origins as independent events.','', '| Selection | Events | HypoDD | SIMUL |','|---|---:|---:|---:|']
     for name,items in sels.items(): c=Counter(r['method'] for r in items);lines.append(f"| `{name}` | {len(items)} | {c.get('HypoDD',0)} | {c.get('SIMUL',0)} |")
-    lines += ['',f'Input: `{result["source_path"]}`; SHA-256 `{result["source_sha256"]}`.','Depth is converted from QuakeML metres to kilometres. Schema: `docs/schemas/catalog_event.schema.yaml`.']
+    lines += ['',f'Input: `{result["source_path"]}`; SHA-256 `{result["source_sha256"]}`.','Depth is converted from QuakeML metres to kilometres. Schema: `docs/framework/schemas/catalog_event.schema.yaml`.']
     (ANALYSIS/'catalog_analysis.md').write_text('\n'.join(lines)+'\n');print(json.dumps(result,indent=2))
 if __name__=='__main__':main()

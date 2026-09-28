@@ -7,4 +7,4 @@
 | DataS1 event catalog | 34091 | 7773 | 7716 |
 | Correlation phase arrivals | 5703270 rows | n/a | n/a |
 
-Schema: `docs/schemas/catalog_event.schema.yaml`; phase arrivals retain their product-specific fields.
+Schema: `docs/framework/schemas/catalog_event.schema.yaml`; phase arrivals retain their product-specific fields.

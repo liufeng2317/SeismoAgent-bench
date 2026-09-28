@@ -42,3 +42,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Framework tree cleanup | [36_framework_tree_cleanup.md](36_framework_tree_cleanup.md) | Complete |
 | Agent workflow boundary cleanup | [37_agent_workflow_boundary.md](37_agent_workflow_boundary.md) | Complete with compatibility shim |
 | Dedicated evaluation workflow module | [38_evaluate_run_module.md](38_evaluate_run_module.md) | Complete |
+| Documentation layout separation | [39_documentation_layout.md](39_documentation_layout.md) | Complete |

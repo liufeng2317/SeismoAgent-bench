@@ -7,7 +7,7 @@ earthquake catalog from continuous seismic observations—and how much expert
 guidance is still required.
 
 <p align="center">
-  <img src="docs/assets/seismoagentbench_overview.svg" alt="SeismoAgentBench project overview" width="960">
+  <img src="docs/research/assets/seismoagentbench_overview.svg" alt="SeismoAgentBench project overview" width="960">
 </p>
 
 The benchmark is built around real, published earthquake and volcanic
@@ -15,7 +15,7 @@ sequences. It separates data preparation and scientific reference validation
 from the later task of reproducing catalogs with agents.
 
 The extraction contract for paper methods, catalog schemas, and case-level
-synthesis is defined in [`docs/01_3_Information_Extraction_Schema.md`](docs/01_3_Information_Extraction_Schema.md).
+synthesis is defined in [`docs/research/01_3_Information_Extraction_Schema.md`](docs/research/01_3_Information_Extraction_Schema.md).
 
 ## Evaluation environment
 
@@ -107,10 +107,8 @@ the next stage, after the data and reference conditions are frozen.
 
 ```text
 docs/
-  00_Research_Plan.md       benchmark design and research questions
-  01_1_Case_details.md        compact case index and summary
-  01_3_Information_Extraction_Schema.md  extraction contract
-  01_4_Paper_Parsing_Audit.md   MinerU output audit
+  research/                 scientific design, case inventory and data preparation
+  framework/                reusable benchmark workflow and implementation records
 
 benchmark_source/
   REFERENCES_MANIFEST.md    paper/supplement/catalog readiness
@@ -179,13 +177,14 @@ Next deliverables are:
 
 ## Documentation
 
-- [Research plan](docs/00_Research_Plan.md)
-- [Case details](docs/01_1_Case_details.md)
-- [Information extraction schema](docs/01_3_Information_Extraction_Schema.md)
-- [Paper parsing audit](docs/01_4_Paper_Parsing_Audit.md)
+- [Research plan](docs/research/00_Research_Plan.md)
+- [Case details](docs/research/01_1_Case_details.md)
+- [Information extraction schema](docs/research/01_3_Information_Extraction_Schema.md)
+- [Paper parsing audit](docs/research/01_4_Paper_Parsing_Audit.md)
+- [Framework documentation](docs/framework/README.md)
 - [Reference manifest](benchmark_source/REFERENCES_MANIFEST.md)
 - [Data organization rules](benchmark_source/README.md)
-- [Repository cleanup and retention decisions](docs/02_Repository_Cleanup.md)
+- [Repository cleanup and retention decisions](docs/research/02_Repository_Cleanup.md)
 
 **Canonical project name:** `SeismoAgentBench`  \
 **Repository slug:** `seismoagent-bench`  \

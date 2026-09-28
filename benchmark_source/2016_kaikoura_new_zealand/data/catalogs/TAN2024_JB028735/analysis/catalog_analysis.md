@@ -11,4 +11,4 @@ S10, S11, associated phases, and S12 mechanisms are separate products.
 
 S10 is the detection/located catalog; S11 is the released GrowClust intermediate. The 41,392 article count must be reconstructed from S11 cluster size >=10. Phase rows and S12 mechanisms are not event rows.
 
-Schemas: `docs/schemas/catalog_event.schema.yaml`; phase product remains product-specific and is not merged into event counts.
+Schemas: `docs/framework/schemas/catalog_event.schema.yaml`; phase product remains product-specific and is not merged into event counts.

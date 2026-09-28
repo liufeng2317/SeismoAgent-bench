@@ -103,7 +103,7 @@ def main():
  plot_event_diagnostics(items,"chamberlain_corrected_benchmark",f"{SOURCE_REF} · corrected benchmark")
  lines=[f"# {SOURCE_REF} catalog analysis","","Product-specific processing keeps corrected and legacy releases separate.","","| Product | Full | Time-only | Benchmark |", "|---|---:|---:|---:|"]
  for p,v in result.items(): lines.append(f"| `{p}` | {v['counts']['full']['row_count']} | {v['counts']['time_only']['row_count']} | {v['counts']['benchmark']['row_count']} |")
- lines += ["","The corrected release is the benchmark product. The legacy file is retained for release comparison only; native event IDs are not cross-catalog keys.","","Schema: `docs/schemas/catalog_event.schema.yaml`."]
+ lines += ["","The corrected release is the benchmark product. The legacy file is retained for release comparison only; native event IDs are not cross-catalog keys.","","Schema: `docs/framework/schemas/catalog_event.schema.yaml`."]
  (ANALYSIS/"catalog_analysis.md").write_text("\n".join(lines)+"\n",encoding="utf-8")
  print(json.dumps(result,indent=2))
 if __name__=="__main__": main()

@@ -18,7 +18,7 @@
         "note": "Project inventory labels this item as a dissertation used for structural context and states that no catalog product is expected."
       },
       {
-        "source": "docs/01_4_Paper_Parsing_Audit.md",
+        "source": "docs/research/01_4_Paper_Parsing_Audit.md",
         "locator": "Failed or unresolved outputs",
         "note": "MinerU failed with “MinerU result missing or post-processing failed”; no local Markdown/model output is present."
       }
@@ -60,7 +60,7 @@
           "note": "The PDF is staged, but the item is marked context-ready rather than catalog-ready."
         },
         {
-          "source": "docs/01_4_Paper_Parsing_Audit.md",
+          "source": "docs/research/01_4_Paper_Parsing_Audit.md",
           "locator": "Failed or unresolved outputs",
           "note": "The parse failure is recorded locally."
         }
@@ -95,7 +95,7 @@
       ],
       "evidence": [
         {
-          "source": "docs/01_4_Paper_Parsing_Audit.md",
+          "source": "docs/research/01_4_Paper_Parsing_Audit.md",
           "locator": "What this audit does not claim",
           "note": "The failed dissertation is explicitly not treated as parsed."
         }
@@ -125,7 +125,7 @@
     "final_output": null,
     "evidence": [
       {
-        "source": "docs/01_4_Paper_Parsing_Audit.md",
+        "source": "docs/research/01_4_Paper_Parsing_Audit.md",
         "locator": "Failed or unresolved outputs",
         "note": "A workflow cannot be reconstructed from the failed parse."
       }

@@ -1,6 +1,6 @@
 # SeismoAgentBench 代码包
 
-整体 benchmark 的控制流程见 [BENCHMARK_WORKFLOW_PLAN.md](BENCHMARK_WORKFLOW_PLAN.md)。该计划定义任务、输入 manifest、执行后端、agent、工具适配器、scorer 和 provenance 的边界。`SeismoAgentBench/` 承载项目的稳定控制代码和支撑工具；来源整理是 `utils/` 下的一个子功能，不代表整个 benchmark 架构。Python 导入路径区分大小写，统一使用 `SeismoAgentBench`。
+整体 benchmark 的控制流程见 [benchmark workflow plan](../docs/framework/00_BENCHMARK_WORKFLOW_PLAN.md)。该计划定义任务、输入 manifest、执行后端、agent、工具适配器、scorer 和 provenance 的边界。`SeismoAgentBench/` 承载项目的稳定控制代码和支撑工具；来源整理是 `utils/` 下的一个子功能，不代表整个 benchmark 架构。Python 导入路径区分大小写，统一使用 `SeismoAgentBench`。
 
 ```text
 SeismoAgentBench/

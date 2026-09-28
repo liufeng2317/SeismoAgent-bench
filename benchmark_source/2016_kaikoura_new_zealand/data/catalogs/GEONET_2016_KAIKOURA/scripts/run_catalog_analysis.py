@@ -88,7 +88,7 @@ def main():
   if product=='operational_benchmark': plot_event_diagnostics(sels['benchmark'],'geonet_operational_benchmark',f'{SOURCE_REF} · operational benchmark')
  lines=['# GEONET_2016_KAIKOURA catalog analysis','','GeoNet is retained as the official operational Q3 baseline; it is not merged with research catalogs.','','| Product | Full | Time-only | Benchmark |','|---|---:|---:|---:|']
  for p,v in all_result.items():lines.append(f"| `{p}` | {v['counts']['full']['row_count']} | {v['counts']['time_only']['row_count']} | {v['counts']['benchmark']['row_count']} |")
- lines += ['', 'Native EventID, magnitude types, and event types are preserved. Schema: `docs/schemas/catalog_event.schema.yaml`.']
+ lines += ['', 'Native EventID, magnitude types, and event types are preserved. Schema: `docs/framework/schemas/catalog_event.schema.yaml`.']
  (ANALYSIS/'catalog_analysis.md').write_text('\n'.join(lines)+'\n')
  print(json.dumps(all_result,indent=2))
 if __name__=='__main__':main()

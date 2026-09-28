@@ -6,7 +6,7 @@ Canonical reviewed records live in:
 benchmark_source/<case>/references/<SOURCE_ID>/parsed/extraction/<SOURCE_ID>__extraction.json
 ```
 
-They follow `docs/schemas/paper_catalog_extraction.schema.yaml`. Evidence is embedded in the object it supports. Keep article-reported counts and local-file counts separate; unresolved facts remain warnings or `null`.
+They follow `docs/framework/schemas/paper_catalog_extraction.schema.yaml`. Evidence is embedded in the object it supports. Keep article-reported counts and local-file counts separate; unresolved facts remain warnings or `null`.
 
 Validate all records:
 

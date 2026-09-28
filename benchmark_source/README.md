@@ -98,7 +98,7 @@ a separate data release without changing the source/catalog identifiers.
 - Delete Python caches and operating-system metadata; never treat `.env` or source data as disposable runtime clutter.
 - Do not add one-time scripts that hardcode a second copy of reviewed extraction JSON. Edit the canonical records with evidence, then run the reusable validator.
 
-The consolidation decisions and removed-file inventory are recorded in [repository cleanup](../docs/02_Repository_Cleanup.md).
+The consolidation decisions and removed-file inventory are recorded in [repository cleanup](../docs/research/02_Repository_Cleanup.md).
 
 ## 目录结构评估与后续调整
 
@@ -107,7 +107,8 @@ The consolidation decisions and removed-file inventory are recorded in [reposito
 ```text
 SeismoAgentBench/
 ├── README.md                         # 项目入口
-├── docs/                             # 研究方案、案例选择、提取约定、历史整理说明
+├── docs/research/                   # 研究方案、案例选择和资料整理
+├── docs/framework/                  # benchmark 框架和实现记录
 ├── scripts/                          # 跨案例下载、解析、验证与清单入口
 ├── SeismoAgentBench/                 # 项目专业代码与通用工具
 │   └── utils/source_prepare/         # 来源整理工具子包
