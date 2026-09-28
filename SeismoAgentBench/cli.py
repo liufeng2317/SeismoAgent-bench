@@ -38,9 +38,6 @@ def _parser() -> argparse.ArgumentParser:
     evaluate = commands.add_parser("evaluate", help="evaluate a completed Agent run")
     evaluate.add_argument("--run-dir", required=True, help="completed run directory")
     evaluate.add_argument("--reference-manifest", help="optional authorized reference manifest")
-    evaluate_many = commands.add_parser("evaluate-runs", help="evaluate and summarize multiple runs")
-    evaluate_many.add_argument("--run-dir", action="append", required=True,
-                               help="run directory; repeat for each run")
     plan = commands.add_parser("plan-experiment", help="validate and expand an experiment spec")
     plan.add_argument("--spec", required=True, help="experiment YAML specification")
     execute = commands.add_parser("execute-experiment", help="execute an experiment plan serially")
@@ -84,19 +81,6 @@ def main(argv: Sequence[str] | None = None) -> int:
                                agent_config=agent_config)
         elif args.action == "evaluate":
             result = evaluate_run(args.run_dir, reference_manifest=args.reference_manifest)
-        elif args.action == "evaluate-runs":
-            evaluations = [evaluate_run(path) for path in args.run_dir]
-            states = [item["run"]["state"] for item in evaluations]
-            passed = sum(state == "scored" for state in states)
-            result = {
-                "runs": evaluations,
-                "summary": {
-                    "total_runs": len(states),
-                    "scored_runs": passed,
-                    "completed_fraction": passed / len(states) if states else 0.0,
-                    "states": {state: states.count(state) for state in sorted(set(states))},
-                },
-            }
         elif args.action == "plan-experiment":
             spec = load_experiment_spec(args.spec)
             result = {"experiment": spec["experiment_id"],
@@ -151,7 +135,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(json.dumps({"state": "cli_error", "error": str(exc)}, sort_keys=True), file=sys.stderr)
         return 2
     print(json.dumps(result, indent=2, sort_keys=True))
-    if args.action in {"plan-experiment", "execute-experiment", "evaluate-runs"}:
+    if args.action in {"plan-experiment", "execute-experiment"}:
         return 0
     return 0 if result["run"]["state"] in {"completed", "scored"} else 3
 
