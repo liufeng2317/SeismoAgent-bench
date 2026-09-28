@@ -10,6 +10,7 @@ from SeismoAgentBench.task import TaskRegistry, load_json, validate_manifest, va
 
 
 PACKAGE = Path(__file__).resolve().parents[2] / "tasks" / "2019_ridgecrest_california"
+SMOKE_REFERENCE = Path(__file__).resolve().parents[1] / "fixtures" / "ridgecrest_smoke_reference"
 
 
 class RidgecrestPackageTests(unittest.TestCase):
@@ -25,7 +26,7 @@ class RidgecrestPackageTests(unittest.TestCase):
                          "ridgecrest_2019_catalog_smoke")
 
     def test_smoke_reference_manifest_and_catalog_are_valid(self):
-        manifest = PACKAGE / "references/usgs_mainshocks/reference_manifest.json"
+        manifest = SMOKE_REFERENCE / "reference_manifest.json"
         reference = ReferenceSpec.from_manifest(manifest)
         catalog = reference.load_catalog()
         self.assertEqual(len(catalog["events"]), 2)
@@ -44,7 +45,7 @@ class RidgecrestPackageTests(unittest.TestCase):
                        "--agent-version", "1",
                        "--run-root", str(run_root),
                        "--run-id", "smoke-001",
-                       "--reference-manifest", str(PACKAGE / "references/usgs_mainshocks/reference_manifest.json"),
+                       "--reference-manifest", str(SMOKE_REFERENCE / "reference_manifest.json"),
                        "--", sys.executable, "-c", code]
             result = subprocess.run(command, capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
@@ -52,7 +53,7 @@ class RidgecrestPackageTests(unittest.TestCase):
             self.assertEqual(payload["run"]["state"], "completed")
             evaluated = subprocess.run([sys.executable, "-m", "SeismoAgentBench", "evaluate",
                                         "--run-dir", str(run_root / "smoke-001"),
-                                        "--reference-manifest", str(PACKAGE / "references/usgs_mainshocks/reference_manifest.json")],
+                                        "--reference-manifest", str(SMOKE_REFERENCE / "reference_manifest.json")],
                                        capture_output=True, text=True, check=False)
             self.assertEqual(evaluated.returncode, 0, evaluated.stderr)
             ep = json.loads(evaluated.stdout)
@@ -70,7 +71,7 @@ class RidgecrestPackageTests(unittest.TestCase):
                        "--agent-version", "1",
                        "--run-root", str(run_root),
                        "--run-id", "baseline-001",
-                       "--reference-manifest", str(PACKAGE / "references/usgs_mainshocks/reference_manifest.json"),
+                       "--reference-manifest", str(SMOKE_REFERENCE / "reference_manifest.json"),
                        "--", sys.executable, str(PACKAGE / "baseline_agent.py")]
             result = subprocess.run(command, capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
@@ -78,7 +79,7 @@ class RidgecrestPackageTests(unittest.TestCase):
             self.assertEqual(payload["run"]["state"], "completed")
             evaluated = subprocess.run([sys.executable, "-m", "SeismoAgentBench", "evaluate",
                                         "--run-dir", str(run_root / "baseline-001"),
-                                        "--reference-manifest", str(PACKAGE / "references/usgs_mainshocks/reference_manifest.json")],
+                                        "--reference-manifest", str(SMOKE_REFERENCE / "reference_manifest.json")],
                                        capture_output=True, text=True, check=False)
             self.assertEqual(evaluated.returncode, 0, evaluated.stderr)
             metrics = json.loads(evaluated.stdout)["scientific_score"]["metrics"]
@@ -99,7 +100,7 @@ class RidgecrestPackageTests(unittest.TestCase):
                        "--agent-version", "1",
                        "--run-root", str(run_root),
                        "--run-id", "waveform-001",
-                       "--reference-manifest", str(PACKAGE / "references/usgs_mainshocks/reference_manifest.json"),
+                       "--reference-manifest", str(SMOKE_REFERENCE / "reference_manifest.json"),
                        "--", sys.executable, str(PACKAGE / "waveform_baseline_agent.py")]
             result = subprocess.run(command, capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
@@ -107,7 +108,7 @@ class RidgecrestPackageTests(unittest.TestCase):
             self.assertEqual(payload["run"]["state"], "completed")
             evaluated = subprocess.run([sys.executable, "-m", "SeismoAgentBench", "evaluate",
                                         "--run-dir", str(run_root / "waveform-001"),
-                                        "--reference-manifest", str(PACKAGE / "references/usgs_mainshocks/reference_manifest.json")],
+                                        "--reference-manifest", str(SMOKE_REFERENCE / "reference_manifest.json")],
                                        capture_output=True, text=True, check=False)
             self.assertEqual(evaluated.returncode, 0, evaluated.stderr)
             self.assertGreater(json.loads(evaluated.stdout)["scientific_score"]["metrics"]["candidate_events"], 0)

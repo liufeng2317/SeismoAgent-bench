@@ -51,11 +51,14 @@ class ReferenceSpec:
             if not isinstance(value.get(field), str) or not value.get(field):
                 errors.append(f"reference manifest.{field} must be a non-empty string")
         reference_path = value.get("path")
-        if not isinstance(reference_path, str) or not reference_path.startswith("/") or "\x00" in reference_path:
-            errors.append("reference manifest.path must be an absolute path")
+        if not isinstance(reference_path, str) or not reference_path or "\x00" in reference_path:
+            errors.append("reference manifest.path must be a non-empty path")
         if errors:
             raise ReferenceError("; ".join(errors))
-        return cls(value["reference_id"], value["version"], value["role"], Path(reference_path),
+        reference_file = Path(reference_path)
+        if not reference_file.is_absolute():
+            reference_file = source.parent / reference_file
+        return cls(value["reference_id"], value["version"], value["role"], reference_file,
                    value.get("description"), value.get("source_identity"))
 
     def load_catalog(self) -> dict[str, Any]:

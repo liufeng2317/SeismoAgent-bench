@@ -35,6 +35,19 @@ class ReferenceTests(unittest.TestCase):
             self.assertEqual(spec.record()["role"], "absolute-location")
             self.assertEqual(len(spec.load_catalog()["events"]), 1)
 
+    def test_manifest_resolves_relative_catalog_path_from_manifest(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "reference.json").write_text(json.dumps(catalog()), encoding="utf-8")
+            manifest = root / "reference_manifest.json"
+            manifest.write_text(json.dumps({
+                "schema_version": 1, "reference_id": "relative", "version": "1",
+                "role": "smoke", "path": "reference.json",
+            }), encoding="utf-8")
+            spec = ReferenceSpec.from_manifest(manifest)
+            self.assertEqual(spec.path, root / "reference.json")
+            self.assertEqual(len(spec.load_catalog()["events"]), 1)
+
     def test_matching_is_one_to_one_and_records_distances(self):
         result = match_events(catalog(), catalog(1.0), MatchingPolicy(time_tolerance_s=2))
         self.assertEqual(len(result["matches"]), 1)
