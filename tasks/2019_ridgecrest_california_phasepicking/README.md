@@ -32,29 +32,27 @@ metadata and points to `task_prompt.md`, which contains the human-readable task
 instructions. `task_prompt.md` is the only supported source for the Agent-facing
 task prompt.
 
-## Input manifest vocabulary
+## Input configuration
 
 The task declares semantic input roles in `task.json` under
-`input_requirements`. Each
-manifest entry repeats its role in `data_type` and separately records the
-physical file representation in `format`. For example, a waveform entry uses
+`input_requirements`. Each `input.json` entry repeats its role in `data_type`,
+records the physical file representation in `format`, and defines the
+run-local link in `link_path`. For example, a waveform entry uses
 `data_type: waveform` and `format: miniSEED`, while station metadata uses
 `data_type: station_metadata` and `format: StationXML`. This distinction keeps
 the task meaning independent of a particular file format.
 
 The output requirements are defined in `task_prompt.md`. The Agent may choose
-the internal layout and file types required by that task description. An input
-manifest is supplied here as an optional detailed description of the waveform
-directory and station metadata; the task can also describe inputs directly in
-the prompt.
+the internal layout and file types required by that task description. `input.json`
+is supplied here as an optional detailed description of the waveform directory
+and station metadata; the task can also describe inputs directly in the prompt.
 
 For Codex runs, the framework renders `task.json` and, when supplied,
-`input_manifest.json` into `control/agent_prompt.md`. This is a convenience
+`input.json` into `control/agent_prompt.md`. This is a convenience
 view; `task_prompt.md` remains the Agent-facing task description.
 
-The task-local `run_config.yaml` defines the runtime input view separately from
-the data manifest. Its `input_links` mapping uses the run-local link path as
-the key and an input-manifest `id` as the value. For this task, the Agent sees
+The task-local `input.json` defines both the absolute source path and the
+run-local `link_path`. For this task, the Agent sees
 `work/input/waveforms` and `work/input/stationxml`; the large source files are
 not copied into the run.
 

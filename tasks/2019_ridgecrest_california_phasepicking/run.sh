@@ -30,7 +30,7 @@ printf 'PATH=%s:/usr/bin:/bin\nPYTHON=%s\n' "$SEISMOAGENT_BIN" "$PYTHON" >> "$RU
 cd "$PROJECT_DIR"
 CODEX_ARGS=(
   --task "$TASK_DIR/task.json"
-  --manifest "$TASK_DIR/input_manifest.json"
+  --manifest "$TASK_DIR/input.json"
   --agent-name codex-phase-picking
   --agent-version 1
   --run-root "$TASK_DIR/runs"

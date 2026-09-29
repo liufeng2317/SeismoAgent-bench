@@ -19,8 +19,6 @@ import tempfile
 import time
 from typing import Any, Mapping, Sequence
 
-import yaml
-
 from SeismoAgentBench.task.validation import ValidationError, load_json, load_task, validate_manifest
 
 
@@ -55,9 +53,6 @@ class RunContext:
             values["BENCH_INPUT_MANIFEST"] = str(self.manifest_path)
         if self.output_contract_path is not None:
             values["BENCH_OUTPUT_CONTRACT"] = str(self.output_contract_path)
-        run_config = self.control / "run_config.yaml"
-        if run_config.is_file():
-            values["BENCH_RUN_CONFIG"] = str(run_config)
         return values
 
 
@@ -69,43 +64,12 @@ def _write_json(path: Path, value: Any) -> None:
     path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
-def _load_input_links(task_source: Path) -> dict[str, str]:
-    config_path = task_source.parent / "run_config.yaml"
-    if not config_path.is_file():
-        return {}
-    try:
-        raw = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
-    except (OSError, UnicodeError, yaml.YAMLError) as exc:
-        raise ExecutionError(f"cannot load run config {config_path}: {exc}") from exc
-    if not isinstance(raw, dict):
-        raise ExecutionError(f"run config must be a YAML mapping: {config_path}")
-    unknown = set(raw) - {"input_links"}
-    if unknown:
-        raise ExecutionError(f"unknown run config fields: {sorted(unknown)}")
-    links = raw.get("input_links", {})
-    if not isinstance(links, dict):
-        raise ExecutionError("run_config.input_links must be a mapping of link path to manifest id")
-    out: dict[str, str] = {}
-    for link_path, input_id in links.items():
-        if (not isinstance(link_path, str) or not link_path
-                or Path(link_path).is_absolute() or "\x00" in link_path
-                or any(part in {"", ".", ".."} for part in Path(link_path).parts)):
-            raise ExecutionError(f"invalid input link path in {config_path}: {link_path!r}")
-        if not isinstance(input_id, str) or not input_id:
-            raise ExecutionError(f"input link {link_path!r} must name a manifest entry")
-        if link_path in out:
-            raise ExecutionError(f"duplicate input link path: {link_path}")
-        out[link_path] = input_id
-    return out
-
-
-def _prepare_input_view(work: Path, manifest: Mapping[str, Any] | None,
-                        input_links: Mapping[str, str]) -> None:
+def _prepare_input_view(work: Path, manifest: Mapping[str, Any] | None) -> None:
     """Create a stable, read-only view of declared inputs below ``work``.
 
-    The view contains only the links explicitly configured by the task's
-    ``run_config.yaml``. It avoids copying large data while keeping the
-    agent's input path short and run-local.
+    The view contains only links explicitly configured by each input entry's
+    ``link_path``. It avoids copying large data while keeping the agent's
+    input path short and run-local.
     """
     view = work / "input"
     if view.exists() or view.is_symlink():
@@ -113,17 +77,13 @@ def _prepare_input_view(work: Path, manifest: Mapping[str, Any] | None,
     view.mkdir(mode=0o755)
     if manifest is None:
         return
-    entries = {
-        entry.get("id"): entry for entry in (manifest or {}).get("entries", [])
-        if isinstance(entry, Mapping) and isinstance(entry.get("id"), str)
-    }
-    for link_path, entry_id in input_links.items():
-        entry = entries.get(entry_id)
-        if entry is None:
-            raise ExecutionError(f"run config refers to unknown manifest input: {entry_id}")
+    for entry in (manifest or {}).get("entries", []):
+        if not isinstance(entry, Mapping):
+            continue
         raw_path = entry.get("path")
-        if not isinstance(raw_path, str):
-            raise ExecutionError(f"manifest input has no path: {entry_id}")
+        link_path = entry.get("link_path")
+        if not isinstance(raw_path, str) or not isinstance(link_path, str):
+            continue
         source = Path(raw_path)
         if not source.exists():
             continue
@@ -189,12 +149,7 @@ def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, 
     work = run / "work"
     work.mkdir(exist_ok=True)
     record.mkdir(exist_ok=True)
-    input_links = _load_input_links(task_source)
-    config_source = task_source.parent / "run_config.yaml"
-    if config_source.is_file():
-        (control / "run_config.yaml").write_text(
-            config_source.read_text(encoding="utf-8"), encoding="utf-8")
-    _prepare_input_view(work, manifest, input_links)
+    _prepare_input_view(work, manifest)
     task_path = control / "task_spec.json"
     manifest_path = control / "input_manifest.json"
     output_contract_path = control / "output_contract.json"

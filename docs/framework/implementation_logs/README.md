@@ -79,3 +79,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Remove framework prompt heading | [77_remove_framework_prompt_heading.md](77_remove_framework_prompt_heading.md) | Complete |
 | Run-local input view | [78_run_input_view.md](78_run_input_view.md) | Complete |
 | Configured input links | [79_configured_input_links.md](79_configured_input_links.md) | Complete |
+| Unified input JSON | [80_unified_input_json.md](80_unified_input_json.md) | Complete |
