@@ -7,8 +7,8 @@ from .aggregate import AggregationError, aggregate_catalog_score
 from .reference import MatchingPolicy, ReferenceError, ReferenceSpec, match_events
 from .scientific import ScientificScoreError, score_catalogs
 from .picks import PickScoreError, load_picks, score_picks
-from .registry import (ScorerDefinition, ScorerRegistry, ScorerRegistryError,
-                       default_scorer_registry)
+from .registry import (ScorerContext, ScorerDefinition, ScorerRegistry,
+                       ScorerRegistryError, ScorerUnavailable, default_scorer_registry)
 
 __all__ = [
     "AggregationError", "ArtifactValidationError", "CatalogValidationError", "ScoreError",
@@ -16,6 +16,7 @@ __all__ = [
     "ScientificScoreError", "score_catalogs",
     "aggregate_catalog_score", "score_artifacts", "validate_artifacts", "validate_catalog",
     "PickScoreError", "load_picks", "score_picks",
-    "ScorerDefinition", "ScorerRegistry", "ScorerRegistryError",
+    "ScorerContext", "ScorerDefinition", "ScorerRegistry", "ScorerRegistryError",
+    "ScorerUnavailable",
     "default_scorer_registry",
 ]

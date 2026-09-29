@@ -47,7 +47,7 @@ class PipelineTests(unittest.TestCase):
         self.assertTrue((run / "record/artifact_manifest.json").is_file())
         self.assertTrue((run / "evaluation/score.json").is_file())
         plan = json.loads((run / "evaluation/scorer_plan.json").read_text())
-        self.assertEqual(plan["status"], "validated")
+        self.assertEqual(plan["status"], "completed")
         self.assertEqual([item["name"] for item in plan["scorers"]], ["artifact-contract"])
         environment = json.loads((run / "record/environment.json").read_text())
         self.assertEqual(environment["execution_profile"], "trusted-development")
@@ -69,7 +69,7 @@ class PipelineTests(unittest.TestCase):
 
     def test_scoring_failure_is_recorded(self):
         code = "import json,os; open(os.path.join(os.environ['BENCH_OUTPUT'],'result.json'),'w').write(json.dumps({'ok': True}))"
-        with patch("SeismoAgentBench.workflow.evaluate_run.score_artifacts", side_effect=ScoreError("synthetic scorer failure")):
+        with patch("SeismoAgentBench.scoring.registry.score_artifacts", side_effect=ScoreError("synthetic scorer failure")):
             result = run_task(self.task, self.manifest, [sys.executable, "-c", code], self.root, "run-004", timeout=10)
         self.assertEqual(result["run"]["state"], "scoring_failed")
         self.assertEqual(result["score"]["status"], "scoring_failed")
@@ -80,6 +80,10 @@ class PipelineTests(unittest.TestCase):
         write_task_package(task, {
             **TASK,
             "task_id": "catalog-pipeline-smoke",
+            "evaluation": {"scorers": [
+                {"name": "artifact-contract", "version": "1"},
+                {"name": "catalog-basic", "version": "1"},
+            ]},
             "output_artifacts": [{"id": "catalog", "path": "catalog.json", "kind": "catalog", "required": True}],
         }, "Run a synthetic catalog task.")
         reference_catalog = base / "reference.json"

@@ -22,6 +22,8 @@ from SeismoAgentBench.scoring import (
     validate_artifacts,
     score_picks,
     ScorerRegistryError,
+    ScorerContext,
+    ScorerUnavailable,
     default_scorer_registry,
 )
 from SeismoAgentBench.task import load_json, validate_output_contract
@@ -95,8 +97,9 @@ def evaluate_run(run_dir: str | Path, *, reference_manifest: str | Path | None =
 
     _write_json(artifacts_path, validation)
     score_dir.mkdir(exist_ok=True)
+    registry = default_scorer_registry()
     try:
-        scorer_plan = default_scorer_registry().plan(task)
+        scorer_plan = registry.plan(task)
     except (KeyError, TypeError, ScorerRegistryError) as exc:
         failure = {"schema_version": 1, "status": "scoring_failed", "errors": [str(exc)]}
         _write_json(score_dir / "scorer_plan.json", failure)
@@ -108,69 +111,74 @@ def evaluate_run(run_dir: str | Path, *, reference_manifest: str | Path | None =
     _write_json(score_dir / "scorer_plan.json", {
         "schema_version": 1, "status": "validated", "scorers": scorer_plan,
     })
-    try:
-        score = score_artifacts(task, validation)
-    except ScoreError as exc:
-        score = {"schema_version": 1, "status": "scoring_failed", "errors": [str(exc)]}
-        _write_json(score_dir / "score.json", score)
-        result["state"] = "scoring_failed"
-        result["scoring_error"] = str(exc)
-        _write_json(run / "record" / "run_result.json", result)
-        write_evaluation_report(run, result)
-        return {"run": result, "artifacts": validation, "score": score}
-    _write_json(score_dir / "score.json", score)
+    context = ScorerContext(task=task, output_dir=output,
+                            validation=validation,
+                            reference_manifest=reference_manifest,
+                            pick_reference=pick_reference,
+                            pick_time_tolerance_s=pick_time_tolerance_s)
+    score = None
     result["artifact_validation"] = "passed"
     reference_record = None
-    if reference_manifest is not None:
+    scientific = None
+    summary = None
+    pick_score = None
+    for plan_item in scorer_plan:
+        definition = registry.resolve(plan_item["name"], plan_item["version"])
+        if definition.handler is None:
+            raise ExecutionError(f"scorer handler is not implemented: {definition.name}@{definition.version}")
         try:
-            reference = ReferenceSpec.from_manifest(reference_manifest)
-            _, candidate_catalog = _catalog_artifact(task, output)
-            scientific = score_catalogs(
-                candidate_catalog,
-                reference.load_catalog(),
-                reference_id=reference.reference_id,
-                reference_version=reference.version,
-            )
-            summary = aggregate_catalog_score(scientific)
-            _write_json(score_dir / "scientific_score.json", scientific)
-            _write_json(score_dir / "task_summary.json", summary)
+            outcome = definition.handler(context)
+        except ScorerUnavailable as exc:
+            plan_item["status"] = "skipped"
+            plan_item["reason"] = str(exc)
+            continue
+        except Exception as exc:
+            failure = {"schema_version": 1, "status": "scoring_failed", "errors": [str(exc)]}
+            _write_json(score_dir / "scorer_plan.json", {
+                "schema_version": 1, "status": "failed", "scorers": scorer_plan,
+            })
+            _write_json(score_dir / (definition.name.replace("-", "_") + "_failure.json"), failure)
+            result["state"] = "scoring_failed"
+            result["scoring_error"] = str(exc)
+            _write_json(run / "record" / "run_result.json", result)
+            write_evaluation_report(run, result, reference=reference_record)
+            return {"run": result, "artifacts": validation,
+                    "score": failure if definition.name == "artifact-contract" else score}
+        _write_json(score_dir / outcome["output_file"], outcome["payload"])
+        plan_item["status"] = "scored"
+        if outcome.get("summary") is not None:
+            _write_json(score_dir / "task_summary.json", outcome["summary"])
+        if outcome.get("reference") is not None:
+            reference_record = outcome["reference"]
+        if outcome["result_key"] == "score":
+            score = outcome["payload"]
+        elif outcome["result_key"] == "scientific_score":
+            scientific = outcome["payload"]
+            summary = outcome.get("summary")
             result["scientific_scoring"] = "passed"
-            reference_record = {"reference_id": reference.reference_id,
-                                "version": reference.version, "role": reference.role}
-        except (AggregationError, ReferenceError, ScientificScoreError, OSError, UnicodeError, json.JSONDecodeError) as exc:
-            failure = {"schema_version": 1, "status": "scoring_failed", "errors": [str(exc)]}
-            _write_json(score_dir / "scientific_score.json", failure)
-            result["state"] = "scoring_failed"
-            result["scientific_scoring"] = "failed"
-            result["scoring_error"] = str(exc)
-            _write_json(run / "record" / "run_result.json", result)
-            write_evaluation_report(run, result, reference=reference_record)
-            return {"run": result, "artifacts": validation, "score": score, "scientific_score": failure}
-    if pick_reference is not None:
-        try:
-            pick_score = score_picks(_pick_artifact(task, output), pick_reference,
-                                    time_tolerance_s=pick_time_tolerance_s,
-                                    reference_id=Path(pick_reference).stem)
-            _write_json(score_dir / "pick_scientific_score.json", pick_score)
+        elif outcome["result_key"] == "pick_scientific_score":
+            pick_score = outcome["payload"]
             result["pick_scientific_scoring"] = "passed"
-        except (PickScoreError, ScientificScoreError, OSError, UnicodeError) as exc:
-            failure = {"schema_version": 1, "status": "scoring_failed", "errors": [str(exc)]}
-            _write_json(score_dir / "pick_scientific_score.json", failure)
-            result["state"] = "scoring_failed"
-            result["pick_scientific_scoring"] = "failed"
-            result["scoring_error"] = str(exc)
-            _write_json(run / "record" / "run_result.json", result)
-            write_evaluation_report(run, result, reference=reference_record)
-            return {"run": result, "artifacts": validation, "score": score,
-                    "pick_scientific_score": failure}
+    _write_json(score_dir / "scorer_plan.json", {
+        "schema_version": 1, "status": "completed", "scorers": scorer_plan,
+    })
+    if score is None:
+        failure = {"schema_version": 1, "status": "scoring_failed",
+                   "errors": ["task evaluation does not declare artifact-contract@1"]}
+        _write_json(score_dir / "score.json", failure)
+        result["state"] = "scoring_failed"
+        result["scoring_error"] = failure["errors"][0]
+        _write_json(run / "record" / "run_result.json", result)
+        write_evaluation_report(run, result, reference=reference_record)
+        return {"run": result, "artifacts": validation, "score": failure}
     result["state"] = "scored"
     result["artifact_validation"] = "passed"
     _write_json(run / "record" / "run_result.json", result)
     write_evaluation_report(run, result, reference=reference_record)
     output_result = {"run": result, "artifacts": validation, "score": score}
-    if reference_manifest is not None:
+    if scientific is not None:
         output_result["scientific_score"] = scientific
         output_result["task_summary"] = summary
-    if pick_reference is not None:
+    if pick_score is not None:
         output_result["pick_scientific_score"] = pick_score
     return output_result

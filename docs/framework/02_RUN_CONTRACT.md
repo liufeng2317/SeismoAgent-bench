@@ -48,6 +48,9 @@ writes `summary.json` and `summary.md` under its batch directory; these files
 summarize execution states only and do not replace external evaluation reports.
 Evaluation writes `evaluation/scorer_plan.json` before scoring. It records the
 registered scorer identities and whether each scorer is local or reference-based.
+Registered handlers then execute those declarations in order. A reference-based
+scorer without its reference input is recorded as `skipped`; it does not receive
+an implicit score.
 
 The runner exposes the three control paths as `BENCH_TASK_SPEC`,
 `BENCH_INPUT_MANIFEST` and `BENCH_OUTPUT_CONTRACT`. These files are snapshots,
