@@ -4,10 +4,9 @@ Process the Ridgecrest waveform data for the UTC interval `[2019-07-05T00:00:00Z
 
 ### Input data
 
-The input data root contains waveforms and corresponding station information.
-Explore the read-only directory recursively to locate the MiniSEED data and
-station metadata needed for the task. Read the inputs only; do not modify,
-rename, delete or replace them.
+The input data contain waveforms and corresponding station infomation. The waveform directory contains the miniSEED data. The StationXML file provides station coordinates and metadata. Read the inputs only; do not modify,rename, delete or replace them.
+- Seismic waveform data: `input/data/`
+- Seismic station infomation: `input/stations/earthscope.stationxml`
 
 ### Task procedure
 
