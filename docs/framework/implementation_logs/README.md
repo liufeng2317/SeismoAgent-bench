@@ -51,3 +51,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Input type and file format contract | [45_input_type_format_contract.md](45_input_type_format_contract.md) | Complete |
 | External output contract | [46_external_output_contract.md](46_external_output_contract.md) | Complete |
 | Folder-based phase-picking task | [47_folder_phase_picking_task.md](47_folder_phase_picking_task.md) | Complete |
+| Agent prompt rendering | [48_agent_prompt_rendering.md](48_agent_prompt_rendering.md) | Complete |
