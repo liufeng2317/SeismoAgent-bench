@@ -54,3 +54,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Agent prompt rendering | [48_agent_prompt_rendering.md](48_agent_prompt_rendering.md) | Complete |
 | Task-local run script | [49_task_run_script.md](49_task_run_script.md) | Complete |
 | Codex executable resolution | [50_codex_executable_resolution.md](50_codex_executable_resolution.md) | Complete |
+| Unique default run ID | [51_unique_default_run_id.md](51_unique_default_run_id.md) | Complete |
