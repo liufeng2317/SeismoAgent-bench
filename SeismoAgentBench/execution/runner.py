@@ -15,6 +15,7 @@ import signal
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 from typing import Any, Mapping, Sequence
 
@@ -32,11 +33,7 @@ class RunContext:
     control: Path
     task_path: Path
     manifest_path: Path
-    agent: Path
     work: Path
-    output: Path
-    home: Path
-    tmp: Path
     log: Path
     record: Path
     result: Path
@@ -47,7 +44,9 @@ class RunContext:
             "BENCH_TASK_SPEC": str(self.task_path),
             "BENCH_INPUT_MANIFEST": str(self.manifest_path),
             "BENCH_WORK": str(self.work),
-            "BENCH_OUTPUT": str(self.output),
+            # Output paths are relative to the single Agent-controlled work
+            # directory. The Agent may choose any internal layout.
+            "BENCH_OUTPUT": str(self.work),
         }
 
 
@@ -106,10 +105,10 @@ def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, 
     else:
         run.mkdir(parents=True)
     control = run / "control"
-    agent = run / "agent"
     record = run / "record"
     control.mkdir(exist_ok=True)
-    agent.mkdir(exist_ok=True)
+    work = run / "work"
+    work.mkdir(exist_ok=True)
     record.mkdir(exist_ok=True)
     task_path = control / "task_spec.json"
     manifest_path = control / "input_manifest.json"
@@ -117,21 +116,23 @@ def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, 
     _write_json(manifest_path, manifest)
     if agent_prompt is not None:
         (control / "agent_prompt.md").write_text(agent_prompt, encoding="utf-8")
-    directories = {name: agent / name for name in ("work", "output", "home", "tmp")}
-    for directory in directories.values():
-        directory.mkdir()
-    return (RunContext(run_id, run, control, task_path, manifest_path, agent, **directories,
-                       log=agent / "execution.log", record=record,
+    return (RunContext(run_id, run, control, task_path, manifest_path, work,
+                       log=record / "execution.log", record=record,
                        result=record / "run_result.json"), attempt)
 
 
-def _environment(context: RunContext, extra_env: Mapping[str, str] | None = None) -> dict[str, str]:
+def _environment(context: RunContext, extra_env: Mapping[str, str] | None = None) -> tuple[dict[str, str], Path]:
+    runtime_root = Path(tempfile.mkdtemp(prefix=f"seismoagentbench-{context.run_id}-"))
+    home = runtime_root / "home"
+    tmp = runtime_root / "tmp"
+    home.mkdir()
+    tmp.mkdir()
     env = {
         "PATH": "/usr/bin:/bin",
         "LANG": "C.UTF-8",
-        "HOME": str(context.home),
-        "TMPDIR": str(context.tmp),
-        "XDG_CACHE_HOME": str(context.home / "cache"),
+        "HOME": str(home),
+        "TMPDIR": str(tmp),
+        "XDG_CACHE_HOME": str(home / "cache"),
         "PYTHONNOUSERSITE": "1",
         "OMP_NUM_THREADS": "1",
         "OPENBLAS_NUM_THREADS": "1",
@@ -143,7 +144,7 @@ def _environment(context: RunContext, extra_env: Mapping[str, str] | None = None
                    for key, value in extra_env.items()):
             raise ExecutionError("extra_env must map non-empty names to strings")
         env.update(extra_env)
-    return env
+    return env, runtime_root
 
 
 def run_command(task_path: str | Path, manifest_path: str | Path, command: Sequence[str],
@@ -178,12 +179,14 @@ def run_command(task_path: str | Path, manifest_path: str | Path, command: Seque
         "started_at": _now(),
     }
     _write_json(context.result, result)
+    runtime_root: Path | None = None
     with context.log.open("wb") as log:
         process: subprocess.Popen[bytes] | None = None
         try:
             result["state"] = "running"
             _write_json(context.result, result)
-            process = subprocess.Popen(list(command), cwd=context.work, env=_environment(context, extra_env),
+            env, runtime_root = _environment(context, extra_env)
+            process = subprocess.Popen(list(command), cwd=context.work, env=env,
                                        stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT,
                                        start_new_session=True)
             try:
@@ -205,6 +208,8 @@ def run_command(task_path: str | Path, manifest_path: str | Path, command: Seque
             result["failure_reason"] = "launcher_error"
             result["error"] = str(exc)
         finally:
+            if runtime_root is not None:
+                shutil.rmtree(runtime_root, ignore_errors=True)
             result["finished_at"] = _now()
             _write_json(context.result, result)
     return result

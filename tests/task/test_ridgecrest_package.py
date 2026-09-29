@@ -89,7 +89,7 @@ class RidgecrestPackageTests(unittest.TestCase):
             self.assertEqual(metrics["matched_events"], 2)
             self.assertEqual(metrics["precision"], 1.0)
             self.assertEqual(metrics["recall"], 1.0)
-            self.assertTrue((run_root / "baseline-001/agent/output/catalog.json").is_file())
+            self.assertTrue((run_root / "baseline-001/work/catalog.json").is_file())
             self.assertTrue((run_root / "baseline-001/evaluation/report.json").is_file())
 
     def test_waveform_baseline_reads_mseed_and_generates_candidates(self):
@@ -114,7 +114,7 @@ class RidgecrestPackageTests(unittest.TestCase):
                                        capture_output=True, text=True, check=False)
             self.assertEqual(evaluated.returncode, 0, evaluated.stderr)
             self.assertGreater(json.loads(evaluated.stdout)["scientific_score"]["metrics"]["candidate_events"], 0)
-            output_catalog = json.loads((run_root / "waveform-001/agent/output/catalog.json").read_text())
+            output_catalog = json.loads((run_root / "waveform-001/work/catalog.json").read_text())
             self.assertTrue(all(event["location_method"] == "station-amplitude-baseline"
                                 for event in output_catalog["events"]))
 

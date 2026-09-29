@@ -41,8 +41,8 @@ class RunnerTests(unittest.TestCase):
         self.assertFalse(result["formal_evaluation_eligible"])
         self.assertTrue((run / "control/task_spec.json").is_file())
         self.assertTrue((run / "control/input_manifest.json").is_file())
-        self.assertTrue((run / "agent/execution.log").is_file())
-        self.assertEqual(json.loads((run / "agent/output/result.json").read_text())["ok"], True)
+        self.assertTrue((run / "record/execution.log").is_file())
+        self.assertEqual(json.loads((run / "work/result.json").read_text())["ok"], True)
         self.assertTrue((run / "record/run_result.json").is_file())
         self.assertFalse((run / "agent/task_spec.json").exists())
 
@@ -75,8 +75,8 @@ class RunnerTests(unittest.TestCase):
                               "run-resume", timeout=10, resume=True)
         self.assertEqual(resumed["state"], "completed")
         run = self.root / "run-resume"
-        self.assertTrue((run / "attempts/attempt-001/agent/execution.log").is_file())
-        self.assertTrue((run / "agent/output/result.json").is_file())
+        self.assertTrue((run / "attempts/attempt-001/record/execution.log").is_file())
+        self.assertTrue((run / "work/result.json").is_file())
 
     def test_timeout_kills_command(self):
         result = run_command(self.task, self.manifest, [sys.executable, "-c", "import time; time.sleep(10)"], self.root, "run-003", timeout=0.1)

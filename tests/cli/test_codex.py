@@ -92,7 +92,7 @@ class CodexCliTests(unittest.TestCase):
             result = subprocess.run(command, capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
             unit = root / "layout-task/run-001"
-            self.assertTrue((unit / "agent/output/result.json").is_file())
+            self.assertTrue((unit / "work/result.json").is_file())
             self.assertEqual(json.loads(result.stdout)["run_layout"]["unit_root"], str(unit))
 
     def test_run_codex_retries_capacity_with_bounded_attempts(self):
@@ -138,8 +138,8 @@ class CodexCliTests(unittest.TestCase):
             unit = run_root / "run-001"
             payload = json.loads(result.stdout)
             self.assertEqual(payload["run"]["state"], "completed")
-            self.assertTrue((unit / "attempts/attempt-001/agent/execution.log").is_file())
-            self.assertTrue((unit / "agent/output/result.json").is_file())
+            self.assertTrue((unit / "attempts/attempt-001/record/execution.log").is_file())
+            self.assertTrue((unit / "work/result.json").is_file())
 
 
 if __name__ == "__main__":

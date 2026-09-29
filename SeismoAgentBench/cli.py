@@ -126,7 +126,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             run = effective_root / args.run_id
             record_dir = run / "record"
             record_dir.mkdir(exist_ok=True)
-            (record_dir / "transcript.jsonl").write_bytes((run / "agent" / "execution.log").read_bytes())
+            (record_dir / "transcript.jsonl").write_bytes((run / "record" / "execution.log").read_bytes())
             (record_dir / "codex_command.json").write_text(
                 json.dumps(spec.record(), indent=2, sort_keys=True) + "\n", encoding="utf-8")
             result["codex"] = {"command_record": "codex_command.json",

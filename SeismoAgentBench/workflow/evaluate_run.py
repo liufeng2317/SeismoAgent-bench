@@ -52,7 +52,8 @@ def evaluate_run(run_dir: str | Path, *, reference_manifest: str | Path | None =
         return {"run": result, "score": None}
 
     task = load_json(run / "control" / "task_spec.json")
-    output = run / "agent" / "output"
+    # The Agent owns one work directory. Artifact paths are relative to it.
+    output = run / "work"
     artifacts_path = run / "record" / "artifact_manifest.json"
     score_dir = run / "evaluation"
     try:

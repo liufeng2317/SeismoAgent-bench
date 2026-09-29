@@ -50,11 +50,11 @@ class PhasePickingTaskTests(unittest.TestCase):
                                         "--run-dir", str(run_root / "phase-001")],
                                        capture_output=True, text=True, check=False)
             self.assertEqual(evaluated.returncode, 0, evaluated.stderr)
-            picks = (run_root / "phase-001/agent/output/picks.csv").read_text()
+            picks = (run_root / "phase-001/work/picks.csv").read_text()
             self.assertIn("station_id,channel,phase,arrival_time", picks)
-            self.assertTrue((run_root / "phase-001/agent/output/task_plan.json").is_file())
-            self.assertTrue((run_root / "phase-001/agent/output/preprocessing_figure.png").is_file())
-            examples = json.loads((run_root / "phase-001/agent/output/pick_examples.json").read_text())
+            self.assertTrue((run_root / "phase-001/work/task_plan.json").is_file())
+            self.assertTrue((run_root / "phase-001/work/preprocessing_figure.png").is_file())
+            examples = json.loads((run_root / "phase-001/work/pick_examples.json").read_text())
             self.assertIn("examples", examples)
 
 

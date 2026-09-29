@@ -20,7 +20,7 @@ class ReportingTests(unittest.TestCase):
     def test_records_do_not_copy_process_environment(self):
         with tempfile.TemporaryDirectory() as tmp:
             run = Path(tmp)
-            (run / "agent/work").mkdir(parents=True)
+            (run / "work").mkdir(parents=True)
             write_environment_record(run, RESULT)
             write_evaluation_report(run, RESULT)
             environment = json.loads((run / "record/environment.json").read_text())

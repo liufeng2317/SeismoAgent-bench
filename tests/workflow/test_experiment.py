@@ -41,7 +41,7 @@ class ExperimentExecutionTests(unittest.TestCase):
             run = base / "runs" / "run_001_demo_base"
             self.assertEqual(results[0]["run"]["state"], "completed")
             self.assertTrue((run / "control/agent_config.yaml").is_file())
-            self.assertTrue((run / "agent/output/result.json").is_file())
+            self.assertTrue((run / "work/result.json").is_file())
             self.assertFalse((run / "evaluation/score.json").exists())
 
 
