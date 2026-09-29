@@ -77,3 +77,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Task output visualization plan | [75_task_output_visualization_plan.md](75_task_output_visualization_plan.md) | Complete |
 | Runtime prompt simplification | [76_runtime_prompt_simplification.md](76_runtime_prompt_simplification.md) | Complete |
 | Remove framework prompt heading | [77_remove_framework_prompt_heading.md](77_remove_framework_prompt_heading.md) | Complete |
+| Run-local input view | [78_run_input_view.md](78_run_input_view.md) | Complete |

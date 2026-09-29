@@ -67,6 +67,38 @@ class RunnerTests(unittest.TestCase):
         self.assertTrue((run / "record/run_result.json").is_file())
         self.assertFalse((run / "agent/task_spec.json").exists())
 
+    def test_declared_inputs_are_linked_into_run_input_view(self):
+        source_dir = Path(self.tmp.name) / "waveforms"
+        source_dir.mkdir()
+        source_file = Path(self.tmp.name) / "stations.xml"
+        source_file.write_text("station", encoding="utf-8")
+        manifest = {
+            "schema_version": 1,
+            "case_id": "synthetic_case",
+            "entries": [
+                {"id": "waveforms", "path": str(source_dir), "path_type": "directory",
+                 "data_type": "waveform", "format": "miniSEED", "read_only": True},
+                {"id": "stations", "path": str(source_file), "path_type": "file",
+                 "data_type": "station_metadata", "format": "StationXML", "read_only": True},
+                {"id": "metadata", "path": str(source_file), "path_type": "file",
+                 "data_type": "metadata", "format": "JSON", "read_only": True},
+            ],
+        }
+        manifest_path = Path(self.tmp.name) / "links-manifest.json"
+        manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+        code = (
+            "import os,pathlib; p=pathlib.Path(os.environ['BENCH_INPUT']); "
+            "assert p.is_dir(); assert (p/'waveforms').is_symlink(); "
+            "assert (p/'stations').is_symlink(); "
+            "assert pathlib.Path(os.environ['BENCH_OUTPUT'],'result.txt').write_text('ok')"
+        )
+        result = run_command(self.task, manifest_path, [sys.executable, "-c", code],
+                             self.root, "run-links", timeout=10)
+        self.assertEqual(result["state"], "completed")
+        run = self.root / "run-links"
+        self.assertTrue((run / "work/input/waveforms").is_symlink())
+        self.assertTrue((run / "work/input/stations").is_symlink())
+
     def test_nonzero_command_is_recorded(self):
         result = run_command(self.task, self.manifest, [sys.executable, "-c", "raise SystemExit(7)"], self.root, "run-002", timeout=10)
         self.assertEqual(result["state"], "execution_failed")

@@ -45,6 +45,10 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
                 _cell(entry["id"]), _cell(entry["data_type"]), _cell(entry["format"]),
                 _cell(entry["path"]), _cell(entry.get("path_type", "file")), _cell(window),
             ]) + " |")
+        lines.extend([
+            "",
+            "The same declared inputs are available as read-only links under `input/` in the working directory; each manifest ID is used as the link name.",
+        ])
     if task.get("output_artifacts"):
         lines.extend([
             "",

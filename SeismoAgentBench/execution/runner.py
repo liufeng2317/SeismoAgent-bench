@@ -44,6 +44,7 @@ class RunContext:
         values = {
             "BENCH_TASK_SPEC": str(self.task_path),
             "BENCH_WORK": str(self.work),
+            "BENCH_INPUT": str(self.work / "input"),
             # Output paths are relative to the single Agent-controlled work
             # directory. The Agent may choose any internal layout.
             "BENCH_OUTPUT": str(self.work),
@@ -61,6 +62,36 @@ def _now() -> str:
 
 def _write_json(path: Path, value: Any) -> None:
     path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def _prepare_input_view(work: Path, manifest: Mapping[str, Any] | None) -> None:
+    """Create a stable, read-only view of declared inputs below ``work``.
+
+    The view contains one symlink per manifest entry.  It avoids copying large
+    data while keeping the agent's input path short and run-local.  Missing
+    paths are recorded as absent by omission; portable task checks may use
+    manifests whose host paths are unavailable.
+    """
+    view = work / "input"
+    if view.exists() or view.is_symlink():
+        raise ExecutionError(f"input view already exists: {view}")
+    view.mkdir(mode=0o755)
+    if manifest is None:
+        return
+    for entry in manifest.get("entries", []):
+        entry_id = entry.get("id")
+        raw_path = entry.get("path")
+        if not isinstance(entry_id, str) or not isinstance(raw_path, str):
+            continue
+        source = Path(raw_path)
+        if not source.exists():
+            continue
+        source = source.resolve(strict=True)
+        target = view / entry_id
+        if target.exists() or target.is_symlink():
+            raise ExecutionError(f"duplicate input view target: {target}")
+        target.symlink_to(source, target_is_directory=source.is_dir())
+    view.chmod(0o555)
 
 
 def _failure_class(log: Path) -> tuple[str, bool]:
@@ -116,6 +147,7 @@ def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, 
     work = run / "work"
     work.mkdir(exist_ok=True)
     record.mkdir(exist_ok=True)
+    _prepare_input_view(work, manifest)
     task_path = control / "task_spec.json"
     manifest_path = control / "input_manifest.json"
     output_contract_path = control / "output_contract.json"
