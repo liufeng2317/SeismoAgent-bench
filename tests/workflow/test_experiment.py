@@ -32,7 +32,7 @@ class ExperimentExecutionTests(unittest.TestCase):
             spec = base / "experiment.yaml"
             spec.write_text(
                 "experiment_id: smoke\noutput_root: runs\nconcurrency: 1\n"
-                "agents:\n  - id: demo\n    name: demo-agent\n    version: '1'\n    config: agent.yaml\n"
+                "agents:\n  - id: demo\n    harness: python\n    name: demo-agent\n    version: '1'\n    config: agent.yaml\n"
                 f"    command: [{sys.executable}, {base / 'agent.py'}]\n"
                 "tasks:\n  - id: task\n    task_spec: task.json\n    input_manifest: manifest.json\n    variants: [base]\n",
                 encoding="utf-8",

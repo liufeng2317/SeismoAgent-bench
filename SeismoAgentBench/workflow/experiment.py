@@ -7,7 +7,8 @@ from pathlib import Path
 from typing import Any
 
 from SeismoAgentBench.agent import AgentSpec
-from SeismoAgentBench.execution import expand_experiment, load_agent_config, load_experiment_spec
+from SeismoAgentBench.execution import (ExperimentSpecError, expand_experiment,
+                                        load_agent_config, load_experiment_spec)
 from .run_agent import run_agent
 
 
@@ -32,6 +33,11 @@ def execute_experiment(spec_path: str | Path, *, limit: int | None = None) -> li
         manifest = (source.parent / unit["input_manifest"]).resolve()
         config_path = (source.parent / unit["agent_config"]).resolve()
         config = load_agent_config(config_path)
+        if config["harness"] != unit["harness"]:
+            raise ExperimentSpecError(
+                f"agent {unit['agent_id']} harness mismatch: "
+                f"experiment={unit['harness']!r}, config={config['harness']!r}"
+            )
         agent = AgentSpec.from_command(unit["agent_name"], unit["agent_version"], unit["command"])
         run_id = f"run_{index:03d}_{unit['agent_id']}_{unit['variant']}"
         result = run_agent(task_spec, manifest, agent, output_root, run_id,

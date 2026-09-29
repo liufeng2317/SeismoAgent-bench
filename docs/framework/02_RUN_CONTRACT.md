@@ -45,6 +45,7 @@ that expected and observed outputs cannot be confused.
 
 The runner exposes the three control paths as `BENCH_TASK_SPEC`,
 `BENCH_INPUT_MANIFEST` and `BENCH_OUTPUT_CONTRACT`. These files are snapshots,
-not Agent-generated files. An experiment may keep its Agent runtime
-configuration in a separate `agent_config.yaml`; the run record should retain
-the configuration identity and relevant non-secret settings.
+not Agent-generated files. An experiment MUST declare an Agent `harness` and
+keep its runtime configuration in a separate `agent_config.yaml`. The declared
+harness and configuration harness MUST match; the run record should retain the
+configuration identity and relevant non-secret settings.

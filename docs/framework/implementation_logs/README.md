@@ -63,3 +63,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Provenance interface cleanup | [61_provenance_interface_cleanup.md](61_provenance_interface_cleanup.md) | Complete |
 | Generic declared artifact schemas | [62_generic_artifact_schema.md](62_generic_artifact_schema.md) | Complete |
 | Canonical task metadata | [63_canonical_task_metadata.md](63_canonical_task_metadata.md) | Complete |
+| Explicit experiment harness | [64_explicit_experiment_harness.md](64_explicit_experiment_harness.md) | Complete |

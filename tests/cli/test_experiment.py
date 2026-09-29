@@ -11,7 +11,7 @@ class ExperimentCliTests(unittest.TestCase):
             spec = Path(tmp) / "experiment.yaml"
             spec.write_text(
                 "experiment_id: smoke\noutput_root: /tmp/runs\nconcurrency: 1\n"
-                "agents:\n  - id: demo\n    name: demo-agent\n    version: '1'\n    config: agent.yaml\n    command: [python, agent.py]\n"
+                "agents:\n  - id: demo\n    harness: command\n    name: demo-agent\n    version: '1'\n    config: agent.yaml\n    command: [python, agent.py]\n"
                 "tasks:\n  - id: task\n    task_spec: task.json\n    input_manifest: manifest.json\n    variants: [base]\n",
                 encoding="utf-8",
             )

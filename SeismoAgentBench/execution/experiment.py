@@ -39,6 +39,8 @@ def load_experiment_spec(path: str | Path) -> dict[str, Any]:
         if item["id"] in agent_ids:
             raise ExperimentSpecError(f"duplicate agent id: {item['id']}")
         agent_ids.add(item["id"])
+        if not isinstance(item.get("harness"), str) or not item["harness"]:
+            raise ExperimentSpecError(f"agent {item.get('id', '<unknown>')} must declare harness")
         if not isinstance(item.get("config"), str) or not item["config"]:
             raise ExperimentSpecError(f"agent {item['id']} must declare config")
         if not isinstance(item.get("name"), str) or not item["name"]:
@@ -71,6 +73,7 @@ def expand_experiment(spec: dict[str, Any]) -> list[dict[str, Any]]:
                 units.append({
                     "experiment_id": spec["experiment_id"],
                     "agent_id": agent["id"],
+                    "harness": agent["harness"],
                     "agent_name": agent["name"],
                     "agent_version": agent["version"],
                     "agent_config": agent["config"],
