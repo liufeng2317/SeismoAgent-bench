@@ -1,11 +1,17 @@
 # Ridgecrest phase-picking workflow test case
 
-This task takes the approved waveform and StationXML manifest and asks an
-agent to produce two JSON artifacts:
+This task takes a one-day waveform directory and StationXML manifest and asks
+an agent to plan, preprocess and pick phases for the half-open UTC window
+`[2019-07-05T00:00:00Z, 2019-07-06T00:00:00Z)`.
 
-- `preprocessing.json`: the input traces and preprocessing operations applied;
-- `picks.json`: phase-pick records with station, channel, phase, arrival time
-  and confidence fields.
+The required outputs are:
+
+- `task_plan.json`: the selected window, processing steps and method;
+- `preprocessing_figure.png`: station distribution and one representative
+  preprocessing view;
+- `picks.csv`: P/S phase-pick records with station, channel, arrival time and
+  confidence;
+- `pick_examples.json`: a small inspectable subset of picks.
 
 The task stops at phase picking. It does not require event association,
 location, magnitude estimation or a reference catalog. The included baseline

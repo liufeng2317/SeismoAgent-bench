@@ -2,14 +2,26 @@
   "schema_version": 1,
   "artifacts": [
     {
-      "id": "preprocessing",
-      "path": "preprocessing.json",
+      "id": "task_plan",
+      "path": "task_plan.json",
       "kind": "json",
       "required": true
     },
     {
+      "id": "preprocessing_figure",
+      "path": "preprocessing_figure.png",
+      "kind": "figure",
+      "required": true
+    },
+    {
       "id": "picks",
-      "path": "picks.json",
+      "path": "picks.csv",
+      "kind": "csv",
+      "required": true
+    },
+    {
+      "id": "pick_examples",
+      "path": "pick_examples.json",
       "kind": "json",
       "required": true
     }

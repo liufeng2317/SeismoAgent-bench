@@ -153,7 +153,7 @@ def validate_manifest(value: Mapping[str, Any], *, task: Mapping[str, Any] | Non
         entries = []
     seen: set[str] = set()
     data_types: set[str] = set()
-    entry_allowed = {"id", "path", "data_type", "format", "read_only", "bytes", "network", "station",
+    entry_allowed = {"id", "path", "path_type", "data_type", "format", "read_only", "bytes", "network", "station",
                      "location", "channel", "start_time", "end_time", "sha256", "notes"}
     for index, raw in enumerate(entries):
         label = f"manifest.entries[{index}]"
@@ -172,8 +172,15 @@ def validate_manifest(value: Mapping[str, Any], *, task: Mapping[str, Any] | Non
         path = entry.get("path")
         if not isinstance(path, str) or not path.startswith("/") or "\x00" in path:
             errors.append(f"{label}.path must be an absolute path")
-        elif check_paths and (not Path(path).is_file() or Path(path).is_symlink()):
-            errors.append(f"{label}.path is not an existing regular file: {path}")
+        path_type = entry.get("path_type", "file")
+        if path_type not in {"file", "directory"}:
+            errors.append(f"{label}.path_type must be file or directory")
+        elif check_paths:
+            target = Path(path)
+            valid = target.is_dir() if path_type == "directory" else target.is_file()
+            if not valid or target.is_symlink():
+                expected = "directory" if path_type == "directory" else "regular file"
+                errors.append(f"{label}.path is not an existing {expected}: {path}")
         data_type = entry.get("data_type")
         if data_type not in _INPUT_TYPES:
             errors.append(f"{label}.data_type is not supported")

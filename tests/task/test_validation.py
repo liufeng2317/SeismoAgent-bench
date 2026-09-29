@@ -52,6 +52,13 @@ class ValidationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValidationError, "missing required field 'format'"):
             validate_manifest(value)
 
+    def test_manifest_supports_directory_inputs(self):
+        value = manifest()
+        value["entries"][0]["path"] = "/tmp"
+        value["entries"][0]["path_type"] = "directory"
+        value["entries"][1]["path"] = "/etc/hosts"
+        validate_manifest(value, check_paths=True)
+
     def test_manifest_path_check_is_optional_and_read_only(self):
         value = manifest()
         validate_manifest(value, check_paths=False)

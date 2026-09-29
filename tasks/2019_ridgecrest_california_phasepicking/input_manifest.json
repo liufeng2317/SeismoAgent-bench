@@ -1,50 +1,23 @@
 {
   "schema_version": 1,
-  "case_id": "2019_ridgecrest_california",
-  "description": "Small Ridgecrest smoke input: CI.CCC HH components for 2019-07-04 and StationXML metadata.",
+  "case_id": "2019_ridgecrest_california_phasepicking",
+  "description": "One-day Ridgecrest waveform directory for the half-open UTC interval [2019-07-05, 2019-07-06), with station metadata.",
   "entries": [
     {
-      "id": "CI.CCC.HHE.20190704",
-      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms/data/CI.CCC/CI.CCC..HHE__20190704T000000Z__20190705T000000Z.mseed",
+      "id": "ridgecrest_waveforms_20190705",
+      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms/data",
+      "path_type": "directory",
       "read_only": true,
-      "network": "CI",
-      "station": "CCC",
-      "location": "",
-      "channel": "HHE",
-      "start_time": "2019-07-04T00:00:00Z",
-      "end_time": "2019-07-05T00:00:00Z",
       "data_type": "waveform",
-      "format": "miniSEED"
+      "format": "miniSEED",
+      "start_time": "2019-07-05T00:00:00Z",
+      "end_time": "2019-07-06T00:00:00Z",
+      "notes": "The interval is UTC and end-exclusive; select files covering [2019-07-05T00:00:00Z, 2019-07-06T00:00:00Z) from the directory."
     },
     {
-      "id": "CI.CCC.HHN.20190704",
-      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms/data/CI.CCC/CI.CCC..HHN__20190704T000000Z__20190705T000000Z.mseed",
-      "read_only": true,
-      "network": "CI",
-      "station": "CCC",
-      "location": "",
-      "channel": "HHN",
-      "start_time": "2019-07-04T00:00:00Z",
-      "end_time": "2019-07-05T00:00:00Z",
-      "data_type": "waveform",
-      "format": "miniSEED"
-    },
-    {
-      "id": "CI.CCC.HHZ.20190704",
-      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms/data/CI.CCC/CI.CCC..HHZ__20190704T000000Z__20190705T000000Z.mseed",
-      "read_only": true,
-      "network": "CI",
-      "station": "CCC",
-      "location": "",
-      "channel": "HHZ",
-      "start_time": "2019-07-04T00:00:00Z",
-      "end_time": "2019-07-05T00:00:00Z",
-      "data_type": "waveform",
-      "format": "miniSEED"
-    },
-    {
-      "id": "earthscope.stationxml",
+      "id": "earthscope_stationxml",
       "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms/stations/earthscope.stationxml",
+      "path_type": "file",
       "read_only": true,
       "data_type": "station_metadata",
       "format": "StationXML"

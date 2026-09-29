@@ -2,8 +2,8 @@
   "task_id": "ridgecrest_2019_phase_picking",
   "version": "1",
   "title": "Ridgecrest phase picking",
-  "summary": "Preprocess the approved Ridgecrest waveform subset and produce P/S phase picks.",
-  "task_prompt": "Read the waveform and StationXML files listed in the input manifest and produce a reproducible phase-picking result. Inspect trace metadata and report the preprocessing applied without modifying the input files. For each accepted P or S pick, record the station, channel, phase, UTC arrival time, and confidence or probability when available. Write the required preprocessing and picks artifacts to the declared output paths. Keep the output self-contained, preserve uncertain or missing results explicitly, and use only the declared inputs and the task runtime environment.",
+  "summary": "Plan and execute preprocessing and P/S phase picking for one UTC day of Ridgecrest waveform data.",
+  "task_prompt": "First write a concise task plan that states the selected half-open UTC window [2019-07-05T00:00:00Z, 2019-07-06T00:00:00Z), input discovery, preprocessing, phase-picking method, quality checks, and output files. Then process only waveform files within that window from the declared waveform directory without modifying inputs. Use the declared StationXML to identify station coordinates. Apply and document transparent preprocessing, pick P and S arrivals, and retain uncertainty or missing results explicitly. Produce one figure containing a station-distribution panel and a representative waveform/preprocessing panel, a picks.csv table with station, channel, phase, UTC arrival time and confidence, and a small set of pick examples for inspection. The result should be reproducible from the declared inputs and runtime environment.",
   "output_contract": "output_contract.json",
   "scorer": {
     "name": "phase-picking-basic",
