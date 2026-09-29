@@ -59,3 +59,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Control snapshot separation | [57_control_snapshot_separation.md](57_control_snapshot_separation.md) | Complete with CLI fixture limitation |
 | Structured Agent transcript | [58_structured_agent_transcript.md](58_structured_agent_transcript.md) | Complete |
 | Provenance record consolidation | [59_provenance_record_consolidation.md](59_provenance_record_consolidation.md) | Complete with CLI smoke limitation |
+| Markdown task prompt | [60_markdown_task_prompt.md](60_markdown_task_prompt.md) | Complete |
