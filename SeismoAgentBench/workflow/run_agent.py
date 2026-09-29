@@ -16,10 +16,12 @@ def run_agent(task_path: str | Path, manifest_path: str | Path, agent: AgentSpec
               reference_manifest: str | Path | None = None,
               extra_env: Mapping[str, str] | None = None,
               resume: bool = False,
-              agent_config: Mapping[str, Any] | None = None) -> dict[str, Any]:
+              agent_config: Mapping[str, Any] | None = None,
+              agent_prompt: str | None = None) -> dict[str, Any]:
     """Execute one Agent and write execution records, without evaluation."""
     result = run_command(task_path, manifest_path, agent.command, run_root, run_id,
-                         timeout=timeout, extra_env=extra_env, resume=resume)
+                         timeout=timeout, extra_env=extra_env, resume=resume,
+                         agent_prompt=agent_prompt)
     run = Path(run_root).resolve() / run_id
     if agent_config is not None:
         write_agent_config_snapshot(run, agent_config)

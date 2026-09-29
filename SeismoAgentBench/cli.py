@@ -13,7 +13,7 @@ from SeismoAgentBench.agent import AgentError, AgentSpec
 from SeismoAgentBench.execution import (CodexCommandError, CodexCommandSpec, ExecutionError,
                                         AgentConfigError, RunLayout, expand_experiment,
                                         load_agent_config, load_env_file, load_experiment_spec)
-from SeismoAgentBench.task import load_json
+from SeismoAgentBench.task import load_json, render_agent_prompt
 from SeismoAgentBench.workflow import evaluate_run, execute_experiment, run_agent
 
 
@@ -55,7 +55,7 @@ def _parser() -> argparse.ArgumentParser:
     codex.add_argument("--variant", default="base")
     codex.add_argument("--codex-bin", required=True)
     codex.add_argument("--model", help="optional model slug; omit to use Codex default routing")
-    codex.add_argument("--prompt", required=True)
+    codex.add_argument("--prompt", help="optional additional instructions appended to the rendered task prompt")
     codex.add_argument("--reasoning-effort", default="medium")
     codex.add_argument("--env-file", help="external KEY=VALUE file; values are never recorded")
     codex.add_argument("--codex-home", help="external CODEX_HOME path")
@@ -103,9 +103,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                 layout = RunLayout(effective_root, args.campaign_id, task_id,
                                    args.variant, args.agent_name, args.run_id)
                 effective_root = layout.run_root
+            rendered_prompt = render_agent_prompt(args.task, args.manifest,
+                                                   extra_instructions=args.prompt)
             spec = CodexCommandSpec(args.codex_bin, args.model,
                                     str(effective_root / args.run_id / "agent" / "work"),
-                                    args.prompt, reasoning_effort=args.reasoning_effort)
+                                    rendered_prompt, reasoning_effort=args.reasoning_effort)
             agent = AgentSpec.from_command(args.agent_name, args.agent_version, spec.argv())
             result = None
             for attempt in range(args.max_attempts):
@@ -114,6 +116,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     timeout=args.timeout, reference_manifest=args.reference_manifest,
                     extra_env=env, resume=args.resume or attempt > 0,
                     agent_config=agent_config,
+                    agent_prompt=rendered_prompt,
                 )
                 if result["run"]["state"] != "execution_retryable" or attempt + 1 >= args.max_attempts:
                     break

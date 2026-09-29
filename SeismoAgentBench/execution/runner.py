@@ -88,7 +88,7 @@ def _archive_retry(run: Path) -> int:
 
 
 def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, Any],
-             *, resume: bool = False) -> tuple[RunContext, int]:
+             *, resume: bool = False, agent_prompt: str | None = None) -> tuple[RunContext, int]:
     if not run_id or Path(run_id).name != run_id or run_id in {".", ".."}:
         raise ExecutionError("run_id must be a non-empty single path component")
     run = root / run_id
@@ -115,6 +115,8 @@ def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, 
     manifest_path = control / "input_manifest.json"
     _write_json(task_path, task)
     _write_json(manifest_path, manifest)
+    if agent_prompt is not None:
+        (control / "agent_prompt.md").write_text(agent_prompt, encoding="utf-8")
     directories = {name: agent / name for name in ("work", "output", "home", "tmp")}
     for directory in directories.values():
         directory.mkdir()
@@ -145,9 +147,9 @@ def _environment(context: RunContext, extra_env: Mapping[str, str] | None = None
 
 
 def run_command(task_path: str | Path, manifest_path: str | Path, command: Sequence[str],
-                 run_root: str | Path, run_id: str, *, timeout: float = 600,
-                 extra_env: Mapping[str, str] | None = None,
-                 resume: bool = False) -> dict[str, Any]:
+                run_root: str | Path, run_id: str, *, timeout: float = 600,
+                extra_env: Mapping[str, str] | None = None,
+                resume: bool = False, agent_prompt: str | None = None) -> dict[str, Any]:
     """Validate inputs and run one command in a fresh trusted-development context."""
     if not command or not all(isinstance(item, str) and item for item in command):
         raise ExecutionError("command must be a non-empty sequence of strings")
@@ -159,7 +161,8 @@ def run_command(task_path: str | Path, manifest_path: str | Path, command: Seque
         validate_manifest(manifest, task=task, check_paths=False)
     except ValidationError as exc:
         raise ExecutionError(f"input validation failed: {exc}") from exc
-    context, attempt = _context(Path(run_root).resolve(), run_id, task, manifest, resume=resume)
+    context, attempt = _context(Path(run_root).resolve(), run_id, task, manifest,
+                                 resume=resume, agent_prompt=agent_prompt)
     result: dict[str, Any] = {
         "run_id": run_id,
         "state": "preparing",

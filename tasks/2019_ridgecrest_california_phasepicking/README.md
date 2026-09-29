@@ -33,6 +33,11 @@ The required output files are defined separately in `output_contract.json`.
 The runner resolves that file when loading `task.json`; the evaluator records
 the files actually produced by an Agent in the run record.
 
+For Codex runs, the framework renders `task.json`, `input_manifest.json` and
+`output_contract.json` into `control/agent_prompt.md`. This is the complete
+Agent-facing task description; the structured JSON files remain the source of
+truth for validation.
+
 ## Run results
 
 The `runs/` entry is a relative symbolic link to the durable run store for

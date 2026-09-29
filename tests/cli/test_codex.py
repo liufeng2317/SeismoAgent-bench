@@ -49,6 +49,11 @@ class CodexCliTests(unittest.TestCase):
             self.assertIn("CODEX_HOME", payload["codex"]["injected_environment_keys"])
             self.assertIn('"text": "OK"', (run / "record/transcript.jsonl").read_text())
             self.assertTrue((run / "record/codex_command.json").is_file())
+            prompt = (run / "control/agent_prompt.md").read_text()
+            self.assertIn("## Task", prompt)
+            self.assertIn("## Input data", prompt)
+            self.assertIn("## Required outputs", prompt)
+            self.assertIn("write the result artifact", prompt)
             self.assertNotIn("external-codex-home", (run / "record/codex_command.json").read_text())
 
     def test_run_codex_supports_canonical_campaign_layout(self):
