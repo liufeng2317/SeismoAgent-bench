@@ -71,3 +71,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Core test suite cleanup | [69_core_test_suite_cleanup.md](69_core_test_suite_cleanup.md) | Complete |
 | Phase-picking prompt contract | [70_phase_picking_prompt_contract.md](70_phase_picking_prompt_contract.md) | Complete |
 | Prompt rendering boundaries | [71_prompt_rendering_boundaries.md](71_prompt_rendering_boundaries.md) | Complete |
+| Prompt heading cleanup | [72_prompt_heading_cleanup.md](72_prompt_heading_cleanup.md) | Complete |

@@ -29,6 +29,9 @@ class PromptRenderingTests(unittest.TestCase):
             self.assertIn("/tmp/metadata.json", rendered)
             self.assertIn("result.json", rendered)
             self.assertIn("Use a concise report.", rendered)
+            self.assertNotIn("### Task instructions", rendered)
+            self.assertEqual(rendered.count("## Input data"), 1)
+            self.assertEqual(rendered.count("## Required outputs"), 1)
 
 
 if __name__ == "__main__":
