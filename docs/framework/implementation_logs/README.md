@@ -55,3 +55,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Task-local run script | [49_task_run_script.md](49_task_run_script.md) | Complete |
 | Codex executable resolution | [50_codex_executable_resolution.md](50_codex_executable_resolution.md) | Complete |
 | Unique default run ID | [51_unique_default_run_id.md](51_unique_default_run_id.md) | Complete |
+| Phase-pick scientific scorer | [56_phase_pick_scientific_scorer.md](56_phase_pick_scientific_scorer.md) | Complete |
