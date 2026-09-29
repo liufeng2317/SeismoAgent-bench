@@ -53,3 +53,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Folder-based phase-picking task | [47_folder_phase_picking_task.md](47_folder_phase_picking_task.md) | Complete |
 | Agent prompt rendering | [48_agent_prompt_rendering.md](48_agent_prompt_rendering.md) | Complete |
 | Task-local run script | [49_task_run_script.md](49_task_run_script.md) | Complete |
+| Codex executable resolution | [50_codex_executable_resolution.md](50_codex_executable_resolution.md) | Complete |
