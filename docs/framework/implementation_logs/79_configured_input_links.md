@@ -2,9 +2,9 @@
 
 ## Implemented
 
-- Added optional `link_path` to each input-manifest entry.
+- Added task-local `run_config.yaml` with an explicit `input_links` mapping.
 - The runner creates only explicitly configured links under `work/input/`.
-- Prompt rendering now shows the configured link path and no longer assumes that an entry ID is the runtime name.
+- The input manifest remains a data description and does not contain runtime link names.
 - Added Ridgecrest mappings for `waveforms` and `stationxml`.
 
 ## Validation

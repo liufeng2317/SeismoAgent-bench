@@ -1,0 +1,4 @@
+# Task-local runtime configuration. Input semantics remain in input_manifest.json.
+input_links:
+  waveforms: ridgecrest_waveforms_20190705
+  stationxml: earthscope_stationxml

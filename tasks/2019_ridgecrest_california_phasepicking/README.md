@@ -52,6 +52,12 @@ For Codex runs, the framework renders `task.json` and, when supplied,
 `input_manifest.json` into `control/agent_prompt.md`. This is a convenience
 view; `task_prompt.md` remains the Agent-facing task description.
 
+The task-local `run_config.yaml` defines the runtime input view separately from
+the data manifest. Its `input_links` mapping uses the run-local link path as
+the key and an input-manifest `id` as the value. For this task, the Agent sees
+`work/input/waveforms` and `work/input/stationxml`; the large source files are
+not copied into the run.
+
 ## Run
 
 Use the task-local script:

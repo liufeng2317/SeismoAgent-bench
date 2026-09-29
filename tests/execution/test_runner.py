@@ -76,16 +76,19 @@ class RunnerTests(unittest.TestCase):
             "schema_version": 1,
             "case_id": "synthetic_case",
             "entries": [
-                {"id": "waveforms", "path": str(source_dir), "link_path": "waveforms", "path_type": "directory",
+                {"id": "waveforms", "path": str(source_dir), "path_type": "directory",
                  "data_type": "waveform", "format": "miniSEED", "read_only": True},
-                {"id": "stations", "path": str(source_file), "link_path": "station.xml", "path_type": "file",
+                {"id": "stations", "path": str(source_file), "path_type": "file",
                  "data_type": "station_metadata", "format": "StationXML", "read_only": True},
-                {"id": "metadata", "path": str(source_file), "link_path": "metadata.json", "path_type": "file",
+                {"id": "metadata", "path": str(source_file), "path_type": "file",
                  "data_type": "metadata", "format": "JSON", "read_only": True},
             ],
         }
         manifest_path = Path(self.tmp.name) / "links-manifest.json"
         manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+        (Path(self.tmp.name) / "run_config.yaml").write_text(
+            "input_links:\n  waveforms: waveforms\n  station.xml: stations\n  metadata.json: metadata\n",
+            encoding="utf-8")
         code = (
             "import os,pathlib; p=pathlib.Path(os.environ['BENCH_INPUT']); "
             "assert p.is_dir(); assert (p/'waveforms').is_symlink(); "
