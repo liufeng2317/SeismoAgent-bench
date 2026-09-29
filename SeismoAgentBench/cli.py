@@ -14,6 +14,7 @@ from SeismoAgentBench.execution import (CodexCommandError, CodexCommandSpec, Exe
                                         AgentConfigError, RunLayout, expand_experiment,
                                         load_agent_config, load_env_file, load_experiment_spec)
 from SeismoAgentBench.task import load_json, render_agent_prompt
+from SeismoAgentBench.reporting.transcript import write_transcript
 from SeismoAgentBench.workflow import evaluate_run, execute_experiment, run_agent
 
 
@@ -130,11 +131,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             run = effective_root / args.run_id
             record_dir = run / "record"
             record_dir.mkdir(exist_ok=True)
-            (record_dir / "transcript.jsonl").write_bytes((run / "record" / "execution.log").read_bytes())
+            transcript_counts = write_transcript(
+                run / "record" / "execution.log", record_dir / "transcript.jsonl")
             (record_dir / "codex_command.json").write_text(
                 json.dumps(spec.record(), indent=2, sort_keys=True) + "\n", encoding="utf-8")
             result["codex"] = {"command_record": "codex_command.json",
                                "transcript": "transcript.jsonl",
+                               "transcript_counts": transcript_counts,
                                "injected_environment_keys": sorted(env)}
             if args.campaign_id:
                 result["run_layout"] = layout.record()

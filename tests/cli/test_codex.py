@@ -48,6 +48,8 @@ class CodexCliTests(unittest.TestCase):
             self.assertEqual(payload["codex"]["transcript"], "transcript.jsonl")
             self.assertIn("CODEX_HOME", payload["codex"]["injected_environment_keys"])
             self.assertIn('"text": "OK"', (run / "record/transcript.jsonl").read_text())
+            transcript = [json.loads(line) for line in (run / "record/transcript.jsonl").read_text().splitlines()]
+            self.assertTrue(any(item["event_type"] == "agent_message" for item in transcript))
             self.assertTrue((run / "record/codex_command.json").is_file())
             prompt = (run / "control/agent_prompt.md").read_text()
             self.assertIn("## Task", prompt)
