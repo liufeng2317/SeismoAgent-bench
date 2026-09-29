@@ -119,6 +119,10 @@ def _figure(output: Path, coordinates: dict[str, tuple[float, float]], example: 
 
 
 def main() -> None:
+    output = Path(os.environ["BENCH_OUTPUT"])
+    output.mkdir(parents=True, exist_ok=True)
+    # Persist the exact program before any waveform processing starts.
+    shutil.copy2(Path(__file__), output / "processing_script.py")
     manifest = _load_manifest()
     files, stationxml = _inputs(manifest)
     coordinates = _station_coordinates(stationxml)
@@ -127,9 +131,6 @@ def main() -> None:
     example = None
     for path in files:
         example = _pick_rows(path, picks, summaries, example)
-    output = Path(os.environ["BENCH_OUTPUT"])
-    output.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(Path(__file__), output / "processing_script.py")
     plan = {
         "schema_version": 1,
         "time_window": {"start": START.isoformat(), "end": END.isoformat()},
