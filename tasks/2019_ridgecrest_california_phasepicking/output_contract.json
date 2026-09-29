@@ -23,7 +23,12 @@
       "id": "picks",
       "path": "picks.csv",
       "kind": "csv",
-      "required": true
+      "required": true,
+      "schema": {
+        "name": "phase-picks",
+        "version": 1,
+        "required_columns": ["station", "phase", "arrival_time_utc"]
+      }
     },
     {
       "id": "pick_examples",

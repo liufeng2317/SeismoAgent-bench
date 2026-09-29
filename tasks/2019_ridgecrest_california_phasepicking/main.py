@@ -74,14 +74,16 @@ def _pick_rows(path: Path, output: list[dict], summaries: list[dict], example: d
             for phase, arrival in (("P", p), ("S", s)):
                 arrival_datetime = arrival.datetime.replace(tzinfo=timezone.utc)
                 output.append({
-                    "station_id": f"{trace.stats.network}.{trace.stats.station}",
-                    "channel": trace.stats.channel,
-                    "phase": phase,
-                    "arrival_time": arrival_datetime.isoformat(timespec="milliseconds").replace("+00:00", "Z"),
-                    "confidence": 0.5,
-                    "method": "classic_sta_lta_baseline",
-                    "source_file": str(path),
-                })
+                "station_id": f"{trace.stats.network}.{trace.stats.station}",
+                "channel": trace.stats.channel,
+                "phase": phase,
+                "arrival_time_utc": arrival_datetime.isoformat(timespec="milliseconds").replace("+00:00", "Z"),
+                "confidence": 0.5,
+                "status": "picked",
+                "uncertainty_s": "",
+                "method": "classic_sta_lta_baseline",
+                "source_file": str(path),
+            })
         if representative is None:
             seconds = min(len(trace.data) / sampling_rate, 60.0)
             count = max(1, int(seconds * sampling_rate))
@@ -138,7 +140,10 @@ def main() -> None:
     (output / "task_plan.json").write_text(json.dumps(plan, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     (output / "pick_examples.json").write_text(json.dumps({"schema_version": 1, "examples": picks[:10]}, indent=2) + "\n", encoding="utf-8")
     with (output / "picks.csv").open("w", newline="", encoding="utf-8") as handle:
-        fields = ["station_id", "channel", "phase", "arrival_time", "confidence", "method", "source_file"]
+        fields = ["station", "channel", "phase", "arrival_time_utc", "confidence",
+                  "status", "uncertainty_s", "method", "source_file"]
+        for row in picks:
+            row["station"] = row.pop("station_id")
         writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
         writer.writerows(picks)

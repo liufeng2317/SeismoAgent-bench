@@ -12,7 +12,8 @@ The required outputs are:
 - `preprocessing_figure.png`: station distribution and one representative
   preprocessing view;
 - `picks.csv`: P/S phase-pick records with station, channel, arrival time and
-  confidence;
+  confidence. The scorer interchange fields are `station`, `phase` and
+  `arrival_time_utc`; status, method and uncertainty may be included;
 - `pick_examples.json`: a small inspectable subset of picks.
 
 The task stops at phase picking. It does not require event association,

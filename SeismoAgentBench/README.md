@@ -73,4 +73,4 @@ from SeismoAgentBench.utils.source_prepare.sources import load_case, inventory
 
 ## 测试边界
 
-自动化测试统一放在根目录 `tests/`，按功能域组织。当前 source 工具只保留 `tests/source_prepare/test_registry.py` 与 `test_catalogs.py` 两个测试模块，同类输入差异使用参数表；不为每个新 case 复制一套。完整来源文件核验仍通过工具命令显式执行。新增或修改测试遵守 [测试维护规则](../tests/AGENTS.md)。
+自动化测试统一放在根目录 `tests/`，按功能域组织。当前 source 工具只保留 `tests/source_prepare/test_registry.py` 的最小注册与路径边界测试；不为每个新 case 复制一套。完整来源文件核验仍通过工具命令显式执行。新增或修改测试遵守 [测试维护规则](../tests/AGENTS.md)。

@@ -1,1 +1,52 @@
-First write a concise task plan that states the selected half-open UTC window [2019-07-05T00:00:00Z, 2019-07-06T00:00:00Z), input discovery, preprocessing, phase-picking method, quality checks, and output files. Before executing the analysis, save the complete reusable processing code as processing_script.py under $BENCH_OUTPUT, then run that saved script to produce all other artifacts. Do not rely on unrecorded scripts in /tmp or on interactive-only code. Then process only waveform files within that window from the declared waveform directory without modifying inputs. Use the declared StationXML to identify station coordinates. Apply and document transparent preprocessing, pick P and S arrivals, and retain uncertainty or missing results explicitly. Produce one figure containing a station-distribution panel and a representative waveform/preprocessing panel, a picks.csv table with station, channel, phase, arrival time and confidence, and a small set of pick examples for inspection. The result should be reproducible from the declared inputs, saved processing script and runtime environment.
+# Ridgecrest waveform preprocessing and phase picking
+
+## Objective
+
+Process the declared Ridgecrest waveform data for the half-open UTC window
+`[2019-07-05T00:00:00Z, 2019-07-06T00:00:00Z)`. Produce reproducible
+preprocessing and P/S phase-pick results, together with enough diagnostics to
+inspect the method and its limitations.
+
+## Inputs and scope
+
+- Discover inputs from `BENCH_INPUT_MANIFEST`; do not hard-code alternative
+  data locations.
+- Use only waveform samples whose time coverage lies in the declared window.
+- Use the declared StationXML to obtain station coordinates for the station
+  map. Record stations or traces that cannot be resolved.
+- Treat all manifest inputs as read-only. Do not download, modify, rename or
+  delete input files, and do not install packages or use network access.
+
+## Required procedure
+
+1. Before analysis, write a concise `task_plan.json` describing the selected
+   window, discovered inputs, preprocessing operations, phase-picking method,
+   quality checks, and output files.
+2. Save the complete reusable processing program as
+   `$BENCH_OUTPUT/processing_script.py` before running the analysis. Execute
+   that saved program to create the remaining outputs. The program must read
+   the declared manifest and write outputs only below `$BENCH_OUTPUT`.
+3. Apply transparent preprocessing and a stated P/S picking method. The
+   method is not prescribed, but its parameters, thresholds, assumptions and
+   known limitations must be recorded in `task_plan.json`.
+4. Perform basic quality checks, including input selection, sample counts,
+   sampling rates, missing data and pick plausibility. Preserve uncertainty,
+   rejected picks and missing results explicitly; do not invent values to fill
+   gaps.
+
+## Required outputs
+
+- `processing_script.py`: the exact executable program used for the analysis.
+- `task_plan.json`: reproducible plan, method and quality-control record.
+- `preprocessing_figure.png`: one figure with a station-distribution panel and
+  one representative waveform/preprocessing panel.
+- `picks.csv`: pick records with the required columns `station`, `phase`, and
+  `arrival_time_utc`. Include `channel`, `confidence`, `status`, `method`,
+  and `uncertainty_s` when available. Use `P` or `S` for `phase`; use an
+  explicit `status` such as `missing` or `rejected` when no valid arrival is
+  retained.
+- `pick_examples.json`: a small inspectable set of accepted, rejected or
+  missing examples, linked to their source trace where possible.
+
+The final artifacts must be reproducible by rerunning the saved processing
+program with the declared inputs and recorded runtime environment.
