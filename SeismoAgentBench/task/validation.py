@@ -54,7 +54,7 @@ def validate_output_contract(value: Mapping[str, Any]) -> dict[str, Any]:
         item = _object(raw, label, errors)
         if item is None:
             continue
-        _unknown(item, {"id", "path", "kind", "required"}, label, errors)
+        _unknown(item, {"id", "path", "kind", "required", "schema"}, label, errors)
         _required(item, {"id", "path", "kind", "required"}, label, errors)
         artifact_id = item.get("id")
         if not isinstance(artifact_id, str) or not _ID.fullmatch(artifact_id):
@@ -77,6 +77,21 @@ def validate_output_contract(value: Mapping[str, Any]) -> dict[str, Any]:
             errors.append(f"{label}.kind must be a non-empty string")
         if not isinstance(item.get("required"), bool):
             errors.append(f"{label}.required must be boolean")
+        schema = item.get("schema")
+        if schema is not None:
+            if not isinstance(schema, dict):
+                errors.append(f"{label}.schema must be an object")
+            else:
+                _unknown(schema, {"name", "version", "required_columns"}, f"{label}.schema", errors)
+                _required(schema, {"name", "version"}, f"{label}.schema", errors)
+                if not isinstance(schema.get("name"), str) or not schema.get("name"):
+                    errors.append(f"{label}.schema.name must be a non-empty string")
+                if not isinstance(schema.get("version"), int) or schema.get("version") < 1:
+                    errors.append(f"{label}.schema.version must be a positive integer")
+                if "required_columns" in schema and (
+                        not isinstance(schema["required_columns"], list)
+                        or any(not isinstance(column, str) or not column for column in schema["required_columns"])):
+                    errors.append(f"{label}.schema.required_columns must be a list of non-empty strings")
     if errors:
         raise ValidationError(errors)
     return dict(value)
@@ -278,7 +293,7 @@ def validate_task(value: Mapping[str, Any]) -> dict[str, Any]:
             item = _object(raw, label, errors)
             if item is None:
                 continue
-            _unknown(item, {"id", "path", "kind", "required"}, label, errors)
+            _unknown(item, {"id", "path", "kind", "required", "schema"}, label, errors)
             _required(item, {"id", "path", "kind", "required"}, label, errors)
             artifact_id = item.get("id")
             if not isinstance(artifact_id, str) or not _ID.fullmatch(artifact_id):
@@ -301,6 +316,16 @@ def validate_task(value: Mapping[str, Any]) -> dict[str, Any]:
                 errors.append(f"{label}.kind must be a non-empty string")
             if not isinstance(item.get("required"), bool):
                 errors.append(f"{label}.required must be boolean")
+            schema = item.get("schema")
+            if schema is not None:
+                if not isinstance(schema, dict):
+                    errors.append(f"{label}.schema must be an object")
+                else:
+                    _required(schema, {"name", "version"}, f"{label}.schema", errors)
+                    if not isinstance(schema.get("name"), str) or not schema.get("name"):
+                        errors.append(f"{label}.schema.name must be a non-empty string")
+                    if not isinstance(schema.get("version"), int) or schema.get("version") < 1:
+                        errors.append(f"{label}.schema.version must be a positive integer")
     scorer = _object(task.get("scorer"), "task.scorer", errors)
     if scorer is not None:
         _unknown(scorer, {"name", "version"}, "task.scorer", errors)

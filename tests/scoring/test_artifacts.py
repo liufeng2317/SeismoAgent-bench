@@ -48,6 +48,18 @@ class ArtifactTests(unittest.TestCase):
             with self.assertRaises(ArtifactValidationError):
                 validate_artifacts(unsafe, tmp)
 
+    def test_declared_csv_schema_is_checked(self):
+        contract = {"output_artifacts": [{"id": "table", "path": "table.csv", "kind": "csv",
+                                           "required": True,
+                                           "schema": {"name": "csv-columns", "version": 1,
+                                                      "required_columns": ["station", "phase"]}}]}
+        with tempfile.TemporaryDirectory() as tmp:
+            Path(tmp, "table.csv").write_text("station,phase\nCI.A,P\n", encoding="utf-8")
+            self.assertTrue(validate_artifacts(contract, tmp)["validated"])
+            Path(tmp, "table.csv").write_text("station\nCI.A\n", encoding="utf-8")
+            with self.assertRaisesRegex(ArtifactValidationError, "missing CSV columns"):
+                validate_artifacts(contract, tmp)
+
 
 if __name__ == "__main__":
     unittest.main()
