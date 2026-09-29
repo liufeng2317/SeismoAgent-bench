@@ -25,7 +25,9 @@ class ReportingTests(unittest.TestCase):
             write_evaluation_report(run, RESULT)
             environment = json.loads((run / "record/environment.json").read_text())
             self.assertNotIn("environment", environment)
-            self.assertEqual(json.loads((run / "evaluation/report.json").read_text())["agent"], None)
+            report = json.loads((run / "evaluation/report.json").read_text())
+            self.assertEqual(report["agent"], None)
+            self.assertNotIn("agent_command", report["records"])
 
 
 if __name__ == "__main__":

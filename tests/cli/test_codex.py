@@ -46,6 +46,7 @@ class CodexCliTests(unittest.TestCase):
             run = run_root / "run-001"
             self.assertEqual(payload["run"]["state"], "completed")
             self.assertEqual(payload["codex"]["transcript"], "transcript.jsonl")
+            self.assertEqual(payload["codex"]["provenance"], "provenance.json")
             self.assertIn("CODEX_HOME", payload["codex"]["injected_environment_keys"])
             self.assertIn('"text": "OK"', (run / "record/transcript.jsonl").read_text())
             transcript = [json.loads(line) for line in (run / "record/transcript.jsonl").read_text().splitlines()]

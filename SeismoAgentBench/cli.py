@@ -144,7 +144,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             provenance["command"] = {"kind": "codex", "reference": "launcher.argv"}
             provenance_path.write_text(
                 json.dumps(provenance, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-            result["codex"] = {"command_record": "codex_command.json",
+            result["codex"] = {"provenance": "provenance.json",
                                "transcript": "transcript.jsonl",
                                "transcript_counts": transcript_counts,
                                "injected_environment_keys": sorted(env)}
