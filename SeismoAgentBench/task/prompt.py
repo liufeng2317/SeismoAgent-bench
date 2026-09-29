@@ -23,9 +23,7 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
         validate_manifest(manifest, task=task, check_paths=False)
 
     lines = [
-        "# SeismoAgentBench Task",
-        "",
-        f"## Task: {task.get('title') or task['task_id']}",
+        f"# Task: {task.get('title') or task['task_id']}",
         "",
         task["task_prompt"].strip(),
     ]
