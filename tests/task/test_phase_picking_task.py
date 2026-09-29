@@ -1,4 +1,5 @@
 import json
+import importlib.util
 from pathlib import Path
 import subprocess
 import sys
@@ -18,10 +19,12 @@ class PhasePickingTaskTests(unittest.TestCase):
         manifest = validate_manifest(load_json(PACKAGE / "input_manifest.json"), task=task)
         self.assertEqual(task["task_id"], "ridgecrest_2019_phase_picking")
         self.assertEqual([item["id"] for item in resolved["output_artifacts"]],
-                         ["task_plan", "preprocessing_figure", "picks", "pick_examples"])
+                         ["processing_script", "task_plan", "preprocessing_figure", "picks", "pick_examples"])
         self.assertEqual(len(manifest["entries"]), 2)
         self.assertEqual(manifest["entries"][0]["path_type"], "directory")
 
+    @unittest.skipUnless(importlib.util.find_spec("obspy"),
+                         "system test interpreter does not provide ObsPy")
     def test_baseline_runs_through_cli_and_writes_picks(self):
         with tempfile.TemporaryDirectory() as tmp:
             run_root = Path(tmp) / "runs"
@@ -53,6 +56,7 @@ class PhasePickingTaskTests(unittest.TestCase):
             picks = (run_root / "phase-001/work/picks.csv").read_text()
             self.assertIn("station_id,channel,phase,arrival_time", picks)
             self.assertTrue((run_root / "phase-001/work/task_plan.json").is_file())
+            self.assertTrue((run_root / "phase-001/work/processing_script.py").is_file())
             self.assertTrue((run_root / "phase-001/work/preprocessing_figure.png").is_file())
             examples = json.loads((run_root / "phase-001/work/pick_examples.json").read_text())
             self.assertIn("examples", examples)

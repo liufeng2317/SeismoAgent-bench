@@ -70,6 +70,7 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path,
         "- Do not modify input data, task files, manifests or run-control files.",
         "- Choose and justify an appropriate scientific method; the framework does not prescribe a fixed analysis workflow.",
         "- Preserve uncertainty, missing values and method limitations explicitly.",
+        "- Keep the executable processing logic in a saved file under `$BENCH_OUTPUT`; do not depend on unrecorded temporary scripts or interactive-only code.",
     ])
     if extra_instructions and extra_instructions.strip():
         lines.extend(["", "## Additional instructions", "", extra_instructions.strip()])

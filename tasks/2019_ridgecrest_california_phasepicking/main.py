@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 from datetime import timezone
 import json
+import shutil
 import os
 from pathlib import Path
 
@@ -126,6 +127,7 @@ def main() -> None:
         example = _pick_rows(path, picks, summaries, example)
     output = Path(os.environ["BENCH_OUTPUT"])
     output.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(Path(__file__), output / "processing_script.py")
     plan = {
         "schema_version": 1,
         "time_window": {"start": START.isoformat(), "end": END.isoformat()},

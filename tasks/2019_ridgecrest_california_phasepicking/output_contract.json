@@ -2,6 +2,12 @@
   "schema_version": 1,
   "artifacts": [
     {
+      "id": "processing_script",
+      "path": "processing_script.py",
+      "kind": "script",
+      "required": true
+    },
+    {
       "id": "task_plan",
       "path": "task_plan.json",
       "kind": "json",
