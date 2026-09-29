@@ -65,3 +65,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Canonical task metadata | [63_canonical_task_metadata.md](63_canonical_task_metadata.md) | Complete |
 | Explicit experiment harness | [64_explicit_experiment_harness.md](64_explicit_experiment_harness.md) | Complete |
 | Unit and batch result records | [65_unit_batch_result_records.md](65_unit_batch_result_records.md) | Complete |
+| Scorer registry | [66_scorer_registry.md](66_scorer_registry.md) | Complete |

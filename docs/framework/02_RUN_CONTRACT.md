@@ -46,6 +46,8 @@ that expected and observed outputs cannot be confused.
 Experiment runs also write `record/unit_result.json`. A completed experiment
 writes `summary.json` and `summary.md` under its batch directory; these files
 summarize execution states only and do not replace external evaluation reports.
+Evaluation writes `evaluation/scorer_plan.json` before scoring. It records the
+registered scorer identities and whether each scorer is local or reference-based.
 
 The runner exposes the three control paths as `BENCH_TASK_SPEC`,
 `BENCH_INPUT_MANIFEST` and `BENCH_OUTPUT_CONTRACT`. These files are snapshots,

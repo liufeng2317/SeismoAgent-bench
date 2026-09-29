@@ -21,6 +21,8 @@ from SeismoAgentBench.scoring import (
     score_catalogs,
     validate_artifacts,
     score_picks,
+    ScorerRegistryError,
+    default_scorer_registry,
 )
 from SeismoAgentBench.task import load_json, validate_output_contract
 
@@ -93,6 +95,19 @@ def evaluate_run(run_dir: str | Path, *, reference_manifest: str | Path | None =
 
     _write_json(artifacts_path, validation)
     score_dir.mkdir(exist_ok=True)
+    try:
+        scorer_plan = default_scorer_registry().plan(task)
+    except (KeyError, TypeError, ScorerRegistryError) as exc:
+        failure = {"schema_version": 1, "status": "scoring_failed", "errors": [str(exc)]}
+        _write_json(score_dir / "scorer_plan.json", failure)
+        result["state"] = "scoring_failed"
+        result["scoring_error"] = str(exc)
+        _write_json(run / "record" / "run_result.json", result)
+        write_evaluation_report(run, result)
+        return {"run": result, "artifacts": validation, "score": None}
+    _write_json(score_dir / "scorer_plan.json", {
+        "schema_version": 1, "status": "validated", "scorers": scorer_plan,
+    })
     try:
         score = score_artifacts(task, validation)
     except ScoreError as exc:
