@@ -32,18 +32,8 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
             "",
             "## Input data",
             "",
-            "The following inputs are declared for this run. Use only these inputs and do not modify them.",
-            "",
-            "| ID | Type | Path | Notes |",
-            "|---|---|---|---|",
-        ])
-        for entry in manifest["entries"]:
-            lines.append("| " + " | ".join([
-                _cell(entry["id"]), _cell(entry["type"]), _cell(entry["path"]), _cell(entry.get("notes", "")),
-            ]) + " |")
-        lines.extend([
-            "",
-            "The declared inputs are available as read-only links under `$BENCH_OUTPUT/input/` (the same directory exposed as `$BENCH_INPUT`), using each source basename as the link name.",
+            "Input data for this run is available under `$BENCH_OUTPUT/input/` (the same directory exposed as `$BENCH_INPUT`).",
+            "The `input/` directory and everything below it are read-only; do not modify or delete them.",
         ])
     if task.get("output_artifacts"):
         lines.extend([

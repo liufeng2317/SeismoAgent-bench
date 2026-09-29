@@ -7,6 +7,7 @@
 - The entry ID remains metadata; the source basename is used as the run-local link name.
 - The runner creates configured links under `work/input/` without copying source data.
 - The rendered Agent prompt identifies the same view as `$BENCH_OUTPUT/input/` and `$BENCH_INPUT`.
+- The rendered Agent prompt describes this read-only input boundary without copying the detailed `input.json` table into the prompt.
 - The input validator now restricts entries to the four task-level fields.
 
 ## Validation
