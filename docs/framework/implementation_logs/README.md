@@ -60,3 +60,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Structured Agent transcript | [58_structured_agent_transcript.md](58_structured_agent_transcript.md) | Complete |
 | Provenance record consolidation | [59_provenance_record_consolidation.md](59_provenance_record_consolidation.md) | Complete with CLI smoke limitation |
 | Markdown task prompt | [60_markdown_task_prompt.md](60_markdown_task_prompt.md) | Complete |
+| Provenance interface cleanup | [61_provenance_interface_cleanup.md](61_provenance_interface_cleanup.md) | Complete |
