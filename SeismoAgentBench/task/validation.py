@@ -86,6 +86,22 @@ def load_task(path: str | Path) -> dict[str, Any]:
     """Load a task and resolve its external output contract, when declared."""
     source = Path(path)
     task = load_json(source)
+    prompt_ref = task.get("task_prompt_file")
+    if prompt_ref is not None:
+        if (not isinstance(prompt_ref, str) or not prompt_ref
+                or Path(prompt_ref).is_absolute()
+                or "\x00" in prompt_ref
+                or any(part == ".." for part in Path(prompt_ref).parts)):
+            raise ValidationError(["task.task_prompt_file must be a relative non-traversing path"])
+        prompt_path = source.parent / prompt_ref
+        try:
+            prompt = prompt_path.read_text(encoding="utf-8").strip()
+        except (OSError, UnicodeError) as exc:
+            raise ValidationError([f"cannot read task.task_prompt_file {prompt_path}: {exc}"]) from exc
+        if not prompt:
+            raise ValidationError(["task.task_prompt_file must not be empty"])
+        task = dict(task)
+        task["task_prompt"] = prompt
     contract_ref = task.get("output_contract")
     if contract_ref is not None:
         if (not isinstance(contract_ref, str) or not contract_ref
@@ -213,10 +229,12 @@ def validate_task(value: Mapping[str, Any]) -> dict[str, Any]:
     task = _object(value, "task", errors)
     if task is None:
         raise ValidationError(errors)
-    allowed = {"task_id", "version", "title", "summary", "task_prompt",
+    allowed = {"task_id", "version", "title", "summary", "task_prompt", "task_prompt_file",
                "input_types", "output_contract", "output_artifacts", "scorer"}
     _unknown(task, allowed, "task", errors)
-    _required(task, {"task_id", "version", "task_prompt", "input_types", "scorer"}, "task", errors)
+    _required(task, {"task_id", "version", "input_types", "scorer"}, "task", errors)
+    if "task_prompt" not in task and "task_prompt_file" not in task:
+        errors.append("task must declare task_prompt or task_prompt_file")
     has_contract = "output_contract" in task
     has_artifacts = "output_artifacts" in task
     if not has_contract and not has_artifacts:
@@ -236,7 +254,15 @@ def validate_task(value: Mapping[str, Any]) -> dict[str, Any]:
         if field in task and (not isinstance(task[field], str) or not task[field]):
             errors.append(f"task.{field} must be a non-empty string when provided")
     if not isinstance(task.get("task_prompt"), str) or not task.get("task_prompt"):
-        errors.append("task.task_prompt must be a non-empty string")
+        if "task_prompt_file" not in task:
+            errors.append("task.task_prompt must be a non-empty string")
+    if "task_prompt_file" in task:
+        prompt_ref = task["task_prompt_file"]
+        if (not isinstance(prompt_ref, str) or not prompt_ref
+                or Path(prompt_ref).is_absolute()
+                or "\x00" in prompt_ref
+                or any(part == ".." for part in Path(prompt_ref).parts)):
+            errors.append("task.task_prompt_file must be a relative non-traversing path")
     input_types = task.get("input_types")
     if not isinstance(input_types, list) or not input_types or any(kind not in _INPUT_TYPES for kind in input_types):
         errors.append("task.input_types must be a non-empty list of supported input types")

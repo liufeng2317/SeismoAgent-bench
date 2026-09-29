@@ -26,6 +26,11 @@ reproducible by running the saved script from the declared inputs.
 
 This workflow test case is maintained separately from the scientific Ridgecrest case package. It exists to validate the benchmark execution and evaluation path.
 
+The task definition is split for readability: `task.json` contains structured
+metadata and points to `task_prompt.md`, which contains the human-readable task
+instructions. The loader uses the Markdown file as the task prompt when it is
+declared; inline `task_prompt` remains supported for legacy tasks.
+
 ## Input manifest vocabulary
 
 The task declares semantic input roles in `task.json` under `input_types`. Each

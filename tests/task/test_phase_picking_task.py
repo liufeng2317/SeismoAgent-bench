@@ -18,6 +18,8 @@ class PhasePickingTaskTests(unittest.TestCase):
         resolved = load_task(PACKAGE / "task.json")
         manifest = validate_manifest(load_json(PACKAGE / "input_manifest.json"), task=task)
         self.assertEqual(task["task_id"], "ridgecrest_2019_phase_picking")
+        self.assertEqual(task["task_prompt_file"], "task_prompt.md")
+        self.assertIn("phase-picking", resolved["task_prompt"].lower())
         self.assertEqual([item["id"] for item in resolved["output_artifacts"]],
                          ["processing_script", "task_plan", "preprocessing_figure", "picks", "pick_examples"])
         self.assertEqual(len(manifest["entries"]), 2)

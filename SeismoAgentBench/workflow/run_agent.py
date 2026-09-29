@@ -36,6 +36,7 @@ def run_agent(task_path: str | Path, manifest_path: str | Path, agent: AgentSpec
             "task": "control/task_spec.json",
             "input_manifest": "control/input_manifest.json",
             "output_contract": "control/output_contract.json",
+            "task_prompt": "control/task_prompt.md",
             "prompt": "control/agent_prompt.md" if (run / "control/agent_prompt.md").is_file() else None,
             "environment": "record/environment.json",
         },

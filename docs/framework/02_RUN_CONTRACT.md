@@ -9,6 +9,7 @@ unique for the task. The directory is divided by ownership:
 │   ├── task_spec.json
 │   ├── input_manifest.json
 │   ├── output_contract.json
+│   ├── task_prompt.md
 │   └── agent_prompt.md       # optional rendered view
 ├── work/                     # the only Agent-controlled directory
 ├── record/
@@ -24,7 +25,8 @@ unique for the task. The directory is divided by ownership:
 
 `control/` is created by the runner from the registered task and concrete input
 manifest. It is read-only control input. `task_spec.json` contains task identity,
-prompt, input types and scorer settings. `output_contract.json` contains only
+prompt-file reference, input types and scorer settings. `task_prompt.md` contains
+the human-readable task instructions. `output_contract.json` contains only
 the required output artifacts. `input_manifest.json` contains only the input
 locations and data metadata. `agent_prompt.md` is a rendered convenience view;
 it is not an additional source of truth.

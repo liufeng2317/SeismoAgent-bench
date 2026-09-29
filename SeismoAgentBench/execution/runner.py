@@ -116,11 +116,14 @@ def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, 
     task_path = control / "task_spec.json"
     manifest_path = control / "input_manifest.json"
     output_contract_path = control / "output_contract.json"
+    task_prompt_path = control / "task_prompt.md"
     # Keep task semantics and output requirements as separate immutable
     # control snapshots. ``load_task`` resolves the contract for evaluation,
     # so remove that derived expansion from the task snapshot.
     task_snapshot = dict(task)
     artifacts = task_snapshot.pop("output_artifacts", None)
+    prompt = task_snapshot.pop("task_prompt", "")
+    task_snapshot["task_prompt_file"] = "task_prompt.md"
     contract = None
     contract_ref = task_snapshot.get("output_contract")
     if isinstance(contract_ref, str):
@@ -132,6 +135,7 @@ def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, 
     _write_json(task_path, task_snapshot)
     _write_json(manifest_path, manifest)
     _write_json(output_contract_path, contract)
+    task_prompt_path.write_text(str(prompt).strip() + "\n", encoding="utf-8")
     if agent_prompt is not None:
         (control / "agent_prompt.md").write_text(agent_prompt, encoding="utf-8")
     return (RunContext(run_id, run, control, task_path, manifest_path, output_contract_path, work,
