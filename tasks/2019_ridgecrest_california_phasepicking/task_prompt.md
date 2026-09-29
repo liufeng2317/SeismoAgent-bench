@@ -1,41 +1,21 @@
 ### Task objective
 
-Process the Ridgecrest waveform data for the UTC interval
-`[2019-07-05T00:00:00Z, 2019-07-06T00:00:00Z)`. Preprocess the waveforms,
-pick P and S arrivals, and provide concise visual and tabular results that can
-be inspected and reproduced.
+Process the Ridgecrest waveform data for the UTC interval `[2019-07-05T00:00:00Z, 2019-07-06T00:00:00Z)`. Preprocess the waveforms, pick P and S arrivals, and provide concise visual and tabular results that can be inspected and reproduced.
 
 ### Input data
 
-Use this base path:
-
-```text
-/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california
-```
-
-The declared data sources are:
-
-```text
-<base_path>/waveforms/data/
-<base_path>/waveforms/stations/earthscope.stationxml
-```
-
-The waveform directory contains the miniSEED data. The StationXML file
-provides station coordinates and metadata. Read the inputs only; do not modify,
+The input data root contains waveforms and corresponding station information.
+Explore the read-only directory recursively to locate the MiniSEED data and
+station metadata needed for the task. Read the inputs only; do not modify,
 rename, delete or replace them.
 
 ### Task procedure
 
-First write a concise `task_plan.md` describing the selected time window,
-input files, preprocessing steps, phase-picking method and quality checks.
-Then write a complete, reusable `processing_script.py` based on that plan and
-run the saved script to generate the final results. Record the method,
-parameters, assumptions and unresolved data quality issues in the plan or in
-the result files.
+First write a concise `task_plan.md` describing the selected time window, input files, preprocessing steps, phase-picking method and quality checks. Then write a complete, reusable `processing_script.py` based on that plan and run the saved script to generate the final results. Record the method, parameters, assumptions and unresolved data quality issues in the plan or in the result files.
 
 ### Required outputs
 
-Write the following files in the assigned output directory:
+For better visualize and reproducesng, write at least the following files in the assigned output directory:
 
 - `task_plan.md`: task planning and method description;
 - `processing_script.py`: the executable code used to produce the results;
@@ -47,6 +27,4 @@ Write the following files in the assigned output directory:
 - `picks.csv`: the phase-pick table with station, channel, phase, arrival time
   and confidence columns.
 
-Keep missing or uncertain picks explicit. Do not invent arrivals to fill gaps.
-The saved script and the recorded runtime environment must be sufficient to
-reproduce the outputs from the declared input data.
+Keep missing or uncertain picks explicit. Do not invent arrivals to fill gaps. The saved script and the recorded runtime environment must be sufficient to reproduce the outputs from the declared input data.

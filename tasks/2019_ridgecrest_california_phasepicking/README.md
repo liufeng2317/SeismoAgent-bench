@@ -1,6 +1,6 @@
 # Ridgecrest phase-picking workflow test case
 
-This task takes a one-day waveform directory and StationXML manifest and asks
+This task takes a one-day waveform data root and asks
 an agent to plan, preprocess and pick phases for the half-open UTC window
 `[2019-07-05T00:00:00Z, 2019-07-06T00:00:00Z)`.
 
@@ -41,17 +41,17 @@ metadata only; the source basename is used as the link name under
 
 The output requirements are defined in `task_prompt.md`. The Agent may choose
 the internal layout and file types required by that task description. `input.json`
-is supplied here as an optional detailed description of the waveform directory
-and station metadata; the task can also describe inputs directly in the prompt.
+is supplied here as a detailed description of the single waveform data root;
+the Agent discovers waveform and station files below it.
 
 For Codex runs, the framework renders `task.json` and, when supplied,
 `input.json` into `control/agent_prompt.md`. This is a convenience
 view; `task_prompt.md` remains the Agent-facing task description.
 
-The task-local `input.json` defines the absolute source paths. The framework
-derives the run-local link name from each source basename. For this task, the Agent sees
-`work/input/data` and `work/input/earthscope.stationxml`; the large source files are
-not copied into the run.
+The task-local `input.json` defines one absolute source path: the complete
+Ridgecrest `waveforms` directory. The framework derives the run-local link name
+from its source basename, so the Agent sees `work/input/waveforms` and explores
+its contents. The large source files are not copied into the run.
 
 ## Run
 

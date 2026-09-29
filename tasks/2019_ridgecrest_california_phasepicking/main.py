@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import csv
 from datetime import timezone
-import json
 import shutil
 import os
 from pathlib import Path
@@ -21,20 +20,20 @@ START = UTCDateTime("2019-07-05T00:00:00Z")
 END = UTCDateTime("2019-07-06T00:00:00Z")
 
 
-def _load_manifest() -> dict:
-    path = Path(os.environ["BENCH_INPUT_MANIFEST"])
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
-def _inputs(manifest: dict) -> tuple[list[Path], Path]:
-    waveform = next(item for item in manifest["entries"] if item["id"] == "waveforms")
-    station = next(item for item in manifest["entries"] if item["id"] == "stationxml")
-    root = Path(waveform["path"])
-    files = sorted(root.rglob("*.mseed")) if root.is_dir() else [root]
+def _inputs() -> tuple[list[Path], Path]:
+    root = Path(os.environ["BENCH_INPUT"])
+    search_roots = [item.resolve() for item in root.iterdir() if item.is_dir()]
+    files = sorted({path for base in search_roots for path in base.rglob("*.mseed")})
     selected = [path for path in files if "20190705T000000Z__20190706T000000Z" in path.name]
     if not selected:
         selected = files
-    return selected, Path(station["path"])
+    station_files = sorted({
+        path for base in search_roots for path in base.rglob("*")
+        if path.is_file() and path.suffix.lower() in {".xml", ".stationxml"}
+    })
+    if not station_files:
+        raise FileNotFoundError("no StationXML file found below BENCH_INPUT")
+    return selected, station_files[0]
 
 
 def _station_coordinates(stationxml: Path) -> dict[str, tuple[float, float]]:
@@ -163,8 +162,7 @@ def main() -> None:
     output.mkdir(parents=True, exist_ok=True)
     # Persist the exact program before any waveform processing starts.
     shutil.copy2(Path(__file__), output / "processing_script.py")
-    manifest = _load_manifest()
-    files, stationxml = _inputs(manifest)
+    files, stationxml = _inputs()
     coordinates = _station_coordinates(stationxml)
     picks: list[dict] = []
     summaries: list[dict] = []

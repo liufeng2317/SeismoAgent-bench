@@ -1,19 +1,13 @@
 {
   "schema_version": 1,
   "case_id": "2019_ridgecrest_california_phasepicking",
-  "description": "Input files for the Ridgecrest phase-picking task.",
+  "description": "Waveform data root for the Ridgecrest phase-picking task; inspect its contents to locate waveforms and station metadata.",
   "entries": [
     {
-      "id": "waveforms",
-      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms/data",
+      "id": "waveform_data_root",
+      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms",
       "type": "folder",
-      "notes": "MiniSEED waveform directory for the requested UTC interval."
-    },
-    {
-      "id": "stationxml",
-      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms/stations/earthscope.stationxml",
-      "type": "file",
-      "notes": "StationXML metadata used for station coordinates."
+      "notes": "Explore this read-only directory to find MiniSEED waveforms and station metadata."
     }
   ]
 }
