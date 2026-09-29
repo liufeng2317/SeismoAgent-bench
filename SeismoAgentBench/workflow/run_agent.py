@@ -11,7 +11,7 @@ from SeismoAgentBench.execution import run_command, write_agent_config_snapshot
 from SeismoAgentBench.reporting import write_environment_record
 
 
-def run_agent(task_path: str | Path, manifest_path: str | Path, agent: AgentSpec,
+def run_agent(task_path: str | Path, manifest_path: str | Path | None, agent: AgentSpec,
               run_root: str | Path, run_id: str, *, timeout: float = 600,
               reference_manifest: str | Path | None = None,
               extra_env: Mapping[str, str] | None = None,
@@ -28,18 +28,22 @@ def run_agent(task_path: str | Path, manifest_path: str | Path, agent: AgentSpec
     write_environment_record(run, result)
     record_dir = run / "record"
     record_dir.mkdir(exist_ok=True)
+    references = {
+        "task": "control/task_spec.json",
+        "task_prompt": "control/task_prompt.md",
+        "environment": "record/environment.json",
+    }
+    if (run / "control/input_manifest.json").is_file():
+        references["input_manifest"] = "control/input_manifest.json"
+    if (run / "control/output_contract.json").is_file():
+        references["output_contract"] = "control/output_contract.json"
+    if (run / "control/agent_prompt.md").is_file():
+        references["prompt"] = "control/agent_prompt.md"
     provenance = {
         "schema_version": 1,
         "agent": {"name": agent.name, "version": agent.version},
         "command": {"argv": list(agent.command), "kind": "agent"},
-        "references": {
-            "task": "control/task_spec.json",
-            "input_manifest": "control/input_manifest.json",
-            "output_contract": "control/output_contract.json",
-            "task_prompt": "control/task_prompt.md",
-            "prompt": "control/agent_prompt.md" if (run / "control/agent_prompt.md").is_file() else None,
-            "environment": "record/environment.json",
-        },
+        "references": references,
     }
     (record_dir / "provenance.json").write_text(
         json.dumps(provenance, indent=2, sort_keys=True) + "\n", encoding="utf-8")

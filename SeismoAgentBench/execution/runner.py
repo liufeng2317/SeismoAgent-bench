@@ -32,8 +32,8 @@ class RunContext:
     root: Path
     control: Path
     task_path: Path
-    manifest_path: Path
-    output_contract_path: Path
+    manifest_path: Path | None
+    output_contract_path: Path | None
     work: Path
     log: Path
     record: Path
@@ -41,15 +41,18 @@ class RunContext:
 
     @property
     def environment(self) -> dict[str, str]:
-        return {
+        values = {
             "BENCH_TASK_SPEC": str(self.task_path),
-            "BENCH_INPUT_MANIFEST": str(self.manifest_path),
-            "BENCH_OUTPUT_CONTRACT": str(self.output_contract_path),
             "BENCH_WORK": str(self.work),
             # Output paths are relative to the single Agent-controlled work
             # directory. The Agent may choose any internal layout.
             "BENCH_OUTPUT": str(self.work),
         }
+        if self.manifest_path is not None:
+            values["BENCH_INPUT_MANIFEST"] = str(self.manifest_path)
+        if self.output_contract_path is not None:
+            values["BENCH_OUTPUT_CONTRACT"] = str(self.output_contract_path)
+        return values
 
 
 def _now() -> str:
@@ -88,7 +91,7 @@ def _archive_retry(run: Path) -> int:
     return number
 
 
-def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, Any],
+def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, Any] | None,
              task_source: Path,
              *, resume: bool = False, agent_prompt: str | None = None) -> tuple[RunContext, int]:
     if not run_id or Path(run_id).name != run_id or run_id in {".", ".."}:
@@ -130,15 +133,19 @@ def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, 
         source_contract = task_source.parent / contract_ref
         if source_contract.is_file():
             contract = load_json(source_contract)
-    if contract is None:
+    if contract is None and (contract_ref is not None or artifacts is not None):
         contract = {"schema_version": 1, "artifacts": artifacts or []}
     _write_json(task_path, task_snapshot)
-    _write_json(manifest_path, manifest)
-    _write_json(output_contract_path, contract)
+    if manifest is not None:
+        _write_json(manifest_path, manifest)
+    if contract is not None:
+        _write_json(output_contract_path, contract)
     task_prompt_path.write_text(str(prompt).strip() + "\n", encoding="utf-8")
     if agent_prompt is not None:
         (control / "agent_prompt.md").write_text(agent_prompt, encoding="utf-8")
-    return (RunContext(run_id, run, control, task_path, manifest_path, output_contract_path, work,
+    return (RunContext(run_id, run, control, task_path,
+                       manifest_path if manifest is not None else None,
+                       output_contract_path if contract is not None else None, work,
                        log=record / "execution.log", record=record,
                        result=record / "run_result.json"), attempt)
 
@@ -169,7 +176,7 @@ def _environment(context: RunContext, extra_env: Mapping[str, str] | None = None
     return env, runtime_root
 
 
-def run_command(task_path: str | Path, manifest_path: str | Path, command: Sequence[str],
+def run_command(task_path: str | Path, manifest_path: str | Path | None, command: Sequence[str],
                 run_root: str | Path, run_id: str, *, timeout: float = 600,
                 extra_env: Mapping[str, str] | None = None,
                 resume: bool = False, agent_prompt: str | None = None) -> dict[str, Any]:
@@ -180,8 +187,10 @@ def run_command(task_path: str | Path, manifest_path: str | Path, command: Seque
         raise ExecutionError("timeout must be positive")
     try:
         task = load_task(task_path)
-        manifest = load_json(manifest_path)
-        validate_manifest(manifest, task=task, check_paths=False)
+        manifest = None
+        if manifest_path is not None:
+            manifest = load_json(manifest_path)
+            validate_manifest(manifest, task=task, check_paths=False)
     except ValidationError as exc:
         raise ExecutionError(f"input validation failed: {exc}") from exc
     context, attempt = _context(Path(run_root).resolve(), run_id, task, manifest,
@@ -194,7 +203,7 @@ def run_command(task_path: str | Path, manifest_path: str | Path, command: Seque
         "formal_evaluation_eligible": False,
         "task_id": task["task_id"],
         "task_version": task["version"],
-        "manifest_schema_version": manifest["schema_version"],
+        "manifest_schema_version": manifest.get("schema_version") if manifest else None,
         "command": list(command),
         "timeout_s": timeout,
         "injected_environment_keys": sorted(extra_env) if extra_env else [],

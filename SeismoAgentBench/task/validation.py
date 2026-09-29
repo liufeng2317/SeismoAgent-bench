@@ -261,10 +261,9 @@ def validate_task(value: Mapping[str, Any]) -> dict[str, Any]:
                # These fields are materialized by load_task for downstream code.
                "task_prompt", "output_artifacts"}
     _unknown(task, allowed, "task", errors)
-    _required(task, {"task_id", "version", "task_prompt_file", "input_requirements",
-                     "output_contract", "evaluation"}, "task", errors)
+    _required(task, {"task_id", "version", "task_prompt_file"}, "task", errors)
     contract_ref = task.get("output_contract")
-    if (not isinstance(contract_ref, str) or not contract_ref
+    if contract_ref is not None and (not isinstance(contract_ref, str) or not contract_ref
             or Path(contract_ref).is_absolute()
             or "\x00" in contract_ref
             or any(part == ".." for part in Path(contract_ref).parts)):
@@ -284,8 +283,10 @@ def validate_task(value: Mapping[str, Any]) -> dict[str, Any]:
         errors.append("task.task_prompt_file must be a relative non-traversing path")
 
     input_requirements = task.get("input_requirements")
-    if not isinstance(input_requirements, list) or not input_requirements:
-        errors.append("task.input_requirements must be a non-empty list")
+    if input_requirements is None:
+        input_requirements = []
+    elif not isinstance(input_requirements, list):
+        errors.append("task.input_requirements must be a list when provided")
         input_requirements = []
     seen_input_requirements: set[str] = set()
     for index, raw in enumerate(input_requirements):
@@ -366,7 +367,7 @@ def validate_task(value: Mapping[str, Any]) -> dict[str, Any]:
                 errors.append(f"{label}.required must be boolean")
 
     evaluation = task.get("evaluation")
-    evaluation_obj = _object(evaluation, "task.evaluation", errors)
+    evaluation_obj = _object(evaluation, "task.evaluation", errors) if evaluation is not None else None
     if evaluation_obj is not None:
         _unknown(evaluation_obj, {"scorers"}, "task.evaluation", errors)
         scorers = evaluation_obj.get("scorers")

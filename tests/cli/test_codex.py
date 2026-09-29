@@ -58,7 +58,7 @@ class CodexCliTests(unittest.TestCase):
             prompt = (run / "control/agent_prompt.md").read_text()
             self.assertIn("## Task", prompt)
             self.assertIn("## Input data", prompt)
-            self.assertIn("## Required outputs", prompt)
+            self.assertIn("## Structured output hints", prompt)
             self.assertIn("write the result artifact", prompt)
             self.assertNotIn("external-codex-home", (run / "record/provenance.json").read_text())
 

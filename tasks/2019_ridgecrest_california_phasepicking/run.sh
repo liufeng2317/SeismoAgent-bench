@@ -43,6 +43,3 @@ CODEX_ARGS=(
 )
 
 "$PYTHON" -m SeismoAgentBench run-codex "${CODEX_ARGS[@]}"
-
-"$PYTHON" -m SeismoAgentBench evaluate \
-  --run-dir "$TASK_DIR/runs/$RUN_ID"

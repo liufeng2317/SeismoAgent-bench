@@ -72,3 +72,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Phase-picking prompt contract | [70_phase_picking_prompt_contract.md](70_phase_picking_prompt_contract.md) | Complete |
 | Prompt rendering boundaries | [71_prompt_rendering_boundaries.md](71_prompt_rendering_boundaries.md) | Complete |
 | Prompt heading cleanup | [72_prompt_heading_cleanup.md](72_prompt_heading_cleanup.md) | Complete |
+| Prompt-first task contract | [73_prompt_first_task_contract.md](73_prompt_first_task_contract.md) | Complete |

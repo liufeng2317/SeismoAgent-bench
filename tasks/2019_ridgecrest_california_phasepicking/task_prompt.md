@@ -33,15 +33,17 @@ together with enough diagnostics to inspect the method and its limitations.
 
 ### Output requirements
 
-- Produce every artifact declared by the output contract. The contract is the
-  source of truth for artifact paths and required CSV fields.
+- Save the complete reusable program as `processing_script.py`.
+- Save the plan and quality-control record as `task_plan.json`.
 - The figure must contain a station-distribution panel and one representative
-  waveform/preprocessing panel.
+  waveform/preprocessing panel in `preprocessing_figure.png`.
+- Save pick records as `picks.csv` with `station`, `phase` and
+  `arrival_time_utc` columns. Include channel and confidence when available.
+- Save a small inspectable set of examples as `pick_examples.json`.
 - Pick records must use `P` or `S` for phase and preserve uncertainty,
   rejected picks and missing results explicitly; do not invent values to fill
   gaps.
-- Include a small inspectable set of accepted, rejected or missing examples,
-  linked to their source trace where possible.
+- Link examples to their source trace where possible.
 
 The final artifacts must be reproducible by rerunning the saved processing
 program with the declared inputs and recorded runtime environment.

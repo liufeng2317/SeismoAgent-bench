@@ -29,6 +29,14 @@ def manifest():
 
 
 class ValidationTests(unittest.TestCase):
+    def test_task_prompt_is_valid_without_manifest_or_output_contract(self):
+        value = {
+            "task_id": "prompt-only",
+            "version": "1",
+            "task_prompt_file": "task_prompt.md",
+        }
+        self.assertEqual(validate_task(value)["task_id"], "prompt-only")
+
     def test_valid_task_and_manifest(self):
         self.assertEqual(validate_task(TASK)["task_id"], "waveform-inspection")
         self.assertEqual(len(validate_manifest(manifest(), task=TASK)["entries"]), 2)

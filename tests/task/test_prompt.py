@@ -31,7 +31,22 @@ class PromptRenderingTests(unittest.TestCase):
             self.assertIn("Use a concise report.", rendered)
             self.assertNotIn("### Task instructions", rendered)
             self.assertEqual(rendered.count("## Input data"), 1)
-            self.assertEqual(rendered.count("## Required outputs"), 1)
+            self.assertEqual(rendered.count("## Structured output hints"), 1)
+
+    def test_renderer_accepts_task_prompt_without_manifest_or_contract(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            task = root / "task.json"
+            task.write_text(json.dumps({
+                "task_id": "prompt-only", "version": "1",
+                "task_prompt_file": "task_prompt.md",
+            }), encoding="utf-8")
+            (root / "task_prompt.md").write_text(
+                "Describe the required result in this prompt.\n", encoding="utf-8")
+            rendered = render_agent_prompt(task)
+            self.assertIn("Describe the required result", rendered)
+            self.assertNotIn("## Input data", rendered)
+            self.assertNotIn("## Structured output hints", rendered)
 
 
 if __name__ == "__main__":

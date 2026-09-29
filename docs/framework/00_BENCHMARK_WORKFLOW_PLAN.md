@@ -38,9 +38,9 @@ A task specification MUST declare:
 
 - `task_id` and task version;
 - Agent-facing task prompt;
-- required and optional input requirements;
-- agent input contract;
-- required output artifacts and schemas;
+- the Agent-facing task prompt;
+- optional structured input requirements;
+- optional output hints or schemas;
 - permitted tool capabilities;
 - execution limits;
 - scorer name and scorer version;
@@ -49,17 +49,21 @@ A task specification MUST declare:
 
 A task specification MUST NOT contain private reference products or depend on a particular agent implementation.
 
-The task record declares the task prompt and required input roles. A task
-package MAY keep the output contract in a separate `output_contract.json`,
-which is resolved relative to the task record and defines the required output
-artifacts.
+The task prompt is the primary task contract and defines the scientific
+objective, inputs and expected outputs. A task package MAY provide an
+`input_manifest.json` for machine-readable input details and MAY provide an
+`output_contract.json` for optional structural checks. Neither file is
+required for a task to run.
 
 **Input:** task specification.  
 **Output:** validated, versioned task record.
 
 ### 3.2 Input manifest validation
 
-An input manifest MUST be versioned and MUST provide stable logical entry IDs. Each entry MUST declare its semantic `data_type`, physical `format`, source or resolved path and read-only intent. Optional metadata MAY include byte size, temporal coverage, station/channel identity and integrity information.
+When supplied, an input manifest MUST be versioned and MUST provide stable
+logical entry IDs. Each entry MUST declare its semantic `data_type`, physical
+`format`, source or resolved path and read-only intent. A task without a
+manifest describes its inputs directly in the task prompt.
 
 The controller MUST validate:
 
@@ -134,7 +138,10 @@ Invalid or incomplete products MUST receive an explicit artifact-validation fail
 
 ### 3.6 Scoring
 
-The scorer MUST run after agent execution and artifact validation. It MUST be separate from the agent command and MUST read only the declared artifacts, task specification and authorized reference products.
+An external scorer MAY run after Agent execution. It MUST be separate from the
+Agent command and MUST read the task prompt, Agent outputs and authorized
+reference products. The framework does not require a scorer or impose a
+universal output format.
 
 A scorer MUST record:
 

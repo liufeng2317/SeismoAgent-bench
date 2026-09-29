@@ -42,15 +42,15 @@ physical file representation in `format`. For example, a waveform entry uses
 `data_type: station_metadata` and `format: StationXML`. This distinction keeps
 the task meaning independent of a particular file format.
 
-The required output files are defined separately in `output_contract.json`.
-The runner resolves that file when loading `task.json`; the evaluator records
-the files actually produced by an Agent in the run record. Evaluation scorers
-are declared under `task.json` in `evaluation.scorers`.
+The output requirements are defined in `task_prompt.md`. The Agent may choose
+the internal layout and file types required by that task description. An input
+manifest is supplied here as an optional detailed description of the waveform
+directory and station metadata; the task can also describe inputs directly in
+the prompt.
 
-For Codex runs, the framework renders `task.json`, `input_manifest.json` and
-`output_contract.json` into `control/agent_prompt.md`. This is the complete
-Agent-facing task description; the structured JSON files remain the source of
-truth for validation.
+For Codex runs, the framework renders `task.json` and, when supplied,
+`input_manifest.json` into `control/agent_prompt.md`. This is a convenience
+view; `task_prompt.md` remains the Agent-facing task description.
 
 ## Run
 
@@ -81,5 +81,6 @@ Each run has four framework-level directories:
 └── evaluation/    # external artifact-contract score and report
 ```
 
-Required artifacts are validated relative to `work/`. Runtime HOME and
-temporary files are kept outside the run directory and are not task outputs.
+The framework records the files written under `work/`. Scientific evaluation
+is performed by a task-specific external scorer rather than by this run
+script. Runtime HOME and temporary files are kept outside the run directory.

@@ -14,12 +14,5 @@
     {"id": "waveforms", "data_type": "waveform", "required": true},
     {"id": "station_metadata", "data_type": "station_metadata", "required": true}
   ],
-  "output_contract": "output_contract.json",
-  "evaluation": {
-    "scorers": [
-      {"name": "artifact-contract", "version": "1"},
-      {"name": "phase-picking-basic", "version": "1"}
-    ]
-  },
   "task_prompt_file": "task_prompt.md"
 }

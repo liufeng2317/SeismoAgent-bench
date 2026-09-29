@@ -86,7 +86,10 @@ def evaluate_run(run_dir: str | Path, *, reference_manifest: str | Path | None =
         task = dict(task)
         task["output_artifacts"] = contract["artifacts"]
     elif "output_artifacts" not in task:
-        raise ExecutionError(f"output contract is missing: {contract_path}")
+        write_evaluation_report(run, result)
+        return {"run": result, "score": None,
+                "evaluation": {"status": "not_configured",
+                                "reason": "no output contract or framework scorer declared"}}
     # The Agent owns one work directory. Artifact paths are relative to it.
     output = run / "work"
     artifacts_path = run / "record" / "artifact_manifest.json"

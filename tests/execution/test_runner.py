@@ -35,6 +35,22 @@ class RunnerTests(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
+    def test_prompt_only_task_runs_without_manifest_or_output_contract(self):
+        task = Path(self.tmp.name) / "prompt_only.json"
+        task.write_text(json.dumps({
+            "task_id": "prompt-only",
+            "version": "1",
+            "task_prompt_file": "prompt.md",
+        }), encoding="utf-8")
+        (task.parent / "prompt.md").write_text("Produce the task result.\n", encoding="utf-8")
+        code = "import os,pathlib; assert 'BENCH_INPUT_MANIFEST' not in os.environ; pathlib.Path(os.environ['BENCH_OUTPUT'],'result.txt').write_text('ok')"
+        result = run_command(task, None, [sys.executable, "-c", code], self.root, "prompt-only", timeout=10)
+        run = self.root / "prompt-only"
+        self.assertEqual(result["state"], "completed")
+        self.assertFalse((run / "control/input_manifest.json").exists())
+        self.assertFalse((run / "control/output_contract.json").exists())
+        self.assertTrue((run / "work/result.txt").is_file())
+
     def test_completed_run_writes_context_and_log(self):
         code = "import json,os,pathlib; assert pathlib.Path(os.environ['BENCH_WORK']) == pathlib.Path.cwd(); pathlib.Path(os.environ['BENCH_OUTPUT'],'result.json').write_text(json.dumps({'ok': True}))"
         result = run_command(self.task, self.manifest, [sys.executable, "-c", code], self.root, "run-001", timeout=10)
