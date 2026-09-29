@@ -26,6 +26,10 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
         f"# Task: {task.get('title') or task['task_id']}",
         "",
         task["task_prompt"].strip(),
+        "",
+        "## Working directory",
+        "",
+        "`$BENCH_WORK` and `$BENCH_OUTPUT` refer to the Agent work/output root. Write all task results below `$BENCH_OUTPUT`.",
     ]
     if manifest is not None:
         lines.extend([
@@ -51,11 +55,6 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
                 "yes" if artifact["required"] else "no",
             ]) + " |")
     lines.extend([
-        "",
-        "## Output location",
-        "",
-        "- `$BENCH_OUTPUT` is the Agent work/output root; write all task results below it.",
-        "- Declared input links are below `$BENCH_OUTPUT/input/` and are read-only.",
         "",
         "## Framework constraints",
         "",
