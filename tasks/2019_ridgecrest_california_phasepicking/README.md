@@ -35,8 +35,9 @@ task prompt.
 ## Input configuration
 
 Each `input.json` entry contains only an identifier, an absolute source path,
-the path type (`file` or `folder`), and optional notes. The identifier is used
-directly as the link name under `work/input/`.
+the path type (`file` or `folder`), and optional notes. The identifier is
+metadata only; the source basename is used as the link name under
+`work/input/`.
 
 The output requirements are defined in `task_prompt.md`. The Agent may choose
 the internal layout and file types required by that task description. `input.json`
@@ -47,9 +48,9 @@ For Codex runs, the framework renders `task.json` and, when supplied,
 `input.json` into `control/agent_prompt.md`. This is a convenience
 view; `task_prompt.md` remains the Agent-facing task description.
 
-The task-local `input.json` defines both the absolute source path and the
-run-local link name. For this task, the Agent sees
-`work/input/waveforms` and `work/input/stationxml`; the large source files are
+The task-local `input.json` defines the absolute source paths. The framework
+derives the run-local link name from each source basename. For this task, the Agent sees
+`work/input/data` and `work/input/earthscope.stationxml`; the large source files are
 not copied into the run.
 
 ## Run

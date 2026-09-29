@@ -43,7 +43,7 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
             ]) + " |")
         lines.extend([
             "",
-            "Only entries with a configured link path are available as read-only links under `input/` in the working directory.",
+            "The declared inputs are available as read-only links under `input/` in the working directory, using each source basename as the link name.",
         ])
     if task.get("output_artifacts"):
         lines.extend([
