@@ -4,10 +4,10 @@ Process the Ridgecrest waveform data for the UTC interval `[2019-07-05T00:00:00Z
 
 ### Input data
 
-The input data root contains waveforms and corresponding station information.
-Explore the read-only directory recursively to locate the MiniSEED data and
-station metadata needed for the task. Read the inputs only; do not modify,
-rename, delete or replace them.
+The read-only input root is available at `input/waveforms/`. Explore this
+directory recursively to locate the MiniSEED waveforms and station metadata;
+for the current data layout, these are under `input/waveforms/data/` and
+`input/waveforms/stations/`. Do not modify, rename, delete or replace inputs.
 
 ### Task procedure
 
