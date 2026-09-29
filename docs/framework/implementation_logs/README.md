@@ -68,3 +68,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Scorer registry | [66_scorer_registry.md](66_scorer_registry.md) | Complete |
 | Scorer handler dispatch | [67_scorer_handler_dispatch.md](67_scorer_handler_dispatch.md) | Complete |
 | Repeatable external evaluation | [68_repeatable_external_evaluation.md](68_repeatable_external_evaluation.md) | Complete |
+| Core test suite cleanup | [69_core_test_suite_cleanup.md](69_core_test_suite_cleanup.md) | Complete |
