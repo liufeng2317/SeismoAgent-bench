@@ -27,18 +27,28 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
         "",
         task["task_prompt"].strip(),
         "",
-        "## Working directory",
+        "## Runtime context",
         "",
-        "`$BENCH_WORK` and `$BENCH_OUTPUT` refer to the Agent work/output root. Write all task results below `$BENCH_OUTPUT`.",
+        "### Working directory",
+        "",
+        "`$BENCH_WORK` is the Agent working directory.",
+        "",
+        "### Input data",
+        "",
     ]
     if manifest is not None:
         lines.extend([
-            "",
-            "## Input data",
-            "",
             "Input data for this run is available under `$BENCH_OUTPUT/input/` (the same directory exposed as `$BENCH_INPUT`).",
             "The `input/` directory and everything below it are read-only; do not modify or delete them.",
         ])
+    else:
+        lines.append("No separate input directory is configured for this run.")
+    lines.extend([
+        "",
+        "### Output location",
+        "",
+        "`$BENCH_OUTPUT` is the Agent output root. Write all task results below it.",
+    ])
     if task.get("output_artifacts"):
         lines.extend([
             "",
@@ -56,10 +66,11 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
             ]) + " |")
     lines.extend([
         "",
-        "## Framework constraints",
+        "### Framework constraints",
         "",
         "- Do not modify task files, manifests or run-control files.",
         "- Keep all Agent-created files below `$BENCH_OUTPUT`.",
+        "",
     ])
     if extra_instructions and extra_instructions.strip():
         lines.extend(["", "## Additional instructions", "", extra_instructions.strip()])
