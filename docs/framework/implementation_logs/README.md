@@ -58,3 +58,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Phase-pick scientific scorer | [56_phase_pick_scientific_scorer.md](56_phase_pick_scientific_scorer.md) | Complete |
 | Control snapshot separation | [57_control_snapshot_separation.md](57_control_snapshot_separation.md) | Complete with CLI fixture limitation |
 | Structured Agent transcript | [58_structured_agent_transcript.md](58_structured_agent_transcript.md) | Complete |
+| Provenance record consolidation | [59_provenance_record_consolidation.md](59_provenance_record_consolidation.md) | Complete with CLI smoke limitation |

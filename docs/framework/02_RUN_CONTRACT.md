@@ -7,15 +7,14 @@ unique for the task. The directory is divided by ownership:
 <run_id>/
 ├── control/
 │   ├── task_spec.json
-│   └── input_manifest.json
+│   ├── input_manifest.json
 │   ├── output_contract.json
 │   └── agent_prompt.md       # optional rendered view
 ├── work/                     # the only Agent-controlled directory
 ├── record/
 │   ├── run_result.json
 │   ├── environment.json
-│   ├── agent_command.json
-│   ├── codex_command.json
+│   ├── provenance.json
 │   ├── transcript.jsonl
 │   └── artifact_manifest.json
 └── evaluation/        # created after the Agent exits
@@ -33,6 +32,9 @@ it is not an additional source of truth.
 `work/` is the only Agent-controlled directory. The Agent writes candidate
 artifacts there through `BENCH_WORK` and `BENCH_OUTPUT`. `record/` is written
 by the runner and stores execution provenance and the actual artifact inventory.
+New runs use one `provenance.json` for Agent identity and launcher details;
+older runs may still contain separate `agent_command.json` and
+`codex_command.json` files.
 `evaluation/` is owned by the evaluator and stores scores and reports.
 
 The task's output contract declares artifact paths relative to the Agent-owned
