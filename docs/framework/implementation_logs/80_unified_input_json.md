@@ -3,11 +3,12 @@
 ## Implemented
 
 - Replaced the Ridgecrest task's separate manifest and runtime link config with one `input.json`.
-- Each entry retains the absolute source `path` and declares its run-local `link_path`.
+- Each entry contains only `id`, absolute source `path`, `type` (`file` or `folder`), and optional `notes`.
+- The entry ID is used directly as the run-local link name.
 - The runner creates configured links under `work/input/` without copying source data.
-- The input manifest validator now checks relative, non-traversing link paths.
+- The input validator now restricts entries to the four task-level fields.
 
 ## Validation
 
 - Updated the task launch script and task documentation.
-- Ran all 82 framework tests successfully.
+- Ran all 76 framework tests successfully.

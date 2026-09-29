@@ -67,9 +67,8 @@ def _write_json(path: Path, value: Any) -> None:
 def _prepare_input_view(work: Path, manifest: Mapping[str, Any] | None) -> None:
     """Create a stable, read-only view of declared inputs below ``work``.
 
-    The view contains only links explicitly configured by each input entry's
-    ``link_path``. It avoids copying large data while keeping the agent's
-    input path short and run-local.
+    Each entry is linked directly as ``work/input/<id>``. It avoids copying
+    large data while keeping the agent's input path short and run-local.
     """
     view = work / "input"
     if view.exists() or view.is_symlink():
@@ -81,18 +80,19 @@ def _prepare_input_view(work: Path, manifest: Mapping[str, Any] | None) -> None:
         if not isinstance(entry, Mapping):
             continue
         raw_path = entry.get("path")
-        link_path = entry.get("link_path")
-        if not isinstance(raw_path, str) or not isinstance(link_path, str):
+        entry_id = entry.get("id")
+        entry_type = entry.get("type")
+        if not isinstance(raw_path, str) or not isinstance(entry_id, str):
             continue
         source = Path(raw_path)
         if not source.exists():
             continue
         source = source.resolve(strict=True)
-        target = view / link_path
+        target = view / entry_id
         if target.exists() or target.is_symlink():
             raise ExecutionError(f"duplicate input view target: {target}")
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.symlink_to(source, target_is_directory=source.is_dir())
+        target.symlink_to(source, target_is_directory=entry_type == "folder")
     view.chmod(0o555)
 
 

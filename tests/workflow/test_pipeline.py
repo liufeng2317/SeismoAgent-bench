@@ -20,7 +20,7 @@ TASK = {
     "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
 }
 MANIFEST = {"schema_version": 1, "case_id": "synthetic_case", "entries": [
-    {"id": "metadata", "path": "/tmp/metadata.json", "data_type": "metadata", "format": "JSON", "read_only": True}
+    {"id": "metadata", "path": "/tmp/metadata.json", "type": "file", "notes": "metadata"}
 ]}
 
 

@@ -1,28 +1,19 @@
 {
   "schema_version": 1,
   "case_id": "2019_ridgecrest_california_phasepicking",
-  "description": "One-day Ridgecrest waveform directory for the half-open UTC interval [2019-07-05, 2019-07-06), with station metadata.",
+  "description": "Input files for the Ridgecrest phase-picking task.",
   "entries": [
     {
-      "id": "ridgecrest_waveforms_20190705",
+      "id": "waveforms",
       "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms/data",
-      "link_path": "waveforms",
-      "path_type": "directory",
-      "read_only": true,
-      "data_type": "waveform",
-      "format": "miniSEED",
-      "start_time": "2019-07-05T00:00:00Z",
-      "end_time": "2019-07-06T00:00:00Z",
-      "notes": "The interval is UTC and end-exclusive; select files covering [2019-07-05T00:00:00Z, 2019-07-06T00:00:00Z) from the directory."
+      "type": "folder",
+      "notes": "MiniSEED waveform directory for the requested UTC interval."
     },
     {
-      "id": "earthscope_stationxml",
+      "id": "stationxml",
       "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms/stations/earthscope.stationxml",
-      "link_path": "stationxml",
-      "path_type": "file",
-      "read_only": true,
-      "data_type": "station_metadata",
-      "format": "StationXML"
+      "type": "file",
+      "notes": "StationXML metadata used for station coordinates."
     }
   ]
 }

@@ -27,8 +27,8 @@ def _load_manifest() -> dict:
 
 
 def _inputs(manifest: dict) -> tuple[list[Path], Path]:
-    waveform = next(item for item in manifest["entries"] if item["data_type"] == "waveform")
-    station = next(item for item in manifest["entries"] if item["data_type"] == "station_metadata")
+    waveform = next(item for item in manifest["entries"] if item["id"] == "waveforms")
+    station = next(item for item in manifest["entries"] if item["id"] == "stationxml")
     root = Path(waveform["path"])
     files = sorted(root.rglob("*.mseed")) if root.is_dir() else [root]
     selected = [path for path in files if "20190705T000000Z__20190706T000000Z" in path.name]

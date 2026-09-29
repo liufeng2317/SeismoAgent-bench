@@ -1,109 +1,26 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://seismoagentbench.org/schemas/input-manifest.schema.json",
-  "title": "SeismoAgentBench input manifest",
+  "$id": "https://seismoagentbench.org/schemas/input.schema.json",
+  "title": "SeismoAgentBench input configuration",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "schema_version",
-    "case_id",
-    "entries"
-  ],
+  "required": ["schema_version", "case_id", "entries"],
   "properties": {
-    "schema_version": {
-      "const": 1
-    },
-    "case_id": {
-      "type": "string",
-      "pattern": "^[a-z0-9][a-z0-9_-]*$"
-    },
-    "description": {
-      "type": "string"
-    },
+    "schema_version": {"const": 1},
+    "case_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$"},
+    "description": {"type": "string"},
     "entries": {
       "type": "array",
       "minItems": 1,
       "items": {
-        "$ref": "#/$defs/entry"
-      }
-    }
-  },
-  "$defs": {
-    "entry": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "id",
-        "path",
-        "data_type",
-        "format",
-        "read_only"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
-        },
-        "path": {
-          "type": "string",
-          "pattern": "^/[^\\u0000]*$"
-        },
-        "path_type": {
-          "type": "string",
-          "enum": ["file", "directory"],
-          "default": "file"
-        },
-        "read_only": {
-          "const": true
-        },
-        "bytes": {
-          "type": "integer",
-          "minimum": 0
-        },
-        "network": {
-          "type": "string",
-          "pattern": "^[A-Z0-9?]{1,2}$"
-        },
-        "station": {
-          "type": "string",
-          "pattern": "^[A-Za-z0-9?_-]{1,8}$"
-        },
-        "location": {
-          "type": "string",
-          "pattern": "^[A-Za-z0-9?_-]{0,2}$"
-        },
-        "channel": {
-          "type": "string",
-          "pattern": "^[A-Za-z0-9?]{3}$"
-        },
-        "start_time": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "end_time": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "sha256": {
-          "type": "string",
-          "pattern": "^[a-fA-F0-9]{64}$"
-        },
-        "notes": {
-          "type": "string"
-        },
-        "data_type": {
-          "type": "string",
-          "enum": [
-            "waveform",
-            "station_metadata",
-            "catalog",
-            "metadata",
-            "other"
-          ]
-        },
-        "format": {
-          "type": "string",
-          "minLength": 1
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "path", "type"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"},
+          "path": {"type": "string", "pattern": "^/[^\\u0000]*$"},
+          "type": {"enum": ["file", "folder"]},
+          "notes": {"type": "string"}
         }
       }
     }

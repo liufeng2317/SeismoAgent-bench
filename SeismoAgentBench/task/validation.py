@@ -189,16 +189,14 @@ def validate_manifest(value: Mapping[str, Any], *, task: Mapping[str, Any] | Non
         errors.append("manifest.entries must be a non-empty list")
         entries = []
     seen: set[str] = set()
-    data_types: set[str] = set()
-    entry_allowed = {"id", "path", "link_path", "path_type", "data_type", "format", "read_only", "bytes", "network", "station",
-                     "location", "channel", "start_time", "end_time", "sha256", "notes"}
+    entry_allowed = {"id", "path", "type", "notes"}
     for index, raw in enumerate(entries):
         label = f"manifest.entries[{index}]"
         entry = _object(raw, label, errors)
         if entry is None:
             continue
         _unknown(entry, entry_allowed, label, errors)
-        _required(entry, {"id", "path", "data_type", "format", "read_only"}, label, errors)
+        _required(entry, {"id", "path", "type"}, label, errors)
         entry_id = entry.get("id")
         if not isinstance(entry_id, str) or not _ID.fullmatch(entry_id):
             errors.append(f"{label}.id has an invalid identifier")
@@ -209,47 +207,15 @@ def validate_manifest(value: Mapping[str, Any], *, task: Mapping[str, Any] | Non
         path = entry.get("path")
         if not isinstance(path, str) or not path.startswith("/") or "\x00" in path:
             errors.append(f"{label}.path must be an absolute path")
-        link_path = entry.get("link_path")
-        if link_path is not None and (
-                not isinstance(link_path, str) or not link_path
-                or Path(link_path).is_absolute() or "\x00" in link_path
-                or any(part in {"", ".", ".."} for part in Path(link_path).parts)):
-            errors.append(f"{label}.link_path must be a relative non-traversing path when provided")
-        path_type = entry.get("path_type", "file")
-        if path_type not in {"file", "directory"}:
-            errors.append(f"{label}.path_type must be file or directory")
+        entry_type = entry.get("type")
+        if entry_type not in {"file", "folder"}:
+            errors.append(f"{label}.type must be file or folder")
         elif check_paths:
             target = Path(path)
-            valid = target.is_dir() if path_type == "directory" else target.is_file()
+            valid = target.is_dir() if entry_type == "folder" else target.is_file()
             if not valid or target.is_symlink():
-                expected = "directory" if path_type == "directory" else "regular file"
+                expected = "directory" if entry_type == "folder" else "regular file"
                 errors.append(f"{label}.path is not an existing {expected}: {path}")
-        data_type = entry.get("data_type")
-        if data_type not in _INPUT_TYPES:
-            errors.append(f"{label}.data_type is not supported")
-        else:
-            data_types.add(data_type)
-        if not isinstance(entry.get("format"), str) or not entry.get("format"):
-            errors.append(f"{label}.format must be a non-empty string")
-        if entry.get("read_only") is not True:
-            errors.append(f"{label}.read_only must be true")
-        if "bytes" in entry and (not isinstance(entry["bytes"], int) or entry["bytes"] < 0):
-            errors.append(f"{label}.bytes must be a non-negative integer")
-        if "sha256" in entry and (not isinstance(entry["sha256"], str) or not re.fullmatch(r"[0-9a-fA-F]{64}", entry["sha256"])):
-            errors.append(f"{label}.sha256 must contain 64 hexadecimal characters")
-        for field in ("start_time", "end_time"):
-            if field in entry:
-                _time(entry[field], f"{label}.{field}", errors)
-    if task is not None and isinstance(task, Mapping):
-        required_types = {
-            item.get("data_type")
-            for item in task.get("input_requirements", [])
-            if isinstance(item, Mapping) and item.get("required") is True
-        }
-        required_types.discard(None)
-        missing = sorted(required_types - data_types)
-        if missing:
-            errors.append(f"manifest is missing required input types: {', '.join(missing)}")
     if errors:
         raise ValidationError(errors)
     return dict(value)

@@ -35,8 +35,6 @@ def run_agent(task_path: str | Path, manifest_path: str | Path | None, agent: Ag
     }
     if (run / "control/input_manifest.json").is_file():
         references["input_manifest"] = "control/input_manifest.json"
-    if (run / "control/run_config.yaml").is_file():
-        references["run_config"] = "control/run_config.yaml"
     if (run / "control/output_contract.json").is_file():
         references["output_contract"] = "control/output_contract.json"
     if (run / "control/agent_prompt.md").is_file():

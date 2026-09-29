@@ -54,7 +54,6 @@ def write_evaluation_report(run_dir: str | Path, result: Mapping[str, Any],
     records = {
         "task": "control/task_spec.json",
         "input_manifest": "control/input_manifest.json",
-        "run_config": "control/run_config.yaml" if (run / "control/run_config.yaml").is_file() else None,
         "output_contract": "control/output_contract.json" if (run / "control/output_contract.json").is_file() else None,
         "task_prompt": "control/task_prompt.md" if (run / "control/task_prompt.md").is_file() else None,
         "agent_config": "control/agent_config.yaml" if (run / "control/agent_config.yaml").is_file() else None,

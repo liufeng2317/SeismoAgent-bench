@@ -34,16 +34,12 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
             "",
             "The following inputs are declared for this run. Use only these inputs and do not modify them.",
             "",
-            "| ID | Link path | Semantic type | Format | Path | Path type | Time window |",
-            "|---|---|---|---|---|---|---|",
+            "| ID | Type | Path | Notes |",
+            "|---|---|---|---|",
         ])
         for entry in manifest["entries"]:
-            window = ""
-            if entry.get("start_time") or entry.get("end_time"):
-                window = f"{entry.get('start_time', '')} to {entry.get('end_time', '')}"
             lines.append("| " + " | ".join([
-                _cell(entry["id"]), _cell(entry.get("link_path", "")), _cell(entry["data_type"]), _cell(entry["format"]),
-                _cell(entry["path"]), _cell(entry.get("path_type", "file")), _cell(window),
+                _cell(entry["id"]), _cell(entry["type"]), _cell(entry["path"]), _cell(entry.get("notes", "")),
             ]) + " |")
         lines.extend([
             "",

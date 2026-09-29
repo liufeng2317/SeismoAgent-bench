@@ -23,7 +23,7 @@ class CodexCliTests(unittest.TestCase):
             }, "smoke")
             manifest.write_text(json.dumps({
                 "schema_version": 1, "case_id": "synthetic", "entries": [
-                    {"id": "metadata", "path": "/tmp/metadata.json", "data_type": "metadata", "format": "JSON", "read_only": True}
+                    {"id": "metadata", "path": "/tmp/metadata.json", "type": "file", "notes": "metadata"}
                 ],
             }), encoding="utf-8")
             fake.write_text(
@@ -78,7 +78,7 @@ class CodexCliTests(unittest.TestCase):
             }, "smoke")
             manifest.write_text(json.dumps({
                 "schema_version": 1, "case_id": "synthetic", "entries": [
-                    {"id": "metadata", "path": "/tmp/metadata.json", "data_type": "metadata", "format": "JSON", "read_only": True}
+                    {"id": "metadata", "path": "/tmp/metadata.json", "type": "file", "notes": "metadata"}
                 ],
             }), encoding="utf-8")
             fake.write_text(
@@ -118,7 +118,7 @@ class CodexCliTests(unittest.TestCase):
             }, "smoke")
             manifest.write_text(json.dumps({
                 "schema_version": 1, "case_id": "synthetic", "entries": [
-                    {"id": "metadata", "path": "/tmp/metadata.json", "data_type": "metadata", "format": "JSON", "read_only": True}
+                    {"id": "metadata", "path": "/tmp/metadata.json", "type": "file", "notes": "metadata"}
                 ],
             }), encoding="utf-8")
             fake.write_text(

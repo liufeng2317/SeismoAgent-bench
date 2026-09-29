@@ -34,13 +34,9 @@ task prompt.
 
 ## Input configuration
 
-The task declares semantic input roles in `task.json` under
-`input_requirements`. Each `input.json` entry repeats its role in `data_type`,
-records the physical file representation in `format`, and defines the
-run-local link in `link_path`. For example, a waveform entry uses
-`data_type: waveform` and `format: miniSEED`, while station metadata uses
-`data_type: station_metadata` and `format: StationXML`. This distinction keeps
-the task meaning independent of a particular file format.
+Each `input.json` entry contains only an identifier, an absolute source path,
+the path type (`file` or `folder`), and optional notes. The identifier is used
+directly as the link name under `work/input/`.
 
 The output requirements are defined in `task_prompt.md`. The Agent may choose
 the internal layout and file types required by that task description. `input.json`
@@ -52,7 +48,7 @@ For Codex runs, the framework renders `task.json` and, when supplied,
 view; `task_prompt.md` remains the Agent-facing task description.
 
 The task-local `input.json` defines both the absolute source path and the
-run-local `link_path`. For this task, the Agent sees
+run-local link name. For this task, the Agent sees
 `work/input/waveforms` and `work/input/stationxml`; the large source files are
 not copied into the run.
 

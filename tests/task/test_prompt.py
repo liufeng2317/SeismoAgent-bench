@@ -19,8 +19,7 @@ class PromptRenderingTests(unittest.TestCase):
             }, "Inspect the data.")
             (root / "manifest.json").write_text(json.dumps({
                 "schema_version": 1, "case_id": "prompt_case", "entries": [{
-                    "id": "metadata", "path": "/tmp/metadata.json", "data_type": "metadata",
-                    "link_path": "metadata.json", "format": "JSON", "read_only": True,
+                    "id": "metadata", "path": "/tmp/metadata.json", "type": "file", "notes": "metadata",
                 }],
             }), encoding="utf-8")
             rendered = render_agent_prompt(root / "task.json", root / "manifest.json",
