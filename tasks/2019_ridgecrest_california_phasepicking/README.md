@@ -38,6 +38,17 @@ For Codex runs, the framework renders `task.json`, `input_manifest.json` and
 Agent-facing task description; the structured JSON files remain the source of
 truth for validation.
 
+## Run
+
+Use the task-local script:
+
+```bash
+bash run.sh
+```
+
+Set `RUN_ID` for another run. Set `PYTHON` or `CODEX_BIN` only when the
+default executable locations are not available.
+
 ## Run results
 
 The `runs/` entry is a relative symbolic link to the durable run store for
