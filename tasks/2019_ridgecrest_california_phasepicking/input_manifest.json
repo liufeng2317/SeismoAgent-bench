@@ -6,6 +6,7 @@
     {
       "id": "ridgecrest_waveforms_20190705",
       "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms/data",
+      "link_path": "waveforms",
       "path_type": "directory",
       "read_only": true,
       "data_type": "waveform",
@@ -17,6 +18,7 @@
     {
       "id": "earthscope_stationxml",
       "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms/stations/earthscope.stationxml",
+      "link_path": "stationxml",
       "path_type": "file",
       "read_only": true,
       "data_type": "station_metadata",

@@ -81,15 +81,17 @@ def _prepare_input_view(work: Path, manifest: Mapping[str, Any] | None) -> None:
     for entry in manifest.get("entries", []):
         entry_id = entry.get("id")
         raw_path = entry.get("path")
-        if not isinstance(entry_id, str) or not isinstance(raw_path, str):
+        link_path = entry.get("link_path")
+        if not isinstance(entry_id, str) or not isinstance(raw_path, str) or not isinstance(link_path, str):
             continue
         source = Path(raw_path)
         if not source.exists():
             continue
         source = source.resolve(strict=True)
-        target = view / entry_id
+        target = view / link_path
         if target.exists() or target.is_symlink():
             raise ExecutionError(f"duplicate input view target: {target}")
+        target.parent.mkdir(parents=True, exist_ok=True)
         target.symlink_to(source, target_is_directory=source.is_dir())
     view.chmod(0o555)
 

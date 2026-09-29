@@ -76,11 +76,11 @@ class RunnerTests(unittest.TestCase):
             "schema_version": 1,
             "case_id": "synthetic_case",
             "entries": [
-                {"id": "waveforms", "path": str(source_dir), "path_type": "directory",
+                {"id": "waveforms", "path": str(source_dir), "link_path": "waveforms", "path_type": "directory",
                  "data_type": "waveform", "format": "miniSEED", "read_only": True},
-                {"id": "stations", "path": str(source_file), "path_type": "file",
+                {"id": "stations", "path": str(source_file), "link_path": "station.xml", "path_type": "file",
                  "data_type": "station_metadata", "format": "StationXML", "read_only": True},
-                {"id": "metadata", "path": str(source_file), "path_type": "file",
+                {"id": "metadata", "path": str(source_file), "link_path": "metadata.json", "path_type": "file",
                  "data_type": "metadata", "format": "JSON", "read_only": True},
             ],
         }
@@ -89,7 +89,7 @@ class RunnerTests(unittest.TestCase):
         code = (
             "import os,pathlib; p=pathlib.Path(os.environ['BENCH_INPUT']); "
             "assert p.is_dir(); assert (p/'waveforms').is_symlink(); "
-            "assert (p/'stations').is_symlink(); "
+            "assert (p/'station.xml').is_symlink(); "
             "assert pathlib.Path(os.environ['BENCH_OUTPUT'],'result.txt').write_text('ok')"
         )
         result = run_command(self.task, manifest_path, [sys.executable, "-c", code],
@@ -97,7 +97,7 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(result["state"], "completed")
         run = self.root / "run-links"
         self.assertTrue((run / "work/input/waveforms").is_symlink())
-        self.assertTrue((run / "work/input/stations").is_symlink())
+        self.assertTrue((run / "work/input/station.xml").is_symlink())
 
     def test_nonzero_command_is_recorded(self):
         result = run_command(self.task, self.manifest, [sys.executable, "-c", "raise SystemExit(7)"], self.root, "run-002", timeout=10)
