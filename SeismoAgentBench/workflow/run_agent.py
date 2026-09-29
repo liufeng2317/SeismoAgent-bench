@@ -28,11 +28,24 @@ def run_agent(task_path: str | Path, manifest_path: str | Path, agent: AgentSpec
     write_environment_record(run, result)
     record_dir = run / "record"
     record_dir.mkdir(exist_ok=True)
-    (record_dir / "agent_command.json").write_text(
-        json.dumps(agent.record(), indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    result["agent"] = agent.record()
+    provenance = {
+        "schema_version": 1,
+        "agent": {"name": agent.name, "version": agent.version},
+        "command": {"argv": list(agent.command), "kind": "agent"},
+        "references": {
+            "task": "control/task_spec.json",
+            "input_manifest": "control/input_manifest.json",
+            "output_contract": "control/output_contract.json",
+            "prompt": "control/agent_prompt.md" if (run / "control/agent_prompt.md").is_file() else None,
+            "environment": "record/environment.json",
+        },
+    }
+    (record_dir / "provenance.json").write_text(
+        json.dumps(provenance, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    result["agent"] = {"name": agent.name, "version": agent.version,
+                        "provenance": "record/provenance.json"}
     run_result = json.loads((record_dir / "run_result.json").read_text(encoding="utf-8"))
-    run_result["agent"] = agent.record()
+    run_result["agent"] = result["agent"]
     (record_dir / "run_result.json").write_text(
         json.dumps(run_result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return {"run": run_result}

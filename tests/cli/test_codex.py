@@ -50,13 +50,15 @@ class CodexCliTests(unittest.TestCase):
             self.assertIn('"text": "OK"', (run / "record/transcript.jsonl").read_text())
             transcript = [json.loads(line) for line in (run / "record/transcript.jsonl").read_text().splitlines()]
             self.assertTrue(any(item["event_type"] == "agent_message" for item in transcript))
-            self.assertTrue((run / "record/codex_command.json").is_file())
+            self.assertTrue((run / "record/provenance.json").is_file())
+            provenance = json.loads((run / "record/provenance.json").read_text())
+            self.assertEqual(provenance["launcher"]["argv"][-1], "<BENCH_AGENT_PROMPT>")
             prompt = (run / "control/agent_prompt.md").read_text()
             self.assertIn("## Task", prompt)
             self.assertIn("## Input data", prompt)
             self.assertIn("## Required outputs", prompt)
             self.assertIn("write the result artifact", prompt)
-            self.assertNotIn("external-codex-home", (run / "record/codex_command.json").read_text())
+            self.assertNotIn("external-codex-home", (run / "record/provenance.json").read_text())
 
     def test_run_codex_supports_canonical_campaign_layout(self):
         with tempfile.TemporaryDirectory() as tmp:

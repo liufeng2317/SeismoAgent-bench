@@ -133,8 +133,17 @@ def main(argv: Sequence[str] | None = None) -> int:
             record_dir.mkdir(exist_ok=True)
             transcript_counts = write_transcript(
                 run / "record" / "execution.log", record_dir / "transcript.jsonl")
-            (record_dir / "codex_command.json").write_text(
-                json.dumps(spec.record(), indent=2, sort_keys=True) + "\n", encoding="utf-8")
+            provenance_path = record_dir / "provenance.json"
+            provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
+            launcher = spec.record()
+            argv = list(launcher["argv"])
+            if argv and argv[-1] == rendered_prompt:
+                argv[-1] = "<BENCH_AGENT_PROMPT>"
+            launcher["argv"] = argv
+            provenance["launcher"] = launcher
+            provenance["command"] = {"kind": "codex", "reference": "launcher.argv"}
+            provenance_path.write_text(
+                json.dumps(provenance, indent=2, sort_keys=True) + "\n", encoding="utf-8")
             result["codex"] = {"command_record": "codex_command.json",
                                "transcript": "transcript.jsonl",
                                "transcript_counts": transcript_counts,

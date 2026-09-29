@@ -36,7 +36,7 @@ class CliTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             payload = json.loads(result.stdout)
             self.assertEqual(payload["run"]["state"], "completed")
-            self.assertTrue((root / "run-001/record/agent_command.json").is_file())
+            self.assertTrue((root / "run-001/record/provenance.json").is_file())
             evaluated = subprocess.run([sys.executable, "-m", "SeismoAgentBench", "evaluate",
                                         "--run-dir", str(root / "run-001")],
                                        capture_output=True, text=True, check=False)
