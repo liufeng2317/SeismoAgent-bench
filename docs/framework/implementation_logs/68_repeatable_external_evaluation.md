@@ -2,7 +2,7 @@
 
 ## Commit
 
-Recorded in the implementation commit for this stage.
+Implementation commit: `194631a` (`allow repeatable external evaluation`).
 
 ## Implemented
 
