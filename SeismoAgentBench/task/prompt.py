@@ -43,7 +43,7 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
             ]) + " |")
         lines.extend([
             "",
-            "The declared inputs are available as read-only links under `input/` in the working directory, using each source basename as the link name.",
+            "The declared inputs are available as read-only links under `$BENCH_OUTPUT/input/` (the same directory exposed as `$BENCH_INPUT`), using each source basename as the link name.",
         ])
     if task.get("output_artifacts"):
         lines.extend([
@@ -64,7 +64,8 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
         "",
         "## Output location",
         "",
-        "- Write all task results under `$BENCH_OUTPUT`.",
+        "- `$BENCH_OUTPUT` is the Agent work/output root; write all task results below it.",
+        "- Declared input links are below `$BENCH_OUTPUT/input/` and are read-only.",
         "",
         "## Framework constraints",
         "",

@@ -28,7 +28,7 @@ class PromptRenderingTests(unittest.TestCase):
             self.assertNotIn("# SeismoAgentBench Task", rendered)
             self.assertIn("Inspect the data.", rendered)
             self.assertIn("/tmp/metadata.json", rendered)
-            self.assertIn("read-only links under `input/`", rendered)
+            self.assertIn("read-only links under `$BENCH_OUTPUT/input/`", rendered)
             self.assertIn("metadata.json", rendered)
             self.assertIn("result.json", rendered)
             self.assertIn("Use a concise report.", rendered)
