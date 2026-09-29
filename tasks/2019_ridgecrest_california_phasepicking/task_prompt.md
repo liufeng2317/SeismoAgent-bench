@@ -1,27 +1,24 @@
-# Ridgecrest waveform preprocessing and phase picking
+### Objective
 
-## Objective
+Process the declared waveform data for the time interval specified by the
+input manifest. Produce reproducible preprocessing and P/S phase-pick results,
+together with enough diagnostics to inspect the method and its limitations.
 
-Process the declared Ridgecrest waveform data for the half-open UTC window
-`[2019-07-05T00:00:00Z, 2019-07-06T00:00:00Z)`. Produce reproducible
-preprocessing and P/S phase-pick results, together with enough diagnostics to
-inspect the method and its limitations.
-
-## Inputs and scope
+### Input scope
 
 - Discover inputs from `BENCH_INPUT_MANIFEST`; do not hard-code alternative
   data locations.
-- Use only waveform samples whose time coverage lies in the declared window.
-- Use the declared StationXML to obtain station coordinates for the station
-  map. Record stations or traces that cannot be resolved.
+- Use only waveform samples in the declared time window and use the declared
+  station metadata for station coordinates. Record stations or traces that
+  cannot be resolved.
 - Treat all manifest inputs as read-only. Do not download, modify, rename or
   delete input files, and do not install packages or use network access.
 
-## Required procedure
+### Required procedure
 
 1. Before analysis, write a concise `task_plan.json` describing the selected
    window, discovered inputs, preprocessing operations, phase-picking method,
-   quality checks, and output files.
+   quality checks, and output artifacts.
 2. Save the complete reusable processing program as
    `$BENCH_OUTPUT/processing_script.py` before running the analysis. Execute
    that saved program to create the remaining outputs. The program must read
@@ -34,19 +31,17 @@ inspect the method and its limitations.
    rejected picks and missing results explicitly; do not invent values to fill
    gaps.
 
-## Required outputs
+### Output requirements
 
-- `processing_script.py`: the exact executable program used for the analysis.
-- `task_plan.json`: reproducible plan, method and quality-control record.
-- `preprocessing_figure.png`: one figure with a station-distribution panel and
-  one representative waveform/preprocessing panel.
-- `picks.csv`: pick records with the required columns `station`, `phase`, and
-  `arrival_time_utc`. Include `channel`, `confidence`, `status`, `method`,
-  and `uncertainty_s` when available. Use `P` or `S` for `phase`; use an
-  explicit `status` such as `missing` or `rejected` when no valid arrival is
-  retained.
-- `pick_examples.json`: a small inspectable set of accepted, rejected or
-  missing examples, linked to their source trace where possible.
+- Produce every artifact declared by the output contract. The contract is the
+  source of truth for artifact paths and required CSV fields.
+- The figure must contain a station-distribution panel and one representative
+  waveform/preprocessing panel.
+- Pick records must use `P` or `S` for phase and preserve uncertainty,
+  rejected picks and missing results explicitly; do not invent values to fill
+  gaps.
+- Include a small inspectable set of accepted, rejected or missing examples,
+  linked to their source trace where possible.
 
 The final artifacts must be reproducible by rerunning the saved processing
 program with the declared inputs and recorded runtime environment.
