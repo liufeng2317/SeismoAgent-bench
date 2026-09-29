@@ -49,6 +49,11 @@ A task specification MUST declare:
 
 A task specification MUST NOT contain private reference products or depend on a particular agent implementation.
 
+The task record declares the task prompt and required input roles. A task
+package MAY keep the output contract in a separate `output_contract.json`,
+which is resolved relative to the task record and defines the required output
+artifacts.
+
 **Input:** task specification.  
 **Output:** validated, versioned task record.
 
@@ -222,7 +227,7 @@ The package is organized by stable workflow responsibilities rather than by ever
 
 | Module | Responsibility | Excludes |
 | --- | --- | --- |
-| `task/` | Task records, task versions, input manifests and validation | Agent implementation and reference answers |
+| `task/` | Task records, output contracts, input manifests and validation | Agent implementation and reference answers |
 | `execution/` | Run creation, runtime preparation, backend dispatch and limits | Scientific scoring rules |
 | `workflow/` | Ordered execution, artifact validation and score-record orchestration | Scientific algorithms and reference comparisons |
 | `agent/` | Agent entry points and adapters for approved scientific tools | Private references and aggregate metrics |

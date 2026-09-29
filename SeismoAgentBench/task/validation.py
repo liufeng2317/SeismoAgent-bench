@@ -34,6 +34,73 @@ def load_json(path: str | Path) -> dict[str, Any]:
     return value
 
 
+def validate_output_contract(value: Mapping[str, Any]) -> dict[str, Any]:
+    """Validate the required output-artifact contract for one task."""
+    errors: list[str] = []
+    contract = _object(value, "output_contract", errors)
+    if contract is None:
+        raise ValidationError(errors)
+    _unknown(contract, {"schema_version", "artifacts"}, "output_contract", errors)
+    _required(contract, {"schema_version", "artifacts"}, "output_contract", errors)
+    if contract.get("schema_version") != 1:
+        errors.append("output_contract.schema_version must be 1")
+    artifacts = contract.get("artifacts")
+    if not isinstance(artifacts, list) or not artifacts:
+        errors.append("output_contract.artifacts must be a non-empty list")
+        artifacts = []
+    output_ids: set[str] = set()
+    for index, raw in enumerate(artifacts):
+        label = f"output_contract.artifacts[{index}]"
+        item = _object(raw, label, errors)
+        if item is None:
+            continue
+        _unknown(item, {"id", "path", "kind", "required"}, label, errors)
+        _required(item, {"id", "path", "kind", "required"}, label, errors)
+        artifact_id = item.get("id")
+        if not isinstance(artifact_id, str) or not _ID.fullmatch(artifact_id):
+            errors.append(f"{label}.id has an invalid identifier")
+        elif artifact_id in output_ids:
+            errors.append(f"duplicate output artifact id {artifact_id!r}")
+        else:
+            output_ids.add(artifact_id)
+        artifact_path = item.get("path")
+        unsafe_path = (
+            not isinstance(artifact_path, str)
+            or not artifact_path
+            or Path(artifact_path).is_absolute()
+            or "\x00" in artifact_path
+            or any(part == ".." for part in Path(artifact_path).parts)
+        )
+        if unsafe_path:
+            errors.append(f"{label}.path must be a relative non-traversing path")
+        if not isinstance(item.get("kind"), str) or not item.get("kind"):
+            errors.append(f"{label}.kind must be a non-empty string")
+        if not isinstance(item.get("required"), bool):
+            errors.append(f"{label}.required must be boolean")
+    if errors:
+        raise ValidationError(errors)
+    return dict(value)
+
+
+def load_task(path: str | Path) -> dict[str, Any]:
+    """Load a task and resolve its external output contract, when declared."""
+    source = Path(path)
+    task = load_json(source)
+    contract_ref = task.get("output_contract")
+    if contract_ref is not None:
+        if (not isinstance(contract_ref, str) or not contract_ref
+                or Path(contract_ref).is_absolute()
+                or "\x00" in contract_ref
+                or any(part == ".." for part in Path(contract_ref).parts)):
+            raise ValidationError(["task.output_contract must be a relative non-traversing path"])
+        contract_path = source.parent / contract_ref
+        contract = load_json(contract_path)
+        validate_output_contract(contract)
+        task = dict(task)
+        task["output_artifacts"] = contract["artifacts"]
+    return validate_task(task)
+
+
 def _object(value: Any, label: str, errors: list[str]) -> Mapping[str, Any] | None:
     if not isinstance(value, dict):
         errors.append(f"{label} must be an object")
@@ -140,10 +207,20 @@ def validate_task(value: Mapping[str, Any]) -> dict[str, Any]:
     if task is None:
         raise ValidationError(errors)
     allowed = {"task_id", "version", "title", "summary", "task_prompt",
-               "input_types", "output_artifacts", "scorer"}
+               "input_types", "output_contract", "output_artifacts", "scorer"}
     _unknown(task, allowed, "task", errors)
-    _required(task, {"task_id", "version", "task_prompt", "input_types",
-                     "output_artifacts", "scorer"}, "task", errors)
+    _required(task, {"task_id", "version", "task_prompt", "input_types", "scorer"}, "task", errors)
+    has_contract = "output_contract" in task
+    has_artifacts = "output_artifacts" in task
+    if not has_contract and not has_artifacts:
+        errors.append("task must declare output_contract or output_artifacts")
+    if has_contract:
+        contract_ref = task.get("output_contract")
+        if (not isinstance(contract_ref, str) or not contract_ref
+                or Path(contract_ref).is_absolute()
+                or "\x00" in contract_ref
+                or any(part == ".." for part in Path(contract_ref).parts)):
+            errors.append("task.output_contract must be a relative non-traversing path")
     if not isinstance(task.get("task_id"), str) or not _ID.fullmatch(task.get("task_id", "")):
         errors.append("task.task_id has an invalid identifier")
     if not isinstance(task.get("version"), str) or not task.get("version"):
@@ -160,9 +237,9 @@ def validate_task(value: Mapping[str, Any]) -> dict[str, Any]:
         errors.append("task.input_types must not contain duplicates")
     outputs = task.get("output_artifacts")
     output_ids: set[str] = set()
-    if not isinstance(outputs, list) or not outputs:
+    if has_artifacts and (not isinstance(outputs, list) or not outputs):
         errors.append("task.output_artifacts must be a non-empty list")
-    else:
+    elif has_artifacts:
         for index, raw in enumerate(outputs):
             label = f"task.output_artifacts[{index}]"
             item = _object(raw, label, errors)

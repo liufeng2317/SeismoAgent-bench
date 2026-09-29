@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from .validation import ValidationError, load_json, validate_task
+from .validation import ValidationError, load_task
 
 
 class TaskRegistryError(ValueError):
@@ -49,7 +49,7 @@ class TaskRegistry:
         if not source.is_file() or source.is_symlink():
             raise TaskRegistryError(f"task path is not a regular file: {source}")
         try:
-            task = validate_task(load_json(source))
+            task = load_task(source)
         except ValidationError as exc:
             raise TaskRegistryError(f"invalid task {source}: {exc}") from exc
         key = (task["task_id"], task["version"])
@@ -70,7 +70,7 @@ class TaskRegistry:
         if len(matches) > 1:
             versions = ", ".join(sorted(record.version for record in matches))
             raise TaskRegistryError(f"task version is ambiguous for {task_id}: {versions}")
-        return validate_task(load_json(matches[0].path))
+        return load_task(matches[0].path)
 
     def records(self) -> tuple[TaskRecord, ...]:
         """Return registered records in stable identifier/version order."""

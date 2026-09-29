@@ -6,7 +6,7 @@ import tempfile
 import unittest
 
 from SeismoAgentBench.scoring import ReferenceSpec, validate_catalog
-from SeismoAgentBench.task import TaskRegistry, load_json, validate_manifest, validate_task
+from SeismoAgentBench.task import TaskRegistry, load_json, load_task, validate_manifest, validate_task
 
 
 PACKAGE = Path(__file__).resolve().parents[2] / "tasks" / "2019_ridgecrest_california"
@@ -16,8 +16,10 @@ SMOKE_REFERENCE = Path(__file__).resolve().parents[1] / "fixtures" / "ridgecrest
 class RidgecrestPackageTests(unittest.TestCase):
     def test_task_and_input_manifest_are_valid(self):
         task = validate_task(load_json(PACKAGE / "task.json"))
+        resolved = load_task(PACKAGE / "task.json")
         manifest = validate_manifest(load_json(PACKAGE / "input_manifest.json"), task=task)
         self.assertEqual(manifest["case_id"], "2019_ridgecrest_california")
+        self.assertEqual(resolved["output_artifacts"][0]["id"], "catalog")
         self.assertEqual(len(manifest["entries"]), 4)
 
     def test_registry_discovers_case_task_without_expert_outputs(self):

@@ -5,7 +5,7 @@ import sys
 import tempfile
 import unittest
 
-from SeismoAgentBench.task import load_json, validate_manifest, validate_task
+from SeismoAgentBench.task import load_json, load_task, validate_manifest, validate_task
 
 
 PACKAGE = Path(__file__).resolve().parents[2] / "tasks" / "2019_ridgecrest_california_phasepicking"
@@ -14,8 +14,10 @@ PACKAGE = Path(__file__).resolve().parents[2] / "tasks" / "2019_ridgecrest_calif
 class PhasePickingTaskTests(unittest.TestCase):
     def test_task_and_manifest_are_valid(self):
         task = validate_task(load_json(PACKAGE / "task.json"))
+        resolved = load_task(PACKAGE / "task.json")
         manifest = validate_manifest(load_json(PACKAGE / "input_manifest.json"), task=task)
         self.assertEqual(task["task_id"], "ridgecrest_2019_phase_picking")
+        self.assertEqual([item["id"] for item in resolved["output_artifacts"]], ["preprocessing", "picks"])
         self.assertEqual(len(manifest["entries"]), 4)
 
     def test_baseline_runs_through_cli_and_writes_picks(self):

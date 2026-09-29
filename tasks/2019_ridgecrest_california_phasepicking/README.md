@@ -23,6 +23,10 @@ physical file representation in `format`. For example, a waveform entry uses
 `data_type: station_metadata` and `format: StationXML`. This distinction keeps
 the task meaning independent of a particular file format.
 
+The required output files are defined separately in `output_contract.json`.
+The runner resolves that file when loading `task.json`; the evaluator records
+the files actually produced by an Agent in the run record.
+
 ## Run results
 
 The `runs/` entry is a relative symbolic link to the durable run store for

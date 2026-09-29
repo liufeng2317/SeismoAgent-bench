@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "artifacts": [
+    {
+      "id": "catalog",
+      "path": "catalog.json",
+      "kind": "catalog",
+      "required": true
+    }
+  ]
+}

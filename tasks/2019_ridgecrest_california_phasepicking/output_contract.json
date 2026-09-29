@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "artifacts": [
+    {
+      "id": "preprocessing",
+      "path": "preprocessing.json",
+      "kind": "json",
+      "required": true
+    },
+    {
+      "id": "picks",
+      "path": "picks.json",
+      "kind": "json",
+      "required": true
+    }
+  ]
+}

@@ -11,3 +11,6 @@ full-sequence performance.
 
 The waveform files are referenced through the input manifest and are not
 copied into Git.
+
+The required catalog output is defined in `output_contract.json`; the task
+record keeps only the relative contract reference.

@@ -18,7 +18,7 @@ import sys
 import time
 from typing import Any, Mapping, Sequence
 
-from SeismoAgentBench.task.validation import ValidationError, load_json, validate_manifest, validate_task
+from SeismoAgentBench.task.validation import ValidationError, load_json, load_task, validate_manifest
 
 
 class ExecutionError(RuntimeError):
@@ -153,10 +153,9 @@ def run_command(task_path: str | Path, manifest_path: str | Path, command: Seque
         raise ExecutionError("command must be a non-empty sequence of strings")
     if timeout <= 0:
         raise ExecutionError("timeout must be positive")
-    task = load_json(task_path)
-    manifest = load_json(manifest_path)
     try:
-        validate_task(task)
+        task = load_task(task_path)
+        manifest = load_json(manifest_path)
         validate_manifest(manifest, task=task, check_paths=False)
     except ValidationError as exc:
         raise ExecutionError(f"input validation failed: {exc}") from exc
