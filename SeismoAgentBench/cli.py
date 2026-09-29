@@ -106,7 +106,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             rendered_prompt = render_agent_prompt(args.task, args.manifest,
                                                    extra_instructions=args.prompt)
             spec = CodexCommandSpec(args.codex_bin, args.model,
-                                    str(effective_root / args.run_id / "agent" / "work"),
+                                    str(effective_root / args.run_id / "work"),
                                     rendered_prompt, reasoning_effort=args.reasoning_effort)
             agent = AgentSpec.from_command(args.agent_name, args.agent_version, spec.argv())
             result = None
