@@ -43,7 +43,12 @@ class ExperimentExecutionTests(unittest.TestCase):
             self.assertEqual(results[0]["run"]["state"], "completed")
             self.assertTrue((run / "control/agent_config.yaml").is_file())
             self.assertTrue((run / "work/result.json").is_file())
+            self.assertTrue((run / "record/unit_result.json").is_file())
             self.assertFalse((run / "evaluation/score.json").exists())
+            batches = list((base / "runs" / "_batches").glob("smoke-*/summary.json"))
+            self.assertEqual(len(batches), 1)
+            summary = json.loads(batches[0].read_text(encoding="utf-8"))
+            self.assertEqual(summary["state_counts"], {"completed": 1})
 
 
 if __name__ == "__main__":

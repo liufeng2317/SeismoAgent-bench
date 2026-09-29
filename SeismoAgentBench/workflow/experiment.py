@@ -9,6 +9,7 @@ from typing import Any
 from SeismoAgentBench.agent import AgentSpec
 from SeismoAgentBench.execution import (ExperimentSpecError, expand_experiment,
                                         load_agent_config, load_experiment_spec)
+from SeismoAgentBench.reporting import create_batch_id, write_batch_summary, write_unit_result
 from .run_agent import run_agent
 
 
@@ -27,6 +28,7 @@ def execute_experiment(spec_path: str | Path, *, limit: int | None = None) -> li
     output_root = Path(spec["output_root"])
     if not output_root.is_absolute():
         output_root = (source.parent / output_root).resolve()
+    batch_dir = output_root / "_batches" / create_batch_id(spec["experiment_id"])
     results: list[dict[str, Any]] = []
     for index, unit in enumerate(units, start=1):
         task_spec = (source.parent / unit["task_spec"]).resolve()
@@ -43,7 +45,11 @@ def execute_experiment(spec_path: str | Path, *, limit: int | None = None) -> li
         result = run_agent(task_spec, manifest, agent, output_root, run_id,
                            agent_config=config)
         run = output_root / run_id
+        result["run"]["run_dir"] = str(run)
         (run / "record" / "experiment_unit.json").write_text(
             json.dumps(unit, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        write_unit_result(run, unit, result)
         results.append(result)
+    write_batch_summary(batch_dir, experiment_id=spec["experiment_id"],
+                        spec_path=source, units=units, results=results)
     return results

@@ -43,6 +43,10 @@ The runner records the files actually found in
 `record/artifact_manifest.json`. The contract and inventory remain separate so
 that expected and observed outputs cannot be confused.
 
+Experiment runs also write `record/unit_result.json`. A completed experiment
+writes `summary.json` and `summary.md` under its batch directory; these files
+summarize execution states only and do not replace external evaluation reports.
+
 The runner exposes the three control paths as `BENCH_TASK_SPEC`,
 `BENCH_INPUT_MANIFEST` and `BENCH_OUTPUT_CONTRACT`. These files are snapshots,
 not Agent-generated files. An experiment MUST declare an Agent `harness` and

@@ -64,3 +64,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Generic declared artifact schemas | [62_generic_artifact_schema.md](62_generic_artifact_schema.md) | Complete |
 | Canonical task metadata | [63_canonical_task_metadata.md](63_canonical_task_metadata.md) | Complete |
 | Explicit experiment harness | [64_explicit_experiment_harness.md](64_explicit_experiment_harness.md) | Complete |
+| Unit and batch result records | [65_unit_batch_result_records.md](65_unit_batch_result_records.md) | Complete |
