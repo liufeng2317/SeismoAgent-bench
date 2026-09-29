@@ -33,7 +33,8 @@ Agent workspace; the Agent writes its candidate artifacts there through
 execution provenance and the actual artifact inventory. `evaluation/` is owned
 by the evaluator and stores scores and reports.
 
-The task's output contract declares artifact paths relative to `agent/output`.
+The task's output contract declares artifact paths relative to the Agent-owned
+`work` directory. The Agent may create any internal subdirectories it needs.
 The runner records the files actually found in
 `record/artifact_manifest.json`. The contract and inventory remain separate so
 that expected and observed outputs cannot be confused.

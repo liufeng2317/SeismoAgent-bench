@@ -56,3 +56,16 @@ The `runs/` entry is a relative symbolic link to the durable run store for
 this task. It exposes completed and in-progress runs without copying their
 files into the repository. The link target is grouped by the task's stable
 `task_id`, while the physical run store remains outside the source tree.
+
+Each run has four framework-level directories:
+
+```text
+<run_id>/
+├── control/       # task and input snapshots supplied to the Agent
+├── work/          # the only Agent work root; its internal layout is Agent-defined
+├── record/        # execution log, commands and run metadata
+└── evaluation/    # external artifact-contract score and report
+```
+
+Required artifacts are validated relative to `work/`. Runtime HOME and
+temporary files are kept outside the run directory and are not task outputs.
