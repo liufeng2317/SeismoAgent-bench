@@ -6,6 +6,8 @@ an agent to plan, preprocess and pick phases for the half-open UTC window
 
 The required outputs are:
 
+- `processing_script.py`: the saved executable processing logic used to create
+  the other artifacts;
 - `task_plan.json`: the selected window, processing steps and method;
 - `preprocessing_figure.png`: station distribution and one representative
   preprocessing view;
@@ -17,6 +19,10 @@ The task stops at phase picking. It does not require event association,
 location, magnitude estimation or a reference catalog. The included baseline
 uses a simple STA/LTA trigger for pipeline validation; it is not a scientific
 replacement for PhaseNet.
+
+The processing script is part of the output contract. Temporary exploratory
+code may be used during development, but the final artifacts must be
+reproducible by running the saved script from the declared inputs.
 
 This workflow test case is maintained separately from the scientific Ridgecrest case package. It exists to validate the benchmark execution and evaluation path.
 
