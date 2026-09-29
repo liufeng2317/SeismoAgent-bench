@@ -3,7 +3,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from SeismoAgentBench.reporting.transcript import write_transcript
+from SeismoAgentBench.reporting.transcript import write_human_log, write_transcript
 
 
 class TranscriptTests(unittest.TestCase):
@@ -23,6 +23,19 @@ class TranscriptTests(unittest.TestCase):
             self.assertEqual(rows[1]["text"], "done")
             self.assertNotIn("private", (root / "transcript.jsonl").read_text())
             self.assertEqual(rows[-1]["event_type"], "log_line")
+
+    def test_human_log_has_timestamps_and_readable_event_summaries(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            raw = root / "execution.jsonl"
+            raw.write_text(json.dumps({
+                "type": "item.completed",
+                "item": {"type": "agent_message", "text": "finished"},
+            }) + "\nplain output\n", encoding="utf-8")
+            write_human_log(raw, root / "execution.log")
+            lines = (root / "execution.log").read_text(encoding="utf-8").splitlines()
+            self.assertRegex(lines[0], r"^\[\d{4}-\d{2}-\d{2}T.*Z\] agent_message: finished$")
+            self.assertIn("stdout: plain output", lines[1])
 
 
 if __name__ == "__main__":

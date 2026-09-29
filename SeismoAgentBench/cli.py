@@ -131,8 +131,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             run = effective_root / args.run_id
             record_dir = run / "record"
             record_dir.mkdir(exist_ok=True)
+            raw_execution = record_dir / "execution.jsonl"
+            execution_source = raw_execution if raw_execution.is_file() else record_dir / "execution.log"
             transcript_counts = write_transcript(
-                run / "record" / "execution.log", record_dir / "transcript.jsonl")
+                execution_source, record_dir / "transcript.jsonl")
             provenance_path = record_dir / "provenance.json"
             provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
             launcher = spec.record()
