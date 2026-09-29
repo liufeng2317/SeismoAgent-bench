@@ -44,6 +44,8 @@ class AgentContractTests(unittest.TestCase):
             self.assertEqual(result["run"]["state"], "completed")
             self.assertEqual(json.loads((run / "record/provenance.json").read_text())["agent"]["name"], "synthetic-agent")
             self.assertEqual(json.loads((run / "record/run_result.json").read_text())["agent"]["version"], "0.1")
+            self.assertEqual(json.loads((run / "record/run_result.json").read_text())["command"],
+                             {"provenance": "record/provenance.json"})
             evaluated = evaluate_run(run)
             self.assertEqual(evaluated["run"]["state"], "scored")
 

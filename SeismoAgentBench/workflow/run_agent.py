@@ -46,6 +46,7 @@ def run_agent(task_path: str | Path, manifest_path: str | Path, agent: AgentSpec
                         "provenance": "record/provenance.json"}
     run_result = json.loads((record_dir / "run_result.json").read_text(encoding="utf-8"))
     run_result["agent"] = result["agent"]
+    run_result["command"] = {"provenance": "record/provenance.json"}
     (record_dir / "run_result.json").write_text(
         json.dumps(run_result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return {"run": run_result}
