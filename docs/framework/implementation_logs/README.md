@@ -75,3 +75,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Prompt-first task contract | [73_prompt_first_task_contract.md](73_prompt_first_task_contract.md) | Complete |
 | Explicit task input paths | [74_explicit_task_input_paths.md](74_explicit_task_input_paths.md) | Complete |
 | Task output visualization plan | [75_task_output_visualization_plan.md](75_task_output_visualization_plan.md) | Complete |
+| Runtime prompt simplification | [76_runtime_prompt_simplification.md](76_runtime_prompt_simplification.md) | Complete |

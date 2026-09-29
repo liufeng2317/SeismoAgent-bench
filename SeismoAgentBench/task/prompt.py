@@ -62,14 +62,11 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
                 _cell(artifact["id"]), _cell(artifact["path"]), _cell(artifact["kind"]),
                 "yes" if artifact["required"] else "no",
             ]) + " |")
-    lines.extend(["", "## Runtime paths", "", "- Task specification: `$BENCH_TASK_SPEC`"])
-    if manifest is not None:
-        lines.append("- Optional input manifest: `$BENCH_INPUT_MANIFEST`")
-    if task.get("output_contract"):
-        lines.append("- Optional output contract: `$BENCH_OUTPUT_CONTRACT`")
     lines.extend([
-        "- Working directory: `$BENCH_WORK`",
-        "- Agent work and output root: `$BENCH_OUTPUT`",
+        "",
+        "## Output location",
+        "",
+        "- Write all task results under `$BENCH_OUTPUT`.",
         "",
         "## Framework constraints",
         "",
