@@ -41,6 +41,8 @@ class RunnerTests(unittest.TestCase):
         self.assertFalse(result["formal_evaluation_eligible"])
         self.assertTrue((run / "control/task_spec.json").is_file())
         self.assertTrue((run / "control/input_manifest.json").is_file())
+        self.assertTrue((run / "control/output_contract.json").is_file())
+        self.assertNotIn("output_artifacts", json.loads((run / "control/task_spec.json").read_text()))
         self.assertTrue((run / "record/execution.log").is_file())
         self.assertEqual(json.loads((run / "work/result.json").read_text())["ok"], True)
         self.assertTrue((run / "record/run_result.json").is_file())

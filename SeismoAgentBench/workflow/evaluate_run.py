@@ -22,7 +22,7 @@ from SeismoAgentBench.scoring import (
     validate_artifacts,
     score_picks,
 )
-from SeismoAgentBench.task import load_json
+from SeismoAgentBench.task import load_json, validate_output_contract
 
 
 def _write_json(path: Path, value: Any) -> None:
@@ -68,6 +68,14 @@ def evaluate_run(run_dir: str | Path, *, reference_manifest: str | Path | None =
         return {"run": result, "score": None}
 
     task = load_json(run / "control" / "task_spec.json")
+    contract_path = run / "control" / "output_contract.json"
+    if contract_path.is_file():
+        contract = load_json(contract_path)
+        validate_output_contract(contract)
+        task = dict(task)
+        task["output_artifacts"] = contract["artifacts"]
+    elif "output_artifacts" not in task:
+        raise ExecutionError(f"output contract is missing: {contract_path}")
     # The Agent owns one work directory. Artifact paths are relative to it.
     output = run / "work"
     artifacts_path = run / "record" / "artifact_manifest.json"

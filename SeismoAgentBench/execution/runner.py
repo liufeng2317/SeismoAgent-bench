@@ -33,6 +33,7 @@ class RunContext:
     control: Path
     task_path: Path
     manifest_path: Path
+    output_contract_path: Path
     work: Path
     log: Path
     record: Path
@@ -43,6 +44,7 @@ class RunContext:
         return {
             "BENCH_TASK_SPEC": str(self.task_path),
             "BENCH_INPUT_MANIFEST": str(self.manifest_path),
+            "BENCH_OUTPUT_CONTRACT": str(self.output_contract_path),
             "BENCH_WORK": str(self.work),
             # Output paths are relative to the single Agent-controlled work
             # directory. The Agent may choose any internal layout.
@@ -87,6 +89,7 @@ def _archive_retry(run: Path) -> int:
 
 
 def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, Any],
+             task_source: Path,
              *, resume: bool = False, agent_prompt: str | None = None) -> tuple[RunContext, int]:
     if not run_id or Path(run_id).name != run_id or run_id in {".", ".."}:
         raise ExecutionError("run_id must be a non-empty single path component")
@@ -112,11 +115,26 @@ def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, 
     record.mkdir(exist_ok=True)
     task_path = control / "task_spec.json"
     manifest_path = control / "input_manifest.json"
-    _write_json(task_path, task)
+    output_contract_path = control / "output_contract.json"
+    # Keep task semantics and output requirements as separate immutable
+    # control snapshots. ``load_task`` resolves the contract for evaluation,
+    # so remove that derived expansion from the task snapshot.
+    task_snapshot = dict(task)
+    artifacts = task_snapshot.pop("output_artifacts", None)
+    contract = None
+    contract_ref = task_snapshot.get("output_contract")
+    if isinstance(contract_ref, str):
+        source_contract = task_source.parent / contract_ref
+        if source_contract.is_file():
+            contract = load_json(source_contract)
+    if contract is None:
+        contract = {"schema_version": 1, "artifacts": artifacts or []}
+    _write_json(task_path, task_snapshot)
     _write_json(manifest_path, manifest)
+    _write_json(output_contract_path, contract)
     if agent_prompt is not None:
         (control / "agent_prompt.md").write_text(agent_prompt, encoding="utf-8")
-    return (RunContext(run_id, run, control, task_path, manifest_path, work,
+    return (RunContext(run_id, run, control, task_path, manifest_path, output_contract_path, work,
                        log=record / "execution.log", record=record,
                        result=record / "run_result.json"), attempt)
 
@@ -163,6 +181,7 @@ def run_command(task_path: str | Path, manifest_path: str | Path, command: Seque
     except ValidationError as exc:
         raise ExecutionError(f"input validation failed: {exc}") from exc
     context, attempt = _context(Path(run_root).resolve(), run_id, task, manifest,
+                                 Path(task_path).resolve(),
                                  resume=resume, agent_prompt=agent_prompt)
     result: dict[str, Any] = {
         "run_id": run_id,

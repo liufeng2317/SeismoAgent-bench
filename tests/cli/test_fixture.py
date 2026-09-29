@@ -31,7 +31,7 @@ class SyntheticFixtureSmokeTests(unittest.TestCase):
             self.assertEqual(evaluated.returncode, 0, evaluated.stderr)
             self.assertEqual(json.loads(evaluated.stdout)["run"]["state"], "scored")
             for relative in (
-                "control/task_spec.json", "control/input_manifest.json", "record/environment.json",
+                "control/task_spec.json", "control/input_manifest.json", "control/output_contract.json", "record/environment.json",
                 "record/agent_command.json", "record/execution.log", "work/catalog.json",
                 "record/artifact_manifest.json", "evaluation/score.json", "record/run_result.json",
                 "evaluation/report.json",
