@@ -38,6 +38,8 @@ def _parser() -> argparse.ArgumentParser:
     evaluate = commands.add_parser("evaluate", help="evaluate a completed Agent run")
     evaluate.add_argument("--run-dir", required=True, help="completed run directory")
     evaluate.add_argument("--reference-manifest", help="optional authorized reference manifest")
+    evaluate.add_argument("--pick-reference", help="optional reference picks CSV")
+    evaluate.add_argument("--pick-time-tolerance-s", type=float, default=0.5)
     plan = commands.add_parser("plan-experiment", help="validate and expand an experiment spec")
     plan.add_argument("--spec", required=True, help="experiment YAML specification")
     execute = commands.add_parser("execute-experiment", help="execute an experiment plan serially")
@@ -80,7 +82,9 @@ def main(argv: Sequence[str] | None = None) -> int:
                                timeout=args.timeout, reference_manifest=args.reference_manifest,
                                agent_config=agent_config)
         elif args.action == "evaluate":
-            result = evaluate_run(args.run_dir, reference_manifest=args.reference_manifest)
+            result = evaluate_run(args.run_dir, reference_manifest=args.reference_manifest,
+                                  pick_reference=args.pick_reference,
+                                  pick_time_tolerance_s=args.pick_time_tolerance_s)
         elif args.action == "plan-experiment":
             spec = load_experiment_spec(args.spec)
             result = {"experiment": spec["experiment_id"],

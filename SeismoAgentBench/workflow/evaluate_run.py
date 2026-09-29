@@ -14,11 +14,13 @@ from SeismoAgentBench.scoring import (
     ReferenceError,
     ScoreError,
     ScientificScoreError,
+    PickScoreError,
     ReferenceSpec,
     aggregate_catalog_score,
     score_artifacts,
     score_catalogs,
     validate_artifacts,
+    score_picks,
 )
 from SeismoAgentBench.task import load_json
 
@@ -40,7 +42,21 @@ def _catalog_artifact(task: dict[str, Any], output: Path) -> tuple[dict[str, Any
     return item, value
 
 
-def evaluate_run(run_dir: str | Path, *, reference_manifest: str | Path | None = None) -> dict[str, Any]:
+def _pick_artifact(task: dict[str, Any], output: Path) -> Path:
+    candidates = [item for item in task["output_artifacts"]
+                  if item.get("kind", "").lower() in {"picks", "phase_picks"}
+                  or Path(item["path"]).name.lower() == "picks.csv"]
+    if len(candidates) != 1:
+        raise ScientificScoreError("pick scoring requires exactly one picks CSV output artifact")
+    path = output / candidates[0]["path"]
+    if not path.is_file():
+        raise ScientificScoreError(f"candidate picks file is missing: {path}")
+    return path
+
+
+def evaluate_run(run_dir: str | Path, *, reference_manifest: str | Path | None = None,
+                 pick_reference: str | Path | None = None,
+                 pick_time_tolerance_s: float = 0.5) -> dict[str, Any]:
     """Evaluate a completed Agent run without starting the Agent."""
     run = Path(run_dir).resolve()
     result_path = run / "record" / "run_result.json"
@@ -107,6 +123,23 @@ def evaluate_run(run_dir: str | Path, *, reference_manifest: str | Path | None =
             _write_json(run / "record" / "run_result.json", result)
             write_evaluation_report(run, result, reference=reference_record)
             return {"run": result, "artifacts": validation, "score": score, "scientific_score": failure}
+    if pick_reference is not None:
+        try:
+            pick_score = score_picks(_pick_artifact(task, output), pick_reference,
+                                    time_tolerance_s=pick_time_tolerance_s,
+                                    reference_id=Path(pick_reference).stem)
+            _write_json(score_dir / "pick_scientific_score.json", pick_score)
+            result["pick_scientific_scoring"] = "passed"
+        except (PickScoreError, ScientificScoreError, OSError, UnicodeError) as exc:
+            failure = {"schema_version": 1, "status": "scoring_failed", "errors": [str(exc)]}
+            _write_json(score_dir / "pick_scientific_score.json", failure)
+            result["state"] = "scoring_failed"
+            result["pick_scientific_scoring"] = "failed"
+            result["scoring_error"] = str(exc)
+            _write_json(run / "record" / "run_result.json", result)
+            write_evaluation_report(run, result, reference=reference_record)
+            return {"run": result, "artifacts": validation, "score": score,
+                    "pick_scientific_score": failure}
     result["state"] = "scored"
     result["artifact_validation"] = "passed"
     _write_json(run / "record" / "run_result.json", result)
@@ -115,4 +148,6 @@ def evaluate_run(run_dir: str | Path, *, reference_manifest: str | Path | None =
     if reference_manifest is not None:
         output_result["scientific_score"] = scientific
         output_result["task_summary"] = summary
+    if pick_reference is not None:
+        output_result["pick_scientific_score"] = pick_score
     return output_result
