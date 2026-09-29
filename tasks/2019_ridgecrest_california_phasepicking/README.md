@@ -46,8 +46,9 @@ Use the task-local script:
 bash run.sh
 ```
 
-Set `RUN_ID` for another run. Set `PYTHON` or `CODEX_BIN` only when the
-default executable locations are not available.
+Each invocation gets a UTC-timestamped `run_id`. Set `RUN_ID` when a stable
+custom identifier is needed. Set `PYTHON` or `CODEX_BIN` only when the default
+executable locations are not available.
 
 ## Run results
 
