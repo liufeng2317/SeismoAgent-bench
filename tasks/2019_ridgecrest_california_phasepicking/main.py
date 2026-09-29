@@ -87,11 +87,13 @@ def _pick_rows(path: Path, output: list[dict], summaries: list[dict], example: d
         if representative is None:
             seconds = min(len(trace.data) / sampling_rate, 60.0)
             count = max(1, int(seconds * sampling_rate))
-            representative = {"trace": trace.copy(), "characteristic": characteristic, "count": count}
+            representative = {"trace": trace.copy(), "characteristic": characteristic,
+                              "count": count, "source_file": str(path)}
     return representative
 
 
-def _figure(output: Path, coordinates: dict[str, tuple[float, float]], example: dict | None) -> None:
+def _figures(output: Path, coordinates: dict[str, tuple[float, float]],
+             example: dict | None, picks: list[dict]) -> None:
     figure, axes = plt.subplots(1, 2, figsize=(12, 4.5), constrained_layout=True)
     if coordinates:
         latitudes, longitudes = zip(*coordinates.values())
@@ -107,14 +109,52 @@ def _figure(output: Path, coordinates: dict[str, tuple[float, float]], example: 
         values = np.asarray(trace.data[:count], dtype=float)
         values -= np.nanmedian(values)
         axes[1].plot(times, values, color="#222222", linewidth=0.5)
-        axes[1].set_title(f"Preprocessed example: {trace.id}")
+        axes[1].set_title(f"Raw waveform: {trace.id}")
         axes[1].set_xlabel("Time since trace start (s)")
-        axes[1].set_ylabel("Demeaned amplitude")
+        axes[1].set_ylabel("Amplitude")
         axes[1].grid(alpha=0.25)
-        trigger_axis = axes[1].twinx()
-        trigger_axis.plot(times, example["characteristic"][:count], color="#c53030", linewidth=0.6, alpha=0.75)
-        trigger_axis.set_ylabel("STA/LTA", color="#c53030")
-    figure.savefig(output / "preprocessing_figure.png", dpi=180)
+    figure.savefig(output / "station_distribution_waveform.png", dpi=180)
+    plt.close(figure)
+
+    if example is None:
+        return
+    trace = example["trace"]
+    count = example["count"]
+    times = np.arange(count) / float(trace.stats.sampling_rate)
+    values = np.asarray(trace.data[:count], dtype=float)
+    values -= np.nanmedian(values)
+    figure, axes = plt.subplots(2, 1, figsize=(10, 6), sharex=True, constrained_layout=True)
+    axes[0].plot(times, values, color="#222222", linewidth=0.5)
+    axes[0].set_ylabel("Demeaned amplitude")
+    axes[0].set_title(f"Preprocessing: {trace.id}")
+    axes[0].grid(alpha=0.25)
+    axes[1].plot(times, example["characteristic"][:count], color="#c53030", linewidth=0.6)
+    axes[1].set_xlabel("Time since trace start (s)")
+    axes[1].set_ylabel("STA/LTA")
+    axes[1].grid(alpha=0.25)
+    figure.savefig(output / "preprocessing.png", dpi=180)
+    plt.close(figure)
+
+    figure, axis = plt.subplots(figsize=(10, 3.5), constrained_layout=True)
+    axis.plot(times, values, color="#222222", linewidth=0.5)
+    source = example["source_file"]
+    for item in picks:
+        if item["source_file"] != source:
+            continue
+        arrival = UTCDateTime(item["arrival_time_utc"])
+        offset = float(arrival - trace.stats.starttime)
+        if 0 <= offset <= times[-1]:
+            color = "#c53030" if item["phase"] == "P" else "#2b6cb0"
+            axis.axvline(offset, color=color, linewidth=0.8, alpha=0.8,
+                         label=item["phase"])
+    axis.set_title(f"Phase picks: {trace.id}")
+    axis.set_xlabel("Time since trace start (s)")
+    axis.set_ylabel("Demeaned amplitude")
+    axis.grid(alpha=0.25)
+    handles, labels = axis.get_legend_handles_labels()
+    if handles:
+        axis.legend(dict(zip(labels, handles)).values(), dict(zip(labels, handles)).keys())
+    figure.savefig(output / "phase_picks.png", dpi=180)
     plt.close(figure)
 
 
@@ -131,15 +171,13 @@ def main() -> None:
     example = None
     for path in files:
         example = _pick_rows(path, picks, summaries, example)
-    plan = {
-        "schema_version": 1,
-        "time_window": {"start": START.isoformat(), "end": END.isoformat()},
-        "steps": ["discover date-matched waveform files", "preprocess traces", "pick P and S arrivals", "inspect outputs"],
-        "method": "demean plus classic STA/LTA trigger; S is represented by trigger end time in this baseline",
-        "input_files": len(files),
-    }
-    (output / "task_plan.json").write_text(json.dumps(plan, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    (output / "pick_examples.json").write_text(json.dumps({"schema_version": 1, "examples": picks[:10]}, indent=2) + "\n", encoding="utf-8")
+    plan = """# Task plan\n\n"""
+    plan += f"- Time window: [{START.isoformat()}, {END.isoformat()})\n"
+    plan += f"- Waveform files selected: {len(files)}\n"
+    plan += "- Preprocessing: demean, then classic STA/LTA characterization.\n"
+    plan += "- Picking: trigger onset is recorded as P and trigger end as S in this baseline.\n"
+    plan += "- Quality checks: sample count, sampling rate, missing data and pick window.\n"
+    (output / "task_plan.md").write_text(plan, encoding="utf-8")
     with (output / "picks.csv").open("w", newline="", encoding="utf-8") as handle:
         fields = ["station", "channel", "phase", "arrival_time_utc", "confidence",
                   "status", "uncertainty_s", "method", "source_file"]
@@ -148,7 +186,7 @@ def main() -> None:
         writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
         writer.writerows(picks)
-    _figure(output, coordinates, example)
+    _figures(output, coordinates, example, picks)
 
 
 if __name__ == "__main__":
