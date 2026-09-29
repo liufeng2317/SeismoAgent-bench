@@ -6,8 +6,12 @@ together with enough diagnostics to inspect the method and its limitations.
 
 ### Input scope
 
-- Discover inputs from `BENCH_INPUT_MANIFEST`; do not hard-code alternative
-  data locations.
+- Use the following input locations. They are read-only:
+  - Waveform directory: `/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms/data`
+  - Station metadata: `/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms/stations/earthscope.stationxml`
+- When `BENCH_INPUT_MANIFEST` is available, use its entries to obtain the same
+  paths together with detailed metadata; the variable points to the run's
+  manifest, not directly to waveform data.
 - Use only waveform samples in the declared time window and use the declared
   station metadata for station coordinates. Record stations or traces that
   cannot be resolved.

@@ -73,3 +73,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Prompt rendering boundaries | [71_prompt_rendering_boundaries.md](71_prompt_rendering_boundaries.md) | Complete |
 | Prompt heading cleanup | [72_prompt_heading_cleanup.md](72_prompt_heading_cleanup.md) | Complete |
 | Prompt-first task contract | [73_prompt_first_task_contract.md](73_prompt_first_task_contract.md) | Complete |
+| Explicit task input paths | [74_explicit_task_input_paths.md](74_explicit_task_input_paths.md) | Complete |
