@@ -67,9 +67,16 @@ def evaluate_run(run_dir: str | Path, *, reference_manifest: str | Path | None =
     if not result_path.is_file():
         raise ExecutionError(f"run record is missing: {result_path}")
     result = load_json(result_path)
-    if result["state"] != "completed":
+    prior_state = result.get("state")
+    # Evaluation is repeatable: a previous evaluation may have changed the
+    # run state, while the Agent execution itself must never be repeated.
+    reevaluable_states = {"completed", "scored", "artifact_invalid", "scoring_failed"}
+    if prior_state not in reevaluable_states:
         write_evaluation_report(run, result)
         return {"run": result, "score": None}
+    if prior_state != "completed":
+        result["previous_evaluation_state"] = prior_state
+        result["state"] = "completed"
 
     task = load_json(run / "control" / "task_spec.json")
     contract_path = run / "control" / "output_contract.json"

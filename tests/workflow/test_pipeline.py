@@ -6,7 +6,7 @@ import unittest
 from unittest.mock import patch
 
 from SeismoAgentBench.scoring import ScoreError
-from SeismoAgentBench.workflow import run_task
+from SeismoAgentBench.workflow import evaluate_run, run_task
 from tests.task_helpers import write_task_package
 
 
@@ -54,6 +54,10 @@ class PipelineTests(unittest.TestCase):
         report = json.loads((run / "evaluation/report.json").read_text())
         self.assertEqual(report["records"]["score"], "evaluation/score.json")
         self.assertIsNone(report["agent"])
+        reevaluated = evaluate_run(run)
+        self.assertEqual(reevaluated["run"]["state"], "scored")
+        self.assertEqual(reevaluated["run"]["previous_evaluation_state"], "scored")
+        self.assertEqual(reevaluated["score"]["metrics"]["contract_compliance"], 1.0)
 
     def test_missing_required_output_is_not_scored(self):
         result = run_task(self.task, self.manifest, [sys.executable, "-c", "pass"], self.root, "run-002", timeout=10)

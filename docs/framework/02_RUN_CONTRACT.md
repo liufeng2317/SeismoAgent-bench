@@ -50,7 +50,9 @@ Evaluation writes `evaluation/scorer_plan.json` before scoring. It records the
 registered scorer identities and whether each scorer is local or reference-based.
 Registered handlers then execute those declarations in order. A reference-based
 scorer without its reference input is recorded as `skipped`; it does not receive
-an implicit score.
+an implicit score. The external evaluator may run again on a completed run (or
+on a previous evaluation state) without starting the Agent or changing `work/`.
+Execution failure and timeout states remain non-evaluable.
 
 The runner exposes the three control paths as `BENCH_TASK_SPEC`,
 `BENCH_INPUT_MANIFEST` and `BENCH_OUTPUT_CONTRACT`. These files are snapshots,

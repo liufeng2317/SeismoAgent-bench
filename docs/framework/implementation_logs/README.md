@@ -67,3 +67,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Unit and batch result records | [65_unit_batch_result_records.md](65_unit_batch_result_records.md) | Complete |
 | Scorer registry | [66_scorer_registry.md](66_scorer_registry.md) | Complete |
 | Scorer handler dispatch | [67_scorer_handler_dispatch.md](67_scorer_handler_dispatch.md) | Complete |
+| Repeatable external evaluation | [68_repeatable_external_evaluation.md](68_repeatable_external_evaluation.md) | Complete |
