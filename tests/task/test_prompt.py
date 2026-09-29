@@ -4,18 +4,19 @@ import tempfile
 import unittest
 
 from SeismoAgentBench.task import render_agent_prompt
+from tests.task_helpers import write_task_package
 
 
 class PromptRenderingTests(unittest.TestCase):
     def test_renderer_combines_task_inputs_outputs_and_extra_instructions(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            (root / "task.json").write_text(json.dumps({
-                "task_id": "prompt-task", "version": "1", "task_prompt": "Inspect the data.",
-                "input_types": ["metadata"],
+            write_task_package(root / "task.json", {
+                "task_id": "prompt-task", "version": "1",
+                "input_requirements": [{"id": "metadata", "data_type": "metadata", "required": True}],
+                "evaluation": {"scorers": [{"name": "artifact-contract", "version": "1"}]},
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
-                "scorer": {"name": "artifact-contract", "version": "1"},
-            }), encoding="utf-8")
+            }, "Inspect the data.")
             (root / "manifest.json").write_text(json.dumps({
                 "schema_version": 1, "case_id": "prompt_case", "entries": [{
                     "id": "metadata", "path": "/tmp/metadata.json", "data_type": "metadata",

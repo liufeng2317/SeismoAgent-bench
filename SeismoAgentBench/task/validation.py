@@ -101,6 +101,12 @@ def load_task(path: str | Path) -> dict[str, Any]:
     """Load a task and resolve its external output contract, when declared."""
     source = Path(path)
     task = load_json(source)
+    legacy_fields = sorted({"task_prompt", "input_types", "output_artifacts", "scorer"} & set(task))
+    if legacy_fields:
+        raise ValidationError([
+            "task uses removed fields: " + ", ".join(legacy_fields)
+            + "; use task_prompt_file, input_requirements and evaluation.scorers"
+        ])
     prompt_ref = task.get("task_prompt_file")
     if prompt_ref is not None:
         if (not isinstance(prompt_ref, str) or not prompt_ref
@@ -229,7 +235,12 @@ def validate_manifest(value: Mapping[str, Any], *, task: Mapping[str, Any] | Non
             if field in entry:
                 _time(entry[field], f"{label}.{field}", errors)
     if task is not None and isinstance(task, Mapping):
-        required_types = set(task.get("input_types", []))
+        required_types = {
+            item.get("data_type")
+            for item in task.get("input_requirements", [])
+            if isinstance(item, Mapping) and item.get("required") is True
+        }
+        required_types.discard(None)
         missing = sorted(required_types - data_types)
         if missing:
             errors.append(f"manifest is missing required input types: {', '.join(missing)}")
@@ -244,23 +255,20 @@ def validate_task(value: Mapping[str, Any]) -> dict[str, Any]:
     task = _object(value, "task", errors)
     if task is None:
         raise ValidationError(errors)
-    allowed = {"task_id", "version", "title", "summary", "task_prompt", "task_prompt_file",
-               "input_types", "output_contract", "output_artifacts", "scorer"}
+    allowed = {"task_id", "version", "title", "summary", "task_prompt_file",
+               "output_contract", "category", "software", "required_system_packages",
+               "taxonomy", "input_requirements", "reference_requirements", "evaluation",
+               # These fields are materialized by load_task for downstream code.
+               "task_prompt", "output_artifacts"}
     _unknown(task, allowed, "task", errors)
-    _required(task, {"task_id", "version", "input_types", "scorer"}, "task", errors)
-    if "task_prompt" not in task and "task_prompt_file" not in task:
-        errors.append("task must declare task_prompt or task_prompt_file")
-    has_contract = "output_contract" in task
-    has_artifacts = "output_artifacts" in task
-    if not has_contract and not has_artifacts:
-        errors.append("task must declare output_contract or output_artifacts")
-    if has_contract:
-        contract_ref = task.get("output_contract")
-        if (not isinstance(contract_ref, str) or not contract_ref
-                or Path(contract_ref).is_absolute()
-                or "\x00" in contract_ref
-                or any(part == ".." for part in Path(contract_ref).parts)):
-            errors.append("task.output_contract must be a relative non-traversing path")
+    _required(task, {"task_id", "version", "task_prompt_file", "input_requirements",
+                     "output_contract", "evaluation"}, "task", errors)
+    contract_ref = task.get("output_contract")
+    if (not isinstance(contract_ref, str) or not contract_ref
+            or Path(contract_ref).is_absolute()
+            or "\x00" in contract_ref
+            or any(part == ".." for part in Path(contract_ref).parts)):
+        errors.append("task.output_contract must be a relative non-traversing path")
     if not isinstance(task.get("task_id"), str) or not _ID.fullmatch(task.get("task_id", "")):
         errors.append("task.task_id has an invalid identifier")
     if not isinstance(task.get("version"), str) or not task.get("version"):
@@ -268,21 +276,115 @@ def validate_task(value: Mapping[str, Any]) -> dict[str, Any]:
     for field in ("title", "summary"):
         if field in task and (not isinstance(task[field], str) or not task[field]):
             errors.append(f"task.{field} must be a non-empty string when provided")
-    if not isinstance(task.get("task_prompt"), str) or not task.get("task_prompt"):
-        if "task_prompt_file" not in task:
-            errors.append("task.task_prompt must be a non-empty string")
-    if "task_prompt_file" in task:
-        prompt_ref = task["task_prompt_file"]
-        if (not isinstance(prompt_ref, str) or not prompt_ref
-                or Path(prompt_ref).is_absolute()
-                or "\x00" in prompt_ref
-                or any(part == ".." for part in Path(prompt_ref).parts)):
-            errors.append("task.task_prompt_file must be a relative non-traversing path")
-    input_types = task.get("input_types")
-    if not isinstance(input_types, list) or not input_types or any(kind not in _INPUT_TYPES for kind in input_types):
-        errors.append("task.input_types must be a non-empty list of supported input types")
-    elif len(set(input_types)) != len(input_types):
-        errors.append("task.input_types must not contain duplicates")
+    prompt_ref = task.get("task_prompt_file")
+    if (not isinstance(prompt_ref, str) or not prompt_ref
+            or Path(prompt_ref).is_absolute()
+            or "\x00" in prompt_ref
+            or any(part == ".." for part in Path(prompt_ref).parts)):
+        errors.append("task.task_prompt_file must be a relative non-traversing path")
+
+    input_requirements = task.get("input_requirements")
+    if not isinstance(input_requirements, list) or not input_requirements:
+        errors.append("task.input_requirements must be a non-empty list")
+        input_requirements = []
+    seen_input_requirements: set[str] = set()
+    for index, raw in enumerate(input_requirements):
+        label = f"task.input_requirements[{index}]"
+        item = _object(raw, label, errors)
+        if item is None:
+            continue
+        _unknown(item, {"id", "data_type", "format", "required"}, label, errors)
+        _required(item, {"id", "data_type", "required"}, label, errors)
+        identifier = item.get("id")
+        if not isinstance(identifier, str) or not _ID.fullmatch(identifier):
+            errors.append(f"{label}.id has an invalid identifier")
+        elif identifier in seen_input_requirements:
+            errors.append(f"duplicate input_requirements id {identifier!r}")
+        else:
+            seen_input_requirements.add(identifier)
+        if item.get("data_type") not in _INPUT_TYPES:
+            errors.append(f"{label}.data_type is not supported")
+        if not isinstance(item.get("required"), bool):
+            errors.append(f"{label}.required must be boolean")
+        if "format" in item and (not isinstance(item["format"], str) or not item["format"].strip()):
+            errors.append(f"{label}.format must be a non-empty string")
+
+    category = task.get("category")
+    if category is not None and (not isinstance(category, str) or not category.strip()):
+        errors.append("task.category must be a non-empty string when provided")
+    for field in ("software", "required_system_packages"):
+        values = task.get(field)
+        if values is not None:
+            if (not isinstance(values, list)
+                    or any(not isinstance(item, str) or not item.strip() for item in values)):
+                errors.append(f"task.{field} must be a list of non-empty strings")
+            elif len(set(values)) != len(values):
+                errors.append(f"task.{field} must not contain duplicates")
+
+    taxonomy = task.get("taxonomy")
+    if taxonomy is not None:
+        if not isinstance(taxonomy, dict):
+            errors.append("task.taxonomy must be an object")
+        else:
+            for key, item in taxonomy.items():
+                valid_scalar = isinstance(item, str) and bool(item.strip())
+                valid_list = (isinstance(item, list) and bool(item)
+                              and all(isinstance(entry, str) and entry.strip() for entry in item))
+                if not isinstance(key, str) or not key.strip() or not (valid_scalar or valid_list):
+                    errors.append("task.taxonomy values must be non-empty strings or string lists")
+
+    for field in ("reference_requirements",):
+        requirements = task.get(field)
+        if requirements is None:
+            continue
+        if not isinstance(requirements, list) or not requirements:
+            errors.append(f"task.{field} must be a non-empty list when provided")
+            continue
+        seen_requirements: set[str] = set()
+        for index, raw in enumerate(requirements):
+            label = f"task.{field}[{index}]"
+            item = _object(raw, label, errors)
+            if item is None:
+                continue
+            allowed_fields = {"id", "data_type", "format", "required", "role"}
+            _unknown(item, allowed_fields, label, errors)
+            _required(item, {"id", "required"}, label, errors)
+            identifier = item.get("id")
+            if not isinstance(identifier, str) or not _ID.fullmatch(identifier):
+                errors.append(f"{label}.id has an invalid identifier")
+            elif identifier in seen_requirements:
+                errors.append(f"duplicate {field} id {identifier!r}")
+            else:
+                seen_requirements.add(identifier)
+            if "data_type" in item and item["data_type"] not in _INPUT_TYPES:
+                errors.append(f"{label}.data_type is not supported")
+            for string_field in ("format", "role"):
+                if string_field in item and (
+                        not isinstance(item[string_field], str) or not item[string_field].strip()):
+                    errors.append(f"{label}.{string_field} must be a non-empty string")
+            if not isinstance(item.get("required"), bool):
+                errors.append(f"{label}.required must be boolean")
+
+    evaluation = task.get("evaluation")
+    evaluation_obj = _object(evaluation, "task.evaluation", errors)
+    if evaluation_obj is not None:
+        _unknown(evaluation_obj, {"scorers"}, "task.evaluation", errors)
+        scorers = evaluation_obj.get("scorers")
+        if not isinstance(scorers, list) or not scorers:
+            errors.append("task.evaluation.scorers must be a non-empty list")
+        else:
+            for index, raw in enumerate(scorers):
+                label = f"task.evaluation.scorers[{index}]"
+                scorer_item = _object(raw, label, errors)
+                if scorer_item is None:
+                    continue
+                _unknown(scorer_item, {"name", "version"}, label, errors)
+                _required(scorer_item, {"name", "version"}, label, errors)
+                if not isinstance(scorer_item.get("name"), str) or not scorer_item["name"].strip():
+                    errors.append(f"{label}.name must be a non-empty string")
+                if not isinstance(scorer_item.get("version"), str) or not scorer_item["version"].strip():
+                    errors.append(f"{label}.version must be a non-empty string")
+    has_artifacts = "output_artifacts" in task
     outputs = task.get("output_artifacts")
     output_ids: set[str] = set()
     if has_artifacts and (not isinstance(outputs, list) or not outputs):
@@ -326,14 +428,6 @@ def validate_task(value: Mapping[str, Any]) -> dict[str, Any]:
                         errors.append(f"{label}.schema.name must be a non-empty string")
                     if not isinstance(schema.get("version"), int) or schema.get("version") < 1:
                         errors.append(f"{label}.schema.version must be a positive integer")
-    scorer = _object(task.get("scorer"), "task.scorer", errors)
-    if scorer is not None:
-        _unknown(scorer, {"name", "version"}, "task.scorer", errors)
-        _required(scorer, {"name", "version"}, "task.scorer", errors)
-        if not isinstance(scorer.get("name"), str) or not scorer.get("name"):
-            errors.append("task.scorer.name must be a non-empty string")
-        if not isinstance(scorer.get("version"), str) or not scorer.get("version"):
-            errors.append("task.scorer.version must be a non-empty string")
     if errors:
         raise ValidationError(errors)
     return dict(value)

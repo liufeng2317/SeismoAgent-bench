@@ -4,6 +4,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from tests.task_helpers import write_task_package
 
 
 class CodexCliTests(unittest.TestCase):
@@ -14,12 +15,12 @@ class CodexCliTests(unittest.TestCase):
             manifest = base / "manifest.json"
             fake = base / "fake-codex"
             run_root = base / "runs"
-            task.write_text(json.dumps({
-                "task_id": "codex-cli-smoke", "version": "1", "task_prompt": "smoke",
-                "input_types": ["metadata"],
+            write_task_package(task, {
+                "task_id": "codex-cli-smoke", "version": "1",
+                "input_requirements": [{"id": "metadata", "data_type": "metadata", "required": True}],
+                "evaluation": {"scorers": [{"name": "artifact-contract", "version": "1"}]},
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
-                "scorer": {"name": "artifact-contract", "version": "1"},
-            }), encoding="utf-8")
+            }, "smoke")
             manifest.write_text(json.dumps({
                 "schema_version": 1, "case_id": "synthetic", "entries": [
                     {"id": "metadata", "path": "/tmp/metadata.json", "data_type": "metadata", "format": "JSON", "read_only": True}
@@ -28,7 +29,7 @@ class CodexCliTests(unittest.TestCase):
             fake.write_text(
                 "#!" + sys.executable + "\n"
                 "import json, os, pathlib\n"
-                "print(json.dumps({'type': 'assistant', 'text': 'OK'}), flush=True)\n"
+                "print(json.dumps({'type': 'item.completed', 'item': {'type': 'agent_message', 'text': 'OK'}}), flush=True)\n"
                 "pathlib.Path(os.environ['BENCH_OUTPUT'], 'result.json').write_text(json.dumps({'ok': True}))\n",
                 encoding="utf-8",
             )
@@ -68,12 +69,12 @@ class CodexCliTests(unittest.TestCase):
             manifest = base / "manifest.json"
             fake = base / "fake-codex"
             root = base / "runs"
-            task.write_text(json.dumps({
-                "task_id": "layout-task", "version": "1", "task_prompt": "smoke",
-                "input_types": ["metadata"],
+            write_task_package(task, {
+                "task_id": "layout-task", "version": "1",
+                "input_requirements": [{"id": "metadata", "data_type": "metadata", "required": True}],
+                "evaluation": {"scorers": [{"name": "artifact-contract", "version": "1"}]},
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
-                "scorer": {"name": "artifact-contract", "version": "1"},
-            }), encoding="utf-8")
+            }, "smoke")
             manifest.write_text(json.dumps({
                 "schema_version": 1, "case_id": "synthetic", "entries": [
                     {"id": "metadata", "path": "/tmp/metadata.json", "data_type": "metadata", "format": "JSON", "read_only": True}
@@ -108,12 +109,12 @@ class CodexCliTests(unittest.TestCase):
             fake = base / "fake-codex"
             counter = base / "counter"
             run_root = base / "runs"
-            task.write_text(json.dumps({
-                "task_id": "retry-task", "version": "1", "task_prompt": "smoke",
-                "input_types": ["metadata"],
+            write_task_package(task, {
+                "task_id": "retry-task", "version": "1",
+                "input_requirements": [{"id": "metadata", "data_type": "metadata", "required": True}],
+                "evaluation": {"scorers": [{"name": "artifact-contract", "version": "1"}]},
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
-                "scorer": {"name": "artifact-contract", "version": "1"},
-            }), encoding="utf-8")
+            }, "smoke")
             manifest.write_text(json.dumps({
                 "schema_version": 1, "case_id": "synthetic", "entries": [
                     {"id": "metadata", "path": "/tmp/metadata.json", "data_type": "metadata", "format": "JSON", "read_only": True}

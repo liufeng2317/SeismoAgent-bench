@@ -28,12 +28,13 @@ This workflow test case is maintained separately from the scientific Ridgecrest 
 
 The task definition is split for readability: `task.json` contains structured
 metadata and points to `task_prompt.md`, which contains the human-readable task
-instructions. The loader uses the Markdown file as the task prompt when it is
-declared; inline `task_prompt` remains supported for legacy tasks.
+instructions. `task_prompt.md` is the only supported source for the Agent-facing
+task prompt.
 
 ## Input manifest vocabulary
 
-The task declares semantic input roles in `task.json` under `input_types`. Each
+The task declares semantic input roles in `task.json` under
+`input_requirements`. Each
 manifest entry repeats its role in `data_type` and separately records the
 physical file representation in `format`. For example, a waveform entry uses
 `data_type: waveform` and `format: miniSEED`, while station metadata uses
@@ -42,7 +43,8 @@ the task meaning independent of a particular file format.
 
 The required output files are defined separately in `output_contract.json`.
 The runner resolves that file when loading `task.json`; the evaluator records
-the files actually produced by an Agent in the run record.
+the files actually produced by an Agent in the run record. Evaluation scorers
+are declared under `task.json` in `evaluation.scorers`.
 
 For Codex runs, the framework renders `task.json`, `input_manifest.json` and
 `output_contract.json` into `control/agent_prompt.md`. This is the complete

@@ -25,7 +25,7 @@ unique for the task. The directory is divided by ownership:
 
 `control/` is created by the runner from the registered task and concrete input
 manifest. It is read-only control input. `task_spec.json` contains task identity,
-prompt-file reference, input types and scorer settings. `task_prompt.md` contains
+prompt-file reference, input requirements and evaluation scorer settings. `task_prompt.md` contains
 the human-readable task instructions. `output_contract.json` contains only
 the required output artifacts. `input_manifest.json` contains only the input
 locations and data metadata. `agent_prompt.md` is a rendered convenience view;
@@ -34,9 +34,7 @@ it is not an additional source of truth.
 `work/` is the only Agent-controlled directory. The Agent writes candidate
 artifacts there through `BENCH_WORK` and `BENCH_OUTPUT`. `record/` is written
 by the runner and stores execution provenance and the actual artifact inventory.
-New runs use one `provenance.json` for Agent identity and launcher details;
-older runs may still contain separate `agent_command.json` and
-`codex_command.json` files.
+New runs use one `provenance.json` for Agent identity and launcher details.
 `evaluation/` is owned by the evaluator and stores scores and reports.
 
 The task's output contract declares artifact paths relative to the Agent-owned

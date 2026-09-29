@@ -9,10 +9,14 @@ from SeismoAgentBench.task import ValidationError, load_json, validate_manifest,
 TASK = {
     "task_id": "waveform-inspection",
     "version": "1",
-    "task_prompt": "Inspect declared waveform metadata.",
-    "input_types": ["waveform", "station_metadata"],
+    "task_prompt_file": "task_prompt.md",
+    "output_contract": "output_contract.json",
+    "input_requirements": [
+        {"id": "waveforms", "data_type": "waveform", "required": True},
+        {"id": "stations", "data_type": "station_metadata", "required": True},
+    ],
+    "evaluation": {"scorers": [{"name": "metadata-score", "version": "1"}]},
     "output_artifacts": [{"id": "summary", "path": "summary.json", "kind": "json", "required": True}],
-    "scorer": {"name": "metadata-score", "version": "1"},
 }
 
 
@@ -73,12 +77,44 @@ class ValidationTests(unittest.TestCase):
         self.assertIn("unknown field", str(raised.exception))
         self.assertIn("duplicate task output artifact id", str(raised.exception))
 
-    def test_task_prompt_is_required_and_objective_is_not_a_task_field(self):
+    def test_task_accepts_framework_metadata(self):
+        value = dict(
+            TASK,
+            category="seismology",
+            software=["Python", "ObsPy"],
+            required_system_packages=["libgomp"],
+            taxonomy={"domain": "seismology", "methods": ["phase_picking"]},
+            input_requirements=[
+                {"id": "waveforms", "data_type": "waveform", "required": True},
+            ],
+            reference_requirements=[
+                {"id": "reference_picks", "format": "CSV", "role": "scoring_only", "required": False},
+            ],
+            evaluation={"scorers": [{"name": "metadata-score", "version": "1"}]},
+        )
+        self.assertEqual(validate_task(value)["category"], "seismology")
+
+    def test_task_metadata_rejects_malformed_requirements(self):
+        value = dict(TASK, input_requirements=[{"id": "bad/id", "required": "yes"}])
+        with self.assertRaisesRegex(ValidationError, r"input_requirements\[0\].id"):
+            validate_task(value)
+
+    def test_task_metadata_rejects_unknown_evaluation_fields(self):
+        value = dict(TASK, evaluation={"scorers": [], "weights": {"x": 1}})
+        with self.assertRaisesRegex(ValidationError, "task.evaluation has unknown field"):
+            validate_task(value)
+
+    def test_task_prompt_file_is_required(self):
         legacy = dict(TASK)
-        legacy.pop("task_prompt")
+        legacy.pop("task_prompt_file")
         legacy["objective"] = "legacy wording"
         with self.assertRaisesRegex(ValidationError, "unknown field.*objective"):
             validate_task(legacy)
+
+    def test_removed_task_fields_are_rejected(self):
+        value = dict(TASK, input_types=["metadata"], scorer={"name": "old", "version": "1"})
+        with self.assertRaisesRegex(ValidationError, "unknown field 'input_types'"):
+            validate_task(value)
 
     def test_load_json_requires_object_and_does_not_modify_source(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -3,6 +3,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from tests.task_helpers import write_task_package
 
 from SeismoAgentBench.workflow import execute_experiment
 
@@ -16,12 +17,12 @@ class ExperimentExecutionTests(unittest.TestCase):
                 "open(os.path.join(os.environ['BENCH_OUTPUT'], 'result.json'), 'w').write(json.dumps({'ok': True}))\n",
                 encoding="utf-8",
             )
-            (base / "task.json").write_text(json.dumps({
-                "task_id": "experiment-task", "version": "1", "task_prompt": "test",
-                "input_types": ["metadata"],
+            write_task_package(base / "task.json", {
+                "task_id": "experiment-task", "version": "1",
+                "input_requirements": [{"id": "metadata", "data_type": "metadata", "required": True}],
+                "evaluation": {"scorers": [{"name": "artifact-contract", "version": "1"}]},
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
-                "scorer": {"name": "artifact-contract", "version": "1"},
-            }), encoding="utf-8")
+            }, "test")
             (base / "manifest.json").write_text(json.dumps({
                 "schema_version": 1, "case_id": "synthetic", "entries": [
                     {"id": "metadata", "path": "/tmp/metadata", "data_type": "metadata", "format": "JSON", "read_only": True}

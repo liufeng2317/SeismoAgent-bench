@@ -23,6 +23,8 @@ class TaskRegistryTests(unittest.TestCase):
             root = Path(tmp)
             (root / "one").mkdir()
             (root / "one/task.json").write_text(FIXTURE.read_text(), encoding="utf-8")
+            for name in ("task_prompt.md", "output_contract.json"):
+                (root / "one" / name).write_bytes((FIXTURE.parent / name).read_bytes())
             (root / "one/manifest.json").write_text("{}", encoding="utf-8")
             registry = TaskRegistry.from_directory(root)
             self.assertEqual(len(registry.records()), 1)
@@ -33,6 +35,8 @@ class TaskRegistryTests(unittest.TestCase):
             first = root / "one.json"
             second = root / "two.json"
             task = json.loads(FIXTURE.read_text())
+            first.parent.joinpath("task_prompt.md").write_text("test\n", encoding="utf-8")
+            first.parent.joinpath("output_contract.json").write_bytes((FIXTURE.parent / "output_contract.json").read_bytes())
             first.write_text(json.dumps(task), encoding="utf-8")
             task["version"] = "2"
             second.write_text(json.dumps(task), encoding="utf-8")

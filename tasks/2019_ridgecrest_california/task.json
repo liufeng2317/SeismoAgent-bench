@@ -3,14 +3,19 @@
   "version": "1",
   "title": "Ridgecrest earthquake catalog construction",
   "summary": "Construct an earthquake catalog from the approved Ridgecrest waveform subset.",
-  "task_prompt": "Construct a reproducible earthquake-catalog candidate from the waveform and StationXML files listed in the input manifest. Inspect the available traces, identify candidate seismic events, and record event times, locations or location status, and provenance for the observations used. Do not modify the declared inputs or claim scientific completeness beyond the available data. Write the catalog artifact to the declared output path and preserve uncertainty or unresolved fields explicitly.",
+  "task_prompt_file": "task_prompt.md",
+  "category": "seismology",
+  "software": ["Python", "ObsPy"],
+  "taxonomy": {"domain": "seismology", "task_type": "catalog_construction"},
+  "input_requirements": [
+    {"id": "waveforms", "data_type": "waveform", "required": true},
+    {"id": "station_metadata", "data_type": "station_metadata", "required": true}
+  ],
   "output_contract": "output_contract.json",
-  "scorer": {
-    "name": "catalog-basic",
-    "version": "1"
-  },
-  "input_types": [
-    "waveform",
-    "station_metadata"
-  ]
+  "evaluation": {
+    "scorers": [
+      {"name": "artifact-contract", "version": "1"},
+      {"name": "catalog-basic", "version": "1"}
+    ]
+  }
 }

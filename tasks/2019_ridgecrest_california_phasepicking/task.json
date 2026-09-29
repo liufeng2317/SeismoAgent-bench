@@ -3,14 +3,23 @@
   "version": "1",
   "title": "Ridgecrest phase picking",
   "summary": "Plan and execute preprocessing and P/S phase picking for one UTC day of Ridgecrest waveform data.",
-  "output_contract": "output_contract.json",
-  "scorer": {
-    "name": "phase-picking-basic",
-    "version": "1"
+  "category": "seismology",
+  "software": ["Python", "ObsPy"],
+  "taxonomy": {
+    "domain": "seismology",
+    "task_type": "phase_picking",
+    "methods": ["waveform_preprocessing", "P_S_phase_picking"]
   },
-  "input_types": [
-    "waveform",
-    "station_metadata"
+  "input_requirements": [
+    {"id": "waveforms", "data_type": "waveform", "required": true},
+    {"id": "station_metadata", "data_type": "station_metadata", "required": true}
   ],
+  "output_contract": "output_contract.json",
+  "evaluation": {
+    "scorers": [
+      {"name": "artifact-contract", "version": "1"},
+      {"name": "phase-picking-basic", "version": "1"}
+    ]
+  },
   "task_prompt_file": "task_prompt.md"
 }

@@ -6,15 +6,17 @@ import unittest
 
 from SeismoAgentBench.agent import AgentError, AgentSpec, run_agent
 from SeismoAgentBench.workflow import evaluate_run
+from tests.task_helpers import write_task_package
 
 
 TASK = {
     "task_id": "agent-smoke",
     "version": "1",
-    "task_prompt": "Run a synthetic agent.",
-    "input_types": ["metadata"],
+    "task_prompt_file": "task_prompt.md",
+    "output_contract": "output_contract.json",
+    "input_requirements": [{"id": "metadata", "data_type": "metadata", "required": True}],
+    "evaluation": {"scorers": [{"name": "artifact-contract", "version": "1"}]},
     "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
-    "scorer": {"name": "artifact-contract", "version": "1"},
 }
 MANIFEST = {"schema_version": 1, "case_id": "synthetic_case", "entries": [
     {"id": "metadata", "path": "/tmp/metadata.json", "data_type": "metadata", "format": "JSON", "read_only": True}
@@ -35,7 +37,7 @@ class AgentContractTests(unittest.TestCase):
             root.mkdir()
             task = base / "task.json"
             manifest = base / "manifest.json"
-            task.write_text(json.dumps(TASK), encoding="utf-8")
+            write_task_package(task, TASK, "Run a synthetic agent.")
             manifest.write_text(json.dumps(MANIFEST), encoding="utf-8")
             code = "import json,os; open(os.path.join(os.environ['BENCH_OUTPUT'],'result.json'),'w').write(json.dumps({'agent': True}))"
             spec = AgentSpec.from_command("synthetic-agent", "0.1", [sys.executable, "-c", code])

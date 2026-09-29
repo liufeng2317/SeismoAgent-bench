@@ -7,15 +7,17 @@ from unittest.mock import patch
 
 from SeismoAgentBench.scoring import ScoreError
 from SeismoAgentBench.workflow import run_task
+from tests.task_helpers import write_task_package
 
 
 TASK = {
     "task_id": "pipeline-smoke",
     "version": "1",
-    "task_prompt": "Run a synthetic end-to-end task.",
-    "input_types": ["metadata"],
+    "task_prompt_file": "task_prompt.md",
+    "output_contract": "output_contract.json",
+    "input_requirements": [{"id": "metadata", "data_type": "metadata", "required": True}],
+    "evaluation": {"scorers": [{"name": "artifact-contract", "version": "1"}]},
     "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
-    "scorer": {"name": "artifact-contract", "version": "1"},
 }
 MANIFEST = {"schema_version": 1, "case_id": "synthetic_case", "entries": [
     {"id": "metadata", "path": "/tmp/metadata.json", "data_type": "metadata", "format": "JSON", "read_only": True}
@@ -30,7 +32,7 @@ class PipelineTests(unittest.TestCase):
         self.root.mkdir()
         self.task = base / "task.json"
         self.manifest = base / "manifest.json"
-        self.task.write_text(json.dumps(TASK), encoding="utf-8")
+        write_task_package(self.task, TASK, "Run a synthetic end-to-end task.")
         self.manifest.write_text(json.dumps(MANIFEST), encoding="utf-8")
 
     def tearDown(self):
@@ -72,11 +74,11 @@ class PipelineTests(unittest.TestCase):
     def test_reference_manifest_enables_optional_scientific_scoring(self):
         base = Path(self.tmp.name)
         task = base / "catalog-task.json"
-        task.write_text(json.dumps({
+        write_task_package(task, {
             **TASK,
             "task_id": "catalog-pipeline-smoke",
             "output_artifacts": [{"id": "catalog", "path": "catalog.json", "kind": "catalog", "required": True}],
-        }), encoding="utf-8")
+        }, "Run a synthetic catalog task.")
         reference_catalog = base / "reference.json"
         reference_catalog.write_text(json.dumps({
             "schema_version": 1,

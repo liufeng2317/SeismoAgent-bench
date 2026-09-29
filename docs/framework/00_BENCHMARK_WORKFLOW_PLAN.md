@@ -38,7 +38,7 @@ A task specification MUST declare:
 
 - `task_id` and task version;
 - Agent-facing task prompt;
-- required and optional input kinds;
+- required and optional input requirements;
 - agent input contract;
 - required output artifacts and schemas;
 - permitted tool capabilities;

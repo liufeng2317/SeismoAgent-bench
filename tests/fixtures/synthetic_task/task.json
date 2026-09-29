@@ -3,20 +3,12 @@
   "version": "1",
   "title": "Synthetic catalog task",
   "summary": "Produce a deterministic synthetic catalog output.",
-  "task_prompt": "Produce a deterministic synthetic catalog output.",
-  "output_artifacts": [
-    {
-      "id": "catalog",
-      "path": "catalog.json",
-      "kind": "catalog",
-      "required": true
-    }
+  "task_prompt_file": "task_prompt.md",
+  "output_contract": "output_contract.json",
+  "input_requirements": [
+    {"id": "metadata", "data_type": "metadata", "required": true}
   ],
-  "scorer": {
-    "name": "artifact-contract",
-    "version": "1"
-  },
-  "input_types": [
-    "metadata"
-  ]
+  "evaluation": {
+    "scorers": [{"name": "artifact-contract", "version": "1"}]
+  }
 }

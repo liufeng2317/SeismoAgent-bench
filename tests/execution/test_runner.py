@@ -3,6 +3,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from tests.task_helpers import write_task_package
 
 from SeismoAgentBench.execution import ExecutionError, run_command
 
@@ -10,10 +11,11 @@ from SeismoAgentBench.execution import ExecutionError, run_command
 TASK = {
     "task_id": "runner-smoke",
     "version": "1",
-    "task_prompt": "Test execution records.",
-    "input_types": ["metadata"],
+    "task_prompt_file": "task_prompt.md",
+    "output_contract": "output_contract.json",
+    "input_requirements": [{"id": "metadata", "data_type": "metadata", "required": True}],
+    "evaluation": {"scorers": [{"name": "noop", "version": "1"}]},
     "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
-    "scorer": {"name": "noop", "version": "1"},
 }
 MANIFEST = {"schema_version": 1, "case_id": "synthetic_case", "entries": [
     {"id": "metadata", "path": "/tmp/metadata.json", "data_type": "metadata", "format": "JSON", "read_only": True}
@@ -27,7 +29,7 @@ class RunnerTests(unittest.TestCase):
         self.root.mkdir()
         self.task = Path(self.tmp.name) / "task.json"
         self.manifest = Path(self.tmp.name) / "manifest.json"
-        self.task.write_text(json.dumps(TASK), encoding="utf-8")
+        write_task_package(self.task, TASK, "Test execution records.")
         self.manifest.write_text(json.dumps(MANIFEST), encoding="utf-8")
 
     def tearDown(self):
