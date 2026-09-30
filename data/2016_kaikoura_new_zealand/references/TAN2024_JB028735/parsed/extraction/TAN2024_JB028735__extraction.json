@@ -22,12 +22,12 @@
     "catalog_relationship": "Introduces SUGAR and publishes an event catalog (S10), a GrowClust-relocated intermediate product (S11), and focal-mechanism products (S12).",
     "evidence": [
       {
-        "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+        "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
         "locator": "title, abstract, author/DOI metadata",
         "note": "Paper identity and catalog-construction purpose."
       },
       {
-        "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0001-supporting-information-si-s01__mineru.md",
+        "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0001-supporting-information-si-s01__mineru.md",
         "locator": "supplementary-information contents and data-product sections",
         "note": "Supplementary material contains construction details and data products."
       }
@@ -54,12 +54,12 @@
         "magnitude_scope": "Local magnitude column M; article/local range in frozen window approximately -0.53 to 4.87.",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0003-table si-s10__extracted.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0003-table si-s10__extracted.md",
             "locator": "sheet Sheet1, header and 67,660 data rows",
             "note": "Local S10 table audit."
           },
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
             "locator": "Section 4, S10 discussion; Supplementary Table S10 description",
             "note": "Article-reported S10 population and construction."
           }
@@ -77,12 +77,12 @@
         "magnitude_scope": "Uses the S10 magnitude field; do not infer a separate magnitude scale.",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0004-table si-s11__extracted.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0004-table si-s11__extracted.md",
             "locator": "sheet Sheet1, header and 46,440 data rows",
             "note": "Local S11 table audit."
           },
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
             "locator": "Section 4, GrowClust paragraph; Supplementary Table S11 description",
             "note": "Article-reported relocation count and method."
           }
@@ -100,12 +100,12 @@
         "magnitude_scope": null,
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
             "locator": "Section 4, paragraph describing clusters with at least 10 events",
             "note": "Article reports 41,392 after cluster-size filtering."
           },
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/README.md",
+            "source": "data/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/README.md",
             "locator": "release reconciliation",
             "note": "S11 is the released 46,440-row intermediate; final membership is not separately released."
           }
@@ -123,12 +123,12 @@
         "magnitude_scope": "M field in S12.",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0005-table si-s12__extracted.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0005-table si-s12__extracted.md",
             "locator": "sheet Sheet1, header and 55 data rows",
             "note": "Local focal-mechanism table audit."
           },
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
             "locator": "Supplementary Table S12 discussion and mechanism-table description",
             "note": "Article-reported focal-mechanism count."
           }
@@ -140,19 +140,19 @@
       "version": null,
       "source_files": [
         {
-          "path": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_sugar_S10.xlsx",
+          "path": "data/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_sugar_S10.xlsx",
           "format": "xlsx",
           "checksum": null,
           "role": "canonical"
         },
         {
-          "path": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_sugar_relocated_S11.xlsx",
+          "path": "data/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_sugar_relocated_S11.xlsx",
           "format": "xlsx",
           "checksum": null,
           "role": "canonical"
         },
         {
-          "path": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/TAN2024_JB028735__phases_associated.zip",
+          "path": "data/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/TAN2024_JB028735__phases_associated.zip",
           "format": "zip of phase files",
           "checksum": null,
           "role": "raw_release"
@@ -160,17 +160,17 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+          "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
           "locator": "Data Availability",
           "note": "Zenodo software/phase archive and Wiley supplementary products."
         },
         {
-          "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0001-supporting-information-si-s01__mineru.md",
+          "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0001-supporting-information-si-s01__mineru.md",
           "locator": "Data products and supplementary tables",
           "note": "Stable supplementary sidecar used for extraction review."
         },
         {
-          "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0001-supporting-information-si-s01__mineru.md",
+          "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0001-supporting-information-si-s01__mineru.md",
           "locator": "Data products and supplementary tables",
           "note": "Stable supplementary sidecar used for extraction review."
         }
@@ -185,7 +185,7 @@
       "article_local_discrepancy": "S10 (67,660), S11 (46,440), and S12 (55) match local products; 41,392 is article-reported final membership without a local standalone file.",
       "evidence": [
         {
-          "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/README.md",
+          "source": "data/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/README.md",
           "locator": "local audit tables",
           "note": "Counts, ranges, masks and release reconciliation."
         }
@@ -222,7 +222,7 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+          "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
           "locator": "§4–§5 and benchmark interpretation",
           "note": "Quality, independence, and applicability limitations."
         }
@@ -260,7 +260,7 @@
         },
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0003-table si-s10__extracted.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0003-table si-s10__extracted.md",
             "locator": "Sheet1 header: Time, Lat, Lon, Dep, M, Picks, AI score, Brightness, Q_e, residual, ID",
             "note": "S10 product-specific fields."
           }
@@ -287,7 +287,7 @@
         },
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0004-table si-s11__extracted.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0004-table si-s11__extracted.md",
             "locator": "Sheet1 header: relocation and cluster columns",
             "note": "S11 product-specific fields."
           }
@@ -308,7 +308,7 @@
         ],
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0005-table si-s12__extracted.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0005-table si-s12__extracted.md",
             "locator": "Sheet1 header and 55 data rows",
             "note": "S12 is a derived focal-mechanism product, not the full catalog."
           }
@@ -332,12 +332,12 @@
         "availability_conditions": "9 selected stations had approximately ±1 s timing errors; paper reports little effect.",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0002-table si-s09__extracted.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0002-table si-s09__extracted.md",
             "locator": "TableS80 station rows",
             "note": "46 GeoNet stations and coordinates/channels."
           },
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
             "locator": "§4 and Table S9",
             "note": "Network and timing conditions."
           }
@@ -355,7 +355,7 @@
         "availability_conditions": null,
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
             "locator": "§4 real-data application",
             "note": "Velocity model used for application."
           }
@@ -373,7 +373,7 @@
         "availability_conditions": "194,559 samples; 20 training epochs.",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
             "locator": "§2.1–§3.1",
             "note": "U-Net synthetic training description."
           }
@@ -423,7 +423,7 @@
         "dependencies": "Sequence-specific station geometry and predicted arrivals.",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
             "locator": "Section 2.2.1, source-scanning brightness-video construction paragraph",
             "note": "Brightness-video construction."
           }
@@ -479,7 +479,7 @@
         "dependencies": "Kaikōura-specific geometry and training distribution.",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
             "locator": "Sections 2.1–3.1, 3-D U-Net architecture/training paragraphs and real-data threshold",
             "note": "U-Net dimensions, training and threshold."
           }
@@ -523,7 +523,7 @@
         "dependencies": "Predicted arrivals and station geometry.",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
             "locator": "Section 2.2.3, candidate merging and guided P/S picking paragraph",
             "note": "Guided P/S picking and minimum phase rules."
           }
@@ -574,12 +574,12 @@
         "dependencies": "Distance-dependent residual thresholds and velocity model.",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
             "locator": "Section 2.2.3, Equations 5–7 and event-retention paragraph",
             "note": "Association and location rules."
           },
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0003-table si-s10__extracted.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0003-table si-s10__extracted.md",
             "locator": "header and rows",
             "note": "S10 released event table."
           }
@@ -615,7 +615,7 @@
         "dependencies": "Station corrections and amplitude calibration.",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
             "locator": "Sections 2.2.3–2.2.4, local-magnitude equation and station-correction paragraph",
             "note": "Magnitude equation and corrections."
           }
@@ -670,12 +670,12 @@
         "dependencies": "S10 event hypotheses and waveform availability.",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
             "locator": "Section 4, GrowClust relocation paragraph and Supplementary Table S11 description",
             "note": "GrowClust settings and count."
           },
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0004-table si-s11__extracted.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0004-table si-s11__extracted.md",
             "locator": "header and rows",
             "note": "S11 fields and local row count."
           }
@@ -713,12 +713,12 @@
         "dependencies": "S11 cluster id/events-in-cluster fields.",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
             "locator": "Section 4, cluster-size filtering paragraph and Supplementary Table S12 discussion",
             "note": "Cluster filter and focal-mechanism product."
           },
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0005-table si-s12__extracted.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0005-table si-s12__extracted.md",
             "locator": "header and 55 rows",
             "note": "Local S12 table."
           }
@@ -728,12 +728,12 @@
     "final_output": "S10 canonical detected/located catalog; S11 canonical released relocated intermediate; article-reported 41,392-event cluster-filtered subset is not separately available locally.",
     "evidence": [
       {
-        "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+        "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
         "locator": "workflow §§2–4",
         "note": "End-to-end workflow reconstructed from article and SI."
       },
       {
-        "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0001-supporting-information-si-s01__mineru.md",
+        "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0001-supporting-information-si-s01__mineru.md",
         "locator": "supplementary-information method and data-product sections",
         "note": "Supplementary construction material is part of the source evidence."
       }
@@ -745,13 +745,13 @@
         "product_id": "DP1",
         "name": "GeoNet station inventory",
         "type": "station_table",
-        "file_path": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0002-table si-s09__extracted.md",
+        "file_path": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0002-table si-s09__extracted.md",
         "catalog_relation": "Input network metadata, not an event catalog.",
         "scientific_use": "Defines the 46-station network and channel geometry.",
         "count_or_scope": "46 GeoNet station rows.",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0002-table si-s09__extracted.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0002-table si-s09__extracted.md",
             "locator": "TableS80 header and rows",
             "note": "Station names, coordinates and channels."
           }
@@ -761,13 +761,13 @@
         "product_id": "DP2",
         "name": "Associated phase archive",
         "type": "phase_table",
-        "file_path": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/TAN2024_JB028735__phases_associated.zip",
+        "file_path": "data/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/TAN2024_JB028735__phases_associated.zip",
         "catalog_relation": "Phase-level support for SUGAR events; not an event catalog.",
         "scientific_use": "Phase support and station-coverage analysis.",
         "count_or_scope": "Local audit: 1,165 .dat files, approximately 1,382,337 phase rows.",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/README.md",
+            "source": "data/2016_kaikoura_new_zealand/data/catalogs/TAN2024_JB028735/README.md",
             "locator": "phase archive audit",
             "note": "Phase-file count and schema audit."
           }
@@ -777,13 +777,13 @@
         "product_id": "DP3",
         "name": "Focal mechanisms",
         "type": "focal_mechanism",
-        "file_path": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0005-table si-s12__extracted.md",
+        "file_path": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0005-table si-s12__extracted.md",
         "catalog_relation": "55-event subset associated with the sequence; not the main catalog.",
         "scientific_use": "Faulting-style and mechanism interpretation.",
         "count_or_scope": "55 rows; 12 events >M4 plus 43 smaller events reported.",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0005-table si-s12__extracted.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0005-table si-s12__extracted.md",
             "locator": "header and data rows",
             "note": "Strike, dip, rake, location and magnitude fields."
           }
@@ -797,7 +797,7 @@
         "scope": "2016 Kaikōura sequence",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
             "locator": "abstract, §4 and conclusions",
             "note": "Catalog-based scientific interpretation."
           }
@@ -809,7 +809,7 @@
         "scope": "relocated event geometry",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
             "locator": "§4 uncertainty discussion",
             "note": "Absolute versus relative uncertainty distinction."
           }
@@ -824,7 +824,7 @@
       "caveats": "Shared GeoNet observations reduce observational independence; SUGAR model is site-specific; do not treat S11 as the final 41,392-row file.",
       "evidence": [
         {
-          "source": "benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
+          "source": "data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/paper/TAN2024_JB028735__paper__mineru.md",
           "locator": "benchmark interpretation and §5",
           "note": "Role and limitations."
         }

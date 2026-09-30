@@ -17,17 +17,17 @@
     "catalog_relationship": "Provides an island-wide HVO-triggered starting/relocated catalog and a useful Kīlauea relative-location auxiliary reference.",
     "evidence": [
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
         "locator": "title, abstract and Sections 2–4",
         "note": "Article identity and workflow."
       },
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
+        "source": "data/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
         "locator": "provenance and frozen summit window",
         "note": "Local release and role."
       },
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
         "locator": "citation block, lines 27–39",
         "note": "Citation gives 2020 and full author names; source ID is retained for repository compatibility."
       }
@@ -59,12 +59,12 @@
         "magnitude_scope": "native mag −0.77–9.0",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
             "locator": "abstract/Section 2",
             "note": "Article population."
           },
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
+            "source": "data/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
             "locator": "full-file audit",
             "note": "Local versioned count."
           }
@@ -82,7 +82,7 @@
         "magnitude_scope": "0.00–4.66",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
+            "source": "data/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
             "locator": "frozen summit window table",
             "note": "Benchmark subset."
           }
@@ -95,7 +95,7 @@
       "source_files": [
         {
           "product_id": "islandwide_events",
-          "path": "benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_islandwide.txt",
+          "path": "data/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/MATOZA2021_EA001253__catalog_islandwide.txt",
           "format": "whitespace text",
           "checksum": "1e3b7c878e93b0f426b312c41fbe6cadd01be15cd452cfef1ad605e645a76877",
           "role": "canonical"
@@ -103,7 +103,7 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
+          "source": "data/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
           "locator": "provenance and schema",
           "note": "Release file."
         }
@@ -123,7 +123,7 @@
       "article_local_discrepancy": "Article reports 347,445/275,009 and 79%; revised local release reports 347,446/299,966.",
       "evidence": [
         {
-          "source": "benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
+          "source": "data/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
           "locator": "full-file audit and frozen window",
           "note": "Counts/ranges."
         }
@@ -152,7 +152,7 @@
         },
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
+            "source": "data/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
             "locator": "native schema",
             "note": "26-field archive README."
           }
@@ -180,7 +180,7 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
+          "source": "data/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
           "locator": "benchmark role and limitations",
           "note": "Evaluation role."
         }
@@ -203,7 +203,7 @@
         "availability_conditions": "no fixed station count; HVO trigger lineage",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
             "locator": "Sections 2–3",
             "note": "Input and network."
           }
@@ -238,7 +238,7 @@
         "dependencies": "available channels and event proximity",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
             "locator": "Methods, correlation/relocation paragraph",
             "note": "Pairing criterion."
           }
@@ -268,7 +268,7 @@
         "dependencies": "HVO trigger catalog",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
+            "source": "data/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
             "locator": "native schema and full-file audit",
             "note": "Release flags."
           }
@@ -278,12 +278,12 @@
     "final_output": "347,446-row island-wide event table with relocated and starting coordinates.",
     "evidence": [
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
         "locator": "Sections 2–4",
         "note": "Workflow."
       },
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
+        "source": "data/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/README.md",
         "locator": "provenance and schema",
         "note": "Release."
       }
@@ -298,7 +298,7 @@
         "scope": "1986–2018 Hawaiian Islands seismicity",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
             "locator": "Results and discussion",
             "note": "Scientific findings."
           }
@@ -313,7 +313,7 @@
       "caveats": "Secondary island-wide reference; use 984 nbranch-qualified summit-window events for relative geometry.",
       "evidence": [
         {
-          "source": "benchmark_source/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+          "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
           "locator": "Results and discussion",
           "note": "Scientific findings."
         }
@@ -321,7 +321,7 @@
     },
     "evidence": [
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/MATOZA2021_EA001253/parsed/paper/MATOZA2021_EA001253__paper__mineru.md",
         "locator": "Results and discussion",
         "note": "Scientific findings."
       }

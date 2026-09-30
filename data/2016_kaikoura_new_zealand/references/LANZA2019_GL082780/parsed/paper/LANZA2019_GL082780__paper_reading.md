@@ -200,11 +200,11 @@ count.
 
 ## Local provenance and remaining actions
 
-- Paper PDF: `benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/paper/LANZA2019_GL082780__paper.pdf`
-- MinerU text: `benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/LANZA2019_GL082780__paper__mineru.md`
-- Text SI: `benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/supplement/grl59060-sup-0001-text_si-s01.docx`
-- Station Table S1: `benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/supplement/grl59060-sup-0002-tables1.xlsx`
-- QuakeML Data Set S1: `benchmark_source/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/raw/grl59060-sup-0003-ds01.xml`
+- Paper PDF: `data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/paper/LANZA2019_GL082780__paper.pdf`
+- MinerU text: `data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/LANZA2019_GL082780__paper__mineru.md`
+- Text SI: `data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/supplement/grl59060-sup-0001-text_si-s01.docx`
+- Station Table S1: `data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/supplement/grl59060-sup-0002-tables1.xlsx`
+- QuakeML Data Set S1: `data/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/raw/grl59060-sup-0003-ds01.xml`
 - Supplement notes: `../parsed/supplement/LANZA2019_GL082780__supplement_notes.md`
 
 Before benchmark freeze, resolve or explicitly retain:

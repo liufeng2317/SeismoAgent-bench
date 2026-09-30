@@ -142,10 +142,10 @@ Mw 6.4 和 Mw 7.1 发震前后各 10 分钟的垂直波形已分别按各自震�
 需要更新派生成果时，从仓库根目录运行相应脚本：
 
 ```bash
-python -B benchmark_source/2019_ridgecrest_california/scripts/catalogs/audit_references.py
-python -B benchmark_source/2019_ridgecrest_california/scripts/observations/prepare_station_metadata.py
-python -B benchmark_source/2019_ridgecrest_california/scripts/figures/plot_catalog_comparison.py
-python -B benchmark_source/2019_ridgecrest_california/scripts/figures/plot_station_distribution.py
+python -B data/2019_ridgecrest_california/scripts/catalogs/audit_references.py
+python -B data/2019_ridgecrest_california/scripts/observations/prepare_station_metadata.py
+python -B data/2019_ridgecrest_california/scripts/figures/plot_catalog_comparison.py
+python -B data/2019_ridgecrest_california/scripts/figures/plot_station_distribution.py
 ```
 
 以上调用使用本地原件；原件或配置变化时，先更新相应核验结果，再生成依赖它的图件。案例特有代码按 `scripts/catalogs/`、`scripts/figures/`、`scripts/observations/` 分层；补下载入口和参数见 [脚本说明](../scripts/README.md)，Shell 入口默认直连下载，`--action plan` 仅生成计划。可复用逻辑在公共 `SeismoAgentBench/utils/`。新增资料应更新对应记录及本页状态，正文不追加下载日志、哈希明细或重复参数表。

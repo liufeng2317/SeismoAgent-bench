@@ -6,7 +6,7 @@ Use [`CATALOGS_MANIFEST.md`](CATALOGS_MANIFEST.md) for a single cross-case view 
 
 Use [`OFFICIAL_BASELINE_AUDIT.md`](OFFICIAL_BASELINE_AUDIT.md) to verify the USGS/GeoNet baseline downloads and distinguish routine-catalog sparsity from acquisition errors.
 
-All six cases use the same source layout under `benchmark_source/`. Case-level `scripts/` exists only when there are executable case-level tools; empty placeholders are unnecessary. The ignored waveform directory is a local reservation, not evidence of downloaded observations.
+All six cases use the same source layout under `data/`. Case-level `scripts/` exists only when there are executable case-level tools; empty placeholders are unnecessary. The ignored waveform directory is a local reservation, not evidence of downloaded observations.
 
 ```text
 <case>/references/<SOURCE_ID>/
@@ -113,7 +113,7 @@ SeismoAgentBench/
 ├── SeismoAgentBench/                 # 项目专业代码与通用工具
 │   └── utils/source_prepare/         # 来源整理工具子包
 ├── tests/                            # 共享代码测试
-└── benchmark_source/
+└── data/
     ├── README.md                     # 组织规范与结构评估（本文件）
     ├── REFERENCES_MANIFEST.md        # 文献/来源就绪状态
     ├── CATALOGS_MANIFEST.md          # 自动生成的产品清单
@@ -155,7 +155,7 @@ SeismoAgentBench/
 
 1. **逐个迁移来源配置契约。** Ridgecrest 已试用下述 `schema_version: 2` 来源登记表；其余五个案例仍使用旧配置。Prague、Maple、Kīlauea 的 `catalogs[].script`、Kaikōura 的 `catalogs[].parser` 路径和 Magna 的角色声明需要逐产品核验后再迁移。登记表中的 `parser` 是解析器标识，不是可直接执行的路径。
 2. **逐步提取共享解析与绘图工具。** 24 个 `run_catalog_analysis.py` 中存在反复出现的日期解析、校验和、筛选、统计和绘图函数；例如 12 个脚本定义了 `finite_float`。先核实行为差异并建立回归样例，再把相同部分提取成共享模块，来源专属字段解析仍留在产品目录。暂不把整个项目重构为软件包。
-3. **未来分开维护来源资料与实际实验输入。** `benchmark_source/` 包含目标目录和答案证据，不能整体挂载给受测 Agent。实验运行器实现时，再定义可追溯的输入导出、评测参考和运行产物目录，并控制文件访问；仅改文件夹名字不能防止答案泄漏。
+3. **未来分开维护来源资料与实际实验输入。** `data/` 包含目标目录和答案证据，不能整体挂载给受测 Agent。实验运行器实现时，再定义可追溯的输入导出、评测参考和运行产物目录，并控制文件访问；仅改文件夹名字不能防止答案泄漏。
 4. **台站信息应跟随观测数据建立。** 开始波形准备时，在案例 `data/` 下增加台站/通道清单、响应、可用性与缺口记录；现在不创建没有内容的 `stations/`、`metadata/` 或 `runs/`。波形存储位置可以是外部数据盘，配置记录位置，Git 保存小型清单与来源。
 5. **保持原始材料和派生产物边界。** 已有来源文件可继续保留在 catalog 根目录，原始发布包留在 `raw/` 或 `raw_article/`；不为外观整齐再次移动全部载荷。生成统计、图件和标准化事件表继续放在产品 `analysis/` 下，不能混入来源原件。
 
@@ -203,10 +203,10 @@ Ridgecrest 目前登记 5 个来源组和 8 个文件产品。Ross 重定位子�
 在仓库根目录运行，使用现有 Python 3.10+ 和 PyYAML 环境：
 
 ```bash
-python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir benchmark_source/2019_ridgecrest_california
-python -B -m SeismoAgentBench.utils.source_prepare inventory --case-dir benchmark_source/2019_ridgecrest_california
-python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir benchmark_source/2019_ridgecrest_california --verify-files
-python -B benchmark_source/2019_ridgecrest_california/scripts/catalogs/audit_references.py
+python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir data/2019_ridgecrest_california
+python -B -m SeismoAgentBench.utils.source_prepare inventory --case-dir data/2019_ridgecrest_california
+python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir data/2019_ridgecrest_california --verify-files
+python -B data/2019_ridgecrest_california/scripts/catalogs/audit_references.py
 ```
 
 前两个命令不读取全部大文件计算哈希：资料登记有效与本地载荷已下载是两个状态。`--verify-files` 才执行 SHA-256 核验，发现本地缺失或内容不符时以非零状态退出。目录统计仍由案例解析器完成；登记表校验不会虚构记录数、波形覆盖、完备性或科学质量。

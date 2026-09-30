@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 from obspy import read,UTCDateTime
 DIR=Path(__file__).resolve().parent;HERE=DIR.parents[1];OUT=HERE/'export/43_template_p_observations'
-WAVE=HERE.parents[2]/'benchmark_source/2019_ridgecrest_california/data/waveforms'
+WAVE=HERE.parents[2]/'data/2019_ridgecrest_california/data/waveforms'
 def load(name,path):
  s=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
 M=load('original43',DIR.parent/'07_joint_location/33_joint_location.py')

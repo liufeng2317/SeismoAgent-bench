@@ -20,12 +20,12 @@
     "catalog_relationship": "Genuine 3,345-event HYPOINVERSE catalog with 3,257 GrowClust relocations; the machine-readable event table is not locally staged.",
     "evidence": [
       {
-        "source": "benchmark_source/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
+        "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
         "locator": "title block, Abstract and Sections 2–3",
         "note": "Identity and catalog purpose."
       },
       {
-        "source": "benchmark_source/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
+        "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
         "locator": "Identity and evidence status; Scientific scope",
         "note": "Article/release status."
       }
@@ -52,12 +52,12 @@
         "magnitude_scope": "Coda Mc -1.7 to 4.4; completeness about Mc 0.5; b≈0.96.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
             "locator": "Scientific scope; Catalog-construction workflow",
             "note": "Article population and ranges."
           },
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
+            "source": "data/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
             "locator": "What is known from the article",
             "note": "Article-only values."
           }
@@ -75,12 +75,12 @@
         "magnitude_scope": "Magnitude scale inherited from article catalog; exact field schema unavailable.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
             "locator": "Catalog-construction workflow",
             "note": "Relocation count and errors."
           },
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
+            "source": "data/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
             "locator": "What is known from the article",
             "note": "Article-only relocation values."
           }
@@ -92,13 +92,13 @@
       "version": null,
       "source_files": [
         {
-          "path": "benchmark_source/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
+          "path": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
           "format": "MinerU Markdown",
           "checksum": null,
           "role": "article_parse"
         },
         {
-          "path": "benchmark_source/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/supplement/PANG2019_GL082376__supplement_notes.md",
+          "path": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/supplement/PANG2019_GL082376__supplement_notes.md",
           "format": "supplement audit note",
           "checksum": null,
           "role": "SI_audit"
@@ -106,7 +106,7 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
+          "source": "data/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
           "locator": "Provenance and Acquisition guidance",
           "note": "No verified event-table URL/DOI; SI is present but not event table."
         }
@@ -124,7 +124,7 @@
       "article_local_discrepancy": "Catalog is missing locally; no local row count, schema, checksum, ranges or frozen-window count may be asserted.",
       "evidence": [
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
+          "source": "data/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
           "locator": "Provenance; What is known from the article; Frozen benchmark mask",
           "note": "Explicit missing status and article/local separation."
         }
@@ -151,12 +151,12 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
+          "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
           "locator": "Benchmark interpretation; Supporting information audit",
           "note": "Role and missing-catalog constraints."
         },
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
+          "source": "data/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
           "locator": "Acquisition guidance",
           "note": "Validation gates."
         }
@@ -168,7 +168,7 @@
       "future_normalization_rule": "Require origin time, coordinates, explicit absolute/GrowClust status, magnitude definition and checksum before marking ready.",
       "evidence": [
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
+          "source": "data/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
           "locator": "Frozen benchmark mask to apply after acquisition; Acquisition guidance",
           "note": "Expected fields and acquisition checks."
         }
@@ -202,7 +202,7 @@
         },
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
+            "source": "data/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
             "locator": "Frozen benchmark mask to apply after acquisition",
             "note": "Expected output fields are a future normalization specification, not a local schema."
           }
@@ -226,7 +226,7 @@
         "availability_conditions": "Exact release table absent locally.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
             "locator": "Observation and network conditions; Catalog-construction workflow",
             "note": "Routine catalog and network context."
           }
@@ -244,7 +244,7 @@
         "availability_conditions": "22 local + 2 regional stations selected for quality/azimuth; no station-day table.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
             "locator": "Observation and network conditions",
             "note": "Station setup and network codes."
           }
@@ -275,7 +275,7 @@
         "dependencies": "UUSS network and regional model.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
             "locator": "Catalog-construction workflow",
             "note": "Absolute-location stage."
           }
@@ -314,7 +314,7 @@
         "dependencies": "Waveform quality and station geometry.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
             "locator": "Catalog-construction workflow",
             "note": "BCSEIS and differential-time totals."
           }
@@ -353,7 +353,7 @@
         "dependencies": "Absolute starting catalog and waveform pairs.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
             "locator": "Catalog-construction workflow; Scientific scope",
             "note": "GrowClust count and error estimates."
           }
@@ -363,12 +363,12 @@
     "final_output": "Article reports 3,345 absolute and 3,257 relocated events; no local event-table output is available.",
     "evidence": [
       {
-        "source": "benchmark_source/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
+        "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
         "locator": "Catalog-construction workflow; Supporting information audit",
         "note": "End-to-end method and release gap."
       },
       {
-        "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
+        "source": "data/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
         "locator": "Acquisition guidance",
         "note": "No substitution rule."
       }
@@ -380,13 +380,13 @@
         "product_id": "A1",
         "name": "Pang publisher supplementary information",
         "type": "method_context_pdf",
-        "file_path": "benchmark_source/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/supplement/PANG2019_GL082376__supplement__mineru.md",
+        "file_path": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/supplement/PANG2019_GL082376__supplement__mineru.md",
         "catalog_relation": "Method/figure/velocity-model context; not a machine-readable catalog.",
         "scientific_use": "Review relocation diagnostics and parameters.",
         "count_or_scope": "No 3,345-row event table found.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/supplement/PANG2019_GL082376__supplement_notes.md",
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/supplement/PANG2019_GL082376__supplement_notes.md",
             "locator": "Supplementary information audit",
             "note": "PDF is present but no CSV/QuakeML/XLSX/text event table."
           }
@@ -400,7 +400,7 @@
         "scope": "Maple Creek sequence",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/PANG2019_GL082376/parsed/paper/PANG2019_GL082376__paper__mineru.md",
             "locator": "Benchmark interpretation",
             "note": "Readiness and role."
           }
@@ -415,7 +415,7 @@
       "caveats": "Article values are not local audits; no event count can be asserted in frozen window.",
       "evidence": [
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
+          "source": "data/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
           "locator": "Frozen benchmark mask; Acquisition guidance",
           "note": "Mask and acquisition gates."
         }
@@ -428,7 +428,7 @@
     ],
     "evidence": [
       {
-        "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
+        "source": "data/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
         "locator": "Acquisition guidance",
         "note": "Explicit missing information."
       }
@@ -456,7 +456,7 @@
     "needs_human_review": true,
     "evidence": [
       {
-        "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
+        "source": "data/2017_maple_creek_yellowstone/data/catalogs/PANG2019_GL082376/README.md",
         "locator": "Catalog status",
         "note": "Catalog explicitly missing, not partial."
       }

@@ -17,7 +17,7 @@ from matplotlib.lines import Line2D
 from obspy import UTCDateTime
 HERE = Path(__file__).resolve().parents[1]  # Expert root; independent of working directory.
 EXP=HERE/'export'; OUT=EXP/'10_validate_catalog'
-CASE=HERE.parents[2]/'benchmark_source/2019_ridgecrest_california'
+CASE=HERE.parents[2]/'data/2019_ridgecrest_california'
 MAIN=['gamma_0000046','gamma_0005482']
 T1=pd.Timestamp('2019-07-04T17:33:49Z'); T2=pd.Timestamp('2019-07-06T03:19:53.04Z')
 SPEC=importlib.util.spec_from_file_location('review_helpers',HERE/'02_diagnostics/05_review_catalog.py')

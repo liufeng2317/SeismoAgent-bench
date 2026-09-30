@@ -70,12 +70,12 @@
     "catalog_relationship": "Provides event/eruption context and cites USGS/HVO seismic products; it does not construct or release a machine-readable event catalog.",
     "evidence": [
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
         "locator": "title, abstract paragraph, and Data and materials availability",
         "note": "Overview identity and data role."
       },
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
         "locator": "citation line / DOI in reference metadata",
         "note": "DOI 10.1126/science.aav7046 is present in the parsed article text."
       }
@@ -97,7 +97,7 @@
       "source_files": [],
       "evidence": [
         {
-          "source": "benchmark_source/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+          "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
           "locator": "Data and materials availability",
           "note": "The overview points to external geologic/seismic data sources, not an article catalog release."
         }
@@ -113,7 +113,7 @@
       "article_local_discrepancy": "No local event table is expected for this context reference.",
       "evidence": [
         {
-          "source": "benchmark_source/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+          "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
           "locator": "Data and materials availability; figures 1–6",
           "note": "No event-table release."
         }
@@ -134,7 +134,7 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+          "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
           "locator": "Data availability and cited USGS catalog reference",
           "note": "Role limitation."
         }
@@ -157,7 +157,7 @@
         "availability_conditions": "not released as an article-specific benchmark bundle",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
             "locator": "figures 1–6 and Data and materials availability",
             "note": "Monitoring modalities and external data references."
           }
@@ -168,7 +168,7 @@
     "final_output": "No catalog output; use only for case context and interpretation.",
     "evidence": [
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
         "locator": "main narrative and figures",
         "note": "Overview rather than construction workflow."
       }
@@ -186,7 +186,7 @@
         "count_or_scope": "not specified in article",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
             "locator": "reference 41 and Data and materials availability",
             "note": "External catalog citation."
           }
@@ -200,7 +200,7 @@
         "scope": "2018 Kīlauea eruption, flank earthquake and summit collapse",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
             "locator": "abstract, Lower ERZ eruption, Summit collapse and Synthesis sections",
             "note": "Scientific context."
           }
@@ -215,7 +215,7 @@
       "caveats": "Context-only reference; never substitute it for Shelly, Wei, Matoza, Lengliné or the official HVO baseline.",
       "evidence": [
         {
-          "source": "benchmark_source/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+          "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
           "locator": "abstract, Lower ERZ eruption, Summit collapse and Synthesis sections",
           "note": "Scientific context."
         }
@@ -223,7 +223,7 @@
     },
     "evidence": [
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/USGS2019_SCIENCE_OVERVIEW/parsed/paper/USGS2019_SCIENCE_OVERVIEW__paper__mineru.md",
         "locator": "abstract, Lower ERZ eruption, Summit collapse and Synthesis sections",
         "note": "Scientific context."
       }

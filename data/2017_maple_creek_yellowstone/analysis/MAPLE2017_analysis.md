@@ -182,6 +182,6 @@ Processing entry points and product declarations are in [processing.yaml](proces
 From the repository root:
 
 ```bash
-python3 benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/scripts/run_catalog_analysis.py
-python3 benchmark_source/2017_maple_creek_yellowstone/data/catalogs/USGS_UUSS_COMCAT_2017/scripts/run_catalog_analysis.py
+python3 data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/scripts/run_catalog_analysis.py
+python3 data/2017_maple_creek_yellowstone/data/catalogs/USGS_UUSS_COMCAT_2017/scripts/run_catalog_analysis.py
 ```

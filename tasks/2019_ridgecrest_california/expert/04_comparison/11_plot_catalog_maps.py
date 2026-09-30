@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 HERE = Path(__file__).resolve().parents[1]  # Expert root; independent of working directory.
 OUT=HERE/'export/11_plot_catalog_maps'
-CASE=HERE.parents[2]/'benchmark_source/2019_ridgecrest_california'
+CASE=HERE.parents[2]/'data/2019_ridgecrest_california'
 START=pd.Timestamp('2019-07-04T15:35:29.4Z'); END=pd.Timestamp('2019-07-07T00:00:00Z')
 LON=(-117.90,-117.20); LAT=(35.45,36.05)
 SPEC=importlib.util.spec_from_file_location('reference_readers',HERE/'02_diagnostics/05_review_catalog.py')

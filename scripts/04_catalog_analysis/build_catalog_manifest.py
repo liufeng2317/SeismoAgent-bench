@@ -132,7 +132,7 @@ def main() -> None:
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--output", type=Path, help="Optional output path for a preview")
     args = parser.parse_args()
-    data = args.root.resolve() / "benchmark_source"
+    data = args.root.resolve() / "data"
     output = args.output or data / "CATALOGS_MANIFEST.md"
     output.write_text(build_manifest(data), encoding="utf-8")
 

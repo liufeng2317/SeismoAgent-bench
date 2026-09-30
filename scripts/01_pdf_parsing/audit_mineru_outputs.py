@@ -107,7 +107,7 @@ def audit_pdf(pdf: Path) -> dict:
 
 
 def discover(root: Path) -> list[Path]:
-    return sorted(root.glob("benchmark_source/*/references/*/paper/*.pdf"))
+    return sorted(root.glob("data/*/references/*/paper/*.pdf"))
 
 
 def markdown_report(records: list[dict]) -> str:

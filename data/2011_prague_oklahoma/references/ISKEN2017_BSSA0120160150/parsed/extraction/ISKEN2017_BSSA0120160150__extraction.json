@@ -16,12 +16,12 @@
     "catalog_relationship": "Table S3 is a 13-event manually picked/relocalized structural anchor, not a complete sequence catalog.",
     "evidence": [
       {
-        "source": "benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
+        "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
         "locator": "title block, Abstract, Data and Methodology",
         "note": "Identity and purpose."
       },
       {
-        "source": "benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
+        "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
         "locator": "Identity and evidence status; Sequence and scientific scope",
         "note": "Catalog relationship and scientific goal."
       }
@@ -48,12 +48,12 @@
         "magnitude_scope": "Mw 3.1–3.4 in official table; do not relabel as ML.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
+            "source": "data/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
             "locator": "Schema and local audit",
             "note": "13-row local derivative and ranges."
           },
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
             "locator": "Sequence and scientific scope",
             "note": "Article selection versus table magnitude distinction."
           }
@@ -71,12 +71,12 @@
         "magnitude_scope": "Table Mw 3.1–3.4 for retained rows; article selection wording remains M_L>3.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
+            "source": "data/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
             "locator": "Frozen-window cross-reference",
             "note": "Seven in-window rows."
           },
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
             "locator": "Frozen benchmark extraction record",
             "note": "Sparse anchor interpretation."
           }
@@ -88,13 +88,13 @@
       "version": null,
       "source_files": [
         {
-          "path": "benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__source_tableS3.html",
+          "path": "data/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__source_tableS3.html",
           "format": "official HTML table",
           "checksum": null,
           "role": "source_authority"
         },
         {
-          "path": "benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv",
+          "path": "data/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv",
           "format": "normalized CSV",
           "checksum": "a8a6df207ff71395d6201fac2bf79693481fbcee9c487aa3f1ca1ad8a2c35199",
           "role": "analysis_derivative"
@@ -102,7 +102,7 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
+          "source": "data/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
           "locator": "Provenance",
           "note": "Official supplement and source/normalized files."
         }
@@ -122,7 +122,7 @@
       "article_local_discrepancy": "Figure 1 caption says 11 November–31 December, while distributed Table S3 ends 9 December; retain both statements. Formal ERH/ERZ fields differ from prose uncertainty on order 1 km.",
       "evidence": [
         {
-          "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
+          "source": "data/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
           "locator": "Schema and local audit; Frozen-window cross-reference",
           "note": "Rows, ranges and discrepancies."
         }
@@ -152,12 +152,12 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
+          "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
           "locator": "Benchmark interpretation",
           "note": "Role and invalid metrics."
         },
         {
-          "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
+          "source": "data/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
           "locator": "Benchmark role and Required next checks",
           "note": "Sparse anchor limitations."
         }
@@ -169,7 +169,7 @@
       "uncertainty_rule": "Preserve ERH/ERZ and prose uncertainty separately until formal definitions resolved.",
       "evidence": [
         {
-          "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
+          "source": "data/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
           "locator": "Provenance; Schema and local audit",
           "note": "Field authority and semantics."
         }
@@ -202,7 +202,7 @@
         },
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
+            "source": "data/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
             "locator": "Schema and local audit",
             "note": "Nine normalized fields and ranges."
           }
@@ -226,7 +226,7 @@
         "availability_conditions": "19 available local stations used for relocation.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
             "locator": "Observation and network conditions",
             "note": "ZQ/LA provenance and 19-station condition."
           }
@@ -244,7 +244,7 @@
         "availability_conditions": "Exact model/S1 metadata not staged locally.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
             "locator": "Phase picking and location",
             "note": "Velocity-model lineage."
           }
@@ -286,7 +286,7 @@
         "dependencies": "Local station coverage and clear arrivals.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
             "locator": "Starting population and selection; Phase picking and location",
             "note": "Selection and picks."
           }
@@ -332,7 +332,7 @@
         "dependencies": "Manual picks, station geometry, velocity model.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
             "locator": "Phase picking and location; Table S3 product and field semantics",
             "note": "Location method and QC fields."
           }
@@ -362,7 +362,7 @@
         "dependencies": "Relocated depths and layered model.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
             "locator": "Waveform modeling is downstream",
             "note": "Separation from catalog construction."
           }
@@ -372,12 +372,12 @@
     "final_output": "13-row selective relocation table; seven rows overlap Prague v1 core window.",
     "evidence": [
       {
-        "source": "benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
+        "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
         "locator": "Catalog-construction workflow; Frozen-window cross-reference",
         "note": "Workflow and count."
       },
       {
-        "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
+        "source": "data/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
         "locator": "Construction and quality interpretation",
         "note": "Local product audit."
       }
@@ -395,7 +395,7 @@
         "count_or_scope": null,
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
             "locator": "Observation and network conditions; Local provenance and unresolved actions",
             "note": "S1/S2 absence."
           }
@@ -409,7 +409,7 @@
         "scope": "Prague sequence",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
+            "source": "data/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
             "locator": "Benchmark role",
             "note": "Sparse-anchor conclusion."
           }
@@ -424,7 +424,7 @@
       "caveats": "No recall/event-rate denominator; table row number is not stable ID.",
       "evidence": [
         {
-          "source": "benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
+          "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
           "locator": "Benchmark interpretation",
           "note": "Metric use and caveats."
         }
@@ -437,7 +437,7 @@
     ],
     "evidence": [
       {
-        "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
+        "source": "data/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md",
         "locator": "Required next checks",
         "note": "Open actions."
       }
@@ -465,7 +465,7 @@
     "needs_human_review": true,
     "evidence": [
       {
-        "source": "benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
+        "source": "data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper__mineru.md",
         "locator": "Extraction status and evidence convention",
         "note": "Article/local distinction and unresolved actions."
       }

@@ -27,11 +27,11 @@ SeismoAgentBench/
 | `SeismoAgentBench/scoring/` | 输出产物校验及后续科学评分接口 |
 | `utils/source_prepare/` | 来源登记、路径/哈希检查、资料盘点与准备阶段的目录诊断 |
 | 根目录 `scripts/` | 下载、转换和批处理入口；逐步调用可复用模块，避免复制实现 |
-| `benchmark_source/<case>/scripts/` | 案例专属原生字段解析、来源核验编排、分析与绘图脚本 |
-| `benchmark_source/` | 资料文件、配置、来源证据及生成的核验结果 |
+| `data/<case>/scripts/` | 案例专属原生字段解析、来源核验编排、分析与绘图脚本 |
+| `data/` | 资料文件、配置、来源证据及生成的核验结果 |
 | 根目录 `tests/` | 按功能域集中维护回归测试；不在案例目录复制共用测试 |
 
-`SeismoAgentBench/` 只接收可跨案例复用的代码，不包含具体地震的目录选择、科学阶段、坐标范围、图件布局或专属分析内容。这类逻辑保留在 `benchmark_source/<case>/scripts/`；仅服务单个案例的辅助函数先在案例内维护，出现明确复用需求后再提取公共接口。原始资料、配置和生成图件仍分别保存在案例的 `data/`、`analysis/` 等相应目录。
+`SeismoAgentBench/` 只接收可跨案例复用的代码，不包含具体地震的目录选择、科学阶段、坐标范围、图件布局或专属分析内容。这类逻辑保留在 `data/<case>/scripts/`；仅服务单个案例的辅助函数先在案例内维护，出现明确复用需求后再提取公共接口。原始资料、配置和生成图件仍分别保存在案例的 `data/`、`analysis/` 等相应目录。
 
 专业逻辑应按领域命名并形成明确模块，而不是全部堆入 `utils/`。例如后续实际实现波形处理或目录操作时，再建立对应专业模块；不提前创建没有实现的 `core/`、`models/` 或 `pipelines/`。目前 `source_prepare/catalog.py` 中的函数服务于来源核验；当专业模块确实需要复用时，再抽取相应领域基础能力，避免反向依赖整个资料准备流程。
 
@@ -42,9 +42,9 @@ SeismoAgentBench/
 从仓库根目录运行，使用 Python 3.10+ 和 PyYAML：
 
 ```bash
-python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir benchmark_source/2019_ridgecrest_california
-python -B -m SeismoAgentBench.utils.source_prepare inventory --case-dir benchmark_source/2019_ridgecrest_california
-python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir benchmark_source/2019_ridgecrest_california --verify-files
+python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir data/2019_ridgecrest_california
+python -B -m SeismoAgentBench.utils.source_prepare inventory --case-dir data/2019_ridgecrest_california
+python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir data/2019_ridgecrest_california --verify-files
 python -B -m unittest discover -s tests -v
 ```
 
@@ -69,7 +69,7 @@ CLI 只负责参数解析和退出码映射，执行、产物校验、评分及�
 from SeismoAgentBench.utils.source_prepare.sources import load_case, inventory
 ```
 
-旧的 `seismoagentbench` 导入与 `python -m seismoagentbench` 命令已替换，不保留第二份实现。来源契约及数据组织规则见 [benchmark_source/README.md](../benchmark_source/README.md)。当前只有 Ridgecrest 接入来源契约 v2，其余案例的迁移范围没有因包路径调整而改变。
+旧的 `seismoagentbench` 导入与 `python -m seismoagentbench` 命令已替换，不保留第二份实现。来源契约及数据组织规则见 [data/README.md](../data/README.md)。当前只有 Ridgecrest 接入来源契约 v2，其余案例的迁移范围没有因包路径调整而改变。
 
 ## 测试边界
 

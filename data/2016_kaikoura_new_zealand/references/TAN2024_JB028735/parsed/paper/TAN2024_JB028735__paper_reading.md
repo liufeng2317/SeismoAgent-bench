@@ -145,7 +145,7 @@ not a guarantee for other windows.
 
 ## Local provenance and open actions
 
-- Paper PDF: `benchmark_source/2016_kaikoura_new_zealand/references/TAN2024_JB028735/paper/TAN2024_JB028735__paper.pdf`
+- Paper PDF: `data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/paper/TAN2024_JB028735__paper.pdf`
 - Parsed paper: `.../parsed/TAN2024_JB028735__paper__mineru.md`
 - Supporting PDF and tables: `.../supplement/2024jb028735-sup-0001-supporting information si-s01.pdf` and `.../si-s09.xlsx`–`si-s12.xlsx`
 - Canonical catalog files: `.../catalogs/TAN2024_JB028735/TAN2024_JB028735__catalog_sugar_S10.xlsx` and `...__catalog_sugar_relocated_S11.xlsx`

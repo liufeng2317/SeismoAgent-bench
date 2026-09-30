@@ -14,5 +14,5 @@ analysis outputs reference these files instead of carrying duplicated
 | `catalog_absolute_approx.schema.yaml` | Explicitly approximate absolute-coordinate derivatives |
 
 The case-level processing manifests are stored at
-`benchmark_source/<CASE_ID>/analysis/processing.yaml`. Product-specific `product_id` and
+`data/<CASE_ID>/analysis/processing.yaml`. Product-specific `product_id` and
 `kind` values remain in the statistics JSON and catalog analysis reports.

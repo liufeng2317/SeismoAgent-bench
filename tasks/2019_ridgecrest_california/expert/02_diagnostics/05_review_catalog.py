@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
 HERE = Path(__file__).resolve().parents[1]  # Expert root; independent of working directory.
-CASE = HERE.parents[2] / 'benchmark_source/2019_ridgecrest_california'
+CASE = HERE.parents[2] / 'data/2019_ridgecrest_california'
 OUT = HERE / 'export/05_review_catalog'
 BLUE, ORANGE = '#0072B2', '#D55E00'
 

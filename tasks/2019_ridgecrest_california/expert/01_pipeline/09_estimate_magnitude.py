@@ -19,7 +19,7 @@ from obspy.signal.invsim import WOODANDERSON
 HERE = Path(__file__).resolve().parents[1]  # Expert root; independent of working directory.
 EXP = HERE / 'export'
 OUT = EXP / '09_estimate_magnitude'
-ROOT = (HERE / '../../../benchmark_source/2019_ridgecrest_california/data/waveforms').resolve()
+ROOT = (HERE / '../../../data/2019_ridgecrest_california/data/waveforms').resolve()
 MAIN = {'gamma_0000046': 'M6.4', 'gamma_0005482': 'M7.1'}
 INV = None
 SETTINGS = dict(prefilter_hz=[0.1, 0.2, 20., 25.], block_seconds=3600,

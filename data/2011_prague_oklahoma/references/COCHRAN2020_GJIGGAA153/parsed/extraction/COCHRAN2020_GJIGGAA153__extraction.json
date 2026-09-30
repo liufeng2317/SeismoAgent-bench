@@ -19,12 +19,12 @@
     "catalog_relationship": "Genuine catalog-construction paper: a 900-event Sumy starting catalog is expanded by template matching and the detections are relatively relocated with GrowClust.",
     "evidence": [
       {
-        "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+        "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
         "locator": "title block, Summary and Introduction",
         "note": "Article identity, purpose and sequence."
       },
       {
-        "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+        "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
         "locator": "Identity and evidence convention; Sequence and scientific scope",
         "note": "Local extraction separates article claims from local-file audits."
       }
@@ -51,12 +51,12 @@
         "magnitude_scope": "Numeric range -1.36–4.99; magnitude type/units unresolved.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
+            "source": "data/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
             "locator": "Local audit table",
             "note": "Row count, ranges and unresolved magnitude type."
           },
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Published product and local-file audit",
             "note": "Article/local population reconciliation."
           }
@@ -74,12 +74,12 @@
         "magnitude_scope": "-0.96–3.22; type unresolved.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
+            "source": "data/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
             "locator": "Frozen benchmark selection audit",
             "note": "Local time-only count and extrema."
           },
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Frozen benchmark extraction record",
             "note": "Canonical selector and distinction from rounded mask."
           }
@@ -97,12 +97,12 @@
         "magnitude_scope": "Same source rows; type unresolved.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
+            "source": "data/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
             "locator": "Frozen benchmark selection audit",
             "note": "Secondary 2,076-row sensitivity count."
           },
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Frozen benchmark extraction record",
             "note": "Warns not to replace canonical 2,078 count."
           }
@@ -114,13 +114,13 @@
       "version": null,
       "source_files": [
         {
-          "path": "benchmark_source/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_primary.txt",
+          "path": "data/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/COCHRAN2020_GJIGGAA153__catalog_primary.txt",
           "format": "headerless whitespace text",
           "checksum": "1b4fe6aee4bc6b5523dafeb36d1fc4ae9b8ceaa93fe24a93c9c37aa7c2076ca7",
           "role": "canonical_event_catalog"
         },
         {
-          "path": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/Supp_Prague_SWS-Faults_JR1__extracted.md",
+          "path": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/Supp_Prague_SWS-Faults_JR1__extracted.md",
           "format": "supplement-derived Markdown",
           "checksum": null,
           "role": "schema_and_auxiliary_product_notes"
@@ -128,7 +128,7 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
+          "source": "data/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
           "locator": "Provenance and Supplement linkage",
           "note": "Canonical file, checksum and supplement relationship."
         }
@@ -149,7 +149,7 @@
       "article_local_discrepancy": "Local release includes a first row on 2011-11-06 although the article template search starts 2011-11-07; it is a mixed starting/template and detection population.",
       "evidence": [
         {
-          "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
+          "source": "data/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
           "locator": "Local audit and Frozen benchmark selection audit",
           "note": "All local counts, ranges, checksum and mask values."
         }
@@ -177,12 +177,12 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+          "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
           "locator": "Benchmark interpretation and Population bias",
           "note": "Role, metric suitability and lineage caveats."
         },
         {
-          "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
+          "source": "data/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
           "locator": "Benchmark role and limitations",
           "note": "Catalog-level use restrictions."
         }
@@ -197,7 +197,7 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
+          "source": "data/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
           "locator": "Reconstructed schema and Supplement linkage",
           "note": "Field interpretation and auxiliary-product distinction."
         }
@@ -229,7 +229,7 @@
         },
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
+            "source": "data/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
             "locator": "Reconstructed schema and parsing rules",
             "note": "Eleven-field source schema and units caveats."
           }
@@ -255,7 +255,7 @@
         },
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/SWS-ALL__extracted.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/SWS-ALL__extracted.md",
             "locator": "header and extracted rows",
             "note": "Supplement measurement schema; multiple measurements per event."
           }
@@ -276,7 +276,7 @@
         },
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/cellAzErrWeight__extracted.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/cellAzErrWeight__extracted.md",
             "locator": "header and extracted rows",
             "note": "Structural analysis grid product."
           }
@@ -300,7 +300,7 @@
         "availability_conditions": "900 events with manual P/S arrivals and relocated hypocenters.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Data and Methods; Template matching",
             "note": "Starting-catalog provenance and size."
           }
@@ -318,7 +318,7 @@
         "availability_conditions": "Station-day availability matrix not published in local note.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Observation and network conditions",
             "note": "31 seismometers, 18 LC stations and availability caveat."
           }
@@ -336,7 +336,7 @@
         "availability_conditions": "Exact model table requires cited supplementary material.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Relative relocation and uncertainty",
             "note": "GrowClust uses inherited velocity model."
           }
@@ -377,7 +377,7 @@
         "dependencies": "Starting-family coverage and station availability.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Template matching section",
             "note": "Template construction rules."
           }
@@ -423,7 +423,7 @@
         "dependencies": "Template families and continuous data availability.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Detection and screening",
             "note": "Detection threshold and duplicate suppression."
           }
@@ -470,7 +470,7 @@
         "dependencies": "Waveform pairs and inherited model.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Relative relocation and uncertainty",
             "note": "Relocation parameters and reported relative uncertainty."
           }
@@ -500,7 +500,7 @@
         "dependencies": "Relocated event geometry and auxiliary measurements.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Downstream fault-geometry processing; Separate S-wave-splitting analysis",
             "note": "Distinguishes interpretation products from event catalog."
           }
@@ -510,12 +510,12 @@
     "final_output": "8,811-row local event catalog; canonical benchmark extraction is the 2,078-row time-only Prague v1 subset.",
     "evidence": [
       {
-        "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+        "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
         "locator": "Catalog-construction workflow and Frozen benchmark extraction record",
         "note": "End-to-end workflow and selection rule."
       },
       {
-        "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
+        "source": "data/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
         "locator": "Construction and quality interpretation",
         "note": "Catalog-level workflow audit."
       }
@@ -527,13 +527,13 @@
         "product_id": "A1",
         "name": "SWS-ALL shear-wave-splitting measurements",
         "type": "measurement_table",
-        "file_path": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/SWS-ALL__extracted.md",
+        "file_path": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/SWS-ALL__extracted.md",
         "catalog_relation": "Auxiliary measurements; not event rows.",
         "scientific_use": "S-wave splitting and anisotropy analysis.",
         "count_or_scope": "8,569 high-quality measurements reported in article.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/SWS-ALL__extracted.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/SWS-ALL__extracted.md",
             "locator": "header/rows",
             "note": "Local supplement extraction."
           }
@@ -543,13 +543,13 @@
         "product_id": "A2",
         "name": "cellAzErrWeight structural grid",
         "type": "grid_summary",
-        "file_path": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/cellAzErrWeight__extracted.md",
+        "file_path": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/cellAzErrWeight__extracted.md",
         "catalog_relation": "Structural-analysis grid; not event rows.",
         "scientific_use": "Principal azimuth/error/weight summaries.",
         "count_or_scope": "No event count asserted.",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/cellAzErrWeight__extracted.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/supplement/cellAzErrWeight__extracted.md",
             "locator": "header/rows",
             "note": "Local supplement extraction."
           }
@@ -563,7 +563,7 @@
         "scope": "Prague sequence",
         "evidence": [
           {
-            "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+            "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
             "locator": "Sequence and scientific scope; Relative relocation and uncertainty",
             "note": "Article interpretation and uncertainty distinction."
           }
@@ -578,7 +578,7 @@
       "caveats": "Not independent absolute-location truth; magnitude type unresolved; station-day availability missing.",
       "evidence": [
         {
-          "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+          "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
           "locator": "Benchmark interpretation",
           "note": "Role and caveats."
         }
@@ -591,7 +591,7 @@
     ],
     "evidence": [
       {
-        "source": "benchmark_source/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
+        "source": "data/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/README.md",
         "locator": "Required next checks",
         "note": "Outstanding local audit items."
       }
@@ -619,7 +619,7 @@
     "needs_human_review": true,
     "evidence": [
       {
-        "source": "benchmark_source/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
+        "source": "data/2011_prague_oklahoma/references/COCHRAN2020_GJIGGAA153/parsed/paper/COCHRAN2020_GJIGGAA153__paper__mineru.md",
         "locator": "Extraction status and evidence convention",
         "note": "Article/local distinction and unresolved actions."
       }

@@ -34,7 +34,7 @@ def load_official_parser():
 
 
 def discover_pdfs(root: Path, case: str | None, source: str | None) -> list[Path]:
-    papers = root / "benchmark_source"
+    papers = root / "data"
     paths = sorted(papers.glob("*/references/*/paper/*.pdf"))
     selected = []
     for path in paths:

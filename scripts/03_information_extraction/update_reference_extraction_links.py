@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def main() -> None:
     changed = 0
-    for extraction in sorted((ROOT / "benchmark_source").glob("*/references/*/parsed/extraction/*__extraction.json")):
+    for extraction in sorted((ROOT / "data").glob("*/references/*/parsed/extraction/*__extraction.json")):
         reference = extraction.parents[2]
         readme = reference / "README.md"
         rel = extraction.relative_to(reference).as_posix()

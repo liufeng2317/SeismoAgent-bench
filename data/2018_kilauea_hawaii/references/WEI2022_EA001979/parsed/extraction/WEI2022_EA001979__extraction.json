@@ -18,17 +18,17 @@
     "catalog_relationship": "Constructs a broad automatic event catalog using STA/LTA, automatic P/S picking, NonLinLoc and mixed networks.",
     "evidence": [
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
         "locator": "title, abstract and Sections 2–6",
         "note": "Article identity."
       },
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/supplement/WEI2022_EA001979__supplement__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/supplement/WEI2022_EA001979__supplement__mineru.md",
         "locator": "supporting information",
         "note": "SI methods and tables."
       },
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/README.md",
+        "source": "data/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/README.md",
         "locator": "provenance",
         "note": "Local release."
       }
@@ -60,12 +60,12 @@
         "magnitude_scope": "d/l/Unk; 308,017 numeric",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
             "locator": "Sections 4–6",
             "note": "Article final count."
           },
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/README.md",
+            "source": "data/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/README.md",
             "locator": "full-file audit",
             "note": "Local count and ranges."
           }
@@ -83,7 +83,7 @@
         "magnitude_scope": "1,930 numeric; 439 Unk",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/README.md",
+            "source": "data/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/README.md",
             "locator": "frozen summit benchmark mask",
             "note": "Local subset and ranges."
           }
@@ -96,7 +96,7 @@
       "source_files": [
         {
           "product_id": "catalog_S1",
-          "path": "benchmark_source/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_S1.txt",
+          "path": "data/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_S1.txt",
           "format": "whitespace text",
           "checksum": "f95ae0b17eb519c169c17248b9986eb15885c2a42ca28102a1d25ca7a28eb339",
           "role": "canonical"
@@ -104,7 +104,7 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/README.md",
+          "source": "data/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/README.md",
           "locator": "provenance",
           "note": "Dryad release."
         }
@@ -124,7 +124,7 @@
       "article_local_discrepancy": "No row-count discrepancy; 67,719 rows have Unk magnitude type.",
       "evidence": [
         {
-          "source": "benchmark_source/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/README.md",
+          "source": "data/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/README.md",
           "locator": "full-file audit and frozen mask",
           "note": "Local stats."
         }
@@ -158,7 +158,7 @@
         },
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/README.md",
+            "source": "data/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/README.md",
             "locator": "native schema and missing values",
             "note": "14-field header."
           }
@@ -186,7 +186,7 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/README.md",
+          "source": "data/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/README.md",
           "locator": "benchmark role",
           "note": "Evaluation role."
         }
@@ -209,12 +209,12 @@
         "availability_conditions": "network changes and offshore quality differences",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
             "locator": "Sections 2–3",
             "note": "Network conditions."
           },
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/supplement/WEI2022_EA001979__supplement__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/supplement/WEI2022_EA001979__supplement__mineru.md",
             "locator": "supporting methods",
             "note": "Array details."
           }
@@ -243,7 +243,7 @@
         "dependencies": "network deployment and velocity model",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
             "locator": "Section 3, detection/association paragraphs",
             "note": "Trigger workflow."
           }
@@ -270,7 +270,7 @@
         "dependencies": "signal quality and station coverage",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
             "locator": "Section 3, picking paragraph",
             "note": "Picking method."
           }
@@ -311,7 +311,7 @@
         "dependencies": "velocity model and topography mask",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
             "locator": "Sections 3–4, location/QC paragraphs",
             "note": "Location workflow."
           }
@@ -347,7 +347,7 @@
         "dependencies": "event overlap/noise and network",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
             "locator": "Section 4.2, magnitude paragraph",
             "note": "Magnitude rules."
           }
@@ -357,12 +357,12 @@
     "final_output": "375,736-row Data Set S1 with mixed d/l/Unk magnitude types.",
     "evidence": [
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
         "locator": "Sections 2–6",
         "note": "Workflow."
       },
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/supplement/WEI2022_EA001979__supplement__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/supplement/WEI2022_EA001979__supplement__mineru.md",
         "locator": "supporting methods",
         "note": "Supplement details."
       }
@@ -377,7 +377,7 @@
         "scope": "2018 Kīlauea eruption",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
             "locator": "Results/discussion",
             "note": "Findings."
           }
@@ -392,7 +392,7 @@
       "caveats": "Q2 secondary broad reference against Shelly summit catalog and HVO Q3 baseline.",
       "evidence": [
         {
-          "source": "benchmark_source/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+          "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
           "locator": "Results/discussion",
           "note": "Findings."
         }
@@ -400,7 +400,7 @@
     },
     "evidence": [
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/paper/WEI2022_EA001979__paper__mineru.md",
         "locator": "Results/discussion",
         "note": "Findings."
       }

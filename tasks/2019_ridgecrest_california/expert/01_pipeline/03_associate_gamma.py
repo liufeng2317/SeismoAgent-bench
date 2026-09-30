@@ -158,7 +158,7 @@ def main():
     stations.to_csv(out/'stations.csv',index=False)
     corners=np.array([proj(lon,lat) for lon in settings['longitude_bounds'] for lat in settings['latitude_bounds']])
     xymin=corners.min(axis=0);xymax=corners.max(axis=0);bounds=[(float(xymin[0]),float(xymax[0])),(float(xymin[1]),float(xymax[1])),tuple(settings['depth_bounds_km']),(None,None)]
-    model_path=HERE/'../../../benchmark_source/2019_ridgecrest_california/data/models/velocity_models.json'
+    model_path=HERE/'../../../data/2019_ridgecrest_california/data/models/velocity_models.json'
     model=json.loads(model_path.read_text())['models'][settings['velocity_model']]
     radius=float(np.max(np.linalg.norm(corners[:,None,:]-stations[['x(km)','y(km)']].values[None,:,:],axis=2)))+10
     grid=dict(vel=dict(z=[r['top_of_layer_km'] for r in model['rows']],p=[r['vp_km_s'] for r in model['rows']],s=[r['vs_km_s'] for r in model['rows']]),

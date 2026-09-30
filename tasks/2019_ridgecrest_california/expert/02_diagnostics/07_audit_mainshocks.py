@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
 HERE = Path(__file__).resolve().parents[1]  # Expert root; independent of working directory.
-CASE = HERE.parents[2] / 'benchmark_source/2019_ridgecrest_california'
+CASE = HERE.parents[2] / 'data/2019_ridgecrest_california'
 OUT = HERE / 'export/07_audit_mainshocks'
 EVENTS = [('M6.4', 'gamma_0000046', '38443183'), ('M7.1', 'gamma_0005482', '38457511')]
 spec = importlib.util.spec_from_file_location('depth_audit', HERE / '02_diagnostics/06_diagnose_depth.py')

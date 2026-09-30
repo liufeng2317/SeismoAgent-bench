@@ -13,7 +13,7 @@ from pyproj import Proj
 from threadpoolctl import threadpool_limits
 threadpool_limits(1)
 HERE=Path(__file__).resolve().parents[2];OUT=HERE/'export/29_3d_velocity';BASE=HERE/'export/04_locate_nonlinloc'
-RAW=HERE.parents[2]/'benchmark_source/2019_ridgecrest_california/data/models/raw/SCEDC_SOCAL_3D/vel.sc8196ord1_sc04.07qd.out'
+RAW=HERE.parents[2]/'data/2019_ridgecrest_california/data/models/raw/SCEDC_SOCAL_3D/vel.sc8196ord1_sc04.07qd.out'
 BINDIR=Path('/liufeng1afs/software/NLLoc/NLL7.00_src/src')
 PROJ=Proj(proj='aeqd',lon_0=-117.55,lat_0=35.75,datum='WGS84',units='km')
 SPACING=1.0

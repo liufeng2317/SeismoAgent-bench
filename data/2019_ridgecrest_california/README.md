@@ -1,6 +1,6 @@
 # Ridgecrest 2019
 
-本案例资料位于 `benchmark_source/2019_ridgecrest_california/`。
+本案例资料位于 `data/2019_ridgecrest_california/`。
 
 | 路径 | 内容 |
 |---|---|
@@ -17,7 +17,7 @@
 在仓库根目录复算：
 
 ```bash
-python -B benchmark_source/2019_ridgecrest_california/scripts/catalogs/audit_references.py
+python -B data/2019_ridgecrest_california/scripts/catalogs/audit_references.py
 python -B -m unittest discover -s tests/source_prepare
 ```
 
@@ -28,8 +28,8 @@ python -B -m unittest discover -s tests/source_prepare
 `processing.yaml` 的 `source_groups` 保存来源关系，`sources` 唯一登记各文件产品的路径、单位、版本、解析器和 SHA-256；`reference_audit` 通过产品键引用它们。当前有 5 个来源组、8 个文件产品，目录子集不重复复制原文件。
 
 ```bash
-python -B -m SeismoAgentBench.utils.source_prepare inventory --case-dir benchmark_source/2019_ridgecrest_california
-python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir benchmark_source/2019_ridgecrest_california --verify-files
+python -B -m SeismoAgentBench.utils.source_prepare inventory --case-dir data/2019_ridgecrest_california
+python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir data/2019_ridgecrest_california --verify-files
 ```
 
 通用代码只处理 source 的登记、完整性和统计诊断；评测将在独立目录实现。来源规范与迁移边界见 [通用 source 架构](../README.md#通用-source-架构ridgecrest-试点)。

@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 from obspy import read,Stream,UTCDateTime
 HERE=Path(__file__).resolve().parents[2];OUT=HERE/'export/46_alternative_picker';DIR=Path(__file__).resolve().parent
-LIB=HERE.parents[2].parent/'TRACE-1.1/seismoagent/library';WAVE=HERE.parents[2]/'benchmark_source/2019_ridgecrest_california/data/waveforms'
+LIB=HERE.parents[2].parent/'TRACE-1.1/seismoagent/library';WAVE=HERE.parents[2]/'data/2019_ridgecrest_california/data/waveforms'
 WEIGHTS=LIB/'ai_module/phase_picking/pretrained/v3/eqtransformer/original_nonconservative.pt.v1';META=WEIGHTS.with_name('original_nonconservative.json.v1');MODEL=None
 
 def load(name,path):

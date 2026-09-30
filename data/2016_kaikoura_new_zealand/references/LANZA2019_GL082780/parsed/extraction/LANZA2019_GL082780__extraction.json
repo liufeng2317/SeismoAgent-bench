@@ -25,12 +25,12 @@
     "catalog_relationship": "Constructs relocated QuakeML Data Set S1 from reviewed GeoNet events, REST/kpick picks, simul2014 locations and 3-D HypoDD relocation.",
     "evidence": [
       {
-        "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+        "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
         "locator": "title, abstract, Sections 2–4",
         "note": "Paper identity and catalog purpose."
       },
       {
-        "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
+        "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
         "locator": "source bundle and Data Set S1 description",
         "note": "Supplementary workflow and release lineage."
       }
@@ -62,7 +62,7 @@
         "magnitude_scope": "article ML≥3",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
             "locator": "Section 2, event-selection paragraph",
             "note": "Starting population."
           }
@@ -80,12 +80,12 @@
         "magnitude_scope": "generic M",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
             "locator": "Section 4.1, initial-location paragraph",
             "note": "Article count."
           },
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/README.md",
+            "source": "data/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/README.md",
             "locator": "local audit: event objects and origins",
             "note": "Local count."
           }
@@ -103,12 +103,12 @@
         "magnitude_scope": "generic M",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
             "locator": "Section 4.2, HypoDD paragraph",
             "note": "Article count and thresholds."
           },
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/README.md",
+            "source": "data/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/README.md",
             "locator": "local audit: HypoDD origins",
             "note": "Local count and discrepancy."
           }
@@ -121,7 +121,7 @@
       "source_files": [
         {
           "product_id": "event_objects",
-          "path": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/raw/grl59060-sup-0003-ds01.xml",
+          "path": "data/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/raw/grl59060-sup-0003-ds01.xml",
           "format": "QuakeML XML",
           "checksum": null,
           "role": "canonical"
@@ -129,7 +129,7 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
+          "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
           "locator": "Data Set S1 description",
           "note": "Machine-readable catalog release."
         }
@@ -150,7 +150,7 @@
       "article_local_discrepancy": "Article reports 2,013 clustered HypoDD events; local XML contains 2,012 HypoDD origins.",
       "evidence": [
         {
-          "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/README.md",
+          "source": "data/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/README.md",
           "locator": "local audit tables",
           "note": "QuakeML counts, ranges and pick inventory."
         }
@@ -175,7 +175,7 @@
         },
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/README.md",
+            "source": "data/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/README.md",
             "locator": "native schema and local audit",
             "note": "QuakeML structure."
           }
@@ -195,7 +195,7 @@
         },
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/README.md",
+            "source": "data/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/README.md",
             "locator": "origin objects and preferred-origin behavior",
             "note": "HypoDD subset semantics."
           }
@@ -217,7 +217,7 @@
         },
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/README.md",
+            "source": "data/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/README.md",
             "locator": "pick audit",
             "note": "Released P/S picks."
           }
@@ -245,7 +245,7 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/README.md",
+          "source": "data/2016_kaikoura_new_zealand/data/catalogs/LANZA2019_GL082780/README.md",
           "locator": "benchmark interpretation",
           "note": "Role and limitations."
         }
@@ -268,7 +268,7 @@
         "availability_conditions": "temporary coverage incomplete at earliest sequence",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
             "locator": "network and station product",
             "note": "81-station inventory and sampling."
           }
@@ -313,7 +313,7 @@
         "dependencies": "station geometry and 3-D model",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
             "locator": "Text S1 §1.1",
             "note": "REST parameters."
           }
@@ -358,7 +358,7 @@
         "dependencies": "REST phases",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
             "locator": "Text S1 §1.2",
             "note": "Pick QC thresholds."
           }
@@ -394,7 +394,7 @@
         "dependencies": "New Zealand 3-D model",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
             "locator": "Sections 3–4.1, initial-location paragraphs",
             "note": "Initial location method."
           }
@@ -435,7 +435,7 @@
         "dependencies": "waveform differential times and 3-D model",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
             "locator": "Section 4.2, HypoDD paragraph",
             "note": "Relocation parameters and count."
           }
@@ -468,7 +468,7 @@
         "dependencies": "clustered HypoDD population",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
             "locator": "Section 4.2, bootstrap paragraph; Text S4/S5",
             "note": "Uncertainty and release."
           }
@@ -478,12 +478,12 @@
     "final_output": "QuakeML events containing SIMUL/HypoDD origins, generic magnitudes and REST-labelled P/S picks.",
     "evidence": [
       {
-        "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+        "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
         "locator": "Sections 2–4",
         "note": "End-to-end workflow."
       },
       {
-        "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
+        "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/LANZA2019_GL082780__supplement_notes.md",
         "locator": "Text S1–S5 and Data Set S1 description",
         "note": "Supplementary implementation details."
       }
@@ -495,13 +495,13 @@
         "product_id": "DP1",
         "name": "Table S1 station inventory",
         "type": "station_table",
-        "file_path": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/grl59060-sup-0002-tables1__extracted.md",
+        "file_path": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/grl59060-sup-0002-tables1__extracted.md",
         "catalog_relation": "network metadata",
         "scientific_use": "station geometry and network condition",
         "count_or_scope": "81 stations",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/grl59060-sup-0002-tables1__extracted.md",
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/supplement/grl59060-sup-0002-tables1__extracted.md",
             "locator": "station rows",
             "note": "Permanent/temporary inventory."
           }
@@ -515,7 +515,7 @@
         "scope": "2016 Mw 7.8 Kaikōura earthquake and northern South Island aftershocks",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
             "locator": "Sections 5–6",
             "note": "Interpretive findings."
           }
@@ -530,7 +530,7 @@
       "caveats": "Primary high-precision location reference; not a universal completeness catalog.",
       "evidence": [
         {
-          "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+          "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
           "locator": "Sections 5–6",
           "note": "Interpretive findings."
         }
@@ -538,7 +538,7 @@
     },
     "evidence": [
       {
-        "source": "benchmark_source/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
+        "source": "data/2016_kaikoura_new_zealand/references/LANZA2019_GL082780/parsed/paper/LANZA2019_GL082780__paper__mineru.md",
         "locator": "Sections 5–6",
         "note": "Interpretive findings."
       }

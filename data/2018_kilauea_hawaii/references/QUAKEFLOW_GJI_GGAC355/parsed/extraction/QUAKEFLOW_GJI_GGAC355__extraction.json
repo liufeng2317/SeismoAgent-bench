@@ -21,12 +21,12 @@
     "catalog_relationship": "Describes a workflow and Hawaii application, but no dedicated machine-readable Hawaii event catalog is released locally or identified by the paper.",
     "evidence": [
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
         "locator": "title, abstract, Hawaii application and Data Availability",
         "note": "Peer-reviewed workflow identity."
       },
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
         "locator": "scope and article–catalog alignment",
         "note": "Evaluation document explicitly separates method paper from catalog."
       }
@@ -48,7 +48,7 @@
       "source_files": [],
       "evidence": [
         {
-          "source": "benchmark_source/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
+          "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
           "locator": "Data Availability",
           "note": "Code release is not an event-catalog release."
         }
@@ -64,7 +64,7 @@
       "article_local_discrepancy": "The article's qualitative 'more events than HVO' statement has no released numerator/denominator or frozen query locally.",
       "evidence": [
         {
-          "source": "benchmark_source/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+          "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
           "locator": "article–catalog alignment decision",
           "note": "No local QuakeFlow event table."
         }
@@ -92,7 +92,7 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+          "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
           "locator": "benchmark role and acquisition/reproduction gate",
           "note": "Current role and missing release."
         }
@@ -115,12 +115,12 @@
         "availability_conditions": "no Hawaii request manifest locally",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
             "locator": "Data Availability and workflow description",
             "note": "Named waveform sources."
           },
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
             "locator": "input data and observation conditions",
             "note": "No reproducible Hawaii manifest."
           }
@@ -149,7 +149,7 @@
         "dependencies": "waveform quality and station metadata",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
             "locator": "workflow architecture and processing sections",
             "note": "Generic workflow stage."
           }
@@ -176,7 +176,7 @@
         "dependencies": "station geometry and travel-time structure",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
             "locator": "workflow architecture and Hawaii application",
             "note": "Association stage."
           }
@@ -206,7 +206,7 @@
         "dependencies": "application-specific data and reference snapshot",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
             "locator": "catalog-QC guidance",
             "note": "Evaluation procedure, not a released catalog."
           }
@@ -216,12 +216,12 @@
     "final_output": "Method workflow and qualitative Hawaii comparison; no locally scored event catalog.",
     "evidence": [
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__paper__mineru.md",
         "locator": "workflow architecture",
         "note": "End-to-end method."
       },
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
         "locator": "article–catalog alignment decision",
         "note": "No catalog substitution."
       }
@@ -233,13 +233,13 @@
         "product_id": "DP1",
         "name": "catalog evaluation guidance",
         "type": "evaluation_method",
-        "file_path": "benchmark_source/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+        "file_path": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
         "catalog_relation": "methodological context, not event data",
         "scientific_use": "define MATCH/MISSED/NEW and snapshot requirements",
         "count_or_scope": "no event rows",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
             "locator": "catalog fields and QC guidance",
             "note": "Evaluation concepts."
           }
@@ -253,7 +253,7 @@
         "scope": "Hawaii application including Kīlauea context",
         "evidence": [
           {
-            "source": "benchmark_source/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+            "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
             "locator": "benchmark role and limitations",
             "note": "Current benchmark decision."
           }
@@ -268,7 +268,7 @@
       "caveats": "Future reproduction target; do not substitute any independent Kīlauea catalog as QuakeFlow output.",
       "evidence": [
         {
-          "source": "benchmark_source/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+          "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
           "locator": "benchmark role and limitations",
           "note": "Current benchmark decision."
         }
@@ -276,7 +276,7 @@
     },
     "evidence": [
       {
-        "source": "benchmark_source/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
+        "source": "data/2018_kilauea_hawaii/references/QUAKEFLOW_GJI_GGAC355/parsed/paper/QUAKEFLOW_GJI_GGAC355__evaluation__mineru.md",
         "locator": "benchmark role and limitations",
         "note": "Current benchmark decision."
       }

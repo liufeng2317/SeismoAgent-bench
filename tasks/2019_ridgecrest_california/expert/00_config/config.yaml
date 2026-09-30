@@ -1,5 +1,5 @@
 # Paths are resolved relative to the expert root, including for --config overrides.
-data_root: ../../../benchmark_source/2019_ridgecrest_california/data/waveforms
+data_root: ../../../data/2019_ridgecrest_california/data/waveforms
 export_root: export
 candidate_window:
   start_utc: '2019-07-04T00:00:00Z'

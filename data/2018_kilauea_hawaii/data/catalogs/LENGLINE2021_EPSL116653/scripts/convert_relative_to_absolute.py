@@ -137,8 +137,8 @@ depth in its two-dimensional localization model.
 
 ## Evidence
 
-- `benchmark_source/2018_kilauea_hawaii/references/LENGLINE2021_EPSL116653/parsed/supplement/LENGLINE2021_EPSL116653__supplement__mmc2__mineru.md` — catalog description paragraph
-- `benchmark_source/2018_kilauea_hawaii/references/LENGLINE2021_EPSL116653/parsed/paper/LENGLINE2021_EPSL116653__paper__mineru.md` — Sections 3.1–3.2
+- `data/2018_kilauea_hawaii/references/LENGLINE2021_EPSL116653/parsed/supplement/LENGLINE2021_EPSL116653__supplement__mmc2__mineru.md` — catalog description paragraph
+- `data/2018_kilauea_hawaii/references/LENGLINE2021_EPSL116653/parsed/paper/LENGLINE2021_EPSL116653__paper__mineru.md` — Sections 3.1–3.2
 """
     (OUT / "coordinate_transform.md").write_text(transform_doc, encoding="utf-8")
 

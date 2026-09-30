@@ -52,7 +52,7 @@ def prepare():
                HERE/'export/15_validate_transfer/inputs/events.csv', HERE/'export/10_validate_catalog/phases.csv',
                HERE/'export/12_relative_location_pilot/run.json', HERE/'export/10_validate_catalog/reference_matches.csv',
                HERE/'export/05_review_catalog/reference_events.csv',
-               HERE.parents[2]/'benchmark_source/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/supplement/HUTTON2010__paper.pdf']
+               HERE.parents[2]/'data/2019_ridgecrest_california/references/AWR2025_CALTECHDATA/supplement/HUTTON2010__paper.pdf']
     sources += [Path(cfg['binary_directory'])/x for x in ['NLLoc','Vel2Grid','Grid2Time']]
     sources += sorted((BASE/'grids').glob('time.*.time.*')) + [BASE/'grids/P.in', BASE/'grids/S.in']
     for eid in cohort.event_id:

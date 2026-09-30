@@ -51,7 +51,7 @@ cd /liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/tasks/2
 
 Environment: existing `seismoagent`, CPU only. The shell entry point explicitly uses `/liufeng1afs/software/miniconda3/envs/seismoagent/bin/python`; selecting another active conda environment does not override it. Full-stage extraction/correlation uses 12 CPU processes and fitting uses four, with BLAS/OpenMP threads limited to one by the wrapper.
 
-The waveform/StationXML entry point is `benchmark_source/2019_ridgecrest_california/data/waveforms` relative to the repository root; it resolves to `/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms`. Baseline reconstruction also needs the local TRACE-1.1 library and picker weights, NonLinLoc binaries configured in `00_config/nonlinloc.yaml`, and the reference/model assets. Configuration paths are relative to the expert root where documented.
+The waveform/StationXML entry point is `data/2019_ridgecrest_california/data/waveforms` relative to the repository root; it resolves to `/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms`. Baseline reconstruction also needs the local TRACE-1.1 library and picker weights, NonLinLoc binaries configured in `00_config/nonlinloc.yaml`, and the reference/model assets. Configuration paths are relative to the expert root where documented.
 
 ### A. Verify the delivered state without changing results
 

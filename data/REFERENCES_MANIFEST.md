@@ -8,7 +8,7 @@
 
 Catalog-level cross-case statistics and figure links are maintained separately in [`CATALOGS_MANIFEST.md`](CATALOGS_MANIFEST.md). This reference manifest remains focused on paper/supplement/catalog readiness and provenance.
 
-每个来源使用稳定的 `SOURCE_ID` 文件夹：`<case>/references/<SOURCE_ID>/` 只保存论文和 supplement；`<case>/catalogs/<CATALOG_ID>/` 保存 benchmark 核心目录、原始 archive 和 schema。论文、supplement 和 catalog 通过 `source_ref` 绑定。完整规则见 [`benchmark_source/README.md`](README.md)。
+每个来源使用稳定的 `SOURCE_ID` 文件夹：`<case>/references/<SOURCE_ID>/` 只保存论文和 supplement；`<case>/catalogs/<CATALOG_ID>/` 保存 benchmark 核心目录、原始 archive 和 schema。论文、supplement 和 catalog 通过 `source_ref` 绑定。完整规则见 [`data/README.md`](README.md)。
 
 ## Per-reference readiness matrix
 

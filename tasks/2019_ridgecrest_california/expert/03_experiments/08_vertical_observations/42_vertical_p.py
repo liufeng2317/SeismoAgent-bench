@@ -10,7 +10,7 @@ import pandas as pd
 from obspy import read,Stream,UTCDateTime
 HERE=Path(__file__).resolve().parents[2];OUT=HERE/'export/42_vertical_p_observations'
 LIB=HERE.parents[2].parent/'TRACE-1.1/seismoagent/library'
-WAVE=HERE.parents[2]/'benchmark_source/2019_ridgecrest_california/data/waveforms'
+WAVE=HERE.parents[2]/'data/2019_ridgecrest_california/data/waveforms'
 WEIGHT=LIB/'ai_module/phase_picking/pretrained/v3/dpppickerp/scedc.pt'
 META=WEIGHT.with_suffix('.json');MODEL=None
 spec=importlib.util.spec_from_file_location('original42',HERE/'03_experiments/07_joint_location/33_joint_location.py');M=importlib.util.module_from_spec(spec);spec.loader.exec_module(M)

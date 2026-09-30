@@ -13,7 +13,7 @@
     "catalog_relationship": "Context-only pending a successful parse; no catalog claim is extracted from the PDF.",
     "evidence": [
       {
-        "source": "benchmark_source/REFERENCES_MANIFEST.md",
+        "source": "data/REFERENCES_MANIFEST.md",
         "locator": "Per-reference readiness matrix / MCMAHON2017_DISSERTATION",
         "note": "Project inventory labels this item as a dissertation used for structural context and states that no catalog product is expected."
       },
@@ -41,13 +41,13 @@
       "version": null,
       "source_files": [
         {
-          "path": "benchmark_source/2011_prague_oklahoma/references/MCMAHON2017_DISSERTATION/paper/MCMAHON2017_DISSERTATION__paper.pdf",
+          "path": "data/2011_prague_oklahoma/references/MCMAHON2017_DISSERTATION/paper/MCMAHON2017_DISSERTATION__paper.pdf",
           "format": "PDF",
           "checksum": "1231621c734bef57aa9393632f6ee51b2d065cd1ac1f09fcfacba09f12da326e",
           "role": "paper_context_only"
         },
         {
-          "path": "benchmark_source/2011_prague_oklahoma/references/MCMAHON2017_DISSERTATION/parsed/paper/mineru/processing_summary_20260920_051841.json",
+          "path": "data/2011_prague_oklahoma/references/MCMAHON2017_DISSERTATION/parsed/paper/mineru/processing_summary_20260920_051841.json",
           "format": "JSON processing summary",
           "checksum": null,
           "role": "parse_audit"
@@ -55,7 +55,7 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/REFERENCES_MANIFEST.md",
+          "source": "data/REFERENCES_MANIFEST.md",
           "locator": "Per-reference readiness matrix / MCMAHON2017_DISSERTATION",
           "note": "The PDF is staged, but the item is marked context-ready rather than catalog-ready."
         },
@@ -76,7 +76,7 @@
       "product_counts": {},
       "evidence": [
         {
-          "source": "benchmark_source/2011_prague_oklahoma/references/MCMAHON2017_DISSERTATION/parsed/paper/mineru/processing_summary_20260920_051841.json",
+          "source": "data/2011_prague_oklahoma/references/MCMAHON2017_DISSERTATION/parsed/paper/mineru/processing_summary_20260920_051841.json",
           "locator": "errors[0]",
           "note": "MinerU processing summary reports the failed result."
         }
@@ -109,7 +109,7 @@
         "units": {},
         "evidence": [
           {
-            "source": "benchmark_source/REFERENCES_MANIFEST.md",
+            "source": "data/REFERENCES_MANIFEST.md",
             "locator": "Per-reference readiness matrix / MCMAHON2017_DISSERTATION",
             "note": "No catalog product is expected."
           }
@@ -142,7 +142,7 @@
       "caveats": "Do not describe this source as parsed or catalog-bearing.",
       "evidence": [
         {
-          "source": "benchmark_source/REFERENCES_MANIFEST.md",
+          "source": "data/REFERENCES_MANIFEST.md",
           "locator": "Per-reference readiness matrix / MCMAHON2017_DISSERTATION",
           "note": "Context-ready status and no-catalog expectation."
         }

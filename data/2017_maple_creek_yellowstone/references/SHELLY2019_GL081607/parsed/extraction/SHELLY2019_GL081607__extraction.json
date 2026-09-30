@@ -16,12 +16,12 @@
     "catalog_relationship": "Genuine catalog-construction paper; article event populations and local USGS phase-arrival release are related but not the same product.",
     "evidence": [
       {
-        "source": "benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
+        "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
         "locator": "title block, Abstract and Methods",
         "note": "Identity, purpose and catalog type."
       },
       {
-        "source": "benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
+        "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
         "locator": "Identity and evidence status; Scientific scope",
         "note": "Article/local product distinction."
       }
@@ -48,7 +48,7 @@
         "magnitude_scope": "Routine coda magnitude lineage; exact local event table unavailable.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Scientific scope; Observation and network conditions",
             "note": "Article template population."
           }
@@ -66,7 +66,7 @@
         "magnitude_scope": "Relative-location population; type not a uniform independent truth scale.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Catalog-construction workflow; Article-reported quality and limitations",
             "note": "Article count and QC rule."
           }
@@ -84,7 +84,7 @@
         "magnitude_scope": "Template-amplitude/UUSS coda-derived Mc-like scale.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Article-reported quality and limitations",
             "note": "Magnitude population and caveat."
           }
@@ -102,7 +102,7 @@
         "magnitude_scope": "Finite mag -6.99 to 5.17 plus invalid/extreme values; XML declared domain 0.35–3.65 differs.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
+            "source": "data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
             "locator": "Full-file audit",
             "note": "Rows, ranges and phase-only semantics."
           }
@@ -120,7 +120,7 @@
         "magnitude_scope": "No valid event-level magnitude population from phase file.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
+            "source": "data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
             "locator": "Frozen benchmark-window audit",
             "note": "1,591,090 rows / 23,660 IDs and 27 station pairs."
           }
@@ -132,13 +132,13 @@
       "version": null,
       "source_files": [
         {
-          "path": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/raw/Yellowstone_2017_correlation_phase_arrivals.csv",
+          "path": "data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/raw/Yellowstone_2017_correlation_phase_arrivals.csv",
           "format": "CSV phase-arrival release",
           "checksum": "a1828099eb2a51339e01ffca191d6e4d98df27ad889c18837aa41278dd128d6c",
           "role": "raw_phase_auxiliary"
         },
         {
-          "path": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/raw/Correlation-derived_seismic_phase_arrival_times_v2.xml",
+          "path": "data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/raw/Correlation-derived_seismic_phase_arrival_times_v2.xml",
           "format": "XML metadata",
           "checksum": "547cbc7e43b11d47b2c10098850904151b4b63de5b95dc6c2d1edb147f1a96e5",
           "role": "release_metadata"
@@ -146,7 +146,7 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
+          "source": "data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
           "locator": "Provenance and product identity",
           "note": "USGS release identity and checksums."
         }
@@ -179,7 +179,7 @@
       "article_local_discrepancy": "Article event tables (15,912/30,411) are not locally staged; local CSV is phase-only and extends beyond XML/article coverage.",
       "evidence": [
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
+          "source": "data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
           "locator": "Full-file audit; Frozen benchmark-window audit",
           "note": "All local counts and discrepancies."
         }
@@ -208,12 +208,12 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
+          "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
           "locator": "Local release interpretation; Benchmark decision",
           "note": "Product distinction and valid metrics."
         },
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
+          "source": "data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
           "locator": "Quality tier and use; Reproducibility and pending work",
           "note": "Catalog-level limitations."
         }
@@ -225,7 +225,7 @@
       "window_count_rule": "Report phase rows and unique IDs separately; 23,660 is an ID count, not event count.",
       "evidence": [
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
+          "source": "data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
           "locator": "Native schema; Frozen benchmark-window audit",
           "note": "Field semantics and count convention."
         }
@@ -256,7 +256,7 @@
         },
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
+            "source": "data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
             "locator": "Native schema",
             "note": "Header and field meanings."
           }
@@ -269,7 +269,7 @@
         "units": null,
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Local release interpretation; Benchmark decision",
             "note": "Article event table is not the downloaded CSV and is not staged."
           }
@@ -293,7 +293,7 @@
         "availability_conditions": "2,289 routine template events; local CSV has 1,147 template IDs.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Observation and network conditions",
             "note": "Template and network setup."
           }
@@ -311,7 +311,7 @@
         "availability_conditions": "Station availability changes; local release has 29 full-file pairs and 27 in frozen window.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Observation and network conditions",
             "note": "Waveform parameters and availability caveat."
           }
@@ -352,7 +352,7 @@
         "dependencies": "Template coverage and station availability.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Observation and network conditions; Catalog-construction workflow",
             "note": "Template parameters."
           }
@@ -388,7 +388,7 @@
         "dependencies": "Template family and waveform lineage.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Catalog-construction workflow",
             "note": "Detection and differential-time process."
           }
@@ -429,7 +429,7 @@
         "dependencies": "Differential-time quality and template lineage.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Catalog-construction workflow; Article-reported quality and limitations",
             "note": "Relocation and threshold."
           }
@@ -471,7 +471,7 @@
         "dependencies": "Matched-filter amplitudes and polarity quality.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Article-reported quality and limitations",
             "note": "Population criteria and mechanism distinction."
           }
@@ -481,12 +481,12 @@
     "final_output": "Article-level event catalog is not locally staged; local machine-readable product is phase-only USGS release.",
     "evidence": [
       {
-        "source": "benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
+        "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
         "locator": "Catalog-construction workflow; Local release interpretation",
         "note": "Workflow/output distinction."
       },
       {
-        "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
+        "source": "data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
         "locator": "Provenance and Quality tier",
         "note": "Local release audit."
       }
@@ -498,13 +498,13 @@
         "product_id": "A1",
         "name": "USGS/UUSS operational baseline",
         "type": "operational_event_catalog",
-        "file_path": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/USGS_UUSS_COMCAT_2017/",
+        "file_path": "data/2017_maple_creek_yellowstone/data/catalogs/USGS_UUSS_COMCAT_2017/",
         "catalog_relation": "Independent Q3 context; not the Shelly phase release.",
         "scientific_use": "Operational recovery comparison.",
         "count_or_scope": "Frozen baseline count recorded separately.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper__mineru.md",
             "locator": "Benchmark decision",
             "note": "Baseline role."
           }
@@ -518,7 +518,7 @@
         "scope": "Maple Creek swarm",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
+            "source": "data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
             "locator": "Native schema; Frozen benchmark-window audit",
             "note": "Phase-only limitation."
           }
@@ -533,7 +533,7 @@
       "caveats": "23,660 frozen IDs are not validated event count; no spatial mask can be applied locally.",
       "evidence": [
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
+          "source": "data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
           "locator": "Quality tier and use",
           "note": "Role and caveats."
         }
@@ -546,7 +546,7 @@
     ],
     "evidence": [
       {
-        "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
+        "source": "data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
         "locator": "Reproducibility and pending work",
         "note": "Open acquisition tasks."
       }
@@ -575,7 +575,7 @@
     "needs_human_review": true,
     "evidence": [
       {
-        "source": "benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
+        "source": "data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/README.md",
         "locator": "Frozen benchmark-window audit; Quality tier and use",
         "note": "Count semantics and missing event table."
       }

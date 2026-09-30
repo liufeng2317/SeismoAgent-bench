@@ -16,7 +16,7 @@
 ### Provenance and product lineage
 
 - Source article: Chamberlain et al. (2021), DOI [10.1029/2021JB022304](https://doi.org/10.1029/2021JB022304).
-- Official article benchmark_source/code archive: [Zenodo 6763130](https://zenodo.org/record/6763130), cited in the paper's data-availability statement.
+- Official article data/code archive: [Zenodo 6763130](https://zenodo.org/record/6763130), cited in the paper's data-availability statement.
 - Legacy public CSV: [Zenodo record 5035841](https://zenodo.org/records/5035841), local file `CHAMBERLAIN2021_JB022304__catalog_growclust.csv`.
 - Canonical benchmark CSV: `CHAMBERLAIN2021_JB022304__catalog_growclust_corrected_focal_mechanisms.csv`, the corrected focal-mechanism release supplied with the local project materials.
 - Both files are preserved. The corrected file is the benchmark input; the legacy file is a provenance/control product and must not be concatenated with it.

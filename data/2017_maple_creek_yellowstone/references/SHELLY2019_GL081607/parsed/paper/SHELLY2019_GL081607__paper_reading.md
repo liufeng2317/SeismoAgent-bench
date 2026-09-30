@@ -122,8 +122,8 @@ which is recorded as a release discrepancy in the catalog summary.
 
 ## Local paths
 
-- Paper PDF: `benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/paper/SHELLY2019_GL081607__paper.pdf`
-- Parsed paper: `benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/SHELLY2019_GL081607__paper__mineru.md`
-- Supplement: `benchmark_source/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/supplement/Shelly2019_MapleCreek_SI.pdf`
-- Phase release and XML metadata: `benchmark_source/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/raw/`
+- Paper PDF: `data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/paper/SHELLY2019_GL081607__paper.pdf`
+- Parsed paper: `data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/parsed/SHELLY2019_GL081607__paper__mineru.md`
+- Supplement: `data/2017_maple_creek_yellowstone/references/SHELLY2019_GL081607/supplement/Shelly2019_MapleCreek_SI.pdf`
+- Phase release and XML metadata: `data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/raw/`
 - Catalog-level audit: `../../../catalogs/SHELLY2019_GL081607/README.md` (created alongside this note)

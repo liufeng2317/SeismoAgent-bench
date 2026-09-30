@@ -19,7 +19,7 @@
     "catalog_relationship": "Constructs an EQcorrscan/NonLinLoc/GrowClust catalog from Lanza-derived templates and supplies corrected focal mechanisms.",
     "evidence": [
       {
-        "source": "benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+        "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
         "locator": "title, abstract and Sections 2–3",
         "note": "Paper identity and catalog purpose."
       }
@@ -52,12 +52,12 @@
         "magnitude_scope": "ML/local magnitude; 50 missing locally",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
             "locator": "Section 3, detection/QC paragraphs",
             "note": "Article count."
           },
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
+            "source": "data/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
             "locator": "corrected catalog audit",
             "note": "Local count."
           }
@@ -75,12 +75,12 @@
         "magnitude_scope": "inherited event magnitude",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
             "locator": "Sections 3–4, relative-relocation paragraph",
             "note": "Article subset."
           },
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
+            "source": "data/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
             "locator": "benchmark role and limitations",
             "note": "No local flag."
           }
@@ -98,12 +98,12 @@
         "magnitude_scope": "associated catalog magnitude",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
             "locator": "Section 3, focal-mechanism paragraph",
             "note": "Method/count."
           },
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
+            "source": "data/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
             "locator": "corrected catalog audit",
             "note": "Local rows."
           }
@@ -116,14 +116,14 @@
       "source_files": [
         {
           "product_id": "final_events",
-          "path": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust_corrected_focal_mechanisms.csv",
+          "path": "data/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust_corrected_focal_mechanisms.csv",
           "format": "CSV",
           "checksum": "6f00695585998c365a81132a60bc3c7ebe058abdd352e8d8d8f802489559137a",
           "role": "canonical"
         },
         {
           "product_id": "legacy_control",
-          "path": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust.csv",
+          "path": "data/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust.csv",
           "format": "CSV",
           "checksum": "b2f7c6e60198b309274051764b564a5a544ae039e45a142e2e31034e0068fc2b",
           "role": "provenance_control"
@@ -131,7 +131,7 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
+          "source": "data/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
           "locator": "provenance and product lineage",
           "note": "Corrected release and legacy control."
         }
@@ -150,7 +150,7 @@
       "article_local_discrepancy": "33,328 headline rows match; 27,431 relocation membership is implicit; focal mechanisms differ by one row.",
       "evidence": [
         {
-          "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
+          "source": "data/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
           "locator": "corrected catalog audit",
           "note": "Rows, ranges and mechanism audit."
         }
@@ -182,7 +182,7 @@
         },
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
+            "source": "data/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
             "locator": "native schema and corrected catalog audit",
             "note": "CSV fields and units."
           }
@@ -206,7 +206,7 @@
         },
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
+            "source": "data/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
             "locator": "complete mechanism rows",
             "note": "Corrected fields."
           }
@@ -235,7 +235,7 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
+          "source": "data/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
           "locator": "benchmark role and limitations",
           "note": "Evaluation role."
         }
@@ -258,7 +258,7 @@
         "availability_conditions": "STREWN/strong-motion stations added for location/mechanisms, not detection",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
             "locator": "Section 2, network paragraph",
             "note": "Detection network."
           }
@@ -290,7 +290,7 @@
         "dependencies": "Lanza population",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
             "locator": "Section 3, template paragraph",
             "note": "Template settings."
           }
@@ -332,7 +332,7 @@
         "dependencies": "station availability/template morphology",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
             "locator": "Section 3, detection/picking paragraphs",
             "note": "Detection settings; exact MAD symbol needs PDF visual check."
           }
@@ -373,7 +373,7 @@
         "dependencies": "velocity models/stations",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
             "locator": "Section 3, location paragraphs",
             "note": "Location QC/counts."
           }
@@ -402,7 +402,7 @@
         "dependencies": "template correlation and models",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
             "locator": "Section 3, magnitude/relocation paragraphs",
             "note": "Methods/count."
           }
@@ -436,7 +436,7 @@
         "dependencies": "strong-motion/STREWN observations",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
             "locator": "Section 3, focal-mechanism paragraph",
             "note": "Mechanism method/count."
           }
@@ -446,12 +446,12 @@
     "final_output": "Corrected 33,328-row CSV; relocation membership remains implicit.",
     "evidence": [
       {
-        "source": "benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+        "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
         "locator": "Sections 2–3",
         "note": "End-to-end workflow."
       },
       {
-        "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
+        "source": "data/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
         "locator": "provenance and audit",
         "note": "Corrected product."
       }
@@ -463,13 +463,13 @@
         "product_id": "DP1",
         "name": "legacy CSV",
         "type": "provenance_control",
-        "file_path": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust.csv",
+        "file_path": "data/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust.csv",
         "catalog_relation": "superseded mechanism release",
         "scientific_use": "lineage comparison",
         "count_or_scope": "34,704 rows; do not merge",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
+            "source": "data/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/README.md",
             "locator": "legacy-versus-corrected comparison",
             "note": "Correction lineage."
           }
@@ -483,7 +483,7 @@
         "scope": "2016 Mw 7.8 Kaikōura sequence and 2009–2020 surrounding seismicity",
         "evidence": [
           {
-            "source": "benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+            "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
             "locator": "abstract and discussion",
             "note": "Scientific interpretation."
           }
@@ -498,7 +498,7 @@
       "caveats": "Secondary dense detection reference; relative-location subset is a metric-specific high-quality target.",
       "evidence": [
         {
-          "source": "benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+          "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
           "locator": "abstract and discussion",
           "note": "Scientific interpretation."
         }
@@ -506,7 +506,7 @@
     },
     "evidence": [
       {
-        "source": "benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
+        "source": "data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper__mineru.md",
         "locator": "abstract and discussion",
         "note": "Scientific interpretation."
       }

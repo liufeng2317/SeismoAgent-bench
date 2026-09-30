@@ -23,7 +23,7 @@ HERE = Path(__file__).resolve().parents[2]  # Expert root; independent of workin
 OUT=HERE/'export/13_hypodd_cc_pilot'
 PRE=HERE/'export/12_relative_location_pilot'
 LIB=Path('/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/TRACE-1.1/seismoagent/library/basic_fun/HypoDD')
-WAVE=HERE.parents[2]/'benchmark_source/2019_ridgecrest_california/data/waveforms'
+WAVE=HERE.parents[2]/'data/2019_ridgecrest_california/data/waveforms'
 TOP=[0.,1.,2.,3.,4.,5.,6.,7.,8.,30.]
 VP=[4.74,5.01,5.35,5.71,6.07,6.17,6.27,6.34,6.39,7.8]
 CONFIG=dict(sample_rate_hz=100,bands_hz=[[2,8],[2,12]],cc_min=.75,snr_min=2.,

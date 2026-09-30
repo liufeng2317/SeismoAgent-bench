@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 threadpool_limits(1)
 HERE=Path(__file__).resolve().parents[1]
 OUT=HERE/'export/19_s_arrival_review'
-ROOT=(HERE/'../../../benchmark_source/2019_ridgecrest_california/data/waveforms').resolve()
+ROOT=(HERE/'../../../data/2019_ridgecrest_california/data/waveforms').resolve()
 STATIONS=['CI.SRT..HH','CI.TOW2..HH']
 
 

@@ -10,7 +10,7 @@ import yaml
 from scipy.signal import resample_poly
 from obspy import read,read_inventory,Stream,Trace,UTCDateTime
 from obspy.signal.rotate import rotate2zne
-HERE=Path(__file__).resolve().parents[2];OUT=HERE/'export/45_added_station';WAVE=HERE.parents[2]/'benchmark_source/2019_ridgecrest_california/data/waveforms'
+HERE=Path(__file__).resolve().parents[2];OUT=HERE/'export/45_added_station';WAVE=HERE.parents[2]/'data/2019_ridgecrest_california/data/waveforms'
 LIB=HERE.parents[2].parent/'TRACE-1.1/seismoagent/library'
 s=importlib.util.spec_from_file_location('baseline_picking45',HERE/'01_pipeline/02_pick_phasenet.py');P=importlib.util.module_from_spec(s);sys.modules[s.name]=P;s.loader.exec_module(P)
 

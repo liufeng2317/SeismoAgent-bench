@@ -18,12 +18,12 @@
     "catalog_relationship": "Real catalog-construction research, but not a Yellowstone Maple Creek source. It is retained only as out-of-case context and must not supply Maple event labels or counts.",
     "evidence": [
       {
-        "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+        "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
         "locator": "title, abstract, Introduction",
         "note": "Article identity, Sheldon location, purpose, and approximate detection/located-event statistics."
       },
       {
-        "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+        "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
         "locator": "Identity and Scope check",
         "note": "Local reading explicitly classifies the article as Sheldon/Nevada context-only for the Maple case."
       }
@@ -56,12 +56,12 @@
         "magnitude_scope": "Includes events sufficient for regional location; exact range not extracted as a local catalog.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "§2.1 Catalog and Waveform Data",
             "note": "NSL database and 7,966 located events."
           },
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "Scope check",
             "note": "Context-only classification and count summary."
           }
@@ -79,7 +79,7 @@
         "magnitude_scope": "M_L >= 1 input subset.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "§2.2 Earthquake Locations",
             "note": "GrowClust3D workflow, 6,533 input events, 3,811 relocated events, and QC thresholds."
           }
@@ -97,12 +97,12 @@
         "magnitude_scope": "Single-station M_L estimates from Wood-Anderson displacement and an approximate 16 km distance.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "§2.4 Earthquake Detections at Station COLR",
             "note": "Detection model, thresholds, time span, and magnitude approximation."
           },
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "Scope check",
             "note": "Article-level nearly 70,000 detection count."
           }
@@ -120,7 +120,7 @@
         "magnitude_scope": "Mid-magnitude events suitable for long-period inversion; no exact range asserted.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "§2.3 Moment Tensor Inversions",
             "note": "93 quality-controlled solutions and >40% variance-reduction threshold."
           }
@@ -132,13 +132,13 @@
       "version": null,
       "source_files": [
         {
-          "path": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/paper/MAPLE_RELATED_OPEN__paper.pdf",
+          "path": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/paper/MAPLE_RELATED_OPEN__paper.pdf",
           "format": "PDF",
           "checksum": "5ad7ec4c6dee6afd0af470c730271655d624f0dba17fb9dc840a7d6f6394a791",
           "role": "paper_context_only"
         },
         {
-          "path": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+          "path": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
           "format": "MinerU Markdown",
           "checksum": null,
           "role": "parsed_article"
@@ -146,12 +146,12 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
           "locator": "Data and code availability section",
           "note": "Article states that derived datasets and the velocity model are archived on Zenodo."
         },
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/README.md",
+          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/README.md",
           "locator": "Role in this case",
           "note": "README records Zenodo DOI but explicitly says products belong to Sheldon, Nevada, not Yellowstone."
         }
@@ -167,7 +167,7 @@
       "product_counts": {},
       "evidence": [
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
           "locator": "Scope check",
           "note": "Local audit explicitly says no Sheldon catalog is staged under the Maple case."
         }
@@ -189,12 +189,12 @@
       ],
       "evidence": [
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
           "locator": "Benchmark decision",
           "note": "Source is context-only and excluded from the Maple reference matrix and event-count comparisons."
         },
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/README.md",
+          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/README.md",
           "locator": "Role in this case",
           "note": "README repeats the out-of-case restriction."
         }
@@ -208,7 +208,7 @@
         "units": {},
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "Scope check",
             "note": "No Sheldon machine-readable release is staged under this case."
           }
@@ -232,7 +232,7 @@
         "availability_conditions": "Sparse regional coverage; temporary COLR station installed 2014-11-18 and operated through 2018-02-06.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "§2.1 Catalog and Waveform Data",
             "note": "Input database, partner networks, 250 km extraction, and COLR deployment."
           }
@@ -250,7 +250,7 @@
         "availability_conditions": "Reliable cellular communications and high signal quality near the sequence.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "§2.1 and §2.4",
             "note": "COLR waveform period and single-station detection input."
           }
@@ -268,7 +268,7 @@
         "availability_conditions": "Used for NonLinLoc and GrowClust3D station-specific travel-time grids.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "§2.2 Earthquake Locations",
             "note": "NonLinLoc correction and GrowClust3D travel-time grids."
           }
@@ -297,7 +297,7 @@
         "dependencies": "S3 velocity model and station corrections.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "§2.2 Earthquake Locations",
             "note": "Two-step NonLinLoc workflow."
           }
@@ -352,7 +352,7 @@
         "dependencies": "S1 waveforms/phases and S3 travel-time grids.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "§2.2 Earthquake Locations",
             "note": "Differential-time and GrowClust3D details."
           }
@@ -394,7 +394,7 @@
         "dependencies": "COLR continuity and sparse regional background.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "§2.4 Earthquake Detections at Station COLR",
             "note": "Model, filtering, association, and magnitude method."
           }
@@ -404,7 +404,7 @@
     "final_output": "Multiple Sheldon products (routine locations, GrowClust3D subset, COLR detections, moment tensors, and source spectra) archived by the article; none are a Maple Creek release in this repository.",
     "evidence": [
       {
-        "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+        "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
         "locator": "§2 Data and Methods; Data and code availability",
         "note": "Article workflow and Zenodo statement."
       }
@@ -422,7 +422,7 @@
         "count_or_scope": "Article says derived datasets and velocity model are archived; exact file inventory not audited.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/README.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/README.md",
             "locator": "Zenodo statement",
             "note": "Archive belongs to Sheldon, Nevada."
           }
@@ -438,7 +438,7 @@
         "count_or_scope": "93 quality-controlled solutions reported.",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "§2.3 Moment Tensor Inversions",
             "note": "Count and variance-reduction criterion."
           }
@@ -452,7 +452,7 @@
         "scope": "Sheldon, Nevada only",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "Abstract and §2.2",
             "note": "Article structural interpretation."
           }
@@ -464,7 +464,7 @@
         "scope": "Sheldon, Nevada only",
         "evidence": [
           {
-            "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+            "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
             "locator": "§2.1 and §2.4",
             "note": "Network limitation and detection rationale."
           }
@@ -479,12 +479,12 @@
       "caveats": "Do not substitute Sheldon counts for Pang or Shelly Yellowstone counts; no local release is available for row-level matching.",
       "evidence": [
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
+          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/parsed/paper/MAPLE_RELATED_OPEN__paper__mineru.md",
           "locator": "Benchmark decision",
           "note": "Explicit context-only decision."
         },
         {
-          "source": "benchmark_source/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/README.md",
+          "source": "data/2017_maple_creek_yellowstone/references/MAPLE_RELATED_OPEN/README.md",
           "locator": "Role in this case",
           "note": "README exclusion rule."
         }

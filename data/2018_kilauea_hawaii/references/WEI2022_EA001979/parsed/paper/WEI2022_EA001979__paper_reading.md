@@ -164,10 +164,10 @@ guarantee.
 
 ## Local provenance and open actions
 
-- Paper PDF: `benchmark_source/2018_kilauea_hawaii/references/WEI2022_EA001979/paper/WEI2022_EA001979__paper.pdf`
-- MinerU text: `benchmark_source/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/WEI2022_EA001979__paper__mineru.md`
-- Supporting information: `benchmark_source/2018_kilauea_hawaii/references/WEI2022_EA001979/supplement/Wei2022_Kilauea_SI.pdf`
-- Catalog README and audit: `benchmark_source/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/README.md` and `README.md`
+- Paper PDF: `data/2018_kilauea_hawaii/references/WEI2022_EA001979/paper/WEI2022_EA001979__paper.pdf`
+- MinerU text: `data/2018_kilauea_hawaii/references/WEI2022_EA001979/parsed/WEI2022_EA001979__paper__mineru.md`
+- Supporting information: `data/2018_kilauea_hawaii/references/WEI2022_EA001979/supplement/Wei2022_Kilauea_SI.pdf`
+- Catalog README and audit: `data/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/README.md` and `README.md`
 - Source release: [Dryad 10.5061/dryad.np5hqbzw9](https://doi.org/10.5061/dryad.np5hqbzw9)
 
 Before reproducing the complete workflow, extract the local SI PDF and record

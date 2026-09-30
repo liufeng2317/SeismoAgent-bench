@@ -160,11 +160,11 @@ events rather than dropping them silently.
 
 ## Local provenance and unresolved actions
 
-- Paper PDF: `benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/paper/ISKEN2017_BSSA0120160150__paper.pdf`
-- MinerU extraction: `benchmark_source/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/mineru/`
-- Catalog README: `benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md`
-- Normalized catalog: `benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv`
-- Official source table: `benchmark_source/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__source_tableS3.html`
+- Paper PDF: `data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/paper/ISKEN2017_BSSA0120160150__paper.pdf`
+- MinerU extraction: `data/2011_prague_oklahoma/references/ISKEN2017_BSSA0120160150/parsed/mineru/`
+- Catalog README: `data/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/README.md`
+- Normalized catalog: `data/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__catalog_relocated_tableS3.csv`
+- Official source table: `data/2011_prague_oklahoma/data/catalogs/ISKEN2017_BSSA0120160150/ISKEN2017_BSSA0120160150__source_tableS3.html`
 - Official supplement landing page: <https://www.seismosoc.org/Publications/BSSA_html/bssa_107-2/2016150-esupp/>
 
 Remaining checks before using this reference in a scored benchmark:

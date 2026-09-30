@@ -128,9 +128,9 @@ spatial mask is a separate case-level operation.
 
 ## Local provenance and open actions
 
-- Paper PDF: `benchmark_source/2011_prague_oklahoma/references/MCMAHON2017_GL072944/paper/MCMAHON2017_GL072944__paper.pdf`
-- MinerU text: `benchmark_source/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/mineru/MCMAHON2017_GL072944__paper/full.md`
-- Catalog README: `benchmark_source/2011_prague_oklahoma/data/catalogs/MCMAHON2017_GL072944/README.md`
-- Catalog release: `benchmark_source/2011_prague_oklahoma/data/catalogs/MCMAHON2017_GL072944/raw/MCMAHON2017_GL072944__catalog_subspace_5446events.txt`
-- Metadata: `benchmark_source/2011_prague_oklahoma/data/catalogs/MCMAHON2017_GL072944/raw/MCMAHON2017_GL072944__metadata.xml`
+- Paper PDF: `data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/paper/MCMAHON2017_GL072944__paper.pdf`
+- MinerU text: `data/2011_prague_oklahoma/references/MCMAHON2017_GL072944/parsed/mineru/MCMAHON2017_GL072944__paper/full.md`
+- Catalog README: `data/2011_prague_oklahoma/data/catalogs/MCMAHON2017_GL072944/README.md`
+- Catalog release: `data/2011_prague_oklahoma/data/catalogs/MCMAHON2017_GL072944/raw/MCMAHON2017_GL072944__catalog_subspace_5446events.txt`
+- Metadata: `data/2011_prague_oklahoma/data/catalogs/MCMAHON2017_GL072944/raw/MCMAHON2017_GL072944__metadata.xml`
 - Required next acquisition: McMahon Supporting Information S1, Table S1/S2, and Data Sets S1/S2 if exact detector thresholds, station/sample-rate metadata, or per-event uncertainty fields are needed.

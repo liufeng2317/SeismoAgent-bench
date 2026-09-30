@@ -9,7 +9,7 @@
 | Journal | *Journal of Geophysical Research: Solid Earth*, 126, e2021JB022304 | PDF p. 1 citation block |
 | DOI | [10.1029/2021JB022304](https://doi.org/10.1029/2021JB022304) | DOI / article PDF |
 | Article type | Research article that constructs a 10-year matched-filter catalog, then performs absolute and relative location/relocation | Abstract; Sections 2–3 |
-| Official benchmark_source/code release | Zenodo record [6763130](https://zenodo.org/record/6763130); article data availability says CSV and QuakeML are provided | PDF pp. 21–22 |
+| Official data/code release | Zenodo record [6763130](https://zenodo.org/record/6763130); article data availability says CSV and QuakeML are provided | PDF pp. 21–22 |
 | Version status | The PDF includes a correction notice: the initial focal-mechanism catalog was erroneous; data, SI, figures and software were replaced. The corrected version is the version of record. | PDF p. 24 erratum |
 | Local paper parse | `parsed/CHAMBERLAIN2021_JB022304__paper__mineru.md`; MinerU `content_list` page indices were used as PDF-page anchors | Local parse audit |
 
@@ -164,9 +164,9 @@ count is the catalog-local time audit; 2,214 is the comparable benchmark count.
 
 ## Local provenance and open actions
 
-- Paper PDF: `benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/paper/CHAMBERLAIN2021_JB022304__paper.pdf`
-- Parsed paper: `benchmark_source/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/CHAMBERLAIN2021_JB022304__paper__mineru.md`
-- Corrected canonical catalog: `benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust_corrected_focal_mechanisms.csv`
-- Legacy Zenodo CSV: `benchmark_source/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust.csv`
-- Official release: [Zenodo 5035841](https://zenodo.org/records/5035841) for the legacy product; corrected benchmark_source/code archive is identified by the article as Zenodo 6763130.
+- Paper PDF: `data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/paper/CHAMBERLAIN2021_JB022304__paper.pdf`
+- Parsed paper: `data/2016_kaikoura_new_zealand/references/CHAMBERLAIN2021_JB022304/parsed/CHAMBERLAIN2021_JB022304__paper__mineru.md`
+- Corrected canonical catalog: `data/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust_corrected_focal_mechanisms.csv`
+- Legacy Zenodo CSV: `data/2016_kaikoura_new_zealand/data/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust.csv`
+- Official release: [Zenodo 5035841](https://zenodo.org/records/5035841) for the legacy product; corrected data/code archive is identified by the article as Zenodo 6763130.
 - Required follow-up: preserve the Zenodo QuakeML/software archive if exact relocation-status flags, focal-mechanism provenance, or reproducibility of the 27,431 subset is required; visually verify the `10× MAD` threshold in the source PDF.

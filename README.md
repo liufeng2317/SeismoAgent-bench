@@ -77,12 +77,12 @@ The central question is:
 
 | Case | Regime | Main challenge |
 |---|---|---|
-| [Prague, Oklahoma](benchmark_source/2011_prague_oklahoma) | Mainshock–aftershock | Changing heterogeneous network |
-| [Kaikōura, New Zealand](benchmark_source/2016_kaikoura_new_zealand) | Dense aftershock sequence | Temporary network and relocation |
-| [Maple Creek, Yellowstone](benchmark_source/2017_maple_creek_yellowstone) | Earthquake swarm | Sparse routine catalog |
-| [Kīlauea, Hawaiʻi](benchmark_source/2018_kilauea_hawaii) | Volcanic eruption sequence | High-rate changing sources |
-| [Ridgecrest, California](benchmark_source/2019_ridgecrest_california) | Dense faulting sequence | Overlapping events and complex geometry |
-| [Magna, Utah](benchmark_source/2020_magna_utah) | Moderate earthquake sequence | Permanent versus nodal networks |
+| [Prague, Oklahoma](data/2011_prague_oklahoma) | Mainshock–aftershock | Changing heterogeneous network |
+| [Kaikōura, New Zealand](data/2016_kaikoura_new_zealand) | Dense aftershock sequence | Temporary network and relocation |
+| [Maple Creek, Yellowstone](data/2017_maple_creek_yellowstone) | Earthquake swarm | Sparse routine catalog |
+| [Kīlauea, Hawaiʻi](data/2018_kilauea_hawaii) | Volcanic eruption sequence | High-rate changing sources |
+| [Ridgecrest, California](data/2019_ridgecrest_california) | Dense faulting sequence | Overlapping events and complex geometry |
+| [Magna, Utah](data/2020_magna_utah) | Moderate earthquake sequence | Permanent versus nodal networks |
 
 The cases are deliberately different. The goal is not one leaderboard, but a
 capability profile showing where an agent succeeds, fails, or needs expert
@@ -110,7 +110,7 @@ docs/
   research/                 scientific design, case inventory and data preparation
   framework/                reusable benchmark workflow and implementation records
 
-benchmark_source/
+data/
   REFERENCES_MANIFEST.md    paper/supplement/catalog readiness
   <case>/references/        source papers and supplementary materials
   <case>/data/catalogs/     source catalogs and catalog-level analysis products
@@ -125,9 +125,9 @@ scripts/
   04_catalog_analysis/     catalog manifest generation
 ```
 
-Detailed organization rules belong in [benchmark_source/README.md](benchmark_source/README.md), and
+Detailed organization rules belong in [data/README.md](data/README.md), and
 the current reference readiness belongs in
-[benchmark_source/REFERENCES_MANIFEST.md](benchmark_source/REFERENCES_MANIFEST.md).
+[data/REFERENCES_MANIFEST.md](data/REFERENCES_MANIFEST.md).
 
 ## Quick start
 
@@ -182,14 +182,14 @@ Next deliverables are:
 - [Information extraction schema](docs/research/01_3_Information_Extraction_Schema.md)
 - [Paper parsing audit](docs/research/01_4_Paper_Parsing_Audit.md)
 - [Framework documentation](docs/framework/README.md)
-- [Reference manifest](benchmark_source/REFERENCES_MANIFEST.md)
-- [Data organization rules](benchmark_source/README.md)
+- [Reference manifest](data/REFERENCES_MANIFEST.md)
+- [Data organization rules](data/README.md)
 - [Repository cleanup and retention decisions](docs/research/02_Repository_Cleanup.md)
 
 **Canonical project name:** `SeismoAgentBench`  \
 **Repository slug:** `seismoagent-bench`  \
 **Short form:** `SABench`
 
-The project code package is [`SeismoAgentBench/`](SeismoAgentBench/README.md). Source registry tools are one utility under [`utils/source_prepare/`](SeismoAgentBench/utils/source_prepare/), with regression tests in [`tests/`](tests/). Ridgecrest is the first case using the versioned source registry; see the [source architecture and commands](benchmark_source/README.md#通用-source-架构ridgecrest-试点). Evaluation will be implemented separately.
+The project code package is [`SeismoAgentBench/`](SeismoAgentBench/README.md). Source registry tools are one utility under [`utils/source_prepare/`](SeismoAgentBench/utils/source_prepare/), with regression tests in [`tests/`](tests/). Ridgecrest is the first case using the versioned source registry; see the [source architecture and commands](data/README.md#通用-source-架构ridgecrest-试点). Evaluation will be implemented separately.
 
 Automated regressions use one entry point: `python -B -m unittest discover -s tests -v`. Follow the [test maintenance rules](tests/AGENTS.md) when adding or changing tests.

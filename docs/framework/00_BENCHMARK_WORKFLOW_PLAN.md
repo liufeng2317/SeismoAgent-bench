@@ -224,7 +224,7 @@ SeismoAgentBench/                 # reusable workflow implementation
   utils/                          # small cross-cutting utilities only
 
 tasks/<instance>/                 # task packages and instance configuration
-benchmark_source/<instance>/      # instance data and source evidence
+data/<instance>/      # instance data and source evidence
 seismotools/                      # versioned scientific-tool snapshots
 ```
 
@@ -249,7 +249,7 @@ The following areas remain outside the reusable control library:
 | Area | Responsibility |
 | --- | --- |
 | `tasks/<instance>/` | Task instructions, instance configuration and instance-level scorers |
-| `benchmark_source/<instance>/` | Source data, reference evidence and instance-specific preparation scripts |
+| `data/<instance>/` | Source data, reference evidence and instance-specific preparation scripts |
 | `seismotools/` | Versioned scientific-tool source, documentation and runtime assets |
 
 Only create a module when it has an implemented responsibility and at least one stable caller. Do not create empty directories for anticipated features.
