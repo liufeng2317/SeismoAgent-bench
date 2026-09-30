@@ -3,7 +3,7 @@ harness: codex
 executable: codex
 version_command:
   - --version
-model: null
+model: gpt-5.6-sol
 provider: direct
 base_url: null
 api_key: null
