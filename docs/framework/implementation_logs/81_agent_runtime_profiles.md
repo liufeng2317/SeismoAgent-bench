@@ -9,7 +9,7 @@ executable and model, and record the installed executable version for a run.
 
 - Extended `agent_config.yaml` validation with `executable`, `version_command`
   and non-secret `auth` metadata.
-- Added a Codex profile at `configs/agents/codex.yaml`.
+- Added a Codex profile at `SeismoAgentBench/configs/agents/codex.yaml`.
 - `run-codex` can take its executable, model and reasoning effort from the
   profile; command-line values remain explicit overrides.
 - The Codex launcher records a non-invasive version probe in
