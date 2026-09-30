@@ -81,3 +81,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Configured input links | [79_configured_input_links.md](79_configured_input_links.md) | Complete |
 | Unified input JSON | [80_unified_input_json.md](80_unified_input_json.md) | Complete |
 | Agent runtime profiles and executable versions | [81_agent_runtime_profiles.md](81_agent_runtime_profiles.md) | Complete |
+| External authentication profiles | [82_external_auth_profiles.md](82_external_auth_profiles.md) | Complete |

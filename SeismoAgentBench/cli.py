@@ -13,7 +13,7 @@ from SeismoAgentBench.agent import AgentError, AgentSpec
 from SeismoAgentBench.execution import (CodexCommandError, CodexCommandSpec, ExecutionError,
                                         AgentConfigError, RunLayout, expand_experiment,
                                         load_agent_config, load_env_file, load_experiment_spec,
-                                        probe_executable_version)
+                                        probe_executable_version, resolve_auth)
 from SeismoAgentBench.task import load_json, render_agent_prompt
 from SeismoAgentBench.workflow import evaluate_run, execute_experiment, run_agent
 
@@ -98,10 +98,15 @@ def main(argv: Sequence[str] | None = None) -> int:
         else:
             if args.max_attempts < 1 or args.retry_delay_s < 0:
                 raise CodexCommandError("max_attempts must be >= 1 and retry_delay_s must be >= 0")
-            env = load_env_file(args.env_file) if args.env_file else {}
             agent_config = load_agent_config(args.agent_config) if args.agent_config else None
             if agent_config is not None and agent_config.get("harness") != "codex":
                 raise CodexCommandError("run-codex requires an Agent config with harness: codex")
+            auth = resolve_auth(agent_config)
+            configured_env_file = args.env_file or auth.get("env_file")
+            configured_codex_home = args.codex_home or auth.get("codex_home")
+            env = load_env_file(configured_env_file) if configured_env_file else {}
+            if configured_codex_home:
+                env["CODEX_HOME"] = configured_codex_home
             configured = (agent_config or {}).get("config", {})
             codex_bin = args.codex_bin or (agent_config or {}).get("executable")
             if not isinstance(codex_bin, str) or not codex_bin:
@@ -110,8 +115,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             reasoning_effort = args.reasoning_effort or configured.get("reasoning_effort", "medium")
             if not isinstance(reasoning_effort, str):
                 raise CodexCommandError("reasoning_effort must be a string")
-            if args.codex_home:
-                env["CODEX_HOME"] = args.codex_home
             effective_root = Path(args.run_root).resolve()
             if args.campaign_id:
                 task_id = load_json(args.task)["task_id"]
@@ -161,6 +164,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                                "injected_environment_keys": sorted(env)}
             if args.campaign_id:
                 result["run_layout"] = layout.record()
+            result["codex"]["authentication"] = {
+                "mode": auth["mode"],
+                "env_file_configured": bool(configured_env_file),
+                "codex_home_configured": bool(configured_codex_home),
+            }
     except (AgentError, AgentConfigError, CodexCommandError, ExecutionError, OSError, ValueError) as exc:
         print(json.dumps({"state": "cli_error", "error": str(exc)}, sort_keys=True), file=sys.stderr)
         return 2

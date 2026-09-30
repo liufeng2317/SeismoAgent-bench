@@ -57,8 +57,12 @@ def load_agent_config(path: str | Path) -> dict[str, Any]:
     auth = value.get("auth", {})
     if not isinstance(auth, dict):
         raise AgentConfigError("Agent config auth must be a mapping")
-    if "mode" in auth and (not isinstance(auth["mode"], str) or not auth["mode"]):
-        raise AgentConfigError("Agent config auth.mode must be a non-empty string")
+    mode = auth.get("mode", "external_profile")
+    if mode not in {"external_profile", "env_file", "codex_home"}:
+        raise AgentConfigError(f"unsupported Agent config auth.mode: {mode}")
+    for field in ("env_file", "codex_home"):
+        if field in auth and (not isinstance(auth[field], str) or not auth[field]):
+            raise AgentConfigError(f"Agent config auth.{field} must be a non-empty string")
     config = value.get("config", {})
     if not isinstance(config, dict):
         raise AgentConfigError("Agent config.config must be a mapping")

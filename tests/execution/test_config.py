@@ -44,6 +44,13 @@ class AgentConfigTests(unittest.TestCase):
             config = load_agent_config(source)
             self.assertEqual(config["auth"]["mode"], "external_profile")
 
+    def test_rejects_unknown_auth_mode(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "agent.yaml"
+            source.write_text("harness: codex\nauth:\n  mode: token_file\n", encoding="utf-8")
+            with self.assertRaises(AgentConfigError):
+                load_agent_config(source)
+
 
 if __name__ == "__main__":
     unittest.main()
