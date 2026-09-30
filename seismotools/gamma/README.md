@@ -7,7 +7,7 @@ Input: picks, station coordinates, coordinate projection, velocity settings and 
 
 Use `source/` on the Python import path; dependencies are in [requirements.txt](source/requirements.txt) and the observed environment record. [Bundled documentation](docs/README.md) is copied from the same local library. Run the root tool check with `--imports` to verify local module import without association or network calls.
 
-[Case usage](../../tasks/2019_ridgecrest_california/expert/01_pipeline/03_associate_gamma.py) defines projection, time blocking, eikonal grids and association thresholds. Keep those case choices out of the reusable source.
+[Case usage](../../workflows/tasks/2019_ridgecrest_california/expert/01_pipeline/03_associate_gamma.py) defines projection, time blocking, eikonal grids and association thresholds. Keep those case choices out of the reusable source.
 
 ## Documentation map
 

@@ -20,7 +20,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 KG_ROOT = Path(os.environ.get("KNOWLEDGE_GRAPH_ROOT", str(PROJECT_ROOT.parent.parent / "Knowledge_Graph")))
 
 

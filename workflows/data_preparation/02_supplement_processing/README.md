@@ -6,7 +6,7 @@ tables. PDF supplements are handled separately by
 `../01_pdf_parsing/parse_supplement_pdfs_with_mineru.py`.
 
 ```bash
-python scripts/02_supplement_processing/convert_nonpdf_supplements.py
+python workflows/data_preparation/02_supplement_processing/convert_nonpdf_supplements.py
 ```
 
 Original files remain unchanged. Catalog migration is opt-in and must be

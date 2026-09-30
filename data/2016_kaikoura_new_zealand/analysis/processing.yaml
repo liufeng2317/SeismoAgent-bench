@@ -11,7 +11,7 @@ window_status: not_frozen
 catalogs:
 - source_ref: CHAMBERLAIN2021_JB022304
   catalog_dir: data/catalogs/CHAMBERLAIN2021_JB022304
-  parser: data/catalogs/CHAMBERLAIN2021_JB022304/scripts/run_catalog_analysis.py
+  parser: data/catalogs/CHAMBERLAIN2021_JB022304/workflows/data_preparation/run_catalog_analysis.py
   products:
   - product_id: growclust_corrected
     kind: event
@@ -23,7 +23,7 @@ catalogs:
     source_path: CHAMBERLAIN2021_JB022304__catalog_growclust.csv
 - source_ref: LANZA2019_GL082780
   catalog_dir: data/catalogs/LANZA2019_GL082780
-  parser: data/catalogs/LANZA2019_GL082780/scripts/run_catalog_analysis.py
+  parser: data/catalogs/LANZA2019_GL082780/workflows/data_preparation/run_catalog_analysis.py
   products:
   - product_id: quakeml_preferred_origins
     kind: event
@@ -31,7 +31,7 @@ catalogs:
     source_path: raw/grl59060-sup-0003-ds01.xml
 - source_ref: TAN2024_JB028735
   catalog_dir: data/catalogs/TAN2024_JB028735
-  parser: data/catalogs/TAN2024_JB028735/scripts/run_catalog_analysis.py
+  parser: data/catalogs/TAN2024_JB028735/workflows/data_preparation/run_catalog_analysis.py
   products:
   - product_id: sugar_s10
     kind: event
@@ -51,7 +51,7 @@ catalogs:
     source_path: ../../../references/TAN2024_JB028735/supplement/2024jb028735-sup-0005-table si-s12.xlsx
 - source_ref: GEONET_2016_KAIKOURA
   catalog_dir: data/catalogs/GEONET_2016_KAIKOURA
-  parser: data/catalogs/GEONET_2016_KAIKOURA/scripts/run_catalog_analysis.py
+  parser: data/catalogs/GEONET_2016_KAIKOURA/workflows/data_preparation/run_catalog_analysis.py
   products:
   - product_id: operational_full
     kind: event

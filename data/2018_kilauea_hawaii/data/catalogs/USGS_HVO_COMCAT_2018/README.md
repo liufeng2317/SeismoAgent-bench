@@ -9,7 +9,7 @@
 - Returned data rows: 40095
 - Full snapshot: `USGS_HVO_COMCAT_2018__catalog_operational_full.csv` (40,095 rows, 2018-04-29–08-07)
 - Frozen-window snapshot: `USGS_HVO_COMCAT_2018__catalog_operational_benchmark.csv` (496 rows)
-- Exact full and benchmark filters are versioned in `scripts/00_catalog_downloading/official_baseline_windows.json`.
+- Exact full and benchmark filters are versioned in `workflows/data_preparation/00_catalog_downloading/official_baseline_windows.json`.
 - Service fields and rows are preserved; time chunks are merged and de-duplicated by stable event ID.
 
 ## Local catalog audit
@@ -23,7 +23,7 @@
 | Provider | USGS ComCat / Hawaiian Volcano Observatory (HVO) |
 | Operational source | `HV` HVO network via ComCat |
 | Service | [`https://earthquake.usgs.gov/fdsnws/event/1/query`](https://earthquake.usgs.gov/fdsnws/event/1/query) |
-| Configuration | [`scripts/00_catalog_downloading/official_baseline_windows.json`](../../../../../scripts/00_catalog_downloading/official_baseline_windows.json), `2018_kilauea_hawaii` entry |
+| Configuration | [`workflows/data_preparation/00_catalog_downloading/official_baseline_windows.json`](../../../../../workflows/data_preparation/00_catalog_downloading/official_baseline_windows.json), `2018_kilauea_hawaii` entry |
 | Download timestamp | 2026-09-19T16:46:55Z (directory README) |
 | Role | Q3 official operational baseline; not a high-resolution truth catalog |
 

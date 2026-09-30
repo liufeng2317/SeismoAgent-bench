@@ -244,8 +244,8 @@ Processing entry points and product declarations are in [processing.yaml](proces
 From the repository root:
 
 ```bash
-python3 data/2018_kilauea_hawaii/data/catalogs/SHELLY2019_GL085636/scripts/run_catalog_analysis.py
-python3 data/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/scripts/run_catalog_analysis.py
+python3 data/2018_kilauea_hawaii/data/catalogs/SHELLY2019_GL085636/workflows/data_preparation/run_catalog_analysis.py
+python3 data/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/workflows/data_preparation/run_catalog_analysis.py
 ```
 
 Use `--only <product_id>` for a targeted product and `--force` only when

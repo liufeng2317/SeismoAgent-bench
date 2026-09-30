@@ -163,12 +163,12 @@
 
 ### 一次性创建/迁移脚本
 
-- `scripts/03_information_extraction/create_context_extractions.py`
-- `scripts/03_information_extraction/create_kilauea_magna_extractions.py`
-- `scripts/03_information_extraction/create_quakeflow_context.py`
-- `scripts/03_information_extraction/create_remaining_extractions.py`
-- `scripts/03_information_extraction/normalize_tan2024_extraction.py`
-- `scripts/03_information_extraction/normalize_extraction_records.py`
+- `workflows/data_preparation/03_information_extraction/create_context_extractions.py`
+- `workflows/data_preparation/03_information_extraction/create_kilauea_magna_extractions.py`
+- `workflows/data_preparation/03_information_extraction/create_quakeflow_context.py`
+- `workflows/data_preparation/03_information_extraction/create_remaining_extractions.py`
+- `workflows/data_preparation/03_information_extraction/normalize_tan2024_extraction.py`
+- `workflows/data_preparation/03_information_extraction/normalize_extraction_records.py`
 
 ### 重复 XLSX 替换为相对链接
 
@@ -181,7 +181,7 @@
 
 ### 重复校验器合并
 
-- `scripts/03_information_extraction/validate_extraction.py` → [保留位置](../scripts/03_information_extraction/validate_all_extractions.py)
+- `workflows/data_preparation/03_information_extraction/validate_extraction.py` → [保留位置](../workflows/data_preparation/03_information_extraction/validate_all_extractions.py)
 
 ### 原始发布说明合并
 

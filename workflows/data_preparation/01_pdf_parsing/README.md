@@ -29,20 +29,20 @@ parsed/paper/
 List papers without submitting jobs:
 
 ```bash
-python scripts/01_pdf_parsing/parse_papers_with_mineru.py --list
+python workflows/data_preparation/01_pdf_parsing/parse_papers_with_mineru.py --list
 ```
 
 Parse one source:
 
 ```bash
-python scripts/01_pdf_parsing/parse_papers_with_mineru.py \
+python workflows/data_preparation/01_pdf_parsing/parse_papers_with_mineru.py \
   --source COCHRAN2020_GJIGGAA153
 ```
 
 Parse one case:
 
 ```bash
-python scripts/01_pdf_parsing/parse_papers_with_mineru.py \
+python workflows/data_preparation/01_pdf_parsing/parse_papers_with_mineru.py \
   --case 2011_prague_oklahoma
 ```
 
@@ -52,13 +52,13 @@ MinerU's `*_model.json`; use `--force` to reparse. To create the stable
 without contacting MinerU, run:
 
 ```bash
-python scripts/01_pdf_parsing/parse_papers_with_mineru.py --sync-stable
+python workflows/data_preparation/01_pdf_parsing/parse_papers_with_mineru.py --sync-stable
 ```
 
 Audit existing outputs without submitting new MinerU jobs:
 
 ```bash
-python scripts/01_pdf_parsing/audit_mineru_outputs.py \
+python workflows/data_preparation/01_pdf_parsing/audit_mineru_outputs.py \
   --report docs/research/01_4_Paper_Parsing_Audit.md
 ```
 
@@ -79,8 +79,8 @@ Supplementary-information PDFs use the same official MinerU service but are
 discovered under `references/*/supplement/`:
 
 ```bash
-python scripts/01_pdf_parsing/parse_supplement_pdfs_with_mineru.py --list
-python scripts/01_pdf_parsing/parse_supplement_pdfs_with_mineru.py \
+python workflows/data_preparation/01_pdf_parsing/parse_supplement_pdfs_with_mineru.py --list
+python workflows/data_preparation/01_pdf_parsing/parse_supplement_pdfs_with_mineru.py \
   --case 2016_kaikoura_new_zealand
 ```
 

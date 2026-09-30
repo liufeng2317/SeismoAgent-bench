@@ -26,7 +26,7 @@ SeismoAgentBench/
 | `SeismoAgentBench/execution/` | 运行目录、命令执行和运行记录 |
 | `SeismoAgentBench/scoring/` | 输出产物校验及后续科学评分接口 |
 | `utils/source_prepare/` | 来源登记、路径/哈希检查、资料盘点与准备阶段的目录诊断 |
-| 根目录 `scripts/` | 下载、转换和批处理入口；逐步调用可复用模块，避免复制实现 |
+| 根目录 `workflows/data_preparation/` | 下载、转换和批处理入口；逐步调用可复用模块，避免复制实现 |
 | `data/<case>/scripts/` | 案例专属原生字段解析、来源核验编排、分析与绘图脚本 |
 | `data/` | 资料文件、配置、来源证据及生成的核验结果 |
 | 根目录 `tests/` | 按功能域集中维护回归测试；不在案例目录复制共用测试 |

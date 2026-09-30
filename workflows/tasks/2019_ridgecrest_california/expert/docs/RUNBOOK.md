@@ -449,7 +449,7 @@ Separately counted S-only experiment: `bash 03_experiments/11_alternative_picker
 ## Stage48: differential-only S and updated support
 
 ```bash
-cd tasks/2019_ridgecrest_california/expert/03_experiments/12_differential_augmentation
+cd workflows/tasks/2019_ridgecrest_california/expert/03_experiments/12_differential_augmentation
 bash run_48.sh
 ```
 
@@ -458,7 +458,7 @@ The fixed graph is an attribution control, and the refreshed graph is the sole p
 ## Stage49: independent Vp/Vs calibration and relocation
 
 ```bash
-cd tasks/2019_ridgecrest_california/expert/03_experiments/13_velocity_ratio
+cd workflows/tasks/2019_ridgecrest_california/expert/03_experiments/13_velocity_ratio
 bash run_49.sh
 ```
 
@@ -467,7 +467,7 @@ The launcher only runs location if all frozen calibration gates pass. `49_run.py
 ## Stage50: depth-uncertainty-aware pair candidates
 
 ```bash
-cd tasks/2019_ridgecrest_california/expert/03_experiments/14_uncertain_depth_pairs
+cd workflows/tasks/2019_ridgecrest_california/expert/03_experiments/14_uncertain_depth_pairs
 bash run_50.sh
 ```
 
@@ -476,7 +476,7 @@ Preparation freezes the candidate rule and all source identities. Measurement pr
 ## Stage51: final frozen-candidate confirmation
 
 ```bash
-cd tasks/2019_ridgecrest_california/expert/03_experiments/15_confirmation
+cd workflows/tasks/2019_ridgecrest_california/expert/03_experiments/15_confirmation
 bash run_51.sh
 ```
 
@@ -487,7 +487,7 @@ Currently launched jobs are supervised by `51_continue.py` in its default mode; 
 ## Stage52: fixed full-working-catalog application
 
 ```bash
-cd tasks/2019_ridgecrest_california/expert/01_pipeline
+cd workflows/tasks/2019_ridgecrest_california/expert/01_pipeline
 bash run_52_full_catalog.sh
 ```
 

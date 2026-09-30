@@ -12,7 +12,7 @@ catalogs:
 - source_ref: LENGLINE2021_EPSL116653
   catalog_dir: data/catalogs/LENGLINE2021_EPSL116653
   parser_version: kilauea-local-v2-compact
-  script: data/catalogs/LENGLINE2021_EPSL116653/scripts/run_catalog_analysis.py
+  script: data/catalogs/LENGLINE2021_EPSL116653/workflows/data_preparation/run_catalog_analysis.py
   products:
   - product_id: relative_events
     kind: lengline
@@ -22,7 +22,7 @@ catalogs:
 - source_ref: MATOZA2014_GL059819
   catalog_dir: data/catalogs/MATOZA2014_GL059819
   parser_version: kilauea-local-v2-compact
-  script: data/catalogs/MATOZA2014_GL059819/scripts/run_catalog_analysis.py
+  script: data/catalogs/MATOZA2014_GL059819/workflows/data_preparation/run_catalog_analysis.py
   products:
   - product_id: lp_events
     kind: matoza14
@@ -32,7 +32,7 @@ catalogs:
 - source_ref: MATOZA2021_EA001253
   catalog_dir: data/catalogs/MATOZA2021_EA001253
   parser_version: kilauea-local-v2-compact
-  script: data/catalogs/MATOZA2021_EA001253/scripts/run_catalog_analysis.py
+  script: data/catalogs/MATOZA2021_EA001253/workflows/data_preparation/run_catalog_analysis.py
   products:
   - product_id: relocated_events
     kind: matoza21
@@ -42,7 +42,7 @@ catalogs:
 - source_ref: SHELLY2019_GL085636
   catalog_dir: data/catalogs/SHELLY2019_GL085636
   parser_version: kilauea-local-v2-compact
-  script: data/catalogs/SHELLY2019_GL085636/scripts/run_catalog_analysis.py
+  script: data/catalogs/SHELLY2019_GL085636/workflows/data_preparation/run_catalog_analysis.py
   products:
   - product_id: events_s1
     kind: shelly_s1
@@ -62,7 +62,7 @@ catalogs:
 - source_ref: USGS_HVO_COMCAT_2018
   catalog_dir: data/catalogs/USGS_HVO_COMCAT_2018
   parser_version: kilauea-local-v2-compact
-  script: data/catalogs/USGS_HVO_COMCAT_2018/scripts/run_catalog_analysis.py
+  script: data/catalogs/USGS_HVO_COMCAT_2018/workflows/data_preparation/run_catalog_analysis.py
   products:
   - product_id: operational_full
     kind: usgs_csv
@@ -77,7 +77,7 @@ catalogs:
 - source_ref: WEI2022_EA001979
   catalog_dir: data/catalogs/WEI2022_EA001979
   parser_version: kilauea-local-v2-compact
-  script: data/catalogs/WEI2022_EA001979/scripts/run_catalog_analysis.py
+  script: data/catalogs/WEI2022_EA001979/workflows/data_preparation/run_catalog_analysis.py
   products:
   - product_id: events_s1
     kind: wei

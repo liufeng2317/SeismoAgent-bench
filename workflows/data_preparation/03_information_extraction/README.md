@@ -11,13 +11,13 @@ They follow `docs/framework/schemas/paper_catalog_extraction.schema.yaml`. Evide
 Validate all records:
 
 ```bash
-python scripts/03_information_extraction/validate_all_extractions.py
+python workflows/data_preparation/03_information_extraction/validate_all_extractions.py
 ```
 
 Validate one record with the same checker:
 
 ```bash
-python scripts/03_information_extraction/validate_all_extractions.py data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/extraction/TAN2024_JB028735__extraction.json
+python workflows/data_preparation/03_information_extraction/validate_all_extractions.py data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/extraction/TAN2024_JB028735__extraction.json
 ```
 
 The checker verifies local evidence/release paths, status semantics, product schemas, and declared CSV/XLSX/QuakeML row counts. It also checks TAN's distinction between the released S11 intermediate product and the article-reported final population. Passing validation does not replace scientific review.

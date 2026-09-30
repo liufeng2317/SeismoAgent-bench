@@ -1,0 +1,30 @@
+{
+  "csv_sha256": "f7d614643017ed168741d799c0ce612082f6c0e7106cf3df6577456e2e0b0a8a",
+  "eligible_pool": 3047,
+  "excluded_unique_ids": 3475,
+  "exposure": "Disjoint from both consumed reserves, all stage39/40/41/42 target and support events, earlier small experiment/calibration cohorts, and reviewed S-window neighbors. Stage42 prediction-only competition tables cover v1; those predictions are not waveform or location outcomes for this reserve. Historical full-catalog comparisons exist, so not never-examined blind data. Event-disjoint, not guaranteed spatially or temporally independent.",
+  "frozen_at_utc": "2026-09-26T10:47:41.178454+00:00",
+  "n": 300,
+  "period_counts": {
+    "after_M7.1": 174,
+    "between_mainshocks": 126
+  },
+  "salt": "ridgecrest-confirmation-v3-300",
+  "selection": "Deterministic SHA256 order within period/original-10km-XY strata; sorted-stratum round robin until 300. Not population-proportional. No result/reference-based screening.",
+  "source_sha256": {
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2019_ridgecrest_california/expert/03_experiments/05_catalog_optimization/00_reserve_confirmation_v3.py": "3116762d7849fbb93070e40cf00bb8a7833de9aeff8328fcffc9f5c68138b5d6",
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2019_ridgecrest_california/expert/docs/optimization_reserved_events.csv": "d86ce49044b4ce0254a0992cb4563fa3aaae541fcc2bc60c5d1d3ae6a2bf3fc8",
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2019_ridgecrest_california/expert/docs/optimization_reserved_events_v2.csv": "bcf13bd88fd57ced2c1f3cc7f8f627e79b19956f29b54131e03f90e59baf17e9",
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2019_ridgecrest_california/expert/export/10_validate_catalog/events.csv": "330190294bd48c74f2d950ca963fcd3a8e054ce6a3e3d844add643b8235a78f7",
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2019_ridgecrest_california/expert/export/12_relative_location_pilot/events.csv": "eb3aa3c2943450bfaba05a8a30fc13540fdcfed058904d317dfa6d5800be43b3",
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2019_ridgecrest_california/expert/export/15_validate_transfer/inputs/events.csv": "b687758ed1578e9008ab44ab644d29258a496d9113e4d3b78d189355536c743b",
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2019_ridgecrest_california/expert/export/17_station_corrections/tables/cohort.csv": "d504fa74b52fdd7afd3b18713a184df20a2d7935747dee569a901a910e8ec112",
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2019_ridgecrest_california/expert/export/19_s_arrival_review/neighboring_picks.csv": "0b49ac56cae85b18a2892b0696d44c9aa8a31d6c6464193a06f896698562f8c5",
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2019_ridgecrest_california/expert/export/19_s_arrival_review/selection.csv": "7929ade69a9cbabf24c77413a4f6865492c68c4b06bfc1bf775e25d34580aeb9",
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2019_ridgecrest_california/expert/export/20_velocity_model_qualification/tables/cohort.csv": "d504fa74b52fdd7afd3b18713a184df20a2d7935747dee569a901a910e8ec112",
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2019_ridgecrest_california/expert/export/39_support_aware_pairs/inputs/events.csv": "e0c81509b5dcbf5a1ba1d5d555288db23a8ecc06b1148e24bd2eddb7c77e98f7",
+    "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2019_ridgecrest_california/expert/export/42_vertical_p_observations/qualification_inputs.csv": "58af3ced56cf429c15e9771ce0e4661327dc7987b4a4beea26bb477764b1b9e9"
+  },
+  "status": "reserved_not_used",
+  "use": "Only open after a frozen candidate passes all development gates. Do not tune to this set or use it as development/support data. Freeze support selection, measurements, errors, solver and gates before scoring. If stage42 fails, retain this reserve unused. New confirmation must also report reused training supports and spatial/time dependence. This administrative freeze is not an optimization round."
+}

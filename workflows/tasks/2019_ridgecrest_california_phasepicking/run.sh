@@ -2,7 +2,7 @@
 set -euo pipefail
 
 TASK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_DIR="$(cd "$TASK_DIR/../.." && pwd)"
+PROJECT_DIR="$(cd "$TASK_DIR/../../.." && pwd)"
 PYTHON="${PYTHON:-/liufeng1afs/software/miniconda3/envs/seismoagent/bin/python}"
 SEISMOAGENT_BIN="${SEISMOAGENT_BIN:-$(dirname "$PYTHON")}"
 RUN_ID="${RUN_ID:-codex-phasepicking-$(date -u +%Y%m%dT%H%M%SZ)}"

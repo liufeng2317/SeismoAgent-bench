@@ -117,12 +117,15 @@ data/
   <case>/data/waveforms/    local waveform payloads (ignored by Git)
   <case>/analysis/          cross-reference case conclusions
 
-scripts/
+workflows/data_preparation/
   01_pdf_parsing/           official MinerU paper parsing wrapper
   00_catalog_downloading/  official baseline download and audit
   02_supplement_processing/ supplement conversion
   03_information_extraction/ reusable extraction validation
   04_catalog_analysis/     catalog manifest generation
+
+workflows/tasks/
+  <task>/                   benchmark task packages and case-specific workflows
 ```
 
 Detailed organization rules belong in [data/README.md](data/README.md), and
@@ -134,13 +137,13 @@ the current reference readiness belongs in
 List paper PDFs available for MinerU parsing:
 
 ```bash
-python scripts/01_pdf_parsing/parse_papers_with_mineru.py --list
+python workflows/data_preparation/01_pdf_parsing/parse_papers_with_mineru.py --list
 ```
 
 Parse one paper through the existing official Knowledge Graph MinerU workflow:
 
 ```bash
-python scripts/01_pdf_parsing/parse_papers_with_mineru.py \
+python workflows/data_preparation/01_pdf_parsing/parse_papers_with_mineru.py \
   --source COCHRAN2020_GJIGGAA153 \
   --timeout 1800
 ```
@@ -148,7 +151,7 @@ python scripts/01_pdf_parsing/parse_papers_with_mineru.py \
 Download official operational baseline snapshots:
 
 ```bash
-python scripts/00_catalog_downloading/download_official_baselines.py --direct --scope full
+python workflows/data_preparation/00_catalog_downloading/download_official_baselines.py --direct --scope full
 ```
 
 ## Reference interpretation

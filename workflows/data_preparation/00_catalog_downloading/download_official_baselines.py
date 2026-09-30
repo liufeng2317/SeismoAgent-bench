@@ -12,7 +12,7 @@ import urllib.request
 from datetime import datetime, timezone, timedelta
 
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
+ROOT = pathlib.Path(__file__).resolve().parents[3]
 
 
 def query_url(spec: dict, start=None, end=None) -> str:
@@ -53,7 +53,7 @@ def write_readme(spec: dict, output: pathlib.Path, url: str, downloaded: str, ro
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--case", help="download one case ID; default is all cases")
-    parser.add_argument("--config", default=str(ROOT / "scripts/00_catalog_downloading/official_baseline_windows.json"))
+    parser.add_argument("--config", default=str(ROOT / "workflows/data_preparation/00_catalog_downloading/official_baseline_windows.json"))
     parser.add_argument("--timeout", type=int, default=120)
     parser.add_argument("--direct", action="store_true", help="ignore HTTP(S)_PROXY environment variables")
     parser.add_argument("--scope", choices=("benchmark", "full"), default="full",

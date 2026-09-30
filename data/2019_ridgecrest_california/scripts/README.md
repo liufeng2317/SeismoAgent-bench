@@ -17,13 +17,13 @@ Requires Python 3.9+, ObsPy, requests and PyYAML. Existing metadata preparation 
 The Shell entry defaults to downloading over a direct connection; neither `--action download` nor `--direct` is required. The Python entry still defaults to plan mode. From the repository root, inspect a plan without network requests:
 
 ```bash
-bash data/2019_ridgecrest_california/scripts/observations/run_download.sh --action plan --scope existing
+bash data/2019_ridgecrest_california/workflows/data_preparation/observations/run_download.sh --action plan --scope existing
 ```
 
 Execute the same selection:
 
 ```bash
-bash data/2019_ridgecrest_california/scripts/observations/run_download.sh \
+bash data/2019_ridgecrest_california/workflows/data_preparation/observations/run_download.sh \
   --action download --scope existing --max-requests 1
 ```
 
@@ -43,9 +43,9 @@ Dates come from `analysis/processing.yaml`'s candidate window. Do not change the
 For example, plan the five missing HH stations, or the APL acceleration channels separately:
 
 ```bash
-bash data/2019_ridgecrest_california/scripts/observations/run_download.sh \
+bash data/2019_ridgecrest_california/workflows/data_preparation/observations/run_download.sh \
   --action plan --stations CI.EDW2,CI.FUR,CI.HYS,CI.LDR,CI.SPG2 --channels HH --locations=--
-bash data/2019_ridgecrest_california/scripts/observations/run_download.sh \
+bash data/2019_ridgecrest_california/workflows/data_preparation/observations/run_download.sh \
   --action plan --stations CI.APL --channels HN --locations=--
 ```
 
@@ -54,7 +54,7 @@ bash data/2019_ridgecrest_california/scripts/observations/run_download.sh \
 `prepare_station_metadata.py` retains the existing regional discovery and paper-selection workflow. The new downloader can explicitly refresh response snapshots for selected, already known channel epochs:
 
 ```bash
-bash data/2019_ridgecrest_california/scripts/observations/run_download.sh \
+bash data/2019_ridgecrest_california/workflows/data_preparation/observations/run_download.sh \
   --action plan --kind stations --stations CI.APL --channels HN --locations=--
 ```
 
@@ -71,8 +71,8 @@ The existing `waveform_inventory.json` stores `download_plan` and `download_runs
 After downloading, refresh the header inventory and assessment **sequentially**, not concurrently with acquisition:
 
 ```bash
-python -B data/2019_ridgecrest_california/scripts/observations/inventory_waveforms.py
-python -B data/2019_ridgecrest_california/scripts/observations/audit_waveform_download_needs.py
+python -B data/2019_ridgecrest_california/workflows/data_preparation/observations/inventory_waveforms.py
+python -B data/2019_ridgecrest_california/workflows/data_preparation/observations/audit_waveform_download_needs.py
 ```
 
 The inventory refresh preserves download history and drops obsolete plans/assessments. The assessment uses the original shared metadata index; newly downloaded response snapshots may need incorporation through the metadata preparation workflow before that separate assessment reflects them. All code in `observations/` preserves raw waveform samples.
@@ -85,7 +85,7 @@ Service references: [SCEDC dataselect](https://service.scedc.caltech.edu/fdsnws/
 
 ### Progress and troubleshooting
 
-The Shell runner prints the log path and saves full stdout/stderr to `scripts/observations/logs/download_<UTC timestamp>_<unique suffix>.log`, while showing it in the terminal. The Python exit status is preserved. Earlier execution records were exported to `scripts/observations/logs/download_history_summary.log`; this is a summary, not a recovered terminal transcript. Direct Python invocation does not use the Shell logging wrapper.
+The Shell runner prints the log path and saves full stdout/stderr to `workflows/data_preparation/observations/logs/download_<UTC timestamp>_<unique suffix>.log`, while showing it in the terminal. The Python exit status is preserved. Earlier execution records were exported to `workflows/data_preparation/observations/logs/download_history_summary.log`; this is a summary, not a recovered terminal transcript. Direct Python invocation does not use the Shell logging wrapper.
 
 Download mode prints the request index, channel, provider, attempt, HTTP status, transferred MB and validation outcome. While bytes are arriving, transfer progress is printed at roughly five-second intervals; connection waits are bounded by the displayed timeout. Failures retain the exception type, message, code location and stage in `download_runs`. URL credentials are redacted. The active request is saved before the network call, so an interrupted run can be distinguished from one that never started. Each run records its Python version.
 
@@ -95,12 +95,12 @@ Python 3.9 is supported: hashing uses a streaming implementation rather than `ha
 
 ```bash
 conda activate inversionagent
-bash data/2019_ridgecrest_california/scripts/observations/run_download_missing_stations.sh
+bash data/2019_ridgecrest_california/workflows/data_preparation/observations/run_download_missing_stations.sh
 ```
 
 This runs two explicit batches: CI.EDW2/CI.FUR/CI.HYS/CI.LDR/CI.SPG2 with HH channels, followed by CI.APL with HN channels. The APL batch tries `SCEDC_CLOUD,SCEDC,EARTHSCOPE` to avoid slow HN streaming from FDSN. Both use blank location codes and the case candidate window; current metadata specifies 100 Hz. HN remains acceleration data, identified by its native channel code. The expected initial requests are 45 HH channel-days and 9 HN channel-days. Existing coverage is checked on each run. Ross-only rule candidates are not added.
 
-Each batch writes its own console log under `scripts/observations/logs/`. An unsuccessful batch does not prevent the other from being attempted; the wrapper retains a nonzero exit status if either fails. Additional flags are forwarded to both batches: `--action plan` previews both without network access; `--max-requests` limits each batch separately. After execution, refresh the waveform inventory and assessment using the commands above.
+Each batch writes its own console log under `workflows/data_preparation/observations/logs/`. An unsuccessful batch does not prevent the other from being attempted; the wrapper retains a nonzero exit status if either fails. Additional flags are forwarded to both batches: `--action plan` previews both without network access; `--max-requests` limits each batch separately. After execution, refresh the waveform inventory and assessment using the commands above.
 
 ### SCEDC cloud adapter
 
@@ -110,7 +110,7 @@ Each batch writes its own console log under `scripts/observations/logs/`. An uns
 
 ```bash
 conda activate inversionagent
-OPENBLAS_NUM_THREADS=1 python -B data/2019_ridgecrest_california/scripts/figures/analyze_waveform_quality.py
+OPENBLAS_NUM_THREADS=1 python -B data/2019_ridgecrest_california/workflows/data_preparation/figures/analyze_waveform_quality.py
 ```
 
 This case-specific, read-only workflow decodes every candidate-window MiniSEED file and generates coverage, sample-quality and exploratory preprocessing figures under `analysis/figures/waveform_quality/`. Its focused README describes definitions, parameters and limitations; CSV tables hold the derived statistics without duplicating the external inventory JSON. It uses existing local data and does not download, alter raw samples or save a processed waveform archive. Run after downloads and inventory refresh have finished; file size and modification time are checked for concurrent changes. Console progress is printed every 20 files.
@@ -118,7 +118,7 @@ This case-specific, read-only workflow decodes every candidate-window MiniSEED f
 ## Instrument response audit and removal trial
 
 ```bash
-OPENBLAS_NUM_THREADS=1 python -B data/2019_ridgecrest_california/scripts/figures/analyze_instrument_response.py
+OPENBLAS_NUM_THREADS=1 python -B data/2019_ridgecrest_california/workflows/data_preparation/figures/analyze_instrument_response.py
 ```
 
 Audits the already downloaded StationXML against all observed candidate channels, then applies ObsPy response removal to three representative vertical-channel windows. Exact epoch/rate matching and numerical response evaluation must pass. Results, figures, an audit CSV and one small derived NPZ bundle go to `analysis/figures/instrument_response/`; raw files remain untouched. The report records physical units, frequency taper, ObsPy version and saturation limitations. Missing responses should be refreshed with the existing `observations/run_download.sh --kind stations` entry and exact station/channel selection; there is no second downloader implementation.
@@ -130,7 +130,7 @@ Audits the already downloaded StationXML against all observed candidate channels
 ## Mainshock record section
 
 ```bash
-OPENBLAS_NUM_THREADS=1 python -B data/2019_ridgecrest_california/scripts/figures/plot_mainshock_record_section.py
+OPENBLAS_NUM_THREADS=1 python -B data/2019_ridgecrest_california/workflows/data_preparation/figures/plot_mainshock_record_section.py
 ```
 
 Plots both Mw 6.4 and Mw 7.1 events ±10 minutes by default (`--event mw6_4` or `--event mw7_1` selects one) for each observed station's native vertical channel, ordered by epicentral distance. Raw-count and response-corrected-velocity figures are saved under `analysis/figures/waveform_examples/`, with one CSV and a focused figure description. Traces are independently normalized for readability; vertical spacing represents station rank, with distances labeled explicitly. Original waveforms are unchanged.
@@ -139,4 +139,4 @@ Record-section artifacts use `mw6_4_record_section_*` and `mw7_1_record_section_
 
 ## Minimal raw-waveform shape screen
 
-`python -B data/2019_ridgecrest_california/scripts/figures/screen_waveform_shapes.py` scans candidate raw counts for near-flat elevated platforms and isolated increments. It writes only a per-channel ranking CSV, seven-window diagnostic figure (PNG/PDF), and a short methods note under `analysis/figures/waveform_quality/`. This internal source check does not label ground truth, remove responses, repair data or prescribe agent preprocessing.
+`python -B data/2019_ridgecrest_california/workflows/data_preparation/figures/screen_waveform_shapes.py` scans candidate raw counts for near-flat elevated platforms and isolated increments. It writes only a per-channel ranking CSV, seven-window diagnostic figure (PNG/PDF), and a short methods note under `analysis/figures/waveform_quality/`. This internal source check does not label ground truth, remove responses, repair data or prescribe agent preprocessing.

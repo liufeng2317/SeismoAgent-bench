@@ -252,8 +252,8 @@ as downloaded, even though the rounded research mask also returns 11 rows.
 From the repository root:
 
 ```bash
-python3 data/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/scripts/run_catalog_analysis.py
-python3 data/2011_prague_oklahoma/data/catalogs/MCMAHON2017_GL072944/scripts/run_catalog_analysis.py
+python3 data/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/workflows/data_preparation/run_catalog_analysis.py
+python3 data/2011_prague_oklahoma/data/catalogs/MCMAHON2017_GL072944/workflows/data_preparation/run_catalog_analysis.py
 ```
 
 Use `--only <product_id>` for a targeted product and `--full-plots` only when

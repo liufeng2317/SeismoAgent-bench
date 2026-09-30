@@ -6,7 +6,7 @@ Use [`CATALOGS_MANIFEST.md`](CATALOGS_MANIFEST.md) for a single cross-case view 
 
 Use [`OFFICIAL_BASELINE_AUDIT.md`](OFFICIAL_BASELINE_AUDIT.md) to verify the USGS/GeoNet baseline downloads and distinguish routine-catalog sparsity from acquisition errors.
 
-All six cases use the same source layout under `data/`. Case-level `scripts/` exists only when there are executable case-level tools; empty placeholders are unnecessary. The ignored waveform directory is a local reservation, not evidence of downloaded observations.
+All six cases use the same source layout under `data/`. Case-level `workflows/data_preparation/` exists only when there are executable case-level tools; empty placeholders are unnecessary. The ignored waveform directory is a local reservation, not evidence of downloaded observations.
 
 ```text
 <case>/references/<SOURCE_ID>/
@@ -19,7 +19,7 @@ All six cases use the same source layout under `data/`. Case-level `scripts/` ex
 
 <case>/data/waveforms/  # local continuous waveform payloads, ignored by Git
 <case>/analysis/        # scientific design, processing config and reference audit
-<case>/scripts/         # case-level tools
+<case>/workflows/data_preparation/         # case-level tools
 ```
 
 `SOURCE_ID`/`CATALOG_ID` is the stable association key between a paper and its catalog. The `references` layer contains only literature and supplementary material; the `catalogs` layer is the core benchmark input and contains raw archives plus extracted catalog files. A catalog README must state `source_ref: <SOURCE_ID>`. Do not place benchmark catalog tables inside `supplement/`, even when the publisher delivered them in the same ZIP.
@@ -87,7 +87,7 @@ a separate data release without changing the source/catalog identifiers.
 
 - `analysis/processing.yaml` records case product declarations and `window_status`; all six cases currently say `not_frozen`. Earlier selections, statistics and plots remain exploratory. A filename containing `benchmark` does not imply a formal freeze.
 - `data/catalogs/<CATALOG_ID>/README.md` is the single authored catalog entry point. Keep DOI, source-file checksums, native schema, release discrepancies and original publisher notes there.
-- `data/catalogs/<CATALOG_ID>/scripts/` holds executable native parsers. `analysis/{derived,stats,figures}/` contains reproducible products; generated `catalog_analysis.md` documents those runs. Do not copy the same statistics into additional hand-maintained indices.
+- `data/catalogs/<CATALOG_ID>/workflows/data_preparation/` holds executable native parsers. `analysis/{derived,stats,figures}/` contains reproducible products; generated `catalog_analysis.md` documents those runs. Do not copy the same statistics into additional hand-maintained indices.
 - Path bases are explicit: `catalog_dir` and script-entry paths are relative to the case root; a product `source_path` is relative to its catalog directory. Ridgecrest `reference_audit.sources[].path` and `phase_source.path` are relative to the case root. Preserve these distinctions until the configuration schema is unified.
 - Local sequential `event_id` values such as `E000001` are scoped to `source_ref/product_id`. Preserve `native_event_id`; cross-catalog identity requires a crosswalk. Phase `match_id`/`template_id` values are not located event IDs.
 - Keep event, relative-coordinate, phase/pick and focal-mechanism products separate. Separate release versions, coordinate bases, and official query snapshots are not redundant just because they overlap.
@@ -109,7 +109,7 @@ SeismoAgentBench/
 ├── README.md                         # 项目入口
 ├── docs/research/                   # 研究方案、案例选择和资料整理
 ├── docs/framework/                  # benchmark 框架和实现记录
-├── scripts/                          # 跨案例下载、解析、验证与清单入口
+├── workflows/data_preparation/                          # 跨案例下载、解析、验证与清单入口
 ├── SeismoAgentBench/                 # 项目专业代码与通用工具
 │   └── utils/source_prepare/         # 来源整理工具子包
 ├── tests/                            # 共享代码测试
@@ -128,17 +128,17 @@ SeismoAgentBench/
         │   │   ├── README.md        # 来源、字段、版本、质量限制
         │   │   ├── <source files>   # 现有规范化命名的来源文件
         │   │   ├── raw/             # 原始发布包，按需存在
-        │   │   ├── scripts/         # 产品专属解析器，按需存在
+        │   │   ├── workflows/data_preparation/         # 产品专属解析器，按需存在
         │   │   └── analysis/        # derived / stats / figures / 生成报告
         │   └── waveforms/           # 本地载荷，Git 忽略
         ├── references/<SOURCE_ID>/
         │   ├── paper/               # 论文原件
         │   ├── supplement/          # 保留出版物原名的附件
         │   └── parsed/              # paper / supplement / extraction
-        └── scripts/                 # 案例级核验工具，按需存在
+        └── workflows/data_preparation/                 # 案例级核验工具，按需存在
 ```
 
-上图中的 `raw/`、`scripts/` 和文献附件按实际内容创建，不要求每个来源都有空目录。`analysis/` 分别位于案例和产品下是有意的：前者保存科学设计及跨产品结论，后者保存单一产品的可复算结果。
+上图中的 `raw/`、`workflows/data_preparation/` 和文献附件按实际内容创建，不要求每个来源都有空目录。`analysis/` 分别位于案例和产品下是有意的：前者保存科学设计及跨产品结论，后者保存单一产品的可复算结果。
 
 ### 各案例的结构判断
 
@@ -174,7 +174,7 @@ analysis/processing.yaml
   └── reference_audit            按产品键引用的核验规则，不重复写路径/哈希
              │
              ├── SeismoAgentBench/utils/source_prepare/sources.py   契约校验、文件盘点、分段/子集
-             ├── 案例 scripts/                原生列解析、来源特有核验
+             ├── 案例 workflows/data_preparation/                原生列解析、来源特有核验
              └── SeismoAgentBench/utils/source_prepare/catalog.py  时间/空间筛选与目录对应诊断
                           ↓
                 analysis/reference_audit.json
@@ -206,7 +206,7 @@ Ridgecrest 目前登记 5 个来源组和 8 个文件产品。Ross 重定位子�
 python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir data/2019_ridgecrest_california
 python -B -m SeismoAgentBench.utils.source_prepare inventory --case-dir data/2019_ridgecrest_california
 python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir data/2019_ridgecrest_california --verify-files
-python -B data/2019_ridgecrest_california/scripts/catalogs/audit_references.py
+python -B data/2019_ridgecrest_california/workflows/data_preparation/catalogs/audit_references.py
 ```
 
 前两个命令不读取全部大文件计算哈希：资料登记有效与本地载荷已下载是两个状态。`--verify-files` 才执行 SHA-256 核验，发现本地缺失或内容不符时以非零状态退出。目录统计仍由案例解析器完成；登记表校验不会虚构记录数、波形覆盖、完备性或科学质量。

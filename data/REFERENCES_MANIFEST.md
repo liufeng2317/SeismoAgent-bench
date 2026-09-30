@@ -134,7 +134,7 @@ blocked are intentional states, not parser failures.
 Batch checks:
 
 ```bash
-python scripts/03_information_extraction/validate_all_extractions.py
+python workflows/data_preparation/03_information_extraction/validate_all_extractions.py
 ```
 
 The checker verifies local evidence/release paths, compact quality tiers,

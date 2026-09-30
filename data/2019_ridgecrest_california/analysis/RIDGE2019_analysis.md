@@ -101,7 +101,7 @@ Shelly 辅助表的 24 站均在 Liu 的 41 个窗口内有效站中，但不能
 - [两次大震的原始波形](figures/waveform_examples/mw6_4_mw7_1_raw_examples.png)（[PDF](figures/waveform_examples/mw6_4_mw7_1_raw_examples.pdf)）：CI.CCC、CI.CLC、PB.B918 的垂直分量，各展示发震前 20 s 至后 150 s；零点为发震时刻，不是震相拾取。
 - [目录差异对比](figures/waveform_examples/legacy_waveform_directory_comparison.png)（[PDF](figures/waveform_examples/legacy_waveform_directory_comparison.pdf)）：a 为一致波形，b 为 CI.WBP 缺口补零，c 为 CI.WNM 的 Z/E/N 副本重合。两图均使用原生数字计数，未去响应、滤波或归一化；振幅不能直接用于跨仪器物理幅度比较。
 
-只读对比复算脚本：[inspect_existing_waveforms.py](../scripts/figures/inspect_existing_waveforms.py)，参数仍为原 `Science2019_Ross_Ridgecrest/data` 路径。原 raw 的 3,032 个文件已独立复制到统一外部存储，逐文件 SHA-256 校验通过；原数据未改动。case 的整个 `data/waveforms` 目录链接到外部统一目录，包含波形、已迁入的 stations、清单和英文 README；内部实体 `data/` 保存原始波形，保留既有访问路径，无需双向同步。路径、台站/日结构与校验清单入口见 [波形存储说明](../data/waveforms/README.md)。 完整副本尚未裁剪；候选三天按头信息识别出 351 文件、4.768 GB、41 站；外部 `waveform_inventory.json` 统一记录来源、路径、大小、通道、样本数与文件内缺口，替代原两个清单。12 个缺失通道日均已补回；CI.WRC2.HHZ 27.39 s 断档仍在，两家服务本次查询均返回无数据；Liu 的 6 个缺失有效站已补齐，其中 CI.APL 为 HN 加速度通道；Ross 规则候选仍缺 2 站。117 个已观测通道均有采样率/有效期匹配且带响应的元数据，响应数值和远端可补性仍待核验；详见同一清单的 `download_assessment`。
+只读对比复算脚本：[inspect_existing_waveforms.py](../workflows/data_preparation/figures/inspect_existing_waveforms.py)，参数仍为原 `Science2019_Ross_Ridgecrest/data` 路径。原 raw 的 3,032 个文件已独立复制到统一外部存储，逐文件 SHA-256 校验通过；原数据未改动。case 的整个 `data/waveforms` 目录链接到外部统一目录，包含波形、已迁入的 stations、清单和英文 README；内部实体 `data/` 保存原始波形，保留既有访问路径，无需双向同步。路径、台站/日结构与校验清单入口见 [波形存储说明](../data/waveforms/README.md)。 完整副本尚未裁剪；候选三天按头信息识别出 351 文件、4.768 GB、41 站；外部 `waveform_inventory.json` 统一记录来源、路径、大小、通道、样本数与文件内缺口，替代原两个清单。12 个缺失通道日均已补回；CI.WRC2.HHZ 27.39 s 断档仍在，两家服务本次查询均返回无数据；Liu 的 6 个缺失有效站已补齐，其中 CI.APL 为 HN 加速度通道；Ross 规则候选仍缺 2 站。117 个已观测通道均有采样率/有效期匹配且带响应的元数据，响应数值和远端可补性仍待核验；详见同一清单的 `download_assessment`。
 
 Mw 6.4 和 Mw 7.1 发震前后各 10 分钟的垂直波形已分别按各自震中距排序绘制，提供原始 counts 和去响应速度两版；每道独立归一化，仅用于时序和形态比较。图件与距离表见 [Mw 6.4 波形剖面](figures/waveform_examples/mw6_4_record_section.md) 与 [Mw 7.1 波形剖面](figures/waveform_examples/mw7_1_record_section.md)。
 
@@ -142,13 +142,13 @@ Mw 6.4 和 Mw 7.1 发震前后各 10 分钟的垂直波形已分别按各自震�
 需要更新派生成果时，从仓库根目录运行相应脚本：
 
 ```bash
-python -B data/2019_ridgecrest_california/scripts/catalogs/audit_references.py
-python -B data/2019_ridgecrest_california/scripts/observations/prepare_station_metadata.py
-python -B data/2019_ridgecrest_california/scripts/figures/plot_catalog_comparison.py
-python -B data/2019_ridgecrest_california/scripts/figures/plot_station_distribution.py
+python -B data/2019_ridgecrest_california/workflows/data_preparation/catalogs/audit_references.py
+python -B data/2019_ridgecrest_california/workflows/data_preparation/observations/prepare_station_metadata.py
+python -B data/2019_ridgecrest_california/workflows/data_preparation/figures/plot_catalog_comparison.py
+python -B data/2019_ridgecrest_california/workflows/data_preparation/figures/plot_station_distribution.py
 ```
 
-以上调用使用本地原件；原件或配置变化时，先更新相应核验结果，再生成依赖它的图件。案例特有代码按 `scripts/catalogs/`、`scripts/figures/`、`scripts/observations/` 分层；补下载入口和参数见 [脚本说明](../scripts/README.md)，Shell 入口默认直连下载，`--action plan` 仅生成计划。可复用逻辑在公共 `SeismoAgentBench/utils/`。新增资料应更新对应记录及本页状态，正文不追加下载日志、哈希明细或重复参数表。
+以上调用使用本地原件；原件或配置变化时，先更新相应核验结果，再生成依赖它的图件。案例特有代码按 `workflows/data_preparation/catalogs/`、`workflows/data_preparation/figures/`、`workflows/data_preparation/observations/` 分层；补下载入口和参数见 [脚本说明](../workflows/data_preparation/README.md)，Shell 入口默认直连下载，`--action plan` 仅生成计划。可复用逻辑在公共 `SeismoAgentBench/utils/`。新增资料应更新对应记录及本页状态，正文不追加下载日志、哈希明细或重复参数表。
 
 
 2026-09-26 补充：LB.DAC 的 HH 三分量三天数据已从 EarthScope 获取，共 9 个日文件，原始采样率 250 Hz。当前候选范围为 360 文件、42 站、120 通道，元数据有效期/采样率/响应均匹配；Ross 规则候选仅 CI.WLH2 尚缺。此前专家流程的 351 文件/41 站输入快照保持不变，新台站须通过独立输入清单和处理记录进入后续实验。详见 [波形归档说明](../data/waveforms/README.md)。

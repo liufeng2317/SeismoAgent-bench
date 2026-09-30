@@ -8,7 +8,7 @@ python seismotools/build_native.py --tool nonlinloc --jobs 4
 
 Outputs: `bin/Vel2Grid`, `bin/Grid2Time`, `bin/NLLoc`. Workflow: velocity/control inputs → velocity grids → station travel-time grids → phase observations/control files → hypocenters, residuals and conditional uncertainty products. This build check does not supply case grids or run a localization.
 
-See the bundled [README](source/src/README.txt) and [change notes](source/src/CHANGE_NOTES.txt). The installed native tree has only source documentation; additional available manuals have now been copied from the local Nonlinlocpy documentation tree. The executed case interface is [04_locate_nonlinloc.py](../../tasks/2019_ridgecrest_california/expert/01_pipeline/04_locate_nonlinloc.py), with [nonlinloc.yaml](../../tasks/2019_ridgecrest_california/expert/00_config/nonlinloc.yaml). Its linear velocity interpolation, elevation datum and receiver corrections must be recorded explicitly in comparisons.
+See the bundled [README](source/src/README.txt) and [change notes](source/src/CHANGE_NOTES.txt). The installed native tree has only source documentation; additional available manuals have now been copied from the local Nonlinlocpy documentation tree. The executed case interface is [04_locate_nonlinloc.py](../../workflows/tasks/2019_ridgecrest_california/expert/01_pipeline/04_locate_nonlinloc.py), with [nonlinloc.yaml](../../workflows/tasks/2019_ridgecrest_california/expert/00_config/nonlinloc.yaml). Its linear velocity interpolation, elevation datum and receiver corrections must be recorded explicitly in comparisons.
 
 ## Additional local manuals
 

@@ -549,37 +549,37 @@
     },
     {
       "path": "hypodd/source/include/README",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/README",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/README",
       "bytes": 315,
       "sha256": "0f2ba3d58debe7e6b95fb3ee6734ef001a6f397adedb052ae4fdaa2c93880248"
     },
     {
       "path": "hypodd/source/include/compat.h",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/compat.h",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/compat.h",
       "bytes": 368,
       "sha256": "1a9d6aa4f5f4dd8aa1d4477f2c86ba15a62ae047d40ec7943da4957b2abc0cfb"
     },
     {
       "path": "hypodd/source/include/f77types.h",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/f77types.h",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/f77types.h",
       "bytes": 390,
       "sha256": "bd470be04d7b77095027986f13ca9e8625cc4fa92a6d8f4fc44471bffd809e1e"
     },
     {
       "path": "hypodd/source/include/geocoord.inc",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/geocoord.inc",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/geocoord.inc",
       "bytes": 361,
       "sha256": "4ee4d47d739a8f44be0618a2ea36205c449df0a9719863cbfa3e1ba4f6a3696d"
     },
     {
       "path": "hypodd/source/include/hypoDD.inc",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/hypoDD.inc",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/hypoDD.inc",
       "bytes": 192,
       "sha256": "471f9ddd3d11162f4018def57240adf1dd5c4653ceb47634faeef4a33f705f51"
     },
     {
       "path": "hypodd/source/include/ph2dt.inc",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/ph2dt.inc",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/include/ph2dt.inc",
       "bytes": 545,
       "sha256": "c9a6139cd7a4f2f63e80040fca29854e4603ada45727db9e2a206fc4f75beeaa"
     },
@@ -615,325 +615,325 @@
     },
     {
       "path": "hypodd/source/src/hypoDD/Makefile",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/Makefile",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/Makefile",
       "bytes": 2058,
       "sha256": "19c1bc04499787e8d9fdb38697df396f14c4ecc33f6e31359f80a26afd628a49"
     },
     {
       "path": "hypodd/source/src/hypoDD/aprod.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/aprod.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/aprod.f",
       "bytes": 1136,
       "sha256": "e659a557ee430ad41d71e4cd2eb94fd98af71901401d57f75c164dcd17193877"
     },
     {
       "path": "hypodd/source/src/hypoDD/atoangle.c",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/atoangle.c",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/atoangle.c",
       "bytes": 650,
       "sha256": "74f3de0224467d5121b798d49b5ed226905539efbec414b90fe86c13f9234040"
     },
     {
       "path": "hypodd/source/src/hypoDD/atoangle_.c",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/atoangle_.c",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/atoangle_.c",
       "bytes": 502,
       "sha256": "7abd781e46eafa8558b857b0aa628bda0baaa257a22759c423b0c0c756069d7d"
     },
     {
       "path": "hypodd/source/src/hypoDD/cluster1.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/cluster1.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/cluster1.f",
       "bytes": 5266,
       "sha256": "0f0fd0e3023cf70a8c6c4fff086ea49c11a1a141985e64564ac8669ebc6f70c8"
     },
     {
       "path": "hypodd/source/src/hypoDD/covar.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/covar.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/covar.f",
       "bytes": 525,
       "sha256": "bc46e0623ddf4d2537af0ea9b1980129ca96dca31e420b05e04e4ebc44a3faaf"
     },
     {
       "path": "hypodd/source/src/hypoDD/datetime_.c",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/datetime_.c",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/datetime_.c",
       "bytes": 529,
       "sha256": "48cca6b4bdfa3e589e8af7c98f4c71e0a4bd5618478d32b60a98fb941e2f019c"
     },
     {
       "path": "hypodd/source/src/hypoDD/datum.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/datum.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/datum.f",
       "bytes": 1184,
       "sha256": "769b9b584a84effa8283597262e0649bfeedc42702b597b279432a809ed1e702"
     },
     {
       "path": "hypodd/source/src/hypoDD/delaz.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/delaz.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/delaz.f",
       "bytes": 1816,
       "sha256": "4d90ee58f57091f95c41974ba28ae0fa8fbd72c3bc7906996fc26935ee460dd3"
     },
     {
       "path": "hypodd/source/src/hypoDD/delaz2.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/delaz2.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/delaz2.f",
       "bytes": 2561,
       "sha256": "e3650361a2777af4c8e835b98540b60feb2f3e23393952877444f8caf9c0dfe2"
     },
     {
       "path": "hypodd/source/src/hypoDD/direct1.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/direct1.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/direct1.f",
       "bytes": 4956,
       "sha256": "292bbb091896582d4fd7ac04f01af6d3e61422aaea0350f3d944e19bb940ed15"
     },
     {
       "path": "hypodd/source/src/hypoDD/dist.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/dist.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/dist.f",
       "bytes": 834,
       "sha256": "6f2c457cd3d9ec6640896251081d04a30c09585a5a6336fc3e06e2d05aabffda"
     },
     {
       "path": "hypodd/source/src/hypoDD/dtres.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/dtres.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/dtres.f",
       "bytes": 2135,
       "sha256": "a366d4fedcfc31c5b1ff95f674e52803033205d4edda74004bfe5b768145b5d6"
     },
     {
       "path": "hypodd/source/src/hypoDD/exist.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/exist.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/exist.f",
       "bytes": 267,
       "sha256": "c118bf408b8c5fd90db83786b646e212e6576fa07bb0bd9d639f68d15d1e961d"
     },
     {
       "path": "hypodd/source/src/hypoDD/freeunit.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/freeunit.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/freeunit.f",
       "bytes": 363,
       "sha256": "731b860ccb2b1570c4c29b2b2763d62b9a3adf6018eeba539f6c5090bdf93e61"
     },
     {
       "path": "hypodd/source/src/hypoDD/getdata.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/getdata.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/getdata.f",
       "bytes": 18285,
       "sha256": "00c0e06de2537f4e73a2931ea51603c21b78dd24d6c3ec498b6909e22d8c49c2"
     },
     {
       "path": "hypodd/source/src/hypoDD/getinp.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/getinp.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/getinp.f",
       "bytes": 7863,
       "sha256": "b15448159a00fcb98ba6f842917c1401e587f0deed45295585f939609e9ee3d6"
     },
     {
       "path": "hypodd/source/src/hypoDD/hypoDD.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/hypoDD.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/hypoDD.f",
       "bytes": 31871,
       "sha256": "517e5e2926a20084b3756913e719c65712c5f1a4dfbabc2db70d242914885a03"
     },
     {
       "path": "hypodd/source/src/hypoDD/hypot_.c",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/hypot_.c",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/hypot_.c",
       "bytes": 296,
       "sha256": "f85dcf757a62858697f64a38b72bd86cad930c4beb5dd12606dd98889e6e8fa0"
     },
     {
       "path": "hypodd/source/src/hypoDD/ifindi.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/ifindi.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/ifindi.f",
       "bytes": 938,
       "sha256": "55ffc3028398f1dd02226d1b66aff7b08c39d151cbac6cc3310e00e74126740a"
     },
     {
       "path": "hypodd/source/src/hypoDD/indexxi.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/indexxi.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/indexxi.f",
       "bytes": 1169,
       "sha256": "ba2bf5eafca24e22cf07cfe35d218bafd085ea213ec5c1c264cb5363f79792e9"
     },
     {
       "path": "hypodd/source/src/hypoDD/juliam.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/juliam.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/juliam.f",
       "bytes": 880,
       "sha256": "c85825a28c276ba6202ad527f5147f56ed9f48d07e9705829f218a9e84d62992"
     },
     {
       "path": "hypodd/source/src/hypoDD/lsfit_lsqr.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/lsfit_lsqr.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/lsfit_lsqr.f",
       "bytes": 10434,
       "sha256": "330149078abf2e89f35b03cfad1f6f8ed15ae93ae22fce3f5d2862acdc51c422"
     },
     {
       "path": "hypodd/source/src/hypoDD/lsfit_svd.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/lsfit_svd.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/lsfit_svd.f",
       "bytes": 10011,
       "sha256": "c3a7e95d04a5eb08a1fd76434924d551b71e4b9dedaa94d5542ae877e1c11673"
     },
     {
       "path": "hypodd/source/src/hypoDD/lsfit_svd_zfix.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/lsfit_svd_zfix.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/lsfit_svd_zfix.f",
       "bytes": 10467,
       "sha256": "80bec63718eacd72e0225973d77dad4bee0a9853be903fea87e9ad638a708c20"
     },
     {
       "path": "hypodd/source/src/hypoDD/lsqr.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/lsqr.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/lsqr.f",
       "bytes": 18829,
       "sha256": "5f585a5d2bbb1c93aedf4735012fd7666700e620c6699a4d862ac8fba4aa983f"
     },
     {
       "path": "hypodd/source/src/hypoDD/matmult1.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/matmult1.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/matmult1.f",
       "bytes": 533,
       "sha256": "0b890ba4caa2bfbd03645dc3c8e762714d92c3f1c6b144c3bd230007366e0224"
     },
     {
       "path": "hypodd/source/src/hypoDD/matmult2.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/matmult2.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/matmult2.f",
       "bytes": 444,
       "sha256": "58c87259b96d8dca3a5aaaa1f0cbbafd905022e0c90101fb3bbce67357883ae9"
     },
     {
       "path": "hypodd/source/src/hypoDD/matmult3.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/matmult3.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/matmult3.f",
       "bytes": 420,
       "sha256": "9eb526e4010c2a36b80e4522e507faab50d94873b4268dfcc62a04c7a42bcad4"
     },
     {
       "path": "hypodd/source/src/hypoDD/mdian1.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/mdian1.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/mdian1.f",
       "bytes": 355,
       "sha256": "ff1391a235e112f1fabeada976be5ec7b3dc1be7c383521b264d5caf7b3054d5"
     },
     {
       "path": "hypodd/source/src/hypoDD/normlz.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/normlz.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/normlz.f",
       "bytes": 471,
       "sha256": "6f4336065394771a53eff72bd4cbe97520db5ad4ca8be4fa701e8aa418467b33"
     },
     {
       "path": "hypodd/source/src/hypoDD/partials.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/partials.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/partials.f",
       "bytes": 3173,
       "sha256": "515e7a576f70b49170d0f6542fd87bfa8201c85d03fba358b0b8eef0addc9ad1"
     },
     {
       "path": "hypodd/source/src/hypoDD/partials_1D.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/partials_1D.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/partials_1D.f",
       "bytes": 4406,
       "sha256": "9dd2e4996ec9a690827f2b866e919a8dc3941f5f013d45fc04c54aab8fdacdc1"
     },
     {
       "path": "hypodd/source/src/hypoDD/ran.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/ran.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/ran.f",
       "bytes": 402,
       "sha256": "ab66d6c26b4a4cdb27401a23b92b82a2d52d6c978d4700c9a3565b1be8b1b711"
     },
     {
       "path": "hypodd/source/src/hypoDD/redist.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/redist.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/redist.f",
       "bytes": 1182,
       "sha256": "65d12b1d967a6670ccfc90234fbe639c96cb01981aa872dc8ba127cf84b294f4"
     },
     {
       "path": "hypodd/source/src/hypoDD/refract.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/refract.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/refract.f",
       "bytes": 4286,
       "sha256": "5a9c9e49e77df4eb9fbd392d827a008ce8003ede51d284a2872b2649fe157917"
     },
     {
       "path": "hypodd/source/src/hypoDD/resstat.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/resstat.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/resstat.f",
       "bytes": 5646,
       "sha256": "ae4f389d85c8174783e1a212779e3cd300335040322b2da29310a6a6bd686bc6"
     },
     {
       "path": "hypodd/source/src/hypoDD/rpad_.c",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/rpad_.c",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/rpad_.c",
       "bytes": 507,
       "sha256": "0fec4fc12577f3514c3c8d51421767db163bf00e7146659e408b4cd9f2d887ca"
     },
     {
       "path": "hypodd/source/src/hypoDD/scopy.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/scopy.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/scopy.f",
       "bytes": 1514,
       "sha256": "0a9799a7b6dfc1f1c02595a2fe407783274589a16c0c19e34629dfd355ba2c1a"
     },
     {
       "path": "hypodd/source/src/hypoDD/sdc2.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/sdc2.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/sdc2.f",
       "bytes": 469,
       "sha256": "73c8e00589dbac6613004149ada063ebc16b1a3a36eff5dafda917bde019a861"
     },
     {
       "path": "hypodd/source/src/hypoDD/setorg.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/setorg.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/setorg.f",
       "bytes": 4761,
       "sha256": "851e168cea37165cba27c230c7c3642cd1fde3e5b2df1e2d083dc19f96e42e60"
     },
     {
       "path": "hypodd/source/src/hypoDD/skip.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/skip.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/skip.f",
       "bytes": 8427,
       "sha256": "8b02fb4779230189e41b79697f10dde018c9fa142648270b698a71e9752e831f"
     },
     {
       "path": "hypodd/source/src/hypoDD/snrm2.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/snrm2.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/snrm2.f",
       "bytes": 3831,
       "sha256": "f0a540cff21eb2c7b8b2aab889897f8d9bc1e41b5cea2ea6d57c2a07c63c8ef3"
     },
     {
       "path": "hypodd/source/src/hypoDD/sort.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/sort.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/sort.f",
       "bytes": 936,
       "sha256": "c2eb3fd0ecce053278f206d0fc2ae24bf4e0d4e945489a7d095340e23ed1b56e"
     },
     {
       "path": "hypodd/source/src/hypoDD/sorti.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/sorti.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/sorti.f",
       "bytes": 841,
       "sha256": "38648412b0110278b927bcd58c99d41dbaba46119d083adda75856f8ecdf4a54"
     },
     {
       "path": "hypodd/source/src/hypoDD/sscal.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/sscal.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/sscal.f",
       "bytes": 1049,
       "sha256": "d690b80c64004a3f1cd24c37f9c25fe76c1e3fa9ec7190a474434ca4451b282c"
     },
     {
       "path": "hypodd/source/src/hypoDD/sscanf3_.c",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/sscanf3_.c",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/sscanf3_.c",
       "bytes": 452,
       "sha256": "38cf3711ec46948e2db92d5d26aef72c5290c77084b188979a7c79ac6f3b9c35"
     },
     {
       "path": "hypodd/source/src/hypoDD/svd.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/svd.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/svd.f",
       "bytes": 5732,
       "sha256": "04e02a33a36f4ac5d6958d30678c0ca7793225b3326901c2c37a91a630c028cb"
     },
     {
       "path": "hypodd/source/src/hypoDD/tiddid.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/tiddid.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/tiddid.f",
       "bytes": 1998,
       "sha256": "8876ef5b1e99e598a5899cb116b2eea50b95d622935e9a40706998c60f2295df"
     },
     {
       "path": "hypodd/source/src/hypoDD/trialsrc.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/trialsrc.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/trialsrc.f",
       "bytes": 2552,
       "sha256": "a9c0a42318427906fbf0fcc51cb012ca80567829bc8848e9a7c048f971ba41c2"
     },
     {
       "path": "hypodd/source/src/hypoDD/trimlen.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/trimlen.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/trimlen.f",
       "bytes": 266,
       "sha256": "e398112c11a9dcd06caf4226b8fafc72c29238b032e45962da53098b1ad8857e"
     },
     {
       "path": "hypodd/source/src/hypoDD/ttime.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/ttime.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/ttime.f",
       "bytes": 2347,
       "sha256": "8c9bb28c9d16ab71a91fd85e0ec96f390a0e5bea7c2ec101f88d23f1fdee256e"
     },
     {
       "path": "hypodd/source/src/hypoDD/vmodel.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/vmodel.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/vmodel.f",
       "bytes": 1121,
       "sha256": "35ce1faf8b1be599cf4e33ec5d1f498737a3d3269e01ee224d52674e8d5f8d59"
     },
     {
       "path": "hypodd/source/src/hypoDD/weighting.f",
-      "source": "tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/weighting.f",
+      "source": "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/native/src/hypoDD/weighting.f",
       "bytes": 6832,
       "sha256": "5c2a0dca131ed4b15a1d4d8eace8085f60f5c72b32882d741a9cc94b573df5f0"
     },

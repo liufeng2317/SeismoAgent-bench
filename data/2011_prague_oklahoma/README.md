@@ -10,6 +10,6 @@
 
 保留主目录、重定位目录、子空间检测和震相产品的区别。
 
-当前 `window_status: not_frozen`。`scripts/` 仅在有案例级执行工具时建立；目录自身的解析脚本保留在 `data/catalogs/<SOURCE_ID>/scripts/`。
+当前 `window_status: not_frozen`。`workflows/data_preparation/` 仅在有案例级执行工具时建立；目录自身的解析脚本保留在 `data/catalogs/<SOURCE_ID>/workflows/data_preparation/`。
 
 来源和完整性见各目录 README，产品统计见 [全局产品清单](../CATALOGS_MANIFEST.md)。共享规则见 [资料组织说明](../README.md)，本页不重复保存统计结果。

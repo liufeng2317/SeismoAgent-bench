@@ -124,7 +124,7 @@ The raw panel only subtracts each channel's displayed-window mean, retaining nat
 
 Gaps remain blank rather than being filled. Summed missing channel-seconds in the displayed interval: {sum(r['missing_seconds'] for r in records):.6f}; summed overlap channel-seconds: {sum(r['overlap_seconds'] for r in records):.6f}. The known WRC2 05:15 UTC gap lies outside this plot. For the Mw 7.1 event only, a dagger (†) marks CI.CCC/CI.WRC2, whose HHZ signals were previously flagged as suspected saturation. That event-specific flag is not transferred to Mw 6.4. Unmarked traces have not been individually cleared of saturation. Response removal does not repair distorted input. These plots are for waveform timing and morphology, not validated peak-ground-motion measurements.
 
-Reproduce from the repository root with `python -B data/2019_ridgecrest_california/scripts/figures/plot_mainshock_record_section.py --event {event_key}` in the inversionagent environment. Raw waveform files and StationXML are read-only.
+Reproduce from the repository root with `python -B data/2019_ridgecrest_california/workflows/data_preparation/figures/plot_mainshock_record_section.py --event {event_key}` in the inversionagent environment. Raw waveform files and StationXML are read-only.
 ''')
     print(f'Wrote two record sections for {len(records)} stations; distance range {records[0]["distance_km"]:.1f}–{records[-1]["distance_km"]:.1f} km',flush=True)
 

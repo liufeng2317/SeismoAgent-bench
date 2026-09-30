@@ -4,7 +4,7 @@
 Supplementary PDFs remain in references/<SOURCE>/supplement. MinerU output is
 written under parsed/supplement/mineru/<PDF_STEM>, with a stable Markdown
 derivative under parsed/supplement. This is the PDF-only companion to
-scripts/02_supplement_processing/convert_nonpdf_supplements.py.
+workflows/data_preparation/02_supplement_processing/convert_nonpdf_supplements.py.
 """
 from __future__ import annotations
 import argparse
@@ -12,7 +12,7 @@ import os
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 
 
 def discover(case=None, source=None):
@@ -26,7 +26,7 @@ def discover(case=None, source=None):
 
 
 def parse_one(pdf, force=False, timeout=3600):
-    sys.path.insert(0, str(ROOT / "scripts/01_pdf_parsing"))
+    sys.path.insert(0, str(ROOT / "workflows/data_preparation/01_pdf_parsing"))
     from parse_papers_with_mineru import load_official_parser, parse_one as parse_paper
     try:
         from dotenv import load_dotenv

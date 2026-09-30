@@ -9,7 +9,7 @@
 - Returned data rows: 9
 - Full snapshot: `USGS_UUSS_COMCAT_2017__catalog_operational_full.csv` (published scan span)
 - Frozen-window snapshot: `USGS_UUSS_COMCAT_2017__catalog_operational_benchmark.csv` (5 rows)
-- Exact full and benchmark filters are versioned in `scripts/00_catalog_downloading/official_baseline_windows.json`.
+- Exact full and benchmark filters are versioned in `workflows/data_preparation/00_catalog_downloading/official_baseline_windows.json`.
 - Service fields and rows are preserved; time chunks are merged and de-duplicated by stable event ID.
 
 ## Local catalog audit
@@ -19,7 +19,7 @@
 ### Provenance
 
 - Provider: USGS ANSS ComCat, UUSS/WY operational source.
-- Query parameters: scripts/00_catalog_downloading/official_baseline_windows.json,
+- Query parameters: workflows/data_preparation/00_catalog_downloading/official_baseline_windows.json,
   Maple Creek entry.
 - Role: Q3 official operational baseline; not a high-resolution truth catalog
   and not an article-linked reference.

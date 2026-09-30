@@ -122,7 +122,7 @@ has been staged. Therefore:
 ## 5. Official baseline audit
 
 Query definition is versioned in
-scripts/00_catalog_downloading/official_baseline_windows.json.
+workflows/data_preparation/00_catalog_downloading/official_baseline_windows.json.
 
 | Snapshot | Rows | Local range | Notes |
 |---|---:|---|---|
@@ -182,6 +182,6 @@ Processing entry points and product declarations are in [processing.yaml](proces
 From the repository root:
 
 ```bash
-python3 data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/scripts/run_catalog_analysis.py
-python3 data/2017_maple_creek_yellowstone/data/catalogs/USGS_UUSS_COMCAT_2017/scripts/run_catalog_analysis.py
+python3 data/2017_maple_creek_yellowstone/data/catalogs/SHELLY2019_GL081607/workflows/data_preparation/run_catalog_analysis.py
+python3 data/2017_maple_creek_yellowstone/data/catalogs/USGS_UUSS_COMCAT_2017/workflows/data_preparation/run_catalog_analysis.py
 ```

@@ -46,7 +46,7 @@ These branches are not serial. Provisional magnitudes were computed on the basel
 Run commands from the expert root:
 
 ```bash
-cd /liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/tasks/2019_ridgecrest_california/expert
+cd /liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2019_ridgecrest_california/expert
 ```
 
 Environment: existing `seismoagent`, CPU only. The shell entry point explicitly uses `/liufeng1afs/software/miniconda3/envs/seismoagent/bin/python`; selecting another active conda environment does not override it. Full-stage extraction/correlation uses 12 CPU processes and fitting uses four, with BLAS/OpenMP threads limited to one by the wrapper.

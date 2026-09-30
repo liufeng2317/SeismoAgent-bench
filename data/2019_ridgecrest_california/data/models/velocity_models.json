@@ -24,7 +24,7 @@
         "author_input_file_verified": false,
         "implementation_limit": "Author-specific hypoDD release, exact input file and model-coordinate/elevation handling remain unverified.",
         "expert_baseline_note": "Existing GaMMA/NonLinLoc linear-gradient runs are a distinct expert model variant. The stage-06 layered sensitivity uses the published layer interpretation but is not a reproduction of Shelly's relative-relocation workflow.",
-        "audit": "tasks/2019_ridgecrest_california/expert/export/07_audit_mainshocks/README.md"
+        "audit": "workflows/tasks/2019_ridgecrest_california/expert/export/07_audit_mainshocks/README.md"
       },
       "rows": [
         {

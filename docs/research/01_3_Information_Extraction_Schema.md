@@ -107,7 +107,7 @@ these unless a later use case proves it necessary.
 9. Update the case-level analysis only after the source JSON is reviewed.
 
 The repository batch checker is
-`scripts/03_information_extraction/validate_all_extractions.py`. It checks
+`workflows/data_preparation/03_information_extraction/validate_all_extractions.py`. It checks
 evidence/release paths, product-specific schemas, status versus human-review
 flags, and locally measurable row counts. A `partial` extraction is expected
 when the paper, supplement, or final release is incomplete; it must not be

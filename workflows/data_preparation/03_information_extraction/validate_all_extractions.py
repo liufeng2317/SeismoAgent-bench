@@ -132,7 +132,7 @@ def validate(path: Path, root: Path) -> tuple[list[str], list[str], dict]:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2])
+    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
     parser.add_argument("paths", nargs="*", type=Path)
     args = parser.parse_args()
     root = args.root.resolve()

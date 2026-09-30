@@ -45,7 +45,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("paths", nargs="*", type=Path)
     args = parser.parse_args()
-    root = Path(__file__).resolve().parents[2]
+    root = Path(__file__).resolve().parents[3]
     paths = args.paths or sorted((root / "data").glob("*/references/*/parsed/extraction/*.json"))
     for raw in paths:
         path = raw if raw.is_absolute() else root / raw

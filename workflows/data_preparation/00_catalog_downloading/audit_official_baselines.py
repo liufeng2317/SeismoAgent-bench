@@ -5,7 +5,7 @@ import csv,json
 from collections import Counter
 from datetime import datetime,timezone
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[2]; CONFIG=ROOT/'scripts/00_catalog_downloading/official_baseline_windows.json'; DATA=ROOT/'data'
+ROOT=Path(__file__).resolve().parents[3]; CONFIG=ROOT/'workflows/data_preparation/00_catalog_downloading/official_baseline_windows.json'; DATA=ROOT/'data'
 def dt(s):
  try:return datetime.fromisoformat(s.replace('Z','+00:00')).replace(tzinfo=timezone.utc)
  except:return None

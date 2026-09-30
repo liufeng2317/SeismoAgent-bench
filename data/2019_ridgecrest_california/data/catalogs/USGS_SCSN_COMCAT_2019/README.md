@@ -9,7 +9,7 @@
 - Returned data rows: 17959
 - Full snapshot: `USGS_SCSN_COMCAT_2019__catalog_operational_full.csv` (17,959 rows, 2019-07-04–07-17)
 - Frozen-window snapshot: `USGS_SCSN_COMCAT_2019__catalog_operational_benchmark.csv` (6,566 rows)
-- Exact full and benchmark filters are versioned in `scripts/00_catalog_downloading/official_baseline_windows.json`.
+- Exact full and benchmark filters are versioned in `workflows/data_preparation/00_catalog_downloading/official_baseline_windows.json`.
 - Service fields and rows are preserved; time chunks are merged and de-duplicated by stable event ID.
 
 ## Local catalog audit
@@ -23,7 +23,7 @@
 | Provider | USGS ANSS ComCat |
 | Operational source | Southern California Seismic Network (`CI`) via ComCat |
 | Service | [`https://earthquake.usgs.gov/fdsnws/event/1/query`](https://earthquake.usgs.gov/fdsnws/event/1/query) |
-| Configuration | [`scripts/00_catalog_downloading/official_baseline_windows.json`](../../../../../scripts/00_catalog_downloading/official_baseline_windows.json), `2019_ridgecrest_california` entry |
+| Configuration | [`workflows/data_preparation/00_catalog_downloading/official_baseline_windows.json`](../../../../../workflows/data_preparation/00_catalog_downloading/official_baseline_windows.json), `2019_ridgecrest_california` entry |
 | Download timestamp | 2026-09-19T16:46:43Z (directory README) |
 | Role | Q3 official operational baseline; not a high-resolution truth catalog |
 

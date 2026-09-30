@@ -9,7 +9,7 @@
 - Returned data rows: 71
 - Full snapshot: `USGS_TUL_COMCAT_2011__catalog_operational_full.csv` (published study span)
 - Frozen-window snapshot: `USGS_TUL_COMCAT_2011__catalog_operational_benchmark.csv` (11 rows)
-- Exact full and benchmark filters are versioned in `scripts/00_catalog_downloading/official_baseline_windows.json`.
+- Exact full and benchmark filters are versioned in `workflows/data_preparation/00_catalog_downloading/official_baseline_windows.json`.
 - Service fields and rows are preserved; time chunks are merged and de-duplicated by stable event ID.
 - Local processing report: [`analysis/catalog_analysis.md`](analysis/catalog_analysis.md).
 
@@ -24,7 +24,7 @@
 | Provider | USGS ANSS ComCat |
 | Operational source | OGS/Tulsa (`tul`) attribution through ComCat |
 | Service | [`https://earthquake.usgs.gov/fdsnws/event/1/query`](https://earthquake.usgs.gov/fdsnws/event/1/query) |
-| Configuration | [`scripts/00_catalog_downloading/official_baseline_windows.json`](../../../../../scripts/00_catalog_downloading/official_baseline_windows.json), `2011_prague_oklahoma` entry |
+| Configuration | [`workflows/data_preparation/00_catalog_downloading/official_baseline_windows.json`](../../../../../workflows/data_preparation/00_catalog_downloading/official_baseline_windows.json), `2011_prague_oklahoma` entry |
 | Download timestamp | 2026-09-19T16:42:23Z (directory README) |
 | Role | Q3 official operational baseline; not a high-resolution truth catalog |
 

@@ -12,7 +12,7 @@ Model inputs are real waveform samples with the component order/sample rate requ
 
 Dependencies: PyTorch, SeisBench utilities, ObsPy, NumPy and the observed environment in `../environment.txt`. Run `python seismotools/check_tools.py --imports` from the project root to validate CPU loading of the copied models. It does not run waveform inference or qualify new weights.
 
-The authoritative case usage is in [02_pick_phasenet.py](../../tasks/2019_ridgecrest_california/expert/01_pipeline/02_pick_phasenet.py), [42_vertical_p.py](../../tasks/2019_ridgecrest_california/expert/03_experiments/08_vertical_observations/42_vertical_p.py) and [46_qualify_eqtransformer.py](../../tasks/2019_ridgecrest_california/expert/03_experiments/11_alternative_picker/46_qualify_eqtransformer.py). These are usage references, not generic wrappers copied into this package.
+The authoritative case usage is in [02_pick_phasenet.py](../../workflows/tasks/2019_ridgecrest_california/expert/01_pipeline/02_pick_phasenet.py), [42_vertical_p.py](../../workflows/tasks/2019_ridgecrest_california/expert/03_experiments/08_vertical_observations/42_vertical_p.py) and [46_qualify_eqtransformer.py](../../workflows/tasks/2019_ridgecrest_california/expert/03_experiments/11_alternative_picker/46_qualify_eqtransformer.py). These are usage references, not generic wrappers copied into this package.
 
 ## Original inference documentation
 
