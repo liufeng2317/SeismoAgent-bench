@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TASK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_DIR="$(cd "$TASK_DIR/../../.." && pwd)"
+PYTHON="${PYTHON:-/liufeng1afs/software/miniconda3/envs/seismoagent/bin/python}"
+CODEX_BIN="${CODEX_BIN:-$(command -v codex)}"
+CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
+CODEX_ENV_FILE="${CODEX_ENV_FILE:-$CODEX_HOME/.env}"
+RUN_ID="${RUN_ID:-codex-ridgecrest-catalog-$(date -u +%Y%m%dT%H%M%SZ)}"
+
+if [ -d "$CODEX_BIN" ]; then CODEX_BIN="$CODEX_BIN/codex"; fi
+if [ ! -x "$CODEX_BIN" ]; then
+  echo "Codex executable is not available: $CODEX_BIN" >&2
+  exit 2
+fi
+
+RUNTIME_ENV_FILE="$(mktemp)"
+trap 'rm -f "$RUNTIME_ENV_FILE"' EXIT
+if [ -f "$CODEX_ENV_FILE" ]; then cat "$CODEX_ENV_FILE" > "$RUNTIME_ENV_FILE"; fi
+printf 'PATH=%s:/usr/bin:/bin\nPYTHON=%s\n' "$(dirname "$PYTHON")" "$PYTHON" >> "$RUNTIME_ENV_FILE"
+
+cd "$PROJECT_DIR"
+"$PYTHON" -m SeismoAgentBench run-codex \
+  --task "$TASK_DIR/task.json" \
+  --input "$TASK_DIR/input.json" \
+  --agent-name codex-ridgecrest-catalog \
+  --agent-version 1 \
+  --run-root "$TASK_DIR/runs" \
+  --run-id "$RUN_ID" \
+  --agent-config "$PROJECT_DIR/SeismoAgentBench/configs/agents/codex.yaml" \
+  --codex-bin "$CODEX_BIN" \
+  --codex-home "$CODEX_HOME" \
+  --env-file "$RUNTIME_ENV_FILE" \
+  --prompt "Use the configured scientific Python environment. Do not install packages or use network access; write all results below \$BENCH_OUTPUT." \
+  --timeout 3600

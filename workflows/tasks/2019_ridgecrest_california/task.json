@@ -13,19 +13,6 @@
     "domain": "seismology",
     "task_type": "catalog_construction"
   },
-  "output_contract": "output_contract.json",
-  "evaluation": {
-    "scorers": [
-      {
-        "name": "artifact-contract",
-        "version": "1"
-      },
-      {
-        "name": "catalog-basic",
-        "version": "1"
-      }
-    ]
-  },
   "input_requirements": [
     {
       "id": "waveform_data",
