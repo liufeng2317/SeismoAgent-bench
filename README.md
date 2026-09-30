@@ -17,6 +17,8 @@ from the later task of reproducing catalogs with agents.
 The extraction contract for paper methods, catalog schemas, and case-level
 synthesis is defined in [`docs/research/01_3_Information_Extraction_Schema.md`](docs/research/01_3_Information_Extraction_Schema.md).
 
+The current implementation and scientific readiness are tracked in [`docs/research/03_PROJECT_STATUS.md`](docs/research/03_PROJECT_STATUS.md).
+
 ## Evaluation environment
 
 The current trusted-development execution path is implemented in

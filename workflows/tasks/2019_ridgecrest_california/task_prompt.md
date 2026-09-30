@@ -18,6 +18,10 @@ input mapping. Explore its contents as needed:
 Treat the entire `input/` directory as read-only. Do not modify, rename,
 delete, or replace any source file.
 
+The current task input exposes waveform and station metadata only. Fault traces
+and remote-sensing DEM are not included in this run; do not assume or silently
+substitute those resources.
+
 ### Task procedure
 
 First write a concise task plan describing file discovery, time coverage,
