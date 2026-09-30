@@ -12,7 +12,8 @@ from typing import Sequence
 from SeismoAgentBench.agent import AgentError, AgentSpec
 from SeismoAgentBench.execution import (CodexCommandError, CodexCommandSpec, ExecutionError,
                                         AgentConfigError, RunLayout, expand_experiment,
-                                        load_agent_config, load_env_file, load_experiment_spec)
+                                        load_agent_config, load_env_file, load_experiment_spec,
+                                        probe_executable_version)
 from SeismoAgentBench.task import load_json, render_agent_prompt
 from SeismoAgentBench.workflow import evaluate_run, execute_experiment, run_agent
 
@@ -55,10 +56,10 @@ def _parser() -> argparse.ArgumentParser:
     codex.add_argument("--agent-config", help="YAML Agent runtime configuration snapshot")
     codex.add_argument("--campaign-id")
     codex.add_argument("--variant", default="base")
-    codex.add_argument("--codex-bin", required=True)
+    codex.add_argument("--codex-bin", help="Codex executable; defaults to agent config")
     codex.add_argument("--model", help="optional model slug; omit to use Codex default routing")
     codex.add_argument("--prompt", help="optional additional instructions appended to the rendered task prompt")
-    codex.add_argument("--reasoning-effort", default="medium")
+    codex.add_argument("--reasoning-effort")
     codex.add_argument("--env-file", help="external KEY=VALUE file; values are never recorded")
     codex.add_argument("--codex-home", help="external CODEX_HOME path")
     codex.add_argument("--timeout", type=float, default=600)
@@ -99,6 +100,16 @@ def main(argv: Sequence[str] | None = None) -> int:
                 raise CodexCommandError("max_attempts must be >= 1 and retry_delay_s must be >= 0")
             env = load_env_file(args.env_file) if args.env_file else {}
             agent_config = load_agent_config(args.agent_config) if args.agent_config else None
+            if agent_config is not None and agent_config.get("harness") != "codex":
+                raise CodexCommandError("run-codex requires an Agent config with harness: codex")
+            configured = (agent_config or {}).get("config", {})
+            codex_bin = args.codex_bin or (agent_config or {}).get("executable")
+            if not isinstance(codex_bin, str) or not codex_bin:
+                raise CodexCommandError("--codex-bin or agent config executable is required")
+            model = args.model if args.model is not None else (agent_config or {}).get("model")
+            reasoning_effort = args.reasoning_effort or configured.get("reasoning_effort", "medium")
+            if not isinstance(reasoning_effort, str):
+                raise CodexCommandError("reasoning_effort must be a string")
             if args.codex_home:
                 env["CODEX_HOME"] = args.codex_home
             effective_root = Path(args.run_root).resolve()
@@ -109,9 +120,9 @@ def main(argv: Sequence[str] | None = None) -> int:
                 effective_root = layout.run_root
             rendered_prompt = render_agent_prompt(args.task, args.manifest,
                                                    extra_instructions=args.prompt)
-            spec = CodexCommandSpec(args.codex_bin, args.model,
+            spec = CodexCommandSpec(codex_bin, model,
                                     str(effective_root / args.run_id / "work"),
-                                    rendered_prompt, reasoning_effort=args.reasoning_effort)
+                                    rendered_prompt, reasoning_effort=reasoning_effort)
             agent = AgentSpec.from_command(args.agent_name, args.agent_version, spec.argv())
             result = None
             for attempt in range(args.max_attempts):
@@ -133,6 +144,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             provenance_path = record_dir / "provenance.json"
             provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
             launcher = spec.record()
+            version_command = (agent_config or {}).get("version_command", ["--version"])
+            launcher["executable_version"] = probe_executable_version(codex_bin, version_command)
             argv = list(launcher["argv"])
             if argv and argv[-1] == rendered_prompt:
                 argv[-1] = "<BENCH_AGENT_PROMPT>"
@@ -144,6 +157,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             result["codex"] = {"provenance": "provenance.json",
                                "execution_log": "execution.log",
                                "execution_jsonl": "execution.jsonl",
+                               "executable_version": launcher["executable_version"],
                                "injected_environment_keys": sorted(env)}
             if args.campaign_id:
                 result["run_layout"] = layout.record()

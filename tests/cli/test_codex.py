@@ -8,6 +8,46 @@ from tests.task_helpers import write_task_package
 
 
 class CodexCliTests(unittest.TestCase):
+    def test_run_codex_can_select_executable_and_model_from_agent_config(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            task = base / "task.json"
+            manifest = base / "manifest.json"
+            config = base / "agent.yaml"
+            fake = base / "fake-codex"
+            run_root = base / "runs"
+            write_task_package(task, {
+                "task_id": "codex-config-smoke", "version": "1",
+                "input_requirements": [{"id": "metadata", "data_type": "metadata", "required": True}],
+                "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
+            }, "smoke")
+            manifest.write_text(json.dumps({"schema_version": 1, "case_id": "synthetic",
+                "entries": [{"id": "metadata", "path": "/tmp/metadata.json", "type": "file"}]}),
+                encoding="utf-8")
+            fake.write_text(
+                "#!" + sys.executable + "\n"
+                "import json, os, pathlib\n"
+                "pathlib.Path(os.environ['BENCH_OUTPUT'], 'result.json').write_text(json.dumps({'ok': True}))\n",
+                encoding="utf-8")
+            fake.chmod(0o755)
+            config.write_text(
+                f"harness: codex\nexecutable: {fake}\nmodel: config-model\n"
+                "version_command: [--version]\nconfig:\n  reasoning_effort: low\n",
+                encoding="utf-8")
+            command = [sys.executable, "-m", "SeismoAgentBench", "run-codex",
+                       "--task", str(task), "--manifest", str(manifest),
+                       "--agent-name", "codex-config", "--agent-version", "1",
+                       "--run-root", str(run_root), "--run-id", "run-001",
+                       "--agent-config", str(config)]
+            result = subprocess.run(command, capture_output=True, text=True, check=False)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["run"]["state"], "completed")
+            self.assertEqual(payload["codex"]["executable_version"]["status"], "unavailable")
+            provenance = json.loads((run_root / "run-001/record/provenance.json").read_text())
+            self.assertEqual(provenance["launcher"]["model"], "config-model")
+            self.assertEqual(provenance["launcher"]["reasoning_effort"], "low")
+
     def test_run_codex_uses_host_direct_adapter_and_captures_execution_records(self):
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)

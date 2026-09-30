@@ -80,3 +80,4 @@ This directory records completed implementation stages. Each stage record lists 
 | Run-local input view | [78_run_input_view.md](78_run_input_view.md) | Complete |
 | Configured input links | [79_configured_input_links.md](79_configured_input_links.md) | Complete |
 | Unified input JSON | [80_unified_input_json.md](80_unified_input_json.md) | Complete |
+| Agent runtime profiles and executable versions | [81_agent_runtime_profiles.md](81_agent_runtime_profiles.md) | Complete |

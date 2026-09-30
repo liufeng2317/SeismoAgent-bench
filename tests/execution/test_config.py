@@ -33,6 +33,17 @@ class AgentConfigTests(unittest.TestCase):
             with self.assertRaises(AgentConfigError):
                 load_agent_config(source)
 
+    def test_accepts_executable_version_and_auth_metadata(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "agent.yaml"
+            source.write_text(
+                "harness: codex\nexecutable: codex\nversion_command: [--version]\n"
+                "auth:\n  mode: external_profile\nconfig: {}\n",
+                encoding="utf-8",
+            )
+            config = load_agent_config(source)
+            self.assertEqual(config["auth"]["mode"], "external_profile")
+
 
 if __name__ == "__main__":
     unittest.main()
