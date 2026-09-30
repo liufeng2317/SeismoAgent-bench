@@ -32,5 +32,5 @@ cd "$PROJECT_DIR"
   --codex-bin "$CODEX_BIN" \
   --codex-home "$CODEX_HOME" \
   --env-file "$RUNTIME_ENV_FILE" \
-  --prompt "Use the configured scientific Python environment. Do not install packages or use network access; write all results below \$BENCH_OUTPUT." \
+  --prompt "Use the configured scientific Python environment. Network access and additional Python package installation are allowed in the designated evaluation environment; do not modify the original shared seismoagent environment. Write all results below \$BENCH_OUTPUT." \
   --timeout 3600

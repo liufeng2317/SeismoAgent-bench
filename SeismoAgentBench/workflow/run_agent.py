@@ -18,7 +18,8 @@ def run_agent(task_path: str | Path, manifest_path: str | Path | None, agent: Ag
               resume: bool = False,
               agent_config: Mapping[str, Any] | None = None,
               agent_prompt: str | None = None,
-              auth_source_home: str | Path | None = None) -> dict[str, Any]:
+              auth_source_home: str | Path | None = None,
+              runtime_context: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Execute one Agent and write execution records, without evaluation."""
     result = run_command(task_path, manifest_path, agent.command, run_root, run_id,
                          timeout=timeout, extra_env=extra_env, resume=resume,
@@ -26,7 +27,7 @@ def run_agent(task_path: str | Path, manifest_path: str | Path | None, agent: Ag
     run = Path(run_root).resolve() / run_id
     if agent_config is not None:
         write_agent_config_snapshot(run, agent_config)
-    write_environment_record(run, result)
+    write_environment_record(run, result, runtime_context=runtime_context)
     record_dir = run / "record"
     record_dir.mkdir(exist_ok=True)
     references = {

@@ -13,7 +13,7 @@ from SeismoAgentBench.agent import AgentError, AgentSpec
 from SeismoAgentBench.execution import (CodexCommandError, CodexCommandSpec, ExecutionError,
                                         AgentConfigError, RunLayout, expand_experiment,
                                         load_agent_config, load_env_file, load_experiment_spec,
-                                        probe_executable_version, resolve_auth)
+                                        probe_executable_version, probe_runtime, resolve_auth)
 from SeismoAgentBench.task import load_json, render_agent_prompt
 from SeismoAgentBench.workflow import evaluate_run, execute_experiment, run_agent
 
@@ -119,8 +119,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                 layout = RunLayout(effective_root, args.campaign_id, task_id,
                                    args.variant, args.agent_name, args.run_id)
                 effective_root = layout.run_root
-            rendered_prompt = render_agent_prompt(args.task, args.manifest,
-                                                   extra_instructions=args.prompt)
+            runtime_context = probe_runtime(env.get("PYTHON"), network_policy="allowed",
+                                            environment=env)
+            rendered_prompt = render_agent_prompt(
+                args.task, args.manifest, extra_instructions=args.prompt,
+                runtime_context=runtime_context)
             spec = CodexCommandSpec(codex_bin, model,
                                     str(effective_root / args.run_id / "work"),
                                     rendered_prompt, reasoning_effort=reasoning_effort)
@@ -134,6 +137,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     agent_config=agent_config,
                     agent_prompt=rendered_prompt,
                     auth_source_home=configured_codex_home,
+                    runtime_context=runtime_context,
                 )
                 if result["run"]["state"] != "execution_retryable" or attempt + 1 >= args.max_attempts:
                     break

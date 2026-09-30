@@ -19,19 +19,25 @@ def _write(path: Path, value: Mapping[str, Any]) -> None:
     path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
-def write_environment_record(run_dir: str | Path, result: Mapping[str, Any]) -> dict[str, Any]:
+def write_environment_record(run_dir: str | Path, result: Mapping[str, Any],
+                             runtime_context: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Write runtime identity without copying the process environment."""
     run = Path(run_dir)
+    runtime = dict(runtime_context or {})
+    runtime.setdefault("python", {"executable": sys.executable, "version": platform.python_version()})
+    runtime.setdefault("operating_system", platform.platform())
+    runtime.setdefault("architecture", platform.machine())
+    runtime.setdefault("network_policy", "allowed")
     record = {
         "schema_version": 1,
         "recorded_at": _now(),
         "run_id": result["run_id"],
         "execution_profile": result["execution_profile"],
         "formal_evaluation_eligible": result["formal_evaluation_eligible"],
-        "python": {"executable": sys.executable, "version": platform.python_version()},
-        "platform": platform.platform(),
+        "runtime": runtime,
         "working_directory": str(run / "work"),
-        "network_policy": "unspecified",
+        "input_directory": str(run / "work" / "input"),
+        "output_directory": str(run / "work"),
     }
     _write(run / "record" / "environment.json", record)
     return record
