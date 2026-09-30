@@ -45,6 +45,59 @@ Next controlled skill or workflow revision
 The loop is designed to improve scientific results while keeping the data
 boundary, execution record and comparison conditions fixed.
 
+## Baseline and Benchmarking
+
+### Baseline
+
+The baseline measures the capability of a general-purpose Agent before adding
+seismological expertise. The Agent receives the task prompt, the declared
+read-only observations and the standard execution interface. It is not given
+PhaseNet, GaMMA, NonLinLoc, hypoDD, expert parameter tables or the expert
+workflow as hidden guidance. This makes the baseline a test of general Agent
+planning, data inspection, code generation, execution and scientific reporting.
+
+The current baseline implementation has two levels:
+
+- `main.py` is a deterministic infrastructure baseline. It checks that a task
+  can run and produce a structurally valid catalog, but it does not measure
+  scientific monitoring quality.
+- The Ridgecrest phase-picking workflow test exercises a real task prompt,
+  read-only waveform input mapping, Agent-created processing artifacts and
+  post-run evaluation. It verifies the benchmark path before scientific scores
+  are introduced.
+
+The Codex CLI is the first general-purpose Agent under test. Its model and
+runtime profile are recorded per run so later comparisons can distinguish
+changes in Agent capability from changes in task data or execution settings.
+
+### Benchmarking
+
+Benchmarking compares Agent-generated results with fixed observation conditions
+and role-specific expert references. The comparison is performed after the
+Agent finishes; the Agent does not score itself. Each run should preserve its
+prompt, input mapping, runtime configuration, execution record and produced
+artifacts so that the same result can be inspected and rescored independently.
+
+The comparison has three layers:
+
+1. **Execution validity** — did the Agent complete the task, preserve the
+   read-only inputs, create reproducible artifacts and report its method?
+2. **Catalog and phase quality** — how complete and internally consistent are
+   the detections, P/S picks, associations, origin times, locations, depths and
+   uncertainties?
+3. **Reference agreement** — how do the results compare with the relevant
+   expert or operational catalog for the same time, space, network and quality
+   conditions? A reference catalog is a role-specific comparison target, not a
+   universal ground truth.
+
+The current framework has the execution records, artifact validation path,
+Ridgecrest reference materials and deterministic baseline needed for the first
+benchmark run. The scientific metric set and frozen evaluation protocol are
+still being defined. In particular, completeness, pick-time tolerance,
+association quality, horizontal and depth errors, uncertainty calibration and
+fair handling of events absent from a reference catalog must be specified
+before reporting a scientific Agent ranking.
+
 ## Current progress
 
 | Stage | Current state | Boundary |
