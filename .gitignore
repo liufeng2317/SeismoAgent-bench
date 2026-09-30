@@ -48,9 +48,9 @@ __pycache__/
 **/references/**/*.mp4
 
 # Large tabular supplementary products and extracted phase directories
-benchmark_source/**/*.xlsx
-benchmark_source/**/phases/
-benchmark_source/**/context/
+data/**/*.xlsx
+data/**/phases/
+data/**/context/
 
 # Raw archives and machine-scale phase-arrival products stay local.
 **/catalogs/**/raw/
@@ -61,9 +61,9 @@ benchmark_source/**/context/
 **/catalogs/**/*.hdf5
 
 # Large source catalogs; small canonical tables can be force-added explicitly.
-benchmark_source/**/*.csv
-benchmark_source/**/*.txt
-benchmark_source/**/*.xml
+data/**/*.csv
+data/**/*.txt
+data/**/*.xml
 
 # Temporary downloads and OS metadata
 **/.DS_Store
@@ -75,17 +75,27 @@ benchmark_source/**/*.xml
 /runs
 
 # Continuous waveforms remain local after the source-layout migration.
-benchmark_source/**/waveforms
+data/**/waveforms
 
 # Native velocity-model downloads and third-party implementation evidence stay local.
-benchmark_source/**/data/models/raw/
+data/**/data/models/raw/
+
+# Large or reproducible data products under the canonical data tree.
+data/**/analysis/figures/
+data/**/analysis/stats/
+data/**/analysis/derived/
+data/**/catalogs/**/raw/
 
 # Locally regenerated Kilauea analysis metadata is intentionally excluded.
-benchmark_source/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/analysis/stats/relocated_events/full_v1.json
+data/2018_kilauea_hawaii/data/catalogs/MATOZA2021_EA001253/analysis/stats/relocated_events/full_v1.json
 
 # Small, reviewed Ridgecrest diagnostic tables accompany their figures.
-!benchmark_source/2019_ridgecrest_california/analysis/figures/waveform_quality/*.csv
-!benchmark_source/2019_ridgecrest_california/analysis/figures/instrument_response/response_audit.csv
-!benchmark_source/2019_ridgecrest_california/analysis/figures/waveform_examples/mw*_record_section.csv
+!data/2019_ridgecrest_california/analysis/figures/waveform_quality/*.csv
+!data/2019_ridgecrest_california/analysis/figures/instrument_response/response_audit.csv
+!data/2019_ridgecrest_california/analysis/figures/waveform_examples/mw*_record_section.csv
 # Reproducible processed waveform excerpts stay local.
-benchmark_source/2019_ridgecrest_california/analysis/figures/instrument_response/response_examples.npz
+data/2019_ridgecrest_california/analysis/figures/instrument_response/response_examples.npz
+
+# Bulk supplementary tables extracted into Markdown stay local.
+/data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0003-table si-s10__extracted.md
+/data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0004-table si-s11__extracted.md
