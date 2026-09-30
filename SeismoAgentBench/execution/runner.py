@@ -12,6 +12,7 @@ import json
 import os
 from pathlib import Path
 import signal
+import selectors
 import shutil
 import subprocess
 import sys
@@ -19,7 +20,7 @@ import tempfile
 import time
 from typing import Any, Mapping, Sequence
 
-from SeismoAgentBench.reporting.transcript import write_event_jsonl, write_human_log
+from SeismoAgentBench.reporting.transcript import append_execution_line
 from SeismoAgentBench.task.validation import ValidationError, load_json, load_task, validate_manifest
 
 
@@ -112,6 +113,35 @@ def _failure_class(log: Path) -> tuple[str, bool]:
     if "usage limit" in text or "hit your usage limit" in text:
         return "usage_limit", False
     return "nonzero_exit", False
+
+
+def _stream_process(process: subprocess.Popen[bytes], event_stream: Any,
+                    human_stream: Any, timeout: float) -> None:
+    """Stream process output while retaining a timeout that can interrupt reads."""
+    if process.stdout is None:
+        process.wait(timeout=timeout)
+        return
+    selector = selectors.DefaultSelector()
+    selector.register(process.stdout, selectors.EVENT_READ)
+    deadline = time.monotonic() + timeout
+    try:
+        while selector.get_map():
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise subprocess.TimeoutExpired(process.args, timeout)
+            ready = selector.select(remaining)
+            if not ready:
+                raise subprocess.TimeoutExpired(process.args, timeout)
+            for key, _ in ready:
+                line = key.fileobj.readline()
+                if line:
+                    append_execution_line(line, event_stream, human_stream)
+                else:
+                    selector.unregister(key.fileobj)
+            if process.poll() is not None and not selector.get_map():
+                break
+    finally:
+        selector.close()
 
 
 def _archive_retry(run: Path) -> int:
@@ -251,22 +281,22 @@ def run_command(task_path: str | Path, manifest_path: str | Path | None, command
     }
     _write_json(context.result, result)
     runtime_root: Path | None = None
-    raw_log = context.log.with_name("execution.jsonl.tmp")
     event_log = context.log.with_name("execution.jsonl")
-    with raw_log.open("wb") as log:
+    with event_log.open("w", encoding="utf-8") as event_stream, context.log.open("w", encoding="utf-8") as human_stream:
         process: subprocess.Popen[bytes] | None = None
         try:
             result["state"] = "running"
             _write_json(context.result, result)
             env, runtime_root = _environment(context, extra_env)
             process = subprocess.Popen(list(command), cwd=context.work, env=env,
-                                       stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT,
+                                       stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                        start_new_session=True)
             try:
-                result["exit_code"] = process.wait(timeout=timeout)
+                _stream_process(process, event_stream, human_stream, timeout)
+                result["exit_code"] = process.wait()
                 result["state"] = "completed" if process.returncode == 0 else "execution_failed"
                 if process.returncode != 0:
-                    reason, retryable = _failure_class(raw_log)
+                    reason, retryable = _failure_class(event_log)
                     result["failure_reason"] = reason
                     result["retryable"] = retryable
                     if retryable:
@@ -274,6 +304,9 @@ def run_command(task_path: str | Path, manifest_path: str | Path | None, command
             except subprocess.TimeoutExpired:
                 os.killpg(process.pid, signal.SIGKILL)
                 process.wait()
+                if process.stdout is not None:
+                    for line in process.stdout:
+                        append_execution_line(line, event_stream, human_stream)
                 result["state"] = "execution_timeout"
                 result["failure_reason"] = "timeout"
         except OSError as exc:
@@ -281,12 +314,10 @@ def run_command(task_path: str | Path, manifest_path: str | Path | None, command
             result["failure_reason"] = "launcher_error"
             result["error"] = str(exc)
         finally:
-            if raw_log.is_file():
-                write_event_jsonl(raw_log, event_log)
-                write_human_log(event_log, context.log)
-                raw_log.unlink(missing_ok=True)
-            elif not context.log.exists():
-                context.log.write_text(f"[{_now()}] launcher produced no output\n", encoding="utf-8")
+            if event_log.stat().st_size == 0:
+                append_execution_line(f"launcher produced no output\n", event_stream, human_stream)
+            if process is not None and process.stdout is not None:
+                process.stdout.close()
             if runtime_root is not None:
                 shutil.rmtree(runtime_root, ignore_errors=True)
             result["finished_at"] = _now()

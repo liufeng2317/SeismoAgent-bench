@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 import sys
 import tempfile
+import threading
+import time
 import unittest
 from tests.task_helpers import write_task_package
 
@@ -66,6 +68,32 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(json.loads((run / "work/result.json").read_text())["ok"], True)
         self.assertTrue((run / "record/run_result.json").is_file())
         self.assertFalse((run / "agent/task_spec.json").exists())
+
+    def test_execution_logs_are_available_while_process_is_running(self):
+        code = "import time; print('first event', flush=True); time.sleep(0.5); print('second event', flush=True)"
+        holder = {}
+
+        def execute():
+            holder["result"] = run_command(
+                self.task, self.manifest, [sys.executable, "-c", code],
+                self.root, "live-logs", timeout=10,
+            )
+
+        worker = threading.Thread(target=execute)
+        worker.start()
+        run = self.root / "live-logs"
+        human = run / "record/execution.log"
+        events = run / "record/execution.jsonl"
+        deadline = time.monotonic() + 5
+        while time.monotonic() < deadline and (not human.exists() or "first event" not in human.read_text()):
+            time.sleep(0.01)
+        self.assertTrue(human.is_file())
+        self.assertIn("first event", human.read_text())
+        self.assertTrue(events.is_file())
+        self.assertIn("console.line", events.read_text())
+        worker.join(timeout=5)
+        self.assertFalse(worker.is_alive())
+        self.assertEqual(holder["result"]["state"], "completed")
 
     def test_declared_inputs_are_linked_into_run_input_view(self):
         source_dir = Path(self.tmp.name) / "waveforms"

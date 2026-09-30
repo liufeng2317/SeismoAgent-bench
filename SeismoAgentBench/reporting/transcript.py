@@ -83,6 +83,24 @@ def write_event_jsonl(raw_log_path: str | Path, event_log_path: str | Path) -> i
     return count
 
 
+def append_execution_line(line: bytes | str, event_stream: Any, human_stream: Any) -> None:
+    """Append one process-output line to the live JSONL and human logs."""
+    if isinstance(line, bytes):
+        text = line.decode("utf-8", errors="replace").rstrip("\r\n")
+    else:
+        text = line.rstrip("\r\n")
+    try:
+        event = json.loads(text)
+    except json.JSONDecodeError:
+        event = {"type": "console.line", "text": text}
+    event_stream.write(json.dumps(event, ensure_ascii=False, sort_keys=True) + "\n")
+    summary = _human_summary(event)
+    for fragment in summary.splitlines() or [""]:
+        human_stream.write(f"[{_timestamp()}] {fragment}\n")
+    event_stream.flush()
+    human_stream.flush()
+
+
 def _event(raw: dict[str, Any], sequence: int) -> dict[str, Any]:
     kind = raw.get("type")
     result: dict[str, Any] = {
