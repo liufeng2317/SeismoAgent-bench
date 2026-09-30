@@ -23,6 +23,8 @@ def _human_summary(raw: Any) -> str:
     if not isinstance(raw, dict):
         return f"raw_event value={_short(raw)}"
     event_type = raw.get("type", "unknown")
+    if event_type == "console.line":
+        return f"stdout: {_short(raw.get('text'))}"
     item = raw.get("item")
     if event_type in {"thread.started", "turn.started", "turn.completed"}:
         return str(event_type)
@@ -60,6 +62,24 @@ def write_human_log(raw_log_path: str | Path, human_log_path: str | Path) -> int
                 summary = _human_summary(event)
             for fragment in summary.splitlines() or [""]:
                 output.write(f"[{_timestamp()}] {fragment}\n")
+    return count
+
+
+def write_event_jsonl(raw_log_path: str | Path, event_log_path: str | Path) -> int:
+    """Convert mixed process output into strict JSON Lines."""
+    source = Path(raw_log_path)
+    target = Path(event_log_path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    count = 0
+    with source.open(encoding="utf-8", errors="replace") as raw_stream, target.open("w", encoding="utf-8") as output:
+        for line in raw_stream:
+            count += 1
+            text = line.rstrip("\n")
+            try:
+                event = json.loads(text)
+            except json.JSONDecodeError:
+                event = {"type": "console.line", "text": text}
+            output.write(json.dumps(event, ensure_ascii=False, sort_keys=True) + "\n")
     return count
 
 

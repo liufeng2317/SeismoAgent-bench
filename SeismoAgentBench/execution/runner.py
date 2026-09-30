@@ -19,7 +19,7 @@ import tempfile
 import time
 from typing import Any, Mapping, Sequence
 
-from SeismoAgentBench.reporting.transcript import write_human_log
+from SeismoAgentBench.reporting.transcript import write_event_jsonl, write_human_log
 from SeismoAgentBench.task.validation import ValidationError, load_json, load_task, validate_manifest
 
 
@@ -251,7 +251,8 @@ def run_command(task_path: str | Path, manifest_path: str | Path | None, command
     }
     _write_json(context.result, result)
     runtime_root: Path | None = None
-    raw_log = context.log.with_name("execution.jsonl")
+    raw_log = context.log.with_name("execution.raw.log")
+    event_log = context.log.with_name("execution.jsonl")
     with raw_log.open("wb") as log:
         process: subprocess.Popen[bytes] | None = None
         try:
@@ -281,7 +282,8 @@ def run_command(task_path: str | Path, manifest_path: str | Path | None, command
             result["error"] = str(exc)
         finally:
             if raw_log.is_file():
-                write_human_log(raw_log, context.log)
+                write_event_jsonl(raw_log, event_log)
+                write_human_log(event_log, context.log)
             elif not context.log.exists():
                 context.log.write_text(f"[{_now()}] launcher produced no output\n", encoding="utf-8")
             if runtime_root is not None:
