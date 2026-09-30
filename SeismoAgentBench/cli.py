@@ -105,8 +105,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             configured_env_file = args.env_file or auth.get("env_file")
             configured_codex_home = args.codex_home or auth.get("codex_home")
             env = load_env_file(configured_env_file) if configured_env_file else {}
-            if configured_codex_home:
-                env["CODEX_HOME"] = configured_codex_home
             configured = (agent_config or {}).get("config", {})
             codex_bin = args.codex_bin or (agent_config or {}).get("executable")
             if not isinstance(codex_bin, str) or not codex_bin:
@@ -135,6 +133,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     extra_env=env, resume=args.resume or attempt > 0,
                     agent_config=agent_config,
                     agent_prompt=rendered_prompt,
+                    auth_source_home=configured_codex_home,
                 )
                 if result["run"]["state"] != "execution_retryable" or attempt + 1 >= args.max_attempts:
                     break

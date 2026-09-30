@@ -55,6 +55,11 @@ class CodexCliTests(unittest.TestCase):
             manifest = base / "manifest.json"
             fake = base / "fake-codex"
             run_root = base / "runs"
+            auth_home = base / "external-codex-home"
+            auth_home.mkdir(mode=0o700)
+            auth_home.chmod(0o700)
+            (auth_home / "auth.json").write_text("{}\n", encoding="utf-8")
+            (auth_home / "auth.json").chmod(0o600)
             write_task_package(task, {
                 "task_id": "codex-cli-smoke", "version": "1",
                 "input_requirements": [{"id": "metadata", "data_type": "metadata", "required": True}],
@@ -79,7 +84,7 @@ class CodexCliTests(unittest.TestCase):
                        "--agent-name", "codex-smoke", "--agent-version", "1",
                        "--run-root", str(run_root), "--run-id", "run-001",
                        "--codex-bin", str(fake), "--model", "test-model",
-                       "--codex-home", "/tmp/external-codex-home",
+                       "--codex-home", str(auth_home),
                        "--prompt", "write the result artifact"]
             result = subprocess.run(command, capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
@@ -89,7 +94,7 @@ class CodexCliTests(unittest.TestCase):
             self.assertEqual(payload["codex"]["execution_log"], "execution.log")
             self.assertEqual(payload["codex"]["execution_jsonl"], "execution.jsonl")
             self.assertEqual(payload["codex"]["provenance"], "provenance.json")
-            self.assertIn("CODEX_HOME", payload["codex"]["injected_environment_keys"])
+            self.assertTrue(payload["codex"]["authentication"]["codex_home_configured"])
             event_log = [json.loads(line) for line in (run / "record/execution.jsonl").read_text().splitlines()]
             self.assertTrue(any(item.get("item", {}).get("type") == "agent_message" for item in event_log))
             self.assertTrue((run / "record/provenance.json").is_file())

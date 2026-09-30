@@ -84,3 +84,4 @@ This directory records completed implementation stages. Each stage record lists 
 | External authentication profiles | [82_external_auth_profiles.md](82_external_auth_profiles.md) | Complete |
 | Live execution logs | [83_live_execution_logs.md](83_live_execution_logs.md) | Complete |
 | Framework configuration location | [84_framework_config_location.md](84_framework_config_location.md) | Complete |
+| Per-run Codex authentication copy | [85_codex_auth_copy.md](85_codex_auth_copy.md) | Complete |

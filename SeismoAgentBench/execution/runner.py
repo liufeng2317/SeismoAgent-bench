@@ -21,6 +21,7 @@ import time
 from typing import Any, Mapping, Sequence
 
 from SeismoAgentBench.reporting.transcript import append_execution_line
+from SeismoAgentBench.execution.auth import prepare_codex_runtime_home
 from SeismoAgentBench.task.validation import ValidationError, load_json, load_task, validate_manifest
 
 
@@ -219,7 +220,8 @@ def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, 
                        result=record / "run_result.json"), attempt)
 
 
-def _environment(context: RunContext, extra_env: Mapping[str, str] | None = None) -> tuple[dict[str, str], Path]:
+def _environment(context: RunContext, extra_env: Mapping[str, str] | None = None,
+                 auth_source_home: str | Path | None = None) -> tuple[dict[str, str], Path]:
     runtime_root = Path(tempfile.mkdtemp(prefix=f"seismoagentbench-{context.run_id}-"))
     home = runtime_root / "home"
     tmp = runtime_root / "tmp"
@@ -237,6 +239,12 @@ def _environment(context: RunContext, extra_env: Mapping[str, str] | None = None
         "MKL_NUM_THREADS": "1",
     }
     env.update(context.environment)
+    if auth_source_home is not None:
+        try:
+            env["CODEX_HOME"] = str(prepare_codex_runtime_home(runtime_root, auth_source_home))
+        except BaseException:
+            shutil.rmtree(runtime_root, ignore_errors=True)
+            raise
     if extra_env:
         if not all(isinstance(key, str) and key and isinstance(value, str)
                    for key, value in extra_env.items()):
@@ -248,7 +256,8 @@ def _environment(context: RunContext, extra_env: Mapping[str, str] | None = None
 def run_command(task_path: str | Path, manifest_path: str | Path | None, command: Sequence[str],
                 run_root: str | Path, run_id: str, *, timeout: float = 600,
                 extra_env: Mapping[str, str] | None = None,
-                resume: bool = False, agent_prompt: str | None = None) -> dict[str, Any]:
+                resume: bool = False, agent_prompt: str | None = None,
+                auth_source_home: str | Path | None = None) -> dict[str, Any]:
     """Validate inputs and run one command in a fresh trusted-development context."""
     if not command or not all(isinstance(item, str) and item for item in command):
         raise ExecutionError("command must be a non-empty sequence of strings")
@@ -287,7 +296,7 @@ def run_command(task_path: str | Path, manifest_path: str | Path | None, command
         try:
             result["state"] = "running"
             _write_json(context.result, result)
-            env, runtime_root = _environment(context, extra_env)
+            env, runtime_root = _environment(context, extra_env, auth_source_home)
             process = subprocess.Popen(list(command), cwd=context.work, env=env,
                                        stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                        start_new_session=True)

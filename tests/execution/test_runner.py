@@ -95,6 +95,24 @@ class RunnerTests(unittest.TestCase):
         self.assertFalse(worker.is_alive())
         self.assertEqual(holder["result"]["state"], "completed")
 
+    def test_codex_auth_is_available_only_in_temporary_runtime_home(self):
+        source = Path(self.tmp.name) / "codex-auth"
+        source.mkdir(mode=0o700)
+        source.chmod(0o700)
+        auth = source / "auth.json"
+        auth.write_text('{"token":"secret"}\n', encoding="utf-8")
+        auth.chmod(0o600)
+        code = (
+            "import json,os,pathlib; p=pathlib.Path(os.environ['CODEX_HOME']); "
+            "assert p.is_dir(); assert (p/'auth.json').read_text() == '{\"token\":\"secret\"}\\n'; "
+            "pathlib.Path(os.environ['BENCH_OUTPUT'],'result.json').write_text(json.dumps({'ok': True}))"
+        )
+        result = run_command(self.task, self.manifest, [sys.executable, "-c", code],
+                             self.root, "auth-run", timeout=10, auth_source_home=source)
+        self.assertEqual(result["state"], "completed")
+        self.assertTrue(auth.is_file())
+        self.assertFalse((self.root / "auth-run/work/.codex_home").exists())
+
     def test_declared_inputs_are_linked_into_run_input_view(self):
         source_dir = Path(self.tmp.name) / "waveforms"
         source_dir.mkdir()
