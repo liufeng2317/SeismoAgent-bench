@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "case_id": "2019_ridgecrest_california",
+  "description": "Read-only Ridgecrest waveform and station metadata root for the catalog-construction task.",
+  "entries": [
+    {
+      "id": "waveform_data_root",
+      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms",
+      "type": "folder",
+      "notes": "Explore the data/ and stations/ subdirectories. The source files are not copied into the run."
+    }
+  ]
+}
