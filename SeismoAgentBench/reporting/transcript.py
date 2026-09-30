@@ -58,7 +58,8 @@ def write_human_log(raw_log_path: str | Path, human_log_path: str | Path) -> int
                 summary = f"stdout: {_short(text)}"
             else:
                 summary = _human_summary(event)
-            output.write(f"[{_timestamp()}] {summary}\n")
+            for fragment in summary.splitlines() or [""]:
+                output.write(f"[{_timestamp()}] {fragment}\n")
     return count
 
 
