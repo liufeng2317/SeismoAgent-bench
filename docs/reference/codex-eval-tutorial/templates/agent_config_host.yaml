@@ -1,0 +1,18 @@
+# 本机（dev-d，bwrap 受限）实测可用的 host-direct 配置模板
+# 坑：reasoning_effort 在 host 模式不会传给 CLI，必须 extra_args 显式钉定
+harness: codex
+model: gpt-6-astra                # 换模型只改这里（slug 见教程 §7）
+provider: direct
+base_url: null
+api_key: null
+config:
+  use_host_home: true             # 继承平台 CODEX_HOME 认证
+  env_file: /root/.geodatabench/openai_proxy.env
+  yolo: true
+  sandbox_mode: danger-full-access
+  isolation: none                 # bwrap 在本机被封；换宿主后改 bubblewrap
+  reasoning_effort: medium        # 仅作记录，host 模式不生效
+  disable_python_bytecode: true
+  extra_args:
+    - "-c"
+    - 'model_reasoning_effort="medium"'   # 真正生效的 effort 绑定

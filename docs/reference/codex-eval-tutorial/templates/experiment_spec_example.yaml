@@ -1,0 +1,15 @@
+# 实验 spec 模板：单模型 × N Case × base
+output_root: runs/my_campaign/my-agent            # 独立 root
+data_root: /chenhao1data/workspace_n/projects/earth_data_agent_bench/GeoDataBench/runs/gpt6_luna_registry_base_20260923/_data_aliases
+# ↑ 统一 40-Case alias 视图（solid_earth successor + glass + id68/id72 已指对）
+prompt_prefix: ""
+prompt_suffix: "\nHost runtime: execute Python with /chenhao1data/workspace_n/envs/shared311/bin/python, not plain python3.\n"
+concurrency: 1                                     # capacity 敏感期保持串行
+agents:
+  - id: my-agent
+    config: agent_config_host.yaml                 # 相对本 spec 的路径
+tasks:
+  - path: cryosphere/sea_ice_age_lagrangian_v06
+    variants: [base]                               # open 用 taskPromptOpen
+  - path: ecology/beps_global_hourly_flux_v08
+    variants: [base]

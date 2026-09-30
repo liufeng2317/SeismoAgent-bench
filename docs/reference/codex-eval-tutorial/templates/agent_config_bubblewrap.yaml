@@ -1,0 +1,15 @@
+# 正式沙箱配置模板（需宿主支持 unprivileged userns；本机 dev-d 不可用）
+harness: codex
+model: gpt-6-astra
+provider: direct
+base_url: null
+api_key: null
+config:
+  codex_home: ~/.codex            # 或每 run 隔离目录
+  env_file: ~/.codex/.env         # 仅 proxy 键
+  yolo: true
+  sandbox_mode: danger-full-access
+  isolation: bubblewrap           # 输入只读挂载 /work/input，输出 bind /work/output
+  reasoning_effort: medium        # bubblewrap 分支会自动转成 -c 参数，无需 extra_args
+  disable_python_bytecode: true
+  extra_args: []
