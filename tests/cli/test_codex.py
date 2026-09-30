@@ -8,7 +8,7 @@ from tests.task_helpers import write_task_package
 
 
 class CodexCliTests(unittest.TestCase):
-    def test_run_codex_uses_host_direct_adapter_and_captures_transcript(self):
+    def test_run_codex_uses_host_direct_adapter_and_captures_execution_records(self):
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)
             task = base / "task.json"
@@ -46,19 +46,19 @@ class CodexCliTests(unittest.TestCase):
             payload = json.loads(result.stdout)
             run = run_root / "run-001"
             self.assertEqual(payload["run"]["state"], "completed")
-            self.assertEqual(payload["codex"]["transcript"], "transcript.jsonl")
+            self.assertEqual(payload["codex"]["execution_log"], "execution.log")
+            self.assertEqual(payload["codex"]["execution_jsonl"], "execution.jsonl")
             self.assertEqual(payload["codex"]["provenance"], "provenance.json")
             self.assertIn("CODEX_HOME", payload["codex"]["injected_environment_keys"])
-            self.assertIn('"text": "OK"', (run / "record/transcript.jsonl").read_text())
-            transcript = [json.loads(line) for line in (run / "record/transcript.jsonl").read_text().splitlines()]
-            self.assertTrue(any(item["event_type"] == "agent_message" for item in transcript))
+            event_log = [json.loads(line) for line in (run / "record/execution.jsonl").read_text().splitlines()]
+            self.assertTrue(any(item.get("item", {}).get("type") == "agent_message" for item in event_log))
             self.assertTrue((run / "record/provenance.json").is_file())
             provenance = json.loads((run / "record/provenance.json").read_text())
             self.assertEqual(provenance["launcher"]["argv"][-1], "<BENCH_AGENT_PROMPT>")
             prompt = (run / "control/agent_prompt.md").read_text()
             self.assertIn("# Task: codex-cli-smoke", prompt)
             self.assertNotIn("# SeismoAgentBench Task", prompt)
-            self.assertIn("## Input data", prompt)
+            self.assertIn("## Runtime context", prompt)
             self.assertIn("## Structured output hints", prompt)
             self.assertIn("write the result artifact", prompt)
             self.assertNotIn("external-codex-home", (run / "record/provenance.json").read_text())

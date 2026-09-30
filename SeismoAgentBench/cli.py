@@ -14,7 +14,6 @@ from SeismoAgentBench.execution import (CodexCommandError, CodexCommandSpec, Exe
                                         AgentConfigError, RunLayout, expand_experiment,
                                         load_agent_config, load_env_file, load_experiment_spec)
 from SeismoAgentBench.task import load_json, render_agent_prompt
-from SeismoAgentBench.reporting.transcript import write_transcript
 from SeismoAgentBench.workflow import evaluate_run, execute_experiment, run_agent
 
 
@@ -131,10 +130,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             run = effective_root / args.run_id
             record_dir = run / "record"
             record_dir.mkdir(exist_ok=True)
-            raw_execution = record_dir / "execution.jsonl"
-            execution_source = raw_execution if raw_execution.is_file() else record_dir / "execution.log"
-            transcript_counts = write_transcript(
-                execution_source, record_dir / "transcript.jsonl")
             provenance_path = record_dir / "provenance.json"
             provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
             launcher = spec.record()
@@ -147,8 +142,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             provenance_path.write_text(
                 json.dumps(provenance, indent=2, sort_keys=True) + "\n", encoding="utf-8")
             result["codex"] = {"provenance": "provenance.json",
-                               "transcript": "transcript.jsonl",
-                               "transcript_counts": transcript_counts,
+                               "execution_log": "execution.log",
+                               "execution_jsonl": "execution.jsonl",
                                "injected_environment_keys": sorted(env)}
             if args.campaign_id:
                 result["run_layout"] = layout.record()

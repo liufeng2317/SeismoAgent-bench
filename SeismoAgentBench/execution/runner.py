@@ -251,7 +251,7 @@ def run_command(task_path: str | Path, manifest_path: str | Path | None, command
     }
     _write_json(context.result, result)
     runtime_root: Path | None = None
-    raw_log = context.log.with_name("execution.raw.log")
+    raw_log = context.log.with_name("execution.jsonl.tmp")
     event_log = context.log.with_name("execution.jsonl")
     with raw_log.open("wb") as log:
         process: subprocess.Popen[bytes] | None = None
@@ -284,6 +284,7 @@ def run_command(task_path: str | Path, manifest_path: str | Path | None, command
             if raw_log.is_file():
                 write_event_jsonl(raw_log, event_log)
                 write_human_log(event_log, context.log)
+                raw_log.unlink(missing_ok=True)
             elif not context.log.exists():
                 context.log.write_text(f"[{_now()}] launcher produced no output\n", encoding="utf-8")
             if runtime_root is not None:
