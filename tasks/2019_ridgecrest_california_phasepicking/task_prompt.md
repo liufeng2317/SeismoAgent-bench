@@ -10,19 +10,16 @@ The input data contain waveforms and corresponding station infomation. The wavef
 
 ### Task procedure
 
-First write a concise `task_plan.md` describing the selected time window, input files, preprocessing steps, phase-picking method and quality checks. Then save complete, reusable processing code based on that plan and run the saved code to generate the final results. Record the method, parameters, assumptions and unresolved data quality issues in the plan or in the result files.
+1.  write a concise `task_plan.md` describing workflow planing.
+2.  Then save complete, reusable processing code based on that plan and run the saved code to generate the final results.
 
 ### Required outputs
 
 For better visualize and reproducesng, write at least the following files in the assigned output directory:
 
-- `task_plan.md`: task planning and method description;
-- `station_distribution_waveform.png`: one figure showing station
-  distribution and representative raw waveform data;
-- `preprocessing.png`: one figure showing the main waveform preprocessing
-  stages;
-- `phase_picks.png`: one figure showing representative P/S picking results;
-- `picks.csv`: the phase-pick table with station, channel, phase, arrival time
+- `output/task_plan.md`: task planning and method description;
+- `output/station_distribution_waveform.png`: one figure showing station distribution and some representative raw waveform data;
+- `output/waveform_processing.png`: one figure showing the main waveform preprocessing stages;
+- `output/phase_picks.png`: one figure showing representative P/S picking results;
+- `output/picks.csv`: the phase-pick table with station, channel, phase, arrival time
   and confidence columns.
-
-Keep missing or uncertain picks explicit. Do not invent arrivals to fill gaps. The saved processing code and the recorded runtime environment must be sufficient to reproduce the outputs from the declared input data.
