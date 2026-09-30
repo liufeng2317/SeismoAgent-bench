@@ -24,3 +24,25 @@ The baseline is a general-purpose Agent without expert seismological knowledge o
 1. Multiple scientific cases have been identified and organized as candidate benchmark tasks.
 2. Ridgecrest waveform and station data have been collected and prepared for Agent execution.
 3. A reusable benchmark framework has been built, including task definitions, input mapping, Agent execution, run records and post-run evaluation.
+
+### Internal benchmark flow
+
+```mermaid
+flowchart LR
+    T[Task definition] --> C[Run configuration]
+    C --> I[Initialize run directory]
+    I --> L[Link declared inputs]
+    L --> P[Assemble task prompt]
+    P --> A[Launch Agent]
+    A --> W[Agent work directory]
+    A --> R[Execution records]
+    W --> O[Produced artifacts]
+    O --> S[External scorer]
+    R --> S
+    S --> H[Evaluation report]
+```
+
+The framework prepares one run from a task definition and run configuration,
+exposes the declared inputs to the Agent, launches the selected Agent through
+its adapter, and preserves the Agent's artifacts and execution records. The
+external scorer reads the completed run and produces the evaluation report.
