@@ -3,7 +3,7 @@
   "version": "1",
   "title": "Ridgecrest earthquake-catalog construction",
   "summary": "Construct a reproducible candidate earthquake catalog from the available Ridgecrest waveform and station data.",
-  "task_prompt_file": "task_prompt.md",
+  "task_prompt_file": "prompt_base.md",
   "category": "seismology",
   "software": [
     "Python",

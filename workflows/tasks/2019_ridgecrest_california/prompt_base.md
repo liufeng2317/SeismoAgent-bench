@@ -48,14 +48,14 @@ Ensure that the complete usable dataset is covered, including when processing is
 
 ### Required scientific outputs
 
-At minimum, provide machine-readable phase observations in `picks.csv` and a versioned candidate-earthquake catalog in `catalog.csv`. Use these columns for `picks.csv`, with one row per phase observation:
+At minimum, provide machine-readable phase observations in `picks.csv` and a versioned candidate-earthquake catalog in `catalog.csv`.
 
+Use these columns for `picks.csv`, with one row per phase observation:
 ```text
 pick_id,event_id,station_id,channel_id,phase,time_utc,probability,uncertainty_s,method,status
 ```
 
 Use these columns for `catalog.csv`, with one row per candidate event:
-
 ```text
 event_id,origin_time_utc,latitude,longitude,depth_km,magnitude,magnitude_type,n_picks,n_p_picks,n_s_picks,status
 ```

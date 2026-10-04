@@ -7,7 +7,8 @@ to five files:
 ```text
 input.json        # read-only source folder declaration
 task.json         # structured task metadata
-task_prompt.md    # Agent-facing instructions and output requirements
+prompt_base.md    # clean baseline Agent prompt and output requirements
+prompt_tools.md   # optional prompt with local seismological tools exposed
 main.py           # deterministic baseline entry point
 run.sh            # Codex execution entry point
 ```
@@ -24,8 +25,11 @@ The Agent must discover the available files, state its processing scope and
 methods, and write a reproducible candidate catalog and supporting results
 under `$BENCH_OUTPUT`. The default runner uses the separate
 `seismoagent_eval` environment so that package installation does not modify the
-shared `seismoagent` environment. The required catalog format and scientific limitations
-are described in `task_prompt.md`; no separate output-contract file is needed.
+shared `seismoagent` environment. The required catalog format and scientific
+limitations are described in `prompt_base.md`; no separate output-contract file
+is needed. `prompt_tools.md` is an optional variant that exposes the local
+PhaseNet, GaMMA, NonLinLoc and hypoDD sources while leaving method selection to
+the Agent.
 
 The default runner allows up to four hours for the complete Agent run. Override
 this with `TIMEOUT`, in seconds, when a different processing budget is needed.
