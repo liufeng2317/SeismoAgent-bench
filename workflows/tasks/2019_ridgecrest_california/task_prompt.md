@@ -48,40 +48,19 @@ Ensure that the complete usable dataset is covered, including when processing is
 
 ### Required scientific outputs
 
-At minimum, provide machine-readable results for:
-
-1. **Phase observations / picks**, including P/S phase information and relevant confidence or quality information when available.
-
-2. **Candidate earthquake locations**, including origin time, latitude, longitude, depth, and relevant quality or uncertainty information when available.
-
-3. A final: `catalog.csv`
-containing a versioned list of candidate earthquakes.
-
-Each event should include, when available:
-- event identifier;
-- origin time in UTC;
-- latitude;
-- longitude;
-- depth;
-- magnitude, if it can be estimated defensibly;
-
-Do not fabricate unavailable quantities. Preserve missing or uncertain values explicitly.
-
-The final catalog should be traceable to the observational evidence used to construct it.
-
-The machine-readable outputs must use these columns. Write phase observations to `picks.csv`, one row per phase observation:
+At minimum, provide machine-readable phase observations in `picks.csv` and a versioned candidate-earthquake catalog in `catalog.csv`. Use these columns for `picks.csv`, with one row per phase observation:
 
 ```text
 pick_id,event_id,station_id,channel_id,phase,time_utc,probability,uncertainty_s,method,status
 ```
 
-Write candidate events to `catalog.csv`, one row per event:
+Use these columns for `catalog.csv`, with one row per candidate event:
 
 ```text
 event_id,origin_time_utc,latitude,longitude,depth_km,magnitude,magnitude_type,n_picks,n_p_picks,n_s_picks,status
 ```
 
-Use ISO 8601 UTC for `time_utc` and `origin_time_utc`. `event_id` must match between the two files; it may be empty for an unassociated pick. Use `P` or `S` for `phase`, and use `accepted`, `uncertain` or `rejected` for `status`. Fields that cannot be estimated defensibly may be empty and must not be fabricated. Record the velocity model, location method, uncertainty estimates and other diagnostic quantities in the workflow documentation or a separate metadata file chosen by the Agent.
+The catalog records the event identifier, origin time in UTC, location, depth, magnitude when defensible, phase counts and event status. Use ISO 8601 UTC for `time_utc` and `origin_time_utc`; `event_id` must match between the two files and may be empty for an unassociated pick. Use `P` or `S` for `phase`, and `accepted`, `uncertain` or `rejected` for `status`. Fields that cannot be estimated defensibly may be empty and must not be fabricated. Record the velocity model, location method, uncertainty estimates and other diagnostic quantities in the workflow documentation or a separate metadata file chosen by the Agent. The final catalog must be traceable to the observational evidence used to construct it.
 
 ### Inspection and visualization
 
