@@ -9,3 +9,15 @@ sudo bash docs/tools/enviroment/install_linux_tools.sh
 ```
 
 The installer is idempotent: rerunning it only verifies or updates the same package set. Review the package list before using it on a production worker.
+
+## Python packages
+
+`requirements.txt` contains the pinned direct dependencies for common benchmark Agent tasks. The versions match the current `seismoagent_eval` environment and cover numerical processing, tables, plotting, ObsPy waveform handling, metadata formats, HTTP requests and progress reporting.
+
+Install them only in the writable evaluation environment:
+
+```bash
+/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python -m pip install -r docs/tools/enviroment/requirements.txt
+```
+
+Do not run this command against the protected `seismoagent` environment. Task-specific packages such as GIS libraries, PhaseNet, GaMMA or NonLinLoc remain optional and should be declared by the corresponding task or Agent workflow.

@@ -1,0 +1,17 @@
+# Core numerical and tabular processing
+numpy==1.26.4
+scipy==1.13.1
+pandas==2.3.0
+
+# Scientific plotting and waveform analysis
+matplotlib==3.9.4
+obspy==1.4.2
+
+# Common file and metadata formats
+h5py==3.14.0
+lxml==5.4.0
+PyYAML==6.0.2
+
+# Network requests and progress reporting
+requests==2.32.4
+tqdm==4.67.1
