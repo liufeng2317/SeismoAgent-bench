@@ -78,10 +78,10 @@ pick_id,event_id,station_id,channel_id,phase,time_utc,probability,uncertainty_s,
 Write candidate events to `catalog.csv`, one row per event:
 
 ```text
-event_id,origin_time_utc,latitude,longitude,depth_km,magnitude,magnitude_type,n_picks,n_p_picks,n_s_picks,location_method,velocity_model,rms_residual_s,origin_time_uncertainty_s,horizontal_uncertainty_km,depth_uncertainty_km,station_gap_deg,status
+event_id,origin_time_utc,latitude,longitude,depth_km,magnitude,magnitude_type,n_picks,n_p_picks,n_s_picks,status
 ```
 
-Use ISO 8601 UTC for `time_utc` and `origin_time_utc`. `event_id` must match between the two files; it may be empty for an unassociated pick. Use `P` or `S` for `phase`, and use `accepted`, `uncertain` or `rejected` for `status`. Fields that cannot be estimated defensibly may be empty and must not be fabricated.
+Use ISO 8601 UTC for `time_utc` and `origin_time_utc`. `event_id` must match between the two files; it may be empty for an unassociated pick. Use `P` or `S` for `phase`, and use `accepted`, `uncertain` or `rejected` for `status`. Fields that cannot be estimated defensibly may be empty and must not be fabricated. Record the velocity model, location method, uncertainty estimates and other diagnostic quantities in the workflow documentation or a separate metadata file chosen by the Agent.
 
 ### Inspection and visualization
 
