@@ -1,3 +1,5 @@
+## 2019 Ridgecrest M7.1 phase picking
+
 ### Task objective
 
 Process the Ridgecrest waveform data for the UTC interval `[2019-07-05T00:00:00Z, 2019-07-06T00:00:00Z)`. Preprocess the waveforms, pick P and S arrivals, and provide concise visual and tabular results that can be inspected and reproduced.
