@@ -27,6 +27,9 @@ under `$BENCH_OUTPUT`. The default runner uses the separate
 shared `seismoagent` environment. The required catalog format and scientific limitations
 are described in `task_prompt.md`; no separate output-contract file is needed.
 
+The default runner allows up to four hours for the complete Agent run. Override
+this with `TIMEOUT`, in seconds, when a different processing budget is needed.
+
 `main.py` is a deterministic infrastructure baseline for checking task
 execution and catalog generation. It is not a scientific detector, phase
 picker, or location solution. The expert scientific workflow remains under

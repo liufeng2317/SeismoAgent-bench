@@ -8,6 +8,7 @@ CODEX_BIN="${CODEX_BIN:-$(command -v codex)}"
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
 CODEX_ENV_FILE="${CODEX_ENV_FILE:-$CODEX_HOME/.env}"
 RUN_ID="${RUN_ID:-codex-ridgecrest-catalog-$(date -u +%Y%m%dT%H%M%SZ)}"
+TIMEOUT="${TIMEOUT:-14400}"
 
 if [ ! -x "$PYTHON" ]; then
   echo "Evaluation Python is not available: $PYTHON" >&2
@@ -39,4 +40,4 @@ cd "$PROJECT_DIR"
   --codex-home "$CODEX_HOME" \
   --env-file "$RUNTIME_ENV_FILE" \
   --prompt "Use the configured scientific Python environment. Network access and additional Python package installation are allowed in the designated evaluation environment; do not modify the original shared seismoagent environment. Write all results below \$BENCH_OUTPUT." \
-  --timeout 3600
+  --timeout "$TIMEOUT"
