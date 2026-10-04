@@ -46,7 +46,6 @@ packages=(
     git
     build-essential
     pkg-config
-    which
 )
 
 echo "Updating apt package indexes..."
