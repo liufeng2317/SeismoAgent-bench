@@ -22,7 +22,9 @@ $BENCH_OUTPUT/input/waveforms/
 
 The Agent must discover the available files, state its processing scope and
 methods, and write a reproducible candidate catalog and supporting results
-under `$BENCH_OUTPUT`. The required catalog format and scientific limitations
+under `$BENCH_OUTPUT`. The default runner uses the separate
+`seismoagent_eval` environment so that package installation does not modify the
+shared `seismoagent` environment. The required catalog format and scientific limitations
 are described in `task_prompt.md`; no separate output-contract file is needed.
 
 `main.py` is a deterministic infrastructure baseline for checking task

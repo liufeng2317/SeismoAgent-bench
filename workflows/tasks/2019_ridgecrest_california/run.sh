@@ -3,11 +3,17 @@ set -euo pipefail
 
 TASK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "$TASK_DIR/../../.." && pwd)"
-PYTHON="${PYTHON:-/liufeng1afs/software/miniconda3/envs/seismoagent/bin/python}"
+PYTHON="${PYTHON:-/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python}"
 CODEX_BIN="${CODEX_BIN:-$(command -v codex)}"
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
 CODEX_ENV_FILE="${CODEX_ENV_FILE:-$CODEX_HOME/.env}"
 RUN_ID="${RUN_ID:-codex-ridgecrest-catalog-$(date -u +%Y%m%dT%H%M%SZ)}"
+
+if [ ! -x "$PYTHON" ]; then
+  echo "Evaluation Python is not available: $PYTHON" >&2
+  echo "Set PYTHON to a writable task environment such as seismoagent_eval." >&2
+  exit 2
+fi
 
 if [ -d "$CODEX_BIN" ]; then CODEX_BIN="$CODEX_BIN/codex"; fi
 if [ ! -x "$CODEX_BIN" ]; then
