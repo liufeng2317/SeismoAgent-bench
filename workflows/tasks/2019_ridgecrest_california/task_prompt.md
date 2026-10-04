@@ -69,23 +69,19 @@ Do not fabricate unavailable quantities. Preserve missing or uncertain values ex
 
 The final catalog should be traceable to the observational evidence used to construct it.
 
-### Machine-readable output schemas
-
-Write the phase observations to `picks.csv` with one row per phase observation and these columns:
+The machine-readable outputs must use these columns. Write phase observations to `picks.csv`, one row per phase observation:
 
 ```text
 pick_id,event_id,station_id,channel_id,phase,time_utc,probability,uncertainty_s,method,status
 ```
 
-`pick_id` and `event_id` identify the pick and its associated event; `event_id` may be empty for an unassociated pick. `station_id` identifies the network and station, `channel_id` identifies the full waveform channel, `phase` is `P` or `S`, and `time_utc` is an ISO 8601 UTC timestamp. `probability` and `uncertainty_s` are numeric quality fields when available, `method` describes how the pick was obtained, and `status` records whether it was accepted, uncertain or rejected.
-
-Write the candidate event catalog to `catalog.csv` with one row per event and these columns:
+Write candidate events to `catalog.csv`, one row per event:
 
 ```text
 event_id,origin_time_utc,latitude,longitude,depth_km,magnitude,magnitude_type,n_picks,n_p_picks,n_s_picks,location_method,velocity_model,rms_residual_s,origin_time_uncertainty_s,horizontal_uncertainty_km,depth_uncertainty_km,station_gap_deg,status
 ```
 
-`event_id` must match the identifiers used in `picks.csv`. Coordinates, depth and origin time use the stated units and UTC convention. Magnitude, uncertainty, velocity-model and station-gap fields may be empty when they cannot be estimated defensibly. `status` should distinguish accepted, uncertain and rejected candidate events. Preserve rows and fields with empty values rather than inventing measurements.
+Use ISO 8601 UTC for `time_utc` and `origin_time_utc`. `event_id` must match between the two files; it may be empty for an unassociated pick. Use `P` or `S` for `phase`, and use `accepted`, `uncertain` or `rejected` for `status`. Fields that cannot be estimated defensibly may be empty and must not be fabricated.
 
 ### Inspection and visualization
 
