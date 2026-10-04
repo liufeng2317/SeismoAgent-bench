@@ -1,15 +1,94 @@
-## Task objective
 
-Construct a reproducible candidate earthquake catalog for the 2019 Ridgecrest sequence from the waveform and station-metadata directory provided to this run. The task covers the complete usable waveform collection in the declared input. Discover and inventory the files first, determine their actual UTC coverage, stations and channels, and process all files in the selected coverage. If the data must be processed in partitions, define the partitions before processing and include their results in one consistent catalog. Do not silently select a small example subset.
+## 2019 Ridgecrest sequence monitoring
 
-## Input data
+### Task objective
 
-The run-local input is available under `input/waveforms/`. Waveforms are under `input/waveforms/data/`, and station metadata are under `input/waveforms/stations/`. Explore the directory structure and file metadata before analysis. Treat the entire `input/` directory as read-only: do not modify, rename, delete or replace any source file. The task provides waveform and station metadata only; do not assume that other data sources are available.
+Construct a scientifically credible and reproducible **candidate earthquake catalog for the 2019 Ridgecrest sequence** using the waveform data and station metadata provided to this run.
 
-## Required workflow
+You are responsible for determining an appropriate end-to-end seismological workflow from the available observations.
 
-First write a concise task plan describing the discovered data coverage, processing scope, preprocessing, event detection, P- and S-phase picking, phase association, location method, quality checks and selected parameters. Then save complete reusable processing code under the assigned output directory and execute that saved code to produce the results. The workflow must proceed from waveform inspection and preprocessing to phase picks, event association and earthquake location. Use the station metadata for station coordinates and any response or channel information needed by the selected method. Record the methods, parameters, assumptions, provenance, data-coverage decisions, missing results and unresolved quality issues so another user can reproduce the run from the declared inputs and runtime environment. The Agent may choose the internal output layout and supporting file names; all created files must remain below the assigned output directory.
+The task covers the complete usable waveform collection in the declared input. Inspect and understand the supplied data before deciding how to process them. Do not silently select a small example subset or short time interval for convenience.
 
-## Required output
+### Input
 
-Produce a machine-readable `catalog.json` containing a versioned list of candidate events. Each event should include, when available, an identifier, origin time with timezone, latitude, longitude, depth, magnitude information, the location method, associated picks or phase evidence, and uncertainty or quality fields. Preserve missing or uncertain values explicitly. Also provide human-readable workflow documentation, a summary of discovered data coverage, and diagnostic figures or tables that allow inspection of waveform preprocessing, phase picks, event association, location results and major data-quality findings. The catalog is the scored artifact; the other files provide the reproducibility and inspection record.
+The run-local input is available under:
+```text
+input/waveforms/
+```
+
+Waveforms are under:
+```text
+input/waveforms/data/
+```
+
+Station metadata are under:
+```text
+input/waveforms/stations/
+```
+
+Treat the entire `input/` directory as read-only.
+
+The supplied waveform and station metadata are the scientific observations available for this task. Do not use an existing Ridgecrest earthquake catalog, published phase picks, known event locations, or other reference earthquake products to construct or tune the catalog.
+
+### Scientific task
+
+Independently design and execute an appropriate workflow to construct the earthquake catalog from the supplied waveform observations and station metadata.
+
+You are responsible for determining the scientific methods, software, models, parameters, and quality-control procedures needed to complete the task. Base these choices on the characteristics of the available data and established seismological practice.
+
+Before substantial processing, briefly document the planned workflow and the rationale for the major scientific decisions. You may revise the workflow when intermediate results indicate that changes are needed; record significant revisions and their rationale.
+
+### Reproducibility
+
+The workflow must be executed and reproducible from the supplied inputs.
+
+Preserve sufficient code, configuration, and provenance under the assigned output directory so that the processing can be rerun and the origin of the final catalog can be understood.
+
+Ensure that the complete usable dataset is covered, including when processing is performed in multiple batches or partitions.
+
+### Required scientific outputs
+
+At minimum, provide machine-readable results for:
+
+1. **Phase observations / picks**, including P/S phase information and relevant confidence or quality information when available.
+
+2. **Candidate earthquake locations**, including origin time, latitude, longitude, depth, and relevant quality or uncertainty information when available.
+
+3. A final: `catalog.csv`
+containing a versioned list of candidate earthquakes.
+
+Each event should include, when available:
+- event identifier;
+- origin time in UTC;
+- latitude;
+- longitude;
+- depth;
+- magnitude, if it can be estimated defensibly;
+
+Do not fabricate unavailable quantities. Preserve missing or uncertain values explicitly.
+
+The final catalog should be traceable to the observational evidence used to construct it.
+
+### Inspection and visualization
+
+Provide a concise set of diagnostic figures or tables that allow a scientist to understand and inspect:
+- the available waveform/station dataset;
+- representative event or phase detections;
+- the resulting earthquake catalog;
+- important quality or uncertainty characteristics of the result.
+
+Choose the diagnostics yourself based on what is scientifically useful for the workflow you adopt.
+
+### Final report
+
+At completion, briefly summarize:
+- the actual data coverage processed;
+- the workflow you selected;
+- the main scientific methods and assumptions;
+- the number of phase observations obtained;
+- the number of candidate events identified and successfully located;
+- major data or methodological limitations;
+- important quality concerns;
+- where the reproducible code, picks, locations, catalog, and diagnostic outputs are stored.
+
+Do not present incomplete or failed processing as a completed catalog.
