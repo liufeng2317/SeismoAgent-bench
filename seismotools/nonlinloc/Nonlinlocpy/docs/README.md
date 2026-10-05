@@ -35,7 +35,7 @@ Both examples default to:
 | `nonlinlocpy/parallel.py` | Chunked/parallel `NLLoc` helpers |
 | `nonlinlocpy/utils.py` | Shared filesystem, grid, binary-resolution, and CSV helpers |
 | `nonlinlocpy/template/` | Control-file and input templates |
-| `../bin/` | Project-managed compiled NonLinLoc binaries |
+| `../../native/bin/` | Project-managed compiled NonLinLoc binaries |
 | `example/gamma_nonlinloc/` | Gamma-based example workflow |
 | `example/standard_nonlinloc/` | Native-format example workflow |
 | `pyproject.toml` | Local package configuration |

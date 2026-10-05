@@ -15,18 +15,19 @@ separate task or experiment run directory.
 
 ```text
 nonlinloc/
-├── source/       # Native NonLinLoc C source, headers and build files
-├── bin/          # Compiled Vel2Grid, Grid2Time and NLLoc executables
+├── native/
+│   ├── source/       # Native NonLinLoc C source, headers and build files
+│   └── bin/          # Compiled Vel2Grid, Grid2Time and NLLoc executables
 ├── Nonlinlocpy/  # Python package, examples, templates and detailed docs
 └── README.md     # This overview and usage guide
 ```
 
-### `source/`
+### `native/source/`
 
 This is the native source snapshot. It is useful for inspecting the original
 implementation or rebuilding the executables. It is not a run directory.
 
-### `bin/`
+### `native/bin/`
 
 This contains the host-built programs:
 
@@ -45,7 +46,7 @@ python seismotools/build_native.py --tool nonlinloc --jobs 4
 This is the project-local copy of the Python interface from TRACE-1.1. It
 contains the `nonlinlocpy/` package, example workflows, templates,
 requirements and detailed documentation. Its interface uses the sibling
-`../bin/` executables when that directory is supplied explicitly.
+`../native/bin/` executables when that directory is supplied explicitly.
 
 Start with [Nonlinlocpy/README.md](Nonlinlocpy/README.md). The package-level
 reference material is in [Nonlinlocpy/docs/README.md](Nonlinlocpy/docs/README.md)
@@ -61,7 +62,7 @@ For a prepared run directory:
 
 ```bash
 PROJECT=/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench
-BIN="$PROJECT/seismotools/nonlinloc/bin"
+BIN="$PROJECT/seismotools/nonlinloc/native/bin"
 RUN=/path/to/a/task/run
 
 cd "$RUN"
@@ -108,7 +109,7 @@ from nonlinlocpy import NLLocConfig, run_nlloc
 
 solutions = run_nlloc(
     NLLocConfig(
-        nlloc_bin="/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/nonlinloc/bin",
+        nlloc_bin="/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/nonlinloc/native/bin",
         control_dir="/path/to/a/task/run",
         picks="/path/to/picks_simple.txt",
         date="201907050000",
@@ -131,7 +132,7 @@ from nonlinlocpy import StandardRunConfig, run_standard_workflow
 result = run_standard_workflow(StandardRunConfig(
     input_dir="./inputs",
     run_dir="./run_case",
-    nlloc_bin="/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/nonlinloc/bin",
+    nlloc_bin="/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/nonlinloc/native/bin",
     use_native_obs=False,
 ))
 ```
@@ -164,5 +165,5 @@ Further references:
 - [Nonlinlocpy API and examples](Nonlinlocpy/README.md)
 - [Nonlinlocpy detailed documentation](Nonlinlocpy/docs/README.md)
 - [Nonlinlocpy workflow guidance](Nonlinlocpy/docs/SKILL.md)
-- [Native source README](source/src/README.txt)
-- [Native change notes](source/src/CHANGE_NOTES.txt)
+- [Native source README](native/source/src/README.txt)
+- [Native change notes](native/source/src/CHANGE_NOTES.txt)

@@ -1,7 +1,7 @@
 # NonLinLoc Python Helpers
 
 This is the project-local copy of the Nonlinlocpy library from TRACE-1.1. Its
-native executables are provided separately in the sibling `../bin/` directory;
+native executables are provided separately in the sibling `../native/bin/` directory;
 pass that directory explicitly as `nlloc_bin` or `--nlloc-bin` when running a
 workflow. Generated grids, observations and location products belong in the
 caller-provided run directory.
@@ -41,7 +41,7 @@ Both examples default to:
 | `nonlinlocpy/parallel.py` | Chunked/parallel `NLLoc` helpers |
 | `nonlinlocpy/utils.py` | Shared filesystem, grid, binary-resolution, and CSV helpers |
 | `nonlinlocpy/template/` | Control-file and input templates |
-| `../bin/` | Project-managed compiled NonLinLoc binaries |
+| `../native/bin/` | Project-managed compiled NonLinLoc binaries |
 | `example/gamma_nonlinloc/` | Gamma-based example workflow |
 | `example/standard_nonlinloc/` | Native-format example workflow |
 | `pyproject.toml` | Local package configuration |

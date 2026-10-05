@@ -5,7 +5,7 @@ description: Use when working with NonLinLoc earthquake location workflows in th
 
 # NonLinLoc
 
-Use this skill when the task involves the NonLinLoc toolchain rather than a single executable. The project-local Python package is under `seismotools/nonlinloc/Nonlinlocpy/nonlinlocpy/`; its native executables are in the sibling `seismotools/nonlinloc/bin/` directory.
+Use this skill when the task involves the NonLinLoc toolchain rather than a single executable. The project-local Python package is under `seismotools/nonlinloc/Nonlinlocpy/nonlinlocpy/`; its native executables are in the sibling `seismotools/nonlinloc/native/bin/` directory.
 
 ## What NonLinLoc Is
 

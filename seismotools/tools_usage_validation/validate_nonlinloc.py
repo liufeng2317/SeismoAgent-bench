@@ -11,7 +11,7 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-BIN = ROOT / "seismotools" / "nonlinloc" / "bin"
+BIN = ROOT / "seismotools" / "nonlinloc" / "native" / "bin"
 PYTHON_PACKAGE = ROOT / "seismotools" / "nonlinloc" / "Nonlinlocpy"
 EXPORT = Path(os.environ.get("RIDGECREST_EXPORT_ROOT", str(ROOT / "workflows/tasks/2019_ridgecrest_california/expert/export/01_baseline")))
 
@@ -33,7 +33,7 @@ def run(binary: Path, control: Path, cwd: Path) -> str:
 def main() -> None:
     # Validate the bundled Python interface independently of the native run.
     # Hide PATH temporarily so this specifically exercises the package's
-    # sibling ``seismotools/nonlinloc/bin`` fallback.
+    # sibling ``seismotools/nonlinloc/native/bin`` fallback.
     original_path = os.environ.get("PATH", "")
     os.environ["PATH"] = ""
     try:

@@ -17,9 +17,12 @@ def main():
         parser.error('--jobs must be positive')
     for name in (['nonlinloc', 'hypodd'] if args.tool == 'all' else [args.tool]):
         folder = ROOT / name
-        build = folder / 'build'
-        shutil.copytree(folder / 'source', build, dirs_exist_ok=True)
-        (folder / 'bin').mkdir(exist_ok=True)
+        # NonLinLoc keeps its native source and binaries under one explicit
+        # native/ namespace; hypoDD retains its existing layout.
+        native = folder / 'native' if name == 'nonlinloc' else folder
+        build = native / 'build'
+        shutil.copytree(native / 'source', build, dirs_exist_ok=True)
+        (native / 'bin').mkdir(exist_ok=True)
         (folder / 'logs').mkdir(exist_ok=True)
         log = folder / 'logs/build.log'
         if name == 'nonlinloc':
@@ -39,7 +42,7 @@ def main():
             subprocess.run(command, cwd=cwd, stdout=stream,
                            stderr=subprocess.STDOUT, check=True)
         for binary in binaries:
-            shutil.copy2(cwd / binary, folder / 'bin' / binary)
+            shutil.copy2(cwd / binary, native / 'bin' / binary)
         print(f'{name}: {", ".join(binaries)} built', flush=True)
 
 
