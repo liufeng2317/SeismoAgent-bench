@@ -42,14 +42,17 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
     python = runtime.get("python") if isinstance(runtime.get("python"), Mapping) else {}
     framework_prompt = _load_framework_prompt(framework_prompt_path)
     lines = [
+        "<framework_instructions>",
         framework_prompt,
+        "</framework_instructions>",
         "",
+        "<task_prompt>",
         f"# Task: {task.get('title') or task['task_id']}",
         "",
         task["task_prompt"].strip(),
+        "</task_prompt>",
         "",
-        "## Runtime context",
-        "",
+        "<runtime_context>",
         "### Working directory",
         "",
         "`$BENCH_WORK` is the Agent working directory and the same directory exposed as `$BENCH_OUTPUT`.",
@@ -101,8 +104,8 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
         "",
         "- Do not modify task files, manifests or framework-managed run-control files.",
         "- Keep all Agent-created files below `$BENCH_OUTPUT`.",
-        "",
+        "</runtime_context>",
     ])
     if extra_instructions and extra_instructions.strip():
-        lines.extend(["", "## Additional instructions", "", extra_instructions.strip()])
+        lines.extend(["", "<additional_instructions>", extra_instructions.strip(), "</additional_instructions>"])
     return "\n".join(lines) + "\n"

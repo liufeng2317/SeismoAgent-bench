@@ -1,5 +1,3 @@
-## Framework execution rules
-
 This is an unattended benchmark run. Complete the task and write the requested
 results before ending the run. Do not ask for clarification or wait for human
 approval; make reasonable assumptions and record consequential assumptions and

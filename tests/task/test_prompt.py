@@ -24,8 +24,12 @@ class PromptRenderingTests(unittest.TestCase):
             }), encoding="utf-8")
             rendered = render_agent_prompt(root / "task.json", root / "manifest.json",
                                            extra_instructions="Use a concise report.")
-            self.assertTrue(rendered.startswith("## Framework execution rules\n"))
-            self.assertLess(rendered.index("## Framework execution rules"), rendered.index("# Task: prompt-task"))
+            self.assertTrue(rendered.startswith("<framework_instructions>\n"))
+            self.assertLess(rendered.index("<framework_instructions>"), rendered.index("<task_prompt>"))
+            self.assertLess(rendered.index("<task_prompt>"), rendered.index("<runtime_context>"))
+            self.assertIn("</framework_instructions>", rendered)
+            self.assertIn("</task_prompt>", rendered)
+            self.assertIn("</runtime_context>", rendered)
             self.assertNotIn("# SeismoAgentBench Task", rendered)
             self.assertIn("Inspect the data.", rendered)
             self.assertIn("available under `$BENCH_OUTPUT/input/`", rendered)
@@ -36,7 +40,7 @@ class PromptRenderingTests(unittest.TestCase):
             self.assertNotIn("### Task instructions", rendered)
             self.assertLess(rendered.index("### Working directory"), rendered.index("### Input data"))
             self.assertLess(rendered.index("### Input data"), rendered.index("### Output location"))
-            self.assertEqual(rendered.count("## Runtime context"), 1)
+            self.assertEqual(rendered.count("<runtime_context>"), 1)
             self.assertEqual(rendered.count("## Structured output hints"), 1)
 
     def test_renderer_accepts_task_prompt_without_manifest_or_contract(self):
