@@ -104,7 +104,8 @@ class CodexCliTests(unittest.TestCase):
             self.assertIn("# Task: codex-cli-smoke", prompt)
             self.assertNotIn("# SeismoAgentBench Task", prompt)
             self.assertIn("<runtime_context>", prompt)
-            self.assertIn("## Structured output hints", prompt)
+            self.assertIn("<output_hints>", prompt)
+            self.assertIn("## Declared output artifacts", prompt)
             self.assertIn("write the result artifact", prompt)
             self.assertNotIn("external-codex-home", (run / "record/provenance.json").read_text())
 

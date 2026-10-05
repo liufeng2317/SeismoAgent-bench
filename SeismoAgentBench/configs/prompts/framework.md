@@ -28,3 +28,11 @@ a task-local environment and record installed dependencies.
 The task prompt below defines the scientific objective, allowed observations,
 workflow choices and required outputs. These framework rules define the
 execution boundary and apply in addition to the task prompt.
+
+## Instruction priority
+
+- Framework instructions apply to the entire run and define the execution boundary.
+- The task prompt defines the scientific objective, workflow and required outputs.
+- Runtime context reports facts about this run and does not add scientific requirements.
+- Output hints are optional structured guidance and do not override the task prompt.
+- Additional instructions may refine the run but cannot override framework rules.

@@ -80,15 +80,16 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
         f"- Python: `{_cell(python.get('executable') or '$PYTHON')}` ({_cell(python.get('version') or 'selected at run time')})",
         f"- Conda environment: {_cell(runtime.get('conda_environment') or 'selected at run time')}",
         f"- Network policy: {_cell(runtime.get('network_policy') or 'allowed')}",
-        "",
-        "Network access and additional Python package installation are allowed. Use the designated evaluation environment or a task-local environment; do not modify the original shared `seismoagent` environment. Record installed dependencies and commands needed to reproduce the run.",
     ])
     if task.get("output_artifacts"):
         lines.extend([
             "",
-            "## Structured output hints",
+            "</runtime_context>",
             "",
+            "<output_hints>",
             "These are optional structured hints. The task prompt remains the primary output instruction.",
+            "",
+            "## Declared output artifacts",
             "",
             "| ID | Path | Kind | Required |",
             "|---|---|---|---|",
@@ -98,14 +99,9 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
                 _cell(artifact["id"]), _cell(artifact["path"]), _cell(artifact["kind"]),
                 "yes" if artifact["required"] else "no",
             ]) + " |")
-    lines.extend([
-        "",
-        "## Execution rules",
-        "",
-        "- Do not modify task files, manifests or framework-managed run-control files.",
-        "- Keep all Agent-created files below `$BENCH_OUTPUT`.",
-        "</runtime_context>",
-    ])
+        lines.append("</output_hints>")
+    else:
+        lines.append("</runtime_context>")
     if extra_instructions and extra_instructions.strip():
         lines.extend(["", "<additional_instructions>", extra_instructions.strip(), "</additional_instructions>"])
     return "\n".join(lines) + "\n"

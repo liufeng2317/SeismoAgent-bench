@@ -41,7 +41,10 @@ class PromptRenderingTests(unittest.TestCase):
             self.assertLess(rendered.index("## Working directory"), rendered.index("## Input data"))
             self.assertLess(rendered.index("## Input data"), rendered.index("## Output location"))
             self.assertEqual(rendered.count("<runtime_context>"), 1)
-            self.assertEqual(rendered.count("## Structured output hints"), 1)
+            self.assertIn("<output_hints>", rendered)
+            self.assertIn("## Declared output artifacts", rendered)
+            self.assertIn("</output_hints>", rendered)
+            self.assertLess(rendered.index("</runtime_context>"), rendered.index("<output_hints>"))
 
     def test_renderer_accepts_task_prompt_without_manifest_or_contract(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -57,7 +60,7 @@ class PromptRenderingTests(unittest.TestCase):
             self.assertIn("Describe the required result", rendered)
             self.assertIn("## Input data", rendered)
             self.assertIn("No separate input directory is configured", rendered)
-            self.assertNotIn("## Structured output hints", rendered)
+            self.assertNotIn("<output_hints>", rendered)
 
 
 if __name__ == "__main__":
