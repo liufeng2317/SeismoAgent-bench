@@ -20,7 +20,7 @@ import tempfile
 import time
 from typing import Any, Mapping, Sequence
 
-from SeismoAgentBench.reporting.transcript import append_execution_line
+from SeismoAgentBench.reporting.transcript import append_execution_line, summarize_usage
 from SeismoAgentBench.execution.auth import prepare_codex_runtime_home
 from SeismoAgentBench.task.validation import ValidationError, load_json, load_task, validate_manifest
 
@@ -329,6 +329,9 @@ def run_command(task_path: str | Path, manifest_path: str | Path | None, command
                 process.stdout.close()
             if runtime_root is not None:
                 shutil.rmtree(runtime_root, ignore_errors=True)
+            usage_path = context.record / "usage_summary.json"
+            _write_json(usage_path, summarize_usage(event_log))
+            result["usage_summary"] = "record/usage_summary.json"
             result["finished_at"] = _now()
             _write_json(context.result, result)
     return result

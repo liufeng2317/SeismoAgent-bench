@@ -3,7 +3,8 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from SeismoAgentBench.reporting.transcript import write_event_jsonl, write_human_log, write_transcript
+from SeismoAgentBench.reporting.transcript import (summarize_usage, write_event_jsonl,
+                                                   write_human_log, write_transcript)
 
 
 class TranscriptTests(unittest.TestCase):
@@ -46,6 +47,27 @@ class TranscriptTests(unittest.TestCase):
             rows = [json.loads(line) for line in (root / "execution.jsonl").read_text().splitlines()]
             self.assertEqual(rows[0], {"type": "console.line", "text": "plain output"})
             self.assertEqual(rows[1]["type"], "turn.started")
+
+    def test_summarizes_provider_usage_without_private_content(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            log = Path(tmp) / "execution.jsonl"
+            log.write_text("\n".join([
+                json.dumps({"type": "turn.completed", "usage": {
+                    "input_tokens": 10, "output_tokens": 4,
+                    "cached_input_tokens": 2, "total_tokens": 14,
+                }}),
+                json.dumps({"type": "turn.completed", "usage": {
+                    "prompt_tokens": 3, "completion_tokens": 5,
+                    "reasoning_tokens": 1,
+                }}),
+            ]) + "\n", encoding="utf-8")
+            summary = summarize_usage(log)
+            self.assertEqual(summary["turns"], 2)
+            self.assertEqual(summary["usage_events"], 2)
+            self.assertEqual(summary["usage"]["input_tokens"], 13)
+            self.assertEqual(summary["usage"]["output_tokens"], 9)
+            self.assertEqual(summary["usage"]["cached_input_tokens"], 2)
+            self.assertEqual(summary["usage"]["reasoning_tokens"], 1)
 
 
 if __name__ == "__main__":

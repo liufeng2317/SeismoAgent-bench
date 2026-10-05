@@ -101,6 +101,61 @@ def append_execution_line(line: bytes | str, event_stream: Any, human_stream: An
     human_stream.flush()
 
 
+def summarize_usage(log_path: str | Path) -> dict[str, Any]:
+    """Summarize provider usage fields without retaining private reasoning."""
+    counts: dict[str, int] = {}
+    usage_totals = {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cached_input_tokens": 0,
+        "reasoning_tokens": 0,
+        "total_tokens": 0,
+    }
+    usage_events = 0
+    turns = 0
+    source = Path(log_path)
+    if not source.is_file():
+        return {"schema_version": 1, "usage_events": 0, "turns": 0,
+                "event_counts": {}, "usage": usage_totals}
+    with source.open(encoding="utf-8", errors="replace") as stream:
+        for line in stream:
+            try:
+                event = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if not isinstance(event, dict):
+                continue
+            event_type = event.get("type")
+            if isinstance(event_type, str):
+                counts[event_type] = counts.get(event_type, 0) + 1
+            if event_type == "turn.completed":
+                turns += 1
+            usage = event.get("usage")
+            if not isinstance(usage, dict):
+                continue
+            usage_events += 1
+            aliases = {
+                "input_tokens": ("input_tokens", "prompt_tokens"),
+                "output_tokens": ("output_tokens", "completion_tokens"),
+                "cached_input_tokens": ("cached_input_tokens", "cache_read_input_tokens"),
+                "reasoning_tokens": ("reasoning_tokens",),
+                "total_tokens": ("total_tokens",),
+            }
+            for target, keys in aliases.items():
+                for key in keys:
+                    value = usage.get(key)
+                    if isinstance(value, (int, float)):
+                        usage_totals[target] += int(value)
+                        break
+    return {
+        "schema_version": 1,
+        "usage_events": usage_events,
+        "turns": turns,
+        "event_counts": counts,
+        "usage": usage_totals,
+    }
+
+
 def _event(raw: dict[str, Any], sequence: int) -> dict[str, Any]:
     kind = raw.get("type")
     result: dict[str, Any] = {

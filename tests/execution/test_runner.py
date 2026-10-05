@@ -67,6 +67,9 @@ class RunnerTests(unittest.TestCase):
         self.assertTrue((run / "record/execution.log").is_file())
         self.assertEqual(json.loads((run / "work/result.json").read_text())["ok"], True)
         self.assertTrue((run / "record/run_result.json").is_file())
+        usage = json.loads((run / "record/usage_summary.json").read_text())
+        self.assertEqual(usage["schema_version"], 1)
+        self.assertIn("event_counts", usage)
         self.assertFalse((run / "agent/task_spec.json").exists())
 
     def test_execution_logs_are_available_while_process_is_running(self):

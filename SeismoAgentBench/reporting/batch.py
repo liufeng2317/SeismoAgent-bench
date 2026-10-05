@@ -56,7 +56,11 @@ def write_batch_summary(
             "variant": unit.get("variant"),
             "run_id": run.get("run_id"),
             "state": run.get("state"),
+            "exit_code": run.get("exit_code"),
+            "started_at": run.get("started_at"),
+            "finished_at": run.get("finished_at"),
             "run_dir": str(Path(run.get("run_dir", ""))) if run.get("run_dir") else None,
+            "usage_summary": "record/usage_summary.json",
         })
     counts: dict[str, int] = {}
     for record in records:
@@ -75,13 +79,13 @@ def write_batch_summary(
     lines = [
         "# Experiment summary", "", f"- Experiment: `{experiment_id}`",
         f"- Units: {len(records)}", "",
-        "| Agent | Harness | Task | Variant | Run | State |",
-        "| --- | --- | --- | --- | --- | --- |",
+        "| Agent | Harness | Task | Variant | Run | State | Exit |",
+        "| --- | --- | --- | --- | --- | --- | --- |",
     ]
     for record in records:
         lines.append(
             f"| {record['agent_id']} | {record['harness']} | {record['task_id']} | "
-            f"{record['variant']} | {record['run_id']} | {record['state']} |"
+            f"{record['variant']} | {record['run_id']} | {record['state']} | {record['exit_code']} |"
         )
     root.mkdir(parents=True, exist_ok=True)
     (root / "summary.md").write_text("\n".join(lines) + "\n", encoding="utf-8")

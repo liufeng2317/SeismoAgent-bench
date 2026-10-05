@@ -63,6 +63,18 @@ python -m SeismoAgentBench run-agent \
 
 CLI 只负责参数解析和退出码映射，执行、产物校验、评分及报告仍由对应模块完成。
 
+批量运行使用 experiment YAML。它声明 Agent、任务、variant、输出根目录和并发设置；
+`plan-experiment` 只展开并校验运行单元，`execute-experiment` 才会依次执行它们：
+
+```bash
+python -m SeismoAgentBench plan-experiment --spec experiment.yaml
+python -m SeismoAgentBench execute-experiment --spec experiment.yaml
+```
+
+每个 run 的 `record/usage_summary.json` 保存可用的 turn、事件和 token 统计；批量运行
+在 `_batches/<batch-id>/` 下生成 `summary.json` 和 `summary.md`。这些记录用于运行审计，
+不参与科学评分。
+
 库调用使用明确的子模块路径，例如：
 
 ```python
