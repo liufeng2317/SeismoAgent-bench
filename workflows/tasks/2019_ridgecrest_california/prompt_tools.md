@@ -21,25 +21,22 @@ The supplied waveform and station metadata are the scientific observations avail
 
 ### Available tools
 
-The following seismological tools and local source materials are available in this project checkout. You may inspect and use them when appropriate; you are not required to use every tool or to follow the expert workflow. Select methods based on the supplied observations and record the selected tools, versions, parameters and reasons in your workflow documentation.
+Local seismological software, model files, documentation and executables are available under the project `seismotools` directory. You may inspect these resources and use any of them when scientifically appropriate. Their availability does not imply that every tool should be used, or that they define a required workflow.
 
-- **Phase picking:** PhaseNet and related local model implementations are in `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/phase_picking/source/phase_picking/`; local model weights and metadata are under `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/phase_picking/weights/`. The interface accepts windowed three-component waveforms and returns P/S probability sequences from which phase arrivals can be selected.
-- **Phase association:** GaMMA source is in `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/gamma/source/`, with documentation under `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/gamma/docs/`. Its association interface accepts timestamped picks, phase labels/probabilities and station coordinates, and returns candidate events plus pick-to-event assignments.
-- **Absolute location:** NonLinLoc executables and source materials are in `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/nonlinloc/`, including `bin/` and `docs/`. Its workflow uses velocity/control inputs, station travel-time grids and phase observations to produce absolute hypocenters and location diagnostics.
-- **Relative relocation:** hypoDD source, manuals and the built executable are in `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/hypodd/`. It accepts event/station files and catalog differential times (`CT`), or catalog plus waveform cross-correlation differential times (`CT+CC`), and returns relatively relocated events and residual products. Cross-correlation measurements must be generated and documented separately when `CT+CC` is used.
-- **General scientific Python:** use the configured evaluation environment for Python, ObsPy, NumPy, SciPy, pandas and Matplotlib when implementing preprocessing, data conversion, diagnostics or tool adapters.
+Available resources include:
+- **PhaseNet:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/phase_picking/`
+- **GaMMA:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/gamma/`
+- **NonLinLoc:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/nonlinloc/`
+- **hypoDD:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/hypodd/`
+- **General scientific Python:** the configured environment includes commonly used scientific and seismological Python packages.
 
-The `seismotools` source, documentation, model weights and executables may be
-read as tool references. The waveform and station directories under `input/`
-remain the only scientific observations for constructing this catalog. Do not
-read or use expert workflow outputs, existing Ridgecrest catalogs, published
-picks, reference locations or other products outside the declared inputs to
-construct or tune the result. Examples or generated files bundled with a tool
-may explain an interface, but they are not answer data. Do not copy expert
-case parameters or results without independently justifying and recording the
-choice. Do not modify the tool sources, weights, binaries or the shared
-`seismoagent` environment, and do not claim that a tool ran unless its command
-and outputs are recorded.
+You may inspect the source code, documentation, model metadata, example interfaces and executables provided with these tools in order to determine whether and how they should be used.
+
+Tool resources are methodological references, not scientific observations for this case. The waveform data and station metadata under the declared `input/` directory are the case-specific observations available for constructing the catalog.
+
+Do not use existing Ridgecrest catalogs, published phase picks, reference event locations, expert workflow outputs, or other case-specific observational products to construct or tune the result. General seismological knowledge and generic methodological assumptions or models may be used when needed, but any consequential choices must be independently justified from the task and available observations.
+
+Do not modify shared tool sources, model weights, binaries, or the evaluation environment. Record sufficient information to identify and reproduce any tools actually used.
 
 ### Scientific task
 
