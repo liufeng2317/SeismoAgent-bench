@@ -28,7 +28,7 @@ This tools-enabled task evaluates whether the Agent can apply the supplied seism
 The project provides source code, documentation, model files and executable interfaces at these locations:
 
 - **PhaseNet:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/phase_picking/`
-- **GaMMA:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/gamma/`
+- **GaMMA:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/gamma/` (standard association entry point: `interface/run.py`)
 - **NonLinLoc:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/nonlinloc/` (the standard adapter is `interface/run.py`; its input and output contracts are in `interface/`)
 - **hypoDD:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/hypodd/`
 - **General scientific Python:** the configured environment includes commonly used scientific and seismological Python packages.

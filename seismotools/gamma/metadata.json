@@ -1,0 +1,10 @@
+{
+  "tool": "GaMMA",
+  "distribution_name": "GMMA",
+  "reported_version": "1.2.17",
+  "runtime_import": "gamma",
+  "interface_version": 1,
+  "source": "source/",
+  "standard_entrypoint": "interface/run.py",
+  "method": "BGMM by default"
+}

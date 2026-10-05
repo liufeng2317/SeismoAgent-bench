@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "description": "GaMMA association output contract.",
+  "files": {
+    "events.csv": "Associated candidate events and their estimated attributes",
+    "assignments.csv": "Pick-index to event-index assignments with probabilities",
+    "run_result.json": "Method, input counts, output counts and file locations"
+  },
+  "note": "Location refinement and catalog filtering are downstream workflow decisions."
+}

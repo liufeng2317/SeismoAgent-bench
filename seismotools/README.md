@@ -23,7 +23,7 @@ seismotools/
   check_tools.py                # integrity, offline imports and strict CPU weight loading
   build_native.py               # builds native tools outside immutable source snapshots
   phase_picking/{source,runtime,interface,examples,docs,README.md}
-  gamma/{source,docs,README.md}   # tutorials, DeepWiki and retrieval text
+  gamma/{source,interface,examples,docs,README.md}   # association source and references
   nonlinloc/{source,runtime,interface,examples,README.md}
   hypodd/{source,README.md}
 ```

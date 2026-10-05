@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "description": "GaMMA association input contract.",
+  "picks_csv": {
+    "required_columns": ["timestamp", "station_id", "phase"],
+    "optional_columns": ["probability", "amplitude"],
+    "phase_values": ["P", "S"],
+    "timestamp": "ISO-8601 UTC"
+  },
+  "stations_csv": {
+    "required_columns": ["station_id", "x_km", "y_km", "z_km"],
+    "coordinate_system": "Local Cartesian coordinates in km"
+  },
+  "reference_catalogs": "Not accepted as association inputs."
+}
