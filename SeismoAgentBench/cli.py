@@ -105,7 +105,11 @@ def main(argv: Sequence[str] | None = None) -> int:
             configured_env_file = args.env_file or auth.get("env_file")
             configured_codex_home = args.codex_home or auth.get("codex_home")
             env = load_env_file(configured_env_file) if configured_env_file else {}
-            configured = (agent_config or {}).get("config", {})
+            configured = (agent_config or {}).get("runtime", {})
+            runtime_mode = configured.get("mode", "host-direct")
+            if runtime_mode != "host-direct":
+                raise CodexCommandError(
+                    f"run-codex currently supports runtime.mode=host-direct, got {runtime_mode!r}")
             codex_bin = args.codex_bin or (agent_config or {}).get("executable")
             if not isinstance(codex_bin, str) or not codex_bin:
                 raise CodexCommandError("--codex-bin or agent config executable is required")

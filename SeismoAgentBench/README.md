@@ -63,6 +63,11 @@ python -m SeismoAgentBench run-agent \
 
 CLI 只负责参数解析和退出码映射，执行、产物校验、评分及报告仍由对应模块完成。
 
+Agent 配置只描述运行所需的非敏感信息：`harness`、可执行文件、版本命令、模型、
+`runtime.mode`、`runtime.reasoning_effort` 和外部认证模式。认证文件或环境变量通过
+命令行提供，不写入 YAML。当前 Codex 仅支持 `runtime.mode: host-direct`；配置中的
+运行模式会被校验并实际传递给 launcher。
+
 批量运行使用 experiment YAML。它声明 Agent、任务、variant、输出根目录和并发设置；
 `plan-experiment` 只展开并校验运行单元，`execute-experiment` 才会依次执行它们：
 

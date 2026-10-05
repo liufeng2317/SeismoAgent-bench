@@ -32,7 +32,7 @@ class CodexCliTests(unittest.TestCase):
             fake.chmod(0o755)
             config.write_text(
                 f"harness: codex\nexecutable: {fake}\nmodel: config-model\n"
-                "version_command: [--version]\nconfig:\n  reasoning_effort: low\n",
+                "version_command: [--version]\nruntime:\n  mode: host-direct\n  reasoning_effort: low\n",
                 encoding="utf-8")
             command = [sys.executable, "-m", "SeismoAgentBench", "run-codex",
                        "--task", str(task), "--manifest", str(manifest),

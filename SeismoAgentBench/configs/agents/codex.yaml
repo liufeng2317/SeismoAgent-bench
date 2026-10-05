@@ -1,15 +1,11 @@
-# Runtime profile for the Codex adapter. Credentials are supplied outside this file.
+# Codex runtime profile. Credentials are supplied outside this file.
 harness: codex
 executable: codex
 version_command:
   - --version
 model: gpt-5.6-sol
-provider: direct
-base_url: null
-api_key: null
 auth:
   mode: external_profile
-  profile: CODEX_HOME or an externally supplied environment file
-config:
-  sandbox_mode: host-direct
+runtime:
+  mode: host-direct
   reasoning_effort: medium

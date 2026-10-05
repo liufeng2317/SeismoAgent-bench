@@ -11,7 +11,7 @@ class AgentConfigTests(unittest.TestCase):
             base = Path(tmp)
             source = base / "agent.yaml"
             source.write_text(
-                "harness: codex\nmodel: null\nprovider: direct\nconfig:\n  isolation: host-direct\n  api_key: null\n",
+                "harness: codex\nmodel: null\nruntime:\n  mode: host-direct\n",
                 encoding="utf-8",
             )
             config = load_agent_config(source)
@@ -38,11 +38,25 @@ class AgentConfigTests(unittest.TestCase):
             source = Path(tmp) / "agent.yaml"
             source.write_text(
                 "harness: codex\nexecutable: codex\nversion_command: [--version]\n"
-                "auth:\n  mode: external_profile\nconfig: {}\n",
+                "auth:\n  mode: external_profile\nruntime: {}\n",
                 encoding="utf-8",
             )
             config = load_agent_config(source)
             self.assertEqual(config["auth"]["mode"], "external_profile")
+
+    def test_rejects_legacy_runtime_fields(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "agent.yaml"
+            source.write_text("harness: codex\nconfig:\n  reasoning_effort: low\n", encoding="utf-8")
+            with self.assertRaises(AgentConfigError):
+                load_agent_config(source)
+
+    def test_rejects_unknown_auth_metadata(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "agent.yaml"
+            source.write_text("harness: codex\nauth:\n  mode: external_profile\n  profile: old\n", encoding="utf-8")
+            with self.assertRaises(AgentConfigError):
+                load_agent_config(source)
 
     def test_rejects_unknown_auth_mode(self):
         with tempfile.TemporaryDirectory() as tmp:
