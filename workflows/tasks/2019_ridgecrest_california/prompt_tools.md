@@ -2,11 +2,11 @@
 
 ### Task objective
 
-Construct a scientifically credible and reproducible **candidate earthquake catalog for the 2019 Ridgecrest sequence** using the waveform data and station metadata provided to this run.
+Construct a scientifically credible and reproducible **windowed candidate earthquake catalog for the 2019 Ridgecrest sequence** using the waveform data and station metadata provided to this run.
 
 You are responsible for determining an appropriate end-to-end seismological workflow from the available observations.
 
-The task covers the complete usable waveform collection in the declared input. Inspect and understand the supplied data before deciding how to process them. Do not silently select a small example subset or short time interval for convenience.
+This first tools-enabled run uses the fixed half-open UTC window `[2019-07-04T17:23:49Z, 2019-07-04T17:43:49Z)`, centered on the Mw 6.4 mainshock at `2019-07-04T17:33:49Z`. Process all usable waveform files, stations and available components that overlap this window. Do not reduce the window or silently select a subset of stations for convenience. This is a windowed tool-chain validation and must not be presented as a complete catalog for the full Ridgecrest sequence.
 
 ### Input
 
@@ -21,7 +21,7 @@ The supplied waveform and station metadata are the scientific observations avail
 
 ### Available tools
 
-This tools-enabled task evaluates whether the Agent can apply the supplied seismological software to the complete waveform collection. The main processing stages are fixed by the workflow below, while the Agent may choose preprocessing parameters, model settings and quality-control rules. The supplied tools are the preferred scientific implementations for their corresponding stages; a simpler custom implementation must not silently replace them.
+This tools-enabled task evaluates whether the Agent can apply the supplied seismological software to the complete selected validation window. The main processing stages are fixed by the workflow below, while the Agent may choose preprocessing parameters, model settings and quality-control rules. The supplied tools are the preferred scientific implementations for their corresponding stages; a simpler custom implementation must not silently replace them.
 
 #### Tool resources
 
@@ -37,9 +37,9 @@ Inspect the supplied documentation, model metadata, examples and executable inte
 
 #### Required and optional processing path
 
-Attempt the first three stages in order and process the complete usable input, including batches or partitions:
+Attempt the first three stages in order and process the complete usable input within the fixed window, including batches or partitions:
 
-1. Use **PhaseNet** (or its supplied command-line/API interface) for neural-network P and S phase picking on the waveform data. Do not replace the full-data picking stage with a simple amplitude threshold, STA/LTA detector or custom peak finder unless PhaseNet has been tested and a documented execution failure prevents its use.
+1. Use **PhaseNet** (or its supplied command-line/API interface) for neural-network P and S phase picking on the waveform data in the selected window. Do not replace the full-window picking stage with a simple amplitude threshold, STA/LTA detector or custom peak finder unless PhaseNet has been tested and a documented execution failure prevents its use.
 2. Use **GaMMA** to associate the resulting phase picks into candidate events. Preserve the association parameters and the input/output file locations.
 3. Use **NonLinLoc** for absolute event location with an explicit velocity model.
 4. After absolute locations are available, **hypoDD** may be used as an additional relative-relocation stage when sufficient differential-pick support exists. Describe whether the final catalog contains absolute locations, relative locations, or both.
@@ -56,11 +56,11 @@ Do not use existing Ridgecrest catalogs, published phase picks, reference event 
 
 Independently design and execute an appropriate workflow to construct the earthquake catalog from the supplied waveform observations and station metadata.
 
-You are responsible for selecting the preprocessing parameters, model configuration, quality-control rules and, where applicable, the relative-relocation strategy. Before substantial processing, briefly document the planned workflow, the tool interfaces to be used, and the rationale for the major scientific decisions. You may revise the workflow when intermediate results indicate that changes are needed; record each significant revision and its rationale. Process the complete usable input, including batches or partitions, and report any files or intervals that could not be processed.
+You are responsible for selecting the preprocessing parameters, model configuration, quality-control rules and, where applicable, the relative-relocation strategy. Before substantial processing, briefly document the planned workflow, the tool interfaces to be used, and the rationale for the major scientific decisions. You may revise the workflow when intermediate results indicate that changes are needed; record each significant revision and its rationale. Process every usable input file that overlaps the fixed window, report any files or intervals that could not be processed, and state the actual coverage in the final report.
 
 ### Reproducibility
 
-The workflow must be executed and reproducible from the supplied inputs. Preserve sufficient code, configuration, tool versions, commands, tool logs and provenance under the assigned output directory so that the processing can be rerun and the origin of the final catalog can be understood. Record which supplied tools were actually executed, not only which tools were inspected. Ensure that the complete usable dataset is covered, including when processing is performed in multiple batches or partitions.
+The workflow must be executed and reproducible from the supplied inputs. Preserve sufficient code, configuration, tool versions, commands, tool logs and provenance under the assigned output directory so that the processing can be rerun and the origin of the final catalog can be understood. Record which supplied tools were actually executed, not only which tools were inspected. Ensure that the complete usable data within the fixed window is covered, including when processing is performed in multiple batches or partitions.
 
 ### Required scientific outputs
 
@@ -84,6 +84,6 @@ Provide a concise set of diagnostic figures or tables that allow a scientist to 
 
 ### Final report
 
-At completion, briefly summarize the actual data coverage processed; the workflow and tools selected; the main scientific methods and assumptions; the number of phase observations obtained; the number of candidate events identified and successfully located; major data or methodological limitations; important quality concerns; and where the reproducible code, picks, locations, catalog and diagnostic outputs are stored.
+At completion, briefly summarize the actual data coverage processed within the fixed window; the workflow and tools selected; the main scientific methods and assumptions; the number of phase observations obtained; the number of candidate events identified and successfully located; major data or methodological limitations; important quality concerns; and where the reproducible code, picks, locations, catalog and diagnostic outputs are stored. State explicitly that the result is a windowed validation product rather than a full-sequence catalog.
 
 Do not present incomplete or failed processing as a completed catalog.
