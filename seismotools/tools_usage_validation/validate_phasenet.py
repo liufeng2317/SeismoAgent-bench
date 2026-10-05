@@ -23,7 +23,7 @@ from phase_picking.model.phasenet import PhaseNet
 def main() -> None:
     torch.manual_seed(42)
     torch.set_num_threads(1)
-    base = TOOL / "weights" / "phasenet"
+    base = TOOL / "runtime" / "weights" / "phasenet"
     metadata = json.loads((base / "original.json.v2").read_text())
     model = PhaseNet(**metadata["model_args"])
     state = torch.load(base / "original.pt.v2", map_location="cpu", weights_only=True)

@@ -1,21 +1,84 @@
 # Phase-picking models
 
-Copied from TRACE-1.1 `library/ai_module/phase_picking/model`, preserving all modules needed by its original `__init__.py`. This is the implementation actually imported by the expert pipeline, not a fresh upstream PhaseNet installation.
+This tool package contains the local PhaseNet, EQTransformer and DPPPicker
+model implementation used by the project. It is a model-inference resource,
+not a complete event detector or association workflow.
 
-| Model | Local weights and metadata under `weights/` | Expert use |
+## Directory layout
+
+```text
+phase_picking/
+├── source/                 # Python model implementations
+├── runtime/weights/        # Local model weights and metadata
+├── interface/              # Stable CPU inference entry point and contracts
+├── examples/smoke/         # Small executable inference example
+├── docs/                   # Inference references and notebook
+├── cache/                  # Local SeisBench cache (ignored runtime files)
+└── README.md
+```
+
+The three bundled models are:
+
+| Model | Runtime weights | Intended use |
 | --- | --- | --- |
-| PhaseNet | `phasenet/original.pt.v2`, `original.json.v2` | Baseline continuous P/S, 100 Hz real ZNE; thresholds 0.3/0.3 |
-| DPPPicker P | `dpppickerp/scedc.pt`, `scedc.json` | Conditional vertical-only P, 1000-sample windows; first threshold crossing, not peak time |
-| EQTransformer | `eqtransformer/original_nonconservative.pt.v1`, matching JSON | Qualified missing S, differential-only in the retained fit |
+| PhaseNet | `runtime/weights/phasenet/original.pt.v2` | P/S probability inference |
+| DPPPicker P | `runtime/weights/dpppickerp/scedc.pt` | Vertical-component P refinement |
+| EQTransformer | `runtime/weights/eqtransformer/original_nonconservative.pt.v1` | Alternative P/S inference |
 
-Model inputs are real waveform samples with the component order/sample rate required by the model. Outputs are probabilities/picks; calibration, association and valid continuous-window selection remain the caller's responsibility. Preserve model metadata normalization, filtering, overlap and blinding. Do not synthesize missing components or bridge real gaps.
+## Standard interface
 
-Dependencies: PyTorch, SeisBench utilities, ObsPy, NumPy and the observed environment in `../environment.txt`. Run `python seismotools/check_tools.py --imports` from the project root to validate CPU loading of the copied models. It does not run waveform inference or qualify new weights.
+`interface/run.py` performs one deterministic CPU model inference on a prepared
+three-component NumPy waveform. It writes `probabilities.npz` and
+`run_result.json`; the interface does not impose a universal threshold or pick
+time convention.
 
-The authoritative case usage is in [02_pick_phasenet.py](../../workflows/tasks/2019_ridgecrest_california/expert/01_pipeline/02_pick_phasenet.py), [42_vertical_p.py](../../workflows/tasks/2019_ridgecrest_california/expert/03_experiments/08_vertical_observations/42_vertical_p.py) and [46_qualify_eqtransformer.py](../../workflows/tasks/2019_ridgecrest_california/expert/03_experiments/11_alternative_picker/46_qualify_eqtransformer.py). These are usage references, not generic wrappers copied into this package.
+```bash
+python seismotools/phase_picking/interface/run.py \
+  --input-npz waveform.npz \
+  --output-dir /path/to/writable-run \
+  --model phasenet \
+  --sample-rate 100
+```
 
-## Original inference documentation
+The input and output contracts are documented in
+[`interface/input_schema.json`](interface/input_schema.json) and
+[`interface/output_schema.json`](interface/output_schema.json). Case workflows
+may convert MiniSEED to the NPZ representation, then apply documented
+preprocessing, probability thresholds, overlap handling and pick extraction.
 
-Copied usage references: [PhaseNet](docs/inference/phasenet.py), [EQTransformer](docs/inference/eqtransformer.py), [DPPPicker P](docs/inference/dpppickerp.py), and the [inference notebook](docs/01_inference_test.ipynb). The other top-level inference examples are preserved alongside them.
+Run the local smoke test with:
 
-These scripts explain `classify`/`annotate` and custom inference conventions, but contain original host/device assumptions (including `torch_npu` imports). They are reference examples, **not CPU-compatible replacement launchers**. The expert's CPU implementation and tool loading check remain the tested interfaces. Notebook outputs are cleared; no inference, data fetch or remote service was run when copying documentation.
+```bash
+bash seismotools/phase_picking/examples/smoke/run.sh /tmp/phase-picking-smoke
+```
+
+## Direct Python use
+
+For custom waveform batching, import the local implementation from `source/`:
+
+```python
+import sys
+sys.path.insert(0, "seismotools/phase_picking/source")
+from phase_picking.model.phasenet import PhaseNet
+```
+
+Load the matching metadata and state dictionary from `runtime/weights/` and set
+the model to evaluation mode. The caller is responsible for channel order,
+sampling rate, gaps, normalization, overlap/blinding, thresholds and UTC
+conversion. Do not synthesize missing components or bridge real gaps.
+
+The reference scripts in `docs/inference/` describe the original
+`classify`/`annotate` conventions. They may contain host-specific imports and
+are documentation references rather than benchmark launchers.
+
+## Validation
+
+From the project root, run:
+
+```bash
+conda run -n seismoagent python seismotools/tools_usage_validation/validate_phasenet.py
+```
+
+This loads the local CPU weights and performs both a synthetic forward pass and
+a bounded Ridgecrest waveform inference. It verifies executable model plumbing,
+not scientific equivalence of a complete catalog.

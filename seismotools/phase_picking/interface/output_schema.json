@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "description": "Outputs from the local phase-picking adapter.",
+  "files": {
+    "probabilities.npz": "Model probability array and sample rate",
+    "run_result.json": "Model identity, input/output shapes and runtime summary"
+  },
+  "note": "Thresholding, phase-time extraction, association and quality control remain workflow-level decisions."
+}

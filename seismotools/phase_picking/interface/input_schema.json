@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "description": "Input contract for the local CPU phase-picking adapter.",
+  "file": "NPZ with an array named data of shape (3, samples)",
+  "component_order": "Three waveform components in the order expected by the selected model; the case workflow must document the mapping.",
+  "sample_rate_hz": "Positive sampling rate supplied as --sample-rate",
+  "read_only": true
+}

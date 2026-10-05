@@ -2014,37 +2014,37 @@
       "sha256": "1a07025a12cb7cc473459c95f09a9c0fca5bd2e6c5c7efaa52c7060091e7f858"
     },
     {
-      "path": "phase_picking/weights/dpppickerp/scedc.json",
+      "path": "phase_picking/runtime/weights/dpppickerp/scedc.json",
       "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/pretrained/v3/dpppickerp/scedc.json",
       "bytes": 558,
       "sha256": "b570ab19b912fa4d4b14c89702a032d27d08cf0ab769417aff05447b55f0b791"
     },
     {
-      "path": "phase_picking/weights/dpppickerp/scedc.pt",
+      "path": "phase_picking/runtime/weights/dpppickerp/scedc.pt",
       "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/pretrained/v3/dpppickerp/scedc.pt",
       "bytes": 2189295,
       "sha256": "6a99c954bd01ec8ecb74e82a58d6ce73f9d6f3d00b55b9ac627121d473ac22e5"
     },
     {
-      "path": "phase_picking/weights/eqtransformer/original_nonconservative.json.v1",
+      "path": "phase_picking/runtime/weights/eqtransformer/original_nonconservative.json.v1",
       "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/pretrained/v3/eqtransformer/original_nonconservative.json.v1",
       "bytes": 734,
       "sha256": "6011413946a683b7c82da194f1a3c0ebade3e331e30b30590c412b15c5fb3404"
     },
     {
-      "path": "phase_picking/weights/eqtransformer/original_nonconservative.pt.v1",
+      "path": "phase_picking/runtime/weights/eqtransformer/original_nonconservative.pt.v1",
       "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/pretrained/v3/eqtransformer/original_nonconservative.pt.v1",
       "bytes": 1572717,
       "sha256": "2b9d843994429f73ce6eb5c94d40c75972032d4cdb660d29a1fa8ead6ac357d0"
     },
     {
-      "path": "phase_picking/weights/phasenet/original.json.v2",
+      "path": "phase_picking/runtime/weights/phasenet/original.json.v2",
       "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/pretrained/v3/phasenet/original.json.v2",
       "bytes": 775,
       "sha256": "ba96278e9ea11bb8226b9f1cea429e4f1651e9050117f93f8eed1a508143edf8"
     },
     {
-      "path": "phase_picking/weights/phasenet/original.pt.v2",
+      "path": "phase_picking/runtime/weights/phasenet/original.pt.v2",
       "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/pretrained/v3/phasenet/original.pt.v2",
       "bytes": 1112276,
       "sha256": "184dd85b896eebf8d5967ee15a722a477fa2e4ce479a3b113ecbcb8a6419113f"

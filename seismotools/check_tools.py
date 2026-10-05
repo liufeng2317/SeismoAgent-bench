@@ -44,7 +44,7 @@ def main():
     ]:
         import inspect
         assert Path(inspect.getfile(cls)).is_relative_to(ROOT / 'phase_picking/source')
-        base = ROOT / 'phase_picking/weights' / folder
+        base = ROOT / 'phase_picking/runtime/weights' / folder
         meta = json.loads((base / metadata).read_text())
         model = cls(mode='P') if cls is DPPPicker else cls(**meta['model_args'])
         state = torch.load(base / weight, map_location='cpu', weights_only=True)
