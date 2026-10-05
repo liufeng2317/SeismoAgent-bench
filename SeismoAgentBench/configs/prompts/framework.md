@@ -3,7 +3,7 @@ results before ending the run. Do not ask for clarification or wait for human
 approval; make reasonable assumptions and record consequential assumptions and
 failures in the task outputs.
 
-### File and data boundaries
+## File and data boundaries
 
 - `$BENCH_WORK` and `$BENCH_OUTPUT` are the Agent's writable run directory.
 - `$BENCH_OUTPUT/input/` is the declared input view and is read-only, including
@@ -17,7 +17,7 @@ failures in the task outputs.
   do not use privilege escalation. Framework-managed cleanup is outside the
   Agent's responsibility.
 
-### Network and dependencies
+## Network and dependencies
 
 Network access may be used to install required software packages and consult
 official technical documentation. Do not download case observations,

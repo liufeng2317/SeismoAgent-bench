@@ -53,11 +53,11 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
         "</task_prompt>",
         "",
         "<runtime_context>",
-        "### Working directory",
+        "## Working directory",
         "",
         "`$BENCH_WORK` is the Agent working directory and the same directory exposed as `$BENCH_OUTPUT`.",
         "",
-        "### Input data",
+        "## Input data",
         "",
     ]
     if manifest is not None:
@@ -69,11 +69,11 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
         lines.append("No separate input directory is configured for this run.")
     lines.extend([
         "",
-        "### Output location",
+        "## Output location",
         "",
         "`$BENCH_OUTPUT` is the Agent output root. Write all task results below it.",
         "",
-        "### Environment and network",
+        "## Environment and network",
         "",
         f"- Operating system: {_cell(runtime.get('operating_system') or 'recorded by the framework')}",
         f"- Architecture: {_cell(runtime.get('architecture') or 'recorded by the framework')}",
@@ -100,7 +100,7 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
             ]) + " |")
     lines.extend([
         "",
-        "### Execution rules",
+        "## Execution rules",
         "",
         "- Do not modify task files, manifests or framework-managed run-control files.",
         "- Keep all Agent-created files below `$BENCH_OUTPUT`.",

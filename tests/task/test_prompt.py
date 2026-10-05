@@ -38,8 +38,8 @@ class PromptRenderingTests(unittest.TestCase):
             self.assertIn("result.json", rendered)
             self.assertIn("Use a concise report.", rendered)
             self.assertNotIn("### Task instructions", rendered)
-            self.assertLess(rendered.index("### Working directory"), rendered.index("### Input data"))
-            self.assertLess(rendered.index("### Input data"), rendered.index("### Output location"))
+            self.assertLess(rendered.index("## Working directory"), rendered.index("## Input data"))
+            self.assertLess(rendered.index("## Input data"), rendered.index("## Output location"))
             self.assertEqual(rendered.count("<runtime_context>"), 1)
             self.assertEqual(rendered.count("## Structured output hints"), 1)
 
@@ -55,7 +55,7 @@ class PromptRenderingTests(unittest.TestCase):
                 "Describe the required result in this prompt.\n", encoding="utf-8")
             rendered = render_agent_prompt(task)
             self.assertIn("Describe the required result", rendered)
-            self.assertIn("### Input data", rendered)
+            self.assertIn("## Input data", rendered)
             self.assertIn("No separate input directory is configured", rendered)
             self.assertNotIn("## Structured output hints", rendered)
 
