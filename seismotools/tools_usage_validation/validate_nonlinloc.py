@@ -6,12 +6,21 @@ import json
 import os
 import shutil
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 BIN = ROOT / "seismotools" / "nonlinloc" / "bin"
+PYTHON_PACKAGE = ROOT / "seismotools" / "nonlinloc" / "Nonlinlocpy"
 EXPORT = Path(os.environ.get("RIDGECREST_EXPORT_ROOT", str(ROOT / "workflows/tasks/2019_ridgecrest_california/expert/export/01_baseline")))
+
+# The bundled Python interface is intentionally kept next to the native
+# NonLinLoc package rather than installed into the host environment.
+sys.path.insert(0, str(PYTHON_PACKAGE))
+from nonlinlocpy import NLLocConfig, resolve_nlloc_bin_dir  # noqa: E402
+from nonlinlocpy.workflows import copy_template_control_file  # noqa: E402
+from nonlinlocpy.runner import run_nlloc_bin  # noqa: E402
 
 
 def run(binary: Path, control: Path, cwd: Path) -> str:
@@ -22,6 +31,18 @@ def run(binary: Path, control: Path, cwd: Path) -> str:
 
 
 def main() -> None:
+    # Validate the bundled Python interface independently of the native run.
+    # Hide PATH temporarily so this specifically exercises the package's
+    # sibling ``seismotools/nonlinloc/bin`` fallback.
+    original_path = os.environ.get("PATH", "")
+    os.environ["PATH"] = ""
+    try:
+        resolved_bin = Path(resolve_nlloc_bin_dir(""))
+    finally:
+        os.environ["PATH"] = original_path
+    assert resolved_bin.resolve() == BIN.resolve()
+    assert NLLocConfig(nlloc_bin=str(BIN), control_dir=".").nlloc_bin == str(BIN)
+
     with tempfile.TemporaryDirectory(prefix="nll-validation-") as tmp:
         work = Path(tmp)
         (work / "vg.in").write_text("""CONTROL 1 54321
@@ -57,6 +78,16 @@ LOCPHASEID P P
         assert (work / "model.P.mod.buf").is_file()
         assert (work / "time.P.S0001.time.buf").is_file()
         assert "events read" in nll_output
+        # Exercise the package runner and packaged control template against
+        # the same temporary case. The runner is deliberately followed by
+        # output assertions because its public helper preserves the native
+        # executable's output rather than returning a parsed solution.
+        template_dir = work / "template-check"
+        template_dir.mkdir()
+        template = copy_template_control_file(template_dir)
+        assert template.is_file()
+        run_nlloc_bin(str(BIN), str(work), "nll.in")
+        assert list(work.glob("*.loc.hyp"))
     source_root = EXPORT / "04_locate_nonlinloc"
     source_event = source_root / "events_raw/gamma_0000001"
     with tempfile.TemporaryDirectory(prefix="ridgecrest-nll-") as tmp:
@@ -69,6 +100,10 @@ LOCPHASEID P P
         output = run(BIN / "NLLoc", event / "control.in", event)
         assert list(event.glob("solution.*.loc.hyp")) and "1 events located" in output
     print(json.dumps({"status": "pass", "tool": "NonLinLoc",
+                      "python": {"package_import": True,
+                                 "default_bin_resolution": True,
+                                 "config_api": True,
+                                 "template_resource": True},
                       "smoke": {"velocity_grid": True, "travel_time_grid": True, "locator_started": True,
                                  "note": "one-station synthetic input is intentionally underdetermined"},
                       "ridgecrest": {"source_event": "gamma_0000001", "located_events": 1}}, indent=2))

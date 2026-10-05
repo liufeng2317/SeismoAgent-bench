@@ -23,7 +23,7 @@ The checks are deliberately small:
 | --- | --- |
 | `validate_phasenet.py` | Synthetic CPU forward pass and one real Ridgecrest three-component window. |
 | `validate_gamma.py` | Synthetic P/S association and one real stored Ridgecrest event's picks. |
-| `validate_nonlinloc.py` | Tiny synthetic grids plus one stored Ridgecrest event and grid. |
+| `validate_nonlinloc.py` | Bundled `Nonlinlocpy` import, default sibling-binary resolution and template resource, tiny synthetic grids, plus one stored Ridgecrest event and grid. |
 | `validate_hypodd.py` | Synthetic input parsing plus two real Ridgecrest CT event-pair blocks. |
 
 The native locator examples are intentionally underdetermined (one station) so
@@ -35,5 +35,12 @@ case-level catalog.
 
 Results are written to the ignored `outputs/` directory. The existing
 `seismotools/check_tools.py --imports` remains the integrity and model-loading
-check; these scripts additionally exercise actual tool execution. The
+check; these scripts additionally exercise actual tool execution and, for
+NonLinLoc, the bundled Python interface. The
 Ridgecrest checks are bounded and are not a full-data catalog rerun.
+
+For NonLinLoc, the validation deliberately covers both layers of the package:
+the native `bin/` executables and the copied `Nonlinlocpy/` Python package.
+The default binary check temporarily removes executable paths from `PATH`, so
+it verifies that the package resolves the repository-local sibling `bin/`
+directory rather than accidentally using an unrelated system installation.
