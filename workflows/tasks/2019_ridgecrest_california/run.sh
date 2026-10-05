@@ -3,11 +3,18 @@ set -euo pipefail
 
 TASK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "$TASK_DIR/../../.." && pwd)"
+VARIANT="${VARIANT:-base}"
 PYTHON="${PYTHON:-/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python}"
 CODEX_BIN="${CODEX_BIN:-$(command -v codex)}"
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
 CODEX_ENV_FILE="${CODEX_ENV_FILE:-$CODEX_HOME/.env}"
-RUN_ID="${RUN_ID:-codex-ridgecrest-catalog-$(date -u +%Y%m%dT%H%M%SZ)}"
+case "$VARIANT" in
+  base) TASK_FILE="$TASK_DIR/task.json"; AGENT_NAME="codex-ridgecrest-base" ;;
+  tools) TASK_FILE="$TASK_DIR/task_tools.json"; AGENT_NAME="codex-ridgecrest-tools" ;;
+  *) echo "VARIANT must be base or tools" >&2; exit 2 ;;
+esac
+RUN_ROOT="$TASK_DIR/runs/$VARIANT"
+RUN_ID="${RUN_ID:-$AGENT_NAME-$(date -u +%Y%m%dT%H%M%SZ)}"
 TIMEOUT="${TIMEOUT:-14400}"
 
 if [ ! -x "$PYTHON" ]; then
@@ -29,11 +36,11 @@ printf 'PATH=%s:/usr/bin:/bin\nPYTHON=%s\n' "$(dirname "$PYTHON")" "$PYTHON" >> 
 
 cd "$PROJECT_DIR"
 "$PYTHON" -m SeismoAgentBench run-codex \
-  --task "$TASK_DIR/task.json" \
+  --task "$TASK_FILE" \
   --input "$TASK_DIR/input.json" \
-  --agent-name codex-ridgecrest-catalog \
+  --agent-name "$AGENT_NAME" \
   --agent-version 1 \
-  --run-root "$TASK_DIR/runs" \
+  --run-root "$RUN_ROOT" \
   --run-id "$RUN_ID" \
   --agent-config "$PROJECT_DIR/SeismoAgentBench/configs/agents/codex.yaml" \
   --codex-bin "$CODEX_BIN" \

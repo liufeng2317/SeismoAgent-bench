@@ -1,0 +1,34 @@
+{
+  "task_id": "ridgecrest_2019_catalog_construction",
+  "version": "1",
+  "title": "Ridgecrest earthquake-catalog construction with local tools",
+  "summary": "Construct a reproducible candidate earthquake catalog from the available Ridgecrest waveform and station data using any suitable local seismological tools.",
+  "task_prompt_file": "prompt_tools.md",
+  "category": "seismology",
+  "software": [
+    "Python",
+    "ObsPy",
+    "PhaseNet",
+    "GaMMA",
+    "NonLinLoc",
+    "hypoDD"
+  ],
+  "taxonomy": {
+    "domain": "seismology",
+    "task_type": "catalog_construction"
+  },
+  "input_requirements": [
+    {
+      "id": "waveform_data",
+      "data_type": "waveform",
+      "format": "MiniSEED",
+      "required": true
+    },
+    {
+      "id": "station_metadata",
+      "data_type": "station_metadata",
+      "format": "StationXML",
+      "required": true
+    }
+  ]
+}
