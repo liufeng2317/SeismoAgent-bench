@@ -1,0 +1,10 @@
+{
+  "tool": "NonLinLoc",
+  "native_version": "7.00.00 (27Oct2017)",
+  "interface_version": 1,
+  "source": "source/src",
+  "binaries": "runtime/bin",
+  "python_interface": "runtime/python/Nonlinlocpy",
+  "standard_entrypoint": "interface/run.py",
+  "stages": ["Vel2Grid", "Grid2Time", "NLLoc"]
+}

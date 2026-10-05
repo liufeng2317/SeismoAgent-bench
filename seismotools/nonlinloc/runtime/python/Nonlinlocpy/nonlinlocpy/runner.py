@@ -81,6 +81,6 @@ def run_nlloc_bin(
     script = os.getcwd()
     try:
         os.chdir(control_file_path)
-        subprocess.run(["NLLoc", control_file_name], check=False)
+        subprocess.run(["NLLoc", control_file_name], check=True)
     finally:
         os.chdir(script)

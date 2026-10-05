@@ -1,0 +1,13 @@
+# 1-D velocity model copied from gamma_nonlinloc/inputs/velocity.txt
+# Columns:
+# depth_km  vp_kms  vs_kms
+0.0    4.74    2.739
+1.0    5.01    2.895
+2.0    5.35    3.092
+3.0    5.71    3.300
+4.0    6.07    3.508
+5.0    6.17    3.566
+6.0    6.27    3.624
+7.0    6.34    3.664
+8.0    6.39    3.693
+32.0   7.80    4.508

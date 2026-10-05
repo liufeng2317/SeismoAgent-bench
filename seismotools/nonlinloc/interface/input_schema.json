@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "description": "Prepared input folder for the standard NonLinLoc adapter.",
+  "required_files": {
+    "velocity_model_1d.txt": "Whitespace table: depth_km vp_km_s vs_km_s",
+    "stations_native.txt": "Whitespace table: station_id longitude latitude elevation_m",
+    "picks_simple.txt": "Whitespace table: station_id phase time_seconds first_motion"
+  },
+  "optional_files": {
+    "event.obs": "Native NLLOC_OBS observations, used with --native-obs"
+  }
+}

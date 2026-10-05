@@ -1,0 +1,11 @@
+# station_id  phase  time_sec  [first_motion]
+# Derived from gamma_nonlinloc first event at 2019-07-04T02:34
+CLC   P  37.7083  ?
+CLC   S  42.2283  ?
+TOW2  P  37.2883  ?
+WRC2  P  35.2383  ?
+WRC2  S  37.9683  ?
+B916  P  33.2683  ?
+B916  S  34.7283  ?
+B918  P  35.4483  ?
+B918  S  38.3783  ?

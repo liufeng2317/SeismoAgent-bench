@@ -91,7 +91,7 @@ def _run_grid2time_ps(control_file_path: str, control_file_name: str) -> None:
         if os.path.exists(tdir):
             shutil.rmtree(tdir)
         os.mkdir(tdir)
-        subprocess.run(["Grid2Time", control_file_name], check=False)
+        subprocess.run(["Grid2Time", control_file_name], check=True)
 
         base, ext = os.path.splitext(control_file_name)
         sname = f"{base}_S{ext}"
@@ -104,7 +104,7 @@ def _run_grid2time_ps(control_file_path: str, control_file_name: str) -> None:
                 rows[i] = row[:-2] + "S\n"
         with open(sname, "w", encoding="utf-8") as fw:
             fw.writelines(rows)
-        subprocess.run(["Grid2Time", sname], check=False)
+        subprocess.run(["Grid2Time", sname], check=True)
         if os.path.exists(sname):
             os.remove(sname)
     finally:

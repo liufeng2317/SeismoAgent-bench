@@ -40,7 +40,7 @@ NonLinLoc, the bundled Python interface. The
 Ridgecrest checks are bounded and are not a full-data catalog rerun.
 
 For NonLinLoc, the validation deliberately covers both layers of the package:
-the native `bin/` executables and the copied `Nonlinlocpy/` Python package.
+the `runtime/bin/` executables and the copied `runtime/python/Nonlinlocpy/` Python package.
 The default binary check temporarily removes executable paths from `PATH`, so
 it verifies that the package resolves the repository-local sibling `bin/`
 directory rather than accidentally using an unrelated system installation.

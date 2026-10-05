@@ -463,7 +463,7 @@ def resolve_nlloc_bin_dir(nlloc_bin_dir: str) -> str:
     resolved = {name: shutil.which(name) for name in required}
     missing = [name for name, path in resolved.items() if path is None]
     if missing:
-        project_bin = Path(__file__).resolve().parents[2] / "native" / "bin"
+        project_bin = Path(__file__).resolve().parents[4] / "runtime" / "bin"
         project_paths = {name: project_bin / name for name in required}
         if all(path.is_file() for path in project_paths.values()):
             return str(project_bin)
@@ -472,7 +472,7 @@ def resolve_nlloc_bin_dir(nlloc_bin_dir: str) -> str:
         raise ValueError(
             "Could not find required NonLinLoc executables on PATH and no bundled fallback was found. "
             f"Missing executables: {missing_str}. Either export them in your shell environment, "
-            "pass the project nonlinloc/native/bin directory or another --nlloc-bin path."
+            "pass the project nonlinloc/runtime/bin directory or another --nlloc-bin path."
         )
 
     first_path = next(path for path in resolved.values() if path is not None)

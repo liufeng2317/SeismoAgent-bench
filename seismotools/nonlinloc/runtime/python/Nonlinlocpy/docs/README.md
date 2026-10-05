@@ -1,11 +1,5 @@
 # NonLinLoc Python Helpers
 
-This is the project-local copy of the Nonlinlocpy library from TRACE-1.1. Its
-native executables are provided separately in the sibling `../native/bin/` directory;
-pass that directory explicitly as `nlloc_bin` or `--nlloc-bin` when running a
-workflow. Generated grids, observations and location products belong in the
-caller-provided run directory.
-
 ## Overview
 
 This package provides Python helpers and example workflows for [NonLinLoc](http://alomax.net/nlloc/). It focuses on three tasks:
@@ -41,7 +35,7 @@ Both examples default to:
 | `nonlinlocpy/parallel.py` | Chunked/parallel `NLLoc` helpers |
 | `nonlinlocpy/utils.py` | Shared filesystem, grid, binary-resolution, and CSV helpers |
 | `nonlinlocpy/template/` | Control-file and input templates |
-| `../native/bin/` | Project-managed compiled NonLinLoc binaries |
+| `../../../bin/` | Project-managed compiled NonLinLoc binaries |
 | `example/gamma_nonlinloc/` | Gamma-based example workflow |
 | `example/standard_nonlinloc/` | Native-format example workflow |
 | `pyproject.toml` | Local package configuration |
@@ -51,13 +45,13 @@ Both examples default to:
 ### Core Package
 
 ```bash
-python -m pip install -e seismotools/nonlinloc/Nonlinlocpy --no-build-isolation
+python -m pip install -e seismotools/nonlinloc/runtime/python/Nonlinlocpy --no-build-isolation
 ```
 
 ### With Example Dependencies
 
 ```bash
-python -m pip install -e "seismotools/nonlinloc/Nonlinlocpy[examples]" --no-build-isolation
+python -m pip install -e "seismotools/nonlinloc/runtime/python/Nonlinlocpy[examples]" --no-build-isolation
 ```
 
 ## Package Entry Points

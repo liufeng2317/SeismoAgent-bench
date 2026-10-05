@@ -17,12 +17,18 @@ def main():
         parser.error('--jobs must be positive')
     for name in (['nonlinloc', 'hypodd'] if args.tool == 'all' else [args.tool]):
         folder = ROOT / name
-        # Native source, build trees and binaries for both compiled tools live
-        # under an explicit native/ namespace.
-        native = folder / 'native'
-        build = native / 'build'
-        shutil.copytree(native / 'source', build, dirs_exist_ok=True)
-        (native / 'bin').mkdir(exist_ok=True)
+        # NonLinLoc uses the standardized source/runtime layout. hypoDD keeps
+        # its existing native layout until that tool is migrated separately.
+        if name == 'nonlinloc':
+            source = folder / 'source'
+            build = folder / 'runtime' / 'build'
+            binary_dir = folder / 'runtime' / 'bin'
+        else:
+            source = folder / 'native' / 'source'
+            build = folder / 'native' / 'build'
+            binary_dir = folder / 'native' / 'bin'
+        shutil.copytree(source, build, dirs_exist_ok=True)
+        binary_dir.mkdir(exist_ok=True)
         (folder / 'logs').mkdir(exist_ok=True)
         log = folder / 'logs/build.log'
         if name == 'nonlinloc':
@@ -47,10 +53,10 @@ def main():
         for cwd, _ in builds:
             binary = cwd.name if name == 'hypodd' else None
             if binary:
-                shutil.copy2(cwd / binary, native / 'bin' / binary)
+                shutil.copy2(cwd / binary, binary_dir / binary)
         if name == 'nonlinloc':
             for binary in binaries:
-                shutil.copy2(cwd / binary, native / 'bin' / binary)
+                shutil.copy2(cwd / binary, binary_dir / binary)
         print(f'{name}: {", ".join(binaries)} built', flush=True)
 
 
