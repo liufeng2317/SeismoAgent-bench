@@ -62,9 +62,9 @@ The workflow must be executed and reproducible from the supplied inputs. Preserv
 
 At minimum, provide machine-readable phase observations in `picks.csv` and a versioned candidate-earthquake catalog in `catalog.csv`.
 
-Use these columns for `picks.csv`, with one row per phase observation:
+Use these columns for `picks.csv`, with one row per phase observation detected by the picker:
 ```text
-pick_id,event_id,station_id,channel_id,phase,time_utc,probability,uncertainty_s,method,status
+pick_id,station_id,channel_id,phase,time_utc,probability,uncertainty_s,method,status
 ```
 
 Use these columns for `catalog.csv`, with one row per candidate event:
@@ -72,7 +72,7 @@ Use these columns for `catalog.csv`, with one row per candidate event:
 event_id,origin_time_utc,latitude,longitude,depth_km,magnitude,magnitude_type,n_picks,n_p_picks,n_s_picks,status
 ```
 
-The catalog records the event identifier, origin time in UTC, location, depth, magnitude when defensible, phase counts and event status. Use ISO 8601 UTC for `time_utc` and `origin_time_utc`; `event_id` must match between the two files and may be empty for an unassociated pick. Use `P` or `S` for `phase`, and `accepted`, `uncertain` or `rejected` for `status`. Fields that cannot be estimated defensibly may be empty and must not be fabricated. Record the velocity model, location method, uncertainty estimates and other diagnostic quantities in workflow documentation or a separate metadata file chosen by the Agent. The final catalog must be traceable to the observational evidence used to construct it.
+The picks table represents picker output before event association and therefore does not require an `event_id`. If an association table is produced, preserve it separately and use the pick identifiers to link associated phases to catalog events. The catalog records the event identifier, origin time in UTC, location, depth, magnitude when defensible, phase counts and event status; `n_picks`, `n_p_picks` and `n_s_picks` should be derived from the association actually used for location. Use ISO 8601 UTC for `time_utc` and `origin_time_utc`, `P` or `S` for `phase`, and `accepted`, `uncertain` or `rejected` for `status`. Fields that cannot be estimated defensibly may be empty and must not be fabricated; explain missing event-level counts or locations in the provenance record. Record the velocity model, location method, uncertainty estimates and other diagnostic quantities in workflow documentation or a separate metadata file chosen by the Agent. The final catalog must be traceable to the observational evidence used to construct it.
 
 ### Inspection and visualization
 
