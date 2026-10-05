@@ -6,15 +6,36 @@ import json
 import os
 import subprocess
 import shutil
+import sys
 import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-BIN = ROOT / "seismotools" / "hypodd" / "bin" / "hypoDD"
+BIN = ROOT / "seismotools" / "hypodd" / "native" / "bin" / "hypoDD"
+PH2DT = BIN.with_name("ph2dt")
+PYTHON_PACKAGE = ROOT / "seismotools" / "hypodd" / "HypoDDpy"
 EXPORT = Path(os.environ.get("RIDGECREST_EXPORT_ROOT", str(ROOT / "workflows/tasks/2019_ridgecrest_california/expert/export/01_baseline")))
+
+sys.path.insert(0, str(PYTHON_PACKAGE))
+from hypodd_runner import (  # noqa: E402
+    HypoDDInputs,
+    HypoDDParams,
+    Ph2dtParams,
+    RuntimeOptions,
+)
 
 
 def main() -> None:
+    assert BIN.is_file() and PH2DT.is_file()
+    # Check the packaged Python interface and its bundled template without
+    # launching a full relocation through the wrapper.
+    api_inputs = HypoDDInputs("/tmp/hypodd", "events.pha", "stations.sta", "/tmp/run", "smoke")
+    assert api_inputs.catalog_code == "smoke"
+    assert HypoDDParams().iphase == 3
+    assert Ph2dtParams().minobs_pair > 0
+    assert RuntimeOptions().num_workers == 1
+    assert (PYTHON_PACKAGE / "hypodd_runner/template/hypoDD.inp").is_file()
+
     with tempfile.TemporaryDirectory(prefix="hypodd-validation-") as tmp:
         work = Path(tmp)
         (work / "event.dat").write_text(
@@ -61,7 +82,11 @@ def main() -> None:
                                      check=True)
         assert (work / "hypoDD.loc").is_file() and "# events =" in real_result.stdout
     print(json.dumps({"status": "pass", "tool": "hypoDD",
-                      "smoke": {"catalog_differential_times_parsed": True, "relocation_started": True,
+                      "python": {"package_import": True,
+                                 "public_config_api": True,
+                                 "template_resource": True},
+                      "smoke": {"ph2dt_binary": True, "hypodd_binary": True,
+                                "catalog_differential_times_parsed": True, "relocation_started": True,
                                  "note": "one-station synthetic input is intentionally underdetermined"},
                       "ridgecrest": {"event_pairs": len(blocks), "events_parsed": len(event_lines),
                                      "mode": "CT", "note": "bounded replay of real differential-time input"}}, indent=2))

@@ -1,0 +1,1495 @@
+"""HypoDD runner implementation: ph2dt + optional ``dt.cc`` (FDTCC) + HypoDD.
+
+Public callers should use the package function APIs instead of this
+implementation module, for example ``run_catalog_only_relocation``,
+``run_fdtcc_relocation``, or ``run_cc_only_relocation``.
+
+Implementation entry point used by ``hypodd_runner.api``:
+
+* ``run_hypodd_pipeline(cfg)`` — run relocation from an existing Config.
+
+Legacy script mode still exists for humans running this implementation file
+directly. Generated task scripts should call the public package APIs with
+explicit function parameters instead.
+
+Full parameter split and call order: see **HYPODD_CC_PIPELINE.md** next to this file.
+
+Legacy implementation-file usage (not for generated task scripts)
+-----------------------------------------------------------------
+* **Built-in demo** — ``python run_hypoDD.py``.
+
+Phase file handling (``phase_format`` in JSON/API config)
+---------------------------------------------------------
+* ``hypodd`` — file is already suitable for ``read_fpha`` / ``mk_pha`` (event header + picks).
+* ``pal`` — convert PAL/PALM-style input with
+  :class:`pal2hypodd.PAL2HypoDD_PhaseConverter` first (writes ``*_new.*`` next to input),
+  then continue in hypodd_runner.
+* ``auto`` — if the first data line matches a HypoDD event header, use as-is; else if it looks
+  like a PAL event line (ISO / unix time), convert; otherwise raise with a hint.
+
+Cross-correlation ``dt.cc`` (optional)
+--------------------------------------
+HypoDD **catalog** settings (grids, ph2dt, velocity model, ``hypodd_idata`` weights)
+are carried by the Config object built by the public function API.
+**Waveform CC** is selected by ``cc_engine``:
+
+* **fdtcc** (default): external **FDTCC** binary. Prefer automatic input
+  preparation through the public function API: provide waveform storage,
+  velocity parameters, and optional FDTCC flags as function arguments. The
+  runner prepares REAL station, travel-time table, and per-grid SAC inputs.
+
+  With MiniSEED waveform input, the runner exports FDTCC ``-F1`` SAC under
+  ``{output_folder}/{fdtcc_waveform_temp_basename}`` (default basename
+  ``waveform_temp``) and creates event subdirectories inside it, runs FDTCC, then deletes
+  that tree when ``fdtcc_cleanup_sac_waveforms``
+  is true. Set ``fdtcc_wave_dir_mode`` to ``fdtcc_sac`` if ``wave_dir`` already points to a
+  ready-made FDTCC SAC tree.
+After waveform CC, ``hypodd_idata`` is adjusted from disk:
+**3** if a non-empty ``dt_*.cc`` exists in ``output_folder``, else **2**.
+Use ``hypodd_idata: 1`` only for HypoDD CC-only mode (still requires ``dt.cc``).
+
+See **HYPODD_CC_PIPELINE.md**.
+
+The legacy entry point ``run_hypoDD_from_PAL.py`` only selects
+``phase_format='pal'`` before calling this hypodd_runner pipeline. It does not
+mean that users should switch to the separate pal_hypodd package when
+hypodd_runner reports a phase parse error.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import pickle
+import shutil
+import sys
+import warnings
+from typing import Any, Dict
+
+warnings.filterwarnings("ignore")
+
+import numpy as np
+from torch.utils.data import DataLoader
+
+def _script_dir() -> str:
+    """Return this package directory for legacy direct-script paths."""
+    return os.path.dirname(os.path.abspath(__file__))
+
+
+if _script_dir() not in sys.path:
+    sys.path.insert(0, _script_dir())
+
+try:
+    from . import config as hypodd_config
+    from .hypodd import (
+        Run_HypoDD,
+        load_hypodd_original_catalog,
+        load_hypodd_reloc_catalog,
+        merge_hypodd_output,
+        plot_hypodd_run_summary,
+    )
+    from .mk_pha import mk_pha
+    from .mk_sta import mk_sta
+    from .phase_convert import prepare_phase_file
+    from .ph2dt import read_fpha, run_ph2dt
+    from .errors import NativeOutputError
+except ImportError:  # pragma: no cover - legacy direct-script execution
+    import config as hypodd_config
+    from hypodd import (
+        Run_HypoDD,
+        load_hypodd_original_catalog,
+        load_hypodd_reloc_catalog,
+        merge_hypodd_output,
+        plot_hypodd_run_summary,
+    )
+    from mk_pha import mk_pha
+    from mk_sta import mk_sta
+    from phase_convert import prepare_phase_file
+    from ph2dt import read_fpha, run_ph2dt
+    from errors import NativeOutputError
+
+
+def _try_import_matplotlib_pyplot():
+    """Return ``matplotlib.pyplot`` if import succeeds; otherwise ``None`` (plots are optional)."""
+    try:
+        import matplotlib.pyplot as plt  # type: ignore
+
+        return plt
+    except Exception:
+        return None
+
+
+def _load_evid_lists(path: str):
+    """Load ``evid_lists.npy`` with a package-specific error for corrupt caches."""
+    try:
+        return np.load(path, allow_pickle=True)
+    except (OSError, EOFError, ValueError, pickle.UnpicklingError) as exc:
+        raise RuntimeError(
+            "Failed to read hypodd_runner intermediate event-grid file "
+            f"{os.path.abspath(path)!r}. This file is generated by mk_pha for the "
+            "current run and appears missing or corrupted/truncated. Remove the "
+            "task output directory or rerun after regenerating phase/grid inputs; "
+            "do not change package/API parameters unless mk_pha itself reports a "
+            "phase-format error."
+        ) from exc
+
+
+def _summarize_dt_cc_outputs(out: str, num_grids: object) -> Dict[str, Any]:
+    """Return a compact summary of per-grid FDTCC ``dt_*.cc`` products."""
+    rows = []
+    total_pair_headers = 0
+    total_data_lines = 0
+    nonempty_files = 0
+    for i in range(num_grids[0]):
+        for j in range(num_grids[1]):
+            path = os.path.join(out, f"dt_{i}-{j}.cc")
+            exists = os.path.isfile(path)
+            size = os.path.getsize(path) if exists else 0
+            n_pairs, n_lines = (0, 0)
+            if exists and size > 0:
+                try:
+                    from fdtcc.runner import summarize_dt_cc
+
+                    n_pairs, n_lines = summarize_dt_cc(path)
+                except Exception:
+                    n_pairs, n_lines = (0, 0)
+            if size > 0:
+                nonempty_files += 1
+            total_pair_headers += int(n_pairs)
+            total_data_lines += int(n_lines)
+            rows.append(
+                {
+                    "grid": f"{i}-{j}",
+                    "path": os.path.abspath(path),
+                    "exists": exists,
+                    "size_bytes": size,
+                    "pair_headers": int(n_pairs),
+                    "data_lines": int(n_lines),
+                }
+            )
+    return {
+        "output_folder": os.path.abspath(out),
+        "nonempty_dt_cc_files": nonempty_files,
+        "total_pair_headers": total_pair_headers,
+        "total_data_lines": total_data_lines,
+        "files": rows,
+    }
+
+
+def _read_reloc_csv_simple(path: str):
+    """
+    Read HypoDD merged ``*.reloc`` format used by examples: CSV lines
+    ``time,lat,lon,depth,mag`` (no header).
+
+    Parameters
+    ----------
+    path : str
+        Path to the merged ``.reloc`` file.
+
+    Returns
+    -------
+    tuple of ndarray or None
+        ``(lat, lon, dep, mag)`` as float arrays, or ``None`` if file missing / empty.
+    """
+    lat, lon, dep, mag = [], [], [], []
+    if not os.path.isfile(path):
+        return None
+    with open(path, "r", encoding="utf-8", errors="ignore") as f:
+        for line in f:
+            s = line.strip()
+            if not s:
+                continue
+            parts = [p.strip() for p in s.split(",")]
+            if len(parts) < 5:
+                continue
+            try:
+                lat.append(float(parts[1]))
+                lon.append(float(parts[2]))
+                dep.append(float(parts[3]))
+                mag.append(float(parts[4]))
+            except Exception:
+                continue
+    if not lat:
+        return None
+    return np.asarray(lat), np.asarray(lon), np.asarray(dep), np.asarray(mag)
+
+
+def _read_residuals_from_res_table(path: str):
+    """
+    Read ``*.res`` produced by HypoDD. Expected format:
+    first line is whitespace header containing ``RES [ms]`` (two tokens).
+    Subsequent lines are whitespace-separated numeric rows.
+
+    Parameters
+    ----------
+    path : str
+        Path to HypoDD ``.res`` table.
+
+    Returns
+    -------
+    ndarray or None
+        1-D float array of residuals (ms), or ``None`` if unusable.
+    """
+    if not os.path.isfile(path):
+        return None
+    with open(path, "r", encoding="utf-8", errors="ignore") as f:
+        header = None
+        for line in f:
+            s = line.strip()
+            if not s:
+                continue
+            header = s.split()
+            break
+        if not header:
+            return None
+
+    # Combine "RES" + "[ms]" to one logical column name so it matches data tokens.
+    cols = []
+    i = 0
+    while i < len(header):
+        if header[i].upper() == "RES" and i + 1 < len(header) and header[i + 1].startswith("["):
+            cols.append(f"{header[i]} {header[i+1]}")
+            i += 2
+            continue
+        cols.append(header[i])
+        i += 1
+
+    try:
+        res_idx = [c.upper() for c in cols].index("RES [MS]")
+    except ValueError:
+        return None
+
+    res = []
+    with open(path, "r", encoding="utf-8", errors="ignore") as f:
+        # skip the first non-empty header line
+        skipped = False
+        for line in f:
+            s = line.strip()
+            if not s:
+                continue
+            if not skipped:
+                skipped = True
+                continue
+            parts = s.split()
+            if len(parts) <= res_idx:
+                continue
+            try:
+                res.append(float(parts[res_idx]))
+            except Exception:
+                continue
+    if not res:
+        return None
+    return np.asarray(res)
+
+
+def _format_residual_summary_ms(residuals_ms: np.ndarray) -> str:
+    """Compact string with sample count, P50/P90/P95 and RMS of residuals in milliseconds.
+
+    Parameters
+    ----------
+    residuals_ms : ndarray
+        Residual samples in milliseconds (may contain NaN; non-finite values dropped).
+
+    Returns
+    -------
+    str
+        Summary like ``n=… P50=…ms …`` or ``n=0`` if empty.
+    """
+    if residuals_ms is None or len(residuals_ms) == 0:
+        return "n=0"
+    r = np.asarray(residuals_ms, dtype=float)
+    r = r[np.isfinite(r)]
+    if len(r) == 0:
+        return "n=0"
+    p50, p90, p95 = np.quantile(r, [0.50, 0.90, 0.95])
+    rms = float(np.sqrt(np.mean(r * r)))
+    return (
+        f"n={len(r)} P50={p50:.3f}ms P90={p90:.3f}ms P95={p95:.3f}ms RMS={rms:.3f}ms"
+    )
+
+
+def plot_hypodd_key_eval_metrics(ctlg_code: str, out: str) -> None:
+    """
+    Extra end-of-run evaluation panels saved under ``out``.
+    This is best-effort: missing files or plotting deps won't fail the pipeline.
+
+    Parameters
+    ----------
+    ctlg_code : str
+        Run prefix; reads ``{ctlg_code}.reloc`` and ``{ctlg_code}.res`` under ``out``.
+    out : str
+        Output directory for PNG figures (``*_eval_*.png``).
+    """
+    plt = _try_import_matplotlib_pyplot()
+    if plt is None:
+        return
+
+    reloc_path = os.path.join(out, f"{ctlg_code}.reloc")
+    res_path = os.path.join(out, f"{ctlg_code}.res")
+
+    reloc = _read_reloc_csv_simple(reloc_path)
+    residuals = _read_residuals_from_res_table(res_path)
+
+    if reloc is None and residuals is None:
+        return
+
+    if reloc is not None:
+        lat, lon, dep, mag = reloc
+
+        # Figure 1: map colored by depth
+        fig = plt.figure(figsize=(10, 8))
+        sc = plt.scatter(lon, lat, c=dep, s=8, alpha=0.7, cmap="viridis")
+        plt.colorbar(sc, label="Depth (km)")
+        plt.xlabel("Longitude")
+        plt.ylabel("Latitude")
+        plt.title(f"{ctlg_code}: Relocated catalog (color=depth)")
+        plt.grid(True, alpha=0.3)
+        fig.tight_layout()
+        fig.savefig(os.path.join(out, f"{ctlg_code}_eval_map_depth.png"), dpi=200)
+        plt.close(fig)
+
+        # Figure 2: depth & magnitude distributions
+        fig, ax = plt.subplots(1, 2, figsize=(12, 4))
+        ax[0].hist(dep, bins=50, color="tab:blue", alpha=0.85)
+        ax[0].set_title("Depth distribution")
+        ax[0].set_xlabel("Depth (km)")
+        ax[0].set_ylabel("Count")
+        ax[0].grid(True, alpha=0.3)
+
+        ax[1].hist(mag, bins=40, color="tab:orange", alpha=0.85)
+        ax[1].set_title("Magnitude distribution")
+        ax[1].set_xlabel("Magnitude")
+        ax[1].set_ylabel("Count")
+        ax[1].grid(True, alpha=0.3)
+
+        fig.tight_layout()
+        fig.savefig(os.path.join(out, f"{ctlg_code}_eval_depth_mag.png"), dpi=200)
+        plt.close(fig)
+
+    if residuals is not None:
+        # Also print a concise tail summary for quick comparisons across runs.
+        try:
+            print(
+                f"hypodd_runner: residual summary ({ctlg_code}.res): "
+                f"{_format_residual_summary_ms(residuals)}",
+                file=sys.stderr,
+            )
+        except Exception:
+            pass
+
+        # Figure 3: residual distribution + key quantiles
+        q = np.quantile(residuals, [0.5, 0.9, 0.95])
+        fig, ax = plt.subplots(1, 2, figsize=(12, 4))
+        ax[0].hist(residuals, bins=60, color="tab:green", alpha=0.85, edgecolor="k", linewidth=0.2)
+        for qq, ls, lab in zip(q, ["--", ":", "-."], ["P50", "P90", "P95"]):
+            ax[0].axvline(float(qq), color="k", ls=ls, alpha=0.8, label=f"{lab}={qq:.1f} ms")
+        ax[0].set_title("Residuals (RES [ms])")
+        ax[0].set_xlabel("ms")
+        ax[0].set_ylabel("Count")
+        ax[0].grid(True, alpha=0.3)
+        ax[0].legend()
+
+        ax[1].bar(["P50", "P90", "P95"], q, color="tab:purple", alpha=0.85)
+        ax[1].set_title("Residual quantiles (ms)")
+        ax[1].grid(True, axis="y", alpha=0.3)
+
+        fig.tight_layout()
+        fig.savefig(os.path.join(out, f"{ctlg_code}_eval_residuals.png"), dpi=200)
+        plt.close(fig)
+
+
+def _waveform_cc_configured(cfg: hypodd_config.Config) -> bool:
+    """True if the pipeline should run a waveform CC step after ph2dt."""
+    engine = getattr(cfg, "cc_engine", "fdtcc")
+    if engine in ("none", "skip", "", None):
+        return False
+    if engine != "fdtcc":
+        raise ValueError(
+            f"Unsupported cc_engine={engine!r}; use 'fdtcc' or 'none/skip'."
+        )
+
+    has_waveform_root = bool(
+        getattr(cfg, "fdtcc_miniseed_root", None)
+        or getattr(cfg, "waveform_dir_raw", None)
+    )
+    has_velocity = bool(
+        getattr(cfg, "fdtcc_velocity_nd", None)
+        or (
+            getattr(cfg, "fdtcc_velocity_layer", None) is not None
+            and getattr(cfg, "fdtcc_velocity_vp", None) is not None
+        )
+    )
+    return has_waveform_root and has_velocity
+
+
+def _fmt_under_output(path: str, output_folder_abs: str) -> str:
+    """
+    If ``path`` is located under ``output_folder_abs``, return relative path.
+    Otherwise, keep the original path.
+    """
+    if not path:
+        return path
+    if not isinstance(path, str):
+        return str(path)
+    ap = os.path.abspath(path)
+    try:
+        if os.path.commonpath([ap, output_folder_abs]) == output_folder_abs:
+            return os.path.relpath(ap, output_folder_abs)
+    except ValueError:
+        pass
+    return path
+
+
+def _fmt_path_for_log(path: str, output_folder_abs: str) -> str:
+    """
+    Format paths for concise logs.
+
+    Priority:
+    1) relative to output folder (if inside output)
+    2) relative to current working directory (if inside cwd)
+    3) original path
+    """
+    p = _fmt_under_output(path, output_folder_abs)
+    if p != path:
+        return p
+    if not path:
+        return path
+    if not isinstance(path, str):
+        return str(path)
+    ap = os.path.abspath(path)
+    cwd = os.path.abspath(os.getcwd())
+    try:
+        if os.path.commonpath([ap, cwd]) == cwd:
+            return os.path.relpath(ap, cwd)
+    except ValueError:
+        pass
+    return path
+
+
+def _fdtcc_prepare_station_and_ttdb(
+    cfg: hypodd_config.Config,
+    station_dat: str,
+    tt_table: str,
+) -> None:
+    """
+    Before FDTCC: write REAL ``station.dat`` from ``cfg.fsta``; optionally build ``ttdb`` at
+    ``tt_table`` when ``fdtcc_velocity_nd`` or direct velocity arrays are set.
+    """
+    if not cfg.fdtcc_prepare_inputs:
+        return
+
+    import math
+
+    from fdtcc.build_ttdb import (
+        write_ttdb_for_fdtcc,
+        write_ttdb_from_simple_velocity,
+    )
+    from fdtcc.real_station_io import write_real_station_dat_from_fsta
+    from fdtcc.runner import fdtcc_flags_from_mapping
+
+    out_abs = os.path.abspath(cfg.output_folder)
+
+    if not os.path.isfile(cfg.fsta):
+        raise FileNotFoundError(
+            f"fdtcc_prepare_inputs: fsta not found: {cfg.fsta!r}"
+        )
+    sd = os.path.abspath(station_dat)
+    tt = os.path.abspath(tt_table)
+    write_real_station_dat_from_fsta(
+        cfg.fsta,
+        sd,
+        default_network=cfg.fdtcc_station_default_network,
+    )
+    print(
+        f"hypodd_runner: FDTCC REAL station.dat <- fsta -> {_fmt_under_output(sd, out_abs)}",
+        file=sys.stderr,
+    )
+
+    # Try to align ttdb generation extents with FDTCC -G flags.
+    # (Otherwise defaults dep_max=20km / dist_max~3deg may be too small.)
+    trx = 3.0
+    trh = 20.0
+    tdx = 0.02
+    tdh = 2.0
+    if getattr(cfg, "fdtcc_flags", None):
+        try:
+            ff = fdtcc_flags_from_mapping(dict(getattr(cfg, "fdtcc_flags", {})))
+            trx = float(getattr(ff, "trx", trx))
+            trh = float(getattr(ff, "trh", trh))
+            tdx = float(getattr(ff, "tdx", tdx))
+            tdh = float(getattr(ff, "tdh", tdh))
+        except Exception:
+            pass
+
+    vnd = cfg.fdtcc_velocity_nd
+    direct_layer = getattr(cfg, "fdtcc_velocity_layer", None)
+    direct_vp = getattr(cfg, "fdtcc_velocity_vp", None)
+    direct_vs = getattr(cfg, "fdtcc_velocity_vs", None)
+    has_direct_velocity = direct_layer is not None and direct_vp is not None
+    if not vnd and not has_direct_velocity:
+        return
+
+    if os.path.isfile(tt) and not cfg.fdtcc_rebuild_ttdb:
+        print(
+            f"hypodd_runner: FDTCC keep existing tt_table {_fmt_under_output(tt, out_abs)} "
+            f"(set fdtcc_rebuild_ttdb true to regenerate)",
+            file=sys.stderr,
+        )
+        return
+
+    if vnd:
+        n_dist = max(1, int(math.ceil(trx / tdx)))
+        nw, ns = write_ttdb_for_fdtcc(
+            os.path.abspath(vnd),
+            tt,
+            dep_km_min=0.0,
+            dep_km_max=trh,
+            dep_step_km=tdh,
+            dist_step_deg=tdx,
+            n_dist=n_dist,
+        )
+        print(
+            f"hypodd_runner: FDTCC ttdb from .nd -> {_fmt_under_output(tt, out_abs)} ({nw} rows, {ns} skipped)",
+            file=sys.stderr,
+        )
+        return
+
+    if has_direct_velocity:
+        layer = [float(x) for x in direct_layer]
+        vp = [float(x) for x in direct_vp]
+        if len(layer) == len(vp):
+            if 6371.0 <= layer[-1]:
+                raise ValueError(
+                    "fdtcc_velocity_layer has the same length as fdtcc_velocity_vp, "
+                    "so it is interpreted as layer tops; the last layer top must be "
+                    f"shallower than 6371.0 km, got {layer[-1]} km."
+                )
+            z = layer + [6371.0]
+        elif len(layer) == len(vp) + 1:
+            z = layer
+        else:
+            raise ValueError(
+                "fdtcc_velocity_layer must have len(vp) layer tops or len(vp)+1 "
+                f"interfaces; got layer={len(layer)}, vp={len(vp)}."
+            )
+        vs = [float(x) for x in direct_vs] if direct_vs is not None else None
+        nw, ns = write_ttdb_from_simple_velocity(
+            tt,
+            z,
+            vp,
+            vs_km_s=vs,
+            vp_vs_ratio=float(getattr(cfg, "fdtcc_velocity_vp_vs_ratio", 1.73)),
+            dep_km_min=0.0,
+            dep_km_max=trh,
+            dep_step_km=tdh,
+            dist_step_deg=tdx,
+            n_dist=max(1, int(math.ceil(trx / tdx))),
+        )
+        print(
+            f"hypodd_runner: FDTCC ttdb from direct velocity parameters -> "
+            f"{_fmt_under_output(tt, out_abs)} ({nw} rows, {ns} skipped)",
+            file=sys.stderr,
+        )
+        return
+
+
+def _run_fdtcc_after_ph2dt(
+    cfg: hypodd_config.Config,
+    out: str,
+    num_grids: object,
+) -> None:
+    """Run external FDTCC per grid; write ``dt_{i}-{j}.cc`` next to ph2dt outputs."""
+    import json
+    from dataclasses import asdict
+
+    from fdtcc.miniseed_to_fdtcc_sac import (
+        export_miniseed_to_fdtcc_continuous_sac_tree,
+        export_miniseed_to_fdtcc_sac_tree,
+        read_ph2dt_events,
+    )
+    from fdtcc.runner import (
+        FDTCCInputPaths,
+        copy_dt_cc_to,
+        fdtcc_flags_from_mapping,
+        fdtcc_flags_to_human_mapping,
+        run_fdtcc,
+        summarize_dt_cc,
+    )
+
+    if not cfg.hypodd_dt_cc_per_grid:
+        print(
+            "hypodd_runner: warning: FDTCC runs per ph2dt grid; "
+            "hypodd_dt_cc_per_grid=false is not supported for cc_engine=fdtcc (using per-grid dt_*.cc).",
+            file=sys.stderr,
+        )
+
+    fc: Dict[str, Any] = {}
+    out_abs = os.path.abspath(out)
+    flags_from_cfg = getattr(cfg, "fdtcc_flags", None)
+    if flags_from_cfg:
+        fc["flags"] = dict(flags_from_cfg)
+    if getattr(cfg, "fdtcc_binary", None):
+        fc["fdtcc_binary"] = str(cfg.fdtcc_binary)
+    fc["cleanup_input_lists"] = bool(
+        getattr(cfg, "fdtcc_cleanup_input_lists", True)
+    )
+    if getattr(cfg, "fdtcc_timeout_sec", None) is not None:
+        fc["timeout_sec"] = float(cfg.fdtcc_timeout_sec)
+
+    waveform_dir_raw = getattr(cfg, "waveform_dir_raw", None)
+    has_velocity = bool(
+        cfg.fdtcc_velocity_nd
+        or (
+            getattr(cfg, "fdtcc_velocity_layer", None) is not None
+            and getattr(cfg, "fdtcc_velocity_vp", None) is not None
+        )
+    )
+    auto_sac = bool(
+        cfg.fdtcc_miniseed_root
+        and has_velocity
+    )
+    auto_inputs = bool(
+        (cfg.fdtcc_miniseed_root or waveform_dir_raw)
+        and has_velocity
+        and cfg.fdtcc_wave_dir_mode == "miniseed"
+    )
+    station_dat = fc.get("station_dat")
+    tt_table = fc.get("tt_table")
+    wave_dir_fixed = fc.get("wave_dir")
+
+    if auto_inputs:
+        station_dat = os.path.join(out, "fdtcc_REAL_station.dat")
+        tt_table = os.path.join(out, "fdtcc_ttdb.txt")
+        wave_dir_fixed = None
+
+    if not station_dat or not tt_table:
+        raise ValueError(
+            "FDTCC needs station_dat and tt_table: enable auto SAC "
+            "(fdtcc_miniseed_root/waveform_dir_raw + velocity)."
+        )
+    # wave_dir is only required when we intend to use pre-built FDTCC SAC
+    # (fdtcc_sac mode) or when exporting temp SAC is not possible.
+    wave_mode = cfg.fdtcc_wave_dir_mode
+    if not auto_sac:
+        if wave_mode == "fdtcc_sac":
+            if not wave_dir_fixed:
+                raise ValueError(
+                    "FDTCC needs a prebuilt FDTCC SAC wave_dir when "
+                    "fdtcc_wave_dir_mode=fdtcc_sac."
+                )
+        elif wave_mode == "miniseed":
+            # In miniseed mode we can either:
+            # - export temp SAC from waveform_dir_raw (raw_miniseed_export), or
+            # - export from a MiniSEED root provided via wave_dir (legacy_miniseed_export),
+            # else we cannot build wave_dir for FDTCC.
+            if not waveform_dir_raw and not wave_dir_fixed:
+                raise ValueError(
+                    "FDTCC needs waveform_dir_raw for miniseed export."
+                )
+        else:
+            raise ValueError(f"Unsupported fdtcc_wave_dir_mode={wave_mode!r}")
+
+    _fdtcc_prepare_station_and_ttdb(cfg, str(station_dat), str(tt_table))
+
+    temp_bn = cfg.fdtcc_waveform_temp_basename
+    raw_miniseed_export = bool(waveform_dir_raw) and wave_mode == "miniseed"
+    # legacy mode reuses `wave_dir` as a MiniSEED root.
+    # If `waveform_dir_raw` is provided, prefer exporting from it (raw_miniseed_export).
+    legacy_miniseed_export = (
+        (not auto_sac) and wave_mode == "miniseed" and not raw_miniseed_export
+    )
+    if legacy_miniseed_export:
+        wraw = str(wave_dir_fixed)
+        if not os.path.isdir(wraw):
+            raise FileNotFoundError(
+                f"fdtcc_wave_dir_mode=miniseed: wave_dir must be an existing MiniSEED root: "
+                f"{wraw!r}"
+            )
+
+    flags = fdtcc_flags_from_mapping(fc.get("flags"))
+    # FDTCC -F flag: 0 = continuous SAC by date; 1 = event segments by event id
+    waveform_mode = int(getattr(flags, "waveform_mode", 1))
+    cleanup = bool(fc.get("cleanup_input_lists", True))
+    timeout_raw = fc.get("timeout_sec")
+    timeout_sec = float(timeout_raw) if timeout_raw is not None else None
+    bin_raw = fc.get("fdtcc_binary")
+    bin_override = str(bin_raw).strip() if isinstance(bin_raw, str) and bin_raw.strip() else None
+
+    tmpl = cfg.fdtcc_miniseed_filename_template
+    filename_template = tmpl if tmpl else "{network}.{station}.{day}T000000Z.{next_day}T000000Z"
+    pre_sec = float(cfg.fdtcc_sac_pre_sec)
+    post_sec = float(cfg.fdtcc_sac_post_sec)
+    cleanup_sac = bool(cfg.fdtcc_cleanup_sac_waveforms)
+
+    # For miniseed->SAC export modes, we can reuse a single temporary SAC tree across
+    # all (i,j) grids because the runner exports event subsets into it.
+    shared_wave_dir = os.path.join(out, temp_bn)
+    cleanup_shared_wave_dir = (
+        cleanup_sac and (auto_sac or raw_miniseed_export or legacy_miniseed_export)
+    )
+    if cleanup_shared_wave_dir and os.path.isdir(shared_wave_dir):
+        shutil.rmtree(shared_wave_dir, ignore_errors=True)
+
+    def _looks_like_fdtcc_sac_filename(fn: str) -> bool:
+        """
+        Heuristic for FDTCC SAC filenames.
+
+        FDTCC continuous mode (-F0) commonly uses: ``NET.STA.COMP`` (no suffix).
+        Some users also keep ``*.sac`` suffix. We support both.
+        """
+        if not fn:
+            return False
+        low = fn.lower()
+        if low.endswith(".sac"):
+            return True
+        # Ignore obviously non-waveform files.
+        if low.endswith((".mseed", ".miniseed", ".txt", ".json", ".csv", ".png", ".jpg", ".jpeg")):
+            return False
+        # Typical `NET.STA.COMP` (3 dot-separated tokens; last token like BHZ/HHN/DPZ).
+        parts = fn.split(".")
+        if len(parts) == 3 and all(parts):
+            comp = parts[-1]
+            if len(comp) in (2, 3, 4) and comp.isalnum():
+                return True
+        return False
+
+    def _has_any_sac_files(d: str) -> bool:
+        """Short-circuit scan; returns true on first SAC-like file found."""
+        if not d or not os.path.isdir(d):
+            return False
+        for _root, _dirs, files in os.walk(d):
+            for fn in files:
+                if _looks_like_fdtcc_sac_filename(fn):
+                    return True
+        return False
+
+    def _count_sac_files(d: str) -> int:
+        """Count SAC-like files under a directory (small temp trees only)."""
+        if not d or not os.path.isdir(d):
+            return 0
+        c = 0
+        for _root, _dirs, files in os.walk(d):
+            for fn in files:
+                if _looks_like_fdtcc_sac_filename(fn):
+                    c += 1
+        return c
+
+    def _copy_ready_sac_tree(src: str, dst: str, mode: int) -> int:
+        """
+        Copy a pre-built SAC tree into ``dst`` (waveform_temp), return copied SAC count.
+
+        Supports two common FDTCC -F0 layouts:
+        1) src/<YYYYMMDD>/NET.STA.COMP   (copy src tree as-is)
+        2) src is a day-dir itself, e.g. .../20190705/NET.STA.COMP
+           (copy files under dst/20190705)
+        For -F1/event-segment layout, copy src tree as-is.
+        """
+        if not src or not os.path.isdir(src):
+            return 0
+
+        src_abs = os.path.abspath(src)
+        dst_abs = os.path.abspath(dst)
+        base = os.path.basename(src_abs.rstrip("/\\"))
+
+        if os.path.isdir(dst_abs):
+            shutil.rmtree(dst_abs, ignore_errors=True)
+        os.makedirs(dst_abs, exist_ok=True)
+
+        # FDTCC -F0 day-dir passed directly as waveform_dir_raw.
+        if mode == 0 and len(base) == 8 and base.isdigit():
+            day_dst = os.path.join(dst_abs, base)
+            os.makedirs(day_dst, exist_ok=True)
+            for fn in os.listdir(src_abs):
+                sp = os.path.join(src_abs, fn)
+                if os.path.isfile(sp):
+                    shutil.copy2(sp, os.path.join(day_dst, fn))
+            return _count_sac_files(dst_abs)
+
+        # Generic tree copy (works for -F0 root/day-subdirs and -F1 event-subdirs).
+        for name in os.listdir(src_abs):
+            sp = os.path.join(src_abs, name)
+            dp = os.path.join(dst_abs, name)
+            if os.path.isdir(sp):
+                shutil.copytree(sp, dp, dirs_exist_ok=True)
+            else:
+                shutil.copy2(sp, dp)
+        return _count_sac_files(dst_abs)
+
+    def _filter_station_dat_for_f0_sac_availability(
+        station_path: str,
+        event_path: str,
+        wave_root: str,
+    ) -> tuple[int, int]:
+        """
+        Remove stations whose required -F0 day SAC files are missing.
+
+        FDTCC's C code can segfault on missing SAC paths generated from phase/station
+        inputs, so protect the binary by pruning stations before it builds Input.*.
+        """
+        if waveform_mode != 0 or not wave_root or not os.path.isdir(wave_root):
+            return (0, 0)
+        events = read_ph2dt_events(event_path)
+        days = sorted({ot.strftime("%Y%m%d") for ot, _evid in events})
+        if not days:
+            return (0, 0)
+        with open(station_path, "r", encoding="utf-8", errors="replace") as fh:
+            lines = fh.readlines()
+        kept: list[str] = []
+        dropped: list[str] = []
+
+        def _sac_exists(day: str, net: str, sta: str, comp: str) -> bool:
+            day_dir = os.path.join(wave_root, day)
+            candidates = [
+                os.path.join(day_dir, f"{net}.{sta}.{comp}"),
+                os.path.join(day_dir, f"{net}.{sta}.{comp}.sac"),
+                os.path.join(day_dir, f"{net}.{sta}.{comp}.SAC"),
+            ]
+            return any(os.path.isfile(p) and os.path.getsize(p) > 0 for p in candidates)
+
+        for line in lines:
+            s = line.strip()
+            if not s or s.startswith("#"):
+                kept.append(line)
+                continue
+            tok = s.split()
+            if len(tok) < 5:
+                kept.append(line)
+                continue
+            net, sta, comp3 = tok[2], tok[3], tok[4]
+            if len(comp3) < 2:
+                kept.append(line)
+                continue
+            prefix = comp3[:2]
+            comps = [f"{prefix}Z", f"{prefix}E", f"{prefix}N"]
+            ok = True
+            for day in days:
+                if not all(_sac_exists(day, net, sta, comp) for comp in comps):
+                    ok = False
+                    break
+            if ok:
+                kept.append(line)
+            else:
+                dropped.append(f"{net}.{sta}")
+        if dropped:
+            with open(station_path, "w", encoding="utf-8") as fh:
+                fh.writelines(kept)
+            preview = ", ".join(dropped[:8])
+            more = "" if len(dropped) <= 8 else f", ... (+{len(dropped)-8})"
+            print(
+                "hypodd_runner: FDTCC -F0 station preflight dropped "
+                f"{len(dropped)}/{len(lines)} stations with missing day SAC files "
+                f"for {len(days)} days: {preview}{more}",
+                file=sys.stderr,
+            )
+        return (len(kept), len(dropped))
+
+    nx, ny = int(num_grids[0]), int(num_grids[1])
+    counts: list = []
+    ms_root = cfg.fdtcc_miniseed_root
+    raw_root = ""
+    if auto_sac:
+        if not ms_root or not os.path.isdir(ms_root):
+            raise FileNotFoundError(
+                "fdtcc_miniseed_root must be an existing MiniSEED root when "
+                "FDTCC auto-SAC preparation is enabled. "
+                f"Got fdtcc_miniseed_root={ms_root!r}. If you already have an "
+                "FDTCC SAC tree, use fdtcc_wave_dir_mode='fdtcc_sac' and pass "
+                "waveform_dir_raw to that SAC tree instead."
+            )
+    if raw_miniseed_export:
+        raw_root = str(waveform_dir_raw)
+        if not os.path.isdir(raw_root):
+            raise FileNotFoundError(
+                "waveform_dir_raw must be an existing MiniSEED directory when "
+                "fdtcc_wave_dir_mode=miniseed"
+            )
+        # Accept both forms:
+        # 1) root=.../processed_picking (store expects root/<YYYYMMDD>/...)
+        # 2) root=.../processed_picking/20190705 (day dir): detect and strip day
+        base = os.path.basename(raw_root.rstrip("/\\"))
+        if base.isdigit() and len(base) == 8:
+            waveform_store_root = os.path.dirname(raw_root.rstrip("/\\"))
+        else:
+            waveform_store_root = raw_root
+        if not waveform_store_root or not os.path.isdir(waveform_store_root):
+            raise FileNotFoundError(
+                "waveform_dir_raw must resolve to a store root directory "
+                "(root/<YYYYMMDD>/...). Got: "
+                f"{waveform_store_root!r}"
+            )
+
+    for i in range(nx):
+        for j in range(ny):
+            event_sel = os.path.join(out, f"event_{i}-{j}.dat")
+            dt_ct = os.path.join(out, f"dt_{i}-{j}.ct")
+            phase_dat = os.path.join(out, f"hypoDD_phase_{i}-{j}.dat")
+            if not os.path.isfile(dt_ct):
+                print(
+                    f"hypodd_runner: fdtcc skip grid {i}-{j}: missing {dt_ct}",
+                    file=sys.stderr,
+                )
+                counts.append((i, j, 0, 0))
+                continue
+            if not os.path.isfile(event_sel):
+                print(
+                    f"hypodd_runner: fdtcc skip grid {i}-{j}: missing {event_sel}",
+                    file=sys.stderr,
+                )
+                counts.append((i, j, 0, 0))
+                continue
+            if not os.path.isfile(phase_dat):
+                raise FileNotFoundError(
+                    f"FDTCC requires phase file for grid {i}-{j}: {phase_dat}"
+                )
+
+            wave_dir: str
+            skip_grid_fdtcc = False
+            if auto_sac:
+                wave_dir = shared_wave_dir
+                # Runtime override: pass the constructed SAC tree path to FDTCC
+                fc["wave_dir"] = wave_dir
+                if waveform_mode == 0:
+                    n_ev = export_miniseed_to_fdtcc_continuous_sac_tree(
+                        miniseed_root=ms_root,
+                        real_station_dat=str(station_dat),
+                        event_dat_path=event_sel,
+                        wave_out_root=wave_dir,
+                        filename_template=filename_template,
+                        max_workers=int(getattr(cfg, "num_workers", 0) or 0),
+                        skip_existing=True,
+                        parallel_backend=getattr(cfg, "fdtcc_sac_export_backend", "process"),
+                        show_progress=bool(getattr(cfg, "fdtcc_sac_show_progress", False)),
+                    )
+                    print(
+                        f"hypodd_runner: FDTCC grid {i}-{j} MiniSEED -> continuous SAC "
+                        f"(sac_files={n_ev}) at {_fmt_under_output(wave_dir, out_abs)}",
+                        file=sys.stderr,
+                    )
+                else:
+                    n_ev = export_miniseed_to_fdtcc_sac_tree(
+                        miniseed_root=ms_root,
+                        real_station_dat=str(station_dat),
+                        event_dat_path=event_sel,
+                        wave_out_root=wave_dir,
+                        filename_template=filename_template,
+                        pre_sec=pre_sec,
+                        post_sec=post_sec,
+                        show_progress=bool(getattr(cfg, "fdtcc_sac_show_progress", False)),
+                    )
+                    print(
+                        f"hypodd_runner: FDTCC grid {i}-{j} MiniSEED -> SAC "
+                        f"({n_ev} event dirs with traces) at {_fmt_under_output(wave_dir, out_abs)}",
+                        file=sys.stderr,
+                    )
+                if n_ev <= 0:
+                    skip_grid_fdtcc = True
+            elif raw_miniseed_export:
+                # Export SAC from waveform_dir_raw (MiniSEED) into output/waveform_temp.
+                # If waveform_dir_raw is already an FDTCC-compatible SAC tree, copy it directly.
+                wave_dir = shared_wave_dir
+                # Runtime override: pass the constructed SAC tree path to FDTCC
+                fc["wave_dir"] = wave_dir
+                print(
+                    f"hypodd_runner: FDTCC exporting grid {i}-{j} SAC "
+                    f"(waveform_dir_raw={waveform_dir_raw!r} -> store_root={waveform_store_root!r}) "
+                    f"-> {_fmt_under_output(wave_dir, out_abs)!r}",
+                    file=sys.stderr,
+                )
+                n_prebuilt = _count_sac_files(raw_root)
+                if n_prebuilt > 0:
+                    n_ev = _copy_ready_sac_tree(raw_root, wave_dir, waveform_mode)
+                    print(
+                        f"hypodd_runner: FDTCC grid {i}-{j} detected pre-built SAC tree "
+                        f"(waveform_dir_raw={waveform_dir_raw!r}) -> copied to "
+                        f"{_fmt_under_output(wave_dir, out_abs)} (sac_files={n_ev})",
+                        file=sys.stderr,
+                    )
+                else:
+                    if waveform_mode == 0:
+                        n_ev = export_miniseed_to_fdtcc_continuous_sac_tree(
+                            miniseed_root=str(waveform_store_root),
+                            real_station_dat=str(station_dat),
+                            event_dat_path=event_sel,
+                            wave_out_root=wave_dir,
+                            filename_template=filename_template,
+                            max_workers=int(getattr(cfg, "num_workers", 0) or 0),
+                            skip_existing=True,
+                            parallel_backend=getattr(cfg, "fdtcc_sac_export_backend", "process"),
+                            show_progress=bool(getattr(cfg, "fdtcc_sac_show_progress", False)),
+                        )
+                        print(
+                            f"hypodd_runner: FDTCC grid {i}-{j} raw MiniSEED -> continuous SAC "
+                            f"(sac_files={n_ev}) at {_fmt_under_output(wave_dir, out_abs)}",
+                            file=sys.stderr,
+                        )
+                    else:
+                        n_ev = export_miniseed_to_fdtcc_sac_tree(
+                            miniseed_root=str(waveform_store_root),
+                            real_station_dat=str(station_dat),
+                            event_dat_path=event_sel,
+                            wave_out_root=wave_dir,
+                            filename_template=filename_template,
+                            pre_sec=pre_sec,
+                            post_sec=post_sec,
+                            show_progress=bool(getattr(cfg, "fdtcc_sac_show_progress", False)),
+                        )
+                        print(
+                            f"hypodd_runner: FDTCC grid {i}-{j} raw MiniSEED (waveform_dir_raw={waveform_dir_raw!r}) "
+                            f"-> temp SAC at {_fmt_under_output(wave_dir, out_abs)}",
+                            file=sys.stderr,
+                        )
+                        print(
+                            "hypodd_runner: FDTCC export results: n_ev=%s, sac_files=%s, filename_template=%r",
+                            n_ev,
+                            _count_sac_files(wave_dir),
+                            filename_template,
+                            file=sys.stderr,
+                        )
+                if n_ev <= 0:
+                    skip_grid_fdtcc = True
+            elif legacy_miniseed_export:
+                assert wave_dir_fixed is not None
+                wave_dir = shared_wave_dir
+                # Runtime override: pass the constructed SAC tree path to FDTCC
+                fc["wave_dir"] = wave_dir
+                if waveform_mode == 0:
+                    n_ev = export_miniseed_to_fdtcc_continuous_sac_tree(
+                        miniseed_root=str(wave_dir_fixed),
+                        real_station_dat=str(station_dat),
+                        event_dat_path=event_sel,
+                        wave_out_root=wave_dir,
+                        filename_template=filename_template,
+                        max_workers=int(getattr(cfg, "num_workers", 0) or 0),
+                        skip_existing=True,
+                        parallel_backend=getattr(cfg, "fdtcc_sac_export_backend", "process"),
+                        show_progress=bool(getattr(cfg, "fdtcc_sac_show_progress", False)),
+                    )
+                    print(
+                        f"hypodd_runner: FDTCC grid {i}-{j} MiniSEED ({wave_dir_fixed!r}) "
+                        f"-> continuous SAC (sac_files={n_ev}) at {_fmt_under_output(wave_dir, out_abs)}",
+                        file=sys.stderr,
+                    )
+                else:
+                    n_ev = export_miniseed_to_fdtcc_sac_tree(
+                        miniseed_root=str(wave_dir_fixed),
+                        real_station_dat=str(station_dat),
+                        event_dat_path=event_sel,
+                        wave_out_root=wave_dir,
+                        filename_template=filename_template,
+                        pre_sec=pre_sec,
+                        post_sec=post_sec,
+                        show_progress=bool(getattr(cfg, "fdtcc_sac_show_progress", False)),
+                    )
+                    print(
+                        f"hypodd_runner: FDTCC grid {i}-{j} raw MiniSEED ({wave_dir_fixed!r}) "
+                        f"-> temp SAC ({n_ev} event dirs) at {_fmt_under_output(wave_dir, out_abs)}",
+                        file=sys.stderr,
+                    )
+                if n_ev <= 0:
+                    skip_grid_fdtcc = True
+            else:
+                wave_dir = str(wave_dir_fixed)
+                # fdtcc_wave_dir_mode=fdtcc_sac: wave_dir should already be a ready SAC tree.
+                # If it's empty, FDTCC will fail; instead skip and keep catalog-only.
+                if cfg.fdtcc_wave_dir_mode == "fdtcc_sac" and not _has_any_sac_files(wave_dir):
+                    skip_grid_fdtcc = True
+
+            work_dir = os.path.join(out, f"fdtcc_work_{i}-{j}")
+            print(
+                f"hypodd_runner: FDTCC grid {i}-{j} work_dir={_fmt_under_output(work_dir, out_abs)}",
+                file=sys.stderr,
+            )
+            try:
+                if skip_grid_fdtcc:
+                    print(
+                        f"hypodd_runner: skip FDTCC grid {i}-{j}: no waveforms/SAC "
+                        f"(wave_dir={_fmt_under_output(wave_dir, out_abs)!r})",
+                        file=sys.stderr,
+                    )
+                    counts.append((i, j, 0, 0))
+                else:
+                    # Copy FDTCC-required *metadata* into the per-grid work dir.
+                    # - do copy: station.dat, dt_*.ct, phase file, used config json
+                    # - do NOT copy: waveform SAC tree (wave_dir) and travel-time table (tt_table)
+                    os.makedirs(work_dir, exist_ok=True)
+
+                    station_dat_work = os.path.join(
+                        work_dir, os.path.basename(str(station_dat))
+                    )
+                    event_sel_work = os.path.join(
+                        work_dir, os.path.basename(str(event_sel))
+                    )
+                    dt_ct_work = os.path.join(work_dir, os.path.basename(str(dt_ct)))
+                    # FDTCC reads a "phase.dat" style file; for clarity we persist it
+                    # under a .pha extension in the work directory.
+                    phase_bn = os.path.basename(str(phase_dat))
+                    phase_noext, _ = os.path.splitext(phase_bn)
+                    phase_dat_work = os.path.join(work_dir, f"{phase_noext}.pha")
+
+                    shutil.copy2(str(station_dat), station_dat_work)
+                    shutil.copy2(str(event_sel), event_sel_work)
+                    shutil.copy2(str(dt_ct), dt_ct_work)
+                    shutil.copy2(str(phase_dat), phase_dat_work)
+                    _filter_station_dat_for_f0_sac_availability(
+                        station_dat_work,
+                        event_sel_work,
+                        str(wave_dir),
+                    )
+
+                    fc_used: Dict[str, Any] = dict(fc) if isinstance(fc, dict) else {}
+                    # Ensure the config reflects runtime-resolved paths (especially wave_dir for auto_sac).
+                    fc_used["station_dat"] = station_dat_work
+                    fc_used["tt_table"] = str(tt_table)
+                    fc_used["wave_dir"] = str(wave_dir)
+
+                    # Persist the actual CLI flags that will be used.
+                    # (We overwrite to avoid stale values when runner overrides trx/trh from config.)
+                    fc_used["flags"] = fdtcc_flags_to_human_mapping(flags)
+
+                    # Persist toggles that matter for the run.
+                    fc_used["cleanup_input_lists"] = cleanup
+                    if timeout_sec is not None:
+                        fc_used["timeout_sec"] = timeout_sec
+
+                    cfg_used_path = os.path.join(work_dir, "fdtcc_config_used.json")
+                    with open(cfg_used_path, "w", encoding="utf-8") as fjson:
+                        json.dump(fc_used, fjson, indent=2, sort_keys=True)
+
+                    paths = FDTCCInputPaths(
+                        station_dat=station_dat_work,
+                        tt_table=str(tt_table),
+                        wave_dir=str(wave_dir),
+                        event_sel=event_sel_work,
+                        dt_ct=dt_ct_work,
+                        phase_dat=phase_dat_work,
+                    )
+                    res = run_fdtcc(
+                        work_dir=work_dir,
+                        paths=paths,
+                        flags=flags,
+                        fdtcc_binary=bin_override,
+                        cleanup_input_lists=cleanup,
+                        check=True,
+                        timeout_sec=timeout_sec,
+                    )
+                    n_pairs, n_lines = summarize_dt_cc(res.dt_cc_path)
+                    dest = os.path.join(out, f"dt_{i}-{j}.cc")
+                    copy_dt_cc_to(res.dt_cc_path, dest)
+                    print(
+                        f"hypodd_runner: fdtcc grid {i}-{j} -> {_fmt_under_output(dest, out_abs)} "
+                        f"({n_pairs} pair headers, {n_lines} data lines)",
+                        file=sys.stderr,
+                    )
+                    counts.append((i, j, n_pairs, n_lines))
+            finally:
+                # shared temporary waveform SAC tree cleanup happens after all grids
+                # (so we don't delete it mid-loop).
+                pass
+
+    if cleanup_shared_wave_dir and os.path.isdir(shared_wave_dir):
+        shutil.rmtree(shared_wave_dir, ignore_errors=True)
+        print(
+            f"hypodd_runner: removed temporary FDTCC waveform tree {_fmt_under_output(shared_wave_dir, out_abs)}",
+            file=sys.stderr,
+        )
+    print(f"hypodd_runner: fdtcc per-grid summary: {counts}", file=sys.stderr)
+
+
+def _run_cc_after_ph2dt(
+    cfg: hypodd_config.Config,
+    fpha_eff: str,
+    out: str,
+    evid_lists: object,
+    num_grids: object,
+) -> None:
+    """If waveform CC is configured, run FDTCC after ph2dt to write ``dt_{i}-{j}.cc``.
+
+    Parameters
+    ----------
+    cfg : config.Config
+        Must set ``cc_engine`` and FDTCC-related paths when CC is desired.
+    fpha_eff : str
+        Resolved phase file path (reserved for non-FDTCC engines; unused for FDTCC).
+    out : str
+        ``output_folder``; FDTCC reads ph2dt outputs here.
+    evid_lists : object
+        Per-grid event ID lists (from ``evid_lists.npy``); passed for API compatibility.
+    num_grids : object
+        ``(nx, ny)`` grid shape (e.g. ``cfg.num_grids``).
+    """
+    # Build dt_{i}-{j}.cc after ph2dt (FDTCC only)
+    if not _waveform_cc_configured(cfg):
+        return
+
+    # FDTCC path-based CC building doesn't use the legacy non-fdtcc inputs.
+    # (Keeping the signature for backward compatibility with callers.)
+    engine = getattr(cfg, "cc_engine", "fdtcc")
+    if engine in ("none", "skip", "", None):
+        return
+    if engine != "fdtcc":
+        raise ValueError(
+            f"Unsupported cc_engine={engine!r}; use 'fdtcc' or 'none/skip'."
+        )
+    _run_fdtcc_after_ph2dt(cfg, out, num_grids)
+
+
+def _nonempty_dt_cc_present(
+    cfg: hypodd_config.Config, out: str, num_grids: object
+) -> bool:
+    """True if HypoDD can read a non-empty CC file (per-grid or single ``dt.cc``)."""
+    per_grid = getattr(cfg, "hypodd_dt_cc_per_grid", True)
+    if per_grid:
+        for i in range(int(num_grids[0])):
+            for j in range(int(num_grids[1])):
+                p = os.path.join(out, f"dt_{i}-{j}.cc")
+                if os.path.isfile(p) and os.path.getsize(p) > 0:
+                    return True
+        return False
+    p = os.path.join(out, "dt.cc")
+    return os.path.isfile(p) and os.path.getsize(p) > 0
+
+
+def _warn_if_cc_weights_disable_cc(cfg: hypodd_config.Config) -> None:
+    """
+    Default ``hypodd_iter_rows`` use WTCCP=WTCCS=-9 (template hypoDD.inp). In HypoDD,
+    those weights multiply CC observations; non-positive values remove CC from the
+    least-squares system, so idata=3 runs match catalog-only unless you set positive
+    WTCCP/WTCCS (and usually non -9 WRCC/WDCC for CC reweighting).
+    """
+    if cfg.hypodd_idata not in (1, 3):
+        return
+    bad_rows = []
+    for row in cfg.hypodd_iter_rows:
+        niter = int(row[0])
+        wcp, wcs = float(row[1]), float(row[2])
+        if wcp <= 0.0 or wcs <= 0.0:
+            bad_rows.append((niter, wcp, wcs))
+    if not bad_rows:
+        return
+    n0, w0p, w0s = bad_rows[0]
+    print(
+        "hypodd_runner: warning: hypodd_iter_rows has WTCCP or WTCCS <= 0 "
+        f"(e.g. block ending at iteration {n0}: WTCCP={w0p}, WTCCS={w0s}). "
+        "HypoDD multiplies CC observations by these weights — non-positive values "
+        "remove CC from the inversion, so results match catalog-only (like idata=2). "
+        "Set positive WTCCP/WTCCS (e.g. 1.0 and 0.5) to use dt.cc with idata=3.",
+        file=sys.stderr,
+    )
+
+
+def _sync_hypodd_idata_with_dt_cc(
+    cfg: hypodd_config.Config, out: str, num_grids: object
+) -> None:
+    """
+    Synchronize ``hypodd_idata`` with whether non-empty ``dt.cc`` exists on disk.
+
+    - ``hypodd_idata==1`` requires CC (non-empty dt.cc) or raises.
+    - ``hypodd_idata==2`` (catalog-only) becomes ``3`` when non-empty dt.cc exists.
+    - ``hypodd_idata==3`` becomes ``2`` when non-empty dt.cc is missing.
+    """
+    if cfg.hypodd_idata not in (1, 2, 3):
+        return
+
+    has_cc = _nonempty_dt_cc_present(cfg, out, num_grids)
+    if cfg.hypodd_idata == 1:
+        if not has_cc:
+            raise FileNotFoundError(
+                f"hypodd_idata=1 (CC only) requires non-empty dt.cc under {out!r} "
+                "(per-grid dt_i-j.cc or dt.cc); none found. This means the "
+                "CC/FDTCC stage did not produce usable cross-correlation links "
+                "for the selected window. Inspect fdtcc_stdout/stderr, dt_*.cc "
+                "counts, station/waveform coverage, and CC thresholds; do not "
+                "treat catalog dt_*.ct alone as CC-only relocation success."
+            )
+        return
+
+    # For hypodd_idata in (2, 3), choose between 2 and 3 based on dt.cc presence.
+    if has_cc:
+        if cfg.hypodd_idata != 3:
+            print(
+                f"hypodd_runner: dt.cc non-empty detected -> hypodd_idata=3 (was {cfg.hypodd_idata})",
+                file=sys.stderr,
+            )
+        cfg.hypodd_idata = 3
+    else:
+        if cfg.hypodd_idata != 2:
+            print(
+                f"hypodd_runner: no non-empty dt.cc detected -> hypodd_idata=2 (was {cfg.hypodd_idata})",
+                file=sys.stderr,
+            )
+        cfg.hypodd_idata = 2
+
+
+def build_config_from_kwargs() -> hypodd_config.Config:
+    """Return built-in demo defaults for the legacy no-JSON script path.
+
+    Normal callers should provide an explicit JSON/dict config through
+the public ``hypodd_runner`` function APIs.
+    """
+    input_folder = os.path.join(_script_dir(), "data", "input")
+    # This built-in demo keeps waveform CC disabled (no fdtcc_*_* inputs).
+    return hypodd_config.Config(
+        hypo_root="/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/software/hypoDD/HYPODD/src",
+        ctlg_code="eg_pal_ct",
+        fsta=os.path.join(input_folder, "example_pal.sta"),
+        fpha=os.path.join(input_folder, "eg_pal_hyp_full.pha"),
+        dep_corr=5,
+        ot_range="20190704-20190705",
+        lat_range=[35.45, 36.05],
+        lon_range=[-117.8, -117.25],
+        num_grids=[1, 1],
+        xy_pad=[0.06, 0.05],
+        num_workers=5,
+        keep_grids=False,
+        hypodd_idata=2,
+        hypodd_iphase=3,
+        hypodd_inp_mode="programmatic",
+        ph2dt_inp_mode="programmatic",
+        output_folder=os.path.join(_script_dir(), "data", "output"),
+        phase_format="auto",
+        cc_engine="fdtcc",
+    )
+
+
+def run_hypodd_pipeline(cfg: hypodd_config.Config) -> None:
+    """End-to-end pipeline: phase/station prep, ph2dt, optional FDTCC ``dt.cc``, HypoDD per grid, merge, plots.
+
+    Reads ``cfg.fpha`` (with ``phase_format`` handling), writes inputs under ``cfg.output_folder``,
+    runs relocation, merges catalogs, and writes summary figures when matplotlib is available.
+
+    Parameters
+    ----------
+    cfg : config.Config
+        Full runner configuration (paths, grids, HypoDD/FDTCC options).
+    """
+    # Prepare paths and options
+    out = cfg.output_folder
+    os.makedirs(out, exist_ok=True)
+    fsta_file = cfg.fsta
+    ctlg_code = cfg.ctlg_code
+    num_grids = cfg.num_grids
+    num_workers = cfg.num_workers
+    keep_grids = cfg.keep_grids
+
+    # Phase file conversion / selection
+    phase_result = prepare_phase_file(cfg.fpha, cfg.phase_format)
+    fpha_eff = phase_result.effective_path
+    print(
+        "Input phase file prepared (whole file before ot_range/lat/lon selection): "
+        f"detected_format={phase_result.detected_format}, "
+        f"converted={phase_result.converted}, "
+        f"total_events={phase_result.event_count}, "
+        f"total_pick_lines={phase_result.pick_line_count}, "
+        f"effective_path={phase_result.effective_path}",
+        flush=True,
+    )
+
+    # Read phase file and build initial data structures
+    pha_dict, mag_dict = read_fpha(fpha_eff)
+    mk_sta(fsta_file, out)              # Write station file for HypoDD
+    mk_pha(fpha_eff, out, cfg)          # Write phase file in HypoDD format
+    evid_lists = _load_evid_lists(os.path.join(out, "evid_lists.npy"))
+
+    # Run ph2dt to produce dt.ct files
+    run_ph2dt(out, cfg)
+
+    # Build dt.cc files if waveform CC is configured.
+    _run_cc_after_ph2dt(cfg, fpha_eff, out, evid_lists, num_grids)
+    if _waveform_cc_configured(cfg) and not _nonempty_dt_cc_present(
+        cfg, out, num_grids
+    ):
+        print(
+            "hypodd_runner: warning: waveform CC is configured but no non-empty "
+            "dt_*.cc (or ./dt.cc) exists under output_folder — HypoDD will run "
+            "without waveform CC (idata->2). This is catalog-only relocation, "
+            "not FDTCC/CC success. Check waveforms, FDTCC paths, station IDs, "
+            "and CC thresholds.",
+            file=sys.stderr,
+        )
+    if getattr(cfg, "stop_after_cc", False):
+        summary = _summarize_dt_cc_outputs(out, num_grids)
+        summary["stop_after_cc"] = True
+        summary["ctlg_code"] = ctlg_code
+        summary_path = os.path.join(out, "fdtcc_cc_summary.json")
+        with open(summary_path, "w", encoding="utf-8") as fh:
+            json.dump(summary, fh, indent=2)
+        if summary["nonempty_dt_cc_files"] <= 0 or summary["total_data_lines"] <= 0:
+            raise NativeOutputError(
+                "stop_after_cc=True but FDTCC produced no non-empty dt_*.cc data. "
+                "Inspect station/waveform coverage, FDTCC thresholds/windows, "
+                "and FDTCC stdout/stderr before changing HypoDD inversion "
+                f"parameters. summary={os.path.abspath(summary_path)}"
+            )
+        print(
+            "hypodd_runner: stop_after_cc=True; wrote CC summary "
+            f"{os.path.abspath(summary_path)} and skipped HypoDD relocation.",
+            file=sys.stderr,
+        )
+        return
+    _sync_hypodd_idata_with_dt_cc(cfg, out, num_grids)
+    _warn_if_cc_weights_disable_cc(cfg)
+
+    # Run HypoDD for each grid (uses PyTorch DataLoader abstraction)
+    idx_list = [(i, j) for i in range(num_grids[0]) for j in range(num_grids[1])]
+    dataset = Run_HypoDD(evid_lists, idx_list, pha_dict, mag_dict, out, cfg)
+    dataloader = DataLoader(dataset, num_workers=num_workers, batch_size=None)
+    for i, _ in enumerate(dataloader):
+        print("run hypoDD: grid {0[0]}-{0[1]}".format(idx_list[i]))
+
+    # Merge output catalogs from separate grids into a single output
+    merge_hypodd_output(ctlg_code, out, keep_grids=keep_grids)
+
+    # Load produced catalogs for plotting/inspection
+    original_catalog = load_hypodd_original_catalog(ctlg_code, out)
+    reloc_catalog = load_hypodd_reloc_catalog(ctlg_code, out)
+    print(
+        "hypodd_runner: merged catalogs "
+        f"original_rows={len(original_catalog)}, relocated_rows={len(reloc_catalog)}",
+        file=sys.stderr,
+    )
+
+    plot_hypodd_run_summary(ctlg_code, out)
+    print(
+        f"hypodd_runner: wrote {ctlg_code}_hypodd_maps.png and {ctlg_code}_residuals.png",
+        file=sys.stderr,
+    )
+    try:
+        plot_hypodd_key_eval_metrics(ctlg_code, out)
+        print(
+            f"hypodd_runner: wrote {ctlg_code}_eval_*.png (key metrics panels)",
+            file=sys.stderr,
+        )
+    except Exception as e:
+        print(f"hypodd_runner: warning: eval plotting skipped: {e}", file=sys.stderr)
+
+
+def main() -> None:
+    """Legacy human-facing script entry point.
+
+    Kept for manual local experiments. Generated task scripts should not call
+    this function or execute this module through a shell; use the public package
+    API instead.
+    """
+    parser = argparse.ArgumentParser(
+        description="HypoDD runner: optional PAL phase conversion, ph2dt, HypoDD, merge + plot."
+    )
+    parser.add_argument(
+        "--phase-format",
+        choices=("auto", "hypodd", "pal"),
+        default=None,
+        help="Override JSON/default: hypodd=as-is, pal=PAL2HypoDD converter, auto=sniff first line.",
+    )
+    args = parser.parse_args()
+
+    # Build the built-in demo configuration object.
+    cfg = build_config_from_kwargs()
+
+    # Override phase format if provided on CLI
+    if args.phase_format is not None:
+        cfg.phase_format = args.phase_format
+    # Main pipeline execution
+    run_hypodd_pipeline(cfg)
+
+
+if __name__ == "__main__":
+    main()

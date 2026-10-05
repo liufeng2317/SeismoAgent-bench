@@ -1,0 +1,45 @@
+{
+  "wave_root": "../data/waveform_root_or_day_folder",
+  "pha": "../data/example_phase.pha",
+  "out": "../data/output/example_dt_0-0.cc",
+  "stations": "../data/example.sta",
+  "use_stations": true,
+
+  "use_dt_ct": true,
+  "auto_ph2dt": true,
+  "hypodd_config_json": "hypodd_config.example.json",
+  "ph2dt_output_folder": "../data/output",
+  "dt_ct_path": null,
+  "dt_ct_grid": [0, 0],
+
+  "phase_format": null,
+
+  "freqmin": 2.0,
+  "freqmax": 16.0,
+  "max_epicentral_km": 10.0,
+  "min_cc_abs": 0.35,
+  "pre_pick_p": 0.15,
+  "post_pick_p": 0.8,
+  "pre_pick_s": 0.2,
+  "post_pick_s": 1.2,
+  "target_sampling_rate": 100.0,
+  "taper_frac": 0.05,
+  "max_lag_sec": 0.25,
+  "flip_dt_sign": false,
+  "otc_per_pair": 0.0,
+  "phases": ["P"],
+  "component_mode": "p_vertical_s_horizontal",
+
+  "default_network": null,
+  "network_upper": true,
+  "legacy_station_day": false,
+  "station_table_override_pha": false,
+  "distance_pairs_only": false,
+
+  "workers": 1,
+  "parallel_mode": "threads",
+  "cache_mseed_files": true,
+  "max_cached_mseed_files": 32,
+  "show_progress": true,
+  "quiet": false
+}

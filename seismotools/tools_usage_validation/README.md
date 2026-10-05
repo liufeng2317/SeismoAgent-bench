@@ -24,7 +24,7 @@ The checks are deliberately small:
 | `validate_phasenet.py` | Synthetic CPU forward pass and one real Ridgecrest three-component window. |
 | `validate_gamma.py` | Synthetic P/S association and one real stored Ridgecrest event's picks. |
 | `validate_nonlinloc.py` | Bundled `Nonlinlocpy` import, default sibling-binary resolution and template resource, tiny synthetic grids, plus one stored Ridgecrest event and grid. |
-| `validate_hypodd.py` | Synthetic input parsing plus two real Ridgecrest CT event-pair blocks. |
+| `validate_hypodd.py` | Bundled `hypodd_runner` import, public configuration API and template, synthetic native relocation, plus two real Ridgecrest CT event-pair blocks. |
 
 The native locator examples are intentionally underdetermined (one station) so
 that they test executable startup, control-file parsing and file generation,

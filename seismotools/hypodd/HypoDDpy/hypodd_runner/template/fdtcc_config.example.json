@@ -1,0 +1,30 @@
+{
+  "station_dat": "../fdtcc/Demo/station.dat",
+  "tt_table": "../fdtcc/Demo/tt_db/ttdb.txt",
+  "wave_dir": "../fdtcc/Demo/waveforms",
+  "fdtcc_binary": null,
+  "cleanup_input_lists": true,
+  "timeout_sec": null,
+  "flags": {
+    "wb": 0.2,
+    "wa": 1.0,
+    "wf": 0.3,
+    "wbs": 0.5,
+    "was": 1.5,
+    "wfs": 0.5,
+    "delta": 0.01,
+    "threshold": 0.7,
+    "thre_snr": 1.0,
+    "thre_shift": 2.0,
+    "trx": 3.0,
+    "trh": 20.0,
+    "tdx": 0.02,
+    "tdh": 2.0,
+    "band_low": 2.0,
+    "band_high": 8.0,
+    "waveform_mode": 1,
+    "c_event_path": 1,
+    "c_dt_ct_path": 1,
+    "c_phase_path": 1
+  }
+}
