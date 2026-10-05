@@ -10,6 +10,12 @@ Run all checks with:
 bash run_all.sh
 ```
 
+Run the bounded real-data checks with:
+
+```bash
+bash run_ridgecrest.sh
+```
+
 Set `PYTHON` when a different compatible environment is intended:
 
 ```bash
@@ -35,3 +41,10 @@ case-level catalog.
 Results are written to the ignored `outputs/` directory. The existing
 `seismotools/check_tools.py --imports` remains the integrity and model-loading
 check; this directory adds actual minimal execution checks.
+
+`run_ridgecrest.sh` reads one real Ridgecrest station-day and StationXML,
+re-runs PhaseNet on that waveform window, associates one event from the stored
+GaMMA picks, re-runs NonLinLoc for one stored event using the existing grids,
+and replays two event-pair blocks from the stored hypoDD CT inputs. Temporary
+copies are used for native tools, so expert intermediate products are not
+modified. This real-data check is bounded and is not a full-data rerun.
