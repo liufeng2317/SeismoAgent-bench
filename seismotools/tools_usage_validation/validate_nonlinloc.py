@@ -23,10 +23,32 @@ from nonlinlocpy.workflows import copy_template_control_file  # noqa: E402
 from nonlinlocpy.runner import run_nlloc_bin  # noqa: E402
 
 
+native_logs: list[str] = []
+
+
+def run_package_runner(binary_dir: Path, work: Path) -> None:
+    """Exercise the Python runner while capturing native child-process output."""
+    log_path = work / "nonlinlocpy.log"
+    sys.stdout.flush()
+    saved_stdout, saved_stderr = os.dup(1), os.dup(2)
+    try:
+        with log_path.open("w") as stream:
+            os.dup2(stream.fileno(), 1)
+            os.dup2(stream.fileno(), 2)
+            run_nlloc_bin(str(binary_dir), str(work), "nll.in")
+    finally:
+        os.dup2(saved_stdout, 1)
+        os.dup2(saved_stderr, 2)
+        os.close(saved_stdout)
+        os.close(saved_stderr)
+    native_logs.append("$ Nonlinlocpy.run_nlloc_bin NLLoc nll.in\n" + log_path.read_text())
+
+
 def run(binary: Path, control: Path, cwd: Path) -> str:
     result = subprocess.run([str(binary), control.name], cwd=cwd,
                             text=True, stdout=subprocess.PIPE,
                             stderr=subprocess.STDOUT, check=True)
+    native_logs.append(f"$ {binary.name} {control.name} (cwd={cwd})\n{result.stdout}")
     return result.stdout
 
 
@@ -86,7 +108,7 @@ LOCPHASEID P P
         template_dir.mkdir()
         template = copy_template_control_file(template_dir)
         assert template.is_file()
-        run_nlloc_bin(str(BIN), str(work), "nll.in")
+        run_package_runner(BIN, work)
         assert list(work.glob("*.loc.hyp"))
     source_root = EXPORT / "04_locate_nonlinloc"
     source_event = source_root / "events_raw/gamma_0000001"
@@ -99,6 +121,9 @@ LOCPHASEID P P
             shutil.copy2(source_event / name, event / name)
         output = run(BIN / "NLLoc", event / "control.in", event)
         assert list(event.glob("solution.*.loc.hyp")) and "1 events located" in output
+    log_dir = Path(os.environ.get("VALIDATION_LOG_DIR", str(Path(__file__).resolve().parent / "outputs")))
+    log_dir.mkdir(parents=True, exist_ok=True)
+    (log_dir / "validate_nonlinloc.native.log").write_text("\n\n".join(native_logs))
     print(json.dumps({"status": "pass", "tool": "NonLinLoc",
                       "python": {"package_import": True,
                                  "default_bin_resolution": True,
