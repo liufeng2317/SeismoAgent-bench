@@ -1,0 +1,9 @@
+# Simple pick table template for automatic conversion to NLLOC_OBS
+# Columns:
+# station_id  phase  time_sec  [first_motion]
+# Notes:
+# - `time_sec` is seconds after the `hhmm` reference passed to the converter.
+# - `first_motion` is optional; use `U`, `D`, or `?`.
+
+GRX  P  44.9200  U
+GRX  S  48.6900  ?

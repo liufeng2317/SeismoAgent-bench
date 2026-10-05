@@ -16,7 +16,7 @@
       "license_status": "No standalone license file found in local source; redistribution terms need upstream verification."
     },
     "nonlinloc": {
-      "implementation": "NLL7.00_src, actual installed local source",
+      "implementation": "NLL7.00 native binaries plus the project-local Nonlinlocpy Python package",
       "license_status": "Preserve source and README notices."
     },
     "hypodd": {
@@ -1046,214 +1046,394 @@
       "sha256": "df327856acc93b914907f5d004b4f1885f201b5295da55c3f621f6bdf4145093"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/build/html/_static/comment-bright.png",
-      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/comment-bright.png",
-      "bytes": 756,
-      "sha256": "0737b92f8825f5ed0740482819f3fba7826297908bbd44ff00b64ee95d262d60"
+      "path": "nonlinloc/Nonlinlocpy/README.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/README.md",
+      "bytes": 11385,
+      "sha256": "3156829e09e1fac7492d3ba410645772bd463e5adebd292e75b1cbf22fda242a"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/build/html/_static/comment-close.png",
-      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/comment-close.png",
-      "bytes": 829,
-      "sha256": "866319c7cf09c3d5b2926ea9d9f068801c8ee0724dac66604b03ac50b1829577"
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/Makefile",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/Makefile",
+      "bytes": 4613,
+      "sha256": "170f014af767f392e43b281ff5a568215d0790bca7058fa17a6f67a01e520d6b"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/build/html/_static/comment.png",
-      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/comment.png",
-      "bytes": 641,
-      "sha256": "5fb8b0b215a51fc05bc152a12ab32d44cda758721c5df53f2aeab1b1e3490aa5"
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/NonLinLocLogo.gif",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/NonLinLocLogo.gif",
+      "bytes": 1881,
+      "sha256": "e0527207f4e1df95fd384c6addc5db7873d8d752f45f0f694580461f147c117b"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/build/html/_static/down-pressed.png",
-      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/down-pressed.png",
-      "bytes": 222,
-      "sha256": "c89ca40639d0bb71502306afdbc8646f6ef362b79c54a8f9211aa290ad8b3635"
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/Notes.txt",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/Notes.txt",
+      "bytes": 688,
+      "sha256": "9575e1519058256a7c2c98ac3235f6441de90bf2cb1bf77c71a48fd9544a760b"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/build/html/_static/down.png",
-      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/down.png",
-      "bytes": 202,
-      "sha256": "75fc30ab04aa494f8ab239fba636663b950ccff763bd3b95a3c214ee2344ec89"
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/conf.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/conf.py",
+      "bytes": 7324,
+      "sha256": "bb5e7989d2fbfd766eecd0108dcaff2afbeeb56fe0249f2da568cbe3a19880e0"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/build/html/_static/file.png",
-      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/file.png",
-      "bytes": 286,
-      "sha256": "5c4bc9a16aebf38c4b950f59b8e501ca36495328cb9eb622218bce9064a35e3e"
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/convert_docs_to_markdown.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/convert_docs_to_markdown.py",
+      "bytes": 9224,
+      "sha256": "8ffaa4eeea653b5823409d6f098a6156bd7e325757f78e9486d9a5b4acc1101b"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/build/html/_static/minus.png",
-      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/minus.png",
-      "bytes": 90,
-      "sha256": "47e7fc50db3699f1ca41ce9a2ffa202c00c5d1d5180c55f62ba859b1bd6cc008"
-    },
-    {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/build/html/_static/plus.png",
-      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/plus.png",
-      "bytes": 90,
-      "sha256": "54115199b96a130cba02147c47c0deb43dcc9b9f08b5162bba8642b34980ac63"
-    },
-    {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/build/html/_static/up-pressed.png",
-      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/up-pressed.png",
-      "bytes": 214,
-      "sha256": "cfe678a4446900f4081ab8d74ef3d1f8b1002edbf8cae3db292fcca0637310ed"
-    },
-    {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/build/html/_static/up.png",
-      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/build/html/_static/up.png",
-      "bytes": 203,
-      "sha256": "108f280badfe5ec5168738c4f70a59bc6ea9d1e9243ff2b951386fb668e93502"
-    },
-    {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/index.rst",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/index.rst",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/index.rst",
       "bytes": 2695,
       "sha256": "5b114caea649db3f5d45c63f23956c11129eff86165d4c9186f791c7c4c1e612"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/markdown/README.md",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/make.bat",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/make.bat",
+      "bytes": 4522,
+      "sha256": "845c61564d9945035e6c7a1bc80d2effdd57baf2f409e52c38c69ce8382ec249"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/markdown/NonLinLocLogo.gif",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/NonLinLocLogo.gif",
+      "bytes": 1881,
+      "sha256": "e0527207f4e1df95fd384c6addc5db7873d8d752f45f0f694580461f147c117b"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/markdown/README.md",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/README.md",
       "bytes": 485,
       "sha256": "b5d39156a0e981f41c07de685a806602dd04bfe4c53b0a37a8ca5fb0b0572f6b"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/markdown/index.md",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/markdown/_images/NonLinLocLogo.gif",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/_images/NonLinLocLogo.gif",
+      "bytes": 1881,
+      "sha256": "e0527207f4e1df95fd384c6addc5db7873d8d752f45f0f694580461f147c117b"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/markdown/index.md",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/index.md",
       "bytes": 1782,
       "sha256": "2311c5b01b7db568dc06e93b51ae1f200ac7e4bfbaf79dd85e4727d13cbaab56"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/markdown/programs.md",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/markdown/programs.md",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs.md",
       "bytes": 1027,
       "sha256": "54d214b72d4825a20b43ee7f894405daa74d694ea384a8784fbbceed1bda4519"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/markdown/programs/control.ControlFile.md",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/markdown/programs/control.ControlFile.md",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/control.ControlFile.md",
       "bytes": 69793,
       "sha256": "f3014c54af574df83082d17af8b3c34534e90021a3e4cb230eae0584c20be649"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/markdown/programs/core.Grid2GMT.md",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Grid2GMT.md",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Grid2GMT.md",
       "bytes": 11946,
       "sha256": "ee1fa02b7d06f3fdcdb8b2c274d3baa8f9e7abc88110bdef8f5f0f482ac5ee18"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/markdown/programs/core.Grid2Time.md",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Grid2Time.md",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Grid2Time.md",
       "bytes": 6805,
       "sha256": "09eee8e506305bd53e924669bcbce574b72dd75231a6250d7c39bdeec7fb5517"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/markdown/programs/core.Loc2ssst.md",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Loc2ssst.md",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Loc2ssst.md",
       "bytes": 2178,
       "sha256": "7f34b224a36d129df8bede7a736dd95817f12d05dbaa6d93494b21722dfffeec"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/markdown/programs/core.LocSum.md",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.LocSum.md",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.LocSum.md",
       "bytes": 3887,
       "sha256": "ad9d01062cde81f9157525b6ac9c8f3f3d1e6cad07db40bbf39e54231d7b692e"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/markdown/programs/core.NLLoc.md",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.NLLoc.md",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.NLLoc.md",
       "bytes": 30978,
       "sha256": "9910e1464993488fa028fb88feff79989eb26310f619fa433312b32799bd6748"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/markdown/programs/core.Time2EQ.md",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Time2EQ.md",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Time2EQ.md",
       "bytes": 2073,
       "sha256": "24cc3144e7a4eeff34a0978d1c2cb88f7c5c39cd74014a9519f0c069b068d6ff"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/markdown/programs/core.Vel2Grid.md",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Vel2Grid.md",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Vel2Grid.md",
       "bytes": 2899,
       "sha256": "7836eac57e9b3b62c2bb41ced3c0588ab19fc609a7c429655ceb5d94a7450abb"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/markdown/programs/core.Vel2Grid3D.md",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Vel2Grid3D.md",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/markdown/programs/core.Vel2Grid3D.md",
       "bytes": 3189,
       "sha256": "9cf2720c7d22409b4b9c4fa97d19ac596273ef939aea610686f15cb2a86f384d"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/programs.rst",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/programs.rst",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs.rst",
       "bytes": 902,
       "sha256": "1235a6a40d457cddee34678622974f5fbef9dd2e5e99619bdc3ef2e682c3bbab"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/programs/control.ControlFile.rst",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/programs/control.ControlFile.rst",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/control.ControlFile.rst",
       "bytes": 71321,
       "sha256": "7b1b36c182dbfe36c817568c35b2bd0f439b542ce753ae4fe2bcdb1c225d3ab2"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/programs/core.Grid2GMT.rst",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/programs/core.Grid2GMT.rst",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/core.Grid2GMT.rst",
       "bytes": 12821,
       "sha256": "d1152223e3cf1e3ac0e445fe0a6cb3407d4189a3833228d91b087fc4b3237261"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/programs/core.Grid2Time.rst",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/programs/core.Grid2Time.rst",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/core.Grid2Time.rst",
       "bytes": 7482,
       "sha256": "c199b32e44ad5a37fbf63a3fd6cb3b9bbb3e8a6f65ff37520d1ef7bd6b05f82c"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/programs/core.Loc2ssst.rst",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/programs/core.Loc2ssst.rst",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/core.Loc2ssst.rst",
       "bytes": 2344,
       "sha256": "9cf40f2bed685a091d435a734b0d1c9526cb25b6361a3cbce2b1152f093d24b9"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/programs/core.LocSum.rst",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/programs/core.LocSum.rst",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/core.LocSum.rst",
       "bytes": 4495,
       "sha256": "98a160cdb4769c6cd1c6c6189f7658e0bf9d6fb1a27ba962cfec4d0f531bd92e"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/programs/core.NLLoc.rst",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/programs/core.NLLoc.rst",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/core.NLLoc.rst",
       "bytes": 32818,
       "sha256": "5554d675947f540fddb497c5fafd53d9bd89af0d6b2b328de37fbd2c9423476c"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/programs/core.Time2EQ.rst",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/programs/core.Time2EQ.rst",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/core.Time2EQ.rst",
       "bytes": 2608,
       "sha256": "a87e498e04d763d9198c83125224c2385f08857c1404dc3829d8253ebe52d036"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/programs/core.Vel2Grid.rst",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/programs/core.Vel2Grid.rst",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/core.Vel2Grid.rst",
       "bytes": 2991,
       "sha256": "14ff9ca082fce6c630dabb510f9ea23f4e959924da47f8b3d2c62e99fa19f085"
     },
     {
-      "path": "nonlinloc/docs/python_reference/Nonlinloc/programs/core.Vel2Grid3D.rst",
+      "path": "nonlinloc/Nonlinlocpy/docs/Nonlinloc/programs/core.Vel2Grid3D.rst",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/Nonlinloc/programs/core.Vel2Grid3D.rst",
       "bytes": 3374,
       "sha256": "0e3f7ba78b2dafbbf14cc2709da777a038d9f1a522b8366b9e6f6468279f81a5"
     },
     {
-      "path": "nonlinloc/docs/python_reference/README.md",
+      "path": "nonlinloc/Nonlinlocpy/docs/README.md",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/README.md",
-      "bytes": 11313,
-      "sha256": "ade0ad923c8990cc75732bcc42aa97aa3aa5b2523dfde4d000ed8501889e99b9"
+      "bytes": 11042,
+      "sha256": "d0a39765d193d5a0fb2efd7f3ab3bd89b2bb1b57fbb99e1b0aaed03ce1c64fd3"
     },
     {
-      "path": "nonlinloc/docs/python_reference/SKILL.md",
+      "path": "nonlinloc/Nonlinlocpy/docs/SKILL.md",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/docs/SKILL.md",
-      "bytes": 6059,
-      "sha256": "29ff2eef4ebc344b98c67823fa67f8e6eb40959abbb37f4e9a95cba3c89bd84d"
+      "bytes": 6423,
+      "sha256": "a2c38a7f3621de0a07aa74029c2f9ec560ffa2c6860803a41ea49ee6f3d69119"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/example/gamma_nonlinloc/nonlinloc_config.json",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/example/gamma_nonlinloc/nonlinloc_config.json",
+      "bytes": 494,
+      "sha256": "22acf766017a74061f224c718d41ddf33acbb70b8b2e5103535747d594c833c8"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/example/gamma_nonlinloc/run_nonlinloc_example.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/example/gamma_nonlinloc/run_nonlinloc_example.md",
+      "bytes": 7870,
+      "sha256": "07cc70badeb2bc1c162b8882f1eaa2bd6b7f12f04c75d7414e871681d0f9ecc9"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/example/gamma_nonlinloc/run_nonlinloc_example.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/example/gamma_nonlinloc/run_nonlinloc_example.py",
+      "bytes": 1009,
+      "sha256": "31fd94ab5a535ee0ece684014053cb0f03e73a629e9e34cfe3bb0b67a32bca4e"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/example/standard_nonlinloc/inputs/event.obs",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/example/standard_nonlinloc/inputs/event.obs",
+      "bytes": 885,
+      "sha256": "4d1b624ea6edc26f59c4270535524a194e1adcb1598b2c54ee92d482deda5a45"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/example/standard_nonlinloc/inputs/picks_simple.txt",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/example/standard_nonlinloc/inputs/picks_simple.txt",
+      "bytes": 289,
+      "sha256": "b7bef0eb0c938359a3879c03ca3412cd75de984fc0792af64c608a4edb584ef8"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/example/standard_nonlinloc/inputs/stations_native.txt",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/example/standard_nonlinloc/inputs/stations_native.txt",
+      "bytes": 288,
+      "sha256": "149183d66815f44751f06f4a327617f25e3154a2e3d4f5ec96644f148f45d129"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/example/standard_nonlinloc/inputs/velocity_model_1d.txt",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/example/standard_nonlinloc/inputs/velocity_model_1d.txt",
+      "bytes": 317,
+      "sha256": "adc1802f9278693570a5832a69afb5d8ef6d6523ad7da53af3a0900805d13327"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/example/standard_nonlinloc/nonlinloc_config.json",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/example/standard_nonlinloc/nonlinloc_config.json",
+      "bytes": 208,
+      "sha256": "7317a1e9e7ba867589d83e8598740087d8e95f1fdc6d5d2f8431d5f4d7bca612"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/example/standard_nonlinloc/run_nonlinloc_standard_example.md",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/example/standard_nonlinloc/run_nonlinloc_standard_example.md",
+      "bytes": 6988,
+      "sha256": "7915a956faf0c19f9a458c3bddab8e8b1e00dad343a0d87b77658e9756a7b02d"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/example/standard_nonlinloc/run_nonlinloc_standard_example.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/example/standard_nonlinloc/run_nonlinloc_standard_example.py",
+      "bytes": 1126,
+      "sha256": "b0ca9df50a909297a4a57895dbe997ee9cf16fc7330bfd6147e6c7f6fa6dc744"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/__init__.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/__init__.py",
+      "bytes": 3781,
+      "sha256": "111dccabf04928262cb0c85d79a63991e5555a74840c0c4d458d347f9f8f1a5d"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/control.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/control.py",
+      "bytes": 3800,
+      "sha256": "5226aeced53221281f62aac6d11069586855da4f5c7e65ff8b10ac98505bd11c"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/gamma_nonlinloc.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/gamma_nonlinloc.py",
+      "bytes": 31448,
+      "sha256": "093fa34ba7c6f1717f30995ad8d927e5dedaedf757bb7a23e9ce4b394d1e9630"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/hyp.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/hyp.py",
+      "bytes": 9037,
+      "sha256": "15f07ad355fdaec7fbbcca70e85e8f7d0297cda78a28ae0f1d7bdaef393ef1cd"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/models.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/models.py",
+      "bytes": 4383,
+      "sha256": "8bbb01d36221d99c178b2312a13e70bf27499460ea34642c7377d1ebc42d7fe6"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/observations.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/observations.py",
+      "bytes": 6149,
+      "sha256": "8aba01f6ce5dd0919c9ab639e75c0cfad9526d751865052cd26157e122e02eec"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/parallel.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/parallel.py",
+      "bytes": 13072,
+      "sha256": "9060f8208b0a053a76f3041ee60577edcff4ca50d186da045d0c5e24c27f7518"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/run_nlloc_cli.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/run_nlloc_cli.py",
+      "bytes": 2091,
+      "sha256": "2d2da7eb268b993233feda2f1bc7414e78979ba27166c784e5870ebc44cb4749"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/runner.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/runner.py",
+      "bytes": 2518,
+      "sha256": "2f489c26b76159eb875a9641184c28c18cd0d3d54cb334eb443ef4982e5b8397"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/standard_nonlinloc.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/standard_nonlinloc.py",
+      "bytes": 8043,
+      "sha256": "dae6af1b3b7ebe3cc8b23baf54a36979e677b0049e5e9fca4566cef2a5dcd27b"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/stations.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/stations.py",
+      "bytes": 4500,
+      "sha256": "24a45f55aa0aa739dca0fec18b92793f7d3aa0f473a7456e04ade03bec6f6e0a"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/template/event.obs.example",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/template/event.obs.example",
+      "bytes": 193,
+      "sha256": "d68ed2652426e6aa05090c8383cd55379f86fb9dead992b63e675738dff9c7f2"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/template/nlloc.in",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/template/nlloc.in",
+      "bytes": 20980,
+      "sha256": "c4f827154be987c12b3426e5cdb7f5b456885c11f716fb27e86c123770859373"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/template/picks_simple.example.txt",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/template/picks_simple.example.txt",
+      "bytes": 304,
+      "sha256": "5133970ddf0cf7b633b65feccaec1f2e809036f934697a371af61d25dc99d1b8"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/template/stations_native.example.txt",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/template/stations_native.example.txt",
+      "bytes": 113,
+      "sha256": "63acf84050c281c56b1c13029f88fd9ac748f0d0131f449118bae30e557b76ce"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/template/velocity_model_1d.example.txt",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/template/velocity_model_1d.example.txt",
+      "bytes": 735,
+      "sha256": "3cd9ec0fc75e7ce39ee7d6e117b1665e444ccc0631663e6fd197ca2873b2f89e"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/utils.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/utils.py",
+      "bytes": 16778,
+      "sha256": "d266b6a200f520f7ca85bd34c70e5b95fd9395e20c2a2cd107dc97d45ce43700"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/velocity.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/velocity.py",
+      "bytes": 4113,
+      "sha256": "e1684a5915dd9097c9746436592a38c86db240af26d33ee136402839f29380fb"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/nonlinlocpy/workflows.py",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/workflows.py",
+      "bytes": 9575,
+      "sha256": "009ec4070d36995ff7dd66079d5b9e265534710f6a90020ec7288fd9d943d069"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/pyproject.toml",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/pyproject.toml",
+      "bytes": 746,
+      "sha256": "c53e399bca6b6c6420db6fe9afa8ea9b2488adc5a1736be4c1172432eba81acf"
+    },
+    {
+      "path": "nonlinloc/Nonlinlocpy/requirements.txt",
+      "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/requirements.txt",
+      "bytes": 23,
+      "sha256": "4d40ae450c8bfcc22849b73cc4779d95ca929d4476f3e9d642cb73708013d051"
     },
     {
       "path": "nonlinloc/source/src/CHANGE_NOTES.txt",
@@ -1899,7 +2079,7 @@
   },
   "documentation_scope": {
     "gamma": "All 30 local DeepWiki Markdown pages; docs tutorial notebooks/assets; source/tests Python/notebooks; retrieval description text. Excludes example datasets, historical result tables, archives and vectors.",
-    "nonlinloc": "Installed source plus available Nonlinlocpy docs (Markdown/RST), not the wrapper runtime. Missing upstream manual pages remain unavailable.",
+    "nonlinloc": "Installed native source and binaries plus the copied Nonlinlocpy Python package and documentation.",
     "phase_picking": "Original model modules, selected expert weights, top-level inference examples and inference tutorial; excludes backup wrappers, unused weights and agent/RAG notebooks.",
     "hypodd": "Previously copied native distribution source/manual and executed native source/header; excludes optional hypodd_runner/FDTCC/backup implementations not used by the native expert branch."
   }

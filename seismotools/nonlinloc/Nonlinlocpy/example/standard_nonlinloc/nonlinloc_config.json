@@ -1,0 +1,10 @@
+{
+  "input_dir": "./inputs",
+  "run_dir": "./run_case",
+  "nlloc_bin": "",
+  "date": "201907040234",
+  "utm_zone_number": null,
+  "utm_zone_letter": null,
+  "use_native_obs": false,
+  "prepare_only": false
+}

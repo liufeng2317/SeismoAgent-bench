@@ -1,0 +1,23 @@
+# 1-D velocity model template for NonLinLoc / Vel2Grid
+# Columns:
+# depth_km  vp_kms  vs_kms
+# Notes:
+# - depth_km is the top depth of each layer.
+# - Units are km and km/s.
+# - This table is a simple editable source template.
+# - Convert it to LAYER lines with `read_depth_vp_vs_columns()` or
+#   `layers_1d_to_vel2grid_lines()` from `nonlinlocpy.velocity`, then write the result
+#   into the Vel2Grid LAYER block inside `nlloc.in`.
+
+-4.0  3.108621  2.387093
+0.0   4.521995  2.670059
+1.0   4.832371  2.855288
+2.0   5.097454  3.012303
+3.0   5.320798  3.143485
+4.0   5.505960  3.251214
+5.0   5.656497  3.337869
+6.0   5.775965  3.405831
+7.0   5.867919  3.457481
+8.0   5.935916  3.495197
+9.0   5.983511  3.521362
+10.0  6.014262  3.538354

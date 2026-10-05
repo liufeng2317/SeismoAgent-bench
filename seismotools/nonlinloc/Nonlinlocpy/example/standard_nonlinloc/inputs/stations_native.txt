@@ -1,0 +1,7 @@
+# station_id  longitude  latitude  elevation_m
+# Real stations used by the first gamma_nonlinloc event
+CLC   -117.597510  35.815740   775.0
+TOW2  -117.764880  35.808560   685.0
+WRC2  -117.650380  35.947900   943.0
+B916  -117.668500  36.192500  1859.9
+B918  -117.601700  35.935700  1042.6

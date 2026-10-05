@@ -5,7 +5,7 @@ description: Use when working with NonLinLoc earthquake location workflows in th
 
 # NonLinLoc
 
-Use this reference when the task involves the NonLinLoc toolchain rather than a single executable. The maintained project-local runner is `seismotools/nonlinloc/python/nonlinloc_runner.py`; this directory documents an external helper package and is not that package's source code.
+Use this skill when the task involves the NonLinLoc toolchain rather than a single executable. The project-local Python package is under `seismotools/nonlinloc/Nonlinlocpy/nonlinlocpy/`; its native executables are in the sibling `seismotools/nonlinloc/bin/` directory.
 
 ## What NonLinLoc Is
 
@@ -32,12 +32,16 @@ The key programs are:
 - Use `NLDiffLoc` for clustered events with usable differential times or waveform-correlation picks.
 - Use `Vel2Grid3D` only when a credible 3-D velocity model already exists and has been resampled to a regular grid format that NonLinLoc can use.
 
-## Project entry point
+## Repo Entry Points
 
-Use `seismotools/nonlinloc/python/nonlinloc_runner.py` for the maintained
-project-local interface. It runs prepared controls in the order `Vel2Grid`,
-`Grid2Time` and `NLLoc`; model selection, control-file generation and result
-parsing remain task-specific.
+- `workflows.py`: user-facing `NLLocConfig` / `run_nlloc` facade for prepared inputs.
+- `models.py`, `control.py`, `velocity.py`, `stations.py`, `observations.py`, `runner.py`, `hyp.py`: focused implementation modules.
+- `run_nlloc_cli.py`: optional thin CLI wrapper that delegates to `run_nlloc`.
+- `template/nlloc.in`: control-file skeleton.
+- `template/velocity_model_1d.example.txt`: editable 1-D depth/Vp/Vs template.
+- `template/stations_native.example.txt`: station table example.
+- `template/picks_simple.example.txt`: simple pick table for automatic conversion to `NLLOC_OBS`.
+- `template/event.obs.example`: arrival example.
 
 ## Required Inputs
 

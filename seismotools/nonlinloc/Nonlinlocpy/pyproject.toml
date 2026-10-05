@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nonlinlocpy"
+version = "0.1.0"
+description = "Python helpers and reusable workflows for preparing and running NonLinLoc."
+readme = "docs/README.md"
+requires-python = ">=3.8"
+
+[project.optional-dependencies]
+examples = [
+    "matplotlib",
+    "obspy",
+    "pandas",
+]
+
+[project.scripts]
+run-nonlinlocpy-cli = "nonlinlocpy.run_nlloc_cli:main"
+run-nlloc-cli = "nonlinlocpy.run_nlloc_cli:main"
+
+[tool.setuptools]
+packages = ["nonlinlocpy"]
+include-package-data = true
+
+[tool.setuptools.package-dir]
+nonlinlocpy = "nonlinlocpy"
+
+[tool.setuptools.package-data]
+nonlinlocpy = [
+    "template/nlloc.in",
+    "template/*.example",
+    "template/*.txt",
+]

@@ -1,8 +1,4 @@
-# NonLinLoc Python Reference
-
-This directory contains documentation copied from a local Nonlinlocpy
-reference tree. It is not the implementation used by this project. For the
-maintained project-local interface, use `../../python/nonlinloc_runner.py`.
+# NonLinLoc Python Helpers
 
 ## Overview
 
@@ -39,7 +35,7 @@ Both examples default to:
 | `nonlinlocpy/parallel.py` | Chunked/parallel `NLLoc` helpers |
 | `nonlinlocpy/utils.py` | Shared filesystem, grid, binary-resolution, and CSV helpers |
 | `nonlinlocpy/template/` | Control-file and input templates |
-| `nonlinlocpy/software/NLL7.00_src/src/` | Optional bundled compiled NonLinLoc binaries |
+| `../bin/` | Project-managed compiled NonLinLoc binaries |
 | `example/gamma_nonlinloc/` | Gamma-based example workflow |
 | `example/standard_nonlinloc/` | Native-format example workflow |
 | `pyproject.toml` | Local package configuration |
@@ -49,13 +45,13 @@ Both examples default to:
 ### Core Package
 
 ```bash
-python -m pip install -e seismoagent/library/basic_fun/Nonlinlocpy --no-build-isolation
+python -m pip install -e seismotools/nonlinloc/Nonlinlocpy --no-build-isolation
 ```
 
 ### With Example Dependencies
 
 ```bash
-python -m pip install -e "seismoagent/library/basic_fun/Nonlinlocpy[examples]" --no-build-isolation
+python -m pip install -e "seismotools/nonlinloc/Nonlinlocpy[examples]" --no-build-isolation
 ```
 
 ## Package Entry Points
