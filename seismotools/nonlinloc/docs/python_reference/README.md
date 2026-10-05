@@ -1,4 +1,8 @@
-# NonLinLoc Python Helpers
+# NonLinLoc Python Reference
+
+This directory contains documentation copied from a local Nonlinlocpy
+reference tree. It is not the implementation used by this project. For the
+maintained project-local interface, use `../../python/nonlinloc_runner.py`.
 
 ## Overview
 
