@@ -11,9 +11,9 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-BIN = ROOT / "seismotools" / "hypodd" / "native" / "bin" / "hypoDD"
+BIN = ROOT / "seismotools" / "hypodd" / "runtime" / "bin" / "hypoDD"
 PH2DT = BIN.with_name("ph2dt")
-PYTHON_PACKAGE = ROOT / "seismotools" / "hypodd" / "HypoDDpy"
+PYTHON_PACKAGE = ROOT / "seismotools" / "hypodd" / "runtime" / "python" / "HypoDDpy"
 EXPORT = Path(os.environ.get("RIDGECREST_EXPORT_ROOT", str(ROOT / "workflows/tasks/2019_ridgecrest_california/expert/export/01_baseline")))
 
 sys.path.insert(0, str(PYTHON_PACKAGE))
