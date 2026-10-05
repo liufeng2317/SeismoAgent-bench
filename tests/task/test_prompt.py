@@ -24,7 +24,8 @@ class PromptRenderingTests(unittest.TestCase):
             }), encoding="utf-8")
             rendered = render_agent_prompt(root / "task.json", root / "manifest.json",
                                            extra_instructions="Use a concise report.")
-            self.assertTrue(rendered.startswith("# Task: prompt-task\n"))
+            self.assertTrue(rendered.startswith("## Framework execution rules\n"))
+            self.assertLess(rendered.index("## Framework execution rules"), rendered.index("# Task: prompt-task"))
             self.assertNotIn("# SeismoAgentBench Task", rendered)
             self.assertIn("Inspect the data.", rendered)
             self.assertIn("available under `$BENCH_OUTPUT/input/`", rendered)

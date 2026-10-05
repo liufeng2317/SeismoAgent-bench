@@ -8,14 +8,29 @@ from typing import Any, Mapping
 from .validation import load_json, load_task, validate_manifest
 
 
+_DEFAULT_FRAMEWORK_PROMPT = (Path(__file__).resolve().parents[1] / "configs" / "prompts" / "framework.md")
+
+
+def _load_framework_prompt(path: str | Path | None) -> str:
+    source = _DEFAULT_FRAMEWORK_PROMPT if path is None else Path(path)
+    try:
+        text = source.read_text(encoding="utf-8").strip()
+    except OSError as exc:
+        raise FileNotFoundError(f"framework prompt not found: {source}") from exc
+    if not text:
+        raise ValueError(f"framework prompt must not be empty: {source}")
+    return text
+
+
 def _cell(value: Any) -> str:
     return str(value if value is not None else "").replace("|", "\\|").replace("\n", " ")
 
 
 def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None = None,
                         *, extra_instructions: str | None = None,
-                        runtime_context: Mapping[str, Any] | None = None) -> str:
-    """Render the task prompt and optional manifest/contract hints."""
+                        runtime_context: Mapping[str, Any] | None = None,
+                        framework_prompt_path: str | Path | None = None) -> str:
+    """Render framework rules, task instructions and run-specific context."""
     task_source = Path(task_path).resolve()
     task = load_task(task_source)
     manifest = None
@@ -25,7 +40,10 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
 
     runtime = runtime_context or {}
     python = runtime.get("python") if isinstance(runtime.get("python"), Mapping) else {}
+    framework_prompt = _load_framework_prompt(framework_prompt_path)
     lines = [
+        framework_prompt,
+        "",
         f"# Task: {task.get('title') or task['task_id']}",
         "",
         task["task_prompt"].strip(),
