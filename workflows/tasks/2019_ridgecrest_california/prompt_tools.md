@@ -21,30 +21,35 @@ The supplied waveform and station metadata are the scientific observations avail
 
 ### Available tools
 
-Local seismological software, model files, documentation and executables are available under the project `seismotools` directory. This tools-enabled task is intended to test whether an Agent can use the supplied seismological software, rather than replace it with an unrelated ad-hoc detector.
+This tools-enabled task evaluates whether the Agent can apply the supplied seismological software to the complete waveform collection. The tools are the preferred scientific implementations for the corresponding processing stages; a simpler custom implementation must not silently replace them.
 
-Available resources include:
+#### Tool resources
+
+The project provides source code, documentation, model files and executable interfaces at these locations:
+
 - **PhaseNet:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/phase_picking/`
 - **GaMMA:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/gamma/`
 - **NonLinLoc:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/nonlinloc/`
 - **hypoDD:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/hypodd/`
 - **General scientific Python:** the configured environment includes commonly used scientific and seismological Python packages.
 
-You may inspect the source code, documentation, model metadata, example interfaces and executables provided with these tools in order to determine whether and how they should be used.
+Inspect the supplied documentation, model metadata, examples and executable interfaces before processing. Do not modify the shared tool directories, model weights, binaries or evaluation environment.
 
-Use the following tool chain as the default workflow:
+#### Required processing path
+
+Attempt the following stages in order and process the complete usable input, including batches or partitions:
 
 1. Use **PhaseNet** (or its supplied command-line/API interface) for neural-network P and S phase picking on the waveform data. Do not replace the full-data picking stage with a simple amplitude threshold, STA/LTA detector or custom peak finder unless PhaseNet has been tested and a documented execution failure prevents its use.
 2. Use **GaMMA** to associate the resulting phase picks into candidate events. Preserve the association parameters and the input/output file locations.
 3. Use **NonLinLoc** for absolute event location with an explicit velocity model. If appropriate, use **hypoDD** for relative relocation after absolute locations and differential picks are available; describe whether the final catalog contains absolute locations, relative locations, or both.
 
-The Agent may add transparent preprocessing or quality-control steps around this chain. It must not silently substitute a custom detector or locator merely because that is simpler. If a required tool cannot be executed, first record the command or interface tested, the exact error, and the affected data scope; then use the least-complex documented fallback and mark the affected results as limited.
+The Agent may add transparent preprocessing and quality-control steps around this path. It must state the selected parameters and explain any change to the order or scope of the stages.
 
-Tool resources are methodological references, not scientific observations for this case. The waveform data and station metadata under the declared `input/` directory are the case-specific observations available for constructing the catalog.
+#### Failure handling and provenance
 
-Do not use existing Ridgecrest catalogs, published phase picks, reference event locations, expert workflow outputs, or other case-specific observational products to construct or tune the result. General seismological knowledge and generic methodological assumptions or models may be used when needed, but any consequential choices must be independently justified from the task and available observations.
+If a required tool cannot be executed, first record the tested command or interface, the exact error and the affected files or time intervals. Then use the least-complex documented fallback, mark the affected results as limited and explain how the fallback changes the scientific interpretation. Record the tools actually executed, their versions, commands, configurations, logs and output locations. Tool resources are methodological references; the waveform data and station metadata under `input/` are the only case-specific observations for constructing the catalog.
 
-Do not modify shared tool sources, model weights, binaries, or the evaluation environment. Record sufficient information to identify and reproduce any tools actually used.
+Do not use existing Ridgecrest catalogs, published phase picks, reference event locations, expert workflow outputs or other case-specific observational products to construct or tune the result. General seismological knowledge and generic methodological assumptions or models may be used when needed, but consequential choices must be justified from the task and available observations.
 
 ### Scientific task
 
