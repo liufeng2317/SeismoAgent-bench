@@ -44,7 +44,7 @@ Attempt the first three stages in order and process the complete usable input wi
 3. Use **NonLinLoc** for absolute event location with an explicit velocity model.
 4. After absolute locations are available, **hypoDD** may be used as an additional relative-relocation stage when sufficient differential-pick support exists. Describe whether the final catalog contains absolute locations, relative locations, or both.
 
-The Agent may add transparent preprocessing and quality-control steps around this path. It must state the selected parameters and explain any change to the order or scope of the stages. The first three stages are mandatory for this task; a custom detector, association method or locator cannot be substituted for them.
+The Agent may add transparent preprocessing and quality-control steps around this path. It must state the selected parameters and explain any change to the order or scope of the stages. Before substantial processing, document the planned workflow, tool interfaces and major scientific decisions. Record significant revisions and report any files or intervals that could not be processed. The first three stages are mandatory for this task; a custom detector, association method or locator cannot be substituted for them.
 
 #### Repair loop and provenance
 
@@ -53,12 +53,6 @@ If a required stage fails, diagnose the error and repair the run-local code, con
 The Agent may stop before 20 attempts when all mandatory stages succeed. If the repair limit is reached, mark the run as failed or incomplete, preserve the partial outputs and diagnostics, and explain the unresolved error. Do not substitute a custom method, skip a mandatory stage or present an upstream partial catalog as the final result. The repair loop must not modify the shared tool directories, model weights, binaries, input observations or evaluation environment. Record the tools actually executed, their versions, commands, configurations, logs and output locations. Tool resources are methodological references; the waveform data and station metadata under `input/` are the only case-specific observations for constructing the catalog.
 
 Do not use existing Ridgecrest catalogs, published phase picks, reference event locations, expert workflow outputs or other case-specific observational products to construct or tune the result. General seismological knowledge and generic methodological assumptions or models may be used when needed, but consequential choices must be justified from the task and available observations.
-
-### Scientific task
-
-Independently design and execute an appropriate workflow to construct the earthquake catalog from the supplied waveform observations and station metadata.
-
-You are responsible for selecting the preprocessing parameters, model configuration, quality-control rules and, where applicable, the relative-relocation strategy. Before substantial processing, briefly document the planned workflow, the tool interfaces to be used, and the rationale for the major scientific decisions. You may revise the workflow when intermediate results indicate that changes are needed; record each significant revision and its rationale. Process every usable input file that overlaps the fixed window, report any files or intervals that could not be processed, and state the actual coverage in the final report.
 
 ### Reproducibility
 
