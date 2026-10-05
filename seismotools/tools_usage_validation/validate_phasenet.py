@@ -53,7 +53,7 @@ def main() -> None:
     print(json.dumps({"status": "pass", "tool": "PhaseNet", "device": "cpu",
                       "smoke": {"input_shape": list(waveform.shape), "output_shape": list(probabilities.shape)},
                       "ridgecrest": {"station": "CI.CCC", "window_start": str(real_start),
-                                     "input_shape": list(real_waveform.shape), "channels": ["HHZ", "HHN", "HHE"]}}))
+                                     "input_shape": list(real_waveform.shape), "channels": ["HHZ", "HHN", "HHE"]}}, indent=2))
 
 
 if __name__ == "__main__":

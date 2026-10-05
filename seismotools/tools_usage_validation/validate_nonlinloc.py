@@ -71,7 +71,7 @@ LOCPHASEID P P
     print(json.dumps({"status": "pass", "tool": "NonLinLoc",
                       "smoke": {"velocity_grid": True, "travel_time_grid": True, "locator_started": True,
                                  "note": "one-station synthetic input is intentionally underdetermined"},
-                      "ridgecrest": {"source_event": "gamma_0000001", "located_events": 1}}))
+                      "ridgecrest": {"source_event": "gamma_0000001", "located_events": 1}}, indent=2))
 
 
 if __name__ == "__main__":

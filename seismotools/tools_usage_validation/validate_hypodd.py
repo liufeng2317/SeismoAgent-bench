@@ -64,7 +64,7 @@ def main() -> None:
                       "smoke": {"catalog_differential_times_parsed": True, "relocation_started": True,
                                  "note": "one-station synthetic input is intentionally underdetermined"},
                       "ridgecrest": {"event_pairs": len(blocks), "events_parsed": len(event_lines),
-                                     "mode": "CT", "note": "bounded replay of real differential-time input"}}))
+                                     "mode": "CT", "note": "bounded replay of real differential-time input"}}, indent=2))
 
 
 if __name__ == "__main__":

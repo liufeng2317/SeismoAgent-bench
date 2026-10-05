@@ -64,7 +64,7 @@ def main() -> None:
     print(json.dumps({"status": "pass", "tool": "GaMMA",
                       "smoke": {"input_picks": len(picks), "events": len(events), "assignments": len(assignments)},
                       "ridgecrest": {"source_event": str(selected), "input_picks": len(converted),
-                                     "events": len(real_events), "assignments": len(real_assignments)}}))
+                                     "events": len(real_events), "assignments": len(real_assignments)}}, indent=2))
 
 
 if __name__ == "__main__":
