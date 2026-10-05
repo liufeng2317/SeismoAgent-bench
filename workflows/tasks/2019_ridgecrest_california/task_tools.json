@@ -2,7 +2,7 @@
   "task_id": "ridgecrest_2019_catalog_construction",
   "version": "1",
   "title": "Ridgecrest earthquake-catalog construction with local tools",
-  "summary": "Construct a reproducible candidate earthquake catalog from the available Ridgecrest waveform and station data using any suitable local seismological tools.",
+  "summary": "Construct a reproducible candidate earthquake catalog from the available Ridgecrest waveform and station data by attempting the supplied local seismological tool chain.",
   "task_prompt_file": "prompt_tools.md",
   "category": "seismology",
   "software": [

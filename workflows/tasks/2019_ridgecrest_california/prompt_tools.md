@@ -21,7 +21,7 @@ The supplied waveform and station metadata are the scientific observations avail
 
 ### Available tools
 
-Local seismological software, model files, documentation and executables are available under the project `seismotools` directory. You may inspect these resources and use any of them when scientifically appropriate. Their availability does not imply that every tool should be used, or that they define a required workflow.
+Local seismological software, model files, documentation and executables are available under the project `seismotools` directory. This tools-enabled task is intended to test whether an Agent can use the supplied seismological software, rather than replace it with an unrelated ad-hoc detector.
 
 Available resources include:
 - **PhaseNet:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/phase_picking/`
@@ -31,6 +31,14 @@ Available resources include:
 - **General scientific Python:** the configured environment includes commonly used scientific and seismological Python packages.
 
 You may inspect the source code, documentation, model metadata, example interfaces and executables provided with these tools in order to determine whether and how they should be used.
+
+Use the following tool chain as the default workflow:
+
+1. Use **PhaseNet** (or its supplied command-line/API interface) for neural-network P and S phase picking on the waveform data. Do not replace the full-data picking stage with a simple amplitude threshold, STA/LTA detector or custom peak finder unless PhaseNet has been tested and a documented execution failure prevents its use.
+2. Use **GaMMA** to associate the resulting phase picks into candidate events. Preserve the association parameters and the input/output file locations.
+3. Use **NonLinLoc** for absolute event location with an explicit velocity model. If appropriate, use **hypoDD** for relative relocation after absolute locations and differential picks are available; describe whether the final catalog contains absolute locations, relative locations, or both.
+
+The Agent may add transparent preprocessing or quality-control steps around this chain. It must not silently substitute a custom detector or locator merely because that is simpler. If a required tool cannot be executed, first record the command or interface tested, the exact error, and the affected data scope; then use the least-complex documented fallback and mark the affected results as limited.
 
 Tool resources are methodological references, not scientific observations for this case. The waveform data and station metadata under the declared `input/` directory are the case-specific observations available for constructing the catalog.
 
@@ -42,11 +50,11 @@ Do not modify shared tool sources, model weights, binaries, or the evaluation en
 
 Independently design and execute an appropriate workflow to construct the earthquake catalog from the supplied waveform observations and station metadata.
 
-You are responsible for determining the scientific methods, software, models, parameters, and quality-control procedures needed to complete the task. Base these choices on the characteristics of the available data and established seismological practice. Before substantial processing, briefly document the planned workflow and the rationale for the major scientific decisions. You may revise the workflow when intermediate results indicate that changes are needed; record significant revisions and their rationale.
+You are responsible for selecting the preprocessing parameters, model configuration, quality-control rules and, where applicable, the relative-relocation strategy. The default PhaseNet–GaMMA–NonLinLoc chain above must be attempted before any fallback is chosen. Before substantial processing, briefly document the planned workflow, the tool interfaces to be used, and the rationale for the major scientific decisions. You may revise the workflow when intermediate results indicate that changes are needed; record each significant revision and its rationale. Process the complete usable input, including batches or partitions, and report any files or intervals that could not be processed.
 
 ### Reproducibility
 
-The workflow must be executed and reproducible from the supplied inputs. Preserve sufficient code, configuration, tool versions, commands and provenance under the assigned output directory so that the processing can be rerun and the origin of the final catalog can be understood. Ensure that the complete usable dataset is covered, including when processing is performed in multiple batches or partitions.
+The workflow must be executed and reproducible from the supplied inputs. Preserve sufficient code, configuration, tool versions, commands, tool logs and provenance under the assigned output directory so that the processing can be rerun and the origin of the final catalog can be understood. Record which supplied tools were actually executed, not only which tools were inspected. Ensure that the complete usable dataset is covered, including when processing is performed in multiple batches or partitions.
 
 ### Required scientific outputs
 
