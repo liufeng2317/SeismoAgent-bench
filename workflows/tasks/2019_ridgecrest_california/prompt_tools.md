@@ -44,11 +44,13 @@ Attempt the first three stages in order and process the complete usable input wi
 3. Use **NonLinLoc** for absolute event location with an explicit velocity model.
 4. After absolute locations are available, **hypoDD** may be used as an additional relative-relocation stage when sufficient differential-pick support exists. Describe whether the final catalog contains absolute locations, relative locations, or both.
 
-The Agent may add transparent preprocessing and quality-control steps around this path. It must state the selected parameters and explain any change to the order or scope of the stages.
+The Agent may add transparent preprocessing and quality-control steps around this path. It must state the selected parameters and explain any change to the order or scope of the stages. The first three stages are mandatory for this task; a custom detector, association method or locator cannot be substituted for them.
 
-#### Failure handling and provenance
+#### Repair loop and provenance
 
-If a required tool cannot be executed, first record the tested command or interface, the exact error and the affected files or time intervals. Then use the least-complex documented fallback, mark the affected results as limited and explain how the fallback changes the scientific interpretation. Record the tools actually executed, their versions, commands, configurations, logs and output locations. Tool resources are methodological references; the waveform data and station metadata under `input/` are the only case-specific observations for constructing the catalog.
+If a required stage fails, diagnose the error and repair the run-local code, control files or configuration, then rerun the failed stage. Allow at most 20 repair attempts for the complete required tool chain. For every attempt, record the attempt number, error, diagnosis, change made and rerun result. A help or no-argument invocation does not count as a completed tool stage; NonLinLoc must be run with generated control files, velocity/travel-time grids and event observations.
+
+The Agent may stop before 20 attempts when all mandatory stages succeed. If the repair limit is reached, mark the run as failed or incomplete, preserve the partial outputs and diagnostics, and explain the unresolved error. Do not substitute a custom method, skip a mandatory stage or present an upstream partial catalog as the final result. The repair loop must not modify the shared tool directories, model weights, binaries, input observations or evaluation environment. Record the tools actually executed, their versions, commands, configurations, logs and output locations. Tool resources are methodological references; the waveform data and station metadata under `input/` are the only case-specific observations for constructing the catalog.
 
 Do not use existing Ridgecrest catalogs, published phase picks, reference event locations, expert workflow outputs or other case-specific observational products to construct or tune the result. General seismological knowledge and generic methodological assumptions or models may be used when needed, but consequential choices must be justified from the task and available observations.
 
