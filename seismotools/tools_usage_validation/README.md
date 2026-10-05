@@ -1,19 +1,14 @@
 # Tool usage validation
 
-This directory contains minimal environment checks for the locally bundled
-seismological tools. The checks use synthetic inputs and temporary directories;
-they do not read or modify the large Ridgecrest waveform collection.
+This directory contains environment checks for the locally bundled
+seismological tools. Each tool check runs both a synthetic smoke test and a
+bounded Ridgecrest data check. Native-tool checks use temporary directories and
+do not modify the stored case products.
 
 Run all checks with:
 
 ```bash
 bash run_all.sh
-```
-
-Run the bounded real-data checks with:
-
-```bash
-bash run_ridgecrest.sh
 ```
 
 Set `PYTHON` when a different compatible environment is intended:
@@ -26,10 +21,10 @@ The checks are deliberately small:
 
 | Script | Validation |
 | --- | --- |
-| `validate_phasenet.py` | Loads the bundled CPU weights and runs one three-component forward pass. |
-| `validate_gamma.py` | Associates a deterministic synthetic P/S pick set into an event. |
-| `validate_nonlinloc.py` | Builds a tiny velocity grid, computes one travel-time grid and starts NLLoc. |
-| `validate_hypodd.py` | Parses a two-event catalog differential-time example and starts hypoDD. |
+| `validate_phasenet.py` | Synthetic CPU forward pass and one real Ridgecrest three-component window. |
+| `validate_gamma.py` | Synthetic P/S association and one real stored Ridgecrest event's picks. |
+| `validate_nonlinloc.py` | Tiny synthetic grids plus one stored Ridgecrest event and grid. |
+| `validate_hypodd.py` | Synthetic input parsing plus two real Ridgecrest CT event-pair blocks. |
 
 The native locator examples are intentionally underdetermined (one station) so
 that they test executable startup, control-file parsing and file generation,
@@ -40,11 +35,5 @@ case-level catalog.
 
 Results are written to the ignored `outputs/` directory. The existing
 `seismotools/check_tools.py --imports` remains the integrity and model-loading
-check; this directory adds actual minimal execution checks.
-
-`run_ridgecrest.sh` reads one real Ridgecrest station-day and StationXML,
-re-runs PhaseNet on that waveform window, associates one event from the stored
-GaMMA picks, re-runs NonLinLoc for one stored event using the existing grids,
-and replays two event-pair blocks from the stored hypoDD CT inputs. Temporary
-copies are used for native tools, so expert intermediate products are not
-modified. This real-data check is bounded and is not a full-data rerun.
+check; these scripts additionally exercise actual tool execution. The
+Ridgecrest checks are bounded and are not a full-data catalog rerun.

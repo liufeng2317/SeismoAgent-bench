@@ -3,12 +3,15 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
+import shutil
 import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 BIN = ROOT / "seismotools" / "hypodd" / "bin" / "hypoDD"
+EXPORT = Path(os.environ.get("RIDGECREST_EXPORT_ROOT", str(ROOT / "workflows/tasks/2019_ridgecrest_california/expert/export/01_baseline")))
 
 
 def main() -> None:
@@ -30,10 +33,38 @@ def main() -> None:
                                 check=True)
         assert (work / "hypoDD.loc").is_file()
         assert "# events =" in result.stdout and "# catalog P dtimes =" in result.stdout
-        print(json.dumps({"status": "pass", "tool": "hypoDD",
-                          "catalog_differential_times_parsed": True,
-                          "relocation_started": True,
-                          "note": "one-station synthetic input is intentionally underdetermined"}))
+    source = ROOT / "workflows/tasks/2019_ridgecrest_california/expert/export/06_full_catalog/53_native_double_difference/hypodd_ct"
+    blocks, event_ids, current = [], set(), []
+    with (source / "dt.ct").open() as handle:
+        for line in handle:
+            if line.startswith("#") and current:
+                blocks.append(current)
+                if len(blocks) == 2:
+                    break
+                current = []
+            if not current and line.startswith("#"):
+                event_ids.update(map(int, line.split()[1:3]))
+            current.append(line)
+    if len(blocks) < 2:
+        blocks.append(current)
+    event_lines = [line for line in (source / "event.dat").read_text().splitlines()
+                   if int(line.split()[-1]) in event_ids]
+    with tempfile.TemporaryDirectory(prefix="ridgecrest-hypodd-") as tmp:
+        work = Path(tmp)
+        (work / "event.dat").write_text("\n".join(event_lines) + "\n")
+        shutil.copy2(source / "station.dat", work / "station.dat")
+        (work / "dt.ct").write_text("".join("".join(block) for block in blocks))
+        (work / "dt.cc").write_text("")
+        shutil.copy2(source / "hypoDD.inp", work / "hypoDD.inp")
+        real_result = subprocess.run([str(BIN), "hypoDD.inp"], cwd=work, text=True,
+                                     stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                     check=True)
+        assert (work / "hypoDD.loc").is_file() and "# events =" in real_result.stdout
+    print(json.dumps({"status": "pass", "tool": "hypoDD",
+                      "smoke": {"catalog_differential_times_parsed": True, "relocation_started": True,
+                                 "note": "one-station synthetic input is intentionally underdetermined"},
+                      "ridgecrest": {"event_pairs": len(blocks), "events_parsed": len(event_lines),
+                                     "mode": "CT", "note": "bounded replay of real differential-time input"}}))
 
 
 if __name__ == "__main__":

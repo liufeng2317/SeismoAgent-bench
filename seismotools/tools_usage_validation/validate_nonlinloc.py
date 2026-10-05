@@ -3,12 +3,15 @@
 from __future__ import annotations
 
 import json
+import os
+import shutil
 import subprocess
 import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 BIN = ROOT / "seismotools" / "nonlinloc" / "bin"
+EXPORT = Path(os.environ.get("RIDGECREST_EXPORT_ROOT", str(ROOT / "workflows/tasks/2019_ridgecrest_california/expert/export/01_baseline")))
 
 
 def run(binary: Path, control: Path, cwd: Path) -> str:
@@ -54,10 +57,21 @@ LOCPHASEID P P
         assert (work / "model.P.mod.buf").is_file()
         assert (work / "time.P.S0001.time.buf").is_file()
         assert "events read" in nll_output
-        print(json.dumps({"status": "pass", "tool": "NonLinLoc",
-                          "velocity_grid": True, "travel_time_grid": True,
-                          "locator_started": True,
-                          "note": "one-station synthetic input is intentionally underdetermined"}))
+    source_root = EXPORT / "04_locate_nonlinloc"
+    source_event = source_root / "events_raw/gamma_0000001"
+    with tempfile.TemporaryDirectory(prefix="ridgecrest-nll-") as tmp:
+        base = Path(tmp) / "run"
+        event = base / "events_raw/gamma_0000001"
+        event.mkdir(parents=True)
+        (base / "grids").symlink_to(source_root / "grids", target_is_directory=True)
+        for name in ("control.in", "input.obs"):
+            shutil.copy2(source_event / name, event / name)
+        output = run(BIN / "NLLoc", event / "control.in", event)
+        assert list(event.glob("solution.*.loc.hyp")) and "1 events located" in output
+    print(json.dumps({"status": "pass", "tool": "NonLinLoc",
+                      "smoke": {"velocity_grid": True, "travel_time_grid": True, "locator_started": True,
+                                 "note": "one-station synthetic input is intentionally underdetermined"},
+                      "ridgecrest": {"source_event": "gamma_0000001", "located_events": 1}}))
 
 
 if __name__ == "__main__":
