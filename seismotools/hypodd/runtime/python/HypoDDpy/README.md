@@ -6,7 +6,7 @@ catalog differential-time, waveform FDTCC and CC-only HypoDD workflows.
 Import the package with:
 
 ```bash
-export PYTHONPATH=/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/hypodd/HypoDDpy:$PYTHONPATH
+export PYTHONPATH=/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/hypodd/runtime/python/HypoDDpy:$PYTHONPATH
 ```
 
 The main public entry points are:

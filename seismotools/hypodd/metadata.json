@@ -1,0 +1,10 @@
+{
+  "tool": "hypoDD",
+  "native_programs": ["hypoDD", "ph2dt"],
+  "interface_version": 1,
+  "source": "source/",
+  "native_runtime": "runtime/bin/",
+  "python_interface": "runtime/python/HypoDDpy/",
+  "standard_entrypoint": "interface/run.py",
+  "modes": ["ct", "ct_cc"]
+}

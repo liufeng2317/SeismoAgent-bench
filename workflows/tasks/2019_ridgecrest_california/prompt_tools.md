@@ -30,7 +30,7 @@ The project provides source code, documentation, model files and executable inte
 - **PhaseNet:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/phase_picking/`
 - **GaMMA:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/gamma/` (standard association entry point: `interface/run.py`)
 - **NonLinLoc:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/nonlinloc/` (the standard adapter is `interface/run.py`; its input and output contracts are in `interface/`)
-- **hypoDD:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/hypodd/`
+- **hypoDD:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/hypodd/` (standard relocation entry point: `interface/run.py`)
 - **General scientific Python:** the configured environment includes commonly used scientific and seismological Python packages.
 
 Inspect the supplied documentation, model metadata, examples and executable interfaces to determine how to invoke the required stages. Do not modify the shared tool directories, model weights, binaries or evaluation environment.

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "description": "Prepared native hypoDD relocation input folder.",
+  "required_files": {
+    "hypoDD.inp": "Native hypoDD control file using the canonical local filenames",
+    "event.dat": "Initial event catalog",
+    "station.dat": "Station table",
+    "dt.ct": "Catalog differential times"
+  },
+  "ct_cc_addition": "mode=ct_cc additionally requires dt.cc",
+  "ph2dt_addition": "--run-ph2dt additionally requires ph2dt.inp and uses ph2dt before hypoDD",
+  "reference_catalogs": "Not consumed by the adapter."
+}

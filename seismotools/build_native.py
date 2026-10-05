@@ -17,16 +17,15 @@ def main():
         parser.error('--jobs must be positive')
     for name in (['nonlinloc', 'hypodd'] if args.tool == 'all' else [args.tool]):
         folder = ROOT / name
-        # NonLinLoc uses the standardized source/runtime layout. hypoDD keeps
-        # its existing native layout until that tool is migrated separately.
+        # Both native tools use the standardized source/runtime layout.
         if name == 'nonlinloc':
             source = folder / 'source'
             build = folder / 'runtime' / 'build'
             binary_dir = folder / 'runtime' / 'bin'
         else:
-            source = folder / 'native' / 'source'
-            build = folder / 'native' / 'build'
-            binary_dir = folder / 'native' / 'bin'
+            source = folder / 'source'
+            build = folder / 'runtime' / 'build'
+            binary_dir = folder / 'runtime' / 'bin'
         shutil.copytree(source, build, dirs_exist_ok=True)
         binary_dir.mkdir(exist_ok=True)
         (folder / 'logs').mkdir(exist_ok=True)

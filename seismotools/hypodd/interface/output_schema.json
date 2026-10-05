@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "description": "Prepared hypoDD relocation output folder.",
+  "files": {
+    "hypoDD.loc": "Native relocated event locations",
+    "hypoDD.reloc": "Native relocation output when enabled by the control file",
+    "hypodd.log": "Combined ph2dt/hypoDD stdout and stderr",
+    "run_result.json": "Mode, input paths, output paths and execution status"
+  },
+  "failure": "A native non-zero exit or missing hypoDD.loc produces status=failed and a non-zero process exit."
+}

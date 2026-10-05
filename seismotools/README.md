@@ -25,7 +25,7 @@ seismotools/
   phase_picking/{source,runtime,interface,examples,docs,README.md}
   gamma/{source,interface,examples,docs,README.md}   # association source and references
   nonlinloc/{source,runtime,interface,examples,README.md}
-  hypodd/{source,README.md}
+  hypodd/{source,runtime,interface,examples,README.md}
 ```
 
 From the project root, using the existing `seismoagent` environment:
@@ -38,7 +38,7 @@ conda run -n seismoagent python seismotools/build_native.py --tool all --jobs 4
 
 The first check uses only the standard library. `--imports` also imports local GaMMA and loads all three model state dictionaries strictly on CPU, without downloading weights. Building needs `make`, `gcc` and `gfortran`; binaries and logs stay inside each tool folder. Passing these checks establishes integrity/loadability/buildability, **not scientific equivalence of a new experiment**.
 
-For a new Python process, add `seismotools/phase_picking/source` and/or `seismotools/gamma/source` to `sys.path` before importing `phase_picking` or `gamma`. Read weights directly from `phase_picking/runtime/weights`; avoid automatic pretrained downloads. New native callers can use `nonlinloc/runtime/bin/{NLLoc,Vel2Grid,Grid2Time}` and `hypodd/native/bin/hypoDD` after building. Existing Ridgecrest launchers are not yet wired to these paths.
+For a new Python process, add `seismotools/phase_picking/source` and/or `seismotools/gamma/source` to `sys.path` before importing `phase_picking` or `gamma`. Read weights directly from `phase_picking/runtime/weights`; avoid automatic pretrained downloads. New native callers can use `nonlinloc/runtime/bin/{NLLoc,Vel2Grid,Grid2Time}` and `hypodd/runtime/bin/hypoDD` after building. Existing Ridgecrest launchers are not yet wired to these paths.
 
 ## Scope and controlled comparisons
 
