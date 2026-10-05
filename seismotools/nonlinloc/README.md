@@ -12,8 +12,18 @@ See the bundled [README](source/src/README.txt) and [change notes](source/src/CH
 
 The project-local Python library is [Nonlinlocpy](Nonlinlocpy/). It provides control, velocity, station, observation, runner and result-parsing helpers. It uses the compiled programs in `../bin` when an explicit binary directory is supplied.
 
-## Python library documentation
+## Package layout
+
+```text
+nonlinloc/
+├── source/       # Native NonLinLoc C source code
+├── bin/          # Compiled Vel2Grid, Grid2Time and NLLoc executables
+├── Nonlinlocpy/  # Python package, examples, templates and documentation
+└── README.md     # This package and usage guide
+```
 
 The Python package, examples, templates, requirements and its associated
-documentation are kept together under `Nonlinlocpy/`. The top-level `docs/`
-directory only explains the tool-package layout.
+documentation are kept together under `Nonlinlocpy/`. Run-specific control
+files, velocity grids, travel-time grids, observations and location outputs
+belong in a task or experiment output directory; they must not be written into
+this shared tool package.
