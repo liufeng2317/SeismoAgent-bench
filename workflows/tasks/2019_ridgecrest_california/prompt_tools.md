@@ -21,7 +21,7 @@ The supplied waveform and station metadata are the scientific observations avail
 
 ### Available tools
 
-This tools-enabled task evaluates whether the Agent can apply the supplied seismological software to the complete waveform collection. The tools are the preferred scientific implementations for the corresponding processing stages; a simpler custom implementation must not silently replace them.
+This tools-enabled task evaluates whether the Agent can apply the supplied seismological software to the complete waveform collection. The main processing stages are fixed by the workflow below, while the Agent may choose preprocessing parameters, model settings and quality-control rules. The supplied tools are the preferred scientific implementations for their corresponding stages; a simpler custom implementation must not silently replace them.
 
 #### Tool resources
 
@@ -33,15 +33,16 @@ The project provides source code, documentation, model files and executable inte
 - **hypoDD:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/hypodd/`
 - **General scientific Python:** the configured environment includes commonly used scientific and seismological Python packages.
 
-Inspect the supplied documentation, model metadata, examples and executable interfaces before processing. Do not modify the shared tool directories, model weights, binaries or evaluation environment.
+Inspect the supplied documentation, model metadata, examples and executable interfaces to determine how to invoke the required stages. Do not modify the shared tool directories, model weights, binaries or evaluation environment.
 
-#### Required processing path
+#### Required and optional processing path
 
-Attempt the following stages in order and process the complete usable input, including batches or partitions:
+Attempt the first three stages in order and process the complete usable input, including batches or partitions:
 
 1. Use **PhaseNet** (or its supplied command-line/API interface) for neural-network P and S phase picking on the waveform data. Do not replace the full-data picking stage with a simple amplitude threshold, STA/LTA detector or custom peak finder unless PhaseNet has been tested and a documented execution failure prevents its use.
 2. Use **GaMMA** to associate the resulting phase picks into candidate events. Preserve the association parameters and the input/output file locations.
-3. Use **NonLinLoc** for absolute event location with an explicit velocity model. If appropriate, use **hypoDD** for relative relocation after absolute locations and differential picks are available; describe whether the final catalog contains absolute locations, relative locations, or both.
+3. Use **NonLinLoc** for absolute event location with an explicit velocity model.
+4. After absolute locations are available, **hypoDD** may be used as an additional relative-relocation stage when sufficient differential-pick support exists. Describe whether the final catalog contains absolute locations, relative locations, or both.
 
 The Agent may add transparent preprocessing and quality-control steps around this path. It must state the selected parameters and explain any change to the order or scope of the stages.
 
@@ -55,7 +56,7 @@ Do not use existing Ridgecrest catalogs, published phase picks, reference event 
 
 Independently design and execute an appropriate workflow to construct the earthquake catalog from the supplied waveform observations and station metadata.
 
-You are responsible for selecting the preprocessing parameters, model configuration, quality-control rules and, where applicable, the relative-relocation strategy. The default PhaseNet–GaMMA–NonLinLoc chain above must be attempted before any fallback is chosen. Before substantial processing, briefly document the planned workflow, the tool interfaces to be used, and the rationale for the major scientific decisions. You may revise the workflow when intermediate results indicate that changes are needed; record each significant revision and its rationale. Process the complete usable input, including batches or partitions, and report any files or intervals that could not be processed.
+You are responsible for selecting the preprocessing parameters, model configuration, quality-control rules and, where applicable, the relative-relocation strategy. Before substantial processing, briefly document the planned workflow, the tool interfaces to be used, and the rationale for the major scientific decisions. You may revise the workflow when intermediate results indicate that changes are needed; record each significant revision and its rationale. Process the complete usable input, including batches or partitions, and report any files or intervals that could not be processed.
 
 ### Reproducibility
 
