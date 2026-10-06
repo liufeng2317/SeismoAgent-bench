@@ -76,10 +76,10 @@ pick table and the association configuration alongside the run output.
 ## Documentation and validation
 
 Read [docs/README.md](docs/README.md) for the documentation map. The
-consolidated `docs/core/` are the recommended Agent materials; the complete
-implementation reference is under `docs/reference/`, and notebooks under
-`docs/reference/rag_examples/notebooks/` are optional methodological references rather than
-benchmark launchers.
+consolidated `docs/core/` guides are the maintained Agent materials. The
+runtime repository intentionally does not include the historical generated
+reference archive or upstream notebooks; use `examples/` for runnable validation
+and `interface/` for the project adapter contract.
 
 Run the project validation from the repository root:
 
