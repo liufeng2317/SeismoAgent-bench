@@ -16,9 +16,11 @@ DEFAULT_BIN = ROOT / "runtime" / "bin"
 
 
 def copy_inputs(input_dir: Path, output_dir: Path, mode: str, run_ph2dt: bool) -> list[str]:
-    required = ["hypoDD.inp", "event.dat", "station.dat"]
+    required = ["hypoDD.inp", "station.dat"]
     if not run_ph2dt:
-        required.append("dt.ct")
+        required.extend(["event.dat", "dt.ct"])
+    else:
+        required.append("phase.dat")
     if mode == "ct_cc":
         required.append("dt.cc")
     if run_ph2dt:
@@ -27,12 +29,22 @@ def copy_inputs(input_dir: Path, output_dir: Path, mode: str, run_ph2dt: bool) -
     if missing:
         raise ValueError(f"Missing hypoDD input files: {', '.join(missing)}")
     copied = []
-    optional = ["hypoDD.inp", "event.dat", "station.dat", "dt.ct", "dt.cc", "ph2dt.inp"]
+    optional = ["hypoDD.inp", "event.dat", "station.dat", "phase.dat", "dt.ct", "dt.cc", "ph2dt.inp"]
     for name in optional:
         src = input_dir / name
         if src.is_file():
             shutil.copy2(src, output_dir / name)
             copied.append(name)
+    if run_ph2dt:
+        # ph2dt reads its station/phase paths from the control file.  The
+        # packaged templates use input/station.dat and input/phase.dat; stage
+        # those canonical paths without touching the declared input directory.
+        ph2dt_input = output_dir / "input"
+        ph2dt_input.mkdir(exist_ok=True)
+        shutil.copy2(output_dir / "station.dat", ph2dt_input / "station.dat")
+        shutil.copy2(output_dir / "phase.dat", ph2dt_input / "phase.dat")
+        shutil.copy2(output_dir / "station.dat", output_dir / "hypoDD_station.dat")
+        shutil.copy2(output_dir / "phase.dat", output_dir / "hypoDD_phase.dat")
     return copied
 
 
@@ -67,6 +79,8 @@ def main() -> int:
         with log_path.open("w", encoding="utf-8") as log:
             if args.run_ph2dt:
                 run_command(bin_dir / "ph2dt", "ph2dt.inp", output_dir, log)
+                if not (output_dir / "dt.ct").is_file():
+                    raise RuntimeError("ph2dt completed without creating dt.ct")
             run_command(bin_dir / "hypoDD", "hypoDD.inp", output_dir, log)
         location = output_dir / "hypoDD.loc"
         if not location.is_file():

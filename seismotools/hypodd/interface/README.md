@@ -11,8 +11,10 @@ python seismotools/hypodd/interface/run.py \
   --bin-dir /path/to/seismotools/hypodd/runtime/bin
 ```
 
-Use `--mode ct_cc` when `dt.cc` is present. Use `--run-ph2dt` only when the
-input folder also contains a valid `ph2dt.inp`. Input and output contracts are
+Use `--mode ct_cc` when `dt.cc` is present. Use `--run-ph2dt` when the input
+folder also contains a valid `ph2dt.inp` and `phase.dat`; the adapter stages
+the canonical paths expected by the native program before running it. Input
+and output contracts are
 in [input_schema.json](input_schema.json) and [output_schema.json](output_schema.json).
 
 The adapter copies the declared inputs into the writable run directory, checks
