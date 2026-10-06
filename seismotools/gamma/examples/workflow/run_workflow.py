@@ -53,6 +53,10 @@ def main() -> None:
     for name in ("events.csv", "assignments.csv"):
         if not (result_dir / name).is_file():
             raise SystemExit(f"missing {name}")
+    assignments = pd.read_csv(result_dir / "assignments.csv")
+    required = {"pick_index", "pick_id", "event_index", "assignment_probability", "assignment_status"}
+    if not required.issubset(assignments.columns) or len(assignments) != len(picks):
+        raise SystemExit("assignment output does not preserve every input pick")
     print(json.dumps({"status": "pass", "events": summary.get("events"),
                       "assignments": summary.get("assignments")}, indent=2))
 

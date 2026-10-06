@@ -2,9 +2,20 @@
   "schema_version": 1,
   "description": "GaMMA association output contract.",
   "files": {
-    "events.csv": "Associated candidate events and their estimated attributes",
-    "assignments.csv": "Pick-index to event-index assignments with probabilities",
-    "run_result.json": "Method, input counts, output counts and file locations"
+    "events.csv": {
+      "required_columns": ["time", "event_index", "x(km)", "y(km)", "z(km)", "num_picks", "num_p_picks", "num_s_picks"],
+      "optional_columns": ["magnitude", "sigma_time", "sigma_amp", "cov_time_amp", "gamma_score"],
+      "description": "Associated candidate events and GaMMA estimated attributes; coordinates are association coordinates, not a final absolute location."
+    },
+    "assignments.csv": {
+      "required_columns": ["pick_index", "pick_id", "event_index", "assignment_probability", "assignment_status"],
+      "assignment_status": ["assigned", "unassigned"],
+      "description": "One row for every input pick, preserving its identity and whether GaMMA assigned it to an event."
+    },
+    "run_result.json": {
+      "required_fields": ["status", "interface_version", "method", "inputs", "config", "events", "assignments", "assigned_picks", "unassigned_picks", "outputs"],
+      "description": "Run status, effective configuration, counts and absolute output paths. Failed runs contain status and error."
+    }
   },
-  "note": "Location refinement and catalog filtering are downstream workflow decisions."
+  "note": "Location refinement and catalog filtering are downstream workflow decisions. Event and pick indices are local to this run."
 }

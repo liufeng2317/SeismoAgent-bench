@@ -12,7 +12,7 @@ gamma/
 ├── source/                 # GaMMA implementation and package metadata
 ├── interface/              # Stable association entry point and contracts
 ├── examples/smoke/         # Small synthetic association example
-├── docs/                   # Core guides and archived reference documentation
+├── docs/                   # Core usage guides
 ├── metadata.json           # Tool and interface identity
 └── README.md
 ```
@@ -39,9 +39,8 @@ are documented in [interface/input_schema.json](interface/input_schema.json)
 and [interface/output_schema.json](interface/output_schema.json).
 
 The adapter writes `events.csv`, `assignments.csv` and `run_result.json`. It
-uses single-process BGMM defaults, fixes the local random seed, preserves
-unassociated picks by reporting assignments separately, and does not read
-reference catalogs.
+uses single-process BGMM defaults, fixes the local random seed, preserves every
+input pick in the assignment table, and does not read reference catalogs.
 
 Run the smoke example with:
 

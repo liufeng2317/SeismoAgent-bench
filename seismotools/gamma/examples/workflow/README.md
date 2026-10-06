@@ -4,9 +4,10 @@ This example creates a small synthetic pick table and station table, calls the
 project GaMMA adapter, and checks the event and assignment outputs. It shows
 the minimum input preparation required by the adapter:
 
-- picks: `timestamp`, `station_id`, `phase`, and optional `probability`;
+- picks: `timestamp`, `station_id`, `phase`, and optional `pick_id`, `probability`;
 - stations: `station_id`, `x_km`, `y_km`, `z_km`;
-- outputs: `events.csv`, `assignments.csv`, `run_result.json`.
+- outputs: `events.csv`, `assignments.csv`, `run_result.json`; the assignment
+  table contains one row for every input pick, including unassociated picks.
 
 The implementation is in `run_workflow.py`; `run.sh` is only a thin shell wrapper.
 

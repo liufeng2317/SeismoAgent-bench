@@ -12,7 +12,14 @@ python seismotools/gamma/interface/run.py \
 ```
 
 Input and output columns are defined in [input_schema.json](input_schema.json)
-and [output_schema.json](output_schema.json). A JSON configuration can be
-passed with `--config`; otherwise conservative single-process defaults are
-used. The interface does not perform event location or consume reference
-catalogs.
+and [output_schema.json](output_schema.json). Optional configuration fields are
+listed in [config_schema.json](config_schema.json). A JSON configuration can be
+passed with `--config`; nested overrides are merged with the defaults. The
+interface does not perform event location or consume reference catalogs.
+
+Every input pick appears in `assignments.csv`. Associated rows contain an event
+index and probability; unassociated rows have a null event index, zero
+probability and `assignment_status=unassigned`. If output files already exist,
+the command fails rather than silently replacing them; pass `--overwrite` only
+when replacement is intentional. A failed run writes a `run_result.json` with
+`status=failed` and the error message.

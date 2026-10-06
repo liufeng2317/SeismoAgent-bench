@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "description": "Optional JSON overrides for the GaMMA association interface. Unspecified values use interface defaults.",
+  "common_fields": {
+    "ncpu": "positive integer, capped by available CPUs",
+    "min_picks_per_eq": "integer minimum total picks per event",
+    "min_p_picks_per_eq": "integer minimum P picks per event",
+    "min_s_picks_per_eq": "integer minimum S picks per event",
+    "min_stations": "integer minimum stations per event",
+    "vel": {"p": "P velocity in km/s", "s": "S velocity in km/s"},
+    "x(km)": "[min, max] association bound",
+    "y(km)": "[min, max] association bound",
+    "z(km)": "[min, max] association bound"
+  },
+  "merge": "Overrides are recursively merged with defaults; nested fields not supplied remain unchanged.",
+  "unsupported_inputs": ["reference catalogs", "waveform files", "StationXML"]
+}

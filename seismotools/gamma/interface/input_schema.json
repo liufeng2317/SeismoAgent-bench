@@ -3,7 +3,8 @@
   "description": "GaMMA association input contract.",
   "picks_csv": {
     "required_columns": ["timestamp", "station_id", "phase"],
-    "optional_columns": ["probability", "amplitude"],
+    "optional_columns": ["pick_id", "probability", "amplitude"],
+    "pick_id": "Optional non-empty unique identifier; generated as pick-000000 when absent",
     "phase_values": ["P", "S"],
     "timestamp": "ISO-8601 UTC"
   },
