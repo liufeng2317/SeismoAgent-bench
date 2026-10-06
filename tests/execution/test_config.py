@@ -44,6 +44,18 @@ class AgentConfigTests(unittest.TestCase):
             config = load_agent_config(source)
             self.assertEqual(config["auth"]["mode"], "external_profile")
 
+    def test_accepts_runtime_environment_settings(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "agent.yaml"
+            source.write_text(
+                "harness: codex\nruntime:\n"
+                "  python: /opt/miniconda/envs/seismoagent_eval/bin/python\n"
+                "  network_policy: allowed\n  package_installation: allowed\n",
+                encoding="utf-8",
+            )
+            config = load_agent_config(source)
+            self.assertEqual(config["runtime"]["network_policy"], "allowed")
+
     def test_rejects_legacy_runtime_fields(self):
         with tempfile.TemporaryDirectory() as tmp:
             source = Path(tmp) / "agent.yaml"

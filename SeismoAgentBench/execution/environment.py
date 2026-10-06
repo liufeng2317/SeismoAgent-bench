@@ -36,6 +36,7 @@ def _python_info(executable: str | None) -> dict[str, str]:
 
 
 def probe_runtime(executable: str | None = None, *, network_policy: str = "allowed",
+                  package_installation: str = "allowed",
                   environment: Mapping[str, str] | None = None) -> dict[str, Any]:
     """Collect non-sensitive runtime facts before an Agent starts."""
     env = dict(os.environ)
@@ -62,4 +63,5 @@ def probe_runtime(executable: str | None = None, *, network_policy: str = "allow
         "conda_environment": conda_name,
         "conda_prefix": conda_prefix,
         "network_policy": network_policy,
+        "package_installation": package_installation,
     }

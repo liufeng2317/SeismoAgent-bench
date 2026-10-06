@@ -46,5 +46,5 @@ cd "$PROJECT_DIR"
   --codex-bin "$CODEX_BIN" \
   --codex-home "$CODEX_HOME" \
   --env-file "$RUNTIME_ENV_FILE" \
-  --prompt "Use the configured scientific Python environment. Network access and additional Python package installation are allowed in the designated evaluation environment; do not modify the original shared seismoagent environment. Write all results below \$BENCH_OUTPUT." \
+  --prompt "Use the Python executable and Conda environment reported in the runtime context for scientific processing. Network access and package installation follow the configured runtime policy; do not modify the original shared seismoagent environment. Write all results below \$BENCH_OUTPUT." \
   --timeout "$TIMEOUT"

@@ -76,6 +76,7 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
         f"- Python: `{_cell(python.get('executable') or '$PYTHON')}` ({_cell(python.get('version') or 'selected at run time')})",
         f"- Conda environment: {_cell(runtime.get('conda_environment') or 'selected at run time')}",
         f"- Network policy: {_cell(runtime.get('network_policy') or 'allowed')}",
+        f"- Package installation: {_cell(runtime.get('package_installation') or 'allowed')}",
     ])
     if task.get("output_artifacts"):
         lines.extend([

@@ -106,6 +106,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             configured_codex_home = args.codex_home or auth.get("codex_home")
             env = load_env_file(configured_env_file) if configured_env_file else {}
             configured = (agent_config or {}).get("runtime", {})
+            configured_python = configured.get("python")
+            if configured_python:
+                env["PYTHON"] = configured_python
             runtime_mode = configured.get("mode", "host-direct")
             if runtime_mode != "host-direct":
                 raise CodexCommandError(
@@ -123,8 +126,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                 layout = RunLayout(effective_root, args.campaign_id, task_id,
                                    args.variant, args.agent_name, args.run_id)
                 effective_root = layout.run_root
-            runtime_context = probe_runtime(env.get("PYTHON"), network_policy="allowed",
-                                            environment=env)
+            runtime_context = probe_runtime(
+                env.get("PYTHON"),
+                network_policy=configured.get("network_policy", "allowed"),
+                package_installation=configured.get("package_installation", "allowed"),
+                environment=env,
+            )
             rendered_prompt = render_agent_prompt(
                 args.task, args.manifest, extra_instructions=args.prompt,
                 runtime_context=runtime_context)

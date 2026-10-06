@@ -8,4 +8,7 @@ auth:
   mode: external_profile
 runtime:
   mode: host-direct
+  python: /liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python
   reasoning_effort: medium
+  network_policy: allowed
+  package_installation: allowed
