@@ -24,9 +24,10 @@ class PromptRenderingTests(unittest.TestCase):
             }), encoding="utf-8")
             rendered = render_agent_prompt(root / "task.json", root / "manifest.json",
                                            extra_instructions="Use a concise report.")
-            self.assertTrue(rendered.startswith("<framework_instructions>\n"))
-            self.assertLess(rendered.index("<framework_instructions>"), rendered.index("<task_prompt>"))
-            self.assertLess(rendered.index("<task_prompt>"), rendered.index("<runtime_context>"))
+            self.assertTrue(rendered.startswith("<task_prompt>\n"))
+            self.assertLess(rendered.index("<task_prompt>"), rendered.index("<framework_instructions>"))
+            self.assertLess(rendered.index("<framework_instructions>"), rendered.index("<runtime_context>"))
+            self.assertLess(rendered.index("<runtime_context>"), rendered.index("<additional_instructions>"))
             self.assertIn("</framework_instructions>", rendered)
             self.assertIn("</task_prompt>", rendered)
             self.assertIn("</runtime_context>", rendered)
@@ -45,7 +46,8 @@ class PromptRenderingTests(unittest.TestCase):
             self.assertIn("<output_hints>", rendered)
             self.assertIn("## Declared output artifacts", rendered)
             self.assertIn("</output_hints>", rendered)
-            self.assertLess(rendered.index("</runtime_context>"), rendered.index("<output_hints>"))
+            self.assertLess(rendered.index("<output_hints>"), rendered.index("</output_hints>"))
+            self.assertLess(rendered.index("</output_hints>"), rendered.index("</runtime_context>"))
 
     def test_renderer_accepts_task_prompt_without_manifest_or_contract(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -30,7 +30,7 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
                         *, extra_instructions: str | None = None,
                         runtime_context: Mapping[str, Any] | None = None,
                         framework_prompt_path: str | Path | None = None) -> str:
-    """Render framework rules, task instructions and run-specific context."""
+    """Render task instructions, framework rules and run-specific context."""
     task_source = Path(task_path).resolve()
     task = load_task(task_source)
     manifest = None
@@ -42,15 +42,15 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
     python = runtime.get("python") if isinstance(runtime.get("python"), Mapping) else {}
     framework_prompt = _load_framework_prompt(framework_prompt_path)
     lines = [
-        "<framework_instructions>",
-        framework_prompt,
-        "</framework_instructions>",
-        "",
         "<task_prompt>",
         f"# Task: {task.get('title') or task['task_id']}",
         "",
         task["task_prompt"].strip(),
         "</task_prompt>",
+        "",
+        "<framework_instructions>",
+        framework_prompt,
+        "</framework_instructions>",
         "",
         "<runtime_context>",
         "## Working directory",
@@ -81,8 +81,6 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
     if task.get("output_artifacts"):
         lines.extend([
             "",
-            "</runtime_context>",
-            "",
             "<output_hints>",
             "These are optional structured hints. The task prompt remains the primary output instruction.",
             "",
@@ -97,8 +95,7 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
                 "yes" if artifact["required"] else "no",
             ]) + " |")
         lines.append("</output_hints>")
-    else:
-        lines.append("</runtime_context>")
+    lines.append("</runtime_context>")
     if extra_instructions and extra_instructions.strip():
         lines.extend(["", "<additional_instructions>", extra_instructions.strip(), "</additional_instructions>"])
     return "\n".join(lines) + "\n"
