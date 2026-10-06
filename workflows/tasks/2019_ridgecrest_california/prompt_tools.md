@@ -28,6 +28,10 @@ The first three stages are mandatory and must be attempted in order. Do not repl
 
 Before processing, write a concise `task_plan.md` below the assigned output directory. The plan must state discovered input coverage, preprocessing, tool calls, parameters, hand-off files and quality checks. Save complete reusable processing code below the output directory before running it. Record consequential assumptions, failed intervals, excluded stations, failed batches and unresolved data-quality issues.
 
+### Execution resources
+
+This host does not provide CUDA or NPU acceleration. Run the workflow on CPU and parallelize independent waveform files or batches. Use up to 32 CPU workers by default; increase to 64 only when those CPUs and sufficient memory are available. Do not create more workers than the available CPUs, and record the worker count and batching strategy in `task_plan.md` or the final report.
+
 ### Execution and repair rules
 
 Keep all created files below the assigned output directory. The input directory is read-only. Use the configured scientific Python environment and the supplied tool interfaces. If a mandatory stage fails, diagnose and repair only run-local code or configuration, then rerun the failed stage. Allow at most 20 repair attempts for the complete required chain. For every attempt, record the error, diagnosis, change, command and result. Do not skip a mandatory stage or present a partial upstream product as the completed catalog. If the limit is reached, mark the run incomplete and preserve the diagnostics.
