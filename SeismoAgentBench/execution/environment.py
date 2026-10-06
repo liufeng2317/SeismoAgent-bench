@@ -42,14 +42,18 @@ def probe_runtime(executable: str | None = None, *, network_policy: str = "allow
     if environment:
         env.update(environment)
     python = _python_info(executable or env.get("PYTHON"))
-    conda_prefix = env.get("CONDA_PREFIX")
-    conda_name = env.get("CONDA_DEFAULT_ENV")
-    if not conda_prefix:
-        executable_path = Path(python["executable"]).resolve()
-        candidate = executable_path.parent.parent
-        if candidate.parent.name == "envs":
-            conda_prefix = str(candidate)
-            conda_name = conda_name or candidate.name
+    conda_prefix = None
+    conda_name = None
+    executable_path = Path(python["executable"]).resolve()
+    candidate = executable_path.parent.parent
+    if candidate.parent.name == "envs":
+        # The selected interpreter is authoritative. The launcher may itself
+        # run from base while selecting a different environment's Python.
+        conda_prefix = str(candidate)
+        conda_name = candidate.name
+    else:
+        conda_prefix = env.get("CONDA_PREFIX")
+        conda_name = env.get("CONDA_DEFAULT_ENV")
     return {
         "operating_system": _os_release(),
         "kernel": platform.release(),
