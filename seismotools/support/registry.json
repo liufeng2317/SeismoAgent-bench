@@ -420,7 +420,7 @@
       "sha256": "c62a9f03cc1a8b7c583634cca97015dc8e10594b252534d683e6da149b4db5a6"
     },
     {
-      "path": "gamma/source/tests/GaMMA.ipynb",
+      "path": "gamma/docs/reference/source_tests/GaMMA.ipynb",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/GaMMA.ipynb",
       "bytes": 18759,
       "sha256": "92aaf94fa08d1a33e3b4151ec4bff26dfaffc484a8a7cc02ad03ed3010406264",
@@ -428,7 +428,7 @@
       "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
     },
     {
-      "path": "gamma/source/tests/comparison.ipynb",
+      "path": "gamma/docs/reference/source_tests/comparison.ipynb",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/comparison.ipynb",
       "bytes": 45298,
       "sha256": "44d74e4ca80bbc19aabd2f3e867ea08415468991aaa612502037d25e2093f1ae",
@@ -436,7 +436,7 @@
       "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
     },
     {
-      "path": "gamma/source/tests/comparison/compare_eikogamma.ipynb",
+      "path": "gamma/docs/reference/source_tests/comparison/compare_eikogamma.ipynb",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/comparison/compare_eikogamma.ipynb",
       "bytes": 10460,
       "sha256": "9e8d03b12f077b3241b6d9964b9af406f7e3c752f257dcf10e4f6f4a17dfb8aa",
@@ -444,19 +444,19 @@
       "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
     },
     {
-      "path": "gamma/source/tests/comparison/real/run.py",
+      "path": "gamma/docs/reference/source_tests/comparison/real/run.py",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/comparison/real/run.py",
       "bytes": 2739,
       "sha256": "6ed484bf62098a50e75bed3b4e479734e1464dcce8aca52ca1e3158001c715bc"
     },
     {
-      "path": "gamma/source/tests/comparison/real/tt_db/taup_tt.py",
+      "path": "gamma/docs/reference/source_tests/comparison/real/tt_db/taup_tt.py",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/comparison/real/tt_db/taup_tt.py",
       "bytes": 1744,
       "sha256": "08b980e0021c42f287a594df953cdbe3e0a049c3da5dcb5ff61b80448102e733"
     },
     {
-      "path": "gamma/source/tests/comparison/statistics.ipynb",
+      "path": "gamma/docs/reference/source_tests/comparison/statistics.ipynb",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/comparison/statistics.ipynb",
       "bytes": 17558,
       "sha256": "9638459abd91909b0330fb813ba0787bc3e2ee035ee22ff0d7b94fb404f6a3c9",
@@ -464,7 +464,7 @@
       "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
     },
     {
-      "path": "gamma/source/tests/comparison/synthetic_ridgecrest_data.ipynb",
+      "path": "gamma/docs/reference/source_tests/comparison/synthetic_ridgecrest_data.ipynb",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/comparison/synthetic_ridgecrest_data.ipynb",
       "bytes": 16473,
       "sha256": "0a04ee08622cc86a8f25f320d6c9060092186ef09ede406bf513ce6c5081edc7",
@@ -472,7 +472,7 @@
       "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
     },
     {
-      "path": "gamma/source/tests/comparison/synthetic_ridgecrest_gamma.ipynb",
+      "path": "gamma/docs/reference/source_tests/comparison/synthetic_ridgecrest_gamma.ipynb",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/comparison/synthetic_ridgecrest_gamma.ipynb",
       "bytes": 20713,
       "sha256": "7698f72f47d3e8c4d684b862f1013f3047356443cf998429bc29e9651e3ddf80",
@@ -480,7 +480,7 @@
       "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
     },
     {
-      "path": "gamma/source/tests/diagram_gamma.ipynb",
+      "path": "gamma/docs/reference/source_tests/diagram_gamma.ipynb",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/diagram_gamma.ipynb",
       "bytes": 9544,
       "sha256": "7f57a2b58d6a14fbbbb2c4f6baaf6f989e769e43bfb3a138503713d98145d8b0",
@@ -488,7 +488,7 @@
       "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
     },
     {
-      "path": "gamma/source/tests/example_phasenet.ipynb",
+      "path": "gamma/docs/reference/source_tests/example_phasenet.ipynb",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/example_phasenet.ipynb",
       "bytes": 19415,
       "sha256": "af3e2ef742e44b81b4610d408d9b0c26f54af7364b847ccce1a77b189b8873d7",
@@ -496,7 +496,7 @@
       "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
     },
     {
-      "path": "gamma/source/tests/example_phasenet_neuma.ipynb",
+      "path": "gamma/docs/reference/source_tests/example_phasenet_neuma.ipynb",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/example_phasenet_neuma.ipynb",
       "bytes": 22026,
       "sha256": "561ad4d9f170873ae535f637d331635502f5283649035f76afaf5b0ec4dd1723",
@@ -504,7 +504,7 @@
       "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
     },
     {
-      "path": "gamma/source/tests/statistics.ipynb",
+      "path": "gamma/docs/reference/source_tests/statistics.ipynb",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/statistics.ipynb",
       "bytes": 2752,
       "sha256": "1bf6e77c1c8c8dc5f2085b9eaf2e40a5043cd02851b0e711a9e0df36ba63e419",
@@ -512,19 +512,19 @@
       "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
     },
     {
-      "path": "gamma/source/tests/synthetic_example.py",
+      "path": "gamma/docs/reference/source_tests/synthetic_example.py",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/synthetic_example.py",
       "bytes": 11719,
       "sha256": "ada753d021418e3a82b6dca3f5d7875d3002504d8b41098939bc702e04767a96"
     },
     {
-      "path": "gamma/source/tests/test_seismoc_ops.py",
+      "path": "gamma/docs/reference/source_tests/test_seismoc_ops.py",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/test_seismoc_ops.py",
       "bytes": 3752,
       "sha256": "8d4ca953f24a2fd811a4bc7def82b6f697abab38612686867d02a86cf6746570"
     },
     {
-      "path": "gamma/source/tests/util.py",
+      "path": "gamma/docs/reference/source_tests/util.py",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/GaMMA/tests/util.py",
       "bytes": 21664,
       "sha256": "5ac244b4f08486eb60e08d13b2dd053f18ffae11107926f46039a372ac25e931"
