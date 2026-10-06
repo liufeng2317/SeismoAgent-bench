@@ -80,6 +80,8 @@ For prepared directories and advanced workflows, add the bundled package to
 export PYTHONPATH="$PWD/seismotools/nonlinloc/runtime/python/Nonlinlocpy:$PYTHONPATH"
 ```
 
+Additional generic examples and Agent-oriented summaries are in [docs/README.md](docs/README.md).
+
 The package exposes `run_nlloc`, `run_standard_workflow`,
 `run_example_workflow` and the parallel workflow helpers. Use the standard
 interface above for benchmark calls; use these Python APIs when a case needs

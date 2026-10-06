@@ -72,7 +72,7 @@ pick table and the association configuration alongside the run output.
 
 ## Documentation and validation
 
-The detailed source and expanded reference material is in [docs/README.md](docs/README.md),
+The detailed source and expanded reference material is in [docs/README.md](docs/README.md), including the curated transformed examples and Agent guides.
 including API notes, travel-time assumptions and example notebooks. The
 notebooks are references rather than guaranteed offline benchmark launchers.
 

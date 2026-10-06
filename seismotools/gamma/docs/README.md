@@ -51,3 +51,19 @@ See details in the [notebook](https://github.com/seisbench/seisbench/blob/main/e
 ![Associaiton result](https://raw.githubusercontent.com/wayneweiqiang/GaMMA/master/docs/assets/2019-07-04T18-02-01.074.png)
 
 More examples can be found in the earthquake detection workflow -- [QuakeFlow](https://ai4eps.github.io/QuakeFlow/)
+
+## Local benchmark documentation
+
+The provenance and selection policy is recorded in [SOURCE_MANIFEST.md](SOURCE_MANIFEST.md).
+
+The local transformed examples are organized in [`examples/`](examples/) and
+the corresponding Agent-oriented input, configuration, workflow, output and
+validation summaries are in [`agent_guides/`](agent_guides/). The project
+adapter and machine-readable contracts remain under `../interface/`.
+
+These examples are methodological references and do not provide Ridgecrest
+catalog values. For benchmark runs, preserve the complete pick table; if the
+input is too large, use explicit time windows and merge associations rather
+than retaining a global top-N subset. A successful process exit only confirms
+execution, so inspect `events.csv` and `assignments.csv` before passing results
+to a locator.

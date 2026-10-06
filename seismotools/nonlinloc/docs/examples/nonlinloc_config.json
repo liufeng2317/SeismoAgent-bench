@@ -1,0 +1,21 @@
+{
+  "example_dir": "./inputs",
+  "run_dir": "./run_case",
+  "nlloc_bin": "",
+  "phase_pattern": "phase_*.dat",
+  "min_phases": 4,
+  "max_events": 200,
+  "horizontal_pad_km": 10.0,
+  "depth_top_km": -2.0,
+  "depth_bottom_pad_km": 10.0,
+  "horizontal_spacing_km": 1.0,
+  "depth_spacing_km": 1.0,
+  "utm_zone_number": null,
+  "utm_zone_letter": null,
+  "pick_error_sec": 0.05,
+  "prepare_only": false,
+  "output_mode": "production",
+  "skip_plots": false,
+  "chunk_size": 0,
+  "num_workers": 64
+}

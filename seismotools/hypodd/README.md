@@ -4,7 +4,7 @@ hypoDD is a double-difference earthquake-relocation program. It refines an
 event cluster from catalog differential times (`dt.ct`) and, when available,
 waveform cross-correlation differential times (`dt.cc`). The native solver is
 supplemented by a local Python interface for input conversion, FDTCC and
-parallel workflows.
+parallel workflows. Curated generic examples and Agent-oriented summaries are in [docs/README.md](docs/README.md).
 
 ## Directory layout
 
