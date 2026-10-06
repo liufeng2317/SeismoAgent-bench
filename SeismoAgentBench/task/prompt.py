@@ -55,26 +55,19 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
         "<runtime_context>",
         "## Working directory",
         "",
-        "`$BENCH_WORK` is the Agent working directory and the same directory exposed as `$BENCH_OUTPUT`.",
-        "It is the writable root for this run. The Agent may create and organize subdirectories inside it; nested directories such as `work/work/` are allowed.",
-        "The framework does not require a fixed internal layout. Keep required final artifacts discoverable under this root and follow any paths required by the task prompt or output contract.",
-        "A recommended layout is `input/` for provided inputs, `scripts/` for reusable code, `intermediate/` for stage outputs, `results/` for final artifacts, and `logs/` for task logs. These names are suggestions, not restrictions.",
+        "Working directory: `$BENCH_WORK`",
+        "Output directory: `$BENCH_OUTPUT`",
         "",
         "## Input data",
         "",
     ]
     if manifest is not None:
         lines.extend([
-            "Input data for this run is available under `$BENCH_OUTPUT/input/` (the same directory exposed as `$BENCH_INPUT`).",
-            "The `input/` directory and everything below it are read-only, including symbolic-link targets; do not modify or delete them.",
+            "Input directory: `$BENCH_INPUT` (also available as `$BENCH_OUTPUT/input/`).",
         ])
     else:
-        lines.append("No separate input directory is configured for this run.")
+        lines.append("Input directory: not configured for this run.")
     lines.extend([
-        "",
-        "## Output location",
-        "",
-        "`$BENCH_OUTPUT` is the same writable run root. Write all Agent-created files below it; the framework does not require a separate `output/` or `work/` subdirectory.",
         "",
         "## Environment and network",
         "",
