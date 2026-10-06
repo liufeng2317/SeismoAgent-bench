@@ -41,6 +41,14 @@ The validation code under `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/
 
 Attempt the first three stages in order and process the complete usable input within the fixed window, including batches or partitions:
 
+Before processing any waveform, write a concise `task_plan.md` directly under
+the assigned output directory. It must state the input discovery result, the
+coverage plan, preprocessing, tool calls, parameters, quality checks and
+expected hand-off files. Treat the assigned output directory as the output
+root itself; do not create another top-level `work/` directory underneath it.
+Intermediate files may be organized in clearly named subdirectories below
+that root.
+
 1. Convert the usable three-component waveform windows to the input representation required by the PhaseNet interface, then use **PhaseNet** for neural-network P and S phase picking on the complete selected window. Process all batches or partitions and merge their documented outputs. Do not replace this stage with a simple amplitude threshold, STA/LTA detector or custom peak finder.
 2. Convert the extracted phase observations to the GaMMA input columns and use **GaMMA** to associate them into candidate events. Preserve the association parameters and the input/output file locations.
 3. Convert the associated observations and station information to the prepared input files required by the NonLinLoc interface, then use **NonLinLoc** for absolute event location with an explicit velocity model.
@@ -59,6 +67,13 @@ Do not use existing Ridgecrest catalogs, published phase picks, reference event 
 ### Reproducibility
 
 The workflow must be executed and reproducible from the supplied inputs. Preserve sufficient code, configuration, tool versions, commands, tool logs and provenance under the assigned output directory so that the processing can be rerun and the origin of the final catalog can be understood. Record which supplied tools were actually executed, not only which tools were inspected. Ensure that the complete usable data within the fixed window is covered, including when processing is performed in multiple batches or partitions.
+
+Before declaring the run complete, verify from the output root that `task_plan.md`,
+`picks.csv` and `catalog.csv` exist, that the two CSV files are readable and
+have the required columns below, and that every required tool reports a
+successful run. Record missing files, failed batches, excluded stations and
+unlocated events in the provenance or final report. A zero exit code from an
+individual command does not by itself establish that the task is complete.
 
 ### Required scientific outputs
 
