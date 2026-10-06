@@ -44,6 +44,18 @@ class AgentConfigTests(unittest.TestCase):
             config = load_agent_config(source)
             self.assertEqual(config["auth"]["mode"], "external_profile")
 
+    def test_agent_definition_does_not_require_executable_or_version_command(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "agent.yaml"
+            source.write_text(
+                "harness: codex\nmodel: gpt-5.6-sol\nreasoning_effort: medium\n"
+                "auth:\n  mode: external_profile\n",
+                encoding="utf-8",
+            )
+            config = load_agent_config(source)
+        self.assertNotIn("executable", config)
+        self.assertNotIn("version_command", config)
+
     def test_accepts_runtime_environment_settings(self):
         with tempfile.TemporaryDirectory() as tmp:
             source = Path(tmp) / "agent.yaml"
