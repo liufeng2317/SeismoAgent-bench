@@ -11,13 +11,13 @@ The read-only observations are under `input/waveforms/`:
 - waveforms: `input/waveforms/data/`
 - station metadata: `input/waveforms/stations/`
 
-Discover the files and actual coverage before processing. Do not modify the input directory. Do not use existing Ridgecrest catalogs, published picks, reference locations, expert outputs or case-specific products to construct, tune or fill the result. Ridgecrest files inside tool examples may be read only to understand an interface; do not use them as observations.
+Discover the files and actual coverage before processing. Do not modify the input directory. Do not use existing Ridgecrest catalogs, published picks, reference locations, expert outputs or case-specific products to construct, tune or fill the result. Files inside generic tool examples may be read only to understand documented usage; do not use them as case observations.
 
 ### Tools and workflow
 
-Use the supplied implementations through their standard interfaces. Read the relevant tool README and interface schemas before calling a tool. The task-local code is responsible for MiniSEED conversion, preprocessing, batching, format conversion and pick extraction between stages. Do not modify shared tools, weights, binaries or the evaluation environment.
+Use the supplied implementations through their standard execution paths. Before calling a tool, read its README and the documentation under its `docs/` directory, including curated Markdown/RAG guides and generic examples where present. Use those documents to determine the method, parameters, input preparation and output interpretation; use the listed execution path only to run the tool. The task-local code is responsible for MiniSEED conversion, preprocessing, batching, format conversion and pick extraction between stages. Do not modify shared tools, weights, binaries or the evaluation environment.
 
-| Stage | Tool and interface | Required result |
+| Stage | Tool and execution path | Required result |
 | --- | --- | --- |
 | 1. Phase picking | PhaseNet: `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/phase_picking/interface/run_continuous.py` | P/S probability output and extracted phase observations for the complete window |
 | 2. Association | GaMMA: `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/gamma/interface/run.py` | Candidate events and pick-to-event assignments |

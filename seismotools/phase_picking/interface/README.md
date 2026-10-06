@@ -1,5 +1,10 @@
 # Standard phase-picking interface
 
+Read the tool README and the model usage documents under `../docs/` before
+choosing preprocessing, windowing, thresholds or pick extraction. The files in
+this directory are execution contracts and entry points, not a replacement for
+those method documents.
+
 `run.py` runs one bundled model on one fixed-size three-component NumPy window in
 CPU mode. For the bundled PhaseNet model the window is 3001 samples, the input
 component order is E/N/Z, and the probability channels are Noise/P/S. It records
