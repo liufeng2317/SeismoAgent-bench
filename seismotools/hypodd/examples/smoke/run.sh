@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
+PYTHON="${PYTHON:-python}"
 WORK="$(mktemp -d /tmp/hypodd-smoke.XXXXXX)"
 OUT="${1:-/tmp/hypodd-smoke-output}"
 trap 'rm -rf "$WORK"' EXIT
@@ -34,6 +35,6 @@ hypoDD.srcpar
 6.0
 0
 EOF
-exec python "$ROOT/seismotools/hypodd/interface/run.py" \
+exec "$PYTHON" "$ROOT/seismotools/hypodd/interface/run.py" \
   --input-dir "$WORK" --output-dir "$OUT" --mode ct \
   --bin-dir "$ROOT/seismotools/hypodd/runtime/bin"

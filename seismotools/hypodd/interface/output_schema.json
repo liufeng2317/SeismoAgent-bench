@@ -2,10 +2,16 @@
   "schema_version": 1,
   "description": "Prepared hypoDD relocation output folder.",
   "files": {
-    "hypoDD.loc": "Native relocated event locations",
+    "hypoDD.loc": "Native relocated event locations; required for success",
     "hypoDD.reloc": "Native relocation output when enabled by the control file",
+    "hypoDD.res": "Native residual output when enabled by the control file",
+    "hypoDD.stares": "Native station residual output when enabled by the control file",
+    "hypoDD.srcpar": "Native source-parameter output when enabled by the control file",
     "hypodd.log": "Combined ph2dt/hypoDD stdout and stderr",
-    "run_result.json": "Mode, input paths, output paths and execution status"
+    "run_result.json": {
+      "required_fields": ["status", "interface_version", "mode", "inputs", "output_dir", "outputs"],
+      "failure_fields": ["status", "interface_version", "mode", "error"]
+    }
   },
-  "failure": "A native non-zero exit or missing hypoDD.loc produces status=failed and a non-zero process exit."
+  "failure": "A native non-zero exit or missing hypoDD.loc produces status=failed and a non-zero process exit. Existing outputs are not overwritten unless --overwrite is supplied."
 }

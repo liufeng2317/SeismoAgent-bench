@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -15,7 +16,9 @@ DEFAULT_BIN = ROOT / "runtime" / "bin"
 
 
 def copy_inputs(input_dir: Path, output_dir: Path, mode: str, run_ph2dt: bool) -> list[str]:
-    required = ["hypoDD.inp", "event.dat", "station.dat", "dt.ct"]
+    required = ["hypoDD.inp", "event.dat", "station.dat"]
+    if not run_ph2dt:
+        required.append("dt.ct")
     if mode == "ct_cc":
         required.append("dt.cc")
     if run_ph2dt:
@@ -34,8 +37,8 @@ def copy_inputs(input_dir: Path, output_dir: Path, mode: str, run_ph2dt: bool) -
 
 
 def run_command(binary: Path, control: str, cwd: Path, log) -> None:
-    if not binary.is_file():
-        raise ValueError(f"Missing executable: {binary}")
+    if not binary.is_file() or not os.access(binary, os.X_OK):
+        raise ValueError(f"Missing or non-executable binary: {binary}")
     subprocess.run([str(binary), control], cwd=cwd, stdout=log, stderr=subprocess.STDOUT, check=True, text=True)
 
 
@@ -46,14 +49,21 @@ def main() -> int:
     parser.add_argument("--mode", choices=("ct", "ct_cc"), default="ct")
     parser.add_argument("--bin-dir", type=Path, default=None)
     parser.add_argument("--run-ph2dt", action="store_true", help="Run ph2dt.inp before hypoDD")
+    parser.add_argument("--overwrite", action="store_true", help="Replace known output files in an existing directory")
     args = parser.parse_args()
     input_dir = args.input_dir.expanduser().resolve()
     output_dir = args.output_dir.expanduser().resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
     bin_dir = (args.bin_dir.expanduser().resolve() if args.bin_dir else DEFAULT_BIN)
-    copied = copy_inputs(input_dir, output_dir, args.mode, args.run_ph2dt)
     log_path = output_dir / "hypodd.log"
+    result_path = output_dir / "run_result.json"
+    known_outputs = ["hypoDD.loc", "hypoDD.reloc", "hypoDD.res", "hypoDD.stares", "hypoDD.srcpar", "hypodd.log", "run_result.json"]
+    if not args.overwrite:
+        existing = [name for name in known_outputs if (output_dir / name).exists()]
+        if existing:
+            raise ValueError(f"output files already exist; choose a new directory or use --overwrite: {existing}")
     try:
+        copied = copy_inputs(input_dir, output_dir, args.mode, args.run_ph2dt)
         with log_path.open("w", encoding="utf-8") as log:
             if args.run_ph2dt:
                 run_command(bin_dir / "ph2dt", "ph2dt.inp", output_dir, log)
@@ -61,22 +71,23 @@ def main() -> int:
         location = output_dir / "hypoDD.loc"
         if not location.is_file():
             raise RuntimeError("hypoDD completed without creating hypoDD.loc")
+        generated = [str(output_dir / name) for name in known_outputs if (output_dir / name).is_file() and name != "run_result.json"]
         summary = {
             "status": "success",
+            "interface_version": 2,
             "mode": args.mode,
-            "input_dir": str(input_dir),
+            "inputs": {"input_dir": str(input_dir), "binary_dir": str(bin_dir)},
             "output_dir": str(output_dir),
-            "binary_dir": str(bin_dir),
             "inputs_copied": copied,
+            "outputs": generated,
             "location_file": str(location),
-            "log": str(log_path),
         }
     except Exception as exc:
-        summary = {"status": "failed", "mode": args.mode, "output_dir": str(output_dir), "error": str(exc), "log": str(log_path)}
-        (output_dir / "run_result.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+        summary = {"status": "failed", "interface_version": 2, "mode": args.mode, "output_dir": str(output_dir), "error": str(exc), "log": str(log_path)}
+        result_path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
         print(json.dumps(summary, indent=2), file=sys.stderr)
         return 1
-    (output_dir / "run_result.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+    result_path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(summary, indent=2))
     return 0
 

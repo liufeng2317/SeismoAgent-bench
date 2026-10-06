@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import subprocess
+import sys
 from pathlib import Path
 
 
@@ -33,7 +34,7 @@ def main() -> None:
     )
     root = Path(__file__).resolve().parents[4]
     subprocess.run([
-        "python", str(root / "seismotools/hypodd/interface/run.py"),
+        sys.executable, str(root / "seismotools/hypodd/interface/run.py"),
         "--input-dir", str(input_dir), "--output-dir", str(result_dir), "--mode", "ct",
         "--bin-dir", str(root / "seismotools/hypodd/runtime/bin"),
     ], check=True)

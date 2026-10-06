@@ -5,9 +5,14 @@
     "hypoDD.inp": "Native hypoDD control file using the canonical local filenames",
     "event.dat": "Initial event catalog",
     "station.dat": "Station table",
-    "dt.ct": "Catalog differential times"
+    "dt.ct": "Catalog differential times; required unless --run-ph2dt is used"
   },
   "ct_cc_addition": "mode=ct_cc additionally requires dt.cc",
   "ph2dt_addition": "--run-ph2dt additionally requires ph2dt.inp and uses ph2dt before hypoDD",
-  "reference_catalogs": "Not consumed by the adapter."
+  "reference_catalogs": "Not consumed by the adapter.",
+  "read_only": "The input directory is copied into the writable output directory and is never modified.",
+  "modes": {
+    "ct": "Uses dt.ct and catalog differential times.",
+    "ct_cc": "Requires dt.ct and dt.cc and uses catalog plus waveform cross-correlation times."
+  }
 }

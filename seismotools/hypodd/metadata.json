@@ -1,7 +1,7 @@
 {
   "tool": "hypoDD",
   "native_programs": ["hypoDD", "ph2dt"],
-  "interface_version": 1,
+  "interface_version": 2,
   "source": "source/",
   "native_runtime": "runtime/bin/",
   "python_interface": "runtime/python/HypoDDpy/",

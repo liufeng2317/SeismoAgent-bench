@@ -17,6 +17,7 @@ hypodd/
 │   └── build.log           # Local build log, ignored by Git
 ├── interface/              # Stable native CT/CT+CC entry point and contracts
 ├── examples/{smoke,workflow}/ # Executable interface examples
+├── docs/{core,examples}/    # Curated method guides and workflow notes
 ├── metadata.json
 └── README.md
 ```

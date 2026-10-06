@@ -15,7 +15,9 @@ Use `--mode ct_cc` when `dt.cc` is present. Use `--run-ph2dt` only when the
 input folder also contains a valid `ph2dt.inp`. Input and output contracts are
 in [input_schema.json](input_schema.json) and [output_schema.json](output_schema.json).
 
-The adapter checks native exit status, records a combined log and requires
-`hypoDD.loc` before reporting success. The richer Python API under
+The adapter copies the declared inputs into the writable run directory, checks
+native exit status, records a combined log and requires `hypoDD.loc` before
+reporting success. Existing known output files are rejected unless
+`--overwrite` is supplied. The richer Python API under
 `runtime/python/HypoDDpy` remains available for input conversion, FDTCC and
 parallel workflows.
