@@ -41,13 +41,12 @@ The validation code under `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/
 
 Attempt the first three stages in order and process the complete usable input within the fixed window, including batches or partitions:
 
-Before processing any waveform, write a concise `task_plan.md` directly under
-the assigned output directory. It must state the input discovery result, the
+Before processing any waveform, write a concise `task_plan.md` under the
+assigned output directory. It must state the input discovery result, the
 coverage plan, preprocessing, tool calls, parameters, quality checks and
-expected hand-off files. Treat the assigned output directory as the output
-root itself; do not create another top-level `work/` directory underneath it.
-Intermediate files may be organized in clearly named subdirectories below
-that root.
+expected hand-off files. Organize intermediate and final files in a clear
+layout under that directory; the framework does not require a particular
+subdirectory structure.
 
 1. Convert the usable three-component waveform windows to the input representation required by the PhaseNet interface, then use **PhaseNet** for neural-network P and S phase picking on the complete selected window. Process all batches or partitions and merge their documented outputs. Do not replace this stage with a simple amplitude threshold, STA/LTA detector or custom peak finder.
 2. Convert the extracted phase observations to the GaMMA input columns and use **GaMMA** to associate them into candidate events. Preserve the association parameters and the input/output file locations.
