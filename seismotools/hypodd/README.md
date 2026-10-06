@@ -13,17 +13,17 @@ hypodd/
 ├── source/                 # Native hypoDD/ph2dt Fortran/C source and manuals
 ├── runtime/
 │   ├── bin/                # Compiled hypoDD and ph2dt executables
-│   ├── build/              # Host-specific ignored build tree
-│   └── python/HypoDDpy/    # Python interface, templates and examples
+│   ├── python/HypoDDpy/    # Python interface, templates and examples
+│   └── build.log           # Local build log, ignored by Git
 ├── interface/              # Stable native CT/CT+CC entry point and contracts
-├── examples/smoke/          # Small executable CT relocation example
-├── logs/                   # Ignored build logs
+├── examples/{smoke,workflow}/ # Executable interface examples
 ├── metadata.json
 └── README.md
 ```
 
-`runtime/bin`, `runtime/build` and `logs` are host-specific artifacts and are
-not committed. Rebuild the native programs from `source/` with:
+`runtime/bin`, `runtime/build` and `runtime/build.log` are host-specific
+artifacts and are not committed. `runtime/build/` is only a rebuild cache; users
+should call `interface/run.py` rather than importing files from that cache. Rebuild the native programs from `source/` with:
 
 ```bash
 python seismotools/support/build_native.py --tool hypodd --jobs 4

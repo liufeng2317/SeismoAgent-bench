@@ -28,8 +28,8 @@ def main():
             binary_dir = folder / 'runtime' / 'bin'
         shutil.copytree(source, build, dirs_exist_ok=True)
         binary_dir.mkdir(exist_ok=True)
-        (folder / 'logs').mkdir(exist_ok=True)
-        log = folder / 'logs/build.log'
+        log = folder / 'runtime' / 'build.log'
+        log.parent.mkdir(exist_ok=True)
         if name == 'nonlinloc':
             cwd = build / 'src'
             binaries = ['NLLoc', 'Vel2Grid', 'Grid2Time']
