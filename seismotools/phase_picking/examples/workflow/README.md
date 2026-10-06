@@ -5,6 +5,8 @@ local CPU PhaseNet interface, and checks the probability output. The adapter
 returns model probabilities; thresholding and conversion to arrival picks are
 left to the surrounding workflow.
 
+The implementation is in `run_workflow.py`; `run.sh` is only a thin shell wrapper.
+
 Run it with:
 
 ```bash

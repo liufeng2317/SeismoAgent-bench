@@ -3,6 +3,8 @@
 This example prepares two synthetic events, one station and one catalog differential times (`dt.ct`), then runs the native hypoDD CT interface. It demonstrates
 the minimum native input set and the expected relocation outputs.
 
+The implementation is in `run_workflow.py`; `run.sh` is only a thin shell wrapper.
+
 Run it with:
 
 ```bash

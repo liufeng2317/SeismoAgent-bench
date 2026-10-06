@@ -4,6 +4,8 @@ This example supplies a synthetic layered velocity model, four synthetic
 stations and an eight-pick event observation set. It calls the standard
 NonLinLoc adapter, which runs `Vel2Grid`, `Grid2Time` and `NLLoc` in order.
 
+The implementation is in `run_workflow.py`; `run.sh` is only a thin shell wrapper.
+
 Run it with:
 
 ```bash

@@ -8,6 +8,8 @@ the minimum input preparation required by the adapter:
 - stations: `station_id`, `x_km`, `y_km`, `z_km`;
 - outputs: `events.csv`, `assignments.csv`, `run_result.json`.
 
+The implementation is in `run_workflow.py`; `run.sh` is only a thin shell wrapper.
+
 Run it with:
 
 ```bash
