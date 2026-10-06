@@ -37,7 +37,7 @@ Results are written to the ignored `outputs/` directory. Each
 `validate_*.json` file is a single machine-readable JSON document; native
 program stdout/stderr is kept separately in a matching `.native.log` file
 when needed. The existing
-`seismotools/check_tools.py --imports` remains the integrity and model-loading
+`seismotools/support/check_tools.py --imports` remains the integrity and model-loading
 check; these scripts additionally exercise actual tool execution and, for
 NonLinLoc, the bundled Python interface. The
 Ridgecrest checks are bounded and are not a full-data catalog rerun.

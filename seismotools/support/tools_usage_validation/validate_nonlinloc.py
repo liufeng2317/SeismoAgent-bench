@@ -10,7 +10,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 BIN = ROOT / "seismotools" / "nonlinloc" / "runtime" / "bin"
 PYTHON_PACKAGE = ROOT / "seismotools" / "nonlinloc" / "runtime" / "python" / "Nonlinlocpy"
 EXPORT = Path(os.environ.get("RIDGECREST_EXPORT_ROOT", str(ROOT / "workflows/tasks/2019_ridgecrest_california/expert/export/01_baseline")))

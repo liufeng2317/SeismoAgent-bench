@@ -93,7 +93,7 @@ The project validation checks package import, bundled template resolution, the
 three native stages on a tiny synthetic grid, and one bounded Ridgecrest event:
 
 ```bash
-python seismotools/tools_usage_validation/validate_nonlinloc.py
+python seismotools/support/tools_usage_validation/validate_nonlinloc.py
 ```
 
 This verifies executability and input/output plumbing. It is not a claim that a

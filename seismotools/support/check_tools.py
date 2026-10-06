@@ -7,14 +7,14 @@ import os
 from pathlib import Path
 import sys
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--imports', action='store_true')
     args = parser.parse_args()
-    registry = json.loads((ROOT / 'registry.json').read_text())
+    registry = json.loads((ROOT / 'support' / 'registry.json').read_text())
     errors = []
     for record in registry['files']:
         path = ROOT / record['path']

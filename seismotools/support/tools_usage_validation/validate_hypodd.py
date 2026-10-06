@@ -10,7 +10,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 BIN = ROOT / "seismotools" / "hypodd" / "runtime" / "bin" / "hypoDD"
 PH2DT = BIN.with_name("ph2dt")
 PYTHON_PACKAGE = ROOT / "seismotools" / "hypodd" / "runtime" / "python" / "HypoDDpy"

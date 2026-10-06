@@ -18,10 +18,7 @@ Local, reusable tool snapshots for controlled catalog-building experiments. Thes
 ```text
 seismotools/
   README.md
-  registry.json                 # one source/weight inventory, identities and provenance
-  environment.txt               # observed Python dependency versions, not a portable lockfile
-  check_tools.py                # integrity, offline imports and strict CPU weight loading
-  build_native.py               # builds native tools outside immutable source snapshots
+  support/                     # registry, build/check scripts and validation
   phase_picking/{source,runtime,interface,examples,docs,README.md}
   gamma/{source,interface,examples,docs,README.md}   # association source and references
   nonlinloc/{source,runtime,interface,examples,README.md}
@@ -31,9 +28,9 @@ seismotools/
 From the project root, using the existing `seismoagent` environment:
 
 ```bash
-conda run -n seismoagent python seismotools/check_tools.py
-conda run -n seismoagent python seismotools/check_tools.py --imports
-conda run -n seismoagent python seismotools/build_native.py --tool all --jobs 4
+conda run -n seismoagent python seismotools/support/check_tools.py
+conda run -n seismoagent python seismotools/support/check_tools.py --imports
+conda run -n seismoagent python seismotools/support/build_native.py --tool all --jobs 4
 ```
 
 The first check uses only the standard library. `--imports` also imports local GaMMA and loads all three model state dictionaries strictly on CPU, without downloading weights. Building needs `make`, `gcc` and `gfortran`; binaries and logs stay inside each tool folder. Passing these checks establishes integrity/loadability/buildability, **not scientific equivalence of a new experiment**.
@@ -42,7 +39,7 @@ For a new Python process, add `seismotools/phase_picking/source` and/or `seismot
 
 ## Scope and controlled comparisons
 
-Tool folders contain reusable implementations and manuals. Waveforms, station metadata, velocity grids, case thresholds, event catalogs and evaluation references stay in their existing case/data directories. The custom **Joint DD** solver remains in the expert case because its current imports and assumptions are case-specific; it is not copied and advertised as a generic tool. ObsPy, SeisBench, PyTorch and SciPy are environment dependencies recorded in `environment.txt`, not duplicated installed environments.
+Tool folders contain reusable implementations and manuals. Waveforms, station metadata, velocity grids, case thresholds, event catalogs and evaluation references stay in their existing case/data directories. The custom **Joint DD** solver remains in the expert case because its current imports and assumptions are case-specific; it is not copied and advertised as a generic tool. ObsPy, SeisBench, PyTorch and SciPy are environment dependencies recorded in `support/environment.txt`, not duplicated installed environments.
 
 For each future benchmark, record the tool/source identity, model weights, parameters, allowed input files, CPU/thread limits and outputs. Change one tool/configuration at a time while fixing the observation cohort, velocity model and evaluation matches where scientifically possible. Reference catalogs and expert outcomes are evaluator inputs, not automatic tool inputs. This folder organizes implementations; it does not itself enforce an isolated agent environment.
 
@@ -52,10 +49,10 @@ Weights are copied locally but ignored by Git, together with manual PDFs, builds
 
 ## Initial validation
 
-The initial 197-file runtime snapshot passed byte-identity checks; the expanded documentation inventory is recorded in `registry.json`. Unmodified copies retain source bytes; notebooks have an explicitly recorded output-stripping transformation. The three model state dictionaries loaded strictly on CPU from the copied package, local GaMMA imported, and NLLoc/Vel2Grid/Grid2Time/hypoDD compiled successfully. Compiler identities and local binary hashes are recorded in `registry.json`. No earthquake catalog was recomputed, and no old tool paths were switched.
+The initial 197-file runtime snapshot passed byte-identity checks; the expanded documentation inventory is recorded in `support/registry.json`. Unmodified copies retain source bytes; notebooks have an explicitly recorded output-stripping transformation. The three model state dictionaries loaded strictly on CPU from the copied package, local GaMMA imported, and NLLoc/Vel2Grid/Grid2Time/hypoDD compiled successfully. Compiler identities and local binary hashes are recorded in `support/registry.json`. No earthquake catalog was recomputed, and no old tool paths were switched.
 
 ## Documentation coverage and exclusions
 
 The first transfer was a runnable-source subset, not a complete documentation archive. The subsequent audit added GaMMA's 30 DeepWiki pages, five docs notebooks and their available image assets, original example/test code, and text from its retrieval index. It also added available NonLinLoc control/program manuals stored under Nonlinlocpy, plus original phase-picking inference examples. Follow each tool README for the reading order.
 
-Source-distributed manuals, secondary generated descriptions and runnable implementations are distinguished. Examples retain original assumptions and may reference data not copied here; copied documentation is not a claim that every tutorial has been executed. Example datasets, old results, backups, embedding vectors, agent-service code and unused model weights remain excluded. Available source documents are preserved; missing pages in the original local library remain missing. `registry.json` records the scope and any transformations rather than asserting a complete copy of all TRACE tools or all documents historically read by an agent.
+Source-distributed manuals, secondary generated descriptions and runnable implementations are distinguished. Examples retain original assumptions and may reference data not copied here; copied documentation is not a claim that every tutorial has been executed. Example datasets, old results, backups, embedding vectors, agent-service code and unused model weights remain excluded. Available source documents are preserved; missing pages in the original local library remain missing. `support/registry.json` records the scope and any transformations rather than asserting a complete copy of all TRACE tools or all documents historically read by an agent.

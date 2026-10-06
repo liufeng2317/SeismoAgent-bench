@@ -26,7 +26,7 @@ hypodd/
 not committed. Rebuild the native programs from `source/` with:
 
 ```bash
-python seismotools/build_native.py --tool hypodd --jobs 4
+python seismotools/support/build_native.py --tool hypodd --jobs 4
 ```
 
 ## Standard interface
@@ -102,7 +102,7 @@ interface card is in
 Run the project validation with:
 
 ```bash
-conda run -n seismoagent python seismotools/tools_usage_validation/validate_hypodd.py
+conda run -n seismoagent python seismotools/support/tools_usage_validation/validate_hypodd.py
 ```
 
 The check covers the local Python package and templates, a synthetic native CT

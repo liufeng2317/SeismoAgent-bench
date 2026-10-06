@@ -10,7 +10,7 @@ from pathlib import Path
 import numpy as np
 from obspy import UTCDateTime, read
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 TOOL = ROOT / "seismotools" / "phase_picking"
 DATA = Path(os.environ.get("RIDGECREST_DATA_ROOT", "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2019_ridgecrest_california/waveforms"))
 os.environ["SEISBENCH_CACHE_ROOT"] = str(TOOL / "cache")

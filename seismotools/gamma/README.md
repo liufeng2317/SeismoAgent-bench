@@ -79,7 +79,7 @@ notebooks are references rather than guaranteed offline benchmark launchers.
 Run the project validation from the repository root:
 
 ```bash
-conda run -n seismoagent python seismotools/tools_usage_validation/validate_gamma.py
+conda run -n seismoagent python seismotools/support/tools_usage_validation/validate_gamma.py
 ```
 
 It checks a deterministic synthetic association and one bounded Ridgecrest

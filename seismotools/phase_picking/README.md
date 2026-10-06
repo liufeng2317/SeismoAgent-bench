@@ -76,7 +76,7 @@ are documentation references rather than benchmark launchers.
 From the project root, run:
 
 ```bash
-conda run -n seismoagent python seismotools/tools_usage_validation/validate_phasenet.py
+conda run -n seismoagent python seismotools/support/tools_usage_validation/validate_phasenet.py
 ```
 
 This loads the local CPU weights and performs both a synthetic forward pass and
