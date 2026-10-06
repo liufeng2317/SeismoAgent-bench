@@ -6,9 +6,9 @@ The transformed GaMMA examples and Agent-oriented summaries were copied from:
 
 The five curated Agent usage guides in `core/` are consolidated from the corresponding
 `*_core_usage_summary`, `*_file_summary`, `*_config_summary` and
-`*_plotting_usage_summary` files. The full generated implementation material
-is kept under `reference/deepwiki/` and the retrieval descriptions under
-`reference/`.
+`*_plotting_usage_summary` files. Original upstream tests and notebooks are in
+`reference/source_tests/`. The full generated implementation material is kept
+under `reference/deepwiki/` and the retrieval descriptions under `reference/`.
 
 Older transformed copies (`v1`–`v3`) are not duplicated. Whitespace-only
 formatting was normalized in copied text files; executable content and

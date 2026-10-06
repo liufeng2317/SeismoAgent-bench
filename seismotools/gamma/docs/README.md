@@ -26,6 +26,8 @@ entire archive.
   implementation reference.
 - [`reference/retrieval_descriptions.md`](reference/retrieval_descriptions.md)
   contains retrieval-index descriptions, not an API contract.
+- [`reference/source_tests/`](reference/source_tests/) contains the original
+  upstream tests and notebooks; it is not part of the runtime package.
 - `reference/assets/`, `reference/figures/` and `reference/test_data/` contain
   supporting figures and upstream reference materials.
 - [`SOURCE_MANIFEST.md`](SOURCE_MANIFEST.md) records provenance and any text
