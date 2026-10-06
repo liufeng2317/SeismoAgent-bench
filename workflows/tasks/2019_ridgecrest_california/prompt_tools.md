@@ -2,7 +2,7 @@
 
 ### Task objective
 
-Construct a reproducible candidate earthquake catalog for the one-day window `[2019-07-04T00:00:00Z, 2019-07-05T00:00:00Z)`. The Mw 6.4 mainshock occurred at approximately `2019-07-04T17:33:49Z`. Process every usable waveform, station and component that overlaps this window, using batches when necessary. This is a one-day validation product, not a complete catalog for the Ridgecrest sequence. CPU execution time is not a reason to shorten this window: partition the data and use the available CPU workers. If the complete window cannot be processed, mark the run incomplete rather than reporting a shortened interval as completed.
+Construct a reproducible candidate earthquake catalog for the one-day window `[2019-07-04T00:00:00Z, 2019-07-05T00:00:00Z)`. Process every usable waveform, station and component that overlaps this window.
 
 ### Input data
 
@@ -19,12 +19,14 @@ Use the supplied implementations through their standard interfaces. Read the rel
 
 | Stage | Tool and interface | Required result |
 | --- | --- | --- |
-| 1. Phase picking | PhaseNet: `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/phase_picking/interface/run.py` | P/S probability output and extracted phase observations for the complete window |
+| 1. Phase picking | PhaseNet: `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/phase_picking/interface/run_continuous.py` | P/S probability output and extracted phase observations for the complete window |
 | 2. Association | GaMMA: `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/gamma/interface/run.py` | Candidate events and pick-to-event assignments |
 | 3. Absolute location | NonLinLoc: `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/nonlinloc/interface/run.py` | Absolute locations using an explicit velocity model |
 | 4. Relative relocation | hypoDD: `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/hypodd/interface/run.py` | Optional relative locations when the associated events and differential times provide adequate support |
 
 The first three stages are mandatory and must be attempted in order. The mandatory processing scope is the complete fixed one-day window, not only a mainshock-centered subwindow. Do not replace PhaseNet, GaMMA or NonLinLoc with an amplitude threshold, STA/LTA detector, custom association or custom locator. hypoDD is an additional stage, not a substitute for absolute locations. If it is used, prepare or verify the required `dt.ct` and, when applicable, `dt.cc` inputs; state whether the final catalog contains absolute locations, relative locations or both. If it is not used, record the scientific reason.
+
+For PhaseNet, each inference window is exactly 3001 samples with input components in E/N/Z order and output probability channels in Noise/P/S order. Use overlapping windows to cover the entire one-day interval, merge and de-duplicate picks, and report the window count and final pick time range. Processing only the first window is incomplete. Do not downsample or retain every Nth pick to make GaMMA finish; preserve the full validated pick set.
 
 Before processing, write a concise `task_plan.md` below the assigned output directory. The plan must state discovered input coverage, preprocessing, tool calls, parameters, hand-off files and quality checks. Save complete reusable processing code below the output directory before running it. Record consequential assumptions, failed intervals, excluded stations, failed batches and unresolved data-quality issues.
 
@@ -34,32 +36,28 @@ This host does not provide CUDA or NPU acceleration. Run the workflow on CPU and
 
 ### Execution and repair rules
 
-Keep all created files below the assigned output directory. The input directory is read-only. Use the configured scientific Python environment and the supplied tool interfaces. If a mandatory stage fails, diagnose and repair only run-local code or configuration, then rerun the failed stage. Allow at most 20 repair attempts for the complete required chain. For every attempt, record the error, diagnosis, change, command and result. Do not skip a mandatory stage or present a partial upstream product as the completed catalog. If the limit is reached, mark the run incomplete and preserve the diagnostics.
-
-Record the actual tools executed, versions, commands, configurations, logs and output locations. A zero exit code alone does not establish success; verify the expected output files and contents after every stage. For NonLinLoc, this verification must include generated control files, velocity and travel-time grids, and event observations, not only a help or no-argument invocation.
+1. Keep all created files below the assigned output directory.
+2. The input directory is read-only. Use the configured scientific Python environment and the supplied tool interfaces.
+3. Record the actual tools executed, versions, commands, configurations, logs and output locations.
 
 ### Required outputs
 
 Create the following machine-readable tables below the output directory.
-
-`picks.csv` contains one row per phase observation before association, with these columns:
-
+1. `picks.csv`: phase picking results, contain columns at least:
 ```text
-pick_id,station_id,channel_id,phase,time_utc,probability,uncertainty_s,method,status
+pick_id,station_id,phase,time_utc,probability
 ```
-
-`catalog.csv` contains one row per candidate event, with these columns:
-
+2. `catalog.csv` events infomation, with at least these columns:
 ```text
 event_id,origin_time_utc,latitude,longitude,depth_km,magnitude,magnitude_type,n_picks,n_p_picks,n_s_picks,status
 ```
 
-`picks.csv` does not require `event_id`; keep any association table separately and link it using `pick_id`. Use ISO 8601 UTC timestamps, `P` or `S` phase labels, and `accepted`, `uncertain` or `rejected` status values. Leave values empty when they cannot be estimated defensibly; do not fabricate magnitudes, locations or uncertainties. Derive event pick counts from the association used for location. Keep velocity models, detailed uncertainties and other diagnostics in additional files chosen by the Agent.
+Use ISO 8601 UTC timestamps, `P` or `S` phase labels. Leave values empty when they cannot be estimated defensibly; do not fabricate magnitudes, locations or uncertainties. Keep velocity models, detailed uncertainties and other diagnostics in additional files chosen by the process.
 
 Also provide:
-
-- at least three non-empty PNG diagnostic figures: one showing station/data coverage, one showing representative raw and/or preprocessed waveforms with picks, and one showing the associated or located catalog in space, time or depth. The figures may contain multiple panels and may use representative samples, but they must be generated from the processed one-day results. CSV tables alone do not satisfy this requirement;
+- PNG diagnostic figures:
+  - station/data coverage
+  - representative raw and/or preprocessed waveforms with picks
+  - associated or located catalog in space, time and depth.
 - a concise final report describing actual coverage, tools and parameters, phase and event counts, located-event counts, limitations and output locations;
 - enough code, configuration, provenance and logs to reproduce the result from the declared inputs.
-
-Before declaring completion, verify that the required CSV files are readable, the mandatory tool outputs are present, the processed interval is exactly the fixed one-day window, and the required PNG figures exist and are non-empty. State explicitly that the result covers only the fixed one-day window.

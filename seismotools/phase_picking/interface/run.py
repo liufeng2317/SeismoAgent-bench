@@ -64,6 +64,12 @@ def main() -> int:
     import torch
     torch.set_num_threads(1)
     model, metadata = load_model(args.model)
+    expected_samples = getattr(model, "in_samples", None)
+    if expected_samples is not None and data.shape[1] != expected_samples:
+        raise ValueError(
+            f"{args.model} requires exactly {expected_samples} samples per inference window; "
+            f"got {data.shape[1]}. Use run_continuous.py for longer waveforms."
+        )
     with torch.inference_mode():
         probabilities = model(torch.from_numpy(data)[None])
     probabilities = probabilities.detach().cpu().numpy()
@@ -77,6 +83,9 @@ def main() -> int:
         "output_shape": list(probabilities.shape),
         "sample_rate_hz": args.sample_rate,
         "probability_channels": int(probabilities.shape[1]) if probabilities.ndim >= 2 else None,
+        "phase_labels": metadata.get("model_args", {}).get("phases"),
+        "component_order": metadata.get("model_args", {}).get("component_order"),
+        "window_samples": expected_samples,
         "model_metadata": metadata.get("docstring", "")[:240],
     }
     (output_dir / "run_result.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
