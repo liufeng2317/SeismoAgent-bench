@@ -15,7 +15,7 @@ case "$VARIANT" in
 esac
 RUN_ROOT="$TASK_DIR/runs/$VARIANT"
 RUN_ID="${RUN_ID:-$AGENT_NAME-$(date -u +%Y%m%dT%H%M%SZ)}"
-TIMEOUT="${TIMEOUT:-14400}"
+TIMEOUT="${TIMEOUT:-86400}"
 
 if [ ! -x "$PYTHON" ]; then
   echo "Evaluation Python is not available: $PYTHON" >&2
@@ -43,6 +43,7 @@ cd "$PROJECT_DIR"
   --run-root "$RUN_ROOT" \
   --run-id "$RUN_ID" \
   --agent-config "$PROJECT_DIR/SeismoAgentBench/configs/agents/codex.yaml" \
+  --environment-config "$PROJECT_DIR/SeismoAgentBench/configs/environments/seismoagent_eval.yaml" \
   --codex-bin "$CODEX_BIN" \
   --codex-home "$CODEX_HOME" \
   --env-file "$RUNTIME_ENV_FILE" \

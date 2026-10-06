@@ -6,7 +6,7 @@ Construct a scientifically credible and reproducible **windowed candidate earthq
 
 You are responsible for determining an appropriate end-to-end seismological workflow from the available observations.
 
-This first tools-enabled run uses the fixed half-open UTC window `[2019-07-04T17:23:49Z, 2019-07-04T17:43:49Z)`, centered on the Mw 6.4 mainshock at `2019-07-04T17:33:49Z`. Process all usable waveform files, stations and available components that overlap this window. Do not reduce the window or silently select a subset of stations for convenience. This is a windowed tool-chain validation and must not be presented as a complete catalog for the full Ridgecrest sequence.
+This tools-enabled run uses the complete UTC day containing the Mw 6.4 mainshock: the half-open window `[2019-07-04T00:00:00Z, 2019-07-05T00:00:00Z)`, with the mainshock at `2019-07-04T17:33:49Z`. Process all usable waveform files, stations and available components that overlap this 24-hour window, using batches or partitions when needed. Do not shorten the window or silently select a subset of stations for convenience. This is a one-day tool-chain validation and must not be presented as a complete catalog for the full Ridgecrest sequence.
 
 ### Input
 
@@ -21,7 +21,7 @@ The supplied waveform and station metadata are the scientific observations avail
 
 ### Available tools
 
-This tools-enabled task evaluates whether the Agent can apply the supplied seismological software to the complete selected validation window. The processing stages are fixed by the workflow below. The Agent may choose transparent preprocessing parameters, model settings and quality-control rules around those stages, but must use the supplied implementations for their corresponding scientific operations.
+This tools-enabled task evaluates whether the Agent can apply the supplied seismological software to the complete selected one-day window. The processing stages are fixed by the workflow below. The Agent may choose transparent preprocessing parameters, model settings and quality-control rules around those stages, but must use the supplied implementations for their corresponding scientific operations.
 
 #### Tool resources
 
@@ -39,7 +39,7 @@ The validation code under `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/
 
 #### Required and optional processing path
 
-Attempt the first three stages in order and process the complete usable input within the fixed window, including batches or partitions:
+Attempt the first three stages in order and process the complete usable input within the fixed one-day window, including batches or partitions:
 
 Before processing any waveform, write a concise `task_plan.md` under the
 assigned output directory. It must state the input discovery result, the
@@ -65,7 +65,7 @@ Do not use existing Ridgecrest catalogs, published phase picks, reference event 
 
 ### Reproducibility
 
-The workflow must be executed and reproducible from the supplied inputs. Preserve sufficient code, configuration, tool versions, commands, tool logs and provenance under the assigned output directory so that the processing can be rerun and the origin of the final catalog can be understood. Record which supplied tools were actually executed, not only which tools were inspected. Ensure that the complete usable data within the fixed window is covered, including when processing is performed in multiple batches or partitions.
+The workflow must be executed and reproducible from the supplied inputs. Preserve sufficient code, configuration, tool versions, commands, tool logs and provenance under the assigned output directory so that the processing can be rerun and the origin of the final catalog can be understood. Record which supplied tools were actually executed, not only which tools were inspected. Ensure that the complete usable data within the fixed one-day window is covered, including when processing is performed in multiple batches or partitions.
 
 Before declaring the run complete, verify from the output root that `task_plan.md`,
 `picks.csv` and `catalog.csv` exist, that the two CSV files are readable and
@@ -96,6 +96,6 @@ Provide a concise set of diagnostic figures or tables that allow a scientist to 
 
 ### Final report
 
-At completion, briefly summarize the actual data coverage processed within the fixed window; the workflow and tools selected; the main scientific methods and assumptions; the number of phase observations obtained; the number of candidate events identified and successfully located; major data or methodological limitations; important quality concerns; and where the reproducible code, picks, locations, catalog and diagnostic outputs are stored. State explicitly that the result is a windowed validation product rather than a full-sequence catalog.
+At completion, briefly summarize the actual data coverage processed within the fixed one-day window; the workflow and tools selected; the main scientific methods and assumptions; the number of phase observations obtained; the number of candidate events identified and successfully located; major data or methodological limitations; important quality concerns; and where the reproducible code, picks, locations, catalog and diagnostic outputs are stored. State explicitly that the result is a one-day validation product rather than a full-sequence catalog.
 
 Do not present incomplete or failed processing as a completed catalog.

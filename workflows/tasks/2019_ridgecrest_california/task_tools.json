@@ -2,7 +2,7 @@
   "task_id": "ridgecrest_2019_catalog_construction",
   "version": "1",
   "title": "Ridgecrest earthquake-catalog construction with local tools",
-  "summary": "Validate the supplied local seismological tool chain by constructing a reproducible candidate catalog in the fixed Mw 6.4 mainshock window.",
+  "summary": "Validate the supplied local seismological tool chain by constructing a reproducible candidate catalog for the complete UTC day containing the Mw 6.4 mainshock.",
   "task_prompt_file": "prompt_tools.md",
   "category": "seismology",
   "software": [
