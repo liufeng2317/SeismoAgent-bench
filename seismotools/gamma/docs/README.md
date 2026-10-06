@@ -23,8 +23,8 @@ The repository keeps only the curated `core/` guides and the runnable examples
 needed to understand and validate this adapter. Historical generated pages,
 raw RAG copies, upstream notebooks/tests, retrieval descriptions and their
 supporting figures were removed because they were not runtime inputs and often
-duplicated or contradicted the curated guides. [`SOURCE_MANIFEST.md`](SOURCE_MANIFEST.md)
-records the provenance of the retained guides.
+duplicated or contradicted the curated guides. The retained guides are
+documented directly in this directory and the repository registry.
 
 Do not use example catalogs, published locations or upstream test products as
 observations for a new benchmark case. A successful process exit only means

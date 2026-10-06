@@ -1982,12 +1982,6 @@
       "sha256": "e8d731afef9399d35012520db84927b6c06585e73d0d7e0ab75aee019e37647e"
     },
     {
-      "path": "seismotools/gamma/docs/SOURCE_MANIFEST.md",
-      "source": "local curated documentation",
-      "bytes": 987,
-      "sha256": "eb01bf99f5266b58449221f5909a4b3c0c005628ae011eeb65033305adde6bf4"
-    },
-    {
       "path": "seismotools/gamma/docs/core/README.md",
       "source": "local curated documentation",
       "bytes": 935,
