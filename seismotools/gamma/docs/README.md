@@ -1,37 +1,37 @@
 # GaMMA documentation
 
-This directory is organized by reading purpose. The project adapter and its
-machine-readable contracts are in [`../interface/`](../interface/); use that
-interface for benchmark runs.
+The documentation is split by purpose so that a run does not need to read the
+entire archive.
 
-## Start here
+## Read first
 
-- [`guides/`](guides/) contains five consolidated workflow guides. Each guide
-  combines the example workflow, required files, configuration and diagnostics.
-  This is the recommended material for an Agent.
-- [`examples/`](examples/) contains the transformed text examples and the
-  original notebooks. They show alternative APIs and preprocessing choices;
-  they are references, not automatic benchmark launchers.
+- [`core/`](core/) contains the curated Agent-facing method, input, configuration
+  and diagnostic guides. Read the one guide relevant to the current input.
+- [`../interface/`](../interface/) contains the project execution entry point and
+  machine-readable input/output contracts. Use it to run GaMMA after reading
+  the method documentation.
 
-## Complete reference
+## Runnable examples
 
-- [`reference/deepwiki/`](reference/deepwiki/) contains the full generated
+- [`../examples/smoke/`](../examples/smoke/) checks the smallest synthetic call.
+- [`../examples/workflow/`](../examples/workflow/) is a complete synthetic
+  input-to-output workflow for the project adapter.
+
+## Reference archive
+
+- [`reference/rag_examples/`](reference/rag_examples/) contains the original
+  transformed RAG examples and notebooks. Consult these only when the core
+  guide does not answer a concrete question.
+- [`reference/deepwiki/`](reference/deepwiki/) contains the generated full
   implementation reference.
 - [`reference/retrieval_descriptions.md`](reference/retrieval_descriptions.md)
-  contains secondary retrieval-index descriptions and is not an API contract.
-- [`reference/assets/`](reference/assets/) and [`reference/figures/`](reference/figures/)
-  contain documentation figures.
-- [`reference/test_data/`](reference/test_data/) contains retained reference
-  figures from the upstream documentation snapshot.
+  contains retrieval-index descriptions, not an API contract.
+- `reference/assets/`, `reference/figures/` and `reference/test_data/` contain
+  supporting figures and upstream reference materials.
+- [`SOURCE_MANIFEST.md`](SOURCE_MANIFEST.md) records provenance and any text
+  transformations.
 
-## Reading rule for benchmark runs
-
-Read `guides/` only when the task requires detailed GaMMA usage. Do not use
-example case catalogs, published locations or upstream test products as
-observations for a new task. Preserve the complete pick table; for large
-inputs, use explicit time windows and merge associations rather than keeping a
-global top-N subset. A process exit of zero only means that GaMMA ran; inspect
-`events.csv` and `assignments.csv` before passing results to a locator.
-
-The source selection and provenance of the transformed material are recorded in
-[`SOURCE_MANIFEST.md`](SOURCE_MANIFEST.md).
+Do not use example catalogs, published locations or upstream test products as
+observations for a new benchmark case. A successful process exit only means
+that GaMMA ran; inspect both `events.csv` and `assignments.csv` before passing
+results to a locator.

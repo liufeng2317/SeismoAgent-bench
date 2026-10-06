@@ -25,12 +25,12 @@ seismotools/
   hypodd/{source,runtime,interface,examples/{smoke,workflow},README.md}
 ```
 
-From the project root, using the existing `seismoagent` environment:
+From the project root, using the configured `seismoagent_eval` environment:
 
 ```bash
-conda run -n seismoagent python seismotools/support/check_tools.py
-conda run -n seismoagent python seismotools/support/check_tools.py --imports
-conda run -n seismoagent python seismotools/support/build_native.py --tool all --jobs 4
+conda run -n seismoagent_eval python seismotools/support/check_tools.py
+conda run -n seismoagent_eval python seismotools/support/check_tools.py --imports
+conda run -n seismoagent_eval python seismotools/support/build_native.py --tool all --jobs 4
 ```
 
 The first check uses only the standard library. `--imports` also imports local GaMMA and loads all three model state dictionaries strictly on CPU, without downloading weights. Building needs `make`, `gcc` and `gfortran`; binaries and logs stay inside each tool folder. Passing these checks establishes integrity/loadability/buildability, **not scientific equivalence of a new experiment**.

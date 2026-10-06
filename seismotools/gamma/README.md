@@ -9,10 +9,10 @@ coordinates; event location is a downstream operation.
 
 ```text
 gamma/
-├── source/                 # GaMMA implementation, dependencies and original tests
+├── source/                 # GaMMA implementation and package metadata
 ├── interface/              # Stable association entry point and contracts
 ├── examples/smoke/         # Small synthetic association example
-├── docs/                   # Source and expanded reference documentation
+├── docs/                   # Core guides and archived reference documentation
 ├── metadata.json           # Tool and interface identity
 └── README.md
 ```
@@ -46,7 +46,7 @@ reference catalogs.
 Run the smoke example with:
 
 ```bash
-conda run -n seismoagent bash seismotools/gamma/examples/smoke/run.sh /tmp/gamma-smoke
+conda run -n seismoagent_eval bash seismotools/gamma/examples/smoke/run.sh /tmp/gamma-smoke
 ```
 
 For a complete offline input-to-output example, see [examples/workflow](examples/workflow).
@@ -76,9 +76,9 @@ pick table and the association configuration alongside the run output.
 ## Documentation and validation
 
 Read [docs/README.md](docs/README.md) for the documentation map. The
-consolidated `docs/guides/` are the recommended Agent materials; the complete
+consolidated `docs/core/` are the recommended Agent materials; the complete
 implementation reference is under `docs/reference/`, and notebooks under
-`docs/examples/notebooks/` are optional methodological references rather than
+`docs/reference/rag_examples/notebooks/` are optional methodological references rather than
 benchmark launchers.
 
 Run the project validation from the repository root:

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -41,7 +42,7 @@ def main() -> None:
     root = Path(__file__).resolve().parents[4]
     import subprocess
     subprocess.run([
-        "python", str(root / "seismotools/gamma/interface/run.py"),
+        sys.executable, str(root / "seismotools/gamma/interface/run.py"),
         "--picks", str(input_dir / "picks.csv"),
         "--stations", str(input_dir / "stations.csv"),
         "--output-dir", str(result_dir),
