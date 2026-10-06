@@ -1,13 +1,17 @@
 # Documentation source manifest
 
-The files under `examples/` and `agent_guides/` were copied from the local
-transformed retrieval library:
+The transformed GaMMA examples and Agent-oriented summaries were copied from:
 
 `TRACE-1.1/seismoagent/library/RAG_Script/Retrieve_package_example_RAG/Transformed_Example_Md/gamma/v4`
 
-Version `v4` is used as the canonical transformed GaMMA example set here; the
-older `v1`–`v3` generated copies are not duplicated. The source examples and
-summaries are retained as documentation references and were not used to copy
-case observations or reference catalog outputs into `seismotools`.
+The five workflow guides in `guides/` are consolidated from the corresponding
+`*_core_usage_summary`, `*_file_summary`, `*_config_summary` and
+`*_plotting_usage_summary` files. The full generated implementation material
+is kept under `reference/deepwiki/` and the retrieval descriptions under
+`reference/`.
 
-Whitespace-only formatting was normalized when these text files were copied; executable content and documented parameters were not otherwise rewritten.
+Older transformed copies (`v1`–`v3`) are not duplicated. Whitespace-only
+formatting was normalized in copied text files; executable content and
+parameters were not otherwise rewritten. Examples remain methodological
+references and do not add case observations or reference catalog outputs to the
+tool package.

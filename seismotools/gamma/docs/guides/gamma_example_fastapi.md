@@ -1,4 +1,8 @@
-# Interactive Example of using Gamma for Phase Association and Location
+# GaMMA Fastapi guide
+
+This guide combines the workflow, input/output, configuration and diagnostic notes for this example. It is a reference for adapting the project interface; it is not a case result.
+
+## Workflow and usage
 
 ## 1) Import statements
 
@@ -401,3 +405,192 @@ else:
 ```
 
 This completes the core workflow: prepare/rename DataFrames, configure GaMMA with region and projection, call association, then post-process events and assign event_index back to the original picks using pick_index.
+
+## Inputs and outputs
+
+This example shows how to use the gamma library to associate PhaseNet seismic picks and locate events for the 2019 Ridgecrest sequence, both locally and through a FastAPI endpoint. It prepares inputs by loading picks and station metadata, renaming columns to gamma’s required schema, uppercasing phase types, dropping unused fields, merging station coordinates, filtering a target time window, and projecting station lat/lon/elevation to x(km)/y(km)/z(km) using an azimuthal equidistant projection. A region-specific configuration is built with geographic bounds, projection limits, association thresholds (e.g., min_picks, min_score, residual limits, P/S pick minimums), BGMM as the method (no DBSCAN) with an oversample factor, a uniform P/S velocity model, BFGS optimization bounds, CPU count, and an event index counter. The core workflow calls gamma.utils.association to produce an events table (time, magnitude, uncertainties, covariance, gamma_score, pick counts, event_index, and projected coordinates), which is then converted back to longitude/latitude and depth_km, and an assignments table mapping pick_index to event_index with gamma_score. Output handling joins assignments to the original picks (unmatched picks set to event_index = -1), enables grouping picks by event, and visualizing picks colored by event. The same process is exposed via a /predict API that accepts JSON-serialized picks, stations, and config (served locally or at ai4eps-gamma.hf.space), with responses parsed into events and picks DataFrames for downstream plotting and analysis.
+
+## Configuration
+
+gamma:
+  api:  # Service wrapper used in the example (not part of core GaMMA config)
+    base_url: "https://ai4eps-gamma.hf.space"  # Endpoint used by the FastAPI demo
+    predict_endpoint: "/predict/"  # POST endpoint for association
+
+  io:  # I/O schema expected by GaMMA
+    picks_required_fields: ["id", "timestamp", "prob", "amp", "type"]  # Required pick fields
+    stations_required_fields: ["id", "elevation(m)"]  # Required station fields
+    rename_to_gamma:  # Column renaming performed before calling association()
+      picks:
+        station_id: "id"  # station identifier
+        phase_time: "timestamp"  # pick time (ISO or pandas datetime)
+        phase_type: "type"  # P/S (uppercased)
+        phase_score: "prob"  # detection/phase probability
+        phase_amplitude: "amp"  # observed amplitude
+      stations:
+        station_id: "id"
+        elevation(m): "elevation_m"
+    station_coordinates:  # Station coordinate preparation
+      projection_spec: "+proj=aeqd +lon_0=<lon0> +lat_0=<lat0> +units=km"  # Azimuthal equidistant; lon0/lat0 are region midpoints
+      x(km): "proj(longitude, latitude) -> x"  # Computed at runtime from lon/lat
+      y(km): "proj(longitude, latitude) -> y"  # Computed at runtime from lon/lat
+      z(km): "-elevation_m/1000"  # Depth positive down; elevation above sea level is negative depth
+
+  config:
+    basic:  # Core association thresholds
+      min_picks: 8  # Minimum number of picks to consider an event
+      min_picks_ratio: 0.2  # Minimum fraction of picks supporting an event
+      max_residual_time: 1.0  # Max allowed time residual (s)
+      max_residual_amplitude: 1.0  # Max allowed amplitude residual (linear units)
+      min_score: 0.6  # Minimum pick probability to use
+      min_s_picks: 2  # Minimum S picks per candidate event
+      min_p_picks: 2  # Minimum P picks per candidate event
+      use_amplitude: true  # Use amplitudes in association (set true in example)
+
+    region:  # Spatial domain (Ridgecrest example)
+      name: "ridgecrest"
+      minlongitude: -118.004  # West bound
+      maxlongitude: -117.004  # East bound
+      minlatitude: 35.205  # South bound
+      maxlatitude: 36.205  # North bound
+      mindepth_km: 0.0  # Shallow bound
+      maxdepth_km: 41.0  # Deep bound
+
+    projection:  # Derived from region bounds (computed at runtime)
+      lon0: "(minlongitude + maxlongitude)/2"  # Projection center longitude
+      lat0: "(minlatitude + maxlatitude)/2"  # Projection center latitude
+      proj: null  # pyproj.Proj instance (runtime only)
+      xlim_km: ["xmin", "xmax"]  # Projected X bounds in km
+      ylim_km: ["ymin", "ymax"]  # Projected Y bounds in km
+      zlim_km: [0.0, 41.0]  # Depth bounds in km
+      "z(km)": [0.0, 41.0]  # Alias for depth bounds
+
+    event_filtering:  # Event-level quality control
+      min_picks_per_eq: 5  # Min total picks per event to report
+      min_p_picks_per_eq: 0  # Min P picks per event (post-fit)
+      min_s_picks_per_eq: 0  # Min S picks per event (post-fit)
+      max_sigma11: 3.0  # Max time uncertainty
+      max_sigma22: 1.0  # Max amplitude uncertainty
+      max_sigma12: 1.0  # Max covariance between time and amplitude
+
+    association:  # Clustering/association settings
+      method: "BGMM"  # Association method ("BGMM" or "GMM")
+      use_dbscan: false  # Use DBSCAN instead of BGMM
+      oversample_factor: 8.0  # Oversampling factor for BGMM
+      dims: ["x(km)", "y(km)", "z(km)"]  # Location dimensions to solve
+      ncpu: 32  # Parallel workers (set to 32 in example)
+
+    velocity_model:  # Uniform velocities
+      p: 6.0  # P-wave velocity (km/s)
+      s: 3.428571  # S-wave velocity (km/s) = 6.0/1.75
+
+    optimization:  # Local optimization bounds (BFGS)
+      bfgs_bounds:
+        - ["xmin-1", "xmax+1"]  # X in km (expanded by 1 km)
+        - ["ymin-1", "ymax+1"]  # Y in km (expanded by 1 km)
+        - [0, "zmax+1"]  # Z in km (from 0 to slightly deeper than maxdepth)
+        - [null, null]  # Origin time (unbounded)
+
+    runtime:  # State updated at run-time
+      event_index: 1  # Event index counter (set to 1 before running in example)
+
+## Diagnostics and plotting
+
+Below are all plotting/visualization snippets found in the provided Gamma example, summarized individually.
+
+Plot 1: Picks over time by latitude, colored by phase type (P vs S)
+- What is plotted
+  - X-axis: picks["phase_time"] (timestamp of each pick)
+  - Y-axis: picks["latitude"] (station latitude for the pick)
+  - Color: picks["phase_type"] mapped via {"P": "red", "S": "blue"}
+  - Point size: s=10
+  - Legend: created using two empty scatter calls for “P” (red) and “S” (blue)
+- How it’s plotted
+  - Matplotlib scatter plot, rendered inline in a Jupyter environment
+- Inputs and outputs
+  - Inputs:
+    - DataFrame picks with columns:
+      - phase_time (datetime-like)
+      - latitude (float)
+      - phase_type (string: “P” or “S”)
+    - color mapping dict: {"P": "red", "S": "blue"}
+  - Outputs:
+    - A new matplotlib Figure (plt.figure())
+    - A scatter PathCollection of the pick points
+    - A legend with two entries (“P”, “S”)
+    - Immediate rendering via plt.show()
+- Code that produces the figure
+  ```python
+  # figure the picks (x-axis: time, y-axis: latitude)
+  plt.figure()
+  color = {"P": "red", "S": "blue"}
+  plt.scatter(picks["phase_time"], picks["latitude"], c=picks["phase_type"].apply(lambda x: color[x]), s=10)
+  plt.scatter([], [], c="red", label="P")
+  plt.scatter([], [], c="blue", label="S")
+  plt.legend()
+  plt.show()
+  ```
+- Purpose/interpretation
+  - Visual check of the temporal-spatial distribution of picks and the separation of P vs S phases using color.
+
+Plot 2: Associated picks over time by latitude, colored by event index (local run)
+- What is plotted
+  - X-axis: picks_["phase_time"]
+  - Y-axis: picks_["latitude"]
+  - Color: picks_["event_index"] mapped to “C{event_index}” for assigned picks; black for unassigned (-1)
+  - Point size: s=10
+- How it’s plotted
+  - Matplotlib scatter plot; created with plt.figure() and plt.scatter()
+- Inputs and outputs
+  - Inputs:
+    - DataFrame picks_ (result from run_gamma) with columns:
+      - phase_time (datetime-like)
+      - latitude (float)
+      - event_index (int; -1 for unassigned)
+    - Color mapping function: lambda x: f"C{x}" if x != -1 else "black"
+  - Outputs:
+    - A new matplotlib Figure
+    - A scatter PathCollection of picks colored by event assignment
+    - No legend and no explicit plt.show() in the snippet
+- Code that produces the figure
+  ```python
+  plt.figure()
+  mapping_color = lambda x: f"C{x}" if x!= -1 else "black"
+  plt.scatter(picks_["phase_time"], picks_["latitude"], c=picks_["event_index"].apply(mapping_color), s=10)
+  ```
+- Purpose/interpretation
+  - Visualize which picks are associated with which event after local Gamma association. Unassigned picks are black; each event gets a distinct default matplotlib cycle color (C0, C1, …).
+
+Plot 3: Associated picks over time by latitude, colored by event index (FastAPI run)
+- What is plotted
+  - X-axis: picks_["phase_time"] (converted back to datetime)
+  - Y-axis: picks_["latitude"]
+  - Color: picks_["event_index"] mapped to “C{event_index}”; black for unassigned (-1)
+  - Point size: s=10
+- How it’s plotted
+  - Matplotlib scatter plot, same style and mapping as Plot 2
+- Inputs and outputs
+  - Inputs:
+    - DataFrame events = pd.DataFrame(result["events"]) (not plotted here)
+    - DataFrame picks_ = pd.DataFrame(result["picks"]) with columns:
+      - phase_time (converted to datetime via pd.to_datetime)
+      - latitude (float)
+      - event_index (int)
+    - Color mapping function: lambda x: f"C{x}" if x != -1 else "black"
+  - Outputs:
+    - A new matplotlib Figure
+    - A scatter PathCollection of picks colored by event assignment returned from the API
+    - No legend and no explicit plt.show() in the snippet
+- Code that produces the figure
+  ```python
+  # figure the associated events
+  events = pd.DataFrame(result["events"])
+  picks_ = pd.DataFrame(result["picks"])
+  picks_["phase_time"] = pd.to_datetime(picks_["phase_time"])
+
+  plt.figure()
+  mapping_color = lambda x: f"C{x}" if x!= -1 else "black"
+  plt.scatter(picks_["phase_time"], picks_["latitude"], c=picks_["event_index"].apply(mapping_color), s=10)
+  ```
+- Purpose/interpretation
+  - Validate and visualize the event association produced by the remote FastAPI Gamma run. Colors differentiate events; black indicates unassigned picks.

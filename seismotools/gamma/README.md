@@ -72,9 +72,11 @@ pick table and the association configuration alongside the run output.
 
 ## Documentation and validation
 
-The detailed source and expanded reference material is in [docs/README.md](docs/README.md), including the curated transformed examples and Agent guides.
-including API notes, travel-time assumptions and example notebooks. The
-notebooks are references rather than guaranteed offline benchmark launchers.
+Read [docs/README.md](docs/README.md) for the documentation map. The
+consolidated `docs/guides/` are the recommended Agent materials; the complete
+implementation reference is under `docs/reference/`, and notebooks under
+`docs/examples/notebooks/` are optional methodological references rather than
+benchmark launchers.
 
 Run the project validation from the repository root:
 
