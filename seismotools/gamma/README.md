@@ -49,6 +49,9 @@ Run the smoke example with:
 conda run -n seismoagent bash seismotools/gamma/examples/smoke/run.sh /tmp/gamma-smoke
 ```
 
+For a complete offline input-to-output example, see [examples/workflow](examples/workflow).
+
+
 A case may pass a JSON configuration with `--config` when it needs different
 association thresholds, velocity settings or spatial bounds. Those choices
 belong to the case workflow and should be recorded with its outputs.

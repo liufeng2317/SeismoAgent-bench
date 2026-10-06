@@ -52,6 +52,9 @@ Run the local smoke test with:
 bash seismotools/phase_picking/examples/smoke/run.sh /tmp/phase-picking-smoke
 ```
 
+For a complete offline waveform-to-probability example, see [examples/workflow](examples/workflow).
+
+
 ## Direct Python use
 
 For custom waveform batching, import the local implementation from `source/`:

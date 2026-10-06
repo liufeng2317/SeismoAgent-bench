@@ -19,10 +19,10 @@ Local, reusable tool snapshots for controlled catalog-building experiments. Thes
 seismotools/
   README.md
   support/                     # registry, build/check scripts and validation
-  phase_picking/{source,runtime,interface,examples,docs,README.md}
-  gamma/{source,interface,examples,docs,README.md}   # association source and references
-  nonlinloc/{source,runtime,interface,examples,README.md}
-  hypodd/{source,runtime,interface,examples,README.md}
+  phase_picking/{source,runtime,interface,examples/{smoke,workflow},docs,README.md}
+  gamma/{source,interface,examples/{smoke,workflow},docs,README.md}   # association source and references
+  nonlinloc/{source,runtime,interface,examples/{smoke,workflow},README.md}
+  hypodd/{source,runtime,interface,examples/{smoke,workflow},README.md}
 ```
 
 From the project root, using the existing `seismoagent` environment:
@@ -40,6 +40,8 @@ For a new Python process, add `seismotools/phase_picking/source` and/or `seismot
 ## Scope and controlled comparisons
 
 Tool folders contain reusable implementations and manuals. Waveforms, station metadata, velocity grids, case thresholds, event catalogs and evaluation references stay in their existing case/data directories. The custom **Joint DD** solver remains in the expert case because its current imports and assumptions are case-specific; it is not copied and advertised as a generic tool. ObsPy, SeisBench, PyTorch and SciPy are environment dependencies recorded in `support/environment.txt`, not duplicated installed environments.
+
+Each tool now has both a fast `examples/smoke/` check and an offline `examples/workflow/` example. Smoke checks interface startup; workflow examples create small inputs, call the standard interface and verify the main outputs. Neither uses case observations or reference catalogs.
 
 For each future benchmark, record the tool/source identity, model weights, parameters, allowed input files, CPU/thread limits and outputs. Change one tool/configuration at a time while fixing the observation cohort, velocity model and evaluation matches where scientifically possible. Reference catalogs and expert outcomes are evaluator inputs, not automatic tool inputs. This folder organizes implementations; it does not itself enforce an isolated agent environment.
 

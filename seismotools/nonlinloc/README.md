@@ -53,6 +53,9 @@ A complete local smoke test is:
 bash seismotools/nonlinloc/examples/smoke/run.sh /tmp/nonlinloc-smoke
 ```
 
+For a complete offline prepared-input workflow, see [examples/workflow](examples/workflow).
+
+
 ## Native command-line usage
 
 For advanced case-specific controls, run the native programs directly in a

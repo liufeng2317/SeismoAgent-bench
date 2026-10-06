@@ -59,6 +59,9 @@ A minimal smoke test is:
 bash seismotools/hypodd/examples/smoke/run.sh /tmp/hypodd-smoke
 ```
 
+For a complete offline CT relocation workflow, see [examples/workflow](examples/workflow).
+
+
 ## Native command-line usage
 
 For advanced controls, run the native programs directly in a writable run
