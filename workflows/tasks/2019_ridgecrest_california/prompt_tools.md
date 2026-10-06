@@ -21,27 +21,29 @@ The supplied waveform and station metadata are the scientific observations avail
 
 ### Available tools
 
-This tools-enabled task evaluates whether the Agent can apply the supplied seismological software to the complete selected validation window. The main processing stages are fixed by the workflow below, while the Agent may choose preprocessing parameters, model settings and quality-control rules. The supplied tools are the preferred scientific implementations for their corresponding stages; a simpler custom implementation must not silently replace them.
+This tools-enabled task evaluates whether the Agent can apply the supplied seismological software to the complete selected validation window. The processing stages are fixed by the workflow below. The Agent may choose transparent preprocessing parameters, model settings and quality-control rules around those stages, but must use the supplied implementations for their corresponding scientific operations.
 
 #### Tool resources
 
-The project provides source code, documentation, model files and executable interfaces at these locations:
+The project provides source code, documentation, model files and standardized executable interfaces at these locations:
 
-- **PhaseNet:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/phase_picking/`
-- **GaMMA:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/gamma/` (standard association entry point: `interface/run.py`)
-- **NonLinLoc:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/nonlinloc/` (the standard adapter is `interface/run.py`; its input and output contracts are in `interface/`)
-- **hypoDD:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/hypodd/` (standard relocation entry point: `interface/run.py`)
+- **PhaseNet:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/phase_picking/interface/run.py`. It accepts a three-component NumPy NPZ and writes model probabilities and a run summary.
+- **GaMMA:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/gamma/interface/run.py`. It accepts picks and station CSV files and writes associated events, assignments and a run summary.
+- **NonLinLoc:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/nonlinloc/interface/run.py`. It accepts a prepared input directory containing a velocity model, station table and observations, and writes grids, locations and a run summary.
+- **hypoDD:** `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/hypodd/interface/run.py`. It accepts a prepared native hypoDD input directory and writes relocation products and a run summary.
 - **General scientific Python:** the configured environment includes commonly used scientific and seismological Python packages.
 
-Inspect the supplied documentation, model metadata, examples and executable interfaces to determine how to invoke the required stages. Do not modify the shared tool directories, model weights, binaries or evaluation environment.
+First read the corresponding tool README and `interface/input_schema.json` and `interface/output_schema.json`, then invoke the standard `interface/run.py` entry point. The Agent may inspect source code only when the documented interface is insufficient. The Agent is responsible for task-local MiniSEED conversion, format conversion, batching and pick extraction needed to connect the stages. Do not modify the shared tool directories, model weights, binaries or evaluation environment.
+
+The validation code under `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/support/tools_usage_validation/` is for maintainer-side environment checks. It is not case-specific scientific input, a reference catalog or an expected-result source, and must not be copied into the result.
 
 #### Required and optional processing path
 
 Attempt the first three stages in order and process the complete usable input within the fixed window, including batches or partitions:
 
-1. Use **PhaseNet** (or its supplied command-line/API interface) for neural-network P and S phase picking on the waveform data in the selected window. Do not replace the full-window picking stage with a simple amplitude threshold, STA/LTA detector or custom peak finder unless PhaseNet has been tested and a documented execution failure prevents its use.
-2. Use **GaMMA** to associate the resulting phase picks into candidate events. Preserve the association parameters and the input/output file locations.
-3. Use **NonLinLoc** for absolute event location with an explicit velocity model.
+1. Convert the usable three-component waveform windows to the input representation required by the PhaseNet interface, then use **PhaseNet** for neural-network P and S phase picking on the complete selected window. Process all batches or partitions and merge their documented outputs. Do not replace this stage with a simple amplitude threshold, STA/LTA detector or custom peak finder.
+2. Convert the extracted phase observations to the GaMMA input columns and use **GaMMA** to associate them into candidate events. Preserve the association parameters and the input/output file locations.
+3. Convert the associated observations and station information to the prepared input files required by the NonLinLoc interface, then use **NonLinLoc** for absolute event location with an explicit velocity model.
 4. After absolute locations are available, **hypoDD** may be used as an additional relative-relocation stage when sufficient differential-pick support exists. If it is used, generate or verify the catalog differential-time input with `ph2dt` before running hypoDD, and state whether the final catalog contains absolute locations, relative locations, or both. If it is not used, record the reason and retain the absolute-location catalog as the final location product.
 
 The Agent may add transparent preprocessing and quality-control steps around this path. It must state the selected parameters and explain any change to the order or scope of the stages. Before substantial processing, document the planned workflow, tool interfaces and major scientific decisions. Record significant revisions and report any files or intervals that could not be processed. The first three stages are mandatory for this task; a custom detector, association method or locator cannot be substituted for them.
