@@ -2,7 +2,7 @@
 
 ### Task objective
 
-Construct a reproducible candidate earthquake catalog for the one-day window `[2019-07-04T00:00:00Z, 2019-07-05T00:00:00Z)`. The Mw 6.4 mainshock occurred at approximately `2019-07-04T17:33:49Z`. Process every usable waveform, station and component that overlaps this window, using batches when necessary. This is a one-day validation product, not a complete catalog for the Ridgecrest sequence.
+Construct a reproducible candidate earthquake catalog for the one-day window `[2019-07-04T00:00:00Z, 2019-07-05T00:00:00Z)`. The Mw 6.4 mainshock occurred at approximately `2019-07-04T17:33:49Z`. Process every usable waveform, station and component that overlaps this window, using batches when necessary. This is a one-day validation product, not a complete catalog for the Ridgecrest sequence. CPU execution time is not a reason to shorten this window: partition the data and use the available CPU workers. If the complete window cannot be processed, mark the run incomplete rather than reporting a shortened interval as completed.
 
 ### Input data
 
@@ -24,7 +24,7 @@ Use the supplied implementations through their standard interfaces. Read the rel
 | 3. Absolute location | NonLinLoc: `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/nonlinloc/interface/run.py` | Absolute locations using an explicit velocity model |
 | 4. Relative relocation | hypoDD: `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/hypodd/interface/run.py` | Optional relative locations when the associated events and differential times provide adequate support |
 
-The first three stages are mandatory and must be attempted in order. Do not replace PhaseNet, GaMMA or NonLinLoc with an amplitude threshold, STA/LTA detector, custom association or custom locator. hypoDD is an additional stage, not a substitute for absolute locations. If it is used, prepare or verify the required `dt.ct` and, when applicable, `dt.cc` inputs; state whether the final catalog contains absolute locations, relative locations or both. If it is not used, record the scientific reason.
+The first three stages are mandatory and must be attempted in order. The mandatory processing scope is the complete fixed one-day window, not only a mainshock-centered subwindow. Do not replace PhaseNet, GaMMA or NonLinLoc with an amplitude threshold, STA/LTA detector, custom association or custom locator. hypoDD is an additional stage, not a substitute for absolute locations. If it is used, prepare or verify the required `dt.ct` and, when applicable, `dt.cc` inputs; state whether the final catalog contains absolute locations, relative locations or both. If it is not used, record the scientific reason.
 
 Before processing, write a concise `task_plan.md` below the assigned output directory. The plan must state discovered input coverage, preprocessing, tool calls, parameters, hand-off files and quality checks. Save complete reusable processing code below the output directory before running it. Record consequential assumptions, failed intervals, excluded stations, failed batches and unresolved data-quality issues.
 
@@ -58,8 +58,8 @@ event_id,origin_time_utc,latitude,longitude,depth_km,magnitude,magnitude_type,n_
 
 Also provide:
 
-- diagnostic figures or tables showing data/station coverage, representative waveforms or picks, catalog results and important quality concerns;
+- at least three non-empty PNG diagnostic figures: one showing station/data coverage, one showing representative raw and/or preprocessed waveforms with picks, and one showing the associated or located catalog in space, time or depth. The figures may contain multiple panels and may use representative samples, but they must be generated from the processed one-day results. CSV tables alone do not satisfy this requirement;
 - a concise final report describing actual coverage, tools and parameters, phase and event counts, located-event counts, limitations and output locations;
 - enough code, configuration, provenance and logs to reproduce the result from the declared inputs.
 
-State explicitly that the result covers only the fixed one-day window.
+Before declaring completion, verify that the required CSV files are readable, the mandatory tool outputs are present, the processed interval is exactly the fixed one-day window, and the required PNG figures exist and are non-empty. State explicitly that the result covers only the fixed one-day window.
