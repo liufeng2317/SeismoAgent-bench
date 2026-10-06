@@ -7,7 +7,8 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from SeismoAgentBench.agent.contract import AgentSpec
-from SeismoAgentBench.execution import run_command, write_agent_config_snapshot
+from SeismoAgentBench.execution import (run_command, write_agent_config_snapshot,
+                                        write_environment_config_snapshot)
 from SeismoAgentBench.reporting import write_environment_record
 
 
@@ -17,6 +18,7 @@ def run_agent(task_path: str | Path, manifest_path: str | Path | None, agent: Ag
               extra_env: Mapping[str, str] | None = None,
               resume: bool = False,
               agent_config: Mapping[str, Any] | None = None,
+              environment_config: Mapping[str, Any] | None = None,
               agent_prompt: str | None = None,
               auth_source_home: str | Path | None = None,
               runtime_context: Mapping[str, Any] | None = None) -> dict[str, Any]:
@@ -27,6 +29,8 @@ def run_agent(task_path: str | Path, manifest_path: str | Path | None, agent: Ag
     run = Path(run_root).resolve() / run_id
     if agent_config is not None:
         write_agent_config_snapshot(run, agent_config)
+    if environment_config is not None:
+        write_environment_config_snapshot(run, environment_config)
     write_environment_record(run, result, runtime_context=runtime_context)
     record_dir = run / "record"
     record_dir.mkdir(exist_ok=True)
@@ -39,6 +43,8 @@ def run_agent(task_path: str | Path, manifest_path: str | Path | None, agent: Ag
         references["input_manifest"] = "control/input_manifest.json"
     if (run / "control/output_contract.json").is_file():
         references["output_contract"] = "control/output_contract.json"
+    if (run / "control/environment_config.yaml").is_file():
+        references["environment_config"] = "control/environment_config.yaml"
     if (run / "control/agent_prompt.md").is_file():
         references["prompt"] = "control/agent_prompt.md"
     provenance = {

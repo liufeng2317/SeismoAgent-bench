@@ -12,7 +12,8 @@ from typing import Sequence
 from SeismoAgentBench.agent import AgentError, AgentSpec
 from SeismoAgentBench.execution import (CodexCommandError, CodexCommandSpec, ExecutionError,
                                         AgentConfigError, RunLayout, expand_experiment,
-                                        load_agent_config, load_env_file, load_experiment_spec,
+                                        load_agent_config, load_environment_config, load_env_file,
+                                        load_experiment_spec,
                                         probe_executable_version, probe_runtime, resolve_auth)
 from SeismoAgentBench.task import load_json, render_agent_prompt
 from SeismoAgentBench.workflow import evaluate_run, execute_experiment, run_agent
@@ -54,6 +55,7 @@ def _parser() -> argparse.ArgumentParser:
     codex.add_argument("--run-root", required=True)
     codex.add_argument("--run-id", required=True)
     codex.add_argument("--agent-config", help="YAML Agent runtime configuration snapshot")
+    codex.add_argument("--environment-config", help="YAML execution environment configuration")
     codex.add_argument("--campaign-id")
     codex.add_argument("--variant", default="base")
     codex.add_argument("--codex-bin", help="Codex executable; defaults to agent config")
@@ -101,11 +103,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             agent_config = load_agent_config(args.agent_config) if args.agent_config else None
             if agent_config is not None and agent_config.get("harness") != "codex":
                 raise CodexCommandError("run-codex requires an Agent config with harness: codex")
+            environment_config = (load_environment_config(args.environment_config)
+                                  if args.environment_config else {})
             auth = resolve_auth(agent_config)
             configured_env_file = args.env_file or auth.get("env_file")
             configured_codex_home = args.codex_home or auth.get("codex_home")
             env = load_env_file(configured_env_file) if configured_env_file else {}
-            configured = (agent_config or {}).get("runtime", {})
+            configured = environment_config
             configured_python = configured.get("python")
             if configured_python:
                 env["PYTHON"] = configured_python
@@ -117,7 +121,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             if not isinstance(codex_bin, str) or not codex_bin:
                 raise CodexCommandError("--codex-bin or agent config executable is required")
             model = args.model if args.model is not None else (agent_config or {}).get("model")
-            reasoning_effort = args.reasoning_effort or configured.get("reasoning_effort", "medium")
+            reasoning_effort = args.reasoning_effort or (agent_config or {}).get(
+                "reasoning_effort", "medium")
             if not isinstance(reasoning_effort, str):
                 raise CodexCommandError("reasoning_effort must be a string")
             effective_root = Path(args.run_root).resolve()
@@ -146,6 +151,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     timeout=args.timeout, reference_manifest=args.reference_manifest,
                     extra_env=env, resume=args.resume or attempt > 0,
                     agent_config=agent_config,
+                    environment_config=environment_config or None,
                     agent_prompt=rendered_prompt,
                     auth_source_home=configured_codex_home,
                     runtime_context=runtime_context,

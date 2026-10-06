@@ -11,13 +11,13 @@ class AgentConfigTests(unittest.TestCase):
             base = Path(tmp)
             source = base / "agent.yaml"
             source.write_text(
-                "harness: codex\nmodel: null\nruntime:\n  mode: host-direct\n",
+                "harness: codex\nmodel: null\nreasoning_effort: medium\n",
                 encoding="utf-8",
             )
             config = load_agent_config(source)
             target = write_agent_config_snapshot(base / "run", config)
             self.assertTrue(target.is_file())
-            self.assertIn("host-direct", target.read_text(encoding="utf-8"))
+            self.assertIn("reasoning_effort", target.read_text(encoding="utf-8"))
 
     def test_rejects_nonempty_secret_field(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -38,7 +38,7 @@ class AgentConfigTests(unittest.TestCase):
             source = Path(tmp) / "agent.yaml"
             source.write_text(
                 "harness: codex\nexecutable: codex\nversion_command: [--version]\n"
-                "auth:\n  mode: external_profile\nruntime: {}\n",
+                "auth:\n  mode: external_profile\n",
                 encoding="utf-8",
             )
             config = load_agent_config(source)
@@ -48,18 +48,16 @@ class AgentConfigTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             source = Path(tmp) / "agent.yaml"
             source.write_text(
-                "harness: codex\nruntime:\n"
-                "  python: /opt/miniconda/envs/seismoagent_eval/bin/python\n"
-                "  network_policy: allowed\n  package_installation: allowed\n",
+                "harness: codex\nreasoning_effort: medium\n",
                 encoding="utf-8",
             )
             config = load_agent_config(source)
-            self.assertEqual(config["runtime"]["network_policy"], "allowed")
+            self.assertEqual(config["reasoning_effort"], "medium")
 
     def test_rejects_legacy_runtime_fields(self):
         with tempfile.TemporaryDirectory() as tmp:
             source = Path(tmp) / "agent.yaml"
-            source.write_text("harness: codex\nconfig:\n  reasoning_effort: low\n", encoding="utf-8")
+            source.write_text("harness: codex\nruntime:\n  reasoning_effort: low\n", encoding="utf-8")
             with self.assertRaises(AgentConfigError):
                 load_agent_config(source)
 

@@ -9,6 +9,15 @@ import platform
 import subprocess
 from typing import Any, Mapping
 
+import yaml
+
+
+class EnvironmentConfigError(ValueError):
+    """Raised when an execution environment configuration is invalid."""
+
+
+_ENVIRONMENT_FIELDS = {"mode", "python", "network_policy", "package_installation"}
+
 
 def _os_release() -> str:
     values: dict[str, str] = {}
@@ -33,6 +42,35 @@ def _python_info(executable: str | None) -> dict[str, str]:
         return {"executable": lines[0], "version": lines[1]}
     except (OSError, subprocess.SubprocessError, IndexError):
         return {"executable": selected, "version": "unknown"}
+
+
+def load_environment_config(path: str | Path) -> dict[str, str]:
+    """Load the non-secret execution environment configuration."""
+    source = Path(path)
+    try:
+        value = yaml.safe_load(source.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, yaml.YAMLError) as exc:
+        raise EnvironmentConfigError(f"cannot load environment config {source}: {exc}") from exc
+    if not isinstance(value, dict):
+        raise EnvironmentConfigError("environment config must be a YAML mapping")
+    unknown = sorted(set(value) - _ENVIRONMENT_FIELDS)
+    if unknown:
+        raise EnvironmentConfigError(f"unknown environment config fields: {', '.join(unknown)}")
+    for field in ("mode", "python"):
+        if field in value and (not isinstance(value[field], str) or not value[field]):
+            raise EnvironmentConfigError(f"environment config.{field} must be a non-empty string")
+    for field in ("network_policy", "package_installation"):
+        if field in value and value[field] not in {"allowed", "blocked"}:
+            raise EnvironmentConfigError(f"environment config.{field} must be allowed or blocked")
+    return {str(key): str(item) for key, item in value.items()}
+
+
+def write_environment_config_snapshot(run_dir: str | Path, config: Mapping[str, Any]) -> Path:
+    """Write the selected non-secret environment configuration under run control."""
+    target = Path(run_dir) / "control" / "environment_config.yaml"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(yaml.safe_dump(dict(config), sort_keys=False), encoding="utf-8")
+    return target
 
 
 def probe_runtime(executable: str | None = None, *, network_policy: str = "allowed",

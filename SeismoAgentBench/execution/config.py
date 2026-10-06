@@ -14,12 +14,11 @@ class AgentConfigError(ValueError):
 
 
 _TOP_LEVEL = {
-    "harness", "model", "runtime",
+    "harness", "model", "reasoning_effort",
     "executable", "version_command", "auth",
 }
 _SECRET = re.compile(r"(api[_-]?key|token|password|secret|credential)", re.I)
 _AUTH_FIELDS = {"mode", "env_file", "codex_home"}
-_RUNTIME_FIELDS = {"mode", "reasoning_effort", "python", "network_policy", "package_installation"}
 
 
 def _redact(value: Any, *, key: str = "") -> Any:
@@ -68,24 +67,10 @@ def load_agent_config(path: str | Path) -> dict[str, Any]:
     for field in ("env_file", "codex_home"):
         if field in auth and (not isinstance(auth[field], str) or not auth[field]):
             raise AgentConfigError(f"Agent config auth.{field} must be a non-empty string")
-    runtime = value.get("runtime", {})
-    if not isinstance(runtime, dict):
-        raise AgentConfigError("Agent config.runtime must be a mapping")
-    unknown_runtime = sorted(set(runtime) - _RUNTIME_FIELDS)
-    if unknown_runtime:
-        raise AgentConfigError(f"unknown Agent config runtime fields: {', '.join(unknown_runtime)}")
-    if "mode" in runtime and (not isinstance(runtime["mode"], str) or not runtime["mode"]):
-        raise AgentConfigError("Agent config.runtime.mode must be a non-empty string")
-    if "python" in runtime and (not isinstance(runtime["python"], str) or not runtime["python"]):
-        raise AgentConfigError("Agent config.runtime.python must be a non-empty path")
-    if "network_policy" in runtime and runtime["network_policy"] not in {"allowed", "blocked"}:
-        raise AgentConfigError("Agent config.runtime.network_policy must be allowed or blocked")
-    if "package_installation" in runtime and runtime["package_installation"] not in {"allowed", "blocked"}:
-        raise AgentConfigError("Agent config.runtime.package_installation must be allowed or blocked")
-    if "reasoning_effort" in runtime and (
-            not isinstance(runtime["reasoning_effort"], str) or
-            runtime["reasoning_effort"] not in {"low", "medium", "high", "xhigh", "max"}):
-        raise AgentConfigError("Agent config.runtime.reasoning_effort is unsupported")
+    if "reasoning_effort" in value and (
+            not isinstance(value["reasoning_effort"], str) or
+            value["reasoning_effort"] not in {"low", "medium", "high", "xhigh", "max"}):
+        raise AgentConfigError("Agent config.reasoning_effort is unsupported")
     return _redact(dict(value))
 
 

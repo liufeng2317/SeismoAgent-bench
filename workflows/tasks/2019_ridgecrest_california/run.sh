@@ -3,7 +3,7 @@ set -euo pipefail
 
 TASK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "$TASK_DIR/../../.." && pwd)"
-VARIANT="${VARIANT:-base}"
+VARIANT="${VARIANT:-tools}"
 PYTHON="${PYTHON:-/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python}"
 CODEX_BIN="${CODEX_BIN:-$(command -v codex)}"
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"

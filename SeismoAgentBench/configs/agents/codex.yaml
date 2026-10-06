@@ -1,14 +1,9 @@
-# Codex runtime profile. Credentials are supplied outside this file.
+# Codex Agent definition. Credentials are supplied outside this file.
 harness: codex
 executable: codex
 version_command:
   - --version
 model: gpt-5.6-sol
+reasoning_effort: medium
 auth:
   mode: external_profile
-runtime:
-  mode: host-direct
-  python: /liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python
-  reasoning_effort: medium
-  network_policy: allowed
-  package_installation: allowed
