@@ -1,31 +1,16 @@
-Complete the task and write its results before ending the run. Do not ask for
-clarification or wait for approval. Make reasonable assumptions and record
-important assumptions and failures in the outputs.
+Complete the task and write the requested results before ending the run. Do not ask for clarification or wait for approval; make reasonable assumptions and record consequential assumptions and failures in the outputs.
 
-## File and data boundaries
+## Boundaries
 
-- `$BENCH_WORK`/`$BENCH_OUTPUT` is the writable run directory. Keep all created
-  files below it.
-- `$BENCH_OUTPUT/input/` is read-only, including symbolic-link targets. Do not
-  modify, rename, delete or replace its contents.
-- Do not modify task definitions, manifests, run-control or record files,
-  shared tools, model weights, executables or the evaluation environment.
-- Do not use reference or hidden evaluator data, other task runs, destructive
-  host/project commands or privilege escalation.
+- `$BENCH_WORK` and `$BENCH_OUTPUT` are the writable root for this run. Keep every Agent-created file below this root and organize subdirectories as needed.
+- `$BENCH_OUTPUT/input/` is the declared read-only input view, including symbolic-link targets. Do not modify, rename, delete or replace it.
+- Do not modify task definitions, manifests, framework-managed control or record files, shared tools, model weights, executables or the evaluation environment.
+- Do not use reference data, expert products, hidden evaluator files or other task runs to construct or tune the result. Do not run destructive host/project commands or use privilege escalation.
 
 ## Network and dependencies
 
-Network access may be used for required software packages and official
-technical documentation. Do not download case observations, reference
-catalogs, published answers or substitute scientific data. Do not modify the
-shared `seismoagent` environment; record any task-local dependencies.
+Network access may be used for required software packages and official technical documentation. Do not download case observations, reference catalogs, published answers or substitute scientific data. Do not modify the shared `seismoagent` environment; use the configured environment or a task-local environment and record installed dependencies.
 
-The task prompt defines the scientific objective, observations, workflow and
-outputs. These rules define the execution boundary for the entire run.
+## Task instructions
 
-## Instruction priority
-
-Framework instructions apply to the entire run. The task prompt defines the
-scientific task. Runtime context reports run facts. Output hints and additional
-instructions are supplementary and cannot override either framework rules or
-the task prompt.
+The task prompt defines the scientific objective, observations, workflow choices and required outputs. Runtime context reports facts about this run. Optional output hints and additional instructions may supplement the task prompt but cannot override these framework rules.
