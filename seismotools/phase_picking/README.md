@@ -11,7 +11,7 @@ phase_picking/
 ├── source/                 # Python model implementations
 ├── runtime/weights/        # Local model weights and metadata
 ├── interface/              # Stable CPU inference entry points and contracts
-├── examples/{smoke,workflow}/ # Executable interface examples
+├── examples/                  # Validated model examples and interface smoke test
 ├── docs/{core,examples}/   # Method notes and model reference examples
 ├── metadata.json            # Tool and interface identity
 ├── cache/                  # Local SeisBench cache (ignored runtime files)
@@ -62,7 +62,7 @@ bash seismotools/phase_picking/examples/smoke/run.sh /tmp/phase-picking-smoke
 The examples use `PYTHON` when it is set and otherwise use `python`. The
 selected interpreter must provide Torch and the scientific dependencies.
 
-For a complete offline waveform-to-probability example, see [examples/workflow](examples/workflow).
+For model-specific inference conventions, see the validated Python examples in [examples](examples/) and the corresponding source references in [docs/examples](docs/examples/).
 
 
 ## Direct Python use
@@ -80,9 +80,9 @@ the model to evaluation mode. The caller is responsible for channel order,
 sampling rate, gaps, normalization, overlap/blinding, thresholds and UTC
 conversion. Do not synthesize missing components or bridge real gaps.
 
-The reference scripts in `docs/examples/` describe the original
-`classify`/`annotate` conventions. They may contain host-specific imports and
-are documentation references rather than benchmark launchers.
+The Python files in `examples/` are copied from `docs/examples/` and describe
+the validated `classify`/`annotate` conventions. They are model-usage
+references rather than benchmark launchers.
 
 ## Validation
 
