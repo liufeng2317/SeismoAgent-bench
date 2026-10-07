@@ -2,7 +2,7 @@
 
 ### Task objective
 
-Construct a reproducible candidate earthquake catalog for the fixed two-hour window `[2019-07-04T16:33:49Z, 2019-07-04T18:33:49Z)`, centered on the Mw 6.4 Ridgecrest mainshock origin time. Process every available waveform interval and every usable station/component that overlaps this window; report incomplete station components and gaps instead of silently dropping them.
+Construct a reproducible candidate earthquake catalog for the fixed two-hour window `[2019-07-04T16:30:00Z, 2019-07-04T18:30:00Z)`, centered on the Mw 6.4 Ridgecrest mainshock origin time. Process every available waveform interval and every usable station/component that overlaps this window; report incomplete station components and gaps instead of silently dropping them.
 
 ### Input data
 
@@ -17,12 +17,10 @@ Discover the files and actual coverage before processing. Do not modify the inpu
 
 Use the supplied implementations through their standard execution paths. Before calling a tool, read its README and the documentation under its `docs/` directory, including curated Markdown/RAG guides and generic examples where present. Use those documents to determine the method, parameters, input preparation and output interpretation; use the listed execution path only to run the tool. The task-local code is responsible for MiniSEED conversion, preprocessing, batching, format conversion and pick extraction between stages. Do not modify shared tools, weights, binaries or the evaluation environment.
 
-| Stage | Tool and execution path | Required result |
-| --- | --- | --- |
-| 1. Phase picking | PhaseNet: `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/phase_picking/interface/run_continuous.py` | P/S probability output and extracted phase observations for the complete window |
-| 2. Association | GaMMA: `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/gamma/interface/run.py` | Candidate events and pick-to-event assignments |
-| 3. Absolute location | NonLinLoc: `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/nonlinloc/interface/run.py` | Absolute locations using an explicit velocity model |
-| 4. Relative relocation | hypoDD: `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/hypodd/interface/run.py` | Optional relative locations when the associated events and differential times provide adequate support |
+1. **Phase picking:** Use PhaseNet through `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/phase_picking/interface/run_continuous.py`. Produce P/S probability output and extracted phase observations for the complete window.
+2. **Association:** Use GaMMA through `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/gamma/interface/run.py`. Produce candidate events and pick-to-event assignments.
+3. **Absolute location:** Use NonLinLoc through `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/nonlinloc/interface/run.py`. Produce absolute locations using an explicit velocity model.
+4. **Relative relocation:** Use hypoDD through `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/hypodd/interface/run.py` when the associated events and differential times provide adequate support. Produce relative locations as an additional result.
 
 The first three stages are mandatory and must be attempted in order. The mandatory processing scope is the complete fixed two-hour window above; do not process only a short excerpt from it. Do not replace PhaseNet, GaMMA or NonLinLoc with an amplitude threshold, STA/LTA detector, custom association or custom locator. hypoDD is an additional stage, not a substitute for absolute locations. If it is used, prepare or verify the required `dt.ct` and, when applicable, `dt.cc` inputs; state whether the final catalog contains absolute locations, relative locations or both. If it is not used, record the scientific reason.
 
