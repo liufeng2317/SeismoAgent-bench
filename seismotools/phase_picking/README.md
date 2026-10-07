@@ -62,7 +62,7 @@ bash seismotools/phase_picking/examples/smoke/run.sh /tmp/phase-picking-smoke
 The examples use `PYTHON` when it is set and otherwise use `python`. The
 selected interpreter must provide Torch and the scientific dependencies.
 
-For model-specific inference conventions, see the validated Python examples in [examples](examples/) and the corresponding source references in [docs/examples](docs/examples/).
+For model-specific inference conventions, see the validated Python examples in [examples](examples/) and the concise usage guidance in [docs/examples](docs/examples/).
 
 
 ## Direct Python use
@@ -80,9 +80,9 @@ the model to evaluation mode. The caller is responsible for channel order,
 sampling rate, gaps, normalization, overlap/blinding, thresholds and UTC
 conversion. Do not synthesize missing components or bridge real gaps.
 
-The Python files in `examples/` are copied from `docs/examples/` and describe
-the validated `classify`/`annotate` conventions. They are model-usage
-references rather than benchmark launchers.
+The Python files in `examples/` describe the validated `classify`/`annotate`
+conventions. They are model-usage references rather than benchmark launchers;
+the `docs/examples/` directory contains guidance and links, not duplicate code.
 
 ## Validation
 
