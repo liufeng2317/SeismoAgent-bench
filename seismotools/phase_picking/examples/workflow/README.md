@@ -10,6 +10,7 @@ The implementation is in `run_workflow.py`; `run.sh` is only a thin shell wrappe
 Run it with:
 
 ```bash
+export PYTHON=/path/to/the/configured/phase-picking-python
 bash seismotools/phase_picking/examples/workflow/run.sh /tmp/phase-picking-workflow
 ```
 

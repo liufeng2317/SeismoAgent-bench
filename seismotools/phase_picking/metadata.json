@@ -1,0 +1,9 @@
+{
+  "tool": "phase_picking",
+  "models": ["phasenet", "eqtransformer", "dpppickerp"],
+  "interface_version": 2,
+  "source": "source/",
+  "weights": "runtime/weights/",
+  "standard_entrypoints": ["interface/run.py", "interface/run_continuous.py"],
+  "device": "CPU"
+}

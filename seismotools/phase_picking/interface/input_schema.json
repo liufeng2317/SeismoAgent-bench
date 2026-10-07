@@ -1,9 +1,11 @@
 {
   "schema_version": 1,
   "description": "Input contract for the local CPU phase-picking adapter.",
-  "file": "NPZ with an array named data of shape (3, 3001) for run.py; use run_continuous.py for longer waveforms",
-  "component_order": "For the bundled PhaseNet model, components must be ordered E, N, Z.",
-  "window_samples": 3001,
-  "sample_rate_hz": "Positive sampling rate supplied as --sample-rate",
+  "file": "NPZ with an array named data of shape (channels, samples).",
+  "model_channels": {"phasenet": 3, "eqtransformer": 3, "dpppickerp": 1},
+  "component_order": {"phasenet": "E,N,Z", "eqtransformer": "Z,N,E", "dpppickerp": "Z"},
+  "window_samples": {"phasenet": 3001, "eqtransformer": 6000, "dpppickerp": "variable"},
+  "sample_rate_hz": "Positive sampling rate supplied by CLI or optional JSON config.",
+  "config": "Optional JSON settings for model, sample_rate_hz, threads, window_samples and overlap_samples.",
   "read_only": true
 }

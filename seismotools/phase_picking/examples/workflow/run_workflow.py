@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 from pathlib import Path
 
@@ -29,7 +30,7 @@ def main() -> None:
 
     root = Path(__file__).resolve().parents[4]
     subprocess.run([
-        "python", str(root / "seismotools/phase_picking/interface/run.py"),
+        os.environ.get("PYTHON", "python"), str(root / "seismotools/phase_picking/interface/run.py"),
         "--input-npz", str(input_dir / "waveform.npz"),
         "--output-dir", str(result_dir), "--model", "phasenet", "--sample-rate", "100",
     ], check=True)

@@ -1,10 +1,12 @@
 {
   "schema_version": 1,
-  "description": "Outputs from the local phase-picking adapter.",
+  "description": "Outputs from the local phase-picking adapters.",
   "files": {
     "probabilities.npz": "Model probability array and sample rate",
-    "run_result.json": "Model identity, input/output shapes and runtime summary"
+    "run_result.json": "Model identity, effective configuration, input/output shapes and runtime summary"
   },
-  "phase_labels": "For PhaseNet, probability channels are Noise, P, S.",
-  "note": "Thresholding, phase-time extraction, association and quality control remain workflow-level decisions."
+  "run_result_fields": ["status", "interface_version", "model", "inputs", "input_shape", "output_shape", "outputs"],
+  "phase_labels": "Labels are reported from the bundled model metadata; for PhaseNet the order is N, P, S.",
+  "note": "Thresholding, phase-time extraction, association and quality control remain workflow-level decisions.",
+  "failure": "The adapter exits non-zero and records status=failed when possible. Existing output directories are not reused unless --overwrite is supplied."
 }

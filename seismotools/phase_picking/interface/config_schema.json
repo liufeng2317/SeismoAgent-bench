@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "description": "Optional JSON settings for the phase-picking interfaces.",
+  "fields": {
+    "model": "phasenet, eqtransformer or dpppickerp",
+    "sample_rate_hz": "Positive waveform sampling rate",
+    "threads": "Positive CPU thread count; defaults to 1",
+    "window_samples": "Model window size; fixed for PhaseNet and EQTransformer",
+    "overlap_samples": "Overlap used by run_continuous.py; must be smaller than window_samples"
+  },
+  "precedence": "Command-line values override JSON values; model defaults to phasenet.",
+  "scope": "This config controls inference only. Thresholding and pick extraction remain case-workflow decisions."
+}
