@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "description": "Local snapshots used by the Ridgecrest expert workflow; not automatically substituted into frozen runs.",
+  "description": "Local source and documentation snapshot index for the seismotools packages.",
   "tools": {
     "phase_picking": {
       "implementation": "Local TRACE-1.1 phase_picking model package, SeisBench utilities dependency",
@@ -1812,68 +1812,6 @@
       "sha256": "1b9c97026ad7c2b5e83e51c0cca07028c9cae700a2434c71999bc7ca3c4bfc97"
     },
     {
-      "path": "phase_picking/docs/01_inference_test.ipynb",
-      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/script/01_inference_test.ipynb",
-      "bytes": 19250,
-      "sha256": "0271e6fef4d19096479660adc98e7fd3408ae712a761347cb45278c909a874f7",
-      "source_sha256": "c657782d24cb2033ffe839b1f64b31904bdbe9147dba5b98d3079516585f36e2",
-      "transformation": "Removed notebook outputs, execution counts and transient metadata; cells retained."
-    },
-    {
-      "path": "phase_picking/docs/inference/basicphaseae.py",
-      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/basicphaseae.py",
-      "bytes": 13001,
-      "sha256": "725ed7e79fa56706561f478e6441018b594a11b7e407e72c5c54978ff444532c"
-    },
-    {
-      "path": "phase_picking/docs/inference/dpppickerp.py",
-      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/dpppickerp.py",
-      "bytes": 7537,
-      "sha256": "d086125c05c94a63eb37a196f77722f5d1bdc53a08b61e080e0c58e9769eb31f"
-    },
-    {
-      "path": "phase_picking/docs/inference/dpppickers.py",
-      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/dpppickers.py",
-      "bytes": 7543,
-      "sha256": "8be6dd89cb188db5dfd7e7cec967b0e8529c428162bb4118d9307e69800555d9"
-    },
-    {
-      "path": "phase_picking/docs/inference/eqtransformer.py",
-      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/eqtransformer.py",
-      "bytes": 13076,
-      "sha256": "5dc1774bb76f1dd19eeb4c1ebca8b9507d6a0d1d877ef0c334f1a8e2afa3755f"
-    },
-    {
-      "path": "phase_picking/docs/inference/gpd.py",
-      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/gpd.py",
-      "bytes": 1516,
-      "sha256": "cbb6c3139a4f2aab6e6d93b1b25bc1c49f534706d81cfac26b91c1c03450b343"
-    },
-    {
-      "path": "phase_picking/docs/inference/obstransformer.py",
-      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/obstransformer.py",
-      "bytes": 13089,
-      "sha256": "d677874c25ee642e03dabbf8b703390508e9075f48e0a730408945062c9d90a0"
-    },
-    {
-      "path": "phase_picking/docs/inference/phasenet.py",
-      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/phasenet.py",
-      "bytes": 13156,
-      "sha256": "94fefcde6047f2372bb66dd344de3113545462bbc19ec2eb1a853c02101bf8fa"
-    },
-    {
-      "path": "phase_picking/docs/inference/phasenetlight.py",
-      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/phasenetlight.py",
-      "bytes": 13093,
-      "sha256": "6fe596e0e241720c885a62623fc54342604a9558ac934f097f9cb8a39ba104f4"
-    },
-    {
-      "path": "phase_picking/docs/inference/skynet.py",
-      "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/inference/skynet.py",
-      "bytes": 13019,
-      "sha256": "fcb72f671db253e1798b0fa016df04782c236ea880f383b19b2e00f5df3ad870"
-    },
-    {
       "path": "phase_picking/runtime/weights/dpppickerp/scedc.json",
       "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/pretrained/v3/dpppickerp/scedc.json",
       "bytes": 558,
@@ -1974,48 +1912,6 @@
       "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/model/skynet.py",
       "bytes": 10544,
       "sha256": "1a07025a12cb7cc473459c95f09a9c0fca5bd2e6c5c7efaa52c7060091e7f858"
-    },
-    {
-      "path": "seismotools/gamma/docs/README.md",
-      "source": "local curated documentation",
-      "bytes": 1435,
-      "sha256": "e8d731afef9399d35012520db84927b6c06585e73d0d7e0ab75aee019e37647e"
-    },
-    {
-      "path": "seismotools/gamma/docs/core/README.md",
-      "source": "local curated documentation",
-      "bytes": 935,
-      "sha256": "5fe5e864b1c740ab5ffce22b8e97d03ac21169e1b93fe0794234d4fb23445767"
-    },
-    {
-      "path": "seismotools/gamma/docs/core/gamma_example_fastapi.md",
-      "source": "local curated documentation",
-      "bytes": 23490,
-      "sha256": "167496bb9a7d6138397d51629cda2269d03c10eb16fe259d593d9a705731a273"
-    },
-    {
-      "path": "seismotools/gamma/docs/core/gamma_example_phasenet.md",
-      "source": "local curated documentation",
-      "bytes": 34565,
-      "sha256": "60b5f9885ef89b219ba71341ce9d35d0f73875ec3f99e9137e7442011a28d6b4"
-    },
-    {
-      "path": "seismotools/gamma/docs/core/gamma_example_phasenet_ncedc.md",
-      "source": "local curated documentation",
-      "bytes": 34863,
-      "sha256": "379dc817d2e033a2507ded025c2d302f6a0e08bc01075b857bbb625ce2e93455"
-    },
-    {
-      "path": "seismotools/gamma/docs/core/gamma_example_seisbench.md",
-      "source": "local curated documentation",
-      "bytes": 20496,
-      "sha256": "29c9ced600bf60fa70aa5d3db723e6a2774ac5408b42ff215a162cc839f9734d"
-    },
-    {
-      "path": "seismotools/gamma/docs/core/gamma_example_synthetic.md",
-      "source": "local curated documentation",
-      "bytes": 24783,
-      "sha256": "06b105b4a99cc44837245195b19c56d9667f4667f4a8ee718f2ad6d90ec0b68b"
     }
   ],
   "validation": {

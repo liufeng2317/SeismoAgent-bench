@@ -1,64 +1,101 @@
-# Seismology tools
+# Seismotools
 
-Local, reusable tool snapshots for controlled catalog-building experiments. These are **real copies**, not symlinks to TRACE or the expert exports. The Ridgecrest expert pipeline still uses its recorded original paths; this addition does not change historical results or automatically migrate callers.
+`seismotools` contains the local seismological software used by benchmark
+workflows. Each tool is kept as an independent package with its own source,
+runtime resources, stable interface, examples and README. Case data, reference
+catalogs and workflow outputs are stored outside this directory.
 
-| Tool | Purpose | Saved implementation / configuration | Documentation |
-| --- | --- | --- | --- |
-| PhaseNet | P/S picking | TRACE model package; `original` v2 weights | [Phase picking](phase_picking/README.md) |
-| DPPPicker P | Conditional vertical P refinement | Same model package; SCEDC weights | [Phase picking](phase_picking/README.md) |
-| EQTransformer | Alternative picking; retained S additions | Same model package; `original_nonconservative` v1 | [Phase picking](phase_picking/README.md) |
-| GaMMA | Arrival association | Local source; setup reports GMMA 1.2.17 | [GaMMA](gamma/README.md) |
-| NonLinLoc | Absolute location and travel-time grids | Actual local NLL7.00 source | [NonLinLoc](nonlinloc/README.md) |
-| hypoDD | Differential relocation, CT or CT+CC | Local native source and executed full-cohort array capacities | [hypoDD](hypodd/README.md) |
+## Available tools
 
-`hypoDD CT` and `hypoDD CT+CC` are configurations of **one program**, not separate tool copies. PhaseNet/DPP/EQTransformer share model infrastructure, so their common code is stored once under `phase_picking/source/`. Extra model modules there preserve the original package imports; they are not additional validated tools.
+| Tool | Role | Standard entry point |
+| --- | --- | --- |
+| PhaseNet, EQTransformer, DPPPicker P | Phase probability inference | `phase_picking/interface/run.py` or `run_continuous.py` |
+| GaMMA | Pick association | `gamma/interface/run.py` |
+| NonLinLoc | Absolute location and travel-time grids | `nonlinloc/interface/run.py` |
+| hypoDD | Relative relocation from catalog and/or cross-correlation times | `hypodd/interface/run.py` |
 
-## Layout and use
+The three phase-picking models share one implementation package but remain
+separate model choices. `hypoDD` CT and CT+CC are modes of the same program.
+The standard interfaces define the reproducible input and output boundary;
+advanced workflows may use the bundled Python or native interfaces directly.
+
+## Common layout
 
 ```text
 seismotools/
-  README.md
-  support/                     # registry, build/check scripts and validation
-  phase_picking/{source,runtime,interface,examples/{smoke,workflow},docs,README.md}
-  gamma/{source,interface,examples/{smoke,workflow},docs,README.md}   # association source and references
-  nonlinloc/{source,runtime,interface,examples/{smoke,workflow},README.md}
-  hypodd/{source,runtime,interface,examples/{smoke,workflow},README.md}
+├── README.md
+├── support/                         # integrity checks and tool validation
+├── phase_picking/
+│   ├── source/                      # model implementation
+│   ├── runtime/weights/             # local model weights and metadata
+│   ├── interface/                  # inference entry points and contracts
+│   ├── examples/{smoke,workflow}/  # runnable examples
+│   └── docs/{core,examples}/       # method notes and reference examples
+├── gamma/{source,interface,examples,docs}/
+├── nonlinloc/{source,runtime,interface,examples,docs}/
+└── hypodd/{source,runtime,interface,examples,docs}/
 ```
 
-From the project root, using the configured `seismoagent_eval` environment:
+Read the tool-specific README before using an interface. It records the
+required input format, model or binary identity, important parameters and
+generated products.
+
+## Environment and validation
+
+Run checks with the Python environment that provides the scientific
+dependencies. The project evaluation environment is normally selected as
+follows:
 
 ```bash
-conda run -n seismoagent_eval python seismotools/support/check_tools.py
-conda run -n seismoagent_eval python seismotools/support/check_tools.py --imports
-conda run -n seismoagent_eval python seismotools/support/build_native.py --tool all --jobs 4
+export PYTHON=/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python
+"$PYTHON" seismotools/support/check_tools.py
+"$PYTHON" seismotools/support/check_tools.py --imports
+PYTHON="$PYTHON" bash seismotools/support/tools_usage_validation/run_all.sh
 ```
 
-The first check uses only the standard library. `--imports` also imports local GaMMA and loads all three model state dictionaries strictly on CPU, without downloading weights. Building needs `make`, `gcc` and `gfortran`; binaries and logs stay inside each tool folder. Passing these checks establishes integrity/loadability/buildability, **not scientific equivalence of a new experiment**.
+The integrity check verifies the tracked tool snapshot. The import check loads
+the local Python packages and model weights on CPU. `run_all.sh` executes a
+small synthetic check and a bounded Ridgecrest data check for each tool. These
+checks verify that the local interfaces start and produce expected artifacts;
+they do not establish scientific accuracy of a complete catalog.
 
-For a new Python process, add `seismotools/phase_picking/source` and/or `seismotools/gamma/source` to `sys.path` before importing `phase_picking` or `gamma`. Read weights directly from `phase_picking/runtime/weights`; avoid automatic pretrained downloads. New native callers can use `nonlinloc/runtime/bin/{NLLoc,Vel2Grid,Grid2Time}` and `hypodd/runtime/bin/hypoDD` after building. Existing Ridgecrest launchers are not yet wired to these paths.
+Native tools can be rebuilt when a compiler toolchain is available:
 
-## Scope and controlled comparisons
+```bash
+"$PYTHON" seismotools/support/build_native.py --tool all --jobs 4
+```
 
-Tool folders contain reusable implementations and manuals. Waveforms, station metadata, velocity grids, case thresholds, event catalogs and evaluation references stay in their existing case/data directories. The custom **Joint DD** solver remains in the expert case because its current imports and assumptions are case-specific; it is not copied and advertised as a generic tool. ObsPy, SeisBench, PyTorch and SciPy are environment dependencies recorded in `support/environment.txt`, not duplicated installed environments.
+Generated binaries, build products, validation outputs and model weights are
+runtime resources and are not intended to be committed as source code. A
+checkout that excludes those resources must restore them before running the
+corresponding validation.
 
-Each tool now has both a fast `examples/smoke/` check and an offline `examples/workflow/` example. Smoke checks interface startup; workflow examples create small inputs, call the standard interface and verify the main outputs. Neither uses case observations or reference catalogs.
+## Interface conventions
 
-For each future benchmark, record the tool/source identity, model weights, parameters, allowed input files, CPU/thread limits and outputs. Change one tool/configuration at a time while fixing the observation cohort, velocity model and evaluation matches where scientifically possible. Reference catalogs and expert outcomes are evaluator inputs, not automatic tool inputs. This folder organizes implementations; it does not itself enforce an isolated agent environment.
+Interfaces read declared inputs and write all generated products below a
+caller-provided output directory. They record a versioned `run_result.json`,
+return a nonzero status on failure, and protect existing outputs unless an
+explicit overwrite option is supplied. Configuration files and command-line
+arguments are documented by each interface; command-line values take
+precedence when both are provided.
 
-Add a future tool as `<tool>/{source,README.md}`, optionally with `weights/` and `docs/`. Document inputs/outputs, dependencies, source identity and one small validation command; extend the shared registry and check only when the tool is actually used. Preserve third-party notices. No new license is assigned to copied code; local folders without a standalone license are identified in the registry.
+The interfaces do not decide case-level scientific policy. Preprocessing,
+probability thresholds, pick extraction, association settings, velocity-model
+choices and quality control must be stated by the calling workflow and recorded
+with its results.
 
-Weights are copied locally but ignored by Git, together with manual PDFs, builds and binaries. Source, metadata and Markdown documentation remain reviewable. A Git-only checkout therefore needs the registered local weights restored before model checks can pass; no fetcher or automatic installer is implied.
+## Data and reproducibility boundary
 
-## Initial validation
+Do not place waveform archives, StationXML, reference catalogs or experiment
+outputs in this package. A workflow should record the selected tool metadata,
+model weights or binary versions, effective parameters, input paths and output
+paths. Shared tool source, weights, binaries and documentation must remain
+unchanged during an agent run.
 
-The initial 197-file runtime snapshot passed byte-identity checks; the expanded documentation inventory is recorded in `support/registry.json`. Unmodified copies retain source bytes; notebooks have an explicitly recorded output-stripping transformation. The three model state dictionaries loaded strictly on CPU from the copied package, local GaMMA imported, and NLLoc/Vel2Grid/Grid2Time/hypoDD compiled successfully. Compiler identities and local binary hashes are recorded in `support/registry.json`. No earthquake catalog was recomputed, and no old tool paths were switched.
+For implementation details and model-specific constraints, follow:
 
-## Documentation coverage and exclusions
-
-Each tool keeps a small maintained README, curated usage guides and runnable
-validation examples. Historical generated pages, raw RAG archives, upstream
-notebooks/tests, old results, example datasets and retrieval-index material are
-not part of the runtime tool packages. Follow each tool README for the reading
-order. `support/registry.json` records retained source identity and the scope of
-local transformations; it is not a promise that every upstream document or
-tutorial is included.
+- [Phase picking](phase_picking/README.md)
+- [GaMMA](gamma/README.md)
+- [NonLinLoc](nonlinloc/README.md)
+- [hypoDD](hypodd/README.md)
+- [Validation tools](support/tools_usage_validation/README.md)
