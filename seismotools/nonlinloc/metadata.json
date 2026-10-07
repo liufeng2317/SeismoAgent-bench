@@ -1,7 +1,7 @@
 {
   "tool": "NonLinLoc",
   "native_version": "7.00.00 (27Oct2017)",
-  "interface_version": 1,
+  "interface_version": 2,
   "source": "source/src",
   "binaries": "runtime/bin",
   "python_interface": "runtime/python/Nonlinlocpy",

@@ -15,7 +15,8 @@ nonlinloc/
 │   ├── bin/                # Vel2Grid, Grid2Time and NLLoc for this host
 │   └── python/Nonlinlocpy/ # Project-local Python interface and references
 ├── interface/              # Stable project CLI and input/output contracts
-├── examples/smoke/         # Small executable example, no case catalog data
+├── examples/{smoke,workflow}/ # Executable examples, no case catalog data
+├── docs/{core,examples}/  # Curated method guides and workflow notes
 ├── metadata.json           # Tool and interface identity
 └── README.md
 ```

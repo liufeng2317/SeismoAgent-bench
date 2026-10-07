@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "description": "Optional settings for the standard NonLinLoc adapter.",
+  "fields": {
+    "date": "Pick-table reference date in YYYYMMDDHHMM format",
+    "native_obs": "Boolean; use event.obs rather than picks_simple.txt",
+    "prepare_only": "Boolean; prepare controls and grids without running NLLoc",
+    "utm_zone_number": "Optional fixed UTM zone number",
+    "utm_zone_letter": "Optional fixed UTM zone letter"
+  },
+  "notes": [
+    "The velocity model, stations and observations are supplied as input files.",
+    "The standard adapter uses the bundled 1-D workflow geometry; advanced control generation belongs to Nonlinlocpy.",
+    "Native binaries are selected with --bin-dir or the bundled runtime/bin directory."
+  ]
+}

@@ -2,11 +2,15 @@
   "schema_version": 1,
   "description": "Outputs written by the standard NonLinLoc adapter.",
   "files": {
-    "located_events.csv": "Parsed locations when NLLoc locates at least one event",
-    "run_result.json": "Run status, input/output paths, binary directory and located-event count",
+    "located_events.csv": "Parsed locations when NLLoc is executed",
+    "run_result.json": {
+      "required_fields": ["status", "interface_version", "inputs", "config", "output_dir", "outputs"],
+      "success_fields": ["located_events", "located_csv", "binary_dir"],
+      "failure_fields": ["error"]
+    },
     "model/": "Velocity grids from Vel2Grid",
     "time/": "Travel-time grids from Grid2Time",
     "loc/": "Native NLLoc location products and logs"
   },
-  "failure": "The adapter exits non-zero and emits a JSON error on stderr when a required input, executable, or native stage fails."
+  "failure": "The adapter exits non-zero, writes status=failed when possible, and emits a JSON error on stderr when a required input, executable, or native stage fails. Existing output directories are not replaced unless --overwrite is supplied."
 }

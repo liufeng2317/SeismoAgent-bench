@@ -8,5 +8,10 @@
   },
   "optional_files": {
     "event.obs": "Native NLLOC_OBS observations, used with --native-obs"
-  }
+  },
+  "modes": {
+    "standard": "Requires velocity_model_1d.txt, stations_native.txt and picks_simple.txt.",
+    "native_obs": "Requires velocity_model_1d.txt, stations_native.txt and event.obs when --native-obs is supplied."
+  },
+  "read_only": "The input directory is read only; all controls, grids, logs and parsed locations are written to the output directory."
 }
