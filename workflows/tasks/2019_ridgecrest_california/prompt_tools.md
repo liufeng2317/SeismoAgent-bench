@@ -2,7 +2,7 @@
 
 ### Task objective
 
-Construct a reproducible candidate earthquake catalog for the complete one-day window `[2019-07-04T00:00:00Z, 2019-07-05T00:00:00Z)`, which contains the Mw 6.4 Ridgecrest mainshock. Process every available waveform interval and every usable station/component that overlaps this window; report incomplete station components and gaps instead of silently dropping them.
+Construct a reproducible candidate earthquake catalog for the fixed two-hour window `[2019-07-04T16:33:49Z, 2019-07-04T18:33:49Z)`, centered on the Mw 6.4 Ridgecrest mainshock origin time. Process every available waveform interval and every usable station/component that overlaps this window; report incomplete station components and gaps instead of silently dropping them.
 
 ### Input data
 
@@ -24,17 +24,17 @@ Use the supplied implementations through their standard execution paths. Before 
 | 3. Absolute location | NonLinLoc: `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/nonlinloc/interface/run.py` | Absolute locations using an explicit velocity model |
 | 4. Relative relocation | hypoDD: `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/hypodd/interface/run.py` | Optional relative locations when the associated events and differential times provide adequate support |
 
-The first three stages are mandatory and must be attempted in order. The mandatory processing scope is the complete fixed one-day window, not only a mainshock-centered subwindow. Do not replace PhaseNet, GaMMA or NonLinLoc with an amplitude threshold, STA/LTA detector, custom association or custom locator. hypoDD is an additional stage, not a substitute for absolute locations. If it is used, prepare or verify the required `dt.ct` and, when applicable, `dt.cc` inputs; state whether the final catalog contains absolute locations, relative locations or both. If it is not used, record the scientific reason.
+The first three stages are mandatory and must be attempted in order. The mandatory processing scope is the complete fixed two-hour window above; do not process only a short excerpt from it. Do not replace PhaseNet, GaMMA or NonLinLoc with an amplitude threshold, STA/LTA detector, custom association or custom locator. hypoDD is an additional stage, not a substitute for absolute locations. If it is used, prepare or verify the required `dt.ct` and, when applicable, `dt.cc` inputs; state whether the final catalog contains absolute locations, relative locations or both. If it is not used, record the scientific reason.
 
 When a supplied tool fails, inspect the command, inputs and error, then repair the input or configuration and retry the same tool. Allow at most 20 repair iterations for one failed stage. Do not silently skip a mandatory stage or replace it with an unrelated method. If the stage still cannot run after the repair limit, record the complete failure and its affected data scope in the final report.
 
-For PhaseNet, each inference window is exactly 3001 samples with input components in E/N/Z order and output probability channels in N/P/S order. Use the supplied continuous interface or an equivalent documented batching scheme to cover the entire one-day interval, merge overlapping windows on the original time axis, de-duplicate picks, and report the window count and final pick time range. Processing only the first window is incomplete. If the source sampling rate differs from the model rate, resample with a documented method and record the change; do not discard intervals or retain every Nth pick merely to reduce the GaMMA input.
+For PhaseNet, each inference window is exactly 3001 samples with input components in E/N/Z order and output probability channels in N/P/S order. Use the supplied continuous interface or an equivalent documented batching scheme to cover the entire two-hour interval, merge overlapping windows on the original time axis, de-duplicate picks, and report the window count and final pick time range. Processing only the first window is incomplete. If the source sampling rate differs from the model rate, resample with a documented method and record the change; do not discard intervals or retain every Nth pick merely to reduce the GaMMA input.
 
 Before processing, write a concise `task_plan.md` below the assigned output directory. The plan must state discovered input coverage, preprocessing, tool calls, parameters, hand-off files and quality checks. Save complete reusable processing code below the output directory before running it. Record consequential assumptions, failed intervals, excluded stations, failed batches and unresolved data-quality issues.
 
 ### Execution resources
 
-This host does not provide CUDA or NPU acceleration. Run the workflow on CPU and parallelize independent waveform files or batches. Use up to 32 CPU workers by default; increase to 64 only when those CPUs and sufficient memory are available. Do not create more workers than the available CPUs, and record the worker count and batching strategy in `task_plan.md` or the final report.
+This host does not provide CUDA or NPU acceleration. Run the workflow on CPU and parallelize independent waveform files or batches. Bound nested parallelism so that `outer_workers * model_threads` does not exceed the available CPU count; use `model_threads=1` when launching many workers. Use up to 32 CPU workers by default; increase to 64 only when those CPUs and sufficient memory are available. Do not create more workers than the available CPUs, and record the worker count, model thread count and batching strategy in `task_plan.md` or the final report.
 
 ### Execution and repair rules
 
