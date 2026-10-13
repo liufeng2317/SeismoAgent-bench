@@ -41,8 +41,9 @@ is needed. `prompt_tools.md` is an optional variant that exposes the local
 PhaseNet, GaMMA, NonLinLoc and hypoDD sources while leaving method selection to
 the Agent.
 
-The default runner allows up to four hours for the complete Agent run. Override
-this with `TIMEOUT`, in seconds, when a different processing budget is needed.
+The default runner allows up to twenty-four hours for the complete Agent run.
+Override this with `TIMEOUT`, in seconds, when a different processing budget is
+needed.
 
 Run outputs are separated by prompt variant:
 
