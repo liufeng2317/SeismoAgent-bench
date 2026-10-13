@@ -3,23 +3,15 @@ set -euo pipefail
 
 TASK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "$TASK_DIR/../../.." && pwd)"
-VARIANT="${VARIANT:-base}"
+VARIANT="${VARIANT:-min}"
 AGENT="${AGENT:-codex}"
 PYTHON="${PYTHON:-/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python}"
-case "$VARIANT" in
-  base) TASK_FILE="$TASK_DIR/task.json" ;;
-  tools) TASK_FILE="$TASK_DIR/task_tools.json" ;;
-  *)
-    # Any additional packaged variant: task_<variant>.json in this directory.
-    CANDIDATE="$TASK_DIR/task_${VARIANT}.json"
-    if [ -f "$CANDIDATE" ]; then
-      TASK_FILE="$CANDIDATE"
-    else
-      echo "VARIANT must be base, tools, or an existing task_<variant>.json stem" >&2
-      exit 2
-    fi
-    ;;
-esac
+# Any packaged variant: task_<variant>.json in this directory.
+TASK_FILE="$TASK_DIR/task_${VARIANT}.json"
+if [ ! -f "$TASK_FILE" ]; then
+  echo "VARIANT must be the stem of an existing task_<variant>.json (min, tools, guided)" >&2
+  exit 2
+fi
 AGENT_NAME="${AGENT}-ridgecrest-${VARIANT}"
 AGENT_CONFIG="$PROJECT_DIR/SeismoAgentBench/configs/agents/${AGENT}.yaml"
 # Experiment factors map one-to-one onto path segments:

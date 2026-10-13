@@ -2,9 +2,9 @@
   "task_id": "ridgecrest_2019_catalog_guided",
   "version": "1",
   "title": "Ridgecrest earthquake-catalog construction (expert-guided baseline)",
-  "summary": "Standard variant plus generic expert scaffolding: canonical pipeline stages, quality-control gates and tuning discipline, without Ridgecrest-specific facts, scoped to the fixed three-day window.",
-  "task_prompt_file": "prompt_base_guided.md",
-  "output_contract": "output_contract_standard.json",
+  "summary": "Experience arm of the experiment: the minimal objective plus generic expert scaffolding (canonical pipeline stages, fixed three-day window, quality-control gates, tuning discipline, reporting requirements), without Ridgecrest-specific facts. Isolates the value of expert experience.",
+  "task_prompt_file": "prompt_guided.md",
+  "output_contract": "output_contract.json",
   "category": "seismology",
   "software": [
     "Python",
@@ -33,8 +33,14 @@
   ],
   "evaluation": {
     "scorers": [
-      {"name": "artifact-contract", "version": "1"},
-      {"name": "phase-picking-basic", "version": "1"}
+      {
+        "name": "artifact-contract",
+        "version": "1"
+      },
+      {
+        "name": "phase-picking-basic",
+        "version": "1"
+      }
     ]
   }
 }

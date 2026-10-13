@@ -2,26 +2,26 @@
 
 This directory is the complete runnable task package for the 2019 Ridgecrest
 catalog-construction case. Its public task interface consists of the task
-definitions, prompts, input declaration, baseline entry point and runner:
+definitions, prompts, input declaration and runner:
 
 ```text
 input.json        # read-only source folder declaration
-task.json         # clean baseline task metadata
-task_tools.json   # task metadata using the tools prompt
-prompt_base.md    # clean baseline Agent prompt and output requirements
-prompt_tools.md   # optional prompt with local seismological tools exposed
-main.py           # deterministic baseline entry point
-run.sh            # Codex entry point; select VARIANT=base or tools
+task_min.json     # Q1 control arm: minimal instructions
+task_tools.json   # Q2 arm: control + local expert tools
+task_guided.json  # Q3 arm: control + expert scaffolding
+prompt_min.md     # minimal-instruction prompt and output schema
+prompt_tools.md   # prompt with local seismological tools exposed
+prompt_guided.md  # prompt with expert workflow scaffolding
+run.sh            # agent entry point; select VARIANT=min|tools|guided
 ```
 
-In addition to the two legacy variants above, this package ships a canonical
-family of five **base-variant prompts** organized as a three-phase experiment
-(see `VARIANTS.md`): `base_standard` (fixed three-day window; the control arm
-and pipeline-validation run), `base_min` / `base_guided` (guidance-axis
-endpoints), `base_notools` (tool-axis floor; legacy `tools` is the ceiling),
-and `base_full` (full-archive flagship). Each is a `task_base_*.json` +
-`prompt_base_*.md` pair with a machine-checkable output contract. The runner
-accepts any of them via `VARIANT=<name> bash run.sh`.
+The three variants form a minimal single-factor experiment around the
+research questions (see `VARIANTS.md`): whether a general-purpose agent can
+reach expert-level results on its own (`min`, scored against the `expert/`
+workflow reference), whether expert tools matter (`tools` vs `min`), and
+whether expert experience matters (`guided` vs `min`). A fourth arm for the
+feedback-loop question (`ris`) will be added when its design is settled.
+Retired variants live under `attic/`.
 
 The source folder declared in `input.json` is linked read-only during a run as:
 
@@ -36,10 +36,10 @@ methods, and write a reproducible candidate catalog and supporting results
 under `$BENCH_OUTPUT`. The default runner uses the separate
 `seismoagent_eval` environment so that package installation does not modify the
 shared `seismoagent` environment. The required catalog format and scientific
-limitations are described in `prompt_base.md`; no separate output-contract file
-is needed. `prompt_tools.md` is an optional variant that exposes the local
-PhaseNet, GaMMA, NonLinLoc and hypoDD sources while leaving method selection to
-the Agent.
+limitations are described in each variant prompt and enforced by the
+machine-checkable output contracts (`output_contract_min.json`,
+`output_contract.json`). `prompt_tools.md` exposes the local PhaseNet, GaMMA,
+NonLinLoc and hypoDD sources while leaving method selection to the Agent.
 
 The default runner allows up to twenty-four hours for the complete Agent run.
 Override this with `TIMEOUT`, in seconds, when a different processing budget is
@@ -49,7 +49,7 @@ Run outputs are separated by experiment factor, one factor per path segment:
 
 ```text
 runs/<variant>/<harness>/<model>/<timestamp>/
-# e.g. runs/base_standard/claude/glm-5.3/20260113T093000Z/
+# e.g. runs/min/claude/glm-5.3/20260113T093000Z/
 ```
 
 The timestamp leaf is one attempt of that configuration (override `RUN_ID`
@@ -57,18 +57,18 @@ for a custom leaf name). The model segment defaults to the agent config's
 `model` line; `CLAUDE_MODEL` / `CODEX_MODEL` override it and are passed to
 the CLI as `--model`.
 
-Use `bash run.sh` for the baseline or `VARIANT=<name> bash run.sh` for any
-packaged variant. `AGENT=claude bash run.sh` runs the same variants through
+`bash run.sh` runs the default `min` variant; `VARIANT=<name> bash run.sh`
+selects any packaged variant. `AGENT=claude bash run.sh` runs the same variants through
 the Claude Code CLI instead of Codex; it authenticates from
 `SeismoAgentBench/configs/agents/claude.env` (chmod 600, git-ignored;
 `ANTHROPIC_BASE_URL` and `ANTHROPIC_AUTH_TOKEN`) — `CLAUDE_ENV_FILE`,
 `CLAUDE_BIN`, `CLAUDE_MODEL`, `CLAUDE_MAX_TURNS` and `CLAUDE_EXTRA_PATH`
 override the defaults. Override `RUN_ID` and `TIMEOUT` when needed.
 
-`main.py` is a deterministic infrastructure baseline for checking task
-execution and catalog generation. It is not a scientific detector, phase
-picker, or location solution. The expert scientific workflow remains under
-`expert/` and is not part of the Agent task interface.
+`attic/main.py` is the retired deterministic infrastructure baseline that
+exercised task execution and catalog generation without an agent. The expert
+scientific workflow remains under `expert/` and is not part of the Agent task
+interface.
 
 Large waveform files, source catalogs and generated analysis products remain in
 the external data store and are not copied into Git.
