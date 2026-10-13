@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "artifacts": [
+    {
+      "id": "picks",
+      "path": "picks.csv",
+      "kind": "picks",
+      "required": true,
+      "schema": {
+        "name": "csv-columns",
+        "version": 1,
+        "required_columns": ["pick_id", "event_id", "station_id", "channel_id", "phase", "time_utc", "probability", "uncertainty_s", "method", "status"]
+      }
+    },
+    {
+      "id": "catalog",
+      "path": "catalog.csv",
+      "kind": "csv",
+      "required": true,
+      "schema": {
+        "name": "csv-columns",
+        "version": 1,
+        "required_columns": ["event_id", "origin_time_utc", "latitude", "longitude", "depth_km", "magnitude", "magnitude_type", "n_picks", "n_p_picks", "n_s_picks", "status"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "task_id": "ridgecrest_2019_catalog_staged",
+  "version": "1",
+  "title": "Ridgecrest earthquake-catalog construction (staged scope)",
+  "summary": "Base v2 in two stages: a mandatory core window [2019-07-04T00:00:00Z, 2019-07-07T00:00:00Z) whose completion is independently scoreable, followed by an optional non-destructive archive extension.",
+  "task_prompt_file": "prompt_base_staged.md",
+  "output_contract": "output_contract_v2.json",
+  "category": "seismology",
+  "software": [
+    "Python",
+    "ObsPy"
+  ],
+  "taxonomy": {
+    "domain": "seismology",
+    "task_type": "catalog_construction",
+    "guidance": "professional",
+    "scope": "staged_core_then_archive",
+    "tool_policy": "neutral_public"
+  },
+  "input_requirements": [
+    {
+      "id": "waveform_data",
+      "data_type": "waveform",
+      "format": "MiniSEED",
+      "required": true
+    },
+    {
+      "id": "station_metadata",
+      "data_type": "station_metadata",
+      "format": "StationXML",
+      "required": true
+    }
+  ],
+  "evaluation": {
+    "scorers": [
+      {"name": "artifact-contract", "version": "1"},
+      {"name": "phase-picking-basic", "version": "1"}
+    ]
+  }
+}

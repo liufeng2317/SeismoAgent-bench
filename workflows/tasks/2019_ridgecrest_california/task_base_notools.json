@@ -1,0 +1,42 @@
+{
+  "task_id": "ridgecrest_2019_catalog_notools",
+  "version": "1",
+  "title": "Ridgecrest earthquake-catalog construction (classical-methods-only baseline)",
+  "summary": "Standard variant restricted to classical signal-processing and deterministic methods implemented from general-purpose scientific libraries; pretrained models are forbidden; scoped to the fixed three-day window.",
+  "task_prompt_file": "prompt_base_notools.md",
+  "output_contract": "output_contract_standard.json",
+  "category": "seismology",
+  "software": [
+    "Python",
+    "NumPy",
+    "SciPy",
+    "ObsPy"
+  ],
+  "taxonomy": {
+    "domain": "seismology",
+    "task_type": "catalog_construction",
+    "guidance": "professional",
+    "scope": "fixed_window",
+    "tool_policy": "classical_only"
+  },
+  "input_requirements": [
+    {
+      "id": "waveform_data",
+      "data_type": "waveform",
+      "format": "MiniSEED",
+      "required": true
+    },
+    {
+      "id": "station_metadata",
+      "data_type": "station_metadata",
+      "format": "StationXML",
+      "required": true
+    }
+  ],
+  "evaluation": {
+    "scorers": [
+      {"name": "artifact-contract", "version": "1"},
+      {"name": "phase-picking-basic", "version": "1"}
+    ]
+  }
+}

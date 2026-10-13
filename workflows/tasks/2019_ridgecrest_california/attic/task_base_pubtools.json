@@ -1,0 +1,40 @@
+{
+  "task_id": "ridgecrest_2019_catalog_pubtools",
+  "version": "1",
+  "title": "Ridgecrest earthquake-catalog construction (public-ecosystem baseline)",
+  "summary": "Base v2 with explicit encouragement to install published seismological packages and pretrained models from official sources under strict provenance recording.",
+  "task_prompt_file": "prompt_base_pubtools.md",
+  "output_contract": "output_contract_v2.json",
+  "category": "seismology",
+  "software": [
+    "Python",
+    "ObsPy"
+  ],
+  "taxonomy": {
+    "domain": "seismology",
+    "task_type": "catalog_construction",
+    "guidance": "professional",
+    "scope": "full_archive",
+    "tool_policy": "public_ecosystem"
+  },
+  "input_requirements": [
+    {
+      "id": "waveform_data",
+      "data_type": "waveform",
+      "format": "MiniSEED",
+      "required": true
+    },
+    {
+      "id": "station_metadata",
+      "data_type": "station_metadata",
+      "format": "StationXML",
+      "required": true
+    }
+  ],
+  "evaluation": {
+    "scorers": [
+      {"name": "artifact-contract", "version": "1"},
+      {"name": "phase-picking-basic", "version": "1"}
+    ]
+  }
+}
