@@ -1,0 +1,11 @@
+# Claude Code Agent definition. Credentials are supplied outside this file:
+# the sibling claude.env (chmod 600, git-ignored) must define
+# ANTHROPIC_BASE_URL and ANTHROPIC_AUTH_TOKEN, for example a GLM
+# Anthropic-compatible endpoint. The framework never reads or writes
+# locations outside this repository for authentication. PATH and PYTHON are
+# injected by the task runner, not by the env file.
+harness: claude
+model: glm-5.3
+auth:
+  mode: env_file
+  env_file: /liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/SeismoAgentBench/configs/agents/claude.env

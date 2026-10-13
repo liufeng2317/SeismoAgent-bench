@@ -1,6 +1,7 @@
 """Development execution backend for SeismoAgentBench."""
 
 from .auth import AuthConfigError, prepare_codex_runtime_home, resolve_auth
+from .claude import ClaudeCommandError, ClaudeCommandSpec
 from .codex import CodexCommandError, CodexCommandSpec, load_env_file
 from .config import AgentConfigError, load_agent_config, write_agent_config_snapshot
 from .environment import (EnvironmentConfigError, load_environment_config, probe_runtime,
@@ -11,7 +12,8 @@ from .runner import ExecutionError, RunContext, run_command
 from .version import probe_executable_version
 
 __all__ = [
-    "AgentConfigError", "AuthConfigError", "CodexCommandError", "CodexCommandSpec",
+    "AgentConfigError", "AuthConfigError", "ClaudeCommandError", "ClaudeCommandSpec",
+    "CodexCommandError", "CodexCommandSpec",
     "EnvironmentConfigError",
     "ExecutionError", "ExperimentSpecError", "RunContext", "RunLayout", "RunLayoutError",
     "expand_experiment", "load_agent_config", "load_env_file", "load_experiment_spec",

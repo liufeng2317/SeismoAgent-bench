@@ -10,7 +10,8 @@ import time
 from typing import Sequence
 
 from SeismoAgentBench.agent import AgentError, AgentSpec
-from SeismoAgentBench.execution import (CodexCommandError, CodexCommandSpec, ExecutionError,
+from SeismoAgentBench.execution import (ClaudeCommandError, ClaudeCommandSpec,
+                                        CodexCommandError, CodexCommandSpec, ExecutionError,
                                         AgentConfigError, RunLayout, expand_experiment,
                                         load_agent_config, load_environment_config, load_env_file,
                                         load_experiment_spec,
@@ -69,6 +70,27 @@ def _parser() -> argparse.ArgumentParser:
     codex.add_argument("--resume", action="store_true")
     codex.add_argument("--max-attempts", type=int, default=1)
     codex.add_argument("--retry-delay-s", type=float, default=0)
+    claude = commands.add_parser("run-claude", help="run one Claude Code CLI agent in host-direct mode")
+    claude.add_argument("--task", required=True)
+    claude.add_argument("--input", "--manifest", dest="manifest", help="optional input JSON")
+    claude.add_argument("--agent-name", required=True)
+    claude.add_argument("--agent-version", required=True)
+    claude.add_argument("--run-root", required=True)
+    claude.add_argument("--run-id", required=True)
+    claude.add_argument("--agent-config", help="YAML Agent runtime configuration snapshot")
+    claude.add_argument("--environment-config", help="YAML execution environment configuration")
+    claude.add_argument("--campaign-id")
+    claude.add_argument("--variant", default="base")
+    claude.add_argument("--claude-bin", help="Claude Code executable; defaults to agent config")
+    claude.add_argument("--model", help="optional model slug; omit to use the endpoint default routing")
+    claude.add_argument("--prompt", help="optional additional instructions appended to the rendered task prompt")
+    claude.add_argument("--max-turns", type=int, help="optional cap on agentic turns")
+    claude.add_argument("--env-file", help="external KEY=VALUE file; values are never recorded")
+    claude.add_argument("--timeout", type=float, default=600)
+    claude.add_argument("--reference-manifest")
+    claude.add_argument("--resume", action="store_true")
+    claude.add_argument("--max-attempts", type=int, default=1)
+    claude.add_argument("--retry-delay-s", type=float, default=0)
     return parser
 
 
@@ -98,16 +120,26 @@ def main(argv: Sequence[str] | None = None) -> int:
             runs = execute_experiment(args.spec, limit=args.limit)
             result = {"spec": str(Path(args.spec).resolve()), "runs": runs}
         else:
+            harness = args.action.removeprefix("run-")
             if args.max_attempts < 1 or args.retry_delay_s < 0:
                 raise CodexCommandError("max_attempts must be >= 1 and retry_delay_s must be >= 0")
             agent_config = load_agent_config(args.agent_config) if args.agent_config else None
-            if agent_config is not None and agent_config.get("harness") != "codex":
-                raise CodexCommandError("run-codex requires an Agent config with harness: codex")
+            if agent_config is not None and agent_config.get("harness") != harness:
+                raise CodexCommandError(
+                    f"run-{harness} requires an Agent config with harness: {harness}")
             environment_config = (load_environment_config(args.environment_config)
                                   if args.environment_config else {})
             auth = resolve_auth(agent_config)
             configured_env_file = args.env_file or auth.get("env_file")
-            configured_codex_home = args.codex_home or auth.get("codex_home")
+            configured_codex_home = None
+            if harness == "codex":
+                configured_codex_home = getattr(args, "codex_home", None) or auth.get("codex_home")
+            elif auth.get("mode") == "codex_home":
+                raise ClaudeCommandError("run-claude does not support auth mode codex_home")
+            if harness == "claude" and not configured_env_file:
+                raise ClaudeCommandError(
+                    "run-claude requires --env-file or auth.env_file providing "
+                    "ANTHROPIC_BASE_URL/ANTHROPIC_AUTH_TOKEN; values are never recorded")
             env = load_env_file(configured_env_file) if configured_env_file else {}
             configured = environment_config
             configured_python = configured.get("python")
@@ -116,15 +148,17 @@ def main(argv: Sequence[str] | None = None) -> int:
             runtime_mode = configured.get("mode", "host-direct")
             if runtime_mode != "host-direct":
                 raise CodexCommandError(
-                    f"run-codex currently supports runtime.mode=host-direct, got {runtime_mode!r}")
-            codex_bin = args.codex_bin or (agent_config or {}).get("executable")
-            if not isinstance(codex_bin, str) or not codex_bin:
-                raise CodexCommandError("--codex-bin or agent config executable is required")
+                    f"run-{harness} currently supports runtime.mode=host-direct, got {runtime_mode!r}")
+            executable = getattr(args, f"{harness}_bin", None) or (agent_config or {}).get("executable")
+            if not isinstance(executable, str) or not executable:
+                raise CodexCommandError(f"--{harness}-bin or agent config executable is required")
             model = args.model if args.model is not None else (agent_config or {}).get("model")
-            reasoning_effort = args.reasoning_effort or (agent_config or {}).get(
-                "reasoning_effort", "medium")
-            if not isinstance(reasoning_effort, str):
-                raise CodexCommandError("reasoning_effort must be a string")
+            reasoning_effort = None
+            if harness == "codex":
+                reasoning_effort = args.reasoning_effort or (agent_config or {}).get(
+                    "reasoning_effort", "medium")
+                if not isinstance(reasoning_effort, str):
+                    raise CodexCommandError("reasoning_effort must be a string")
             effective_root = Path(args.run_root).resolve()
             if args.campaign_id:
                 task_id = load_json(args.task)["task_id"]
@@ -140,9 +174,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             rendered_prompt = render_agent_prompt(
                 args.task, args.manifest, extra_instructions=args.prompt,
                 runtime_context=runtime_context)
-            spec = CodexCommandSpec(codex_bin, model,
-                                    str(effective_root / args.run_id / "work"),
-                                    rendered_prompt, reasoning_effort=reasoning_effort)
+            if harness == "codex":
+                spec = CodexCommandSpec(executable, model,
+                                        str(effective_root / args.run_id / "work"),
+                                        rendered_prompt, reasoning_effort=reasoning_effort)
+            else:
+                spec = ClaudeCommandSpec(executable, model,
+                                         str(effective_root / args.run_id / "work"),
+                                         rendered_prompt, max_turns=args.max_turns)
             agent = AgentSpec.from_command(args.agent_name, args.agent_version, spec.argv())
             result = None
             for attempt in range(args.max_attempts):
@@ -168,28 +207,31 @@ def main(argv: Sequence[str] | None = None) -> int:
             provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
             launcher = spec.record()
             version_command = (agent_config or {}).get("version_command", ["--version"])
-            launcher["executable_version"] = probe_executable_version(codex_bin, version_command)
+            launcher["executable_version"] = probe_executable_version(executable, version_command)
             argv = list(launcher["argv"])
             if argv and argv[-1] == rendered_prompt:
                 argv[-1] = "<BENCH_AGENT_PROMPT>"
             launcher["argv"] = argv
             provenance["launcher"] = launcher
-            provenance["command"] = {"kind": "codex", "reference": "launcher.argv"}
+            provenance["command"] = {"kind": harness, "reference": "launcher.argv"}
             provenance_path.write_text(
                 json.dumps(provenance, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-            result["codex"] = {"provenance": "provenance.json",
+            result[harness] = {"provenance": "provenance.json",
                                "execution_log": "execution.log",
                                "execution_jsonl": "execution.jsonl",
                                "executable_version": launcher["executable_version"],
                                "injected_environment_keys": sorted(env)}
             if args.campaign_id:
                 result["run_layout"] = layout.record()
-            result["codex"]["authentication"] = {
+            authentication = {
                 "mode": auth["mode"],
                 "env_file_configured": bool(configured_env_file),
-                "codex_home_configured": bool(configured_codex_home),
             }
-    except (AgentError, AgentConfigError, CodexCommandError, ExecutionError, OSError, ValueError) as exc:
+            if harness == "codex":
+                authentication["codex_home_configured"] = bool(configured_codex_home)
+            result[harness]["authentication"] = authentication
+    except (AgentError, AgentConfigError, ClaudeCommandError, CodexCommandError,
+            ExecutionError, OSError, ValueError) as exc:
         print(json.dumps({"state": "cli_error", "error": str(exc)}, sort_keys=True), file=sys.stderr)
         return 2
     print(json.dumps(result, indent=2, sort_keys=True))

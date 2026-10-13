@@ -14,6 +14,15 @@ main.py           # deterministic baseline entry point
 run.sh            # Codex entry point; select VARIANT=base or tools
 ```
 
+In addition to the two legacy variants above, this package ships a canonical
+family of five **base-variant prompts** organized as a three-phase experiment
+(see `VARIANTS.md`): `base_standard` (fixed three-day window; the control arm
+and pipeline-validation run), `base_min` / `base_guided` (guidance-axis
+endpoints), `base_notools` (tool-axis floor; legacy `tools` is the ceiling),
+and `base_full` (full-archive flagship). Each is a `task_base_*.json` +
+`prompt_base_*.md` pair with a machine-checkable output contract. The runner
+accepts any of them via `VARIANT=<name> bash run.sh`.
+
 The source folder declared in `input.json` is linked read-only during a run as:
 
 ```text
@@ -40,10 +49,16 @@ Run outputs are separated by prompt variant:
 ```text
 runs/base/     # clean baseline prompt
 runs/tools/    # tools-enabled prompt
+runs/<name>/   # any packaged base variant (see VARIANTS.md)
 ```
 
-Use `bash run.sh` for the baseline or `VARIANT=tools bash run.sh` for the
-tools-enabled task. Override `RUN_ID` and `TIMEOUT` when needed.
+Use `bash run.sh` for the baseline or `VARIANT=<name> bash run.sh` for any
+packaged variant. `AGENT=claude bash run.sh` runs the same variants through
+the Claude Code CLI instead of Codex; it authenticates from
+`SeismoAgentBench/configs/agents/claude.env` (chmod 600, git-ignored;
+`ANTHROPIC_BASE_URL` and `ANTHROPIC_AUTH_TOKEN`) — `CLAUDE_ENV_FILE`,
+`CLAUDE_BIN`, `CLAUDE_MODEL`, `CLAUDE_MAX_TURNS` and `CLAUDE_EXTRA_PATH`
+override the defaults. Override `RUN_ID` and `TIMEOUT` when needed.
 
 `main.py` is a deterministic infrastructure baseline for checking task
 execution and catalog generation. It is not a scientific detector, phase
