@@ -1,6 +1,12 @@
-# Codex Agent definition. Credentials are supplied outside this file.
+# Codex Agent definition. Credentials are supplied outside this file:
+# the sibling codex_home/ directory (0700, git-ignored) holds auth.json
+# (0600) and .env; the runner copies auth.json into a per-run temporary
+# CODEX_HOME and injects .env as environment variables without recording
+# values. The framework never reads locations outside this repository for
+# authentication.
 harness: codex
 model: gpt-5.6-sol
 reasoning_effort: medium
 auth:
-  mode: external_profile
+  mode: codex_home
+  codex_home: /liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/SeismoAgentBench/configs/agents/codex_home
