@@ -169,6 +169,29 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(result["failure_reason"], "usage_limit")
         self.assertFalse(result["retryable"])
 
+    def test_rate_limit_failure_is_retryable(self):
+        code = "print('API Error: 429 too many requests', flush=True); raise SystemExit(1)"
+        result = run_command(self.task, self.manifest, [sys.executable, "-c", code], self.root, "run-rate", timeout=10)
+        self.assertEqual(result["state"], "execution_retryable")
+        self.assertEqual(result["failure_reason"], "rate_limited")
+        self.assertTrue(result["retryable"])
+
+    def test_quota_failure_is_not_retryable(self):
+        code = "print('API Error: insufficient balance (quota exhausted)', flush=True); raise SystemExit(1)"
+        result = run_command(self.task, self.manifest, [sys.executable, "-c", code], self.root, "run-quota", timeout=10)
+        self.assertEqual(result["state"], "execution_failed")
+        self.assertEqual(result["failure_reason"], "quota_exhausted")
+        self.assertFalse(result["retryable"])
+
+    def test_progress_token_counts_do_not_trigger_failure_classification(self):
+        # Claude streams estimated-token progress containing arbitrary numbers;
+        # a bare 429 inside such an event must not read as an HTTP status.
+        code = ("import json; print(json.dumps({'type': 'system', 'subtype': 'thinking_tokens', "
+                "'estimated_tokens': 429}), flush=True); raise SystemExit(1)")
+        result = run_command(self.task, self.manifest, [sys.executable, "-c", code], self.root, "run-noise", timeout=10)
+        self.assertEqual(result["state"], "execution_failed")
+        self.assertEqual(result["failure_reason"], "nonzero_exit")
+
     def test_retryable_run_can_be_resumed_and_archives_previous_attempt(self):
         first = [sys.executable, "-c", "print('Selected model is at capacity', flush=True); raise SystemExit(1)"]
         result = run_command(self.task, self.manifest, first, self.root, "run-resume", timeout=10)

@@ -104,15 +104,42 @@ def _prepare_input_view(work: Path, manifest: Mapping[str, Any] | None) -> None:
 
 
 def _failure_class(log: Path) -> tuple[str, bool]:
-    """Classify known provider failures without treating output as success."""
+    """Classify known provider failures without treating output as success.
+
+    Only console lines, non-JSON output, and structured result-event error
+    fields feed the pattern corpus, so numeric values inside progress or
+    usage events can never look like HTTP status codes.
+    """
+    texts: list[str] = []
     try:
-        text = log.read_text(encoding="utf-8", errors="replace").lower()
+        for line in log.read_text(encoding="utf-8", errors="replace").splitlines():
+            try:
+                event = json.loads(line)
+            except json.JSONDecodeError:
+                texts.append(line)
+                continue
+            if not isinstance(event, dict):
+                continue
+            if event.get("type") == "console.line" and isinstance(event.get("text"), str):
+                texts.append(event["text"])
+            elif event.get("type") == "result" and (event.get("is_error") or event.get("api_error_status")):
+                status = event.get("api_error_status")
+                texts.append(f"api error status {status}" if status else "result error")
     except OSError:
         return "nonzero_exit", False
-    if "selected model is at capacity" in text or "model is at capacity" in text:
+    text = "\n".join(texts).lower()
+    if ("selected model is at capacity" in text or "model is at capacity" in text
+            or "overloaded" in text):
         return "capacity", True
+    if "rate limit" in text or "rate_limit" in text or "too many requests" in text:
+        return "rate_limited", True
     if "usage limit" in text or "hit your usage limit" in text:
         return "usage_limit", False
+    if ("quota" in text or "insufficient balance" in text or "credit balance" in text
+            or "余额不足" in text or "额度不足" in text):
+        return "quota_exhausted", False
+    if "exceeded maximum turns" in text or "exceeded max turns" in text:
+        return "max_turns_exceeded", False
     return "nonzero_exit", False
 
 
