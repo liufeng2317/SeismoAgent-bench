@@ -19,12 +19,74 @@ def _short(value: Any, limit: int = 4000) -> str:
     return text
 
 
-def _human_summary(raw: Any) -> str:
+# Claude Code streams high-frequency progress events while the model thinks
+# (for example thinking_tokens every few milliseconds). The raw JSONL keeps
+# every event; the human log keeps only signal events.
+_PROGRESS_EVENT_SUBTYPES = {"thinking_tokens"}
+
+
+def _content_kinds(content: Any) -> list[str]:
+    if not isinstance(content, list):
+        return []
+    return [block["type"] for block in content
+            if isinstance(block, dict) and isinstance(block.get("type"), str)]
+
+
+def _human_summary(raw: Any) -> str | None:
     if not isinstance(raw, dict):
         return f"raw_event value={_short(raw)}"
     event_type = raw.get("type", "unknown")
     if event_type == "console.line":
         return f"stdout: {_short(raw.get('text'))}"
+    if event_type == "system":
+        subtype = raw.get("subtype")
+        if subtype in _PROGRESS_EVENT_SUBTYPES:
+            return None
+        label = f"system/{subtype}" if isinstance(subtype, str) else "system"
+        if isinstance(raw.get("status"), str):
+            return f"{label} {raw['status']}"
+        return label
+    if event_type == "assistant":
+        message = raw.get("message")
+        if not isinstance(message, dict):
+            return "assistant"
+        kinds: list[str] = []
+        text = None
+        content = message.get("content")
+        if isinstance(content, list):
+            for block in content:
+                if not isinstance(block, dict) or not isinstance(block.get("type"), str):
+                    continue
+                kinds.append(block["type"])
+                if block["type"] == "text" and text is None:
+                    text = block.get("text")
+        detail = f"assistant [{message.get('model', 'unknown')}] {'+'.join(kinds) if kinds else 'empty'}"
+        return f"{detail}: {_short(text, 160)}" if text else detail
+    if event_type == "user":
+        content = raw.get("message", {}).get("content") if isinstance(raw.get("message"), dict) else None
+        if isinstance(content, str):
+            return f"user: {_short(content, 160)}"
+        kinds = _content_kinds(content)
+        return f"user {'+'.join(kinds)}" if kinds else "user"
+    if event_type == "result":
+        usage = raw.get("usage") if isinstance(raw.get("usage"), dict) else {}
+        parts = [f"result {raw.get('subtype', 'unknown')}"]
+        if isinstance(raw.get("num_turns"), int):
+            parts.append(f"turns={raw['num_turns']}")
+        for key, label in (("input_tokens", "in"), ("output_tokens", "out"),
+                           ("cache_read_input_tokens", "cached")):
+            if isinstance(usage.get(key), int):
+                parts.append(f"{label}={usage[key]}")
+        cost = raw.get("total_cost_usd")
+        if isinstance(cost, (int, float)):
+            parts.append(f"cost=${cost:.2f}")
+        return " ".join(parts)
+    if event_type == "tool_progress":
+        detail = f"tool_progress {raw.get('tool_name', 'unknown')}"
+        elapsed = raw.get("elapsed_time_seconds")
+        if isinstance(elapsed, (int, float)):
+            detail += f" elapsed={elapsed}s"
+        return detail
     item = raw.get("item")
     if event_type in {"thread.started", "turn.started", "turn.completed"}:
         return str(event_type)
@@ -60,6 +122,8 @@ def write_human_log(raw_log_path: str | Path, human_log_path: str | Path) -> int
                 summary = f"stdout: {_short(text)}"
             else:
                 summary = _human_summary(event)
+            if summary is None:
+                continue
             for fragment in summary.splitlines() or [""]:
                 output.write(f"[{_timestamp()}] {fragment}\n")
     return count
@@ -95,14 +159,20 @@ def append_execution_line(line: bytes | str, event_stream: Any, human_stream: An
         event = {"type": "console.line", "text": text}
     event_stream.write(json.dumps(event, ensure_ascii=False, sort_keys=True) + "\n")
     summary = _human_summary(event)
-    for fragment in summary.splitlines() or [""]:
-        human_stream.write(f"[{_timestamp()}] {fragment}\n")
+    if summary is not None:
+        for fragment in summary.splitlines() or [""]:
+            human_stream.write(f"[{_timestamp()}] {fragment}\n")
     event_stream.flush()
     human_stream.flush()
 
 
 def summarize_usage(log_path: str | Path) -> dict[str, Any]:
-    """Summarize provider usage fields without retaining private reasoning."""
+    """Summarize provider usage fields without retaining private reasoning.
+
+    Codex reports usage per turn.completed event; Claude Code streams zero
+    usage on assistant messages and reports authoritative totals (turn count,
+    per-model token counts, cost) once in the final result event.
+    """
     counts: dict[str, int] = {}
     usage_totals = {
         "input_tokens": 0,
@@ -113,10 +183,13 @@ def summarize_usage(log_path: str | Path) -> dict[str, Any]:
     }
     usage_events = 0
     turns = 0
+    total_cost_usd: float | None = None
+    models: dict[str, dict[str, Any]] = {}
     source = Path(log_path)
     if not source.is_file():
         return {"schema_version": 1, "usage_events": 0, "turns": 0,
-                "event_counts": {}, "usage": usage_totals}
+                "event_counts": {}, "usage": usage_totals, "models": {},
+                "total_cost_usd": None}
     with source.open(encoding="utf-8", errors="replace") as stream:
         for line in stream:
             try:
@@ -126,10 +199,30 @@ def summarize_usage(log_path: str | Path) -> dict[str, Any]:
             if not isinstance(event, dict):
                 continue
             event_type = event.get("type")
+            if event_type == "system" and isinstance(event.get("subtype"), str):
+                event_type = f"system/{event['subtype']}"
             if isinstance(event_type, str):
                 counts[event_type] = counts.get(event_type, 0) + 1
             if event_type == "turn.completed":
                 turns += 1
+            if event_type == "result":
+                if isinstance(event.get("num_turns"), int):
+                    turns = event["num_turns"]
+                cost = event.get("total_cost_usd")
+                if isinstance(cost, (int, float)):
+                    total_cost_usd = float(cost)
+                model_usage = event.get("modelUsage")
+                if isinstance(model_usage, dict):
+                    for name, stats in model_usage.items():
+                        if not isinstance(stats, dict):
+                            continue
+                        models[str(name)] = {
+                            "input_tokens": stats.get("inputTokens"),
+                            "output_tokens": stats.get("outputTokens"),
+                            "cached_input_tokens": stats.get("cacheReadInputTokens"),
+                            "reasoning_tokens": stats.get("thinkingTokens"),
+                            "cost_usd": stats.get("costUSD"),
+                        }
             usage = event.get("usage")
             if not isinstance(usage, dict):
                 continue
@@ -147,12 +240,17 @@ def summarize_usage(log_path: str | Path) -> dict[str, Any]:
                     if isinstance(value, (int, float)):
                         usage_totals[target] += int(value)
                         break
+            details = usage.get("output_tokens_details")
+            if isinstance(details, dict) and isinstance(details.get("thinking_tokens"), (int, float)):
+                usage_totals["reasoning_tokens"] += int(details["thinking_tokens"])
     return {
         "schema_version": 1,
         "usage_events": usage_events,
         "turns": turns,
         "event_counts": counts,
         "usage": usage_totals,
+        "models": models,
+        "total_cost_usd": total_cost_usd,
     }
 
 
