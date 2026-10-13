@@ -1,0 +1,1018 @@
+{
+  "schema_version": 1,
+  "case_id": "2018_kilauea_hawaii",
+  "generated_utc": "2026-10-10T21:45:23.490440+00:00",
+  "method": "One-second dataselect samples at 00/06/12/18 UTC per channel-day; presence evidence only, not intra-day continuity. Four samples per day because eruption damage makes partial-day availability likely.",
+  "window": {
+    "start_utc": "2018-05-01T00:00:00+00:00",
+    "end_utc": "2018-05-09T00:00:00+00:00",
+    "days": 8,
+    "samples_per_day": 4
+  },
+  "station_source": "data/waveforms/stations/shelly2019_phase_station_manifest.json",
+  "station_source_sha256": "be6bab5bca8dff5355d763495ac2f9a5c54d157f80b0f315095e3d3caf1d8dc4",
+  "summary": {
+    "stations_probed": 25,
+    "channels_probed": 65,
+    "probes": 2080,
+    "probes_present": 2080,
+    "probes_no_data": 0,
+    "probes_errors": 0,
+    "stations_full_window": 25
+  },
+  "stations": {
+    "AHUD": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "BYL": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "CPKD": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 4,
+        "2018-05-02": 4,
+        "2018-05-03": 4,
+        "2018-05-04": 4,
+        "2018-05-05": 4,
+        "2018-05-06": 4,
+        "2018-05-07": 4,
+        "2018-05-08": 4
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "DESD": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "DEVL": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "HAT": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "HLPD": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "KKO": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "KNHD": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 4,
+        "2018-05-02": 4,
+        "2018-05-03": 4,
+        "2018-05-04": 4,
+        "2018-05-05": 4,
+        "2018-05-06": 4,
+        "2018-05-07": 4,
+        "2018-05-08": 4
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "MITD": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 4,
+        "2018-05-02": 4,
+        "2018-05-03": 4,
+        "2018-05-04": 4,
+        "2018-05-05": 4,
+        "2018-05-06": 4,
+        "2018-05-07": 4,
+        "2018-05-08": 4
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "MLOD": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "NAHU": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "NPT": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "OBL": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "OTLD": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 4,
+        "2018-05-02": 4,
+        "2018-05-03": 4,
+        "2018-05-04": 4,
+        "2018-05-05": 4,
+        "2018-05-06": 4,
+        "2018-05-07": 4,
+        "2018-05-08": 4
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "PAUD": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "POLD": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 4,
+        "2018-05-02": 4,
+        "2018-05-03": 4,
+        "2018-05-04": 4,
+        "2018-05-05": 4,
+        "2018-05-06": 4,
+        "2018-05-07": 4,
+        "2018-05-08": 4
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "PUHI": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "RIMD": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "RSDD": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "SBL": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "SDH": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "UWB": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "UWE": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "WRM": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2018-05-01": 12,
+        "2018-05-02": 12,
+        "2018-05-03": 12,
+        "2018-05-04": 12,
+        "2018-05-05": 12,
+        "2018-05-06": 12,
+        "2018-05-07": 12,
+        "2018-05-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    }
+  },
+  "per_channel": {
+    "HV.AHUD..EHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2011-04-06T00:00:00.0000",
+      "epoch_end": null,
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.AHUD..EHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2011-04-06T00:00:00.0000",
+      "epoch_end": null,
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.AHUD..EHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2011-04-06T00:00:00.0000",
+      "epoch_end": null,
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.BYL..HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-11-02T00:00:00.0000",
+      "epoch_end": "2024-07-16T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.BYL..HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-11-02T00:00:00.0000",
+      "epoch_end": "2024-07-16T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.BYL..HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-11-02T00:00:00.0000",
+      "epoch_end": "2024-07-16T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.CPKD..EHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2016-02-04T00:00:00.0000",
+      "epoch_end": "2024-05-10T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.DESD..EHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-10-20T00:00:00.0000",
+      "epoch_end": "2026-08-08T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.DESD..EHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-10-20T00:00:00.0000",
+      "epoch_end": "2026-08-08T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.DESD..EHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-10-20T00:00:00.0000",
+      "epoch_end": "2026-08-08T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.DEVL..HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2014-11-18T00:00:00.0000",
+      "epoch_end": "2023-02-02T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.DEVL..HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2014-11-18T00:00:00.0000",
+      "epoch_end": "2023-02-02T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.DEVL..HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2014-11-18T00:00:00.0000",
+      "epoch_end": "2023-02-02T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.HAT..HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-01-12T00:00:00.0000",
+      "epoch_end": "2026-07-16T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.HAT..HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-01-12T00:00:00.0000",
+      "epoch_end": "2026-07-16T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.HAT..HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-01-12T00:00:00.0000",
+      "epoch_end": "2026-07-16T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.HLPD..HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2012-01-05T00:00:00.0000",
+      "epoch_end": "2024-05-23T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.HLPD..HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2012-01-05T00:00:00.0000",
+      "epoch_end": "2024-05-23T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.HLPD..HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2012-01-05T00:00:00.0000",
+      "epoch_end": "2024-05-23T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.KKO..HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-10-27T00:00:00.0000",
+      "epoch_end": "2018-06-26T21:51:43.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.KKO..HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-10-27T00:00:00.0000",
+      "epoch_end": "2018-06-26T21:51:43.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.KKO..HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-10-27T00:00:00.0000",
+      "epoch_end": "2018-06-26T21:51:43.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.KNHD..EHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2013-05-24T00:00:00.0000",
+      "epoch_end": null,
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.MITD..EHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2016-07-22T00:00:00.0000",
+      "epoch_end": "2024-05-23T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.MLOD..HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2013-02-08T00:00:00.0000",
+      "epoch_end": "2026-04-09T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.MLOD..HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2013-02-08T00:00:00.0000",
+      "epoch_end": "2026-04-09T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.MLOD..HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2013-02-08T00:00:00.0000",
+      "epoch_end": "2026-04-09T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.NAHU..EHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-01-18T00:00:00.0000",
+      "epoch_end": "2019-07-25T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.NAHU..EHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-01-18T00:00:00.0000",
+      "epoch_end": "2019-07-25T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.NAHU..EHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-01-18T00:00:00.0000",
+      "epoch_end": "2019-07-25T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.NPT..HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-02-10T00:00:00.0000",
+      "epoch_end": "2018-05-25T22:43:35.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.NPT..HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-02-10T00:00:00.0000",
+      "epoch_end": "2018-05-25T22:43:35.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.NPT..HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-02-10T00:00:00.0000",
+      "epoch_end": "2018-05-25T22:43:35.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.OBL..HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-03-16T00:00:00.0000",
+      "epoch_end": "2021-12-06T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.OBL..HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-03-16T00:00:00.0000",
+      "epoch_end": "2021-12-06T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.OBL..HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-03-16T00:00:00.0000",
+      "epoch_end": "2021-12-06T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.OTLD..EHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2011-03-29T00:00:00.0000",
+      "epoch_end": "2021-08-26T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.PAUD..HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2016-01-08T15:00:00.0000",
+      "epoch_end": "2025-04-10T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.PAUD..HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2016-01-08T15:00:00.0000",
+      "epoch_end": "2025-04-10T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.PAUD..HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2016-01-08T15:00:00.0000",
+      "epoch_end": "2025-04-10T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.POLD..EHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2014-06-20T00:00:00.0000",
+      "epoch_end": null,
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.PUHI..HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-05-14T22:00:00.0000",
+      "epoch_end": null,
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.PUHI..HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-05-14T22:00:00.0000",
+      "epoch_end": null,
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.PUHI..HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-05-14T22:00:00.0000",
+      "epoch_end": null,
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.RIMD..HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2016-02-11T00:00:00.0000",
+      "epoch_end": "2024-05-24T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.RIMD..HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2016-02-11T00:00:00.0000",
+      "epoch_end": "2024-05-24T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.RIMD..HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2016-02-11T00:00:00.0000",
+      "epoch_end": "2024-05-24T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.RSDD..EHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-07-25T00:00:00.0000",
+      "epoch_end": "2018-09-20T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.RSDD..EHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-07-25T00:00:00.0000",
+      "epoch_end": "2018-09-20T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.RSDD..EHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-07-25T00:00:00.0000",
+      "epoch_end": "2018-09-20T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.SBL..HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-03-30T00:00:00.0000",
+      "epoch_end": "2024-07-17T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.SBL..HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-03-30T00:00:00.0000",
+      "epoch_end": "2024-07-17T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.SBL..HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-03-30T00:00:00.0000",
+      "epoch_end": "2024-07-17T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.SDH..HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-08-11T00:00:00.0000",
+      "epoch_end": null,
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.SDH..HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-08-11T00:00:00.0000",
+      "epoch_end": null,
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.SDH..HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2015-08-11T00:00:00.0000",
+      "epoch_end": null,
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.UWB..HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-05-31T00:00:00.0000",
+      "epoch_end": null,
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.UWB..HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-05-31T00:00:00.0000",
+      "epoch_end": null,
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.UWB..HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2017-05-31T00:00:00.0000",
+      "epoch_end": null,
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.UWE..HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2006-01-02T00:00:00.0000",
+      "epoch_end": "2021-10-27T21:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.UWE..HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2006-01-02T00:00:00.0000",
+      "epoch_end": "2021-10-27T21:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.UWE..HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2006-01-02T00:00:00.0000",
+      "epoch_end": "2021-10-27T21:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.WRM..HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2016-10-25T00:00:00.0000",
+      "epoch_end": "2024-07-11T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.WRM..HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2016-10-25T00:00:00.0000",
+      "epoch_end": "2024-07-11T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "HV.WRM..HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2016-10-25T00:00:00.0000",
+      "epoch_end": "2024-07-11T00:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    }
+  },
+  "other_families_present": [
+    "HV.AHUD.01.BDF",
+    "HV.AHUD.02.BDF",
+    "HV.AHUD.03.BDF",
+    "HV.AHUD.04.BDF",
+    "HV.DESD..HNE",
+    "HV.DESD..HNN",
+    "HV.DESD..HNZ",
+    "HV.HLPD..HNE",
+    "HV.HLPD..HNN",
+    "HV.HLPD..HNZ",
+    "HV.MLOD..HNE",
+    "HV.MLOD..HNN",
+    "HV.MLOD..HNZ",
+    "HV.NPT..HNE",
+    "HV.NPT..HNN",
+    "HV.NPT..HNZ",
+    "HV.NPT.01.HDF",
+    "HV.NPT.02.HDF",
+    "HV.NPT.03.HDF",
+    "HV.NPT.04.HDF",
+    "HV.PAUD..HNE",
+    "HV.PAUD..HNN",
+    "HV.PAUD..HNZ",
+    "HV.RSDD..HNE",
+    "HV.RSDD..HNN",
+    "HV.RSDD..HNZ",
+    "HV.UWE..HNE",
+    "HV.UWE..HNN",
+    "HV.UWE..HNZ"
+  ]
+}

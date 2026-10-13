@@ -8,6 +8,28 @@ processing_policy:
   figure_format: png
   figure_dpi: 300
 window_status: not_frozen
+scientific_design:
+  status: candidate_design_reference_audit_only
+  primary_question: Can an agent sustain detection, association and location
+    quality through an induced aftershock sequence recorded by a mixed
+    RAMP/USArray/permanent network whose geometry changes during deployment?
+  candidate_window:
+    start_utc: '2011-11-11T00:00:00Z'
+    end_utc: '2011-11-19T00:00:00Z'
+    interval: half_open
+    status: exploratory_candidate_not_scientific_freeze
+    source: v1 core window (analysis/PRAGUE2011_analysis.md) chosen because the
+      last temporary stations became fully operational on 2011-11-11; the
+      changing-network interval 2011-11-04 to 11-11 remains a separate stress
+      condition and must not be mixed into the core score.
+  primary_input_condition: raw_waveforms_and_station_metadata
+  station_policy: mcmahon_31_station_reconstruction; the paper's 31-station set
+    (18 Oklahoma RAMP ZQ LC01-LC18 + 3 USGS GS OK020-OK022 + 9 Transportable
+    Array TA + 1 Oklahoma network OK FNO) is rebuilt by rule because Table S1
+    is not retrievable (publisher supplement blocked). TA membership is the
+    nine stations nearest the Mw 5.7 mainshock epicentre (cut at 129 km; the
+    tenth candidate sits at 134 km), cross-checked against McMahon phase
+    participation. All waveforms and StationXML come from EarthScope.
 catalogs:
 - source_ref: COCHRAN2020_GJIGGAA153
   catalog_dir: data/catalogs/COCHRAN2020_GJIGGAA153

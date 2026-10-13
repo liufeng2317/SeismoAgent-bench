@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "case_id": "2017_maple_creek_yellowstone",
+  "key": "mainshock",
+  "anchor": {
+    "event_id": "uu60203137",
+    "time_utc": "2017-06-16T00:48:46.940000Z",
+    "magnitude": 4.4,
+    "magnitude_type": "mw",
+    "latitude": 44.7813333,
+    "longitude": -111.0331667,
+    "depth_km": 9.3,
+    "status": "reviewed"
+  },
+  "label": "Mw 4.4",
+  "sources": [
+    {
+      "role": "primary",
+      "provider": "USGS ANSS ComCat (single-event query)",
+      "url": "https://earthquake.usgs.gov/fdsnws/event/1/query",
+      "parameters": {
+        "format": "geojson",
+        "starttime": "2017-06-16T00:00:00",
+        "endtime": "2017-06-17T00:00:00",
+        "minmagnitude": "4.0",
+        "maxmagnitude": "5.0",
+        "minlatitude": "44.3",
+        "maxlatitude": "45.0",
+        "minlongitude": "-111.3",
+        "maxlongitude": "-110.8"
+      },
+      "retrieved_utc": "2017-06-16T00:48:46.940000+00:00",
+      "event": {
+        "event_id": "uu60203137",
+        "time_utc": "2017-06-16T00:48:46.940000Z",
+        "latitude": 44.7813333,
+        "longitude": -111.0331667,
+        "depth_km": 9.3,
+        "comcat_magnitude": 4.36,
+        "comcat_magnitude_type": "ml",
+        "status": "reviewed"
+      }
+    }
+  ],
+  "cross_check": {
+    "moment_tensor_magnitude": "UUSS Mw 4.4 (Shelly & Hardebeck 2019 fig. 2; Pang et al. 2019 fig. 1), used as the anchor magnitude",
+    "comcat_magnitude_ml": 4.36,
+    "staged_paper_statement_found": true,
+    "staged_paper": "references/SHELLY2019_GL081607/parsed/paper/SHELLY2019_GL081607__paper_reading.md",
+    "staged_paper_statement": "with a largest event of \\(M_w 4.4\\) on 2017-06-16.",
+    "baseline_snapshot": {
+      "path": "data/catalogs/USGS_UUSS_COMCAT_2017/USGS_UUSS_COMCAT_2017__catalog_operational_full.csv",
+      "sha256": "8925fd0c7e99386c28fb700280ea8c1a842939bc76b86f27c5379e93f85c6601",
+      "rows": 9,
+      "max_magnitude": 1.86,
+      "latitude_range": [
+        44.5386667,
+        44.6216667
+      ],
+      "longitude_range": [
+        -110.5401667,
+        -110.3346667
+      ],
+      "note": "Baseline query mask (44.45–44.75°N, 110.55–110.15°W) does not cover the swarm area; the Mw 4.4 event is absent from the staged snapshot."
+    }
+  },
+  "generated_utc": "2026-10-11T01:51:48.554522+00:00",
+  "note": "Anchor parameters for figure scripts. The plotted magnitude is the UUSS moment magnitude; ComCat lists the same event as ML 4.36."
+}

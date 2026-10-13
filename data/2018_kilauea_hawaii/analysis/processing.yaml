@@ -8,6 +8,26 @@ processing_policy:
   figure_format: png
   figure_dpi: 300
 window_status: not_frozen
+scientific_design:
+  status: candidate_design_reference_audit_only
+  primary_question: Can an agent sustain detection and monitoring through an
+    eruption-onset sequence with extremely high event rates and a network whose
+    availability degrades day by day (station loss after the M6.9 flank event
+    and summit collapses)?
+  candidate_window:
+    start_utc: '2018-05-01T00:00:00Z'
+    end_utc: '2018-05-09T00:00:00Z'
+    interval: half_open
+    status: exploratory_candidate_not_scientific_freeze
+    source: 8-day recommended compact window for eruption-onset/high-rate
+      monitoring (analysis/KILAUEA2018_analysis.md); summit scope paired with
+      the Shelly & Thelen (2019) reference; the full reference span
+      (2018-04-29 to 2018-08-06) remains a separate large-volume option.
+  primary_input_condition: raw_waveforms_and_station_metadata
+  station_policy: shelly_phase_manifest_with_day_level_availability_audit;
+    stations come from the phase-pick release inside the candidate window,
+    and a dataselect probe audits per-station/per-day waveform presence
+    because eruption damage changes availability within the window.
 catalogs:
 - source_ref: LENGLINE2021_EPSL116653
   catalog_dir: data/catalogs/LENGLINE2021_EPSL116653

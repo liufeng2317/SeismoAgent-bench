@@ -5,7 +5,8 @@
 | [analysis/KAIKOURA2016_analysis.md](analysis/KAIKOURA2016_analysis.md) | 案例科学分析、参考角色和待办事项 |
 | [analysis/processing.yaml](analysis/processing.yaml) | 产品声明与窗口状态 |
 | [data/catalogs/](data/catalogs/) | 各来源目录、说明、处理脚本与分析产物 |
-| `data/waveforms/` | 本地连续波形预留位置；不纳入 Git |
+| `data/waveforms/` | 波形存储 symlink，指向外部档案 `/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2016_kaikoura_new_zealand/waveforms/`；不纳入 Git |
+| [scripts/observations/](scripts/observations/README.md) | 案例级观测数据准备：Table S1 台站清单、双 provider 可用性审计、元数据获取、波形清单与下载 |
 | [references/](references/) | 文献、附件、阅读记录和结构化提取 |
 
 保留 GrowClust 版本、SUGAR S10/S11、关联震相和机制解之间的区别；补充材料中的同源表通过软链接引用。

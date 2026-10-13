@@ -1,0 +1,1701 @@
+{
+  "schema_version": 1,
+  "case_id": "2020_magna_utah",
+  "generated_utc": "2026-10-10T18:56:51.498914+00:00",
+  "method": "One-second dataselect sample at each UTC midnight per channel-day; presence evidence only, not intra-day continuity.",
+  "mainshock": {
+    "latitude": 40.7495,
+    "longitude": -112.0972,
+    "radius_deg": 0.36
+  },
+  "window": {
+    "start_utc": "2020-03-17T00:00:00+00:00",
+    "end_utc": "2020-05-01T00:00:00+00:00",
+    "days": 45
+  },
+  "networks": "UU,GS",
+  "summary": {
+    "channels_probed": 200,
+    "probes": 9000,
+    "probes_present": 7718,
+    "probes_no_data": 1281,
+    "probes_errors": 1,
+    "stations_with_any_data": 56,
+    "stations_full_window": 48
+  },
+  "stations": {
+    "ASU4": {
+      "days_present": 43,
+      "missing_days": [
+        "2020-03-17",
+        "2020-03-18"
+      ]
+    },
+    "ASU5": {
+      "days_present": 39,
+      "missing_days": [
+        "2020-03-17",
+        "2020-03-18",
+        "2020-03-19",
+        "2020-03-20",
+        "2020-04-21",
+        "2020-04-22"
+      ]
+    },
+    "ASU6": {
+      "days_present": 36,
+      "missing_days": [
+        "2020-03-17",
+        "2020-03-18",
+        "2020-03-19",
+        "2020-03-20",
+        "2020-03-21",
+        "2020-03-22",
+        "2020-03-23",
+        "2020-03-24",
+        "2020-03-25"
+      ]
+    },
+    "AVE": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "BSS": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "BYP": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "CAPU": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "CFS": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "CHS": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "COY": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "CTU": {
+      "days_present": 36,
+      "missing_days": [
+        "2020-03-26",
+        "2020-03-27",
+        "2020-03-28",
+        "2020-03-29",
+        "2020-03-30",
+        "2020-03-31",
+        "2020-04-01",
+        "2020-04-02",
+        "2020-04-03"
+      ]
+    },
+    "CWU": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "DOT": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "ELE": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "EOCU": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "FPU": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "FTT": {
+      "days_present": 44,
+      "missing_days": [
+        "2020-04-06"
+      ]
+    },
+    "GMO": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "GMU": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "HER": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "HRU": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "ICF": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "JRP": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "LCU": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "LGC": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "LKC": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "MHD": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "MID": {
+      "days_present": 44,
+      "missing_days": [
+        "2020-03-21"
+      ]
+    },
+    "NAI": {
+      "days_present": 44,
+      "missing_days": [
+        "2020-03-17"
+      ]
+    },
+    "NAIU": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "NOQ": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "NOQ3": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "NOQ4": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "NOQ5": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "NOQ6": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "OSS": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "RBU": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "RPF": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "SAIU": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "SCC": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "SCS": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "SHED": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "SJF": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "SNUT": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "SPS": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "SSC": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "TPU": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "TRS": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "UHP": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "UT01": {
+      "days_present": 35,
+      "missing_days": [
+        "2020-03-17",
+        "2020-03-18",
+        "2020-03-19",
+        "2020-03-20",
+        "2020-03-21",
+        "2020-03-22",
+        "2020-03-23",
+        "2020-03-24",
+        "2020-03-31",
+        "2020-04-01"
+      ]
+    },
+    "UUE": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "VEC": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "WES": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "WHS": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "WRP": {
+      "days_present": 45,
+      "missing_days": []
+    },
+    "WTU": {
+      "days_present": 45,
+      "missing_days": []
+    }
+  },
+  "per_channel": {
+    "GS.UT01.00.HH1": {
+      "rate_hz": 100.0,
+      "days_present": 35,
+      "http_200": 35,
+      "no_data": 10,
+      "errors": 0
+    },
+    "GS.UT01.00.HH2": {
+      "rate_hz": 100.0,
+      "days_present": 35,
+      "http_200": 35,
+      "no_data": 10,
+      "errors": 0
+    },
+    "GS.UT01.00.HHZ": {
+      "rate_hz": 100.0,
+      "days_present": 35,
+      "http_200": 35,
+      "no_data": 10,
+      "errors": 0
+    },
+    "GS.UT01.00.LH1": {
+      "rate_hz": 1.0,
+      "days_present": 35,
+      "http_200": 35,
+      "no_data": 10,
+      "errors": 0
+    },
+    "GS.UT01.00.LH2": {
+      "rate_hz": 1.0,
+      "days_present": 35,
+      "http_200": 35,
+      "no_data": 10,
+      "errors": 0
+    },
+    "GS.UT01.00.LHZ": {
+      "rate_hz": 1.0,
+      "days_present": 35,
+      "http_200": 35,
+      "no_data": 10,
+      "errors": 0
+    },
+    "GS.UT01.20.HN1": {
+      "rate_hz": 200.0,
+      "days_present": 1,
+      "http_200": 1,
+      "no_data": 44,
+      "errors": 0
+    },
+    "GS.UT01.20.HN2": {
+      "rate_hz": 200.0,
+      "days_present": 1,
+      "http_200": 1,
+      "no_data": 44,
+      "errors": 0
+    },
+    "GS.UT01.20.HNZ": {
+      "rate_hz": 200.0,
+      "days_present": 1,
+      "http_200": 1,
+      "no_data": 44,
+      "errors": 0
+    },
+    "GS.UT01.20.LN1": {
+      "rate_hz": 1.0,
+      "days_present": 35,
+      "http_200": 35,
+      "no_data": 10,
+      "errors": 0
+    },
+    "GS.UT01.20.LN2": {
+      "rate_hz": 1.0,
+      "days_present": 35,
+      "http_200": 35,
+      "no_data": 10,
+      "errors": 0
+    },
+    "GS.UT01.20.LNZ": {
+      "rate_hz": 1.0,
+      "days_present": 35,
+      "http_200": 35,
+      "no_data": 10,
+      "errors": 0
+    },
+    "UU.ASU4.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 43,
+      "http_200": 43,
+      "no_data": 2,
+      "errors": 0
+    },
+    "UU.ASU4.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 43,
+      "http_200": 43,
+      "no_data": 2,
+      "errors": 0
+    },
+    "UU.ASU4.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 43,
+      "http_200": 43,
+      "no_data": 2,
+      "errors": 0
+    },
+    "UU.ASU5.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 39,
+      "http_200": 39,
+      "no_data": 6,
+      "errors": 0
+    },
+    "UU.ASU5.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 39,
+      "http_200": 39,
+      "no_data": 6,
+      "errors": 0
+    },
+    "UU.ASU5.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 39,
+      "http_200": 39,
+      "no_data": 6,
+      "errors": 0
+    },
+    "UU.ASU6.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 36,
+      "http_200": 36,
+      "no_data": 9,
+      "errors": 0
+    },
+    "UU.ASU6.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 36,
+      "http_200": 36,
+      "no_data": 9,
+      "errors": 0
+    },
+    "UU.ASU6.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 36,
+      "http_200": 36,
+      "no_data": 9,
+      "errors": 0
+    },
+    "UU.AVE.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.AVE.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.AVE.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.BSS.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.BSS.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.BSS.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.BYP.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.BYP.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.BYP.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.CAPU.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.CAPU.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.CAPU.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.CFS.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.CFS.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.CFS.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.CHS.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.CHS.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.CHS.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.COY.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.COY.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.COY.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.CTU.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 36,
+      "http_200": 36,
+      "no_data": 9,
+      "errors": 0
+    },
+    "UU.CTU.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 36,
+      "http_200": 36,
+      "no_data": 9,
+      "errors": 0
+    },
+    "UU.CTU.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 36,
+      "http_200": 36,
+      "no_data": 9,
+      "errors": 0
+    },
+    "UU.CTU.01.HHE": {
+      "rate_hz": 100.0,
+      "days_present": 36,
+      "http_200": 36,
+      "no_data": 9,
+      "errors": 0
+    },
+    "UU.CTU.01.HHN": {
+      "rate_hz": 100.0,
+      "days_present": 36,
+      "http_200": 36,
+      "no_data": 9,
+      "errors": 0
+    },
+    "UU.CTU.01.HHZ": {
+      "rate_hz": 100.0,
+      "days_present": 36,
+      "http_200": 36,
+      "no_data": 9,
+      "errors": 0
+    },
+    "UU.CWU.01.EHZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.DOT.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.DOT.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.DOT.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.ELE.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.ELE.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.ELE.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.EOCU.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.EOCU.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.EOCU.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.FPU.01.EHZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.FTT.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 44,
+      "http_200": 44,
+      "no_data": 1,
+      "errors": 0
+    },
+    "UU.FTT.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 44,
+      "http_200": 44,
+      "no_data": 1,
+      "errors": 0
+    },
+    "UU.FTT.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 44,
+      "http_200": 44,
+      "no_data": 1,
+      "errors": 0
+    },
+    "UU.GMO.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.GMO.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.GMO.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.GMU.01.EHE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.GMU.01.EHN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.GMU.01.EHZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.HER.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.HER.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.HER.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.HRU.01.EHZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.HRU.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 44,
+      "http_200": 44,
+      "no_data": 0,
+      "errors": 1
+    },
+    "UU.HRU.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.HRU.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.ICF.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.ICF.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.ICF.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.JRP.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.JRP.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.JRP.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.LCU.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.LCU.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.LCU.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.LGC.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.LGC.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.LGC.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.LKC.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.LKC.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.LKC.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.MHD.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.MHD.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.MHD.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.MHD.02.EHZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.MID.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 44,
+      "http_200": 44,
+      "no_data": 1,
+      "errors": 0
+    },
+    "UU.MID.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 44,
+      "http_200": 44,
+      "no_data": 1,
+      "errors": 0
+    },
+    "UU.MID.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 44,
+      "http_200": 44,
+      "no_data": 1,
+      "errors": 0
+    },
+    "UU.NAI.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 44,
+      "http_200": 44,
+      "no_data": 1,
+      "errors": 0
+    },
+    "UU.NAI.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 44,
+      "http_200": 44,
+      "no_data": 1,
+      "errors": 0
+    },
+    "UU.NAI.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 44,
+      "http_200": 44,
+      "no_data": 1,
+      "errors": 0
+    },
+    "UU.NAIU.01.EHZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.NOQ.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.NOQ.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.NOQ.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.NOQ.01.HHE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.NOQ.01.HHN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.NOQ.01.HHZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.NOQ3.01.EDF": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.NOQ4.01.EDF": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.NOQ5.01.EDF": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.NOQ6.01.EDF": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.OSS.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.OSS.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.OSS.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.QBHW.01.HNE": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QBHW.01.HNN": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QBHW.01.HNZ": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QCSP.01.HNE": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QCSP.01.HNN": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QCSP.01.HNZ": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QCWC.01.HNE": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QCWC.01.HNN": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QCWC.01.HNZ": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QDPS.01.HNE": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QDPS.01.HNN": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QDPS.01.HNZ": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QJMH.01.HNE": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QJMH.01.HNN": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QJMH.01.HNZ": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QMDS.01.HNE": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QMDS.01.HNN": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QMDS.01.HNZ": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QSTV.01.HNE": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QSTV.01.HNN": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.QSTV.01.HNZ": {
+      "rate_hz": 200.0,
+      "days_present": 0,
+      "http_200": 0,
+      "no_data": 45,
+      "errors": 0
+    },
+    "UU.RBU.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.RBU.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.RBU.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.RBU.02.EHZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.RPF.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.RPF.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.RPF.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SAIU.01.EHZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SAIU.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SAIU.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SAIU.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SAIU.02.EHZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SCC.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SCC.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SCC.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SCS.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SCS.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SCS.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SHED.01.HNE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SHED.01.HNN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SHED.01.HNZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SJF.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SJF.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SJF.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SNUT.01.EHZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SNUT.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SNUT.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SNUT.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SNUT.02.EHZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SPS.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SPS.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SPS.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SSC.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SSC.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.SSC.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.TPU.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.TPU.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.TPU.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.TRS.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.TRS.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.TRS.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.UHP.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.UHP.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.UHP.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.UUE.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.UUE.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.UUE.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.VEC.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.VEC.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.VEC.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.WES.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.WES.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.WES.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.WHS.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.WHS.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.WHS.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.WRP.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.WRP.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.WRP.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.WTU.01.EHE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.WTU.01.EHN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.WTU.01.EHZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.WTU.01.ENE": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.WTU.01.ENN": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    },
+    "UU.WTU.01.ENZ": {
+      "rate_hz": 100.0,
+      "days_present": 45,
+      "http_200": 45,
+      "no_data": 0,
+      "errors": 0
+    }
+  }
+}

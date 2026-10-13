@@ -1,0 +1,2335 @@
+{
+  "schema_version": 1,
+  "case_id": "2011_prague_oklahoma",
+  "generated_utc": "2026-10-12T01:26:55.477664+00:00",
+  "method": "One-second dataselect samples at 00/06/12/18 UTC per channel-day against EarthScope (sole archive for ZQ, GS, OK and TA here); presence evidence only, not intra-day continuity.",
+  "window": {
+    "start_utc": "2011-11-11T00:00:00+00:00",
+    "end_utc": "2011-11-19T00:00:00+00:00",
+    "days": 8,
+    "samples_per_day": 4
+  },
+  "station_source": "data/waveforms/stations/prague2011_station_manifest.json",
+  "station_source_sha256": "f9259a512b883f1dcd3cb368ccc2753e1f8bf0ec8665d2b34ef74858874509a5",
+  "audit_scope": {
+    "families": [
+      "BH",
+      "CH",
+      "CN",
+      "DH",
+      "HH"
+    ],
+    "min_rate_hz": 40.0,
+    "excluded_channels": 344
+  },
+  "summary": {
+    "stations_probed": 23,
+    "channels_probed": 102,
+    "probes": 3264,
+    "probes_present": 2484,
+    "probes_no_data": 780,
+    "probes_errors": 0,
+    "stations_full_window": 23
+  },
+  "stations": {
+    "FNO": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 6,
+        "2011-11-15": 12,
+        "2011-11-16": 6,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "LC09": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "LC10": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "LC11": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "LC12": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "LC13": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "LC14": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "LC15": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "LC16": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "LC17": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "LC18": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "OK020": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 24,
+        "2011-11-12": 24,
+        "2011-11-13": 24,
+        "2011-11-14": 24,
+        "2011-11-15": 24,
+        "2011-11-16": 24,
+        "2011-11-17": 24,
+        "2011-11-18": 24
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "OK021": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 24,
+        "2011-11-12": 24,
+        "2011-11-13": 24,
+        "2011-11-14": 24,
+        "2011-11-15": 24,
+        "2011-11-16": 24,
+        "2011-11-17": 24,
+        "2011-11-18": 24
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "OK022": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 24,
+        "2011-11-12": 24,
+        "2011-11-13": 24,
+        "2011-11-14": 24,
+        "2011-11-15": 24,
+        "2011-11-16": 24,
+        "2011-11-17": 24,
+        "2011-11-18": 24
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "TUL1": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "U35A": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "V35A": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "V36A": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "W35A": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "W36A": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "W37B": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "X35A": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "X36A": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2011-11-11": 12,
+        "2011-11-12": 12,
+        "2011-11-13": 12,
+        "2011-11-14": 12,
+        "2011-11-15": 12,
+        "2011-11-16": 12,
+        "2011-11-17": 12,
+        "2011-11-18": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    }
+  },
+  "per_channel": {
+    "GS.OK020.00.BHE": {
+      "rate_hz": 40.0,
+      "epoch_start": "2011-11-08T21:00:00.0000",
+      "epoch_end": "2012-03-13T22:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "GS.OK020.00.BHN": {
+      "rate_hz": 40.0,
+      "epoch_start": "2011-11-08T21:00:00.0000",
+      "epoch_end": "2012-03-13T22:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "GS.OK020.00.BHZ": {
+      "rate_hz": 40.0,
+      "epoch_start": "2011-11-08T21:00:00.0000",
+      "epoch_end": "2012-03-13T22:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "GS.OK020.00.HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2011-11-08T21:00:00.0000",
+      "epoch_end": "2012-03-13T22:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "GS.OK020.00.HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2011-11-08T21:00:00.0000",
+      "epoch_end": "2012-03-13T22:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "GS.OK020.00.HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2011-11-08T21:00:00.0000",
+      "epoch_end": "2012-03-13T22:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "GS.OK021.00.BHE": {
+      "rate_hz": 40.0,
+      "epoch_start": "2011-11-10T21:00:00.0000",
+      "epoch_end": "2012-03-13T19:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "GS.OK021.00.BHN": {
+      "rate_hz": 40.0,
+      "epoch_start": "2011-11-10T21:00:00.0000",
+      "epoch_end": "2012-03-13T19:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "GS.OK021.00.BHZ": {
+      "rate_hz": 40.0,
+      "epoch_start": "2011-11-10T21:00:00.0000",
+      "epoch_end": "2012-03-13T19:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "GS.OK021.00.HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2011-11-10T21:00:00.0000",
+      "epoch_end": "2012-03-13T19:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "GS.OK021.00.HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2011-11-10T21:00:00.0000",
+      "epoch_end": "2012-03-13T19:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "GS.OK021.00.HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2011-11-10T21:00:00.0000",
+      "epoch_end": "2012-03-13T19:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "GS.OK022.00.BHE": {
+      "rate_hz": 40.0,
+      "epoch_start": "2011-11-09T00:00:00.0000",
+      "epoch_end": "2012-03-13T16:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "GS.OK022.00.BHN": {
+      "rate_hz": 40.0,
+      "epoch_start": "2011-11-09T00:00:00.0000",
+      "epoch_end": "2012-03-13T16:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "GS.OK022.00.BHZ": {
+      "rate_hz": 40.0,
+      "epoch_start": "2011-11-09T00:00:00.0000",
+      "epoch_end": "2012-03-13T16:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "GS.OK022.00.HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2011-11-09T00:00:00.0000",
+      "epoch_end": "2012-03-13T16:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "GS.OK022.00.HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2011-11-09T00:00:00.0000",
+      "epoch_end": "2012-03-13T16:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "GS.OK022.00.HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2011-11-09T00:00:00.0000",
+      "epoch_end": "2012-03-13T16:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "OK.FNO.01.HHE": {
+      "rate_hz": 100.0,
+      "epoch_start": "2011-09-16T00:00:00.0000",
+      "epoch_end": "2015-05-11T20:07:00.0000",
+      "samples_present": 28,
+      "http_200": 28,
+      "no_data": 4,
+      "errors": 0
+    },
+    "OK.FNO.01.HHN": {
+      "rate_hz": 100.0,
+      "epoch_start": "2011-09-16T00:00:00.0000",
+      "epoch_end": "2015-05-11T20:07:00.0000",
+      "samples_present": 28,
+      "http_200": 28,
+      "no_data": 4,
+      "errors": 0
+    },
+    "OK.FNO.01.HHZ": {
+      "rate_hz": 100.0,
+      "epoch_start": "2011-09-16T00:00:00.0000",
+      "epoch_end": "2015-05-11T20:07:00.0000",
+      "samples_present": 28,
+      "http_200": 28,
+      "no_data": 4,
+      "errors": 0
+    },
+    "TA.TUL1..BHE": {
+      "rate_hz": 40.0,
+      "epoch_start": "2008-10-16T00:00:00.0000",
+      "epoch_end": "2016-12-13T18:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.TUL1..BHN": {
+      "rate_hz": 40.0,
+      "epoch_start": "2008-10-16T00:00:00.0000",
+      "epoch_end": "2016-12-13T18:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.TUL1..BHZ": {
+      "rate_hz": 40.0,
+      "epoch_start": "2008-10-16T00:00:00.0000",
+      "epoch_end": "2016-12-13T18:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.U35A..BHE": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-06-18T00:00:00.0000",
+      "epoch_end": "2012-02-12T16:10:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.U35A..BHN": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-06-18T00:00:00.0000",
+      "epoch_end": "2012-02-12T16:10:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.U35A..BHZ": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-06-18T00:00:00.0000",
+      "epoch_end": "2012-02-12T16:10:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.V35A..BHE": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-04-30T20:15:00.0000",
+      "epoch_end": "2012-02-20T16:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.V35A..BHN": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-04-30T20:15:00.0000",
+      "epoch_end": "2012-02-20T16:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.V35A..BHZ": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-04-30T20:15:00.0000",
+      "epoch_end": "2012-02-20T16:00:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.V36A..BHE": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-06-10T00:00:00.0000",
+      "epoch_end": "2012-02-09T19:20:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.V36A..BHN": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-06-10T00:00:00.0000",
+      "epoch_end": "2012-02-09T19:20:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.V36A..BHZ": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-06-10T00:00:00.0000",
+      "epoch_end": "2012-02-09T19:20:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.W35A..BHE": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-04-15T00:00:00.0000",
+      "epoch_end": "2012-02-01T19:25:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.W35A..BHN": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-04-15T00:00:00.0000",
+      "epoch_end": "2012-02-01T19:25:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.W35A..BHZ": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-04-15T00:00:00.0000",
+      "epoch_end": "2012-02-01T19:25:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.W36A..BHE": {
+      "rate_hz": 40.0,
+      "epoch_start": "2011-09-09T16:00:00.0000",
+      "epoch_end": "2012-02-01T15:40:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.W36A..BHN": {
+      "rate_hz": 40.0,
+      "epoch_start": "2011-09-09T16:00:00.0000",
+      "epoch_end": "2012-02-01T15:40:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.W36A..BHZ": {
+      "rate_hz": 40.0,
+      "epoch_start": "2011-09-09T16:00:00.0000",
+      "epoch_end": "2012-02-01T15:40:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.W37B..BHE": {
+      "rate_hz": 40.0,
+      "epoch_start": "2011-01-28T00:00:00.0000",
+      "epoch_end": "2012-02-05T15:40:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.W37B..BHN": {
+      "rate_hz": 40.0,
+      "epoch_start": "2011-01-28T00:00:00.0000",
+      "epoch_end": "2012-02-05T15:40:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.W37B..BHZ": {
+      "rate_hz": 40.0,
+      "epoch_start": "2011-01-28T00:00:00.0000",
+      "epoch_end": "2012-02-05T15:40:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.X35A..BHE": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-04-18T00:00:00.0000",
+      "epoch_end": "2012-02-02T19:50:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.X35A..BHN": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-04-18T00:00:00.0000",
+      "epoch_end": "2012-02-02T19:50:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.X35A..BHZ": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-04-18T00:00:00.0000",
+      "epoch_end": "2012-02-02T19:50:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.X36A..BHE": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-04-20T00:00:00.0000",
+      "epoch_end": "2012-02-02T16:15:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.X36A..BHN": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-04-20T00:00:00.0000",
+      "epoch_end": "2012-02-02T16:15:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "TA.X36A..BHZ": {
+      "rate_hz": 40.0,
+      "epoch_start": "2010-04-20T00:00:00.0000",
+      "epoch_end": "2012-02-02T16:15:00.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC01..CHE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T23:04:40.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC01..CHN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T23:04:40.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC01..CHZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T23:04:40.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC02..CHE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T22:09:25.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC02..CHN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T22:09:25.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC02..CHZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T22:09:25.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC03..CHE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T23:52:45.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC03..CHN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T23:52:45.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC03..CHZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T23:52:45.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC04..CHE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T00:00:00.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC04..CHN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T00:00:00.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC04..CHZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T00:00:00.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC05..CHE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T00:00:00.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC05..CHN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T00:00:00.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC05..CHZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T00:00:00.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC06..CHE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T00:00:00.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC06..CHN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T00:00:00.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC06..CHZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-06T00:00:00.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC07..CHE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC07..CHN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC07..CHZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC08..CHE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-08T00:00:00.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC08..CHN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-08T00:00:00.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC08..CHZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-08T00:00:00.0000",
+      "epoch_end": "2012-04-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "ZQ.LC09..CNE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC09..CNN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC09..CNZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC10..CNE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC10..CNN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC10..CNZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC11..DHE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC11..DHN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC11..DHZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC12..DHE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC12..DHN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC12..DHZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC13..DHE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC13..DHN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC13..DHZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC14..DHE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC14..DHN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC14..DHZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC15..DHE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC15..DHN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC15..DHZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC16..DHE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC16..DHN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC16..DHZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC17..DHE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC17..DHN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC17..DHZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC18..DHE": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC18..DHN": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "ZQ.LC18..DHZ": {
+      "rate_hz": 250.0,
+      "epoch_start": "2011-11-07T00:00:00.0000",
+      "epoch_end": "2012-05-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    }
+  },
+  "excluded_channels": {
+    "ZQ.LC09..LOG": {
+      "rate_hz": 0.0
+    },
+    "ZQ.LC09..VM1": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC09..VM2": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC09..VM3": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC10..LOG": {
+      "rate_hz": 0.0
+    },
+    "ZQ.LC10..VM1": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC10..VM2": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC10..VM3": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC11..LOG": {
+      "rate_hz": 0.0
+    },
+    "ZQ.LC11..VM1": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC11..VM2": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC11..VM3": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC12..LOG": {
+      "rate_hz": 0.0
+    },
+    "ZQ.LC12..VM1": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC12..VM2": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC12..VM3": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC13..LOG": {
+      "rate_hz": 0.0
+    },
+    "ZQ.LC13..VM1": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC13..VM2": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC13..VM3": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC14..LOG": {
+      "rate_hz": 0.0
+    },
+    "ZQ.LC14..VM1": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC14..VM2": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC14..VM3": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC15..LOG": {
+      "rate_hz": 0.0
+    },
+    "ZQ.LC15..VM1": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC15..VM2": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC15..VM3": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC16..LOG": {
+      "rate_hz": 0.0
+    },
+    "ZQ.LC16..VM1": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC16..VM2": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC16..VM3": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC17..LOG": {
+      "rate_hz": 0.0
+    },
+    "ZQ.LC17..VM1": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC17..VM2": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC17..VM3": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC18..LOG": {
+      "rate_hz": 0.0
+    },
+    "ZQ.LC18..VM1": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC18..VM2": {
+      "rate_hz": 0.1
+    },
+    "ZQ.LC18..VM3": {
+      "rate_hz": 0.1
+    },
+    "GS.OK020.20.HNE": {
+      "rate_hz": 200.0
+    },
+    "GS.OK020.20.HNN": {
+      "rate_hz": 200.0
+    },
+    "GS.OK020.20.HNZ": {
+      "rate_hz": 200.0
+    },
+    "GS.OK021.20.HNE": {
+      "rate_hz": 200.0
+    },
+    "GS.OK021.20.HNN": {
+      "rate_hz": 200.0
+    },
+    "GS.OK021.20.HNZ": {
+      "rate_hz": 200.0
+    },
+    "GS.OK022.20.HNE": {
+      "rate_hz": 200.0
+    },
+    "GS.OK022.20.HNN": {
+      "rate_hz": 200.0
+    },
+    "GS.OK022.20.HNZ": {
+      "rate_hz": 200.0
+    },
+    "TA.V35A..ACE": {
+      "rate_hz": 0.0
+    },
+    "TA.V35A..LCE": {
+      "rate_hz": 1.0
+    },
+    "TA.V35A..LCQ": {
+      "rate_hz": 1.0
+    },
+    "TA.V35A..LHE": {
+      "rate_hz": 1.0
+    },
+    "TA.V35A..LHN": {
+      "rate_hz": 1.0
+    },
+    "TA.V35A..LHZ": {
+      "rate_hz": 1.0
+    },
+    "TA.V35A..LOG": {
+      "rate_hz": 0.0
+    },
+    "TA.V35A..OCF": {
+      "rate_hz": 0.0
+    },
+    "TA.V35A..UHE": {
+      "rate_hz": 0.01
+    },
+    "TA.V35A..UHN": {
+      "rate_hz": 0.01
+    },
+    "TA.V35A..UHZ": {
+      "rate_hz": 0.01
+    },
+    "TA.V35A..VCO": {
+      "rate_hz": 0.1
+    },
+    "TA.V35A..VEA": {
+      "rate_hz": 0.1
+    },
+    "TA.V35A..VEC": {
+      "rate_hz": 0.1
+    },
+    "TA.V35A..VEP": {
+      "rate_hz": 0.1
+    },
+    "TA.V35A..VHE": {
+      "rate_hz": 0.1
+    },
+    "TA.V35A..VHN": {
+      "rate_hz": 0.1
+    },
+    "TA.V35A..VHZ": {
+      "rate_hz": 0.1
+    },
+    "TA.V35A..VKI": {
+      "rate_hz": 0.1
+    },
+    "TA.V35A..VM0": {
+      "rate_hz": 0.1
+    },
+    "TA.V35A..VM1": {
+      "rate_hz": 0.1
+    },
+    "TA.V35A..VM2": {
+      "rate_hz": 0.1
+    },
+    "TA.V35A..VM3": {
+      "rate_hz": 0.1
+    },
+    "TA.V35A..VM4": {
+      "rate_hz": 0.1
+    },
+    "TA.V35A..VM5": {
+      "rate_hz": 0.1
+    },
+    "TA.V35A..VM6": {
+      "rate_hz": 0.1
+    },
+    "TA.V35A..VPB": {
+      "rate_hz": 0.1
+    },
+    "TA.V35A.EP.LCE": {
+      "rate_hz": 1.0
+    },
+    "TA.V35A.EP.LCO": {
+      "rate_hz": 1.0
+    },
+    "TA.V35A.EP.LDM": {
+      "rate_hz": 1.0
+    },
+    "TA.V35A.EP.LEP": {
+      "rate_hz": 1.0
+    },
+    "TA.V35A.EP.LIM": {
+      "rate_hz": 1.0
+    },
+    "TA.V35A.EP.LKM": {
+      "rate_hz": 1.0
+    },
+    "TA.W35A..ACE": {
+      "rate_hz": 0.0
+    },
+    "TA.W35A..LCE": {
+      "rate_hz": 1.0
+    },
+    "TA.W35A..LCQ": {
+      "rate_hz": 1.0
+    },
+    "TA.W35A..LHE": {
+      "rate_hz": 1.0
+    },
+    "TA.W35A..LHN": {
+      "rate_hz": 1.0
+    },
+    "TA.W35A..LHZ": {
+      "rate_hz": 1.0
+    },
+    "TA.W35A..LOG": {
+      "rate_hz": 0.0
+    },
+    "TA.W35A..OCF": {
+      "rate_hz": 0.0
+    },
+    "TA.W35A..UHE": {
+      "rate_hz": 0.01
+    },
+    "TA.W35A..UHN": {
+      "rate_hz": 0.01
+    },
+    "TA.W35A..UHZ": {
+      "rate_hz": 0.01
+    },
+    "TA.W35A..VCO": {
+      "rate_hz": 0.1
+    },
+    "TA.W35A..VEA": {
+      "rate_hz": 0.1
+    },
+    "TA.W35A..VEC": {
+      "rate_hz": 0.1
+    },
+    "TA.W35A..VEP": {
+      "rate_hz": 0.1
+    },
+    "TA.W35A..VHE": {
+      "rate_hz": 0.1
+    },
+    "TA.W35A..VHN": {
+      "rate_hz": 0.1
+    },
+    "TA.W35A..VHZ": {
+      "rate_hz": 0.1
+    },
+    "TA.W35A..VKI": {
+      "rate_hz": 0.1
+    },
+    "TA.W35A..VM0": {
+      "rate_hz": 0.1
+    },
+    "TA.W35A..VM1": {
+      "rate_hz": 0.1
+    },
+    "TA.W35A..VM2": {
+      "rate_hz": 0.1
+    },
+    "TA.W35A..VM3": {
+      "rate_hz": 0.1
+    },
+    "TA.W35A..VM4": {
+      "rate_hz": 0.1
+    },
+    "TA.W35A..VM5": {
+      "rate_hz": 0.1
+    },
+    "TA.W35A..VM6": {
+      "rate_hz": 0.1
+    },
+    "TA.W35A..VPB": {
+      "rate_hz": 0.1
+    },
+    "TA.W35A.EP.LCE": {
+      "rate_hz": 1.0
+    },
+    "TA.W35A.EP.LCO": {
+      "rate_hz": 1.0
+    },
+    "TA.W35A.EP.LDM": {
+      "rate_hz": 1.0
+    },
+    "TA.W35A.EP.LEP": {
+      "rate_hz": 1.0
+    },
+    "TA.W35A.EP.LIM": {
+      "rate_hz": 1.0
+    },
+    "TA.W35A.EP.LKM": {
+      "rate_hz": 1.0
+    },
+    "TA.W36A..ACE": {
+      "rate_hz": 0.0
+    },
+    "TA.W36A..LCE": {
+      "rate_hz": 1.0
+    },
+    "TA.W36A..LCQ": {
+      "rate_hz": 1.0
+    },
+    "TA.W36A..LHE": {
+      "rate_hz": 1.0
+    },
+    "TA.W36A..LHN": {
+      "rate_hz": 1.0
+    },
+    "TA.W36A..LHZ": {
+      "rate_hz": 1.0
+    },
+    "TA.W36A..LOG": {
+      "rate_hz": 0.0
+    },
+    "TA.W36A..OCF": {
+      "rate_hz": 0.0
+    },
+    "TA.W36A..UHE": {
+      "rate_hz": 0.01
+    },
+    "TA.W36A..UHN": {
+      "rate_hz": 0.01
+    },
+    "TA.W36A..UHZ": {
+      "rate_hz": 0.01
+    },
+    "TA.W36A..VCO": {
+      "rate_hz": 0.1
+    },
+    "TA.W36A..VEA": {
+      "rate_hz": 0.1
+    },
+    "TA.W36A..VEC": {
+      "rate_hz": 0.1
+    },
+    "TA.W36A..VEP": {
+      "rate_hz": 0.1
+    },
+    "TA.W36A..VHE": {
+      "rate_hz": 0.1
+    },
+    "TA.W36A..VHN": {
+      "rate_hz": 0.1
+    },
+    "TA.W36A..VHZ": {
+      "rate_hz": 0.1
+    },
+    "TA.W36A..VKI": {
+      "rate_hz": 0.1
+    },
+    "TA.W36A..VM0": {
+      "rate_hz": 0.1
+    },
+    "TA.W36A..VM1": {
+      "rate_hz": 0.1
+    },
+    "TA.W36A..VM2": {
+      "rate_hz": 0.1
+    },
+    "TA.W36A..VM3": {
+      "rate_hz": 0.1
+    },
+    "TA.W36A..VM4": {
+      "rate_hz": 0.1
+    },
+    "TA.W36A..VM5": {
+      "rate_hz": 0.1
+    },
+    "TA.W36A..VM6": {
+      "rate_hz": 0.1
+    },
+    "TA.W36A..VPB": {
+      "rate_hz": 0.1
+    },
+    "TA.W36A.EP.LCE": {
+      "rate_hz": 1.0
+    },
+    "TA.W36A.EP.LCO": {
+      "rate_hz": 1.0
+    },
+    "TA.W36A.EP.LDM": {
+      "rate_hz": 1.0
+    },
+    "TA.W36A.EP.LEP": {
+      "rate_hz": 1.0
+    },
+    "TA.W36A.EP.LIM": {
+      "rate_hz": 1.0
+    },
+    "TA.W36A.EP.LKM": {
+      "rate_hz": 1.0
+    },
+    "TA.V36A..ACE": {
+      "rate_hz": 0.0
+    },
+    "TA.V36A..LCE": {
+      "rate_hz": 1.0
+    },
+    "TA.V36A..LCQ": {
+      "rate_hz": 1.0
+    },
+    "TA.V36A..LHE": {
+      "rate_hz": 1.0
+    },
+    "TA.V36A..LHN": {
+      "rate_hz": 1.0
+    },
+    "TA.V36A..LHZ": {
+      "rate_hz": 1.0
+    },
+    "TA.V36A..LOG": {
+      "rate_hz": 0.0
+    },
+    "TA.V36A..OCF": {
+      "rate_hz": 0.0
+    },
+    "TA.V36A..UHE": {
+      "rate_hz": 0.01
+    },
+    "TA.V36A..UHN": {
+      "rate_hz": 0.01
+    },
+    "TA.V36A..UHZ": {
+      "rate_hz": 0.01
+    },
+    "TA.V36A..VCO": {
+      "rate_hz": 0.1
+    },
+    "TA.V36A..VEA": {
+      "rate_hz": 0.1
+    },
+    "TA.V36A..VEC": {
+      "rate_hz": 0.1
+    },
+    "TA.V36A..VEP": {
+      "rate_hz": 0.1
+    },
+    "TA.V36A..VHE": {
+      "rate_hz": 0.1
+    },
+    "TA.V36A..VHN": {
+      "rate_hz": 0.1
+    },
+    "TA.V36A..VHZ": {
+      "rate_hz": 0.1
+    },
+    "TA.V36A..VKI": {
+      "rate_hz": 0.1
+    },
+    "TA.V36A..VM0": {
+      "rate_hz": 0.1
+    },
+    "TA.V36A..VM1": {
+      "rate_hz": 0.1
+    },
+    "TA.V36A..VM2": {
+      "rate_hz": 0.1
+    },
+    "TA.V36A..VM3": {
+      "rate_hz": 0.1
+    },
+    "TA.V36A..VM4": {
+      "rate_hz": 0.1
+    },
+    "TA.V36A..VM5": {
+      "rate_hz": 0.1
+    },
+    "TA.V36A..VM6": {
+      "rate_hz": 0.1
+    },
+    "TA.V36A..VPB": {
+      "rate_hz": 0.1
+    },
+    "TA.V36A.EP.LCE": {
+      "rate_hz": 1.0
+    },
+    "TA.V36A.EP.LCO": {
+      "rate_hz": 1.0
+    },
+    "TA.V36A.EP.LDM": {
+      "rate_hz": 1.0
+    },
+    "TA.V36A.EP.LEP": {
+      "rate_hz": 1.0
+    },
+    "TA.V36A.EP.LIM": {
+      "rate_hz": 1.0
+    },
+    "TA.V36A.EP.LKM": {
+      "rate_hz": 1.0
+    },
+    "TA.U35A..ACE": {
+      "rate_hz": 0.0
+    },
+    "TA.U35A..LCE": {
+      "rate_hz": 1.0
+    },
+    "TA.U35A..LCQ": {
+      "rate_hz": 1.0
+    },
+    "TA.U35A..LHE": {
+      "rate_hz": 1.0
+    },
+    "TA.U35A..LHN": {
+      "rate_hz": 1.0
+    },
+    "TA.U35A..LHZ": {
+      "rate_hz": 1.0
+    },
+    "TA.U35A..LOG": {
+      "rate_hz": 0.0
+    },
+    "TA.U35A..OCF": {
+      "rate_hz": 0.0
+    },
+    "TA.U35A..UHE": {
+      "rate_hz": 0.01
+    },
+    "TA.U35A..UHN": {
+      "rate_hz": 0.01
+    },
+    "TA.U35A..UHZ": {
+      "rate_hz": 0.01
+    },
+    "TA.U35A..VCO": {
+      "rate_hz": 0.1
+    },
+    "TA.U35A..VEA": {
+      "rate_hz": 0.1
+    },
+    "TA.U35A..VEC": {
+      "rate_hz": 0.1
+    },
+    "TA.U35A..VEP": {
+      "rate_hz": 0.1
+    },
+    "TA.U35A..VHE": {
+      "rate_hz": 0.1
+    },
+    "TA.U35A..VHN": {
+      "rate_hz": 0.1
+    },
+    "TA.U35A..VHZ": {
+      "rate_hz": 0.1
+    },
+    "TA.U35A..VKI": {
+      "rate_hz": 0.1
+    },
+    "TA.U35A..VM0": {
+      "rate_hz": 0.1
+    },
+    "TA.U35A..VM1": {
+      "rate_hz": 0.1
+    },
+    "TA.U35A..VM2": {
+      "rate_hz": 0.1
+    },
+    "TA.U35A..VM3": {
+      "rate_hz": 0.1
+    },
+    "TA.U35A..VM4": {
+      "rate_hz": 0.1
+    },
+    "TA.U35A..VM5": {
+      "rate_hz": 0.1
+    },
+    "TA.U35A..VM6": {
+      "rate_hz": 0.1
+    },
+    "TA.U35A..VPB": {
+      "rate_hz": 0.1
+    },
+    "TA.U35A.EP.LCE": {
+      "rate_hz": 1.0
+    },
+    "TA.U35A.EP.LCO": {
+      "rate_hz": 1.0
+    },
+    "TA.U35A.EP.LDM": {
+      "rate_hz": 1.0
+    },
+    "TA.U35A.EP.LEP": {
+      "rate_hz": 1.0
+    },
+    "TA.U35A.EP.LIM": {
+      "rate_hz": 1.0
+    },
+    "TA.U35A.EP.LKM": {
+      "rate_hz": 1.0
+    },
+    "TA.TUL1..ACE": {
+      "rate_hz": 0.0
+    },
+    "TA.TUL1..LCE": {
+      "rate_hz": 1.0
+    },
+    "TA.TUL1..LCQ": {
+      "rate_hz": 1.0
+    },
+    "TA.TUL1..LHE": {
+      "rate_hz": 1.0
+    },
+    "TA.TUL1..LHN": {
+      "rate_hz": 1.0
+    },
+    "TA.TUL1..LHZ": {
+      "rate_hz": 1.0
+    },
+    "TA.TUL1..LOG": {
+      "rate_hz": 0.0
+    },
+    "TA.TUL1..OCF": {
+      "rate_hz": 0.0
+    },
+    "TA.TUL1..UHE": {
+      "rate_hz": 0.01
+    },
+    "TA.TUL1..UHN": {
+      "rate_hz": 0.01
+    },
+    "TA.TUL1..UHZ": {
+      "rate_hz": 0.01
+    },
+    "TA.TUL1..VCO": {
+      "rate_hz": 0.1
+    },
+    "TA.TUL1..VEA": {
+      "rate_hz": 0.1
+    },
+    "TA.TUL1..VEC": {
+      "rate_hz": 0.1
+    },
+    "TA.TUL1..VEP": {
+      "rate_hz": 0.1
+    },
+    "TA.TUL1..VHE": {
+      "rate_hz": 0.1
+    },
+    "TA.TUL1..VHN": {
+      "rate_hz": 0.1
+    },
+    "TA.TUL1..VHZ": {
+      "rate_hz": 0.1
+    },
+    "TA.TUL1..VKI": {
+      "rate_hz": 0.1
+    },
+    "TA.TUL1..VM0": {
+      "rate_hz": 0.1
+    },
+    "TA.TUL1..VM1": {
+      "rate_hz": 0.1
+    },
+    "TA.TUL1..VM2": {
+      "rate_hz": 0.1
+    },
+    "TA.TUL1..VM3": {
+      "rate_hz": 0.1
+    },
+    "TA.TUL1..VM4": {
+      "rate_hz": 0.1
+    },
+    "TA.TUL1..VM5": {
+      "rate_hz": 0.1
+    },
+    "TA.TUL1..VM6": {
+      "rate_hz": 0.1
+    },
+    "TA.TUL1..VPB": {
+      "rate_hz": 0.1
+    },
+    "TA.X36A..ACE": {
+      "rate_hz": 0.0
+    },
+    "TA.X36A..LCE": {
+      "rate_hz": 1.0
+    },
+    "TA.X36A..LCQ": {
+      "rate_hz": 1.0
+    },
+    "TA.X36A..LHE": {
+      "rate_hz": 1.0
+    },
+    "TA.X36A..LHN": {
+      "rate_hz": 1.0
+    },
+    "TA.X36A..LHZ": {
+      "rate_hz": 1.0
+    },
+    "TA.X36A..LOG": {
+      "rate_hz": 0.0
+    },
+    "TA.X36A..OCF": {
+      "rate_hz": 0.0
+    },
+    "TA.X36A..UHE": {
+      "rate_hz": 0.01
+    },
+    "TA.X36A..UHN": {
+      "rate_hz": 0.01
+    },
+    "TA.X36A..UHZ": {
+      "rate_hz": 0.01
+    },
+    "TA.X36A..VCO": {
+      "rate_hz": 0.1
+    },
+    "TA.X36A..VEA": {
+      "rate_hz": 0.1
+    },
+    "TA.X36A..VEC": {
+      "rate_hz": 0.1
+    },
+    "TA.X36A..VEP": {
+      "rate_hz": 0.1
+    },
+    "TA.X36A..VHE": {
+      "rate_hz": 0.1
+    },
+    "TA.X36A..VHN": {
+      "rate_hz": 0.1
+    },
+    "TA.X36A..VHZ": {
+      "rate_hz": 0.1
+    },
+    "TA.X36A..VKI": {
+      "rate_hz": 0.1
+    },
+    "TA.X36A..VM0": {
+      "rate_hz": 0.1
+    },
+    "TA.X36A..VM1": {
+      "rate_hz": 0.1
+    },
+    "TA.X36A..VM2": {
+      "rate_hz": 0.1
+    },
+    "TA.X36A..VM3": {
+      "rate_hz": 0.1
+    },
+    "TA.X36A..VM4": {
+      "rate_hz": 0.1
+    },
+    "TA.X36A..VM5": {
+      "rate_hz": 0.1
+    },
+    "TA.X36A..VM6": {
+      "rate_hz": 0.1
+    },
+    "TA.X36A..VPB": {
+      "rate_hz": 0.1
+    },
+    "TA.X36A.EP.LCE": {
+      "rate_hz": 1.0
+    },
+    "TA.X36A.EP.LCO": {
+      "rate_hz": 1.0
+    },
+    "TA.X36A.EP.LDM": {
+      "rate_hz": 1.0
+    },
+    "TA.X36A.EP.LEP": {
+      "rate_hz": 1.0
+    },
+    "TA.X36A.EP.LIM": {
+      "rate_hz": 1.0
+    },
+    "TA.X36A.EP.LKM": {
+      "rate_hz": 1.0
+    },
+    "TA.X35A..ACE": {
+      "rate_hz": 0.0
+    },
+    "TA.X35A..LCE": {
+      "rate_hz": 1.0
+    },
+    "TA.X35A..LCQ": {
+      "rate_hz": 1.0
+    },
+    "TA.X35A..LHE": {
+      "rate_hz": 1.0
+    },
+    "TA.X35A..LHN": {
+      "rate_hz": 1.0
+    },
+    "TA.X35A..LHZ": {
+      "rate_hz": 1.0
+    },
+    "TA.X35A..LOG": {
+      "rate_hz": 0.0
+    },
+    "TA.X35A..OCF": {
+      "rate_hz": 0.0
+    },
+    "TA.X35A..UHE": {
+      "rate_hz": 0.01
+    },
+    "TA.X35A..UHN": {
+      "rate_hz": 0.01
+    },
+    "TA.X35A..UHZ": {
+      "rate_hz": 0.01
+    },
+    "TA.X35A..VCO": {
+      "rate_hz": 0.1
+    },
+    "TA.X35A..VEA": {
+      "rate_hz": 0.1
+    },
+    "TA.X35A..VEC": {
+      "rate_hz": 0.1
+    },
+    "TA.X35A..VEP": {
+      "rate_hz": 0.1
+    },
+    "TA.X35A..VHE": {
+      "rate_hz": 0.1
+    },
+    "TA.X35A..VHN": {
+      "rate_hz": 0.1
+    },
+    "TA.X35A..VHZ": {
+      "rate_hz": 0.1
+    },
+    "TA.X35A..VKI": {
+      "rate_hz": 0.1
+    },
+    "TA.X35A..VM0": {
+      "rate_hz": 0.1
+    },
+    "TA.X35A..VM1": {
+      "rate_hz": 0.1
+    },
+    "TA.X35A..VM2": {
+      "rate_hz": 0.1
+    },
+    "TA.X35A..VM3": {
+      "rate_hz": 0.1
+    },
+    "TA.X35A..VM4": {
+      "rate_hz": 0.1
+    },
+    "TA.X35A..VM5": {
+      "rate_hz": 0.1
+    },
+    "TA.X35A..VM6": {
+      "rate_hz": 0.1
+    },
+    "TA.X35A..VPB": {
+      "rate_hz": 0.1
+    },
+    "TA.X35A.EP.LCE": {
+      "rate_hz": 1.0
+    },
+    "TA.X35A.EP.LCO": {
+      "rate_hz": 1.0
+    },
+    "TA.X35A.EP.LDM": {
+      "rate_hz": 1.0
+    },
+    "TA.X35A.EP.LEP": {
+      "rate_hz": 1.0
+    },
+    "TA.X35A.EP.LIM": {
+      "rate_hz": 1.0
+    },
+    "TA.X35A.EP.LKM": {
+      "rate_hz": 1.0
+    },
+    "TA.W37B..ACE": {
+      "rate_hz": 0.0
+    },
+    "TA.W37B..LCE": {
+      "rate_hz": 1.0
+    },
+    "TA.W37B..LCQ": {
+      "rate_hz": 1.0
+    },
+    "TA.W37B..LHE": {
+      "rate_hz": 1.0
+    },
+    "TA.W37B..LHN": {
+      "rate_hz": 1.0
+    },
+    "TA.W37B..LHZ": {
+      "rate_hz": 1.0
+    },
+    "TA.W37B..LOG": {
+      "rate_hz": 0.0
+    },
+    "TA.W37B..OCF": {
+      "rate_hz": 0.0
+    },
+    "TA.W37B..UHE": {
+      "rate_hz": 0.01
+    },
+    "TA.W37B..UHN": {
+      "rate_hz": 0.01
+    },
+    "TA.W37B..UHZ": {
+      "rate_hz": 0.01
+    },
+    "TA.W37B..VCO": {
+      "rate_hz": 0.1
+    },
+    "TA.W37B..VEA": {
+      "rate_hz": 0.1
+    },
+    "TA.W37B..VEC": {
+      "rate_hz": 0.1
+    },
+    "TA.W37B..VEP": {
+      "rate_hz": 0.1
+    },
+    "TA.W37B..VHE": {
+      "rate_hz": 0.1
+    },
+    "TA.W37B..VHN": {
+      "rate_hz": 0.1
+    },
+    "TA.W37B..VHZ": {
+      "rate_hz": 0.1
+    },
+    "TA.W37B..VKI": {
+      "rate_hz": 0.1
+    },
+    "TA.W37B..VM0": {
+      "rate_hz": 0.1
+    },
+    "TA.W37B..VM1": {
+      "rate_hz": 0.1
+    },
+    "TA.W37B..VM2": {
+      "rate_hz": 0.1
+    },
+    "TA.W37B..VM3": {
+      "rate_hz": 0.1
+    },
+    "TA.W37B..VM4": {
+      "rate_hz": 0.1
+    },
+    "TA.W37B..VM5": {
+      "rate_hz": 0.1
+    },
+    "TA.W37B..VM6": {
+      "rate_hz": 0.1
+    },
+    "TA.W37B..VPB": {
+      "rate_hz": 0.1
+    },
+    "TA.W37B.EP.BDF": {
+      "rate_hz": 40.0
+    },
+    "TA.W37B.EP.BDO": {
+      "rate_hz": 40.0
+    },
+    "TA.W37B.EP.LCE": {
+      "rate_hz": 1.0
+    },
+    "TA.W37B.EP.LCO": {
+      "rate_hz": 1.0
+    },
+    "TA.W37B.EP.LDF": {
+      "rate_hz": 1.0
+    },
+    "TA.W37B.EP.LDM": {
+      "rate_hz": 1.0
+    },
+    "TA.W37B.EP.LDO": {
+      "rate_hz": 1.0
+    },
+    "TA.W37B.EP.LEP": {
+      "rate_hz": 1.0
+    },
+    "TA.W37B.EP.LIM": {
+      "rate_hz": 1.0
+    },
+    "TA.W37B.EP.LKM": {
+      "rate_hz": 1.0
+    }
+  }
+}

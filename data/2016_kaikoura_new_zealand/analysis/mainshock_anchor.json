@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "case_id": "2016_kaikoura_new_zealand",
+  "key": "anchor",
+  "anchor": {
+    "event_id": "2016p913880",
+    "time_utc": "2016-12-04T03:15:47Z",
+    "magnitude": 5.5,
+    "magnitude_type": "M",
+    "latitude": -41.69,
+    "longitude": 174.236,
+    "depth_km": 10.7
+  },
+  "label": "M 5.5",
+  "sources": [
+    {
+      "role": "primary",
+      "path": "data/catalogs/GEONET_2016_KAIKOURA/GEONET_2016_KAIKOURA__catalog_operational_full.txt",
+      "sha256": "5a21b838538b9da69fdf0be48c6e7db3e398822f5f5b4b11a2984fac4d7a48de",
+      "provider": "GeoNet operational catalogue (GNS), in-window ranking"
+    },
+    {
+      "role": "cross_check",
+      "path": "data/catalogs/LANZA2019_GL082780/raw/grl59060-sup-0003-ds01.xml",
+      "sha256": "c87a16de4fb28be7cd873b03e93b3d410c6e2237d7ed443affbe798670fbd478",
+      "provider": "Lanza et al. (2019) relocated QuakeML, in-window ranking"
+    }
+  ],
+  "cross_check": {
+    "lanza_event_id": "2016p913880",
+    "lanza_origin_time_utc": "2016-12-04T03:15:47.170000Z",
+    "origin_time_delta_seconds": 0.17,
+    "latitude_delta_deg": -0.048017,
+    "longitude_delta_deg": -0.010121,
+    "depth_delta_km": 2.707,
+    "lanza_magnitude": 5.8,
+    "lanza_magnitude_type": "M",
+    "in_window_events": {
+      "operational_full": 1507,
+      "lanza_quakeml": 123
+    }
+  },
+  "generated_utc": "2026-10-11T03:09:09.879519+00:00",
+  "note": "Anchor parameters for figure scripts. The v1 window deliberately excludes the 2016-11-13 M7.8 mainshock, so the anchor is the largest in-window event (an aftershock near Seddon/Cape Campbell). Both staged sources rank the same EventID first; the operational M 5.5 is kept as the anchor and the relocated M 5.8 is recorded but not substituted."
+}

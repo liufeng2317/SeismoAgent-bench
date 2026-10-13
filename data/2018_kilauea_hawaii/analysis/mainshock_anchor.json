@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "case_id": "2018_kilauea_hawaii",
+  "key": "mainshock",
+  "anchor": {
+    "event_id": "hv70116556",
+    "time_utc": "2018-05-04T22:32:54.650000Z",
+    "magnitude": 6.9,
+    "magnitude_type": "mw",
+    "latitude": 19.3181667,
+    "longitude": -154.9996667,
+    "depth_km": 5.81,
+    "status": "reviewed"
+  },
+  "label": "M 6.9",
+  "sources": [
+    {
+      "role": "primary",
+      "provider": "USGS ComCat / HVO (single-event query)",
+      "url": "https://earthquake.usgs.gov/fdsnws/event/1/query",
+      "parameters": {
+        "format": "geojson",
+        "starttime": "2018-05-04T22:00:00",
+        "endtime": "2018-05-04T23:00:00",
+        "minmagnitude": "6.0",
+        "maxmagnitude": "7.5",
+        "minlatitude": "19.0",
+        "maxlatitude": "20.0",
+        "minlongitude": "-156.0",
+        "maxlongitude": "-154.0"
+      },
+      "retrieved_utc": "2026-10-11T01:52:29.314071+00:00"
+    }
+  ],
+  "cross_check": {
+    "wei2022": {
+      "source": "data/catalogs/WEI2022_EA001979/WEI2022_EA001979__catalog_S1.txt",
+      "sha256": "f95ae0b17eb519c169c17248b9986eb15885c2a42ca28102a1d25ca7a28eb339",
+      "time_utc": "2018-05-04T22:32:53.699593",
+      "time_delta_s": 0.950407,
+      "latitude": 19.345885,
+      "longitude": -154.979121,
+      "depth_km": 0.01709,
+      "magnitude": 5.31,
+      "magnitude_type": "l"
+    },
+    "baseline_snapshot": {
+      "path": "data/catalogs/USGS_HVO_COMCAT_2018/USGS_HVO_COMCAT_2018__catalog_operational_full.csv",
+      "sha256": "b80a2553a29209c5ff2c46346f599e80362ef55578ad797491a784779ea1b41c",
+      "note": "The Mw 6.9 event is absent from the staged operational baseline snapshot (max magnitude 5.4)."
+    }
+  },
+  "generated_utc": "2026-10-11T01:52:31.566519+00:00",
+  "note": "Anchor parameters for figure scripts. The staged Wei et al. (2022) detection catalog contains the same origin time; its location and local magnitude (5.31 l) are that catalog's own solution and are recorded as a cross-check only."
+}

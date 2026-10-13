@@ -5,7 +5,8 @@
 | [analysis/MAGNA2020_analysis.md](analysis/MAGNA2020_analysis.md) | 案例科学分析、参考角色和待办事项 |
 | [analysis/processing.yaml](analysis/processing.yaml) | 产品声明与窗口状态 |
 | [data/catalogs/](data/catalogs/) | 各来源目录、说明、处理脚本与分析产物 |
-| `data/waveforms/` | 本地连续波形预留位置；不纳入 Git |
+| `data/waveforms/` | 波形存储 symlink，指向外部档案 `/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2020_magna_utah/waveforms/`；不纳入 Git |
+| [scripts/observations/](scripts/observations/README.md) | 案例级观测数据准备：可用性探针审计、台站清单提取、元数据获取、波形清单与下载 |
 | [references/](references/) | 文献、附件、阅读记录和结构化提取 |
 
 区分拾取记录、重定位事件、ISC 对比档案和官方快照。

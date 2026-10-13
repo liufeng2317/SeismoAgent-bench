@@ -74,8 +74,13 @@ the case-level tables above remain the benchmark decision record.
 - [x] Preserve the McMahon 5,446-event release separately; reconcile the paper's 5,262 filtered subset only through an explicit event/quality crosswalk.
 - [x] Extract McMahon paper/catalog construction and local E/P schema.
 - [x] Extract Isken Table S3 paper/catalog construction and sparse-anchor role.
-- [ ] Confirm the station list and deployment dates from McMahon Table S1 and Isken Table S1.
-- [ ] Identify archive provenance for ZQ and NEIC waveform subsets.
+- [x] Confirm the station list: Table S1 is not retrievable (publisher blocked), so the
+  31-station set is reconstructed by rule (18 ZQ + 3 GS + 9 nearest TA + OK FNO) with
+  distance/pick evidence in the observation manifest; deployment dates come from the
+  EarthScope channel epochs. Isken Table S1 remains outstanding.
+- [x] Identify archive provenance for ZQ and NEIC waveform subsets: everything archives
+  at EarthScope, but ZQ LC01–LC08 (the paper's USGS NEIC subset) are metadata-only there —
+  dataselect returns 204 across their full deployment epochs (see Waveform archive status).
 - [ ] Subset all references to the same time and spatial window.
 - [ ] Record the primary reference's inclusion and uncertainty filters.
 - [ ] Acquire McMahon SI/Table S1–S2 and resolve P-record timestamp semantics.
@@ -96,6 +101,32 @@ The stable-network window is preferred for the core benchmark because the last t
 | Network condition | 31-station heterogeneous RAMP/USArray/Oklahoma network; use only channels available during the full window and retain deployment masks |
 | Waveform volume | Design upper bound: 25.71264 GB decimal (23.95 GiB) for 31 × 3 components × 100 Hz × int32 × 8 days continuous; actual volume is lower after gaps/channel filtering. |
 | Reference quality and role | Cochran: Q2 enhanced detection/location reference; McMahon filtered set: Q1 location/QC subset; Isken Table S3: Q1 local structural anchor, 13 events only |
+
+### Waveform archive status (2026-10-12)
+
+The reconstructed 31-station set was probed per channel-day (EarthScope dataselect,
+one-second samples at 00/06/12/18 UTC; `analysis/station_availability_probe.json`),
+then downloaded day-by-day with the exact-epoch plan
+(`scripts/observations/`, 744 requests → 552 day-files, ~7 GB on disk).
+
+- **23 of 31 stations are fully retrievable** from EarthScope: ZQ LC09–LC18
+  (250 Hz CN/DH), GS OK020–OK022 (100 Hz HH), OK FNO (100 Hz HH, with partial
+  availability on 11-14/11-16), and all 9 TA stations (40 Hz BH).
+- **ZQ LC01–LC08 are metadata-only at EarthScope.** Their channel epochs
+  (from 2011-11-06/07/08) and full responses exist, but dataselect returns
+  HTTP 204 for every request across the whole deployment span — the paper's
+  "USGS NEIC archives" subset was never deposited publicly (no alternate
+  network code exists; the only other LC01–LC08 hit is network SY synthetic
+  data). This is terminal archive evidence recorded in the download run, not
+  a retrieval failure; the 192 no-data requests are the paper trail.
+- Consequence for the benchmark condition: the dense local ring around the
+  epicentre keeps 10 RAMP (LC09–LC18, 1.6–15 km) + 3 GS stations; LC01–LC08
+  (1.0–8.3 km, the closest sites) exist only as StationXML. Station-level
+  evaluation must treat these eight as metadata-present/waveform-absent, and
+  any station-count comparison against the paper's 31 must carry this caveat.
+- ZQ.LC17 carries a placeholder latitude (exactly 35.0000) in EarthScope
+  metadata; its coordinates are flagged unverified (see the inventory's
+  metadata audit).
 
 ## Main risks
 

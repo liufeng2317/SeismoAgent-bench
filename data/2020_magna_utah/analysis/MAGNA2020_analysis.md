@@ -35,8 +35,11 @@ research products:
 
 Pang and Baker must remain separate tasks.  Pang used 39 stations/226 channels
 and explicitly did not use the 180-node deployment; Baker's release contains
-repeated P/S picks from 205 `UU` station codes and two `GS` codes.  A raw row
-count or station count cannot be compared across the two products.
+repeated P/S picks under 205 `UU` and 2 `GS` station codes, but roughly 175 of
+those `UU` codes are numeric identifiers from the temporary nodal deployment
+that the ISC release mislabels as network `UU` (EarthScope metadata has no such
+channels).  The permanent `UU` population is only the ~30 alphabetic codes, so
+a raw station count cannot be compared across the two products.
 
 ## Reference evaluation matrix
 

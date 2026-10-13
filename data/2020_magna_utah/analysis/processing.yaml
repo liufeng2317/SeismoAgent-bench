@@ -1,5 +1,22 @@
 case_id: 2020_magna_utah
 window_status: not_frozen
+scientific_design:
+  status: candidate_design_reference_audit_only
+  primary_question: Can an agent construct a usable catalog under a dense urban permanent-network
+    condition with pick-level references, without conflating permanent and nodal deployments?
+  candidate_window:
+    start_utc: '2020-03-18T00:00:00Z'
+    end_utc: '2020-03-26T00:00:00Z'
+    interval: half_open
+    status: exploratory_candidate_not_scientific_freeze
+    source: 8-day compact window covering the M5.7 mainshock (2020-03-18 13:09 UTC)
+      and early aftershocks; the full article processing span (2020-03-17 to
+      04-30) remains a separate large-volume option pending archive storage.
+  primary_input_condition: raw_waveforms_and_station_metadata
+  station_policy: availability_superset_candidate; stations selected by probe-audited
+    waveform presence (>=43/45 days) within 40 km of the mainshock, permanent UU
+    plus QB strong-motion populations; nodal/numeric codes and GS temporary
+    stations excluded; evaluation-time masking may subset toward the Pang rule
 products:
   - source_ref: BAKER2021_0220200316
     role: dense_pick_and_location_reference

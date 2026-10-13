@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "case_id": "2020_magna_utah",
+  "key": "mainshock",
+  "anchor": {
+    "event_id": "uu60363602",
+    "time_utc": "2020-03-18T13:09:31.530Z",
+    "magnitude": 5.7,
+    "magnitude_type": "mw",
+    "latitude": 40.751,
+    "longitude": -112.0783333,
+    "depth_km": 11.9,
+    "status": "reviewed"
+  },
+  "label": "M 5.7",
+  "sources": [
+    {
+      "role": "primary",
+      "path": "data/catalogs/USGS_UUSS_COMCAT_2020/USGS_UUSS_COMCAT_2020__catalog_operational_full.csv",
+      "sha256": "4766e5826688a92664ecedd7c9a968a425b3ab0635ea7803aa86f310b3dddc7a",
+      "provider": "USGS ANSS ComCat / UUSS operational baseline"
+    },
+    {
+      "role": "cross_check",
+      "path": "data/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_primary.txt",
+      "sha256": "e26957771d2ad607c610fd91d211eac3bb32297d8ec3225fe1d8e9a83d5cb48a",
+      "provider": "Pang et al. (2020) relocated primary catalog"
+    }
+  ],
+  "cross_check": {
+    "pang_origin_time_utc": "2020-03-18 13:09:31.530",
+    "time_matches": true,
+    "latitude_delta_deg": 0.0,
+    "longitude_delta_deg": 3.329999999834854e-05,
+    "depth_delta_km": 0.0,
+    "pang_magnitude": 5.67
+  },
+  "generated_utc": "2026-10-11T01:43:43.885518+00:00",
+  "note": "Anchor parameters for figure scripts; both staged rows refer to the same event (ComCat id uu60363602). The relocated catalog magnitude 5.67 is its own solution and is not substituted for the operational M 5.7."
+}

@@ -8,6 +8,21 @@ processing_policy:
   figure_format: png
   figure_dpi: 300
 window_status: not_frozen
+scientific_design:
+  status: candidate_design_reference_audit_only
+  primary_question: Can an agent detect and locate a Yellowstone swarm under a mixed
+    permanent/temporary network with template-lineage references?
+  candidate_window:
+    start_utc: '2017-06-11T00:00:00Z'
+    end_utc: '2017-06-19T00:00:00Z'
+    interval: half_open
+    status: exploratory_candidate_not_scientific_freeze
+    source: analysis/MAPLE2017_analysis.md frozen v1 benchmark window (retained as
+      exploratory audit history until this case freezes its own window)
+  primary_input_condition: raw_waveforms_and_station_metadata
+  station_policy: shelly_phase_manifest_candidate; 27 network-station pairs selected
+    by the phase release inside the window; channel/location availability verified
+    against EarthScope metadata, waveform availability not presumed
 catalogs:
 - source_ref: SHELLY2019_GL081607
   catalog_dir: data/catalogs/SHELLY2019_GL081607

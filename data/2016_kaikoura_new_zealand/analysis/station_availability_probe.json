@@ -1,0 +1,4972 @@
+{
+  "schema_version": 1,
+  "case_id": "2016_kaikoura_new_zealand",
+  "generated_utc": "2026-10-11T01:40:15.721090+00:00",
+  "method": "One-second dataselect samples at 00/06/12/18 UTC per channel-day, routed to the network-of-origin provider (NZ -> GeoNet, Z1 -> EarthScope); presence evidence only, not intra-day continuity.",
+  "window": {
+    "start_utc": "2016-12-01T00:00:00+00:00",
+    "end_utc": "2016-12-09T00:00:00+00:00",
+    "days": 8,
+    "samples_per_day": 4
+  },
+  "station_source": "data/waveforms/stations/lanza2019_table_s1_station_manifest.json",
+  "station_source_sha256": "1711333f28b6c60cd87305450e68b824ecc3a7ddc24ea7c266118a85ee770384",
+  "audit_scope": {
+    "families": [
+      "EH",
+      "HH",
+      "HN"
+    ],
+    "min_rate_hz": 100.0,
+    "excluded_channels": 150
+  },
+  "summary": {
+    "stations_probed": 66,
+    "channels_probed": 333,
+    "probes": 10656,
+    "probes_present": 6162,
+    "probes_no_data": 4493,
+    "probes_errors": 1,
+    "stations_full_window": 53
+  },
+  "stations": {
+    "AMCZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "ANWZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "BFZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "BHW": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 9,
+        "2016-12-06": 12,
+        "2016-12-07": 9,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "BSWZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 9
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "CAW": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "CMWZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 6,
+        "2016-12-06": 3,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": [
+        "2016-12-06"
+      ]
+    },
+    "CPWZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "CRSZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "CSCP": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "CSWB": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "DSZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "DUWZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 21,
+        "2016-12-03": 24,
+        "2016-12-04": 24,
+        "2016-12-05": 24,
+        "2016-12-06": 24,
+        "2016-12-07": 24,
+        "2016-12-08": 24
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "DVHZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "GVZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "HOWZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "KHZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 21,
+        "2016-12-03": 24,
+        "2016-12-04": 24,
+        "2016-12-05": 24,
+        "2016-12-06": 24,
+        "2016-12-07": 24,
+        "2016-12-08": 24
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "KIW": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "LREZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "LTW1A": {
+      "days_with_any_sample": 5,
+      "samples_per_day": {
+        "2016-12-04": 18,
+        "2016-12-05": 24,
+        "2016-12-06": 24,
+        "2016-12-07": 24,
+        "2016-12-08": 24
+      },
+      "missing_days": [
+        "2016-12-01",
+        "2016-12-02",
+        "2016-12-03"
+      ],
+      "partial_days": []
+    },
+    "LTW3": {
+      "days_with_any_sample": 2,
+      "samples_per_day": {
+        "2016-12-07": 9,
+        "2016-12-08": 12
+      },
+      "missing_days": [
+        "2016-12-01",
+        "2016-12-02",
+        "2016-12-03",
+        "2016-12-04",
+        "2016-12-05",
+        "2016-12-06"
+      ],
+      "partial_days": []
+    },
+    "LTZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "MQZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "MRNZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "MRZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "MSWZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "MTW": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "NNZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "OGWZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "OHWZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "OKCZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "OXZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "PAWZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "PLWZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "POWZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "PRHZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "PRWZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "QRZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "S002": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "S007": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "S012": {
+      "days_with_any_sample": 4,
+      "samples_per_day": {
+        "2016-12-05": 12,
+        "2016-12-06": 24,
+        "2016-12-07": 24,
+        "2016-12-08": 24
+      },
+      "missing_days": [
+        "2016-12-01",
+        "2016-12-02",
+        "2016-12-03",
+        "2016-12-04"
+      ],
+      "partial_days": []
+    },
+    "S018": {
+      "days_with_any_sample": 3,
+      "samples_per_day": {
+        "2016-12-06": 9,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [
+        "2016-12-01",
+        "2016-12-02",
+        "2016-12-03",
+        "2016-12-04",
+        "2016-12-05"
+      ],
+      "partial_days": []
+    },
+    "S021": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "S023": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "S029": {
+      "days_with_any_sample": 1,
+      "samples_per_day": {
+        "2016-12-08": 24
+      },
+      "missing_days": [
+        "2016-12-01",
+        "2016-12-02",
+        "2016-12-03",
+        "2016-12-04",
+        "2016-12-05",
+        "2016-12-06",
+        "2016-12-07"
+      ],
+      "partial_days": []
+    },
+    "S030": {
+      "days_with_any_sample": 1,
+      "samples_per_day": {
+        "2016-12-08": 18
+      },
+      "missing_days": [
+        "2016-12-01",
+        "2016-12-02",
+        "2016-12-03",
+        "2016-12-04",
+        "2016-12-05",
+        "2016-12-06",
+        "2016-12-07"
+      ],
+      "partial_days": []
+    },
+    "S034": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "S039": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "SEAS1": {
+      "days_with_any_sample": 6,
+      "samples_per_day": {
+        "2016-12-03": 6,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [
+        "2016-12-01",
+        "2016-12-02"
+      ],
+      "partial_days": []
+    },
+    "STAW": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "STRN1": {
+      "days_with_any_sample": 4,
+      "samples_per_day": {
+        "2016-12-05": 12,
+        "2016-12-06": 24,
+        "2016-12-07": 24,
+        "2016-12-08": 24
+      },
+      "missing_days": [
+        "2016-12-01",
+        "2016-12-02",
+        "2016-12-03",
+        "2016-12-04"
+      ],
+      "partial_days": []
+    },
+    "STRN2": {
+      "days_with_any_sample": 3,
+      "samples_per_day": {
+        "2016-12-06": 12,
+        "2016-12-07": 24,
+        "2016-12-08": 24
+      },
+      "missing_days": [
+        "2016-12-01",
+        "2016-12-02",
+        "2016-12-03",
+        "2016-12-04",
+        "2016-12-05"
+      ],
+      "partial_days": []
+    },
+    "STRN3": {
+      "days_with_any_sample": 3,
+      "samples_per_day": {
+        "2016-12-06": 18,
+        "2016-12-07": 24,
+        "2016-12-08": 24
+      },
+      "missing_days": [
+        "2016-12-01",
+        "2016-12-02",
+        "2016-12-03",
+        "2016-12-04",
+        "2016-12-05"
+      ],
+      "partial_days": []
+    },
+    "STRN4": {
+      "days_with_any_sample": 3,
+      "samples_per_day": {
+        "2016-12-06": 12,
+        "2016-12-07": 24,
+        "2016-12-08": 24
+      },
+      "missing_days": [
+        "2016-12-01",
+        "2016-12-02",
+        "2016-12-03",
+        "2016-12-04",
+        "2016-12-05"
+      ],
+      "partial_days": []
+    },
+    "STWC": {
+      "days_with_any_sample": 3,
+      "samples_per_day": {
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [
+        "2016-12-01",
+        "2016-12-02",
+        "2016-12-03",
+        "2016-12-04",
+        "2016-12-05"
+      ],
+      "partial_days": []
+    },
+    "TCW": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 21,
+        "2016-12-03": 24,
+        "2016-12-04": 24,
+        "2016-12-05": 24,
+        "2016-12-06": 24,
+        "2016-12-07": 24,
+        "2016-12-08": 24
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "THZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "TIWZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "TKNZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "TMWZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "TRWZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "TSZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "TUWZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 9,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "WAZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "WEL": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 24,
+        "2016-12-02": 24,
+        "2016-12-03": 24,
+        "2016-12-04": 24,
+        "2016-12-05": 24,
+        "2016-12-06": 24,
+        "2016-12-07": 24,
+        "2016-12-08": 24
+      },
+      "missing_days": [],
+      "partial_days": []
+    },
+    "WPHZ": {
+      "days_with_any_sample": 8,
+      "samples_per_day": {
+        "2016-12-01": 12,
+        "2016-12-02": 12,
+        "2016-12-03": 12,
+        "2016-12-04": 12,
+        "2016-12-05": 12,
+        "2016-12-06": 12,
+        "2016-12-07": 12,
+        "2016-12-08": 12
+      },
+      "missing_days": [],
+      "partial_days": []
+    }
+  },
+  "per_channel": {
+    "NZ.AMCZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2012-06-26T23:00:01Z",
+      "epoch_end": "2023-06-26T22:18:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.AMCZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2012-06-26T23:00:01Z",
+      "epoch_end": "2023-06-26T22:18:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.AMCZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2012-06-26T23:00:01Z",
+      "epoch_end": "2023-06-26T22:18:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.ANWZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-08-07T00:05:00Z",
+      "epoch_end": "2019-01-23T01:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.ANWZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-08-07T00:05:00Z",
+      "epoch_end": "2019-01-23T01:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.ANWZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-08-07T00:05:00Z",
+      "epoch_end": "2019-01-23T01:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.BFZ.10.HHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2015-10-08T03:00:00Z",
+      "epoch_end": "2021-04-29T00:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.BFZ.10.HHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2015-10-08T03:00:00Z",
+      "epoch_end": "2021-04-29T00:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.BFZ.10.HHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2015-10-08T03:00:00Z",
+      "epoch_end": "2021-04-29T00:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.BFZ.20.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2009-11-19T01:00:01Z",
+      "epoch_end": "2017-08-30T00:00:02Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.BFZ.20.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2009-11-19T01:00:01Z",
+      "epoch_end": "2017-08-30T00:00:02Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.BFZ.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2009-11-19T01:00:01Z",
+      "epoch_end": "2017-08-30T00:00:02Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.BHW.10.HHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-07-15T02:32:00Z",
+      "epoch_end": "2019-04-09T23:40:00Z",
+      "samples_present": 30,
+      "http_200": 30,
+      "no_data": 2,
+      "errors": 0
+    },
+    "NZ.BHW.10.HHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-07-15T02:32:00Z",
+      "epoch_end": "2019-04-09T23:40:00Z",
+      "samples_present": 30,
+      "http_200": 30,
+      "no_data": 2,
+      "errors": 0
+    },
+    "NZ.BHW.10.HHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-07-15T02:32:00Z",
+      "epoch_end": "2019-04-09T23:40:00Z",
+      "samples_present": 30,
+      "http_200": 30,
+      "no_data": 2,
+      "errors": 0
+    },
+    "NZ.BSWZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-12-08T00:00:01Z",
+      "epoch_end": "2020-05-27T21:11:00Z",
+      "samples_present": 31,
+      "http_200": 31,
+      "no_data": 1,
+      "errors": 0
+    },
+    "NZ.BSWZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-12-08T00:00:01Z",
+      "epoch_end": "2020-05-27T21:11:00Z",
+      "samples_present": 31,
+      "http_200": 31,
+      "no_data": 1,
+      "errors": 0
+    },
+    "NZ.BSWZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-12-08T00:00:01Z",
+      "epoch_end": "2020-05-27T21:11:00Z",
+      "samples_present": 31,
+      "http_200": 31,
+      "no_data": 1,
+      "errors": 0
+    },
+    "NZ.BSWZ.20.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-12-08T02:00:00Z",
+      "epoch_end": "2020-05-27T21:11:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.BSWZ.20.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-12-08T02:00:00Z",
+      "epoch_end": "2020-05-27T21:11:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.BSWZ.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-12-08T02:00:00Z",
+      "epoch_end": "2020-05-27T21:11:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.CAW.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2014-10-20T00:00:10Z",
+      "epoch_end": "2019-07-22T21:50:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.CAW.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2014-10-20T00:00:10Z",
+      "epoch_end": "2019-07-22T21:50:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.CAW.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2014-10-20T00:00:10Z",
+      "epoch_end": "2019-07-22T21:50:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.CECS.20.HN1": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2014-12-16T00:30:00Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.CECS.20.HN2": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2014-12-16T00:30:00Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.CECS.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2014-12-16T00:30:00Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.CMWZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-12-05T06:25:01Z",
+      "epoch_end": "2022-02-23T03:37:00Z",
+      "samples_present": 27,
+      "http_200": 27,
+      "no_data": 5,
+      "errors": 0
+    },
+    "NZ.CMWZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-12-05T06:25:01Z",
+      "epoch_end": "2022-02-23T03:37:00Z",
+      "samples_present": 27,
+      "http_200": 27,
+      "no_data": 5,
+      "errors": 0
+    },
+    "NZ.CMWZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-12-05T06:25:01Z",
+      "epoch_end": "2022-02-23T03:37:00Z",
+      "samples_present": 27,
+      "http_200": 27,
+      "no_data": 5,
+      "errors": 0
+    },
+    "NZ.CMWZ.20.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-12-05T06:30:00Z",
+      "epoch_end": "2020-01-29T00:00:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.CMWZ.20.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-12-05T06:30:00Z",
+      "epoch_end": "2020-01-29T00:00:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.CMWZ.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-12-05T06:30:00Z",
+      "epoch_end": "2020-01-29T00:00:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.CPWZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2009-07-07T01:00:00Z",
+      "epoch_end": "2023-02-09T23:53:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.CPWZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2009-07-07T01:00:00Z",
+      "epoch_end": "2023-02-09T23:53:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.CPWZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2009-07-07T01:00:00Z",
+      "epoch_end": "2023-02-09T23:53:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.CRSZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T05:20:01Z",
+      "epoch_end": "2021-07-20T23:23:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.CRSZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T05:20:01Z",
+      "epoch_end": "2021-07-20T23:23:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.CRSZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T05:20:01Z",
+      "epoch_end": "2021-07-20T23:23:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.CRSZ.20.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-11-15T05:20:01Z",
+      "epoch_end": "2018-08-14T23:10:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.CRSZ.20.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-11-15T05:20:01Z",
+      "epoch_end": "2018-08-14T23:10:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.CRSZ.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-11-15T05:20:01Z",
+      "epoch_end": "2018-08-14T23:10:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.DSZ.10.HHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-09T23:15:00Z",
+      "epoch_end": "2021-11-09T22:30:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.DSZ.10.HHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-09T23:15:00Z",
+      "epoch_end": "2021-11-09T22:30:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.DSZ.10.HHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-09T23:15:00Z",
+      "epoch_end": "2021-11-09T22:30:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.DSZ.21.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-11-09T23:15:00Z",
+      "epoch_end": "2019-11-14T02:25:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.DSZ.21.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-11-09T23:15:00Z",
+      "epoch_end": "2019-11-14T02:25:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.DSZ.21.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-11-09T23:15:00Z",
+      "epoch_end": "2019-11-14T02:25:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.DUWZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2012-02-29T02:01:00Z",
+      "epoch_end": "2023-06-15T20:22:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.DUWZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2012-02-29T02:01:00Z",
+      "epoch_end": "2023-06-15T20:22:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.DUWZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2012-02-29T02:01:00Z",
+      "epoch_end": "2023-06-15T20:22:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.DUWZ.20.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2012-02-08T00:05:01Z",
+      "epoch_end": "2023-06-15T20:22:00Z",
+      "samples_present": 27,
+      "http_200": 27,
+      "no_data": 5,
+      "errors": 0
+    },
+    "NZ.DUWZ.20.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2012-02-08T00:05:01Z",
+      "epoch_end": "2023-06-15T20:22:00Z",
+      "samples_present": 27,
+      "http_200": 27,
+      "no_data": 5,
+      "errors": 0
+    },
+    "NZ.DUWZ.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2012-02-08T00:05:01Z",
+      "epoch_end": "2023-06-15T20:22:00Z",
+      "samples_present": 27,
+      "http_200": 27,
+      "no_data": 5,
+      "errors": 0
+    },
+    "NZ.DVHZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-01-14T02:15:00Z",
+      "epoch_end": "2018-12-03T01:50:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.DVHZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-01-14T02:15:00Z",
+      "epoch_end": "2018-12-03T01:50:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.DVHZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-01-14T02:15:00Z",
+      "epoch_end": "2018-12-03T01:50:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.GVZ.10.HHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2012-12-04T05:00:00Z",
+      "epoch_end": "2022-10-11T22:57:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.GVZ.10.HHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2012-12-04T05:00:00Z",
+      "epoch_end": "2022-10-11T22:57:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.GVZ.10.HHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2012-12-04T05:00:00Z",
+      "epoch_end": "2022-10-11T22:57:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.GVZ.20.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-10-16T21:05:00Z",
+      "epoch_end": "2019-06-17T19:55:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.GVZ.20.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-10-16T21:05:00Z",
+      "epoch_end": "2019-06-17T19:55:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.GVZ.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-10-16T21:05:00Z",
+      "epoch_end": "2019-06-17T19:55:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.HOWZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2007-09-07T00:30:00Z",
+      "epoch_end": "2022-11-29T02:16:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.HOWZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2007-09-07T00:30:00Z",
+      "epoch_end": "2022-11-29T02:16:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.HOWZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2007-09-07T00:30:00Z",
+      "epoch_end": "2022-11-29T02:16:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.HSES.20.HN1": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-05-10T22:10:00Z",
+      "epoch_end": "2017-06-26T21:00:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.HSES.20.HN2": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-05-10T22:10:00Z",
+      "epoch_end": "2017-06-26T21:00:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.HSES.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-05-10T22:10:00Z",
+      "epoch_end": "2017-06-26T21:00:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.KARS.20.HN1": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-07-01T01:30:21Z",
+      "epoch_end": "2019-03-20T01:50:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.KARS.20.HN2": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-07-01T01:30:21Z",
+      "epoch_end": "2019-03-20T01:50:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.KARS.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-07-01T01:30:21Z",
+      "epoch_end": "2019-03-20T01:50:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.KEKS.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-12-01T00:05:00Z",
+      "epoch_end": "2018-01-14T20:26:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.KEKS.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-12-01T00:05:00Z",
+      "epoch_end": "2018-01-14T20:26:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.KEKS.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-12-01T00:05:00Z",
+      "epoch_end": "2018-01-14T20:26:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.KEKS.20.HN1": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-12-21T00:10:00Z",
+      "epoch_end": "2019-12-11T20:42:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.KEKS.20.HN2": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-12-21T00:10:00Z",
+      "epoch_end": "2019-12-11T20:42:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.KEKS.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-12-21T00:10:00Z",
+      "epoch_end": "2019-12-11T20:42:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.KHLS.20.HN1": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-10-31T23:10:00Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.KHLS.20.HN2": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-10-31T23:10:00Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.KHLS.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-10-31T23:10:00Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.KHZ.10.HHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2011-02-23T04:05:00Z",
+      "epoch_end": "2021-05-27T02:03:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.KHZ.10.HHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2011-02-23T04:05:00Z",
+      "epoch_end": "2021-05-27T02:03:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.KHZ.10.HHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2011-02-23T04:05:00Z",
+      "epoch_end": "2021-05-27T02:03:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.KHZ.20.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-01-17T01:00:01Z",
+      "epoch_end": "2021-05-27T02:03:00Z",
+      "samples_present": 27,
+      "http_200": 27,
+      "no_data": 5,
+      "errors": 0
+    },
+    "NZ.KHZ.20.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-01-17T01:00:01Z",
+      "epoch_end": "2021-05-27T02:03:00Z",
+      "samples_present": 27,
+      "http_200": 27,
+      "no_data": 5,
+      "errors": 0
+    },
+    "NZ.KHZ.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-01-17T01:00:01Z",
+      "epoch_end": "2021-05-27T02:03:00Z",
+      "samples_present": 27,
+      "http_200": 27,
+      "no_data": 5,
+      "errors": 0
+    },
+    "NZ.KIKS.20.HN1": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-04-23T22:00:05Z",
+      "epoch_end": null,
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.KIKS.20.HN2": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-04-23T22:00:05Z",
+      "epoch_end": null,
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.KIKS.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-04-23T22:00:05Z",
+      "epoch_end": null,
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.KIW.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2007-11-07T00:00:10Z",
+      "epoch_end": "2018-11-12T17:20:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.KIW.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2007-11-07T00:00:10Z",
+      "epoch_end": "2018-11-12T17:20:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.KIW.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2007-11-07T00:00:10Z",
+      "epoch_end": "2018-11-12T17:20:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.LREZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2010-01-27T01:00:00Z",
+      "epoch_end": "2018-12-04T02:20:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.LREZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2010-01-27T01:00:00Z",
+      "epoch_end": "2018-12-04T02:20:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.LREZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2010-01-27T01:00:00Z",
+      "epoch_end": "2018-12-04T02:20:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.LTZ.10.HHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2013-10-23T05:05:01Z",
+      "epoch_end": "2023-05-15T23:23:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.LTZ.10.HHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2013-10-23T05:05:01Z",
+      "epoch_end": "2023-05-15T23:23:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.LTZ.10.HHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2013-10-23T05:05:01Z",
+      "epoch_end": "2023-05-15T23:23:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.LTZ.21.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-02-22T22:02:00Z",
+      "epoch_end": "2019-07-01T23:15:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.LTZ.21.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-02-22T22:02:00Z",
+      "epoch_end": "2019-07-01T23:15:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.LTZ.21.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-02-22T22:02:00Z",
+      "epoch_end": "2019-07-01T23:15:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.MCAS.20.HN1": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-04-23T02:21:49Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.MCAS.20.HN2": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-04-23T02:21:49Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.MCAS.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-04-23T02:21:49Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.MKBS.20.HN1": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2014-03-14T02:55:00Z",
+      "epoch_end": "2020-09-03T03:40:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.MKBS.20.HN2": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2014-03-14T02:55:00Z",
+      "epoch_end": "2020-09-03T03:40:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.MKBS.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2014-03-14T02:55:00Z",
+      "epoch_end": "2020-09-03T03:40:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.MQZ.10.HHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2009-08-06T04:00:00Z",
+      "epoch_end": "2023-07-11T00:35:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.MQZ.10.HHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2009-08-06T04:00:00Z",
+      "epoch_end": "2023-07-11T00:35:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.MQZ.10.HHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2009-08-06T04:00:00Z",
+      "epoch_end": "2023-07-11T00:35:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.MQZ.21.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-02-24T01:02:00Z",
+      "epoch_end": "2019-06-17T05:25:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.MQZ.21.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-02-24T01:02:00Z",
+      "epoch_end": "2019-06-17T05:25:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.MQZ.21.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-02-24T01:02:00Z",
+      "epoch_end": "2019-06-17T05:25:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.MRNZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2015-04-02T00:00:05Z",
+      "epoch_end": "2026-04-29T01:49:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.MRNZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2015-04-02T00:00:05Z",
+      "epoch_end": "2026-04-29T01:49:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.MRNZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2015-04-02T00:00:05Z",
+      "epoch_end": "2026-04-29T01:49:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.MRZ.10.HHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2011-04-13T00:00:01Z",
+      "epoch_end": "2022-08-11T22:36:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.MRZ.10.HHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2011-04-13T00:00:01Z",
+      "epoch_end": "2022-08-11T22:36:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.MRZ.10.HHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2011-04-13T00:00:01Z",
+      "epoch_end": "2022-08-11T22:36:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.MRZ.21.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2014-01-13T00:10:00Z",
+      "epoch_end": "2019-07-30T22:50:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.MRZ.21.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2014-01-13T00:10:00Z",
+      "epoch_end": "2019-07-30T22:50:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.MRZ.21.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2014-01-13T00:10:00Z",
+      "epoch_end": "2019-07-30T22:50:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.MSWZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2004-08-13T00:00:01Z",
+      "epoch_end": "2018-07-23T04:05:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.MSWZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2004-08-13T00:00:01Z",
+      "epoch_end": "2018-07-23T04:05:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.MSWZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2004-08-13T00:00:01Z",
+      "epoch_end": "2018-07-23T04:05:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.MTW.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2007-12-06T07:00:00Z",
+      "epoch_end": "2018-12-10T21:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.MTW.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2007-12-06T07:00:00Z",
+      "epoch_end": "2018-12-10T21:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.MTW.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2007-12-06T07:00:00Z",
+      "epoch_end": "2018-12-10T21:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.NNZ.10.HHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2012-01-05T23:10:00Z",
+      "epoch_end": "2023-01-17T01:26:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.NNZ.10.HHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2012-01-05T23:10:00Z",
+      "epoch_end": "2023-01-17T01:26:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.NNZ.10.HHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2012-01-05T23:10:00Z",
+      "epoch_end": "2023-01-17T01:26:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.NNZ.21.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-07-02T22:00:00Z",
+      "epoch_end": "2019-06-06T21:15:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.NNZ.21.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-07-02T22:00:00Z",
+      "epoch_end": "2019-06-06T21:15:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.NNZ.21.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-07-02T22:00:00Z",
+      "epoch_end": "2019-06-06T21:15:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.OGWZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2010-03-31T00:05:00Z",
+      "epoch_end": "2019-01-22T02:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.OGWZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2010-03-31T00:05:00Z",
+      "epoch_end": "2019-01-22T02:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.OGWZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2010-03-31T00:05:00Z",
+      "epoch_end": "2019-01-22T02:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.OHWZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-10-21T02:00:01Z",
+      "epoch_end": "2018-07-19T03:45:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.OHWZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-10-21T02:00:01Z",
+      "epoch_end": "2018-07-19T03:45:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.OHWZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-10-21T02:00:01Z",
+      "epoch_end": "2018-07-19T03:45:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.OKCZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2012-03-01T00:00:00Z",
+      "epoch_end": "2023-05-18T02:12:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.OKCZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2012-03-01T00:00:00Z",
+      "epoch_end": "2023-05-18T02:12:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.OKCZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2012-03-01T00:00:00Z",
+      "epoch_end": "2023-05-18T02:12:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.OXZ.10.HHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2014-10-30T00:10:00Z",
+      "epoch_end": "2023-02-06T07:43:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.OXZ.10.HHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2014-10-30T00:10:00Z",
+      "epoch_end": "2023-02-06T07:43:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.OXZ.10.HHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2014-10-30T00:10:00Z",
+      "epoch_end": "2023-02-06T07:43:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.OXZ.21.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-02-25T01:02:00Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.OXZ.21.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-02-25T01:02:00Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.OXZ.21.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-02-25T01:02:00Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.PAWZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2007-11-30T00:00:20Z",
+      "epoch_end": "2018-07-24T22:30:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.PAWZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2007-11-30T00:00:20Z",
+      "epoch_end": "2018-07-24T22:30:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.PAWZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2007-11-30T00:00:20Z",
+      "epoch_end": "2018-07-24T22:30:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.PLWZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2007-06-27T23:30:01Z",
+      "epoch_end": "2023-04-14T00:03:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.PLWZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2007-06-27T23:30:01Z",
+      "epoch_end": "2023-04-14T00:03:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.PLWZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2007-06-27T23:30:01Z",
+      "epoch_end": "2023-04-14T00:03:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.POWZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-04-23T00:05:00Z",
+      "epoch_end": "2022-11-29T22:41:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.POWZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-04-23T00:05:00Z",
+      "epoch_end": "2022-11-29T22:41:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.POWZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-04-23T00:05:00Z",
+      "epoch_end": "2022-11-29T22:41:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.PRHZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-01-15T01:15:00Z",
+      "epoch_end": "2019-01-23T03:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.PRHZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-01-15T01:15:00Z",
+      "epoch_end": "2019-01-23T03:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.PRHZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-01-15T01:15:00Z",
+      "epoch_end": "2019-01-23T03:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.PRWZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-11-03T01:10:00Z",
+      "epoch_end": "2022-11-29T21:28:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.PRWZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-11-03T01:10:00Z",
+      "epoch_end": "2022-11-29T21:28:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.PRWZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-11-03T01:10:00Z",
+      "epoch_end": "2022-11-29T21:28:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.QRZ.10.HHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2015-11-12T02:00:01Z",
+      "epoch_end": "2021-10-04T20:34:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.QRZ.10.HHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2015-11-12T02:00:01Z",
+      "epoch_end": "2021-10-04T20:34:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.QRZ.10.HHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2015-11-12T02:00:01Z",
+      "epoch_end": "2021-10-04T20:34:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.QRZ.21.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-11-11T23:00:00Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.QRZ.21.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-11-11T23:00:00Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.QRZ.21.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-11-11T23:00:00Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.RCBS.20.HN1": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-09-03T00:00:01Z",
+      "epoch_end": null,
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.RCBS.20.HN2": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-09-03T00:00:01Z",
+      "epoch_end": null,
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.RCBS.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-09-03T00:00:01Z",
+      "epoch_end": null,
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.RCBS.21.HN1": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-09-03T00:00:01Z",
+      "epoch_end": null,
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.RCBS.21.HN2": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-09-03T00:00:01Z",
+      "epoch_end": null,
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.RCBS.21.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-09-03T00:00:01Z",
+      "epoch_end": null,
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.RDCS.20.HN1": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-04-21T23:51:30Z",
+      "epoch_end": "2019-06-18T00:00:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.RDCS.20.HN2": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-04-21T23:51:30Z",
+      "epoch_end": "2019-06-18T00:00:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.RDCS.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-04-21T23:51:30Z",
+      "epoch_end": "2019-06-18T00:00:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.SJFS.20.HN1": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-04-22T04:37:49Z",
+      "epoch_end": null,
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.SJFS.20.HN2": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-04-22T04:37:49Z",
+      "epoch_end": null,
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.SJFS.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-04-22T04:37:49Z",
+      "epoch_end": null,
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.TCW.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2011-03-25T00:00:01Z",
+      "epoch_end": "2019-02-18T22:10:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TCW.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2011-03-25T00:00:01Z",
+      "epoch_end": "2019-02-18T22:10:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TCW.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2011-03-25T00:00:01Z",
+      "epoch_end": "2019-02-18T22:10:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TCW.20.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-12-02T00:00:00Z",
+      "epoch_end": "2023-06-15T23:54:00Z",
+      "samples_present": 27,
+      "http_200": 27,
+      "no_data": 5,
+      "errors": 0
+    },
+    "NZ.TCW.20.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-12-02T00:00:00Z",
+      "epoch_end": "2023-06-15T23:54:00Z",
+      "samples_present": 27,
+      "http_200": 27,
+      "no_data": 5,
+      "errors": 0
+    },
+    "NZ.TCW.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-12-02T00:00:00Z",
+      "epoch_end": "2023-06-15T23:54:00Z",
+      "samples_present": 27,
+      "http_200": 27,
+      "no_data": 5,
+      "errors": 0
+    },
+    "NZ.THZ.10.HHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2014-04-03T14:01:01Z",
+      "epoch_end": "2021-10-06T19:52:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.THZ.10.HHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2014-04-03T14:01:01Z",
+      "epoch_end": "2021-10-06T19:52:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.THZ.10.HHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2014-04-03T14:01:01Z",
+      "epoch_end": "2021-10-06T19:52:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.THZ.21.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2014-04-03T14:05:00Z",
+      "epoch_end": "2019-06-06T01:45:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.THZ.21.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2014-04-03T14:05:00Z",
+      "epoch_end": "2019-06-06T01:45:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.THZ.21.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2014-04-03T14:05:00Z",
+      "epoch_end": "2019-06-06T01:45:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.TIWZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-10-15T00:10:00Z",
+      "epoch_end": "2018-10-16T21:10:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TIWZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-10-15T00:10:00Z",
+      "epoch_end": "2018-10-16T21:10:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TIWZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-10-15T00:10:00Z",
+      "epoch_end": "2018-10-16T21:10:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TKNZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2014-06-18T00:00:10Z",
+      "epoch_end": "2022-09-15T04:05:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TKNZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2014-06-18T00:00:10Z",
+      "epoch_end": "2022-09-15T04:05:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TKNZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2014-06-18T00:00:10Z",
+      "epoch_end": "2022-09-15T04:05:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TMWZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-03-27T22:00:02Z",
+      "epoch_end": "2023-04-17T22:28:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TMWZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-03-27T22:00:02Z",
+      "epoch_end": "2023-04-17T22:28:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TMWZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-03-27T22:00:02Z",
+      "epoch_end": "2023-04-17T22:28:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TRWZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2005-06-22T00:00:00Z",
+      "epoch_end": "2018-06-21T22:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TRWZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2005-06-22T00:00:00Z",
+      "epoch_end": "2018-06-21T22:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TRWZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2005-06-22T00:00:00Z",
+      "epoch_end": "2018-06-21T22:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TSZ.10.HHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2013-07-02T02:00:01Z",
+      "epoch_end": "2018-08-30T23:25:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TSZ.10.HHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2013-07-02T02:00:01Z",
+      "epoch_end": "2018-08-30T23:25:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TSZ.10.HHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2013-07-02T02:00:01Z",
+      "epoch_end": "2018-08-30T23:25:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.TSZ.21.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-06-11T00:05:10Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.TSZ.21.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-06-11T00:05:10Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.TSZ.21.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2015-06-11T00:05:10Z",
+      "epoch_end": "2020-02-08T23:59:59Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.TUWZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-12-07T00:00:01Z",
+      "epoch_end": "2022-09-01T02:50:00Z",
+      "samples_present": 31,
+      "http_200": 31,
+      "no_data": 1,
+      "errors": 0
+    },
+    "NZ.TUWZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-12-07T00:00:01Z",
+      "epoch_end": "2022-09-01T02:50:00Z",
+      "samples_present": 31,
+      "http_200": 31,
+      "no_data": 1,
+      "errors": 0
+    },
+    "NZ.TUWZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-12-07T00:00:01Z",
+      "epoch_end": "2022-09-01T02:50:00Z",
+      "samples_present": 31,
+      "http_200": 31,
+      "no_data": 1,
+      "errors": 0
+    },
+    "NZ.TUWZ.20.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-12-07T00:00:05Z",
+      "epoch_end": "2020-01-28T00:00:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.TUWZ.20.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-12-07T00:00:05Z",
+      "epoch_end": "2020-01-28T00:00:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.TUWZ.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2016-12-07T00:00:05Z",
+      "epoch_end": "2020-01-28T00:00:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.WAZ.10.HHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2013-12-22T00:05:01Z",
+      "epoch_end": "2021-11-16T23:32:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.WAZ.10.HHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2013-12-22T00:05:01Z",
+      "epoch_end": "2021-11-16T23:32:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.WAZ.10.HHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2013-12-22T00:05:01Z",
+      "epoch_end": "2021-11-16T23:32:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.WAZ.20.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-12-22T00:10:00Z",
+      "epoch_end": "2019-05-22T01:35:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.WAZ.20.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-12-22T00:10:00Z",
+      "epoch_end": "2019-05-22T01:35:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.WAZ.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2013-12-22T00:10:00Z",
+      "epoch_end": "2019-05-22T01:35:00Z",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.WEL.10.HHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-12-18T01:15:00Z",
+      "epoch_end": "2016-12-19T21:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.WEL.10.HHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-12-18T01:15:00Z",
+      "epoch_end": "2016-12-19T21:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.WEL.10.HHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2008-12-18T01:15:00Z",
+      "epoch_end": "2016-12-19T21:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.WEL.20.HNE": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2008-12-18T01:00:01Z",
+      "epoch_end": "2016-12-19T21:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.WEL.20.HNN": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2008-12-18T01:00:01Z",
+      "epoch_end": "2016-12-19T21:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.WEL.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2008-12-18T01:00:01Z",
+      "epoch_end": "2016-12-19T21:00:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.WPHZ.10.EHE": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2014-11-26T00:10:00Z",
+      "epoch_end": "2018-10-29T02:39:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.WPHZ.10.EHN": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2014-11-26T00:10:00Z",
+      "epoch_end": "2018-10-29T02:39:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.WPHZ.10.EHZ": {
+      "provider": "GEONET",
+      "rate_hz": 100.0,
+      "epoch_start": "2014-11-26T00:10:00Z",
+      "epoch_end": "2018-10-29T02:39:00Z",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "NZ.WVFS.20.HN1": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2014-12-17T00:00:05Z",
+      "epoch_end": null,
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.WVFS.20.HN2": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2014-12-17T00:00:05Z",
+      "epoch_end": null,
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "NZ.WVFS.20.HNZ": {
+      "provider": "GEONET",
+      "rate_hz": 200.0,
+      "epoch_start": "2014-12-17T00:00:05Z",
+      "epoch_end": null,
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "Z1.CSCP..EHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.CSCP..EHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.CSCP..EHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.CSWB..EHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.CSWB..EHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.CSWB..EHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.LTW1A..HHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 19,
+      "http_200": 19,
+      "no_data": 13,
+      "errors": 0
+    },
+    "Z1.LTW1A..HHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 19,
+      "http_200": 19,
+      "no_data": 13,
+      "errors": 0
+    },
+    "Z1.LTW1A..HHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 19,
+      "http_200": 19,
+      "no_data": 13,
+      "errors": 0
+    },
+    "Z1.LTW1A..HNE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 19,
+      "http_200": 19,
+      "no_data": 13,
+      "errors": 0
+    },
+    "Z1.LTW1A..HNN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 19,
+      "http_200": 19,
+      "no_data": 13,
+      "errors": 0
+    },
+    "Z1.LTW1A..HNZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 19,
+      "http_200": 19,
+      "no_data": 13,
+      "errors": 0
+    },
+    "Z1.LTW2..EHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "Z1.LTW2..EHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "Z1.LTW2..EHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "Z1.LTW3.10.EHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-07-01T23:59:59.0000",
+      "samples_present": 7,
+      "http_200": 7,
+      "no_data": 25,
+      "errors": 0
+    },
+    "Z1.LTW3.10.EHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-07-01T23:59:59.0000",
+      "samples_present": 7,
+      "http_200": 7,
+      "no_data": 25,
+      "errors": 0
+    },
+    "Z1.LTW3.10.EHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-07-01T23:59:59.0000",
+      "samples_present": 7,
+      "http_200": 7,
+      "no_data": 25,
+      "errors": 0
+    },
+    "Z1.S002..HHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.S002..HHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.S002..HHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.S007..HHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-11-15T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.S007..HHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-11-15T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.S007..HHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-11-15T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.S012..EHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 14,
+      "http_200": 14,
+      "no_data": 18,
+      "errors": 0
+    },
+    "Z1.S012..EHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 14,
+      "http_200": 14,
+      "no_data": 18,
+      "errors": 0
+    },
+    "Z1.S012..EHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 14,
+      "http_200": 14,
+      "no_data": 18,
+      "errors": 0
+    },
+    "Z1.S012..HNE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 14,
+      "http_200": 14,
+      "no_data": 18,
+      "errors": 0
+    },
+    "Z1.S012..HNN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 14,
+      "http_200": 14,
+      "no_data": 18,
+      "errors": 0
+    },
+    "Z1.S012..HNZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 14,
+      "http_200": 14,
+      "no_data": 18,
+      "errors": 0
+    },
+    "Z1.S018..EHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-01-17T05:20:00.0000",
+      "samples_present": 11,
+      "http_200": 11,
+      "no_data": 21,
+      "errors": 0
+    },
+    "Z1.S018..EHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-01-17T05:20:00.0000",
+      "samples_present": 11,
+      "http_200": 11,
+      "no_data": 21,
+      "errors": 0
+    },
+    "Z1.S018..EHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-01-17T05:20:00.0000",
+      "samples_present": 11,
+      "http_200": 11,
+      "no_data": 21,
+      "errors": 0
+    },
+    "Z1.S021.10.EHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-11-15T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.S021.10.EHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-11-15T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.S021.10.EHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-11-15T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.S023.10.EHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.S023.10.EHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.S023.10.EHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.S029..HHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-01-20T23:59:59.0000",
+      "samples_present": 4,
+      "http_200": 4,
+      "no_data": 28,
+      "errors": 0
+    },
+    "Z1.S029..HHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-01-20T23:59:59.0000",
+      "samples_present": 4,
+      "http_200": 4,
+      "no_data": 28,
+      "errors": 0
+    },
+    "Z1.S029..HHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-01-20T23:59:59.0000",
+      "samples_present": 4,
+      "http_200": 4,
+      "no_data": 28,
+      "errors": 0
+    },
+    "Z1.S029..HNE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-01-20T23:59:59.0000",
+      "samples_present": 4,
+      "http_200": 4,
+      "no_data": 28,
+      "errors": 0
+    },
+    "Z1.S029..HNN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-01-20T23:59:59.0000",
+      "samples_present": 4,
+      "http_200": 4,
+      "no_data": 28,
+      "errors": 0
+    },
+    "Z1.S029..HNZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-01-20T23:59:59.0000",
+      "samples_present": 4,
+      "http_200": 4,
+      "no_data": 28,
+      "errors": 0
+    },
+    "Z1.S030..HHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 3,
+      "http_200": 3,
+      "no_data": 29,
+      "errors": 0
+    },
+    "Z1.S030..HHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 3,
+      "http_200": 3,
+      "no_data": 29,
+      "errors": 0
+    },
+    "Z1.S030..HHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 3,
+      "http_200": 3,
+      "no_data": 29,
+      "errors": 0
+    },
+    "Z1.S030..HNE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 3,
+      "http_200": 3,
+      "no_data": 29,
+      "errors": 0
+    },
+    "Z1.S030..HNN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 3,
+      "http_200": 3,
+      "no_data": 29,
+      "errors": 0
+    },
+    "Z1.S030..HNZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 3,
+      "http_200": 3,
+      "no_data": 29,
+      "errors": 0
+    },
+    "Z1.S034.10.EHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.S034.10.EHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.S034.10.EHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.S039.10.EHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-07-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.S039.10.EHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-07-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.S039.10.EHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-07-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.SEAS1..EHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 22,
+      "http_200": 22,
+      "no_data": 10,
+      "errors": 0
+    },
+    "Z1.SEAS1..EHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 22,
+      "http_200": 22,
+      "no_data": 9,
+      "errors": 1
+    },
+    "Z1.SEAS1..EHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 22,
+      "http_200": 22,
+      "no_data": 10,
+      "errors": 0
+    },
+    "Z1.STAW..EHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.STAW..EHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.STAW..EHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 32,
+      "http_200": 32,
+      "no_data": 0,
+      "errors": 0
+    },
+    "Z1.STRN1..HHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 14,
+      "http_200": 14,
+      "no_data": 18,
+      "errors": 0
+    },
+    "Z1.STRN1..HHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 14,
+      "http_200": 14,
+      "no_data": 18,
+      "errors": 0
+    },
+    "Z1.STRN1..HHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 14,
+      "http_200": 14,
+      "no_data": 18,
+      "errors": 0
+    },
+    "Z1.STRN1..HNE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 14,
+      "http_200": 14,
+      "no_data": 18,
+      "errors": 0
+    },
+    "Z1.STRN1..HNN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 14,
+      "http_200": 14,
+      "no_data": 18,
+      "errors": 0
+    },
+    "Z1.STRN1..HNZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 14,
+      "http_200": 14,
+      "no_data": 18,
+      "errors": 0
+    },
+    "Z1.STRN2..HHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 10,
+      "http_200": 10,
+      "no_data": 22,
+      "errors": 0
+    },
+    "Z1.STRN2..HHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 10,
+      "http_200": 10,
+      "no_data": 22,
+      "errors": 0
+    },
+    "Z1.STRN2..HHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 10,
+      "http_200": 10,
+      "no_data": 22,
+      "errors": 0
+    },
+    "Z1.STRN2..HNE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 10,
+      "http_200": 10,
+      "no_data": 22,
+      "errors": 0
+    },
+    "Z1.STRN2..HNN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 10,
+      "http_200": 10,
+      "no_data": 22,
+      "errors": 0
+    },
+    "Z1.STRN2..HNZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 10,
+      "http_200": 10,
+      "no_data": 22,
+      "errors": 0
+    },
+    "Z1.STRN3..HHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 11,
+      "http_200": 11,
+      "no_data": 21,
+      "errors": 0
+    },
+    "Z1.STRN3..HHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 11,
+      "http_200": 11,
+      "no_data": 21,
+      "errors": 0
+    },
+    "Z1.STRN3..HHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 11,
+      "http_200": 11,
+      "no_data": 21,
+      "errors": 0
+    },
+    "Z1.STRN3..HNE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 11,
+      "http_200": 11,
+      "no_data": 21,
+      "errors": 0
+    },
+    "Z1.STRN3..HNN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 11,
+      "http_200": 11,
+      "no_data": 21,
+      "errors": 0
+    },
+    "Z1.STRN3..HNZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 11,
+      "http_200": 11,
+      "no_data": 21,
+      "errors": 0
+    },
+    "Z1.STRN4..EHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 10,
+      "http_200": 10,
+      "no_data": 22,
+      "errors": 0
+    },
+    "Z1.STRN4..EHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 10,
+      "http_200": 10,
+      "no_data": 22,
+      "errors": 0
+    },
+    "Z1.STRN4..EHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 10,
+      "http_200": 10,
+      "no_data": 22,
+      "errors": 0
+    },
+    "Z1.STRN4..HNE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 10,
+      "http_200": 10,
+      "no_data": 22,
+      "errors": 0
+    },
+    "Z1.STRN4..HNN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 10,
+      "http_200": 10,
+      "no_data": 22,
+      "errors": 0
+    },
+    "Z1.STRN4..HNZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 10,
+      "http_200": 10,
+      "no_data": 22,
+      "errors": 0
+    },
+    "Z1.STRN5.10.HHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "Z1.STRN5.10.HHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "Z1.STRN5.10.HHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "Z1.STRN6.10.HHE": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "Z1.STRN6.10.HHN": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "Z1.STRN6.10.HHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 0,
+      "http_200": 0,
+      "no_data": 32,
+      "errors": 0
+    },
+    "Z1.STWC..EH1": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 12,
+      "http_200": 12,
+      "no_data": 20,
+      "errors": 0
+    },
+    "Z1.STWC..EH2": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 12,
+      "http_200": 12,
+      "no_data": 20,
+      "errors": 0
+    },
+    "Z1.STWC..EHZ": {
+      "provider": "EARTHSCOPE",
+      "rate_hz": 100.0,
+      "epoch_start": "2016-11-15T00:00:00.0000",
+      "epoch_end": "2017-06-01T23:59:59.0000",
+      "samples_present": 12,
+      "http_200": 12,
+      "no_data": 20,
+      "errors": 0
+    }
+  },
+  "excluded_channels": {
+    "NZ.BHW.10.LHE": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.BHW.10.LHN": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.BHW.10.LHZ": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.BSWZ.20.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.BSWZ.20.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.BSWZ.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.CMWZ.20.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.CMWZ.20.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.CMWZ.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.CRSZ.20.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.CRSZ.20.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.CRSZ.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.DSZ.10.LHE": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.DSZ.10.LHN": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.DSZ.10.LHZ": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.DSZ.21.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.DSZ.21.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.DSZ.21.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.DUWZ.20.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.DUWZ.20.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.DUWZ.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.GVZ.10.LHE": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.GVZ.10.LHN": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.GVZ.10.LHZ": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.GVZ.20.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.GVZ.20.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.GVZ.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.KHZ.10.LHE": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.KHZ.10.LHN": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.KHZ.10.LHZ": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.KHZ.20.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.KHZ.20.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.KHZ.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.LTZ.10.LHE": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.LTZ.10.LHN": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.LTZ.10.LHZ": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.LTZ.21.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.LTZ.21.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.LTZ.21.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.MQZ.10.LHE": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.MQZ.10.LHN": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.MQZ.10.LHZ": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.MQZ.21.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.MQZ.21.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.MQZ.21.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.MRZ.10.LHE": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.MRZ.10.LHN": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.MRZ.10.LHZ": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.MRZ.21.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.MRZ.21.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.MRZ.21.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.NNZ.10.LHE": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.NNZ.10.LHN": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.NNZ.10.LHZ": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.NNZ.21.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.NNZ.21.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.NNZ.21.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.OXZ.10.LHE": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.OXZ.10.LHN": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.OXZ.10.LHZ": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.OXZ.21.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.OXZ.21.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.OXZ.21.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.QRZ.10.LHE": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.QRZ.10.LHN": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.QRZ.10.LHZ": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.QRZ.10.VHE": {
+      "provider": "GEONET",
+      "rate_hz": 0.1
+    },
+    "NZ.QRZ.10.VHN": {
+      "provider": "GEONET",
+      "rate_hz": 0.1
+    },
+    "NZ.QRZ.10.VHZ": {
+      "provider": "GEONET",
+      "rate_hz": 0.1
+    },
+    "NZ.QRZ.21.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.QRZ.21.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.QRZ.21.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.TCW.20.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.TCW.20.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.TCW.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.THZ.10.LHE": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.THZ.10.LHN": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.THZ.10.LHZ": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.THZ.21.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.THZ.21.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.THZ.21.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.TUWZ.20.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.TUWZ.20.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.TUWZ.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.WEL.10.LHE": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.WEL.10.LHN": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.WEL.10.LHZ": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.WEL.20.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.WEL.20.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.WEL.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.BFZ.10.LHE": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.BFZ.10.LHN": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.BFZ.10.LHZ": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.BFZ.10.VHE": {
+      "provider": "GEONET",
+      "rate_hz": 0.1
+    },
+    "NZ.BFZ.10.VHN": {
+      "provider": "GEONET",
+      "rate_hz": 0.1
+    },
+    "NZ.BFZ.10.VHZ": {
+      "provider": "GEONET",
+      "rate_hz": 0.1
+    },
+    "NZ.BFZ.20.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.BFZ.20.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.BFZ.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.WAZ.10.LHE": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.WAZ.10.LHN": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.WAZ.10.LHZ": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.WAZ.20.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.WAZ.20.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.WAZ.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.WVFS.20.BN1": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.WVFS.20.BN2": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.WVFS.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.HSES.20.BN1": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.HSES.20.BN2": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.HSES.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.TSZ.10.LHE": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.TSZ.10.LHN": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.TSZ.10.LHZ": {
+      "provider": "GEONET",
+      "rate_hz": 1.0
+    },
+    "NZ.TSZ.21.BNE": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.TSZ.21.BNN": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.TSZ.21.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.CECS.20.BN1": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.CECS.20.BN2": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.CECS.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.RDCS.20.BN1": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.RDCS.20.BN2": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.RDCS.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.SJFS.20.BN1": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.SJFS.20.BN2": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.SJFS.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.MCAS.20.BN1": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.MCAS.20.BN2": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.MCAS.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.KARS.20.BN1": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.KARS.20.BN2": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.KARS.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.KIKS.20.BN1": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.KIKS.20.BN2": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.KIKS.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.KEKS.20.BN1": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.KEKS.20.BN2": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.KEKS.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.MKBS.20.BN1": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.MKBS.20.BN2": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.MKBS.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.KHLS.20.BN1": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.KHLS.20.BN2": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.KHLS.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.RCBS.20.BN1": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.RCBS.20.BN2": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.RCBS.20.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.RCBS.21.BN1": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.RCBS.21.BN2": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    },
+    "NZ.RCBS.21.BNZ": {
+      "provider": "GEONET",
+      "rate_hz": 50.0
+    }
+  }
+}

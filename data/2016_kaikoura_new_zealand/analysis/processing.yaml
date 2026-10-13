@@ -8,6 +8,28 @@ processing_policy:
   figure_format: png
   figure_dpi: 300
 window_status: not_frozen
+scientific_design:
+  status: candidate_design_reference_audit_only
+  primary_question: Can an agent deliver accurate absolute and relative locations
+    through a complex multi-fault sequence under a mixed permanent/temporary
+    network whose geometry changes the relocation problem?
+  candidate_window:
+    start_utc: '2016-12-01T00:00:00Z'
+    end_utc: '2016-12-09T00:00:00Z'
+    interval: half_open
+    status: exploratory_candidate_not_scientific_freeze
+    source: v1 benchmark window (analysis/KAIKOURA2016_analysis.md) chosen for
+      active STREWN temporary deployment; the early post-mainshock window
+      (2016-11-13 to 11-20, permanent-network stress condition) remains a
+      separate option.
+  primary_input_condition: raw_waveforms_and_station_metadata
+  station_policy: lanza_table_s1_stations_with_provider_split_availability_audit;
+    stations come from the 81-station Table S1 (57 GeoNet permanent network NZ,
+    24 STREWN temporary). The 2016-17 STREWN deployment is absent from GeoNet
+    (FDSN and open-data bucket) and archived at EarthScope under network Z1
+    (2016-11-15 to 2017-06-01), so waveforms are fetched per network of origin
+    (NZ -> GeoNet, Z1 -> EarthScope). Availability is probed per channel-day
+    because neither provider exposes a working availability service.
 catalogs:
 - source_ref: CHAMBERLAIN2021_JB022304
   catalog_dir: data/catalogs/CHAMBERLAIN2021_JB022304
