@@ -146,6 +146,7 @@ VARIANT=base_standard bash run.sh         # any canonical or legacy variant
 VARIANT=base_full TIMEOUT=86400 bash run.sh
 ```
 
-Runs land in `runs/<variant>/` with the usual control/work/record layout.
+Runs land in `runs/<variant>/<harness>/<model>/<timestamp>/` (one experiment
+factor per path segment) with the usual control/work/record layout.
 The runner accepts any `task_<variant>.json` present in this directory, so
 new recombinations do not require editing `run.sh`.

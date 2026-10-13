@@ -21,8 +21,22 @@ case "$VARIANT" in
     ;;
 esac
 AGENT_NAME="${AGENT}-ridgecrest-${VARIANT}"
-RUN_ROOT="$TASK_DIR/runs/$VARIANT"
-RUN_ID="${RUN_ID:-$AGENT_NAME-$(date -u +%Y%m%dT%H%M%SZ)}"
+AGENT_CONFIG="$PROJECT_DIR/SeismoAgentBench/configs/agents/${AGENT}.yaml"
+# Experiment factors map one-to-one onto path segments:
+# runs/<variant>/<harness>/<model>/<timestamp>. The model segment defaults
+# to the agent config's model line; CLAUDE_MODEL / CODEX_MODEL override it
+# (and are passed to the CLI as --model). It must stay path-safe.
+if [ "$AGENT" = "claude" ]; then
+  MODEL="${CLAUDE_MODEL:-$(awk '$1=="model:"{print $2; exit}' "$AGENT_CONFIG")}"
+else
+  MODEL="${CODEX_MODEL:-$(awk '$1=="model:"{print $2; exit}' "$AGENT_CONFIG")}"
+fi
+if [ -z "$MODEL" ]; then
+  echo "Could not resolve the model for $AGENT from $AGENT_CONFIG" >&2
+  exit 2
+fi
+RUN_ROOT="$TASK_DIR/runs/$VARIANT/$AGENT/$MODEL"
+RUN_ID="${RUN_ID:-$(date -u +%Y%m%dT%H%M%SZ)}"
 TIMEOUT="${TIMEOUT:-86400}"
 
 if [ ! -x "$PYTHON" ]; then
@@ -71,7 +85,7 @@ fi
 cd "$PROJECT_DIR"
 if [ "$AGENT" = "claude" ]; then
   CLAUDE_ARGS=(--claude-bin "$CLAUDE_BIN" --env-file "$RUNTIME_ENV_FILE"
-    --agent-config "$PROJECT_DIR/SeismoAgentBench/configs/agents/claude.yaml")
+    --agent-config "$AGENT_CONFIG")
   if [ -n "${CLAUDE_MODEL:-}" ]; then CLAUDE_ARGS+=(--model "$CLAUDE_MODEL"); fi
   if [ -n "${CLAUDE_MAX_TURNS:-}" ]; then CLAUDE_ARGS+=(--max-turns "$CLAUDE_MAX_TURNS"); fi
   "$PYTHON" -m SeismoAgentBench run-claude \
@@ -86,6 +100,9 @@ if [ "$AGENT" = "claude" ]; then
     --prompt "Use the Python executable and Conda environment reported in the runtime context for scientific processing. Network access and package installation follow the configured runtime policy; do not modify the original shared seismoagent environment. Write all results below \$BENCH_OUTPUT." \
     --timeout "$TIMEOUT"
 else
+  CODEX_ARGS=(--codex-bin "$CODEX_BIN" --codex-home "$CODEX_HOME"
+    --env-file "$RUNTIME_ENV_FILE")
+  if [ -n "${CODEX_MODEL:-}" ]; then CODEX_ARGS+=(--model "$CODEX_MODEL"); fi
   "$PYTHON" -m SeismoAgentBench run-codex \
     --task "$TASK_FILE" \
     --input "$TASK_DIR/input.json" \
@@ -93,11 +110,9 @@ else
     --agent-version 1 \
     --run-root "$RUN_ROOT" \
     --run-id "$RUN_ID" \
-    --agent-config "$PROJECT_DIR/SeismoAgentBench/configs/agents/codex.yaml" \
+    --agent-config "$AGENT_CONFIG" \
     --environment-config "$PROJECT_DIR/SeismoAgentBench/configs/environments/seismoagent_eval.yaml" \
-    --codex-bin "$CODEX_BIN" \
-    --codex-home "$CODEX_HOME" \
-    --env-file "$RUNTIME_ENV_FILE" \
+    "${CODEX_ARGS[@]}" \
     --prompt "Use the Python executable and Conda environment reported in the runtime context for scientific processing. Network access and package installation follow the configured runtime policy; do not modify the original shared seismoagent environment. Write all results below \$BENCH_OUTPUT." \
     --timeout "$TIMEOUT"
 fi

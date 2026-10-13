@@ -45,13 +45,17 @@ The default runner allows up to twenty-four hours for the complete Agent run.
 Override this with `TIMEOUT`, in seconds, when a different processing budget is
 needed.
 
-Run outputs are separated by prompt variant:
+Run outputs are separated by experiment factor, one factor per path segment:
 
 ```text
-runs/base/     # clean baseline prompt
-runs/tools/    # tools-enabled prompt
-runs/<name>/   # any packaged base variant (see VARIANTS.md)
+runs/<variant>/<harness>/<model>/<timestamp>/
+# e.g. runs/base_standard/claude/glm-5.3/20260113T093000Z/
 ```
+
+The timestamp leaf is one attempt of that configuration (override `RUN_ID`
+for a custom leaf name). The model segment defaults to the agent config's
+`model` line; `CLAUDE_MODEL` / `CODEX_MODEL` override it and are passed to
+the CLI as `--model`.
 
 Use `bash run.sh` for the baseline or `VARIANT=<name> bash run.sh` for any
 packaged variant. `AGENT=claude bash run.sh` runs the same variants through
