@@ -24,8 +24,8 @@
 
 - [项目说明](../../README.md)：目的、阶段与运行入口。
 - [案例注册表](01_1_Case_details.md)：案例角色与 case analysis 导航，不再复制完整窗口数值表。
-- [文献清单](../../data/REFERENCES_MANIFEST.md)：文献与补充材料可用性、未解决问题及 extraction 导航。
-- [目录清单](../../data/CATALOGS_MANIFEST.md)：由 full-product JSON 生成的单位明确的统计。
+- [六案统计总览](../data/CASES_SUMMARY.md)：波形、台站、catalog、official baseline 和文献资产的跨案例统计。
+- [按案例详细信息](../data/CASE_DETAILS.md)：每案的观测、研究/官方 catalog、文献和限制。
 - [数据组织规则](../../data/README.md)：保留策略、命名、备份和处理产物规则。
 - `data/<case>/data/catalogs/<catalog>/README.md`：人工维护的来源、字段、质量、原文说明。
 - `data/<case>/data/catalogs/<catalog>/analysis/catalog_analysis.md`：脚本生成的处理报告。
@@ -181,7 +181,7 @@
 
 ### 重复校验器合并
 
-- `workflows/data_preparation/03_information_extraction/validate_extraction.py` → [保留位置](../workflows/data_preparation/03_information_extraction/validate_all_extractions.py)
+- `workflows/data_preparation/03_information_extraction/validate_extraction.py` → [保留位置](../../workflows/data_preparation/03_information_extraction/validate_all_extractions.py)
 
 ### 原始发布说明合并
 

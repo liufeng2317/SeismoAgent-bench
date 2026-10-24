@@ -37,7 +37,7 @@ Quality tier, evaluation role, quality by dimension, and reference independence 
 
 Current status for all six cases: `window_status: not_frozen` in the case processing configuration. Existing time/space selections and derived counts are exploratory; they do not establish waveform readiness or a formal evaluation freeze.
 
-Detailed readiness and unresolved literature gaps are maintained once in the [reference manifest](../../data/REFERENCES_MANIFEST.md). Product counts and units are generated in the [catalog manifest](../../data/CATALOGS_MANIFEST.md).
+Cross-case readiness is maintained in the [data summary](../data/CASES_SUMMARY.md), while product counts, official catalogs, literature gaps, and case-specific limitations are organized in the [case details](../data/CASE_DETAILS.md).
 
 ## Case-analysis requirements
 

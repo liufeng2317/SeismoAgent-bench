@@ -8,9 +8,9 @@
 | [analysis/processing.yaml](analysis/processing.yaml) | 来源登记表 v2、既有候选时窗与核验配置 |
 | [analysis/reference_audit.json](analysis/reference_audit.json) | 可复算的目录与震相核验结果 |
 | [data/catalogs/](data/catalogs/) | 原始目录、来源说明、各产品统计和图件 |
-| `data/waveforms/` | 外部统一观测目录的软链接，包含波形、台站和清单；不纳入 Git |
+| `data/waveforms/` | 外部统一观测目录软链接；归档共 57 站/3,107 文件/37,839,508,992 bytes，当前 72 小时候选窗为 42 站/360 文件/4,945,348,096 bytes |
 | [references/](references/) | 文献、补充材料、解析与提取记录 |
-| [workflows/data_preparation/README.md](workflows/data_preparation/README.md) | 按 catalogs / figures / observations 分层的案例脚本与下载入口 |
+| [scripts/](scripts/README.md) | 按 catalogs / figures / observations 分层的案例脚本与下载入口 |
 
 当前仍为 `not_frozen`；结构迁移不改变科学设计或正式评测状态。
 
@@ -21,7 +21,7 @@ python -B data/2019_ridgecrest_california/workflows/data_preparation/catalogs/au
 python -B -m unittest discover -s tests/source_prepare
 ```
 
-大目录、波形、论文原件和敏感配置保留本地。文件维护规则见 [资料组织说明](../README.md)。
+区域 StationXML 发现范围是 404 站，不是最终评测输入；来源子集和当前波形台站也尚未冻结。见 [六案统计](../../docs/data/CASES_SUMMARY.md) 和 [Ridgecrest 详细信息](../../docs/data/CASE_DETAILS.md#5-ridgecrest-california-2019)。大目录、波形、论文原件和敏感配置保留本地，文件维护规则见 [资料组织说明](../README.md)。
 
 ## Source 整理入口
 
@@ -32,4 +32,4 @@ python -B -m SeismoAgentBench.utils.source_prepare inventory --case-dir data/201
 python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir data/2019_ridgecrest_california --verify-files
 ```
 
-通用代码只处理 source 的登记、完整性和统计诊断；评测将在独立目录实现。来源规范与迁移边界见 [通用 source 架构](../README.md#通用-source-架构ridgecrest-试点)。
+通用代码只处理 source 的登记、完整性和统计诊断；评测将在独立目录实现。来源组织与维护边界见 [资料组织说明](../README.md)。

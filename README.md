@@ -112,8 +112,11 @@ docs/
   research/                 scientific design, case inventory and data preparation
   framework/                reusable benchmark workflow and implementation records
 
+docs/data/
+  CASES_SUMMARY.md          cross-case data and readiness statistics
+  CASE_DETAILS.md           case-by-case observation and catalog details
+
 data/
-  REFERENCES_MANIFEST.md    paper/supplement/catalog readiness
   <case>/references/        source papers and supplementary materials
   <case>/data/catalogs/     source catalogs and catalog-level analysis products
   <case>/data/waveforms/    local waveform payloads (ignored by Git)
@@ -131,8 +134,8 @@ workflows/tasks/
 ```
 
 Detailed organization rules belong in [data/README.md](data/README.md), and
-the current reference readiness belongs in
-[data/REFERENCES_MANIFEST.md](data/REFERENCES_MANIFEST.md).
+the current data readiness belongs in
+[docs/data/CASES_SUMMARY.md](docs/data/CASES_SUMMARY.md).
 
 ## Quick start
 
@@ -169,15 +172,16 @@ and network condition separately.
 Phase I has six cases, archived reference materials, paper-level extraction
 records, research-catalog audits, and official operational snapshots. The
 current case configurations explicitly mark benchmark windows as `not_frozen`;
-existing masked statistics and figures are exploratory. Remaining gaps are
-recorded in `REFERENCES_MANIFEST.md` and the case analyses.
+existing masked statistics and figures are exploratory. Literature, catalog,
+official-baseline and observation gaps are recorded in their dedicated
+manifests and case analyses.
 
 Next deliverables are:
 
 - consolidation of scientific window choices and existing exploratory figures;
-- station-day/channel availability and waveform manifests;
-- recovery of confirmed missing products (for example Pang Maple Creek,
-  Ross DC1, and the Magna Baker paper) without substituting unrelated data;
+- freeze the station/channel conditions from the downloaded waveform archives;
+- recovery of confirmed missing products (for example the Pang Maple Creek
+  event table and the Magna Baker paper) without substituting unrelated data;
 - controlled agent reproduction and role-specific evaluation.
 
 ## Documentation
@@ -187,7 +191,8 @@ Next deliverables are:
 - [Information extraction schema](docs/research/01_3_Information_Extraction_Schema.md)
 - [Paper parsing audit](docs/research/01_4_Paper_Parsing_Audit.md)
 - [Framework documentation](docs/framework/README.md)
-- [Reference manifest](data/REFERENCES_MANIFEST.md)
+- [Six-case data summary](docs/data/CASES_SUMMARY.md)
+- [Case-by-case data details](docs/data/CASE_DETAILS.md)
 - [Data organization rules](data/README.md)
 - [Repository cleanup and retention decisions](docs/research/02_Repository_Cleanup.md)
 
@@ -195,6 +200,6 @@ Next deliverables are:
 **Repository slug:** `seismoagent-bench`  \
 **Short form:** `SABench`
 
-The project code package is [`SeismoAgentBench/`](SeismoAgentBench/README.md). Source registry tools are one utility under [`utils/source_prepare/`](SeismoAgentBench/utils/source_prepare/), with regression tests in [`tests/`](tests/). Ridgecrest is the first case using the versioned source registry; see the [source architecture and commands](data/README.md#通用-source-架构ridgecrest-试点). Evaluation will be implemented separately.
+The project code package is [`SeismoAgentBench/`](SeismoAgentBench/README.md). Source registry tools are one utility under [`utils/source_prepare/`](SeismoAgentBench/utils/source_prepare/), with regression tests in [`tests/`](tests/). Ridgecrest is the first case using the versioned source registry; see its [source registry and commands](data/2019_ridgecrest_california/README.md#source-整理入口). Evaluation will be implemented separately.
 
 Automated regressions use one entry point: `python -B -m unittest discover -s tests -v`. Follow the [test maintenance rules](tests/AGENTS.md) when adding or changing tests.

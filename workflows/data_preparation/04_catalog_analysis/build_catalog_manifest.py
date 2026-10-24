@@ -130,11 +130,18 @@ def build_manifest(data: Path) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)
-    parser.add_argument("--output", type=Path, help="Optional output path for a preview")
+    parser.add_argument(
+        "--output",
+        type=Path,
+        help="Optional output path; omit to print the generated manifest to stdout",
+    )
     args = parser.parse_args()
     data = args.root.resolve() / "data"
-    output = args.output or data / "CATALOGS_MANIFEST.md"
-    output.write_text(build_manifest(data), encoding="utf-8")
+    manifest = build_manifest(data)
+    if args.output:
+        args.output.write_text(manifest, encoding="utf-8")
+    else:
+        print(manifest, end="")
 
 
 if __name__ == "__main__":
