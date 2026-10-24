@@ -130,3 +130,31 @@ Findings:
 Accuracy improves strongly with CC density; sharpness does not reach
 Shelly's: per-event scatter of ~0.2–0.3 km remains. CC data are the limit —
 332k accepted measurements (~50 per event) vs Shelly's ~700 per event.
+
+Three-day run (2026-10-25; `--scope full`, CC 5 km / 80 neighbours,
+CC ≥ 0.6, CC² weights, dt.ct from picks only, control cc3_d1): 16,686
+events, 778,824 accepted CC times (246,379 linked pairs), 2.40 M pick
+differences; hypoDD MAXEVE raised to the event count. 11,093 relocations
+accepted (picked 6,056 / 6,520; M&L 5,037 / 10,166); 5,008 not in the
+hypoDD output, 585 rejected as diverged.
+
+| 3 days | vs Shelly | vs Liu | vs Ross | thickness picked / M&L |
+|---|---|---|---|---|
+| before | 0.616 km | 0.801 | 0.748 | 0.337 / 0.263 (grid-stacked) |
+| cc3_d1 | 0.458 | 0.468 | 0.809 | 0.333 / 0.390 |
+| cc3_d1 + CC-dominated set | 0.505 | 0.556 | 0.878 | 0.315 / 0.380 |
+| Shelly / Ross / Liu thickness | | | | 0.193 / 0.197 / 0.283 |
+
+What the relocation changes is the *frame*, not the sharpness: hypoDD with
+the Shelly Table-1 layered model (no station elevations) moves the catalog
+~0.35 km SW, toward Shelly and Liu, away from Ross (3-D model). Removing that
+centroid shift worsened agreement with Shelly (pilot day 0.25 → 0.52 km), so
+no correction is applied. Local thickness of the same events before/after,
+by CC links: ≥ 50 links 0.222 → 0.255 km; 20–50 0.529 → 0.575; < 20
+~0.9–1.0 → slightly more. Even well-linked events end slightly more
+scattered than their stage-52 joint-DD positions. Relocated M&L events lose
+their grid stacking but reach only the picked events' scatter level.
+Conclusion: with ~50–150 CC times per event, hypoDD does not reach Shelly /
+Ross sharpness (~0.19 km); not adopted into the evaluation layer pending a
+decision (GrowClust — Ross's L1 cluster-wise method — is the remaining
+untested lever).
