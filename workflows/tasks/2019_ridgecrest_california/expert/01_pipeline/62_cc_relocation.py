@@ -21,15 +21,28 @@ Steps (``--step``; ``all`` runs them in order):
            catalog dt = 0 at every station, which collapses them onto the
            template position (local thickness 0.05 km, a third of Shelly's),
            dt.cc (re-referenced to the 0.01-s rounded origins hypoDD reads)
-  build    hypoDD from the stage-13 native sources, MAXEVE 7000 and MAXDATA
+  build    hypoDD from the stage-13 native sources, MAXEVE/MAXCL and MAXDATA
            sized to the data
   relocate hypoDD with the stage-14 cc3_d1 control file (``--control cc3_d1``) or
            cc3_d1 plus a third, CC-dominated set (``cc3_d1_ccfinal``: 6 iterations,
            catalog weights 0.01, CC residuals beyond 6 SD down-weighted)
-  evaluate sharpness (nearest-neighbour distance, fault-normal MAD) and
-           agreement with Shelly / Ross / Liu, before vs after, by row source
+  evaluate local thickness (minor-axis SD, map view, of each event's 20
+           nearest neighbours found in 3-D; orientation-free) and agreement with
+           Shelly / Ross / Liu, before vs after, by row source
+  export   the scope's catalog with accepted relocations (``relocation_status``
+           ``relocated``; otherwise the stage-60 position is kept and the
+           status says why)
 
-Outputs: export/07_match_locate/62_cc_relocation/<scope>/.
+A hypoDD row is accepted only if it parses, its depth is within 0–25 km, it
+moved < 3 km horizontally and its origin changed < 1 s: without template-
+derived catalog links, weakly constrained M&L events can diverge. No centroid
+correction is applied: the hypoDD solution moves the catalog into the frame of
+the Shelly Table-1 layered model (no station elevations) that Shelly's own
+hypoDD catalog uses; removing that shift worsened agreement with Shelly on the
+pilot day from 0.25 to 0.52 km.
+
+Outputs: export/07_match_locate/62_cc_relocation/<scope>[_<tag>]/ and, for
+``export``, export/07_match_locate/62_catalog/<scope>[_<tag>]/catalog_events.csv.
 """
 from __future__ import annotations
 
@@ -71,8 +84,6 @@ def step_inputs(out: Path, days) -> dict:
     u = pd.read_csv(UNION, low_memory=False)
     u["t"] = ts(u.origin_time_utc)
     u = u[u.t.dt.strftime("%Y-%m-%d").isin(days)].reset_index(drop=True)
-    if len(u) > 7000:
-        raise SystemExit(f"{len(u)} events exceed hypoDD MAXEVE 7000; split the scope")
     ev = pd.DataFrame({"event_id": u.event_id, "origin_time_utc": u.t.dt.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                        "latitude": u.latitude, "longitude": u.longitude, "depth_km": u.depth_bsl_km + SURFACE_KM,
                        "magnitude": u.magnitude, "location_source": u.location_source,
@@ -213,11 +224,13 @@ def step_build(out: Path) -> Path:
     for part in ["include", "src/hypoDD"]:
         shutil.copytree(NATIVE_SRC / part, dest / part, dirs_exist_ok=True)
     cap = int(n * 1.1) + 1000
+    n_ev = sum(1 for _ in (out / "events.csv").open()) - 1
+    maxeve = max(7000, n_ev + 100)
     (dest / "include/hypoDD.inc").write_text(
         "      integer*4 MAXEVE, MAXLAY, MAXDATA, MAXSTA, MAXEVE0,\n"
         "     & MAXDATA0, MAXCL\n"
-        f"      parameter(MAXEVE=7000, MAXLAY=15, MAXDATA={cap},\n"
-        "     & MAXSTA=100, MAXEVE0=2, MAXDATA0=1, MAXCL=7000)\n")
+        f"      parameter(MAXEVE={maxeve}, MAXLAY=15, MAXDATA={cap},\n"
+        f"     & MAXSTA=100, MAXEVE0=2, MAXDATA0=1, MAXCL={maxeve})\n")
     cwd = dest / "src/hypoDD"
     with (dest / "build.log").open("w") as log:
         subprocess.run(["make", "clean"], cwd=cwd, stdout=log, stderr=subprocess.STDOUT, check=True)
@@ -254,78 +267,118 @@ def step_relocate(out: Path, variant: str, ct: str) -> dict:
     return {"relocated": n}
 
 
-def read_reloc(path: Path, ids: Path) -> pd.DataFrame:
-    cols = ["cusp", "lat", "lon", "depth", "x", "y", "z", "ex", "ey", "ez", "yr", "mo", "dy", "hr", "mi", "sc",
-            "mag", "nccp", "nccs", "nctp", "ncts", "rcc", "rct", "cid"]
-    r = pd.read_csv(path, sep=r"\s+", header=None, names=cols)
-    m = pd.read_csv(ids)
-    return r.merge(m, left_on="cusp", right_on="cusp_id")
+RELOC_COLS = ["cusp", "lat", "lon", "depth", "x", "y", "z", "ex", "ey", "ez", "yr", "mo", "dy", "hr", "mi", "sc",
+              "mag", "nccp", "nccs", "nctp", "ncts", "rcc", "rct", "cid"]
 
 
-def sharpness(lat, lon, N=None, seed=0):
+def load_relocation(out: Path, variant: str, ct: str) -> pd.DataFrame:
+    """Scope events with the accepted hypoDD solution (lat/lon/depth/t_new) or NaN, and a status."""
+    ev = pd.read_csv(out / "events.csv")
+    ev["t"] = ts(ev.origin_time_utc)
+    r = pd.read_csv(out / f"hypodd_{variant}_{ct}/hypoDD.reloc", sep=r"\s+", header=None, names=RELOC_COLS, dtype=str)
+    for c in RELOC_COLS:
+        r[c] = pd.to_numeric(r[c], errors="coerce")
+    r = r.merge(pd.read_csv(out / "ccdt/event_ids.csv"), left_on="cusp", right_on="cusp_id")
+    r = r.merge(ev[["event_id", "latitude", "longitude", "t"]], on="event_id")
+    r["t_new"] = pd.to_datetime(dict(year=r.yr, month=r.mo, day=r.dy, hour=r.hr, minute=r.mi), utc=True,
+                                errors="coerce") + pd.to_timedelta(r.sc, unit="s")
+    dh = np.hypot((r.lat - r.latitude) * 111.195, (r.lon - r.longitude) * 111.195 * np.cos(np.radians(r.latitude)))
+    dto = (r.t_new - r.t).dt.total_seconds().abs()
+    r["status"] = np.where(r.lat.isna() | r.depth.isna() | r.t_new.isna(), "diverged_unparsable",
+                  np.where(~r.depth.between(0, 25), "diverged_depth",
+                  np.where(dh >= 3, "diverged_shift", np.where(dto >= 1, "diverged_origin", "relocated"))))
+    ok = r[r.status == "relocated"][["event_id", "lat", "lon", "depth", "t_new", "nccp", "nccs", "nctp", "ncts"]]
+    m = ev.merge(ok, on="event_id", how="left")
+    m = m.merge(r[["event_id", "status"]], on="event_id", how="left")
+    m["status"] = m.status.fillna("not_in_hypodd_output")
+    return m
+
+
+def thickness(lat, lon, dep, k=20, n=3000, seed=0):
+    """Median local thickness (km): minor-axis SD, in map view, of each sampled event's k nearest
+    neighbours (found in 3-D)."""
     from scipy.spatial import cKDTree
-    lat, lon = np.asarray(lat, float), np.asarray(lon, float)
-    ok = (lat >= 35.45) & (lat <= 36.05) & (lon >= -117.9) & (lon <= -117.2)
-    P = np.c_[(lon[ok] + 117.55) * 111.2 * math.cos(math.radians(35.7)), (lat[ok] - 35.7) * 111.2]
-    if N and len(P) > N:
-        P = P[np.random.default_rng(seed).choice(len(P), N, replace=False)]
-    d, _ = cKDTree(P).query(P, k=2)
-    th = math.radians(-40)
-    along, perp = P @ np.array([math.sin(th), math.cos(th)]), P @ np.array([math.cos(th), -math.sin(th)])
-    w = []
-    for a0 in range(-25, 25, 5):
-        s = (along >= a0) & (along < a0 + 5)
-        if s.sum() > 50:
-            w.append(np.median(np.abs(perp[s] - np.median(perp[s]))))
-    return {"n": int(len(P)), "nn_median_km": round(float(np.median(d[:, 1])), 4),
-            "fault_normal_mad_km": round(float(np.median(w)), 3)}
+    lat, lon, dep = (np.asarray(a, float) for a in (lat, lon, dep))
+    ok = np.isfinite(lat) & np.isfinite(lon) & np.isfinite(dep) & (lat >= 35.45) & (lat <= 36.05) & \
+        (lon >= -117.9) & (lon <= -117.2)
+    X = np.c_[(lon[ok] + 117.55) * 111.195 * math.cos(math.radians(35.7)), (lat[ok] - 35.7) * 111.195, dep[ok]]
+    X = X + np.random.default_rng(1).normal(0, 1e-4, X.shape)        # break exact ties (stacked M&L positions)
+    tree = cKDTree(X)
+    out = []
+    for i in np.random.default_rng(seed).choice(len(X), min(n, len(X)), replace=False):
+        _, j = tree.query(X[i], k=k + 1)
+        Y = X[j, :2] - X[j, :2].mean(axis=0)
+        out.append(math.sqrt(max(np.linalg.eigvalsh(np.cov(Y.T))[0], 0.0)))
+    return round(float(np.median(out)), 3)
 
 
 def step_evaluate(out: Path, days, variant: str, ct: str) -> dict:
-    spec = __import__("importlib.util").util.spec_from_file_location(
-        "evaluation", EXPERT.parent / "evaluation/scripts/plot_evaluation_comparison.py")
-    E = __import__("importlib.util").util.module_from_spec(spec)
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("evaluation", EXPERT.parent / "evaluation/scripts/plot_evaluation_comparison.py")
+    E = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(E)
     _, _, refs, _ = E.house.load_data(E.CASE)
     refs = {p["key"]: p for p in refs}
-    ev = pd.read_csv(out / "events.csv")
-    rel = read_reloc(out / f"hypodd_{variant}_{ct}/hypoDD.reloc", out / "ccdt/event_ids.csv")
-    after = ev.merge(rel[["event_id", "lat", "lon", "depth"]], on="event_id", how="left")
-    res = {"events": len(ev), "relocated": int(after.lat.notna().sum()),
-           "relocated_by_source": after[after.lat.notna()].location_source.value_counts().to_dict()}
-    day_rows = lambda p: [r for r in p["rows"] if r["time"].strftime("%Y-%m-%d") in days]
-    N = min(len(day_rows(refs["shelly"])), int(after.lat.notna().sum()))
-    res["sharpness"] = {"shelly": sharpness([r["latitude"] for r in day_rows(refs["shelly"])],
-                                            [r["longitude"] for r in day_rows(refs["shelly"])], N),
-                        "ross": sharpness([r["latitude"] for r in day_rows(refs["ross_relocated"])],
-                                          [r["longitude"] for r in day_rows(refs["ross_relocated"])], N)}
-    for src in ("dd", "ml", None):
-        s = after if src is None else after[after.location_source == src]
-        k = src or "all"
-        res["sharpness"][f"before_{k}"] = sharpness(s.latitude, s.longitude, N)
-        r = s[s.lat.notna()]
-        res["sharpness"][f"after_{k}"] = sharpness(r.lat, r.lon, N)
-    # agreement with references (epicentral median of matched pairs, 4 s / 15 km)
-    def rec(df, latc, lonc, depc):
-        rows = [{"time": t.to_pydatetime(), "latitude": la, "longitude": lo, "depth_km": z, "magnitude": None}
-                for t, la, lo, z in zip(ts(df.origin_time_utc), df[latc], df[lonc], df[depc])]
+    m = load_relocation(out, variant, ct)
+    m["la"], m["lo"] = m.lat.fillna(m.latitude), m.lon.fillna(m.longitude)
+    m["de"], m["tt"] = m.depth.fillna(m.depth_km), m.t_new.fillna(m.t)
+    rel = m.lat.notna()
+    res = {"events": len(m), "status": m.status.value_counts().to_dict(),
+           "relocated_by_source": m[rel].location_source.value_counts().to_dict()}
+    in_days = lambda p: [r for r in p["rows"] if r["time"].strftime("%Y-%m-%d") in days]
+    th = {k: thickness(*zip(*[(r["latitude"], r["longitude"], r["depth_km"]) for r in in_days(refs[k])]))
+          for k in ("shelly", "ross_relocated", "liu")}
+    # "before"/"after_all" include M&L events stacked on template nodes, which read as thin
+    th["before_all"] = thickness(m.latitude, m.longitude, m.depth_km)
+    th["after_all"] = thickness(m.la, m.lo, m.de)
+    for src in ("dd", "ml"):
+        q = m[rel & (m.location_source == src)]
+        th[f"relocated_{src}_before"] = thickness(q.latitude, q.longitude, q.depth_km)
+        th[f"relocated_{src}_after"] = thickness(q.la, q.lo, q.de)
+    res["local_thickness_km"] = th
+
+    def rec(la, lo, z, t):
+        rows = [{"time": a.to_pydatetime(), "latitude": b, "longitude": c, "depth_km": d, "magnitude": None}
+                for a, b, c, d in zip(m[t], m[la], m[lo], m[z])]
         return E.as_record("x", "x", "k", sorted(rows, key=lambda r: r["time"]))
-    relocated = after[after.lat.notna()]
+    before, after = rec("latitude", "longitude", "depth_km", "t"), rec("la", "lo", "de", "tt")
     agree = {}
     for key in ("shelly", "ross_relocated", "liu"):
-        ref = dict(refs[key]); ref["rows"] = day_rows(refs[key])
-        for lab, df, la, lo, z in (("before", relocated, "latitude", "longitude", "depth_km"),
-                                   ("after", relocated, "lat", "lon", "depth")):
-            pr = E.match(rec(df, la, lo, z), ref)
-            agree[f"{key}_{lab}"] = {"matched": len(pr), "epi_median_km": round(float(np.median([p[2] for p in pr])), 3)}
-    res["agreement_relocated_subset"] = agree
+        ref = dict(refs[key]); ref["rows"] = in_days(refs[key])
+        for lab, pop in (("before", before), ("after", after)):
+            pr = E.match(pop, ref)
+            agree[f"{key}_{lab}"] = {"recall": round(len(pr) / len(ref["rows"]), 4),
+                                     "epi_median_km": round(float(np.median([p[2] for p in pr])), 3)}
+    res["agreement"] = agree
     return res
+
+
+def step_export(out: Path, variant: str, ct: str, dest: Path) -> dict:
+    m = load_relocation(out, variant, ct)
+    u = pd.read_csv(UNION, low_memory=False).set_index("event_id")
+    rel = m.lat.notna()
+    cat = pd.DataFrame({
+        "event_id": m.event_id,
+        "origin_time_utc": np.where(rel, m.t_new.dt.strftime("%Y-%m-%dT%H:%M:%S.%f+00:00"), m.origin_time_utc),
+        "latitude": m.lat.fillna(m.latitude), "longitude": m.lon.fillna(m.longitude),
+        "depth_bsl_km": np.where(rel, m.depth - SURFACE_KM, m.depth_km - SURFACE_KM),
+        "magnitude": m.event_id.map(u.magnitude), "magnitude_source": m.event_id.map(u.magnitude_source),
+        "location_source": m.location_source,
+        "relocation_status": m.status, "n_cc_p": m.nccp, "n_cc_s": m.nccs, "n_ct_p": m.nctp, "n_ct_s": m.ncts,
+        "ml_cc": m.event_id.map(u.ml_cc), "ml_nmad": m.event_id.map(u.ml_nmad),
+        "ml_template_id": m.event_id.map(u.ml_template_id)})
+    cat = cat.sort_values("origin_time_utc")
+    dest.mkdir(parents=True, exist_ok=True)
+    cat.to_csv(dest / "catalog_events.csv", index=False)
+    return {"catalog": str(dest.relative_to(EXPERT)), "events": len(cat),
+            "relocated": int(rel.sum()), "status": m.status.value_counts().to_dict(),
+            "control": variant, "catalog_times": ct}
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--scope", choices=sorted(SCOPES), default="pilot")
-    ap.add_argument("--step", choices=["all", "inputs", "ccdt", "hypodd", "build", "relocate", "evaluate"],
+    ap.add_argument("--step", choices=["all", "inputs", "ccdt", "hypodd", "build", "relocate", "evaluate", "export"],
                     default="all")
     ap.add_argument("--workers", type=int, default=32)
     ap.add_argument("--control", default="cc3_d1", choices=["cc3_d1", "cc3_d1_ccfinal"])
@@ -346,6 +399,7 @@ def main() -> int:
     rp = out / "report.json"
     report = json.loads(rp.read_text()) if rp.exists() else {}
     steps = ["inputs", "ccdt", "hypodd", "build", "relocate", "evaluate"] if args.step == "all" else [args.step]
+    tagname = f"{args.scope}_{args.tag}" if args.tag else args.scope
     for s in steps:
         if s == "inputs":
             report["inputs"] = step_inputs(out, SCOPES[args.scope])
@@ -362,9 +416,12 @@ def main() -> int:
         elif s == "evaluate":
             report[f"evaluation_{args.control}_{args.ct}"] = step_evaluate(out, SCOPES[args.scope], args.control,
                                                                             args.ct)
+        elif s == "export":
+            report["export"] = step_export(out, args.control, args.ct,
+                                           EXPERT / "export/07_match_locate/62_catalog" / tagname)
         rp.write_text(json.dumps(report, indent=2, default=str) + "\n")
         key = {"hypodd": f"hypodd_inputs_{args.ct}", "relocate": f"relocate_{args.control}_{args.ct}",
-               "evaluate": f"evaluation_{args.control}_{args.ct}"}.get(s, s)
+               "evaluate": f"evaluation_{args.control}_{args.ct}", "export": "export"}.get(s, s)
         print(f"{s}: {json.dumps(report.get(key), default=str)[:600]}", flush=True)
     return 0
 
