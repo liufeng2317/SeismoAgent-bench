@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime, timezone
+import re
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -164,6 +165,88 @@ def append_execution_line(line: bytes | str, event_stream: Any, human_stream: An
             human_stream.write(f"[{_timestamp()}] {fragment}\n")
     event_stream.flush()
     human_stream.flush()
+
+
+def build_timeline(human_log_path: str | Path) -> dict[str, Any]:
+    """Summarize event arrival timing from the human execution log.
+
+    The runner prefixes every human-log line with the UTC time it received
+    the event, which is the only complete arrival-time record for both
+    harnesses. Long silent stretches (for example a background science
+    stage) surface as gaps instead of disappearing.
+    """
+    source = Path(human_log_path)
+    if not source.is_file():
+        return {"schema_version": 1, "lines": 0}
+    prefix = re.compile(r"^\[(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?)Z\]\s?(.*)$")
+    progress = re.compile(r"^tool_progress (\S+)(?:.*elapsed=(\d+)s)?")
+    stamps: list[datetime] = []
+    kinds: dict[str, int] = {}
+    tool_runs: list[dict[str, Any]] = []
+    open_run: dict[str, Any] | None = None
+
+    def _close_run(next_kind: str | None) -> None:
+        nonlocal open_run
+        if open_run is not None and next_kind != "tool_progress":
+            tool_runs.append(open_run)
+            open_run = None
+
+    with source.open(encoding="utf-8", errors="replace") as stream:
+        for line in stream:
+            match = prefix.match(line)
+            if match is None:
+                continue
+            stamp = datetime.fromisoformat(match.group(1) + "+00:00")
+            text = match.group(2)
+            stamps.append(stamp)
+            kind = text.split(" ", 1)[0] if text else "(empty)"
+            kinds[kind] = kinds.get(kind, 0) + 1
+            tool_match = progress.match(text)
+            if tool_match is not None:
+                elapsed = int(tool_match.group(2) or 0)
+                if open_run is None or open_run["tool"] != tool_match.group(1):
+                    _close_run("tool_progress")
+                    open_run = {"tool": tool_match.group(1), "first_seen_at": None,
+                                "duration_s": elapsed}
+                    open_run["first_seen_at"] = stamp.isoformat().replace("+00:00", "Z")
+                elif elapsed > open_run["duration_s"]:
+                    open_run["duration_s"] = elapsed
+            else:
+                _close_run(kind)
+    _close_run(None)
+    if not stamps:
+        return {"schema_version": 1, "lines": 0}
+    first, last = stamps[0], stamps[-1]
+    duration_s = (last - first).total_seconds()
+    hours: list[dict[str, Any]] = []
+    if duration_s > 0:
+        cursor = first.replace(minute=0, second=0, microsecond=0)
+        counts: dict[datetime, int] = {}
+        for stamp in stamps:
+            hour = stamp.replace(minute=0, second=0, microsecond=0)
+            counts[hour] = counts.get(hour, 0) + 1
+        while cursor <= last:
+            hours.append({"hour_utc": cursor.strftime("%Y-%m-%dT%H:00Z"),
+                          "events": counts.get(cursor, 0)})
+            cursor += timedelta(hours=1)
+    gaps = []
+    for previous, following in zip(stamps, stamps[1:]):
+        silent = (following - previous).total_seconds()
+        if silent > 600:
+            gaps.append({"from_utc": previous.isoformat().replace("+00:00", "Z"),
+                        "to_utc": following.isoformat().replace("+00:00", "Z"),
+                        "silent_s": round(silent)})
+    return {
+        "schema_version": 1,
+        "lines": len(stamps),
+        "first_event_at": first.isoformat().replace("+00:00", "Z"),
+        "last_event_at": last.isoformat().replace("+00:00", "Z"),
+        "duration_s": round(duration_s, 1),
+        "events_per_hour": hours,
+        "event_kinds": dict(sorted(kinds.items(), key=lambda item: -item[1])),
+        "tool_runs_over_300s": [run for run in tool_runs if run.get("duration_s", 0) >= 300],
+        "gaps_over_600s": gaps,
+    }
 
 
 def summarize_usage(log_path: str | Path) -> dict[str, Any]:
