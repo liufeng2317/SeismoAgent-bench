@@ -1,0 +1,48 @@
+{
+  "case_id": "2018_kilauea_hawaii",
+  "models": {
+    "hvo_klein_linear": {
+      "status": "numeric_table_transcribed",
+      "source": "references/HVO2002_OFR02157/paper/HVO2002_OFR02157__paper.pdf",
+      "source_sha256": "4c29decc6aec2fb70059d723e17befe1a17639efff10d533a925886c2989974d",
+      "locator": "PDF page 19 (HYPOINVERSE section): crustal model specified by four depth points",
+      "reference": "HVO operational HYPOINVERSE model (Klein linear-gradient model family; Klein 1981 BSSA 71, 1503-1510; used by HVO and by Matoza et al. 2021)",
+      "role": "Association and absolute location for the 2018 Kilauea summit case",
+      "derivation": "Transcribed verbatim: Vp 1.9 / 6.5 / 6.9 / 8.3 km/s at 0 / 4.6 / 15.0 / >=16.5 km, linear interpolation between points, homogeneous half-space below 16.5 km.",
+      "units": {
+        "top_of_layer": "km",
+        "vp": "km/s",
+        "vs": "km/s"
+      },
+      "vp_vs_ratio": 1.78,
+      "vs_provenance": "Vp/1.78, the moderate source-region Vp/Vs used by Shelly & Thelen (2019) for this sequence (the HVO model tabulates P only).",
+      "depth_reference": "Not stated in the source; HVO catalog depths have a mixed datum history (see Matoza et al. 2025 commentary). Taken below the mean station surface.",
+      "layer_semantics": {
+        "published_representation": "Velocity points with LINEAR interpolation between them (not constant layers).",
+        "grid_use": "Use velocity_layering: linear (the stage 03/04 ramp between rows is this model's native definition)."
+      },
+      "rows": [
+        {
+          "top_of_layer_km": 0.0,
+          "vp_km_s": 1.9,
+          "vs_km_s": 1.067416
+        },
+        {
+          "top_of_layer_km": 4.6,
+          "vp_km_s": 6.5,
+          "vs_km_s": 3.651685
+        },
+        {
+          "top_of_layer_km": 15.0,
+          "vp_km_s": 6.9,
+          "vs_km_s": 3.876404
+        },
+        {
+          "top_of_layer_km": 16.5,
+          "vp_km_s": 8.3,
+          "vs_km_s": 4.662921
+        }
+      ]
+    }
+  }
+}

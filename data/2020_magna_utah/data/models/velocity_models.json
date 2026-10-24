@@ -1,0 +1,106 @@
+{
+  "case_id": "2020_magna_utah",
+  "models": {
+    "bjarnason_pechmann_1989_wasatch_front": {
+      "status": "numeric_table_transcribed",
+      "source": "references/BJARNASON_PECHMANN_1989_BSSA/paper/BJARNASON_PECHMANN_1989__BSSA_79_731.pdf",
+      "source_sha256": "4c1bcdd0c2c0929abd12cfa2dbe4c8362bbbe4a2a355f3fbb37afd37ab2bc50d",
+      "locator": "PDF page 7, printed page 736, Table 2, Wasatch front column",
+      "reference": "Bjarnason & Pechmann (1989), BSSA 79(3), 731-755; model modified from model B of Keller et al. (1975)",
+      "doi": "10.1785/BSSA0790030731",
+      "role": "GaMMA association eikonal + NonLinLoc absolute location for the 2020 Magna sequence",
+      "derivation": "Wasatch front column of Table 2, transcribed verbatim. The 1989 modifications relative to Keller et al. (1975) model B were: (1) addition of a 7.9 km/s halfspace beginning at 42 km depth, and (2) increase of the depth of the top of the 7.5 km/s layer (to 28.0 km), distributed proportionately to all layers above for consistency with Loeb (1986) and Loeb & Pechmann (1986).",
+      "corroboration": "Cited as the UUSS routine Wasatch front 1-D model by later UUSS work (e.g. Whidden et al. 2023, SRL; 2024 BSSA ML-arrival studies). This is the model family in routine UUSS use for the Salt Lake Valley where the 2020 Magna sequence lies.",
+      "units": {
+        "top_of_layer": "km",
+        "vp": "km/s",
+        "vs": "km/s"
+      },
+      "vp_vs_ratio": 1.73,
+      "vs_provenance": "Derived as Vp / 1.73; the paper tabulates P-wave velocities only. Not an independently tabulated measurement.",
+      "depth_reference": "Table 2 footnote: 'Datum is 1500 m above sea level.' Layer-top depths are therefore below a 1.5 km ASL datum, which closely matches this case's association reference_elevation_km = 1.4 (mean station elevation ~1.48 km ASL); the residual 0.1 km datum offset is not corrected for and is noted here.",
+      "layer_semantics": {
+        "published_representation": "Depth to top of layer plus one constant P velocity per layer (standard layered model). Paper text: 'The P-wave velocity in our Wasatch front model is 5.9 km/sec over the depth range of 1.5 to 17.1 km'; near-source velocity estimated 5.9 +/- 0.2 km/s for most studied earthquakes.",
+        "grid_use": "Vel2Grid/NLLoc and the GaMMA eikonal treat these as layer tops with constant velocity per layer below the top, consistent with the Ridgecrest shelly_table1 convention in this repository."
+      },
+      "rows": [
+        {
+          "top_of_layer_km": 0.0,
+          "vp_km_s": 3.4,
+          "vs_km_s": 1.9653179190751444
+        },
+        {
+          "top_of_layer_km": 1.5,
+          "vp_km_s": 5.9,
+          "vs_km_s": 3.410404624277457
+        },
+        {
+          "top_of_layer_km": 17.1,
+          "vp_km_s": 6.4,
+          "vs_km_s": 3.6994219653179194
+        },
+        {
+          "top_of_layer_km": 28.0,
+          "vp_km_s": 7.5,
+          "vs_km_s": 4.335260115606936
+        },
+        {
+          "top_of_layer_km": 42.0,
+          "vp_km_s": 7.9,
+          "vs_km_s": 4.566473988439307
+        }
+      ]
+    },
+    "bjarnason_pechmann_1989_plus_slv_basinfill2km": {
+      "status": "adopted_round4",
+      "source": "derived from bjarnason_pechmann_1989_wasatch_front",
+      "reference": "Bjarnason & Pechmann (1989), BSSA 79(3), 731-755; model modified from model B of Keller et al. (1975)",
+      "role": "GaMMA association eikonal + NonLinLoc absolute location for the 2020 Magna sequence, round r4+",
+      "derivation": "BP89 Wasatch-front column with one structural addition: a low-velocity basin-fill layer, sea level to 2.0 km bsl (1.5-3.5 km below the model datum) at Vp 4.0 km/s, Vs = Vp/1.73. Motivation: BP89 puts 5.9 km/s immediately below sea level, a smoothed regional average that is too fast for the Salt Lake Valley sedimentary fill above the Magna sources; with BP89 the NLL catalog ran systematically late (median origin-time difference +0.34 s vs both pang and uuss) and the two non-basin levers (main-layer 5.9->5.7, Vp/Vs 1.73->1.68) both degraded depths without fixing dt. Selected by the r4 offline relocation sweep (2026-10-19, expert/PLAN.md): dt +0.34 -> +0.05 s (pang) / +0.04 s (uuss), depth/epicentral medians and matched counts unchanged or slightly improved, zero NLL failures.",
+      "units": {
+        "top_of_layer": "km",
+        "vp": "km/s",
+        "vs": "km/s"
+      },
+      "vp_vs_ratio": 1.73,
+      "vs_provenance": "Derived as Vp / 1.73; the paper tabulates P-wave velocities only. Not an independently tabulated measurement.",
+      "depth_reference": "Table 2 footnote: 'Datum is 1500 m above sea level.' Layer-top depths are therefore below a 1.5 km ASL datum, which closely matches this case's association reference_elevation_km = 1.4 (mean station elevation ~1.48 km ASL); the residual 0.1 km datum offset is not corrected for and is noted here.",
+      "layer_semantics": {
+        "published_representation": "Depth to top of layer plus one constant P velocity per layer (standard layered model). Paper text: 'The P-wave velocity in our Wasatch front model is 5.9 km/sec over the depth range of 1.5 to 17.1 km'; near-source velocity estimated 5.9 +/- 0.2 km/s for most studied earthquakes.",
+        "grid_use": "Vel2Grid/NLLoc and the GaMMA eikonal treat these as layer tops with constant velocity per layer below the top, consistent with the Ridgecrest shelly_table1 convention in this repository."
+      },
+      "rows": [
+        {
+          "top_of_layer_km": 0.0,
+          "vp_km_s": 3.4,
+          "vs_km_s": 1.9653179191
+        },
+        {
+          "top_of_layer_km": 1.5,
+          "vp_km_s": 4.0,
+          "vs_km_s": 2.3121387283
+        },
+        {
+          "top_of_layer_km": 3.5,
+          "vp_km_s": 5.9,
+          "vs_km_s": 3.4104046243
+        },
+        {
+          "top_of_layer_km": 17.1,
+          "vp_km_s": 6.4,
+          "vs_km_s": 3.6994219653
+        },
+        {
+          "top_of_layer_km": 28.0,
+          "vp_km_s": 7.5,
+          "vs_km_s": 4.3352601156
+        },
+        {
+          "top_of_layer_km": 42.0,
+          "vp_km_s": 7.9,
+          "vs_km_s": 4.5664739884
+        }
+      ]
+    }
+  }
+}

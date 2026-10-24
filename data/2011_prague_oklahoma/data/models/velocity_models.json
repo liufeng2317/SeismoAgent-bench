@@ -1,0 +1,59 @@
+{
+  "case_id": "2011_prague_oklahoma",
+  "models": {
+    "keranen2013_prague_1d": {
+      "status": "extracted_from_vector_figure",
+      "source": "references/KERANEN2013_G34045/supplement/KERANEN2013_G34045__supplement_2013191.pdf",
+      "source_sha256": "73bfbd28f40d2f6db8faa26005d7c4e23e444396df9796c022b69b5b48a9139f",
+      "locator": "GSA Data Repository 2013191, page 4, Figure DR1, dashed (best-fitting) Vp and Vs curves",
+      "reference": "Keranen et al. (2013), Geology 41(6), 699-702; joint P/S velocity-hypocentre inversion of Prague aftershocks recorded on >15 stations",
+      "doi": "10.1130/G34045.1",
+      "role": "Local model used by Cochran et al. (2020) (the primary reference catalog); association and absolute location for the 2011 Prague case",
+      "derivation": "scripts/models/digitize_keranen2013_dr1.py parses the PDF vector content stream (no raster digitising): dashed step polylines mapped with the figure's own axis frame; velocities to 1e-3 km/s, layer tops to 0.01 km. Check: the extracted Vp/Vs reproduces the separate Vp/Vs panel within 1.1 pt and places its 1.6/1.8 ticks under the printed labels.",
+      "units": {
+        "top_of_layer": "km",
+        "vp": "km/s",
+        "vs": "km/s"
+      },
+      "vp_vs_ratio": null,
+      "vs_provenance": "Inverted jointly with Vp in the source (not a fixed ratio); Vp/Vs 1.68-1.87.",
+      "depth_reference": "Not stated in the source (depth below the surface assumed; local elevations ~0.3 km ASL).",
+      "layer_semantics": {
+        "published_representation": "Constant-velocity layers (step polylines); two sedimentary layers bounded by the top and bottom of the Arbuckle group, then basement with gradual variation.",
+        "grid_use": "Use velocity_layering: step (Maple Creek finding: linear ramps between tops bias origins)."
+      },
+      "rows": [
+        {
+          "top_of_layer_km": 0.0,
+          "vp_km_s": 2.76,
+          "vs_km_s": 1.48
+        },
+        {
+          "top_of_layer_km": 1.46,
+          "vp_km_s": 5.752,
+          "vs_km_s": 3.096
+        },
+        {
+          "top_of_layer_km": 2.25,
+          "vp_km_s": 5.736,
+          "vs_km_s": 3.416
+        },
+        {
+          "top_of_layer_km": 5.18,
+          "vp_km_s": 6.168,
+          "vs_km_s": 3.64
+        },
+        {
+          "top_of_layer_km": 8.13,
+          "vp_km_s": 6.216,
+          "vs_km_s": 3.592
+        },
+        {
+          "top_of_layer_km": 11.08,
+          "vp_km_s": 6.296,
+          "vs_km_s": 3.656
+        }
+      ]
+    }
+  }
+}

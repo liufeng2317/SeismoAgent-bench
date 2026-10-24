@@ -1,0 +1,154 @@
+{
+  "case_id": "2016_kaikoura_new_zealand",
+  "models": {
+    "chamberlain2021_nz3d_avg_1d": {
+      "status": "numeric_table_from_author_repository",
+      "source": "references/CHAMBERLAIN2021_JB022304/code/vzmodel.txt",
+      "source_sha256": "119c00887b212cc7011a6dd842a8b2e2c053d6fb05d2a5da361b25e59cabc50d",
+      "locator": "calum-chamberlain/kaikoura-aftershocks release 0.2 (Zenodo 10.5281/zenodo.5047794, commit ec0ae1f), Scripts/Workflow/vzmodel.txt",
+      "reference": "Chamberlain et al. (2021) JGR 126, e2021JB022304: GrowClust model = average 1-D of NZ3D 2.2 (Eberhart-Phillips et al.) over X 72-110 km, Y -100-80 km",
+      "doi": "10.1029/2021JB022304",
+      "role": "Association and absolute location for the 2016 Kaikoura case (December 2016 window)",
+      "derivation": "Rows copied verbatim (depth below sea level, Vp, Vs) from the authors' file; the -15 km node is a padding node above the surface, kept as published.",
+      "units": {
+        "top_of_layer": "km",
+        "vp": "km/s",
+        "vs": "km/s"
+      },
+      "vp_vs_ratio": null,
+      "vs_provenance": "Tabulated (NZ3D Vs averages).",
+      "depth_reference": "Depths below sea level (NZ3D convention). Use association reference_elevation_km 0.",
+      "layer_semantics": {
+        "published_representation": "Velocities at NZ3D depth nodes; NZ3D interpolates linearly between nodes.",
+        "grid_use": "Use velocity_layering: linear."
+      },
+      "rows": [
+        {
+          "top_of_layer_km": -15.0,
+          "vp_km_s": 2.84,
+          "vs_km_s": 1.63
+        },
+        {
+          "top_of_layer_km": -1.0,
+          "vp_km_s": 3.67,
+          "vs_km_s": 2.09
+        },
+        {
+          "top_of_layer_km": 1.0,
+          "vp_km_s": 3.94,
+          "vs_km_s": 2.26
+        },
+        {
+          "top_of_layer_km": 3.0,
+          "vp_km_s": 4.29,
+          "vs_km_s": 2.47
+        },
+        {
+          "top_of_layer_km": 5.0,
+          "vp_km_s": 4.69,
+          "vs_km_s": 2.71
+        },
+        {
+          "top_of_layer_km": 8.0,
+          "vp_km_s": 5.24,
+          "vs_km_s": 3.01
+        },
+        {
+          "top_of_layer_km": 15.0,
+          "vp_km_s": 5.78,
+          "vs_km_s": 3.27
+        },
+        {
+          "top_of_layer_km": 23.0,
+          "vp_km_s": 6.61,
+          "vs_km_s": 3.73
+        },
+        {
+          "top_of_layer_km": 30.0,
+          "vp_km_s": 7.33,
+          "vs_km_s": 4.15
+        },
+        {
+          "top_of_layer_km": 34.0,
+          "vp_km_s": 7.82,
+          "vs_km_s": 4.47
+        },
+        {
+          "top_of_layer_km": 38.0,
+          "vp_km_s": 8.21,
+          "vs_km_s": 4.73
+        },
+        {
+          "top_of_layer_km": 42.0,
+          "vp_km_s": 8.35,
+          "vs_km_s": 4.8
+        },
+        {
+          "top_of_layer_km": 48.0,
+          "vp_km_s": 8.41,
+          "vs_km_s": 4.88
+        },
+        {
+          "top_of_layer_km": 55.0,
+          "vp_km_s": 8.42,
+          "vs_km_s": 4.88
+        },
+        {
+          "top_of_layer_km": 65.0,
+          "vp_km_s": 8.44,
+          "vs_km_s": 4.88
+        },
+        {
+          "top_of_layer_km": 85.0,
+          "vp_km_s": 8.35,
+          "vs_km_s": 4.83
+        },
+        {
+          "top_of_layer_km": 105.0,
+          "vp_km_s": 8.38,
+          "vs_km_s": 4.84
+        },
+        {
+          "top_of_layer_km": 130.0,
+          "vp_km_s": 8.41,
+          "vs_km_s": 4.87
+        },
+        {
+          "top_of_layer_km": 155.0,
+          "vp_km_s": 8.34,
+          "vs_km_s": 4.82
+        },
+        {
+          "top_of_layer_km": 185.0,
+          "vp_km_s": 8.42,
+          "vs_km_s": 4.87
+        },
+        {
+          "top_of_layer_km": 225.0,
+          "vp_km_s": 8.56,
+          "vs_km_s": 4.95
+        },
+        {
+          "top_of_layer_km": 275.0,
+          "vp_km_s": 8.67,
+          "vs_km_s": 5.01
+        },
+        {
+          "top_of_layer_km": 370.0,
+          "vp_km_s": 8.88,
+          "vs_km_s": 5.13
+        },
+        {
+          "top_of_layer_km": 620.0,
+          "vp_km_s": 10.2,
+          "vs_km_s": 5.9
+        },
+        {
+          "top_of_layer_km": 750.0,
+          "vp_km_s": 10.6,
+          "vs_km_s": 6.13
+        }
+      ]
+    }
+  }
+}
