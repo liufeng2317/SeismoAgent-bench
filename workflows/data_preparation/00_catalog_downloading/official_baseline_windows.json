@@ -38,15 +38,15 @@
     "service": "https://earthquake.usgs.gov/fdsnws/event/1/query",
     "starttime": "2017-06-11T00:00:00",
     "endtime": "2017-06-19T00:00:00",
-    "minlatitude": 44.45,
-    "maxlatitude": 44.75,
-    "minlongitude": -110.55,
-    "maxlongitude": -110.15,
-    "mindepth": 0,
-    "maxdepth": 15,
+    "minlatitude": 44.70,
+    "maxlatitude": 44.84,
+    "minlongitude": -111.13,
+    "maxlongitude": -110.93,
+    "mindepth": -3,
+    "maxdepth": 20,
     "output": "data/2017_maple_creek_yellowstone/data/catalogs/USGS_UUSS_COMCAT_2017/USGS_UUSS_COMCAT_2017__catalog_operational_benchmark.csv",
-    "benchmark": {"starttime":"2017-06-11T00:00:00","endtime":"2017-06-19T00:00:00","minlatitude":44.45,"maxlatitude":44.75,"minlongitude":-110.55,"maxlongitude":-110.15,"mindepth":0,"maxdepth":15,"output":"data/2017_maple_creek_yellowstone/data/catalogs/USGS_UUSS_COMCAT_2017/USGS_UUSS_COMCAT_2017__catalog_operational_benchmark.csv"},
-    "full": {"starttime":"2017-06-11T00:00:00","endtime":"2017-09-15T00:00:00","minlatitude":44.45,"maxlatitude":44.75,"minlongitude":-110.55,"maxlongitude":-110.15,"mindepth":0,"maxdepth":15,"output":"data/2017_maple_creek_yellowstone/data/catalogs/USGS_UUSS_COMCAT_2017/USGS_UUSS_COMCAT_2017__catalog_operational_full.csv"}
+    "benchmark": {"starttime":"2017-06-11T00:00:00","endtime":"2017-06-19T00:00:00","minlatitude":44.70,"maxlatitude":44.84,"minlongitude":-111.13,"maxlongitude":-110.93,"mindepth":-3,"maxdepth":20,"output":"data/2017_maple_creek_yellowstone/data/catalogs/USGS_UUSS_COMCAT_2017/USGS_UUSS_COMCAT_2017__catalog_operational_benchmark.csv"},
+    "full": {"starttime":"2017-06-11T00:00:00","endtime":"2017-09-15T00:00:00","minlatitude":44.70,"maxlatitude":44.84,"minlongitude":-111.13,"maxlongitude":-110.93,"mindepth":-3,"maxdepth":20,"output":"data/2017_maple_creek_yellowstone/data/catalogs/USGS_UUSS_COMCAT_2017/USGS_UUSS_COMCAT_2017__catalog_operational_full.csv"}
   },
   "2018_kilauea_hawaii": {
     "provider": "USGS ComCat / HVO",

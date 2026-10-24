@@ -34,6 +34,12 @@ catalogs:
     unit: phase_pick
     role: primary_auxiliary
     source_path: raw/Yellowstone_2017_correlation_phase_arrivals.csv
+  - product_id: detection_events
+    kind: derived_csv
+    unit: event
+    role: primary_time_only_reference
+    script: data/catalogs/SHELLY2019_GL081607/scripts/derive_detection_events.py
+    source_path: analysis/derived/detection_events/SHELLY2019_GL081607__detection_events_v1.csv
 - source_ref: USGS_UUSS_COMCAT_2017
   catalog_dir: data/catalogs/USGS_UUSS_COMCAT_2017
   parser_version: maple-local-v1-compact

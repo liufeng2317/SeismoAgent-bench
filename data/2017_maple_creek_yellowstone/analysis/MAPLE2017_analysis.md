@@ -1,5 +1,14 @@
 # MAPLE2017 - 2017 Maple Creek, Yellowstone case analysis
 
+> Update 2026-10-22 (expert preparation): the ComCat query box is corrected to
+> the swarm footprint (626 window events, was 5 from a box ~40 km east);
+> Shelly's phase release is turned into a time-only detection reference
+> (18,062 window events, origin accuracy vs ComCat MAD 0.11 s; SHELLY catalog
+> README); the UUSS Yellowstone 1-D model is registered in
+> `data/models/velocity_models.json`. Pang's table is still unpublished. The
+> statements below about the 5-row baseline and the 44.45–44.75 N mask are
+> superseded.
+
 > Current preparation state: `window_status: not_frozen` in [processing.yaml](processing.yaml). Earlier “frozen/v1” windows and counts below are retained as exploratory audit history, not approved evaluation inputs.
 
 

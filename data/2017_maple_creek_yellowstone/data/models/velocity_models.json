@@ -1,0 +1,74 @@
+{
+  "case_id": "2017_maple_creek_yellowstone",
+  "models": {
+    "uuss_yellowstone_1d": {
+      "status": "numeric_table_transcribed",
+      "source": "references/PANG2019_GL082376/supplement/Pang2019_MapleCreek_SI.pdf",
+      "source_sha256": "31728c932ed72926798131d934eec4f224c76eea42ba7725249984ec5dc1f946",
+      "locator": "PDF page 11, Table S1",
+      "reference": "Pang et al. (2019), GRL 46, supporting information Table S1: '1-D velocity model used by UUSS to locate earthquakes in the Yellowstone region'",
+      "doi": "10.1029/2019GL082376",
+      "role": "UUSS routine HYPOINVERSE model for Yellowstone (the model behind the ComCat reference locations); association, absolute location and reference-time derivation for the 2017 Maple Creek case",
+      "derivation": "Table S1 transcribed verbatim (Vp and Vs both tabulated; verified against the PDF text layer).",
+      "units": {
+        "top_of_layer": "km",
+        "vp": "km/s",
+        "vs": "km/s"
+      },
+      "vp_vs_ratio": null,
+      "vs_provenance": "Tabulated in the source (Vp/Vs varies 1.60-1.66 by layer).",
+      "depth_reference": "Not stated in the source. Pang et al. report depths 'beneath the surface (mean elevation of 2.3 km)'; the datum of the layer tops is therefore taken as the local surface (~2.3 km ASL) until confirmed.",
+      "layer_semantics": {
+        "published_representation": "Depth to top of layer plus one constant velocity per layer (HYPOINVERSE layered model).",
+        "grid_use": "Layer tops with constant velocity below each top, as for the Ridgecrest and Magna registries."
+      },
+      "rows": [
+        {
+          "top_of_layer_km": 0.0,
+          "vp_km_s": 2.72,
+          "vs_km_s": 1.66
+        },
+        {
+          "top_of_layer_km": 1.3,
+          "vp_km_s": 2.79,
+          "vs_km_s": 1.74
+        },
+        {
+          "top_of_layer_km": 4.3,
+          "vp_km_s": 5.21,
+          "vs_km_s": 3.23
+        },
+        {
+          "top_of_layer_km": 7.3,
+          "vp_km_s": 5.56,
+          "vs_km_s": 3.42
+        },
+        {
+          "top_of_layer_km": 10.3,
+          "vp_km_s": 5.77,
+          "vs_km_s": 3.49
+        },
+        {
+          "top_of_layer_km": 14.3,
+          "vp_km_s": 6.07,
+          "vs_km_s": 3.68
+        },
+        {
+          "top_of_layer_km": 18.3,
+          "vp_km_s": 6.33,
+          "vs_km_s": 3.78
+        },
+        {
+          "top_of_layer_km": 23.3,
+          "vp_km_s": 6.63,
+          "vs_km_s": 4.0
+        },
+        {
+          "top_of_layer_km": 52.3,
+          "vp_km_s": 8.0,
+          "vs_km_s": 4.85
+        }
+      ]
+    }
+  }
+}
