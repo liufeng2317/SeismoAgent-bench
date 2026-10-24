@@ -1,0 +1,58 @@
+# Stage 60 — Match&Locate (seismotools/match_and_locate) seeded by the r6 catalog.
+# Paths are relative to expert/. The source round is read only.
+source_export: export/r6
+export_root: export/r7/60_match_locate
+tool_root: ../../../../seismotools/match_and_locate
+waveforms: ../../../../data/2020_magna_utah/data/waveforms/data
+velocity_model:
+  registry: ../../../../data/2020_magna_utah/data/models/velocity_models.json
+  key: bjarnason_pechmann_1989_plus_slv_basinfill2km
+model_datum_elevation_km: 1.48           # = association.yaml reference_elevation_km
+
+templates:
+  # candidates: v1 working events with enough stations and a constrained depth;
+  # positions from the r6 double-difference layer where relocated, else NLL
+  min_stations: 15
+  max_sigma_depth_km: 2.0
+  # pilot round 2 (2026-10-21): denser templates + smaller grid beat a 1 km cover at lower cost
+  cover_radius_km: 0.5
+  pick_max_abs_residual_s: 0.3           # NLL residual gate for picks used as template marks
+
+scopes:
+  pilot:
+    days: ["2020-03-20"]
+    max_templates: 20
+  full:
+    days: ["2020-03-18", "2020-03-19", "2020-03-20", "2020-03-21",
+           "2020-03-22", "2020-03-23", "2020-03-24", "2020-03-25"]
+    max_templates: null
+
+window: {length_s: 2.0, before_s: 0.3, after_s: 1.7}
+
+prepare:
+  processing: {sampling_rate: 50.0, freqmin: 2.0, freqmax: 10.0}
+  channels: {families: [EN, EH], P: [Z], S: [N, E, "1", "2"]}   # expert channel policy
+  # pilot 2026-10-21: near, high-SNR rows beat all rows (Pang recall x1.5 at equal precision; PLAN.md r7)
+  selection: {max_distance_km: 20.0, min_snr: 5.0, noise_s: 5.0, min_rows: 12,
+              exclude_p_overlapping_s: true}
+  marks: {source: picks_then_model}
+
+run:
+  search: {units: km, half_width_km: 0.5, step_km: 0.25, half_depth_km: 0.5, step_depth_km: 0.5}
+  # deliberately permissive: the final thresholds are chosen by the offline sweep
+  detection: {cc_threshold: 0.0, mad_threshold: 8.0, min_separation_s: 4.0}
+  merge: {engine: python, cc_threshold: 0.0, mad_threshold: 8.0, min_separation_s: 4.0}
+  min_channels: 12
+
+# final catalog threshold: channel-shuffled null run on the dense pilot gives
+# 5 false of 355 at N×MAD 9 (1.4%), 54/460 at 8.5, 362/798 at 8 (PLAN.md r7)
+# full run (2026-10-22): mainshock-day null 49/2170 (2.3%) at 9; widening the merge
+# separation 4 -> 6 s removes 382 detections of which 301 match no reference
+# (post-event duplicates) for -68 Pang matches; 8 s starts removing real pairs
+final: {mad_threshold: 9.0, cc_threshold: 0.0, min_separation_s: 6.0}
+
+sweep:
+  mad: [8, 8.5, 9, 9.5, 10, 11, 12, 14]
+  cc: [0.0, 0.1, 0.15, 0.2, 0.25, 0.3]
+
+parallel: {prepare_workers: 32, jobs: 8, threads: 8}

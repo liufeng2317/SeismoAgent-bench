@@ -1,0 +1,109 @@
+# Paths are resolved relative to the expert root, including for --config overrides.
+case: 2020_magna_utah
+round: r8
+data_root: ../../../../data/2020_magna_utah/data/waveforms
+case_root: ../../../../data/2020_magna_utah
+export_root: export/r8
+candidate_window:
+  start_utc: '2020-03-18T00:00:00Z'
+  end_utc: '2020-03-26T00:00:00Z'
+pilot_window:
+  start_utc: '2020-03-18T02:00:00Z'
+  end_utc: '2020-03-18T02:10:00Z'
+mainshock:  # from data/2020_magna_utah/analysis/mainshock_anchor.json (ComCat uu60363602, cross-checked vs Pang)
+  event_id: uu60363602
+  time_utc: '2020-03-18T13:09:31.530Z'
+  magnitude: 5.7
+  magnitude_type: mw
+  latitude: 40.751
+  longitude: -112.0783333
+  depth_km: 11.9
+  proximity_s: 10
+core_region:  # the common reference-mask box; flags outside_core_region in stage 03
+  longitude_bounds: [-112.14, -111.94]
+  latitude_bounds: [40.69, 40.84]
+pilot_association_windows:  # stage 03 --scope pilot development windows (half-open)
+  quiet: ['2020-03-18T02:00:00Z', '2020-03-18T02:10:00Z']
+  mainshock: ['2020-03-18T13:05:00Z', '2020-03-18T13:20:00Z']
+methods:
+  picker: PhaseNet
+  weights: original
+  weight_version: '2'
+  implementation: TRACE-1.1 PhaseNet with SeisBench utilities
+  association: GaMMA
+  association_use_amplitude: false
+  absolute_location: NonLinLoc
+  velocity_model: bjarnason_pechmann_1989_wasatch_front
+channel_policy:
+  primary_families: [EN, EH]
+  require_three_components_for_first_pilot: true
+  rotate_12_using_stationxml: true
+  # One primary instrument per site: UU.WTU carries both 3-component EH and EN
+  # epochs across the whole window; keep the first family in this order.
+  site_family_preference: [EN, EH]
+  hn_and_vertical_only: deferred_separate_input_conditions
+stationxml_file: stations/earthscope_180c4a9f1ee1.stationxml  # relative to data_root
+tools:
+  trace_library: /liufeng1afs/project/03_LLM/Science_Discovery_Agenet/TRACE-1.1/seismoagent/library
+picking:
+  p_threshold: 0.2
+  s_threshold: 0.2
+  buffer_seconds: 60
+  cpu_workers: 4
+  cpu_threads: 1
+  batch_size: 32
+magnitude:
+  # r2 knob: Utah ML recalibration fitted on r1 by 04_comparison/
+  # 06_fit_ml_calibration.py (export/r1/06_fit_ml_calibration/fit.yaml):
+  # 385 UUSS-ML-matched events, 3363 accepted station measurements, 11
+  # sigma-clipped. Geometric spreading and the constant are refit; the HB87
+  # anelastic term (0.00189/km) is kept (not identifiable <=60 km leverage).
+  calibration: utah_geometric_spread_fit_r2
+  ml_calibration:  # correction(r) = a*log10(r_km) + b*r_km + c
+    a_log10r: 2.93417233670744
+    b_r_km: 0.00189
+    c: -2.3130951615978965
+  # r3 knob: per-station median residuals under the r2 calibration (same
+  # 06_fit_ml_calibration fit on r2, UUSS-ML anchor, stations with n>=20
+  # measurements on anchor events; no entry = 0). Entries are the fit.yaml
+  # medians verbatim — residual = ml_station - reference — and stage 09
+  # subtracts them from ml_station.
+  station_corrections:
+    UU.AVE.01.EN: -0.2555  # n=86
+    UU.BSS.01.EN: -0.2285  # n=52
+    UU.BYP.01.EN: -0.1469  # n=21
+    UU.CAPU.01.EN: -0.023  # n=137
+    UU.CFS.01.EN: 0.1822  # n=200
+    UU.CHS.01.EN: 0.0766  # n=97
+    UU.COY.01.EN: -0.2584  # n=174
+    UU.DOT.01.EN: 0.1594  # n=31
+    UU.ELE.01.EN: 0.2307  # n=36
+    UU.EOCU.01.EN: -0.1015  # n=59
+    UU.FTT.01.EN: -0.0908  # n=316
+    UU.HER.01.EN: 0.1822  # n=50
+    UU.HRU.01.EN: -0.4892  # n=40
+    UU.ICF.01.EN: 0.3115  # n=239
+    UU.LCU.01.EN: -0.0987  # n=30
+    UU.LKC.01.EN: 0.3418  # n=171
+    UU.MID.01.EN: 0.2054  # n=162
+    UU.NAI.01.EN: 0.0207  # n=60
+    UU.NOQ.01.EN: -0.072  # n=352
+    UU.OSS.01.EN: 0.1172  # n=116
+    UU.SAIU.01.EN: -0.3591  # n=193
+    UU.SNUT.01.EN: 0.2685  # n=32
+    UU.SPS.01.EN: 0.1893  # n=29
+    UU.SSC.01.EN: -0.0773  # n=36
+    UU.TPU.01.EN: 0.0983  # n=22
+    UU.TRS.01.EN: -0.0841  # n=61
+    UU.UHP.01.EN: -0.0065  # n=40
+    UU.UUE.01.EN: -0.3343  # n=60
+    UU.VEC.01.EN: 0.0009  # n=301
+    UU.WES.01.EN: -0.1533  # n=50
+    UU.WHS.01.EN: 0.0612  # n=83
+  numerical_check_channel: UU.AVE.01.ENE  # real single-stage response, 100 Hz horizontal
+# r8 (stage 45): depth prior for weakly constrained NLL locations (PLAN.md r8).
+depth_prior:
+  min_phases: 20          # weak = n_phases < 20 ...
+  max_sigma_z_km: 2.0     # ... or posterior sigma_z > 2 km
+  prior_sigma_km: 2.0     # Gaussian about the median depth of well-constrained events
+  min_ess: 30             # fewer effective re-weighted samples -> depth_unresolved

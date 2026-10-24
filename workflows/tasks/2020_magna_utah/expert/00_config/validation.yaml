@@ -1,0 +1,45 @@
+# Reference cohort mask, matching gates and review thresholds for
+# 04_comparison/05_match_references.py and 01_pipeline/10_validate_catalog.py.
+window:
+  start_utc: '2020-03-18T00:00:00Z'
+  end_utc: '2020-03-26T00:00:00Z'   # half-open, as everywhere in the pipeline
+region:
+  latitude_bounds: [40.69, 40.84]
+  longitude_bounds: [-112.14, -111.94]
+depth_bounds_sea_level_km: [-1.3, 13.1]
+# No magnitude floor: Pang Mc sentinels (<= -4, parsed to NaN) and unmagnituded
+# Baker/UUSS rows are real events and stay in the cohort. The audited no-floor
+# common-mask counts were 4,162/3,712/1,432 with the original parser, which
+# dropped 7 Pang rows with non-canonical seconds; our parser absorbs all rows,
+# hence 4,169. These counts are hard gates in stage 05.
+expected_reference_counts:
+  pang: 4169
+  baker: 3712
+  uuss: 1432
+matching:
+  # Primary gates equal the Ridgecrest evaluation matcher (4 s / 15 km) so
+  # round feedback is directly comparable with benchmark scoring.
+  primary: [4.0, 15.0]
+  sensitivity: [[2.0, 5.0], [1.0, 3.0]]
+quality:
+  residual_outlier_s: 1.0
+  association_review_min_outliers: 3
+  association_review_fraction: 0.20
+  rms_review_s: 0.6
+  depth_sigma_review_km: 3.0
+  horizontal_shift_review_km: 2.0
+  depth_edge_km: 0.5
+  azimuth_gap_review_deg: 180.0
+references:  # paths relative to case_root
+  pang:
+    label: Pang et al. (2020) relocated
+    format: pang_whitespace
+    path: data/catalogs/PANG2020_GL089798/PANG2020_GL089798__catalog_primary.txt
+  baker:
+    label: Baker & Whidden (2021) picks
+    format: baker_event_from_picks
+    path: data/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_picks.csv
+  uuss:
+    label: UUSS/ComCat operational
+    format: uuss_csv
+    path: data/catalogs/USGS_UUSS_COMCAT_2020/USGS_UUSS_COMCAT_2020__catalog_operational_benchmark.csv

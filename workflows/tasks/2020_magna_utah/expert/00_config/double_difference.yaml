@@ -1,0 +1,47 @@
+# Stage 52 (double-difference relocation) knobs. Round r6.
+# Correlation kernel conventions (two-band gates, whiten + full-window
+# normalized vector dot product, boundary/margin rules) are cribbed from the
+# Ridgecrest production stage 52; the corner frequencies are chosen for this
+# case (M1-3 events at 2-40 km through Salt Lake Valley basin fill) because
+# the Ridgecrest windows were cached with their bands baked in.
+
+bands_hz: [[2.0, 10.0], [1.0, 6.0]]   # [primary, check]; check band overlaps but
+                                      # weights differently -> cycle-skip detector
+butterworth_order: 4                  # zero-phase (sosfiltfilt)
+p_window_s: [-0.2, 1.0]               # pick-aligned analysis window
+s_window_s: [-0.3, 1.5]
+noise_window_s: [-1.2, -0.3]          # pre-event noise for the SNR gate
+edge_pad_s: 1.0                       # raw pad around the union, filtered then trimmed
+lag_limit_s: 0.40                     # search +-40 samples at 100 Hz
+boundary_lag_s: 0.39                  # reject measurements pinned at the search edge
+peak_exclusion_s: 0.08                # margin ignores +-8 samples around the peak
+min_snr: 2.0
+min_cc: 0.75
+min_peak_margin: 0.08
+band_lag_tolerance_s: 0.020001
+
+pair_k_neighbors: 8                   # nearest events per event (3-D NLL distance)
+pair_max_separation_km: 10.0
+min_obs_cc_pair: 4                    # pair kept in dt.cc if >= this many accepted obs
+min_obs_ct_pair: 4                    # pair kept in dt.ct if >= this many common picks
+
+# hypoDD iteration control is copied verbatim from the Ridgecrest tuned run
+# (14_tune_hypodd cc3_d1: CT+CC, damping 80/40); only MAXEVE, layer count and
+# the velocity model differ. Model = the round's association model, verbatim.
+
+match_gates: {time_s: 4.0, distance_km: 15.0}   # same as stage 05 primary gates
+
+# hypoDD relocates with flat layers and stations pinned to the model top; its
+# layered analytic tracer runs ~0.9 km shallower than the NLL eikonal solution
+# on the same model (verified spatially uniform on the 8-16 km population).
+# Offset = -mean(pang -0.86, uuss -0.81) dZ medians; added to relocated depths.
+depth_datum_offset_km: 0.90
+
+# Acceptance (applied by consumers, stage 60 catalog export): a strong layer
+# contrast at 3.5 km model depth (~2 km bsl, Vp 4.0 -> 5.9) traps weakly linked
+# events in hypoDD; r8 events moved up > 3 km sit at 1.5-2.5 km bsl and are
+# -5.1 km off Pang where their DD-start depth was +0.3 km. Relocations whose
+# depth moves more than this from the DD start keep the start position.
+max_vertical_shift_km: 3.0
+
+workers: 16

@@ -1,0 +1,29 @@
+# GaMMA association settings; the r2+ tuning levers are the velocity model and
+# the dbscan_*/min_*/oversample_factor entries below.
+method: BGMM
+workers: 32
+chunk_seconds: 3600
+buffer_seconds: 120
+projection_center: [-112.0783333, 40.751]  # mainshock epicenter (ComCat uu60363602)
+longitude_bounds: [-112.65, -111.55]      # contains all 47 stations plus margin
+latitude_bounds: [40.40, 41.10]
+depth_bounds_km: [0, 20]                  # below the reference elevation datum
+# Mean station elevation 1.479 km ASL; also matches the Bjarnason & Pechmann
+# (1989) Table 2 model datum (1.5 km ASL) to within 20 m, so layer-top depths
+# carry over without re-datuming.
+reference_elevation_km: 1.48
+velocity_model: bjarnason_pechmann_1989_plus_slv_basinfill2km
+# 'linear' ramps between layer tops (GaMMA np.interp, NLL LAYER gradients);
+# 'step' keeps constant layers. r9 tested step and was rejected (PLAN.md r9):
+# the r4 basin layer was calibrated under the ramp, so linear stays.
+velocity_layering: linear
+eikonal_spacing_km: 0.5
+dbscan_eps: 10.0
+dbscan_min_samples: 3
+oversample_factor: 5
+covariance_prior: [3.0]
+min_picks_per_eq: 10
+min_p_picks_per_eq: 4
+min_s_picks_per_eq: 3
+min_stations: 6
+max_sigma11: 1.5
