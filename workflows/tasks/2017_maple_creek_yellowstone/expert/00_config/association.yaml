@@ -1,0 +1,30 @@
+# GaMMA association settings; the r2+ tuning levers are the station set, the
+# velocity model and the dbscan_*/min_*/oversample_factor entries below.
+method: BGMM
+workers: 32
+chunk_seconds: 3600
+buffer_seconds: 120
+projection_center: [-111.0331667, 44.7813333]  # Mw 4.4 epicenter (ComCat uu60203137)
+longitude_bounds: [-111.80, -109.40]      # contains all 27 stations (to WY.YPK, 88 km) plus margin
+latitude_bounds: [43.90, 45.30]
+depth_bounds_km: [0, 20]                  # below the reference elevation datum
+# Mean station elevation 2.36 km ASL (2.41 km for the 17 three-component
+# sites); the UUSS Yellowstone model has no stated datum and Pang et al. (2019)
+# give depths below a 2.3 km mean surface, so the layer tops are taken below
+# 2.3 km ASL (registry depth_reference).
+reference_elevation_km: 2.3
+velocity_model: uuss_yellowstone_1d
+# r2 knob: 'step' keeps the published constant-velocity layers in the GaMMA
+# eikonal grid and the NLL LAYER cards; r1 used 'linear' (ramps between layer
+# tops), which made the 1.3-4.3 km 2.79 km/s layer far too fast (PLAN.md r1).
+velocity_layering: step
+eikonal_spacing_km: 0.5
+dbscan_eps: 10.0
+dbscan_min_samples: 3
+oversample_factor: 5
+covariance_prior: [3.0]
+min_picks_per_eq: 10
+min_p_picks_per_eq: 4
+min_s_picks_per_eq: 3
+min_stations: 6
+max_sigma11: 1.5

@@ -1,0 +1,57 @@
+# Stage 60 — Match&Locate (seismotools/match_and_locate) seeded by the r5 catalog.
+# Ported from the Magna stage 60 (its PLAN.md r7); paths relative to expert/.
+source_export: export/r5
+export_root: export/r7/60_match_locate   # r6: export/r6/60_match_locate
+tool_root: ../../../../seismotools/match_and_locate
+waveforms: ../../../../data/2017_maple_creek_yellowstone/data/waveforms/data
+velocity_model:
+  registry: ../../../../data/2017_maple_creek_yellowstone/data/models/velocity_models.json
+  key: uuss_yellowstone_1d
+model_datum_elevation_km: 2.3            # = association.yaml reference_elevation_km
+
+templates:
+  # candidates: v1 working events with enough stations and a constrained depth
+  # (NLL positions with r5 station delays; no DD layer in this case yet)
+  # r7 knob (template density): r6 used min_stations 10 / cover 0.5 km
+  # (219 templates, 90 % cover of v1); Shelly used 1,147 templates.
+  min_stations: 8
+  max_sigma_depth_km: 2.0
+  cover_radius_km: 0.3                   # 519 templates, 92 % cover
+  pick_max_abs_residual_s: 0.3
+
+scopes:
+  pilot:
+    days: ["2017-06-13"]                 # mid-activity day: ComCat 37, Shelly 1,897
+    max_templates: 20
+  full:
+    days: ["2017-06-11", "2017-06-12", "2017-06-13", "2017-06-14",
+           "2017-06-15", "2017-06-16", "2017-06-17", "2017-06-18"]
+    max_templates: null
+
+window: {length_s: 2.0, before_s: 0.3, after_s: 1.7}
+
+prepare:
+  processing: {sampling_rate: 50.0, freqmin: 2.0, freqmax: 10.0}
+  # vertical-only WY sites contribute P rows only (no horizontals)
+  channels: {families: [HH, EH], P: [Z], S: [N, E, "1", "2"]}
+  # Magna default is 20 km; here 20 km holds only 3 three-component and 5
+  # vertical-only sites (<= 14 rows), so the pilot compares 20 vs 30 km.
+  selection: {max_distance_km: 20.0, min_snr: 5.0, noise_s: 5.0, min_rows: 8,
+              exclude_p_overlapping_s: true}
+  marks: {source: picks_then_model}
+
+run:
+  search: {units: km, half_width_km: 0.5, step_km: 0.25, half_depth_km: 0.5, step_depth_km: 0.5}
+  detection: {cc_threshold: 0.0, mad_threshold: 8.0, min_separation_s: 4.0}
+  merge: {engine: python, cc_threshold: 0.0, mad_threshold: 8.0, min_separation_s: 4.0}
+  min_channels: 8
+
+# final catalog threshold (set after the sweep / null run; Magna: N×MAD 9, 6 s)
+# r7 (519 templates): null run 2.6 % false at 9, 0.95 % at 9.25, 0.3 % at 9.5
+# (6 s separation) -> 9.25, the ~1 % level of Magna and r6 (r6: 9 -> 1.2 %).
+final: {mad_threshold: 9.25, cc_threshold: 0.0, min_separation_s: 6.0}
+
+sweep:
+  mad: [8, 8.5, 9, 9.5, 10, 11, 12, 14]
+
+parallel: {prepare_workers: 32, jobs: 8, threads: 8}

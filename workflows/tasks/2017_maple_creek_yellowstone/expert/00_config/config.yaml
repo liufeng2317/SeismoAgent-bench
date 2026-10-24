@@ -1,0 +1,68 @@
+# Paths are resolved relative to the expert root, including for --config overrides.
+case: 2017_maple_creek_yellowstone
+round: r5
+data_root: ../../../../data/2017_maple_creek_yellowstone/data/waveforms
+case_root: ../../../../data/2017_maple_creek_yellowstone
+export_root: export/r5
+candidate_window:
+  start_utc: '2017-06-11T00:00:00Z'
+  end_utc: '2017-06-19T00:00:00Z'
+pilot_window:  # quiet pre-swarm interval (Shelly: 16 detections on all of 06-11)
+  start_utc: '2017-06-11T02:00:00Z'
+  end_utc: '2017-06-11T02:10:00Z'
+mainshock:  # from data/2017_maple_creek_yellowstone/analysis/mainshock_anchor.json (ComCat uu60203137)
+  event_id: uu60203137
+  time_utc: '2017-06-16T00:48:46.940Z'
+  magnitude: 4.4
+  magnitude_type: mw
+  latitude: 44.7813333
+  longitude: -111.0331667
+  depth_km: 9.3
+  proximity_s: 10
+core_region:  # the reference-mask box (ComCat query box); flags outside_core_region in stage 03
+  longitude_bounds: [-111.13, -110.93]
+  latitude_bounds: [44.70, 44.84]
+pilot_association_windows:  # stage 03 --scope pilot development windows (half-open)
+  quiet: ['2017-06-11T02:00:00Z', '2017-06-11T02:10:00Z']
+  mainshock: ['2017-06-16T00:45:00Z', '2017-06-16T01:00:00Z']
+methods:
+  picker: PhaseNet
+  weights: original
+  weight_version: '2'
+  implementation: TRACE-1.1 PhaseNet with SeisBench utilities
+  association: GaMMA
+  association_use_amplitude: false
+  absolute_location: NonLinLoc
+  velocity_model: uuss_yellowstone_1d
+channel_policy:
+  primary_families: [HH, EH]
+  require_three_components_for_first_pilot: true
+  rotate_12_using_stationxml: true
+  # One primary instrument per site: WY.YPP and WY.YTP carry a vertical-only
+  # EH and a three-component HH; keep the first family in this order.
+  site_family_preference: [HH, EH]
+  # r3 knob: the ten EHZ-only WY sites enter as a vertical-only input condition
+  # (PhaseNet with zero-imputed horizontals, P picks only); YGC 6 km, YHB 13 km
+  # and YHH 14 km from the epicentre. A three-component instrument still wins at
+  # a shared site (WY.YPP, WY.YTP keep HH).
+  vertical_only_families: [EH]
+  hn_and_vertical_only: deferred_separate_input_conditions  # BH 40 Hz sites remain deferred
+stationxml_file: stations/earthscope_d8d8f15e00eb.stationxml  # relative to data_root
+tools:
+  trace_library: /liufeng1afs/project/03_LLM/Science_Discovery_Agenet/TRACE-1.1/seismoagent/library
+picking:
+  # 0.2 carried over from Magna r5 (largest recall gain there; 0.15 rejected
+  # as uncalibrated), not re-derived for this case.
+  p_threshold: 0.2
+  s_threshold: 0.2
+  buffer_seconds: 60
+  cpu_workers: 4
+  cpu_threads: 1
+  batch_size: 32
+  # r4 knob: vertical-only instruments see Z on all three channels (r3: zeros).
+  vertical_only_horizontals: copy_z
+magnitude:
+  # r1: provisional Hutton & Boore (1987) ML; a Yellowstone calibration
+  # against the ComCat magnitudes is a later knob (Magna r2/r3 pattern).
+  calibration: hutton_boore_1987_provisional
+  numerical_check_channel: WY.YMC.01.EHE  # nearest three-component site, 100 Hz horizontal

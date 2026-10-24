@@ -1,0 +1,22 @@
+# NonLinLoc settings, ported verbatim from the Ridgecrest round defaults.
+binary_directory: /liufeng1afs/software/NLLoc/NLL7.00_src/src
+workers: 32
+grid_spacing_km: 0.25
+grid_top_km: -3.0
+grid_bottom_km: 35.0
+search_min_node_km: 0.1
+search_max_nodes: 50000
+pick_error_s:
+  P: 0.10
+  S: 0.20
+model_error_s: 0.30
+per_event_timeout_s: 180
+posterior_samples: 2000
+# r5 knob: station delays (LOCDELAY) from this round's own well-constrained
+# events, iterated; stage 04 relocates after each update (PLAN.md r5).
+station_delays:
+  iterations: 2
+  min_picks: 20
+  max_rms_s: 0.5
+  max_gap_deg: 180
+  max_sigma_depth_km: 3.0

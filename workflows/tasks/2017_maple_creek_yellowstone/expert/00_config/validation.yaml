@@ -1,0 +1,48 @@
+# Reference cohort mask, matching gates and review thresholds for
+# 04_comparison/05_match_references.py and 01_pipeline/10_validate_catalog.py.
+window:
+  start_utc: '2017-06-11T00:00:00Z'
+  end_utc: '2017-06-19T00:00:00Z'   # half-open, as everywhere in the pipeline
+region:  # the ComCat query box (swarm footprint + ~3 km); applies to located references
+  latitude_bounds: [44.70, 44.84]
+  longitude_bounds: [-111.13, -110.93]
+# ComCat (UUSS Yellowstone) depths are below the local surface, which is also
+# this pipeline's model datum (association reference_elevation_km 2.3); the
+# limits are the query limits and deliberately loose.
+depth_bounds_km: [-3.0, 20.0]
+# Hard gates in stage 05: ComCat benchmark snapshot rows (all inside the query
+# box by construction) and Shelly window events after duplicate merging
+# (data/catalogs/SHELLY2019_GL081607 detection_events_v1).
+expected_reference_counts:
+  comcat: 626
+  shelly: 18062
+matching:
+  # Located references: same gates as the Ridgecrest/Magna evaluation matcher.
+  primary: [4.0, 15.0]
+  sensitivity: [[2.0, 5.0], [1.0, 3.0]]
+  # Time-only references (Shelly): origin time alone; the distance entry is
+  # unused. Shelly origin times are within 0.11 s (MAD) of ComCat, but on the
+  # peak day there is one detection every ~14 s, so the gate is tight and a
+  # shifted-reference control counts chance coincidences.
+  time_only:
+    primary: [1.0, 15.0]
+    sensitivity: [[2.0, 15.0], [0.5, 15.0]]
+    control_shift_s: 60
+quality:
+  residual_outlier_s: 1.0
+  association_review_min_outliers: 3
+  association_review_fraction: 0.20
+  rms_review_s: 0.6
+  depth_sigma_review_km: 3.0
+  horizontal_shift_review_km: 2.0
+  depth_edge_km: 0.5
+  azimuth_gap_review_deg: 180.0
+references:  # paths relative to case_root
+  comcat:
+    label: ComCat/UUSS operational
+    format: comcat_csv
+    path: data/catalogs/USGS_UUSS_COMCAT_2017/USGS_UUSS_COMCAT_2017__catalog_operational_benchmark.csv
+  shelly:
+    label: Shelly & Hardebeck (2019) detections, time only
+    format: shelly_detection_events
+    path: data/catalogs/SHELLY2019_GL081607/analysis/derived/detection_events/SHELLY2019_GL081607__detection_events_v1.csv
