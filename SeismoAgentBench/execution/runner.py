@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
+import platform
 import signal
 import selectors
 import shutil
@@ -18,15 +19,28 @@ import subprocess
 import sys
 import tempfile
 import time
-from typing import Any, Mapping, Sequence
+from typing import Any, Callable, Mapping, Sequence
 
-from SeismoAgentBench.reporting.transcript import append_execution_line, summarize_usage
+from SeismoAgentBench.reporting.transcript import append_execution_line, build_timeline, summarize_usage
 from SeismoAgentBench.execution.auth import prepare_codex_runtime_home
 from SeismoAgentBench.task.validation import ValidationError, load_json, load_task, validate_manifest
 
 
 class ExecutionError(RuntimeError):
     """Raised when a run cannot be prepared or completed."""
+
+
+class RunnerInterrupted(RuntimeError):
+    """Raised inside the streaming loop when the runner receives a stop signal."""
+
+    def __init__(self, signum: int):
+        self.signum = signum
+        super().__init__(f"interrupted by signal {signum}")
+
+
+# How often a live run rewrites run_result.json with progress fields, so a
+# post-mortem can still see duration and last activity after a hard kill.
+HEARTBEAT_INTERVAL_S = 300.0
 
 
 @dataclass(frozen=True)
@@ -143,8 +157,63 @@ def _failure_class(log: Path) -> tuple[str, bool]:
     return "nonzero_exit", False
 
 
+def _install_signal_guards() -> dict[str, Any]:
+    """Ignore hangups and turn stop signals into ``RunnerInterrupted``.
+
+    A terminal disconnect (SIGHUP) must not end a trusted-development run.
+    An explicit stop (SIGTERM/SIGINT) must still leave a closed record, so
+    it raises instead of terminating the runner outright.
+    """
+    installed: dict[str, Any] = {}
+
+    def _interrupt(signum: int, frame: Any) -> None:
+        raise RunnerInterrupted(signum)
+
+    try:
+        if hasattr(signal, "SIGHUP"):
+            installed["SIGHUP"] = signal.signal(signal.SIGHUP, signal.SIG_IGN)
+        for name in ("SIGTERM", "SIGINT"):
+            number = getattr(signal, name, None)
+            if isinstance(number, int):
+                installed[name] = signal.signal(number, _interrupt)
+    except ValueError:
+        # Signal handlers can only be installed in the main thread; threaded
+        # callers (tests, experiment executors) keep the default disposition.
+        return {}
+    return installed
+
+
+def _restore_signal_handlers(installed: dict[str, Any]) -> None:
+    for name, handler in installed.items():
+        number = getattr(signal, name, None)
+        if isinstance(number, int):
+            try:
+                signal.signal(number, handler)
+            except (OSError, ValueError):
+                pass
+
+
+def _process_start_ticks(pid: int) -> int | None:
+    """Read the /proc process start time used to reject pid reuse."""
+    try:
+        fields = Path(f"/proc/{pid}/stat").read_text(encoding="utf-8").rsplit(")", 1)[1].split()
+        return int(fields[19])
+    except (OSError, ValueError, IndexError):
+        return None
+
+
+def _write_runner_pid(record: Path) -> None:
+    _write_json(record / "runner.pid", {
+        "pid": os.getpid(),
+        "hostname": platform.node(),
+        "process_start_time": _process_start_ticks(os.getpid()),
+        "recorded_at": _now(),
+    })
+
+
 def _stream_process(process: subprocess.Popen[bytes], event_stream: Any,
-                    human_stream: Any, timeout: float) -> None:
+                    human_stream: Any, timeout: float,
+                    heartbeat_cb: Callable[[], None] | None = None) -> None:
     """Stream process output while retaining a timeout that can interrupt reads."""
     if process.stdout is None:
         process.wait(timeout=timeout)
@@ -152,20 +221,39 @@ def _stream_process(process: subprocess.Popen[bytes], event_stream: Any,
     selector = selectors.DefaultSelector()
     selector.register(process.stdout, selectors.EVENT_READ)
     deadline = time.monotonic() + timeout
+    last_heartbeat = time.monotonic()
+
+    def _fire_heartbeat() -> None:
+        nonlocal last_heartbeat
+        last_heartbeat = time.monotonic()
+        if heartbeat_cb is not None:
+            try:
+                heartbeat_cb()
+            except OSError:
+                pass
+
     try:
         while selector.get_map():
             remaining = deadline - time.monotonic()
             if remaining <= 0:
                 raise subprocess.TimeoutExpired(process.args, timeout)
-            ready = selector.select(remaining)
+            window = remaining
+            if heartbeat_cb is not None:
+                # Wake at least once per interval so heartbeats fire even
+                # while the launcher stays silent (long background stages).
+                window = min(window, HEARTBEAT_INTERVAL_S)
+            ready = selector.select(window)
             if not ready:
-                raise subprocess.TimeoutExpired(process.args, timeout)
+                _fire_heartbeat()
+                continue
             for key, _ in ready:
                 line = key.fileobj.readline()
                 if line:
                     append_execution_line(line, event_stream, human_stream)
                 else:
                     selector.unregister(key.fileobj)
+            if time.monotonic() - last_heartbeat >= HEARTBEAT_INTERVAL_S:
+                _fire_heartbeat()
             if process.poll() is not None and not selector.get_map():
                 break
     finally:
@@ -318,17 +406,33 @@ def run_command(task_path: str | Path, manifest_path: str | Path | None, command
     _write_json(context.result, result)
     runtime_root: Path | None = None
     event_log = context.log.with_name("execution.jsonl")
+    started_monotonic = time.monotonic()
     with event_log.open("w", encoding="utf-8") as event_stream, context.log.open("w", encoding="utf-8") as human_stream:
         process: subprocess.Popen[bytes] | None = None
+        installed_handlers: dict[str, Any] = {}
+
+        def _heartbeat() -> None:
+            result["heartbeat_at"] = _now()
+            result["elapsed_s"] = round(time.monotonic() - started_monotonic, 1)
+            try:
+                result["execution_log_bytes"] = event_log.stat().st_size
+            except OSError:
+                pass
+            _write_json(context.result, result)
+
         try:
             result["state"] = "running"
             _write_json(context.result, result)
             env, runtime_root = _environment(context, extra_env, auth_source_home)
+            installed_handlers = _install_signal_guards()
             process = subprocess.Popen(list(command), cwd=context.work, env=env,
                                        stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                        start_new_session=True)
             try:
-                _stream_process(process, event_stream, human_stream, timeout)
+                # Stays inside the inner try so a stop signal arriving while
+                # the pid record is written still closes the run record.
+                _write_runner_pid(context.record)
+                _stream_process(process, event_stream, human_stream, timeout, heartbeat_cb=_heartbeat)
                 result["exit_code"] = process.wait()
                 result["state"] = "completed" if process.returncode == 0 else "execution_failed"
                 if process.returncode != 0:
@@ -345,6 +449,17 @@ def run_command(task_path: str | Path, manifest_path: str | Path | None, command
                         append_execution_line(line, event_stream, human_stream)
                 result["state"] = "execution_timeout"
                 result["failure_reason"] = "timeout"
+            except RunnerInterrupted as exc:
+                try:
+                    os.killpg(process.pid, signal.SIGKILL)
+                except (ProcessLookupError, PermissionError):
+                    pass
+                process.wait()
+                if process.stdout is not None:
+                    for line in process.stdout:
+                        append_execution_line(line, event_stream, human_stream)
+                result["state"] = "interrupted"
+                result["failure_reason"] = f"runner_signal:{signal.Signals(exc.signum).name}"
         except OSError as exc:
             result["state"] = "execution_failed"
             result["failure_reason"] = "launcher_error"
@@ -359,6 +474,12 @@ def run_command(task_path: str | Path, manifest_path: str | Path | None, command
             usage_path = context.record / "usage_summary.json"
             _write_json(usage_path, summarize_usage(event_log))
             result["usage_summary"] = "record/usage_summary.json"
+            try:
+                _write_json(context.record / "timeline.json", build_timeline(context.log))
+                result["timeline"] = "record/timeline.json"
+            except OSError:
+                pass
+            _restore_signal_handlers(installed_handlers)
             result["finished_at"] = _now()
             _write_json(context.result, result)
     return result

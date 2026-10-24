@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+import signal
 import sys
 import tempfile
 import threading
@@ -8,6 +9,7 @@ import unittest
 from tests.task_helpers import write_task_package
 
 from SeismoAgentBench.execution import ExecutionError, run_command
+from SeismoAgentBench.execution import runner as runner_module
 
 
 TASK = {
@@ -79,7 +81,7 @@ class RunnerTests(unittest.TestCase):
         def execute():
             holder["result"] = run_command(
                 self.task, self.manifest, [sys.executable, "-c", code],
-                self.root, "live-logs", timeout=10,
+                self.root, "live-logs", timeout=30,
             )
 
         worker = threading.Thread(target=execute)
@@ -87,16 +89,71 @@ class RunnerTests(unittest.TestCase):
         run = self.root / "live-logs"
         human = run / "record/execution.log"
         events = run / "record/execution.jsonl"
-        deadline = time.monotonic() + 5
+        # Host python start-up alone can take ~10 s, so poll generously.
+        deadline = time.monotonic() + 40
         while time.monotonic() < deadline and (not human.exists() or "first event" not in human.read_text()):
-            time.sleep(0.01)
+            time.sleep(0.1)
         self.assertTrue(human.is_file())
         self.assertIn("first event", human.read_text())
         self.assertTrue(events.is_file())
         self.assertIn("console.line", events.read_text())
-        worker.join(timeout=5)
+        worker.join(timeout=30)
         self.assertFalse(worker.is_alive())
         self.assertEqual(holder["result"]["state"], "completed")
+
+    def test_heartbeat_rewrites_run_result_while_running(self):
+        # A hard-killed runner leaves no finished_at; the periodic heartbeat
+        # must still expose elapsed time and last activity in run_result.json.
+        code = "import time; print('first', flush=True); time.sleep(4); print('second', flush=True)"
+        holder = {}
+        original_interval = runner_module.HEARTBEAT_INTERVAL_S
+        runner_module.HEARTBEAT_INTERVAL_S = 1.0
+        try:
+            def execute():
+                holder["result"] = run_command(
+                    self.task, self.manifest, [sys.executable, "-c", code],
+                    self.root, "live-heartbeat", timeout=60,
+                )
+
+            worker = threading.Thread(target=execute)
+            worker.start()
+            result_path = self.root / "live-heartbeat" / "record" / "run_result.json"
+            deadline = time.monotonic() + 40
+            observed = None
+            while time.monotonic() < deadline:
+                if result_path.is_file():
+                    try:
+                        observed = json.loads(result_path.read_text(encoding="utf-8"))
+                    except (OSError, json.JSONDecodeError):
+                        observed = None
+                    if isinstance(observed, dict) and "heartbeat_at" in observed:
+                        break
+                time.sleep(0.2)
+            worker.join(timeout=40)
+            self.assertFalse(worker.is_alive())
+            self.assertIsNotNone(observed)
+            self.assertIn("heartbeat_at", observed)
+            self.assertIsInstance(observed.get("elapsed_s"), (int, float))
+            self.assertEqual(holder["result"]["state"], "completed")
+
+        finally:
+            runner_module.HEARTBEAT_INTERVAL_S = original_interval
+
+    def test_stop_signal_closes_record_as_interrupted(self):
+        # The child SIGTERMs its parent (the runner). The record must close
+        # as interrupted with a signal failure reason, not stay "running".
+        code = ("import os,signal,time; print('arming', flush=True); time.sleep(0.5); "
+                "os.kill(os.getppid(), signal.SIGTERM); time.sleep(30)")
+        result = run_command(self.task, self.manifest, [sys.executable, "-c", code],
+                             self.root, "sigterm-run", timeout=60)
+        self.assertEqual(result["state"], "interrupted")
+        self.assertEqual(result["failure_reason"], "runner_signal:SIGTERM")
+        self.assertIn("finished_at", result)
+        run = self.root / "sigterm-run"
+        self.assertTrue((run / "record/runner.pid").is_file())
+        self.assertTrue((run / "record/usage_summary.json").is_file())
+        timeline = json.loads((run / "record/timeline.json").read_text(encoding="utf-8"))
+        self.assertGreaterEqual(timeline.get("lines", 0), 1)
 
     def test_codex_auth_is_available_only_in_temporary_runtime_home(self):
         source = Path(self.tmp.name) / "codex-auth"

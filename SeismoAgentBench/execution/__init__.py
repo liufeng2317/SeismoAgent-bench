@@ -7,8 +7,9 @@ from .config import AgentConfigError, load_agent_config, write_agent_config_snap
 from .environment import (EnvironmentConfigError, load_environment_config, probe_runtime,
                           write_environment_config_snapshot)
 from .experiment import ExperimentSpecError, expand_experiment, load_experiment_spec
+from .monitor import finalize_run, run_status
 from .paths import RunLayout, RunLayoutError
-from .runner import ExecutionError, RunContext, run_command
+from .runner import ExecutionError, RunContext, RunnerInterrupted, run_command
 from .version import probe_executable_version
 
 __all__ = [
@@ -16,8 +17,10 @@ __all__ = [
     "CodexCommandError", "CodexCommandSpec",
     "EnvironmentConfigError",
     "ExecutionError", "ExperimentSpecError", "RunContext", "RunLayout", "RunLayoutError",
-    "expand_experiment", "load_agent_config", "load_env_file", "load_experiment_spec",
+    "RunnerInterrupted",
+    "expand_experiment", "finalize_run", "load_agent_config", "load_env_file",
+    "load_experiment_spec",
     "load_environment_config", "prepare_codex_runtime_home", "probe_executable_version",
-    "probe_runtime", "resolve_auth", "write_environment_config_snapshot",
+    "probe_runtime", "resolve_auth", "run_status", "write_environment_config_snapshot",
     "run_command", "write_agent_config_snapshot",
 ]

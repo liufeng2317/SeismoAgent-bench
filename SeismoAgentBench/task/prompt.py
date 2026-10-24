@@ -78,6 +78,11 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
         f"- Network policy: {_cell(runtime.get('network_policy') or 'allowed')}",
         f"- Package installation: {_cell(runtime.get('package_installation') or 'allowed')}",
     ])
+    budget = runtime.get("time_budget_s")
+    if isinstance(budget, (int, float)) and not isinstance(budget, bool) and budget > 0:
+        lines.append(
+            f"- Time budget: {int(budget)} s (~{budget / 3600:.1f} h) wall clock from run start; "
+            "the run is terminated at the deadline")
     if task.get("output_artifacts"):
         lines.extend([
             "",

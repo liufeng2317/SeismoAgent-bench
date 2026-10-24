@@ -13,9 +13,10 @@ from SeismoAgentBench.agent import AgentError, AgentSpec
 from SeismoAgentBench.execution import (ClaudeCommandError, ClaudeCommandSpec,
                                         CodexCommandError, CodexCommandSpec, ExecutionError,
                                         AgentConfigError, RunLayout, expand_experiment,
-                                        load_agent_config, load_environment_config, load_env_file,
-                                        load_experiment_spec,
-                                        probe_executable_version, probe_runtime, resolve_auth)
+                                        finalize_run, load_agent_config, load_environment_config,
+                                        load_env_file, load_experiment_spec,
+                                        probe_executable_version, probe_runtime, resolve_auth,
+                                        run_status)
 from SeismoAgentBench.task import load_json, render_agent_prompt
 from SeismoAgentBench.workflow import evaluate_run, execute_experiment, run_agent
 
@@ -91,6 +92,12 @@ def _parser() -> argparse.ArgumentParser:
     claude.add_argument("--resume", action="store_true")
     claude.add_argument("--max-attempts", type=int, default=1)
     claude.add_argument("--retry-delay-s", type=float, default=0)
+    status = commands.add_parser("status", help="read-only probe of one run directory")
+    status.add_argument("--run-dir", required=True, help="run directory to inspect")
+    finalize = commands.add_parser("finalize", help="close out a run record the runner abandoned")
+    finalize.add_argument("--run-dir", required=True, help="run directory to close")
+    finalize.add_argument("--force", action="store_true",
+                          help="close even if the runner pid still appears alive")
     return parser
 
 
@@ -119,6 +126,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         elif args.action == "execute-experiment":
             runs = execute_experiment(args.spec, limit=args.limit)
             result = {"spec": str(Path(args.spec).resolve()), "runs": runs}
+        elif args.action == "status":
+            result = run_status(args.run_dir)
+        elif args.action == "finalize":
+            result = finalize_run(args.run_dir, force=args.force)
         else:
             harness = args.action.removeprefix("run-")
             if args.max_attempts < 1 or args.retry_delay_s < 0:
@@ -171,6 +182,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                 package_installation=configured.get("package_installation", "allowed"),
                 environment=env,
             )
+            # The agent cannot plan a multi-hour pipeline against a deadline
+            # it never sees, so the wall-clock budget travels with the prompt.
+            runtime_context = dict(runtime_context)
+            runtime_context["time_budget_s"] = args.timeout
             rendered_prompt = render_agent_prompt(
                 args.task, args.manifest, extra_instructions=args.prompt,
                 runtime_context=runtime_context)
@@ -235,7 +250,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(json.dumps({"state": "cli_error", "error": str(exc)}, sort_keys=True), file=sys.stderr)
         return 2
     print(json.dumps(result, indent=2, sort_keys=True))
-    if args.action in {"plan-experiment", "execute-experiment"}:
+    if args.action in {"plan-experiment", "execute-experiment", "status", "finalize"}:
         return 0
     return 0 if result["run"]["state"] in {"completed", "scored"} else 3
 

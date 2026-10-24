@@ -65,6 +65,25 @@ class PromptRenderingTests(unittest.TestCase):
             self.assertIn("Input directory: not configured for this run.", rendered)
             self.assertNotIn("<output_hints>", rendered)
 
+    def test_time_budget_is_rendered_only_when_provided(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            task = root / "task.json"
+            task.write_text(json.dumps({
+                "task_id": "budget-task", "version": "1",
+                "task_prompt_file": "task_prompt.md",
+            }), encoding="utf-8")
+            (root / "task_prompt.md").write_text("Do the work.\n", encoding="utf-8")
+            for budget, expected in ((172800, "Time budget: 172800 s (~48.0 h)"), (None, None)):
+                with self.subTest(time_budget_s=budget):
+                    runtime = {} if budget is None else {"time_budget_s": budget}
+                    rendered = render_agent_prompt(task, runtime_context=runtime)
+                    if expected is None:
+                        self.assertNotIn("Time budget:", rendered)
+                    else:
+                        self.assertIn(expected, rendered)
+                        self.assertIn("terminated at the deadline", rendered)
+
 
 if __name__ == "__main__":
     unittest.main()
