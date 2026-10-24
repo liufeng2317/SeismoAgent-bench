@@ -97,3 +97,36 @@ Median epicentral vs Shelly / Liu / Ross / ComCat: 0.62 / 0.80 / 0.75 /
 0.83 km. Ridgecrest now exceeds the reference-to-reference recall like the
 other five cases. The task evaluation layer reads this union (depths below
 sea level + 0.7 km).
+
+## Stage 62 — cross-correlation relocation pilot (2026-10-25)
+
+Motivation: the stage-60 union is less sharp than Shelly/Ross (fault-normal
+width 1.58 km vs 0.85): its 10,166 M&L events sit on 4,975 template grid
+nodes and were never relocated. `01_pipeline/62_cc_relocation.py`: CC
+differential times from the new `seismotools/cross_correlation` (ccdt),
+hypoDD with the stage-14 control `cc3_d1` (and a variant with a final
+CC-dominated set). Pilot day 07-05: 6,814 events (2,476 picked + 4,338 M&L).
+Sharpness metric: median local thickness (minor-axis SD of each event's 20
+nearest neighbours, map view) — orientation-free; the single-strike
+fault-normal width mixes the NE and NW faults of that day and was dropped.
+
+Findings:
+1. **Template-derived catalog times must not enter dt.ct.** Two detections
+   of one template get catalog dt = 0 at every station, and hypoDD collapses
+   them onto the template (M&L thickness 0.05 km, a third of Shelly's — an
+   artifact). dt.ct now comes from picks only; M&L events rely on CC alone.
+2. Dropping such links leaves weakly constrained events that diverge; rows
+   with overflow, > 3 km horizontal shift, depth outside 0–25 km or > 1 s
+   origin change are treated as not relocated (they keep their M&L position).
+
+| 07-05 | relocated | vs Shelly | vs Liu | vs Ross | thickness M&L / picked |
+|---|---|---|---|---|---|
+| before | — | 0.518 km | 0.660 | 0.767 | 0.18 (grid-stacked) / 0.31 |
+| CC 3 km / 30 nbrs, CC ≥ 0.7 | 4,201 | 0.360 | 0.518 | 0.688 | 0.35 / 0.31 |
+| CC 5 km / 80 nbrs, CC ≥ 0.6, CC² | 4,596 | **0.254** | **0.387** | 0.664 | 0.33 / 0.30 |
+| Shelly / Ross / Liu thickness | | | | | 0.16 / 0.16 / 0.27 |
+
+(epicentral medians of matched pairs, same events before and after.)
+Accuracy improves strongly with CC density; sharpness does not reach
+Shelly's: per-event scatter of ~0.2–0.3 km remains. CC data are the limit —
+332k accepted measurements (~50 per event) vs Shelly's ~700 per event.
