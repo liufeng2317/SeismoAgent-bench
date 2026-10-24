@@ -1,0 +1,74 @@
+{
+  "generated_utc": "2026-10-23T08:51:14+00:00",
+  "evaluation_window": {
+    "start_utc": "2017-06-11T00:00:00Z",
+    "end_utc": "2017-06-19T00:00:00Z"
+  },
+  "matching": {
+    "dt_max_s": 4.0,
+    "d_max_km": 15.0,
+    "method": "greedy one-to-one by (distance, dt)"
+  },
+  "populations": {
+    "comcat": {
+      "label": "ComCat/UUSS operational",
+      "records": 626,
+      "color": "#009E73",
+      "depth_datum": "local_surface"
+    },
+    "shelly": {
+      "label": "Shelly & Hardebeck (2019) detections, time only",
+      "records": 18062,
+      "color": "#0072B2",
+      "depth_datum": null
+    },
+    "expert": {
+      "label": "Expert reproduction (r7)",
+      "records": 13675,
+      "color": "#E69F00",
+      "depth_datum": "local_surface"
+    }
+  },
+  "inputs": {
+    "comcat": {
+      "path": "data/catalogs/USGS_UUSS_COMCAT_2017/USGS_UUSS_COMCAT_2017__catalog_operational_benchmark.csv",
+      "plotted_records": 626
+    },
+    "shelly": {
+      "path": "data/catalogs/SHELLY2019_GL081607/analysis/derived/detection_events/SHELLY2019_GL081607__detection_events_v1.csv",
+      "plotted_records": 18062
+    },
+    "expert": {
+      "path": "expert/export/r7/60_catalog/catalog_events.csv",
+      "round": "r7",
+      "plotted_records": 13675,
+      "selection": "complete round catalog (all rows)",
+      "depth": "below the local surface (sea level + 2.3 km)"
+    }
+  },
+  "statistics": {
+    "expert": {
+      "records": 13675,
+      "versus": {
+        "comcat": {
+          "matched": 622,
+          "precision": 0.04548446069469835,
+          "recall": 0.9936102236421726,
+          "median_abs_dt_s": 0.09495999999999999,
+          "median_epicentral_km": 0.8686941494992435,
+          "median_depth_difference_km": 1.4331500000000008,
+          "mad_depth_difference_km": 0.6956250000000002
+        },
+        "shelly": {
+          "matched": 10526,
+          "precision": 0.7697257769652651,
+          "recall": 0.5827704573136973,
+          "median_abs_dt_s": 0.165629,
+          "median_epicentral_km": null,
+          "chance_matches": 1120,
+          "recall_net": 0.5207618203964124
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "case_id": "2017_maple_creek_yellowstone",
+  "description": "Read-only Maple Creek 2017 waveform and station metadata root for the catalog-construction task.",
+  "entries": [
+    {
+      "id": "waveform_data_root",
+      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2017_maple_creek_yellowstone/waveforms",
+      "type": "folder",
+      "notes": "Explore the data/ and stations/ subdirectories. The source files are not copied into the run."
+    }
+  ]
+}
