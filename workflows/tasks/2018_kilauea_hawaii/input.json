@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "case_id": "2018_kilauea_hawaii",
+  "description": "Read-only Kīlauea 2018 waveform and station metadata root for the catalog-construction task.",
+  "entries": [
+    {
+      "id": "waveform_data_root",
+      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2018_kilauea_hawaii/waveforms",
+      "type": "folder",
+      "notes": "Explore the data/ and stations/ subdirectories. The source files are not copied into the run."
+    }
+  ]
+}
