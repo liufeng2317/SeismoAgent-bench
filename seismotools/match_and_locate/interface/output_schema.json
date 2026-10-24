@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "description": "Match&Locate run output folder.",
+  "files": {
+    "detections.csv": {
+      "columns": ["detection_id", "origin_time_utc", "latitude", "longitude", "depth_km", "depth_model_km", "magnitude", "cc", "nmad", "template_id", "segment", "time_s", "self_detection"],
+      "notes": "Merged catalog across templates (SelectFinal rule; the python engine works on absolute times across segments, the native engine per segment). time_s is relative to the segment's SAC reference. depth_km is in the depth reference of the input templates table (dataset.json depth_offset_km removed; 0 for hand-built datasets); depth_model_km is below the velocity-model datum. Location is the best grid node of the detecting template; magnitude is template magnitude + median log10 peak-amplitude ratio (relative, biased high at low SNR); self_detection = CC 1.0 (the template itself)."
+    },
+    "template_detections.csv": "Every per-template detection before the merge (segment, template_id, origin_time_utc, time_s, latitude, longitude, depth_km, depth_model_km, magnitude, cc, nmad).",
+    "jobs.csv": "One row per (segment, template): status success|failed|skipped, reason, n_rows, n_detections, grid_nodes, runtime_s, returncode.",
+    "jobs/<segment>/<template_id>/": "INPUT.in, EventCase.out, native.log (command line + native stderr), job.json; native stack/CC files when output_mode > 0.",
+    "merge/": "Allevents_<segment> and Allevents_<segment>.final when merge.engine = native.",
+    "progress.jsonl": "One line per finished job, appended as jobs complete (also across --resume runs).",
+    "config.json": "Effective parameters after defaults and overrides.",
+    "run_result.json": {
+      "required_fields": ["status", "interface_version", "output_dir", "inputs", "parallelism", "outputs", "detections_file", "segments", "templates", "jobs", "template_detections", "detections"],
+      "failure_fields": ["status", "interface_version", "output_dir", "error"]
+    }
+  },
+  "failure": "Dataset validation errors, a missing binary or any failed native job (non-zero exit, exit 3 = candidate-buffer overflow, or no EventCase.out) give status=failed and a non-zero process exit; outputs of the successful jobs are still written. Existing outputs are rejected unless --overwrite or --resume is given."
+}

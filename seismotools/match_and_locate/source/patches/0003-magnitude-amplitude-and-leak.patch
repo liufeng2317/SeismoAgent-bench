@@ -1,0 +1,33 @@
+--- a/src/MatchLocate2.c
++++ b/src/MatchLocate2.c
+@@ -663,7 +663,7 @@
+             exit(-1);
+         }
+         npts1 = hd0.npts;
+-        mastermax = master[0];
++        mastermax = fabs(master[0]);
+         for(k=0; k<npts1; k++) {
+             if(fabs(master[k]) > mastermax)mastermax = fabs(master[k]);
+         }
+@@ -678,16 +678,16 @@
+             exit(-1);
+         }
+         npts2 = hd1.npts;
+-        armax = ar[0];
++        armax = fabs(ar[0]);
+         for(k=0; k<npts2; k++) {
+             if(fabs(ar[k]) > armax)armax = fabs(ar[k]);
+         }
+         ratio[i] = armax/mastermax;
+     	mag[i] = mag0[i] + log10(ratio[i]);
+-    }
+-    free(master);
+-    free(ar);
+-    median = CalculateMedian(mag,ntrace);
++        free(master);
++        free(ar);
++    }
++median = CalculateMedian(mag,ntrace);
+     free(ratio);free(mag);
+     return median;
+ }

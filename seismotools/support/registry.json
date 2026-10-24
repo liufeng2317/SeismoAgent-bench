@@ -26,6 +26,14 @@
         "CT+CC"
       ],
       "license_status": "Preserve bundled README, manual and source notices; no new project license applied."
+    },
+    "match_and_locate": {
+      "implementation": "MatchLocate2 2.0 (Miao Zhang) from MatchLocate2-master.zip, commit bac5ccb, archive sha256 543b6bc9...ad19; built with local patches source/patches/0001-0007",
+      "variants": [
+        "Match&Locate grid search",
+        "matched filter (zero search half-widths)"
+      ],
+      "license_status": "GPL-3.0 (source/upstream/LICENSE); preserve notices. Local patches are distributed as separate patch files."
     }
   },
   "files": [
@@ -1912,6 +1920,384 @@
       "source": "TRACE-1.1/seismoagent/library/ai_module/phase_picking/model/skynet.py",
       "bytes": 10544,
       "sha256": "1a07025a12cb7cc473459c95f09a9c0fca5bd2e6c5c7efaa52c7060091e7f858"
+    },
+    {
+      "path": "match_and_locate/source/upstream/LICENSE",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/LICENSE",
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "match_and_locate/source/upstream/Modified_History",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/Modified_History",
+      "bytes": 1074,
+      "sha256": "01ffb06610c1ec27c9c73ecfb291afe1cd9d6b83bda90d5f32098a6c25c80a61"
+    },
+    {
+      "path": "match_and_locate/source/upstream/README.md",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/README.md",
+      "bytes": 2136,
+      "sha256": "591eed6e1b214ab226b7f522f7a39cd88a0b9ab21f16063339c6998fe56ce055"
+    },
+    {
+      "path": "match_and_locate/source/upstream/doc/gmtdefaults4",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/doc/gmtdefaults4",
+      "bytes": 2752,
+      "sha256": "3526ebadfaffacc9b34919e448d0664899d75d98043bdad438b32198bd4a3d14"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/20120902/20120902032225.53",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/20120902/20120902032225.53",
+      "bytes": 3619,
+      "sha256": "513ba787ab193b0da854e48b3ab44e21f0a619d63b3dd77e297a414c0988799a"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/20120902/20120902032413.12",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/20120902/20120902032413.12",
+      "bytes": 6930,
+      "sha256": "e903b7571a9d64963191ece3fddbcb569bc13b88ea33a326bd659531d2c327b0"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/20120902/20120902032626.52",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/20120902/20120902032626.52",
+      "bytes": 5467,
+      "sha256": "dec2f63171c22e641224834780929f43ac8897f1c9296094624c8cacd5541bfa"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/20120902/20120902033351.61",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/20120902/20120902033351.61",
+      "bytes": 8162,
+      "sha256": "b33ed35a4a72bce540878d0ad0941205e92b57a1a1ae045cee123cb9271a14b7"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/20120902/20120902033403.83",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/20120902/20120902033403.83",
+      "bytes": 7777,
+      "sha256": "d95d61da184af27f36344ff71c1af483c247ab5540aa2953e8d796d85eaeb77a"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/20120902/20120902034130.37",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/20120902/20120902034130.37",
+      "bytes": 7007,
+      "sha256": "7fa486d760f6140dbecb26ee0f35c3330a48320db031b29a98ff308dc33ef371"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/20120902/20120902034236.82",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/20120902/20120902034236.82",
+      "bytes": 6776,
+      "sha256": "f5c53978a830d56cf3e0b861351c782d3246a6e65b03320efe072f20425a94bd"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/20120902/20120902034301.07",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/20120902/20120902034301.07",
+      "bytes": 7623,
+      "sha256": "627eca7fccb369b89e47c7d9669bbb6c14c1e8913aa247507bc836e86c7d272d"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/20120902/20120902034343.16",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/20120902/20120902034343.16",
+      "bytes": 7084,
+      "sha256": "a292661f88b5b9dfab0c5dca20d90c77c69a0d2cb2d5b83f72d9d0b079dab338"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/20120902/20120902034421.21",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/20120902/20120902034421.21",
+      "bytes": 6776,
+      "sha256": "5bb2b37189c123eff2985797805d9d6e4633d6a0c72bc5d78dfcc83ec7ca549a"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/20120902/20120902034541.57",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/20120902/20120902034541.57",
+      "bytes": 7315,
+      "sha256": "1321ee30934a21ee0f9a29688c79b7999fd714ad5df725b867694415f676d925"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/20120902/20120902034608.85",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/20120902/20120902034608.85",
+      "bytes": 5929,
+      "sha256": "7c46a546f88b0e5ff3c2bfb6b2e5f7e8c5a3df41206d2c4f0ad3b178d458403d"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/20120902/20120902034748.15",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/20120902/20120902034748.15",
+      "bytes": 6314,
+      "sha256": "93398abc4ee4facd454b1da46e11597b016d194f20d7d5b1413d065e94fc0b79"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/20120902/20120902034823.31",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/20120902/20120902034823.31",
+      "bytes": 6468,
+      "sha256": "44c8665bc9dd0d86f02590a61ccfb8d08c0687ff680733784fb8ade68a663cd1"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/INPUT.in",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/INPUT.in",
+      "bytes": 1830,
+      "sha256": "db08d968622cbe40dbe5e72551159a9e6ae1b68ba1cb2906e268116cfeb4e4b8"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/MultipleTemplate/DetectedFinal.dat",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/MultipleTemplate/DetectedFinal.dat",
+      "bytes": 15788,
+      "sha256": "d28b34eae98f5039ee356bdb2a3cb62fc9d29947088fa1da5cf19ea0bc564784"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/MultipleTemplate/PlotEventWaveform.pl",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/MultipleTemplate/PlotEventWaveform.pl",
+      "bytes": 4767,
+      "sha256": "9164f6cce100c696e2c4054bf7c99da6aa9d4909c49b34bc70b2ccf33b57fa42"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/MultipleTemplate/SelectFinal.pl",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/MultipleTemplate/SelectFinal.pl",
+      "bytes": 2001,
+      "sha256": "c3a40b450c9be0ce87f9a44e17940fff76c5efc4c75011af6745efa6a343692e"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/PROC_MatchLocate.pl",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/PROC_MatchLocate.pl",
+      "bytes": 4195,
+      "sha256": "4667fb3a3c49feaf9a2b48cd508cf24bbf7deda6ae8049b9b1dd49bc7409b9bd"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/README",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/README",
+      "bytes": 1818,
+      "sha256": "b3babec9ee5d8dff3ae93e7149a1b50080bfa1387efc69770c99c101705a0947"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/RunprocAll.pl",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/RunprocAll.pl",
+      "bytes": 2631,
+      "sha256": "3a8b60373670dda4c3af7f4d90e23fc62794cb5b828244f1303f945205642946"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/Template/INPUT/20120902032225.53",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/Template/INPUT/20120902032225.53",
+      "bytes": 1152,
+      "sha256": "9530250be8275ae7cd2920d6d453e205fa0cda9d17c9cfb76a4bf1de17a48e53"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/Template/INPUT/20120902032413.12",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/Template/INPUT/20120902032413.12",
+      "bytes": 1296,
+      "sha256": "a43624fd677a3783cdf080a456d0630e7074402b97f509b07e8f69e1fcc17dc1"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/Template/INPUT/20120902032626.52",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/Template/INPUT/20120902032626.52",
+      "bytes": 1296,
+      "sha256": "7f1c8f2e6324559ebcd63c7c87e5fd618750bf0ab90a9f748eace623f9a249d2"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/Template/INPUT/20120902033351.61",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/Template/INPUT/20120902033351.61",
+      "bytes": 1296,
+      "sha256": "e9836bc834953c8c44f25930dc39978e5dca3a956cacb30f75e6307fc44b0b59"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/Template/INPUT/20120902033403.83",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/Template/INPUT/20120902033403.83",
+      "bytes": 1296,
+      "sha256": "a43624fd677a3783cdf080a456d0630e7074402b97f509b07e8f69e1fcc17dc1"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/Template/INPUT/20120902034130.37",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/Template/INPUT/20120902034130.37",
+      "bytes": 1296,
+      "sha256": "33ee303f5db687938f7df50926be067bfede10c1fc72e95b34ff11151305a7d2"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/Template/INPUT/20120902034236.82",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/Template/INPUT/20120902034236.82",
+      "bytes": 1296,
+      "sha256": "333e50d3398d902519e1f27a67d87684b1e5a5e5fe3176e9c848b4a39dd6b0cd"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/Template/INPUT/20120902034301.07",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/Template/INPUT/20120902034301.07",
+      "bytes": 1296,
+      "sha256": "ea15421a7ae5ed40dd89006acd9f611051a5baadb70b9fdd8c524013b77fa86e"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/Template/INPUT/20120902034343.16",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/Template/INPUT/20120902034343.16",
+      "bytes": 1296,
+      "sha256": "a41595a8d5fe505fbe822a808980721b15ca187817e67f292db88db954ab4d8d"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/Template/INPUT/20120902034421.21",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/Template/INPUT/20120902034421.21",
+      "bytes": 1296,
+      "sha256": "c901a60fea0ddb4b17f3af6784cc294c92e45eb3b7bbf37f1cb42a0d68bc2869"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/Template/INPUT/20120902034541.57",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/Template/INPUT/20120902034541.57",
+      "bytes": 1296,
+      "sha256": "9015b814a16323ce85d363b42c545e98cf6a1950503db978fbc8c136dfe4925d"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/Template/INPUT/20120902034608.85",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/Template/INPUT/20120902034608.85",
+      "bytes": 1296,
+      "sha256": "789d6119153a55798a671c7a34329e02b309c4271acdb9b539c56c1578a7ac25"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/Template/INPUT/20120902034748.15",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/Template/INPUT/20120902034748.15",
+      "bytes": 1296,
+      "sha256": "2f0fd413cf1bd61c3c401bce2606ee63e0210e7ab2dd529a56f013afb633364f"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/Template/INPUT/20120902034823.31",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/Template/INPUT/20120902034823.31",
+      "bytes": 1296,
+      "sha256": "952584911ed2220c7ef50ccf33ec1d8eef0ae573b95796d0fddbf848b80a73c0"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/Template/marktaup.pl",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/Template/marktaup.pl",
+      "bytes": 3077,
+      "sha256": "db065b5f0caa10d82e8821730a3212b04c0afc709964fee7cce8a6cafad64dd4"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/Trace/SACH_O.pl",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/Trace/SACH_O.pl",
+      "bytes": 672,
+      "sha256": "2baf9f9489fa8e2917a2b7bb430b84123929048c28a501913f66e1b3fb5c3cf1"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example/catalog.dat",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example/catalog.dat",
+      "bytes": 672,
+      "sha256": "14bdb93837a439fa1267348188c986845f7794104dc483f6f2cd8a2c68f1a89d"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example_CCdistribution/20120902/20120902032413.12",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example_CCdistribution/20120902/20120902032413.12",
+      "bytes": 154,
+      "sha256": "5e5321a8162e4db348148aec9de77d86a3b28823ab00f64b9a918a3842dda6d6"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example_CCdistribution/INPUT.in",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example_CCdistribution/INPUT.in",
+      "bytes": 1830,
+      "sha256": "91a005ce63aabdcbd71ca285cec9b4a8b7c570fc8da41cb36a8ae736f9f5abd9"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example_CCdistribution/PROC_MatchLocate.pl",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example_CCdistribution/PROC_MatchLocate.pl",
+      "bytes": 4197,
+      "sha256": "b4c2ebffc3fbcf8f18eafcb4afa9b8f44d8bfe93635b4a4ca67500d2837c80cb"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example_CCdistribution/README",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example_CCdistribution/README",
+      "bytes": 598,
+      "sha256": "ff4d7d028d77cd17c9547dc23993eea08c45a84bc10d60e97297fe305aa9beb4"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example_CCdistribution/RunprocAll.pl",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example_CCdistribution/RunprocAll.pl",
+      "bytes": 2631,
+      "sha256": "3a8b60373670dda4c3af7f4d90e23fc62794cb5b828244f1303f945205642946"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example_CCdistribution/Template/INPUT/20120902032413.12",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example_CCdistribution/Template/INPUT/20120902032413.12",
+      "bytes": 1296,
+      "sha256": "fa9e7c8dd7cde705495538321d5481ceb9a8cc56be49a81a09a369bbd47f847a"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example_CCdistribution/Template/marktaup.pl",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example_CCdistribution/Template/marktaup.pl",
+      "bytes": 3150,
+      "sha256": "4c6ce4bdeeb6c10ef022bce879936a65c5d05450e6ebcb38b12a7f9c47b062e4"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example_CCdistribution/catalog.dat",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example_CCdistribution/catalog.dat",
+      "bytes": 48,
+      "sha256": "87b0af59c9d56b328ef7d55ec176701ddb91eaef16d78918005999131f012cc3"
+    },
+    {
+      "path": "match_and_locate/source/upstream/example_CCdistribution/plot/plot_ccdistribution.pl",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/example_CCdistribution/plot/plot_ccdistribution.pl",
+      "bytes": 2595,
+      "sha256": "50614f318b97fbccc38c111e98dff49a437a869e1165867755086e9656cdb7e6"
+    },
+    {
+      "path": "match_and_locate/source/upstream/src/Makefile",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/src/Makefile",
+      "bytes": 620,
+      "sha256": "f5a0cbf068f617ce60f36571b2be260cc248f6fa8d36b39ede1482c57280e226"
+    },
+    {
+      "path": "match_and_locate/source/upstream/src/MatchLocate2.1.c",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/src/MatchLocate2.1.c",
+      "bytes": 32475,
+      "sha256": "05a0d068587e0b9bfc23f6bc243f3d13cbcc02fcf8f2c41c2b797afb66b15b05"
+    },
+    {
+      "path": "match_and_locate/source/upstream/src/MatchLocate2.c",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/src/MatchLocate2.c",
+      "bytes": 29144,
+      "sha256": "5b30b0b7896fe32a1218e663552f046a75df87f1e08666a425d1cc0027732b01"
+    },
+    {
+      "path": "match_and_locate/source/upstream/src/README",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/src/README",
+      "bytes": 663,
+      "sha256": "1b7e44f0a943bbf0bd24f4ea0d355845372caf3b66ddee06bc2e4e8a06ebe47f"
+    },
+    {
+      "path": "match_and_locate/source/upstream/src/SHIFT.c",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/src/SHIFT.c",
+      "bytes": 2775,
+      "sha256": "c00e576b2cd9e5a045ec128cefef2be83ef561f73d10dbb7abb2e116a5dd4a1e"
+    },
+    {
+      "path": "match_and_locate/source/upstream/src/SelectFinal.c",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/src/SelectFinal.c",
+      "bytes": 6683,
+      "sha256": "62bac8511facd4643deb026e8900bd0cba200a2f8205a5e08e05cc5ab59fd086"
+    },
+    {
+      "path": "match_and_locate/source/upstream/src/ccsacc.c",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/src/ccsacc.c",
+      "bytes": 5469,
+      "sha256": "d148486194b7886868ee08ed4a5766f352f0ce14346f172251ef38808ece0627"
+    },
+    {
+      "path": "match_and_locate/source/upstream/src/lsac.c",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/src/lsac.c",
+      "bytes": 797,
+      "sha256": "ce5a9276c33afa3805fba0812a70ffb1060809d5acfc118fc83bae2d109baa45"
+    },
+    {
+      "path": "match_and_locate/source/upstream/src/sac.h",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/src/sac.h",
+      "bytes": 14335,
+      "sha256": "b82bd67376b8680488e1926e302de94abcea0886b61f54ed6afd50389fad5e79"
+    },
+    {
+      "path": "match_and_locate/source/upstream/src/sac0.h",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/src/sac0.h",
+      "bytes": 3397,
+      "sha256": "c070ecb885e44cea2f2aed7da2d3e46d342f846f3bd9951a6cc4d0e2f38e1f27"
+    },
+    {
+      "path": "match_and_locate/source/upstream/src/sacio.c",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/src/sacio.c",
+      "bytes": 13512,
+      "sha256": "49b99fa60bede5b2271f12830934376eefbb5a4a8e54f6452e010da7c65f781a"
+    },
+    {
+      "path": "match_and_locate/source/upstream/src/sacio.h",
+      "source": "MatchLocate2-master.zip/MatchLocate2-master/src/sacio.h",
+      "bytes": 3772,
+      "sha256": "a5ccfa82439f7504fe0946f21dd316314e94fd4828f7398ba3f5f2b632ce7172"
     }
   ],
   "validation": {

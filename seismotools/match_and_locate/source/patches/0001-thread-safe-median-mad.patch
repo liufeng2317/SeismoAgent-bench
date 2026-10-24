@@ -1,0 +1,78 @@
+--- a/src/MatchLocate2.c
++++ b/src/MatchLocate2.c
+@@ -78,7 +78,7 @@
+ void Checkdata(int, char**, int*, float*);
+ void Subcc(float*,float*,int,double*);
+ void GCinit(const double*,const double*,const double*,const double*,double*);
+-void Threshold(SACHEAD,double,double,double,float*,EVENT*,long int*,float);
++void Threshold(SACHEAD,double,double,double,float*,EVENT*,long int*,float,float,float);
+ void DetermineEvent(EVENT*,long int);
+ void Shiftstack(double,double,double,EVENT*,long int*);
+ int Time_compare_Time(const void *a,const void *b);
+@@ -90,7 +90,7 @@
+ void Outputlast(int,double,double,double,float,float);
+ float Mag(float,double,double,double);
+ float CalculateMedian(float *,int);
+-float Threshold_detection(float *, int);
++float Threshold_detection(float *, int, float *, float *);
+ 
+ //Main function
+ int main(int argc, char **argv) {
+@@ -428,7 +428,7 @@
+     extern double delay,before;
+     double **coefout;
+     float *sumout;
+-    float tshiftmax,threshold0;
++    float tshiftmax,threshold0,median_l,mad_l;
+     double Dt,GCarc,GCarc0;
+     SACHEAD hd1;
+     int i,k,nshift,gnccmax;
+@@ -481,10 +481,12 @@
+     }
+     
+ 
+-    threshold0 = Threshold_detection(sumout, hd1.npts);
++    // SeismoAgentBench patch 0001: median/MAD are per-grid-node values computed
++    // inside the OpenMP shift-and-stack loop; keep them thread-local.
++    threshold0 = Threshold_detection(sumout, hd1.npts, &median_l, &mad_l);
+ 
+     //Determine potential events.
+-    Threshold(hd1,lat,lon,h,sumout,loc2,KK,threshold0);
++    Threshold(hd1,lat,lon,h,sumout,loc2,KK,threshold0,median_l,mad_l);
+ 
+     free(sumout);
+     for(i=0; i<ntrace; i++) free(coefout[i]);
+@@ -492,10 +494,10 @@
+ }
+ 
+ //The coef. threshold
+-void Threshold(SACHEAD hd,double evla, double evlo, double evdp, float *ar, EVENT *loc2, long int *KK, float threshold) {
++void Threshold(SACHEAD hd,double evla, double evlo, double evdp, float *ar, EVENT *loc2, long int *KK, float threshold, float median, float MAD) {
+     long int j,k;
+     extern double delay;
+-    extern float median, MAD, THRESH;
++    extern float THRESH;
+ 
+     k = 0; 
+     for(j=0; j<hd.npts; j++) {
+@@ -618,8 +620,9 @@
+ }
+ 
+ //calculate the threshold of detection
+-float Threshold_detection(float *cc_sum, int npts){
+-    extern float median, MAD, NMAD;
++float Threshold_detection(float *cc_sum, int npts, float *median_out, float *mad_out){
++    extern float NMAD;
++    float median = 0.0, MAD = 0.0;
+     float *cc_sum2,*cc_sum1;
+ 
+     cc_sum1=(float *)calloc(npts,sizeof(float ));
+@@ -634,6 +637,8 @@
+     if(npts%2 == 1)MAD = cc_sum2[(npts-1)/2];
+     free(cc_sum1);
+     free(cc_sum2);
++    *median_out = median;
++    *mad_out = MAD;
+     return median+NMAD*MAD;
+ }
+ 

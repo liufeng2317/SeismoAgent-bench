@@ -1,0 +1,21 @@
+{
+  "tool": "MatchLocate2",
+  "method": "Match&Locate (Zhang & Wen 2015, GJI 200(3) 1523-1537)",
+  "upstream": {
+    "repository": "https://github.com/Dal-mzhang/MatchLocate2",
+    "archive": "MatchLocate2-master.zip",
+    "archive_sha256": "543b6bc9052403ca63a286e6b06c2c806b4872205f8a2be0cb75d6a4e331ad19",
+    "commit": "bac5ccb00816a4ec0aaab215ea1c342c730d412f",
+    "version": "2.0 (MatchLocate2.c); 2.1 source kept, not built",
+    "license": "GPL-3.0 (source/upstream/LICENSE)"
+  },
+  "native_programs": ["MatchLocate2", "SelectFinal", "SHIFT", "lsac"],
+  "local_patches": "source/patches/ (0001-0007, applied at build time)",
+  "interface_version": 1,
+  "source": "source/upstream/",
+  "native_runtime": "runtime/bin/",
+  "python_interface": "runtime/python/MatchLocatepy/",
+  "standard_entrypoint": "interface/run.py",
+  "prepare_entrypoint": "interface/prepare.py",
+  "modes": ["match_and_locate", "matched_filter (zero search half-widths)"]
+}

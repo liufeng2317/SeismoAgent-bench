@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "description": "Prepared Match&Locate dataset folder: templates, continuous data and per-channel phase rows.",
+  "layout": {
+    "templates.csv": {
+      "columns": ["template_id", "origin_time_utc", "latitude", "longitude", "depth_km", "magnitude"],
+      "notes": "template_id matches [A-Za-z0-9._-]+ and names templates/<template_id>/. depth_km is the depth used for the template's travel times and grid center (km below the velocity-model datum). magnitude may be empty; detections then carry NaN magnitude."
+    },
+    "channels.csv": {
+      "columns": ["template_id", "channel", "phase", "mark", "slowness_h_s_per_deg", "slowness_v_s_per_km"],
+      "notes": "One row per correlated channel-phase. channel is the file stem shared by templates/<template_id>/<channel>.sac and continuous/<segment_id>/<channel>.sac. mark is the SAC t-mark index (1 -> t1, 2 -> t2) holding the phase travel time in the template. slowness_h_s_per_deg = dT/dDelta in s per great-circle degree; slowness_v_s_per_km = dT/dz_source in s/km, positive when a deeper source arrives later (upgoing direct ray). A channel may carry several rows (for example P on t1 and S on t2)."
+    },
+    "templates/<template_id>/<channel>.sac": "Template SAC in host (little-endian) byte order. Reference time = template origin (o = 0), the phase travel time in t<mark>, evla/evlo/evdp of the template, user0 = template magnitude, stla/stlo of the station. Must cover [t<mark> - before_s, t<mark> + after_s]. Cut it from the processed continuous data so the self-detection reaches CC = 1.",
+    "continuous/<segment_id>/<channel>.sac": "Processed continuous SAC (same filter and sampling interval as the templates), o = 0. A segment is a folder scanned together, normally one UTC day (segment_id YYYYMMDD, SAC reference = 00:00:00 of that day) or a window around a known event. All files of one segment share one SAC reference time (detected origin times are reported relative to it), the sampling interval and the begin time (within 1e-3 s); the shortest end time bounds the scan. segment_id matches [A-Za-z0-9._-]+.",
+    "config.json": "Optional default parameters (see config_schema.json); --config overrides it."
+  },
+  "reference_catalogs": "Not consumed by the adapter.",
+  "read_only": "The dataset is never modified; native jobs reach it through per-job symlinks.",
+  "validation": "Before any native job: segment folders exist, o = 0, one SAC reference time, uniform delta and begin time per segment, little-endian SAC, template marks defined and covering the correlation window, template/station coordinates present. Any failure stops the run with status=failed."
+}

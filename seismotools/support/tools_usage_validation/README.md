@@ -25,6 +25,7 @@ The checks are deliberately small:
 | `validate_gamma.py` | Synthetic P/S association and one real stored Ridgecrest event's picks. |
 | `validate_nonlinloc.py` | Bundled `Nonlinlocpy` import, default sibling-binary resolution and template resource, tiny synthetic grids, plus one stored Ridgecrest event and grid. |
 | `validate_hypodd.py` | Bundled `hypodd_runner` import, public configuration API and template, synthetic native relocation, plus two real Ridgecrest CT event-pair blocks. |
+| `validate_match_and_locate.py` | `matchlocate_runner` travel times against analytic solutions, SAC header reader against ObsPy, `select_templates` on two clusters, a synthetic end-to-end run of both interface steps (raw MiniSEED and tables → `prepare.py` → `run.py`) with known answers (detection times, offset locations, depths through the sea-level/datum conversion, relative magnitudes), and both upstream examples through the interface: Hi-net (1 vs 8 threads identical, Python merge equal to native `SelectFinal`, comparison with the upstream outputs) and CC distribution (per-node CC identical to upstream on all common rows, same detected event). Its real-data check is the upstream example (archive path via `MATCHLOCATE_ARCHIVE`, skipped when absent), not Ridgecrest. |
 
 The native locator examples are intentionally underdetermined (one station) so
 that they test executable startup, control-file parsing and file generation,

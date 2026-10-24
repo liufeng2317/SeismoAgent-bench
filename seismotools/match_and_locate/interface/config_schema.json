@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "description": "Match&Locate run parameters. Values not given take the defaults below; --config or <input-dir>/config.json supplies overrides. The defaults are generic starting points (upstream example window and thresholds, a 1 km local grid), not scientific policy for a case.",
+  "search": {
+    "units": {"default": "km", "values": ["km", "deg"]},
+    "km": {
+      "half_width_km": {"default": 1.0, "meaning": "horizontal grid half-width about the template (square, both axes)"},
+      "step_km": {"default": 0.25, "meaning": "horizontal node spacing; half-width is rounded to whole steps"},
+      "half_depth_km": {"default": 1.0, "meaning": "depth half-width about the template depth; 0 fixes depth"},
+      "step_depth_km": {"default": 0.5, "meaning": "depth node spacing; must be > 0 even when half_depth_km = 0"}
+    },
+    "deg": {
+      "fields": ["half_lat_deg", "half_lon_deg", "half_depth_km", "step_lat_deg", "step_lon_deg", "step_depth_km"],
+      "meaning": "native -R/-I values; all steps > 0. half widths of 0/0/0 is the matched-filter case."
+    },
+    "node_count": "per axis int(2*half/step + 1); jobs.csv records grid_nodes. Shift-and-stack cost is proportional to nodes x samples x rows."
+  },
+  "window": {
+    "length_s": {"default": 4.0, "meaning": "correlation window (-T window)"},
+    "before_s": {"default": 1.0, "meaning": "window start before the phase mark"},
+    "after_s": {"default": 3.0, "meaning": "window end after the phase mark; length_s <= before_s + after_s is enforced"}
+  },
+  "detection": {
+    "cc_threshold": {"default": 0.0, "meaning": "per-template: mean stacked CC >= this (-H first value)"},
+    "mad_threshold": {"default": 12.0, "meaning": "per-template: (CC - median)/MAD >= this, statistics per grid node over the whole segment (-H second value)"},
+    "min_separation_s": {"default": 6.0, "meaning": "per-template: keep the highest-N(*MAD) candidate within this many seconds (-D)"}
+  },
+  "merge": {
+    "engine": {"default": "python", "values": ["python", "native"], "meaning": "python = port of SelectFinal on absolute times across all segments, without its 100,000-row limit; native = SelectFinal binary per segment"},
+    "cc_threshold": {"default": 0.3},
+    "mad_threshold": {"default": 12.0},
+    "min_separation_s": {"default": 6.0, "meaning": "across templates: keep the highest-N(*MAD) detection within this window; a CC = 1.0 self-detection is always kept"}
+  },
+  "min_channels": {"default": 9, "meaning": "skip (segment, template) jobs with fewer usable channel-phase rows; upstream warns below 9 (3 three-component stations)"},
+  "output_mode": {"default": 0, "values": [0, 1, 2, 3], "meaning": "native -O: 1 stacked correlogram of each detection, 2 every node's full stack (very large), 3 CCdistribution.out of every above-threshold node and sample; files stay in jobs/<segment>/<template>/"}
+}

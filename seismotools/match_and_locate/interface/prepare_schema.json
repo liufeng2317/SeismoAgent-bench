@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "description": "Inputs and settings of interface/prepare.py: common case inputs -> prepared Match&Locate dataset (input_schema.json).",
+  "inputs": {
+    "--waveforms": "Folder searched recursively for MiniSEED (*.mseed, *.miniseed, *.ms, *.msd); indexed from headers, any file layout, gaps allowed. Read only.",
+    "--stations": {"columns": ["station_id", "latitude", "longitude"], "optional_columns": ["elevation_m"],
+                   "notes": "station_id is NET.STA and must match the waveform network and station codes."},
+    "--templates": {"columns": ["event_id", "origin_time_utc", "latitude", "longitude", "depth_km"], "optional_columns": ["magnitude"],
+                    "notes": "The events to use as templates (selection is the caller's decision; matchlocate_runner.select_templates helps). event_id matches [A-Za-z0-9._-]+. depth_km in the reference named by depth.input_reference. Without magnitude, detections carry NaN magnitude."},
+    "--picks": {"optional": true, "columns": ["event_id", "station_id", "phase", "time_utc"],
+                "notes": "P/S picks of template events; used as phase marks according to marks.source."},
+    "--velocity-model": "CSV with top_of_layer_km, vp_km_s, vs_km_s; a JSON list of such rows; or a JSON registry {\"models\": {key: {\"rows\": [...]}}} with --model-key (the case velocity_models.json format). Depths are km below the model datum.",
+    "--config": "JSON settings below; missing keys take the defaults.",
+    "--output-dir": "Dataset folder to create; must be new or empty unless --overwrite.",
+    "--workers": "Parallel (channel, day) tasks."
+  },
+  "settings": {
+    "processing": {"sampling_rate": 50.0, "freqmin": 2.0, "freqmax": 10.0, "corners": 4, "zerophase": true,
+                   "notes": "Applied identically to continuous data and templates (templates are cut from the processed continuous trace of their own day)."},
+    "segments": {"days": ["YYYY-MM-DD", "..."], "windows": [{"segment_id": "token", "start": "UTC", "end": "UTC"}],
+                 "notes": "Days are scanned whole (segment_id YYYYMMDD, reference = day start). Windows are processed with 30 s padding and trimmed (reference = window start). At least one day or window. Template days are processed for cutting even when not scanned."},
+    "channels": {"families": ["HH", "BH", "EH", "HN", "EN", "SH"], "P": ["Z"], "S": ["N", "E", "1", "2"],
+                 "notes": "Per station the first band/instrument family present is used (lowest location code); P rows on the P components, S rows on the S components."},
+    "window": {"length_s": 2.0, "before_s": 0.3, "after_s": 1.7,
+               "notes": "Correlation window around each mark; must equal the run configuration's window (copy it into run)."},
+    "selection": {"max_distance_km": 100.0, "min_snr": 3.0, "noise_s": 5.0, "min_rows": 9, "exclude_p_overlapping_s": true,
+                  "notes": "A row is kept when the template window is inside the processed day and its SNR (peak in the correlation window over the RMS of noise_s seconds ending 0.5 s before P) >= min_snr. P rows whose window would reach S are excluded. Templates with fewer than min_rows kept rows are dropped."},
+    "marks": {"source": "picks_then_model", "values": ["picks_then_model", "model", "picks_only"]},
+    "depth": {"input_reference": "model_datum", "values": ["model_datum", "sea_level"], "model_datum_elevation_km": null,
+              "notes": "sea_level requires model_datum_elevation_km: dataset depth = input depth + datum elevation; station receiver depth = datum - elevation. run.py reports depth_km back in the input reference (and depth_model_km)."},
+    "run": "Run parameters copied to <dataset>/config.json (config_schema.json)."
+  },
+  "outputs": {
+    "dataset": "templates.csv, channels.csv, templates/, continuous/, config.json (input_schema.json)",
+    "dataset.json": "Provenance: input paths and sha256, velocity model rows, effective settings, depth_offset_km, segments, stations and channels used.",
+    "prepare_report.json": "Per template: kept/dropped and why; per channel-phase row: status, reason, SNR, mark source (pick/model), distance, travel time. Task errors (no data).",
+    "prepare_result.json": "status success|failed, counts, outputs; failed when no template is kept or on any error (non-zero exit)."
+  }
+}

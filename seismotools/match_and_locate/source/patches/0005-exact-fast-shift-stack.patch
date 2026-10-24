@@ -1,0 +1,136 @@
+--- a/src/MatchLocate2.c
++++ b/src/MatchLocate2.c
+@@ -428,20 +428,19 @@
+     extern double *Dt_Dgc,*Dt_Dh,*tshift;
+     extern double *evla0,*evlo0,*evdp0,*gstla,*gstlo,**coefsum;
+     extern double delay,before;
+-    double **coefout;
+     float *sumout;
+     float tshiftmax,threshold0,median_l,mad_l;
+     double Dt,GCarc,GCarc0;
+     SACHEAD hd1;
+-    int i,k,nshift,gnccmax;
++    int i,k,kb,ke,nshift,gnccmax;
+     char outfile[128];
+ 
+     sumout = (float *)calloc(gnmax,sizeof(float));
+-    coefout = (double **)calloc(ntrace,sizeof(double *));
+-    for(i=0; i<ntrace; i++) {
+-        coefout[i] = (double *)calloc(gnmax,sizeof(double));
+-    }
+-    
++
++    // SeismoAgentBench patch 0005: accumulate each shifted correlogram directly
++    // instead of copying it into a per-node ntrace x gnmax matrix first. Each
++    // sample still receives trace 0..ntrace-1 in order and out-of-range samples
++    // contributed +0.0, so the stack is bit-identical.
+     tshiftmax = 0.0;
+     for(i=0; i<ntrace; i++) {
+         GCinit(&gstla[i],&gstlo[i],&lat,&lon,&GCarc);
+@@ -449,24 +448,18 @@
+         Dt = Dt_Dgc[i]*(GCarc-GCarc0) + Dt_Dh[i]*(h-evdp0[i]);
+         nshift = (int)((tshift[i] + Dt)/delay+0.5);
+ 
+-        for(k=0; k<gnmax; k++) {
+-            if((k+nshift)<gnmax && (k + nshift)>=0) {
+-                //Here ignore several seconds (tshift)seismograms at the beginning.
+-                coefout[i][k] = coefsum[i][k+nshift];
+-            }
+-            else {
+-                coefout[i][k]=0.0;
+-            }
++        kb = (nshift < 0) ? -nshift : 0;
++        ke = (nshift > 0) ? gnmax - nshift : gnmax;
++        //Here ignore several seconds (tshift)seismograms at the beginning.
++        for(k=kb; k<ke; k++) {
++            sumout[k] += coefsum[i][k+nshift];
+         }
+         if(tshift[i] > tshiftmax){tshiftmax = tshift[i];}
+     }
+ 
+     //Remove the blank Cross-correlogram (segment of travel time t1)
+-    gnccmax = gnmax - (int)(tshiftmax/delay);   
++    gnccmax = gnmax - (int)(tshiftmax/delay);
+     for(k=0; k<gnmax; k++) {
+-        for(i=0; i<ntrace; i++) {
+-            sumout[k] += coefout[i][k];
+-        }
+         sumout[k] /= ntrace;
+     }
+ 
+@@ -491,8 +484,6 @@
+     Threshold(hd1,lat,lon,h,sumout,loc2,KK,threshold0,median_l,mad_l);
+ 
+     free(sumout);
+-    for(i=0; i<ntrace; i++) free(coefout[i]);
+-    free(coefout);
+ }
+ 
+ //The coef. threshold
+@@ -627,24 +618,51 @@
+ }
+ 
+ //calculate the threshold of detection
++// SeismoAgentBench patch 0005: k-th smallest value by in-place quickselect.
++// On return a[0..k-1] <= a[k] <= a[k+1..n-1].
++static float select_kth(float *a, int n, int k) {
++    int lo = 0, hi = n - 1, i, j;
++    float pivot, t;
++    while(hi > lo) {
++        pivot = a[lo + (hi - lo)/2];
++        i = lo; j = hi;
++        while(i <= j) {
++            while(a[i] < pivot) i++;
++            while(a[j] > pivot) j--;
++            if(i <= j) { t = a[i]; a[i] = a[j]; a[j] = t; i++; j--; }
++        }
++        if(k <= j) hi = j;
++        else if(k >= i) lo = i;
++        else break;
++    }
++    return a[k];
++}
++
++// Median of a[0..n-1] (a is reordered), with the original even-n arithmetic.
++static float median_select(float *a, int n) {
++    float hi, lo;
++    int i;
++    if(n%2 == 1) return select_kth(a, n, (n-1)/2);
++    hi = select_kth(a, n, n/2);
++    lo = a[0];
++    for(i=1; i<n/2; i++) if(a[i] > lo) lo = a[i];
++    return (hi+lo)/2;
++}
++
+ float Threshold_detection(float *cc_sum, int npts, float *median_out, float *mad_out){
+     extern float NMAD;
+     float median = 0.0, MAD = 0.0;
+-    float *cc_sum2,*cc_sum1;
+-
+-    cc_sum1=(float *)calloc(npts,sizeof(float ));
+-    for(int i=0;i<npts;i++)cc_sum1[i]=cc_sum[i];
+-    cc_sum2=(float *)calloc(npts,sizeof(float ));
+-    qsort(cc_sum1, npts, sizeof(float), compare);
+-    if(npts%2 == 0)median = (cc_sum1[npts/2]+cc_sum1[npts/2-1])/2;
+-    if(npts%2 == 1)median = cc_sum1[(npts-1)/2];
+-    for(int i=0; i<npts; i++)cc_sum2[i] = fabsf(cc_sum1[i]-median);
+-    qsort(cc_sum2, npts, sizeof(float), compare);
+-    if(npts%2 == 0)MAD = (cc_sum2[npts/2]+cc_sum2[npts/2-1])/2;
+-    if(npts%2 == 1)MAD = cc_sum2[(npts-1)/2];
+-    free(cc_sum1);
+-    free(cc_sum2);
+-    *median_out = median;
++    float *work;
++
++    // SeismoAgentBench patch 0005: the same order statistics as the two full
++    // qsort() calls, obtained in O(n); thresholds are unchanged.
++    work=(float *)malloc(npts*sizeof(float));
++    for(int i=0;i<npts;i++)work[i]=cc_sum[i];
++    median = median_select(work, npts);
++    for(int i=0; i<npts; i++)work[i] = fabsf(cc_sum[i]-median);
++    MAD = median_select(work, npts);
++    free(work);
++*median_out = median;
+     *mad_out = MAD;
+     return median+NMAD*MAD;
+ }

@@ -1,0 +1,11 @@
+--- a/src/MatchLocate2.c
++++ b/src/MatchLocate2.c
+@@ -349,7 +349,7 @@
+     //12/29/2016
+     if(go == 3){
+ 	    fp2 = fopen(CCOUT,"w");
+-    	    if(fp1 == NULL) {
++    	    if(fp2 == NULL) {
+         	    fprintf(stderr,"Can't open the CC output file\n");
+         	    exit(-1);
+    	    }

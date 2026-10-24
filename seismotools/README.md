@@ -13,9 +13,13 @@ catalogs and workflow outputs are stored outside this directory.
 | GaMMA | Pick association | `gamma/interface/run.py` |
 | NonLinLoc | Absolute location and travel-time grids | `nonlinloc/interface/run.py` |
 | hypoDD | Relative relocation from catalog and/or cross-correlation times | `hypodd/interface/run.py` |
+| MatchLocate2 | Template detection with grid-search location (Match&Locate; matched filter as the zero-grid case) | `match_and_locate/interface/prepare.py` then `run.py` |
 
 The three phase-picking models share one implementation package but remain
 separate model choices. `hypoDD` CT and CT+CC are modes of the same program.
+MatchLocate2 is built from the upstream source with local patches
+(`match_and_locate/source/patches/`) that fix a thread race and unchecked
+buffers and speed up the grid stack without changing its output.
 The standard interfaces define the reproducible input and output boundary;
 advanced workflows may use the bundled Python or native interfaces directly.
 
@@ -33,7 +37,8 @@ seismotools/
 │   └── docs/{core,examples}/       # method notes and reference examples
 ├── gamma/{source,interface,examples,docs}/
 ├── nonlinloc/{source,runtime,interface,examples,docs}/
-└── hypodd/{source,runtime,interface,examples,docs}/
+├── hypodd/{source,runtime,interface,examples,docs}/
+└── match_and_locate/{source/{upstream,patches},runtime,interface,examples,docs}/
 ```
 
 Read the tool-specific README before using an interface. It records the
@@ -98,4 +103,5 @@ For implementation details and model-specific constraints, follow:
 - [GaMMA](gamma/README.md)
 - [NonLinLoc](nonlinloc/README.md)
 - [hypoDD](hypodd/README.md)
+- [Match&Locate](match_and_locate/README.md)
 - [Validation tools](support/tools_usage_validation/README.md)

@@ -1,0 +1,26 @@
+--- a/src/MatchLocate2.c
++++ b/src/MatchLocate2.c
+@@ -657,11 +657,19 @@
+     // SeismoAgentBench patch 0005: the same order statistics as the two full
+     // qsort() calls, obtained in O(n); thresholds are unchanged.
+     work=(float *)malloc(npts*sizeof(float));
+-    for(int i=0;i<npts;i++)work[i]=cc_sum[i];
+-    median = median_select(work, npts);
+-    for(int i=0; i<npts; i++)work[i] = fabsf(cc_sum[i]-median);
+-    MAD = median_select(work, npts);
++    // SeismoAgentBench patch 0007: a stack sample is exactly 0 only where no
++    // channel has data (zero-filled gaps, padding of partial days). Leave those
++    // samples out of the median/MAD; with no data, or MAD = 0, the node yields
++    // no candidates instead of a zero threshold that every sample passes.
++    int n = 0;
++    for(int i=0;i<npts;i++) if(cc_sum[i] != 0.0f) work[n++]=cc_sum[i];
++    if(n == 0) { free(work); *median_out = 0.0; *mad_out = 0.0; return HUGE_VALF; }
++    median = median_select(work, n);
++    n = 0;
++    for(int i=0; i<npts; i++) if(cc_sum[i] != 0.0f) work[n++] = fabsf(cc_sum[i]-median);
++    MAD = median_select(work, n);
+     free(work);
++    if(!(MAD > 0.0)) { *median_out = median; *mad_out = MAD; return HUGE_VALF; }
+ *median_out = median;
+     *mad_out = MAD;
+     return median+NMAD*MAD;
