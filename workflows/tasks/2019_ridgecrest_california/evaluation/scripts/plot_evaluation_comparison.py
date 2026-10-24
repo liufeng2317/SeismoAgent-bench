@@ -49,7 +49,12 @@ AGENT_LEGACY_COLOR = '#000000'
 # Agent arm featured in the recall and matched-pair diagnostics panels.
 FOCUS_AGENT = 'agent_tools'
 
-EXPERT_CATALOG = TASK / 'expert/export/06_full_catalog/52_full_catalog/working_catalog.csv'
+# Stage-60 union (2026-10-25): the stage-52 DD working catalog plus the
+# Match&Locate events (N×MAD 9.5, 4 s; null false fraction 0.24 %). Its depths
+# are below sea level; +0.7 km puts them on the working catalog's convention
+# (below the nominal 0.7-km-ASL surface, association.yaml reference_elevation_km).
+EXPERT_CATALOG = TASK / 'expert/export/07_match_locate/60_catalog/catalog_events.csv'
+EXPERT_DEPTH = ('depth_bsl_km', 0.7)
 AGENT_RUNS = {
     'agent_min': {
         'label': 'Agent min',
@@ -94,7 +99,7 @@ def parse_time(text):
     return datetime.fromisoformat(text).replace(tzinfo=timezone.utc)
 
 
-def read_ours(path, time_col):
+def read_ours(path, time_col, depth_col='depth_km', depth_offset=0.0):
     rows = []
     with open(path, newline='') as fh:
         for r in csv_dict(fh):
@@ -105,7 +110,7 @@ def read_ours(path, time_col):
                 'time': t,
                 'latitude': _f(r.get('latitude')),
                 'longitude': _f(r.get('longitude')),
-                'depth_km': _f(r.get('depth_km')),
+                'depth_km': None if _f(r.get(depth_col)) is None else _f(r.get(depth_col)) + depth_offset,
                 'magnitude': _f(r.get('magnitude')),
             })
     rows.sort(key=lambda r: r['time'])
@@ -137,7 +142,7 @@ def load_references():
     cfg, audit, published, inputs = house.load_data(CASE)
     populations = list(published)
     inputs = dict(inputs)
-    expert_rows = read_ours(EXPERT_CATALOG, 'origin_time')
+    expert_rows = read_ours(EXPERT_CATALOG, 'origin_time_utc', *EXPERT_DEPTH)
     if not expert_rows:
         raise ValueError(f'No expert rows in window: {EXPERT_CATALOG}')
     populations.append(as_record('expert', 'Expert reproduction', EXPERT_COLOR, expert_rows))
@@ -265,12 +270,15 @@ def fig_spatial(out, cfg, audit, pops):
     ax.barh(y, [len(r['rows']) for r in pops], color=[r['color'] for r in pops], height=.58)
     ax.set_yticks(y, labels=[SHORT_LABELS[r['key']] for r in pops], fontsize=6)
     ax.invert_yaxis()
-    ax.set_xlim(0, 12500)
-    ax.set_xticks([0, 2500, 5000, 7500, 10000, 12500],
-                  labels=['0', '2,500', '5,000', '7,500', '10,000', '12,500'])
+    top = max(len(r['rows']) for r in pops)
+    step = 2500 if top <= 15000 else 5000
+    ax.set_xlim(0, (top // step + 1) * step)
+    from matplotlib.ticker import FuncFormatter, MultipleLocator
+    ax.xaxis.set_major_locator(MultipleLocator(step))
+    ax.xaxis.set_major_formatter(FuncFormatter(lambda v, _: f'{v:,.0f}'))
     ax.set_xlabel('Catalog records in window')
     for i, rec in enumerate(pops):
-        ax.text(len(rec['rows']) + 180, i, f'{len(rec["rows"]):,}', va='center', fontsize=6)
+        ax.text(len(rec['rows']) + top * .012, i, f'{len(rec["rows"]):,}', va='center', fontsize=6)
     house.panel_label(ax, 'j', 'Population size')
     cax = fig.add_axes([.09, .028, .45, .012])
     bar = fig.colorbar(plt.cm.ScalarMappable(norm=Normalize(0, 20), cmap='viridis_r'),

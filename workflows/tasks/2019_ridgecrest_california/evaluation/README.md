@@ -10,9 +10,13 @@ sequence over the fixed evaluation window
    Ross 2019 QTM relocated subset, AWR 2025 v2 (long-term GaMMA), and the
    USGS/SCSN ComCat operational snapshot.
 2. **Human-expert reproduction** — this repository's `expert/` workflow,
-   stage-52 joint-double-difference candidate
-   (`expert/export/06_full_catalog/52_full_catalog/working_catalog.csv`,
-   6,520 events in window).
+   stage-60 union (`expert/export/07_match_locate/60_catalog/catalog_events.csv`,
+   16,686 events in window): the stage-52 joint-double-difference working
+   catalog (6,520) plus 10,166 Match&Locate events (1,061 templates, N×MAD
+   9.5, 4 s separation; null-run false fraction 0.24 %). Recall vs Shelly
+   91.0 %, Liu 95.0 %, Ross 90.9 %, ComCat 87.7 %; median epicentral 0.62 /
+   0.80 / 0.75 / 0.83 km (stage-52 alone: 61.2 / 75.1 / 57.4 / 64.1 %).
+   Expert depths are below sea level + 0.7 km (the nominal surface).
 3. **Agent reproductions** — completed Claude Code × GLM-5.3 runs:
    `runs/min/claude/glm-5.3/20261013T215003Z` (the Q1 `min` arm),
    `runs/tools/claude/glm-5.3/20261015T020300Z` (the Q2 `tools` arm;
@@ -44,13 +48,15 @@ populations. Headline numbers:
 
 | Arm | vs Expert | vs Shelly | vs ComCat | median \|Δt\| | median epicentral |
 |---|---|---|---|---|---|
-| `tools` | 5,602 (P 48.2%, R 85.9%) | 6,060 (78.5%) | 5,317 (81.0%) | 0.97 s | 1.2 km |
-| `min` | 2,218 (P 21.5%, R 34.0%) | 2,620 (34.0%) | 2,518 (38.4%) | 0.34 s | 4.7 km |
-| `legacy` | 974 (P 55.3%, R 14.9%) | 1,147 (14.9%) | 1,108 (16.9%) | 0.26 s | 2.3 km |
+| `tools` | 8,015 (P 69.0%, R 48.0%) | 6,060 (78.5%) | 5,317 (81.0%) | 0.95 s | 1.4 km |
+| `min` | 2,910 (P 28.2%, R 17.4%) | 2,620 (34.0%) | 2,518 (38.4%) | 0.42 s | 5.0 km |
+| `legacy` | 1,208 (P 68.6%, R 7.2%) | 1,147 (14.9%) | 1,108 (16.9%) | 0.30 s | 2.5 km |
 
-Medians are vs Expert. The `tools` arm roughly doubles both precision
-and recall over `min` while keeping sub-second and sub-2 km agreement
-with the expert catalog.
+Medians are vs Expert. Since 2026-10-25 the expert is the stage-60 union
+(16,686 events), so recall *vs Expert* fell for every arm (tools: 85.9 % →
+48.0 % against the 6,520-event stage-52 catalog) while precision rose; the
+reference columns are unchanged. The `tools` arm still roughly doubles both
+precision and recall over `min` against every population.
 
 ## Per-run evaluation
 
