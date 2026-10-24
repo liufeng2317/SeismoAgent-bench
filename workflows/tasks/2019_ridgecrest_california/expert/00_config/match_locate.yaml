@@ -1,0 +1,65 @@
+# Stage 60 — Match&Locate (seismotools/match_and_locate), ported from the
+# Kaikoura/Kilauea/Prague stage 60 (Magna PLAN.md r7 lineage). Ridgecrest has
+# no round tree: inputs are the stage-01–10 baseline and the stage-52 working
+# catalog; outputs go to export/07_match_locate/.
+source:
+  events: export/01_baseline/10_validate_catalog/events.csv          # v1 flags, n_stations, sigma
+  assoc_picks: export/01_baseline/04_locate_nonlinloc/full/picks.csv
+  picks: export/02_pick_phasenet/full/picks.csv
+  stations: export/01_baseline/04_locate_nonlinloc/stations.csv
+  # stage-52 double-difference working catalog (6,520 = v1): template
+  # positions and the union base
+  catalog: export/06_full_catalog/52_full_catalog/working_catalog.csv
+export_root: export/07_match_locate/60_match_locate
+tool_root: ../../../../seismotools/match_and_locate
+waveforms: ../../../../data/2019_ridgecrest_california/data/waveforms/data
+velocity_model:
+  registry: ../../../../data/2019_ridgecrest_california/data/models/velocity_models.json
+  key: shelly_table1
+  # The expert's GaMMA/NonLinLoc runs interpolate this profile linearly
+  # (03_associate_gamma.py); the template locations were made that way, so
+  # the moveouts use the same profile, densified into constant sublayers.
+  layering: linear
+  sublayer_km: 0.25
+model_datum_elevation_km: 0.7            # = association.yaml reference_elevation_km
+
+templates:
+  min_stations: 10
+  max_sigma_depth_km: 2.0
+  cover_radius_km: 1.0                   # 1,235 templates (0.5 km: 2,462, ~19 h); pilot 9.4 s per template-day
+  pick_max_abs_residual_s: 0.3
+
+scopes:
+  pilot:
+    days: ["2019-07-05"]                 # between the Mw 6.4 and Mw 7.1
+    max_templates: 20
+  full:
+    days: ["2019-07-04", "2019-07-05", "2019-07-06"]
+    max_templates: null
+
+window: {length_s: 2.0, before_s: 0.3, after_s: 1.7}
+
+prepare:
+  processing: {sampling_rate: 50.0, freqmin: 2.0, freqmax: 10.0}
+  channels: {families: [HH, EH], P: [Z], S: [N, E, "1", "2"]}
+  # median v1 event: 3 stations within 20 km, 12 within 40 km -> 40 km
+  selection: {max_distance_km: 40.0, min_snr: 5.0, noise_s: 5.0, min_rows: 12,
+              exclude_p_overlapping_s: true}
+  marks: {source: picks_then_model}
+
+run:
+  search: {units: km, half_width_km: 0.5, step_km: 0.25, half_depth_km: 0.5, step_depth_km: 0.5}
+  detection: {cc_threshold: 0.0, mad_threshold: 8.0, min_separation_s: 4.0}
+  merge: {engine: python, cc_threshold: 0.0, mad_threshold: 8.0, min_separation_s: 4.0}
+  min_channels: 12
+
+# final threshold: null run (08_null_run.py, 07-05 + 07-06, 6 s) gives 4.2 % false at
+# N×MAD 9, 0.3 % at 9.5, 0.04 % at 10 -> 9.5 (as Prague/Kilauea/Kaikoura; PLAN.md stage 60).
+# Separation 4 s, not Magna's 6 s: on the null days 4 s keeps 9,717 detections
+# (6 s: 7,745) with the same 23 null ones (0.24 %) — 6 s merged real coda events.
+final: {mad_threshold: 9.5, cc_threshold: 0.0, min_separation_s: 4.0}
+
+sweep:
+  mad: [8, 8.5, 9, 9.5, 10, 11, 12, 14]
+
+parallel: {prepare_workers: 32, jobs: 8, threads: 8}

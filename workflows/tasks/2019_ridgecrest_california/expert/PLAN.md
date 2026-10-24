@@ -52,3 +52,48 @@ The first baseline is **PhaseNet picking → GaMMA association and initial locat
 The first version is complete when the three-day workflow runs successfully, events and picks are traceable, results are reproducible, and major differences and limitations are documented. Maximizing event counts or exactly reproducing a published catalog is not a completion criterion.
 
 Stage-20 outcome: HK reduces withheld RMS by 11.1% and improves horizontal reference agreement, but increases the Shelly depth discrepancy by 29.9% and p90 posterior depth sigma by 11.3%. It fails promotion; retain v1 and close this fixed trial.
+
+## Stage 60 — Match&Locate (2026-10-24)
+
+Motivation: a cross-case review found Ridgecrest the only case whose expert
+catalog recalls the references less well than the references recall each
+other (expert vs Shelly 0.612, Ross 0.574, Liu 0.751, ComCat 0.641; Shelly
+alone recovers 75.0 % of Ross and 82.3 % of Liu). Shelly and Ross are
+template-matching catalogs; this catalog had no detection stage beyond the
+picker. `01_pipeline/60_match_locate.py` + `00_config/match_locate.yaml`,
+ported from Kaikōura: templates are v1 events (≥ 10 stations, σz ≤ 2 km) at
+their stage-52 double-difference positions, marked with their NLL-associated
+picks; the union base is the stage-52 working catalog (6,520); references and
+gates (4 s / 15 km, comparison box) come from the task evaluation module, so
+stage-60 scores equal the evaluation layer's. Shelly Table 1 is used as the
+expert's GaMMA/NLL runs used it (linear interpolation), densified into
+0.25 km constant sublayers; stations within 40 km (median v1 event: 12).
+Outputs: `export/07_match_locate/`.
+
+Pilot (07-05, 20 templates by station count): at N×MAD 9.5 the union
+recovers Shelly 58.0 → 70.6 %, Ross 53.3 → 65.8 %, Liu 73.7 → 77.3 %,
+ComCat 63.4 → 70.9 % (1,253 new events); 9.4 s per template-day.
+Full run: 1 km cover → 1,235 templates (95 % of v1; 0.5 km would be 2,462
+and ~19 h), three days. Threshold from a null run, as in every other case.
+
+Result (2026-10-25): **adopted.** Full run: 1,061 of 1,235 templates kept,
+3,183 jobs, 2.5 h. Null run (07-05 + 07-06, channel circular shift): false
+fraction 77 % at N×MAD 8, 26 % at 8.5, 4.2 % at 9, **0.3 % at 9.5**, 0.04 %
+at 10 → final 9.5. Final separation **4 s**, not Magna's 6 s: on the null
+days 4 s keeps 9,717 detections (6 s: 7,745) with the same 23 null ones
+(0.24 %) — 6 s merged real events in the aftershock coda. Catalog
+`export/07_match_locate/60_catalog/catalog_events.csv`: **16,686 events**
+(6,520 stage-52 + 10,166 M&L); magnitudes chained from 424 ML templates to
+981 of 1,061.
+
+| | stage 52 | M&L | **union** | other refs' best recall of it |
+|---|---|---|---|---|
+| Shelly | 0.612 | 0.856 | **0.910** | 0.629 (Ross) |
+| Liu | 0.751 | 0.887 | **0.950** | 0.823 (Shelly) |
+| Ross (nbranch > 1) | 0.574 | 0.872 | **0.910** | 0.750 (Shelly) |
+| ComCat | 0.641 | 0.808 | **0.877** | 0.735 (Shelly) |
+
+Median epicentral vs Shelly / Liu / Ross / ComCat: 0.62 / 0.80 / 0.75 /
+0.83 km. Ridgecrest now exceeds the reference-to-reference recall like the
+other five cases. The task evaluation layer reads this union (depths below
+sea level + 0.7 km).
