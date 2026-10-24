@@ -1,0 +1,29 @@
+# GaMMA association settings; later-round levers: station delays (NLL),
+# dbscan_*/min_*/oversample_factor.
+method: BGMM
+workers: 32
+chunk_seconds: 3600
+buffer_seconds: 120
+projection_center: [-155.28, 19.40]      # summit (centre of the frozen box)
+# r1 bounds. r2 (summit-restricted -155.50..-155.05, 19.25..19.55) was
+# rejected: the small events still drift to the (new) east bound (PLAN.md r2).
+longitude_bounds: [-155.65, -154.90]
+latitude_bounds: [19.10, 19.70]
+depth_bounds_km: [0, 20]                 # below the reference elevation datum
+# Mean station elevation 1.07 km ASL (25 sites; summit stations ~1.1 km). The
+# HVO model states no datum; depths below the mean station surface.
+reference_elevation_km: 1.07
+velocity_model: hvo_klein_linear
+# The HVO model is defined by linear interpolation between its points, so the
+# stage 03/04 ramp is the native representation (contrast Maple/Prague: step).
+velocity_layering: linear
+eikonal_spacing_km: 0.5
+dbscan_eps: 10.0
+dbscan_min_samples: 3
+oversample_factor: 5
+covariance_prior: [3.0]
+min_picks_per_eq: 10
+min_p_picks_per_eq: 4
+min_s_picks_per_eq: 3
+min_stations: 6
+max_sigma11: 1.5

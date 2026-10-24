@@ -1,0 +1,68 @@
+# Paths are resolved relative to the expert root, including for --config overrides.
+case: 2018_kilauea_hawaii
+round: r3
+data_root: ../../../../data/2018_kilauea_hawaii/data/waveforms
+case_root: ../../../../data/2018_kilauea_hawaii
+export_root: export/r3
+candidate_window:
+  start_utc: '2018-05-01T00:00:00Z'
+  end_utc: '2018-05-09T00:00:00Z'
+pilot_window:  # low-rate interval (Shelly S1: 1 event in 02Z of 05-01)
+  start_utc: '2018-05-01T02:00:00Z'
+  end_utc: '2018-05-01T02:10:00Z'
+mainshock:
+  # Mw 6.9 south-flank earthquake (ComCat hv70116556, analysis/mainshock_anchor.json):
+  # inside the time window but ~28 km east of the summit box, so not part of
+  # this summit task -> no in-window mainshock identity (stages 05/09/10).
+  in_window: false
+  event_id: hv70116556
+  time_utc: '2018-05-04T22:32:54.650Z'
+  magnitude: 6.9
+  magnitude_type: mw
+  latitude: 19.3181667
+  longitude: -154.9996667
+  depth_km: 5.81
+  proximity_s: 10
+core_region:  # = validation.yaml region (the frozen summit box)
+  longitude_bounds: [-155.40, -155.15]
+  latitude_bounds: [19.30, 19.50]
+pilot_association_windows:  # stage 03 --scope pilot development windows (half-open)
+  low_rate: ['2018-05-01T02:00:00Z', '2018-05-01T02:10:00Z']
+  largest: ['2018-05-04T22:45:00Z', '2018-05-04T23:00:00Z']   # summit M4.66 at 22:48:19, in the Mw 6.9 coda
+methods:
+  picker: PhaseNet
+  weights: original
+  weight_version: '2'
+  implementation: TRACE-1.1 PhaseNet with SeisBench utilities
+  association: GaMMA
+  association_use_amplitude: false
+  absolute_location: NonLinLoc
+  velocity_model: hvo_klein_linear
+channel_policy:
+  # 25 HV sites, all 100 Hz: HH (broadband) and EH (short period); five EH
+  # sites are vertical-only (OTLD, CPKD, MITD, KNHD, POLD).
+  primary_families: [HH, EH]
+  require_three_components_for_first_pilot: true
+  rotate_12_using_stationxml: true
+  site_family_preference: [HH, EH]
+  vertical_only_families: [EH]     # P picks only (Maple Creek r3/r4)
+  exclude_stations: []
+  hn_and_vertical_only: deferred_separate_input_conditions
+stationxml_file: stations/earthscope_f1b6274535b6.stationxml  # relative to data_root
+tools:
+  trace_library: /liufeng1afs/project/03_LLM/Science_Discovery_Agenet/TRACE-1.1/seismoagent/library
+picking:
+  # 0.2 carried over from Magna r5, not re-derived for this case.
+  p_threshold: 0.2
+  s_threshold: 0.2
+  buffer_seconds: 60
+  cpu_workers: 4
+  cpu_threads: 1
+  batch_size: 32
+  vertical_only_horizontals: copy_z   # Maple Creek r4
+magnitude:
+  calibration: hutton_boore_1987_provisional
+  numerical_check_channel: HV.RIMD..HHE   # 100 Hz horizontal at the summit
+  # r3 knob: high-pass the WA prefilter at 1 Hz (r1 0.1-0.2 Hz: low-SNR rejections
+  # 3,132 of 3,644 station measurements; PLAN.md r3).
+  prefilter_hz: [0.5, 1.0, 20.0, 25.0]

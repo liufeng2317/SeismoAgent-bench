@@ -1,0 +1,57 @@
+# Stage 60 — Match&Locate (seismotools/match_and_locate) seeded by the r3 catalog.
+# Ported from the Prague stage 60 (Maple Creek / Magna PLAN.md r7 lineage).
+source_export: export/r3
+export_root: export/r4/60_match_locate
+tool_root: ../../../../seismotools/match_and_locate
+waveforms: ../../../../data/2018_kilauea_hawaii/data/waveforms/data
+velocity_model:
+  registry: ../../../../data/2018_kilauea_hawaii/data/models/velocity_models.json
+  key: hvo_klein_linear
+  # The tool treats rows as constant layers; this model is defined by linear
+  # interpolation between its points (as stages 03/04 use it), so stage 60
+  # passes a densified copy: constant sublayers at the mid-depth velocity.
+  layering: linear
+  sublayer_km: 0.2
+model_datum_elevation_km: 1.07           # = association.yaml reference_elevation_km
+
+templates:
+  min_stations: 10
+  max_sigma_depth_km: 2.0
+  cover_radius_km: 0.5
+  pick_max_abs_residual_s: 0.3
+
+scopes:
+  pilot:
+    days: ["2018-05-02"]                 # pre-Mw 6.9 (Shelly 241 events; r1 recall ~0.10)
+    max_templates: 20
+  full:
+    days: ["2018-05-01", "2018-05-02", "2018-05-03", "2018-05-04",
+           "2018-05-05", "2018-05-06", "2018-05-07", "2018-05-08"]
+    max_templates: null
+
+window: {length_s: 2.0, before_s: 0.3, after_s: 1.7}
+
+prepare:
+  processing: {sampling_rate: 50.0, freqmin: 2.0, freqmax: 10.0}
+  # five vertical-only EH sites contribute P rows only
+  channels: {families: [HH, EH], P: [Z], S: [N, E, "1", "2"]}
+  # Summit sources at ~2 km depth have S-P < 1.7 s at most stations, so the
+  # Magna P/S overlap exclusion would drop nearly all P rows: kept (false).
+  selection: {max_distance_km: 20.0, min_snr: 5.0, noise_s: 5.0, min_rows: 12,
+              exclude_p_overlapping_s: false}
+  marks: {source: picks_then_model}
+
+run:
+  search: {units: km, half_width_km: 0.5, step_km: 0.25, half_depth_km: 0.5, step_depth_km: 0.5}
+  detection: {cc_threshold: 0.0, mad_threshold: 8.0, min_separation_s: 4.0}
+  merge: {engine: python, cc_threshold: 0.0, mad_threshold: 8.0, min_separation_s: 4.0}
+  min_channels: 12
+
+# final threshold: null run (08_null_run.py, 05-02 + 05-06, 6 s) gives 6.5 % false at
+# N×MAD 9, 0.8 % at 9.5, 0 at 10 -> 9.5 (PLAN.md r4)
+final: {mad_threshold: 9.5, cc_threshold: 0.0, min_separation_s: 6.0}
+
+sweep:
+  mad: [8, 8.5, 9, 9.5, 10, 11, 12, 14]
+
+parallel: {prepare_workers: 32, jobs: 8, threads: 8}
