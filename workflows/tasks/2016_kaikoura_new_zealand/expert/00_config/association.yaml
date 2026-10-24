@@ -1,0 +1,25 @@
+# GaMMA association settings.
+method: BGMM
+workers: 32
+chunk_seconds: 3600
+buffer_seconds: 120
+projection_center: [173.6, -42.35]       # centre of the frozen common mask
+longitude_bounds: [171.6, 176.8]         # all 53 stations (to ~260 km) plus margin
+latitude_bounds: [-43.9, -39.3]
+depth_bounds_km: [0, 60]                 # the references reach 60 km
+# The Chamberlain (2021) model is an NZ3D average with depths below sea
+# level; the model datum is sea level (mean station elevation 0.29 km).
+reference_elevation_km: 0.0
+velocity_model: chamberlain2021_nz3d_avg_1d
+velocity_layering: linear                # NZ3D interpolates linearly between depth nodes
+eikonal_spacing_km: 1.0                  # 260 km aperture
+eikonal_zlim_km: [-5, 70]
+dbscan_eps: 15.0                         # r3 knob (r1/r2 10 s): one event spans >40 s of picks over the 260 km aperture; 10 s left GeoNet M>2 events unassociated (PLAN.md r3)
+dbscan_min_samples: 3
+oversample_factor: 5
+covariance_prior: [3.0]
+min_picks_per_eq: 10
+min_p_picks_per_eq: 4
+min_s_picks_per_eq: 3
+min_stations: 6
+max_sigma11: 1.5

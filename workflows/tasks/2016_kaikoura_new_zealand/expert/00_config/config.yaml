@@ -1,0 +1,64 @@
+# Paths are resolved relative to the expert root, including for --config overrides.
+case: 2016_kaikoura_new_zealand
+round: r3
+data_root: ../../../../data/2016_kaikoura_new_zealand/data/waveforms
+case_root: ../../../../data/2016_kaikoura_new_zealand
+export_root: export/r3
+candidate_window:
+  start_utc: '2016-12-01T00:00:00Z'
+  end_utc: '2016-12-09T00:00:00Z'
+pilot_window:  # lowest-rate hour of 12-01 (Tan S10: 39 events in 03Z)
+  start_utc: '2016-12-01T03:00:00Z'
+  end_utc: '2016-12-01T03:10:00Z'
+mainshock:
+  # In-window anchor: the largest GeoNet event of the window (analysis/
+  # mainshock_anchor.json), M 5.5 2016p913880; the Mw 7.8 (2016-11-13)
+  # precedes the window by 18 days.
+  in_window: true
+  event_id: 2016p913880
+  time_utc: '2016-12-04T03:15:47Z'
+  magnitude: 5.5
+  magnitude_type: M
+  latitude: -41.69
+  longitude: 174.236
+  depth_km: 10.7
+  proximity_s: 10
+core_region:  # = validation.yaml region (the frozen common mask)
+  longitude_bounds: [172.0, 175.2]
+  latitude_bounds: [-43.5, -41.2]
+pilot_association_windows:  # stage 03 --scope pilot development windows (half-open)
+  low_rate: ['2016-12-01T03:00:00Z', '2016-12-01T03:10:00Z']
+  anchor: ['2016-12-04T03:10:00Z', '2016-12-04T03:25:00Z']   # M 5.5 at 03:15:47
+methods:
+  picker: PhaseNet
+  weights: original
+  weight_version: '2'
+  implementation: TRACE-1.1 PhaseNet with SeisBench utilities
+  association: GaMMA
+  association_use_amplitude: false
+  absolute_location: NonLinLoc
+  velocity_model: chamberlain2021_nz3d_avg_1d
+channel_policy:
+  # 53 sites (GeoNet NZ + STREWN Z1): HH and EH three-component at 100 Hz;
+  # four sites also carry HN strong-motion at 200 Hz (not a primary family).
+  primary_families: [HH, EH]
+  require_three_components_for_first_pilot: true
+  rotate_12_using_stationxml: true
+  site_family_preference: [HH, EH]
+  exclude_stations: []
+  hn_and_vertical_only: deferred_separate_input_conditions
+# GeoNet (NZ) and EarthScope (Z1) StationXML; stage 09 merges them.
+stationxml_file: [stations/geonet_e97b9e8ad650.stationxml, stations/earthscope_25a5656748dc.stationxml]
+tools:
+  trace_library: /liufeng1afs/project/03_LLM/Science_Discovery_Agenet/TRACE-1.1/seismoagent/library
+picking:
+  p_threshold: 0.2           # Magna r5, not re-derived for this case
+  resample_to_hz: 100        # off-grid 100 Hz day files (NZ.WAZ, OKCZ, ...) onto the absolute grid
+  s_threshold: 0.2
+  buffer_seconds: 60
+  cpu_workers: 4
+  cpu_threads: 1
+  batch_size: 32
+magnitude:
+  calibration: hutton_boore_1987_provisional
+  numerical_check_channel: NZ.KHZ.10.HHE   # 100 Hz broadband horizontal

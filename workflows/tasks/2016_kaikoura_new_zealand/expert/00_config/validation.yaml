@@ -1,0 +1,46 @@
+# Reference cohort mask, matching gates and review thresholds for
+# 04_comparison/05_match_references.py and 01_pipeline/10_validate_catalog.py.
+window:
+  start_utc: '2016-12-01T00:00:00Z'
+  end_utc: '2016-12-09T00:00:00Z'   # half-open, as everywhere in the pipeline
+region:  # the frozen common mask (analysis/KAIKOURA2016_analysis.md)
+  latitude_bounds: [-43.5, -41.2]
+  longitude_bounds: [172.0, 175.2]
+# The audit mask is 0-60 km; -3 km lower limit so that no datum convention
+# removes events (Tan S11 has depths down to -1.6 km).
+depth_bounds_km: [-3.0, 60.0]
+expected_reference_counts:  # hard gates in stage 05
+  tan: 9720
+  lanza: 122
+  chamberlain: 2260
+  geonet: 1507
+matching:
+  primary: [4.0, 15.0]           # same gates as every other case
+  sensitivity: [[2.0, 5.0], [1.0, 3.0]]
+  time_only: {primary: [1.0, 15.0], sensitivity: [], control_shift_s: 60}   # unused (no time-only reference)
+quality:
+  residual_outlier_s: 1.0
+  association_review_min_outliers: 3
+  association_review_fraction: 0.20
+  rms_review_s: 0.6
+  depth_sigma_review_km: 3.0
+  horizontal_shift_review_km: 2.0
+  depth_edge_km: 0.5
+  azimuth_gap_review_deg: 180.0
+references:  # paths relative to case_root
+  tan:
+    label: Tan et al. (2024) SUGAR table S10 (detection primary)
+    format: tan_s10
+    path: data/catalogs/TAN2024_JB028735/analysis/derived/sugar_s10/TAN2024_JB028735__sugar_s10__normalized_v1.csv
+  lanza:
+    label: Lanza et al. (2019) HypoDD preferred origins (location primary)
+    format: lanza_origins
+    path: data/catalogs/LANZA2019_GL082780/analysis/derived/LANZA2019_GL082780/LANZA2019_GL082780__preferred_origins__normalized_v1.csv
+  chamberlain:
+    label: Chamberlain et al. (2021) corrected GrowClust catalog
+    format: chamberlain_growclust
+    path: data/catalogs/CHAMBERLAIN2021_JB022304/CHAMBERLAIN2021_JB022304__catalog_growclust_corrected_focal_mechanisms.csv
+  geonet:
+    label: GeoNet operational
+    format: geonet_text
+    path: data/catalogs/GEONET_2016_KAIKOURA/GEONET_2016_KAIKOURA__catalog_operational_benchmark.txt

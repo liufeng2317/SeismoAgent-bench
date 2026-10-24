@@ -1,0 +1,57 @@
+# Stage 60 — Match&Locate (seismotools/match_and_locate) seeded by the r3 catalog.
+# Ported from the Kilauea stage 60 (Prague / Maple Creek / Magna PLAN.md r7 lineage).
+source_export: export/r3
+export_root: export/r4/60_match_locate
+tool_root: ../../../../seismotools/match_and_locate
+waveforms: ../../../../data/2016_kaikoura_new_zealand/data/waveforms/data
+velocity_model:
+  registry: ../../../../data/2016_kaikoura_new_zealand/data/models/velocity_models.json
+  key: chamberlain2021_nz3d_avg_1d
+  # The tool treats rows as constant layers; this model interpolates linearly
+  # between nodes (as stages 03/04 use it): constant 0.5 km sublayers at the
+  # mid-depth velocity down to 60 km, published rows below (paths <= 80 km).
+  layering: linear
+  sublayer_km: 0.5
+  densify_to_km: 60
+model_datum_elevation_km: 0.0            # = association.yaml reference_elevation_km
+
+templates:
+  min_stations: 10
+  max_sigma_depth_km: 3.0
+  cover_radius_km: 2.0                   # 803 templates (1 km: 1,350); the +-1 km grid tiles 2 km spacing
+  pick_max_abs_residual_s: 0.5           # r3 NLL RMS 0.36 s (1-D model, 260 km aperture)
+
+scopes:
+  pilot:
+    days: ["2016-12-04"]                 # mid-window (anchor M5.5 day; Tan ~1,200 events/day)
+    max_templates: 20
+  full:
+    days: ["2016-12-01", "2016-12-02", "2016-12-03", "2016-12-04",
+           "2016-12-05", "2016-12-06", "2016-12-07", "2016-12-08"]
+    max_templates: null
+
+window: {length_s: 2.0, before_s: 0.3, after_s: 1.7}
+
+prepare:
+  processing: {sampling_rate: 50.0, freqmin: 2.0, freqmax: 8.0}
+  channels: {families: [HH, EH], P: [Z], S: [N, E, "1", "2"]}
+  # Sparse network: median v1 event has 1 station within 20 km, 6 within 60,
+  # 8 within 80 -> 80 km (Magna/Maple/Kilauea: 20 km).
+  selection: {max_distance_km: 80.0, min_snr: 5.0, noise_s: 5.0, min_rows: 12,
+              exclude_p_overlapping_s: true}
+  marks: {source: picks_then_model}
+
+run:
+  search: {units: km, half_width_km: 1.0, step_km: 0.5, half_depth_km: 1.0, step_depth_km: 0.5}
+  detection: {cc_threshold: 0.0, mad_threshold: 8.0, min_separation_s: 4.0}
+  merge: {engine: python, cc_threshold: 0.0, mad_threshold: 8.0, min_separation_s: 4.0}
+  min_channels: 12
+
+# final threshold: null run (08_null_run.py, 12-02 + 12-06, 6 s) gives 9.2 % false at
+# N×MAD 9, 1.4 % at 9.5 (Magna/Maple accepted 1-2 %), 0.3 % at 10 -> 9.5 (PLAN.md r4)
+final: {mad_threshold: 9.5, cc_threshold: 0.0, min_separation_s: 6.0}
+
+sweep:
+  mad: [8, 8.5, 9, 9.5, 10, 11, 12, 14]
+
+parallel: {prepare_workers: 32, jobs: 8, threads: 8}
