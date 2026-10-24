@@ -29,7 +29,17 @@ if [ -z "$MODEL" ]; then
 fi
 RUN_ROOT="$TASK_DIR/runs/$VARIANT/$AGENT/$MODEL"
 RUN_ID="${RUN_ID:-$(date -u +%Y%m%dT%H%M%SZ)}"
-TIMEOUT="${TIMEOUT:-86400}"
+# The tools variant drives multi-hour science stages (picking, association,
+# location); it gets a 48 h budget by default while other variants keep 24 h.
+case "$VARIANT" in
+  tools) DEFAULT_TIMEOUT=172800 ;;
+  *) DEFAULT_TIMEOUT=86400 ;;
+esac
+TIMEOUT="${TIMEOUT:-$DEFAULT_TIMEOUT}"
+# DETACH=1 (default) runs the runner in its own session so a closed terminal
+# cannot SIGHUP it mid-run; the run still streams to record/execution.log.
+# DETACH=0 keeps the previous attached, streaming behavior.
+DETACH="${DETACH:-1}"
 
 if [ ! -x "$PYTHON" ]; then
   echo "Evaluation Python is not available: $PYTHON" >&2
@@ -45,7 +55,13 @@ if [ "$AGENT" = "claude" ]; then
   # ANTHROPIC_AUTH_TOKEN, for example a GLM Anthropic-compatible endpoint).
   # CLAUDE_EXTRA_PATH optionally adds directories (for example a node
   # installation) to the sanitized run PATH.
-  CLAUDE_BIN="${CLAUDE_BIN:-$(command -v claude)}"
+  CLAUDE_BIN="${CLAUDE_BIN:-$(command -v claude || true)}"
+  if [ -z "$CLAUDE_BIN" ]; then
+    # Fallback: the Cursor-bundled Claude Code binary, which is not on PATH.
+    # sort -V picks the newest extension version, so extension updates keep
+    # resolving without touching this script.
+    CLAUDE_BIN="$(ls -d "$HOME"/.cursor-server/extensions/anthropic.claude-code-*-linux-*/resources/native-binary 2>/dev/null | sort -V | tail -n 1)"
+  fi
   if [ -d "$CLAUDE_BIN" ]; then CLAUDE_BIN="$CLAUDE_BIN/claude"; fi
   if [ ! -x "$CLAUDE_BIN" ]; then
     echo "Claude executable is not available: $CLAUDE_BIN" >&2
@@ -80,7 +96,7 @@ if [ "$AGENT" = "claude" ]; then
     --agent-config "$AGENT_CONFIG")
   if [ -n "${CLAUDE_MODEL:-}" ]; then CLAUDE_ARGS+=(--model "$CLAUDE_MODEL"); fi
   if [ -n "${CLAUDE_MAX_TURNS:-}" ]; then CLAUDE_ARGS+=(--max-turns "$CLAUDE_MAX_TURNS"); fi
-  "$PYTHON" -m SeismoAgentBench run-claude \
+  CMD=("$PYTHON" -m SeismoAgentBench run-claude \
     --task "$TASK_FILE" \
     --input "$TASK_DIR/input.json" \
     --agent-name "$AGENT_NAME" \
@@ -90,12 +106,12 @@ if [ "$AGENT" = "claude" ]; then
     --environment-config "$PROJECT_DIR/SeismoAgentBench/configs/environments/seismoagent_eval.yaml" \
     "${CLAUDE_ARGS[@]}" \
     --prompt "Use the Python executable and Conda environment reported in the runtime context for scientific processing. Network access and package installation follow the configured runtime policy; do not modify the original shared seismoagent environment. Write all results below \$BENCH_OUTPUT." \
-    --timeout "$TIMEOUT"
+    --timeout "$TIMEOUT")
 else
   CODEX_ARGS=(--codex-bin "$CODEX_BIN" --codex-home "$CODEX_HOME"
     --env-file "$RUNTIME_ENV_FILE")
   if [ -n "${CODEX_MODEL:-}" ]; then CODEX_ARGS+=(--model "$CODEX_MODEL"); fi
-  "$PYTHON" -m SeismoAgentBench run-codex \
+  CMD=("$PYTHON" -m SeismoAgentBench run-codex \
     --task "$TASK_FILE" \
     --input "$TASK_DIR/input.json" \
     --agent-name "$AGENT_NAME" \
@@ -106,5 +122,27 @@ else
     --environment-config "$PROJECT_DIR/SeismoAgentBench/configs/environments/seismoagent_eval.yaml" \
     "${CODEX_ARGS[@]}" \
     --prompt "Use the Python executable and Conda environment reported in the runtime context for scientific processing. Network access and package installation follow the configured runtime policy; do not modify the original shared seismoagent environment. Write all results below \$BENCH_OUTPUT." \
-    --timeout "$TIMEOUT"
+    --timeout "$TIMEOUT")
 fi
+
+if [ "$DETACH" != "1" ]; then
+  "${CMD[@]}"
+  exit $?
+fi
+
+mkdir -p "$RUN_ROOT"
+RUNNER_LOG="$RUN_ROOT/runner-$RUN_ID.log"
+setsid nohup "${CMD[@]}" >"$RUNNER_LOG" 2>&1 </dev/null &
+# The runtime env file carries credentials and is deleted by the EXIT trap.
+# Stay around until the runner has consumed it and started the agent
+# (record/runner.pid appears) before letting that trap fire.
+for _ in $(seq 1 180); do
+  if [ -f "$RUN_ROOT/$RUN_ID/record/runner.pid" ]; then break; fi
+  sleep 1
+done
+RUNNER_PID="$(sed -n 's/.*"pid": *\([0-9][0-9]*\).*/\1/p' "$RUN_ROOT/$RUN_ID/record/runner.pid" 2>/dev/null || true)"
+echo "detached runner for run $RUN_ID"
+echo "  runner pid : ${RUNNER_PID:-unknown (see $RUNNER_LOG)}"
+echo "  runner log : $RUNNER_LOG"
+echo "  live events: tail -f $RUN_ROOT/$RUN_ID/record/execution.log"
+echo "  probe      : $PYTHON -m SeismoAgentBench status --run-dir $RUN_ROOT/$RUN_ID"

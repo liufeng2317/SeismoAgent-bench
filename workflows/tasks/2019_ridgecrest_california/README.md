@@ -41,9 +41,25 @@ machine-checkable output contracts (`output_contract_min.json`,
 `output_contract.json`). `prompt_tools.md` exposes the local PhaseNet, GaMMA,
 NonLinLoc and hypoDD sources while leaving method selection to the Agent.
 
-The default runner allows up to twenty-four hours for the complete Agent run.
-Override this with `TIMEOUT`, in seconds, when a different processing budget is
-needed.
+The runner's wall-clock budget defaults to twenty-four hours (`tools`
+forty-eight, because its science stages alone ran ~18 h in the first
+completed run). Override with `TIMEOUT`, in seconds, when a different
+processing budget is needed; the budget is also rendered into the agent's
+runtime context so the agent can plan against the deadline.
+
+By default `run.sh` starts the runner detached in its own session
+(`setsid`), so closing the launching terminal cannot kill a multi-hour run;
+the runner log lands next to the run tree as
+`runs/<variant>/<harness>/<model>/runner-<RUN_ID>.log` and live events keep
+streaming to `<run>/record/execution.log`. Set `DETACH=0` for the previous
+attached, streaming behavior. Two probes close the observability gap:
+
+```bash
+# periodic status probe (state, elapsed, idle seconds, artifact presence)
+/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python -m SeismoAgentBench status --run-dir <run>
+# forensic closure when a runner died without writing a final state
+/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python -m SeismoAgentBench finalize --run-dir <run>
+```
 
 Run outputs are separated by experiment factor, one factor per path segment:
 
