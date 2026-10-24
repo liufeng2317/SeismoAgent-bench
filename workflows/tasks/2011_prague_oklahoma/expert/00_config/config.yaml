@@ -1,0 +1,69 @@
+# Paths are resolved relative to the expert root, including for --config overrides.
+case: 2011_prague_oklahoma
+round: r2
+data_root: ../../../../data/2011_prague_oklahoma/data/waveforms
+case_root: ../../../../data/2011_prague_oklahoma
+export_root: export/r2
+candidate_window:
+  start_utc: '2011-11-11T00:00:00Z'
+  end_utc: '2011-11-19T00:00:00Z'
+pilot_window:  # low-rate interval (Cochran: 8 events in 16Z)
+  start_utc: '2011-11-11T16:00:00Z'
+  end_utc: '2011-11-11T16:10:00Z'
+mainshock:
+  # Mw 5.7 of 2011-11-06 (Cochran 2020 id 1000036 / ComCat usp000jadn); it lies
+  # five days BEFORE the stable-network window, so no in-window event is
+  # treated as the mainshock (stages 05/09/10: in_window false).
+  in_window: false
+  event_id: usp000jadn
+  time_utc: '2011-11-06T03:53:10Z'
+  magnitude: 5.7
+  magnitude_type: mw
+  latitude: 35.5215
+  longitude: -96.7725
+  depth_km: 2.96
+  proximity_s: 10
+core_region:  # = validation.yaml region (Cochran window envelope widened to 3 decimals)
+  longitude_bounds: [-96.873, -96.733]
+  latitude_bounds: [35.452, 35.558]
+pilot_association_windows:  # stage 03 --scope pilot development windows (half-open)
+  low_rate: ['2011-11-11T16:00:00Z', '2011-11-11T16:10:00Z']
+  active: ['2011-11-11T03:00:00Z', '2011-11-11T03:15:00Z']
+  largest: ['2011-11-11T19:15:00Z', '2011-11-11T19:30:00Z']   # Isken Mw 3.2 at 19:19
+methods:
+  picker: PhaseNet
+  weights: original
+  weight_version: '2'
+  implementation: TRACE-1.1 PhaseNet with SeisBench utilities
+  association: GaMMA
+  association_use_amplitude: false
+  absolute_location: NonLinLoc
+  velocity_model: keranen2013_prague_1d
+channel_policy:
+  # ZQ RAMP: 250 Hz DH (high-gain) and CN (accelerometer, LC09/LC10); GS/OK
+  # 100 Hz HH; TA 40 Hz BH. All 3C; one family per site.
+  primary_families: [HH, DH, CN, BH]
+  require_three_components_for_first_pilot: true
+  rotate_12_using_stationxml: true
+  site_family_preference: [HH, DH, CN, BH]
+  # ZQ.LC17 carries a placeholder latitude (exactly 35.0000) in EarthScope
+  # metadata (data/2011_prague_oklahoma analysis): location unknown, excluded.
+  exclude_stations: [ZQ.LC17]
+  hn_and_vertical_only: deferred_separate_input_conditions
+stationxml_file: stations/earthscope_4c1bf8ee6369.stationxml  # relative to data_root (the file the channel epochs cite)
+tools:
+  trace_library: /liufeng1afs/project/03_LLM/Science_Discovery_Agenet/TRACE-1.1/seismoagent/library
+picking:
+  # 0.2 carried over from Magna r5, not re-derived for this case.
+  p_threshold: 0.2
+  s_threshold: 0.2
+  buffer_seconds: 60
+  cpu_workers: 4
+  cpu_threads: 1
+  batch_size: 32
+  # ZQ 250 Hz and TA 40 Hz are FFT-resampled to PhaseNet's 100 Hz in stage 02
+  # (explicit; without this key non-100 Hz input is an error).
+  resample_to_hz: 100
+magnitude:
+  calibration: hutton_boore_1987_provisional
+  numerical_check_channel: GS.OK021.00.HHE   # 100 Hz horizontal, 8.9 km

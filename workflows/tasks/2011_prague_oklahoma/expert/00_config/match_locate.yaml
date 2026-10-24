@@ -1,0 +1,50 @@
+# Stage 60 — Match&Locate (seismotools/match_and_locate) seeded by the r2 catalog.
+# Ported from the Maple Creek stage 60 (itself from Magna PLAN.md r7).
+source_export: export/r2
+export_root: export/r3/60_match_locate
+tool_root: ../../../../seismotools/match_and_locate
+waveforms: ../../../../data/2011_prague_oklahoma/data/waveforms/data
+velocity_model:
+  registry: ../../../../data/2011_prague_oklahoma/data/models/velocity_models.json
+  key: keranen2013_prague_1d
+model_datum_elevation_km: 0.28           # = association.yaml reference_elevation_km
+
+templates:
+  min_stations: 10
+  max_sigma_depth_km: 2.0
+  cover_radius_km: 0.5
+  pick_max_abs_residual_s: 0.3
+
+scopes:
+  pilot:
+    days: ["2011-11-13"]                 # mid-window day (Cochran ~260 events/day)
+    max_templates: 20
+  full:
+    days: ["2011-11-11", "2011-11-12", "2011-11-13", "2011-11-14",
+           "2011-11-15", "2011-11-16", "2011-11-17", "2011-11-18"]
+    max_templates: null
+
+window: {length_s: 2.0, before_s: 0.3, after_s: 1.7}
+
+prepare:
+  processing: {sampling_rate: 50.0, freqmin: 2.0, freqmax: 10.0}
+  channels: {families: [HH, DH, CN, BH], P: [Z], S: [N, E, "1", "2"]}
+  # 12 three-component sites lie within 20 km (<= 36 rows): Magna defaults
+  selection: {max_distance_km: 20.0, min_snr: 5.0, noise_s: 5.0, min_rows: 12,
+              exclude_p_overlapping_s: true}
+  marks: {source: picks_then_model}
+
+run:
+  search: {units: km, half_width_km: 0.5, step_km: 0.25, half_depth_km: 0.5, step_depth_km: 0.5}
+  detection: {cc_threshold: 0.0, mad_threshold: 8.0, min_separation_s: 4.0}
+  merge: {engine: python, cc_threshold: 0.0, mad_threshold: 8.0, min_separation_s: 4.0}
+  min_channels: 12
+
+# final threshold: null run (08_null_run.py, 11-11 + 11-14, 6 s) gives 4.9 % false at
+# N×MAD 9 (Magna/Maple: 1-2 %), 0.7 % at 9.5, 0.2 % at 10 -> 9.5 (PLAN.md r3)
+final: {mad_threshold: 9.5, cc_threshold: 0.0, min_separation_s: 6.0}
+
+sweep:
+  mad: [8, 8.5, 9, 9.5, 10, 11, 12, 14]
+
+parallel: {prepare_workers: 32, jobs: 8, threads: 8}

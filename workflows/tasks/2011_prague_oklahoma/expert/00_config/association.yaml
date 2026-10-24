@@ -1,0 +1,27 @@
+# GaMMA association settings; later-round levers: station delays (NLL),
+# dbscan_*/min_*/oversample_factor.
+method: BGMM
+workers: 32
+chunk_seconds: 3600
+buffer_seconds: 120
+projection_center: [-96.7725, 35.5215]   # Mw 5.7 epicentre (Cochran 2020 id 1000036)
+longitude_bounds: [-97.65, -95.20]       # all 22 used stations (TA to ~128 km) plus margin
+latitude_bounds: [34.20, 36.60]
+depth_bounds_km: [0, 20]                 # below the reference elevation datum
+# Mean station elevation 0.28 km ASL (the 13 sites within 20 km: 0.28 km). The
+# Keranen et al. (2013) model states no datum; depths below the surface.
+reference_elevation_km: 0.28
+velocity_model: keranen2013_prague_1d
+# The published model is constant-velocity layers (Figure DR1 step curves);
+# the Maple Creek port showed the linear ramp between tops biases origins.
+velocity_layering: step
+eikonal_spacing_km: 0.5
+dbscan_eps: 10.0
+dbscan_min_samples: 3
+oversample_factor: 5
+covariance_prior: [3.0]
+min_picks_per_eq: 10
+min_p_picks_per_eq: 4
+min_s_picks_per_eq: 3
+min_stations: 6
+max_sigma11: 1.5
