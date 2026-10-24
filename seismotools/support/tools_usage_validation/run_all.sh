@@ -4,7 +4,7 @@ set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PYTHON="${PYTHON:-/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python}"
 mkdir -p "$HERE/outputs"
-for script in validate_phasenet.py validate_gamma.py validate_nonlinloc.py validate_hypodd.py validate_match_and_locate.py; do
+for script in validate_phasenet.py validate_gamma.py validate_nonlinloc.py validate_hypodd.py validate_match_and_locate.py validate_cross_correlation.py; do
   echo "=== $script ==="
   "$PYTHON" "$HERE/$script" | tee "$HERE/outputs/${script%.py}.json"
 done

@@ -96,6 +96,12 @@ Its public package is `hypodd_runner` and provides:
 - FDTCC preparation;
 - time-window planning and parallel execution.
 
+For new cross-correlation measurements use `../cross_correlation/` (ccdt),
+which writes `dt.cc` directly. A source audit of the bundled FDTCC
+(2026-10-25) found its dt sign correct but integer-sample precision, |CC|
+peak acceptance and other limits, and a travel-time table off by one distance
+step against `build_ttdb.py`; see `../cross_correlation/README.md`.
+
 Use the Python package for these advanced workflows, while using the standard
 adapter for benchmark calls with a fixed input/output boundary. Its detailed
 interface card is in

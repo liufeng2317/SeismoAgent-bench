@@ -14,6 +14,7 @@ catalogs and workflow outputs are stored outside this directory.
 | NonLinLoc | Absolute location and travel-time grids | `nonlinloc/interface/run.py` |
 | hypoDD | Relative relocation from catalog and/or cross-correlation times | `hypodd/interface/run.py` |
 | MatchLocate2 | Template detection with grid-search location (Match&Locate; matched filter as the zero-grid case) | `match_and_locate/interface/prepare.py` then `run.py` |
+| ccdt | Waveform cross-correlation differential times (`dt.cc` for hypoDD / GrowClust) | `cross_correlation/interface/run.py` |
 
 The three phase-picking models share one implementation package but remain
 separate model choices. `hypoDD` CT and CT+CC are modes of the same program.
@@ -38,6 +39,7 @@ seismotools/
 ├── gamma/{source,interface,examples,docs}/
 ├── nonlinloc/{source,runtime,interface,examples,docs}/
 ├── hypodd/{source,runtime,interface,examples,docs}/
+├── cross_correlation/{runtime,interface,examples}/   # project-local Python, no native code
 └── match_and_locate/{source/{upstream,patches},runtime,interface,examples,docs}/
 ```
 

@@ -1,0 +1,11 @@
+{
+  "tool": "ccdt",
+  "method": "Waveform cross-correlation differential times for double-difference relocation (Pearson CC per lag, parabolic sub-sample peak, multi-component S)",
+  "implementation": "Project-local Python (numpy, scipy, ObsPy); no native code",
+  "interface_version": 1,
+  "python_interface": "runtime/python/ccdt/",
+  "standard_entrypoint": "interface/run.py",
+  "outputs": ["dt.cc (hypoDD / GrowClust)", "event_ids.csv", "measurements.csv", "run_result.json"],
+  "validation": "support/tools_usage_validation/validate_cross_correlation.py",
+  "replaces": "FDTCC bundled in hypodd/ for CC measurement (see README, Relation to FDTCC)"
+}

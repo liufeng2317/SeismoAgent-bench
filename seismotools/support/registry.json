@@ -34,6 +34,14 @@
         "matched filter (zero search half-widths)"
       ],
       "license_status": "GPL-3.0 (source/upstream/LICENSE); preserve notices. Local patches are distributed as separate patch files."
+    },
+    "cross_correlation": {
+      "implementation": "Project-local Python ccdt (numpy/scipy/ObsPy), interface version 1",
+      "variants": [
+        "P on Z",
+        "S on two horizontals (N/E or 1/2), averaged curves"
+      ],
+      "license_status": "Project code; no third-party source bundled."
     }
   },
   "files": [
