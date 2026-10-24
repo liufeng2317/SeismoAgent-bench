@@ -1,0 +1,46 @@
+{
+  "task_id": "kaikoura_2016_catalog_guided",
+  "version": "1",
+  "title": "Kaikōura 2016 earthquake-catalog construction (expert-guided baseline)",
+  "summary": "Experience arm of the experiment: the minimal objective plus generic expert scaffolding (canonical pipeline stages, fixed eight-day window, quality-control gates, tuning discipline, reporting requirements), without Kaikōura-specific facts. Isolates the value of expert experience.",
+  "task_prompt_file": "prompt_guided.md",
+  "output_contract": "output_contract.json",
+  "category": "seismology",
+  "software": [
+    "Python",
+    "ObsPy"
+  ],
+  "taxonomy": {
+    "domain": "seismology",
+    "task_type": "catalog_construction",
+    "guidance": "expert_scaffolded",
+    "scope": "fixed_window",
+    "tool_policy": "neutral_public"
+  },
+  "input_requirements": [
+    {
+      "id": "waveform_data",
+      "data_type": "waveform",
+      "format": "MiniSEED",
+      "required": true
+    },
+    {
+      "id": "station_metadata",
+      "data_type": "station_metadata",
+      "format": "StationXML",
+      "required": true
+    }
+  ],
+  "evaluation": {
+    "scorers": [
+      {
+        "name": "artifact-contract",
+        "version": "1"
+      },
+      {
+        "name": "phase-picking-basic",
+        "version": "1"
+      }
+    ]
+  }
+}
