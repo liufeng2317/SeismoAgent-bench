@@ -190,3 +190,39 @@ are re-detected by passing templates and stay in the catalog at those
 positions. The evaluation layer reads this catalog. Remaining visual
 artifact: compact clumps where M&L detections stack on their templates'
 grid nodes (relocation does not remove them without adding scatter, stage 62).
+
+## Remaining-gap analysis (2026-10-25)
+
+Round 08 misses (vs Shelly 874, ComCat 1,007): ~78 % undetected (an expert
+event within 4 s but > 15 km away is mostly a chance coincidence at ~300
+events/h, dt median −0.03 s), ~22 % "two reference events < 4 s apart, we
+keep one". Misses do not shrink with magnitude (ComCat M2–3: 14 % missed)
+and grow after the Mw 7.1 (6 h+: Shelly 0.858, ComCat 0.785). Recall falls
+with distance to the nearest passing template (≤ 1 km 0.903, 1–2 km 0.857).
+
+**Close events → round 09_close_events (adopted).** A 2-s merge separation
+adds 2,436 events with an unchanged null count, but PhaseNet P picks at the
+template stations (±0.15 s) hit 0.41 for kept events, 0.17 for the
+additions, ~0.01 for a +1 s control: only ~40 % are real arrivals, the rest
+duplicates from template origin scatter. By template support: 1 template
+~29 % real, 2 ~54 %, ≥ 3 ~87 %. Rule (`final.close_events`): keep 4 s, and
+keep a closer event only with ≥ 3 templates within ±0.5 s → +254 events;
+Shelly 0.887 → 0.892, ComCat 0.847 → 0.851.
+
+**Depth/frame → round 10_layered_frame (test, `63_layered_frame.py`).**
+Shelly depths share our datum (≈ 0.7 km asl). Picked events vs Shelly:
+linear-interpolated Table 1 (pipeline) dZ −0.52 (MAD 0.73); stage-62 hypoDD
+with the published constant layers −0.16 (0.52). Stage 63 moves round 09 into
+that frame (picked events take their stage-62 relocation; M&L events move
+with their template's displacement, origin included; the rest take the
+median displacement −0.73 km N, −0.39 km E, +0.28 km deeper):
+
+| | Shelly epi / dZ (MAD) | ComCat | Liu | Ross |
+|---|---|---|---|---|
+| round 09 | 0.593 / −0.49 (0.74) | 0.804 / −0.65 (0.85) | 0.787 / −1.23 (0.53) | 0.731 / −0.36 (0.77) |
+| round 10 | **0.446 / −0.08 (0.57)** | **0.605 / −0.18 (0.81)** | **0.463 / −0.81 (0.70)** | 0.808 / −0.02 (0.76) |
+
+Recall, off-fault share (1.1 %) and local thickness unchanged. Ross (3-D
+model) agrees better in depth, less in epicentre. Stage 06's 108-event test
+had found mixed evidence for the layered model; on the full catalog it
+improves three of four references in epicentre and all four in depth.

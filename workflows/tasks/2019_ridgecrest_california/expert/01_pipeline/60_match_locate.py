@@ -32,6 +32,7 @@ import math
 import subprocess
 import sys
 import time
+from typing import Optional
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -164,6 +165,9 @@ def build_inputs(out: Path, scope: dict) -> dict:
             for e in events.itertuples()]
     candidates = [r for r in rows if r["n_stations"] >= tcfg["min_stations"]
                   and r["sigma_z"] <= tcfg["max_sigma_depth_km"]]
+    if tcfg.get("require_location_quality"):
+        good, _ = location_quality()
+        candidates = [r for r in candidates if r["event_id"] in good]
     chosen = select_templates(rows, candidates, radius_km=tcfg["cover_radius_km"],
                               max_templates=scope["max_templates"], rank=lambda r: r["n_stations"])
     templates = chosen["templates"]
@@ -340,6 +344,38 @@ def location_quality():
     return good, {e: r for e, r in zip(ids, reason) if r != "ok"}
 
 
+def merged_with_close_events(detections, cc: float, mad: float, sep: float, close: Optional[dict]):
+    """merged_rows at ``sep``; with ``close`` = {min_separation_s, min_templates}, also keep events that
+    only a finer separation resolves (closer than ``sep`` to a stronger detection) when at least
+    ``min_templates`` distinct templates detect them within +-0.5 s. At Ridgecrest such additions
+    are ~87 % real with >= 3 templates, ~29 % with one (PhaseNet P picks at the template's stations
+    vs a +1 s control; PLAN.md stage 60)."""
+    base = merged_rows(detections, cc, mad, sep)
+    if not close:
+        return base, 0
+    fine = merged_rows(detections, cc, mad, float(close["min_separation_s"]))
+    times, tids = [], []
+    for seg, v in detections.items():
+        ref = datetime.strptime(seg, "%Y%m%d").replace(tzinfo=timezone.utc).timestamp()
+        for d in v:
+            if d.nmad >= mad and d.cc >= cc:
+                times.append(ref + d.time_s)
+                tids.append(d.template_id)
+    order = np.argsort(times)
+    times, tids = np.asarray(times)[order], np.asarray(tids)[order]
+    kept = np.array(sorted(r["time"].timestamp() for r in base))
+    extra = []
+    for r in fine:
+        t = r["time"].timestamp()
+        i = np.searchsorted(kept, t)
+        if min(abs(kept[i - 1] - t) if i > 0 else 9e9, abs(kept[i] - t) if i < len(kept) else 9e9) <= 0.01:
+            continue
+        lo, hi = np.searchsorted(times, t - 0.5), np.searchsorted(times, t + 0.5)
+        if len(set(tids[lo:hi])) >= int(close["min_templates"]):
+            extra.append(r)
+    return sorted(base + extra, key=lambda r: r["time"]), len(extra)
+
+
 def export(out: Path, scope: dict, catalog_round: str) -> dict:
     final = CFG["final"]
     good, failed = location_quality()
@@ -347,8 +383,8 @@ def export(out: Path, scope: dict, catalog_round: str) -> dict:
     if good is not None:
         # templates failing the rule do not place events; their detections leave the merge
         detections = {seg: [d for d in v if d.template_id in good] for seg, v in detections.items()}
-    ml = merged_rows(detections, float(final["cc_threshold"]), float(final["mad_threshold"]),
-                     float(final["min_separation_s"]))
+    ml, n_close = merged_with_close_events(detections, float(final["cc_threshold"]), float(final["mad_threshold"]),
+                                           float(final["min_separation_s"]), final.get("close_events"))
     chain = chain_magnitudes(out, ml)
     for r, (m, n) in zip(ml, chain["per_event"]):
         r["magnitude_native"], r["magnitude"], r["n_magnitude_templates"] = r["magnitude"], m, n
@@ -390,7 +426,7 @@ def export(out: Path, scope: dict, catalog_round: str) -> dict:
     refs = load_references(days)
     boxed = lambda rows: [r for r in rows if in_box(r)]
     return {"final_threshold": final, "location_quality": CFG.get("location_quality"),
-            "picked_failing_quality": len(low), "ml_events": len(ml), "ml_in_source": len(in_base), "ml_new": len(new),
+            "picked_failing_quality": len(low), "close_events_added": n_close, "ml_events": len(ml), "ml_in_source": len(in_base), "ml_new": len(new),
             "union_events": len(union), "catalog": str(dest.relative_to(EXPERT)),
             "magnitudes": {k: chain[k] for k in ("templates_with_ml", "templates_after_chain", "templates_total")},
             "scores": {"source": score(boxed(base), refs), "ml": score(boxed(ml), refs),

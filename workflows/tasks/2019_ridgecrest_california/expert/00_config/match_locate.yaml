@@ -57,7 +57,14 @@ run:
 # N×MAD 9, 0.3 % at 9.5, 0.04 % at 10 -> 9.5 (as Prague/Kilauea/Kaikoura; PLAN.md stage 60).
 # Separation 4 s, not Magna's 6 s: on the null days 4 s keeps 9,717 detections
 # (6 s: 7,745) with the same 23 null ones (0.24 %) — 6 s merged real coda events.
-final: {mad_threshold: 9.5, cc_threshold: 0.0, min_separation_s: 4.0}
+# Close events (2026-10-25; catalog round 09_close_events): Shelly misses are
+# 22 % "two events < 4 s apart, we keep one". Separation 2 s adds 2,436
+# events with an unchanged null count, but by PhaseNet P picks at the
+# template stations only ~40 % of them are real arrivals (the rest are
+# duplicates from template origin scatter): single-template additions ~29 %,
+# >= 3 templates ~87 %. So 4 s stays, and closer events need >= 3 templates.
+final: {mad_threshold: 9.5, cc_threshold: 0.0, min_separation_s: 4.0,
+        close_events: {min_separation_s: 2.0, min_templates: 3}}
 
 # Location quality (2026-10-25; export to catalog round 08_location_quality):
 # the stage-60 union put 5.2 % of its events > 1 km from every reference
