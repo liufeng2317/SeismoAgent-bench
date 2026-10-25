@@ -49,11 +49,13 @@ AGENT_LEGACY_COLOR = '#000000'
 # Agent arm featured in the recall and matched-pair diagnostics panels.
 FOCUS_AGENT = 'agent_tools'
 
-# Stage-60 union (2026-10-25): the stage-52 DD working catalog plus the
-# Match&Locate events (N×MAD 9.5, 4 s; null false fraction 0.24 %). Its depths
+# Stage-60 union with the location-quality rule (2026-10-25, export round
+# 08_location_quality): picked events and templates need >= 1 stage-52 CC
+# link, gap <= 150 deg, NLL sigma_x <= 0.8 km (the plain union, round
+# 07_match_locate, put 5.2 % of events > 1 km off the faults). Its depths
 # are below sea level; +0.7 km puts them on the working catalog's convention
 # (below the nominal 0.7-km-ASL surface, association.yaml reference_elevation_km).
-EXPERT_CATALOG = TASK / 'expert/export/07_match_locate/60_catalog/catalog_events.csv'
+EXPERT_CATALOG = TASK / 'expert/export/08_location_quality/60_catalog/catalog_events.csv'
 EXPERT_DEPTH = ('depth_bsl_km', 0.7)
 AGENT_RUNS = {
     'agent_min': {

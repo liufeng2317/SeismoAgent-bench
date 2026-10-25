@@ -158,3 +158,35 @@ Conclusion: with ~50–150 CC times per event, hypoDD does not reach Shelly /
 Ross sharpness (~0.19 km); not adopted into the evaluation layer pending a
 decision (GrowClust — Ross's L1 cluster-wise method — is the remaining
 untested lever).
+
+## Location quality (2026-10-25) — catalog round 08_location_quality
+
+The union looked worse-delineated than even ComCat. Off-fault measure: share
+of events > 1 km from every Shelly/Ross/Liu event (3 days, box): ComCat
+1.5 %, stage-60 union 5.2 % (2.5× more events, so many times more visible
+scatter). On-fault sharpness is not the problem (local thickness of picked
+events 0.357 km vs ComCat 0.383). The scatter has two sources:
+- picked events with no waveform neighbours: off-fault ones have stage-52
+  cc_all_edges 0 (on-fault 37), 11 vs 19 stations, gap 131° vs 81°,
+  NLL σx 0.86 vs 0.50 km; DD never moved them (0.08 km);
+- M&L detections of off-fault templates: 96 % of off-fault M&L events come
+  from 124 such templates (73 produce them all, 20 produce 502 of 618).
+Rule (internal quantities only, no reference information): a picked event
+stays, and a template may place events, only with ≥ 1 stage-52 CC link,
+azimuthal gap ≤ 150° and NLL σx ≤ 0.8 km (`match_locate.yaml
+location_quality`). Detections of failing templates leave the merge, so an
+event they shared with a passing template keeps that template's position.
+
+| | events | off-fault | Shelly | Ross | Liu | ComCat |
+|---|---|---|---|---|---|---|
+| union (07_match_locate) | 16,686 | 5.2 % | 0.910 | 0.909 | 0.950 | 0.877 |
+| ≥ 1 CC link only | 15,635 | 1.8 % | 0.895 | 0.889 | 0.931 | 0.857 |
+| **+ gap ≤ 150°, σx ≤ 0.8 km (adopted)** | **15,207** | **1.1 %** | **0.887** | **0.882** | **0.925** | **0.847** |
+| ComCat | 6,564 | 1.5 % | | | | |
+
+1,342 picked events fail (no waveform neighbours 740, σx 351, gap 251) →
+`export/08_location_quality/60_catalog/low_quality_events.csv`; 553 of them
+are re-detected by passing templates and stay in the catalog at those
+positions. The evaluation layer reads this catalog. Remaining visual
+artifact: compact clumps where M&L detections stack on their templates'
+grid nodes (relocation does not remove them without adding scatter, stage 62).

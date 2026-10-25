@@ -59,6 +59,17 @@ run:
 # (6 s: 7,745) with the same 23 null ones (0.24 %) — 6 s merged real coda events.
 final: {mad_threshold: 9.5, cc_threshold: 0.0, min_separation_s: 4.0}
 
+# Location quality (2026-10-25; export to catalog round 08_location_quality):
+# the stage-60 union put 5.2 % of its events > 1 km from every reference
+# event (ComCat 1.5 %). They are picked events with no waveform neighbours
+# (stage-52 cc_all_edges = 0, few stations, large gap) and M&L detections of
+# 124 templates that are themselves such events (96 % of off-fault M&L rows).
+# Internal criteria only — no reference information: a template places
+# events, and a picked event stays in the catalog, only with >= 1 stage-52
+# CC link, azimuthal gap <= 150 deg and NLL horizontal sigma <= 0.8 km.
+# Failing picked events go to low_quality_events.csv (PLAN.md stage 60).
+location_quality: {min_cc_links: 1, max_gap_deg: 150, max_sigma_x_km: 0.8}
+
 sweep:
   mad: [8, 8.5, 9, 9.5, 10, 11, 12, 14]
 

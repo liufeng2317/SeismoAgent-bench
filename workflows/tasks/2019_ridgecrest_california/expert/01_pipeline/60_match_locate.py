@@ -321,15 +321,41 @@ def chain_magnitudes(out: Path, final_rows: list, window_s: float = 0.5) -> dict
             "templates_after_chain": len(mag), "templates_total": int(len(templates))}
 
 
+def location_quality():
+    """Event ids passing ``location_quality`` (internal criteria only: stage-52 CC links, NLL azimuthal gap
+    and horizontal sigma), and the failing ids with their reason. None when the block is absent."""
+    q = CFG.get("location_quality")
+    if not q:
+        return None, {}
+    ev = pd.read_csv(EXPERT / CFG["source"]["events"], low_memory=False).set_index("event_id")
+    links = pd.read_csv(EXPERT / CFG["source"]["catalog"], low_memory=False).set_index("event_id").cc_all_edges
+    ids = links.index
+    n_links = links.fillna(0)
+    gap = ids.map(ev.azimuth_gap_deg).to_numpy(dtype=float)
+    sx = ids.map(ev.posterior_sigma_x_km).to_numpy(dtype=float)
+    reason = np.where(n_links.to_numpy() < q["min_cc_links"], "no_waveform_neighbours",
+             np.where(~(gap <= q["max_gap_deg"]), "azimuthal_gap",
+             np.where(~(sx <= q["max_sigma_x_km"]), "horizontal_sigma", "ok")))
+    good = set(ids[reason == "ok"])
+    return good, {e: r for e, r in zip(ids, reason) if r != "ok"}
+
+
 def export(out: Path, scope: dict, catalog_round: str) -> dict:
     final = CFG["final"]
-    ml = merged_rows(read_detections(out), float(final["cc_threshold"]), float(final["mad_threshold"]),
+    good, failed = location_quality()
+    detections = read_detections(out)
+    if good is not None:
+        # templates failing the rule do not place events; their detections leave the merge
+        detections = {seg: [d for d in v if d.template_id in good] for seg, v in detections.items()}
+    ml = merged_rows(detections, float(final["cc_threshold"]), float(final["mad_threshold"]),
                      float(final["min_separation_s"]))
     chain = chain_magnitudes(out, ml)
     for r, (m, n) in zip(ml, chain["per_event"]):
         r["magnitude_native"], r["magnitude"], r["n_magnitude_templates"] = r["magnitude"], m, n
     w0, w1 = utc(WINDOW["start_utc"]), utc(WINDOW["end_utc"])
     base = base_rows()
+    low = [r for r in base if r["event_id"] in failed]
+    base = [r for r in base if r["event_id"] not in failed]
     pairs = dedupe_pairs(ml, base)
     for i, j in pairs:
         if base[j]["magnitude"] is None and ml[i]["magnitude"] is not None:
@@ -350,10 +376,21 @@ def export(out: Path, scope: dict, catalog_round: str) -> dict:
             w.writerow([r["event_id"], r["time"].isoformat(), r["latitude"], r["longitude"], r["depth_km"],
                         "" if r["magnitude"] is None else round(r["magnitude"], 3), r["magnitude_source"],
                         r["location_source"], r.get("cc", ""), r.get("nmad", ""), r.get("template_id", "")])
+    if good is not None:
+        # picked events failing the rule, unless an M&L event (from a passing template) took their place
+        taken = {j for _, j in dedupe_pairs(ml, low)}
+        with (dest / "low_quality_events.csv").open("w", newline="") as h:
+            w = csv.writer(h, lineterminator="\n")
+            w.writerow(["event_id", "origin_time_utc", "latitude", "longitude", "depth_bsl_km", "reason",
+                        "redetected_by_ml"])
+            for j, r in enumerate(low):
+                w.writerow([r["event_id"], r["time"].isoformat(), r["latitude"], r["longitude"], r["depth_km"],
+                            failed[r["event_id"]], j in taken])
     days = [w0 + timedelta(days=k) for k in range((w1 - w0).days)]
     refs = load_references(days)
     boxed = lambda rows: [r for r in rows if in_box(r)]
-    return {"final_threshold": final, "ml_events": len(ml), "ml_in_source": len(in_base), "ml_new": len(new),
+    return {"final_threshold": final, "location_quality": CFG.get("location_quality"),
+            "picked_failing_quality": len(low), "ml_events": len(ml), "ml_in_source": len(in_base), "ml_new": len(new),
             "union_events": len(union), "catalog": str(dest.relative_to(EXPERT)),
             "magnitudes": {k: chain[k] for k in ("templates_with_ml", "templates_after_chain", "templates_total")},
             "scores": {"source": score(boxed(base), refs), "ml": score(boxed(ml), refs),

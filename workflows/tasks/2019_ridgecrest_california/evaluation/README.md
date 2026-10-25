@@ -10,12 +10,15 @@ sequence over the fixed evaluation window
    Ross 2019 QTM relocated subset, AWR 2025 v2 (long-term GaMMA), and the
    USGS/SCSN ComCat operational snapshot.
 2. **Human-expert reproduction** — this repository's `expert/` workflow,
-   stage-60 union (`expert/export/07_match_locate/60_catalog/catalog_events.csv`,
-   16,686 events in window): the stage-52 joint-double-difference working
-   catalog (6,520) plus 10,166 Match&Locate events (1,061 templates, N×MAD
-   9.5, 4 s separation; null-run false fraction 0.24 %). Recall vs Shelly
-   91.0 %, Liu 95.0 %, Ross 90.9 %, ComCat 87.7 %; median epicentral 0.62 /
-   0.80 / 0.75 / 0.83 km (stage-52 alone: 61.2 / 75.1 / 57.4 / 64.1 %).
+   stage-60 union with the location-quality rule
+   (`expert/export/08_location_quality/60_catalog/catalog_events.csv`, 15,207
+   events): stage-52 joint-DD events plus Match&Locate events (N×MAD 9.5, 4 s;
+   null-run false fraction 0.24 %), where picked events and templates need
+   >= 1 stage-52 CC link, azimuthal gap <= 150 deg and NLL sigma_x <= 0.8 km
+   (internal criteria; expert PLAN.md "Location quality"). Recall vs Shelly
+   88.7 %, Liu 92.5 %, Ross 88.2 %, ComCat 84.7 %; 1.1 % of events lie > 1 km
+   from every Shelly/Ross/Liu event (ComCat 1.5 %; the plain union, round
+   07_match_locate with 16,686 events and 91.0 % Shelly recall, 5.2 %).
    Expert depths are below sea level + 0.7 km (the nominal surface).
 3. **Agent reproductions** — completed Claude Code × GLM-5.3 runs:
    `runs/min/claude/glm-5.3/20261013T215003Z` (the Q1 `min` arm),
