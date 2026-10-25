@@ -80,8 +80,9 @@ EXPERT_ROUNDS = {
     'r5': (TASK / 'expert/export/r5/10_validate_catalog/events.csv', 'origin_time', 'depth_below_sea_level_km'),
     'r6': (TASK / 'expert/export/r6/60_catalog/catalog_events.csv', 'origin_time_utc', 'depth_bsl_km'),
     'r7': (TASK / 'expert/export/r7/60_catalog/catalog_events.csv', 'origin_time_utc', 'depth_bsl_km'),
+    'r8': (TASK / 'expert/export/r8/60_catalog/catalog_events.csv', 'origin_time_utc', 'depth_bsl_km'),
 }
-EXPERT_ROUND = 'r7'
+EXPERT_ROUND = 'r8'
 SHORT_LABELS['expert'] = f'Expert ({EXPERT_ROUND})'
 EXPERT_CATALOG = EXPERT_ROUNDS[EXPERT_ROUND][0]
 

@@ -48,3 +48,12 @@ sweep:
   mad: [8, 8.5, 9, 9.5, 10, 11, 12, 14]
 
 parallel: {prepare_workers: 32, jobs: 8, threads: 8}
+
+# Location quality (2026-10-26; catalog round r4): 1.5 % of the r3 union lies
+# > 1 km from every Cochran/McMahon event (McMahon itself 0.8 %); off-fault NLL
+# rows have high RMS and large gap, off-fault M&L rows come from 5 off-fault
+# templates (93 %). A source event places events (as template) or stays only
+# with >= 1 waveform CC link to a neighbour (`--stage cclinks`, ccdt): off-fault
+# 1.5 -> 1.0 %, Cochran 0.967 -> 0.964. Adding gap/sigma limits (Ridgecrest)
+# did not help here; an RMS rule cost 6 points of Cochran recall.
+location_quality: {min_cc_links: 1}

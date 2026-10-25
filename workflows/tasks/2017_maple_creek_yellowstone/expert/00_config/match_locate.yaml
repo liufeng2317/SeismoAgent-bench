@@ -55,3 +55,12 @@ sweep:
   mad: [8, 8.5, 9, 9.5, 10, 11, 12, 14]
 
 parallel: {prepare_workers: 32, jobs: 8, threads: 8}
+
+# Location quality (2026-10-26; catalog round r8): 3.5 % of the r7 union lies
+# > 1 km from every ComCat event (a sparse skeleton: overstated); off-fault NLL
+# rows have high RMS (0.38 vs 0.13 s), off-fault M&L rows come from 24
+# off-fault templates (89 %). 95 % of events have a waveform CC link, so the
+# full Ridgecrest rule is needed: >= 1 CC link (`--stage cclinks`, ccdt), gap
+# <= 150 deg, NLL sigma_x <= 0.8 km -> off-fault 3.5 -> 1.5 %, ComCat
+# 0.994 -> 0.990, Shelly net 0.521 -> 0.507 (an RMS rule cost 3.8 points).
+location_quality: {min_cc_links: 1, max_gap_deg: 150, max_sigma_x_km: 0.8}

@@ -11,12 +11,14 @@ over the fixed evaluation window **[2017-06-11T00:00:00Z, 2017-06-19T00:00:00Z)*
    - Shelly & Hardebeck (2019) detections derived from their phase release
      (18,062; origin times only, no locations; `data/2017_maple_creek_yellowstone/
      data/catalogs/SHELLY2019_GL081607/scripts/derive_detection_events.py`).
-2. **Human-expert reproduction** — `expert/` round r7 complete catalog
-   (`expert/export/r7/60_catalog/catalog_events.csv`, 13,675 events): the r5
-   NLL catalog (25 sites incl. vertical-only, step velocity layers, station
-   delays) plus the stage-60 Match&Locate events (519 templates, N×MAD 9.25;
-   null-run false fraction 0.95 %), chained relative magnitudes. Rounds are
-   registered in `EXPERT_ROUNDS` (r5, r6, r7). Expert depths are stored below sea level and
+2. **Human-expert reproduction** — `expert/` round r8 complete catalog
+   (`expert/export/r8/60_catalog/catalog_events.csv`, 12,602 events): the r7
+   union (r5 NLL + stage-60 Match&Locate, N×MAD 9.25) with the location-quality
+   rule of 2026-10-26 — a source event stays, and may place events as a
+   template, only with ≥ 1 waveform CC link to a neighbour (ccdt), gap ≤ 150°
+   and NLL σx ≤ 0.8 km. 1.5 % of events lie > 1 km from every ComCat event
+   (r7: 3.5 %); ComCat recall 99.0 %, Shelly net 50.7 % (r7 99.4 / 52.1 %).
+   Rounds registered in `EXPERT_ROUNDS` (r5–r8); depths below sea level
    converted to below-surface with the model datum (2.3 km).
 3. **Agent reproductions** — none completed yet; register arms in
    `AGENT_RUNS` inside `plot_evaluation_comparison.py` as runs finish.

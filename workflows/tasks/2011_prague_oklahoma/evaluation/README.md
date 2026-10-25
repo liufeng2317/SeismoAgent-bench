@@ -13,13 +13,15 @@ sequence over the fixed evaluation window **[2011-11-11T00:00:00Z,
    - Isken & Mooney (2017) Table S3, M>3 manual relocations (6) — origin
      times to the minute, matched at 60 s / 5 km: a location anchor;
    - ComCat operational (11; sparse in 2011).
-2. **Human-expert reproduction** — `expert/` round r3 complete catalog
-   (`expert/export/r3/60_catalog/catalog_events.csv`, 7,156 events): the r2
-   NLL catalog (Keranen 2013 model, step layers, station delays) plus the
-   stage-60 Match&Locate events (N×MAD 9.5; null-run false fraction 0.7 %),
-   chained relative magnitudes. Rounds registered in `EXPERT_ROUNDS` (r2,
-   r3). Expert depths are converted from sea level to below the surface with
-   the model datum (0.28 km).
+2. **Human-expert reproduction** — `expert/` round r4 complete catalog
+   (`expert/export/r4/60_catalog/catalog_events.csv`, 6,964 events): the r3
+   union (Keranen model, step layers, station delays, stage-60 Match&Locate at
+   N×MAD 9.5) with the location-quality rule of 2026-10-26 — a source event
+   stays, and may place events as a template, only with ≥ 1 waveform CC link
+   to a neighbour (ccdt). 1.0 % of events lie > 1 km from every Cochran/McMahon
+   event (r3: 1.5 %; McMahon itself 0.8 %). Rounds registered in
+   `EXPERT_ROUNDS` (r2–r4). Expert depths are converted from sea level to
+   below the surface with the model datum (0.28 km).
 3. **Agent reproductions** — none completed yet; register arms in
    `AGENT_RUNS` inside `plot_evaluation_comparison.py`.
 

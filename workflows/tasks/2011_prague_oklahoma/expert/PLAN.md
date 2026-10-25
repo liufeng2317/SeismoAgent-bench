@@ -164,3 +164,16 @@ with Kīlauea/Kaikōura apart from its settings block, and `evaluate_run.py` is
 case-independent. Outputs unchanged (Cochran 96.7 %, McMahon 97.4 %, Isken
 6/6 at 0.32 km); the depth-section axis now points NE (was SW).
 
+## r4 (2026-10-26) — location quality (cross-case review after Ridgecrest)
+
+Off-fault share (> 1 km from every Cochran/McMahon event): r3 1.5 %
+(McMahon itself 0.8 %). Off-fault NLL rows: RMS 0.47 vs 0.19 s, gap 130°
+vs 77°; off-fault M&L rows: 93 % from 5 off-fault templates. Candidate rules
+(complete-catalog evaluation): v1 + RMS ≤ 1.5× median → 0 % but Cochran
+0.967 → 0.909; templates only → 0.7 %, 0.925; **≥ 1 waveform CC link (events
+and templates) → 1.0 %, Cochran 0.964, McMahon 0.968** (adopted); adding the
+Ridgecrest gap/σx limits did not help (1.7 %). CC links: `60_match_locate.py
+--stage cclinks` (ccdt; 2,136 of 2,860 source events linked). r4 = export
+with `location_quality`: 6,964 events, 724 picked events in
+`low_quality_events.csv`; epicentral vs Cochran 0.49 → 0.47 km, McMahon
+0.34 → 0.31 km. Evaluation layer = r4.

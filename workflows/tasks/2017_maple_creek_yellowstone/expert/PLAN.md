@@ -300,3 +300,19 @@ r7 catalog: `export/r7/60_catalog/catalog_events.csv`, 13,675 events
 evaluation switched to r7 (complete catalog: ComCat 0.994, Shelly 0.583 /
 net 0.521, epicentral 0.87 km, dZ +1.43). Residual: a few shallow template
 families (streaks near 1 km and 2–3 km below the surface in figure 01).
+
+## r8 (2026-10-26) — location quality (cross-case review after Ridgecrest)
+
+Off-fault share (> 1 km from every ComCat event — a sparse 626-event
+skeleton, so overstated): r7 3.5 % (NLL rows 7.2 %, M&L rows 2.9 %).
+Off-fault NLL rows: RMS 0.38 vs 0.13 s, 7 vs 10 stations, half outside v1;
+off-fault M&L rows: 89 % from 24 off-fault templates. Candidate rules
+(complete-catalog evaluation): v1 + RMS ≤ 1.5× median → 0.2 % but Shelly net
+−3.8 points (high-RMS templates still detect well); templates only → 1.2 %,
+−3.7 points; ≥ 1 waveform CC link only → 3.3 % (95 % of events have a link:
+compact swarm); **≥ 1 CC link + gap ≤ 150° + σx ≤ 0.8 km (the Ridgecrest
+rule) → 1.5 %, ComCat 0.994 → 0.990, Shelly net 0.521 → 0.507** (adopted).
+CC links: `60_match_locate.py --stage cclinks` (ccdt, 3 km / 30 neighbours;
+1,962 of 2,059 source events linked). r8 = export with `location_quality`:
+12,602 events, 929 picked events in `low_quality_events.csv`. Evaluation
+layer = r8.

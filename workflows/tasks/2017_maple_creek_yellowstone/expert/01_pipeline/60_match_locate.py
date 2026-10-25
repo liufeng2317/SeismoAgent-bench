@@ -275,9 +275,67 @@ def chain_magnitudes(out: Path, final_rows: list, window_s: float = 0.5) -> dict
             "templates_after_chain": len(mag), "templates_total": int(len(templates))}
 
 
+CC_LINKS = EXPERT / CFG["export_root"] / "cc_links"
+
+
+def cc_links(workers: int) -> dict:
+    """Waveform CC link count per source event (seismotools/cross_correlation, pairs within 3 km,
+    30 nearest neighbours, default acceptance): an event without any is not similar to any neighbour.
+    Writes <export_root>/cc_links/cc_links.csv."""
+    src = EXPERT / CFG["source_export"]
+    CC_LINKS.mkdir(parents=True, exist_ok=True)
+    v = pd.read_csv(src / "10_validate_catalog" / "events.csv", low_memory=False)
+    v = v[v.latitude.notna()]
+    v[["event_id", "origin_time", "latitude", "longitude", "depth_below_sea_level_km"]].rename(
+        columns={"origin_time": "origin_time_utc", "depth_below_sea_level_km": "depth_km"}).to_csv(
+        CC_LINKS / "events.csv", index=False)
+    a = pd.read_csv(src / "04_locate_nonlinloc" / "full" / "picks.csv")
+    a = a[a.residual_s.abs() <= 0.5].merge(
+        pd.read_csv(src / "02_pick_phasenet" / "full" / "picks.csv", usecols=["pick_id", "station_id", "time_utc"]),
+        on="pick_id")
+    a[["event_id", "station_id", "phase", "time_utc"]].drop_duplicates(["event_id", "station_id", "phase"]).to_csv(
+        CC_LINKS / "arrivals.csv", index=False)
+    (CC_LINKS / "ccdt_config.json").write_text(json.dumps(
+        {"pairs": {"max_distance_km": 3.0, "max_neighbors": 30}, "write_rejected": False}))
+    tool = TOOL.parent / "cross_correlation" / "interface" / "run.py"
+    call([sys.executable, "-I", tool, "--events", CC_LINKS / "events.csv", "--arrivals", CC_LINKS / "arrivals.csv",
+          "--waveforms", (EXPERT / CFG["waveforms"]).resolve(), "--output-dir", CC_LINKS / "ccdt",
+          "--config", CC_LINKS / "ccdt_config.json", "--workers", workers, "--overwrite", "--quiet"],
+         CC_LINKS / "ccdt.log")
+    m = pd.read_csv(CC_LINKS / "ccdt" / "measurements.csv")
+    n = pd.concat([m.event_id_1, m.event_id_2]).value_counts()
+    v["cc_links"] = v.event_id.map(n).fillna(0).astype(int)
+    v[["event_id", "cc_links"]].to_csv(CC_LINKS / "cc_links.csv", index=False)
+    return {"events": len(v), "with_links": int((v.cc_links > 0).sum()), "dt_lines": int(len(m))}
+
+
+def location_quality():
+    """Source event ids passing ``location_quality`` (internal criteria only: CC links from
+    ``cc_links``, optionally NLL azimuthal gap and horizontal sigma) and the failing ids with a reason.
+    None when the block is absent."""
+    q = CFG.get("location_quality")
+    if not q:
+        return None, {}
+    ev = pd.read_csv(EXPERT / CFG["source_export"] / "10_validate_catalog" / "events.csv", low_memory=False)
+    ev = ev[ev.latitude.notna()].set_index("event_id")
+    links = pd.read_csv(CC_LINKS / "cc_links.csv").set_index("event_id").cc_links.reindex(ev.index).fillna(0)
+    reason = pd.Series("ok", index=ev.index)
+    if "max_sigma_x_km" in q:
+        reason[~(ev.posterior_sigma_x_km <= q["max_sigma_x_km"])] = "horizontal_sigma"
+    if "max_gap_deg" in q:
+        reason[~(ev.azimuth_gap_deg <= q["max_gap_deg"])] = "azimuthal_gap"
+    reason[links < q["min_cc_links"]] = "no_waveform_neighbours"
+    return set(reason.index[reason == "ok"]), reason[reason != "ok"].to_dict()
+
+
 def export(out: Path, scope: dict, catalog_round: str) -> dict:
     final = CFG["final"]
-    ml = merged_rows(read_detections(out), float(final["cc_threshold"]), float(final["mad_threshold"]),
+    good, failed = location_quality()
+    detections = read_detections(out)
+    if good is not None:
+        # templates failing the rule do not place events; their detections leave the merge
+        detections = {seg: [d for d in v if d.template_id in good] for seg, v in detections.items()}
+    ml = merged_rows(detections, float(final["cc_threshold"]), float(final["mad_threshold"]),
                      float(final["min_separation_s"]))
     chain = chain_magnitudes(out, ml)
     for r, (m, n) in zip(ml, chain["per_event"]):
@@ -290,6 +348,8 @@ def export(out: Path, scope: dict, catalog_round: str) -> dict:
                     "magnitude_source": "" if pd.isna(r.magnitude) else "source_ml"}
                    for r in e.itertuples() if pd.notna(r.latitude) and w0 <= utc(r.origin_time) < w1],
                   key=lambda r: r["time"])
+    low = [r for r in base if r["event_id"] in failed]
+    base = [r for r in base if r["event_id"] not in failed]
     pairs = dedupe_pairs(ml, base)
     for i, j in pairs:
         if base[j]["magnitude"] is None and ml[i]["magnitude"] is not None:
@@ -310,10 +370,21 @@ def export(out: Path, scope: dict, catalog_round: str) -> dict:
             w.writerow([r["event_id"], r["time"].isoformat(), r["latitude"], r["longitude"], r["depth_km"],
                         "" if r["magnitude"] is None else round(r["magnitude"], 3), r["magnitude_source"],
                         r["location_source"], r.get("cc", ""), r.get("nmad", ""), r.get("template_id", "")])
+    if good is not None:
+        # picked events failing the rule, unless an M&L event (from a passing template) took their place
+        taken = {j for _, j in dedupe_pairs(ml, low)}
+        with (dest / "low_quality_events.csv").open("w", newline="") as h:
+            w = csv.writer(h, lineterminator="\n")
+            w.writerow(["event_id", "origin_time_utc", "latitude", "longitude", "depth_bsl_km", "reason",
+                        "redetected_by_ml"])
+            for j, r in enumerate(low):
+                w.writerow([r["event_id"], r["time"].isoformat(), r["latitude"], r["longitude"], r["depth_km"],
+                            failed[r["event_id"]], j in taken])
     days = [w0 + timedelta(days=k) for k in range((w1 - w0).days)]
     refs = load_references(days)
     boxed = lambda rows: [r for r in rows if in_box(r)]
-    return {"final_threshold": final, "ml_events": len(ml), "ml_in_source": len(in_base), "ml_new": len(new),
+    return {"final_threshold": final, "location_quality": CFG.get("location_quality"),
+            "picked_failing_quality": len(low), "ml_events": len(ml), "ml_in_source": len(in_base), "ml_new": len(new),
             "union_events": len(union), "catalog": str(dest.relative_to(EXPERT)),
             "magnitudes": {k: chain[k] for k in ("templates_with_ml", "templates_after_chain", "templates_total")},
             "scores": {"source": score(boxed(base), refs), "ml": score(boxed(ml), refs),
@@ -346,7 +417,8 @@ def summary_md(report: dict) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--scope", choices=sorted(CFG["scopes"]), default="pilot")
-    parser.add_argument("--stage", choices=["all", "inputs", "prepare", "run", "evaluate", "export"], default="all")
+    parser.add_argument("--stage", choices=["all", "inputs", "prepare", "run", "evaluate", "export", "cclinks"],
+                        default="all")
     parser.add_argument("--tag", default="", help="variant name; output goes to <scope>_<tag>")
     parser.add_argument("--catalog-round", default="", help="export step: round that receives 60_catalog (e.g. r6)")
     parser.add_argument("--override", default="{}",
@@ -383,6 +455,8 @@ def main() -> int:
             report["run"] = {k: result.get(k) for k in ("status", "jobs", "template_detections", "detections")}
         elif step == "evaluate":
             report["evaluation"] = evaluate(out, scope)
+        elif step == "cclinks":
+            report["cc_links"] = cc_links(par["prepare_workers"])
         elif step == "export":
             if not args.catalog_round:
                 parser.error("--stage export needs --catalog-round")
