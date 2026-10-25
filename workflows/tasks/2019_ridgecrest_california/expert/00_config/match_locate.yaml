@@ -26,7 +26,11 @@ model_datum_elevation_km: 0.7            # = association.yaml reference_elevatio
 templates:
   min_stations: 10
   max_sigma_depth_km: 2.0
-  cover_radius_km: 1.0                   # 1,235 templates (0.5 km: 2,462, ~19 h); pilot 9.4 s per template-day
+  # rounds 07-10: 1.0 km (1,235 templates, any v1 event). Rounds 11-12
+  # (run tag dense05): 0.5 km from location-quality events only -> 2,059
+  # templates (1,932 kept), 5.2 h; null 0.51 % at N x MAD 9.5.
+  cover_radius_km: 0.5
+  require_location_quality: true
   pick_max_abs_residual_s: 0.3
 
 scopes:
@@ -64,7 +68,10 @@ run:
 # duplicates from template origin scatter): single-template additions ~29 %,
 # >= 3 templates ~87 %. So 4 s stays, and closer events need >= 3 templates.
 final: {mad_threshold: 9.5, cc_threshold: 0.0, min_separation_s: 4.0,
-        close_events: {min_separation_s: 2.0, min_templates: 3}}
+        close_events: {min_separation_s: 2.0, min_templates: 6}}
+# min_templates scales with template density: with the 0.5 km set, >= 3
+# templates admits 1,281 additions of which only ~61 % are real (P-pick
+# test), >= 6 admits 398 at ~84 % (the 1 km set reached ~87 % at >= 3).
 
 # Location quality (2026-10-25; export to catalog round 08_location_quality):
 # the stage-60 union put 5.2 % of its events > 1 km from every reference

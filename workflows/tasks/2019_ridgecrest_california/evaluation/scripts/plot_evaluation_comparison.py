@@ -53,10 +53,12 @@ FOCUS_AGENT = 'agent_tools'
 # templates need >= 1 stage-52 CC link, gap <= 150 deg, NLL sigma_x <= 0.8 km;
 # the plain union put 5.2 % of events > 1 km off the faults), close events
 # with >= 3 templates (round 09), moved into the published layered Shelly
-# Table-1 frame by stage 63 (round 10_layered_frame, 2026-10-25). Its depths
+# Table-1 frame by stage 63 (round 10), then rebuilt with 0.5 km templates from
+# quality-passing events and close events needing >= 6 templates (round
+# 12_dense_layered, 2026-10-25). Its depths
 # are below sea level; +0.7 km puts them on the working catalog's convention
 # (below the nominal 0.7-km-ASL surface, association.yaml reference_elevation_km).
-EXPERT_CATALOG = TASK / 'expert/export/10_layered_frame/60_catalog/catalog_events.csv'
+EXPERT_CATALOG = TASK / 'expert/export/12_dense_layered/60_catalog/catalog_events.csv'
 EXPERT_DEPTH = ('depth_bsl_km', 0.7)
 AGENT_RUNS = {
     'agent_min': {

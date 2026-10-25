@@ -226,3 +226,22 @@ Recall, off-fault share (1.1 %) and local thickness unchanged. Ross (3-D
 model) agrees better in depth, less in epicentre. Stage 06's 108-event test
 had found mixed evidence for the layered model; on the full catalog it
 improves three of four references in epicentre and all four in depth.
+
+**Dense templates → rounds 11/12 (adopted, evaluation layer = round 12).**
+0.5 km cover drawn only from location-quality events (`templates.
+require_location_quality`): 2,059 templates (1,932 kept by prepare), run tag
+`dense05`, 5,796 jobs, 5.2 h. Null run (07-05 + 07-06): 31 % false at N×MAD
+8.5, 5.2 % at 9, **0.51 % at 9.5**, 0.05 % at 10 → 9.5 unchanged. M&L alone
+at 9.5: Shelly 85.5 → 90.8 %, ComCat 80.8 → 86.4 %. The close-event rule had
+to scale with template density: with this set ≥ 3 templates admits 1,281
+additions at ~61 % real (P-pick test), ≥ 6 admits 398 at ~84 %, ≥ 8 199 at
+~98 % → `min_templates: 6`. Round 11 = export, round 12 = stage-63 layered
+frame of round 11.
+
+| | round 10 | **round 12** |
+|---|---|---|
+| events | 15,397 | **18,537** |
+| recall Shelly / Ross / Liu / ComCat | 0.893 / 0.885 / 0.926 / 0.850 | **0.933 / 0.941 / 0.959 / 0.890** |
+| epicentral (same order, km) | 0.446 / 0.808 / 0.463 / 0.605 | 0.438 / 0.789 / 0.460 / 0.601 |
+| depth vs Shelly (MAD) | −0.08 (0.57) | −0.09 (0.56) |
+| > 1 km from every reference event | 1.1 % | **0.5 %** |

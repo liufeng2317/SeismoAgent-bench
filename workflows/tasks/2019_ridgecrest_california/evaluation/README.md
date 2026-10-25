@@ -10,16 +10,17 @@ sequence over the fixed evaluation window
    Ross 2019 QTM relocated subset, AWR 2025 v2 (long-term GaMMA), and the
    USGS/SCSN ComCat operational snapshot.
 2. **Human-expert reproduction** — this repository's `expert/` workflow,
-   round `10_layered_frame` (`expert/export/10_layered_frame/60_catalog/
-   catalog_events.csv`, 15,397 events): stage-52 joint-DD events plus
-   Match&Locate events (N×MAD 9.5, 4 s, closer events only with ≥ 3
-   templates; null false fraction ~0.2 %), a location-quality rule on picked
-   events and templates (≥ 1 stage-52 CC link, gap ≤ 150°, NLL σx ≤ 0.8 km),
-   moved into the frame of Shelly Table 1 as published (constant layers) by
-   stage 63. Recall vs Shelly 89.3 %, Ross 88.5 %, Liu 92.6 %, ComCat 85.0 %;
-   median epicentral 0.45 / 0.81 / 0.46 / 0.61 km; depth vs Shelly −0.08 km
-   (MAD 0.57); 1.1 % of events > 1 km from every Shelly/Ross/Liu event
-   (ComCat 1.5 %). Round history in expert/PLAN.md (stages 60, 62, 63).
+   round `12_dense_layered` (`expert/export/12_dense_layered/60_catalog/
+   catalog_events.csv`, 18,537 events): stage-52 joint-DD events plus
+   Match&Locate events from 1,932 templates (0.5 km cover of events passing
+   the location-quality rule: ≥ 1 stage-52 CC link, gap ≤ 150°, NLL σx ≤ 0.8 km;
+   N×MAD 9.5, null false fraction 0.5 %; 4 s separation, closer events only
+   with ≥ 6 templates), the same rule applied to picked events, moved into the
+   frame of Shelly Table 1 as published (constant layers) by stage 63.
+   Recall vs Shelly 93.3 %, Ross 94.1 %, Liu 95.9 %, ComCat 89.0 %; median
+   epicentral 0.44 / 0.79 / 0.46 / 0.60 km; depth vs Shelly −0.09 km (MAD
+   0.56); 0.5 % of events > 1 km from every Shelly/Ross/Liu event (ComCat
+   1.5 %). Round history in expert/PLAN.md (stages 60, 62, 63).
 3. **Agent reproductions** — completed Claude Code × GLM-5.3 runs:
    `runs/min/claude/glm-5.3/20261013T215003Z` (the Q1 `min` arm),
    `runs/tools/claude/glm-5.3/20261015T020300Z` (the Q2 `tools` arm;
