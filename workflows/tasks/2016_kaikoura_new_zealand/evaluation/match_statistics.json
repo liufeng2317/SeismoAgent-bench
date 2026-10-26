@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-26T18:41:09+00:00",
+  "generated_utc": "2026-10-26T23:50:28+00:00",
   "evaluation_window": {
     "start_utc": "2016-12-01T00:00:00Z",
     "end_utc": "2016-12-09T00:00:00Z"
@@ -31,7 +31,7 @@
       "color": "#009E73"
     },
     "expert": {
-      "label": "Expert reproduction (r5)",
+      "label": "Expert reproduction (r6)",
       "records": 13426,
       "color": "#E69F00"
     }
@@ -54,8 +54,8 @@
       "plotted_records": 1507
     },
     "expert": {
-      "path": "expert/export/r5/60_catalog/catalog_events.csv",
-      "round": "r5",
+      "path": "expert/export/r6/60_catalog/catalog_events.csv",
+      "round": "r6",
       "plotted_records": 13426,
       "selection": "complete round catalog (all rows)"
     }
@@ -65,40 +65,40 @@
       "records": 13426,
       "versus": {
         "tan": {
-          "matched": 5081,
-          "precision": 0.37844480858036644,
-          "recall": 0.5227366255144033,
-          "median_abs_dt_s": 0.509742,
-          "median_epicentral_km": 3.7127214536693636,
-          "median_depth_difference_km": 0.6718799999999998,
-          "mad_depth_difference_km": 2.8437599999999996
+          "matched": 5083,
+          "precision": 0.3785937732757336,
+          "recall": 0.5229423868312757,
+          "median_abs_dt_s": 0.458301,
+          "median_epicentral_km": 3.3892954769522183,
+          "median_depth_difference_km": 1.0137400000000003,
+          "mad_depth_difference_km": 2.5918600000000005
         },
         "lanza": {
           "matched": 120,
           "precision": 0.008937881722031879,
           "recall": 0.9836065573770492,
-          "median_abs_dt_s": 0.632834,
-          "median_epicentral_km": 3.164843210686705,
-          "median_depth_difference_km": -1.1961500000000012,
-          "mad_depth_difference_km": 1.4421400000000002
+          "median_abs_dt_s": 0.6215095,
+          "median_epicentral_km": 3.0503151362201093,
+          "median_depth_difference_km": -0.8656199999999998,
+          "mad_depth_difference_km": 1.295469999999999
         },
         "chamberlain": {
-          "matched": 1850,
-          "precision": 0.13779234321465814,
-          "recall": 0.8185840707964602,
-          "median_abs_dt_s": 0.4142755,
-          "median_epicentral_km": 3.765888559275675,
-          "median_depth_difference_km": 0.20412499999999945,
-          "mad_depth_difference_km": 2.5268749999999995
+          "matched": 1855,
+          "precision": 0.13816475495307612,
+          "recall": 0.8207964601769911,
+          "median_abs_dt_s": 0.395284,
+          "median_epicentral_km": 3.4097984751408084,
+          "median_depth_difference_km": 0.5299000000000014,
+          "mad_depth_difference_km": 2.1322750000000017
         },
         "geonet": {
-          "matched": 1383,
-          "precision": 0.1030090868464174,
-          "recall": 0.9177173191771731,
-          "median_abs_dt_s": 0.425287,
-          "median_epicentral_km": 3.14837341345988,
-          "median_depth_difference_km": -5.98,
-          "mad_depth_difference_km": 5.94875
+          "matched": 1380,
+          "precision": 0.10278563980336661,
+          "recall": 0.9157266091572661,
+          "median_abs_dt_s": 0.41212899999999997,
+          "median_epicentral_km": 3.162313745624165,
+          "median_depth_difference_km": -5.59375,
+          "mad_depth_difference_km": 5.6187499999999995
         }
       }
     }

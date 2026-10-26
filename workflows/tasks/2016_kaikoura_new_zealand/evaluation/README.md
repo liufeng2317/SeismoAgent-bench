@@ -12,12 +12,14 @@ anchor is the GeoNet M5.5 2016p913880 (2016-12-04 03:15:47).
    - Lanza et al. (2019) HypoDD preferred origins — location primary (122);
    - Chamberlain et al. (2021) corrected GrowClust catalog (2,260);
    - GeoNet operational, earthquake + unknown types (1,507).
-2. **Human-expert reproduction** — `expert/` round r5 complete catalog
-   (`expert/export/r5/60_catalog/catalog_events.csv`, 13,426 events): the r3
+2. **Human-expert reproduction** — `expert/` round r6 complete catalog
+   (`expert/export/r6/60_catalog/catalog_events.csv`, 13,426 events): the r5
+   catalog moved to NonLinLoc EDT_OT_WT locations (stage 64: picked events
+   relocated, Match&Locate events shifted with their templates). r5 is the r3
    NLL catalog (Chamberlain 1-D average of NZ3D, station delays, GaMMA DBSCAN
    eps 15 s) plus the stage-60 Match&Locate events (1,492 templates at 1 km
    cover, min 8 stations, N×MAD 10; null-run false fraction 0.26 %), chained relative
-   magnitudes. Rounds registered in `EXPERT_ROUNDS` (r3, r4, r5). All depths are
+   magnitudes. Rounds registered in `EXPERT_ROUNDS` (r3–r6). All depths are
    below sea level (model datum 0 km).
 3. **Agent reproductions** — none completed yet; register arms in
    `AGENT_RUNS` inside `plot_evaluation_comparison.py`.
@@ -29,7 +31,8 @@ Greedy one-to-one pairing by (distance, Δt) within **|Δt| ≤ 4 s and 15 km**
 
 | Population | vs Tan (R) | vs Lanza (R) | vs Chamberlain (R) | vs GeoNet (R) | epicentral Chamberlain | dZ vs Chamberlain (MAD) |
 |---|---|---|---|---|---|---|
-| **Expert (r5)** | 5,081 (52.3 %) | 120 (98.4 %) | 1,850 (81.9 %) | 1,383 (91.8 %) | 3.77 km | +0.20 (2.53) |
+| **Expert (r6)** | 5,083 (52.3 %) | 120 (98.4 %) | 1,855 (82.1 %) | 1,380 (91.6 %) | 3.41 km | +0.53 (2.13) |
+| Expert (r5) | 5,081 (52.3 %) | 120 (98.4 %) | 1,850 (81.9 %) | 1,383 (91.8 %) | 3.77 km | +0.20 (2.53) |
 | agent arms | — no completed runs yet — | | | | | |
 
 Epicentral differences are 3.1–3.8 km against every reference. The expert

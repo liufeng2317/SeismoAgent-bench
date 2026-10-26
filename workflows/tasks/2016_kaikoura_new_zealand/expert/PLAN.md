@@ -189,3 +189,22 @@ Result (2026-10-27): **adopted.** r5 catalog
 | GeoNet | 0.915 | 0.919 | **0.918** |
 
 Evaluation layer: r5 (Tan 52.3 %, Chamberlain 81.9 %, 3.77 km, dZ +0.20).
+
+### r6 (2026-10-27) — NonLinLoc LOCMETH EDT_OT_WT (Prague r5 method)
+
+`nonlinloc.yaml location_method: EDT_OT_WT`. r6 = r3 stages 01–03
+(hardlinked) + stage 04 (two station-delay passes, 36 min) + stage 05; 09/10
+not rerun. Stage-04 test on the r3 associations: Chamberlain 3.95/7.45 →
+3.78/7.05 km, Tan 3.61/7.56 → 3.46/7.33 km, recall +0.8 / +0.4 points. Stage
+64 moves the r5 catalog into the r6 frame: 6,137 picked events relocated,
+7,262 M&L events shifted with their templates (template displacement median
+0.80 km, p90 3.87 km), 27 kept.
+
+| final catalog | Tan R | epi median / p90 | Chamberlain R | epi median / p90 | dZ (MAD) | Lanza epi median / p90 | GeoNet R |
+|---|---|---|---|---|---|---|---|
+| r5 | 0.523 | 3.71 / 7.77 | 0.819 | 3.77 / 6.96 | +0.20 (2.53) | 3.17 / 6.34 | 0.918 |
+| **r6** | 0.523 | **3.39 / 7.74** | **0.821** | **3.41 / 6.59** | +0.53 (**2.13**) | **3.05 / 6.07** | 0.916 |
+
+M&L rows improve most (vs Lanza 4.75 → 2.49 km, vs Tan 4.51 → 4.10 km).
+GeoNet loses 3 matches. The 1-D vs 3-D offset (r2) remains the dominant term.
+**Adopted**; evaluation layer = r6.

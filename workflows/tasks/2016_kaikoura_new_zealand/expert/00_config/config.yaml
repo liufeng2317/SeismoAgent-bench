@@ -1,9 +1,9 @@
 # Paths are resolved relative to the expert root, including for --config overrides.
 case: 2016_kaikoura_new_zealand
-round: r3
+round: r6
 data_root: ../../../../data/2016_kaikoura_new_zealand/data/waveforms
 case_root: ../../../../data/2016_kaikoura_new_zealand
-export_root: export/r3
+export_root: export/r6
 candidate_window:
   start_utc: '2016-12-01T00:00:00Z'
   end_utc: '2016-12-09T00:00:00Z'

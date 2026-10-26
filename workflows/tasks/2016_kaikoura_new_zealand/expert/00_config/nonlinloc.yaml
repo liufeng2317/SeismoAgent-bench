@@ -20,3 +20,7 @@ station_delays:
   max_rms_s: 0.5
   max_gap_deg: 180
   max_sigma_depth_km: 3.0
+# r6 knob: LOCMETH EDT_OT_WT (r1-r5 GAU_ANALYTIC; Prague r5, Maple r9, Kilauea r7).
+# Stage-04 test on the r3 associations: Chamberlain 3.95/7.45 -> 3.78/7.05 km,
+# Tan 3.61/7.56 -> 3.46/7.33 km, recall +0.8 / +0.4 points (PLAN.md r6).
+location_method: EDT_OT_WT
