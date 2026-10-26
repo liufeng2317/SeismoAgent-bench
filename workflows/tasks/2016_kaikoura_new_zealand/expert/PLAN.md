@@ -154,3 +154,38 @@ Location by row source (evaluation-layer matcher): vs Chamberlain, M&L rows
 3.79 km epicentral / dZ +0.33 (NLL rows 3.95 / +0.33) — as good as picked;
 vs Tan 4.99 km (NLL 3.61): small events placed at 2 km-spaced templates.
 The 1-D vs 3-D offset (r2) applies to both.
+
+### r5 — denser Match&Locate templates (1 km cover, min 8 stations)
+
+Miss diagnosis of r4 (2026-10-26): missed Tan events have almost no PhaseNet
+pick support (median 1 P station within 60 km, +60 s control 0), so only
+template matching can add them, and Tan recall falls with the distance to the
+nearest r4 template: 0.71 within 0.5 km, 0.66 at 0.5–1 km, 0.56 at 1–2 km,
+0.33 at 2–4 km, 0.20 at 4–8 km, 0.12 beyond (35 % of Tan events > 2 km away).
+Knob: `templates.cover_radius_km` 2 → 1 and `min_stations` 10 → 8 →
+1,635 templates (1,492 kept by prepare, 33,815 rows), 11,936 jobs, 9.4 h.
+
+Null run (12-02 + 12-06, channel circular shift, 6 s): 13.3 % false at N×MAD
+9, 1.8 % at 9.5, **0.26 % at 10** → final 10. 9.5 is within the 1–2 %
+accepted elsewhere but 10 cuts false detections ~7× for −1.4 (Tan) / −1.1
+(Chamberlain) recall points.
+
+Location checks before adoption (the Kīlauea r5 lesson): matched offsets by
+row source are as in r4 (vs Tan: M&L 4.5–4.7 km, NLL 3.5 km — the documented
+1-D vs 3-D offset); the 1,269 new-event matches to Tan spread over 642
+templates (largest 1.2 %; one template with ≥ 10 matches has a median offset
+> 8 km, 0.8 % of matches); events > 5 km from every Tan/Chamberlain/Lanza
+event 1.21 % → 0.94 %.
+
+Result (2026-10-27): **adopted.** r5 catalog
+`export/r5/60_catalog/catalog_events.csv`: 13,426 events. Box-scored
+(stage-05 readers and mask, export separation 6 s):
+
+| | r4 | r5 @ 9.5 | **r5 @ 10** |
+|---|---|---|---|
+| Tan | 0.492 | 0.537 | **0.523** |
+| Chamberlain | 0.775 | 0.830 | **0.819** |
+| Lanza | 0.984 | 0.984 | **0.984** |
+| GeoNet | 0.915 | 0.919 | **0.918** |
+
+Evaluation layer: r5 (Tan 52.3 %, Chamberlain 81.9 %, 3.77 km, dZ +0.20).

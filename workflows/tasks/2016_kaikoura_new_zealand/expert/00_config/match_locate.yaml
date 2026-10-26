@@ -1,7 +1,7 @@
 # Stage 60 — Match&Locate (seismotools/match_and_locate) seeded by the r3 catalog.
 # Ported from the Kilauea stage 60 (Prague / Maple Creek / Magna PLAN.md r7 lineage).
 source_export: export/r3
-export_root: export/r4/60_match_locate
+export_root: export/r5/60_match_locate   # r4: export/r4/60_match_locate
 tool_root: ../../../../seismotools/match_and_locate
 waveforms: ../../../../data/2016_kaikoura_new_zealand/data/waveforms/data
 velocity_model:
@@ -16,9 +16,13 @@ velocity_model:
 model_datum_elevation_km: 0.0            # = association.yaml reference_elevation_km
 
 templates:
-  min_stations: 10
+  # r5: Tan recall falls with distance to the nearest r4 template (0.71 within
+  # 0.5 km, 0.56 at 1-2 km, 0.33 at 2-4 km, 0.12 beyond 8 km; 35 % of Tan
+  # events > 2 km away) -> 1 km cover, min 8 stations: 1,635 templates.
+  # r4: min 10 stations, 2 km cover (708 kept; the +-1 km grid tiles 2 km).
+  min_stations: 8
   max_sigma_depth_km: 3.0
-  cover_radius_km: 2.0                   # 803 templates (1 km: 1,350); the +-1 km grid tiles 2 km spacing
+  cover_radius_km: 1.0
   pick_max_abs_residual_s: 0.5           # r3 NLL RMS 0.36 s (1-D model, 260 km aperture)
 
 scopes:
@@ -49,7 +53,10 @@ run:
 
 # final threshold: null run (08_null_run.py, 12-02 + 12-06, 6 s) gives 9.2 % false at
 # N×MAD 9, 1.4 % at 9.5 (Magna/Maple accepted 1-2 %), 0.3 % at 10 -> 9.5 (PLAN.md r4)
-final: {mad_threshold: 9.5, cc_threshold: 0.0, min_separation_s: 6.0}
+# r5 (1,492 templates, 1 km cover): 13.3 % at 9, 1.8 % at 9.5, 0.26 % at 10 -> 10:
+# 9.5 is within the 1-2 % accepted elsewhere but 10 cuts false detections ~7x for
+# -1.4 (Tan) / -1.1 (Chamberlain) recall points (PLAN.md r5). r4: 9.5.
+final: {mad_threshold: 10.0, cc_threshold: 0.0, min_separation_s: 6.0}
 
 sweep:
   mad: [8, 8.5, 9, 9.5, 10, 11, 12, 14]
