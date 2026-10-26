@@ -6,11 +6,13 @@
     "native_obs": "Boolean; use event.obs rather than picks_simple.txt",
     "prepare_only": "Boolean; prepare controls and grids without running NLLoc",
     "utm_zone_number": "Optional fixed UTM zone number",
-    "utm_zone_letter": "Optional fixed UTM zone letter"
+    "utm_zone_letter": "Optional fixed UTM zone letter",
+    "location_method": "LOCMETH method: EDT_OT_WT (default), EDT (equal differential time) or GAU_ANALYTIC (L2 Gaussian likelihood)",
+    "grid_center": "Optional {latitude, longitude, depth_km}: build the search grid around this point (+-10 km); default: a grid spanning the station footprint"
   },
   "notes": [
     "The velocity model, stations and observations are supplied as input files.",
-    "The standard adapter uses the bundled 1-D workflow geometry; advanced control generation belongs to Nonlinlocpy.",
+    "The standard adapter builds a 1-D geometry around grid_center or the station footprint; advanced control generation belongs to Nonlinlocpy. Multi-event catalogs: interface/locate.py.",
     "Native binaries are selected with --bin-dir or the bundled runtime/bin directory."
   ]
 }

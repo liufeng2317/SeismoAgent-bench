@@ -17,13 +17,17 @@ Set `PYTHON` when a different compatible environment is intended:
 PYTHON=/path/to/python bash run_all.sh
 ```
 
+`synthetic_events.py` is the shared known-answer generator for the association
+and location validations (uniform half-space, analytic travel times; optional
+pick noise, false picks, dropped picks, one outlier).
+
 The checks are deliberately small:
 
 | Script | Validation |
 | --- | --- |
 | `validate_phasenet.py` | Synthetic CPU forward pass and one real Ridgecrest three-component window. |
 | `validate_gamma.py` | Synthetic P/S association and one real stored Ridgecrest event's picks. |
-| `validate_nonlinloc.py` | Bundled `Nonlinlocpy` import, default sibling-binary resolution and template resource, tiny synthetic grids, plus one stored Ridgecrest event and grid. |
+| `validate_nonlinloc.py` | Bundled `Nonlinlocpy` import, default sibling-binary resolution and template resource, tiny synthetic grids, one stored Ridgecrest event and grid; the v2 adapter's smoke solution under all three `location_method`s (default unchanged); the v3 catalog locator `locate.py` on the shared synthetic half-space case (`synthetic_events.py`: 40 known hypocentres within 0.1 km / 0.15 km depth / 0.02 s for every method; one 2-s outlier pick: EDT less affected than GAU_ANALYTIC) and its reproduction of 50 Prague expert r2 locations with the r2 settings and station delays (median < 0.1 km, depth < 0.2 km). |
 | `validate_hypodd.py` | Bundled `hypodd_runner` import, public configuration API and template, synthetic native relocation, plus two real Ridgecrest CT event-pair blocks. |
 | `validate_match_and_locate.py` | `matchlocate_runner` travel times against analytic solutions, SAC header reader against ObsPy, `select_templates` on two clusters, a synthetic end-to-end run of both interface steps (raw MiniSEED and tables → `prepare.py` → `run.py`) with known answers (detection times, offset locations, depths through the sea-level/datum conversion, relative magnitudes), and both upstream examples through the interface: Hi-net (1 vs 8 threads identical, Python merge equal to native `SelectFinal`, comparison with the upstream outputs) and CC distribution (per-node CC identical to upstream on all common rows, same detected event). Its real-data check is the upstream example (archive path via `MATCHLOCATE_ARCHIVE`, skipped when absent), not Ridgecrest. |
 | `validate_cross_correlation.py` | `ccdt` kernels against a brute-force Pearson loop and an analytic parabola; the synthetic known-answer dataset (`examples/smoke`: fractional-sample arrivals, midnight file boundary, 1/2 and E-only horizontals, 200 Hz, polarity reversal, overlapping events, exact/erroneous/predicted arrivals; 1 vs 4 workers identical); and 76 well-picked Ridgecrest events, whose accepted CC dt must match their PhaseNet pick differences (median < 10 ms, MAD < 30 ms, robust slope within 5 %, < 10 % beyond 0.1 s). |

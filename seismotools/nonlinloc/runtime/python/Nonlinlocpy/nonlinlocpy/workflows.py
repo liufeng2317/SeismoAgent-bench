@@ -171,6 +171,7 @@ def prepare_1d_control_case(
     depth_spacing_km: float,
     utm_zone_number: int | None = None,
     utm_zone_letter: str | None = None,
+    locmeth_line: str = "LOCMETH EDT_OT_WT 9999.0 4 -1 -1 -1 6 -1.0 1",
 ) -> tuple[Path, str, str]:
     """Create a prepared run directory and patch a 1-D velocity NonLinLoc case.
     
@@ -186,6 +187,7 @@ def prepare_1d_control_case(
         depth_spacing_km (float): depth spacing km.
         utm_zone_number (int | None): Optional fixed UTM zone number.
         utm_zone_letter (str | None): Optional fixed UTM zone letter.
+        locmeth_line (str): complete ``LOCMETH`` control line.
     
     Returns:
         tuple[Path, str, str]: Result returned by the function.
@@ -196,7 +198,7 @@ def prepare_1d_control_case(
 
     layer_lines = velocity.read_depth_vp_vs_columns(str(velocity_path))
     velocity.replace_vel2grid_layer_block(str(run_dir), layer_lines)
-    utils.ensure_locmeth_line(control_path, "LOCMETH EDT_OT_WT 9999.0 4 -1 -1 -1 6 -1.0 1")
+    utils.ensure_locmeth_line(control_path, locmeth_line)
     utils.patch_lochypout_line(control_path)
 
     velocity_depths = utils.load_velocity_depths(velocity_path)

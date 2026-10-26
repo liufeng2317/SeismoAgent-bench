@@ -56,6 +56,16 @@ bash seismotools/nonlinloc/examples/smoke/run.sh /tmp/nonlinloc-smoke
 
 For a complete offline prepared-input workflow, see [examples/workflow](examples/workflow).
 
+### Catalog locator (many events)
+
+`interface/locate.py` (interface version 3) locates a whole catalog of arrival
+groups: travel-time grids once per station, one NLLoc run per event in a thread
+pool, optional fixed station delays, selectable location method
+(`GAU_ANALYTIC`, `EDT`, `EDT_OT_WT`). Inputs are plain CSV/text (arrivals,
+stations with latitude/longitude/elevation, a 1-D model); outputs are
+`events.csv` and `arrivals.csv` with residuals. See
+[`interface/README.md`](interface/README.md#catalog-locator-locatepy-interface-version-3).
+
 
 ## Native command-line usage
 
@@ -96,7 +106,10 @@ native control reference.
 ## Validation
 
 The project validation checks package import, bundled template resolution, the
-three native stages on a tiny synthetic grid, and one bounded Ridgecrest event:
+three native stages on a tiny synthetic grid, one bounded Ridgecrest event, the
+adapter's smoke solution under all three location methods, the catalog locator
+on a synthetic half-space case (known hypocentres; one outlier pick) and its
+reproduction of 50 Prague expert (r2) locations:
 
 ```bash
 python seismotools/support/tools_usage_validation/validate_nonlinloc.py

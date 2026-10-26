@@ -16,8 +16,13 @@
       "license_status": "No standalone license file found in local source; redistribution terms need upstream verification."
     },
     "nonlinloc": {
-      "implementation": "NLL7.00 native binaries plus the project-local Nonlinlocpy Python package",
-      "license_status": "Preserve source and README notices."
+      "implementation": "NLL7.00 native binaries plus the project-local Nonlinlocpy Python package; interface/run.py (v2, single event; location_method switch) and interface/locate.py (v3, catalog locator, project code in nonlinlocpy/catalog.py)",
+      "license_status": "Preserve source and README notices.",
+      "variants": [
+        "LOCMETH EDT_OT_WT (default)",
+        "EDT",
+        "GAU_ANALYTIC"
+      ]
     },
     "hypodd": {
       "implementation": "Local hypoDD distribution plus executed stage-53 src/hypoDD and include files",
@@ -1308,8 +1313,9 @@
     {
       "path": "nonlinloc/runtime/python/Nonlinlocpy/nonlinlocpy/standard_nonlinloc.py",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/standard_nonlinloc.py",
-      "bytes": 8043,
-      "sha256": "dae6af1b3b7ebe3cc8b23baf54a36979e677b0049e5e9fca4566cef2a5dcd27b"
+      "bytes": 8880,
+      "sha256": "6df630a0ed4084dcf4c2d0a33dc5ffc34efc90cc131011ca2210cf2e3d05b194",
+      "local_change": "2026-10-26 local change: location_method and grid_center settings (default grid spans the station footprint)"
     },
     {
       "path": "nonlinloc/runtime/python/Nonlinlocpy/nonlinlocpy/stations.py",
@@ -1362,8 +1368,9 @@
     {
       "path": "nonlinloc/runtime/python/Nonlinlocpy/nonlinlocpy/workflows.py",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/Nonlinlocpy/nonlinlocpy/workflows.py",
-      "bytes": 9575,
-      "sha256": "009ec4070d36995ff7dd66079d5b9e265534710f6a90020ec7288fd9d943d069"
+      "bytes": 9676,
+      "sha256": "6d42405e25f7d230df95d30992ec029c5f036875c5292c3ab7f21fa767351b25",
+      "local_change": "2026-10-26 local change: prepare_1d_control_case(locmeth_line=...)"
     },
     {
       "path": "nonlinloc/runtime/python/Nonlinlocpy/pyproject.toml",

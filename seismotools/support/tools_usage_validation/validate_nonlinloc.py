@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Generate a tiny NonLinLoc grid and run the three native stages."""
+"""Validate NonLinLoc: native stages, the v2 adapter (smoke regression, location
+methods) and the v3 catalog locator (synthetic known answers; Prague r2 reproduction)."""
 from __future__ import annotations
 
 import json
@@ -21,6 +22,18 @@ sys.path.insert(0, str(PYTHON_PACKAGE))
 from nonlinlocpy import NLLocConfig, resolve_nlloc_bin_dir  # noqa: E402
 from nonlinlocpy.workflows import copy_template_control_file  # noqa: E402
 from nonlinlocpy.runner import run_nlloc_bin  # noqa: E402
+
+import numpy as np  # noqa: E402
+import pandas as pd  # noqa: E402
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from synthetic_events import make_case, write_case  # noqa: E402
+
+TOOL = ROOT / "seismotools" / "nonlinloc"
+PY = sys.executable
+PRAGUE = ROOT / "workflows/tasks/2011_prague_oklahoma/expert/export/r2"
+# v2 smoke solution (examples/smoke with config.json) before the 2026-10 changes
+SMOKE_SOLUTION = {"lat": 36.12129630306454, "lon": -117.6320737732665, "depth_km": 1.82812}
 
 
 native_logs: list[str] = []
@@ -50,6 +63,107 @@ def run(binary: Path, control: Path, cwd: Path) -> str:
                             stderr=subprocess.STDOUT, check=True)
     native_logs.append(f"$ {binary.name} {control.name} (cwd={cwd})\n{result.stdout}")
     return result.stdout
+
+
+def epi_km(lat1, lon1, lat2, lon2):
+    return np.hypot((np.asarray(lat1) - lat2) * 111.195,
+                    (np.asarray(lon1) - lon2) * 111.195 * np.cos(np.radians(np.asarray(lat2))))
+
+
+def locate(tmp: Path, name: str, arrivals: Path, stations: Path, model: Path, config: dict,
+           delays: Path | None = None) -> pd.DataFrame:
+    cfg = tmp / f"{name}.json"
+    cfg.write_text(json.dumps(config))
+    cmd = [PY, "-I", str(TOOL / "interface/locate.py"), "--arrivals", str(arrivals), "--stations", str(stations),
+           "--velocity-model", str(model), "--output-dir", str(tmp / name), "--config", str(cfg),
+           "--bin-dir", str(BIN), "--workers", "16", "--quiet"]
+    if delays is not None:
+        cmd += ["--station-delays", str(delays)]
+    subprocess.run(cmd, check=True, capture_output=True)
+    assert json.loads((tmp / name / "run_result.json").read_text())["status"] == "success"
+    return pd.read_csv(tmp / name / "events.csv").set_index("event_id")
+
+
+def check_smoke_regression(tmp: Path) -> dict:
+    """v2 adapter: the smoke example (with its grid_center config) reproduces the earlier solution."""
+    out = {}
+    for method in ("EDT_OT_WT", "EDT", "GAU_ANALYTIC"):
+        cfg = json.loads((TOOL / "examples/smoke/config.json").read_text())
+        cfg["location_method"] = method
+        (tmp / f"smoke_{method}.json").write_text(json.dumps(cfg))
+        subprocess.run([PY, "-I", str(TOOL / "interface/run.py"), "--input-dir", str(TOOL / "examples/smoke/inputs"),
+                        "--output-dir", str(tmp / f"smoke_{method}"), "--config", str(tmp / f"smoke_{method}.json"),
+                        "--bin-dir", str(BIN)], check=True, capture_output=True)
+        row = pd.read_csv(tmp / f"smoke_{method}" / "located_events.csv").iloc[0]
+        out[method] = {"lat": float(row.lat), "lon": float(row.lon), "depth_km": float(row.depth_km)}
+    d = out["EDT_OT_WT"]
+    out["default_unchanged"] = all(abs(d[k] - SMOKE_SOLUTION[k]) < 1e-6 for k in SMOKE_SOLUTION)
+    assert out["default_unchanged"], out
+    return out
+
+
+def check_synthetic(tmp: Path) -> dict:
+    """v3 locator: noise-free half-space hypocentres for all methods; one 2 s outlier: EDT beats GAU."""
+    res = {}
+    for label, opts in (("exact", {}), ("outlier", {"outlier_s": 2.0})):
+        case = make_case(seed=1, **opts)
+        d = write_case(case, tmp / f"syn_{label}")
+        case["picks"][case["picks"].event_id.astype(str) != ""].to_csv(d / "arrivals.csv", index=False)
+        truth = case["events"].set_index("event_id")
+        for method in ("GAU_ANALYTIC", "EDT", "EDT_OT_WT"):
+            cfg = {"location_method": method, "grid_spacing_km": 0.25, "projection_center": case["projection_center"],
+                   "region": {"latitude": [35.3, 35.7], "longitude": [-97.25, -96.75], "depth_km": [0, 20]}}
+            e = locate(tmp, f"syn_{label}_{method}", d / "arrivals.csv", d / "stations.csv", d / "velocity_model.txt",
+                       cfg).loc[truth.index]
+            dh = epi_km(e.latitude, e.longitude, truth.latitude, truth.longitude)
+            dt = (pd.to_datetime(e.origin_time_utc) - pd.to_datetime(truth.origin_time_utc)).dt.total_seconds()
+            res[f"{label}_{method}"] = {"located": int((e.status == "LOCATED").sum()),
+                                        "max_epi_km": round(float(dh.max()), 3),
+                                        "max_abs_depth_km": round(float((e.depth_km - truth.depth_km).abs().max()), 3),
+                                        "max_abs_origin_s": round(float(dt.abs().max()), 4),
+                                        "outlier_event_epi_km": round(float(dh.iloc[0]), 3)}
+    for method in ("GAU_ANALYTIC", "EDT", "EDT_OT_WT"):
+        r = res[f"exact_{method}"]
+        assert r["located"] == 40 and r["max_epi_km"] < 0.1 and r["max_abs_depth_km"] < 0.15 \
+            and r["max_abs_origin_s"] < 0.02, (method, r)
+    assert res["outlier_EDT"]["outlier_event_epi_km"] < res["outlier_GAU_ANALYTIC"]["outlier_event_epi_km"], res
+    return res
+
+
+def check_prague(tmp: Path, n_events: int = 50) -> dict:
+    """v3 locator with the Prague r2 stage-04 settings and station delays reproduces 50 r2 events."""
+    ref = pd.read_csv(PRAGUE / "04_locate_nonlinloc/full/events.csv")
+    ref = ref[(ref.status == "LOCATED") & (ref.n_stations >= 10)].sort_values("event_id")
+    ref = ref.iloc[np.linspace(0, len(ref) - 1, n_events).astype(int)].set_index("event_id")
+    picks = pd.read_csv(PRAGUE / "03_associate_gamma/full/picks.csv", keep_default_na=False)
+    arr = picks[picks.event_id.isin(ref.index)][["event_id", "pick_id", "station_id", "phase", "time_utc"]]
+    arr.to_csv(tmp / "prague_arrivals.csv", index=False)
+    st = pd.read_csv(PRAGUE / "03_associate_gamma/full/stations.csv")
+    st.assign(elevation_m=st.elevation_m - st.sensor_depth_m)[["station_id", "latitude", "longitude", "elevation_m"]] \
+        .to_csv(tmp / "prague_stations.csv", index=False)
+    inputs = json.loads((PRAGUE / "03_associate_gamma/full/inputs.json").read_text())
+    rows = inputs["model_source"]["rows"]
+    (tmp / "prague_model.txt").write_text("".join(f"{r['top_of_layer_km']} {r['vp_km_s']} {r['vs_km_s']}\n" for r in rows))
+    dl = pd.read_csv(PRAGUE / "04_locate_nonlinloc/full/station_delays.csv")
+    dl.assign(station_id=dl.instrument_id.map(dict(zip(st.id, st.station_id))))[
+        ["station_id", "phase", "delay_s", "n_picks"]].to_csv(tmp / "prague_delays.csv", index=False)
+    s = inputs["settings"]
+    cfg = {"reference_elevation_km": s["reference_elevation_km"], "projection_center": s["projection_center"],
+           "region": {"longitude": s["longitude_bounds"], "latitude": s["latitude_bounds"],
+                      "depth_km": s["depth_bounds_km"]},
+           "velocity_layering": s["velocity_layering"], "grid_spacing_km": 0.25, "grid_depth_km": [-3.0, 35.0],
+           "location_method": "GAU_ANALYTIC", "min_phases": 10, "min_s_phases": 3,
+           "pick_error_s": {"P": 0.10, "S": 0.20}, "model_error_s": 0.30,
+           "search": {"min_node_km": 0.1, "max_nodes": 50000, "samples": 2000}}
+    e = locate(tmp, "prague", tmp / "prague_arrivals.csv", tmp / "prague_stations.csv", tmp / "prague_model.txt",
+               cfg, tmp / "prague_delays.csv").loc[ref.index]
+    dh = epi_km(e.latitude, e.longitude, ref.latitude, ref.longitude)
+    dz = (e.depth_km - ref.depth_km).abs()
+    out = {"events": n_events, "located": int((e.status == "LOCATED").sum()),
+           "median_epi_km": round(float(np.median(dh)), 4), "max_epi_km": round(float(dh.max()), 4),
+           "median_abs_depth_km": round(float(dz.median()), 4), "max_abs_depth_km": round(float(dz.max()), 4)}
+    assert out["located"] == n_events and out["median_epi_km"] < 0.1 and out["median_abs_depth_km"] < 0.2, out
+    return out
 
 
 def main() -> None:
@@ -121,6 +235,10 @@ LOCPHASEID P P
             shutil.copy2(source_event / name, event / name)
         output = run(BIN / "NLLoc", event / "control.in", event)
         assert list(event.glob("solution.*.loc.hyp")) and "1 events located" in output
+    with tempfile.TemporaryDirectory(prefix="nll-v3-") as tmp:
+        smoke = check_smoke_regression(Path(tmp))
+        synthetic = check_synthetic(Path(tmp))
+        prague = check_prague(Path(tmp))
     log_dir = Path(os.environ.get("VALIDATION_LOG_DIR", str(Path(__file__).resolve().parent / "outputs")))
     log_dir.mkdir(parents=True, exist_ok=True)
     (log_dir / "validate_nonlinloc.native.log").write_text("\n\n".join(native_logs))
@@ -131,7 +249,10 @@ LOCPHASEID P P
                                  "template_resource": True},
                       "smoke": {"velocity_grid": True, "travel_time_grid": True, "locator_started": True,
                                  "note": "one-station synthetic input is intentionally underdetermined"},
-                      "ridgecrest": {"source_event": "gamma_0000001", "located_events": 1}}, indent=2))
+                      "ridgecrest": {"source_event": "gamma_0000001", "located_events": 1},
+                      "adapter_v2_smoke_methods": smoke,
+                      "locate_v3_synthetic": synthetic,
+                      "locate_v3_prague_r2": prague}, indent=2))
 
 
 if __name__ == "__main__":

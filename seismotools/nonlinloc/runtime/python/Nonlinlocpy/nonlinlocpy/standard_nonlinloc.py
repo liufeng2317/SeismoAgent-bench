@@ -19,6 +19,7 @@ from .workflows import (
 )
 
 INPUTS_DIR = Path("./inputs")
+LOCATION_METHODS = ("EDT_OT_WT", "EDT", "GAU_ANALYTIC")
 RUN_DIR = Path("./run_case")
 
 # -----------------------------------------------------------------------------
@@ -39,6 +40,9 @@ class StandardRunConfig:
         utm_zone_letter (str | None): fixed UTM zone letter for cross-zone regions.
         use_native_obs (bool): use native obs.
         prepare_only (bool): prepare only.
+        location_method (str): NLLoc LOCMETH method: EDT_OT_WT (default), EDT or GAU_ANALYTIC.
+        grid_center (dict | None): ``{latitude, longitude, depth_km}`` around which the
+            search grid is built; default: a grid spanning the station footprint.
     """
     input_dir: str = str(INPUTS_DIR)
     run_dir: str = str(RUN_DIR)
@@ -48,6 +52,8 @@ class StandardRunConfig:
     utm_zone_letter: str | None = None
     use_native_obs: bool = False
     prepare_only: bool = False
+    location_method: str = "EDT_OT_WT"
+    grid_center: dict | None = None
 
 
 @dataclass
@@ -148,16 +154,17 @@ def prepare_standard_example(config: StandardRunConfig) -> tuple[Path, List[Stat
     if not stations:
         raise ValueError(f"No stations were loaded from {station_path}")
 
-    event_guess = EventGuess(
-        latitude=36.124940,
-        longitude=-117.711110,
-        depth_km=4.380,
-    )
+    if config.location_method not in LOCATION_METHODS:
+        raise ValueError(f"location_method must be one of {LOCATION_METHODS}: {config.location_method}")
+    if config.grid_center:
+        guesses = [EventGuess(**{k: float(config.grid_center[k]) for k in ("latitude", "longitude", "depth_km")})]
+    else:  # the search grid spans the station footprint (plus the horizontal pad)
+        guesses = [EventGuess(latitude=s.lat, longitude=s.lon, depth_km=5.0) for s in stations]
     _, vggrid_line, locgrid_line = prepare_1d_control_case(
         run_dir=run_dir,
         velocity_path=velocity_path,
         stations=stations,
-        events=[event_guess],
+        events=guesses,
         horizontal_pad_km=10.0,
         depth_top_km=-2.0,
         depth_bottom_pad_km=10.0,
@@ -165,6 +172,7 @@ def prepare_standard_example(config: StandardRunConfig) -> tuple[Path, List[Stat
         depth_spacing_km=1.0,
         utm_zone_number=config.utm_zone_number,
         utm_zone_letter=config.utm_zone_letter,
+        locmeth_line=f"LOCMETH {config.location_method} 9999.0 4 -1 -1 -1 6 -1.0 1",
     )
 
     if config.use_native_obs:

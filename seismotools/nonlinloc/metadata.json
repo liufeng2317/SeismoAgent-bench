@@ -6,5 +6,17 @@
   "binaries": "runtime/bin",
   "python_interface": "runtime/python/Nonlinlocpy",
   "standard_entrypoint": "interface/run.py",
-  "stages": ["Vel2Grid", "Grid2Time", "NLLoc"]
+  "stages": [
+    "Vel2Grid",
+    "Grid2Time",
+    "NLLoc"
+  ],
+  "catalog_entrypoint": "interface/locate.py",
+  "catalog_interface_version": 3,
+  "location_methods": [
+    "EDT_OT_WT",
+    "EDT",
+    "GAU_ANALYTIC"
+  ],
+  "validation": "support/tools_usage_validation/validate_nonlinloc.py"
 }
