@@ -146,7 +146,7 @@ def main():
     common=base+'\n'.join(sources)+'\nLOCSIG SeismoAgentBench expert\nLOCCOM Fixed GaMMA associations; HVO Klein linear-gradient profile\n'
     common+=f'LOCGRID {counts[0]} {counts[1]} {counts[2]} {bounds[0][0]} {bounds[1][0]} {bounds[2][0]} {steps[0]} {steps[1]} {steps[2]} PROB_DENSITY SAVE\n'
     common+=f'LOCSEARCH OCT 10 10 5 {cfg["search_min_node_km"]} {cfg["search_max_nodes"]} {cfg["posterior_samples"]} 0 0\n'
-    common+='LOCMETH GAU_ANALYTIC 9999 10 -1 3 -1 100 -1 1\nLOCHYPOUT SAVE_NLLOC_ALL\n'
+    common+=f'LOCMETH GAU_ANALYTIC 9999 {cfg.get("min_phases",10)} -1 {cfg.get("min_s_phases",3)} -1 100 -1 1\nLOCHYPOUT SAVE_NLLOC_ALL\n'
     common+=f'LOCGAU {cfg["model_error_s"]} 0\nLOCQUAL2ERR .1 .2 .5 1 999\nLOCPHASEID P P\nLOCPHASEID S S\nLOCANGLES ANGLES_NO 5\n'
     if args.scope=='pilot':
         # Self-contained diagnostic selection: mainshock-proximal events plus

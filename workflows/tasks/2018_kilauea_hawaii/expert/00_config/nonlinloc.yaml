@@ -12,6 +12,9 @@ pick_error_s:
 model_error_s: 0.30
 per_event_timeout_s: 180
 posterior_samples: 2000
+# LOCMETH minimum phases / S phases; r5 (rejected) used 6 / -1 for P-only events.
+min_phases: 10
+min_s_phases: 3
 # Station delays (LOCDELAY, iterated; Maple Creek r5): off in r1 (baseline port).
 station_delays:
   iterations: 0
