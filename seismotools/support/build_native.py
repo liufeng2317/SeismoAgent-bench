@@ -8,7 +8,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-TOOLS = ['nonlinloc', 'hypodd', 'match_and_locate', 'pyocto']
+TOOLS = ['nonlinloc', 'hypodd', 'match_and_locate', 'pyocto', 'real']
 # MatchLocate2 is plain C + OpenMP. -ffp-contract=off keeps floating-point
 # results independent of FMA availability (aarch64 contracts by default).
 MATCHLOCATE_CFLAGS = ['-O2', '-std=gnu99', '-fopenmp', '-ffp-contract=off', '-w']
@@ -60,6 +60,15 @@ def build_pyocto(folder, log):
     return [wheel.name]
 
 
+def build_real(folder, log):
+    """REAL is one C file (OpenMP); -ffp-contract=off as for MatchLocate2."""
+    build = patched_copy(folder, '.', 'src', log)
+    run_logged(['gcc', '-O2', '-fopenmp', '-ffp-contract=off', '-w', '-o', 'REAL', 'REAL.c', '-lm'], build / 'src', log)
+    (folder / 'runtime' / 'bin').mkdir(parents=True, exist_ok=True)
+    shutil.copy2(build / 'src' / 'REAL', folder / 'runtime' / 'bin' / 'REAL')
+    return ['REAL']
+
+
 def build_match_and_locate(folder, log):
     """Patch a pristine copy of the upstream src/ and compile it.
 
@@ -77,7 +86,7 @@ def build_match_and_locate(folder, log):
     return list(MATCHLOCATE_PROGRAMS)
 
 
-BUILDERS = {'match_and_locate': build_match_and_locate, 'pyocto': build_pyocto}
+BUILDERS = {'match_and_locate': build_match_and_locate, 'pyocto': build_pyocto, 'real': build_real}
 
 
 def main():

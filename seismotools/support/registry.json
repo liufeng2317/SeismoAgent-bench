@@ -54,6 +54,13 @@
         "VelocityModel1D (layered, step or linear)"
       ],
       "license_status": "MIT (source/upstream/LICENSE); preserve notices."
+    },
+    "real": {
+      "implementation": "REAL (Miao Zhang) commit 6435ace, archive sha256 47ea30bd...b605, built without patches; adapter interface/run.py (interface version 1) with a fast-marching travel-time table",
+      "variants": [
+        "layered 1-D travel-time table (step or linear)"
+      ],
+      "license_status": "MIT (source/upstream/LICENSE); preserve notices."
     }
   },
   "files": [
@@ -2410,6 +2417,42 @@
       "source": "pyocto-0.1.9.tar.gz/pyocto-0.1.9/src/types.h",
       "bytes": 3700,
       "sha256": "962b9395efda6857a9119fbc36cef2e712b922bf501d606994dc3c147f6afdba"
+    },
+    {
+      "path": "real/source/README.md",
+      "source": "project",
+      "bytes": 649,
+      "sha256": "715be5db903ccdf28049020046d3f67c9a16ca5c4baa408dfe6093d0c76cdd14"
+    },
+    {
+      "path": "real/source/upstream/LICENSE",
+      "source": "REAL-6435ace552d1efe72e633e8f82a5f9d8467f1049.zip/REAL-6435ace552d1efe72e633e8f82a5f9d8467f1049/LICENSE",
+      "bytes": 1067,
+      "sha256": "be1d1cb624c30f5985f3ebafe155dd47c5b618ed65022b64cda58b1898a8c009"
+    },
+    {
+      "path": "real/source/upstream/Makefile",
+      "source": "REAL-6435ace552d1efe72e633e8f82a5f9d8467f1049.zip/REAL-6435ace552d1efe72e633e8f82a5f9d8467f1049/src/REAL/Makefile",
+      "bytes": 221,
+      "sha256": "fc54dafa3c002c1fe0762b06f476c5aff9d289948a1c61e4f2a403432b5a9818"
+    },
+    {
+      "path": "real/source/upstream/Modified_History",
+      "source": "REAL-6435ace552d1efe72e633e8f82a5f9d8467f1049.zip/REAL-6435ace552d1efe72e633e8f82a5f9d8467f1049/Modified_History",
+      "bytes": 1180,
+      "sha256": "9f1ec864e81533a41502834dde345d0484bb8c67be58a7581960b6aa0a11e644"
+    },
+    {
+      "path": "real/source/upstream/README.md",
+      "source": "REAL-6435ace552d1efe72e633e8f82a5f9d8467f1049.zip/REAL-6435ace552d1efe72e633e8f82a5f9d8467f1049/README.md",
+      "bytes": 2639,
+      "sha256": "a68000387474fc46faa9c0cd9dfe4b54647798713c577b2359fb77a2128af1ac"
+    },
+    {
+      "path": "real/source/upstream/REAL.c",
+      "source": "REAL-6435ace552d1efe72e633e8f82a5f9d8467f1049.zip/REAL-6435ace552d1efe72e633e8f82a5f9d8467f1049/src/REAL/REAL.c",
+      "bytes": 82607,
+      "sha256": "c9d3823582e10c8d35f94b3c046970005621e66f6f12cea91923adc2094d8fbb"
     }
   ],
   "validation": {
@@ -2434,6 +2477,9 @@
       },
       "pyocto": {
         "_core.cpython-39-aarch64-linux-gnu.so": "1e2ebb1fcff4079ecb190f40c7497dbe8e7c7e4b1212ea3404e9c31c79b0d92e"
+      },
+      "real": {
+        "REAL": "d757f1698a7bbcf303474d21781e985abe5ce6253ebcece404f8288d71c006ca"
       }
     },
     "compilers": {

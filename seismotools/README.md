@@ -12,6 +12,7 @@ catalogs and workflow outputs are stored outside this directory.
 | PhaseNet, EQTransformer, DPPPicker P | Phase probability inference | `phase_picking/interface/run.py` or `run_continuous.py` |
 | GaMMA | Pick association | `gamma/interface/run.py` |
 | PyOcto | Pick association (octree space-time partitioning) | `pyocto/interface/run.py` |
+| REAL | Pick association (pick counting on a grid around the initiating station) | `real/interface/run.py` |
 | NonLinLoc | Absolute location and travel-time grids (methods GAU_ANALYTIC / EDT / EDT_OT_WT) | `nonlinloc/interface/run.py` (one event), `locate.py` (catalog) |
 | hypoDD | Relative relocation from catalog and/or cross-correlation times | `hypodd/interface/run.py` |
 | MatchLocate2 | Template detection with grid-search location (Match&Locate; matched filter as the zero-grid case) | `match_and_locate/interface/prepare.py` then `run.py` |
@@ -44,6 +45,7 @@ seismotools/
 ├── hypodd/{source,runtime,interface,examples,docs}/
 ├── cross_correlation/{runtime,interface,examples}/   # project-local Python, no native code
 ├── pyocto/{source/{upstream,patches},runtime,interface,examples}/
+├── real/{source/upstream,runtime,interface,examples}/
 └── match_and_locate/{source/{upstream,patches},runtime,interface,examples,docs}/
 ```
 
@@ -112,4 +114,5 @@ For implementation details and model-specific constraints, follow:
 - [Match&Locate](match_and_locate/README.md)
 - [ccdt cross-correlation](cross_correlation/README.md)
 - [PyOcto](pyocto/README.md)
+- [REAL](real/README.md)
 - [Validation tools](support/tools_usage_validation/README.md)

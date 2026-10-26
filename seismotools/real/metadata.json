@@ -1,0 +1,16 @@
+{
+  "tool": "REAL",
+  "method": "Rapid Earthquake Association and Location: pick counting in travel-time windows on a grid (Zhang, Ellsworth & Beroza 2019, SRL 90(6))",
+  "implementation": "Upstream C (OpenMP) built locally; project adapter interface/run.py with a fast-marching travel-time table",
+  "reported_version": "REAL Aug. 2021 (usage banner), commit 6435ace",
+  "interface_version": 1,
+  "standard_entrypoint": "interface/run.py",
+  "native_programs": ["runtime/bin/REAL"],
+  "outputs": ["events.csv", "assignments.csv", "ttdb.txt", "chunks/", "config.json", "run_result.json"],
+  "validation": "support/tools_usage_validation/validate_real.py",
+  "upstream": {"repository": "https://github.com/Dal-mzhang/REAL",
+               "commit": "6435ace552d1efe72e633e8f82a5f9d8467f1049",
+               "archive_sha256": "47ea30bd04d89a95de22f0f360e95a2d840b058b0c3c2db32c57c4a7f0a5b605",
+               "license": "MIT"},
+  "local_patches": []
+}
