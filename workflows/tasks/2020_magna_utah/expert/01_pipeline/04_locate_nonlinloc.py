@@ -16,6 +16,7 @@ from pyproj import Proj
 import yaml
 
 HERE = Path(__file__).resolve().parents[1]  # Expert root; independent of working directory.
+METHOD = 'GAU_ANALYTIC'  # nonlinloc.yaml location_method, set in main()
 
 
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
@@ -65,7 +66,8 @@ def parse_hyp(path,event,observations,station_map,proj,datum,depth_bounds):
                           residual_s=float(b[1]),weight=float(b[2]),predicted_travel_time_s=float(b[0])))
     assert len(links)==len(expected)==row['n_phases'],f'Arrival count mismatch for {row["event_id"]}'
     assert len({r['pick_id'] for r in links})==len(links)
-    assert all(r['weight']>0 for r in links),'An input arrival was not used'
+    # EDT methods may zero-weight outlier arrivals (that is their robustness); GAU uses every arrival
+    assert METHOD!='GAU_ANALYTIC' or all(r['weight']>0 for r in links),'An input arrival was not used'
     row['rms_unweighted_s']=float(np.sqrt(np.mean([r['residual_s']**2 for r in links])))
     row['gamma_rms_unweighted_s']=float(np.sqrt(np.mean([float(r['residual_s'])**2 for r in observations])))
     row['origin_time_shift_s']=(origin-pd.Timestamp(event['origin_time'])).total_seconds()
@@ -105,6 +107,8 @@ def locate(event,observations,aliases,common,out,cfg,proj,datum,depth_bounds):
 def main():
     ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--scope',choices=['pilot','full'],default='pilot');args=ap.parse_args()
     cfg=yaml.safe_load((HERE/'00_config/nonlinloc.yaml').read_text());main_cfg=yaml.safe_load((HERE/'00_config/config.yaml').read_text())
+    global METHOD
+    METHOD=cfg.get('location_method','GAU_ANALYTIC')
     export=HERE/main_cfg['export_root'];source=export/'03_associate_gamma/full';out=export/'04_locate_nonlinloc';out.mkdir(exist_ok=True)
     import fcntl
     lock=(out/'run.lock').open('w');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
@@ -146,7 +150,7 @@ def main():
     common=base+'\n'.join(sources)+'\nLOCSIG SeismoAgentBench expert\nLOCCOM Fixed GaMMA associations; Bjarnason and Pechmann 1989 profile\n'
     common+=f'LOCGRID {counts[0]} {counts[1]} {counts[2]} {bounds[0][0]} {bounds[1][0]} {bounds[2][0]} {steps[0]} {steps[1]} {steps[2]} PROB_DENSITY SAVE\n'
     common+=f'LOCSEARCH OCT 10 10 5 {cfg["search_min_node_km"]} {cfg["search_max_nodes"]} {cfg["posterior_samples"]} 0 0\n'
-    common+='LOCMETH GAU_ANALYTIC 9999 10 -1 3 -1 100 -1 1\nLOCHYPOUT SAVE_NLLOC_ALL\n'
+    common+=f'LOCMETH {cfg.get("location_method","GAU_ANALYTIC")} 9999 10 -1 3 -1 100 -1 1\nLOCHYPOUT SAVE_NLLOC_ALL\n'
     common+=f'LOCGAU {cfg["model_error_s"]} 0\nLOCQUAL2ERR .1 .2 .5 1 999\nLOCPHASEID P P\nLOCPHASEID S S\nLOCANGLES ANGLES_NO 5\n'
     if args.scope=='pilot':
         # Self-contained diagnostic selection: mainshock-proximal events plus
