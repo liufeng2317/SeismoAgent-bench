@@ -177,3 +177,60 @@ Ridgecrest gap/σx limits did not help (1.7 %). CC links: `60_match_locate.py
 with `location_quality`: 6,964 events, 724 picked events in
 `low_quality_events.csv`; epicentral vs Cochran 0.49 → 0.47 km, McMahon
 0.34 → 0.31 km. Evaluation layer = r4.
+
+## Method comparison (stage 70, 2026-10-27)
+
+The seismotools library gained association (PyOcto, REAL), absolute
+location (NonLinLoc method switch + catalog locator `locate.py`,
+HypoInverse) and relative relocation (GrowClust) methods, each validated
+first (`seismotools/support/tools_usage_validation/`). Stage 70
+(`04_comparison/70_method_comparison.py`, `00_config/method_comparison.yaml`,
+figure `71_plot_method_comparison.py`) runs them on identical inputs: r2
+PhaseNet picks, r2 stations, Keranen model as step layers, 0.28-km datum, no
+station delays (r2 stage 04 used two delay passes). GaMMA = the r2 stage-03
+association; PyOcto and REAL use GaMMA's minima (10 picks, 4 P, 3 S).
+HypoInverse needs `lvz_policy: clip` (the Keranen model has two small
+inversions). Scored like the evaluation layer (masked references, 4 s /
+15 km). The GaMMA + NLL-GAU arm reproduces the r2 expert catalog (Cochran
+0.630 vs 0.630, 0.483 vs 0.486 km), so the frame is sound.
+
+| association (events) | locator | Cochran | McMahon | epi median / p90 (km) | dZ median (MAD) | \|dt\| (s) |
+|---|---|---|---|---|---|---|
+| GaMMA (2,860) | NLL GAU_ANALYTIC | 0.630 | 0.734 | 0.48 / 1.33 | −0.05 (0.59) | 0.11 |
+| | NLL EDT | 0.630 | 0.734 | **0.37 / 0.84** | +0.10 (**0.41**) | **0.07** |
+| | NLL EDT_OT_WT | 0.630 | 0.734 | 0.37 / 0.86 | +0.10 (0.42) | 0.07 |
+| | HypoInverse | 0.630 | 0.734 | 0.45 / 2.10 | −0.06 (0.65) | 0.25 |
+| PyOcto (3,058) | NLL GAU / EDT | 0.642 / 0.644 | 0.750 / 0.753 | 0.60 / 1.75; 0.39 / 0.88 | | |
+| | HypoInverse | 0.641 | 0.748 | 0.50 / 2.73 | | |
+| REAL (2,641) | NLL GAU / EDT | 0.612 / 0.612 | 0.713 | 0.43 / 1.06; 0.38 / 0.85 | | |
+| | HypoInverse | 0.611 | 0.713 | 0.41 / 1.62 | | |
+| GaMMA + NLL-GAU, model ×0.95 / ×1.05 | | 0.630 | 0.734 | 0.47 / 0.53 | +0.39 / −0.76 | |
+| ccdt + GrowClust (2,047 of 2,859 relocated) | | (subset) | | 0.38 / 0.82 | −0.22 (**0.30**) | |
+
+Findings:
+- **Recall is set by the association, not the locator** (the 15-km gate):
+  PyOcto +1.2 points over GaMMA (Cochran), REAL −1.8; REAL is the most
+  conservative (precision proxy 0.81 vs 0.80/0.79).
+- **NLL EDT beats GAU_ANALYTIC** for every association: median epicentral
+  offset −0.1 km, p90 1.33 → 0.84 km, depth MAD 0.59 → 0.41 km, origin
+  |dt| 0.11 → 0.07 s. The expert stage 04 uses GAU_ANALYTIC; switching
+  is a candidate round for all cases (EDT is robust to outlier picks —
+  validate_nonlinloc: one 2-s outlier moved GAU 2.3 km in depth).
+- HypoInverse with the NCSN weighting defaults has a heavy tail (p90
+  2.1–2.7 km) and origins 0.16–0.25 s late; its distance weighting is tuned
+  for dense California networks, not this geometry.
+- ±5 % velocity moves depths systematically (+0.4 / −0.8 km) but barely the
+  epicentres.
+- GrowClust (`ngoodmin 4`) gives the tightest depths (MAD 0.30 km) on the
+  72 % of events it links.
+
+Cross-method spread as an internal quality indicator (GaMMA association,
+1,310 events matched to Cochran, 3.8 % with errors > 2 km): the locator
+spread (largest epicentre distance from the median of the four locators)
+correlates with the error (Spearman 0.59; top 5 % → 6.4× the large-error
+rate), unlike the NLL posterior σh (0.10). RMS is as strong (0.64) and
+correlated with the spread (0.76): beyond RMS the spread keeps a partial
+correlation of 0.20; flagging the top 10 % by either catches 33 of 50 large
+errors (spread 26, RMS 24). The ±5 % model spread is not informative (0.10)
+— a model change shifts all events alike. Not yet tested across
+associations (pick-set linking).

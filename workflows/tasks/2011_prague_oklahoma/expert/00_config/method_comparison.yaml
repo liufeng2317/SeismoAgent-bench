@@ -1,0 +1,27 @@
+# Stage 70: association x location method comparison on the r2 PhaseNet picks
+# (04_comparison/70_method_comparison.py; PLAN.md "Method comparison").
+# Region, datum, velocity model and its layering come from the r2 stage-03 inputs.json.
+source_round: r2
+workers: 32
+association:
+  # GaMMA: the r2 stage-03 association itself. PyOcto and REAL get GaMMA's minima.
+  pyocto: {associator: {n_picks: 10, n_p_picks: 4, n_s_picks: 3}}
+  real: {thresholds: {np0: 4, ns0: 3, nps0: 10}}
+location:
+  # NonLinLoc as in r2 stage 04 (nonlinloc.yaml) but without station delays, so
+  # every arm is located the same way
+  nll: {grid_spacing_km: 0.25, grid_depth_km: [-3.0, 35.0], min_phases: 10, min_s_phases: 3,
+        pick_error_s: {P: 0.10, S: 0.20}, model_error_s: 0.30,
+        search: {min_node_km: 0.1, max_nodes: 50000, samples: 2000}}
+  nll_methods: {nll_gau: GAU_ANALYTIC, nll_edt: EDT, nll_edt_ot_wt: EDT_OT_WT}
+  # the Keranen model has small velocity inversions that CRH models cannot hold
+  hypoinverse: {lvz_policy: clip}
+# GaMMA + NLL-GAU relocated with Vp and Vs scaled by these factors (model sensitivity)
+model_scaling: [0.95, 1.05]
+relative:
+  # the near-source ZQ stations record on DH/CN channels
+  ccdt: {channels: {families: [HH, EH, BH, HN, EN, DH, CN]}}
+  growclust: {ngoodmin: 4, table: {distance_max_km: 150.0}}
+spread:
+  error_km: 2.0          # "large error" for the lift statistic
+  top_fraction: 0.05
