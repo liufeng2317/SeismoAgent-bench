@@ -245,3 +245,21 @@ frame of round 11.
 | epicentral (same order, km) | 0.446 / 0.808 / 0.463 / 0.605 | 0.438 / 0.789 / 0.460 / 0.601 |
 | depth vs Shelly (MAD) | −0.08 (0.57) | −0.09 (0.56) |
 | > 1 km from every reference event | 1.1 % | **0.5 %** |
+
+## NonLinLoc EDT_OT_WT test (2026-10-27) — stage-04 gain, not propagated
+
+Stage-04-level test (seismotools `nonlinloc/interface/locate.py` on the
+01_baseline stage-03 associations; GAU reproduces stage 04 exactly):
+
+| vs | GAU epi median / p90 (km) | EDT_OT_WT | depth MAD GAU → EDT | recall GAU → EDT |
+|---|---|---|---|---|
+| Shelly | 0.95 / 3.70 | **0.79 / 3.39** | 1.69 → **1.29** | 0.800 → 0.805 |
+| Liu | 0.90 / 2.19 | **0.76 / 1.92** | 1.64 → **1.21** | 0.937 → 0.940 |
+| Ross | 0.95 / 3.85 | **0.84 / 3.56** | 1.96 → **1.62** | 0.755 → 0.757 |
+| ComCat | 0.87 / 2.79 | **0.73 / 2.56** | 1.46 → **1.18** | 0.818 → 0.822 |
+
+The final catalog (round 12) takes picked positions from the stage-52/62
+double-difference relocations and moves M&L events with their templates'
+stage-62 displacement, so an absolute-locator change reaches it only through
+a rerun of stages 52, 60, 62 and 63. Not done; the knob
+(`nonlinloc.yaml location_method`) is in place for that rerun.

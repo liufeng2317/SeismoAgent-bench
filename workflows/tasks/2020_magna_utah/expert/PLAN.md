@@ -681,3 +681,22 @@ early and shallow. A fair step test would re-sweep the basin layer; not
 pursued (r6–r8 already agree with the references at the absolute-locator
 floor). Config restored to round r8 with `velocity_layering: linear`;
 export/r9 (03–05) kept as the record.
+
+### NonLinLoc EDT_OT_WT test (2026-10-27) — not adopted
+
+Prague stage 70 found NLL EDT better than GAU_ANALYTIC (the method of every
+expert stage 04), and Prague, Maple, Kīlauea and Kaikōura adopted it.
+Stage-04-level test here (seismotools `nonlinloc/interface/locate.py` with
+the r8 stage-03 associations and stage-04 settings; GAU reproduces r8
+stage 04 exactly):
+
+| vs | GAU epi median / p90 (km) | EDT_OT_WT | dZ median (MAD): GAU → EDT |
+|---|---|---|---|
+| Pang | 1.47 / 3.51 | 1.88 / 3.80 | +1.40 (1.16) → +0.33 (0.97) |
+| Baker | 1.37 / 3.11 | 1.72 / 3.21 | −0.18 (1.22) → −1.30 (1.11) |
+| UUSS | 1.46 / 2.83 | 1.91 / 3.60 | +1.76 (1.06) → +0.55 (1.05) |
+
+EDT moves epicentres 0.4 km further from every reference here and shifts
+depths by ~1 km; the basin layer was calibrated under GAU (r4), so the method
+change would need a re-calibration. stage 04 keeps GAU_ANALYTIC (the knob
+`nonlinloc.yaml location_method` now exists, default GAU).
