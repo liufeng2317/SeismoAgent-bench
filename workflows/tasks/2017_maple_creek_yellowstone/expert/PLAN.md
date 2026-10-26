@@ -316,3 +316,23 @@ CC links: `60_match_locate.py --stage cclinks` (ccdt, 3 km / 30 neighbours;
 1,962 of 2,059 source events linked). r8 = export with `location_quality`:
 12,602 events, 929 picked events in `low_quality_events.csv`. Evaluation
 layer = r8.
+
+### r9 (2026-10-27) — NonLinLoc LOCMETH EDT_OT_WT (Prague r5 method)
+
+`nonlinloc.yaml location_method: EDT_OT_WT`. r9 = r5 stages 01–03
+(hardlinked) + stage 04 (two station-delay passes) + stage 05; 09/10 not
+rerun. Stage-04 test on the r5 associations (seismotools locate.py, fixed r5
+delays): ComCat epicentral 0.867/1.827 → 0.828/1.684 km, depth MAD 0.67 →
+0.63 km. Stage 64 moves the r8 catalog into the r9 frame: 1,130 picked
+events relocated, 11,472 M&L events shifted with their templates (template
+displacement median 0.25 km, p90 2.05 km).
+
+| final catalog (evaluation matcher) | ComCat R | epi median / p90 | dZ (MAD) | Shelly R (net) | > 1 km from ComCat (box) |
+|---|---|---|---|---|---|
+| r8 | 0.990 | 0.908 / 2.164 | +1.43 (0.85) | 0.564 (0.507) | 1.53 % |
+| **r9** | 0.989 | **0.895 / 1.898** | +1.46 (**0.69**) | 0.569 (**0.511**) | **0.28 %** |
+
+M&L rows vs ComCat 1.22 → 0.91 km; picked rows 0.86 → 0.90 km (median; the
+p90 and the off-fault share improve). One ComCat event fewer matched.
+**Adopted**; evaluation layer = r9. The +1.4 km depth offset to ComCat is
+unchanged (documented r5–r7 input difference).

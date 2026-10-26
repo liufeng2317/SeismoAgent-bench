@@ -1,9 +1,9 @@
 # Paths are resolved relative to the expert root, including for --config overrides.
 case: 2017_maple_creek_yellowstone
-round: r5
+round: r9
 data_root: ../../../../data/2017_maple_creek_yellowstone/data/waveforms
 case_root: ../../../../data/2017_maple_creek_yellowstone
-export_root: export/r5
+export_root: export/r9
 candidate_window:
   start_utc: '2017-06-11T00:00:00Z'
   end_utc: '2017-06-19T00:00:00Z'

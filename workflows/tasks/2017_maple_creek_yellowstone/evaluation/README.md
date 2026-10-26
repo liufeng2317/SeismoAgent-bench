@@ -11,14 +11,17 @@ over the fixed evaluation window **[2017-06-11T00:00:00Z, 2017-06-19T00:00:00Z)*
    - Shelly & Hardebeck (2019) detections derived from their phase release
      (18,062; origin times only, no locations; `data/2017_maple_creek_yellowstone/
      data/catalogs/SHELLY2019_GL081607/scripts/derive_detection_events.py`).
-2. **Human-expert reproduction** — `expert/` round r8 complete catalog
-   (`expert/export/r8/60_catalog/catalog_events.csv`, 12,602 events): the r7
+2. **Human-expert reproduction** — `expert/` round r9 complete catalog
+   (`expert/export/r9/60_catalog/catalog_events.csv`, 12,602 events): the r8
+   catalog moved to NonLinLoc EDT_OT_WT locations (stage 64: picked events
+   relocated, Match&Locate events shifted with their templates; 0.28 % of
+   events > 1 km from every ComCat event). r8 is the r7
    union (r5 NLL + stage-60 Match&Locate, N×MAD 9.25) with the location-quality
    rule of 2026-10-26 — a source event stays, and may place events as a
    template, only with ≥ 1 waveform CC link to a neighbour (ccdt), gap ≤ 150°
    and NLL σx ≤ 0.8 km. 1.5 % of events lie > 1 km from every ComCat event
    (r7: 3.5 %); ComCat recall 99.0 %, Shelly net 50.7 % (r7 99.4 / 52.1 %).
-   Rounds registered in `EXPERT_ROUNDS` (r5–r8); depths below sea level
+   Rounds registered in `EXPERT_ROUNDS` (r5–r9); depths below sea level
    converted to below-surface with the model datum (2.3 km).
 3. **Agent reproductions** — none completed yet; register arms in
    `AGENT_RUNS` inside `plot_evaluation_comparison.py` as runs finish.
@@ -37,7 +40,8 @@ statistics.
 
 | Population | vs ComCat (R) | vs Shelly (R / net) | median \|Δt\| ComCat | epicentral ComCat | dZ vs ComCat (MAD) |
 |---|---|---|---|---|---|
-| **Expert (r7)** | 622 (99.4 %) | 10,526 (58.3 % / 52.1 %) | 0.10 s | 0.87 km | +1.43 (0.70) |
+| **Expert (r9)** | 619 (98.9 %) | 10,269 (56.9 % / 51.1 %) | 0.09 s | 0.90 km | +1.46 (0.69) |
+| Expert (r7) | 622 (99.4 %) | 10,526 (58.3 % / 52.1 %) | 0.10 s | 0.87 km | +1.43 (0.70) |
 | Expert (r6) | 623 (99.5 %) | 9,825 (54.4 % / 48.5 %) | 0.10 s | 0.87 km | +1.43 (0.70) |
 | agent arms | — no completed runs yet — | | | | |
 

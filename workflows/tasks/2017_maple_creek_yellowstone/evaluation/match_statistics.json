@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-25T17:00:39+00:00",
+  "generated_utc": "2026-10-26T22:58:29+00:00",
   "evaluation_window": {
     "start_utc": "2017-06-11T00:00:00Z",
     "end_utc": "2017-06-19T00:00:00Z"
@@ -23,7 +23,7 @@
       "depth_datum": null
     },
     "expert": {
-      "label": "Expert reproduction (r8)",
+      "label": "Expert reproduction (r9)",
       "records": 12602,
       "color": "#E69F00",
       "depth_datum": "local_surface"
@@ -39,8 +39,8 @@
       "plotted_records": 18062
     },
     "expert": {
-      "path": "expert/export/r8/60_catalog/catalog_events.csv",
-      "round": "r8",
+      "path": "expert/export/r9/60_catalog/catalog_events.csv",
+      "round": "r9",
       "plotted_records": 12602,
       "selection": "complete round catalog (all rows)",
       "depth": "below the local surface (sea level + 2.3 km)"
@@ -51,22 +51,22 @@
       "records": 12602,
       "versus": {
         "comcat": {
-          "matched": 620,
-          "precision": 0.049198539914299316,
-          "recall": 0.9904153354632588,
-          "median_abs_dt_s": 0.101633,
-          "median_epicentral_km": 0.9081682115151051,
-          "median_depth_difference_km": 1.4331500000000008,
-          "mad_depth_difference_km": 0.8487499999999999
+          "matched": 619,
+          "precision": 0.04911918743056658,
+          "recall": 0.9888178913738019,
+          "median_abs_dt_s": 0.089714,
+          "median_epicentral_km": 0.8950006431457354,
+          "median_depth_difference_km": 1.4612499999999997,
+          "mad_depth_difference_km": 0.6900000000000004
         },
         "shelly": {
-          "matched": 10192,
-          "precision": 0.8087605142040946,
-          "recall": 0.5642785959472927,
-          "median_abs_dt_s": 0.1564415,
+          "matched": 10269,
+          "precision": 0.8148706554515156,
+          "recall": 0.568541689735356,
+          "median_abs_dt_s": 0.117678,
           "median_epicentral_km": null,
-          "chance_matches": 1036,
-          "recall_net": 0.5069206067988041
+          "chance_matches": 1042,
+          "recall_net": 0.5108515114605249
         }
       }
     }
