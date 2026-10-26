@@ -5,7 +5,8 @@ Port of the Prague stage 60 (Maple Creek / Magna PLAN.md r7). Scope ``pilot`` sc
 with a small template set; ``full`` scans the eight-day window. Steps:
 
 1. inputs: greedy spatial cover of the source v1 catalog by quality-filtered
-   v1 events (NLL positions), associated picks as template marks;
+   v1 events (NLL positions), per period if ``templates.split_utc`` is set,
+   associated picks as template marks;
 2. seismotools/match_and_locate interface/prepare.py;
 3. interface/run.py with permissive thresholds;
 4. evaluate: N×MAD sweep of the merged detections on the scanned days,
@@ -144,9 +145,19 @@ def build_inputs(out: Path, scope: dict) -> dict:
             for e in events.itertuples()]
     candidates = [r for r in rows if r["n_stations"] >= tcfg["min_stations"]
                   and r["sigma_z"] <= tcfg["max_sigma_depth_km"]]
-    chosen = select_templates(rows, candidates, radius_km=tcfg["cover_radius_km"],
-                              max_templates=scope["max_templates"], rank=lambda r: r["n_stations"])
-    templates = chosen["templates"]
+    # templates.split_utc: cover each period separately, so events of one
+    # period (e.g. pre-mainshock summit events) are not "covered" by
+    # templates of another period at the same place but with other waveforms.
+    split = [pd.Timestamp(t) for t in tcfg.get("split_utc", [])]
+    period = lambda r: sum(pd.Timestamp(r["origin"]) >= t for t in split)
+    templates, covered = [], 0
+    for k in range(len(split) + 1):
+        chosen = select_templates([r for r in rows if period(r) == k], [r for r in candidates if period(r) == k],
+                                  radius_km=tcfg["cover_radius_km"], max_templates=scope["max_templates"],
+                                  rank=lambda r: r["n_stations"])
+        templates += chosen["templates"]
+        covered += chosen.get("covered", 0)
+    chosen = {"covered_fraction": covered / max(len(rows), 1)}
     out.mkdir(parents=True, exist_ok=True)
     with (out / "templates.csv").open("w", newline="") as h:
         w = csv.writer(h, lineterminator="\n")
