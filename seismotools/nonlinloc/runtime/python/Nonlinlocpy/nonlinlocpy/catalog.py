@@ -191,8 +191,8 @@ class CatalogLocator:
         if len(hyps) != 1:
             raise RuntimeError(f"expected one .hyp, found {len(hyps)}; see {folder / 'run.log'}")
         row, links = self.parse_hyp(hyps[0], event_id, arr)
-        if not cfg["keep_raw"]:
-            shutil.rmtree(folder)
+        if not cfg["keep_raw"]:          # cleanup must not fail a located event (network file systems)
+            shutil.rmtree(folder, ignore_errors=True)
         return row, links
 
     def parse_hyp(self, path: Path, event_id: str, arr: pd.DataFrame) -> Tuple[dict, List[dict]]:
@@ -273,7 +273,7 @@ def locate_catalog(arrivals: pd.DataFrame, stations: pd.DataFrame, velocity_path
                                  "predicted_travel_time_s"]).to_csv(out / "arrivals.csv", index=False)
     pd.DataFrame(failed, columns=["event_id", "error"]).to_csv(out / "failures.csv", index=False)
     if not cfg["keep_raw"] and not failed and (out / "events_raw").exists():
-        shutil.rmtree(out / "events_raw")
+        shutil.rmtree(out / "events_raw", ignore_errors=True)
     (x0, x1), (y0, y1), (z0, z1) = loc.bounds
     return {"config": cfg, "events_in": len(groups), "located": int((ev.status == "LOCATED").sum()),
             "parsed": len(ev), "failed": len(failed), "seconds": round(time.monotonic() - t0, 1),
