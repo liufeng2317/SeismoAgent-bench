@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Build copied native sources in local build trees; never mutate source/."""
 import argparse
+import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-TOOLS = ['nonlinloc', 'hypodd', 'match_and_locate']
+TOOLS = ['nonlinloc', 'hypodd', 'match_and_locate', 'pyocto']
 # MatchLocate2 is plain C + OpenMP. -ffp-contract=off keeps floating-point
 # results independent of FMA availability (aarch64 contracts by default).
 MATCHLOCATE_CFLAGS = ['-O2', '-std=gnu99', '-fopenmp', '-ffp-contract=off', '-w']
@@ -18,20 +20,52 @@ MATCHLOCATE_PROGRAMS = {
 }
 
 
+def patched_copy(folder, upstream_subdir, target, log):
+    """Fresh copy of source/upstream/<subdir> in runtime/build/<target> with source/patches applied."""
+    build = folder / 'runtime' / 'build'
+    if build.exists():
+        shutil.rmtree(build)
+    shutil.copytree(folder / 'source' / 'upstream' / upstream_subdir, build / target)
+    patch_root = build if target == 'src' and upstream_subdir == 'src' else build / target
+    for patch in sorted((folder / 'source' / 'patches').glob('*.patch')):
+        log.write(f'== patch {patch.name}\n')
+        log.flush()
+        subprocess.run(['patch', '-p1', '--no-backup-if-mismatch', '-i', str(patch)], cwd=patch_root,
+                       stdout=log, stderr=subprocess.STDOUT, check=True)
+    return build
+
+
+def run_logged(command, cwd, log):
+    log.write('== ' + ' '.join(map(str, command)) + '\n')
+    log.flush()
+    subprocess.run([str(c) for c in command], cwd=cwd, stdout=log, stderr=subprocess.STDOUT, check=True)
+
+
+# PyOcto build requirements (scikit-build-core, pybind11, wheel, setuptools and
+# their dependencies), downloaded once: the build itself needs no network.
+PYOCTO_BUILD_REQUIREMENTS = Path(os.environ.get('PYOCTO_BUILD_REQUIREMENTS',
+                                                '/liufeng1afs/software/Download/pyocto/build_requirements'))
+
+
+def build_pyocto(folder, log):
+    """Wheel from the patched upstream subset (isolated, offline build requirements, system
+    CMake with Makefiles), installed into runtime/build/site; the Python environment is not modified."""
+    build = patched_copy(folder, '.', 'src', log)
+    os.environ['CMAKE_GENERATOR'] = 'Unix Makefiles'
+    run_logged([sys.executable, '-I', '-m', 'pip', 'wheel', '--no-deps', '--no-index', '--find-links',
+                PYOCTO_BUILD_REQUIREMENTS, '-w', build / 'wheel', build / 'src'], build, log)
+    wheel = next((build / 'wheel').glob('pyocto-*.whl'))
+    run_logged([sys.executable, '-I', '-m', 'pip', 'install', '--no-deps', '--target', build / 'site', wheel],
+               build, log)
+    return [wheel.name]
+
+
 def build_match_and_locate(folder, log):
     """Patch a pristine copy of the upstream src/ and compile it.
 
     ccsacc (a plotting helper) links SAC's libsac and is not built.
     """
-    build = folder / 'runtime' / 'build'
-    if build.exists():
-        shutil.rmtree(build)
-    shutil.copytree(folder / 'source' / 'upstream' / 'src', build / 'src')
-    for patch in sorted((folder / 'source' / 'patches').glob('*.patch')):
-        log.write(f'== patch {patch.name}\n')
-        log.flush()
-        subprocess.run(['patch', '-p1', '--no-backup-if-mismatch', '-i', str(patch)], cwd=build,
-                       stdout=log, stderr=subprocess.STDOUT, check=True)
+    build = patched_copy(folder, 'src', 'src', log)
     binary_dir = folder / 'runtime' / 'bin'
     binary_dir.mkdir(parents=True, exist_ok=True)
     for program, sources in MATCHLOCATE_PROGRAMS.items():
@@ -43,6 +77,9 @@ def build_match_and_locate(folder, log):
     return list(MATCHLOCATE_PROGRAMS)
 
 
+BUILDERS = {'match_and_locate': build_match_and_locate, 'pyocto': build_pyocto}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--tool', choices=['all', *TOOLS], default='all')
@@ -52,12 +89,12 @@ def main():
         parser.error('--jobs must be positive')
     for name in (TOOLS if args.tool == 'all' else [args.tool]):
         folder = ROOT / name
-        if name == 'match_and_locate':
+        if name in BUILDERS:
             log = folder / 'runtime' / 'build.log'
             log.parent.mkdir(exist_ok=True)
             print(f'Building {name}; log: {log}', flush=True)
             with log.open('w') as stream:
-                binaries = build_match_and_locate(folder, stream)
+                binaries = BUILDERS[name](folder, stream)
             print(f'{name}: {", ".join(binaries)} built', flush=True)
             continue
         # Both native tools use the standardized source/runtime layout.
