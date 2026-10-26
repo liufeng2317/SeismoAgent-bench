@@ -8,7 +8,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-TOOLS = ['nonlinloc', 'hypodd', 'match_and_locate', 'pyocto', 'real', 'growclust']
+TOOLS = ['nonlinloc', 'hypodd', 'match_and_locate', 'pyocto', 'real', 'growclust', 'hypoinverse']
 # MatchLocate2 is plain C + OpenMP. -ffp-contract=off keeps floating-point
 # results independent of FMA availability (aarch64 contracts by default).
 MATCHLOCATE_CFLAGS = ['-O2', '-std=gnu99', '-fopenmp', '-ffp-contract=off', '-w']
@@ -78,6 +78,28 @@ def build_growclust(folder, log):
     return ['growclust']
 
 
+# HypoInverse 1.40 targets g77; gfortran builds it with legacy semantics (SAVEd, zeroed locals)
+HYPOINVERSE_FFLAGS = ['-O1', '-std=legacy', '-fno-automatic', '-finit-local-zero', '-ffixed-line-length-none',
+                      '-fallow-argument-mismatch', '-w']
+
+
+def build_hypoinverse(folder, log):
+    """Compile the objects listed for the hyp1.40 target of the upstream makefile (g77) with gfortran."""
+    build = patched_copy(folder, 'source', 'src', log)
+    src = build / 'src'
+    make = (src / 'makefile').read_text()
+    target = make[make.index('hyp1.40  :'):make.index('\tg77 -g')]
+    objects = [w for w in target.replace('\\', ' ').split() if w.endswith('.o')]
+    for obj in objects:
+        stem = obj[:-2]
+        source = next(p for p in (src / f'{stem}.for', src / f'{stem}.f') if p.exists())
+        run_logged(['gfortran', *HYPOINVERSE_FFLAGS, '-c', source.name, '-o', obj], src, log)
+    run_logged(['gfortran', *objects, '-o', 'hyp1.40'], src, log)
+    (folder / 'runtime' / 'bin').mkdir(parents=True, exist_ok=True)
+    shutil.copy2(src / 'hyp1.40', folder / 'runtime' / 'bin' / 'hyp1.40')
+    return ['hyp1.40']
+
+
 def build_match_and_locate(folder, log):
     """Patch a pristine copy of the upstream src/ and compile it.
 
@@ -95,7 +117,7 @@ def build_match_and_locate(folder, log):
     return list(MATCHLOCATE_PROGRAMS)
 
 
-BUILDERS = {'match_and_locate': build_match_and_locate, 'pyocto': build_pyocto, 'real': build_real, 'growclust': build_growclust}
+BUILDERS = {'match_and_locate': build_match_and_locate, 'pyocto': build_pyocto, 'real': build_real, 'growclust': build_growclust, 'hypoinverse': build_hypoinverse}
 
 
 def main():

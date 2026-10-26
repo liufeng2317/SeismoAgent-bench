@@ -14,6 +14,7 @@ catalogs and workflow outputs are stored outside this directory.
 | PyOcto | Pick association (octree space-time partitioning) | `pyocto/interface/run.py` |
 | REAL | Pick association (pick counting on a grid around the initiating station) | `real/interface/run.py` |
 | NonLinLoc | Absolute location and travel-time grids (methods GAU_ANALYTIC / EDT / EDT_OT_WT) | `nonlinloc/interface/run.py` (one event), `locate.py` (catalog) |
+| HypoInverse | Absolute location, linearised with distance/residual weighting (USGS network locator) | `hypoinverse/interface/run.py` |
 | hypoDD | Relative relocation from catalog and/or cross-correlation times | `hypodd/interface/run.py` |
 | GrowClust | Relative relocation, L1 hierarchical cluster growth on cross-correlation times | `growclust/interface/run.py` |
 | MatchLocate2 | Template detection with grid-search location (Match&Locate; matched filter as the zero-grid case) | `match_and_locate/interface/prepare.py` then `run.py` |
@@ -48,6 +49,7 @@ seismotools/
 ├── pyocto/{source/{upstream,patches},runtime,interface,examples}/
 ├── real/{source/upstream,runtime,interface,examples}/
 ├── growclust/{source/upstream,runtime,interface,examples}/
+├── hypoinverse/{source/upstream,runtime,interface,examples}/
 └── match_and_locate/{source/{upstream,patches},runtime,interface,examples,docs}/
 ```
 
@@ -118,4 +120,5 @@ For implementation details and model-specific constraints, follow:
 - [PyOcto](pyocto/README.md)
 - [REAL](real/README.md)
 - [GrowClust](growclust/README.md)
+- [HypoInverse](hypoinverse/README.md)
 - [Validation tools](support/tools_usage_validation/README.md)

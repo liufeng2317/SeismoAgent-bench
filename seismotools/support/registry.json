@@ -68,6 +68,13 @@
         "L1 cluster-growth relocation of CC differential times"
       ],
       "license_status": "GPL-3.0 (source/upstream/license.txt); run unmodified as a separate executable; preserve notices."
+    },
+    "hypoinverse": {
+      "implementation": "HypoInverse 1.40 (Fred Klein, USGS) from hyp1.40.tar (sha256 c7ef454f...1006), built with gfortran without source patches; adapter interface/run.py (interface version 1)",
+      "variants": [
+        "CRH layered P and S models (SAL)"
+      ],
+      "license_status": "USGS software (U.S. Government work); the archive carries no license file. Keep source/README provenance."
     }
   },
   "files": [
@@ -2514,6 +2521,330 @@
       "source": "GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63.zip/GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63/license.txt",
       "bytes": 35127,
       "sha256": "e72fd105cae7725bea32b7f706fc61434cb74a38bee8f72bf81d857d346677ae"
+    },
+    {
+      "path": "hypoinverse/source/README.md",
+      "source": "project",
+      "bytes": 1234,
+      "sha256": "f574a2c0d3d52d071e7395d578ea159b35d6a3f532829618b1f521337f97f0e7"
+    },
+    {
+      "path": "hypoinverse/source/upstream/hyp1.40-release-notes.txt",
+      "source": "hyp1.40.tar/hyp1.40-release-notes.txt",
+      "bytes": 3258,
+      "sha256": "77b49c0133c6500811db9a721778255e437000d331a565506ecfa4121cf56cc3"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/allsubs.f",
+      "source": "hyp1.40.tar/source/allsubs.f",
+      "bytes": 36937,
+      "sha256": "2ccfdfb9e9558bfd34abbe595c38c58fa3b279fdfbdceb9b6423119314c374d5"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/box2.inc",
+      "source": "hyp1.40.tar/source/box2.inc",
+      "bytes": 40631,
+      "sha256": "7c482263744daae4bd87d23070d3bfbab2cd11dd23d5556dc3cfd736f708266b"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/box3.inc",
+      "source": "hyp1.40.tar/source/box3.inc",
+      "bytes": 22043,
+      "sha256": "b16b51708a4404661b062f1a7dd8dd5a8711cf8206db82bcc5d45bb1a3a6e4e2"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/common.inc",
+      "source": "hyp1.40.tar/source/common.inc",
+      "bytes": 34356,
+      "sha256": "84f099d026b84ba1c646a43ca73119cda0f03e9261b458d14d185f0b7c81e2b2"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hyate.for",
+      "source": "hyp1.40.tar/source/hyate.for",
+      "bytes": 3726,
+      "sha256": "1ae5ddd6ed88a6653a408edd804454d2b77c4e5fc8d3fa884c6e5f8d1e9105ff"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hybda.for",
+      "source": "hyp1.40.tar/source/hybda.for",
+      "bytes": 3824,
+      "sha256": "2bc450f7d740c89be3bebf722be30606bef4353637b98227818345e9621f6458"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hybeg.f",
+      "source": "hyp1.40.tar/source/hybeg.f",
+      "bytes": 1496,
+      "sha256": "326f3cd9b8eabf7d8463c2d415d166df6f46c3b38e332dd65e2904aacf0a8de4"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hycal.for",
+      "source": "hyp1.40.tar/source/hycal.for",
+      "bytes": 2737,
+      "sha256": "17e1db33a3dcf42f3d3f15772c227ed84bfcc5e2abf4df75423c07416fe79068"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hycmd.for",
+      "source": "hyp1.40.tar/source/hycmd.for",
+      "bytes": 75062,
+      "sha256": "5c6daca3e89d019db764750b17f7980a599f02a662f08f599264618a18ed121c"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hycre.for",
+      "source": "hyp1.40.tar/source/hycre.for",
+      "bytes": 2879,
+      "sha256": "bbcc80eedb09227ffa92610ddda38fb6047d8547aea8d6aea855d677ed299655"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hycrh.for",
+      "source": "hyp1.40.tar/source/hycrh.for",
+      "bytes": 832,
+      "sha256": "64636eff874af35a67c5f10f9bcff73438c24e856d49ccc96e9057bc0924d0bf"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hycrt.for",
+      "source": "hyp1.40.tar/source/hycrt.for",
+      "bytes": 1134,
+      "sha256": "4c85090d03c530585035b588b8b2b96012cb9594a5e235b17f7373d5efed4cc9"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hydatum.for",
+      "source": "hyp1.40.tar/source/hydatum.for",
+      "bytes": 4093,
+      "sha256": "cc3d3910393b6d4c419092cb5f17e5d7172115366698dc83fb60dbf7f62e5b2f"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hydel.for",
+      "source": "hyp1.40.tar/source/hydel.for",
+      "bytes": 2962,
+      "sha256": "3fc2e1b86831fb1ea98eb01537ea96bda0eef8202fee78733bc4c85bb81fb152"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hydelt.f",
+      "source": "hyp1.40.tar/source/hydelt.f",
+      "bytes": 1027,
+      "sha256": "1c7fa944ef375cc451de324f2fdf5f2024cfc15106e29cc71c0f230761a19874"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hyedit.f",
+      "source": "hyp1.40.tar/source/hyedit.f",
+      "bytes": 576,
+      "sha256": "f80d320b9868ead6876f10d44154790511939dab3a0eb0f7b5a540fff50171e2"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hyfile.for",
+      "source": "hyp1.40.tar/source/hyfile.for",
+      "bytes": 4956,
+      "sha256": "708ccec877fa3af9ede38f34e2dd9c144f2e0b96afdb2d4b3a6c0e97cb9e7e34"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hyfmc.for",
+      "source": "hyp1.40.tar/source/hyfmc.for",
+      "bytes": 3576,
+      "sha256": "85b7cb5d6e8f737c159e7842691626ba606c99c1497f6cf4b999c3397aacf918"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hyinit.for",
+      "source": "hyp1.40.tar/source/hyinit.for",
+      "bytes": 3215,
+      "sha256": "8cf8a9fe51a878cbad917fb3f469981c96172d980592598ec001039b5cdc4e27"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hyinp.for",
+      "source": "hyp1.40.tar/source/hyinp.for",
+      "bytes": 6485,
+      "sha256": "80dce48115e1752eba081c7d9ec2baaebb72d12f04abbc48e69c4d0bf7a536c8"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hylin.for",
+      "source": "hyp1.40.tar/source/hylin.for",
+      "bytes": 1348,
+      "sha256": "25874fd872f71ba614e37f8ef7748afbf1346abe39dc378f2a358b5ff1389250"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hylinv.for",
+      "source": "hyp1.40.tar/source/hylinv.for",
+      "bytes": 1375,
+      "sha256": "1b43e1111556f6c6df64bff29b1ea3947afada03a09c34f5fecc664ae2d89e05"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hyloc.for",
+      "source": "hyp1.40.tar/source/hyloc.for",
+      "bytes": 18202,
+      "sha256": "92cc8176f0595a2366df669f64e1d0934909d502ea471709b3d002218fb0813d"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hylst.for",
+      "source": "hyp1.40.tar/source/hylst.for",
+      "bytes": 31152,
+      "sha256": "4512cd3c233f0366317e7a7a83bd7a9482f6d74a9e03b6679949d78f24fb847c"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hymag.for",
+      "source": "hyp1.40.tar/source/hymag.for",
+      "bytes": 29918,
+      "sha256": "427c9cb4b4d5bf3b2d2fe9543eb650ff7ebf58dd9babbfccc72a1951aa8155b2"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hymagp.for",
+      "source": "hyp1.40.tar/source/hymagp.for",
+      "bytes": 15948,
+      "sha256": "e94ffd30815e5b3fb019bdb25c05d0a1187e1c0f21d30b31eae0cbd2736509aa"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hyopen.for",
+      "source": "hyp1.40.tar/source/hyopen.for",
+      "bytes": 2047,
+      "sha256": "4d6f78eba0455942efe6c423a903df9ccc29edd9f1a654394a0d329ae57e3c8e"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hyp.for",
+      "source": "hyp1.40.tar/source/hyp.for",
+      "bytes": 14570,
+      "sha256": "4a31b369743de58fc143ac5471f376f75ed6b9e98ae9bb8e0a11ea1c0f7c8d2e"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hyphs.for",
+      "source": "hyp1.40.tar/source/hyphs.for",
+      "bytes": 29237,
+      "sha256": "5ecb9ec1a36f49095edd2d84276feb63c2066ff81f2e60785a7de488bc926ff7"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hypref.for",
+      "source": "hyp1.40.tar/source/hypref.for",
+      "bytes": 2548,
+      "sha256": "c9837106f1d3fa3da64c12a437b1f00e7138be7fa029bfb821e0357578d99cc4"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hypro.for",
+      "source": "hyp1.40.tar/source/hypro.for",
+      "bytes": 12317,
+      "sha256": "c29d93ad0ac84a522b49c2dab0df8b8c691238724e75b4127731ecfa9fd03706"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hyrep.for",
+      "source": "hyp1.40.tar/source/hyrep.for",
+      "bytes": 639,
+      "sha256": "1ea346cdad2e647ae50a092f6c2ff3c82d41ccc3ad8eab48b6886ee67cf1bcb9"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hysol.for",
+      "source": "hyp1.40.tar/source/hysol.for",
+      "bytes": 3485,
+      "sha256": "91c20cdf575ee898b681ed39860a1750433340e8e3d66fe69638f9fc8ee8b4a1"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hysou.for",
+      "source": "hyp1.40.tar/source/hysou.for",
+      "bytes": 4614,
+      "sha256": "2d47814fe62013005e8047d81702a10920bc9f29e8d2a997e949ecb559a8dfba"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hysta.for",
+      "source": "hyp1.40.tar/source/hysta.for",
+      "bytes": 5578,
+      "sha256": "bb0ee1fec24b4c73ddaa8bec82adae304ea301ae5c8d9426ba07567be2e4c37f"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hystl.for",
+      "source": "hyp1.40.tar/source/hystl.for",
+      "bytes": 12818,
+      "sha256": "a2424429359f0f7b8d4564d8df73b06a079b29fab2de6eb8620a1c4ac2a26623"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hysum.for",
+      "source": "hyp1.40.tar/source/hysum.for",
+      "bytes": 9143,
+      "sha256": "1e950fc6ee0ad202882fef58b2bff912be4bb5196e51ae72634c8233571722cf"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hysvd.f",
+      "source": "hyp1.40.tar/source/hysvd.f",
+      "bytes": 10814,
+      "sha256": "e0e662f457518d517b69c0fe512ae2e4f879e6d04474b0d3edb2c40e573fc427"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hytime.f",
+      "source": "hyp1.40.tar/source/hytime.f",
+      "bytes": 634,
+      "sha256": "295389ddae0104ecc56e99af98d9e49f1b5a8119ea52b2c7b1979298a211763c"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hytra.for",
+      "source": "hyp1.40.tar/source/hytra.for",
+      "bytes": 6913,
+      "sha256": "b6ee1868611ec47dd5a7e56cac1c737e0c3df055605f757cacf7fb85f3e0b697"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hytre.for",
+      "source": "hyp1.40.tar/source/hytre.for",
+      "bytes": 4940,
+      "sha256": "9de7a47837cdd8a52932122ab1c48bf7f9af9b68222e63b4b0135c805b44f477"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hytrh.for",
+      "source": "hyp1.40.tar/source/hytrh.for",
+      "bytes": 5627,
+      "sha256": "c3445555eb0752471e55c766364a804373d73fd139014a39a3a3ff9e37b31598"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hytrl.for",
+      "source": "hyp1.40.tar/source/hytrl.for",
+      "bytes": 832,
+      "sha256": "f658ed11687827f795312f1d10bce8f17766b890aa850d0e325cb9798bd9f7a0"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hytrt.for",
+      "source": "hyp1.40.tar/source/hytrt.for",
+      "bytes": 6150,
+      "sha256": "bd09080a7c3910b1cf0d284ab6effdf2a8e0a1d7fe5db2bec3fdbee5a85f81fa"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/hyxmc.for",
+      "source": "hyp1.40.tar/source/hyxmc.for",
+      "bytes": 3670,
+      "sha256": "e8db7ef593b775968d17823d4e90b33d4c48490a9bbd703cd75a9b0f75e46b8b"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/integer.for",
+      "source": "hyp1.40.tar/source/integer.for",
+      "bytes": 845,
+      "sha256": "bfcfc9d0689226a4cb1c77a8e2486e579b3388710edbf7080a9c498fb3ba782c"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/linv.for",
+      "source": "hyp1.40.tar/source/linv.for",
+      "bytes": 4379,
+      "sha256": "2e39d6ece86de5c76adde22ad85b613f89329a513d9db0f85b7898710c2e4dd6"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/linvol.for",
+      "source": "hyp1.40.tar/source/linvol.for",
+      "bytes": 10022,
+      "sha256": "9fbb830dd0048c25d0a2a8baeb8b8416f77560d4579e2b93a3e9df68037aa272"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/makefile",
+      "source": "hyp1.40.tar/source/makefile",
+      "bytes": 6935,
+      "sha256": "9af345c84dddd763ea085bf1a02de24aa44be7baf13e6dba15794cccd9b4c661"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/medwt.for",
+      "source": "hyp1.40.tar/source/medwt.for",
+      "bytes": 3282,
+      "sha256": "6627fab2969234d346c18af25a25bd08a43b4282f3ec92067f8d50aec6900f60"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/trvcon.for",
+      "source": "hyp1.40.tar/source/trvcon.for",
+      "bytes": 19743,
+      "sha256": "8394b99c4b50971567982d208aa7fdff1cfbcb8ea6e555f42a97b54eb2ed62e6"
+    },
+    {
+      "path": "hypoinverse/source/upstream/source/utmcal.for",
+      "source": "hyp1.40.tar/source/utmcal.for",
+      "bytes": 1956,
+      "sha256": "7f525e607bd64e3a1eb8bf5775c12afa298fc8769a33b86ff3705f2fdd1f3e52"
     }
   ],
   "validation": {
@@ -2544,6 +2875,9 @@
       },
       "growclust": {
         "growclust": "8118aaf71f6c4d4311b3884afef9c34584e7ac597e108f26f43ec0a8aa9dc66f"
+      },
+      "hypoinverse": {
+        "hyp1.40": "f04dd2fd8009e131b20f0d14364b4bf2e03e9b88761dab0c05f3a839c026ba31"
       }
     },
     "compilers": {
