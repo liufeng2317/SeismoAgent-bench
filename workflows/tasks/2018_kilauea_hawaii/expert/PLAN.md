@@ -116,3 +116,104 @@ Wei post 0.652 → 0.755, pre 0.278 → 0.379. The pre-mainshock gap remains:
 templates come from located v1 events, and r3 located few events in the
 pre-mainshock cluster (−155.23, 2.6 km), so it has few templates. Candidate
 r5: denser/looser templates (Maple r7: min 8 stations, 0.3 km cover).
+
+### r5 — P-only events admitted; templates covered per period (pre/post Mw 6.9)
+
+Miss diagnosis of r4 (2026-10-26) on the 784 pre-mainshock Shelly events
+(recall 0.198):
+
+- Not template density: 62 % lie within 0.5 km of a template, yet those are
+  recalled at only 0.27. Of 151 eligible pre-mainshock box events (v1,
+  ≥ 10 stations), only 29 became templates — the greedy cover was won by
+  post-mainshock collapse events at the same place, whose waveforms differ.
+- Not location: time-only matching (4 s) recalls 0.28 (+60 s control 0.04).
+  In this period the lower-ERZ intrusion also produced events: r3
+  associated 1,739 pre-mainshock events, only 332 inside the summit box.
+- Pick support: 60 % of the missed events have PhaseNet P picks at ≥ 6
+  stations within 15 km (+60 s control 1 %), but S picks are almost absent
+  (median 0), so the r1–r4 minima (10 picks, 3 S) dropped them.
+
+Knobs (one round, measured stage by stage):
+
+1. Association: `association.yaml` min 6 picks / 6 P / 0 S / 6 stations
+   (r1–r4: 10 / 4 / 3 / 6), and NonLinLoc `LOCMETH` minimum phases 10 → 6
+   and minimum S 3 → none (`nonlinloc.yaml` `min_phases`, `min_s_phases`;
+   the first attempt left NLL at 10/3 and every P-only event failed).
+   Stage 03: 5,864 → 6,591 events (box 2,762 → 3,059); the 280 P-only box
+   events match some reference in 50 % of cases (+60 s control 7.5 %).
+   Stage 05 (full catalog, box): Shelly 0.514 → 0.527, Wei 0.560 → 0.597,
+   Matoza 0.841 → 0.862, ComCat 0.897 → 0.907; v1 subsets unchanged
+   (P-only events rarely pass v1).
+2. Stage 60: `templates.split_utc` = Mw 6.9 origin — the greedy cover runs
+   separately per period. 511 templates (r4 400), 66 pre-mainshock (r4 29).
+   Prepare kept 420; 3,360 jobs, 3.8 h.
+
+Null run (05-02 + 05-06, channel circular shift, 6 s): 7.7 % false at
+N×MAD 9, **1.2 % at 9.5**, 0.14 % at 10. By day, at 9.5: 05-02 (pre-
+mainshock) 2.7 % (5 of 183), 05-06 0.8 % (5 of 648); at 10: 0.7 % / 0.
+Final threshold stays 9.5 (Kaikōura r4 accepted 1.4 %); the pre-mainshock
+false share is higher but rests on 5 null events.
+
+Result (2026-10-26): **not adopted as exported.** r5 catalog
+`export/r5/60_catalog/catalog_events.csv` (9,130 events) box-scores
+Shelly 0.716 (pre-Mw 6.9 0.376), Wei 0.698, Matoza 0.903, ComCat 0.938
+(r4: 0.641 / 0.196 / 0.667 / 0.867 / 0.917), but the pre-mainshock gain is
+one mislocated template. 162 of the 182 pre-mainshock M&L matches to Shelly
+come from `gamma_0000094`, an event admitted by knob 1 (2 S picks; 10
+stations, gap 165°, NLL σx 1.0 km, RMS 0.51 s). Its detections are real
+(|dt| to Shelly 0.36 s), but they inherit its position ~6 km SE of the
+Shelly pre-mainshock cluster: a false cluster of ~160 events. Pre-mainshock
+M&L matches lie 5.9 km from Shelly (r4 2.1 km). The off-fault metric
+(0.23 % → 0.33 %) misses it because the offset stays inside the dense summit.
+
+Without that template's detections: Shelly 0.631 (pre 0.173), Wei 0.692,
+Matoza 0.886, ComCat 0.929. With the Ridgecrest template rule (gap ≤ 150°,
+σx ≤ 0.8 km; 151 of 420 templates fail, 10 of 53 pre-mainshock), approximated
+by dropping their detections without a re-merge: 0.620 / 0.661 / 0.875 / 0.915.
+The period-split templates add almost nothing; knob 1 helps Wei, Matoza and
+ComCat slightly. The evaluation layer stays on r4.
+
+### r6 — stage 62 template relocation (CC double difference): rejected; final stays r4
+
+`01_pipeline/62_template_relocation.py` relocates the r5 box events (3,203,
+all 420 kept templates) with hypoDD on pick (dt.ct) and ccdt (dt.cc)
+differential times; HVO model as 0.5/1-km constant layers; Ridgecrest
+cc3_d1 weighting; acceptance by ≥ 6 CC links, no limit on the move.
+
+1. Nearest-neighbour pairs only (8 km, 40): `gamma_0000094` got no CC data —
+   its nearest neighbours are the events around its wrong position.
+   Relocated set moved ~1 km south (hypoDD ignores station elevations): a
+   frame change (Wei 1.42 → 1.05 km, Shelly 0.78 → 0.86 km).
+2. Plus co-detection pairs (a template with the located events its own
+   detections coincide with, ±1.5 s; +5,843 pairs) and the NLL frame kept
+   (median displacement of quality-passing relocated events removed): 374
+   templates relocated; template offsets p90 vs Shelly 3.04 → 2.25 km, vs Wei
+   3.64 → 2.62 km; all events vs Shelly 0.78 → 0.95 km, vs Wei 1.42 → 1.14 km.
+   `gamma_0000094` moved 3 km further from the Shelly cluster, then left the
+   solution. Its 92 co-detected partners (73 pre-mainshock) sit at the same
+   wrong place: median 1.8 km from it, 6.3 km from Shelly's pre-mainshock
+   cluster, gap 220°, σx 1.5 km. The whole pre-mainshock family is
+   mislocated together (small events picked on one side of the network);
+   relative relocation keeps a shared bias, so it cannot fix this.
+3. Export with NLL positions and the full Ridgecrest/Maple location-quality
+   rule instead (≥ 1 ccdt CC link, gap ≤ 150°, σx ≤ 0.8 km, for picked events
+   and templates; `--positions nll`): 6,392 events, 2,111 picked box events
+   and 161 of 420 templates dropped.
+
+| box-scored | r4 | r5 | r6 (quality rule) |
+|---|---|---|---|
+| Shelly (pre / post) | 0.641 (0.196 / 0.953) | 0.716 (0.376 / 0.954) | 0.583 (0.148 / 0.887) |
+| Wei | 0.667 | 0.698 | 0.485 |
+| Matoza | 0.867 | 0.903 | 0.645 |
+| ComCat | 0.917 | 0.938 | 0.675 |
+| epi vs Shelly, all / pre (km) | 0.89 / 1.15 | 1.10 / 5.69 | 0.89 / 0.78 |
+| > 1 km from every ref. event | 0.23 % | 0.33 % | 0.03 % |
+
+On the summit, ≥ 1 CC link (ccdt CC ≥ 0.7; most summit pairs come out
+anticorrelated or low) and gap ≤ 150° reject many sound events, including
+post-mainshock ones (ComCat post 0.955 → 0.680): too blunt here, as on
+Kaikōura. **Decision (2026-10-26): the expert catalog stays r4.** The
+pre-mainshock gap is an absolute-location limit for small summit events
+with one-sided station coverage, not a detection or relocation one. Configs
+are back at r4 values; the code options added for r5/r6 (NLL `min_phases`,
+`templates.split_utc`, stage 62) default to r4 behaviour.

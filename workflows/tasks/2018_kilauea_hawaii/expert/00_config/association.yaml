@@ -22,6 +22,8 @@ dbscan_eps: 10.0
 dbscan_min_samples: 3
 oversample_factor: 5
 covariance_prior: [3.0]
+# r5 tested P-only events (6 / 6 / 0 / 6): rejected — the added pre-Mw 6.9
+# summit events locate ~6 km SE as a family (one-sided coverage), PLAN.md r5/r6.
 min_picks_per_eq: 10
 min_p_picks_per_eq: 4
 min_s_picks_per_eq: 3
