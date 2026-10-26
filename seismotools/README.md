@@ -15,6 +15,7 @@ catalogs and workflow outputs are stored outside this directory.
 | REAL | Pick association (pick counting on a grid around the initiating station) | `real/interface/run.py` |
 | NonLinLoc | Absolute location and travel-time grids (methods GAU_ANALYTIC / EDT / EDT_OT_WT) | `nonlinloc/interface/run.py` (one event), `locate.py` (catalog) |
 | hypoDD | Relative relocation from catalog and/or cross-correlation times | `hypodd/interface/run.py` |
+| GrowClust | Relative relocation, L1 hierarchical cluster growth on cross-correlation times | `growclust/interface/run.py` |
 | MatchLocate2 | Template detection with grid-search location (Match&Locate; matched filter as the zero-grid case) | `match_and_locate/interface/prepare.py` then `run.py` |
 | ccdt | Waveform cross-correlation differential times (`dt.cc` for hypoDD / GrowClust) | `cross_correlation/interface/run.py` |
 
@@ -46,6 +47,7 @@ seismotools/
 ├── cross_correlation/{runtime,interface,examples}/   # project-local Python, no native code
 ├── pyocto/{source/{upstream,patches},runtime,interface,examples}/
 ├── real/{source/upstream,runtime,interface,examples}/
+├── growclust/{source/upstream,runtime,interface,examples}/
 └── match_and_locate/{source/{upstream,patches},runtime,interface,examples,docs}/
 ```
 
@@ -115,4 +117,5 @@ For implementation details and model-specific constraints, follow:
 - [ccdt cross-correlation](cross_correlation/README.md)
 - [PyOcto](pyocto/README.md)
 - [REAL](real/README.md)
+- [GrowClust](growclust/README.md)
 - [Validation tools](support/tools_usage_validation/README.md)

@@ -8,7 +8,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-TOOLS = ['nonlinloc', 'hypodd', 'match_and_locate', 'pyocto', 'real']
+TOOLS = ['nonlinloc', 'hypodd', 'match_and_locate', 'pyocto', 'real', 'growclust']
 # MatchLocate2 is plain C + OpenMP. -ffp-contract=off keeps floating-point
 # results independent of FMA availability (aarch64 contracts by default).
 MATCHLOCATE_CFLAGS = ['-O2', '-std=gnu99', '-fopenmp', '-ffp-contract=off', '-w']
@@ -69,6 +69,15 @@ def build_real(folder, log):
     return ['REAL']
 
 
+def build_growclust(folder, log):
+    """GrowClust Fortran90 with its upstream makefile (gfortran -O)."""
+    build = patched_copy(folder, 'SRC', 'src', log)
+    run_logged(['make', 'FC=gfortran'], build / 'src', log)
+    (folder / 'runtime' / 'bin').mkdir(parents=True, exist_ok=True)
+    shutil.copy2(build / 'src' / 'growclust', folder / 'runtime' / 'bin' / 'growclust')
+    return ['growclust']
+
+
 def build_match_and_locate(folder, log):
     """Patch a pristine copy of the upstream src/ and compile it.
 
@@ -86,7 +95,7 @@ def build_match_and_locate(folder, log):
     return list(MATCHLOCATE_PROGRAMS)
 
 
-BUILDERS = {'match_and_locate': build_match_and_locate, 'pyocto': build_pyocto, 'real': build_real}
+BUILDERS = {'match_and_locate': build_match_and_locate, 'pyocto': build_pyocto, 'real': build_real, 'growclust': build_growclust}
 
 
 def main():

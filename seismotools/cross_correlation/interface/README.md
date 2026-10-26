@@ -32,7 +32,7 @@ Window status (run_result): `ok`, `no_data`, `gap_or_edge`, `zero_signal`.
 
 | Key | Default | Meaning |
 |---|---|---|
-| `channels.families` | HH, EH, BH, HN, EN | preference order per station |
+| `channels.families` | HH, EH, BH, HN, EN | preference order per station; stations with only other families (e.g. Prague's ZQ DH/CN sites) are skipped — list them explicitly |
 | `channels.P` / `channels.S` | Z / N, E, 1, 2 | components per phase |
 | `filter` | 2–15 Hz, 4 corners | zero-phase Butterworth on the long trace |
 | `window.P` / `window.S` | 0.2 + 0.6 s / 0.3 + 1.0 s | before/after the arrival |

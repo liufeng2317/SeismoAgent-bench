@@ -61,6 +61,13 @@
         "layered 1-D travel-time table (step or linear)"
       ],
       "license_status": "MIT (source/upstream/LICENSE); preserve notices."
+    },
+    "growclust": {
+      "implementation": "GrowClust Fortran90 (Daniel Trugman) commit 53226cf, archive sha256 feec66a0...cc2c, built without patches; adapter interface/run.py (interface version 1) reading ccdt dt.cc",
+      "variants": [
+        "L1 cluster-growth relocation of CC differential times"
+      ],
+      "license_status": "GPL-3.0 (source/upstream/license.txt); run unmodified as a separate executable; preserve notices."
     }
   },
   "files": [
@@ -2453,6 +2460,60 @@
       "source": "REAL-6435ace552d1efe72e633e8f82a5f9d8467f1049.zip/REAL-6435ace552d1efe72e633e8f82a5f9d8467f1049/src/REAL/REAL.c",
       "bytes": 82607,
       "sha256": "c9d3823582e10c8d35f94b3c046970005621e66f6f12cea91923adc2094d8fbb"
+    },
+    {
+      "path": "growclust/source/README.md",
+      "source": "project",
+      "bytes": 826,
+      "sha256": "cd389f94ee20794f138d967839736f3fe0efc3eff94cfb8b35c591da910f84a8"
+    },
+    {
+      "path": "growclust/source/upstream/README.md",
+      "source": "GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63.zip/GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63/README.md",
+      "bytes": 692,
+      "sha256": "5a01417c9ff83419a89f7396f20df6a2f8e10bfc8eaed559a3e2567854b5fcba"
+    },
+    {
+      "path": "growclust/source/upstream/SRC/Makefile",
+      "source": "GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63.zip/GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63/SRC/Makefile",
+      "bytes": 1031,
+      "sha256": "32d893c424a1c32ccacb61329a70d82d75c3f399d456792f4bd55bf424e577cd"
+    },
+    {
+      "path": "growclust/source/upstream/SRC/grow_params.f90",
+      "source": "GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63.zip/GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63/SRC/grow_params.f90",
+      "bytes": 4280,
+      "sha256": "332f778ba01a9bed819ced88a19fa19273067a93133baf062be7b991741cc233"
+    },
+    {
+      "path": "growclust/source/upstream/SRC/growclust.f90",
+      "source": "GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63.zip/GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63/SRC/growclust.f90",
+      "bytes": 102981,
+      "sha256": "78adecb7542153afb76d7334a033c3e08484c6a5410497c18daf8c919c9d042f"
+    },
+    {
+      "path": "growclust/source/upstream/SRC/input_subs.f90",
+      "source": "GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63.zip/GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63/SRC/input_subs.f90",
+      "bytes": 49235,
+      "sha256": "83c9c0e3a06b84272e0315bc1de2be7c19992ba92a821cfb3d8d280de7ad98fb"
+    },
+    {
+      "path": "growclust/source/upstream/SRC/stats_subs.f90",
+      "source": "GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63.zip/GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63/SRC/stats_subs.f90",
+      "bytes": 18697,
+      "sha256": "863388f08f29c97ffbc95ba96bab5e371f04e1a0f9b27384f130ab7ccff31e78"
+    },
+    {
+      "path": "growclust/source/upstream/SRC/vel_subs.f90",
+      "source": "GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63.zip/GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63/SRC/vel_subs.f90",
+      "bytes": 25968,
+      "sha256": "a7e2b2300b2804f4947dbba3c9a55fb0e5196c780dd0debcc1cfdd9d513cb32a"
+    },
+    {
+      "path": "growclust/source/upstream/license.txt",
+      "source": "GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63.zip/GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63/license.txt",
+      "bytes": 35127,
+      "sha256": "e72fd105cae7725bea32b7f706fc61434cb74a38bee8f72bf81d857d346677ae"
     }
   ],
   "validation": {
@@ -2480,6 +2541,9 @@
       },
       "real": {
         "REAL": "d757f1698a7bbcf303474d21781e985abe5ce6253ebcece404f8288d71c006ca"
+      },
+      "growclust": {
+        "growclust": "8118aaf71f6c4d4311b3884afef9c34584e7ac597e108f26f43ec0a8aa9dc66f"
       }
     },
     "compilers": {

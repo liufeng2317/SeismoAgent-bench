@@ -1,0 +1,17 @@
+{
+  "tool": "GrowClust",
+  "method": "Hierarchical cluster-growth relative relocation with an L1 misfit on cross-correlation differential times (Trugman & Shearer 2017, SRL 88(2))",
+  "implementation": "Upstream Fortran 90 built locally; project adapter interface/run.py reading ccdt output",
+  "reported_version": "GrowClust Fortran90, commit 53226cf",
+  "interface_version": 1,
+  "standard_entrypoint": "interface/run.py",
+  "native_programs": ["runtime/bin/growclust"],
+  "inputs_from": "seismotools/cross_correlation (dt.cc, event_ids.csv)",
+  "outputs": ["relocated.csv", "OUT/out.growclust_cat", "OUT/out.growclust_clust", "OUT/out.growclust_log", "config.json", "run_result.json"],
+  "validation": "support/tools_usage_validation/validate_growclust.py",
+  "upstream": {"repository": "https://github.com/dttrugman/GrowClust",
+               "commit": "53226cf7662ab5bab5db87138d1ae63227d4ba63",
+               "archive_sha256": "feec66a06a58fb6761f5a3d63a4e45107084dc735f0a9755aa759583334bcc2c",
+               "license": "GPL-3.0"},
+  "local_patches": []
+}
