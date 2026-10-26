@@ -234,3 +234,24 @@ correlation of 0.20; flagging the top 10 % by either catches 33 of 50 large
 errors (spread 26, RMS 24). The ±5 % model spread is not informative (0.10)
 — a model change shifts all events alike. Not yet tested across
 associations (pick-set linking).
+
+## r5 (2026-10-27) — NonLinLoc LOCMETH EDT_OT_WT
+
+Stage 70 found NLL EDT better than GAU_ANALYTIC for every association.
+Knob: `nonlinloc.yaml location_method: EDT_OT_WT` (stage 04 now reads it;
+the arrival-weight assertion applies to GAU only, since EDT zero-weights
+outlier arrivals — 3 of 2,860 events have one). r5 = r2 stages 01–03
+(hardlinked) + stage 04 rerun with its two station-delay passes + stage 05;
+stages 09/10 not rerun (magnitudes and v1 flags carried). New stage
+`01_pipeline/64_locator_frame.py` moves the r4 catalog into the r5 frame:
+2,136 picked events take their EDT solution, 4,828 Match&Locate events move
+with their template's r2 → r5 displacement (median 0.27 km, p90 1.08 km;
+depth +0.03 km, origin −0.007 s). Membership and magnitudes are r4's.
+
+| final catalog | Cochran R | epi median / p90 | dZ (MAD) | McMahon R | epi median / p90 | > 1 km from Cochran ∪ McMahon (box) |
+|---|---|---|---|---|---|---|
+| r4 | 0.964 | 0.465 / 1.200 | −0.03 (0.57) | 0.968 | 0.312 / 1.026 | 0.98 % |
+| **r5** | 0.965 | **0.365 / 0.840** | +0.12 (**0.40**) | 0.967 | **0.213 / 0.504** | **0.04 %** |
+
+M&L rows improve as much as picked rows (vs Cochran 0.487 → 0.383 km,
+picked 0.446 → 0.356). **Adopted**; evaluation layer = r5.

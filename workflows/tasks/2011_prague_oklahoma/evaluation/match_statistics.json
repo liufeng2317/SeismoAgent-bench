@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-25T17:00:55+00:00",
+  "generated_utc": "2026-10-26T22:43:56+00:00",
   "evaluation_window": {
     "start_utc": "2011-11-11T00:00:00Z",
     "end_utc": "2011-11-19T00:00:00Z"
@@ -31,7 +31,7 @@
       "color": "#009E73"
     },
     "expert": {
-      "label": "Expert reproduction (r4)",
+      "label": "Expert reproduction (r5)",
       "records": 6964,
       "color": "#E69F00"
     }
@@ -58,8 +58,8 @@
       "plotted_records": 11
     },
     "expert": {
-      "path": "expert/export/r4/60_catalog/catalog_events.csv",
-      "round": "r4",
+      "path": "expert/export/r5/60_catalog/catalog_events.csv",
+      "round": "r5",
       "plotted_records": 6964,
       "selection": "complete round catalog (all rows)"
     }
@@ -69,28 +69,28 @@
       "records": 6964,
       "versus": {
         "cochran": {
-          "matched": 2004,
-          "precision": 0.2877656519241815,
-          "recall": 0.9643888354186718,
-          "median_abs_dt_s": 0.09406049999999999,
-          "median_epicentral_km": 0.4651766432874475,
-          "median_depth_difference_km": -0.029625000000000234,
-          "mad_depth_difference_km": 0.5703750000000001
+          "matched": 2006,
+          "precision": 0.28805284319356694,
+          "recall": 0.9653512993262753,
+          "median_abs_dt_s": 0.0678525,
+          "median_epicentral_km": 0.36531616840830516,
+          "median_depth_difference_km": 0.1211249999999997,
+          "mad_depth_difference_km": 0.4011250000000003
         },
         "mcmahon": {
-          "matched": 2267,
-          "precision": 0.325531303848363,
-          "recall": 0.9675629534784465,
-          "median_abs_dt_s": 0.212058,
-          "median_epicentral_km": 0.31233095542604544,
-          "median_depth_difference_km": -0.44184999999999963,
-          "mad_depth_difference_km": 0.6100000000000003
+          "matched": 2266,
+          "precision": 0.3253877082136703,
+          "recall": 0.9671361502347418,
+          "median_abs_dt_s": 0.1615355,
+          "median_epicentral_km": 0.21271523477215099,
+          "median_depth_difference_km": -0.35297500000000015,
+          "mad_depth_difference_km": 0.5526999999999997
         },
         "isken": {
           "matched": 6,
           "precision": 0.0008615738081562321,
           "recall": 1.0,
-          "median_abs_dt_s": 28.571057500000002,
+          "median_abs_dt_s": 28.9574105,
           "median_epicentral_km": 0.31638750021511397,
           "median_depth_difference_km": -1.6125000000000003,
           "mad_depth_difference_km": 0.25875000000000004
@@ -99,7 +99,7 @@
           "matched": 11,
           "precision": 0.0015795519816197588,
           "recall": 1.0,
-          "median_abs_dt_s": 0.329783,
+          "median_abs_dt_s": 0.329777,
           "median_epicentral_km": 0.8955053617424604,
           "median_depth_difference_km": 0.15625,
           "mad_depth_difference_km": 0.4500000000000002

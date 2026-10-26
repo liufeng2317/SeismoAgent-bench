@@ -81,8 +81,9 @@ EXPERT_ROUNDS = {
     'r2': (EXPERT / 'export/r2/10_validate_catalog/events.csv', 'origin_time', 'depth_below_sea_level_km'),
     'r3': (EXPERT / 'export/r3/60_catalog/catalog_events.csv', 'origin_time_utc', 'depth_bsl_km'),
     'r4': (EXPERT / 'export/r4/60_catalog/catalog_events.csv', 'origin_time_utc', 'depth_bsl_km'),
+    'r5': (EXPERT / 'export/r5/60_catalog/catalog_events.csv', 'origin_time_utc', 'depth_bsl_km'),
 }
-EXPERT_ROUND = 'r4'
+EXPERT_ROUND = 'r5'
 # ----------------------------------------------------------------------------
 
 EXPERT_COLOR = '#E69F00'

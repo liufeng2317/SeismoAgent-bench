@@ -13,14 +13,16 @@ sequence over the fixed evaluation window **[2011-11-11T00:00:00Z,
    - Isken & Mooney (2017) Table S3, M>3 manual relocations (6) — origin
      times to the minute, matched at 60 s / 5 km: a location anchor;
    - ComCat operational (11; sparse in 2011).
-2. **Human-expert reproduction** — `expert/` round r4 complete catalog
-   (`expert/export/r4/60_catalog/catalog_events.csv`, 6,964 events): the r3
+2. **Human-expert reproduction** — `expert/` round r5 complete catalog
+   (`expert/export/r5/60_catalog/catalog_events.csv`, 6,964 events): the r4
+   catalog moved to NonLinLoc EDT_OT_WT locations (stage 64: picked events
+   relocated, Match&Locate events shifted with their templates). r4 is the r3
    union (Keranen model, step layers, station delays, stage-60 Match&Locate at
    N×MAD 9.5) with the location-quality rule of 2026-10-26 — a source event
    stays, and may place events as a template, only with ≥ 1 waveform CC link
    to a neighbour (ccdt). 1.0 % of events lie > 1 km from every Cochran/McMahon
-   event (r3: 1.5 %; McMahon itself 0.8 %). Rounds registered in
-   `EXPERT_ROUNDS` (r2–r4). Expert depths are converted from sea level to
+   event (r3: 1.5 %; McMahon itself 0.8 %); r5: 0.04 %. Rounds registered in
+   `EXPERT_ROUNDS` (r2–r5). Expert depths are converted from sea level to
    below the surface with the model datum (0.28 km).
 3. **Agent reproductions** — none completed yet; register arms in
    `AGENT_RUNS` inside `plot_evaluation_comparison.py`.
@@ -36,7 +38,7 @@ count box-filtered expert events (r3: Cochran 0.967 here vs 0.952).
 
 | Population | vs Cochran (R) | vs McMahon (R) | median \|Δt\| Cochran | epicentral Cochran | dZ vs Cochran (MAD) |
 |---|---|---|---|---|---|
-| **Expert (r3)** | 2,010 (96.7 %) | 2,281 (97.4 %) | 0.10 s | 0.49 km | −0.05 (0.63) |
+| **Expert (r5)** | 2,006 (96.5 %) | 2,266 (96.7 %) | 0.07 s | 0.37 km | +0.12 (0.40) |
 | agent arms | — no completed runs yet — | | | | |
 
 Isken: 6/6, epicentral 0.32 km, depth −1.61 km (Isken deeper — gradient
