@@ -1,0 +1,16 @@
+{
+  "tool": "PyOcto",
+  "method": "Octree space-time partitioning phase associator (Münchmeyer 2024, Seismica 3(1))",
+  "implementation": "Upstream C++ core with pybind11 bindings, built locally; project adapter interface/run.py",
+  "reported_version": "0.1.9",
+  "interface_version": 1,
+  "standard_entrypoint": "interface/run.py",
+  "python_interface": "runtime/build/site/pyocto (built by support/build_native.py --tool pyocto)",
+  "outputs": ["events.csv", "assignments.csv", "travel_time_table.bin", "config.json", "run_result.json"],
+  "validation": "support/tools_usage_validation/validate_pyocto.py",
+  "upstream": {"repository": "https://github.com/yetinam/pyocto", "archive": "pyocto-0.1.9.tar.gz (PyPI sdist)",
+               "archive_sha256": "6f985b92dc5a83b14e6744ce74e1b498a96fadeaf4eb6f7be35408ad3b736d19",
+               "license": "MIT"},
+  "local_patches": ["source/patches/0001-cmake-find-pybind11.patch"],
+  "build_requirements": "scikit-build-core 1.1.1, pybind11 3.1.0 (offline wheels), system CMake 3.22, g++"
+}

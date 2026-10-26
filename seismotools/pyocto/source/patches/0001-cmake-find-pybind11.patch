@@ -1,0 +1,12 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -6,7 +6,8 @@
+ cmake_minimum_required(VERSION 3.4...3.18)
+ project(_core LANGUAGES CXX)
+ 
+-add_subdirectory(extern/pybind11)
++# seismotools 0001: pybind11 comes from the build requirements, not extern/
++find_package(pybind11 CONFIG REQUIRED)
+ pybind11_add_module(_core
+         src/python_bindings.cpp
+         src/OctoAssociator.cpp

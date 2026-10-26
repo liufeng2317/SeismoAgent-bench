@@ -47,6 +47,13 @@
         "S on two horizontals (N/E or 1/2), averaged curves"
       ],
       "license_status": "Project code; no third-party source bundled."
+    },
+    "pyocto": {
+      "implementation": "PyOcto 0.1.9 (Jannes M\u00fcnchmeyer) from the PyPI sdist (sha256 6f985b92...6d19), C++ core built locally with patch 0001 into runtime/build/site; adapter interface/run.py (interface version 1)",
+      "variants": [
+        "VelocityModel1D (layered, step or linear)"
+      ],
+      "license_status": "MIT (source/upstream/LICENSE); preserve notices."
     }
   },
   "files": [
@@ -2313,6 +2320,96 @@
       "source": "MatchLocate2-master.zip/MatchLocate2-master/src/sacio.h",
       "bytes": 3772,
       "sha256": "a5ccfa82439f7504fe0946f21dd316314e94fd4828f7398ba3f5f2b632ce7172"
+    },
+    {
+      "path": "pyocto/source/README.md",
+      "source": "project",
+      "bytes": 1166,
+      "sha256": "cf415252a856ab334d754c1df7097982ee0336b17383f5c7700e261a91495053"
+    },
+    {
+      "path": "pyocto/source/patches/0001-cmake-find-pybind11.patch",
+      "source": "project",
+      "bytes": 378,
+      "sha256": "f28ee3d08b692cc4155e26aae2372afbb5509d29e4576e6101640b415f98f1b6"
+    },
+    {
+      "path": "pyocto/source/upstream/CMakeLists.txt",
+      "source": "pyocto-0.1.9.tar.gz/pyocto-0.1.9/CMakeLists.txt",
+      "bytes": 453,
+      "sha256": "c7184ae4e2d887de511662a81c9adde38e28d56dfb927e9bfe5f597b00726527"
+    },
+    {
+      "path": "pyocto/source/upstream/LICENSE",
+      "source": "pyocto-0.1.9.tar.gz/pyocto-0.1.9/LICENSE",
+      "bytes": 1075,
+      "sha256": "4e246d925e3cca747baaa5909b1fec30f68fe14337b3d6aff826745becbabb14"
+    },
+    {
+      "path": "pyocto/source/upstream/README.md",
+      "source": "pyocto-0.1.9.tar.gz/pyocto-0.1.9/README.md",
+      "bytes": 3210,
+      "sha256": "6e459a02217ff0c068eb8c2578ef6cf22c14088c66a615a0205ea91de61fd6a0"
+    },
+    {
+      "path": "pyocto/source/upstream/pyproject.toml",
+      "source": "pyocto-0.1.9.tar.gz/pyocto-0.1.9/pyproject.toml",
+      "bytes": 978,
+      "sha256": "c6ab589bccaa69a7444e4fa60c02edcdb41fbcbb86f1d30679ed6472c767f658"
+    },
+    {
+      "path": "pyocto/source/upstream/src/OctoAssociator.cpp",
+      "source": "pyocto-0.1.9.tar.gz/pyocto-0.1.9/src/OctoAssociator.cpp",
+      "bytes": 25701,
+      "sha256": "85a029f5edf37233b30a9c3458466fb2af57c158d83765eb3df36fb1aa09c95b"
+    },
+    {
+      "path": "pyocto/source/upstream/src/OctoAssociator.h",
+      "source": "pyocto-0.1.9.tar.gz/pyocto-0.1.9/src/OctoAssociator.h",
+      "bytes": 6728,
+      "sha256": "4c3bbb83025fff0afc5a6ed44d686a8091ea4316803705af75565f3e04d66563"
+    },
+    {
+      "path": "pyocto/source/upstream/src/VelocityModel.cpp",
+      "source": "pyocto-0.1.9.tar.gz/pyocto-0.1.9/src/VelocityModel.cpp",
+      "bytes": 9253,
+      "sha256": "3645668965baf10e206aa3d0616cedca1358c2a1d65f2641f0230447f6a3cba7"
+    },
+    {
+      "path": "pyocto/source/upstream/src/VelocityModel.h",
+      "source": "pyocto-0.1.9.tar.gz/pyocto-0.1.9/src/VelocityModel.h",
+      "bytes": 3886,
+      "sha256": "92a7039e6ce1078ff2d3fca2c8ffedccca04322234b0df9c7df73769ae572991"
+    },
+    {
+      "path": "pyocto/source/upstream/src/pyocto/__init__.py",
+      "source": "pyocto-0.1.9.tar.gz/pyocto-0.1.9/src/pyocto/__init__.py",
+      "bytes": 144,
+      "sha256": "a3bf41aa959d709cbd79b0fc4d7c9036c45c0879d9fa0acde5b9c8bbcfcaec10"
+    },
+    {
+      "path": "pyocto/source/upstream/src/pyocto/associator.py",
+      "source": "pyocto-0.1.9.tar.gz/pyocto-0.1.9/src/pyocto/associator.py",
+      "bytes": 42340,
+      "sha256": "e2afbac73f38ec95b17d8f16341af2289fcb3cf9b2effbfc3feee89894114550"
+    },
+    {
+      "path": "pyocto/source/upstream/src/python_bindings.cpp",
+      "source": "pyocto-0.1.9.tar.gz/pyocto-0.1.9/src/python_bindings.cpp",
+      "bytes": 4840,
+      "sha256": "47e23474fce808fdb8e574ddb2032ff2b1a24bb5cbe9c96878dd33a52c83e35c"
+    },
+    {
+      "path": "pyocto/source/upstream/src/types.cpp",
+      "source": "pyocto-0.1.9.tar.gz/pyocto-0.1.9/src/types.cpp",
+      "bytes": 2190,
+      "sha256": "f4ad1e49119cf65cf10c2f8dc9b21e22246a17dc89216929e52b21caf4005158"
+    },
+    {
+      "path": "pyocto/source/upstream/src/types.h",
+      "source": "pyocto-0.1.9.tar.gz/pyocto-0.1.9/src/types.h",
+      "bytes": 3700,
+      "sha256": "962b9395efda6857a9119fbc36cef2e712b922bf501d606994dc3c147f6afdba"
     }
   ],
   "validation": {
@@ -2334,6 +2431,9 @@
       },
       "hypodd": {
         "hypoDD": "cdf0e136fbca241ab4393e6b3acb331c29d0af270147ff7850ae5bca6304a9c0"
+      },
+      "pyocto": {
+        "_core.cpython-39-aarch64-linux-gnu.so": "1e2ebb1fcff4079ecb190f40c7497dbe8e7c7e4b1212ea3404e9c31c79b0d92e"
       }
     },
     "compilers": {
