@@ -12,12 +12,14 @@ earthquake (inside the window, outside the summit box):
    - Wei et al. (2022) data S1, 3-D NonLinLoc (3,627);
    - Matoza et al. (2021) GrowClust relocations, nbranch > 1 (1,020);
    - ComCat/HVO operational (496).
-2. **Human-expert reproduction** — `expert/` round r4 complete catalog
-   (`expert/export/r4/60_catalog/catalog_events.csv`, 8,223 events): the r3
+2. **Human-expert reproduction** — `expert/` round r7 complete catalog
+   (`expert/export/r7/60_catalog/catalog_events.csv`, 8,223 events): the r4
+   catalog moved to NonLinLoc EDT_OT_WT locations (stage 64: picked events
+   relocated, Match&Locate events shifted with their templates). r4 is the r3
    NLL catalog (HVO linear-gradient model, 1 Hz Wood–Anderson prefilter) plus
    the stage-60 Match&Locate events (480 templates, N×MAD 9.5; null-run false
    fraction 0.8 %), chained relative magnitudes. Rounds registered in
-   `EXPERT_ROUNDS` (r3, r4). Expert depths are converted from sea level to
+   `EXPERT_ROUNDS` (r3, r4, r7). Expert depths are converted from sea level to
    below the surface with the model datum (1.07 km).
 3. **Agent reproductions** — none completed yet; register arms in
    `AGENT_RUNS` inside `plot_evaluation_comparison.py`.
@@ -32,7 +34,8 @@ the window, so the expert's 8,223 rows include events outside the summit box
 
 | Population | vs Shelly (R) | vs Wei (R) | vs Matoza (R) | vs ComCat (R) | epicentral Shelly | dZ vs Shelly (MAD) |
 |---|---|---|---|---|---|---|
-| **Expert (r4)** | 1,221 (64.2 %) | 2,480 (68.4 %) | 913 (89.5 %) | 461 (92.9 %) | 0.89 km | +0.55 (0.58) |
+| **Expert (r7)** | 1,234 (64.9 %) | 2,479 (68.3 %) | 915 (89.7 %) | 461 (92.9 %) | 0.76 km | +0.54 (0.49) |
+| Expert (r4) | 1,221 (64.2 %) | 2,480 (68.4 %) | 913 (89.5 %) | 461 (92.9 %) | 0.89 km | +0.55 (0.58) |
 | agent arms | — no completed runs yet — | | | | | |
 
 Median |Δt|: 0.21 s (Shelly), 0.24 s (Wei), 0.26 s (Matoza), 0.11 s (ComCat).

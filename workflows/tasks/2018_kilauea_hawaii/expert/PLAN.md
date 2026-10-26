@@ -217,3 +217,26 @@ pre-mainshock gap is an absolute-location limit for small summit events
 with one-sided station coverage, not a detection or relocation one. Configs
 are back at r4 values; the code options added for r5/r6 (NLL `min_phases`,
 `templates.split_utc`, stage 62) default to r4 behaviour.
+
+### r7 (2026-10-27) — NonLinLoc LOCMETH EDT_OT_WT (Prague r5 method)
+
+`nonlinloc.yaml location_method: EDT_OT_WT`. r7 = r3 stages 01–03
+(hardlinked) + stage 04 + stage 05; 09/10 not rerun. Stage-04 test on the r3
+associations: Shelly epicentral 0.79/3.83 → 0.69/2.49 km, Wei p90 5.73 →
+4.75 km, depth MAD 0.61 → 0.52 km. Stage 64 moves the r4 catalog into the r7
+frame: 5,090 picked events relocated, 2,359 M&L events shifted with their
+templates (template displacement median 0.34 km, p90 3.96 km), 774 kept
+(picked events not LOCATED in either round).
+
+| final catalog | Shelly R | epi median / p90 | dZ (MAD) | Wei epi median / p90 | Matoza p90 | ComCat p90 | > 1 km from Shelly ∪ Wei ∪ Matoza (box) |
+|---|---|---|---|---|---|---|---|
+| r4 | 0.642 | 0.892 / 2.681 | +0.55 (0.58) | 1.571 / 5.786 | 3.739 | 2.667 | 0.23 % |
+| **r7** | **0.649** | **0.758** / 3.121 | +0.54 (**0.49**) | **1.456 / 5.209** | **3.078** | **2.580** | **0.19 %** |
+
+Matches beyond 2 km / 5 km fall for every reference (Shelly 243 → 218 /
+54 → 50; Wei 1,015 → 976 / 310 → 266). The Shelly p90 rises because of
+the pre-Mw 6.9 family (mislocated together under both methods, r5/r6): its
+M&L rows move from 2.06 to 3.14 km (median, 68 matches) and its picked
+rows' p90 from 5.3 to 8.1 km, while post-mainshock rows improve (picked
+0.74/2.47 → 0.67/2.12 km, M&L 1.03/2.47 → 0.79/2.26 km). **Adopted**;
+evaluation layer = r7.

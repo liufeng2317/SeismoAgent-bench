@@ -78,8 +78,9 @@ SPATIAL_EXCLUDE = []                      # references too sparse for a density 
 EXPERT_ROUNDS = {
     'r3': (EXPERT / 'export/r3/10_validate_catalog/events.csv', 'origin_time', 'depth_below_sea_level_km'),
     'r4': (EXPERT / 'export/r4/60_catalog/catalog_events.csv', 'origin_time_utc', 'depth_bsl_km'),
+    'r7': (EXPERT / 'export/r7/60_catalog/catalog_events.csv', 'origin_time_utc', 'depth_bsl_km'),
 }
-EXPERT_ROUND = 'r4'
+EXPERT_ROUND = 'r7'
 # ----------------------------------------------------------------------------
 
 EXPERT_COLOR = '#E69F00'
