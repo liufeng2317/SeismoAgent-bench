@@ -1,8 +1,8 @@
 {
  "metrics_version": 1,
- "scorer_commit": "f273f98c3a98f917a07d8f5fdb94190493999796",
+ "scorer_commit": "fc4037c7f5a5a49936b0419c641e80d173d06660",
  "scorer_dirty": false,
- "generated_utc": "2026-10-27T19:49:26+00:00",
+ "generated_utc": "2026-10-27T20:48:29+00:00",
  "task": "2017_maple_creek_yellowstone",
  "references": {
   "comcat": {
@@ -1101,7 +1101,43 @@
     "dt_mean_s": -0.0767,
     "dt_std_s": 0.1975,
     "recall_after_large": 1.0,
-    "recall_other": 0.9878
+    "recall_other": 0.9878,
+    "pick_recall_P": 0.5933,
+    "pick_residual_mad_P_s": 0.0302,
+    "pick_recall_S": 0.5907,
+    "pick_residual_mad_S_s": 0.062
+   },
+   "picks": {
+    "stations_common": 25,
+    "stations_reference": 27,
+    "stations_candidate": 25,
+    "phases": {
+     "P": {
+      "candidate": 82554,
+      "reference": 42822,
+      "matched_0.5s": 25406,
+      "recall_0.5s": 0.5933,
+      "precision_0.5s": 0.3078,
+      "matched_0.1s": 19207,
+      "recall_0.1s": 0.4485,
+      "precision_0.1s": 0.2327,
+      "residual_median_s": 0.0367,
+      "residual_mad_s": 0.0302
+     },
+     "S": {
+      "candidate": 51729,
+      "reference": 42250,
+      "matched_0.5s": 24957,
+      "recall_0.5s": 0.5907,
+      "precision_0.5s": 0.4825,
+      "matched_0.1s": 16067,
+      "recall_0.1s": 0.3803,
+      "precision_0.1s": 0.3106,
+      "residual_median_s": -0.0185,
+      "residual_mad_s": 0.062
+     }
+    },
+    "reference": "shelly"
    }
   },
   "expert_blind": {

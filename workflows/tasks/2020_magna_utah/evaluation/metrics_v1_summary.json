@@ -1,8 +1,8 @@
 {
  "metrics_version": 1,
- "scorer_commit": "f273f98c3a98f917a07d8f5fdb94190493999796",
+ "scorer_commit": "fc4037c7f5a5a49936b0419c641e80d173d06660",
  "scorer_dirty": false,
- "generated_utc": "2026-10-27T19:51:40+00:00",
+ "generated_utc": "2026-10-27T20:50:48+00:00",
  "task": "2020_magna_utah",
  "configurations": [
   {
@@ -45,6 +45,10 @@
      "f1_M5": 1.0,
      "off_structure_after_shift": 0.0375,
      "off_structure_fraction": 0.0409,
+     "pick_recall_P": 0.6678,
+     "pick_recall_S": 0.6545,
+     "pick_residual_mad_P_s": 0.04,
+     "pick_residual_mad_S_s": 0.06,
      "precision_M2": 0.9748,
      "precision_M3": 1.0,
      "precision_M4": 1.0,
@@ -235,6 +239,30 @@
      "mean": 0.0409,
      "min": 0.0409,
      "max": 0.0409,
+     "n": 1
+    },
+    "pick_recall_P": {
+     "mean": 0.6678,
+     "min": 0.6678,
+     "max": 0.6678,
+     "n": 1
+    },
+    "pick_recall_S": {
+     "mean": 0.6545,
+     "min": 0.6545,
+     "max": 0.6545,
+     "n": 1
+    },
+    "pick_residual_mad_P_s": {
+     "mean": 0.04,
+     "min": 0.04,
+     "max": 0.04,
+     "n": 1
+    },
+    "pick_residual_mad_S_s": {
+     "mean": 0.06,
+     "min": 0.06,
+     "max": 0.06,
      "n": 1
     },
     "precision_M2": {

@@ -1,8 +1,8 @@
 {
  "metrics_version": 1,
- "scorer_commit": "f273f98c3a98f917a07d8f5fdb94190493999796",
+ "scorer_commit": "fc4037c7f5a5a49936b0419c641e80d173d06660",
  "scorer_dirty": false,
- "generated_utc": "2026-10-27T19:50:30+00:00",
+ "generated_utc": "2026-10-27T20:49:37+00:00",
  "task": "2020_magna_utah",
  "references": {
   "pang": {
@@ -2373,7 +2373,43 @@
     "dt_mean_s": 0.0776,
     "dt_std_s": 0.4149,
     "recall_after_large": 0.9333,
-    "recall_other": 0.7954
+    "recall_other": 0.7954,
+    "pick_recall_P": 0.8949,
+    "pick_residual_mad_P_s": 0.03,
+    "pick_recall_S": 0.8514,
+    "pick_residual_mad_S_s": 0.055
+   },
+   "picks": {
+    "stations_common": 27,
+    "stations_reference": 201,
+    "stations_candidate": 43,
+    "phases": {
+     "P": {
+      "candidate": 76337,
+      "reference": 19803,
+      "matched_0.5s": 17722,
+      "recall_0.5s": 0.8949,
+      "precision_0.5s": 0.2322,
+      "matched_0.1s": 14949,
+      "recall_0.1s": 0.7549,
+      "precision_0.1s": 0.1958,
+      "residual_median_s": 0.04,
+      "residual_mad_s": 0.03
+     },
+     "S": {
+      "candidate": 73552,
+      "reference": 30977,
+      "matched_0.5s": 26375,
+      "recall_0.5s": 0.8514,
+      "precision_0.5s": 0.3586,
+      "matched_0.1s": 20196,
+      "recall_0.1s": 0.652,
+      "precision_0.1s": 0.2746,
+      "residual_median_s": -0.005,
+      "residual_mad_s": 0.055
+     }
+    },
+    "reference": "baker"
    }
   },
   "expert_blind": {
