@@ -12,7 +12,7 @@ surface_elevation_km: 2.3           # expert association.yaml reference_elevatio
 off_structure_km: 1.0
 # Shelly has no ceiling (no other complete detection catalog), so the normalised
 # headline uses ComCat; Shelly recall_net is reported alongside.
-primary: {detection: comcat, location: comcat}
+primary: {detection: comcat, location: comcat, magnitude: comcat}   # magnitude classes: the operational catalog
 references:
   comcat: {roles: DLSM, depth_datum: surface}         # UUSS depths below the local surface
   shelly: {roles: D, time_only: true}                 # detections from the phase release

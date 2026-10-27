@@ -10,7 +10,7 @@ mask:                               # expert/00_config/validation.yaml, depth co
   depth_bsl_km: [-3.28, 19.72]      # [-3, 20] below the 0.28-km surface
 surface_elevation_km: 0.28          # expert association.yaml reference_elevation_km
 off_structure_km: 1.0
-primary: {detection: cochran, location: cochran}
+primary: {detection: cochran, location: cochran, magnitude: cochran}   # ComCat holds 11 events in 2011: Cochran sets the magnitude classes
 references:
   # Datums are unstated in the publications; compared as below-surface depths (±0.3 km caveat).
   cochran: {roles: DLSM, depth_datum: surface}

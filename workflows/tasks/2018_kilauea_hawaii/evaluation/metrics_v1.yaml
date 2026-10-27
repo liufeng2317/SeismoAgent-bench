@@ -10,7 +10,7 @@ mask:                               # expert/00_config/validation.yaml, depth co
   depth_bsl_km: [-4.07, 18.93]      # [-3, 20] below the 1.07-km surface
 surface_elevation_km: 1.07          # expert association.yaml reference_elevation_km
 off_structure_km: 1.0
-primary: {detection: shelly, location: shelly}
+primary: {detection: shelly, location: shelly, magnitude: comcat}
 references:
   # Datums unstated or mixed; compared as below-surface depths.
   shelly: {roles: DLSM, depth_datum: surface}         # hypocentroids

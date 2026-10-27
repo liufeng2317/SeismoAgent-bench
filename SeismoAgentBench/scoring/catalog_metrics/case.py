@@ -160,7 +160,27 @@ def headline(score: dict, case: Case, ceiling: dict) -> dict:
             "dz_median_km": loc.get("dz_median_km"), "depth_datum_known": loc.get("depth_datum_known"),
             "depth_mode_share": depth.get("mode_share"), "depth_band_share": depth.get("band_share"),
             "off_structure_fraction": score["off_structure"]["fraction"],
-            "off_structure_after_shift": (score.get("off_structure_after_shift") or {}).get("fraction")}
+            "off_structure_after_shift": (score.get("off_structure_after_shift") or {}).get("fraction"),
+            **_class_headline(score), **_strength_time_headline(score)}
+
+
+def _class_headline(score: dict) -> dict:
+    """F1 (and its parts) and mean matched-pair errors per magnitude class."""
+    out = {}
+    for name, c in (score.get("by_magnitude") or {}).get("classes", {}).items():
+        out.update({f"recall_{name}": c["recall"], f"precision_{name}": c["precision"], f"f1_{name}": c["f1"],
+                    f"epi_mean_{name}": c["epi_km"].get("mean"), f"dt_mean_{name}": c["dt_s"].get("mean"),
+                    f"dmag_mean_{name}": c["dmag"].get("mean")})
+    return out
+
+
+def _strength_time_headline(score: dict) -> dict:
+    s, t = score.get("strength") or {}, score.get("time") or {}
+    after = t.get("after_large") or {}
+    return {"dmag_median": (s.get("dmag") or {}).get("median"), "dmag_std": (s.get("dmag") or {}).get("std"),
+            "dmag_slope_per_unit": s.get("dmag_slope_per_unit"), "b_difference": s.get("b_difference"),
+            "dt_mean_s": (t.get("dt_s") or {}).get("mean"), "dt_std_s": (t.get("dt_s") or {}).get("std"),
+            "recall_after_large": after.get("recall_after"), "recall_other": after.get("recall_other")}
 
 
 def _scorer_record() -> dict:
@@ -184,11 +204,11 @@ def score_baseline(task_dir: Path, *, write: bool = True) -> dict:
     for key, ref in case.refs.items():  # U excludes the expert for reference rows (§5 L1)
         rows[key] = _strip(score_population(ref, case.refs, expert=None, center=case.center,
                                             off_structure_km=case.config["off_structure_km"],
-                                        location_ref=case.primary["location"]))
+                                        primary=case.primary, mask=case.mask))
     for key, pop in case.expert.items():
         score = _strip(score_population(pop, case.refs, expert=None, center=case.center,
                                         off_structure_km=case.config["off_structure_km"],
-                                        location_ref=case.primary["location"]))
+                                        primary=case.primary, mask=case.mask))
         score["headline"] = headline(score, case, ceiling)
         rows[pop.key] = score
     report = {**_scorer_record(), "task": case.task_dir.name, "references": _references_record(case),
@@ -237,7 +257,7 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
         status["consistency"] = consistency(raw_catalog, raw_picks)
         score = score_population(cand, case.refs, expert=case.expert.get("final"), center=case.center,
                                  off_structure_km=case.config["off_structure_km"],
-                                 location_ref=case.primary["location"])
+                                 primary=case.primary, mask=case.mask)
         ceiling = ceilings(case.refs)
         unsupported = score["union_support"]["unsupported_index"]
         sample = sample_unsupported(cand, unsupported)

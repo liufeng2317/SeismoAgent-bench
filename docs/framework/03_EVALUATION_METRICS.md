@@ -82,6 +82,14 @@ alongside the normalised headline.
 | | **Chamberlain 2021** | D S M | corrected GrowClust (3-D frame); detection primary, ceiling from Tan |
 | | GeoNet | D M | operational; fixed-depth solutions → no L |
 
+**Magnitude authority.** Magnitude classes and the strength dimension use
+one catalog per case, the operational network catalog with calibrated
+ML/Mw that is complete above M 2–3: Ridgecrest ComCat (SCSN), Magna UUSS,
+Kīlauea ComCat (HVO), Kaikōura GeoNet, Maple Creek ComCat (UUSS). Prague's
+2011 ComCat holds 11 events in the window, so Cochran sets its classes.
+Research catalogs use differing magnitude scales (Magna M2+: Pang 375,
+UUSS 140 events) and are not used for classes.
+
 A reference's depth enters L only when its datum is known (sea level or
 stated surface datum convertible with the case's model datum).
 
@@ -183,6 +191,41 @@ Population depth profile (no matching), for every catalog:
 A constant offset reflects calibration (the expert itself runs 0.22 below
 Cochran); the MAD is the quality measure.
 
+### Time, space and strength by magnitude class
+
+Every catalog is also read along three dimensions against the magnitude
+authority (A) and the primary detection reference:
+
+| Dimension | Metric | Definition |
+|---|---|---|
+| time | `dt_s` (mean, median, std, \|dt\| p90) | signed candidate − reference origin time of matched pairs; a mean offset trades off against depth |
+| time | `recall_by_day` | recall of the primary detection reference per day of the window |
+| time | `recall_after_large` vs `recall_other` | recall of reference events within 1 h after any A event of M ≥ 4 (M ≥ 3 where none) against all other events: short-term incompleteness after large events |
+| space | L2, L3 | as above |
+| strength | `dmag` (mean, median, std, MAD, \|dmag\| p90) | candidate − A magnitude of matched pairs |
+| strength | `dmag_slope_per_unit` | least-squares slope of dmag against the A magnitude; negative = compressed scale or saturation of large events |
+| strength | `Mc`, `b` (± σ), `b_difference` | maximum curvature + 0.2 and the Aki–Utsu b-value (Shi & Bolt σ) above it, for candidate and A |
+| strength | `magnitude_coverage` | fraction of candidate events with a magnitude |
+
+**Magnitude classes M ≥ 2, 3, 4, 5** (by A magnitude; classes with no A event
+are omitted). A candidate event enters class M ≥ T when its magnitude minus
+the candidate's median offset from A (over all matched pairs, ≥ 5 pairs) is
+≥ T, so precision and F1 measure detection and the calibration is scored by
+`dmag`; `precision_unaligned` uses the raw magnitudes. Above M 2–3 the
+authority is complete, so precision against it is meaningful, unlike at
+small magnitudes (§5 L1). Per class:
+
+| Metric | Definition |
+|---|---|
+| `recall` | matched A events of the class / A events of the class |
+| `precision` | candidate events of the class matched to any A event / candidate events of the class |
+| **`f1`** | 2PR / (P + R) |
+| `dt_s`, `epi_km`, `dz_km`, `dmag` | distributions (n, mean, median, std, p90) over the matched A events of the class |
+| `events` | every A event of the class, matched or missed, with its errors — listed for classes of ≤ 20 events and for M ≥ 4 |
+
+M ≥ 4 has enough events for distributions only at Ridgecrest (88) and
+Kaikōura (12); M ≥ 5 (≤ 6 events per case) is read from the event list.
+
 ### L5 — Phase picks (P references; Magna, Maple Creek)
 
 Scored with `SeismoAgentBench/scoring/picks.py`: P and S recall and precision
@@ -230,8 +273,9 @@ Per case and configuration:
 3. `union_support` and `audited_false_rate`;
 4. vs the primary location reference: `shift`, `scatter_median`, `epi_gt5km`, `dz_median`;
 5. depth artefacts: `depth_mode_share`;
-6. `off_structure_fraction` and `off_structure_after_shift`;
-7. cost and wall time.
+6. by magnitude class: `f1` (with recall, precision) and mean `dt`, `epi`, `dmag`; strength: `dmag` median and std, `dmag_slope_per_unit`; time: mean `dt`, `recall_after_large`;
+7. `off_structure_fraction` and `off_structure_after_shift`;
+8. cost and wall time.
 
 Rows: each Agent configuration, *expert (blind)*, *expert (final)*, and each
 reference scored against the primary reference (the ceiling rows).

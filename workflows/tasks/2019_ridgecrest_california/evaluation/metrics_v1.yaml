@@ -10,7 +10,7 @@ mask:                               # analysis/processing.yaml candidate window 
   depth_bsl_km: [-0.7, 19.3]        # [0, 20] below the nominal 0.7-km surface
 surface_elevation_km: 0.7           # expert association.yaml reference_elevation_km
 off_structure_km: 1.0
-primary: {detection: shelly, location: shelly}
+primary: {detection: shelly, location: shelly, magnitude: official_earthquake}
 references:
   # Datums are not harmonised across sources; compared as below-surface depths (expert convention).
   shelly: {roles: DLSM, depth_datum: surface}             # template matching; primary

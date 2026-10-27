@@ -24,8 +24,10 @@ def main(argv=None) -> int:
         summary["ceilings"] = {k: v["value"] for k, v in report["ceilings"].items()}
     elif args.command == "summary":
         report = summarize(args.task_dir, rescore=args.rescore)
-        summary = [{k: c[k] for k in ("variant", "harness", "model", "launched", "completion_rate", "recall_norm",
-                                      "union_support", "epi_median_km")} for c in report["configurations"]]
+        summary = [{**{k: c[k] for k in ("variant", "harness", "model", "launched", "completion_rate")},
+                    **{k: (c["metrics"].get(k) or {}).get("mean")
+                       for k in ("recall_norm", "union_support", "f1_M2", "f1_M3", "scatter_median_km")}}
+                   for c in report["configurations"]]
     else:
         if args.run_dir is None:
             parser.error("run needs --run-dir")

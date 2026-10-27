@@ -10,7 +10,7 @@ mask:                               # expert/00_config/validation.yaml (model da
   depth_bsl_km: [-3.0, 60.0]
 surface_elevation_km: 0.0           # expert association.yaml reference_elevation_km
 off_structure_km: 5.0               # sparse network and 1-D vs 3-D frame offsets of 3-4 km
-primary: {detection: chamberlain, location: lanza}   # Tan has no comparably complete partner (ceiling 0.16)
+primary: {detection: chamberlain, location: lanza, magnitude: geonet}   # Tan has no comparably complete partner (ceiling 0.16)
 references:
   tan: {roles: DSM, depth_datum: sea_level}
   lanza: {roles: LS, depth_datum: sea_level}          # 122 HypoDD origins

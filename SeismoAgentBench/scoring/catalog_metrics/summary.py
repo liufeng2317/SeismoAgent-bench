@@ -11,11 +11,8 @@ import numpy as np
 from .case import RUN_SCORE_FILE, _scorer_record, score_run
 
 SUMMARY_FILE = "metrics_v1_summary.json"
-# Detection metrics count a failed run as zero; the others average completed runs only.
-DETECTION = ("recall", "recall_norm")
-QUALITY = ("union_support", "audited_false_rate", "epi_median_km", "shift_km", "scatter_median_km", "epi_gt5km",
-           "dz_median_km", "depth_mode_share", "depth_band_share", "off_structure_fraction",
-           "off_structure_after_shift")
+# Detection metrics (recall*, f1_*) count a failed run as zero; the others average completed runs only.
+DETECTION_PREFIXES = ("recall", "f1_")
 PROCESS = ("cost_usd", "elapsed_s", "turns")
 
 
@@ -41,15 +38,19 @@ def summarize(task_dir: Path, *, rescore: bool = False, write: bool = True) -> d
     for (variant, harness, model), reports in sorted(groups.items()):
         clean = [r for r in reports if not r["process"]["leakage"].get("flag")]
         completed = [r for r in clean if r["completion"]["completed"]]
+        keys = sorted({k for r in reports for k, v in r["headline"].items()
+                       if isinstance(v, (int, float)) and not isinstance(v, bool) and k != "ceiling"})
         entry = {"variant": variant, "harness": harness, "model": model, "launched": len(reports),
                  "leakage_flagged": [r["run"]["run_id"] for r in reports if r["process"]["leakage"].get("flag")],
                  "completion_rate": round(len(completed) / len(clean), 4) if clean else None,
                  "runs": [{"run_id": r["run"]["run_id"], "completed": r["completion"]["completed"],
-                           **{k: r["headline"].get(k) for k in DETECTION + QUALITY}} for r in reports]}
-        for key in DETECTION:
-            entry[key] = _stats([r["headline"].get(key) if r["completion"]["completed"] else 0.0 for r in clean])
-        for key in QUALITY:
-            entry[key] = _stats([r["headline"].get(key) for r in completed])
+                           **{k: r["headline"].get(k) for k in keys}} for r in reports], "metrics": {}}
+        for key in keys:
+            if key.startswith(DETECTION_PREFIXES):
+                values = [r["headline"].get(key) if r["completion"]["completed"] else 0.0 for r in clean]
+            else:
+                values = [r["headline"].get(key) for r in completed]
+            entry["metrics"][key] = _stats(values)
         for key in PROCESS:
             entry[key] = _stats([r["process"].get(key) for r in clean])
         configurations.append(entry)

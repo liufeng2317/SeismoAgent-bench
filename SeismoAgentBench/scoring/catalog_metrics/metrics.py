@@ -9,6 +9,7 @@ from scipy.spatial import cKDTree
 from scipy.stats import spearmanr
 
 from .matching import CHANCE_SHIFT_S, SENSITIVITY_GATES, correspond, match
+from .dimensions import magnitude_classes, strength, time_profile
 from .tables import Population, local_xyz
 
 MAG_BIN = 0.5
@@ -308,7 +309,8 @@ def ceilings(refs: Mapping[str, Population]) -> dict:
 
 
 def score_population(cand: Population, refs: Mapping[str, Population], *, expert: Population | None,
-                     center, off_structure_km: float, location_ref: str | None = None) -> dict:
+                     center, off_structure_km: float, primary: Mapping[str, str] | None = None,
+                     mask: Mapping[str, Any] | None = None) -> dict:
     """Metrics of one catalog against every reference (and the expert)."""
     out = {"events": int(len(cand.events)), "located": int(cand.located.sum()), "versus": {}}
     for key, ref in refs.items():
@@ -320,11 +322,20 @@ def score_population(cand: Population, refs: Mapping[str, Population], *, expert
     out["union_support"] = union_support(cand, union)
     structure = [r for r in refs.values() if "S" in r.roles]
     out["off_structure"] = off_structure_fraction(cand, structure, center, off_structure_km)
-    loc = out["versus"].get(location_ref, {}).get("location", {})
+    primary = primary or {}
+    loc = out["versus"].get(primary.get("location"), {}).get("location", {})
     if loc.get("shift_km") is not None:
         out["off_structure_after_shift"] = off_structure_fraction(
             cand, structure, center, off_structure_km, shift=(loc["shift_east_km"], loc["shift_north_km"]))
     out["local_thickness_km"] = local_thickness(cand, center)
     out["depth_profile"] = depth_profile(cand)
     out["magnitude_coverage"] = _num(cand.events.magnitude.notna().mean()) if len(cand.events) else None
+    authority = refs.get(primary.get("magnitude"))
+    if authority is not None and authority.key != cand.key:
+        pairs = correspond(cand, authority)["pairs"]
+        out["by_magnitude"] = magnitude_classes(cand, authority, center, pairs)
+        out["strength"] = strength(cand, authority, pairs)
+        detection_ref = refs.get(primary.get("detection"))
+        if detection_ref is not None and detection_ref.key != cand.key and mask is not None:
+            out["time"] = time_profile(cand, detection_ref, authority, correspond(cand, detection_ref)["pairs"], mask)
     return out

@@ -5,6 +5,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
+from SeismoAgentBench.scoring.catalog_metrics.dimensions import b_value, magnitude_classes
 from SeismoAgentBench.scoring.catalog_metrics.matching import correspond, match
 from SeismoAgentBench.scoring.catalog_metrics.metrics import (
     ceilings, depth_profile, location, m90, off_structure_fraction, pair_distance_error, union_support)
@@ -95,6 +96,31 @@ class MetricTest(unittest.TestCase):
         self.assertLess(result["scatter_median_km"], 0.05)
         self.assertEqual(len(result["epi_median_by_period_km"]), 4)
         self.assertEqual(depth_profile(cand)["mode_share"], 1.0)
+
+    def test_magnitude_classes_remove_the_calibration_offset(self):
+        # The candidate finds every reference event but reports magnitudes 0.4 low, and adds
+        # 10 spurious M2.5 events. After the offset is removed, recall is 1 and precision
+        # reflects only the spurious events; the unaligned precision is distorted.
+        n = 100
+        times = np.arange(n) * 30.0
+        mags = np.linspace(1.0, 4.5, n)
+        ref = population("authority", times, [40.0] * n, [-100.0] * n, mag=mags, roles="DM")
+        extra = np.arange(10) * 30.0 + 5000.0
+        cand = population("cand", np.concatenate([times, extra]), [40.0] * (n + 10), [-100.0] * (n + 10),
+                          mag=np.concatenate([mags - 0.4, [2.1] * 10]))
+        result = magnitude_classes(cand, ref, CENTER)
+        self.assertAlmostEqual(result["magnitude_bias"], -0.4, places=6)
+        m2 = result["classes"]["M2"]
+        self.assertEqual(m2["recall"], 1.0)
+        expected = m2["matched"] / (m2["matched"] + 10)
+        self.assertAlmostEqual(m2["precision"], expected, places=3)
+        self.assertAlmostEqual(m2["dmag"]["mean"], -0.4, places=6)
+        self.assertIn("events", result["classes"]["M4"])
+
+    def test_b_value_recovers_a_gutenberg_richter_sample(self):
+        rng = np.random.default_rng(4)
+        m = np.round(0.95 + rng.exponential(1 / np.log(10), 5000), 1)  # b = 1; bin 1.0 covers [0.95, 1.05)
+        self.assertAlmostEqual(b_value(m, 1.0)["b"], 1.0, delta=0.05)
 
     def test_off_structure_uses_other_references_only(self):
         ref = population("ref", [0.0, 10.0], [40.0, 40.0], [-100.0, -100.0], [5.0, 5.0])

@@ -10,7 +10,7 @@ mask:                               # expert/00_config/validation.yaml (sea-leve
   depth_bsl_km: [-1.3, 13.1]
 surface_elevation_km: 1.48          # expert association.yaml reference_elevation_km
 off_structure_km: 1.0
-primary: {detection: pang, location: pang}
+primary: {detection: pang, location: pang, magnitude: uuss}
 references:
   pang: {roles: DLSM, depth_datum: sea_level}         # relocated; Mc sentinels parsed to NaN
   baker: {roles: DS, depth_datum: unknown}            # picks collapsed to events; datum unspecified
