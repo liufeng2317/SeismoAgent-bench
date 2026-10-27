@@ -33,6 +33,7 @@ CONFIG_FILE = "metrics_v1.yaml"
 ADAPTER_FILE = "metrics_v1_adapter.py"
 RUN_SCORE_FILE = "metrics_v1.json"
 BASELINE_FILE = "metrics_v1_baseline.json"
+FIGURE_FILE = "location_diagnostics.png"
 SEA_LEVEL_MARKER = "below sea level"
 
 
@@ -150,11 +151,16 @@ def headline(score: dict, case: Case, ceiling: dict) -> dict:
     recall = effective_recall(det)
     ceil = ceiling[p["detection"]]["value"]
     loc = score["versus"][p["location"]].get("location", {})
+    depth = score.get("depth_profile") or {}
     return {"recall": recall, "ceiling": ceil,
             "recall_norm": round(recall / ceil, 4) if recall is not None and ceil else None,
             "union_support": score["union_support"]["fraction"],
-            "epi_median_km": loc.get("epi_median_km"),
-            "off_structure_fraction": score["off_structure"]["fraction"]}
+            "epi_median_km": loc.get("epi_median_km"), "shift_km": loc.get("shift_km"),
+            "scatter_median_km": loc.get("scatter_median_km"), "epi_gt5km": loc.get("epi_gt5km"),
+            "dz_median_km": loc.get("dz_median_km"), "depth_datum_known": loc.get("depth_datum_known"),
+            "depth_mode_share": depth.get("mode_share"), "depth_band_share": depth.get("band_share"),
+            "off_structure_fraction": score["off_structure"]["fraction"],
+            "off_structure_after_shift": (score.get("off_structure_after_shift") or {}).get("fraction")}
 
 
 def _scorer_record() -> dict:
@@ -177,10 +183,12 @@ def score_baseline(task_dir: Path, *, write: bool = True) -> dict:
     rows = {}
     for key, ref in case.refs.items():  # U excludes the expert for reference rows (§5 L1)
         rows[key] = _strip(score_population(ref, case.refs, expert=None, center=case.center,
-                                            off_structure_km=case.config["off_structure_km"]))
+                                            off_structure_km=case.config["off_structure_km"],
+                                        location_ref=case.primary["location"]))
     for key, pop in case.expert.items():
         score = _strip(score_population(pop, case.refs, expert=None, center=case.center,
-                                        off_structure_km=case.config["off_structure_km"]))
+                                        off_structure_km=case.config["off_structure_km"],
+                                        location_ref=case.primary["location"]))
         score["headline"] = headline(score, case, ceiling)
         rows[pop.key] = score
     report = {**_scorer_record(), "task": case.task_dir.name, "references": _references_record(case),
@@ -228,7 +236,8 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
         raw_picks = pd.read_csv(work / "picks.csv", dtype=str, keep_default_na=False)
         status["consistency"] = consistency(raw_catalog, raw_picks)
         score = score_population(cand, case.refs, expert=case.expert.get("final"), center=case.center,
-                                 off_structure_km=case.config["off_structure_km"])
+                                 off_structure_km=case.config["off_structure_km"],
+                                 location_ref=case.primary["location"])
         ceiling = ceilings(case.refs)
         unsupported = score["union_support"]["unsupported_index"]
         sample = sample_unsupported(cand, unsupported)
@@ -236,6 +245,12 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
         audit = audited_false_rate(out_dir / LABEL_FILE, 1 - score["union_support"]["fraction"]
                                    if score["union_support"]["fraction"] is not None else None)
         report["headline"]["audited_false_rate"] = audit["rate"] if audit else None
+        if write:
+            from .figures import location_figure
+            ref = case.refs[case.primary["location"]]
+            location_figure(out_dir / FIGURE_FILE, cand, ref, [r for r in case.refs.values() if "S" in r.roles],
+                            case.expert, case.center, off_structure_km=case.config["off_structure_km"],
+                            title=f"{case.task_dir.name} - {layout['path']}")
         report["audit"] = {"sample_file": SAMPLE_FILE, "sampled": int(len(sample)),
                            "unsupported": int(len(unsupported)), "labels": audit}
     else:

@@ -7,7 +7,7 @@ import pandas as pd
 
 from SeismoAgentBench.scoring.catalog_metrics.matching import correspond, match
 from SeismoAgentBench.scoring.catalog_metrics.metrics import (
-    ceilings, m90, off_structure_fraction, pair_distance_error, union_support)
+    ceilings, depth_profile, location, m90, off_structure_fraction, pair_distance_error, union_support)
 from SeismoAgentBench.scoring.catalog_metrics.tables import Population, standardize
 
 T0 = pd.Timestamp("2020-01-01T00:00:00Z")
@@ -80,6 +80,21 @@ class MetricTest(unittest.TestCase):
         result = pair_distance_error(shifted, ref, match(shifted, ref, 4.0, 15.0), CENTER)
         self.assertGreater(result["pairs"], 0)
         self.assertLess(result["median_km"], 1e-6)
+
+    def test_location_separates_a_common_shift_from_scatter(self):
+        # A rigid 2-km eastward shift is all "shift", no "scatter"; a depth pile-up shows in the profile.
+        rng = np.random.default_rng(3)
+        n = 120
+        lat, lon = 40 + rng.normal(0, 0.02, n), -100 + rng.normal(0, 0.02, n)
+        times = np.arange(n) * 30.0
+        ref = population("ref", times, lat, lon, 5 + rng.normal(0, 1, n))
+        east = 2.0 / (111.195 * np.cos(np.radians(40.0)))
+        cand = population("cand", times, lat, lon + east, [10.0] * n)
+        result = location(cand, ref, match(cand, ref, 4.0, 15.0), CENTER)
+        self.assertAlmostEqual(result["shift_east_km"], 2.0, places=1)
+        self.assertLess(result["scatter_median_km"], 0.05)
+        self.assertEqual(len(result["epi_median_by_period_km"]), 4)
+        self.assertEqual(depth_profile(cand)["mode_share"], 1.0)
 
     def test_off_structure_uses_other_references_only(self):
         ref = population("ref", [0.0, 10.0], [40.0, 40.0], [-100.0, -100.0], [5.0, 5.0])

@@ -13,7 +13,9 @@ from .case import RUN_SCORE_FILE, _scorer_record, score_run
 SUMMARY_FILE = "metrics_v1_summary.json"
 # Detection metrics count a failed run as zero; the others average completed runs only.
 DETECTION = ("recall", "recall_norm")
-QUALITY = ("union_support", "audited_false_rate", "epi_median_km", "off_structure_fraction")
+QUALITY = ("union_support", "audited_false_rate", "epi_median_km", "shift_km", "scatter_median_km", "epi_gt5km",
+           "dz_median_km", "depth_mode_share", "depth_band_share", "off_structure_fraction",
+           "off_structure_after_shift")
 PROCESS = ("cost_usd", "elapsed_s", "turns")
 
 

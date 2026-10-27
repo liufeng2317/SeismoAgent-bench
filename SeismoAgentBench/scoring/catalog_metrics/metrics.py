@@ -16,6 +16,9 @@ M90_MIN_EVENTS = 10
 PAIR_NEIGHBOURS = 10
 PAIR_RADIUS_KM = 5.0
 THICKNESS_NEIGHBOURS = 20
+PERIODS = 4
+DEPTH_BAND_KM = 1.0
+PERIOD_MIN_PAIRS = 25
 
 
 def _num(value: Any, digits: int = 4):
@@ -89,15 +92,57 @@ def effective_recall(entry: Mapping[str, Any]):
 
 # ------------------------------------------------------------------ L2 / L4 / L7
 
-def location(cand: Population, ref: Population, pairs) -> dict:
-    d = pairs.distance_km[np.isfinite(pairs.distance_km)]
-    out = {"pairs": int(len(d)), "epi_median_km": _median(d), "epi_p90_km": _p90(d),
+def location(cand: Population, ref: Population, pairs, center) -> dict:
+    """Matched-pair location differences, split into a common shift and the scatter about it (§5 L2)."""
+    if len(pairs) == 0:
+        return {"pairs": 0}
+    xa = local_xyz(cand.events.iloc[pairs.a], center)
+    xb = local_xyz(ref.events.iloc[pairs.b], center)
+    offset = xa[:, :2] - xb[:, :2]
+    epi = np.hypot(offset[:, 0], offset[:, 1])
+    shift = np.median(offset, axis=0)
+    scatter = np.hypot(*(offset - shift).T)
+    out = {"pairs": int(len(pairs)), "epi_median_km": _median(epi), "epi_p90_km": _p90(epi),
+           "epi_gt2km": _num((epi > 2).mean()), "epi_gt5km": _num((epi > 5).mean()),
+           "shift_east_km": _num(shift[0]), "shift_north_km": _num(shift[1]), "shift_km": _num(np.hypot(*shift)),
+           "scatter_median_km": _median(scatter), "scatter_p90_km": _p90(scatter),
            "dt_median_s": _median(pairs.dt_s)}
-    if cand.depth_known and ref.depth_known:
-        dz = cand.events.depth_km.to_numpy()[pairs.a] - ref.events.depth_km.to_numpy()[pairs.b]
-        dz = dz[np.isfinite(dz)]
-        out.update({"depth_pairs": int(len(dz)), "dz_median_km": _median(dz), "dz_mad_km": _mad(dz)})
+    # Equal-count periods by origin time: a problem confined to part of the sequence
+    # (early aftershocks, before/after a mainshock) does not move the overall median.
+    t = cand.events.time.to_numpy()[pairs.a]
+    if len(t) >= 4 * PERIOD_MIN_PAIRS:
+        edges = np.quantile(t, np.linspace(0, 1, PERIODS + 1))
+        period = np.clip(np.searchsorted(edges, t, side="right") - 1, 0, PERIODS - 1)
+        out["epi_median_by_period_km"] = [_median(epi[period == k]) for k in range(PERIODS)]
+    dz = xa[:, 2] - xb[:, 2]
+    dz = dz[np.isfinite(dz)]
+    if len(dz):
+        known = cand.depth_known and ref.depth_known
+        out.update({"depth_pairs": int(len(dz)), "dz_median_km": _median(dz), "dz_mad_km": _mad(dz),
+                    "dz_gt2km": _num((np.abs(dz) > 2).mean()), "depth_datum_known": known})
     return out
+
+
+def depth_profile(pop: Population) -> dict | None:
+    """Population depth quantiles and pile-ups at a single value (fixed depths, grid edges)."""
+    z = pop.events.depth_km.to_numpy()
+    z = z[np.isfinite(z)]
+    if not len(z):
+        return None
+    values, counts = np.unique(np.round(z, 2), return_counts=True)
+    top, share = densest_band(z)
+    return {"events": int(len(z)), "p05_km": _num(np.percentile(z, 5)), "p50_km": _num(np.median(z)),
+            "p95_km": _num(np.percentile(z, 95)), "mode_km": _num(values[counts.argmax()]),
+            "mode_share": _num(counts.max() / len(z)), "band_top_km": _num(top), "band_share": _num(share),
+            "datum_known": pop.depth_known}
+
+
+def densest_band(z: np.ndarray, width: float = DEPTH_BAND_KM) -> tuple[float, float]:
+    """Top of the ``width``-km depth window holding the most events, and its share."""
+    z = np.sort(z)
+    counts = np.searchsorted(z, z + width, side="right") - np.arange(len(z))
+    k = int(counts.argmax())
+    return float(z[k]), float(counts[k] / len(z))
 
 
 def magnitude(cand: Population, ref: Population, pairs) -> dict:
@@ -154,7 +199,8 @@ def pair_distance_error(cand: Population, ref: Population, pairs, center) -> dic
     return {"pairs": int(len(err)), "median_km": _median(err), "p90_km": _p90(err)}
 
 
-def off_structure_fraction(pop: Population, structure: Iterable[Population], center, radius_km: float) -> dict:
+def off_structure_fraction(pop: Population, structure: Iterable[Population], center, radius_km: float,
+                           shift: tuple | None = None) -> dict:
     """Fraction of located events whose epicentre is farther than ``radius_km`` from every
     structure-reference epicentre (depth is scored separately, by L2)."""
     refs = [r for r in structure if r.key != pop.key]
@@ -162,6 +208,8 @@ def off_structure_fraction(pop: Population, structure: Iterable[Population], cen
         return {"fraction": None, "events": 0, "radius_km": radius_km}
     tree = cKDTree(np.vstack([local_xyz(r.events[r.located], center)[:, :2] for r in refs]))
     xy = local_xyz(pop.events[pop.located], center)[:, :2]
+    if shift is not None:
+        xy = xy - np.asarray(shift)  # remove the common shift: what remains is misplaced or spurious
     nearest = tree.query(xy)[0] if len(xy) else np.array([])
     return {"fraction": _num((nearest > radius_km).mean()) if len(xy) else None, "events": int(len(xy)),
             "radius_km": radius_km, "members": [r.key for r in refs]}
@@ -192,7 +240,7 @@ def versus(cand: Population, ref: Population, center) -> dict:
         out["detection"] = detection(ref, result)
     located_pair = result["gates"][1] is not None
     if located_pair and "L" in ref.roles:
-        out["location"] = location(cand, ref, pairs)
+        out["location"] = location(cand, ref, pairs, center)
         unc = uncertainty(cand, ref, pairs)
         if unc is not None:
             out["uncertainty"] = unc
@@ -260,7 +308,7 @@ def ceilings(refs: Mapping[str, Population]) -> dict:
 
 
 def score_population(cand: Population, refs: Mapping[str, Population], *, expert: Population | None,
-                     center, off_structure_km: float) -> dict:
+                     center, off_structure_km: float, location_ref: str | None = None) -> dict:
     """Metrics of one catalog against every reference (and the expert)."""
     out = {"events": int(len(cand.events)), "located": int(cand.located.sum()), "versus": {}}
     for key, ref in refs.items():
@@ -272,6 +320,11 @@ def score_population(cand: Population, refs: Mapping[str, Population], *, expert
     out["union_support"] = union_support(cand, union)
     structure = [r for r in refs.values() if "S" in r.roles]
     out["off_structure"] = off_structure_fraction(cand, structure, center, off_structure_km)
+    loc = out["versus"].get(location_ref, {}).get("location", {})
+    if loc.get("shift_km") is not None:
+        out["off_structure_after_shift"] = off_structure_fraction(
+            cand, structure, center, off_structure_km, shift=(loc["shift_east_km"], loc["shift_north_km"]))
     out["local_thickness_km"] = local_thickness(cand, center)
+    out["depth_profile"] = depth_profile(cand)
     out["magnitude_coverage"] = _num(cand.events.magnitude.notna().mean()) if len(cand.events) else None
     return out

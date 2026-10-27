@@ -143,11 +143,26 @@ versions.
 
 ### L2 — Absolute location (L references, matched pairs)
 
+A median epicentral offset mixes a common shift (velocity-model or frame
+difference) with scatter (location precision), hides tails, and says nothing
+about depth artefacts. L2 therefore separates them:
+
 | Metric | Definition |
 |---|---|
-| **`epi_median[R]`**, `epi_p90[R]` | epicentral distance of matched pairs — `epi_median` vs the primary location reference is a headline |
-| `dz_median[R]`, `dz_mad[R]` | Agent − reference depth (sea-level datum), median and median absolute deviation; only for references with a known datum |
-| `dt_median[R]` | median |Δ origin time| |
+| `epi_median[R]`, `epi_p90[R]`, `epi_gt2km`, `epi_gt5km` | epicentral offset of matched pairs: median, 90th percentile, fractions above 2 and 5 km |
+| **`shift[R]`** (`shift_east_km`, `shift_north_km`, `shift_km`) | component-wise median of the offset vectors — the common shift |
+| **`scatter_median[R]`**, `scatter_p90` | distance of each offset vector from the shift — the precision part |
+| `epi_median_by_period` | median offset in four equal-count periods of origin time (a problem confined to part of the sequence does not move the overall median) |
+| **`dz_median[R]`**, `dz_mad[R]`, `dz_gt2km` | candidate − reference depth (sea-level datum). Reported also when a datum is unknown, flagged `depth_datum_known: false`; the value is then uncertain by up to the surface elevation, which does not hide errors of several km |
+| `dt_median[R]` | median \|Δ origin time\| |
+
+Population depth profile (no matching), for every catalog:
+
+| Metric | Definition |
+|---|---|
+| `depth p05 / p50 / p95` | depth quantiles |
+| **`depth_mode_share`** | largest share of events at one depth value (to 0.01 km): fixed-depth solutions, grid-edge pile-ups |
+| `depth_band_share` | largest share of events in any 1-km depth window, read against the reference's value |
 
 ### L3 — Relative location and structure (S references)
 
@@ -156,6 +171,7 @@ versions.
 | `pair_distance_error[R]` | for each matched event, its 10 nearest matched neighbours in the reference within 5 km; median of |d_Agent − d_ref| over these pairs (3-D distances). Insensitive to a common frame shift |
 | `off_structure_fraction` | fraction of located scored Agent events whose epicentre is farther than r_off from every epicentre of the case's S references (epicentral, so depth errors — scored by L2 — and unknown datums do not enter); r_off = 1 km (Kaikōura 5 km). The same value for each reference (against the other S references) and the expert is reported alongside |
 | `local_thickness` | median over events of the minor-axis standard deviation of the 20 nearest neighbours; reported with the reference value of the same region |
+| `off_structure_after_shift` | `off_structure_fraction` after removing the L2 shift from the candidate epicentres: what remains is misplaced or spurious, not a frame offset |
 
 ### L4 — Magnitude (M references, matched pairs with magnitudes)
 
@@ -212,9 +228,10 @@ Per case and configuration:
 1. `completion_rate`;
 2. `recall_norm` vs the primary detection reference (raw `recall` in brackets);
 3. `union_support` and `audited_false_rate`;
-4. `epi_median` vs the primary location reference;
-5. `off_structure_fraction`;
-6. cost and wall time.
+4. vs the primary location reference: `shift`, `scatter_median`, `epi_gt5km`, `dz_median`;
+5. depth artefacts: `depth_mode_share`;
+6. `off_structure_fraction` and `off_structure_after_shift`;
+7. cost and wall time.
 
 Rows: each Agent configuration, *expert (blind)*, *expert (final)*, and each
 reference scored against the primary reference (the ceiling rows).
@@ -232,8 +249,8 @@ every variant's prompt (`min`, `tools`, `guided`):
   `origin_time_uncertainty_s` (1σ). Empty values are allowed.
 
 Runs launched before these conventions (Ridgecrest and Magna, 2026-10-13 to
-2026-10-22) are scored with depth metrics omitted unless their report states
-the datum.
+2026-10-22) carry `depth_datum_known: false`; their depth differences are
+reported with that flag.
 
 ## 9. Implementation
 
@@ -256,6 +273,7 @@ python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir workflows/
 |---|---|---|
 | `evaluation/metrics_v1_baseline.json` | ceilings; reference, expert-final and expert-blind rows | yes |
 | `<run>/evaluation/metrics_v1.json` | one run: completion, catalog notes, all metrics, headline, process, leakage | no (runs/ is ignored) |
+| `<run>/evaluation/location_diagnostics.png` | offset vectors (shift vs scatter), offset CDF with expert yardsticks, depth distribution with the densest band, map of offsets and off-structure events | no |
 | `<run>/evaluation/audit_sample.csv` | the audit sample, drawn once and never redrawn; reviewers add `audit_labels.csv` (`event_id,label`) | no |
 | `evaluation/metrics_v1_summary.json` | per configuration over repeated runs (§6) | yes |
 
