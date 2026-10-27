@@ -81,15 +81,16 @@ event_id,origin_time_utc,latitude,longitude,depth_km,magnitude,magnitude_type,n_
 
 Field conventions:
 
-- CSV dialect: UTF-8, comma-separated, the header row above in exactly this order, one record per row, the empty string for unavailable fields, no units inside cells.
+- CSV dialect: UTF-8, comma-separated, the header row above in exactly this order (followed only by the optional catalog columns below), one record per row, the empty string for unavailable fields, no units inside cells.
 - `station_id` is `NET.STA` (for example `NZ.KHZ`). `channel_id` is the full SEED channel `NET.STA.LOC.CHA` with an empty location code written as an empty segment (for example `NZ.KHZ.10.HHE`, or `XX.ABC..HNE` when the location code is empty).
 - `phase` is `P` or `S`. `time_utc` and `origin_time_utc` are ISO 8601 UTC timestamps ending in `Z` or `+00:00`.
 - `probability` is a detector-assigned quality score in [0, 1]; document its semantics in the metadata file; it may be empty. `uncertainty_s` is a pick-time uncertainty in seconds; it may be empty.
-- `status` is `accepted`, `uncertain` or `rejected` — the producer's verdict on that row. Keep rejected rows in the files for auditability. An empty `event_id` marks an unassociated pick.
-- `latitude` and `longitude` are decimal degrees (WGS84). `depth_km` is positive downward; document the depth datum used in the metadata file; it may be empty when depth is not resolvable.
+- `status` is `accepted`, `uncertain` or `rejected` — the producer's verdict on that row. Keep rejected rows in the files for auditability; they are not scored. An empty `event_id` marks an unassociated pick.
+- `latitude` and `longitude` are decimal degrees (WGS84). `depth_km` is kilometres below sea level, positive downward; it may be empty when depth is not resolvable.
+- `catalog.csv` may add, after the columns above, `horizontal_uncertainty_km`, `depth_uncertainty_km` and `origin_time_uncertainty_s` (1σ; may be empty).
 - `magnitude` may be empty when not defensible; `magnitude_type` is a short code such as `ML`, `Md`, `Mw` or `M`; document the derivation.
 - `n_picks`, `n_p_picks` and `n_s_picks` count the non-rejected `picks.csv` rows for that event and must be consistent with them.
-- Record the velocity model, location method, uncertainty estimates, depth datum, probability semantics and other diagnostic quantities in a metadata file of your choosing, referenced from `report.md`.
+- Record the velocity model, location method, uncertainty estimates, probability semantics and other diagnostic quantities in a metadata file of your choosing, referenced from `report.md`.
 
 Fields that cannot be estimated defensibly may be empty and must not be fabricated. The final catalog must be traceable to the observational evidence used to construct it.
 

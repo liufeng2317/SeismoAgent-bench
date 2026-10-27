@@ -31,7 +31,7 @@ pick_id,event_id,station_id,channel_id,phase,time_utc,probability,uncertainty_s,
 event_id,origin_time_utc,latitude,longitude,depth_km,magnitude,magnitude_type,n_picks,n_p_picks,n_s_picks,status
 ```
 
-Use ISO 8601 UTC timestamps. `event_id` must match between the two files and may be empty for an unassociated pick.
+Use ISO 8601 UTC timestamps. `event_id` must match between the two files and may be empty for an unassociated pick. `depth_km` is kilometres below sea level, positive down. `status` is `accepted`, `uncertain` or `rejected`; keep rejected rows in the files (they are not scored). `catalog.csv` may add, after the columns above, `horizontal_uncertainty_km`, `depth_uncertainty_km` and `origin_time_uncertainty_s` (1σ; may be empty).
 
 ### Validity conditions
 
