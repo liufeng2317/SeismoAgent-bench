@@ -1,8 +1,8 @@
 {
  "metrics_version": 1,
- "scorer_commit": "9af99b32d2b6b3dc95f7caaca61478067fc04144",
+ "scorer_commit": "0645ffc09bb062c5ed99a2b1b8306fb405e411b8",
  "scorer_dirty": false,
- "generated_utc": "2026-10-27T05:11:56+00:00",
+ "generated_utc": "2026-10-27T05:51:11+00:00",
  "task": "2019_ridgecrest_california",
  "references": {
   "shelly": {
@@ -583,7 +583,1133 @@
     "band_share": 0.1501,
     "datum_known": true
    },
-   "magnitude_coverage": 1.0
+   "magnitude_coverage": 1.0,
+   "by_magnitude": {
+    "authority": "official_earthquake",
+    "magnitude_bias": 0.0,
+    "bias_removed": true,
+    "candidate_without_magnitude": 0,
+    "classes": {
+     "M2": {
+      "reference_events": 2724,
+      "matched": 2046,
+      "recall": 0.7511,
+      "candidate_events": 2400,
+      "precision": 0.9608,
+      "f1": 0.8431,
+      "precision_unaligned": 0.9608,
+      "precision_authority_only": 0.8554,
+      "dt_s": {
+       "n": 2046,
+       "mean": 0.0024,
+       "median": 0.02,
+       "std": 0.3373,
+       "abs_p90": 0.42
+      },
+      "epi_km": {
+       "n": 2046,
+       "mean": 0.7124,
+       "median": 0.3369,
+       "std": 1.4212,
+       "p90": 1.2492
+      },
+      "dz_km": {
+       "n": 2046,
+       "mean": 0.0052,
+       "median": 0.059,
+       "std": 1.6409,
+       "abs_p90": 2.1975
+      },
+      "dmag": {
+       "n": 2046,
+       "mean": -0.0347,
+       "median": -0.02,
+       "std": 0.1389,
+       "abs_p90": 0.22
+      }
+     },
+     "M3": {
+      "reference_events": 742,
+      "matched": 515,
+      "recall": 0.6941,
+      "candidate_events": 496,
+      "precision": 0.9859,
+      "f1": 0.8146,
+      "precision_unaligned": 0.9859,
+      "precision_authority_only": 0.9617,
+      "dt_s": {
+       "n": 515,
+       "mean": 0.0552,
+       "median": 0.05,
+       "std": 0.3656,
+       "abs_p90": 0.396
+      },
+      "epi_km": {
+       "n": 515,
+       "mean": 0.6258,
+       "median": 0.346,
+       "std": 1.187,
+       "p90": 1.0369
+      },
+      "dz_km": {
+       "n": 515,
+       "mean": 0.2155,
+       "median": 0.211,
+       "std": 1.5128,
+       "abs_p90": 1.9646
+      },
+      "dmag": {
+       "n": 515,
+       "mean": -0.065,
+       "median": -0.03,
+       "std": 0.1576,
+       "abs_p90": 0.27
+      }
+     },
+     "M4": {
+      "reference_events": 88,
+      "matched": 58,
+      "recall": 0.6591,
+      "candidate_events": 53,
+      "precision": 1.0,
+      "f1": 0.7945,
+      "precision_unaligned": 1.0,
+      "precision_authority_only": 1.0,
+      "dt_s": {
+       "n": 58,
+       "mean": 0.011,
+       "median": 0.03,
+       "std": 0.3474,
+       "abs_p90": 0.513
+      },
+      "epi_km": {
+       "n": 58,
+       "mean": 0.7617,
+       "median": 0.5813,
+       "std": 0.7069,
+       "p90": 1.4989
+      },
+      "dz_km": {
+       "n": 58,
+       "mean": 1.0797,
+       "median": 1.011,
+       "std": 2.4661,
+       "abs_p90": 4.6155
+      },
+      "dmag": {
+       "n": 58,
+       "mean": -0.0464,
+       "median": 0.0,
+       "std": 0.2782,
+       "abs_p90": 0.36
+      },
+      "events": [
+       {
+        "reference_event_id": "3495",
+        "origin_time_utc": "2019-07-06T03:19:53.040000Z",
+        "reference_magnitude": 7.1,
+        "matched": true,
+        "candidate_event_id": "4704",
+        "candidate_magnitude": 7.1,
+        "dt_s": -0.18,
+        "epi_km": 0.534,
+        "dz_km": -4.759,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "18",
+        "origin_time_utc": "2019-07-04T17:33:49.000000Z",
+        "reference_magnitude": 6.4,
+        "matched": true,
+        "candidate_event_id": "35",
+        "candidate_magnitude": 6.4,
+        "dt_s": -0.24,
+        "epi_km": 0.577,
+        "dz_km": 4.554,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3613",
+        "origin_time_utc": "2019-07-06T03:47:53.420000Z",
+        "reference_magnitude": 5.5,
+        "matched": true,
+        "candidate_event_id": "4760",
+        "candidate_magnitude": 5.5,
+        "dt_s": 0.04,
+        "epi_km": 0.571,
+        "dz_km": 0.999,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3727",
+        "origin_time_utc": "2019-07-06T04:18:55.790000Z",
+        "reference_magnitude": 5.44,
+        "matched": true,
+        "candidate_event_id": "4832",
+        "candidate_magnitude": 5.44,
+        "dt_s": 0.01,
+        "epi_km": 0.603,
+        "dz_km": 6.395,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "1842",
+        "origin_time_utc": "2019-07-05T11:07:53.040000Z",
+        "reference_magnitude": 5.37,
+        "matched": true,
+        "candidate_event_id": "2487",
+        "candidate_magnitude": 5.36,
+        "dt_s": -0.01,
+        "epi_km": 0.169,
+        "dz_km": 1.247,
+        "dmag": -0.01
+       },
+       {
+        "reference_event_id": "3493",
+        "origin_time_utc": "2019-07-06T03:16:32.480000Z",
+        "reference_magnitude": 4.97,
+        "matched": true,
+        "candidate_event_id": "4700",
+        "candidate_magnitude": 4.97,
+        "dt_s": -0.02,
+        "epi_km": 0.05,
+        "dz_km": -0.081,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3625",
+        "origin_time_utc": "2019-07-06T03:50:59.710000Z",
+        "reference_magnitude": 4.97,
+        "matched": true,
+        "candidate_event_id": "4767",
+        "candidate_magnitude": 4.97,
+        "dt_s": -0.06,
+        "epi_km": 0.597,
+        "dz_km": 2.995,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "4583",
+        "origin_time_utc": "2019-07-06T09:28:28.980000Z",
+        "reference_magnitude": 4.89,
+        "matched": true,
+        "candidate_event_id": "5611",
+        "candidate_magnitude": 4.89,
+        "dt_s": 0.14,
+        "epi_km": 0.456,
+        "dz_km": 1.023,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3790",
+        "origin_time_utc": "2019-07-06T04:36:55.310000Z",
+        "reference_magnitude": 4.85,
+        "matched": true,
+        "candidate_event_id": "4882",
+        "candidate_magnitude": 4.89,
+        "dt_s": 0.01,
+        "epi_km": 0.349,
+        "dz_km": -0.331,
+        "dmag": 0.04
+       },
+       {
+        "reference_event_id": "3509",
+        "origin_time_utc": "2019-07-06T03:23:50.720000Z",
+        "reference_magnitude": 4.84,
+        "matched": true,
+        "candidate_event_id": "4707",
+        "candidate_magnitude": 5.37,
+        "dt_s": -0.35,
+        "epi_km": 2.254,
+        "dz_km": 1.377,
+        "dmag": 0.53
+       },
+       {
+        "reference_event_id": "3497",
+        "origin_time_utc": "2019-07-06T03:20:41.140000Z",
+        "reference_magnitude": 4.81,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3707",
+        "origin_time_utc": "2019-07-06T04:13:07.080000Z",
+        "reference_magnitude": 4.8,
+        "matched": true,
+        "candidate_event_id": "4823",
+        "candidate_magnitude": 4.8,
+        "dt_s": -0.78,
+        "epi_km": 0.585,
+        "dz_km": 3.77,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3503",
+        "origin_time_utc": "2019-07-06T03:22:35.630000Z",
+        "reference_magnitude": 4.73,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3681",
+        "origin_time_utc": "2019-07-06T04:07:04.570000Z",
+        "reference_magnitude": 4.68,
+        "matched": true,
+        "candidate_event_id": "4805",
+        "candidate_magnitude": 4.35,
+        "dt_s": -0.56,
+        "epi_km": 1.15,
+        "dz_km": 3.659,
+        "dmag": -0.33
+       },
+       {
+        "reference_event_id": "3504",
+        "origin_time_utc": "2019-07-06T03:22:48.300000Z",
+        "reference_magnitude": 4.64,
+        "matched": true,
+        "candidate_event_id": "4706",
+        "candidate_magnitude": 4.98,
+        "dt_s": -0.03,
+        "epi_km": 0.936,
+        "dz_km": 2.881,
+        "dmag": 0.34
+       },
+       {
+        "reference_event_id": "3500",
+        "origin_time_utc": "2019-07-06T03:22:03.570000Z",
+        "reference_magnitude": 4.64,
+        "matched": true,
+        "candidate_event_id": "4705",
+        "candidate_magnitude": 4.64,
+        "dt_s": 0.16,
+        "epi_km": 0.271,
+        "dz_km": 1.868,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "4039",
+        "origin_time_utc": "2019-07-06T06:01:51.800000Z",
+        "reference_magnitude": 4.63,
+        "matched": true,
+        "candidate_event_id": "5095",
+        "candidate_magnitude": 4.63,
+        "dt_s": 0.06,
+        "epi_km": 0.517,
+        "dz_km": 1.952,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3516",
+        "origin_time_utc": "2019-07-06T03:25:27.970000Z",
+        "reference_magnitude": 4.61,
+        "matched": true,
+        "candidate_event_id": "4709",
+        "candidate_magnitude": 4.97,
+        "dt_s": -0.12,
+        "epi_km": 0.916,
+        "dz_km": 1.404,
+        "dmag": 0.36
+       },
+       {
+        "reference_event_id": "209",
+        "origin_time_utc": "2019-07-04T18:39:44.440000Z",
+        "reference_magnitude": 4.59,
+        "matched": false
+       },
+       {
+        "reference_event_id": "242",
+        "origin_time_utc": "2019-07-04T18:56:06.420000Z",
+        "reference_magnitude": 4.58,
+        "matched": true,
+        "candidate_event_id": "255",
+        "candidate_magnitude": 4.58,
+        "dt_s": 0.42,
+        "epi_km": 0.564,
+        "dz_km": -0.37,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3525",
+        "origin_time_utc": "2019-07-06T03:27:11.370000Z",
+        "reference_magnitude": 4.57,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4478",
+        "origin_time_utc": "2019-07-06T08:32:57.550000Z",
+        "reference_magnitude": 4.56,
+        "matched": true,
+        "candidate_event_id": "5471",
+        "candidate_magnitude": 4.56,
+        "dt_s": 0.37,
+        "epi_km": 0.488,
+        "dz_km": 1.317,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3501",
+        "origin_time_utc": "2019-07-06T03:22:17.100000Z",
+        "reference_magnitude": 4.55,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3506",
+        "origin_time_utc": "2019-07-06T03:23:19.870000Z",
+        "reference_magnitude": 4.52,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3536",
+        "origin_time_utc": "2019-07-06T03:29:32.080000Z",
+        "reference_magnitude": 4.51,
+        "matched": false
+       },
+       {
+        "reference_event_id": "5079",
+        "origin_time_utc": "2019-07-06T13:06:55.260000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "6180",
+        "candidate_magnitude": 4.5,
+        "dt_s": 0.11,
+        "epi_km": 0.416,
+        "dz_km": -0.416,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3524",
+        "origin_time_utc": "2019-07-06T03:27:07.010000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "4712",
+        "candidate_magnitude": 4.73,
+        "dt_s": -0.82,
+        "epi_km": 2.913,
+        "dz_km": 6.527,
+        "dmag": 0.23
+       },
+       {
+        "reference_event_id": "6554",
+        "origin_time_utc": "2019-07-06T23:50:41.990000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "7701",
+        "candidate_magnitude": 4.5,
+        "dt_s": 0.17,
+        "epi_km": 0.88,
+        "dz_km": 1.796,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "301",
+        "origin_time_utc": "2019-07-04T19:21:32.090000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "326",
+        "candidate_magnitude": 4.5,
+        "dt_s": 0.07,
+        "epi_km": 1.226,
+        "dz_km": 5.397,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3540",
+        "origin_time_utc": "2019-07-06T03:30:25.050000Z",
+        "reference_magnitude": 4.49,
+        "matched": true,
+        "candidate_event_id": "4716",
+        "candidate_magnitude": 4.37,
+        "dt_s": -0.07,
+        "epi_km": 0.302,
+        "dz_km": 1.202,
+        "dmag": -0.12
+       },
+       {
+        "reference_event_id": "19",
+        "origin_time_utc": "2019-07-04T17:35:01.660000Z",
+        "reference_magnitude": 4.49,
+        "matched": true,
+        "candidate_event_id": "36",
+        "candidate_magnitude": 4.49,
+        "dt_s": -0.02,
+        "epi_km": 0.843,
+        "dz_km": 5.589,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "4590",
+        "origin_time_utc": "2019-07-06T09:30:41.240000Z",
+        "reference_magnitude": 4.49,
+        "matched": true,
+        "candidate_event_id": "5614",
+        "candidate_magnitude": 4.49,
+        "dt_s": 0.19,
+        "epi_km": 1.077,
+        "dz_km": -1.741,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3841",
+        "origin_time_utc": "2019-07-06T04:52:17.710000Z",
+        "reference_magnitude": 4.47,
+        "matched": true,
+        "candidate_event_id": "4918",
+        "candidate_magnitude": 4.36,
+        "dt_s": 0.13,
+        "epi_km": 0.179,
+        "dz_km": -0.091,
+        "dmag": -0.11
+       },
+       {
+        "reference_event_id": "3502",
+        "origin_time_utc": "2019-07-06T03:22:27.160000Z",
+        "reference_magnitude": 4.46,
+        "matched": false
+       },
+       {
+        "reference_event_id": "540",
+        "origin_time_utc": "2019-07-04T22:12:08.490000Z",
+        "reference_magnitude": 4.43,
+        "matched": true,
+        "candidate_event_id": "792",
+        "candidate_magnitude": 4.47,
+        "dt_s": 0.23,
+        "epi_km": 0.841,
+        "dz_km": -2.97,
+        "dmag": 0.04
+       },
+       {
+        "reference_event_id": "4587",
+        "origin_time_utc": "2019-07-06T09:29:20.970000Z",
+        "reference_magnitude": 4.41,
+        "matched": true,
+        "candidate_event_id": "5612",
+        "candidate_magnitude": 4.46,
+        "dt_s": 0.21,
+        "epi_km": 0.276,
+        "dz_km": 1.29,
+        "dmag": 0.05
+       },
+       {
+        "reference_event_id": "3569",
+        "origin_time_utc": "2019-07-06T03:36:16.460000Z",
+        "reference_magnitude": 4.35,
+        "matched": true,
+        "candidate_event_id": "4733",
+        "candidate_magnitude": 4.24,
+        "dt_s": 0.02,
+        "epi_km": 0.744,
+        "dz_km": 2.295,
+        "dmag": -0.11
+       },
+       {
+        "reference_event_id": "222",
+        "origin_time_utc": "2019-07-04T18:47:06.590000Z",
+        "reference_magnitude": 4.34,
+        "matched": true,
+        "candidate_event_id": "237",
+        "candidate_magnitude": 4.34,
+        "dt_s": -0.39,
+        "epi_km": 0.676,
+        "dz_km": 3.739,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3498",
+        "origin_time_utc": "2019-07-06T03:21:10.050000Z",
+        "reference_magnitude": 4.33,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3496",
+        "origin_time_utc": "2019-07-06T03:20:36.080000Z",
+        "reference_magnitude": 4.33,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3791",
+        "origin_time_utc": "2019-07-06T04:37:13.570000Z",
+        "reference_magnitude": 4.33,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3652",
+        "origin_time_utc": "2019-07-06T03:57:50.900000Z",
+        "reference_magnitude": 4.31,
+        "matched": true,
+        "candidate_event_id": "4782",
+        "candidate_magnitude": 4.12,
+        "dt_s": 1.53,
+        "epi_km": 2.682,
+        "dz_km": -1.451,
+        "dmag": -0.19
+       },
+       {
+        "reference_event_id": "3728",
+        "origin_time_utc": "2019-07-06T04:19:15.480000Z",
+        "reference_magnitude": 4.29,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3943",
+        "origin_time_utc": "2019-07-06T05:25:04.870000Z",
+        "reference_magnitude": 4.29,
+        "matched": true,
+        "candidate_event_id": "4997",
+        "candidate_magnitude": 4.18,
+        "dt_s": -0.42,
+        "epi_km": 0.058,
+        "dz_km": -2.199,
+        "dmag": -0.11
+       },
+       {
+        "reference_event_id": "22",
+        "origin_time_utc": "2019-07-04T17:35:52.170000Z",
+        "reference_magnitude": 4.28,
+        "matched": true,
+        "candidate_event_id": "37",
+        "candidate_magnitude": 3.0,
+        "dt_s": -0.17,
+        "epi_km": 0.278,
+        "dz_km": -0.77,
+        "dmag": -1.28
+       },
+       {
+        "reference_event_id": "4072",
+        "origin_time_utc": "2019-07-06T06:12:52.000000Z",
+        "reference_magnitude": 4.27,
+        "matched": true,
+        "candidate_event_id": "5123",
+        "candidate_magnitude": 4.09,
+        "dt_s": 0.14,
+        "epi_km": 0.953,
+        "dz_km": -0.505,
+        "dmag": -0.18
+       },
+       {
+        "reference_event_id": "3608",
+        "origin_time_utc": "2019-07-06T03:46:26.870000Z",
+        "reference_magnitude": 4.26,
+        "matched": true,
+        "candidate_event_id": "4758",
+        "candidate_magnitude": 4.17,
+        "dt_s": 0.07,
+        "epi_km": 0.603,
+        "dz_km": -1.949,
+        "dmag": -0.09
+       },
+       {
+        "reference_event_id": "3800",
+        "origin_time_utc": "2019-07-06T04:40:15.980000Z",
+        "reference_magnitude": 4.24,
+        "matched": true,
+        "candidate_event_id": "4887",
+        "candidate_magnitude": 4.16,
+        "dt_s": 0.1,
+        "epi_km": 0.347,
+        "dz_km": 0.165,
+        "dmag": -0.08
+       },
+       {
+        "reference_event_id": "4584",
+        "origin_time_utc": "2019-07-06T09:28:41.790000Z",
+        "reference_magnitude": 4.24,
+        "matched": false
+       },
+       {
+        "reference_event_id": "181",
+        "origin_time_utc": "2019-07-04T18:27:59.440000Z",
+        "reference_magnitude": 4.23,
+        "matched": true,
+        "candidate_event_id": "187",
+        "candidate_magnitude": 4.14,
+        "dt_s": 0.22,
+        "epi_km": 0.529,
+        "dz_km": 0.769,
+        "dmag": -0.09
+       },
+       {
+        "reference_event_id": "3508",
+        "origin_time_utc": "2019-07-06T03:23:34.710000Z",
+        "reference_magnitude": 4.22,
+        "matched": false
+       },
+       {
+        "reference_event_id": "243",
+        "origin_time_utc": "2019-07-04T18:56:22.030000Z",
+        "reference_magnitude": 4.21,
+        "matched": true,
+        "candidate_event_id": "256",
+        "candidate_magnitude": 3.5,
+        "dt_s": -0.23,
+        "epi_km": 0.198,
+        "dz_km": -0.592,
+        "dmag": -0.71
+       },
+       {
+        "reference_event_id": "3512",
+        "origin_time_utc": "2019-07-06T03:24:22.370000Z",
+        "reference_magnitude": 4.19,
+        "matched": true,
+        "candidate_event_id": "4708",
+        "candidate_magnitude": 4.34,
+        "dt_s": 0.04,
+        "epi_km": 0.829,
+        "dz_km": -1.665,
+        "dmag": 0.15
+       },
+       {
+        "reference_event_id": "3532",
+        "origin_time_utc": "2019-07-06T03:28:46.550000Z",
+        "reference_magnitude": 4.19,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3551",
+        "origin_time_utc": "2019-07-06T03:32:46.660000Z",
+        "reference_magnitude": 4.17,
+        "matched": true,
+        "candidate_event_id": "4724",
+        "candidate_magnitude": 4.23,
+        "dt_s": 0.27,
+        "epi_km": 1.939,
+        "dz_km": 1.336,
+        "dmag": 0.06
+       },
+       {
+        "reference_event_id": "3738",
+        "origin_time_utc": "2019-07-06T04:21:35.820000Z",
+        "reference_magnitude": 4.17,
+        "matched": false
+       },
+       {
+        "reference_event_id": "350",
+        "origin_time_utc": "2019-07-04T19:56:00.500000Z",
+        "reference_magnitude": 4.16,
+        "matched": true,
+        "candidate_event_id": "412",
+        "candidate_magnitude": 4.16,
+        "dt_s": -0.2,
+        "epi_km": 0.223,
+        "dz_km": 0.237,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3499",
+        "origin_time_utc": "2019-07-06T03:21:19.190000Z",
+        "reference_magnitude": 4.15,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4034",
+        "origin_time_utc": "2019-07-06T05:58:17.570000Z",
+        "reference_magnitude": 4.15,
+        "matched": true,
+        "candidate_event_id": "5088",
+        "candidate_magnitude": 4.17,
+        "dt_s": 0.4,
+        "epi_km": 0.636,
+        "dz_km": 8.942,
+        "dmag": 0.02
+       },
+       {
+        "reference_event_id": "5576",
+        "origin_time_utc": "2019-07-06T16:36:05.820000Z",
+        "reference_magnitude": 4.14,
+        "matched": true,
+        "candidate_event_id": "6702",
+        "candidate_magnitude": 4.17,
+        "dt_s": -0.52,
+        "epi_km": 1.404,
+        "dz_km": 2.051,
+        "dmag": 0.03
+       },
+       {
+        "reference_event_id": "3494",
+        "origin_time_utc": "2019-07-06T03:17:13.500000Z",
+        "reference_magnitude": 4.14,
+        "matched": false
+       },
+       {
+        "reference_event_id": "40",
+        "origin_time_utc": "2019-07-04T17:40:18.520000Z",
+        "reference_magnitude": 4.13,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4892",
+        "origin_time_utc": "2019-07-06T11:53:08.090000Z",
+        "reference_magnitude": 4.12,
+        "matched": true,
+        "candidate_event_id": "5998",
+        "candidate_magnitude": 4.12,
+        "dt_s": 0.51,
+        "epi_km": 0.095,
+        "dz_km": 0.078,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3529",
+        "origin_time_utc": "2019-07-06T03:28:00.730000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "4713",
+        "candidate_magnitude": 4.04,
+        "dt_s": -0.2,
+        "epi_km": 0.261,
+        "dz_km": -0.463,
+        "dmag": -0.05
+       },
+       {
+        "reference_event_id": "2018",
+        "origin_time_utc": "2019-07-05T12:38:30.020000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "2746",
+        "candidate_magnitude": 4.09,
+        "dt_s": 0.09,
+        "epi_km": 0.655,
+        "dz_km": 0.891,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3522",
+        "origin_time_utc": "2019-07-06T03:26:51.990000Z",
+        "reference_magnitude": 4.09,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3530",
+        "origin_time_utc": "2019-07-06T03:28:12.340000Z",
+        "reference_magnitude": 4.09,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3563",
+        "origin_time_utc": "2019-07-06T03:35:05.420000Z",
+        "reference_magnitude": 4.09,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3553",
+        "origin_time_utc": "2019-07-06T03:33:20.200000Z",
+        "reference_magnitude": 4.08,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3535",
+        "origin_time_utc": "2019-07-06T03:29:28.840000Z",
+        "reference_magnitude": 4.07,
+        "matched": true,
+        "candidate_event_id": "4715",
+        "candidate_magnitude": 4.51,
+        "dt_s": 0.38,
+        "epi_km": 3.585,
+        "dz_km": 2.581,
+        "dmag": 0.44
+       },
+       {
+        "reference_event_id": "3513",
+        "origin_time_utc": "2019-07-06T03:24:33.520000Z",
+        "reference_magnitude": 4.07,
+        "matched": false
+       },
+       {
+        "reference_event_id": "239",
+        "origin_time_utc": "2019-07-04T18:54:13.990000Z",
+        "reference_magnitude": 4.07,
+        "matched": true,
+        "candidate_event_id": "252",
+        "candidate_magnitude": 3.92,
+        "dt_s": 0.29,
+        "epi_km": 1.457,
+        "dz_km": 1.539,
+        "dmag": -0.15
+       },
+       {
+        "reference_event_id": "3642",
+        "origin_time_utc": "2019-07-06T03:55:20.020000Z",
+        "reference_magnitude": 4.06,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4128",
+        "origin_time_utc": "2019-07-06T06:34:47.410000Z",
+        "reference_magnitude": 4.05,
+        "matched": true,
+        "candidate_event_id": "5175",
+        "candidate_magnitude": 4.1,
+        "dt_s": 0.09,
+        "epi_km": 0.277,
+        "dz_km": 1.244,
+        "dmag": 0.05
+       },
+       {
+        "reference_event_id": "4731",
+        "origin_time_utc": "2019-07-06T10:48:24.460000Z",
+        "reference_magnitude": 4.04,
+        "matched": true,
+        "candidate_event_id": "5822",
+        "candidate_magnitude": 4.04,
+        "dt_s": 0.19,
+        "epi_km": 0.833,
+        "dz_km": -0.718,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "727",
+        "origin_time_utc": "2019-07-05T00:18:01.410000Z",
+        "reference_magnitude": 4.04,
+        "matched": true,
+        "candidate_event_id": "1100",
+        "candidate_magnitude": 4.04,
+        "dt_s": 0.0,
+        "epi_km": 0.352,
+        "dz_km": -0.775,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "662",
+        "origin_time_utc": "2019-07-04T23:34:02.380000Z",
+        "reference_magnitude": 4.04,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3528",
+        "origin_time_utc": "2019-07-06T03:27:36.260000Z",
+        "reference_magnitude": 4.03,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3858",
+        "origin_time_utc": "2019-07-06T04:58:36.690000Z",
+        "reference_magnitude": 4.03,
+        "matched": true,
+        "candidate_event_id": "4930",
+        "candidate_magnitude": 3.88,
+        "dt_s": 0.02,
+        "epi_km": 0.261,
+        "dz_km": -0.07,
+        "dmag": -0.15
+       },
+       {
+        "reference_event_id": "3519",
+        "origin_time_utc": "2019-07-06T03:26:04.010000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "4710",
+        "candidate_magnitude": 3.87,
+        "dt_s": -0.6,
+        "epi_km": 0.603,
+        "dz_km": 2.085,
+        "dmag": -0.15
+       },
+       {
+        "reference_event_id": "223",
+        "origin_time_utc": "2019-07-04T18:47:22.600000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "238",
+        "candidate_magnitude": 3.83,
+        "dt_s": 0.0,
+        "epi_km": 0.713,
+        "dz_km": 0.895,
+        "dmag": -0.19
+       },
+       {
+        "reference_event_id": "749",
+        "origin_time_utc": "2019-07-05T00:32:06.670000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "1130",
+        "candidate_magnitude": 4.02,
+        "dt_s": -0.35,
+        "epi_km": 0.303,
+        "dz_km": -0.612,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3533",
+        "origin_time_utc": "2019-07-06T03:29:10.290000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "4714",
+        "candidate_magnitude": 4.38,
+        "dt_s": 0.01,
+        "epi_km": 1.597,
+        "dz_km": 1.973,
+        "dmag": 0.36
+       },
+       {
+        "reference_event_id": "27",
+        "origin_time_utc": "2019-07-04T17:37:25.640000Z",
+        "reference_magnitude": 4.01,
+        "matched": true,
+        "candidate_event_id": "42",
+        "candidate_magnitude": 3.0,
+        "dt_s": 0.08,
+        "epi_km": 0.091,
+        "dz_km": -1.272,
+        "dmag": -1.01
+       },
+       {
+        "reference_event_id": "3731",
+        "origin_time_utc": "2019-07-06T04:19:56.010000Z",
+        "reference_magnitude": 4.01,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3555",
+        "origin_time_utc": "2019-07-06T03:33:39.450000Z",
+        "reference_magnitude": 4.01,
+        "matched": true,
+        "candidate_event_id": "4727",
+        "candidate_magnitude": 3.73,
+        "dt_s": 0.21,
+        "epi_km": 0.457,
+        "dz_km": -1.64,
+        "dmag": -0.28
+       },
+       {
+        "reference_event_id": "3534",
+        "origin_time_utc": "2019-07-06T03:29:15.860000Z",
+        "reference_magnitude": 4.01,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3507",
+        "origin_time_utc": "2019-07-06T03:23:29.560000Z",
+        "reference_magnitude": 4.0,
+        "matched": false
+       }
+      ]
+     },
+     "M5": {
+      "reference_events": 5,
+      "matched": 5,
+      "recall": 1.0,
+      "candidate_events": 6,
+      "precision": 1.0,
+      "f1": 1.0,
+      "precision_unaligned": 1.0,
+      "precision_authority_only": 1.0,
+      "dt_s": {
+       "n": 5,
+       "mean": -0.076,
+       "median": -0.01,
+       "std": 0.1254,
+       "abs_p90": 0.216
+      },
+      "epi_km": {
+       "n": 5,
+       "mean": 0.4909,
+       "median": 0.5709,
+       "std": 0.1814,
+       "p90": 0.5927
+      },
+      "dz_km": {
+       "n": 5,
+       "mean": 1.6872,
+       "median": 1.247,
+       "std": 4.2604,
+       "abs_p90": 5.7406
+      },
+      "dmag": {
+       "n": 5,
+       "mean": -0.002,
+       "median": 0.0,
+       "std": 0.0045,
+       "abs_p90": 0.006
+      },
+      "events": [
+       {
+        "reference_event_id": "3495",
+        "origin_time_utc": "2019-07-06T03:19:53.040000Z",
+        "reference_magnitude": 7.1,
+        "matched": true,
+        "candidate_event_id": "4704",
+        "candidate_magnitude": 7.1,
+        "dt_s": -0.18,
+        "epi_km": 0.534,
+        "dz_km": -4.759,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "18",
+        "origin_time_utc": "2019-07-04T17:33:49.000000Z",
+        "reference_magnitude": 6.4,
+        "matched": true,
+        "candidate_event_id": "35",
+        "candidate_magnitude": 6.4,
+        "dt_s": -0.24,
+        "epi_km": 0.577,
+        "dz_km": 4.554,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3613",
+        "origin_time_utc": "2019-07-06T03:47:53.420000Z",
+        "reference_magnitude": 5.5,
+        "matched": true,
+        "candidate_event_id": "4760",
+        "candidate_magnitude": 5.5,
+        "dt_s": 0.04,
+        "epi_km": 0.571,
+        "dz_km": 0.999,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3727",
+        "origin_time_utc": "2019-07-06T04:18:55.790000Z",
+        "reference_magnitude": 5.44,
+        "matched": true,
+        "candidate_event_id": "4832",
+        "candidate_magnitude": 5.44,
+        "dt_s": 0.01,
+        "epi_km": 0.603,
+        "dz_km": 6.395,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "1842",
+        "origin_time_utc": "2019-07-05T11:07:53.040000Z",
+        "reference_magnitude": 5.37,
+        "matched": true,
+        "candidate_event_id": "2487",
+        "candidate_magnitude": 5.36,
+        "dt_s": -0.01,
+        "epi_km": 0.169,
+        "dz_km": 1.247,
+        "dmag": -0.01
+       }
+      ]
+     }
+    }
+   },
+   "strength": {
+    "authority": "official_earthquake",
+    "pairs": 4825,
+    "dmag": {
+     "n": 4825,
+     "mean": -0.0058,
+     "median": 0.0,
+     "std": 0.1363,
+     "abs_p90": 0.21,
+     "mad": 0.05
+    },
+    "dmag_slope_per_unit": -0.0389,
+    "candidate": {
+     "mc": 1.3,
+     "b": 0.517,
+     "b_sigma": 0.006,
+     "n": 5050
+    },
+    "authority_mfd": {
+     "mc": 2.0,
+     "b": 0.603,
+     "b_sigma": 0.009,
+     "n": 2881
+    },
+    "b_difference": -0.086
+   }
   },
   "liu": {
    "events": 6242,
@@ -1095,7 +2221,1258 @@
     "band_share": 0.157,
     "datum_known": true
    },
-   "magnitude_coverage": 1.0
+   "magnitude_coverage": 1.0,
+   "by_magnitude": {
+    "authority": "official_earthquake",
+    "magnitude_bias": -0.22,
+    "bias_removed": true,
+    "candidate_without_magnitude": 0,
+    "classes": {
+     "M2": {
+      "reference_events": 2724,
+      "matched": 2126,
+      "recall": 0.7805,
+      "candidate_events": 2465,
+      "precision": 0.9659,
+      "f1": 0.8633,
+      "precision_unaligned": 0.9738,
+      "precision_authority_only": 0.8592,
+      "dt_s": {
+       "n": 2126,
+       "mean": -0.1029,
+       "median": -0.1,
+       "std": 0.1781,
+       "abs_p90": 0.19
+      },
+      "epi_km": {
+       "n": 2126,
+       "mean": 0.5569,
+       "median": 0.3406,
+       "std": 0.9535,
+       "p90": 0.9215
+      },
+      "dz_km": {
+       "n": 2126,
+       "mean": 0.5635,
+       "median": 0.7445,
+       "std": 1.5372,
+       "abs_p90": 2.372
+      },
+      "dmag": {
+       "n": 2126,
+       "mean": -0.2883,
+       "median": -0.29,
+       "std": 0.1551,
+       "abs_p90": 0.47
+      }
+     },
+     "M3": {
+      "reference_events": 742,
+      "matched": 561,
+      "recall": 0.7561,
+      "candidate_events": 512,
+      "precision": 0.9863,
+      "f1": 0.856,
+      "precision_unaligned": 0.991,
+      "precision_authority_only": 0.9473,
+      "dt_s": {
+       "n": 561,
+       "mean": -0.108,
+       "median": -0.1,
+       "std": 0.1468,
+       "abs_p90": 0.19
+      },
+      "epi_km": {
+       "n": 561,
+       "mean": 0.482,
+       "median": 0.3234,
+       "std": 0.6623,
+       "p90": 0.764
+      },
+      "dz_km": {
+       "n": 561,
+       "mean": 0.6424,
+       "median": 0.797,
+       "std": 1.6153,
+       "abs_p90": 2.419
+      },
+      "dmag": {
+       "n": 561,
+       "mean": -0.3326,
+       "median": -0.34,
+       "std": 0.1826,
+       "abs_p90": 0.54
+      }
+     },
+     "M4": {
+      "reference_events": 88,
+      "matched": 74,
+      "recall": 0.8409,
+      "candidate_events": 82,
+      "precision": 1.0,
+      "f1": 0.9136,
+      "precision_unaligned": 1.0,
+      "precision_authority_only": 0.9634,
+      "dt_s": {
+       "n": 74,
+       "mean": -0.0973,
+       "median": -0.1,
+       "std": 0.1447,
+       "abs_p90": 0.244
+      },
+      "epi_km": {
+       "n": 74,
+       "mean": 0.5438,
+       "median": 0.4235,
+       "std": 0.5261,
+       "p90": 1.1026
+      },
+      "dz_km": {
+       "n": 74,
+       "mean": 0.8262,
+       "median": 0.9125,
+       "std": 1.6783,
+       "abs_p90": 2.6888
+      },
+      "dmag": {
+       "n": 74,
+       "mean": -0.3403,
+       "median": -0.315,
+       "std": 0.2555,
+       "abs_p90": 0.567
+      },
+      "events": [
+       {
+        "reference_event_id": "3495",
+        "origin_time_utc": "2019-07-06T03:19:53.040000Z",
+        "reference_magnitude": 7.1,
+        "matched": true,
+        "candidate_event_id": "3428",
+        "candidate_magnitude": 5.5,
+        "dt_s": -0.08,
+        "epi_km": 1.279,
+        "dz_km": -4.487,
+        "dmag": -1.6
+       },
+       {
+        "reference_event_id": "18",
+        "origin_time_utc": "2019-07-04T17:33:49.000000Z",
+        "reference_magnitude": 6.4,
+        "matched": true,
+        "candidate_event_id": "18",
+        "candidate_magnitude": 5.31,
+        "dt_s": -0.04,
+        "epi_km": 0.312,
+        "dz_km": 0.223,
+        "dmag": -1.09
+       },
+       {
+        "reference_event_id": "3613",
+        "origin_time_utc": "2019-07-06T03:47:53.420000Z",
+        "reference_magnitude": 5.5,
+        "matched": true,
+        "candidate_event_id": "3497",
+        "candidate_magnitude": 4.61,
+        "dt_s": -0.03,
+        "epi_km": 1.231,
+        "dz_km": 5.524,
+        "dmag": -0.89
+       },
+       {
+        "reference_event_id": "3727",
+        "origin_time_utc": "2019-07-06T04:18:55.790000Z",
+        "reference_magnitude": 5.44,
+        "matched": true,
+        "candidate_event_id": "3574",
+        "candidate_magnitude": 4.94,
+        "dt_s": -0.12,
+        "epi_km": 0.308,
+        "dz_km": 1.863,
+        "dmag": -0.5
+       },
+       {
+        "reference_event_id": "1842",
+        "origin_time_utc": "2019-07-05T11:07:53.040000Z",
+        "reference_magnitude": 5.37,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3493",
+        "origin_time_utc": "2019-07-06T03:16:32.480000Z",
+        "reference_magnitude": 4.97,
+        "matched": true,
+        "candidate_event_id": "3423",
+        "candidate_magnitude": 4.59,
+        "dt_s": 0.12,
+        "epi_km": 0.447,
+        "dz_km": 0.951,
+        "dmag": -0.38
+       },
+       {
+        "reference_event_id": "3625",
+        "origin_time_utc": "2019-07-06T03:50:59.710000Z",
+        "reference_magnitude": 4.97,
+        "matched": true,
+        "candidate_event_id": "3504",
+        "candidate_magnitude": 4.86,
+        "dt_s": -0.36,
+        "epi_km": 0.721,
+        "dz_km": 3.726,
+        "dmag": -0.11
+       },
+       {
+        "reference_event_id": "4583",
+        "origin_time_utc": "2019-07-06T09:28:28.980000Z",
+        "reference_magnitude": 4.89,
+        "matched": true,
+        "candidate_event_id": "4324",
+        "candidate_magnitude": 4.45,
+        "dt_s": -0.01,
+        "epi_km": 0.3,
+        "dz_km": 1.894,
+        "dmag": -0.44
+       },
+       {
+        "reference_event_id": "3790",
+        "origin_time_utc": "2019-07-06T04:36:55.310000Z",
+        "reference_magnitude": 4.85,
+        "matched": true,
+        "candidate_event_id": "3622",
+        "candidate_magnitude": 4.29,
+        "dt_s": -0.02,
+        "epi_km": 0.731,
+        "dz_km": 0.949,
+        "dmag": -0.56
+       },
+       {
+        "reference_event_id": "3509",
+        "origin_time_utc": "2019-07-06T03:23:50.720000Z",
+        "reference_magnitude": 4.84,
+        "matched": true,
+        "candidate_event_id": "3436",
+        "candidate_magnitude": 4.35,
+        "dt_s": -0.2,
+        "epi_km": 0.702,
+        "dz_km": -0.155,
+        "dmag": -0.49
+       },
+       {
+        "reference_event_id": "3497",
+        "origin_time_utc": "2019-07-06T03:20:41.140000Z",
+        "reference_magnitude": 4.81,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3707",
+        "origin_time_utc": "2019-07-06T04:13:07.080000Z",
+        "reference_magnitude": 4.8,
+        "matched": true,
+        "candidate_event_id": "3557",
+        "candidate_magnitude": 4.37,
+        "dt_s": -0.08,
+        "epi_km": 0.425,
+        "dz_km": -2.479,
+        "dmag": -0.43
+       },
+       {
+        "reference_event_id": "3503",
+        "origin_time_utc": "2019-07-06T03:22:35.630000Z",
+        "reference_magnitude": 4.73,
+        "matched": true,
+        "candidate_event_id": "3432",
+        "candidate_magnitude": 4.73,
+        "dt_s": -0.06,
+        "epi_km": 0.419,
+        "dz_km": 0.231,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3681",
+        "origin_time_utc": "2019-07-06T04:07:04.570000Z",
+        "reference_magnitude": 4.68,
+        "matched": true,
+        "candidate_event_id": "3541",
+        "candidate_magnitude": 4.13,
+        "dt_s": -0.12,
+        "epi_km": 0.827,
+        "dz_km": 2.117,
+        "dmag": -0.55
+       },
+       {
+        "reference_event_id": "3504",
+        "origin_time_utc": "2019-07-06T03:22:48.300000Z",
+        "reference_magnitude": 4.64,
+        "matched": true,
+        "candidate_event_id": "3433",
+        "candidate_magnitude": 4.55,
+        "dt_s": -0.13,
+        "epi_km": 0.234,
+        "dz_km": 0.805,
+        "dmag": -0.09
+       },
+       {
+        "reference_event_id": "3500",
+        "origin_time_utc": "2019-07-06T03:22:03.570000Z",
+        "reference_magnitude": 4.64,
+        "matched": true,
+        "candidate_event_id": "3430",
+        "candidate_magnitude": 4.41,
+        "dt_s": -0.2,
+        "epi_km": 0.569,
+        "dz_km": 1.594,
+        "dmag": -0.23
+       },
+       {
+        "reference_event_id": "4039",
+        "origin_time_utc": "2019-07-06T06:01:51.800000Z",
+        "reference_magnitude": 4.63,
+        "matched": true,
+        "candidate_event_id": "3831",
+        "candidate_magnitude": 4.15,
+        "dt_s": -0.14,
+        "epi_km": 0.075,
+        "dz_km": 2.039,
+        "dmag": -0.48
+       },
+       {
+        "reference_event_id": "3516",
+        "origin_time_utc": "2019-07-06T03:25:27.970000Z",
+        "reference_magnitude": 4.61,
+        "matched": true,
+        "candidate_event_id": "3441",
+        "candidate_magnitude": 4.5,
+        "dt_s": -0.25,
+        "epi_km": 0.553,
+        "dz_km": 0.938,
+        "dmag": -0.11
+       },
+       {
+        "reference_event_id": "209",
+        "origin_time_utc": "2019-07-04T18:39:44.440000Z",
+        "reference_magnitude": 4.59,
+        "matched": true,
+        "candidate_event_id": "162",
+        "candidate_magnitude": 3.87,
+        "dt_s": -0.08,
+        "epi_km": 0.088,
+        "dz_km": 0.582,
+        "dmag": -0.72
+       },
+       {
+        "reference_event_id": "242",
+        "origin_time_utc": "2019-07-04T18:56:06.420000Z",
+        "reference_magnitude": 4.58,
+        "matched": true,
+        "candidate_event_id": "192",
+        "candidate_magnitude": 4.04,
+        "dt_s": -0.06,
+        "epi_km": 0.389,
+        "dz_km": 0.435,
+        "dmag": -0.54
+       },
+       {
+        "reference_event_id": "3525",
+        "origin_time_utc": "2019-07-06T03:27:11.370000Z",
+        "reference_magnitude": 4.57,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4478",
+        "origin_time_utc": "2019-07-06T08:32:57.550000Z",
+        "reference_magnitude": 4.56,
+        "matched": true,
+        "candidate_event_id": "4190",
+        "candidate_magnitude": 4.18,
+        "dt_s": -0.07,
+        "epi_km": 0.541,
+        "dz_km": 0.882,
+        "dmag": -0.38
+       },
+       {
+        "reference_event_id": "3501",
+        "origin_time_utc": "2019-07-06T03:22:17.100000Z",
+        "reference_magnitude": 4.55,
+        "matched": true,
+        "candidate_event_id": "3431",
+        "candidate_magnitude": 4.3,
+        "dt_s": -0.12,
+        "epi_km": 0.979,
+        "dz_km": 2.369,
+        "dmag": -0.25
+       },
+       {
+        "reference_event_id": "3506",
+        "origin_time_utc": "2019-07-06T03:23:19.870000Z",
+        "reference_magnitude": 4.52,
+        "matched": true,
+        "candidate_event_id": "3434",
+        "candidate_magnitude": 4.21,
+        "dt_s": -0.19,
+        "epi_km": 0.649,
+        "dz_km": 2.589,
+        "dmag": -0.31
+       },
+       {
+        "reference_event_id": "3536",
+        "origin_time_utc": "2019-07-06T03:29:32.080000Z",
+        "reference_magnitude": 4.51,
+        "matched": true,
+        "candidate_event_id": "3452",
+        "candidate_magnitude": 4.01,
+        "dt_s": -0.2,
+        "epi_km": 0.813,
+        "dz_km": 0.613,
+        "dmag": -0.5
+       },
+       {
+        "reference_event_id": "5079",
+        "origin_time_utc": "2019-07-06T13:06:55.260000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "4858",
+        "candidate_magnitude": 3.93,
+        "dt_s": -0.04,
+        "epi_km": 0.086,
+        "dz_km": 0.909,
+        "dmag": -0.57
+       },
+       {
+        "reference_event_id": "3524",
+        "origin_time_utc": "2019-07-06T03:27:07.010000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "3444",
+        "candidate_magnitude": 4.22,
+        "dt_s": -0.14,
+        "epi_km": 0.977,
+        "dz_km": 1.708,
+        "dmag": -0.28
+       },
+       {
+        "reference_event_id": "6554",
+        "origin_time_utc": "2019-07-06T23:50:41.990000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "6225",
+        "candidate_magnitude": 4.11,
+        "dt_s": -0.05,
+        "epi_km": 0.212,
+        "dz_km": 0.72,
+        "dmag": -0.39
+       },
+       {
+        "reference_event_id": "301",
+        "origin_time_utc": "2019-07-04T19:21:32.090000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "249",
+        "candidate_magnitude": 4.15,
+        "dt_s": -0.05,
+        "epi_km": 0.526,
+        "dz_km": 2.714,
+        "dmag": -0.35
+       },
+       {
+        "reference_event_id": "3540",
+        "origin_time_utc": "2019-07-06T03:30:25.050000Z",
+        "reference_magnitude": 4.49,
+        "matched": true,
+        "candidate_event_id": "3453",
+        "candidate_magnitude": 4.05,
+        "dt_s": -0.16,
+        "epi_km": 0.603,
+        "dz_km": 0.414,
+        "dmag": -0.44
+       },
+       {
+        "reference_event_id": "19",
+        "origin_time_utc": "2019-07-04T17:35:01.660000Z",
+        "reference_magnitude": 4.49,
+        "matched": true,
+        "candidate_event_id": "19",
+        "candidate_magnitude": 4.28,
+        "dt_s": -0.14,
+        "epi_km": 0.119,
+        "dz_km": 1.96,
+        "dmag": -0.21
+       },
+       {
+        "reference_event_id": "4590",
+        "origin_time_utc": "2019-07-06T09:30:41.240000Z",
+        "reference_magnitude": 4.49,
+        "matched": true,
+        "candidate_event_id": "4327",
+        "candidate_magnitude": 4.15,
+        "dt_s": -0.09,
+        "epi_km": 0.275,
+        "dz_km": 1.465,
+        "dmag": -0.34
+       },
+       {
+        "reference_event_id": "3841",
+        "origin_time_utc": "2019-07-06T04:52:17.710000Z",
+        "reference_magnitude": 4.47,
+        "matched": true,
+        "candidate_event_id": "3660",
+        "candidate_magnitude": 4.15,
+        "dt_s": -0.06,
+        "epi_km": 0.084,
+        "dz_km": 1.688,
+        "dmag": -0.32
+       },
+       {
+        "reference_event_id": "3502",
+        "origin_time_utc": "2019-07-06T03:22:27.160000Z",
+        "reference_magnitude": 4.46,
+        "matched": false
+       },
+       {
+        "reference_event_id": "540",
+        "origin_time_utc": "2019-07-04T22:12:08.490000Z",
+        "reference_magnitude": 4.43,
+        "matched": true,
+        "candidate_event_id": "600",
+        "candidate_magnitude": 3.94,
+        "dt_s": -0.13,
+        "epi_km": 0.359,
+        "dz_km": -1.098,
+        "dmag": -0.49
+       },
+       {
+        "reference_event_id": "4587",
+        "origin_time_utc": "2019-07-06T09:29:20.970000Z",
+        "reference_magnitude": 4.41,
+        "matched": true,
+        "candidate_event_id": "4325",
+        "candidate_magnitude": 4.22,
+        "dt_s": -0.18,
+        "epi_km": 0.166,
+        "dz_km": 2.63,
+        "dmag": -0.19
+       },
+       {
+        "reference_event_id": "3569",
+        "origin_time_utc": "2019-07-06T03:36:16.460000Z",
+        "reference_magnitude": 4.35,
+        "matched": true,
+        "candidate_event_id": "3469",
+        "candidate_magnitude": 4.43,
+        "dt_s": -0.23,
+        "epi_km": 0.429,
+        "dz_km": 3.119,
+        "dmag": 0.08
+       },
+       {
+        "reference_event_id": "222",
+        "origin_time_utc": "2019-07-04T18:47:06.590000Z",
+        "reference_magnitude": 4.34,
+        "matched": true,
+        "candidate_event_id": "174",
+        "candidate_magnitude": 4.21,
+        "dt_s": -0.07,
+        "epi_km": 0.424,
+        "dz_km": 0.916,
+        "dmag": -0.13
+       },
+       {
+        "reference_event_id": "3498",
+        "origin_time_utc": "2019-07-06T03:21:10.050000Z",
+        "reference_magnitude": 4.33,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3496",
+        "origin_time_utc": "2019-07-06T03:20:36.080000Z",
+        "reference_magnitude": 4.33,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3791",
+        "origin_time_utc": "2019-07-06T04:37:13.570000Z",
+        "reference_magnitude": 4.33,
+        "matched": true,
+        "candidate_event_id": "3623",
+        "candidate_magnitude": 4.11,
+        "dt_s": -0.19,
+        "epi_km": 0.126,
+        "dz_km": 1.31,
+        "dmag": -0.22
+       },
+       {
+        "reference_event_id": "3652",
+        "origin_time_utc": "2019-07-06T03:57:50.900000Z",
+        "reference_magnitude": 4.31,
+        "matched": true,
+        "candidate_event_id": "3521",
+        "candidate_magnitude": 3.99,
+        "dt_s": -0.03,
+        "epi_km": 0.154,
+        "dz_km": 0.703,
+        "dmag": -0.32
+       },
+       {
+        "reference_event_id": "3728",
+        "origin_time_utc": "2019-07-06T04:19:15.480000Z",
+        "reference_magnitude": 4.29,
+        "matched": true,
+        "candidate_event_id": "3575",
+        "candidate_magnitude": 4.08,
+        "dt_s": -0.14,
+        "epi_km": 0.208,
+        "dz_km": 0.737,
+        "dmag": -0.21
+       },
+       {
+        "reference_event_id": "3943",
+        "origin_time_utc": "2019-07-06T05:25:04.870000Z",
+        "reference_magnitude": 4.29,
+        "matched": true,
+        "candidate_event_id": "3736",
+        "candidate_magnitude": 3.96,
+        "dt_s": -0.09,
+        "epi_km": 0.109,
+        "dz_km": 1.775,
+        "dmag": -0.33
+       },
+       {
+        "reference_event_id": "22",
+        "origin_time_utc": "2019-07-04T17:35:52.170000Z",
+        "reference_magnitude": 4.28,
+        "matched": true,
+        "candidate_event_id": "20",
+        "candidate_magnitude": 3.89,
+        "dt_s": -0.35,
+        "epi_km": 0.339,
+        "dz_km": -0.867,
+        "dmag": -0.39
+       },
+       {
+        "reference_event_id": "4072",
+        "origin_time_utc": "2019-07-06T06:12:52.000000Z",
+        "reference_magnitude": 4.27,
+        "matched": true,
+        "candidate_event_id": "3860",
+        "candidate_magnitude": 4.01,
+        "dt_s": -0.14,
+        "epi_km": 0.493,
+        "dz_km": -0.338,
+        "dmag": -0.26
+       },
+       {
+        "reference_event_id": "3608",
+        "origin_time_utc": "2019-07-06T03:46:26.870000Z",
+        "reference_magnitude": 4.26,
+        "matched": true,
+        "candidate_event_id": "3494",
+        "candidate_magnitude": 4.15,
+        "dt_s": -0.11,
+        "epi_km": 0.161,
+        "dz_km": -0.038,
+        "dmag": -0.11
+       },
+       {
+        "reference_event_id": "3800",
+        "origin_time_utc": "2019-07-06T04:40:15.980000Z",
+        "reference_magnitude": 4.24,
+        "matched": true,
+        "candidate_event_id": "3630",
+        "candidate_magnitude": 3.92,
+        "dt_s": -0.02,
+        "epi_km": 0.156,
+        "dz_km": 1.577,
+        "dmag": -0.32
+       },
+       {
+        "reference_event_id": "4584",
+        "origin_time_utc": "2019-07-06T09:28:41.790000Z",
+        "reference_magnitude": 4.24,
+        "matched": false
+       },
+       {
+        "reference_event_id": "181",
+        "origin_time_utc": "2019-07-04T18:27:59.440000Z",
+        "reference_magnitude": 4.23,
+        "matched": true,
+        "candidate_event_id": "133",
+        "candidate_magnitude": 3.97,
+        "dt_s": -0.14,
+        "epi_km": 0.302,
+        "dz_km": 1.387,
+        "dmag": -0.26
+       },
+       {
+        "reference_event_id": "3508",
+        "origin_time_utc": "2019-07-06T03:23:34.710000Z",
+        "reference_magnitude": 4.22,
+        "matched": true,
+        "candidate_event_id": "3435",
+        "candidate_magnitude": 3.86,
+        "dt_s": -0.06,
+        "epi_km": 1.139,
+        "dz_km": -0.417,
+        "dmag": -0.36
+       },
+       {
+        "reference_event_id": "243",
+        "origin_time_utc": "2019-07-04T18:56:22.030000Z",
+        "reference_magnitude": 4.21,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3512",
+        "origin_time_utc": "2019-07-06T03:24:22.370000Z",
+        "reference_magnitude": 4.19,
+        "matched": true,
+        "candidate_event_id": "3437",
+        "candidate_magnitude": 4.2,
+        "dt_s": -0.37,
+        "epi_km": 0.361,
+        "dz_km": 3.098,
+        "dmag": 0.01
+       },
+       {
+        "reference_event_id": "3532",
+        "origin_time_utc": "2019-07-06T03:28:46.550000Z",
+        "reference_magnitude": 4.19,
+        "matched": true,
+        "candidate_event_id": "3449",
+        "candidate_magnitude": 4.05,
+        "dt_s": -0.03,
+        "epi_km": 1.117,
+        "dz_km": 2.149,
+        "dmag": -0.14
+       },
+       {
+        "reference_event_id": "3551",
+        "origin_time_utc": "2019-07-06T03:32:46.660000Z",
+        "reference_magnitude": 4.17,
+        "matched": true,
+        "candidate_event_id": "3459",
+        "candidate_magnitude": 3.99,
+        "dt_s": 0.0,
+        "epi_km": 1.771,
+        "dz_km": 2.419,
+        "dmag": -0.18
+       },
+       {
+        "reference_event_id": "3738",
+        "origin_time_utc": "2019-07-06T04:21:35.820000Z",
+        "reference_magnitude": 4.17,
+        "matched": true,
+        "candidate_event_id": "3580",
+        "candidate_magnitude": 3.47,
+        "dt_s": -0.11,
+        "epi_km": 0.504,
+        "dz_km": 0.123,
+        "dmag": -0.7
+       },
+       {
+        "reference_event_id": "350",
+        "origin_time_utc": "2019-07-04T19:56:00.500000Z",
+        "reference_magnitude": 4.16,
+        "matched": true,
+        "candidate_event_id": "321",
+        "candidate_magnitude": 3.7,
+        "dt_s": 0.02,
+        "epi_km": 0.516,
+        "dz_km": 1.87,
+        "dmag": -0.46
+       },
+       {
+        "reference_event_id": "3499",
+        "origin_time_utc": "2019-07-06T03:21:19.190000Z",
+        "reference_magnitude": 4.15,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4034",
+        "origin_time_utc": "2019-07-06T05:58:17.570000Z",
+        "reference_magnitude": 4.15,
+        "matched": true,
+        "candidate_event_id": "3824",
+        "candidate_magnitude": 3.75,
+        "dt_s": 0.21,
+        "epi_km": 1.239,
+        "dz_km": 1.998,
+        "dmag": -0.4
+       },
+       {
+        "reference_event_id": "5576",
+        "origin_time_utc": "2019-07-06T16:36:05.820000Z",
+        "reference_magnitude": 4.14,
+        "matched": true,
+        "candidate_event_id": "5321",
+        "candidate_magnitude": 3.71,
+        "dt_s": -0.04,
+        "epi_km": 0.215,
+        "dz_km": -0.27,
+        "dmag": -0.43
+       },
+       {
+        "reference_event_id": "3494",
+        "origin_time_utc": "2019-07-06T03:17:13.500000Z",
+        "reference_magnitude": 4.14,
+        "matched": true,
+        "candidate_event_id": "3424",
+        "candidate_magnitude": 3.48,
+        "dt_s": -0.15,
+        "epi_km": 0.479,
+        "dz_km": 0.098,
+        "dmag": -0.66
+       },
+       {
+        "reference_event_id": "40",
+        "origin_time_utc": "2019-07-04T17:40:18.520000Z",
+        "reference_magnitude": 4.13,
+        "matched": true,
+        "candidate_event_id": "30",
+        "candidate_magnitude": 3.9,
+        "dt_s": -0.16,
+        "epi_km": 0.684,
+        "dz_km": -0.406,
+        "dmag": -0.23
+       },
+       {
+        "reference_event_id": "4892",
+        "origin_time_utc": "2019-07-06T11:53:08.090000Z",
+        "reference_magnitude": 4.12,
+        "matched": true,
+        "candidate_event_id": "4688",
+        "candidate_magnitude": 3.8,
+        "dt_s": -0.1,
+        "epi_km": 0.147,
+        "dz_km": -0.266,
+        "dmag": -0.32
+       },
+       {
+        "reference_event_id": "3529",
+        "origin_time_utc": "2019-07-06T03:28:00.730000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "3446",
+        "candidate_magnitude": 3.88,
+        "dt_s": -0.09,
+        "epi_km": 0.146,
+        "dz_km": 0.551,
+        "dmag": -0.21
+       },
+       {
+        "reference_event_id": "2018",
+        "origin_time_utc": "2019-07-05T12:38:30.020000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "2063",
+        "candidate_magnitude": 3.99,
+        "dt_s": -0.14,
+        "epi_km": 0.284,
+        "dz_km": 1.823,
+        "dmag": -0.1
+       },
+       {
+        "reference_event_id": "3522",
+        "origin_time_utc": "2019-07-06T03:26:51.990000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "3443",
+        "candidate_magnitude": 3.92,
+        "dt_s": 0.08,
+        "epi_km": 1.068,
+        "dz_km": -1.165,
+        "dmag": -0.17
+       },
+       {
+        "reference_event_id": "3530",
+        "origin_time_utc": "2019-07-06T03:28:12.340000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "3447",
+        "candidate_magnitude": 3.9,
+        "dt_s": -0.04,
+        "epi_km": 0.892,
+        "dz_km": 0.13,
+        "dmag": -0.19
+       },
+       {
+        "reference_event_id": "3563",
+        "origin_time_utc": "2019-07-06T03:35:05.420000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "3467",
+        "candidate_magnitude": 3.44,
+        "dt_s": 0.0,
+        "epi_km": 0.534,
+        "dz_km": 0.969,
+        "dmag": -0.65
+       },
+       {
+        "reference_event_id": "3553",
+        "origin_time_utc": "2019-07-06T03:33:20.200000Z",
+        "reference_magnitude": 4.08,
+        "matched": true,
+        "candidate_event_id": "3462",
+        "candidate_magnitude": 3.99,
+        "dt_s": -0.07,
+        "epi_km": 0.355,
+        "dz_km": -0.643,
+        "dmag": -0.09
+       },
+       {
+        "reference_event_id": "3535",
+        "origin_time_utc": "2019-07-06T03:29:28.840000Z",
+        "reference_magnitude": 4.07,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3513",
+        "origin_time_utc": "2019-07-06T03:24:33.520000Z",
+        "reference_magnitude": 4.07,
+        "matched": false
+       },
+       {
+        "reference_event_id": "239",
+        "origin_time_utc": "2019-07-04T18:54:13.990000Z",
+        "reference_magnitude": 4.07,
+        "matched": true,
+        "candidate_event_id": "189",
+        "candidate_magnitude": 3.71,
+        "dt_s": -0.11,
+        "epi_km": 0.15,
+        "dz_km": -0.54,
+        "dmag": -0.36
+       },
+       {
+        "reference_event_id": "3642",
+        "origin_time_utc": "2019-07-06T03:55:20.020000Z",
+        "reference_magnitude": 4.06,
+        "matched": true,
+        "candidate_event_id": "3514",
+        "candidate_magnitude": 4.02,
+        "dt_s": -0.2,
+        "epi_km": 0.433,
+        "dz_km": 2.36,
+        "dmag": -0.04
+       },
+       {
+        "reference_event_id": "4128",
+        "origin_time_utc": "2019-07-06T06:34:47.410000Z",
+        "reference_magnitude": 4.05,
+        "matched": true,
+        "candidate_event_id": "3910",
+        "candidate_magnitude": 3.98,
+        "dt_s": -0.17,
+        "epi_km": 0.093,
+        "dz_km": 1.764,
+        "dmag": -0.07
+       },
+       {
+        "reference_event_id": "4731",
+        "origin_time_utc": "2019-07-06T10:48:24.460000Z",
+        "reference_magnitude": 4.04,
+        "matched": true,
+        "candidate_event_id": "4526",
+        "candidate_magnitude": 3.79,
+        "dt_s": -0.12,
+        "epi_km": 0.6,
+        "dz_km": -0.576,
+        "dmag": -0.25
+       },
+       {
+        "reference_event_id": "727",
+        "origin_time_utc": "2019-07-05T00:18:01.410000Z",
+        "reference_magnitude": 4.04,
+        "matched": true,
+        "candidate_event_id": "819",
+        "candidate_magnitude": 3.82,
+        "dt_s": -0.03,
+        "epi_km": 0.254,
+        "dz_km": 1.457,
+        "dmag": -0.22
+       },
+       {
+        "reference_event_id": "662",
+        "origin_time_utc": "2019-07-04T23:34:02.380000Z",
+        "reference_magnitude": 4.04,
+        "matched": true,
+        "candidate_event_id": "742",
+        "candidate_magnitude": 3.52,
+        "dt_s": -0.1,
+        "epi_km": 0.325,
+        "dz_km": 0.166,
+        "dmag": -0.52
+       },
+       {
+        "reference_event_id": "3528",
+        "origin_time_utc": "2019-07-06T03:27:36.260000Z",
+        "reference_magnitude": 4.03,
+        "matched": true,
+        "candidate_event_id": "3445",
+        "candidate_magnitude": 3.92,
+        "dt_s": -0.26,
+        "epi_km": 0.298,
+        "dz_km": 1.877,
+        "dmag": -0.11
+       },
+       {
+        "reference_event_id": "3858",
+        "origin_time_utc": "2019-07-06T04:58:36.690000Z",
+        "reference_magnitude": 4.03,
+        "matched": true,
+        "candidate_event_id": "3675",
+        "candidate_magnitude": 3.67,
+        "dt_s": -0.05,
+        "epi_km": 0.298,
+        "dz_km": 1.81,
+        "dmag": -0.36
+       },
+       {
+        "reference_event_id": "3519",
+        "origin_time_utc": "2019-07-06T03:26:04.010000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "3442",
+        "candidate_magnitude": 3.82,
+        "dt_s": -0.4,
+        "epi_km": 0.764,
+        "dz_km": 2.247,
+        "dmag": -0.2
+       },
+       {
+        "reference_event_id": "223",
+        "origin_time_utc": "2019-07-04T18:47:22.600000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "175",
+        "candidate_magnitude": 3.74,
+        "dt_s": -0.1,
+        "epi_km": 0.423,
+        "dz_km": -0.446,
+        "dmag": -0.28
+       },
+       {
+        "reference_event_id": "749",
+        "origin_time_utc": "2019-07-05T00:32:06.670000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "844",
+        "candidate_magnitude": 3.79,
+        "dt_s": -0.09,
+        "epi_km": 0.234,
+        "dz_km": 0.59,
+        "dmag": -0.23
+       },
+       {
+        "reference_event_id": "3533",
+        "origin_time_utc": "2019-07-06T03:29:10.290000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "3450",
+        "candidate_magnitude": 3.74,
+        "dt_s": -0.37,
+        "epi_km": 1.799,
+        "dz_km": 0.745,
+        "dmag": -0.28
+       },
+       {
+        "reference_event_id": "27",
+        "origin_time_utc": "2019-07-04T17:37:25.640000Z",
+        "reference_magnitude": 4.01,
+        "matched": true,
+        "candidate_event_id": "23",
+        "candidate_magnitude": 3.75,
+        "dt_s": 0.12,
+        "epi_km": 0.552,
+        "dz_km": -4.178,
+        "dmag": -0.26
+       },
+       {
+        "reference_event_id": "3731",
+        "origin_time_utc": "2019-07-06T04:19:56.010000Z",
+        "reference_magnitude": 4.01,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3555",
+        "origin_time_utc": "2019-07-06T03:33:39.450000Z",
+        "reference_magnitude": 4.01,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3534",
+        "origin_time_utc": "2019-07-06T03:29:15.860000Z",
+        "reference_magnitude": 4.01,
+        "matched": true,
+        "candidate_event_id": "3451",
+        "candidate_magnitude": 3.99,
+        "dt_s": 0.72,
+        "epi_km": 3.669,
+        "dz_km": -4.794,
+        "dmag": -0.02
+       },
+       {
+        "reference_event_id": "3507",
+        "origin_time_utc": "2019-07-06T03:23:29.560000Z",
+        "reference_magnitude": 4.0,
+        "matched": false
+       }
+      ]
+     },
+     "M5": {
+      "reference_events": 5,
+      "matched": 4,
+      "recall": 0.8,
+      "candidate_events": 4,
+      "precision": 1.0,
+      "f1": 0.8889,
+      "precision_unaligned": 1.0,
+      "precision_authority_only": 1.0,
+      "dt_s": {
+       "n": 4,
+       "mean": -0.0675,
+       "median": -0.06,
+       "std": 0.0411,
+       "abs_p90": 0.108
+      },
+      "epi_km": {
+       "n": 4,
+       "mean": 0.7822,
+       "median": 0.7712,
+       "std": 0.546,
+       "p90": 1.2644
+      },
+      "dz_km": {
+       "n": 4,
+       "mean": 0.7808,
+       "median": 1.043,
+       "std": 4.1525,
+       "abs_p90": 5.2129
+      },
+      "dmag": {
+       "n": 4,
+       "mean": -1.02,
+       "median": -0.99,
+       "std": 0.4577,
+       "abs_p90": 1.447
+      },
+      "events": [
+       {
+        "reference_event_id": "3495",
+        "origin_time_utc": "2019-07-06T03:19:53.040000Z",
+        "reference_magnitude": 7.1,
+        "matched": true,
+        "candidate_event_id": "3428",
+        "candidate_magnitude": 5.5,
+        "dt_s": -0.08,
+        "epi_km": 1.279,
+        "dz_km": -4.487,
+        "dmag": -1.6
+       },
+       {
+        "reference_event_id": "18",
+        "origin_time_utc": "2019-07-04T17:33:49.000000Z",
+        "reference_magnitude": 6.4,
+        "matched": true,
+        "candidate_event_id": "18",
+        "candidate_magnitude": 5.31,
+        "dt_s": -0.04,
+        "epi_km": 0.312,
+        "dz_km": 0.223,
+        "dmag": -1.09
+       },
+       {
+        "reference_event_id": "3613",
+        "origin_time_utc": "2019-07-06T03:47:53.420000Z",
+        "reference_magnitude": 5.5,
+        "matched": true,
+        "candidate_event_id": "3497",
+        "candidate_magnitude": 4.61,
+        "dt_s": -0.03,
+        "epi_km": 1.231,
+        "dz_km": 5.524,
+        "dmag": -0.89
+       },
+       {
+        "reference_event_id": "3727",
+        "origin_time_utc": "2019-07-06T04:18:55.790000Z",
+        "reference_magnitude": 5.44,
+        "matched": true,
+        "candidate_event_id": "3574",
+        "candidate_magnitude": 4.94,
+        "dt_s": -0.12,
+        "epi_km": 0.308,
+        "dz_km": 1.863,
+        "dmag": -0.5
+       },
+       {
+        "reference_event_id": "1842",
+        "origin_time_utc": "2019-07-05T11:07:53.040000Z",
+        "reference_magnitude": 5.37,
+        "matched": false
+       }
+      ]
+     }
+    }
+   },
+   "strength": {
+    "authority": "official_earthquake",
+    "pairs": 4649,
+    "dmag": {
+     "n": 4649,
+     "mean": -0.2218,
+     "median": -0.22,
+     "std": 0.1631,
+     "abs_p90": 0.42,
+     "mad": 0.1
+    },
+    "dmag_slope_per_unit": -0.09,
+    "candidate": {
+     "mc": 1.3,
+     "b": 0.562,
+     "b_sigma": 0.007,
+     "n": 4249
+    },
+    "authority_mfd": {
+     "mc": 2.0,
+     "b": 0.603,
+     "b_sigma": 0.009,
+     "n": 2881
+    },
+    "b_difference": -0.041
+   },
+   "time": {
+    "reference": "shelly",
+    "dt_s": {
+     "n": 5138,
+     "mean": -0.0838,
+     "median": -0.1,
+     "std": 0.3621,
+     "abs_p90": 0.4
+    },
+    "recall_by_day": [
+     {
+      "day": 0,
+      "events": 1061,
+      "recall": 0.6334
+     },
+     {
+      "day": 1,
+      "events": 3268,
+      "recall": 0.6383
+     },
+     {
+      "day": 2,
+      "events": 3387,
+      "recall": 0.7027
+     }
+    ],
+    "after_large": {
+     "threshold": 4.0,
+     "large_events": 88,
+     "window_s": 3600.0,
+     "events_after": 2860,
+     "recall_after": 0.6892,
+     "recall_other": 0.6522
+    }
+   }
   },
   "ross_relocated": {
    "events": 6463,
@@ -1617,7 +3994,912 @@
     "band_share": 0.2002,
     "datum_known": true
    },
-   "magnitude_coverage": 1.0
+   "magnitude_coverage": 1.0,
+   "by_magnitude": {
+    "authority": "official_earthquake",
+    "magnitude_bias": 0.0,
+    "bias_removed": true,
+    "candidate_without_magnitude": 0,
+    "classes": {
+     "M2": {
+      "reference_events": 2724,
+      "matched": 1631,
+      "recall": 0.5988,
+      "candidate_events": 1934,
+      "precision": 0.9504,
+      "f1": 0.7347,
+      "precision_unaligned": 0.9504,
+      "precision_authority_only": 0.8485,
+      "dt_s": {
+       "n": 1631,
+       "mean": 0.0115,
+       "median": 0.024,
+       "std": 0.3622,
+       "abs_p90": 0.175
+      },
+      "epi_km": {
+       "n": 1631,
+       "mean": 0.8493,
+       "median": 0.5487,
+       "std": 1.3694,
+       "p90": 1.1851
+      },
+      "dz_km": {
+       "n": 1631,
+       "mean": -0.0826,
+       "median": -0.016,
+       "std": 1.6345,
+       "abs_p90": 2.37
+      },
+      "dmag": {
+       "n": 1631,
+       "mean": -0.0225,
+       "median": -0.01,
+       "std": 0.1424,
+       "abs_p90": 0.21
+      }
+     },
+     "M3": {
+      "reference_events": 742,
+      "matched": 405,
+      "recall": 0.5458,
+      "candidate_events": 406,
+      "precision": 0.9901,
+      "f1": 0.7037,
+      "precision_unaligned": 0.9901,
+      "precision_authority_only": 0.9729,
+      "dt_s": {
+       "n": 405,
+       "mean": 0.0412,
+       "median": 0.046,
+       "std": 0.316,
+       "abs_p90": 0.2116
+      },
+      "epi_km": {
+       "n": 405,
+       "mean": 0.8612,
+       "median": 0.5699,
+       "std": 1.2413,
+       "p90": 1.2401
+      },
+      "dz_km": {
+       "n": 405,
+       "mean": 0.1299,
+       "median": 0.1,
+       "std": 1.5824,
+       "abs_p90": 2.352
+      },
+      "dmag": {
+       "n": 405,
+       "mean": -0.0298,
+       "median": 0.0,
+       "std": 0.1485,
+       "abs_p90": 0.226
+      }
+     },
+     "M4": {
+      "reference_events": 88,
+      "matched": 23,
+      "recall": 0.2614,
+      "candidate_events": 26,
+      "precision": 1.0,
+      "f1": 0.4144,
+      "precision_unaligned": 1.0,
+      "precision_authority_only": 0.9231,
+      "dt_s": {
+       "n": 23,
+       "mean": 0.1242,
+       "median": 0.087,
+       "std": 0.2067,
+       "abs_p90": 0.203
+      },
+      "epi_km": {
+       "n": 23,
+       "mean": 0.9076,
+       "median": 0.8519,
+       "std": 0.8197,
+       "p90": 1.2046
+      },
+      "dz_km": {
+       "n": 23,
+       "mean": 0.3554,
+       "median": 0.471,
+       "std": 1.8146,
+       "abs_p90": 2.0064
+      },
+      "dmag": {
+       "n": 23,
+       "mean": -0.0517,
+       "median": 0.0,
+       "std": 0.2837,
+       "abs_p90": 0.166
+      },
+      "events": [
+       {
+        "reference_event_id": "3495",
+        "origin_time_utc": "2019-07-06T03:19:53.040000Z",
+        "reference_magnitude": 7.1,
+        "matched": false
+       },
+       {
+        "reference_event_id": "18",
+        "origin_time_utc": "2019-07-04T17:33:49.000000Z",
+        "reference_magnitude": 6.4,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3613",
+        "origin_time_utc": "2019-07-06T03:47:53.420000Z",
+        "reference_magnitude": 5.5,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3727",
+        "origin_time_utc": "2019-07-06T04:18:55.790000Z",
+        "reference_magnitude": 5.44,
+        "matched": false
+       },
+       {
+        "reference_event_id": "1842",
+        "origin_time_utc": "2019-07-05T11:07:53.040000Z",
+        "reference_magnitude": 5.37,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3493",
+        "origin_time_utc": "2019-07-06T03:16:32.480000Z",
+        "reference_magnitude": 4.97,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3625",
+        "origin_time_utc": "2019-07-06T03:50:59.710000Z",
+        "reference_magnitude": 4.97,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4583",
+        "origin_time_utc": "2019-07-06T09:28:28.980000Z",
+        "reference_magnitude": 4.89,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3790",
+        "origin_time_utc": "2019-07-06T04:36:55.310000Z",
+        "reference_magnitude": 4.85,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3509",
+        "origin_time_utc": "2019-07-06T03:23:50.720000Z",
+        "reference_magnitude": 4.84,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3497",
+        "origin_time_utc": "2019-07-06T03:20:41.140000Z",
+        "reference_magnitude": 4.81,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3707",
+        "origin_time_utc": "2019-07-06T04:13:07.080000Z",
+        "reference_magnitude": 4.8,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3503",
+        "origin_time_utc": "2019-07-06T03:22:35.630000Z",
+        "reference_magnitude": 4.73,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3681",
+        "origin_time_utc": "2019-07-06T04:07:04.570000Z",
+        "reference_magnitude": 4.68,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3504",
+        "origin_time_utc": "2019-07-06T03:22:48.300000Z",
+        "reference_magnitude": 4.64,
+        "matched": true,
+        "candidate_event_id": "4177",
+        "candidate_magnitude": 4.98,
+        "dt_s": 0.165,
+        "epi_km": 0.446,
+        "dz_km": -0.28,
+        "dmag": 0.34
+       },
+       {
+        "reference_event_id": "3500",
+        "origin_time_utc": "2019-07-06T03:22:03.570000Z",
+        "reference_magnitude": 4.64,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4039",
+        "origin_time_utc": "2019-07-06T06:01:51.800000Z",
+        "reference_magnitude": 4.63,
+        "matched": true,
+        "candidate_event_id": "4465",
+        "candidate_magnitude": 4.63,
+        "dt_s": 0.157,
+        "epi_km": 0.871,
+        "dz_km": 1.936,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3516",
+        "origin_time_utc": "2019-07-06T03:25:27.970000Z",
+        "reference_magnitude": 4.61,
+        "matched": false
+       },
+       {
+        "reference_event_id": "209",
+        "origin_time_utc": "2019-07-04T18:39:44.440000Z",
+        "reference_magnitude": 4.59,
+        "matched": false
+       },
+       {
+        "reference_event_id": "242",
+        "origin_time_utc": "2019-07-04T18:56:06.420000Z",
+        "reference_magnitude": 4.58,
+        "matched": true,
+        "candidate_event_id": "208",
+        "candidate_magnitude": 4.58,
+        "dt_s": 0.087,
+        "epi_km": 0.883,
+        "dz_km": 1.719,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3525",
+        "origin_time_utc": "2019-07-06T03:27:11.370000Z",
+        "reference_magnitude": 4.57,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4478",
+        "origin_time_utc": "2019-07-06T08:32:57.550000Z",
+        "reference_magnitude": 4.56,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3501",
+        "origin_time_utc": "2019-07-06T03:22:17.100000Z",
+        "reference_magnitude": 4.55,
+        "matched": true,
+        "candidate_event_id": "4176",
+        "candidate_magnitude": 4.49,
+        "dt_s": 0.092,
+        "epi_km": 0.852,
+        "dz_km": 0.837,
+        "dmag": -0.06
+       },
+       {
+        "reference_event_id": "3506",
+        "origin_time_utc": "2019-07-06T03:23:19.870000Z",
+        "reference_magnitude": 4.52,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3536",
+        "origin_time_utc": "2019-07-06T03:29:32.080000Z",
+        "reference_magnitude": 4.51,
+        "matched": false
+       },
+       {
+        "reference_event_id": "5079",
+        "origin_time_utc": "2019-07-06T13:06:55.260000Z",
+        "reference_magnitude": 4.5,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3524",
+        "origin_time_utc": "2019-07-06T03:27:07.010000Z",
+        "reference_magnitude": 4.5,
+        "matched": false
+       },
+       {
+        "reference_event_id": "6554",
+        "origin_time_utc": "2019-07-06T23:50:41.990000Z",
+        "reference_magnitude": 4.5,
+        "matched": false
+       },
+       {
+        "reference_event_id": "301",
+        "origin_time_utc": "2019-07-04T19:21:32.090000Z",
+        "reference_magnitude": 4.5,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3540",
+        "origin_time_utc": "2019-07-06T03:30:25.050000Z",
+        "reference_magnitude": 4.49,
+        "matched": false
+       },
+       {
+        "reference_event_id": "19",
+        "origin_time_utc": "2019-07-04T17:35:01.660000Z",
+        "reference_magnitude": 4.49,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4590",
+        "origin_time_utc": "2019-07-06T09:30:41.240000Z",
+        "reference_magnitude": 4.49,
+        "matched": true,
+        "candidate_event_id": "4860",
+        "candidate_magnitude": 4.49,
+        "dt_s": 0.055,
+        "epi_km": 0.888,
+        "dz_km": 1.172,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3841",
+        "origin_time_utc": "2019-07-06T04:52:17.710000Z",
+        "reference_magnitude": 4.47,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3502",
+        "origin_time_utc": "2019-07-06T03:22:27.160000Z",
+        "reference_magnitude": 4.46,
+        "matched": false
+       },
+       {
+        "reference_event_id": "540",
+        "origin_time_utc": "2019-07-04T22:12:08.490000Z",
+        "reference_magnitude": 4.43,
+        "matched": true,
+        "candidate_event_id": "611",
+        "candidate_magnitude": 4.47,
+        "dt_s": -0.002,
+        "epi_km": 0.68,
+        "dz_km": 1.216,
+        "dmag": 0.04
+       },
+       {
+        "reference_event_id": "4587",
+        "origin_time_utc": "2019-07-06T09:29:20.970000Z",
+        "reference_magnitude": 4.41,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3569",
+        "origin_time_utc": "2019-07-06T03:36:16.460000Z",
+        "reference_magnitude": 4.35,
+        "matched": true,
+        "candidate_event_id": "4194",
+        "candidate_magnitude": 4.24,
+        "dt_s": 0.066,
+        "epi_km": 1.245,
+        "dz_km": 1.725,
+        "dmag": -0.11
+       },
+       {
+        "reference_event_id": "222",
+        "origin_time_utc": "2019-07-04T18:47:06.590000Z",
+        "reference_magnitude": 4.34,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3498",
+        "origin_time_utc": "2019-07-06T03:21:10.050000Z",
+        "reference_magnitude": 4.33,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3496",
+        "origin_time_utc": "2019-07-06T03:20:36.080000Z",
+        "reference_magnitude": 4.33,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3791",
+        "origin_time_utc": "2019-07-06T04:37:13.570000Z",
+        "reference_magnitude": 4.33,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3652",
+        "origin_time_utc": "2019-07-06T03:57:50.900000Z",
+        "reference_magnitude": 4.31,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3728",
+        "origin_time_utc": "2019-07-06T04:19:15.480000Z",
+        "reference_magnitude": 4.29,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3943",
+        "origin_time_utc": "2019-07-06T05:25:04.870000Z",
+        "reference_magnitude": 4.29,
+        "matched": false
+       },
+       {
+        "reference_event_id": "22",
+        "origin_time_utc": "2019-07-04T17:35:52.170000Z",
+        "reference_magnitude": 4.28,
+        "matched": true,
+        "candidate_event_id": "37",
+        "candidate_magnitude": 3.0,
+        "dt_s": 0.046,
+        "epi_km": 0.239,
+        "dz_km": -0.365,
+        "dmag": -1.28
+       },
+       {
+        "reference_event_id": "4072",
+        "origin_time_utc": "2019-07-06T06:12:52.000000Z",
+        "reference_magnitude": 4.27,
+        "matched": true,
+        "candidate_event_id": "4481",
+        "candidate_magnitude": 4.09,
+        "dt_s": -0.072,
+        "epi_km": 0.591,
+        "dz_km": -0.161,
+        "dmag": -0.18
+       },
+       {
+        "reference_event_id": "3608",
+        "origin_time_utc": "2019-07-06T03:46:26.870000Z",
+        "reference_magnitude": 4.26,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3800",
+        "origin_time_utc": "2019-07-06T04:40:15.980000Z",
+        "reference_magnitude": 4.24,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4584",
+        "origin_time_utc": "2019-07-06T09:28:41.790000Z",
+        "reference_magnitude": 4.24,
+        "matched": false
+       },
+       {
+        "reference_event_id": "181",
+        "origin_time_utc": "2019-07-04T18:27:59.440000Z",
+        "reference_magnitude": 4.23,
+        "matched": true,
+        "candidate_event_id": "155",
+        "candidate_magnitude": 4.14,
+        "dt_s": -0.064,
+        "epi_km": 0.958,
+        "dz_km": 0.78,
+        "dmag": -0.09
+       },
+       {
+        "reference_event_id": "3508",
+        "origin_time_utc": "2019-07-06T03:23:34.710000Z",
+        "reference_magnitude": 4.22,
+        "matched": false
+       },
+       {
+        "reference_event_id": "243",
+        "origin_time_utc": "2019-07-04T18:56:22.030000Z",
+        "reference_magnitude": 4.21,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3512",
+        "origin_time_utc": "2019-07-06T03:24:22.370000Z",
+        "reference_magnitude": 4.19,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3532",
+        "origin_time_utc": "2019-07-06T03:28:46.550000Z",
+        "reference_magnitude": 4.19,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3551",
+        "origin_time_utc": "2019-07-06T03:32:46.660000Z",
+        "reference_magnitude": 4.17,
+        "matched": true,
+        "candidate_event_id": "4187",
+        "candidate_magnitude": 4.23,
+        "dt_s": 0.078,
+        "epi_km": 2.133,
+        "dz_km": 0.406,
+        "dmag": 0.06
+       },
+       {
+        "reference_event_id": "3738",
+        "origin_time_utc": "2019-07-06T04:21:35.820000Z",
+        "reference_magnitude": 4.17,
+        "matched": false
+       },
+       {
+        "reference_event_id": "350",
+        "origin_time_utc": "2019-07-04T19:56:00.500000Z",
+        "reference_magnitude": 4.16,
+        "matched": true,
+        "candidate_event_id": "322",
+        "candidate_magnitude": 4.16,
+        "dt_s": 0.153,
+        "epi_km": 0.674,
+        "dz_km": 2.873,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3499",
+        "origin_time_utc": "2019-07-06T03:21:19.190000Z",
+        "reference_magnitude": 4.15,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4034",
+        "origin_time_utc": "2019-07-06T05:58:17.570000Z",
+        "reference_magnitude": 4.15,
+        "matched": false
+       },
+       {
+        "reference_event_id": "5576",
+        "origin_time_utc": "2019-07-06T16:36:05.820000Z",
+        "reference_magnitude": 4.14,
+        "matched": true,
+        "candidate_event_id": "5647",
+        "candidate_magnitude": 4.17,
+        "dt_s": 0.203,
+        "epi_km": 0.905,
+        "dz_km": 0.054,
+        "dmag": 0.03
+       },
+       {
+        "reference_event_id": "3494",
+        "origin_time_utc": "2019-07-06T03:17:13.500000Z",
+        "reference_magnitude": 4.14,
+        "matched": false
+       },
+       {
+        "reference_event_id": "40",
+        "origin_time_utc": "2019-07-04T17:40:18.520000Z",
+        "reference_magnitude": 4.13,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4892",
+        "origin_time_utc": "2019-07-06T11:53:08.090000Z",
+        "reference_magnitude": 4.12,
+        "matched": true,
+        "candidate_event_id": "5130",
+        "candidate_magnitude": 4.12,
+        "dt_s": 0.202,
+        "epi_km": 0.531,
+        "dz_km": 0.471,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3529",
+        "origin_time_utc": "2019-07-06T03:28:00.730000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "4181",
+        "candidate_magnitude": 4.09,
+        "dt_s": -0.028,
+        "epi_km": 0.042,
+        "dz_km": -1.45,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "2018",
+        "origin_time_utc": "2019-07-05T12:38:30.020000Z",
+        "reference_magnitude": 4.09,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3522",
+        "origin_time_utc": "2019-07-06T03:26:51.990000Z",
+        "reference_magnitude": 4.09,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3530",
+        "origin_time_utc": "2019-07-06T03:28:12.340000Z",
+        "reference_magnitude": 4.09,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3563",
+        "origin_time_utc": "2019-07-06T03:35:05.420000Z",
+        "reference_magnitude": 4.09,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3553",
+        "origin_time_utc": "2019-07-06T03:33:20.200000Z",
+        "reference_magnitude": 4.08,
+        "matched": true,
+        "candidate_event_id": "4189",
+        "candidate_magnitude": 4.0,
+        "dt_s": 0.049,
+        "epi_km": 0.327,
+        "dz_km": -0.751,
+        "dmag": -0.08
+       },
+       {
+        "reference_event_id": "3535",
+        "origin_time_utc": "2019-07-06T03:29:28.840000Z",
+        "reference_magnitude": 4.07,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3513",
+        "origin_time_utc": "2019-07-06T03:24:33.520000Z",
+        "reference_magnitude": 4.07,
+        "matched": false
+       },
+       {
+        "reference_event_id": "239",
+        "origin_time_utc": "2019-07-04T18:54:13.990000Z",
+        "reference_magnitude": 4.07,
+        "matched": true,
+        "candidate_event_id": "204",
+        "candidate_magnitude": 4.07,
+        "dt_s": 0.203,
+        "epi_km": 1.042,
+        "dz_km": 0.126,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3642",
+        "origin_time_utc": "2019-07-06T03:55:20.020000Z",
+        "reference_magnitude": 4.06,
+        "matched": true,
+        "candidate_event_id": "4219",
+        "candidate_magnitude": 4.07,
+        "dt_s": 0.073,
+        "epi_km": 0.967,
+        "dz_km": 1.175,
+        "dmag": 0.01
+       },
+       {
+        "reference_event_id": "4128",
+        "origin_time_utc": "2019-07-06T06:34:47.410000Z",
+        "reference_magnitude": 4.05,
+        "matched": true,
+        "candidate_event_id": "4522",
+        "candidate_magnitude": 4.1,
+        "dt_s": 0.099,
+        "epi_km": 0.878,
+        "dz_km": 0.192,
+        "dmag": 0.05
+       },
+       {
+        "reference_event_id": "4731",
+        "origin_time_utc": "2019-07-06T10:48:24.460000Z",
+        "reference_magnitude": 4.04,
+        "matched": true,
+        "candidate_event_id": "5006",
+        "candidate_magnitude": 4.04,
+        "dt_s": -0.067,
+        "epi_km": 0.546,
+        "dz_km": -0.312,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "727",
+        "origin_time_utc": "2019-07-05T00:18:01.410000Z",
+        "reference_magnitude": 4.04,
+        "matched": true,
+        "candidate_event_id": "858",
+        "candidate_magnitude": 4.04,
+        "dt_s": 0.216,
+        "epi_km": 0.678,
+        "dz_km": 1.315,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "662",
+        "origin_time_utc": "2019-07-04T23:34:02.380000Z",
+        "reference_magnitude": 4.04,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3528",
+        "origin_time_utc": "2019-07-06T03:27:36.260000Z",
+        "reference_magnitude": 4.03,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3858",
+        "origin_time_utc": "2019-07-06T04:58:36.690000Z",
+        "reference_magnitude": 4.03,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3519",
+        "origin_time_utc": "2019-07-06T03:26:04.010000Z",
+        "reference_magnitude": 4.02,
+        "matched": false
+       },
+       {
+        "reference_event_id": "223",
+        "origin_time_utc": "2019-07-04T18:47:22.600000Z",
+        "reference_magnitude": 4.02,
+        "matched": false
+       },
+       {
+        "reference_event_id": "749",
+        "origin_time_utc": "2019-07-05T00:32:06.670000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "893",
+        "candidate_magnitude": 4.02,
+        "dt_s": 0.167,
+        "epi_km": 0.343,
+        "dz_km": 2.024,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "3533",
+        "origin_time_utc": "2019-07-06T03:29:10.290000Z",
+        "reference_magnitude": 4.02,
+        "matched": false
+       },
+       {
+        "reference_event_id": "27",
+        "origin_time_utc": "2019-07-04T17:37:25.640000Z",
+        "reference_magnitude": 4.01,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3731",
+        "origin_time_utc": "2019-07-06T04:19:56.010000Z",
+        "reference_magnitude": 4.01,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3555",
+        "origin_time_utc": "2019-07-06T03:33:39.450000Z",
+        "reference_magnitude": 4.01,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3534",
+        "origin_time_utc": "2019-07-06T03:29:15.860000Z",
+        "reference_magnitude": 4.01,
+        "matched": true,
+        "candidate_event_id": "4182",
+        "candidate_magnitude": 4.09,
+        "dt_s": 0.979,
+        "epi_km": 4.154,
+        "dz_km": -6.527,
+        "dmag": 0.08
+       },
+       {
+        "reference_event_id": "3507",
+        "origin_time_utc": "2019-07-06T03:23:29.560000Z",
+        "reference_magnitude": 4.0,
+        "matched": false
+       }
+      ]
+     },
+     "M5": {
+      "reference_events": 5,
+      "matched": 0,
+      "recall": 0.0,
+      "candidate_events": 0,
+      "precision": null,
+      "f1": null,
+      "precision_unaligned": null,
+      "precision_authority_only": null,
+      "dt_s": {
+       "n": 0
+      },
+      "epi_km": {
+       "n": 0
+      },
+      "dz_km": {
+       "n": 0
+      },
+      "dmag": {
+       "n": 0
+      },
+      "events": [
+       {
+        "reference_event_id": "3495",
+        "origin_time_utc": "2019-07-06T03:19:53.040000Z",
+        "reference_magnitude": 7.1,
+        "matched": false
+       },
+       {
+        "reference_event_id": "18",
+        "origin_time_utc": "2019-07-04T17:33:49.000000Z",
+        "reference_magnitude": 6.4,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3613",
+        "origin_time_utc": "2019-07-06T03:47:53.420000Z",
+        "reference_magnitude": 5.5,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3727",
+        "origin_time_utc": "2019-07-06T04:18:55.790000Z",
+        "reference_magnitude": 5.44,
+        "matched": false
+       },
+       {
+        "reference_event_id": "1842",
+        "origin_time_utc": "2019-07-05T11:07:53.040000Z",
+        "reference_magnitude": 5.37,
+        "matched": false
+       }
+      ]
+     }
+    }
+   },
+   "strength": {
+    "authority": "official_earthquake",
+    "pairs": 3830,
+    "dmag": {
+     "n": 3830,
+     "mean": -0.0029,
+     "median": 0.0,
+     "std": 0.1467,
+     "abs_p90": 0.22,
+     "mad": 0.05
+    },
+    "dmag_slope_per_unit": -0.0235,
+    "candidate": {
+     "mc": 1.3,
+     "b": 0.516,
+     "b_sigma": 0.006,
+     "n": 4001
+    },
+    "authority_mfd": {
+     "mc": 2.0,
+     "b": 0.603,
+     "b_sigma": 0.009,
+     "n": 2881
+    },
+    "b_difference": -0.087
+   },
+   "time": {
+    "reference": "shelly",
+    "dt_s": {
+     "n": 4850,
+     "mean": 0.0091,
+     "median": 0.006,
+     "std": 0.4216,
+     "abs_p90": 0.4002
+    },
+    "recall_by_day": [
+     {
+      "day": 0,
+      "events": 1061,
+      "recall": 0.6041
+     },
+     {
+      "day": 1,
+      "events": 3268,
+      "recall": 0.6888
+     },
+     {
+      "day": 2,
+      "events": 3387,
+      "recall": 0.5781
+     }
+    ],
+    "after_large": {
+     "threshold": 4.0,
+     "large_events": 88,
+     "window_s": 3600.0,
+     "events_after": 2860,
+     "recall_after": 0.5811,
+     "recall_other": 0.6565
+    }
+   }
   },
   "awr_hypocenters": {
    "events": 5737,
@@ -2177,7 +5459,936 @@
     "band_share": 0.1855,
     "datum_known": true
    },
-   "magnitude_coverage": 1.0
+   "magnitude_coverage": 1.0,
+   "by_magnitude": {
+    "authority": "official_earthquake",
+    "magnitude_bias": -0.111,
+    "bias_removed": true,
+    "candidate_without_magnitude": 0,
+    "classes": {
+     "M2": {
+      "reference_events": 2724,
+      "matched": 1962,
+      "recall": 0.7203,
+      "candidate_events": 2123,
+      "precision": 0.984,
+      "f1": 0.8317,
+      "precision_unaligned": 0.9858,
+      "precision_authority_only": 0.8921,
+      "dt_s": {
+       "n": 1962,
+       "mean": -0.2618,
+       "median": -0.272,
+       "std": 0.2085,
+       "abs_p90": 0.366
+      },
+      "epi_km": {
+       "n": 1962,
+       "mean": 0.9814,
+       "median": 0.8082,
+       "std": 0.9382,
+       "p90": 1.4558
+      },
+      "dz_km": {
+       "n": 1962,
+       "mean": 2.0027,
+       "median": 2.0375,
+       "std": 1.2996,
+       "abs_p90": 3.3759
+      },
+      "dmag": {
+       "n": 1962,
+       "mean": -0.1796,
+       "median": -0.172,
+       "std": 0.1273,
+       "abs_p90": 0.339
+      }
+     },
+     "M3": {
+      "reference_events": 742,
+      "matched": 460,
+      "recall": 0.6199,
+      "candidate_events": 401,
+      "precision": 0.99,
+      "f1": 0.7625,
+      "precision_unaligned": 0.9875,
+      "precision_authority_only": 0.9576,
+      "dt_s": {
+       "n": 460,
+       "mean": -0.2519,
+       "median": -0.254,
+       "std": 0.2463,
+       "abs_p90": 0.341
+      },
+      "epi_km": {
+       "n": 460,
+       "mean": 1.0264,
+       "median": 0.8382,
+       "std": 1.059,
+       "p90": 1.406
+      },
+      "dz_km": {
+       "n": 460,
+       "mean": 2.1929,
+       "median": 2.2425,
+       "std": 1.2211,
+       "abs_p90": 3.4784
+      },
+      "dmag": {
+       "n": 460,
+       "mean": -0.1987,
+       "median": -0.1985,
+       "std": 0.147,
+       "abs_p90": 0.3751
+      }
+     },
+     "M4": {
+      "reference_events": 88,
+      "matched": 27,
+      "recall": 0.3068,
+      "candidate_events": 36,
+      "precision": 1.0,
+      "f1": 0.4696,
+      "precision_unaligned": 1.0,
+      "precision_authority_only": 0.9722,
+      "dt_s": {
+       "n": 27,
+       "mean": -0.1662,
+       "median": -0.131,
+       "std": 0.1241,
+       "abs_p90": 0.31
+      },
+      "epi_km": {
+       "n": 27,
+       "mean": 0.874,
+       "median": 0.8748,
+       "std": 0.476,
+       "p90": 1.2658
+      },
+      "dz_km": {
+       "n": 27,
+       "mean": 2.0857,
+       "median": 2.109,
+       "std": 1.414,
+       "abs_p90": 3.7554
+      },
+      "dmag": {
+       "n": 27,
+       "mean": -0.0863,
+       "median": -0.064,
+       "std": 0.1018,
+       "abs_p90": 0.209
+      },
+      "events": [
+       {
+        "reference_event_id": "3495",
+        "origin_time_utc": "2019-07-06T03:19:53.040000Z",
+        "reference_magnitude": 7.1,
+        "matched": false
+       },
+       {
+        "reference_event_id": "18",
+        "origin_time_utc": "2019-07-04T17:33:49.000000Z",
+        "reference_magnitude": 6.4,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3613",
+        "origin_time_utc": "2019-07-06T03:47:53.420000Z",
+        "reference_magnitude": 5.5,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3727",
+        "origin_time_utc": "2019-07-06T04:18:55.790000Z",
+        "reference_magnitude": 5.44,
+        "matched": false
+       },
+       {
+        "reference_event_id": "1842",
+        "origin_time_utc": "2019-07-05T11:07:53.040000Z",
+        "reference_magnitude": 5.37,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3493",
+        "origin_time_utc": "2019-07-06T03:16:32.480000Z",
+        "reference_magnitude": 4.97,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3625",
+        "origin_time_utc": "2019-07-06T03:50:59.710000Z",
+        "reference_magnitude": 4.97,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4583",
+        "origin_time_utc": "2019-07-06T09:28:28.980000Z",
+        "reference_magnitude": 4.89,
+        "matched": true,
+        "candidate_event_id": "3991",
+        "candidate_magnitude": 4.58,
+        "dt_s": -0.099,
+        "epi_km": 0.727,
+        "dz_km": 4.488,
+        "dmag": -0.305
+       },
+       {
+        "reference_event_id": "3790",
+        "origin_time_utc": "2019-07-06T04:36:55.310000Z",
+        "reference_magnitude": 4.85,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3509",
+        "origin_time_utc": "2019-07-06T03:23:50.720000Z",
+        "reference_magnitude": 4.84,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3497",
+        "origin_time_utc": "2019-07-06T03:20:41.140000Z",
+        "reference_magnitude": 4.81,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3707",
+        "origin_time_utc": "2019-07-06T04:13:07.080000Z",
+        "reference_magnitude": 4.8,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3503",
+        "origin_time_utc": "2019-07-06T03:22:35.630000Z",
+        "reference_magnitude": 4.73,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3681",
+        "origin_time_utc": "2019-07-06T04:07:04.570000Z",
+        "reference_magnitude": 4.68,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3504",
+        "origin_time_utc": "2019-07-06T03:22:48.300000Z",
+        "reference_magnitude": 4.64,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3500",
+        "origin_time_utc": "2019-07-06T03:22:03.570000Z",
+        "reference_magnitude": 4.64,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4039",
+        "origin_time_utc": "2019-07-06T06:01:51.800000Z",
+        "reference_magnitude": 4.63,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3516",
+        "origin_time_utc": "2019-07-06T03:25:27.970000Z",
+        "reference_magnitude": 4.61,
+        "matched": false
+       },
+       {
+        "reference_event_id": "209",
+        "origin_time_utc": "2019-07-04T18:39:44.440000Z",
+        "reference_magnitude": 4.59,
+        "matched": false
+       },
+       {
+        "reference_event_id": "242",
+        "origin_time_utc": "2019-07-04T18:56:06.420000Z",
+        "reference_magnitude": 4.58,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3525",
+        "origin_time_utc": "2019-07-06T03:27:11.370000Z",
+        "reference_magnitude": 4.57,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4478",
+        "origin_time_utc": "2019-07-06T08:32:57.550000Z",
+        "reference_magnitude": 4.56,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3501",
+        "origin_time_utc": "2019-07-06T03:22:17.100000Z",
+        "reference_magnitude": 4.55,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3506",
+        "origin_time_utc": "2019-07-06T03:23:19.870000Z",
+        "reference_magnitude": 4.52,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3536",
+        "origin_time_utc": "2019-07-06T03:29:32.080000Z",
+        "reference_magnitude": 4.51,
+        "matched": false
+       },
+       {
+        "reference_event_id": "5079",
+        "origin_time_utc": "2019-07-06T13:06:55.260000Z",
+        "reference_magnitude": 4.5,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3524",
+        "origin_time_utc": "2019-07-06T03:27:07.010000Z",
+        "reference_magnitude": 4.5,
+        "matched": false
+       },
+       {
+        "reference_event_id": "6554",
+        "origin_time_utc": "2019-07-06T23:50:41.990000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "5722",
+        "candidate_magnitude": 4.46,
+        "dt_s": -0.123,
+        "epi_km": 0.727,
+        "dz_km": 2.599,
+        "dmag": -0.035
+       },
+       {
+        "reference_event_id": "301",
+        "origin_time_utc": "2019-07-04T19:21:32.090000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "221",
+        "candidate_magnitude": 4.48,
+        "dt_s": -0.131,
+        "epi_km": 1.308,
+        "dz_km": 2.885,
+        "dmag": -0.024
+       },
+       {
+        "reference_event_id": "3540",
+        "origin_time_utc": "2019-07-06T03:30:25.050000Z",
+        "reference_magnitude": 4.49,
+        "matched": true,
+        "candidate_event_id": "3264",
+        "candidate_magnitude": 4.29,
+        "dt_s": -0.306,
+        "epi_km": 0.661,
+        "dz_km": 0.975,
+        "dmag": -0.199
+       },
+       {
+        "reference_event_id": "19",
+        "origin_time_utc": "2019-07-04T17:35:01.660000Z",
+        "reference_magnitude": 4.49,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4590",
+        "origin_time_utc": "2019-07-06T09:30:41.240000Z",
+        "reference_magnitude": 4.49,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3841",
+        "origin_time_utc": "2019-07-06T04:52:17.710000Z",
+        "reference_magnitude": 4.47,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3502",
+        "origin_time_utc": "2019-07-06T03:22:27.160000Z",
+        "reference_magnitude": 4.46,
+        "matched": false
+       },
+       {
+        "reference_event_id": "540",
+        "origin_time_utc": "2019-07-04T22:12:08.490000Z",
+        "reference_magnitude": 4.43,
+        "matched": true,
+        "candidate_event_id": "554",
+        "candidate_magnitude": 4.23,
+        "dt_s": -0.088,
+        "epi_km": 1.04,
+        "dz_km": 1.362,
+        "dmag": -0.196
+       },
+       {
+        "reference_event_id": "4587",
+        "origin_time_utc": "2019-07-06T09:29:20.970000Z",
+        "reference_magnitude": 4.41,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3569",
+        "origin_time_utc": "2019-07-06T03:36:16.460000Z",
+        "reference_magnitude": 4.35,
+        "matched": false
+       },
+       {
+        "reference_event_id": "222",
+        "origin_time_utc": "2019-07-04T18:47:06.590000Z",
+        "reference_magnitude": 4.34,
+        "matched": true,
+        "candidate_event_id": "154",
+        "candidate_magnitude": 4.34,
+        "dt_s": -0.229,
+        "epi_km": 0.95,
+        "dz_km": 3.743,
+        "dmag": -0.002
+       },
+       {
+        "reference_event_id": "3498",
+        "origin_time_utc": "2019-07-06T03:21:10.050000Z",
+        "reference_magnitude": 4.33,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3496",
+        "origin_time_utc": "2019-07-06T03:20:36.080000Z",
+        "reference_magnitude": 4.33,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3791",
+        "origin_time_utc": "2019-07-06T04:37:13.570000Z",
+        "reference_magnitude": 4.33,
+        "matched": true,
+        "candidate_event_id": "3381",
+        "candidate_magnitude": 4.27,
+        "dt_s": -0.243,
+        "epi_km": 0.955,
+        "dz_km": 1.595,
+        "dmag": -0.064
+       },
+       {
+        "reference_event_id": "3652",
+        "origin_time_utc": "2019-07-06T03:57:50.900000Z",
+        "reference_magnitude": 4.31,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3728",
+        "origin_time_utc": "2019-07-06T04:19:15.480000Z",
+        "reference_magnitude": 4.29,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3943",
+        "origin_time_utc": "2019-07-06T05:25:04.870000Z",
+        "reference_magnitude": 4.29,
+        "matched": false
+       },
+       {
+        "reference_event_id": "22",
+        "origin_time_utc": "2019-07-04T17:35:52.170000Z",
+        "reference_magnitude": 4.28,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4072",
+        "origin_time_utc": "2019-07-06T06:12:52.000000Z",
+        "reference_magnitude": 4.27,
+        "matched": true,
+        "candidate_event_id": "3572",
+        "candidate_magnitude": 4.12,
+        "dt_s": -0.23,
+        "epi_km": 0.694,
+        "dz_km": 0.532,
+        "dmag": -0.147
+       },
+       {
+        "reference_event_id": "3608",
+        "origin_time_utc": "2019-07-06T03:46:26.870000Z",
+        "reference_magnitude": 4.26,
+        "matched": true,
+        "candidate_event_id": "3297",
+        "candidate_magnitude": 4.22,
+        "dt_s": -0.089,
+        "epi_km": 0.387,
+        "dz_km": 2.109,
+        "dmag": -0.042
+       },
+       {
+        "reference_event_id": "3800",
+        "origin_time_utc": "2019-07-06T04:40:15.980000Z",
+        "reference_magnitude": 4.24,
+        "matched": true,
+        "candidate_event_id": "3387",
+        "candidate_magnitude": 4.17,
+        "dt_s": -0.124,
+        "epi_km": 0.161,
+        "dz_km": 2.45,
+        "dmag": -0.066
+       },
+       {
+        "reference_event_id": "4584",
+        "origin_time_utc": "2019-07-06T09:28:41.790000Z",
+        "reference_magnitude": 4.24,
+        "matched": false
+       },
+       {
+        "reference_event_id": "181",
+        "origin_time_utc": "2019-07-04T18:27:59.440000Z",
+        "reference_magnitude": 4.23,
+        "matched": true,
+        "candidate_event_id": "124",
+        "candidate_magnitude": 4.19,
+        "dt_s": -0.224,
+        "epi_km": 0.875,
+        "dz_km": 2.498,
+        "dmag": -0.042
+       },
+       {
+        "reference_event_id": "3508",
+        "origin_time_utc": "2019-07-06T03:23:34.710000Z",
+        "reference_magnitude": 4.22,
+        "matched": false
+       },
+       {
+        "reference_event_id": "243",
+        "origin_time_utc": "2019-07-04T18:56:22.030000Z",
+        "reference_magnitude": 4.21,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3512",
+        "origin_time_utc": "2019-07-06T03:24:22.370000Z",
+        "reference_magnitude": 4.19,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3532",
+        "origin_time_utc": "2019-07-06T03:28:46.550000Z",
+        "reference_magnitude": 4.19,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3551",
+        "origin_time_utc": "2019-07-06T03:32:46.660000Z",
+        "reference_magnitude": 4.17,
+        "matched": true,
+        "candidate_event_id": "3269",
+        "candidate_magnitude": 3.94,
+        "dt_s": -0.043,
+        "epi_km": 2.758,
+        "dz_km": 1.872,
+        "dmag": -0.226
+       },
+       {
+        "reference_event_id": "3738",
+        "origin_time_utc": "2019-07-06T04:21:35.820000Z",
+        "reference_magnitude": 4.17,
+        "matched": false
+       },
+       {
+        "reference_event_id": "350",
+        "origin_time_utc": "2019-07-04T19:56:00.500000Z",
+        "reference_magnitude": 4.16,
+        "matched": true,
+        "candidate_event_id": "289",
+        "candidate_magnitude": 3.99,
+        "dt_s": 0.017,
+        "epi_km": 0.924,
+        "dz_km": 3.656,
+        "dmag": -0.166
+       },
+       {
+        "reference_event_id": "3499",
+        "origin_time_utc": "2019-07-06T03:21:19.190000Z",
+        "reference_magnitude": 4.15,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4034",
+        "origin_time_utc": "2019-07-06T05:58:17.570000Z",
+        "reference_magnitude": 4.15,
+        "matched": false
+       },
+       {
+        "reference_event_id": "5576",
+        "origin_time_utc": "2019-07-06T16:36:05.820000Z",
+        "reference_magnitude": 4.14,
+        "matched": true,
+        "candidate_event_id": "4896",
+        "candidate_magnitude": 3.99,
+        "dt_s": -0.117,
+        "epi_km": 0.776,
+        "dz_km": 1.457,
+        "dmag": -0.153
+       },
+       {
+        "reference_event_id": "3494",
+        "origin_time_utc": "2019-07-06T03:17:13.500000Z",
+        "reference_magnitude": 4.14,
+        "matched": false
+       },
+       {
+        "reference_event_id": "40",
+        "origin_time_utc": "2019-07-04T17:40:18.520000Z",
+        "reference_magnitude": 4.13,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4892",
+        "origin_time_utc": "2019-07-06T11:53:08.090000Z",
+        "reference_magnitude": 4.12,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3529",
+        "origin_time_utc": "2019-07-06T03:28:00.730000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "3262",
+        "candidate_magnitude": 3.87,
+        "dt_s": -0.202,
+        "epi_km": 0.706,
+        "dz_km": 1.056,
+        "dmag": -0.224
+       },
+       {
+        "reference_event_id": "2018",
+        "origin_time_utc": "2019-07-05T12:38:30.020000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "1911",
+        "candidate_magnitude": 4.07,
+        "dt_s": -0.166,
+        "epi_km": 1.058,
+        "dz_km": 1.811,
+        "dmag": -0.02
+       },
+       {
+        "reference_event_id": "3522",
+        "origin_time_utc": "2019-07-06T03:26:51.990000Z",
+        "reference_magnitude": 4.09,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3530",
+        "origin_time_utc": "2019-07-06T03:28:12.340000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "3263",
+        "candidate_magnitude": 4.11,
+        "dt_s": -0.224,
+        "epi_km": 0.876,
+        "dz_km": 1.436,
+        "dmag": 0.019
+       },
+       {
+        "reference_event_id": "3563",
+        "origin_time_utc": "2019-07-06T03:35:05.420000Z",
+        "reference_magnitude": 4.09,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3553",
+        "origin_time_utc": "2019-07-06T03:33:20.200000Z",
+        "reference_magnitude": 4.08,
+        "matched": true,
+        "candidate_event_id": "3272",
+        "candidate_magnitude": 4.16,
+        "dt_s": -0.316,
+        "epi_km": 0.221,
+        "dz_km": 1.028,
+        "dmag": 0.076
+       },
+       {
+        "reference_event_id": "3535",
+        "origin_time_utc": "2019-07-06T03:29:28.840000Z",
+        "reference_magnitude": 4.07,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3513",
+        "origin_time_utc": "2019-07-06T03:24:33.520000Z",
+        "reference_magnitude": 4.07,
+        "matched": false
+       },
+       {
+        "reference_event_id": "239",
+        "origin_time_utc": "2019-07-04T18:54:13.990000Z",
+        "reference_magnitude": 4.07,
+        "matched": true,
+        "candidate_event_id": "165",
+        "candidate_magnitude": 4.02,
+        "dt_s": -0.094,
+        "epi_km": 0.662,
+        "dz_km": 2.665,
+        "dmag": -0.054
+       },
+       {
+        "reference_event_id": "3642",
+        "origin_time_utc": "2019-07-06T03:55:20.020000Z",
+        "reference_magnitude": 4.06,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4128",
+        "origin_time_utc": "2019-07-06T06:34:47.410000Z",
+        "reference_magnitude": 4.05,
+        "matched": true,
+        "candidate_event_id": "3620",
+        "candidate_magnitude": 4.06,
+        "dt_s": -0.324,
+        "epi_km": 1.238,
+        "dz_km": 3.019,
+        "dmag": 0.008
+       },
+       {
+        "reference_event_id": "4731",
+        "origin_time_utc": "2019-07-06T10:48:24.460000Z",
+        "reference_magnitude": 4.04,
+        "matched": true,
+        "candidate_event_id": "4169",
+        "candidate_magnitude": 4.02,
+        "dt_s": -0.205,
+        "epi_km": 0.582,
+        "dz_km": 0.456,
+        "dmag": -0.019
+       },
+       {
+        "reference_event_id": "727",
+        "origin_time_utc": "2019-07-05T00:18:01.410000Z",
+        "reference_magnitude": 4.04,
+        "matched": true,
+        "candidate_event_id": "739",
+        "candidate_magnitude": 3.9,
+        "dt_s": 0.018,
+        "epi_km": 0.965,
+        "dz_km": 3.965,
+        "dmag": -0.143
+       },
+       {
+        "reference_event_id": "662",
+        "origin_time_utc": "2019-07-04T23:34:02.380000Z",
+        "reference_magnitude": 4.04,
+        "matched": true,
+        "candidate_event_id": "676",
+        "candidate_magnitude": 3.87,
+        "dt_s": -0.029,
+        "epi_km": 1.344,
+        "dz_km": 0.7,
+        "dmag": -0.173
+       },
+       {
+        "reference_event_id": "3528",
+        "origin_time_utc": "2019-07-06T03:27:36.260000Z",
+        "reference_magnitude": 4.03,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3858",
+        "origin_time_utc": "2019-07-06T04:58:36.690000Z",
+        "reference_magnitude": 4.03,
+        "matched": true,
+        "candidate_event_id": "3432",
+        "candidate_magnitude": 3.88,
+        "dt_s": -0.06,
+        "epi_km": 0.694,
+        "dz_km": 2.958,
+        "dmag": -0.15
+       },
+       {
+        "reference_event_id": "3519",
+        "origin_time_utc": "2019-07-06T03:26:04.010000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "3260",
+        "candidate_magnitude": 4.04,
+        "dt_s": -0.571,
+        "epi_km": 0.94,
+        "dz_km": 3.774,
+        "dmag": 0.016
+       },
+       {
+        "reference_event_id": "223",
+        "origin_time_utc": "2019-07-04T18:47:22.600000Z",
+        "reference_magnitude": 4.02,
+        "matched": false
+       },
+       {
+        "reference_event_id": "749",
+        "origin_time_utc": "2019-07-05T00:32:06.670000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "763",
+        "candidate_magnitude": 3.9,
+        "dt_s": -0.182,
+        "epi_km": 0.954,
+        "dz_km": 3.35,
+        "dmag": -0.12
+       },
+       {
+        "reference_event_id": "3533",
+        "origin_time_utc": "2019-07-06T03:29:10.290000Z",
+        "reference_magnitude": 4.02,
+        "matched": false
+       },
+       {
+        "reference_event_id": "27",
+        "origin_time_utc": "2019-07-04T17:37:25.640000Z",
+        "reference_magnitude": 4.01,
+        "matched": true,
+        "candidate_event_id": "22",
+        "candidate_magnitude": 4.13,
+        "dt_s": -0.103,
+        "epi_km": 0.415,
+        "dz_km": -2.126,
+        "dmag": 0.121
+       },
+       {
+        "reference_event_id": "3731",
+        "origin_time_utc": "2019-07-06T04:19:56.010000Z",
+        "reference_magnitude": 4.01,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3555",
+        "origin_time_utc": "2019-07-06T03:33:39.450000Z",
+        "reference_magnitude": 4.01,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3534",
+        "origin_time_utc": "2019-07-06T03:29:15.860000Z",
+        "reference_magnitude": 4.01,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3507",
+        "origin_time_utc": "2019-07-06T03:23:29.560000Z",
+        "reference_magnitude": 4.0,
+        "matched": false
+       }
+      ]
+     },
+     "M5": {
+      "reference_events": 5,
+      "matched": 0,
+      "recall": 0.0,
+      "candidate_events": 0,
+      "precision": null,
+      "f1": null,
+      "precision_unaligned": null,
+      "precision_authority_only": null,
+      "dt_s": {
+       "n": 0
+      },
+      "epi_km": {
+       "n": 0
+      },
+      "dz_km": {
+       "n": 0
+      },
+      "dmag": {
+       "n": 0
+      },
+      "events": [
+       {
+        "reference_event_id": "3495",
+        "origin_time_utc": "2019-07-06T03:19:53.040000Z",
+        "reference_magnitude": 7.1,
+        "matched": false
+       },
+       {
+        "reference_event_id": "18",
+        "origin_time_utc": "2019-07-04T17:33:49.000000Z",
+        "reference_magnitude": 6.4,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3613",
+        "origin_time_utc": "2019-07-06T03:47:53.420000Z",
+        "reference_magnitude": 5.5,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3727",
+        "origin_time_utc": "2019-07-06T04:18:55.790000Z",
+        "reference_magnitude": 5.44,
+        "matched": false
+       },
+       {
+        "reference_event_id": "1842",
+        "origin_time_utc": "2019-07-05T11:07:53.040000Z",
+        "reference_magnitude": 5.37,
+        "matched": false
+       }
+      ]
+     }
+    }
+   },
+   "strength": {
+    "authority": "official_earthquake",
+    "pairs": 4350,
+    "dmag": {
+     "n": 4350,
+     "mean": -0.1188,
+     "median": -0.111,
+     "std": 0.1428,
+     "abs_p90": 0.298,
+     "mad": 0.083
+    },
+    "dmag_slope_per_unit": -0.0809,
+    "candidate": {
+     "mc": 1.6,
+     "b": 0.645,
+     "b_sigma": 0.009,
+     "n": 3184
+    },
+    "authority_mfd": {
+     "mc": 2.0,
+     "b": 0.603,
+     "b_sigma": 0.009,
+     "n": 2881
+    },
+    "b_difference": 0.042
+   },
+   "time": {
+    "reference": "shelly",
+    "dt_s": {
+     "n": 4924,
+     "mean": -0.2498,
+     "median": -0.275,
+     "std": 0.296,
+     "abs_p90": 0.469
+    },
+    "recall_by_day": [
+     {
+      "day": 0,
+      "events": 1061,
+      "recall": 0.5966
+     },
+     {
+      "day": 1,
+      "events": 3268,
+      "recall": 0.6248
+     },
+     {
+      "day": 2,
+      "events": 3387,
+      "recall": 0.664
+     }
+    ],
+    "after_large": {
+     "threshold": 4.0,
+     "large_events": 88,
+     "window_s": 3600.0,
+     "events_after": 2860,
+     "recall_after": 0.6399,
+     "recall_other": 0.6371
+    }
+   }
   },
   "official_earthquake": {
    "events": 6564,
@@ -3316,6 +7527,1269 @@
     "datum_known": true
    },
    "magnitude_coverage": 0.9827,
+   "by_magnitude": {
+    "authority": "official_earthquake",
+    "magnitude_bias": -0.094,
+    "bias_removed": true,
+    "candidate_without_magnitude": 320,
+    "classes": {
+     "M2": {
+      "reference_events": 2724,
+      "matched": 2446,
+      "recall": 0.8979,
+      "candidate_events": 3744,
+      "precision": 0.7631,
+      "f1": 0.825,
+      "precision_unaligned": 0.7728,
+      "precision_authority_only": 0.6343,
+      "dt_s": {
+       "n": 2446,
+       "mean": 0.2671,
+       "median": 0.26,
+       "std": 0.3815,
+       "abs_p90": 0.45
+      },
+      "epi_km": {
+       "n": 2446,
+       "mean": 0.9662,
+       "median": 0.5294,
+       "std": 1.5444,
+       "p90": 1.8199
+      },
+      "dz_km": {
+       "n": 2446,
+       "mean": -0.0154,
+       "median": -0.0119,
+       "std": 1.7621,
+       "abs_p90": 2.4841
+      },
+      "dmag": {
+       "n": 2392,
+       "mean": -0.0915,
+       "median": -0.085,
+       "std": 0.1715,
+       "abs_p90": 0.305
+      }
+     },
+     "M3": {
+      "reference_events": 742,
+      "matched": 676,
+      "recall": 0.9111,
+      "candidate_events": 828,
+      "precision": 0.8382,
+      "f1": 0.8731,
+      "precision_unaligned": 0.8413,
+      "precision_authority_only": 0.7983,
+      "dt_s": {
+       "n": 676,
+       "mean": 0.2716,
+       "median": 0.27,
+       "std": 0.3903,
+       "abs_p90": 0.463
+      },
+      "epi_km": {
+       "n": 676,
+       "mean": 0.933,
+       "median": 0.5123,
+       "std": 1.4993,
+       "p90": 1.8146
+      },
+      "dz_km": {
+       "n": 676,
+       "mean": 0.1705,
+       "median": 0.1798,
+       "std": 1.7084,
+       "abs_p90": 2.2751
+      },
+      "dmag": {
+       "n": 663,
+       "mean": -0.0775,
+       "median": -0.08,
+       "std": 0.2001,
+       "abs_p90": 0.32
+      }
+     },
+     "M4": {
+      "reference_events": 88,
+      "matched": 78,
+      "recall": 0.8864,
+      "candidate_events": 112,
+      "precision": 0.9018,
+      "f1": 0.894,
+      "precision_unaligned": 0.8989,
+      "precision_authority_only": 0.875,
+      "dt_s": {
+       "n": 78,
+       "mean": 0.3518,
+       "median": 0.3066,
+       "std": 0.3093,
+       "abs_p90": 0.5763
+      },
+      "epi_km": {
+       "n": 78,
+       "mean": 0.9016,
+       "median": 0.5566,
+       "std": 0.9905,
+       "p90": 1.825
+      },
+      "dz_km": {
+       "n": 78,
+       "mean": 0.5503,
+       "median": 0.6155,
+       "std": 1.73,
+       "abs_p90": 2.5308
+      },
+      "dmag": {
+       "n": 77,
+       "mean": -0.0008,
+       "median": 0.005,
+       "std": 0.2215,
+       "abs_p90": 0.3358
+      },
+      "events": [
+       {
+        "reference_event_id": "3495",
+        "origin_time_utc": "2019-07-06T03:19:53.040000Z",
+        "reference_magnitude": 7.1,
+        "matched": false
+       },
+       {
+        "reference_event_id": "18",
+        "origin_time_utc": "2019-07-04T17:33:49.000000Z",
+        "reference_magnitude": 6.4,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3613",
+        "origin_time_utc": "2019-07-06T03:47:53.420000Z",
+        "reference_magnitude": 5.5,
+        "matched": true,
+        "candidate_event_id": "gamma_0005587",
+        "candidate_magnitude": 5.2,
+        "dt_s": 0.39,
+        "epi_km": 0.524,
+        "dz_km": 1.491,
+        "dmag": -0.3
+       },
+       {
+        "reference_event_id": "3727",
+        "origin_time_utc": "2019-07-06T04:18:55.790000Z",
+        "reference_magnitude": 5.44,
+        "matched": true,
+        "candidate_event_id": "gamma_0005701",
+        "candidate_magnitude": 5.55,
+        "dt_s": 0.39,
+        "epi_km": 0.731,
+        "dz_km": -0.009,
+        "dmag": 0.114
+       },
+       {
+        "reference_event_id": "1842",
+        "origin_time_utc": "2019-07-05T11:07:53.040000Z",
+        "reference_magnitude": 5.37,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3493",
+        "origin_time_utc": "2019-07-06T03:16:32.480000Z",
+        "reference_magnitude": 4.97,
+        "matched": true,
+        "candidate_event_id": "ml_008487",
+        "candidate_magnitude": 4.8,
+        "dt_s": 1.58,
+        "epi_km": 1.874,
+        "dz_km": 2.104,
+        "dmag": -0.17
+       },
+       {
+        "reference_event_id": "3625",
+        "origin_time_utc": "2019-07-06T03:50:59.710000Z",
+        "reference_magnitude": 4.97,
+        "matched": true,
+        "candidate_event_id": "gamma_0005596",
+        "candidate_magnitude": 5.12,
+        "dt_s": 0.28,
+        "epi_km": 0.296,
+        "dz_km": 1.0,
+        "dmag": 0.15
+       },
+       {
+        "reference_event_id": "4583",
+        "origin_time_utc": "2019-07-06T09:28:28.980000Z",
+        "reference_magnitude": 4.89,
+        "matched": true,
+        "candidate_event_id": "gamma_0006842",
+        "candidate_magnitude": 4.79,
+        "dt_s": 0.36,
+        "epi_km": 0.272,
+        "dz_km": 1.047,
+        "dmag": -0.095
+       },
+       {
+        "reference_event_id": "3790",
+        "origin_time_utc": "2019-07-06T04:36:55.310000Z",
+        "reference_magnitude": 4.85,
+        "matched": true,
+        "candidate_event_id": "gamma_0005769",
+        "candidate_magnitude": 4.62,
+        "dt_s": 0.27,
+        "epi_km": 0.246,
+        "dz_km": 0.459,
+        "dmag": -0.234
+       },
+       {
+        "reference_event_id": "3509",
+        "origin_time_utc": "2019-07-06T03:23:50.720000Z",
+        "reference_magnitude": 4.84,
+        "matched": true,
+        "candidate_event_id": "gamma_0005491",
+        "candidate_magnitude": 5.17,
+        "dt_s": 0.2,
+        "epi_km": 1.36,
+        "dz_km": -0.841,
+        "dmag": 0.325
+       },
+       {
+        "reference_event_id": "3497",
+        "origin_time_utc": "2019-07-06T03:20:41.140000Z",
+        "reference_magnitude": 4.81,
+        "matched": true,
+        "candidate_event_id": "ml_008493",
+        "candidate_magnitude": 4.97,
+        "dt_s": -1.029,
+        "epi_km": 4.235,
+        "dz_km": -1.179,
+        "dmag": 0.16
+       },
+       {
+        "reference_event_id": "3707",
+        "origin_time_utc": "2019-07-06T04:13:07.080000Z",
+        "reference_magnitude": 4.8,
+        "matched": true,
+        "candidate_event_id": "gamma_0005679",
+        "candidate_magnitude": 5.0,
+        "dt_s": 0.1,
+        "epi_km": 0.585,
+        "dz_km": 2.709,
+        "dmag": 0.199
+       },
+       {
+        "reference_event_id": "3503",
+        "origin_time_utc": "2019-07-06T03:22:35.630000Z",
+        "reference_magnitude": 4.73,
+        "matched": true,
+        "candidate_event_id": "ml_008501",
+        "candidate_magnitude": 4.39,
+        "dt_s": 0.303,
+        "epi_km": 1.298,
+        "dz_km": 0.673,
+        "dmag": -0.34
+       },
+       {
+        "reference_event_id": "3681",
+        "origin_time_utc": "2019-07-06T04:07:04.570000Z",
+        "reference_magnitude": 4.68,
+        "matched": true,
+        "candidate_event_id": "gamma_0005657",
+        "candidate_magnitude": 4.68,
+        "dt_s": 0.28,
+        "epi_km": 0.394,
+        "dz_km": 4.487,
+        "dmag": 0.005
+       },
+       {
+        "reference_event_id": "3504",
+        "origin_time_utc": "2019-07-06T03:22:48.300000Z",
+        "reference_magnitude": 4.64,
+        "matched": true,
+        "candidate_event_id": "gamma_0005488",
+        "candidate_magnitude": 4.64,
+        "dt_s": 0.34,
+        "epi_km": 0.676,
+        "dz_km": -0.376,
+        "dmag": 0.005
+       },
+       {
+        "reference_event_id": "3500",
+        "origin_time_utc": "2019-07-06T03:22:03.570000Z",
+        "reference_magnitude": 4.64,
+        "matched": true,
+        "candidate_event_id": "gamma_0005484",
+        "candidate_magnitude": 5.04,
+        "dt_s": 0.33,
+        "epi_km": 0.741,
+        "dz_km": -0.072,
+        "dmag": 0.402
+       },
+       {
+        "reference_event_id": "4039",
+        "origin_time_utc": "2019-07-06T06:01:51.800000Z",
+        "reference_magnitude": 4.63,
+        "matched": true,
+        "candidate_event_id": "gamma_0006077",
+        "candidate_magnitude": 4.63,
+        "dt_s": 0.23,
+        "epi_km": 0.405,
+        "dz_km": 1.705,
+        "dmag": 0.004
+       },
+       {
+        "reference_event_id": "3516",
+        "origin_time_utc": "2019-07-06T03:25:27.970000Z",
+        "reference_magnitude": 4.61,
+        "matched": true,
+        "candidate_event_id": "ml_008517",
+        "candidate_magnitude": 4.62,
+        "dt_s": 0.277,
+        "epi_km": 1.328,
+        "dz_km": -0.772,
+        "dmag": 0.01
+       },
+       {
+        "reference_event_id": "209",
+        "origin_time_utc": "2019-07-04T18:39:44.440000Z",
+        "reference_magnitude": 4.59,
+        "matched": true,
+        "candidate_event_id": "ml_000420",
+        "candidate_magnitude": 4.16,
+        "dt_s": 0.974,
+        "epi_km": 1.068,
+        "dz_km": 0.66,
+        "dmag": -0.435
+       },
+       {
+        "reference_event_id": "242",
+        "origin_time_utc": "2019-07-04T18:56:06.420000Z",
+        "reference_magnitude": 4.58,
+        "matched": true,
+        "candidate_event_id": "ml_000493",
+        "candidate_magnitude": 4.34,
+        "dt_s": 0.684,
+        "epi_km": 0.463,
+        "dz_km": 0.437,
+        "dmag": -0.24
+       },
+       {
+        "reference_event_id": "3525",
+        "origin_time_utc": "2019-07-06T03:27:11.370000Z",
+        "reference_magnitude": 4.57,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4478",
+        "origin_time_utc": "2019-07-06T08:32:57.550000Z",
+        "reference_magnitude": 4.56,
+        "matched": true,
+        "candidate_event_id": "gamma_0006641",
+        "candidate_magnitude": 4.78,
+        "dt_s": 0.36,
+        "epi_km": 0.105,
+        "dz_km": 0.631,
+        "dmag": 0.217
+       },
+       {
+        "reference_event_id": "3501",
+        "origin_time_utc": "2019-07-06T03:22:17.100000Z",
+        "reference_magnitude": 4.55,
+        "matched": true,
+        "candidate_event_id": "gamma_0005485",
+        "candidate_magnitude": 4.63,
+        "dt_s": 0.28,
+        "epi_km": 1.496,
+        "dz_km": 0.693,
+        "dmag": 0.08
+       },
+       {
+        "reference_event_id": "3506",
+        "origin_time_utc": "2019-07-06T03:23:19.870000Z",
+        "reference_magnitude": 4.52,
+        "matched": true,
+        "candidate_event_id": "gamma_0005489",
+        "candidate_magnitude": 5.0,
+        "dt_s": 0.22,
+        "epi_km": 0.544,
+        "dz_km": 1.658,
+        "dmag": 0.484
+       },
+       {
+        "reference_event_id": "3536",
+        "origin_time_utc": "2019-07-06T03:29:32.080000Z",
+        "reference_magnitude": 4.51,
+        "matched": true,
+        "candidate_event_id": "gamma_0005514",
+        "candidate_magnitude": 4.25,
+        "dt_s": 0.24,
+        "epi_km": 0.631,
+        "dz_km": 1.712,
+        "dmag": -0.255
+       },
+       {
+        "reference_event_id": "5079",
+        "origin_time_utc": "2019-07-06T13:06:55.260000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "ml_011036",
+        "candidate_magnitude": 4.24,
+        "dt_s": 0.782,
+        "epi_km": 1.804,
+        "dz_km": 0.937,
+        "dmag": -0.26
+       },
+       {
+        "reference_event_id": "3524",
+        "origin_time_utc": "2019-07-06T03:27:07.010000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "gamma_0005504",
+        "candidate_magnitude": 4.63,
+        "dt_s": 0.38,
+        "epi_km": 0.569,
+        "dz_km": -1.565,
+        "dmag": 0.13
+       },
+       {
+        "reference_event_id": "6554",
+        "origin_time_utc": "2019-07-06T23:50:41.990000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "gamma_0009920",
+        "candidate_magnitude": 4.78,
+        "dt_s": 0.29,
+        "epi_km": 0.369,
+        "dz_km": -0.149,
+        "dmag": 0.283
+       },
+       {
+        "reference_event_id": "301",
+        "origin_time_utc": "2019-07-04T19:21:32.090000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "gamma_0000360",
+        "candidate_magnitude": 4.66,
+        "dt_s": 0.39,
+        "epi_km": 0.149,
+        "dz_km": 2.769,
+        "dmag": 0.155
+       },
+       {
+        "reference_event_id": "3540",
+        "origin_time_utc": "2019-07-06T03:30:25.050000Z",
+        "reference_magnitude": 4.49,
+        "matched": true,
+        "candidate_event_id": "gamma_0005516",
+        "candidate_magnitude": 4.58,
+        "dt_s": 0.27,
+        "epi_km": 0.174,
+        "dz_km": 0.6,
+        "dmag": 0.086
+       },
+       {
+        "reference_event_id": "19",
+        "origin_time_utc": "2019-07-04T17:35:01.660000Z",
+        "reference_magnitude": 4.49,
+        "matched": true,
+        "candidate_event_id": "gamma_0000047",
+        "candidate_magnitude": 4.51,
+        "dt_s": 0.36,
+        "epi_km": 0.464,
+        "dz_km": 2.388,
+        "dmag": 0.02
+       },
+       {
+        "reference_event_id": "4590",
+        "origin_time_utc": "2019-07-06T09:30:41.240000Z",
+        "reference_magnitude": 4.49,
+        "matched": true,
+        "candidate_event_id": "gamma_0006846",
+        "candidate_magnitude": 4.71,
+        "dt_s": 0.26,
+        "epi_km": 0.61,
+        "dz_km": -0.427,
+        "dmag": 0.218
+       },
+       {
+        "reference_event_id": "3841",
+        "origin_time_utc": "2019-07-06T04:52:17.710000Z",
+        "reference_magnitude": 4.47,
+        "matched": true,
+        "candidate_event_id": "gamma_0005825",
+        "candidate_magnitude": 4.68,
+        "dt_s": 0.29,
+        "epi_km": 0.472,
+        "dz_km": 0.654,
+        "dmag": 0.21
+       },
+       {
+        "reference_event_id": "3502",
+        "origin_time_utc": "2019-07-06T03:22:27.160000Z",
+        "reference_magnitude": 4.46,
+        "matched": false
+       },
+       {
+        "reference_event_id": "540",
+        "origin_time_utc": "2019-07-04T22:12:08.490000Z",
+        "reference_magnitude": 4.43,
+        "matched": true,
+        "candidate_event_id": "gamma_0000871",
+        "candidate_magnitude": 4.46,
+        "dt_s": 0.31,
+        "epi_km": 0.442,
+        "dz_km": 0.095,
+        "dmag": 0.026
+       },
+       {
+        "reference_event_id": "4587",
+        "origin_time_utc": "2019-07-06T09:29:20.970000Z",
+        "reference_magnitude": 4.41,
+        "matched": true,
+        "candidate_event_id": "gamma_0006844",
+        "candidate_magnitude": 4.53,
+        "dt_s": 0.27,
+        "epi_km": 0.227,
+        "dz_km": 0.592,
+        "dmag": 0.116
+       },
+       {
+        "reference_event_id": "3569",
+        "origin_time_utc": "2019-07-06T03:36:16.460000Z",
+        "reference_magnitude": 4.35,
+        "matched": true,
+        "candidate_event_id": "gamma_0005542",
+        "candidate_magnitude": 4.5,
+        "dt_s": 0.2,
+        "epi_km": 0.114,
+        "dz_km": 1.997,
+        "dmag": 0.151
+       },
+       {
+        "reference_event_id": "222",
+        "origin_time_utc": "2019-07-04T18:47:06.590000Z",
+        "reference_magnitude": 4.34,
+        "matched": true,
+        "candidate_event_id": "ml_000459",
+        "candidate_magnitude": 4.45,
+        "dt_s": 0.512,
+        "epi_km": 0.256,
+        "dz_km": 2.808,
+        "dmag": 0.11
+       },
+       {
+        "reference_event_id": "3498",
+        "origin_time_utc": "2019-07-06T03:21:10.050000Z",
+        "reference_magnitude": 4.33,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3496",
+        "origin_time_utc": "2019-07-06T03:20:36.080000Z",
+        "reference_magnitude": 4.33,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3791",
+        "origin_time_utc": "2019-07-06T04:37:13.570000Z",
+        "reference_magnitude": 4.33,
+        "matched": true,
+        "candidate_event_id": "gamma_0005770",
+        "candidate_magnitude": 4.26,
+        "dt_s": 0.34,
+        "epi_km": 0.661,
+        "dz_km": -0.648,
+        "dmag": -0.07
+       },
+       {
+        "reference_event_id": "3652",
+        "origin_time_utc": "2019-07-06T03:57:50.900000Z",
+        "reference_magnitude": 4.31,
+        "matched": true,
+        "candidate_event_id": "gamma_0005623",
+        "candidate_magnitude": 4.13,
+        "dt_s": 1.54,
+        "epi_km": 3.597,
+        "dz_km": -0.773,
+        "dmag": -0.18
+       },
+       {
+        "reference_event_id": "3728",
+        "origin_time_utc": "2019-07-06T04:19:15.480000Z",
+        "reference_magnitude": 4.29,
+        "matched": true,
+        "candidate_event_id": "ml_008820",
+        "candidate_magnitude": 4.11,
+        "dt_s": 0.22,
+        "epi_km": 0.998,
+        "dz_km": 0.392,
+        "dmag": -0.181
+       },
+       {
+        "reference_event_id": "3943",
+        "origin_time_utc": "2019-07-06T05:25:04.870000Z",
+        "reference_magnitude": 4.29,
+        "matched": true,
+        "candidate_event_id": "gamma_0005941",
+        "candidate_magnitude": 4.33,
+        "dt_s": 0.21,
+        "epi_km": 0.277,
+        "dz_km": 0.072,
+        "dmag": 0.042
+       },
+       {
+        "reference_event_id": "22",
+        "origin_time_utc": "2019-07-04T17:35:52.170000Z",
+        "reference_magnitude": 4.28,
+        "matched": true,
+        "candidate_event_id": "ml_000080",
+        "candidate_magnitude": 3.87,
+        "dt_s": 0.801,
+        "epi_km": 5.037,
+        "dz_km": 8.76,
+        "dmag": -0.415
+       },
+       {
+        "reference_event_id": "4072",
+        "origin_time_utc": "2019-07-06T06:12:52.000000Z",
+        "reference_magnitude": 4.27,
+        "matched": true,
+        "candidate_event_id": "gamma_0006118",
+        "candidate_magnitude": 4.39,
+        "dt_s": 0.26,
+        "epi_km": 0.309,
+        "dz_km": 0.267,
+        "dmag": 0.116
+       },
+       {
+        "reference_event_id": "3608",
+        "origin_time_utc": "2019-07-06T03:46:26.870000Z",
+        "reference_magnitude": 4.26,
+        "matched": true,
+        "candidate_event_id": "gamma_0005584",
+        "candidate_magnitude": 4.45,
+        "dt_s": 0.31,
+        "epi_km": 0.205,
+        "dz_km": -0.351,
+        "dmag": 0.188
+       },
+       {
+        "reference_event_id": "3800",
+        "origin_time_utc": "2019-07-06T04:40:15.980000Z",
+        "reference_magnitude": 4.24,
+        "matched": true,
+        "candidate_event_id": "gamma_0005778",
+        "candidate_magnitude": 4.55,
+        "dt_s": 0.34,
+        "epi_km": 0.237,
+        "dz_km": 0.76,
+        "dmag": 0.312
+       },
+       {
+        "reference_event_id": "4584",
+        "origin_time_utc": "2019-07-06T09:28:41.790000Z",
+        "reference_magnitude": 4.24,
+        "matched": true,
+        "candidate_event_id": "ml_010167",
+        "candidate_magnitude": 4.24,
+        "dt_s": 0.393,
+        "epi_km": 0.502,
+        "dz_km": -0.05,
+        "dmag": 0.0
+       },
+       {
+        "reference_event_id": "181",
+        "origin_time_utc": "2019-07-04T18:27:59.440000Z",
+        "reference_magnitude": 4.23,
+        "matched": true,
+        "candidate_event_id": "gamma_0000204",
+        "candidate_magnitude": 4.43,
+        "dt_s": 0.32,
+        "epi_km": 0.054,
+        "dz_km": 1.262,
+        "dmag": 0.198
+       },
+       {
+        "reference_event_id": "3508",
+        "origin_time_utc": "2019-07-06T03:23:34.710000Z",
+        "reference_magnitude": 4.22,
+        "matched": true,
+        "candidate_event_id": "gamma_0005490",
+        "candidate_magnitude": null,
+        "dt_s": 0.17,
+        "epi_km": 0.497,
+        "dz_km": 1.547,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "243",
+        "origin_time_utc": "2019-07-04T18:56:22.030000Z",
+        "reference_magnitude": 4.21,
+        "matched": true,
+        "candidate_event_id": "ml_000494",
+        "candidate_magnitude": 3.86,
+        "dt_s": -0.067,
+        "epi_km": 3.543,
+        "dz_km": 2.824,
+        "dmag": -0.35
+       },
+       {
+        "reference_event_id": "3512",
+        "origin_time_utc": "2019-07-06T03:24:22.370000Z",
+        "reference_magnitude": 4.19,
+        "matched": true,
+        "candidate_event_id": "gamma_0005492",
+        "candidate_magnitude": 4.8,
+        "dt_s": 0.22,
+        "epi_km": 0.622,
+        "dz_km": -0.527,
+        "dmag": 0.614
+       },
+       {
+        "reference_event_id": "3532",
+        "origin_time_utc": "2019-07-06T03:28:46.550000Z",
+        "reference_magnitude": 4.19,
+        "matched": true,
+        "candidate_event_id": "gamma_0005509",
+        "candidate_magnitude": 4.3,
+        "dt_s": 0.43,
+        "epi_km": 1.071,
+        "dz_km": 0.784,
+        "dmag": 0.111
+       },
+       {
+        "reference_event_id": "3551",
+        "origin_time_utc": "2019-07-06T03:32:46.660000Z",
+        "reference_magnitude": 4.17,
+        "matched": true,
+        "candidate_event_id": "gamma_0005526",
+        "candidate_magnitude": 4.5,
+        "dt_s": 0.42,
+        "epi_km": 1.372,
+        "dz_km": 0.827,
+        "dmag": 0.333
+       },
+       {
+        "reference_event_id": "3738",
+        "origin_time_utc": "2019-07-06T04:21:35.820000Z",
+        "reference_magnitude": 4.17,
+        "matched": true,
+        "candidate_event_id": "gamma_0005708",
+        "candidate_magnitude": 4.16,
+        "dt_s": 0.28,
+        "epi_km": 0.577,
+        "dz_km": -0.518,
+        "dmag": -0.01
+       },
+       {
+        "reference_event_id": "350",
+        "origin_time_utc": "2019-07-04T19:56:00.500000Z",
+        "reference_magnitude": 4.16,
+        "matched": true,
+        "candidate_event_id": "ml_000790",
+        "candidate_magnitude": 3.9,
+        "dt_s": 0.461,
+        "epi_km": 0.089,
+        "dz_km": 0.823,
+        "dmag": -0.265
+       },
+       {
+        "reference_event_id": "3499",
+        "origin_time_utc": "2019-07-06T03:21:19.190000Z",
+        "reference_magnitude": 4.15,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4034",
+        "origin_time_utc": "2019-07-06T05:58:17.570000Z",
+        "reference_magnitude": 4.15,
+        "matched": true,
+        "candidate_event_id": "ml_009278",
+        "candidate_magnitude": 4.12,
+        "dt_s": 0.441,
+        "epi_km": 1.343,
+        "dz_km": 0.179,
+        "dmag": -0.03
+       },
+       {
+        "reference_event_id": "5576",
+        "origin_time_utc": "2019-07-06T16:36:05.820000Z",
+        "reference_magnitude": 4.14,
+        "matched": true,
+        "candidate_event_id": "gamma_0008361",
+        "candidate_magnitude": 4.1,
+        "dt_s": 0.26,
+        "epi_km": 0.653,
+        "dz_km": 1.142,
+        "dmag": -0.043
+       },
+       {
+        "reference_event_id": "3494",
+        "origin_time_utc": "2019-07-06T03:17:13.500000Z",
+        "reference_magnitude": 4.14,
+        "matched": true,
+        "candidate_event_id": "gamma_0005478",
+        "candidate_magnitude": 3.81,
+        "dt_s": 0.27,
+        "epi_km": 0.91,
+        "dz_km": -1.117,
+        "dmag": -0.33
+       },
+       {
+        "reference_event_id": "40",
+        "origin_time_utc": "2019-07-04T17:40:18.520000Z",
+        "reference_magnitude": 4.13,
+        "matched": true,
+        "candidate_event_id": "gamma_0000060",
+        "candidate_magnitude": 4.08,
+        "dt_s": 0.24,
+        "epi_km": 0.162,
+        "dz_km": 1.511,
+        "dmag": -0.055
+       },
+       {
+        "reference_event_id": "4892",
+        "origin_time_utc": "2019-07-06T11:53:08.090000Z",
+        "reference_magnitude": 4.12,
+        "matched": true,
+        "candidate_event_id": "gamma_0007343",
+        "candidate_magnitude": 4.13,
+        "dt_s": 0.19,
+        "epi_km": 0.318,
+        "dz_km": -0.126,
+        "dmag": 0.009
+       },
+       {
+        "reference_event_id": "3529",
+        "origin_time_utc": "2019-07-06T03:28:00.730000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "gamma_0005506",
+        "candidate_magnitude": 4.33,
+        "dt_s": 0.36,
+        "epi_km": 0.512,
+        "dz_km": -1.069,
+        "dmag": 0.238
+       },
+       {
+        "reference_event_id": "2018",
+        "origin_time_utc": "2019-07-05T12:38:30.020000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "gamma_0003226",
+        "candidate_magnitude": 4.36,
+        "dt_s": 0.32,
+        "epi_km": 0.289,
+        "dz_km": 0.923,
+        "dmag": 0.266
+       },
+       {
+        "reference_event_id": "3522",
+        "origin_time_utc": "2019-07-06T03:26:51.990000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "gamma_0005503",
+        "candidate_magnitude": 3.97,
+        "dt_s": 0.53,
+        "epi_km": 1.739,
+        "dz_km": -2.65,
+        "dmag": -0.12
+       },
+       {
+        "reference_event_id": "3530",
+        "origin_time_utc": "2019-07-06T03:28:12.340000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "gamma_0005507",
+        "candidate_magnitude": 4.05,
+        "dt_s": 0.36,
+        "epi_km": 1.406,
+        "dz_km": -0.944,
+        "dmag": -0.044
+       },
+       {
+        "reference_event_id": "3563",
+        "origin_time_utc": "2019-07-06T03:35:05.420000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "gamma_0005537",
+        "candidate_magnitude": 3.83,
+        "dt_s": 0.34,
+        "epi_km": 0.416,
+        "dz_km": 0.064,
+        "dmag": -0.255
+       },
+       {
+        "reference_event_id": "3553",
+        "origin_time_utc": "2019-07-06T03:33:20.200000Z",
+        "reference_magnitude": 4.08,
+        "matched": true,
+        "candidate_event_id": "gamma_0005529",
+        "candidate_magnitude": 3.64,
+        "dt_s": 0.23,
+        "epi_km": 0.365,
+        "dz_km": 0.006,
+        "dmag": -0.44
+       },
+       {
+        "reference_event_id": "3535",
+        "origin_time_utc": "2019-07-06T03:29:28.840000Z",
+        "reference_magnitude": 4.07,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3513",
+        "origin_time_utc": "2019-07-06T03:24:33.520000Z",
+        "reference_magnitude": 4.07,
+        "matched": true,
+        "candidate_event_id": "ml_008510",
+        "candidate_magnitude": 3.91,
+        "dt_s": 0.143,
+        "epi_km": 1.882,
+        "dz_km": -0.482,
+        "dmag": -0.16
+       },
+       {
+        "reference_event_id": "239",
+        "origin_time_utc": "2019-07-04T18:54:13.990000Z",
+        "reference_magnitude": 4.07,
+        "matched": true,
+        "candidate_event_id": "gamma_0000282",
+        "candidate_magnitude": 4.19,
+        "dt_s": 0.33,
+        "epi_km": 0.763,
+        "dz_km": 1.099,
+        "dmag": 0.122
+       },
+       {
+        "reference_event_id": "3642",
+        "origin_time_utc": "2019-07-06T03:55:20.020000Z",
+        "reference_magnitude": 4.06,
+        "matched": true,
+        "candidate_event_id": "gamma_0005612",
+        "candidate_magnitude": 4.18,
+        "dt_s": 0.25,
+        "epi_km": 0.366,
+        "dz_km": 1.477,
+        "dmag": 0.123
+       },
+       {
+        "reference_event_id": "4128",
+        "origin_time_utc": "2019-07-06T06:34:47.410000Z",
+        "reference_magnitude": 4.05,
+        "matched": true,
+        "candidate_event_id": "gamma_0006189",
+        "candidate_magnitude": 4.21,
+        "dt_s": 0.26,
+        "epi_km": 0.305,
+        "dz_km": 0.796,
+        "dmag": 0.157
+       },
+       {
+        "reference_event_id": "4731",
+        "origin_time_utc": "2019-07-06T10:48:24.460000Z",
+        "reference_magnitude": 4.04,
+        "matched": true,
+        "candidate_event_id": "gamma_0007107",
+        "candidate_magnitude": 4.27,
+        "dt_s": 0.27,
+        "epi_km": 0.215,
+        "dz_km": 0.053,
+        "dmag": 0.233
+       },
+       {
+        "reference_event_id": "727",
+        "origin_time_utc": "2019-07-05T00:18:01.410000Z",
+        "reference_magnitude": 4.04,
+        "matched": true,
+        "candidate_event_id": "gamma_0001232",
+        "candidate_magnitude": 4.12,
+        "dt_s": 0.33,
+        "epi_km": 0.261,
+        "dz_km": 0.347,
+        "dmag": 0.085
+       },
+       {
+        "reference_event_id": "662",
+        "origin_time_utc": "2019-07-04T23:34:02.380000Z",
+        "reference_magnitude": 4.04,
+        "matched": true,
+        "candidate_event_id": "ml_001827",
+        "candidate_magnitude": 3.87,
+        "dt_s": 0.504,
+        "epi_km": 1.184,
+        "dz_km": 0.984,
+        "dmag": -0.175
+       },
+       {
+        "reference_event_id": "3528",
+        "origin_time_utc": "2019-07-06T03:27:36.260000Z",
+        "reference_magnitude": 4.03,
+        "matched": true,
+        "candidate_event_id": "gamma_0005505",
+        "candidate_magnitude": 3.88,
+        "dt_s": 0.26,
+        "epi_km": 0.801,
+        "dz_km": -0.42,
+        "dmag": -0.15
+       },
+       {
+        "reference_event_id": "3858",
+        "origin_time_utc": "2019-07-06T04:58:36.690000Z",
+        "reference_magnitude": 4.03,
+        "matched": true,
+        "candidate_event_id": "gamma_0005848",
+        "candidate_magnitude": 4.19,
+        "dt_s": 0.36,
+        "epi_km": 0.243,
+        "dz_km": 1.865,
+        "dmag": 0.156
+       },
+       {
+        "reference_event_id": "3519",
+        "origin_time_utc": "2019-07-06T03:26:04.010000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "gamma_0005500",
+        "candidate_magnitude": 3.87,
+        "dt_s": 0.02,
+        "epi_km": 1.029,
+        "dz_km": 1.403,
+        "dmag": -0.154
+       },
+       {
+        "reference_event_id": "223",
+        "origin_time_utc": "2019-07-04T18:47:22.600000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "ml_000460",
+        "candidate_magnitude": 3.83,
+        "dt_s": 0.287,
+        "epi_km": 1.127,
+        "dz_km": 1.032,
+        "dmag": -0.195
+       },
+       {
+        "reference_event_id": "749",
+        "origin_time_utc": "2019-07-05T00:32:06.670000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "ml_002063",
+        "candidate_magnitude": 3.86,
+        "dt_s": 0.376,
+        "epi_km": 0.539,
+        "dz_km": 0.2,
+        "dmag": -0.157
+       },
+       {
+        "reference_event_id": "3533",
+        "origin_time_utc": "2019-07-06T03:29:10.290000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "gamma_0005511",
+        "candidate_magnitude": 3.85,
+        "dt_s": 0.3,
+        "epi_km": 0.451,
+        "dz_km": 1.198,
+        "dmag": -0.165
+       },
+       {
+        "reference_event_id": "27",
+        "origin_time_utc": "2019-07-04T17:37:25.640000Z",
+        "reference_magnitude": 4.01,
+        "matched": true,
+        "candidate_event_id": "ml_000089",
+        "candidate_magnitude": 3.87,
+        "dt_s": 0.402,
+        "epi_km": 0.574,
+        "dz_km": -2.1,
+        "dmag": -0.14
+       },
+       {
+        "reference_event_id": "3731",
+        "origin_time_utc": "2019-07-06T04:19:56.010000Z",
+        "reference_magnitude": 4.01,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3555",
+        "origin_time_utc": "2019-07-06T03:33:39.450000Z",
+        "reference_magnitude": 4.01,
+        "matched": true,
+        "candidate_event_id": "gamma_0005530",
+        "candidate_magnitude": 3.78,
+        "dt_s": 0.09,
+        "epi_km": 2.692,
+        "dz_km": 1.891,
+        "dmag": -0.23
+       },
+       {
+        "reference_event_id": "3534",
+        "origin_time_utc": "2019-07-06T03:29:15.860000Z",
+        "reference_magnitude": 4.01,
+        "matched": true,
+        "candidate_event_id": "ml_008536",
+        "candidate_magnitude": 3.75,
+        "dt_s": 1.175,
+        "epi_km": 4.037,
+        "dz_km": -6.224,
+        "dmag": -0.255
+       },
+       {
+        "reference_event_id": "3507",
+        "origin_time_utc": "2019-07-06T03:23:29.560000Z",
+        "reference_magnitude": 4.0,
+        "matched": true,
+        "candidate_event_id": "ml_008505",
+        "candidate_magnitude": 3.87,
+        "dt_s": 0.524,
+        "epi_km": 1.174,
+        "dz_km": -2.48,
+        "dmag": -0.13
+       }
+      ]
+     },
+     "M5": {
+      "reference_events": 5,
+      "matched": 2,
+      "recall": 0.4,
+      "candidate_events": 8,
+      "precision": 1.0,
+      "f1": 0.5714,
+      "precision_unaligned": 1.0,
+      "precision_authority_only": 1.0,
+      "dt_s": {
+       "n": 2,
+       "mean": 0.39,
+       "median": 0.39,
+       "std": 0.0,
+       "abs_p90": 0.39
+      },
+      "epi_km": {
+       "n": 2,
+       "mean": 0.6274,
+       "median": 0.6274,
+       "std": 0.1463,
+       "p90": 0.7102
+      },
+      "dz_km": {
+       "n": 2,
+       "mean": 0.741,
+       "median": 0.741,
+       "std": 1.0607,
+       "abs_p90": 1.3428
+      },
+      "dmag": {
+       "n": 2,
+       "mean": -0.093,
+       "median": -0.093,
+       "std": 0.2927,
+       "abs_p90": 0.2814
+      },
+      "events": [
+       {
+        "reference_event_id": "3495",
+        "origin_time_utc": "2019-07-06T03:19:53.040000Z",
+        "reference_magnitude": 7.1,
+        "matched": false
+       },
+       {
+        "reference_event_id": "18",
+        "origin_time_utc": "2019-07-04T17:33:49.000000Z",
+        "reference_magnitude": 6.4,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3613",
+        "origin_time_utc": "2019-07-06T03:47:53.420000Z",
+        "reference_magnitude": 5.5,
+        "matched": true,
+        "candidate_event_id": "gamma_0005587",
+        "candidate_magnitude": 5.2,
+        "dt_s": 0.39,
+        "epi_km": 0.524,
+        "dz_km": 1.491,
+        "dmag": -0.3
+       },
+       {
+        "reference_event_id": "3727",
+        "origin_time_utc": "2019-07-06T04:18:55.790000Z",
+        "reference_magnitude": 5.44,
+        "matched": true,
+        "candidate_event_id": "gamma_0005701",
+        "candidate_magnitude": 5.55,
+        "dt_s": 0.39,
+        "epi_km": 0.731,
+        "dz_km": -0.009,
+        "dmag": 0.114
+       },
+       {
+        "reference_event_id": "1842",
+        "origin_time_utc": "2019-07-05T11:07:53.040000Z",
+        "reference_magnitude": 5.37,
+        "matched": false
+       }
+      ]
+     }
+    }
+   },
+   "strength": {
+    "authority": "official_earthquake",
+    "pairs": 5701,
+    "dmag": {
+     "n": 5701,
+     "mean": -0.0946,
+     "median": -0.094,
+     "std": 0.1724,
+     "abs_p90": 0.308,
+     "mad": 0.094
+    },
+    "dmag_slope_per_unit": 0.0101,
+    "candidate": {
+     "mc": 0.7,
+     "b": 0.451,
+     "b_sigma": 0.003,
+     "n": 12948
+    },
+    "authority_mfd": {
+     "mc": 2.0,
+     "b": 0.603,
+     "b_sigma": 0.009,
+     "n": 2881
+    },
+    "b_difference": -0.152
+   },
+   "time": {
+    "reference": "shelly",
+    "dt_s": {
+     "n": 7196,
+     "mean": 0.2723,
+     "median": 0.2597,
+     "std": 0.473,
+     "abs_p90": 0.617
+    },
+    "recall_by_day": [
+     {
+      "day": 0,
+      "events": 1061,
+      "recall": 0.9595
+     },
+     {
+      "day": 1,
+      "events": 3268,
+      "recall": 0.9468
+     },
+     {
+      "day": 2,
+      "events": 3387,
+      "recall": 0.9105
+     }
+    ],
+    "after_large": {
+     "threshold": 4.0,
+     "large_events": 88,
+     "window_s": 3600.0,
+     "events_after": 2860,
+     "recall_after": 0.9315,
+     "recall_other": 0.9333
+    }
+   },
    "headline": {
     "recall": 0.9326,
     "ceiling": 0.6659,
@@ -3330,7 +8804,39 @@
     "depth_mode_share": 0.0052,
     "depth_band_share": 0.1613,
     "off_structure_fraction": 0.0052,
-    "off_structure_after_shift": 0.0042
+    "off_structure_after_shift": 0.0042,
+    "recall_M2": 0.8979,
+    "precision_M2": 0.7631,
+    "f1_M2": 0.825,
+    "epi_mean_M2": 0.9662,
+    "dt_mean_M2": 0.2671,
+    "dmag_mean_M2": -0.0915,
+    "recall_M3": 0.9111,
+    "precision_M3": 0.8382,
+    "f1_M3": 0.8731,
+    "epi_mean_M3": 0.933,
+    "dt_mean_M3": 0.2716,
+    "dmag_mean_M3": -0.0775,
+    "recall_M4": 0.8864,
+    "precision_M4": 0.9018,
+    "f1_M4": 0.894,
+    "epi_mean_M4": 0.9016,
+    "dt_mean_M4": 0.3518,
+    "dmag_mean_M4": -0.0008,
+    "recall_M5": 0.4,
+    "precision_M5": 1.0,
+    "f1_M5": 0.5714,
+    "epi_mean_M5": 0.6274,
+    "dt_mean_M5": 0.39,
+    "dmag_mean_M5": -0.093,
+    "dmag_median": -0.094,
+    "dmag_std": 0.1724,
+    "dmag_slope_per_unit": 0.0101,
+    "b_difference": -0.152,
+    "dt_mean_s": 0.2723,
+    "dt_std_s": 0.473,
+    "recall_after_large": 0.9315,
+    "recall_other": 0.9333
    }
   },
   "expert_blind": {
@@ -3956,6 +9462,1281 @@
     "datum_known": true
    },
    "magnitude_coverage": 0.0,
+   "by_magnitude": {
+    "authority": "official_earthquake",
+    "magnitude_bias": null,
+    "bias_removed": false,
+    "candidate_without_magnitude": 9360,
+    "classes": {
+     "M2": {
+      "reference_events": 2724,
+      "matched": 2284,
+      "recall": 0.8385,
+      "candidate_events": 0,
+      "precision": null,
+      "f1": null,
+      "precision_unaligned": null,
+      "precision_authority_only": null,
+      "dt_s": {
+       "n": 2284,
+       "mean": 0.141,
+       "median": 0.1497,
+       "std": 0.351,
+       "abs_p90": 0.4184
+      },
+      "epi_km": {
+       "n": 2284,
+       "mean": 1.3318,
+       "median": 0.8659,
+       "std": 1.8032,
+       "p90": 2.2866
+      },
+      "dz_km": {
+       "n": 2284,
+       "mean": -1.686,
+       "median": -1.6953,
+       "std": 2.667,
+       "abs_p90": 4.9416
+      },
+      "dmag": {
+       "n": 0
+      }
+     },
+     "M3": {
+      "reference_events": 742,
+      "matched": 594,
+      "recall": 0.8005,
+      "candidate_events": 0,
+      "precision": null,
+      "f1": null,
+      "precision_unaligned": null,
+      "precision_authority_only": null,
+      "dt_s": {
+       "n": 594,
+       "mean": 0.1538,
+       "median": 0.1556,
+       "std": 0.3726,
+       "abs_p90": 0.4023
+      },
+      "epi_km": {
+       "n": 594,
+       "mean": 1.1826,
+       "median": 0.8359,
+       "std": 1.5463,
+       "p90": 1.945
+      },
+      "dz_km": {
+       "n": 594,
+       "mean": -1.8214,
+       "median": -1.6791,
+       "std": 2.5518,
+       "abs_p90": 5.1262
+      },
+      "dmag": {
+       "n": 0
+      }
+     },
+     "M4": {
+      "reference_events": 88,
+      "matched": 81,
+      "recall": 0.9205,
+      "candidate_events": 0,
+      "precision": null,
+      "f1": null,
+      "precision_unaligned": null,
+      "precision_authority_only": null,
+      "dt_s": {
+       "n": 81,
+       "mean": 0.1931,
+       "median": 0.1636,
+       "std": 0.3118,
+       "abs_p90": 0.3955
+      },
+      "epi_km": {
+       "n": 81,
+       "mean": 1.2753,
+       "median": 0.929,
+       "std": 1.7554,
+       "p90": 2.3104
+      },
+      "dz_km": {
+       "n": 81,
+       "mean": -1.5926,
+       "median": -1.5241,
+       "std": 3.1587,
+       "abs_p90": 5.1528
+      },
+      "dmag": {
+       "n": 0
+      },
+      "events": [
+       {
+        "reference_event_id": "3495",
+        "origin_time_utc": "2019-07-06T03:19:53.040000Z",
+        "reference_magnitude": 7.1,
+        "matched": true,
+        "candidate_event_id": "gamma_0005482",
+        "candidate_magnitude": null,
+        "dt_s": 0.054,
+        "epi_km": 1.308,
+        "dz_km": -7.961,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "18",
+        "origin_time_utc": "2019-07-04T17:33:49.000000Z",
+        "reference_magnitude": 6.4,
+        "matched": true,
+        "candidate_event_id": "gamma_0000046",
+        "candidate_magnitude": null,
+        "dt_s": -0.168,
+        "epi_km": 2.31,
+        "dz_km": -10.461,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3613",
+        "origin_time_utc": "2019-07-06T03:47:53.420000Z",
+        "reference_magnitude": 5.5,
+        "matched": true,
+        "candidate_event_id": "gamma_0005587",
+        "candidate_magnitude": null,
+        "dt_s": 0.372,
+        "epi_km": 0.845,
+        "dz_km": -0.392,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3727",
+        "origin_time_utc": "2019-07-06T04:18:55.790000Z",
+        "reference_magnitude": 5.44,
+        "matched": true,
+        "candidate_event_id": "gamma_0005701",
+        "candidate_magnitude": null,
+        "dt_s": 0.386,
+        "epi_km": 0.939,
+        "dz_km": -4.09,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "1842",
+        "origin_time_utc": "2019-07-05T11:07:53.040000Z",
+        "reference_magnitude": 5.37,
+        "matched": true,
+        "candidate_event_id": "gamma_0002958",
+        "candidate_magnitude": null,
+        "dt_s": -0.015,
+        "epi_km": 0.836,
+        "dz_km": -6.911,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3493",
+        "origin_time_utc": "2019-07-06T03:16:32.480000Z",
+        "reference_magnitude": 4.97,
+        "matched": true,
+        "candidate_event_id": "gamma_0005477",
+        "candidate_magnitude": null,
+        "dt_s": 0.251,
+        "epi_km": 1.07,
+        "dz_km": -0.841,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3625",
+        "origin_time_utc": "2019-07-06T03:50:59.710000Z",
+        "reference_magnitude": 4.97,
+        "matched": true,
+        "candidate_event_id": "gamma_0005596",
+        "candidate_magnitude": null,
+        "dt_s": 0.367,
+        "epi_km": 1.061,
+        "dz_km": -2.869,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "4583",
+        "origin_time_utc": "2019-07-06T09:28:28.980000Z",
+        "reference_magnitude": 4.89,
+        "matched": true,
+        "candidate_event_id": "gamma_0006842",
+        "candidate_magnitude": null,
+        "dt_s": 0.197,
+        "epi_km": 1.228,
+        "dz_km": -1.841,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3790",
+        "origin_time_utc": "2019-07-06T04:36:55.310000Z",
+        "reference_magnitude": 4.85,
+        "matched": true,
+        "candidate_event_id": "gamma_0005769",
+        "candidate_magnitude": null,
+        "dt_s": 0.015,
+        "epi_km": 0.591,
+        "dz_km": -1.158,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3509",
+        "origin_time_utc": "2019-07-06T03:23:50.720000Z",
+        "reference_magnitude": 4.84,
+        "matched": true,
+        "candidate_event_id": "gamma_0005491",
+        "candidate_magnitude": null,
+        "dt_s": 0.056,
+        "epi_km": 1.948,
+        "dz_km": 0.708,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3497",
+        "origin_time_utc": "2019-07-06T03:20:41.140000Z",
+        "reference_magnitude": 4.81,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3707",
+        "origin_time_utc": "2019-07-06T04:13:07.080000Z",
+        "reference_magnitude": 4.8,
+        "matched": true,
+        "candidate_event_id": "gamma_0005679",
+        "candidate_magnitude": null,
+        "dt_s": 0.283,
+        "epi_km": 0.13,
+        "dz_km": -3.089,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3503",
+        "origin_time_utc": "2019-07-06T03:22:35.630000Z",
+        "reference_magnitude": 4.73,
+        "matched": true,
+        "candidate_event_id": "gamma_0005487",
+        "candidate_magnitude": null,
+        "dt_s": -0.114,
+        "epi_km": 2.814,
+        "dz_km": 0.455,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3681",
+        "origin_time_utc": "2019-07-06T04:07:04.570000Z",
+        "reference_magnitude": 4.68,
+        "matched": true,
+        "candidate_event_id": "gamma_0005657",
+        "candidate_magnitude": null,
+        "dt_s": 0.424,
+        "epi_km": 0.935,
+        "dz_km": 3.367,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3504",
+        "origin_time_utc": "2019-07-06T03:22:48.300000Z",
+        "reference_magnitude": 4.64,
+        "matched": true,
+        "candidate_event_id": "gamma_0005488",
+        "candidate_magnitude": null,
+        "dt_s": 0.259,
+        "epi_km": 1.069,
+        "dz_km": 0.548,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3500",
+        "origin_time_utc": "2019-07-06T03:22:03.570000Z",
+        "reference_magnitude": 4.64,
+        "matched": true,
+        "candidate_event_id": "gamma_0005484",
+        "candidate_magnitude": null,
+        "dt_s": 0.069,
+        "epi_km": 0.96,
+        "dz_km": 1.791,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "4039",
+        "origin_time_utc": "2019-07-06T06:01:51.800000Z",
+        "reference_magnitude": 4.63,
+        "matched": true,
+        "candidate_event_id": "gamma_0006077",
+        "candidate_magnitude": null,
+        "dt_s": 0.134,
+        "epi_km": 0.761,
+        "dz_km": -2.217,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3516",
+        "origin_time_utc": "2019-07-06T03:25:27.970000Z",
+        "reference_magnitude": 4.61,
+        "matched": false
+       },
+       {
+        "reference_event_id": "209",
+        "origin_time_utc": "2019-07-04T18:39:44.440000Z",
+        "reference_magnitude": 4.59,
+        "matched": true,
+        "candidate_event_id": "gamma_0000241",
+        "candidate_magnitude": null,
+        "dt_s": -0.005,
+        "epi_km": 0.61,
+        "dz_km": -2.771,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "242",
+        "origin_time_utc": "2019-07-04T18:56:06.420000Z",
+        "reference_magnitude": 4.58,
+        "matched": true,
+        "candidate_event_id": "gamma_0000285",
+        "candidate_magnitude": null,
+        "dt_s": 0.033,
+        "epi_km": 0.768,
+        "dz_km": -1.881,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3525",
+        "origin_time_utc": "2019-07-06T03:27:11.370000Z",
+        "reference_magnitude": 4.57,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4478",
+        "origin_time_utc": "2019-07-06T08:32:57.550000Z",
+        "reference_magnitude": 4.56,
+        "matched": true,
+        "candidate_event_id": "gamma_0006641",
+        "candidate_magnitude": null,
+        "dt_s": 0.052,
+        "epi_km": 0.194,
+        "dz_km": -2.32,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3501",
+        "origin_time_utc": "2019-07-06T03:22:17.100000Z",
+        "reference_magnitude": 4.55,
+        "matched": true,
+        "candidate_event_id": "gamma_0005485",
+        "candidate_magnitude": null,
+        "dt_s": 0.233,
+        "epi_km": 0.809,
+        "dz_km": 2.584,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3506",
+        "origin_time_utc": "2019-07-06T03:23:19.870000Z",
+        "reference_magnitude": 4.52,
+        "matched": true,
+        "candidate_event_id": "gamma_0005489",
+        "candidate_magnitude": null,
+        "dt_s": 0.09,
+        "epi_km": 1.87,
+        "dz_km": 3.61,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3536",
+        "origin_time_utc": "2019-07-06T03:29:32.080000Z",
+        "reference_magnitude": 4.51,
+        "matched": true,
+        "candidate_event_id": "gamma_0005514",
+        "candidate_magnitude": null,
+        "dt_s": 0.224,
+        "epi_km": 0.939,
+        "dz_km": 2.836,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "5079",
+        "origin_time_utc": "2019-07-06T13:06:55.260000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "gamma_0007601",
+        "candidate_magnitude": null,
+        "dt_s": 0.045,
+        "epi_km": 0.878,
+        "dz_km": -1.94,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3524",
+        "origin_time_utc": "2019-07-06T03:27:07.010000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "gamma_0005504",
+        "candidate_magnitude": null,
+        "dt_s": 0.213,
+        "epi_km": 0.094,
+        "dz_km": -1.516,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "6554",
+        "origin_time_utc": "2019-07-06T23:50:41.990000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "gamma_0009920",
+        "candidate_magnitude": null,
+        "dt_s": 0.16,
+        "epi_km": 0.676,
+        "dz_km": -3.815,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "301",
+        "origin_time_utc": "2019-07-04T19:21:32.090000Z",
+        "reference_magnitude": 4.5,
+        "matched": true,
+        "candidate_event_id": "gamma_0000360",
+        "candidate_magnitude": null,
+        "dt_s": 0.121,
+        "epi_km": 0.412,
+        "dz_km": -3.402,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3540",
+        "origin_time_utc": "2019-07-06T03:30:25.050000Z",
+        "reference_magnitude": 4.49,
+        "matched": true,
+        "candidate_event_id": "gamma_0005516",
+        "candidate_magnitude": null,
+        "dt_s": 0.378,
+        "epi_km": 0.563,
+        "dz_km": -1.405,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "19",
+        "origin_time_utc": "2019-07-04T17:35:01.660000Z",
+        "reference_magnitude": 4.49,
+        "matched": true,
+        "candidate_event_id": "gamma_0000047",
+        "candidate_magnitude": null,
+        "dt_s": 0.302,
+        "epi_km": 0.368,
+        "dz_km": 2.938,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "4590",
+        "origin_time_utc": "2019-07-06T09:30:41.240000Z",
+        "reference_magnitude": 4.49,
+        "matched": true,
+        "candidate_event_id": "gamma_0006846",
+        "candidate_magnitude": null,
+        "dt_s": 0.164,
+        "epi_km": 1.032,
+        "dz_km": -1.455,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3841",
+        "origin_time_utc": "2019-07-06T04:52:17.710000Z",
+        "reference_magnitude": 4.47,
+        "matched": true,
+        "candidate_event_id": "gamma_0005825",
+        "candidate_magnitude": null,
+        "dt_s": 0.182,
+        "epi_km": 0.621,
+        "dz_km": -0.156,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3502",
+        "origin_time_utc": "2019-07-06T03:22:27.160000Z",
+        "reference_magnitude": 4.46,
+        "matched": true,
+        "candidate_event_id": "gamma_0005486",
+        "candidate_magnitude": null,
+        "dt_s": -0.779,
+        "epi_km": 6.652,
+        "dz_km": -1.692,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "540",
+        "origin_time_utc": "2019-07-04T22:12:08.490000Z",
+        "reference_magnitude": 4.43,
+        "matched": true,
+        "candidate_event_id": "gamma_0000871",
+        "candidate_magnitude": null,
+        "dt_s": 0.038,
+        "epi_km": 0.497,
+        "dz_km": -4.08,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "4587",
+        "origin_time_utc": "2019-07-06T09:29:20.970000Z",
+        "reference_magnitude": 4.41,
+        "matched": true,
+        "candidate_event_id": "gamma_0006844",
+        "candidate_magnitude": null,
+        "dt_s": 0.112,
+        "epi_km": 1.016,
+        "dz_km": -2.648,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3569",
+        "origin_time_utc": "2019-07-06T03:36:16.460000Z",
+        "reference_magnitude": 4.35,
+        "matched": true,
+        "candidate_event_id": "gamma_0005542",
+        "candidate_magnitude": null,
+        "dt_s": 0.122,
+        "epi_km": 2.036,
+        "dz_km": 2.3,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "222",
+        "origin_time_utc": "2019-07-04T18:47:06.590000Z",
+        "reference_magnitude": 4.34,
+        "matched": true,
+        "candidate_event_id": "gamma_0000263",
+        "candidate_magnitude": null,
+        "dt_s": -0.112,
+        "epi_km": 0.421,
+        "dz_km": -8.335,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3498",
+        "origin_time_utc": "2019-07-06T03:21:10.050000Z",
+        "reference_magnitude": 4.33,
+        "matched": true,
+        "candidate_event_id": "gamma_0005483",
+        "candidate_magnitude": null,
+        "dt_s": 2.29,
+        "epi_km": 14.276,
+        "dz_km": -2.383,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3496",
+        "origin_time_utc": "2019-07-06T03:20:36.080000Z",
+        "reference_magnitude": 4.33,
+        "matched": false
+       },
+       {
+        "reference_event_id": "3791",
+        "origin_time_utc": "2019-07-06T04:37:13.570000Z",
+        "reference_magnitude": 4.33,
+        "matched": true,
+        "candidate_event_id": "gamma_0005770",
+        "candidate_magnitude": null,
+        "dt_s": 0.192,
+        "epi_km": 1.428,
+        "dz_km": 0.545,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3652",
+        "origin_time_utc": "2019-07-06T03:57:50.900000Z",
+        "reference_magnitude": 4.31,
+        "matched": true,
+        "candidate_event_id": "gamma_0005622",
+        "candidate_magnitude": null,
+        "dt_s": 0.219,
+        "epi_km": 3.939,
+        "dz_km": -7.171,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3728",
+        "origin_time_utc": "2019-07-06T04:19:15.480000Z",
+        "reference_magnitude": 4.29,
+        "matched": true,
+        "candidate_event_id": "gamma_0005702",
+        "candidate_magnitude": null,
+        "dt_s": 0.196,
+        "epi_km": 0.981,
+        "dz_km": 2.847,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3943",
+        "origin_time_utc": "2019-07-06T05:25:04.870000Z",
+        "reference_magnitude": 4.29,
+        "matched": true,
+        "candidate_event_id": "gamma_0005941",
+        "candidate_magnitude": null,
+        "dt_s": -0.001,
+        "epi_km": 0.849,
+        "dz_km": -2.375,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "22",
+        "origin_time_utc": "2019-07-04T17:35:52.170000Z",
+        "reference_magnitude": 4.28,
+        "matched": true,
+        "candidate_event_id": "gamma_0000048",
+        "candidate_magnitude": null,
+        "dt_s": -0.046,
+        "epi_km": 0.929,
+        "dz_km": -1.561,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "4072",
+        "origin_time_utc": "2019-07-06T06:12:52.000000Z",
+        "reference_magnitude": 4.27,
+        "matched": true,
+        "candidate_event_id": "gamma_0006118",
+        "candidate_magnitude": null,
+        "dt_s": 0.135,
+        "epi_km": 1.573,
+        "dz_km": -0.294,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3608",
+        "origin_time_utc": "2019-07-06T03:46:26.870000Z",
+        "reference_magnitude": 4.26,
+        "matched": true,
+        "candidate_event_id": "gamma_0005584",
+        "candidate_magnitude": null,
+        "dt_s": 0.115,
+        "epi_km": 0.966,
+        "dz_km": -4.545,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3800",
+        "origin_time_utc": "2019-07-06T04:40:15.980000Z",
+        "reference_magnitude": 4.24,
+        "matched": true,
+        "candidate_event_id": "gamma_0005778",
+        "candidate_magnitude": null,
+        "dt_s": 0.093,
+        "epi_km": 0.537,
+        "dz_km": -2.216,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "4584",
+        "origin_time_utc": "2019-07-06T09:28:41.790000Z",
+        "reference_magnitude": 4.24,
+        "matched": true,
+        "candidate_event_id": "gamma_0006843",
+        "candidate_magnitude": null,
+        "dt_s": 0.058,
+        "epi_km": 2.502,
+        "dz_km": 4.243,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "181",
+        "origin_time_utc": "2019-07-04T18:27:59.440000Z",
+        "reference_magnitude": 4.23,
+        "matched": true,
+        "candidate_event_id": "gamma_0000204",
+        "candidate_magnitude": null,
+        "dt_s": 0.056,
+        "epi_km": 0.271,
+        "dz_km": -4.96,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3508",
+        "origin_time_utc": "2019-07-06T03:23:34.710000Z",
+        "reference_magnitude": 4.22,
+        "matched": true,
+        "candidate_event_id": "gamma_0005490",
+        "candidate_magnitude": null,
+        "dt_s": 0.468,
+        "epi_km": 0.229,
+        "dz_km": -1.523,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "243",
+        "origin_time_utc": "2019-07-04T18:56:22.030000Z",
+        "reference_magnitude": 4.21,
+        "matched": true,
+        "candidate_event_id": "gamma_0000286",
+        "candidate_magnitude": null,
+        "dt_s": -0.06,
+        "epi_km": 1.078,
+        "dz_km": -1.121,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3512",
+        "origin_time_utc": "2019-07-06T03:24:22.370000Z",
+        "reference_magnitude": 4.19,
+        "matched": true,
+        "candidate_event_id": "gamma_0005492",
+        "candidate_magnitude": null,
+        "dt_s": 0.219,
+        "epi_km": 1.571,
+        "dz_km": 1.067,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3532",
+        "origin_time_utc": "2019-07-06T03:28:46.550000Z",
+        "reference_magnitude": 4.19,
+        "matched": true,
+        "candidate_event_id": "gamma_0005509",
+        "candidate_magnitude": null,
+        "dt_s": 0.324,
+        "epi_km": 2.523,
+        "dz_km": 0.787,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3551",
+        "origin_time_utc": "2019-07-06T03:32:46.660000Z",
+        "reference_magnitude": 4.17,
+        "matched": true,
+        "candidate_event_id": "gamma_0005526",
+        "candidate_magnitude": null,
+        "dt_s": 0.174,
+        "epi_km": 1.78,
+        "dz_km": 2.014,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3738",
+        "origin_time_utc": "2019-07-06T04:21:35.820000Z",
+        "reference_magnitude": 4.17,
+        "matched": true,
+        "candidate_event_id": "gamma_0005708",
+        "candidate_magnitude": null,
+        "dt_s": 0.092,
+        "epi_km": 0.832,
+        "dz_km": -1.926,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "350",
+        "origin_time_utc": "2019-07-04T19:56:00.500000Z",
+        "reference_magnitude": 4.16,
+        "matched": true,
+        "candidate_event_id": "gamma_0000469",
+        "candidate_magnitude": null,
+        "dt_s": 0.085,
+        "epi_km": 0.142,
+        "dz_km": -1.451,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3499",
+        "origin_time_utc": "2019-07-06T03:21:19.190000Z",
+        "reference_magnitude": 4.15,
+        "matched": false
+       },
+       {
+        "reference_event_id": "4034",
+        "origin_time_utc": "2019-07-06T05:58:17.570000Z",
+        "reference_magnitude": 4.15,
+        "matched": true,
+        "candidate_event_id": "gamma_0006066",
+        "candidate_magnitude": null,
+        "dt_s": 0.159,
+        "epi_km": 0.63,
+        "dz_km": -1.821,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "5576",
+        "origin_time_utc": "2019-07-06T16:36:05.820000Z",
+        "reference_magnitude": 4.14,
+        "matched": true,
+        "candidate_event_id": "gamma_0008361",
+        "candidate_magnitude": null,
+        "dt_s": 0.364,
+        "epi_km": 0.267,
+        "dz_km": -3.37,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3494",
+        "origin_time_utc": "2019-07-06T03:17:13.500000Z",
+        "reference_magnitude": 4.14,
+        "matched": true,
+        "candidate_event_id": "gamma_0005478",
+        "candidate_magnitude": null,
+        "dt_s": 0.13,
+        "epi_km": 0.346,
+        "dz_km": -3.414,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "40",
+        "origin_time_utc": "2019-07-04T17:40:18.520000Z",
+        "reference_magnitude": 4.13,
+        "matched": true,
+        "candidate_event_id": "gamma_0000060",
+        "candidate_magnitude": null,
+        "dt_s": 0.09,
+        "epi_km": 0.287,
+        "dz_km": -6.121,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "4892",
+        "origin_time_utc": "2019-07-06T11:53:08.090000Z",
+        "reference_magnitude": 4.12,
+        "matched": true,
+        "candidate_event_id": "gamma_0007343",
+        "candidate_magnitude": null,
+        "dt_s": 0.052,
+        "epi_km": 1.203,
+        "dz_km": -1.319,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3529",
+        "origin_time_utc": "2019-07-06T03:28:00.730000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "gamma_0005506",
+        "candidate_magnitude": null,
+        "dt_s": 0.302,
+        "epi_km": 1.924,
+        "dz_km": 0.004,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "2018",
+        "origin_time_utc": "2019-07-05T12:38:30.020000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "gamma_0003226",
+        "candidate_magnitude": null,
+        "dt_s": 0.277,
+        "epi_km": 0.718,
+        "dz_km": -2.367,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3522",
+        "origin_time_utc": "2019-07-06T03:26:51.990000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "gamma_0005503",
+        "candidate_magnitude": null,
+        "dt_s": 0.385,
+        "epi_km": 0.322,
+        "dz_km": -1.524,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3530",
+        "origin_time_utc": "2019-07-06T03:28:12.340000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "gamma_0005507",
+        "candidate_magnitude": null,
+        "dt_s": 0.271,
+        "epi_km": 1.417,
+        "dz_km": -0.005,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3563",
+        "origin_time_utc": "2019-07-06T03:35:05.420000Z",
+        "reference_magnitude": 4.09,
+        "matched": true,
+        "candidate_event_id": "gamma_0005537",
+        "candidate_magnitude": null,
+        "dt_s": 0.314,
+        "epi_km": 0.903,
+        "dz_km": -0.837,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3553",
+        "origin_time_utc": "2019-07-06T03:33:20.200000Z",
+        "reference_magnitude": 4.08,
+        "matched": true,
+        "candidate_event_id": "gamma_0005529",
+        "candidate_magnitude": null,
+        "dt_s": 0.324,
+        "epi_km": 0.902,
+        "dz_km": -1.498,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3535",
+        "origin_time_utc": "2019-07-06T03:29:28.840000Z",
+        "reference_magnitude": 4.07,
+        "matched": true,
+        "candidate_event_id": "gamma_0005513",
+        "candidate_magnitude": null,
+        "dt_s": 0.515,
+        "epi_km": 3.335,
+        "dz_km": 5.509,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3513",
+        "origin_time_utc": "2019-07-06T03:24:33.520000Z",
+        "reference_magnitude": 4.07,
+        "matched": false
+       },
+       {
+        "reference_event_id": "239",
+        "origin_time_utc": "2019-07-04T18:54:13.990000Z",
+        "reference_magnitude": 4.07,
+        "matched": true,
+        "candidate_event_id": "gamma_0000282",
+        "candidate_magnitude": null,
+        "dt_s": -0.022,
+        "epi_km": 0.213,
+        "dz_km": -4.197,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3642",
+        "origin_time_utc": "2019-07-06T03:55:20.020000Z",
+        "reference_magnitude": 4.06,
+        "matched": true,
+        "candidate_event_id": "gamma_0005612",
+        "candidate_magnitude": null,
+        "dt_s": 0.37,
+        "epi_km": 1.464,
+        "dz_km": -3.703,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "4128",
+        "origin_time_utc": "2019-07-06T06:34:47.410000Z",
+        "reference_magnitude": 4.05,
+        "matched": true,
+        "candidate_event_id": "gamma_0006189",
+        "candidate_magnitude": null,
+        "dt_s": 0.272,
+        "epi_km": 1.405,
+        "dz_km": -0.24,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "4731",
+        "origin_time_utc": "2019-07-06T10:48:24.460000Z",
+        "reference_magnitude": 4.04,
+        "matched": true,
+        "candidate_event_id": "gamma_0007107",
+        "candidate_magnitude": null,
+        "dt_s": 0.176,
+        "epi_km": 0.526,
+        "dz_km": -2.827,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "727",
+        "origin_time_utc": "2019-07-05T00:18:01.410000Z",
+        "reference_magnitude": 4.04,
+        "matched": true,
+        "candidate_event_id": "gamma_0001232",
+        "candidate_magnitude": null,
+        "dt_s": 0.222,
+        "epi_km": 0.896,
+        "dz_km": -0.754,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "662",
+        "origin_time_utc": "2019-07-04T23:34:02.380000Z",
+        "reference_magnitude": 4.04,
+        "matched": true,
+        "candidate_event_id": "gamma_0001114",
+        "candidate_magnitude": null,
+        "dt_s": -0.257,
+        "epi_km": 0.38,
+        "dz_km": -4.711,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3528",
+        "origin_time_utc": "2019-07-06T03:27:36.260000Z",
+        "reference_magnitude": 4.03,
+        "matched": true,
+        "candidate_event_id": "gamma_0005505",
+        "candidate_magnitude": null,
+        "dt_s": 0.164,
+        "epi_km": 1.076,
+        "dz_km": 0.627,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3858",
+        "origin_time_utc": "2019-07-06T04:58:36.690000Z",
+        "reference_magnitude": 4.03,
+        "matched": true,
+        "candidate_event_id": "gamma_0005848",
+        "candidate_magnitude": null,
+        "dt_s": 0.331,
+        "epi_km": 0.594,
+        "dz_km": 2.061,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3519",
+        "origin_time_utc": "2019-07-06T03:26:04.010000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "gamma_0005500",
+        "candidate_magnitude": null,
+        "dt_s": 0.103,
+        "epi_km": 1.185,
+        "dz_km": 2.017,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "223",
+        "origin_time_utc": "2019-07-04T18:47:22.600000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "gamma_0000264",
+        "candidate_magnitude": null,
+        "dt_s": 0.454,
+        "epi_km": 0.344,
+        "dz_km": -5.153,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "749",
+        "origin_time_utc": "2019-07-05T00:32:06.670000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "gamma_0001269",
+        "candidate_magnitude": null,
+        "dt_s": 0.131,
+        "epi_km": 0.581,
+        "dz_km": -0.961,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3533",
+        "origin_time_utc": "2019-07-06T03:29:10.290000Z",
+        "reference_magnitude": 4.02,
+        "matched": true,
+        "candidate_event_id": "gamma_0005511",
+        "candidate_magnitude": null,
+        "dt_s": 0.021,
+        "epi_km": 0.245,
+        "dz_km": -1.566,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "27",
+        "origin_time_utc": "2019-07-04T17:37:25.640000Z",
+        "reference_magnitude": 4.01,
+        "matched": true,
+        "candidate_event_id": "gamma_0000051",
+        "candidate_magnitude": null,
+        "dt_s": 0.6,
+        "epi_km": 1.118,
+        "dz_km": -12.343,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3731",
+        "origin_time_utc": "2019-07-06T04:19:56.010000Z",
+        "reference_magnitude": 4.01,
+        "matched": true,
+        "candidate_event_id": "gamma_0005704",
+        "candidate_magnitude": null,
+        "dt_s": 0.396,
+        "epi_km": 1.384,
+        "dz_km": -1.547,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3555",
+        "origin_time_utc": "2019-07-06T03:33:39.450000Z",
+        "reference_magnitude": 4.01,
+        "matched": true,
+        "candidate_event_id": "gamma_0005530",
+        "candidate_magnitude": null,
+        "dt_s": -0.027,
+        "epi_km": 2.83,
+        "dz_km": 2.074,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3534",
+        "origin_time_utc": "2019-07-06T03:29:15.860000Z",
+        "reference_magnitude": 4.01,
+        "matched": true,
+        "candidate_event_id": "gamma_0005512",
+        "candidate_magnitude": null,
+        "dt_s": 0.777,
+        "epi_km": 1.135,
+        "dz_km": -2.883,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3507",
+        "origin_time_utc": "2019-07-06T03:23:29.560000Z",
+        "reference_magnitude": 4.0,
+        "matched": false
+       }
+      ]
+     },
+     "M5": {
+      "reference_events": 5,
+      "matched": 5,
+      "recall": 1.0,
+      "candidate_events": 0,
+      "precision": null,
+      "f1": null,
+      "precision_unaligned": null,
+      "precision_authority_only": null,
+      "dt_s": {
+       "n": 5,
+       "mean": 0.1258,
+       "median": 0.0541,
+       "std": 0.2448,
+       "abs_p90": 0.3805
+      },
+      "epi_km": {
+       "n": 5,
+       "mean": 1.2478,
+       "median": 0.9391,
+       "std": 0.6244,
+       "p90": 1.9095
+      },
+      "dz_km": {
+       "n": 5,
+       "mean": -5.9628,
+       "median": -6.9109,
+       "std": 3.8624,
+       "abs_p90": 9.4609
+      },
+      "dmag": {
+       "n": 0
+      },
+      "events": [
+       {
+        "reference_event_id": "3495",
+        "origin_time_utc": "2019-07-06T03:19:53.040000Z",
+        "reference_magnitude": 7.1,
+        "matched": true,
+        "candidate_event_id": "gamma_0005482",
+        "candidate_magnitude": null,
+        "dt_s": 0.054,
+        "epi_km": 1.308,
+        "dz_km": -7.961,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "18",
+        "origin_time_utc": "2019-07-04T17:33:49.000000Z",
+        "reference_magnitude": 6.4,
+        "matched": true,
+        "candidate_event_id": "gamma_0000046",
+        "candidate_magnitude": null,
+        "dt_s": -0.168,
+        "epi_km": 2.31,
+        "dz_km": -10.461,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3613",
+        "origin_time_utc": "2019-07-06T03:47:53.420000Z",
+        "reference_magnitude": 5.5,
+        "matched": true,
+        "candidate_event_id": "gamma_0005587",
+        "candidate_magnitude": null,
+        "dt_s": 0.372,
+        "epi_km": 0.845,
+        "dz_km": -0.392,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "3727",
+        "origin_time_utc": "2019-07-06T04:18:55.790000Z",
+        "reference_magnitude": 5.44,
+        "matched": true,
+        "candidate_event_id": "gamma_0005701",
+        "candidate_magnitude": null,
+        "dt_s": 0.386,
+        "epi_km": 0.939,
+        "dz_km": -4.09,
+        "dmag": null
+       },
+       {
+        "reference_event_id": "1842",
+        "origin_time_utc": "2019-07-05T11:07:53.040000Z",
+        "reference_magnitude": 5.37,
+        "matched": true,
+        "candidate_event_id": "gamma_0002958",
+        "candidate_magnitude": null,
+        "dt_s": -0.015,
+        "epi_km": 0.836,
+        "dz_km": -6.911,
+        "dmag": null
+       }
+      ]
+     }
+    }
+   },
+   "strength": {
+    "authority": "official_earthquake",
+    "pairs": 0,
+    "dmag": {
+     "n": 0
+    },
+    "candidate": {
+     "mc": null,
+     "b": null,
+     "n": 0
+    },
+    "authority_mfd": {
+     "mc": 2.0,
+     "b": 0.603,
+     "b_sigma": 0.009,
+     "n": 2881
+    }
+   },
+   "time": {
+    "reference": "shelly",
+    "dt_s": {
+     "n": 6161,
+     "mean": 0.1238,
+     "median": 0.1357,
+     "std": 0.5314,
+     "abs_p90": 0.6832
+    },
+    "recall_by_day": [
+     {
+      "day": 0,
+      "events": 1061,
+      "recall": 0.7719
+     },
+     {
+      "day": 1,
+      "events": 3268,
+      "recall": 0.8161
+     },
+     {
+      "day": 2,
+      "events": 3387,
+      "recall": 0.7898
+     }
+    ],
+    "after_large": {
+     "threshold": 4.0,
+     "large_events": 88,
+     "window_s": 3600.0,
+     "events_after": 2860,
+     "recall_after": 0.7839,
+     "recall_other": 0.807
+    }
+   },
    "headline": {
     "recall": 0.7985,
     "ceiling": 0.6659,
@@ -3970,7 +10751,39 @@
     "depth_mode_share": 0.1607,
     "depth_band_share": 0.2583,
     "off_structure_fraction": 0.0825,
-    "off_structure_after_shift": 0.0813
+    "off_structure_after_shift": 0.0813,
+    "recall_M2": 0.8385,
+    "precision_M2": null,
+    "f1_M2": null,
+    "epi_mean_M2": 1.3318,
+    "dt_mean_M2": 0.141,
+    "dmag_mean_M2": null,
+    "recall_M3": 0.8005,
+    "precision_M3": null,
+    "f1_M3": null,
+    "epi_mean_M3": 1.1826,
+    "dt_mean_M3": 0.1538,
+    "dmag_mean_M3": null,
+    "recall_M4": 0.9205,
+    "precision_M4": null,
+    "f1_M4": null,
+    "epi_mean_M4": 1.2753,
+    "dt_mean_M4": 0.1931,
+    "dmag_mean_M4": null,
+    "recall_M5": 1.0,
+    "precision_M5": null,
+    "f1_M5": null,
+    "epi_mean_M5": 1.2478,
+    "dt_mean_M5": 0.1258,
+    "dmag_mean_M5": null,
+    "dmag_median": null,
+    "dmag_std": null,
+    "dmag_slope_per_unit": null,
+    "b_difference": null,
+    "dt_mean_s": 0.1238,
+    "dt_std_s": 0.5314,
+    "recall_after_large": 0.7839,
+    "recall_other": 0.807
    }
   }
  }

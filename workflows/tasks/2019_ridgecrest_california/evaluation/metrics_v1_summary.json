@@ -1,8 +1,8 @@
 {
  "metrics_version": 1,
- "scorer_commit": "9af99b32d2b6b3dc95f7caaca61478067fc04144",
+ "scorer_commit": "0645ffc09bb062c5ed99a2b1b8306fb405e411b8",
  "scorer_dirty": false,
- "generated_utc": "2026-10-27T05:12:59+00:00",
+ "generated_utc": "2026-10-27T05:52:15+00:00",
  "task": "2019_ridgecrest_california",
  "configurations": [
   {
@@ -16,93 +16,317 @@
     {
      "run_id": "20261013T043225Z",
      "completed": true,
-     "recall": 0.1487,
-     "recall_norm": 0.2233,
-     "union_support": 0.848,
-     "audited_false_rate": null,
-     "epi_median_km": 2.2264,
-     "shift_km": 0.4173,
-     "scatter_median_km": 2.2107,
-     "epi_gt5km": 0.3121,
-     "dz_median_km": 4.837,
-     "depth_mode_share": 0.0033,
+     "b_difference": -0.108,
      "depth_band_share": 0.0958,
+     "depth_mode_share": 0.0033,
+     "dmag_mean_M2": 0.139,
+     "dmag_mean_M3": 0.121,
+     "dmag_mean_M4": 0.1689,
+     "dmag_mean_M5": -0.274,
+     "dmag_median": 0.18,
+     "dmag_slope_per_unit": -0.1247,
+     "dmag_std": 0.2435,
+     "dt_mean_M2": 0.1364,
+     "dt_mean_M3": 0.1612,
+     "dt_mean_M4": 0.1572,
+     "dt_mean_M5": 0.1344,
+     "dt_mean_s": 0.1599,
+     "dt_std_s": 0.9615,
+     "dz_median_km": 4.837,
+     "epi_gt5km": 0.3121,
+     "epi_mean_M2": 3.201,
+     "epi_mean_M3": 2.5558,
+     "epi_mean_M4": 1.6622,
+     "epi_mean_M5": 0.9422,
+     "epi_median_km": 2.2264,
+     "f1_M2": 0.3554,
+     "f1_M3": 0.4158,
+     "f1_M4": 0.5709,
+     "f1_M5": 1.0,
+     "off_structure_after_shift": 0.1943,
      "off_structure_fraction": 0.197,
-     "off_structure_after_shift": 0.1943
+     "precision_M2": 0.8347,
+     "precision_M3": 0.8398,
+     "precision_M4": 0.8889,
+     "precision_M5": 1.0,
+     "recall": 0.1487,
+     "recall_M2": 0.2258,
+     "recall_M3": 0.2763,
+     "recall_M4": 0.4205,
+     "recall_M5": 1.0,
+     "recall_after_large": 0.1392,
+     "recall_norm": 0.2233,
+     "recall_other": 0.1542,
+     "scatter_median_km": 2.2107,
+     "shift_km": 0.4173,
+     "union_support": 0.848
     }
    ],
-   "recall": {
-    "mean": 0.1487,
-    "min": 0.1487,
-    "max": 0.1487,
-    "n": 1
-   },
-   "recall_norm": {
-    "mean": 0.2233,
-    "min": 0.2233,
-    "max": 0.2233,
-    "n": 1
-   },
-   "union_support": {
-    "mean": 0.848,
-    "min": 0.848,
-    "max": 0.848,
-    "n": 1
-   },
-   "audited_false_rate": null,
-   "epi_median_km": {
-    "mean": 2.2264,
-    "min": 2.2264,
-    "max": 2.2264,
-    "n": 1
-   },
-   "shift_km": {
-    "mean": 0.4173,
-    "min": 0.4173,
-    "max": 0.4173,
-    "n": 1
-   },
-   "scatter_median_km": {
-    "mean": 2.2107,
-    "min": 2.2107,
-    "max": 2.2107,
-    "n": 1
-   },
-   "epi_gt5km": {
-    "mean": 0.3121,
-    "min": 0.3121,
-    "max": 0.3121,
-    "n": 1
-   },
-   "dz_median_km": {
-    "mean": 4.837,
-    "min": 4.837,
-    "max": 4.837,
-    "n": 1
-   },
-   "depth_mode_share": {
-    "mean": 0.0033,
-    "min": 0.0033,
-    "max": 0.0033,
-    "n": 1
-   },
-   "depth_band_share": {
-    "mean": 0.0958,
-    "min": 0.0958,
-    "max": 0.0958,
-    "n": 1
-   },
-   "off_structure_fraction": {
-    "mean": 0.197,
-    "min": 0.197,
-    "max": 0.197,
-    "n": 1
-   },
-   "off_structure_after_shift": {
-    "mean": 0.1943,
-    "min": 0.1943,
-    "max": 0.1943,
-    "n": 1
+   "metrics": {
+    "b_difference": {
+     "mean": -0.108,
+     "min": -0.108,
+     "max": -0.108,
+     "n": 1
+    },
+    "depth_band_share": {
+     "mean": 0.0958,
+     "min": 0.0958,
+     "max": 0.0958,
+     "n": 1
+    },
+    "depth_mode_share": {
+     "mean": 0.0033,
+     "min": 0.0033,
+     "max": 0.0033,
+     "n": 1
+    },
+    "dmag_mean_M2": {
+     "mean": 0.139,
+     "min": 0.139,
+     "max": 0.139,
+     "n": 1
+    },
+    "dmag_mean_M3": {
+     "mean": 0.121,
+     "min": 0.121,
+     "max": 0.121,
+     "n": 1
+    },
+    "dmag_mean_M4": {
+     "mean": 0.1689,
+     "min": 0.1689,
+     "max": 0.1689,
+     "n": 1
+    },
+    "dmag_mean_M5": {
+     "mean": -0.274,
+     "min": -0.274,
+     "max": -0.274,
+     "n": 1
+    },
+    "dmag_median": {
+     "mean": 0.18,
+     "min": 0.18,
+     "max": 0.18,
+     "n": 1
+    },
+    "dmag_slope_per_unit": {
+     "mean": -0.1247,
+     "min": -0.1247,
+     "max": -0.1247,
+     "n": 1
+    },
+    "dmag_std": {
+     "mean": 0.2435,
+     "min": 0.2435,
+     "max": 0.2435,
+     "n": 1
+    },
+    "dt_mean_M2": {
+     "mean": 0.1364,
+     "min": 0.1364,
+     "max": 0.1364,
+     "n": 1
+    },
+    "dt_mean_M3": {
+     "mean": 0.1612,
+     "min": 0.1612,
+     "max": 0.1612,
+     "n": 1
+    },
+    "dt_mean_M4": {
+     "mean": 0.1572,
+     "min": 0.1572,
+     "max": 0.1572,
+     "n": 1
+    },
+    "dt_mean_M5": {
+     "mean": 0.1344,
+     "min": 0.1344,
+     "max": 0.1344,
+     "n": 1
+    },
+    "dt_mean_s": {
+     "mean": 0.1599,
+     "min": 0.1599,
+     "max": 0.1599,
+     "n": 1
+    },
+    "dt_std_s": {
+     "mean": 0.9615,
+     "min": 0.9615,
+     "max": 0.9615,
+     "n": 1
+    },
+    "dz_median_km": {
+     "mean": 4.837,
+     "min": 4.837,
+     "max": 4.837,
+     "n": 1
+    },
+    "epi_gt5km": {
+     "mean": 0.3121,
+     "min": 0.3121,
+     "max": 0.3121,
+     "n": 1
+    },
+    "epi_mean_M2": {
+     "mean": 3.201,
+     "min": 3.201,
+     "max": 3.201,
+     "n": 1
+    },
+    "epi_mean_M3": {
+     "mean": 2.5558,
+     "min": 2.5558,
+     "max": 2.5558,
+     "n": 1
+    },
+    "epi_mean_M4": {
+     "mean": 1.6622,
+     "min": 1.6622,
+     "max": 1.6622,
+     "n": 1
+    },
+    "epi_mean_M5": {
+     "mean": 0.9422,
+     "min": 0.9422,
+     "max": 0.9422,
+     "n": 1
+    },
+    "epi_median_km": {
+     "mean": 2.2264,
+     "min": 2.2264,
+     "max": 2.2264,
+     "n": 1
+    },
+    "f1_M2": {
+     "mean": 0.3554,
+     "min": 0.3554,
+     "max": 0.3554,
+     "n": 1
+    },
+    "f1_M3": {
+     "mean": 0.4158,
+     "min": 0.4158,
+     "max": 0.4158,
+     "n": 1
+    },
+    "f1_M4": {
+     "mean": 0.5709,
+     "min": 0.5709,
+     "max": 0.5709,
+     "n": 1
+    },
+    "f1_M5": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "off_structure_after_shift": {
+     "mean": 0.1943,
+     "min": 0.1943,
+     "max": 0.1943,
+     "n": 1
+    },
+    "off_structure_fraction": {
+     "mean": 0.197,
+     "min": 0.197,
+     "max": 0.197,
+     "n": 1
+    },
+    "precision_M2": {
+     "mean": 0.8347,
+     "min": 0.8347,
+     "max": 0.8347,
+     "n": 1
+    },
+    "precision_M3": {
+     "mean": 0.8398,
+     "min": 0.8398,
+     "max": 0.8398,
+     "n": 1
+    },
+    "precision_M4": {
+     "mean": 0.8889,
+     "min": 0.8889,
+     "max": 0.8889,
+     "n": 1
+    },
+    "precision_M5": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "recall": {
+     "mean": 0.1487,
+     "min": 0.1487,
+     "max": 0.1487,
+     "n": 1
+    },
+    "recall_M2": {
+     "mean": 0.2258,
+     "min": 0.2258,
+     "max": 0.2258,
+     "n": 1
+    },
+    "recall_M3": {
+     "mean": 0.2763,
+     "min": 0.2763,
+     "max": 0.2763,
+     "n": 1
+    },
+    "recall_M4": {
+     "mean": 0.4205,
+     "min": 0.4205,
+     "max": 0.4205,
+     "n": 1
+    },
+    "recall_M5": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "recall_after_large": {
+     "mean": 0.1392,
+     "min": 0.1392,
+     "max": 0.1392,
+     "n": 1
+    },
+    "recall_norm": {
+     "mean": 0.2233,
+     "min": 0.2233,
+     "max": 0.2233,
+     "n": 1
+    },
+    "recall_other": {
+     "mean": 0.1542,
+     "min": 0.1542,
+     "max": 0.1542,
+     "n": 1
+    },
+    "scatter_median_km": {
+     "mean": 2.2107,
+     "min": 2.2107,
+     "max": 2.2107,
+     "n": 1
+    },
+    "shift_km": {
+     "mean": 0.4173,
+     "min": 0.4173,
+     "max": 0.4173,
+     "n": 1
+    },
+    "union_support": {
+     "mean": 0.848,
+     "min": 0.848,
+     "max": 0.848,
+     "n": 1
+    }
    },
    "cost_usd": {
     "mean": 19.4533,
@@ -134,93 +358,317 @@
     {
      "run_id": "20261013T215003Z",
      "completed": true,
-     "recall": 0.3394,
-     "recall_norm": 0.5097,
-     "union_support": 0.5655,
-     "audited_false_rate": null,
-     "epi_median_km": 4.6748,
-     "shift_km": 3.6212,
-     "scatter_median_km": 3.2662,
-     "epi_gt5km": 0.4544,
-     "dz_median_km": 9.12,
-     "depth_mode_share": 0.0058,
+     "b_difference": -0.22,
      "depth_band_share": 0.1616,
+     "depth_mode_share": 0.0058,
+     "dmag_mean_M2": -0.8901,
+     "dmag_mean_M3": -0.8831,
+     "dmag_mean_M4": -0.8338,
+     "dmag_mean_M5": -1.3375,
+     "dmag_median": -0.995,
+     "dmag_slope_per_unit": -0.0759,
+     "dmag_std": 0.4906,
+     "dt_mean_M2": 0.4226,
+     "dt_mean_M3": 0.4258,
+     "dt_mean_M4": 0.4988,
+     "dt_mean_M5": 0.0748,
+     "dt_mean_s": 0.5157,
+     "dt_std_s": 0.9072,
+     "dz_median_km": 9.12,
+     "epi_gt5km": 0.4544,
+     "epi_mean_M2": 4.8515,
+     "epi_mean_M3": 4.3695,
+     "epi_mean_M4": 3.7651,
+     "epi_mean_M5": 3.1375,
+     "epi_median_km": 4.6748,
+     "f1_M2": 0.5113,
+     "f1_M3": 0.5241,
+     "f1_M4": 0.5544,
+     "f1_M5": 0.6275,
+     "off_structure_after_shift": 0.4057,
      "off_structure_fraction": 0.442,
-     "off_structure_after_shift": 0.4057
+     "precision_M2": 0.5789,
+     "precision_M3": 0.5698,
+     "precision_M4": 0.5763,
+     "precision_M5": 0.5161,
+     "recall": 0.3394,
+     "recall_M2": 0.4578,
+     "recall_M3": 0.4852,
+     "recall_M4": 0.5341,
+     "recall_M5": 0.8,
+     "recall_after_large": 0.3273,
+     "recall_norm": 0.5097,
+     "recall_other": 0.3466,
+     "scatter_median_km": 3.2662,
+     "shift_km": 3.6212,
+     "union_support": 0.5655
     }
    ],
-   "recall": {
-    "mean": 0.3394,
-    "min": 0.3394,
-    "max": 0.3394,
-    "n": 1
-   },
-   "recall_norm": {
-    "mean": 0.5097,
-    "min": 0.5097,
-    "max": 0.5097,
-    "n": 1
-   },
-   "union_support": {
-    "mean": 0.5655,
-    "min": 0.5655,
-    "max": 0.5655,
-    "n": 1
-   },
-   "audited_false_rate": null,
-   "epi_median_km": {
-    "mean": 4.6748,
-    "min": 4.6748,
-    "max": 4.6748,
-    "n": 1
-   },
-   "shift_km": {
-    "mean": 3.6212,
-    "min": 3.6212,
-    "max": 3.6212,
-    "n": 1
-   },
-   "scatter_median_km": {
-    "mean": 3.2662,
-    "min": 3.2662,
-    "max": 3.2662,
-    "n": 1
-   },
-   "epi_gt5km": {
-    "mean": 0.4544,
-    "min": 0.4544,
-    "max": 0.4544,
-    "n": 1
-   },
-   "dz_median_km": {
-    "mean": 9.12,
-    "min": 9.12,
-    "max": 9.12,
-    "n": 1
-   },
-   "depth_mode_share": {
-    "mean": 0.0058,
-    "min": 0.0058,
-    "max": 0.0058,
-    "n": 1
-   },
-   "depth_band_share": {
-    "mean": 0.1616,
-    "min": 0.1616,
-    "max": 0.1616,
-    "n": 1
-   },
-   "off_structure_fraction": {
-    "mean": 0.442,
-    "min": 0.442,
-    "max": 0.442,
-    "n": 1
-   },
-   "off_structure_after_shift": {
-    "mean": 0.4057,
-    "min": 0.4057,
-    "max": 0.4057,
-    "n": 1
+   "metrics": {
+    "b_difference": {
+     "mean": -0.22,
+     "min": -0.22,
+     "max": -0.22,
+     "n": 1
+    },
+    "depth_band_share": {
+     "mean": 0.1616,
+     "min": 0.1616,
+     "max": 0.1616,
+     "n": 1
+    },
+    "depth_mode_share": {
+     "mean": 0.0058,
+     "min": 0.0058,
+     "max": 0.0058,
+     "n": 1
+    },
+    "dmag_mean_M2": {
+     "mean": -0.8901,
+     "min": -0.8901,
+     "max": -0.8901,
+     "n": 1
+    },
+    "dmag_mean_M3": {
+     "mean": -0.8831,
+     "min": -0.8831,
+     "max": -0.8831,
+     "n": 1
+    },
+    "dmag_mean_M4": {
+     "mean": -0.8338,
+     "min": -0.8338,
+     "max": -0.8338,
+     "n": 1
+    },
+    "dmag_mean_M5": {
+     "mean": -1.3375,
+     "min": -1.3375,
+     "max": -1.3375,
+     "n": 1
+    },
+    "dmag_median": {
+     "mean": -0.995,
+     "min": -0.995,
+     "max": -0.995,
+     "n": 1
+    },
+    "dmag_slope_per_unit": {
+     "mean": -0.0759,
+     "min": -0.0759,
+     "max": -0.0759,
+     "n": 1
+    },
+    "dmag_std": {
+     "mean": 0.4906,
+     "min": 0.4906,
+     "max": 0.4906,
+     "n": 1
+    },
+    "dt_mean_M2": {
+     "mean": 0.4226,
+     "min": 0.4226,
+     "max": 0.4226,
+     "n": 1
+    },
+    "dt_mean_M3": {
+     "mean": 0.4258,
+     "min": 0.4258,
+     "max": 0.4258,
+     "n": 1
+    },
+    "dt_mean_M4": {
+     "mean": 0.4988,
+     "min": 0.4988,
+     "max": 0.4988,
+     "n": 1
+    },
+    "dt_mean_M5": {
+     "mean": 0.0748,
+     "min": 0.0748,
+     "max": 0.0748,
+     "n": 1
+    },
+    "dt_mean_s": {
+     "mean": 0.5157,
+     "min": 0.5157,
+     "max": 0.5157,
+     "n": 1
+    },
+    "dt_std_s": {
+     "mean": 0.9072,
+     "min": 0.9072,
+     "max": 0.9072,
+     "n": 1
+    },
+    "dz_median_km": {
+     "mean": 9.12,
+     "min": 9.12,
+     "max": 9.12,
+     "n": 1
+    },
+    "epi_gt5km": {
+     "mean": 0.4544,
+     "min": 0.4544,
+     "max": 0.4544,
+     "n": 1
+    },
+    "epi_mean_M2": {
+     "mean": 4.8515,
+     "min": 4.8515,
+     "max": 4.8515,
+     "n": 1
+    },
+    "epi_mean_M3": {
+     "mean": 4.3695,
+     "min": 4.3695,
+     "max": 4.3695,
+     "n": 1
+    },
+    "epi_mean_M4": {
+     "mean": 3.7651,
+     "min": 3.7651,
+     "max": 3.7651,
+     "n": 1
+    },
+    "epi_mean_M5": {
+     "mean": 3.1375,
+     "min": 3.1375,
+     "max": 3.1375,
+     "n": 1
+    },
+    "epi_median_km": {
+     "mean": 4.6748,
+     "min": 4.6748,
+     "max": 4.6748,
+     "n": 1
+    },
+    "f1_M2": {
+     "mean": 0.5113,
+     "min": 0.5113,
+     "max": 0.5113,
+     "n": 1
+    },
+    "f1_M3": {
+     "mean": 0.5241,
+     "min": 0.5241,
+     "max": 0.5241,
+     "n": 1
+    },
+    "f1_M4": {
+     "mean": 0.5544,
+     "min": 0.5544,
+     "max": 0.5544,
+     "n": 1
+    },
+    "f1_M5": {
+     "mean": 0.6275,
+     "min": 0.6275,
+     "max": 0.6275,
+     "n": 1
+    },
+    "off_structure_after_shift": {
+     "mean": 0.4057,
+     "min": 0.4057,
+     "max": 0.4057,
+     "n": 1
+    },
+    "off_structure_fraction": {
+     "mean": 0.442,
+     "min": 0.442,
+     "max": 0.442,
+     "n": 1
+    },
+    "precision_M2": {
+     "mean": 0.5789,
+     "min": 0.5789,
+     "max": 0.5789,
+     "n": 1
+    },
+    "precision_M3": {
+     "mean": 0.5698,
+     "min": 0.5698,
+     "max": 0.5698,
+     "n": 1
+    },
+    "precision_M4": {
+     "mean": 0.5763,
+     "min": 0.5763,
+     "max": 0.5763,
+     "n": 1
+    },
+    "precision_M5": {
+     "mean": 0.5161,
+     "min": 0.5161,
+     "max": 0.5161,
+     "n": 1
+    },
+    "recall": {
+     "mean": 0.3394,
+     "min": 0.3394,
+     "max": 0.3394,
+     "n": 1
+    },
+    "recall_M2": {
+     "mean": 0.4578,
+     "min": 0.4578,
+     "max": 0.4578,
+     "n": 1
+    },
+    "recall_M3": {
+     "mean": 0.4852,
+     "min": 0.4852,
+     "max": 0.4852,
+     "n": 1
+    },
+    "recall_M4": {
+     "mean": 0.5341,
+     "min": 0.5341,
+     "max": 0.5341,
+     "n": 1
+    },
+    "recall_M5": {
+     "mean": 0.8,
+     "min": 0.8,
+     "max": 0.8,
+     "n": 1
+    },
+    "recall_after_large": {
+     "mean": 0.3273,
+     "min": 0.3273,
+     "max": 0.3273,
+     "n": 1
+    },
+    "recall_norm": {
+     "mean": 0.5097,
+     "min": 0.5097,
+     "max": 0.5097,
+     "n": 1
+    },
+    "recall_other": {
+     "mean": 0.3466,
+     "min": 0.3466,
+     "max": 0.3466,
+     "n": 1
+    },
+    "scatter_median_km": {
+     "mean": 3.2662,
+     "min": 3.2662,
+     "max": 3.2662,
+     "n": 1
+    },
+    "shift_km": {
+     "mean": 3.6212,
+     "min": 3.6212,
+     "max": 3.6212,
+     "n": 1
+    },
+    "union_support": {
+     "mean": 0.5655,
+     "min": 0.5655,
+     "max": 0.5655,
+     "n": 1
+    }
    },
    "cost_usd": {
     "mean": 17.3908,
@@ -252,93 +700,317 @@
     {
      "run_id": "20261015T020300Z",
      "completed": true,
-     "recall": 0.7854,
-     "recall_norm": 1.1795,
-     "union_support": 0.8511,
-     "audited_false_rate": null,
-     "epi_median_km": 1.6304,
-     "shift_km": 1.1423,
-     "scatter_median_km": 1.0432,
-     "epi_gt5km": 0.0713,
-     "dz_median_km": 8.0765,
-     "depth_mode_share": 0.028,
+     "b_difference": 0.07,
      "depth_band_share": 0.2159,
+     "depth_mode_share": 0.028,
+     "dmag_mean_M2": -0.208,
+     "dmag_mean_M3": -0.2681,
+     "dmag_mean_M4": -0.2481,
+     "dmag_mean_M5": -0.936,
+     "dmag_median": -0.04,
+     "dmag_slope_per_unit": -0.2069,
+     "dmag_std": 0.234,
+     "dt_mean_M2": -0.6633,
+     "dt_mean_M3": -0.6672,
+     "dt_mean_M4": -0.592,
+     "dt_mean_M5": -0.649,
+     "dt_mean_s": -0.615,
+     "dt_std_s": 0.5863,
+     "dz_median_km": 8.0765,
+     "epi_gt5km": 0.0713,
+     "epi_mean_M2": 1.9378,
+     "epi_mean_M3": 1.7668,
+     "epi_mean_M4": 1.6652,
+     "epi_mean_M5": 1.05,
+     "epi_median_km": 1.6304,
+     "f1_M2": 0.843,
+     "f1_M3": 0.8486,
+     "f1_M4": 0.9019,
+     "f1_M5": 1.0,
+     "off_structure_after_shift": 0.1414,
      "off_structure_fraction": 0.1366,
-     "off_structure_after_shift": 0.1414
+     "precision_M2": 0.8442,
+     "precision_M3": 0.8738,
+     "precision_M4": 0.8947,
+     "precision_M5": 1.0,
+     "recall": 0.7854,
+     "recall_M2": 0.8418,
+     "recall_M3": 0.8248,
+     "recall_M4": 0.9091,
+     "recall_M5": 1.0,
+     "recall_after_large": 0.7839,
+     "recall_norm": 1.1795,
+     "recall_other": 0.7862,
+     "scatter_median_km": 1.0432,
+     "shift_km": 1.1423,
+     "union_support": 0.8511
     }
    ],
-   "recall": {
-    "mean": 0.7854,
-    "min": 0.7854,
-    "max": 0.7854,
-    "n": 1
-   },
-   "recall_norm": {
-    "mean": 1.1795,
-    "min": 1.1795,
-    "max": 1.1795,
-    "n": 1
-   },
-   "union_support": {
-    "mean": 0.8511,
-    "min": 0.8511,
-    "max": 0.8511,
-    "n": 1
-   },
-   "audited_false_rate": null,
-   "epi_median_km": {
-    "mean": 1.6304,
-    "min": 1.6304,
-    "max": 1.6304,
-    "n": 1
-   },
-   "shift_km": {
-    "mean": 1.1423,
-    "min": 1.1423,
-    "max": 1.1423,
-    "n": 1
-   },
-   "scatter_median_km": {
-    "mean": 1.0432,
-    "min": 1.0432,
-    "max": 1.0432,
-    "n": 1
-   },
-   "epi_gt5km": {
-    "mean": 0.0713,
-    "min": 0.0713,
-    "max": 0.0713,
-    "n": 1
-   },
-   "dz_median_km": {
-    "mean": 8.0765,
-    "min": 8.0765,
-    "max": 8.0765,
-    "n": 1
-   },
-   "depth_mode_share": {
-    "mean": 0.028,
-    "min": 0.028,
-    "max": 0.028,
-    "n": 1
-   },
-   "depth_band_share": {
-    "mean": 0.2159,
-    "min": 0.2159,
-    "max": 0.2159,
-    "n": 1
-   },
-   "off_structure_fraction": {
-    "mean": 0.1366,
-    "min": 0.1366,
-    "max": 0.1366,
-    "n": 1
-   },
-   "off_structure_after_shift": {
-    "mean": 0.1414,
-    "min": 0.1414,
-    "max": 0.1414,
-    "n": 1
+   "metrics": {
+    "b_difference": {
+     "mean": 0.07,
+     "min": 0.07,
+     "max": 0.07,
+     "n": 1
+    },
+    "depth_band_share": {
+     "mean": 0.2159,
+     "min": 0.2159,
+     "max": 0.2159,
+     "n": 1
+    },
+    "depth_mode_share": {
+     "mean": 0.028,
+     "min": 0.028,
+     "max": 0.028,
+     "n": 1
+    },
+    "dmag_mean_M2": {
+     "mean": -0.208,
+     "min": -0.208,
+     "max": -0.208,
+     "n": 1
+    },
+    "dmag_mean_M3": {
+     "mean": -0.2681,
+     "min": -0.2681,
+     "max": -0.2681,
+     "n": 1
+    },
+    "dmag_mean_M4": {
+     "mean": -0.2481,
+     "min": -0.2481,
+     "max": -0.2481,
+     "n": 1
+    },
+    "dmag_mean_M5": {
+     "mean": -0.936,
+     "min": -0.936,
+     "max": -0.936,
+     "n": 1
+    },
+    "dmag_median": {
+     "mean": -0.04,
+     "min": -0.04,
+     "max": -0.04,
+     "n": 1
+    },
+    "dmag_slope_per_unit": {
+     "mean": -0.2069,
+     "min": -0.2069,
+     "max": -0.2069,
+     "n": 1
+    },
+    "dmag_std": {
+     "mean": 0.234,
+     "min": 0.234,
+     "max": 0.234,
+     "n": 1
+    },
+    "dt_mean_M2": {
+     "mean": -0.6633,
+     "min": -0.6633,
+     "max": -0.6633,
+     "n": 1
+    },
+    "dt_mean_M3": {
+     "mean": -0.6672,
+     "min": -0.6672,
+     "max": -0.6672,
+     "n": 1
+    },
+    "dt_mean_M4": {
+     "mean": -0.592,
+     "min": -0.592,
+     "max": -0.592,
+     "n": 1
+    },
+    "dt_mean_M5": {
+     "mean": -0.649,
+     "min": -0.649,
+     "max": -0.649,
+     "n": 1
+    },
+    "dt_mean_s": {
+     "mean": -0.615,
+     "min": -0.615,
+     "max": -0.615,
+     "n": 1
+    },
+    "dt_std_s": {
+     "mean": 0.5863,
+     "min": 0.5863,
+     "max": 0.5863,
+     "n": 1
+    },
+    "dz_median_km": {
+     "mean": 8.0765,
+     "min": 8.0765,
+     "max": 8.0765,
+     "n": 1
+    },
+    "epi_gt5km": {
+     "mean": 0.0713,
+     "min": 0.0713,
+     "max": 0.0713,
+     "n": 1
+    },
+    "epi_mean_M2": {
+     "mean": 1.9378,
+     "min": 1.9378,
+     "max": 1.9378,
+     "n": 1
+    },
+    "epi_mean_M3": {
+     "mean": 1.7668,
+     "min": 1.7668,
+     "max": 1.7668,
+     "n": 1
+    },
+    "epi_mean_M4": {
+     "mean": 1.6652,
+     "min": 1.6652,
+     "max": 1.6652,
+     "n": 1
+    },
+    "epi_mean_M5": {
+     "mean": 1.05,
+     "min": 1.05,
+     "max": 1.05,
+     "n": 1
+    },
+    "epi_median_km": {
+     "mean": 1.6304,
+     "min": 1.6304,
+     "max": 1.6304,
+     "n": 1
+    },
+    "f1_M2": {
+     "mean": 0.843,
+     "min": 0.843,
+     "max": 0.843,
+     "n": 1
+    },
+    "f1_M3": {
+     "mean": 0.8486,
+     "min": 0.8486,
+     "max": 0.8486,
+     "n": 1
+    },
+    "f1_M4": {
+     "mean": 0.9019,
+     "min": 0.9019,
+     "max": 0.9019,
+     "n": 1
+    },
+    "f1_M5": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "off_structure_after_shift": {
+     "mean": 0.1414,
+     "min": 0.1414,
+     "max": 0.1414,
+     "n": 1
+    },
+    "off_structure_fraction": {
+     "mean": 0.1366,
+     "min": 0.1366,
+     "max": 0.1366,
+     "n": 1
+    },
+    "precision_M2": {
+     "mean": 0.8442,
+     "min": 0.8442,
+     "max": 0.8442,
+     "n": 1
+    },
+    "precision_M3": {
+     "mean": 0.8738,
+     "min": 0.8738,
+     "max": 0.8738,
+     "n": 1
+    },
+    "precision_M4": {
+     "mean": 0.8947,
+     "min": 0.8947,
+     "max": 0.8947,
+     "n": 1
+    },
+    "precision_M5": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "recall": {
+     "mean": 0.7854,
+     "min": 0.7854,
+     "max": 0.7854,
+     "n": 1
+    },
+    "recall_M2": {
+     "mean": 0.8418,
+     "min": 0.8418,
+     "max": 0.8418,
+     "n": 1
+    },
+    "recall_M3": {
+     "mean": 0.8248,
+     "min": 0.8248,
+     "max": 0.8248,
+     "n": 1
+    },
+    "recall_M4": {
+     "mean": 0.9091,
+     "min": 0.9091,
+     "max": 0.9091,
+     "n": 1
+    },
+    "recall_M5": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "recall_after_large": {
+     "mean": 0.7839,
+     "min": 0.7839,
+     "max": 0.7839,
+     "n": 1
+    },
+    "recall_norm": {
+     "mean": 1.1795,
+     "min": 1.1795,
+     "max": 1.1795,
+     "n": 1
+    },
+    "recall_other": {
+     "mean": 0.7862,
+     "min": 0.7862,
+     "max": 0.7862,
+     "n": 1
+    },
+    "scatter_median_km": {
+     "mean": 1.0432,
+     "min": 1.0432,
+     "max": 1.0432,
+     "n": 1
+    },
+    "shift_km": {
+     "mean": 1.1423,
+     "min": 1.1423,
+     "max": 1.1423,
+     "n": 1
+    },
+    "union_support": {
+     "mean": 0.8511,
+     "min": 0.8511,
+     "max": 0.8511,
+     "n": 1
+    }
    },
    "cost_usd": null,
    "elapsed_s": {
