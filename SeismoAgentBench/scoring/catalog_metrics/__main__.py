@@ -1,4 +1,7 @@
-"""CLI: ``python -m SeismoAgentBench.scoring.catalog_metrics {baseline,run,summary} --task-dir T [--run-dir R]``."""
+"""CLI: ``python -m SeismoAgentBench.scoring.catalog_metrics {baseline,run,summary,audit} --task-dir T [--run-dir R]``.
+
+audit prepares the blind review of a scored run (evaluation/audit/); rerun ``run`` after labelling.
+"""
 
 from __future__ import annotations
 
@@ -6,6 +9,7 @@ import argparse
 import json
 from pathlib import Path
 
+from .audit import prepare_review
 from .case import score_baseline, score_run
 from .summary import summarize
 
@@ -13,7 +17,7 @@ from .summary import summarize
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(prog="python -m SeismoAgentBench.scoring.catalog_metrics",
                                      description=__doc__)
-    parser.add_argument("command", choices=("baseline", "run", "summary"))
+    parser.add_argument("command", choices=("baseline", "run", "summary", "audit"))
     parser.add_argument("--task-dir", type=Path, required=True)
     parser.add_argument("--run-dir", type=Path, help="runs/<variant>/<harness>/<model>/<run_id> (command run)")
     parser.add_argument("--rescore", action="store_true", help="summary: rescore every run first")
@@ -28,6 +32,10 @@ def main(argv=None) -> int:
                     **{k: (c["metrics"].get(k) or {}).get("mean")
                        for k in ("recall_norm", "union_support", "f1_M2", "f1_M3", "scatter_median_km")}}
                    for c in report["configurations"]]
+    elif args.command == "audit":
+        if args.run_dir is None:
+            parser.error("audit needs --run-dir")
+        summary = prepare_review(args.run_dir.resolve(), args.task_dir.resolve())
     else:
         if args.run_dir is None:
             parser.error("run needs --run-dir")

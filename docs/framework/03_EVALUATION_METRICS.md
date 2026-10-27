@@ -141,13 +141,20 @@ stated surface datum convertible with the case's model datum).
 
 **Audit of unsupported events.** From each scored run, draw a stratified
 random sample of the events without support in U (50, or all if fewer;
-strata by Agent `n_picks` tercile), with a fixed seed recorded in the score
-file. Each sampled event is reviewed blind to its source on waveform plots
-(three-component, nearest six stations, ±10 s) and labelled *earthquake*,
-*not an earthquake* or *undecidable*. The estimated false-event rate is
-`(1 − union_support) × p_false` with a Wilson 95 % interval on `p_false`.
-Reviews are stored next to the run evaluation and reused across metric
-versions.
+strata by Agent `n_picks` tercile, fixed seed); `audit_sample.csv` is drawn
+once and never redrawn. `catalog_metrics audit` turns it into a blind review
+package (`<run>/evaluation/audit/`): figures `aNN.png` in random order, each
+showing the six nearest stations (2–15 Hz) with the event's predicted P/S
+and those of the run's own other events — no reference catalog — and
+`key.csv` (aNN → event), opened only after labelling. The first reviewer
+(Claude) labels every figure *earthquake* (own P/S arrivals at ≥ 2 near
+stations), *not_earthquake* (none at the predicted times) or *undecidable*
+in `labels.csv`; a second reviewer (the user) labels the random subset in
+`spot_check.csv` (10 figures), and their agreement is reported. The
+estimated false-event rate is `(1 − union_support) × p_false`, with
+`p_false = not / (earthquake + not)` and a Wilson 95 % interval; it is
+computed only when every sample is labelled. Reviews are kept next to the
+run evaluation and reused across metric versions.
 
 ### L2 — Absolute location (L references, matched pairs)
 
@@ -314,14 +321,18 @@ python -m SeismoAgentBench.scoring.catalog_metrics baseline --task-dir workflows
 python -m SeismoAgentBench.scoring.catalog_metrics run --task-dir workflows/tasks/<case> \
     --run-dir workflows/tasks/<case>/runs/<variant>/<harness>/<model>/<run_id>
 python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir workflows/tasks/<case> [--rescore]
+python -m SeismoAgentBench.scoring.catalog_metrics audit --task-dir workflows/tasks/<case> --run-dir <run>
 ```
+
+`python -m SeismoAgentBench evaluate --run-dir <run>` runs the same scorer: every task
+spec declares `artifact-contract@1` and `catalog-metrics@1`; this is the only scoring path.
 
 | Output | Content | Tracked |
 |---|---|---|
 | `evaluation/metrics_v1_baseline.json` | ceilings; reference, expert-final and expert-blind rows | yes |
 | `<run>/evaluation/metrics_v1.json` | one run: completion, catalog notes, all metrics, headline, process, leakage | no (runs/ is ignored) |
 | `<run>/evaluation/location_diagnostics.png` | offset vectors (shift vs scatter), offset CDF with expert yardsticks, depth distribution with the densest band, map of offsets and off-structure events | no |
-| `<run>/evaluation/audit_sample.csv` | the audit sample, drawn once and never redrawn; reviewers add `audit_labels.csv` (`event_id,label`) | no |
+| `<run>/evaluation/audit_sample.csv`, `audit/` | the audit sample (drawn once) and its blind review package: `plots/`, `key.csv`, `labels.csv`, `spot_check.csv` | no |
 | `evaluation/metrics_v1_summary.json` | per configuration over repeated runs (§6) | yes |
 
 The leakage scan reads only the Agent's tool-call inputs (its accesses), not

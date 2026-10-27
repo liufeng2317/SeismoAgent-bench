@@ -1,10 +1,13 @@
 """Pre-registered catalog metrics v1: matching and metric semantics on synthetic catalogs."""
 
+import tempfile
 import unittest
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
+from SeismoAgentBench.scoring.catalog_metrics.audit import audited_false_rate
 from SeismoAgentBench.scoring.catalog_metrics.dimensions import b_value, magnitude_classes
 from SeismoAgentBench.scoring.catalog_metrics.matching import correspond, match
 from SeismoAgentBench.scoring.catalog_metrics.metrics import (
@@ -121,6 +124,22 @@ class MetricTest(unittest.TestCase):
         rng = np.random.default_rng(4)
         m = np.round(0.95 + rng.exponential(1 / np.log(10), 5000), 1)  # b = 1; bin 1.0 covers [0.95, 1.05)
         self.assertAlmostEqual(b_value(m, 1.0)["b"], 1.0, delta=0.05)
+
+    def test_audit_counts_only_a_complete_review_and_reports_spot_check_agreement(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            review = Path(tmp)
+            labels = pd.DataFrame({"audit_id": ["a01", "a02", "a03", "a04"],
+                                   "label": ["earthquake", "not_earthquake", "not_earthquake", ""]})
+            labels.to_csv(review / "labels.csv", index=False)
+            self.assertIsNone(audited_false_rate(review, 0.4))  # one sample still unlabelled
+            labels.loc[3, "label"] = "undecidable"
+            labels.to_csv(review / "labels.csv", index=False)
+            pd.DataFrame({"audit_id": ["a01", "a02"], "label": ["earthquake", "earthquake"]}).to_csv(
+                review / "spot_check.csv", index=False)
+            result = audited_false_rate(review, 0.4)
+            self.assertAlmostEqual(result["p_false"], 2 / 3, places=4)  # undecidable excluded
+            self.assertAlmostEqual(result["rate"], 0.4 * 2 / 3, places=4)
+            self.assertEqual(result["spot_check"], {"events": 2, "agreement": 0.5})
 
     def test_off_structure_uses_other_references_only(self):
         ref = population("ref", [0.0, 10.0], [40.0, 40.0], [-100.0, -100.0], [5.0, 5.0])

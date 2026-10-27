@@ -24,7 +24,7 @@ import pandas as pd
 import yaml
 
 from . import METRICS_VERSION
-from .audit import LABEL_FILE, SAMPLE_FILE, audited_false_rate, sample_unsupported
+from .audit import REVIEW_DIR, SAMPLE_FILE, audited_false_rate, sample_unsupported
 from .metrics import ceilings, effective_recall, score_population
 from .process import consistency, contract_status, process_metrics
 from .tables import ROLES, Population, epoch_seconds, in_mask, read_candidate_catalog, standardize
@@ -262,7 +262,7 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
         unsupported = score["union_support"]["unsupported_index"]
         sample = sample_unsupported(cand, unsupported)
         report.update({"catalog": notes, "scores": _strip(score), "headline": headline(score, case, ceiling)})
-        audit = audited_false_rate(out_dir / LABEL_FILE, 1 - score["union_support"]["fraction"]
+        audit = audited_false_rate(out_dir / REVIEW_DIR, 1 - score["union_support"]["fraction"]
                                    if score["union_support"]["fraction"] is not None else None)
         report["headline"]["audited_false_rate"] = audit["rate"] if audit else None
         if write:

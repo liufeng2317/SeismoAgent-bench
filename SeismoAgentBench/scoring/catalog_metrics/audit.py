@@ -14,7 +14,6 @@ AUDIT_SIZE = 50
 AUDIT_SEED = 20261027
 LABELS = ("earthquake", "not_earthquake", "undecidable")
 SAMPLE_FILE = "audit_sample.csv"
-LABEL_FILE = "audit_labels.csv"
 
 
 def sample_unsupported(cand: Population, index: np.ndarray, *, size: int = AUDIT_SIZE,
@@ -49,6 +48,62 @@ def sample_unsupported(cand: Population, index: np.ndarray, *, size: int = AUDIT
                          "stratum": chosen.stratum.to_numpy(), "label": ""})
 
 
+REVIEW_DIR = "audit"
+SPOT_CHECK_SIZE = 10
+
+
+def prepare_review(run_dir: Path, task_dir: Path, *, seed: int = AUDIT_SEED) -> dict:
+    """Anonymised review package for a run's audit sample (evaluation/audit/).
+
+    plots/aNN.png show each sampled event with the run's own catalog as context
+    (no reference catalog); key.csv maps aNN to event ids and is not opened
+    before labelling; labels.csv (all) and spot_check.csv (a random subset for
+    a second reviewer) are templates with an empty label column.
+    """
+    from .audit_plots import input_root, plot_event  # matplotlib/obspy only when reviewing
+
+    ev_dir = run_dir / "evaluation"
+    out = ev_dir / REVIEW_DIR
+    if (out / "labels.csv").is_file() and pd.read_csv(out / "labels.csv", dtype=str,
+                                                       keep_default_na=False).label.str.strip().ne("").any():
+        raise ValueError(f"{out}/labels.csv already holds labels; the review is never redrawn")
+    sample = pd.read_csv(ev_dir / SAMPLE_FILE)
+    rng = np.random.default_rng(seed)
+    order = rng.permutation(len(sample))
+    key = pd.DataFrame({"audit_id": [f"a{i + 1:02d}" for i in range(len(sample))],
+                        "event_id": sample.event_id.to_numpy()[order].astype(str)})
+    catalog = pd.read_csv(run_dir / "work" / "catalog.csv", dtype=str, keep_default_na=False)
+    context = catalog.rename(columns={"origin_time_utc": "origin_time_utc"})[
+        ["event_id", "origin_time_utc", "latitude", "longitude", "depth_km", "magnitude"]].replace({"": np.nan})
+    for column in ("latitude", "longitude", "depth_km", "magnitude"):
+        context[column] = pd.to_numeric(context[column], errors="coerce")
+    context = context.dropna(subset=["origin_time_utc", "latitude", "longitude"])
+    root = input_root(task_dir)
+    rows = sample.set_index(sample.event_id.astype(str))
+    drawn = 0
+    for audit_id, event_id in zip(key.audit_id, key.event_id):
+        r = rows.loc[event_id]
+        event = {"event_id": audit_id, "source_id": event_id, "origin_time_utc": r.origin_time_utc,
+                 "latitude": r.latitude, "longitude": r.longitude, "depth_km": r.depth_km, "magnitude": None}
+        drawn += bool(plot_event(root, event, context, out / "plots" / f"{audit_id}.png"))
+    key.to_csv(out / "key.csv", index=False)
+    pd.DataFrame({"audit_id": key.audit_id, "label": ""}).to_csv(out / "labels.csv", index=False)
+    spot = rng.choice(key.audit_id, size=min(SPOT_CHECK_SIZE, len(key)), replace=False)
+    pd.DataFrame({"audit_id": sorted(spot), "label": ""}).to_csv(out / "spot_check.csv", index=False)
+    return {"events": int(len(key)), "plots": drawn, "dir": str(out)}
+
+
+def _labels(path: Path) -> pd.Series | None:
+    if not path.is_file():
+        return None
+    table = pd.read_csv(path, dtype=str, keep_default_na=False)
+    labels = table.set_index("audit_id").label.str.strip().str.lower()
+    unknown = sorted(set(labels) - set(LABELS) - {""})
+    if unknown:
+        raise ValueError(f"{path}: unknown labels {unknown}")
+    return labels
+
+
 def wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
     if n == 0:
         return (0.0, 1.0)
@@ -58,20 +113,22 @@ def wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
     return (max(0.0, centre - half), min(1.0, centre + half))
 
 
-def audited_false_rate(labels_path: Path, unsupported_fraction: float | None) -> dict | None:
-    """``(1 - union_support) x p_false`` from reviewed labels; None until a review exists."""
-    if not labels_path.is_file() or unsupported_fraction is None:
+def audited_false_rate(review_dir: Path, unsupported_fraction: float | None) -> dict | None:
+    """``(1 - union_support) x p_false`` from a completed review; None until every sample is labelled."""
+    labels = _labels(review_dir / "labels.csv")
+    if labels is None or unsupported_fraction is None or labels.eq("").any():
         return None
-    labels = pd.read_csv(labels_path, dtype=str, keep_default_na=False).label.str.strip().str.lower()
-    unknown = sorted(set(labels) - set(LABELS) - {""})
-    if unknown:
-        raise ValueError(f"{labels_path}: unknown labels {unknown}")
     counts = {name: int((labels == name).sum()) for name in LABELS}
     decided = counts["earthquake"] + counts["not_earthquake"]
-    if decided == 0:
-        return {"counts": counts, "p_false": None, "rate": None}
-    p = counts["not_earthquake"] / decided
-    lo, hi = wilson(counts["not_earthquake"], decided)
-    return {"counts": counts, "p_false": round(p, 4),
-            "rate": round(unsupported_fraction * p, 4),
-            "rate_ci95": [round(unsupported_fraction * lo, 4), round(unsupported_fraction * hi, 4)]}
+    out = {"counts": counts, "p_false": None, "rate": None}
+    if decided:
+        p = counts["not_earthquake"] / decided
+        lo, hi = wilson(counts["not_earthquake"], decided)
+        out.update({"p_false": round(p, 4), "rate": round(unsupported_fraction * p, 4),
+                    "rate_ci95": [round(unsupported_fraction * lo, 4), round(unsupported_fraction * hi, 4)]})
+    spot = _labels(review_dir / "spot_check.csv")
+    if spot is not None and not spot.eq("").any():
+        both = spot.index.intersection(labels.index)
+        out["spot_check"] = {"events": int(len(both)),
+                             "agreement": round(float((spot[both] == labels[both]).mean()), 4) if len(both) else None}
+    return out
