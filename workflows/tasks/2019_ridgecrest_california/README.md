@@ -38,8 +38,13 @@ under `$BENCH_OUTPUT`. The default runner uses the separate
 shared `seismoagent` environment. The required catalog format and scientific
 limitations are described in each variant prompt and enforced by the
 machine-checkable output contracts (`output_contract_min.json`,
-`output_contract.json`). `prompt_tools.md` exposes the local PhaseNet, GaMMA,
-NonLinLoc and hypoDD sources while leaving method selection to the Agent.
+`output_contract.json`). `prompt_tools.md` exposes the local seismotools library — PhaseNet;
+GaMMA, PyOcto and REAL (association); NonLinLoc and HypoInverse (absolute
+location); hypoDD, GrowClust and ccdt (relative relocation) — while leaving
+method selection to the Agent. Each run records the seismotools commit in
+its provenance (`tools`).
+Runs before 2026-10-27 used the earlier tools prompt, which listed only
+PhaseNet, GaMMA, NonLinLoc and hypoDD.
 
 The runner's wall-clock budget defaults to twenty-four hours (`tools`
 forty-eight, because its science stages alone ran ~18 h in the first

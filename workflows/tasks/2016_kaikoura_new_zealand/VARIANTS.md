@@ -27,7 +27,7 @@ the scoring benchmark for every arm.
 | Variant | Task spec | Differs from `min` by | Guidance | Scope | Tool policy | Contract |
 |---|---|---|---|---|---|---|
 | `min` | `task_min.json` | — (control arm) | minimal | unspecified | unspecified | min |
-| `tools` | `task_tools.json` | + `### Tools`: local PhaseNet / GaMMA / NonLinLoc / hypoDD with validated usage docs | minimal | unspecified | local provided | min |
+| `tools` | `task_tools.json` | + `### Tools`: local PhaseNet; GaMMA / PyOcto / REAL; NonLinLoc / HypoInverse; hypoDD / GrowClust / ccdt (picking; association; location; relocation) with validated usage docs | minimal | unspecified | local provided | min |
 | `guided` | `task_guided.json` | + expert scaffolding: fixed eight-day window, pipeline stages, QC gates, tuning discipline, report | expert-scaffolded | fixed window | neutral public | default |
 
 Contracts: `output_contract_min.json` (picks + catalog) and

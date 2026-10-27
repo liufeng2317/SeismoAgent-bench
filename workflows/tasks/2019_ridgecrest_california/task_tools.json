@@ -2,7 +2,7 @@
   "task_id": "ridgecrest_2019_catalog_tools",
   "version": "1",
   "title": "Ridgecrest earthquake-catalog construction (minimal instructions with expert tools)",
-  "summary": "Tools arm of the experiment: identical to the minimal-instruction baseline except that the local expert toolchain (PhaseNet, GaMMA, NonLinLoc, hypoDD) is exposed with its validated usage documentation. Isolates the value of expert tools.",
+  "summary": "Tools arm of the experiment: identical to the minimal-instruction baseline except that the local seismotools library (PhaseNet; GaMMA, PyOcto, REAL; NonLinLoc, HypoInverse; hypoDD, GrowClust, ccdt) is exposed with its validated usage documentation. Isolates the value of expert tools.",
   "task_prompt_file": "prompt_tools.md",
   "output_contract": "output_contract_min.json",
   "category": "seismology",
@@ -11,7 +11,12 @@
     "ObsPy",
     "PhaseNet",
     "GaMMA",
-    "NonLinLoc"
+    "PyOcto",
+    "REAL",
+    "NonLinLoc",
+    "HypoInverse",
+    "hypoDD",
+    "GrowClust"
   ],
   "taxonomy": {
     "domain": "seismology",
