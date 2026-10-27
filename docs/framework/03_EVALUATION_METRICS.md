@@ -1,10 +1,12 @@
 # Evaluation metrics (v1, pre-registered)
 
-This document fixes how every Agent catalog is scored. It is frozen before the
-formal Agent runs (2026-10-27). A change to any definition, gate, mask or
-reference role below creates a new version; every run is then re-scored with
-that version, and each score file records the version it used
-(`metrics_version: 1`).
+This document fixes how every Agent catalog is scored. Pre-registered on
+2026-10-27, revised while it was implemented and before any formal Agent run
+was scored (§10), and **frozen on 2026-10-28** with the commit that adds §10.
+A change to any definition, gate, mask, reference role or expert catalog from
+now on creates a new version; every run is then re-scored with that version,
+and each score file records the version it used (`metrics_version: 1`) and
+the scorer commit.
 
 Two principles follow from the expert work on the six cases:
 
@@ -354,3 +356,26 @@ The leakage scan reads only the Agent's tool-call inputs (its accesses), not
 text that appears in tool results such as fetched documents or directory
 listings; withheld-product patterns are reference DOIs, repository paths of
 reference data, expert outputs and scores, and earthquake-catalogue services.
+
+## 10. Revision history before the freeze
+
+All revisions below were made between pre-registration (2026-10-27, commit
+2255ccf) and the freeze; no formal Agent run had been scored. The four
+development runs (Ridgecrest base/min/tools, Magna min) were used to test
+the scorer.
+
+| Date | Change | Reason |
+|---|---|---|
+| 10-27 | Off-structure distance epicentral, against all located S references (McMahon, Liu gain S) | 3-D distance double-counted depth errors (Prague expert 11 % vs 0.04 %) |
+| 10-27 | Primary detection reference must have an informative ceiling (Kaikōura → Chamberlain, Maple Creek → ComCat; Tan and Shelly reported raw) | Tan's and Shelly's ceilings were 0.16 and 0.03 |
+| 10-27 | Time-only references join U with aggregate chance correction | Maple Creek U was otherwise ComCat alone |
+| 10-27 | M90 thresholds are the reference's own magnitudes | 0.1 steps gave non-existent magnitudes |
+| 10-27 | Leakage scan reads tool-call inputs only; repository-path patterns replace catalog-folder names | Folder names appear in the supplied station metadata of every case |
+| 10-27 | L2 split into shift and scatter, tails, periods, depth reported with unknown datum, depth profile; L3 off-structure after shift | A median epicentral offset hid frame shifts, 8–9 km depth errors and fixed depths |
+| 10-27 | Time, space and strength by magnitude class (M ≥ 2–5, operational-catalog magnitudes, candidate offset removed) | Requested evaluation by magnitude with F1 and error distributions |
+| 10-27 | Class precision counts union-supported events as real | HVO incomplete at M 2 on 4–5 May 2018 |
+| 10-28 | Expert finals replaced by the corrected rounds (stages 65–67) | Missing Ridgecrest mainshocks, compressed large-event magnitudes, coda ghosts |
+| 10-28 | catalog-metrics@1 is the only scoring path (`SeismoAgentBench evaluate`) | Three scoring paths with different statistics |
+| 10-28 | Blind review package and spot check | Reviewer workflow decided (Claude labels, user spot-checks 10) |
+| 10-28 | L5 phase picks wired (Baker; Shelly release collapsed per event/station/phase) | Decided to score picks before the formal runs |
+
