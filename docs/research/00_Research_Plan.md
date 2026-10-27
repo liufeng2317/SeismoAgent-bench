@@ -133,6 +133,31 @@ flowchart LR
     E["Expert Workflow Prescription"] --> P
 ```
 
+#### Agent capability stages (plan, 2026-10-28)
+
+Within the closed-reference, raw-waveform task, the Agent arms form a ladder
+in which each stage adds exactly one factor. The working hypothesis (evidence
+in [`04_Expert_Experience_and_Checker.md`](./04_Expert_Experience_and_Checker.md))
+is that an expert catalog needs experience — parameter strategies, stage
+diagnosis and upstream repair — that can be encoded as a reference-free
+checker; the central question is whether a general Agent without such a
+checker produces catalogs usable for scientific discovery.
+
+| Stage | Arm | Agent additionally gets | Question | Status |
+|---|---|---|---|---|
+| S0 | `min` | task, data, output contract | Can a general Agent build a usable catalog on its own? | implemented |
+| S1 | `tools` | validated tool library (`seismotools`) and usage docs | Is the gap tool access/execution or scientific judgement? | implemented |
+| S2 | `tools + checker` | a checker skill that runs reference-free diagnostics on the Agent's own products and reports symptoms only | Once told that a stage is wrong, does the Agent find and repair the cause? | planned, not implemented |
+| S3 | `tools + checker + playbook` | the symptom → likely cause → upstream repair knowledge | Does encoded expert experience close the gap (self-improving loop)? | planned, not implemented |
+
+Yardsticks: expert blind (first-round standard workflow, before any reference
+comparison) and expert final (reference-informed upper control). The
+existing `guided` arm varies how prescriptive the task statement is and also
+changes the window and contract; it is not on this ladder and is optional.
+Constraints for S2/S3: reference-free, case-agnostic rules; checker use
+logged; results reported separately for the cases a rule was learned from
+and for the others.
+
 ### Target leakage control
 
 Target leakage is a major methodological risk.

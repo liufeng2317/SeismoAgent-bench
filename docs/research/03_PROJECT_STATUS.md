@@ -46,3 +46,22 @@ The framework prepares one run from a task definition and run configuration,
 exposes the declared inputs to the Agent, launches the selected Agent through
 its adapter, and preserves the Agent's artifacts and execution records. The
 external scorer reads the completed run and produces the evaluation report.
+
+## Evaluation status and plan (2026-10-28)
+
+- Metrics v1 frozen (`docs/framework/03_EVALUATION_METRICS.md`); single scoring
+  path `python -m SeismoAgentBench evaluate` (catalog-metrics@1), blind review
+  of unsupported events, L5 picks for Magna and Maple Creek.
+- Expert baselines corrected and fixed for all six cases (final and blind rows
+  in each `evaluation/metrics_v1_baseline.json`); expert ladder recorded per case.
+- Zero-cost analyses: expert ladder (what each expert step adds) and component
+  swap (Agent front end versus model/locator choice) —
+  [`04_Expert_Experience_and_Checker.md`](./04_Expert_Experience_and_Checker.md).
+- Agent stages: S0 `min` and S1 `tools` implemented; S2 `tools + checker` and
+  S3 `tools + checker + playbook` planned, not implemented
+  ([`00_Research_Plan.md`](./00_Research_Plan.md), "Agent capability stages").
+- Next: formal S0/S1 runs on the six cases (one each), repeats only where two
+  runs differ by more than half the stage effect; every run scored with
+  metrics v1 and component swap. The four earlier Ridgecrest/Magna runs
+  predate the output conventions and remain development runs.
+
