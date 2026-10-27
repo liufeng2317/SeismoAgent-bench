@@ -205,8 +205,12 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
     run_dir = run_dir.resolve()
     layout = run_layout(case.task_dir, run_dir)
     work = run_dir / "work"
-    contract = json.loads((run_dir / "control" / "output_contract.json").read_text(encoding="utf-8"))
+    contract_path = run_dir / "control" / "output_contract.json"
+    if not contract_path.is_file():  # runs older than the control snapshot (retired base variant)
+        contract_path = case.task_dir / "output_contract_min.json"
+    contract = json.loads(contract_path.read_text(encoding="utf-8"))
     status = contract_status(work, contract)
+    status["contract"] = str(contract_path.relative_to(case.task_dir))
     report = {**_scorer_record(), "task": case.task_dir.name, "run": layout, "completion": status,
               "process": process_metrics(run_dir, case.config.get("leakage_patterns", []))}
     out_dir = run_dir / "evaluation"

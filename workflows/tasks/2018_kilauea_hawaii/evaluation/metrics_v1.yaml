@@ -31,7 +31,8 @@ leakage_patterns:
   - '10\.5061/dryad\.np5hqbzw9'
   - '10\.5066/P13JCJ2I'
   - '10\.5066/P9DMIFMW'
-  - 'SHELLY2019|WEI2022|MATOZA20(14|21)|LENGLINE2021|USGS_HVO_COMCAT'
-  - 'data/catalogs/'
+  - 'data/\d{4}_[a-z_]+/(data/catalogs|references|analysis)/'   # repository reference data
+  - 'tasks/\d{4}_[a-z_]+/(expert|evaluation)/'                  # expert catalogs and scores
   - 'fdsnws/event'
+  - 'isc\.ac\.uk/(iscbulletin|cgi-bin)|seismicportal\.eu'
   - 'earthquake\.usgs\.gov/(earthquakes|fdsnws)'

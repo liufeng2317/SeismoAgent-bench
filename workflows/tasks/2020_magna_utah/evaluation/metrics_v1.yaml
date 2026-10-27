@@ -25,7 +25,8 @@ leakage_patterns:
   - '10\.1785/0220200316'
   - '10\.31905/9IE6PAF2'
   - '10\.31905/LGR1456Y'
-  - 'PANG2020|BAKER2021|USGS_UUSS_COMCAT'
-  - 'data/catalogs/'
+  - 'data/\d{4}_[a-z_]+/(data/catalogs|references|analysis)/'   # repository reference data
+  - 'tasks/\d{4}_[a-z_]+/(expert|evaluation)/'                  # expert catalogs and scores
   - 'fdsnws/event'
+  - 'isc\.ac\.uk/(iscbulletin|cgi-bin)|seismicportal\.eu'
   - 'earthquake\.usgs\.gov/(earthquakes|fdsnws)'

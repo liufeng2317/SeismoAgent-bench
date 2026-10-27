@@ -237,7 +237,29 @@ the datum.
 
 ## 9. Implementation
 
-The scorer is shared code in `SeismoAgentBench/scoring/`; each case provides
-only its configuration (reference readers, roles, mask, gates, expert
-catalogs). Every score file records `metrics_version`, the scorer's git
-commit, the gates, the reference counts after masking and the audit seed.
+The scorer is shared code in `SeismoAgentBench/scoring/catalog_metrics/`;
+each case provides only `evaluation/metrics_v1.yaml` (mask, roles, datums,
+primary references, expert catalogs, leakage patterns) and, where its
+references are not read by the expert stage-05 module, a
+`metrics_v1_adapter.py` (Ridgecrest). Every score file records
+`metrics_version`, the scorer's git commit and dirty flag, the gates, the
+reference counts after masking and the audit sample.
+
+```bash
+python -m SeismoAgentBench.scoring.catalog_metrics baseline --task-dir workflows/tasks/<case>
+python -m SeismoAgentBench.scoring.catalog_metrics run --task-dir workflows/tasks/<case> \
+    --run-dir workflows/tasks/<case>/runs/<variant>/<harness>/<model>/<run_id>
+python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir workflows/tasks/<case> [--rescore]
+```
+
+| Output | Content | Tracked |
+|---|---|---|
+| `evaluation/metrics_v1_baseline.json` | ceilings; reference, expert-final and expert-blind rows | yes |
+| `<run>/evaluation/metrics_v1.json` | one run: completion, catalog notes, all metrics, headline, process, leakage | no (runs/ is ignored) |
+| `<run>/evaluation/audit_sample.csv` | the audit sample, drawn once and never redrawn; reviewers add `audit_labels.csv` (`event_id,label`) | no |
+| `evaluation/metrics_v1_summary.json` | per configuration over repeated runs (§6) | yes |
+
+The leakage scan reads only the Agent's tool-call inputs (its accesses), not
+text that appears in tool results such as fetched documents or directory
+listings; withheld-product patterns are reference DOIs, repository paths of
+reference data, expert outputs and scores, and earthquake-catalogue services.

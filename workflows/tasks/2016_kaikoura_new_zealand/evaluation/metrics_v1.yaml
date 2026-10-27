@@ -26,7 +26,8 @@ leakage_patterns:
   - '10\.1029/2021JB022304'
   - '10\.1029/2024JB028735'
   - '10\.5281/zenodo\.10937462'
-  - 'CHAMBERLAIN2021|GEONET_2016_KAIKOURA|LANZA2019|TAN2024'
-  - 'data/catalogs/'
+  - 'data/\d{4}_[a-z_]+/(data/catalogs|references|analysis)/'   # repository reference data
+  - 'tasks/\d{4}_[a-z_]+/(expert|evaluation)/'                  # expert catalogs and scores
   - 'fdsnws/event'
+  - 'isc\.ac\.uk/(iscbulletin|cgi-bin)|seismicportal\.eu'
   - 'quakesearch\.geonet|api\.geonet\.org\.nz/quake|wfs\.geonet\.org\.nz'

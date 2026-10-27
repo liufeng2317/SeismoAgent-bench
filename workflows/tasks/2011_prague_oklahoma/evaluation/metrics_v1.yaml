@@ -22,12 +22,13 @@ expert:
           depth_column: depth_bsl_km, depth_datum: sea_level}
   blind: {path: expert/export/r1/04_locate_nonlinloc/full/events.csv, time_column: origin_time,
           depth_column: depth_below_sea_level_km, depth_datum: sea_level, keep: {status: LOCATED}}
-leakage_patterns:                   # withheld products: reference DOIs, catalog folders, event services
+leakage_patterns:                   # withheld products: reference DOIs, repository paths, event services
   - '10\.1093/gji/ggaa153'
   - '10\.1002/2017GL072944'
   - '10\.1785/0120160150'
   - '10\.5066/F7FJ2FNT'
-  - 'COCHRAN2020|MCMAHON2017|ISKEN2017|USGS_TUL_COMCAT'
-  - 'data/catalogs/'
+  - 'data/\d{4}_[a-z_]+/(data/catalogs|references|analysis)/'   # repository reference data
+  - 'tasks/\d{4}_[a-z_]+/(expert|evaluation)/'                  # expert catalogs and scores
   - 'fdsnws/event'
+  - 'isc\.ac\.uk/(iscbulletin|cgi-bin)|seismicportal\.eu'
   - 'earthquake\.usgs\.gov/(earthquakes|fdsnws)'

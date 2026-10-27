@@ -45,7 +45,7 @@ def consistency(catalog: pd.DataFrame, picks: pd.DataFrame) -> dict:
     linked = picks[picks.event_id.astype(str).str.strip() != ""]
     ids = set(catalog.event_id.astype(str))
     out["pick_event_ids_exist"] = round(float(linked.event_id.astype(str).isin(ids).mean()), 4) if len(linked) else None
-    live = linked[picks.status.astype(str).str.strip().str.lower() != "rejected"] if "status" in picks else linked
+    live = linked[linked.status.astype(str).str.strip().str.lower() != "rejected"] if "status" in linked else linked
     phase = live.phase.astype(str).str.upper().str[0]
     counts = pd.DataFrame({"n": live.groupby("event_id").size(),
                            "p": live[phase == "P"].groupby("event_id").size(),
@@ -77,23 +77,50 @@ def process_metrics(run_dir: Path, leakage_patterns: Iterable[str]) -> dict:
            "cached_input_tokens": totals.get("cached_input_tokens"), "output_tokens": totals.get("output_tokens"),
            "compactions": usage.get("event_counts", {}).get("system/compact_boundary"),
            "long_tool_runs": len(timeline.get("tool_runs_over_300s", [])) if timeline else None}
-    out["leakage"] = scan_transcript(record / "execution.jsonl", leakage_patterns)
+    if out["elapsed_s"] is None and result.get("started_at") and result.get("finished_at"):
+        span = pd.Timestamp(result["finished_at"]) - pd.Timestamp(result["started_at"])
+        out["elapsed_s"] = round(span.total_seconds(), 1)  # records written before elapsed_s existed
+    out["leakage"] = scan_transcript(record / "execution.jsonl", leakage_patterns, run_dir)
     return out
 
 
-def scan_transcript(path: Path, patterns: Iterable[str]) -> dict:
-    """URLs seen in the transcript and hits of the case's withheld-product patterns."""
-    compiled = [(p, re.compile(p, re.IGNORECASE)) for p in patterns]
-    if not path.is_file():
-        return {"scanned": False, "flag": None, "urls": [], "hits": {}}
-    urls, hits = set(), {}
+def tool_inputs(path: Path):
+    """Yield (line number, JSON text) of every tool call the Agent made (its accesses)."""
     with path.open(encoding="utf-8", errors="replace") as handle:
         for number, line in enumerate(handle, 1):
-            if number == 1:
-                continue  # the rendered task prompt; it names the case, never the withheld products
-            urls.update(m.rstrip(".,;") for m in URL.findall(line))
-            for raw, rx in compiled:
-                if rx.search(line):
-                    hits.setdefault(raw, []).append(number)
-    return {"scanned": True, "flag": bool(hits), "urls": sorted(urls),
-            "hits": {k: {"lines": len(v), "first_line": v[0]} for k, v in hits.items()}}
+            if '"tool_use"' not in line:
+                continue
+            try:
+                event = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            message = event.get("message") if event.get("type") == "assistant" else None
+            for item in (message or {}).get("content") or []:
+                if isinstance(item, dict) and item.get("type") == "tool_use":
+                    yield number, json.dumps(item.get("input"), ensure_ascii=False)
+
+
+ABSOLUTE_PATH = re.compile(r"(?<![\w.])/(?:[\w.@+-]+/){2,}[\w.@+-]*")
+
+
+def scan_transcript(path: Path, patterns: Iterable[str], run_dir: Path | None = None) -> dict:
+    """URLs and paths the Agent accessed (tool-call inputs) and hits of the withheld-product patterns.
+
+    Text that only appears in tool results (fetched documents, listings) is
+    not an access and is not scanned.
+    """
+    compiled = [(p, re.compile(p, re.IGNORECASE)) for p in patterns]
+    if not path.is_file():
+        return {"scanned": False, "flag": None, "urls": [], "outside_paths": [], "hits": {}}
+    urls, outside, hits = set(), set(), {}
+    own = str(run_dir.resolve()) if run_dir is not None else None
+    for number, text in tool_inputs(path):
+        urls.update(m.rstrip(".,;") for m in URL.findall(text))
+        for found in ABSOLUTE_PATH.findall(URL.sub(" ", text.replace("\\/", "/"))):
+            if own is None or not found.startswith(own):
+                outside.add("/".join(found.split("/")[:7]))
+        for raw, rx in compiled:
+            if rx.search(text):
+                hits.setdefault(raw, []).append(number)
+    return {"scanned": True, "flag": bool(hits), "urls": sorted(urls), "outside_paths": sorted(outside),
+            "hits": {k: {"calls": len(v), "first_line": v[0]} for k, v in hits.items()}}

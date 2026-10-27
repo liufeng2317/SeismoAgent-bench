@@ -31,8 +31,9 @@ leakage_patterns:
   - '10\.22002/5af05-cah73'
   - '10\.22002/f40da-hww21'
   - '10\.5066/P9JN6H0N'
-  - 'SHELLY2020|LIU2020|ROSS2019|AWR2025|USGS_SCSN_COMCAT'
-  - 'data/catalogs/'
+  - 'data/\d{4}_[a-z_]+/(data/catalogs|references|analysis)/'   # repository reference data
+  - 'tasks/\d{4}_[a-z_]+/(expert|evaluation)/'                  # expert catalogs and scores
   - 'fdsnws/event'
+  - 'isc\.ac\.uk/(iscbulletin|cgi-bin)|seismicportal\.eu'
   - 'earthquake\.usgs\.gov/(earthquakes|fdsnws)'
   - 'scedc\.caltech\.edu/(eq-catalogs|data/cat)'
