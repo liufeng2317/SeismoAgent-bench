@@ -7,6 +7,8 @@ Using the supplied waveform data and station metadata, construct an earthquake c
 
 The run-local input is available under `input/waveforms/` (`data/` for waveforms, `stations/` for station metadata).
 
+Process the half-open window `[2016-12-01T00:00:00Z, 2016-12-09T00:00:00Z)`; the catalog reports events with origin time inside it. The input may contain waveforms beyond the window.
+
 ### Required outputs
 
 Write the following machine-readable files under the output directory.

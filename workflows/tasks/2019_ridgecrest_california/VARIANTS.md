@@ -22,8 +22,8 @@ benchmark for every arm.
 
 | Variant | Task spec | Differs from `min` by | Guidance | Scope | Tool policy | Contract |
 |---|---|---|---|---|---|---|
-| `min` | `task_min.json` | — (control arm) | minimal | unspecified | unspecified | min |
-| `tools` | `task_tools.json` | + `### Tools`: local PhaseNet; GaMMA / PyOcto / REAL; NonLinLoc / HypoInverse; hypoDD / GrowClust / ccdt (picking; association; location; relocation) with validated usage docs | minimal | unspecified | local provided | min |
+| `min` | `task_min.json` | — (control arm) | minimal | stated window | unspecified | min |
+| `tools` | `task_tools.json` | + `### Tools`: local PhaseNet; GaMMA / PyOcto / REAL; NonLinLoc / HypoInverse; hypoDD / GrowClust / ccdt (picking; association; location; relocation) with validated usage docs | minimal | stated window | local provided | min |
 | `guided` | `task_guided.json` | + expert scaffolding: fixed three-day window, pipeline stages, QC gates, tuning discipline, report | expert-scaffolded | fixed window | neutral public | default |
 
 Contracts: `output_contract_min.json` (picks + catalog) and
@@ -31,13 +31,15 @@ Contracts: `output_contract_min.json` (picks + catalog) and
 
 ## Design decisions
 
-- **Scope.** `min` and `tools` deliberately do not state a processing window:
-  self-scoping is part of what Q1 measures, and adding a window to `tools`
-  would confound the Q2 contrast. `guided`'s fixed window
-  `[2019-07-04T00:00:00Z, 2019-07-07T00:00:00Z)` is itself part of the
-  expert-experience treatment. All arms are scored on the same evaluation
-  window, so differences in processed scope do not break comparability of the
-  scores.
+- **Scope.** Every arm states the processing window
+  `[2019-07-04T00:00:00Z, 2019-07-07T00:00:00Z)`: it is part of the task definition, not expert
+  guidance, and the supplied `waveform_inventory.json` names it anyway.
+  Before 2026-10-28 `min` and `tools` left it to self-scoping; an
+  unstated window measured whether the Agent read the inventory (and,
+  where the input holds more days than the window, how much budget it
+  spent outside it) rather than scientific judgement. `guided` adds the
+  daily-file mapping and the margin rule. All arms are scored on the
+  same evaluation window.
 - **What ships with tools.** The `tools` arm carries the tools' validated
   usage notes (the PhaseNet example, the 100 Hz resampling rule) because they
   are part of the tool package. The legacy variant's workflow mandates
@@ -74,9 +76,8 @@ and are scored with the summary command.
 
 ## Cost and sequencing
 
-Fixed-window guidance (`guided`) and, in practice, the self-scoped arms
-process days of waveform data (≈5 GB for three days) on CPU-only hardware
-and fit the default budget. The 2026-10-13 legacy-baseline claude run
+Every arm processes the three-day window (≈5 GB; the input holds 23 days)
+on CPU-only hardware and fits the default budget. The 2026-10-13 legacy-baseline claude run
 completed a self-scoped three-day build in 3 h 09 m / $19.45, which doubles
 as the pipeline-validation record.
 

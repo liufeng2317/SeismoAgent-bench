@@ -7,6 +7,8 @@ Using the supplied waveform data and station metadata, construct an earthquake c
 
 The run-local input is available under `input/waveforms/` (`data/` for waveforms, `stations/` for station metadata).
 
+Process the half-open window `[2020-03-18T00:00:00Z, 2020-03-26T00:00:00Z)`; the catalog reports events with origin time inside it. The input may contain waveforms beyond the window.
+
 ### Tools
 
 The tools base directory is TOOLS_BASE_PATH=`/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismotools/`. The supplied implementations may be used through their standard execution paths. Before calling a tool, read its README, the relevant guidance under its `docs/` directory and the validated executable examples under its `examples/` directory, and use those materials to determine the method, parameters, input preparation and output interpretation.

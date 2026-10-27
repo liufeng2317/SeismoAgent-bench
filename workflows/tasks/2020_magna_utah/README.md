@@ -47,7 +47,7 @@ PhaseNet, GaMMA, NonLinLoc and hypoDD.
 
 The dataset is an eight-day window (~11 GB, 1,184 daily per-channel MiniSEED
 files, 47 short-period stations of the Salt Lake Valley area — the 2019
-Ridgecrest case carried three days / ~5 GB), so self-scoped arms process a
+Ridgecrest case carried three days / ~5 GB), so every arm processes a
 meaningfully larger volume than in the first case. The runner's wall-clock
 budget defaults to twenty-four hours (`tools` forty-eight, because its
 science stages are the long pole). Override with `TIMEOUT`, in seconds, when
