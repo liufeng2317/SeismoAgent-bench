@@ -1,8 +1,8 @@
 {
  "metrics_version": 1,
- "scorer_commit": "0645ffc09bb062c5ed99a2b1b8306fb405e411b8",
+ "scorer_commit": "f273f98c3a98f917a07d8f5fdb94190493999796",
  "scorer_dirty": false,
- "generated_utc": "2026-10-27T05:52:15+00:00",
+ "generated_utc": "2026-10-27T19:51:19+00:00",
  "task": "2019_ridgecrest_california",
  "configurations": [
   {
@@ -39,14 +39,14 @@
      "epi_mean_M4": 1.6622,
      "epi_mean_M5": 0.9422,
      "epi_median_km": 2.2264,
-     "f1_M2": 0.3554,
-     "f1_M3": 0.4158,
+     "f1_M2": 0.3551,
+     "f1_M3": 0.4152,
      "f1_M4": 0.5709,
      "f1_M5": 1.0,
      "off_structure_after_shift": 0.1943,
      "off_structure_fraction": 0.197,
-     "precision_M2": 0.8347,
-     "precision_M3": 0.8398,
+     "precision_M2": 0.8311,
+     "precision_M3": 0.8355,
      "precision_M4": 0.8889,
      "precision_M5": 1.0,
      "recall": 0.1487,
@@ -59,7 +59,7 @@
      "recall_other": 0.1542,
      "scatter_median_km": 2.2107,
      "shift_km": 0.4173,
-     "union_support": 0.848
+     "union_support": 0.846
     }
    ],
    "metrics": {
@@ -202,15 +202,15 @@
      "n": 1
     },
     "f1_M2": {
-     "mean": 0.3554,
-     "min": 0.3554,
-     "max": 0.3554,
+     "mean": 0.3551,
+     "min": 0.3551,
+     "max": 0.3551,
      "n": 1
     },
     "f1_M3": {
-     "mean": 0.4158,
-     "min": 0.4158,
-     "max": 0.4158,
+     "mean": 0.4152,
+     "min": 0.4152,
+     "max": 0.4152,
      "n": 1
     },
     "f1_M4": {
@@ -238,15 +238,15 @@
      "n": 1
     },
     "precision_M2": {
-     "mean": 0.8347,
-     "min": 0.8347,
-     "max": 0.8347,
+     "mean": 0.8311,
+     "min": 0.8311,
+     "max": 0.8311,
      "n": 1
     },
     "precision_M3": {
-     "mean": 0.8398,
-     "min": 0.8398,
-     "max": 0.8398,
+     "mean": 0.8355,
+     "min": 0.8355,
+     "max": 0.8355,
      "n": 1
     },
     "precision_M4": {
@@ -322,9 +322,9 @@
      "n": 1
     },
     "union_support": {
-     "mean": 0.848,
-     "min": 0.848,
-     "max": 0.848,
+     "mean": 0.846,
+     "min": 0.846,
+     "max": 0.846,
      "n": 1
     }
    },
@@ -381,15 +381,15 @@
      "epi_mean_M4": 3.7651,
      "epi_mean_M5": 3.1375,
      "epi_median_km": 4.6748,
-     "f1_M2": 0.5113,
-     "f1_M3": 0.5241,
-     "f1_M4": 0.5544,
+     "f1_M2": 0.5097,
+     "f1_M3": 0.5216,
+     "f1_M4": 0.5484,
      "f1_M5": 0.6275,
      "off_structure_after_shift": 0.4057,
      "off_structure_fraction": 0.442,
-     "precision_M2": 0.5789,
-     "precision_M3": 0.5698,
-     "precision_M4": 0.5763,
+     "precision_M2": 0.5748,
+     "precision_M3": 0.564,
+     "precision_M4": 0.5636,
      "precision_M5": 0.5161,
      "recall": 0.3394,
      "recall_M2": 0.4578,
@@ -401,7 +401,7 @@
      "recall_other": 0.3466,
      "scatter_median_km": 3.2662,
      "shift_km": 3.6212,
-     "union_support": 0.5655
+     "union_support": 0.5633
     }
    ],
    "metrics": {
@@ -544,21 +544,21 @@
      "n": 1
     },
     "f1_M2": {
-     "mean": 0.5113,
-     "min": 0.5113,
-     "max": 0.5113,
+     "mean": 0.5097,
+     "min": 0.5097,
+     "max": 0.5097,
      "n": 1
     },
     "f1_M3": {
-     "mean": 0.5241,
-     "min": 0.5241,
-     "max": 0.5241,
+     "mean": 0.5216,
+     "min": 0.5216,
+     "max": 0.5216,
      "n": 1
     },
     "f1_M4": {
-     "mean": 0.5544,
-     "min": 0.5544,
-     "max": 0.5544,
+     "mean": 0.5484,
+     "min": 0.5484,
+     "max": 0.5484,
      "n": 1
     },
     "f1_M5": {
@@ -580,21 +580,21 @@
      "n": 1
     },
     "precision_M2": {
-     "mean": 0.5789,
-     "min": 0.5789,
-     "max": 0.5789,
+     "mean": 0.5748,
+     "min": 0.5748,
+     "max": 0.5748,
      "n": 1
     },
     "precision_M3": {
-     "mean": 0.5698,
-     "min": 0.5698,
-     "max": 0.5698,
+     "mean": 0.564,
+     "min": 0.564,
+     "max": 0.564,
      "n": 1
     },
     "precision_M4": {
-     "mean": 0.5763,
-     "min": 0.5763,
-     "max": 0.5763,
+     "mean": 0.5636,
+     "min": 0.5636,
+     "max": 0.5636,
      "n": 1
     },
     "precision_M5": {
@@ -664,9 +664,9 @@
      "n": 1
     },
     "union_support": {
-     "mean": 0.5655,
-     "min": 0.5655,
-     "max": 0.5655,
+     "mean": 0.5633,
+     "min": 0.5633,
+     "max": 0.5633,
      "n": 1
     }
    },
@@ -723,14 +723,14 @@
      "epi_mean_M4": 1.6652,
      "epi_mean_M5": 1.05,
      "epi_median_km": 1.6304,
-     "f1_M2": 0.843,
-     "f1_M3": 0.8486,
+     "f1_M2": 0.8409,
+     "f1_M3": 0.846,
      "f1_M4": 0.9019,
      "f1_M5": 1.0,
      "off_structure_after_shift": 0.1414,
      "off_structure_fraction": 0.1366,
-     "precision_M2": 0.8442,
-     "precision_M3": 0.8738,
+     "precision_M2": 0.84,
+     "precision_M3": 0.8683,
      "precision_M4": 0.8947,
      "precision_M5": 1.0,
      "recall": 0.7854,
@@ -743,7 +743,7 @@
      "recall_other": 0.7862,
      "scatter_median_km": 1.0432,
      "shift_km": 1.1423,
-     "union_support": 0.8511
+     "union_support": 0.8487
     }
    ],
    "metrics": {
@@ -886,15 +886,15 @@
      "n": 1
     },
     "f1_M2": {
-     "mean": 0.843,
-     "min": 0.843,
-     "max": 0.843,
+     "mean": 0.8409,
+     "min": 0.8409,
+     "max": 0.8409,
      "n": 1
     },
     "f1_M3": {
-     "mean": 0.8486,
-     "min": 0.8486,
-     "max": 0.8486,
+     "mean": 0.846,
+     "min": 0.846,
+     "max": 0.846,
      "n": 1
     },
     "f1_M4": {
@@ -922,15 +922,15 @@
      "n": 1
     },
     "precision_M2": {
-     "mean": 0.8442,
-     "min": 0.8442,
-     "max": 0.8442,
+     "mean": 0.84,
+     "min": 0.84,
+     "max": 0.84,
      "n": 1
     },
     "precision_M3": {
-     "mean": 0.8738,
-     "min": 0.8738,
-     "max": 0.8738,
+     "mean": 0.8683,
+     "min": 0.8683,
+     "max": 0.8683,
      "n": 1
     },
     "precision_M4": {
@@ -1006,9 +1006,9 @@
      "n": 1
     },
     "union_support": {
-     "mean": 0.8511,
-     "min": 0.8511,
-     "max": 0.8511,
+     "mean": 0.8487,
+     "min": 0.8487,
+     "max": 0.8487,
      "n": 1
     }
    },

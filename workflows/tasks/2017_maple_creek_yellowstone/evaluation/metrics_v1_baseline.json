@@ -1,8 +1,8 @@
 {
  "metrics_version": 1,
- "scorer_commit": "0645ffc09bb062c5ed99a2b1b8306fb405e411b8",
+ "scorer_commit": "f273f98c3a98f917a07d8f5fdb94190493999796",
  "scorer_dirty": false,
- "generated_utc": "2026-10-27T05:50:30+00:00",
+ "generated_utc": "2026-10-27T19:49:26+00:00",
  "task": "2017_maple_creek_yellowstone",
  "references": {
   "comcat": {
@@ -22,8 +22,8 @@
  },
  "expert": {
   "final": {
-   "path": "expert/export/r9/60_catalog/catalog_events.csv",
-   "events": 12424
+   "path": "expert/export/r11/60_catalog/catalog_events.csv",
+   "events": 12422
   },
   "blind": {
    "path": "expert/export/r1/04_locate_nonlinloc/full/events.csv",
@@ -533,8 +533,8 @@
    }
   },
   "expert_final": {
-   "events": 12424,
-   "located": 12424,
+   "events": 12422,
+   "located": 12422,
    "versus": {
     "comcat": {
      "gates": [
@@ -656,9 +656,9 @@
      ],
      "roles": "D",
      "detection": {
-      "matched": 10264,
+      "matched": 10263,
       "reference_events": 18062,
-      "recall": 0.5683,
+      "recall": 0.5682,
       "chance": 1032,
       "recall_net": 0.5111,
       "recall_by_mag": [
@@ -720,7 +720,7 @@
        {
         "magnitude_from": 3.0,
         "events": 17,
-        "recall": 0.5882
+        "recall": 0.5294
        },
        {
         "magnitude_from": 3.5,
@@ -743,11 +743,11 @@
     }
    },
    "union_support": {
-    "fraction": 0.7486,
-    "fraction_raw": 0.8267,
-    "supported": 10271,
+    "fraction": 0.7487,
+    "fraction_raw": 0.8268,
+    "supported": 10270,
     "chance": 970,
-    "events": 12424,
+    "events": 12422,
     "members": [
      "comcat",
      "shelly"
@@ -755,7 +755,7 @@
    },
    "off_structure": {
     "fraction": 0.0028,
-    "events": 12424,
+    "events": 12422,
     "radius_km": 1.0,
     "members": [
      "comcat"
@@ -763,7 +763,7 @@
    },
    "off_structure_after_shift": {
     "fraction": 0.0019,
-    "events": 12424,
+    "events": 12422,
     "radius_km": 1.0,
     "members": [
      "comcat"
@@ -771,7 +771,7 @@
    },
    "local_thickness_km": 0.0023,
    "depth_profile": {
-    "events": 12424,
+    "events": 12422,
     "p05_km": 4.3575,
     "p50_km": 6.485,
     "p95_km": 7.9212,
@@ -792,11 +792,11 @@
       "reference_events": 57,
       "matched": 57,
       "recall": 1.0,
-      "candidate_events": 32,
+      "candidate_events": 31,
       "precision": 1.0,
       "f1": 1.0,
       "precision_unaligned": 1.0,
-      "precision_authority_only": 0.9062,
+      "precision_authority_only": 0.9355,
       "dt_s": {
        "n": 57,
        "mean": 0.0754,
@@ -820,10 +820,10 @@
       },
       "dmag": {
        "n": 57,
-       "mean": -0.2521,
+       "mean": -0.2399,
        "median": -0.252,
-       "std": 0.1626,
-       "abs_p90": 0.4208
+       "std": 0.1372,
+       "abs_p90": 0.4114
       }
      },
      "M3": {
@@ -858,10 +858,10 @@
       },
       "dmag": {
        "n": 5,
-       "mean": -0.4374,
-       "median": -0.328,
-       "std": 0.2688,
-       "abs_p90": 0.71
+       "mean": -0.2984,
+       "median": -0.316,
+       "std": 0.0899,
+       "abs_p90": 0.3862
       },
       "events": [
        {
@@ -870,11 +870,11 @@
         "reference_magnitude": 4.36,
         "matched": true,
         "candidate_event_id": "gamma_0000567",
-        "candidate_magnitude": 3.46,
+        "candidate_magnitude": 4.15,
         "dt_s": 0.012,
         "epi_km": 0.936,
         "dz_km": 1.419,
-        "dmag": -0.9
+        "dmag": -0.205
        },
        {
         "reference_event_id": "uu60202047",
@@ -930,11 +930,11 @@
       "reference_events": 1,
       "matched": 1,
       "recall": 1.0,
-      "candidate_events": 0,
-      "precision": null,
-      "f1": null,
-      "precision_unaligned": null,
-      "precision_authority_only": null,
+      "candidate_events": 1,
+      "precision": 1.0,
+      "f1": 1.0,
+      "precision_unaligned": 1.0,
+      "precision_authority_only": 1.0,
       "dt_s": {
        "n": 1,
        "mean": 0.0116,
@@ -958,10 +958,10 @@
       },
       "dmag": {
        "n": 1,
-       "mean": -0.9,
-       "median": -0.9,
+       "mean": -0.2052,
+       "median": -0.2052,
        "std": null,
-       "abs_p90": 0.9
+       "abs_p90": 0.2052
       },
       "events": [
        {
@@ -970,11 +970,11 @@
         "reference_magnitude": 4.36,
         "matched": true,
         "candidate_event_id": "gamma_0000567",
-        "candidate_magnitude": 3.46,
+        "candidate_magnitude": 4.15,
         "dt_s": 0.012,
         "epi_km": 0.936,
         "dz_km": 1.419,
-        "dmag": -0.9
+        "dmag": -0.205
        }
       ]
      }
@@ -985,18 +985,18 @@
     "pairs": 616,
     "dmag": {
      "n": 616,
-     "mean": 0.1204,
+     "mean": 0.1215,
      "median": 0.1525,
-     "std": 0.2898,
-     "abs_p90": 0.4875,
+     "std": 0.2872,
+     "abs_p90": 0.4855,
      "mad": 0.227
     },
-    "dmag_slope_per_unit": -0.3164,
+    "dmag_slope_per_unit": -0.3083,
     "candidate": {
      "mc": -0.2,
-     "b": 1.029,
+     "b": 1.031,
      "b_sigma": 0.015,
-     "n": 5318
+     "n": 5316
     },
     "authority_mfd": {
      "mc": 0.7,
@@ -1004,7 +1004,7 @@
      "b_sigma": 0.026,
      "n": 368
     },
-    "b_difference": 0.425
+    "b_difference": 0.427
    },
    "time": {
     "reference": "comcat",
@@ -1065,7 +1065,7 @@
     "recall": 0.9888,
     "ceiling": 0.8562,
     "recall_norm": 1.1549,
-    "union_support": 0.7486,
+    "union_support": 0.7487,
     "epi_median_km": 0.895,
     "shift_km": 0.5934,
     "scatter_median_km": 0.6628,
@@ -1081,23 +1081,23 @@
     "f1_M2": 1.0,
     "epi_mean_M2": 1.4778,
     "dt_mean_M2": 0.0754,
-    "dmag_mean_M2": -0.2521,
+    "dmag_mean_M2": -0.2399,
     "recall_M3": 1.0,
     "precision_M3": 1.0,
     "f1_M3": 1.0,
     "epi_mean_M3": 1.3615,
     "dt_mean_M3": 0.1156,
-    "dmag_mean_M3": -0.4374,
+    "dmag_mean_M3": -0.2984,
     "recall_M4": 1.0,
-    "precision_M4": null,
-    "f1_M4": null,
+    "precision_M4": 1.0,
+    "f1_M4": 1.0,
     "epi_mean_M4": 0.9362,
     "dt_mean_M4": 0.0116,
-    "dmag_mean_M4": -0.9,
+    "dmag_mean_M4": -0.2052,
     "dmag_median": 0.1525,
-    "dmag_std": 0.2898,
-    "dmag_slope_per_unit": -0.3164,
-    "b_difference": 0.425,
+    "dmag_std": 0.2872,
+    "dmag_slope_per_unit": -0.3083,
+    "b_difference": 0.427,
     "dt_mean_s": -0.0767,
     "dt_std_s": 0.1975,
     "recall_after_large": 1.0,

@@ -1,8 +1,8 @@
 {
  "metrics_version": 1,
- "scorer_commit": "0645ffc09bb062c5ed99a2b1b8306fb405e411b8",
+ "scorer_commit": "f273f98c3a98f917a07d8f5fdb94190493999796",
  "scorer_dirty": false,
- "generated_utc": "2026-10-27T05:49:59+00:00",
+ "generated_utc": "2026-10-27T19:48:51+00:00",
  "task": "2011_prague_oklahoma",
  "references": {
   "cochran": {
@@ -39,8 +39,8 @@
  },
  "expert": {
   "final": {
-   "path": "expert/export/r5/60_catalog/catalog_events.csv",
-   "events": 6768
+   "path": "expert/export/r7/60_catalog/catalog_events.csv",
+   "events": 6767
   },
   "blind": {
    "path": "expert/export/r1/04_locate_nonlinloc/full/events.csv",
@@ -1537,8 +1537,8 @@
    }
   },
   "expert_final": {
-   "events": 6768,
-   "located": 6768,
+   "events": 6767,
+   "located": 6767,
    "versus": {
     "cochran": {
      "gates": [
@@ -1757,15 +1757,15 @@
      "location": {
       "pairs": 6,
       "epi_median_km": 0.3164,
-      "epi_p90_km": 0.4537,
+      "epi_p90_km": 0.4836,
       "epi_gt2km": 0.0,
       "epi_gt5km": 0.0,
       "shift_east_km": 0.0866,
       "shift_north_km": -0.2277,
       "shift_km": 0.2436,
       "scatter_median_km": 0.2285,
-      "scatter_p90_km": 0.4067,
-      "dt_median_s": 28.9574,
+      "scatter_p90_km": 0.4607,
+      "dt_median_s": 28.5467,
       "depth_pairs": 6,
       "dz_median_km": -1.6125,
       "dz_mad_km": 0.2588,
@@ -1798,7 +1798,7 @@
     "fraction_raw": 0.4671,
     "supported": 3161,
     "chance": 0,
-    "events": 6768,
+    "events": 6767,
     "members": [
      "cochran",
      "mcmahon"
@@ -1806,7 +1806,7 @@
    },
    "off_structure": {
     "fraction": 0.0004,
-    "events": 6768,
+    "events": 6767,
     "radius_km": 1.0,
     "members": [
      "cochran",
@@ -1815,7 +1815,7 @@
    },
    "off_structure_after_shift": {
     "fraction": 0.0004,
-    "events": 6768,
+    "events": 6767,
     "radius_km": 1.0,
     "members": [
      "cochran",
@@ -1824,14 +1824,14 @@
    },
    "local_thickness_km": 0.0403,
    "depth_profile": {
-    "events": 6768,
+    "events": 6767,
     "p05_km": 1.5,
     "p50_km": 3.5013,
-    "p95_km": 6.8682,
+    "p95_km": 6.8697,
     "mode_km": 2.0,
     "mode_share": 0.0907,
     "band_top_km": 1.81,
-    "band_share": 0.3017,
+    "band_share": 0.3016,
     "datum_known": true
    },
    "magnitude_coverage": 0.9975,
@@ -1845,11 +1845,11 @@
       "reference_events": 60,
       "matched": 60,
       "recall": 1.0,
-      "candidate_events": 69,
-      "precision": 0.9855,
-      "f1": 0.9927,
-      "precision_unaligned": 0.9783,
-      "precision_authority_only": 0.8551,
+      "candidate_events": 68,
+      "precision": 1.0,
+      "f1": 1.0,
+      "precision_unaligned": 1.0,
+      "precision_authority_only": 0.8676,
       "dt_s": {
        "n": 60,
        "mean": 0.0586,
@@ -1959,9 +1959,9 @@
     "dmag_slope_per_unit": -0.2165,
     "candidate": {
      "mc": -0.3,
-     "b": 0.947,
+     "b": 0.948,
      "b_sigma": 0.016,
-     "n": 4039
+     "n": 4038
     },
     "authority_mfd": {
      "mc": 0.4,
@@ -1969,7 +1969,7 @@
      "b_sigma": 0.02,
      "n": 898
     },
-    "b_difference": 0.259
+    "b_difference": 0.26
    },
    "time": {
     "reference": "cochran",
@@ -2043,12 +2043,12 @@
     "dz_median_km": 0.1211,
     "depth_datum_known": true,
     "depth_mode_share": 0.0907,
-    "depth_band_share": 0.3017,
+    "depth_band_share": 0.3016,
     "off_structure_fraction": 0.0004,
     "off_structure_after_shift": 0.0004,
     "recall_M2": 1.0,
-    "precision_M2": 0.9855,
-    "f1_M2": 0.9927,
+    "precision_M2": 1.0,
+    "f1_M2": 1.0,
     "epi_mean_M2": 0.7069,
     "dt_mean_M2": 0.0586,
     "dmag_mean_M2": -0.324,
@@ -2061,7 +2061,7 @@
     "dmag_median": -0.23,
     "dmag_std": 0.3737,
     "dmag_slope_per_unit": -0.2165,
-    "b_difference": 0.259,
+    "b_difference": 0.26,
     "dt_mean_s": 0.0541,
     "dt_std_s": 0.3239,
     "recall_after_large": 0.9583,
