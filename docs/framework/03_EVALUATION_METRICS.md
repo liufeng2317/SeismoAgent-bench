@@ -57,14 +57,14 @@ detection and location references (bold) feed the headline metrics.
 |---|---|---|---|
 | Ridgecrest 2019 | **Shelly 2020** | D L S M | template matching; primary |
 | | Ross 2019 (QTM relocated subset) | D L S | |
-| | Liu 2020 | D L | ML picker + GaMMA |
+| | Liu 2020 | D L S | ML picker + GaMMA, relocated |
 | | AWR 2025 v2 | D | long-term GaMMA |
 | | ComCat (SCSN) | D L M | operational |
 | Magna 2020 | **Pang 2020** | D L S M | relocated; primary |
 | | Baker & Whidden 2021 | D P | picks collapsed to events; depth datum unknown → no L depth |
 | | ComCat (UUSS) | D L M | operational |
 | Prague 2011 | **Cochran 2020** | D L S M | template-enhanced relocated; primary |
-| | McMahon 2017 | D | subspace detections |
+| | McMahon 2017 | D S | subspace detections, Bayesloc |
 | | Isken & Mooney 2017 | L | 6 M > 3 manual relocations; 60 s / 5 km gates |
 | | ComCat | M | 11 events; auxiliary |
 | Maple Creek 2017 | **ComCat (UUSS)** | D L S M | only located reference; primary |
@@ -122,9 +122,9 @@ stated surface datum convertible with the case's model datum).
 | `recall[R]` | matched / N_R, for every D reference |
 | **`recall_norm[R]`** | `recall[R] / ceiling(R)` — headline for the primary detection reference |
 | `recall_by_mag[R]` | recall in 0.5-unit bins of the reference magnitude |
-| `M90[R]` | lowest reference magnitude M such that recall of reference events with magnitude ≥ M is ≥ 0.9 (calibration-free completeness proxy; undefined if never reached) |
+| `M90[R]` | lowest reference magnitude M (taken from the reference's own magnitudes, to 0.1) such that recall of reference events with magnitude ≥ M is ≥ 0.9, over at least 10 events (calibration-free completeness proxy; undefined if never reached) |
 | `event_ratio` | scored Agent events / N of the primary detection reference |
-| **`union_support`** | fraction of scored Agent events matched (primary gates) to at least one event of U = all D references ∪ expert (final) — headline precision proxy |
+| **`union_support`** | fraction of scored Agent events matched (primary gates) to at least one event of U = all located D references ∪ expert (final) — headline precision proxy. Time-only references are not members (their chance coincidences cannot be removed per event); for expert and reference rows U excludes the row itself and the expert |
 | `audited_false_rate` | see below |
 
 **Audit of unsupported events.** From each scored run, draw a stratified
@@ -150,7 +150,7 @@ versions.
 | Metric | Definition |
 |---|---|
 | `pair_distance_error[R]` | for each matched event, its 10 nearest matched neighbours in the reference within 5 km; median of |d_Agent − d_ref| over these pairs (3-D distances). Insensitive to a common frame shift |
-| `off_structure_fraction` | fraction of scored Agent events farther than r_off (hypocentral) from every event of the case's S references; r_off = 1 km (Kaikōura 5 km). The same value for each reference and the expert is reported alongside |
+| `off_structure_fraction` | fraction of located scored Agent events whose epicentre is farther than r_off from every epicentre of the case's S references (epicentral, so depth errors — scored by L2 — and unknown datums do not enter); r_off = 1 km (Kaikōura 5 km). The same value for each reference (against the other S references) and the expert is reported alongside |
 | `local_thickness` | median over events of the minor-axis standard deviation of the 20 nearest neighbours; reported with the reference value of the same region |
 
 ### L4 — Magnitude (M references, matched pairs with magnitudes)

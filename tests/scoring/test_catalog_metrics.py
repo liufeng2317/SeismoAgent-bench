@@ -1,0 +1,100 @@
+"""Pre-registered catalog metrics v1: matching and metric semantics on synthetic catalogs."""
+
+import unittest
+
+import numpy as np
+import pandas as pd
+
+from SeismoAgentBench.scoring.catalog_metrics.matching import correspond, match
+from SeismoAgentBench.scoring.catalog_metrics.metrics import (
+    ceilings, m90, off_structure_fraction, pair_distance_error, union_support)
+from SeismoAgentBench.scoring.catalog_metrics.tables import Population, standardize
+
+T0 = pd.Timestamp("2020-01-01T00:00:00Z")
+CENTER = (-100.0, 40.0)
+
+
+def population(key, seconds, lat=None, lon=None, depth=None, mag=None, roles="DLS", time_only=False):
+    n = len(seconds)
+    frame = pd.DataFrame({"time": [T0 + pd.Timedelta(seconds=s) for s in seconds],
+                          "latitude": lat if lat is not None else [np.nan] * n,
+                          "longitude": lon if lon is not None else [np.nan] * n,
+                          "depth_km": depth if depth is not None else [np.nan] * n,
+                          "magnitude": mag if mag is not None else [np.nan] * n})
+    return Population(key=key, events=standardize(frame), roles=frozenset(roles), time_only=time_only)
+
+
+class MatchingTest(unittest.TestCase):
+    def test_greedy_one_to_one_prefers_the_nearer_event(self):
+        # Two candidates compete for one reference event; the nearer one wins and the
+        # other may not reuse it, even though both are inside the gates.
+        ref = population("ref", [10.0], [40.0], [-100.0])
+        cand = population("cand", [10.5, 10.1], [40.01, 40.05], [-100.0, -100.0])
+        pairs = match(cand, ref, 4.0, 15.0)
+        self.assertEqual(len(pairs), 1)
+        self.assertEqual(int(pairs.a[0]), int(np.argmin(np.abs(cand.events.latitude - 40.0))))
+
+    def test_gates_bound_time_and_distance(self):
+        ref = population("ref", [0.0, 100.0], [40.0, 40.0], [-100.0, -100.0])
+        cand = population("cand", [4.5, 100.0], [40.0, 40.2], [-100.0, -100.0])  # 4.5 s late; 22 km off
+        self.assertEqual(len(match(cand, ref, 4.0, 15.0)), 0)
+
+    def test_time_only_recall_is_chance_corrected(self):
+        # A dense time-only reference matches a random candidate by coincidence; the
+        # 60-s shifted run must remove that share.
+        rng = np.random.default_rng(1)
+        ref = population("shelly", np.sort(rng.uniform(0, 3600, 600)), roles="D", time_only=True)
+        cand = population("cand", np.sort(rng.uniform(0, 3600, 300)), [40.0] * 300, [-100.0] * 300)
+        result = correspond(cand, ref)
+        self.assertIsNone(result["gates"][1])
+        self.assertGreater(len(result["pairs"]), 0)
+        net = (len(result["pairs"]) - result["chance"]) / 600
+        self.assertLess(abs(net), 0.05)
+
+
+class MetricTest(unittest.TestCase):
+    def test_ceiling_is_the_best_other_reference(self):
+        times = np.arange(0, 1000, 10.0)
+        lat, lon = [40.0] * 100, [-100.0] * 100
+        r = population("r", times, lat, lon)
+        half = population("half", times[:50], lat[:50], lon[:50])
+        most = population("most", times[:80], lat[:80], lon[:80])
+        value = ceilings({"r": r, "half": half, "most": most})["r"]
+        self.assertEqual(value["by"], "most")
+        self.assertAlmostEqual(value["value"], 0.8)
+
+    def test_m90_is_the_lowest_magnitude_with_recall_090(self):
+        mags = np.round(np.repeat(np.arange(0.0, 3.0, 0.5), 20), 1)
+        hit = mags >= 1.0
+        self.assertEqual(m90(mags, hit), 1.0)
+        self.assertIsNone(m90(mags, np.zeros_like(hit)))
+
+    def test_pair_distance_error_ignores_a_common_frame_shift(self):
+        rng = np.random.default_rng(2)
+        n = 200
+        lat, lon = 40 + rng.normal(0, 0.01, n), -100 + rng.normal(0, 0.01, n)
+        depth = 8 + rng.normal(0, 0.5, n)
+        times = np.arange(n) * 30.0
+        ref = population("ref", times, lat, lon, depth)
+        shifted = population("cand", times, lat + 0.01, lon, depth + 1.0)  # ~1.1 km north, 1 km deeper
+        result = pair_distance_error(shifted, ref, match(shifted, ref, 4.0, 15.0), CENTER)
+        self.assertGreater(result["pairs"], 0)
+        self.assertLess(result["median_km"], 1e-6)
+
+    def test_off_structure_uses_other_references_only(self):
+        ref = population("ref", [0.0, 10.0], [40.0, 40.0], [-100.0, -100.0], [5.0, 5.0])
+        far = population("cand", [0.0], [40.1], [-100.0], [5.0])  # 11 km away
+        self.assertEqual(off_structure_fraction(far, [ref], CENTER, 1.0)["fraction"], 1.0)
+        self.assertIsNone(off_structure_fraction(ref, [ref], CENTER, 1.0)["fraction"])
+
+    def test_union_support_skips_itself_and_time_only_members(self):
+        cand = population("cand", [0.0, 50.0], [40.0, 40.0], [-100.0, -100.0])
+        located = population("loc", [0.0], [40.0], [-100.0])
+        time_only = population("tonly", [50.0], roles="D", time_only=True)
+        result = union_support(cand, [cand, located, time_only])
+        self.assertEqual(result["members"], ["loc"])
+        self.assertEqual(result["fraction"], 0.5)
+
+
+if __name__ == "__main__":
+    unittest.main()
