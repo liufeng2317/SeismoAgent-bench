@@ -1,8 +1,8 @@
 {
  "metrics_version": 1,
- "scorer_commit": "fcf4666e4212563f39e8b53d8e42c43690181f3c",
+ "scorer_commit": "9af99b32d2b6b3dc95f7caaca61478067fc04144",
  "scorer_dirty": false,
- "generated_utc": "2026-10-27T04:22:53+00:00",
+ "generated_utc": "2026-10-27T05:11:34+00:00",
  "task": "2018_kilauea_hawaii",
  "references": {
   "shelly": {
@@ -169,11 +169,26 @@
      "location": {
       "pairs": 1061,
       "epi_median_km": 1.4059,
-      "epi_p90_km": 5.6399,
+      "epi_p90_km": 5.64,
+      "epi_gt2km": 0.3619,
+      "epi_gt5km": 0.1103,
+      "shift_east_km": 0.3701,
+      "shift_north_km": 0.0224,
+      "shift_km": 0.3708,
+      "scatter_median_km": 1.275,
+      "scatter_p90_km": 5.4878,
       "dt_median_s": 0.3293,
+      "epi_median_by_period_km": [
+       2.3948,
+       2.0027,
+       0.888,
+       0.6632
+      ],
       "depth_pairs": 1061,
       "dz_median_km": 0.8247,
-      "dz_mad_km": 1.0396
+      "dz_mad_km": 1.0396,
+      "dz_gt2km": 0.3007,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 928,
@@ -348,12 +363,27 @@
      },
      "location": {
       "pairs": 276,
-      "epi_median_km": 0.5663,
+      "epi_median_km": 0.5664,
       "epi_p90_km": 1.9042,
+      "epi_gt2km": 0.0942,
+      "epi_gt5km": 0.0326,
+      "shift_east_km": 0.1461,
+      "shift_north_km": 0.1936,
+      "shift_km": 0.2425,
+      "scatter_median_km": 0.515,
+      "scatter_p90_km": 1.9263,
       "dt_median_s": 0.22,
+      "epi_median_by_period_km": [
+       0.8,
+       0.6442,
+       0.6479,
+       0.3174
+      ],
       "depth_pairs": 276,
       "dz_median_km": 0.166,
-      "dz_mad_km": 0.341
+      "dz_mad_km": 0.341,
+      "dz_gt2km": 0.0652,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 276,
@@ -403,6 +433,17 @@
     ]
    },
    "local_thickness_km": 0.0237,
+   "depth_profile": {
+    "events": 1902,
+    "p05_km": -0.5159,
+    "p50_km": 1.233,
+    "p95_km": 4.5701,
+    "mode_km": 1.57,
+    "mode_share": 0.0389,
+    "band_top_km": -0.171,
+    "band_share": 0.3896,
+    "datum_known": true
+   },
    "magnitude_coverage": 1.0
   },
   "wei": {
@@ -480,12 +521,27 @@
      },
      "location": {
       "pairs": 1060,
-      "epi_median_km": 1.4058,
-      "epi_p90_km": 5.5579,
+      "epi_median_km": 1.4059,
+      "epi_p90_km": 5.5573,
+      "epi_gt2km": 0.3613,
+      "epi_gt5km": 0.1094,
+      "shift_east_km": -0.3725,
+      "shift_north_km": -0.0213,
+      "shift_km": 0.3732,
+      "scatter_median_km": 1.2723,
+      "scatter_p90_km": 5.4208,
       "dt_median_s": 0.3292,
+      "epi_median_by_period_km": [
+       2.3948,
+       1.9941,
+       0.888,
+       0.6685
+      ],
       "depth_pairs": 1060,
       "dz_median_km": -0.8231,
-      "dz_mad_km": 1.0379
+      "dz_mad_km": 1.0379,
+      "dz_gt2km": 0.3,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 927,
@@ -660,12 +716,27 @@
      },
      "location": {
       "pairs": 414,
-      "epi_median_km": 1.066,
-      "epi_p90_km": 2.2686,
+      "epi_median_km": 1.0657,
+      "epi_p90_km": 2.2684,
+      "epi_gt2km": 0.1546,
+      "epi_gt5km": 0.029,
+      "shift_east_km": -0.2737,
+      "shift_north_km": 0.1536,
+      "shift_km": 0.3139,
+      "scatter_median_km": 0.9861,
+      "scatter_p90_km": 2.3015,
       "dt_median_s": 0.159,
+      "epi_median_by_period_km": [
+       1.2078,
+       1.1264,
+       1.0833,
+       0.7762
+      ],
       "depth_pairs": 414,
       "dz_median_km": -1.1371,
-      "dz_mad_km": 0.9011
+      "dz_mad_km": 0.9011,
+      "dz_gt2km": 0.2657,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 392,
@@ -714,7 +785,27 @@
      "matoza"
     ]
    },
+   "off_structure_after_shift": {
+    "fraction": 0.1004,
+    "events": 3627,
+    "radius_km": 1.0,
+    "members": [
+     "shelly",
+     "matoza"
+    ]
+   },
    "local_thickness_km": 0.3424,
+   "depth_profile": {
+    "events": 3627,
+    "p05_km": -2.1699,
+    "p50_km": 0.119,
+    "p95_km": 7.846,
+    "mode_km": -2.11,
+    "mode_share": 0.0306,
+    "band_top_km": -2.298,
+    "band_share": 0.3129,
+    "datum_known": true
+   },
    "magnitude_coverage": 0.8059
   },
   "matoza": {
@@ -793,11 +884,26 @@
      "location": {
       "pairs": 550,
       "epi_median_km": 0.8953,
-      "epi_p90_km": 3.4821,
+      "epi_p90_km": 3.4824,
+      "epi_gt2km": 0.1818,
+      "epi_gt5km": 0.0691,
+      "shift_east_km": -0.0788,
+      "shift_north_km": 0.1153,
+      "shift_km": 0.1396,
+      "scatter_median_km": 0.896,
+      "scatter_p90_km": 3.4607,
       "dt_median_s": 0.3645,
+      "epi_median_by_period_km": [
+       1.4154,
+       0.9809,
+       0.8201,
+       0.6383
+      ],
       "depth_pairs": 550,
       "dz_median_km": 0.956,
-      "dz_mad_km": 0.5635
+      "dz_mad_km": 0.5635,
+      "dz_gt2km": 0.1418,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 550,
@@ -910,12 +1016,27 @@
      },
      "location": {
       "pairs": 826,
-      "epi_median_km": 0.9795,
-      "epi_p90_km": 3.0556,
+      "epi_median_km": 0.9793,
+      "epi_p90_km": 3.0554,
+      "epi_gt2km": 0.1792,
+      "epi_gt5km": 0.0569,
+      "shift_east_km": 0.1868,
+      "shift_north_km": 0.1497,
+      "shift_km": 0.2394,
+      "scatter_median_km": 0.9371,
+      "scatter_p90_km": 3.1351,
       "dt_median_s": 0.1792,
+      "epi_median_by_period_km": [
+       1.0101,
+       0.9814,
+       0.9681,
+       0.9522
+      ],
       "depth_pairs": 826,
       "dz_median_km": 1.7113,
-      "dz_mad_km": 1.1068
+      "dz_mad_km": 1.1068,
+      "dz_gt2km": 0.5157,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 784,
@@ -1003,12 +1124,27 @@
      },
      "location": {
       "pairs": 457,
-      "epi_median_km": 0.7614,
+      "epi_median_km": 0.7613,
       "epi_p90_km": 1.8886,
+      "epi_gt2km": 0.0941,
+      "epi_gt5km": 0.0131,
+      "shift_east_km": -0.1633,
+      "shift_north_km": 0.156,
+      "shift_km": 0.2258,
+      "scatter_median_km": 0.6709,
+      "scatter_p90_km": 1.8747,
       "dt_median_s": 0.164,
+      "epi_median_by_period_km": [
+       0.7875,
+       0.7362,
+       0.843,
+       0.6543
+      ],
       "depth_pairs": 457,
       "dz_median_km": 1.092,
-      "dz_mad_km": 0.564
+      "dz_mad_km": 0.564,
+      "dz_gt2km": 0.151,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 457,
@@ -1057,7 +1193,27 @@
      "wei"
     ]
    },
+   "off_structure_after_shift": {
+    "fraction": 0.0039,
+    "events": 1020,
+    "radius_km": 1.0,
+    "members": [
+     "shelly",
+     "wei"
+    ]
+   },
    "local_thickness_km": 0.1975,
+   "depth_profile": {
+    "events": 1020,
+    "p05_km": -0.6712,
+    "p50_km": 1.459,
+    "p95_km": 6.2078,
+    "mode_km": 1.19,
+    "mode_share": 0.0108,
+    "band_top_km": 0.234,
+    "band_share": 0.3294,
+    "datum_known": true
+   },
    "magnitude_coverage": 1.0
   },
   "comcat": {
@@ -1135,12 +1291,27 @@
      },
      "location": {
       "pairs": 276,
-      "epi_median_km": 0.5663,
+      "epi_median_km": 0.5664,
       "epi_p90_km": 1.9042,
+      "epi_gt2km": 0.0942,
+      "epi_gt5km": 0.0326,
+      "shift_east_km": -0.1461,
+      "shift_north_km": -0.1936,
+      "shift_km": 0.2425,
+      "scatter_median_km": 0.515,
+      "scatter_p90_km": 1.9263,
       "dt_median_s": 0.22,
+      "epi_median_by_period_km": [
+       0.8,
+       0.6442,
+       0.6479,
+       0.3174
+      ],
       "depth_pairs": 276,
       "dz_median_km": -0.166,
-      "dz_mad_km": 0.341
+      "dz_mad_km": 0.341,
+      "dz_gt2km": 0.0652,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 276,
@@ -1253,12 +1424,27 @@
      },
      "location": {
       "pairs": 414,
-      "epi_median_km": 1.066,
-      "epi_p90_km": 2.2685,
+      "epi_median_km": 1.0657,
+      "epi_p90_km": 2.2684,
+      "epi_gt2km": 0.1546,
+      "epi_gt5km": 0.029,
+      "shift_east_km": 0.2737,
+      "shift_north_km": -0.1536,
+      "shift_km": 0.3139,
+      "scatter_median_km": 0.9861,
+      "scatter_p90_km": 2.3015,
       "dt_median_s": 0.159,
+      "epi_median_by_period_km": [
+       1.2078,
+       1.1264,
+       1.0833,
+       0.7762
+      ],
       "depth_pairs": 414,
       "dz_median_km": 1.1371,
-      "dz_mad_km": 0.9011
+      "dz_mad_km": 0.9011,
+      "dz_gt2km": 0.2657,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 392,
@@ -1400,7 +1586,28 @@
      "matoza"
     ]
    },
+   "off_structure_after_shift": {
+    "fraction": 0.0,
+    "events": 496,
+    "radius_km": 1.0,
+    "members": [
+     "shelly",
+     "wei",
+     "matoza"
+    ]
+   },
    "local_thickness_km": 0.3176,
+   "depth_profile": {
+    "events": 496,
+    "p05_km": -0.8625,
+    "p50_km": 0.69,
+    "p95_km": 6.2675,
+    "mode_km": -0.76,
+    "mode_share": 0.0101,
+    "band_top_km": -0.98,
+    "band_share": 0.3246,
+    "datum_known": true
+   },
    "magnitude_coverage": 1.0
   },
   "expert_final": {
@@ -1478,12 +1685,27 @@
      },
      "location": {
       "pairs": 1229,
-      "epi_median_km": 0.7551,
-      "epi_p90_km": 3.0626,
+      "epi_median_km": 0.7552,
+      "epi_p90_km": 3.0627,
+      "epi_gt2km": 0.1733,
+      "epi_gt5km": 0.0366,
+      "shift_east_km": -0.5235,
+      "shift_north_km": 0.2745,
+      "shift_km": 0.5911,
+      "scatter_median_km": 0.6655,
+      "scatter_p90_km": 2.7719,
       "dt_median_s": 0.2077,
+      "epi_median_by_period_km": [
+       1.565,
+       1.4334,
+       0.5965,
+       0.4158
+      ],
       "depth_pairs": 1229,
       "dz_median_km": 0.54,
-      "dz_mad_km": 0.4845
+      "dz_mad_km": 0.4845,
+      "dz_gt2km": 0.0797,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 960,
@@ -1598,10 +1820,25 @@
       "pairs": 2436,
       "epi_median_km": 1.4282,
       "epi_p90_km": 5.0158,
+      "epi_gt2km": 0.3842,
+      "epi_gt5km": 0.101,
+      "shift_east_km": -0.0347,
+      "shift_north_km": 0.5042,
+      "shift_km": 0.5054,
+      "scatter_median_km": 1.3355,
+      "scatter_p90_km": 4.8643,
       "dt_median_s": 0.2374,
+      "epi_median_by_period_km": [
+       1.3878,
+       1.8546,
+       1.521,
+       1.0554
+      ],
       "depth_pairs": 2436,
       "dz_median_km": 1.9976,
-      "dz_mad_km": 1.2642
+      "dz_mad_km": 1.2642,
+      "dz_gt2km": 0.5698,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 1461,
@@ -1776,12 +2013,27 @@
      },
      "location": {
       "pairs": 458,
-      "epi_median_km": 1.0588,
-      "epi_p90_km": 2.547,
+      "epi_median_km": 1.0589,
+      "epi_p90_km": 2.5471,
+      "epi_gt2km": 0.2096,
+      "epi_gt5km": 0.0131,
+      "shift_east_km": -0.2669,
+      "shift_north_km": 0.7356,
+      "shift_km": 0.7825,
+      "scatter_median_km": 0.7647,
+      "scatter_p90_km": 1.9384,
       "dt_median_s": 0.0996,
+      "epi_median_by_period_km": [
+       1.1588,
+       1.1023,
+       1.1317,
+       0.6783
+      ],
       "depth_pairs": 458,
       "dz_median_km": 1.105,
-      "dz_mad_km": 0.5575
+      "dz_mad_km": 0.5575,
+      "dz_gt2km": 0.2904,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 390,
@@ -1832,15 +2084,44 @@
      "matoza"
     ]
    },
+   "off_structure_after_shift": {
+    "fraction": 0.001,
+    "events": 5245,
+    "radius_km": 1.0,
+    "members": [
+     "shelly",
+     "wei",
+     "matoza"
+    ]
+   },
    "local_thickness_km": 0.1379,
+   "depth_profile": {
+    "events": 5245,
+    "p05_km": -0.5388,
+    "p50_km": 1.96,
+    "p95_km": 9.96,
+    "mode_km": 1.96,
+    "mode_share": 0.0595,
+    "band_top_km": 0.4612,
+    "band_share": 0.2576,
+    "datum_known": true
+   },
    "magnitude_coverage": 0.6768,
    "headline": {
     "recall": 0.6462,
     "ceiling": 0.5573,
     "recall_norm": 1.1595,
     "union_support": 0.5346,
-    "epi_median_km": 0.7551,
-    "off_structure_fraction": 0.0019
+    "epi_median_km": 0.7552,
+    "shift_km": 0.5911,
+    "scatter_median_km": 0.6655,
+    "epi_gt5km": 0.0366,
+    "dz_median_km": 0.54,
+    "depth_datum_known": true,
+    "depth_mode_share": 0.0595,
+    "depth_band_share": 0.2576,
+    "off_structure_fraction": 0.0019,
+    "off_structure_after_shift": 0.001
    }
   },
   "expert_blind": {
@@ -1919,11 +2200,26 @@
      "location": {
       "pairs": 982,
       "epi_median_km": 0.784,
-      "epi_p90_km": 3.6958,
+      "epi_p90_km": 3.6959,
+      "epi_gt2km": 0.2006,
+      "epi_gt5km": 0.0723,
+      "shift_east_km": -0.356,
+      "shift_north_km": 0.2383,
+      "shift_km": 0.4284,
+      "scatter_median_km": 0.7394,
+      "scatter_p90_km": 3.6297,
       "dt_median_s": 0.2112,
+      "epi_median_by_period_km": [
+       1.416,
+       1.4926,
+       0.5375,
+       0.4461
+      ],
       "depth_pairs": 982,
       "dz_median_km": 0.6147,
-      "dz_mad_km": 0.6077
+      "dz_mad_km": 0.6077,
+      "dz_gt2km": 0.1365,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 0,
@@ -2030,12 +2326,27 @@
      },
      "location": {
       "pairs": 2046,
-      "epi_median_km": 1.3828,
-      "epi_p90_km": 5.0528,
+      "epi_median_km": 1.3829,
+      "epi_p90_km": 5.0525,
+      "epi_gt2km": 0.3631,
+      "epi_gt5km": 0.1022,
+      "shift_east_km": -0.0384,
+      "shift_north_km": 0.4518,
+      "shift_km": 0.4534,
+      "scatter_median_km": 1.2957,
+      "scatter_p90_km": 4.8085,
       "dt_median_s": 0.2263,
+      "epi_median_by_period_km": [
+       1.2709,
+       1.7605,
+       1.6087,
+       1.0334
+      ],
       "depth_pairs": 2046,
       "dz_median_km": 1.9453,
-      "dz_mad_km": 1.2529
+      "dz_mad_km": 1.2529,
+      "dz_gt2km": 0.5674,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 0,
@@ -2198,12 +2509,27 @@
      },
      "location": {
       "pairs": 446,
-      "epi_median_km": 1.0975,
-      "epi_p90_km": 2.5767,
+      "epi_median_km": 1.0976,
+      "epi_p90_km": 2.5765,
+      "epi_gt2km": 0.2108,
+      "epi_gt5km": 0.0179,
+      "shift_east_km": -0.2626,
+      "shift_north_km": 0.715,
+      "shift_km": 0.7617,
+      "scatter_median_km": 0.7616,
+      "scatter_p90_km": 2.025,
       "dt_median_s": 0.1111,
+      "epi_median_by_period_km": [
+       1.3575,
+       1.169,
+       1.0361,
+       0.7117
+      ],
       "depth_pairs": 446,
       "dz_median_km": 1.0775,
-      "dz_mad_km": 0.6181
+      "dz_mad_km": 0.6181,
+      "dz_gt2km": 0.2937,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 0,
@@ -2248,7 +2574,28 @@
      "matoza"
     ]
    },
+   "off_structure_after_shift": {
+    "fraction": 0.0014,
+    "events": 2875,
+    "radius_km": 1.0,
+    "members": [
+     "shelly",
+     "wei",
+     "matoza"
+    ]
+   },
    "local_thickness_km": 0.2766,
+   "depth_profile": {
+    "events": 2875,
+    "p05_km": -1.0388,
+    "p50_km": 1.5237,
+    "p95_km": 10.2112,
+    "mode_km": -1.04,
+    "mode_share": 0.071,
+    "band_top_km": 0.3362,
+    "band_share": 0.2706,
+    "datum_known": true
+   },
    "magnitude_coverage": 0.0,
    "headline": {
     "recall": 0.5163,
@@ -2256,7 +2603,15 @@
     "recall_norm": 0.9264,
     "union_support": 0.7732,
     "epi_median_km": 0.784,
-    "off_structure_fraction": 0.0042
+    "shift_km": 0.4284,
+    "scatter_median_km": 0.7394,
+    "epi_gt5km": 0.0723,
+    "dz_median_km": 0.6147,
+    "depth_datum_known": true,
+    "depth_mode_share": 0.071,
+    "depth_band_share": 0.2706,
+    "off_structure_fraction": 0.0042,
+    "off_structure_after_shift": 0.0014
    }
   }
  }

@@ -1,8 +1,8 @@
 {
  "metrics_version": 1,
- "scorer_commit": "fcf4666e4212563f39e8b53d8e42c43690181f3c",
+ "scorer_commit": "9af99b32d2b6b3dc95f7caaca61478067fc04144",
  "scorer_dirty": false,
- "generated_utc": "2026-10-27T04:22:07+00:00",
+ "generated_utc": "2026-10-27T05:10:46+00:00",
  "task": "2011_prague_oklahoma",
  "references": {
   "cochran": {
@@ -172,11 +172,20 @@
      "location": {
       "pairs": 6,
       "epi_median_km": 0.7442,
-      "epi_p90_km": 2.5355,
+      "epi_p90_km": 2.5356,
+      "epi_gt2km": 0.1667,
+      "epi_gt5km": 0.0,
+      "shift_east_km": 0.2281,
+      "shift_north_km": -0.3025,
+      "shift_km": 0.3788,
+      "scatter_median_km": 0.6734,
+      "scatter_p90_km": 2.412,
       "dt_median_s": 28.5305,
       "depth_pairs": 6,
       "dz_median_km": -1.7615,
-      "dz_mad_km": 0.584
+      "dz_mad_km": 0.584,
+      "dz_gt2km": 0.5,
+      "depth_datum_known": true
      }
     },
     "comcat": {
@@ -218,6 +227,17 @@
     ]
    },
    "local_thickness_km": 0.0426,
+   "depth_profile": {
+    "events": 2078,
+    "p05_km": 1.3414,
+    "p50_km": 3.871,
+    "p95_km": 5.4924,
+    "mode_km": 4.89,
+    "mode_share": 0.0096,
+    "band_top_km": 4.217,
+    "band_share": 0.3335,
+    "datum_known": true
+   },
    "magnitude_coverage": 1.0
   },
   "mcmahon": {
@@ -286,11 +306,26 @@
      "location": {
       "pairs": 1094,
       "epi_median_km": 0.2963,
-      "epi_p90_km": 0.7138,
+      "epi_p90_km": 0.7137,
+      "epi_gt2km": 0.0165,
+      "epi_gt5km": 0.0064,
+      "shift_east_km": 0.0385,
+      "shift_north_km": 0.1844,
+      "shift_km": 0.1884,
+      "scatter_median_km": 0.2127,
+      "scatter_p90_km": 0.7424,
       "dt_median_s": 0.1901,
+      "epi_median_by_period_km": [
+       0.2841,
+       0.3135,
+       0.2974,
+       0.2902
+      ],
       "depth_pairs": 1094,
       "dz_median_km": 0.7079,
-      "dz_mad_km": 0.5565
+      "dz_mad_km": 0.5565,
+      "dz_gt2km": 0.0548,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 1094,
@@ -332,10 +367,19 @@
       "pairs": 6,
       "epi_median_km": 0.3488,
       "epi_p90_km": 0.4953,
+      "epi_gt2km": 0.0,
+      "epi_gt5km": 0.0,
+      "shift_east_km": 0.074,
+      "shift_north_km": -0.2058,
+      "shift_km": 0.2187,
+      "scatter_median_km": 0.2922,
+      "scatter_p90_km": 0.4837,
       "dt_median_s": 28.33,
       "depth_pairs": 6,
       "dz_median_km": -1.0996,
-      "dz_mad_km": 0.247
+      "dz_mad_km": 0.247,
+      "dz_gt2km": 0.1667,
+      "depth_datum_known": true
      }
     },
     "comcat": {
@@ -376,7 +420,26 @@
      "cochran"
     ]
    },
+   "off_structure_after_shift": {
+    "fraction": 0.0081,
+    "events": 2343,
+    "radius_km": 1.0,
+    "members": [
+     "cochran"
+    ]
+   },
    "local_thickness_km": 0.0684,
+   "depth_profile": {
+    "events": 2343,
+    "p05_km": 1.49,
+    "p50_km": 4.5007,
+    "p95_km": 7.709,
+    "mode_km": 2.03,
+    "mode_share": 0.0115,
+    "band_top_km": 1.3049,
+    "band_share": 0.4063,
+    "datum_known": true
+   },
    "magnitude_coverage": 1.0
   },
   "isken": {
@@ -446,10 +509,19 @@
       "pairs": 1,
       "epi_median_km": 0.5185,
       "epi_p90_km": 0.5185,
+      "epi_gt2km": 0.0,
+      "epi_gt5km": 0.0,
+      "shift_east_km": 0.0851,
+      "shift_north_km": 0.5115,
+      "shift_km": 0.5185,
+      "scatter_median_km": 0.0,
+      "scatter_p90_km": 0.0,
       "dt_median_s": 2.701,
       "depth_pairs": 1,
       "dz_median_km": 1.852,
-      "dz_mad_km": 0.0
+      "dz_mad_km": 0.0,
+      "dz_gt2km": 0.0,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 1,
@@ -616,7 +688,27 @@
      "mcmahon"
     ]
    },
+   "off_structure_after_shift": {
+    "fraction": 0.0,
+    "events": 6,
+    "radius_km": 1.0,
+    "members": [
+     "cochran",
+     "mcmahon"
+    ]
+   },
    "local_thickness_km": null,
+   "depth_profile": {
+    "events": 6,
+    "p05_km": 5.3075,
+    "p50_km": 6.495,
+    "p95_km": 8.8725,
+    "mode_km": 5.17,
+    "mode_share": 0.1667,
+    "band_top_km": 5.72,
+    "band_share": 0.5,
+    "datum_known": true
+   },
    "magnitude_coverage": 1.0
   },
   "comcat": {
@@ -684,9 +776,21 @@
      },
      "location": {
       "pairs": 10,
-      "epi_median_km": 0.8304,
-      "epi_p90_km": 1.237,
-      "dt_median_s": 0.3295
+      "epi_median_km": 0.8305,
+      "epi_p90_km": 1.2373,
+      "epi_gt2km": 0.1,
+      "epi_gt5km": 0.0,
+      "shift_east_km": 0.3372,
+      "shift_north_km": 0.4042,
+      "shift_km": 0.5264,
+      "scatter_median_km": 0.5483,
+      "scatter_p90_km": 0.8658,
+      "dt_median_s": 0.3295,
+      "depth_pairs": 10,
+      "dz_median_km": 0.079,
+      "dz_mad_km": 0.5215,
+      "dz_gt2km": 0.1,
+      "depth_datum_known": false
      },
      "magnitude": {
       "pairs": 10,
@@ -821,9 +925,21 @@
      "roles": "L",
      "location": {
       "pairs": 5,
-      "epi_median_km": 0.8442,
-      "epi_p90_km": 1.7045,
-      "dt_median_s": 16.0
+      "epi_median_km": 0.8445,
+      "epi_p90_km": 1.7047,
+      "epi_gt2km": 0.0,
+      "epi_gt5km": 0.0,
+      "shift_east_km": 0.6336,
+      "shift_north_km": 0.6672,
+      "shift_km": 0.9201,
+      "scatter_median_km": 0.6672,
+      "scatter_p90_km": 0.9753,
+      "dt_median_s": 16.0,
+      "depth_pairs": 5,
+      "dz_median_km": -2.14,
+      "dz_mad_km": 1.45,
+      "dz_gt2km": 0.6,
+      "depth_datum_known": false
      }
     }
    },
@@ -847,7 +963,27 @@
      "mcmahon"
     ]
    },
+   "off_structure_after_shift": {
+    "fraction": 0.0,
+    "events": 11,
+    "radius_km": 1.0,
+    "members": [
+     "cochran",
+     "mcmahon"
+    ]
+   },
    "local_thickness_km": null,
+   "depth_profile": {
+    "events": 11,
+    "p05_km": 3.2,
+    "p50_km": 5.0,
+    "p95_km": 6.8,
+    "mode_km": 5.0,
+    "mode_share": 0.4545,
+    "band_top_km": 5.0,
+    "band_share": 0.4545,
+    "datum_known": false
+   },
    "magnitude_coverage": 1.0
   },
   "expert_final": {
@@ -915,12 +1051,27 @@
      },
      "location": {
       "pairs": 2000,
-      "epi_median_km": 0.3647,
-      "epi_p90_km": 0.8407,
+      "epi_median_km": 0.3648,
+      "epi_p90_km": 0.8409,
+      "epi_gt2km": 0.014,
+      "epi_gt5km": 0.004,
+      "shift_east_km": 0.0009,
+      "shift_north_km": 0.1745,
+      "shift_km": 0.1745,
+      "scatter_median_km": 0.3093,
+      "scatter_p90_km": 0.8495,
       "dt_median_s": 0.0679,
+      "epi_median_by_period_km": [
+       0.3509,
+       0.3831,
+       0.3813,
+       0.3449
+      ],
       "depth_pairs": 2000,
       "dz_median_km": 0.1211,
-      "dz_mad_km": 0.4011
+      "dz_mad_km": 0.4011,
+      "dz_gt2km": 0.0435,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 1998,
@@ -1057,10 +1208,19 @@
       "pairs": 6,
       "epi_median_km": 0.3164,
       "epi_p90_km": 0.4537,
+      "epi_gt2km": 0.0,
+      "epi_gt5km": 0.0,
+      "shift_east_km": 0.0866,
+      "shift_north_km": -0.2277,
+      "shift_km": 0.2436,
+      "scatter_median_km": 0.2285,
+      "scatter_p90_km": 0.4067,
       "dt_median_s": 28.9574,
       "depth_pairs": 6,
       "dz_median_km": -1.6125,
-      "dz_mad_km": 0.2588
+      "dz_mad_km": 0.2588,
+      "dz_gt2km": 0.1667,
+      "depth_datum_known": true
      }
     },
     "comcat": {
@@ -1103,15 +1263,43 @@
      "mcmahon"
     ]
    },
+   "off_structure_after_shift": {
+    "fraction": 0.0004,
+    "events": 6768,
+    "radius_km": 1.0,
+    "members": [
+     "cochran",
+     "mcmahon"
+    ]
+   },
    "local_thickness_km": 0.0403,
+   "depth_profile": {
+    "events": 6768,
+    "p05_km": 1.5,
+    "p50_km": 3.5013,
+    "p95_km": 6.8682,
+    "mode_km": 2.0,
+    "mode_share": 0.0907,
+    "band_top_km": 1.81,
+    "band_share": 0.3017,
+    "datum_known": true
+   },
    "magnitude_coverage": 0.9975,
    "headline": {
     "recall": 0.9625,
     "ceiling": 0.5265,
     "recall_norm": 1.8281,
     "union_support": 0.4671,
-    "epi_median_km": 0.3647,
-    "off_structure_fraction": 0.0004
+    "epi_median_km": 0.3648,
+    "shift_km": 0.1745,
+    "scatter_median_km": 0.3093,
+    "epi_gt5km": 0.004,
+    "dz_median_km": 0.1211,
+    "depth_datum_known": true,
+    "depth_mode_share": 0.0907,
+    "depth_band_share": 0.3017,
+    "off_structure_fraction": 0.0004,
+    "off_structure_after_shift": 0.0004
    }
   },
   "expert_blind": {
@@ -1179,12 +1367,27 @@
      },
      "location": {
       "pairs": 1277,
-      "epi_median_km": 0.472,
-      "epi_p90_km": 1.2803,
+      "epi_median_km": 0.4721,
+      "epi_p90_km": 1.2804,
+      "epi_gt2km": 0.0329,
+      "epi_gt5km": 0.0086,
+      "shift_east_km": -0.004,
+      "shift_north_km": 0.1869,
+      "shift_km": 0.187,
+      "scatter_median_km": 0.4474,
+      "scatter_p90_km": 1.2786,
       "dt_median_s": 0.1034,
+      "epi_median_by_period_km": [
+       0.4487,
+       0.5125,
+       0.4935,
+       0.4397
+      ],
       "depth_pairs": 1277,
       "dz_median_km": -0.0382,
-      "dz_mad_km": 0.58
+      "dz_mad_km": 0.58,
+      "dz_gt2km": 0.0877,
+      "depth_datum_known": true
      },
      "magnitude": {
       "pairs": 0,
@@ -1315,10 +1518,19 @@
       "pairs": 6,
       "epi_median_km": 0.3164,
       "epi_p90_km": 0.6181,
+      "epi_gt2km": 0.0,
+      "epi_gt5km": 0.0,
+      "shift_east_km": 0.1613,
+      "shift_north_km": -0.1721,
+      "shift_km": 0.2359,
+      "scatter_median_km": 0.2054,
+      "scatter_p90_km": 0.584,
       "dt_median_s": 28.5832,
       "depth_pairs": 6,
       "dz_median_km": -1.9437,
-      "dz_mad_km": 0.34
+      "dz_mad_km": 0.34,
+      "dz_gt2km": 0.5,
+      "depth_datum_known": true
      }
     },
     "comcat": {
@@ -1355,15 +1567,43 @@
      "mcmahon"
     ]
    },
+   "off_structure_after_shift": {
+    "fraction": 0.0176,
+    "events": 2553,
+    "radius_km": 1.0,
+    "members": [
+     "cochran",
+     "mcmahon"
+    ]
+   },
    "local_thickness_km": 0.1481,
+   "depth_profile": {
+    "events": 2553,
+    "p05_km": 0.2512,
+    "p50_km": 3.5638,
+    "p95_km": 7.0637,
+    "mode_km": 2.0,
+    "mode_share": 0.112,
+    "band_top_km": 1.8762,
+    "band_share": 0.2664,
+    "datum_known": true
+   },
    "magnitude_coverage": 0.0,
    "headline": {
     "recall": 0.6145,
     "ceiling": 0.5265,
     "recall_norm": 1.1671,
     "union_support": 0.7979,
-    "epi_median_km": 0.472,
-    "off_structure_fraction": 0.018
+    "epi_median_km": 0.4721,
+    "shift_km": 0.187,
+    "scatter_median_km": 0.4474,
+    "epi_gt5km": 0.0086,
+    "dz_median_km": -0.0382,
+    "depth_datum_known": true,
+    "depth_mode_share": 0.112,
+    "depth_band_share": 0.2664,
+    "off_structure_fraction": 0.018,
+    "off_structure_after_shift": 0.0176
    }
   }
  }

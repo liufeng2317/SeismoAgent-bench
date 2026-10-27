@@ -1,8 +1,8 @@
 {
  "metrics_version": 1,
- "scorer_commit": "fcf4666e4212563f39e8b53d8e42c43690181f3c",
+ "scorer_commit": "9af99b32d2b6b3dc95f7caaca61478067fc04144",
  "scorer_dirty": false,
- "generated_utc": "2026-10-27T04:24:29+00:00",
+ "generated_utc": "2026-10-27T05:13:18+00:00",
  "task": "2020_magna_utah",
  "configurations": [
   {
@@ -20,8 +20,15 @@
      "recall_norm": 0.557,
      "union_support": 0.9886,
      "audited_false_rate": null,
-     "epi_median_km": 1.5866,
-     "off_structure_fraction": 0.0409
+     "epi_median_km": 1.5862,
+     "shift_km": 1.1472,
+     "scatter_median_km": 1.0269,
+     "epi_gt5km": 0.0775,
+     "dz_median_km": 1.08,
+     "depth_mode_share": 0.416,
+     "depth_band_share": 0.5068,
+     "off_structure_fraction": 0.0409,
+     "off_structure_after_shift": 0.0375
     }
    ],
    "recall": {
@@ -44,15 +51,57 @@
    },
    "audited_false_rate": null,
    "epi_median_km": {
-    "mean": 1.5866,
-    "min": 1.5866,
-    "max": 1.5866,
+    "mean": 1.5862,
+    "min": 1.5862,
+    "max": 1.5862,
+    "n": 1
+   },
+   "shift_km": {
+    "mean": 1.1472,
+    "min": 1.1472,
+    "max": 1.1472,
+    "n": 1
+   },
+   "scatter_median_km": {
+    "mean": 1.0269,
+    "min": 1.0269,
+    "max": 1.0269,
+    "n": 1
+   },
+   "epi_gt5km": {
+    "mean": 0.0775,
+    "min": 0.0775,
+    "max": 0.0775,
+    "n": 1
+   },
+   "dz_median_km": {
+    "mean": 1.08,
+    "min": 1.08,
+    "max": 1.08,
+    "n": 1
+   },
+   "depth_mode_share": {
+    "mean": 0.416,
+    "min": 0.416,
+    "max": 0.416,
+    "n": 1
+   },
+   "depth_band_share": {
+    "mean": 0.5068,
+    "min": 0.5068,
+    "max": 0.5068,
     "n": 1
    },
    "off_structure_fraction": {
     "mean": 0.0409,
     "min": 0.0409,
     "max": 0.0409,
+    "n": 1
+   },
+   "off_structure_after_shift": {
+    "mean": 0.0375,
+    "min": 0.0375,
+    "max": 0.0375,
     "n": 1
    },
    "cost_usd": {

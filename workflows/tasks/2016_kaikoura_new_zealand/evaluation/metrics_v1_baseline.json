@@ -1,8 +1,8 @@
 {
  "metrics_version": 1,
- "scorer_commit": "fcf4666e4212563f39e8b53d8e42c43690181f3c",
+ "scorer_commit": "9af99b32d2b6b3dc95f7caaca61478067fc04144",
  "scorer_dirty": false,
- "generated_utc": "2026-10-27T04:22:22+00:00",
+ "generated_utc": "2026-10-27T05:11:02+00:00",
  "task": "2016_kaikoura_new_zealand",
  "references": {
   "tan": {
@@ -83,12 +83,27 @@
      "roles": "LS",
      "location": {
       "pairs": 119,
-      "epi_median_km": 1.7455,
-      "epi_p90_km": 3.5183,
+      "epi_median_km": 1.74,
+      "epi_p90_km": 3.5105,
+      "epi_gt2km": 0.4286,
+      "epi_gt5km": 0.0588,
+      "shift_east_km": 0.9013,
+      "shift_north_km": -0.0192,
+      "shift_km": 0.9015,
+      "scatter_median_km": 1.556,
+      "scatter_p90_km": 3.2618,
       "dt_median_s": 0.23,
+      "epi_median_by_period_km": [
+       1.7304,
+       1.4881,
+       2.2141,
+       1.5876
+      ],
       "depth_pairs": 119,
       "dz_median_km": -3.194,
-      "dz_mad_km": 1.219
+      "dz_mad_km": 1.219,
+      "dz_gt2km": 0.7395,
+      "depth_datum_known": true
      },
      "pair_distance_error": {
       "pairs": 113,
@@ -301,7 +316,27 @@
      "chamberlain"
     ]
    },
+   "off_structure_after_shift": {
+    "fraction": 0.1027,
+    "events": 9720,
+    "radius_km": 5.0,
+    "members": [
+     "lanza",
+     "chamberlain"
+    ]
+   },
    "local_thickness_km": 0.9949,
+   "depth_profile": {
+    "events": 9720,
+    "p05_km": 0.0,
+    "p50_km": 9.0,
+    "p95_km": 18.0,
+    "mode_km": 8.0,
+    "mode_share": 0.1199,
+    "band_top_km": 8.0,
+    "band_share": 0.1844,
+    "datum_known": true
+   },
    "magnitude_coverage": 1.0
   },
   "lanza": {
@@ -589,6 +624,17 @@
     ]
    },
    "local_thickness_km": 2.8109,
+   "depth_profile": {
+    "events": 122,
+    "p05_km": 4.9412,
+    "p50_km": 11.4065,
+    "p95_km": 15.9613,
+    "mode_km": 9.46,
+    "mode_share": 0.0164,
+    "band_top_km": 13.406,
+    "band_share": 0.2049,
+    "datum_known": true
+   },
    "magnitude_coverage": 0.0
   },
   "chamberlain": {
@@ -705,12 +751,27 @@
      "roles": "LS",
      "location": {
       "pairs": 121,
-      "epi_median_km": 1.1872,
-      "epi_p90_km": 2.5948,
+      "epi_median_km": 1.1849,
+      "epi_p90_km": 2.6023,
+      "epi_gt2km": 0.1901,
+      "epi_gt5km": 0.0331,
+      "shift_east_km": 0.5365,
+      "shift_north_km": -0.2595,
+      "shift_km": 0.5959,
+      "scatter_median_km": 1.0418,
+      "scatter_p90_km": 2.4039,
       "dt_median_s": 0.6345,
+      "epi_median_by_period_km": [
+       1.0344,
+       0.9911,
+       1.3304,
+       1.2026
+      ],
       "depth_pairs": 121,
       "dz_median_km": -1.06,
-      "dz_mad_km": 1.403
+      "dz_mad_km": 1.403,
+      "dz_gt2km": 0.405,
+      "depth_datum_known": true
      },
      "pair_distance_error": {
       "pairs": 113,
@@ -831,7 +892,27 @@
      "lanza"
     ]
    },
+   "off_structure_after_shift": {
+    "fraction": 0.0018,
+    "events": 2260,
+    "radius_km": 5.0,
+    "members": [
+     "tan",
+     "lanza"
+    ]
+   },
    "local_thickness_km": 0.5812,
+   "depth_profile": {
+    "events": 2260,
+    "p05_km": 1.3388,
+    "p50_km": 9.5135,
+    "p95_km": 15.7082,
+    "mode_km": 7.04,
+    "mode_share": 0.0071,
+    "band_top_km": 6.447,
+    "band_share": 0.1274,
+    "datum_known": true
+   },
    "magnitude_coverage": 0.9991
   },
   "geonet": {
@@ -948,12 +1029,27 @@
      "roles": "LS",
      "location": {
       "pairs": 121,
-      "epi_median_km": 3.1838,
-      "epi_p90_km": 5.2948,
+      "epi_median_km": 3.1818,
+      "epi_p90_km": 5.2938,
+      "epi_gt2km": 0.8347,
+      "epi_gt5km": 0.157,
+      "shift_east_km": -0.8908,
+      "shift_north_km": 1.2027,
+      "shift_km": 1.4967,
+      "scatter_median_km": 2.5563,
+      "scatter_p90_km": 4.6125,
       "dt_median_s": 0.36,
+      "epi_median_by_period_km": [
+       3.3115,
+       3.1261,
+       3.1379,
+       2.9988
+      ],
       "depth_pairs": 121,
       "dz_median_km": -2.92,
-      "dz_mad_km": 2.455
+      "dz_mad_km": 2.455,
+      "dz_gt2km": 0.6694,
+      "depth_datum_known": true
      },
      "pair_distance_error": {
       "pairs": 113,
@@ -1085,7 +1181,28 @@
      "chamberlain"
     ]
    },
+   "off_structure_after_shift": {
+    "fraction": 0.01,
+    "events": 1507,
+    "radius_km": 5.0,
+    "members": [
+     "tan",
+     "lanza",
+     "chamberlain"
+    ]
+   },
    "local_thickness_km": 1.8476,
+   "depth_profile": {
+    "events": 1507,
+    "p05_km": 5.0,
+    "p50_km": 15.8,
+    "p95_km": 29.8,
+    "mode_km": 5.0,
+    "mode_share": 0.0717,
+    "band_top_km": 4.9,
+    "band_share": 0.1068,
+    "datum_known": true
+   },
    "magnitude_coverage": 1.0
   },
   "expert_final": {
@@ -1202,12 +1319,27 @@
      "roles": "LS",
      "location": {
       "pairs": 120,
-      "epi_median_km": 3.0503,
-      "epi_p90_km": 6.0718,
+      "epi_median_km": 3.0481,
+      "epi_p90_km": 6.0709,
+      "epi_gt2km": 0.7917,
+      "epi_gt5km": 0.225,
+      "shift_east_km": 0.5328,
+      "shift_north_km": 1.0016,
+      "shift_km": 1.1345,
+      "scatter_median_km": 2.7846,
+      "scatter_p90_km": 6.3793,
       "dt_median_s": 0.6215,
+      "epi_median_by_period_km": [
+       2.882,
+       3.5783,
+       2.6709,
+       3.0713
+      ],
       "depth_pairs": 120,
       "dz_median_km": -0.8656,
-      "dz_mad_km": 1.2955
+      "dz_mad_km": 1.2955,
+      "dz_gt2km": 0.35,
+      "depth_datum_known": true
      },
      "pair_distance_error": {
       "pairs": 113,
@@ -1422,15 +1554,44 @@
      "chamberlain"
     ]
    },
+   "off_structure_after_shift": {
+    "fraction": 0.0077,
+    "events": 12927,
+    "radius_km": 5.0,
+    "members": [
+     "tan",
+     "lanza",
+     "chamberlain"
+    ]
+   },
    "local_thickness_km": 0.378,
+   "depth_profile": {
+    "events": 12927,
+    "p05_km": 3.1406,
+    "p50_km": 11.7637,
+    "p95_km": 17.8594,
+    "mode_km": 14.3,
+    "mode_share": 0.0103,
+    "band_top_km": 13.355,
+    "band_share": 0.1015,
+    "datum_known": true
+   },
    "magnitude_coverage": 0.7808,
    "headline": {
     "recall": 0.8208,
     "ceiling": 0.6991,
     "recall_norm": 1.1741,
     "union_support": 0.4345,
-    "epi_median_km": 3.0503,
-    "off_structure_fraction": 0.0081
+    "epi_median_km": 3.0481,
+    "shift_km": 1.1345,
+    "scatter_median_km": 2.7846,
+    "epi_gt5km": 0.225,
+    "dz_median_km": -0.8656,
+    "depth_datum_known": true,
+    "depth_mode_share": 0.0103,
+    "depth_band_share": 0.1015,
+    "off_structure_fraction": 0.0081,
+    "off_structure_after_shift": 0.0077
    }
   },
   "expert_blind": {
@@ -1541,12 +1702,27 @@
      "roles": "LS",
      "location": {
       "pairs": 101,
-      "epi_median_km": 4.1594,
-      "epi_p90_km": 9.6634,
+      "epi_median_km": 4.1554,
+      "epi_p90_km": 9.6736,
+      "epi_gt2km": 0.9109,
+      "epi_gt5km": 0.3267,
+      "shift_east_km": 0.1132,
+      "shift_north_km": 2.1189,
+      "shift_km": 2.122,
+      "scatter_median_km": 2.9402,
+      "scatter_p90_km": 10.6785,
       "dt_median_s": 0.4984,
+      "epi_median_by_period_km": [
+       3.8679,
+       4.7519,
+       3.0922,
+       4.6424
+      ],
       "depth_pairs": 101,
       "dz_median_km": -0.0946,
-      "dz_mad_km": 1.5495
+      "dz_mad_km": 1.5495,
+      "dz_gt2km": 0.4257,
+      "depth_datum_known": true
      },
      "pair_distance_error": {
       "pairs": 102,
@@ -1749,15 +1925,44 @@
      "chamberlain"
     ]
    },
+   "off_structure_after_shift": {
+    "fraction": 0.0109,
+    "events": 4758,
+    "radius_km": 5.0,
+    "members": [
+     "tan",
+     "lanza",
+     "chamberlain"
+    ]
+   },
    "local_thickness_km": 0.8663,
+   "depth_profile": {
+    "events": 4758,
+    "p05_km": 3.3281,
+    "p50_km": 14.2969,
+    "p95_km": 21.8906,
+    "mode_km": 0.05,
+    "mode_share": 0.0189,
+    "band_top_km": 16.1719,
+    "band_share": 0.0946,
+    "datum_known": true
+   },
    "magnitude_coverage": 0.0,
    "headline": {
     "recall": 0.5611,
     "ceiling": 0.6991,
     "recall_norm": 0.8026,
     "union_support": 0.7825,
-    "epi_median_km": 4.1594,
-    "off_structure_fraction": 0.0132
+    "epi_median_km": 4.1554,
+    "shift_km": 2.122,
+    "scatter_median_km": 2.9402,
+    "epi_gt5km": 0.3267,
+    "dz_median_km": -0.0946,
+    "depth_datum_known": true,
+    "depth_mode_share": 0.0189,
+    "depth_band_share": 0.0946,
+    "off_structure_fraction": 0.0132,
+    "off_structure_after_shift": 0.0109
    }
   }
  }

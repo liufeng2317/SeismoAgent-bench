@@ -1,8 +1,8 @@
 {
  "metrics_version": 1,
- "scorer_commit": "fcf4666e4212563f39e8b53d8e42c43690181f3c",
+ "scorer_commit": "9af99b32d2b6b3dc95f7caaca61478067fc04144",
  "scorer_dirty": false,
- "generated_utc": "2026-10-27T04:24:12+00:00",
+ "generated_utc": "2026-10-27T05:12:59+00:00",
  "task": "2019_ridgecrest_california",
  "configurations": [
   {
@@ -21,7 +21,14 @@
      "union_support": 0.848,
      "audited_false_rate": null,
      "epi_median_km": 2.2264,
-     "off_structure_fraction": 0.197
+     "shift_km": 0.4173,
+     "scatter_median_km": 2.2107,
+     "epi_gt5km": 0.3121,
+     "dz_median_km": 4.837,
+     "depth_mode_share": 0.0033,
+     "depth_band_share": 0.0958,
+     "off_structure_fraction": 0.197,
+     "off_structure_after_shift": 0.1943
     }
    ],
    "recall": {
@@ -49,10 +56,52 @@
     "max": 2.2264,
     "n": 1
    },
+   "shift_km": {
+    "mean": 0.4173,
+    "min": 0.4173,
+    "max": 0.4173,
+    "n": 1
+   },
+   "scatter_median_km": {
+    "mean": 2.2107,
+    "min": 2.2107,
+    "max": 2.2107,
+    "n": 1
+   },
+   "epi_gt5km": {
+    "mean": 0.3121,
+    "min": 0.3121,
+    "max": 0.3121,
+    "n": 1
+   },
+   "dz_median_km": {
+    "mean": 4.837,
+    "min": 4.837,
+    "max": 4.837,
+    "n": 1
+   },
+   "depth_mode_share": {
+    "mean": 0.0033,
+    "min": 0.0033,
+    "max": 0.0033,
+    "n": 1
+   },
+   "depth_band_share": {
+    "mean": 0.0958,
+    "min": 0.0958,
+    "max": 0.0958,
+    "n": 1
+   },
    "off_structure_fraction": {
     "mean": 0.197,
     "min": 0.197,
     "max": 0.197,
+    "n": 1
+   },
+   "off_structure_after_shift": {
+    "mean": 0.1943,
+    "min": 0.1943,
+    "max": 0.1943,
     "n": 1
    },
    "cost_usd": {
@@ -89,8 +138,15 @@
      "recall_norm": 0.5097,
      "union_support": 0.5655,
      "audited_false_rate": null,
-     "epi_median_km": 4.6763,
-     "off_structure_fraction": 0.442
+     "epi_median_km": 4.6748,
+     "shift_km": 3.6212,
+     "scatter_median_km": 3.2662,
+     "epi_gt5km": 0.4544,
+     "dz_median_km": 9.12,
+     "depth_mode_share": 0.0058,
+     "depth_band_share": 0.1616,
+     "off_structure_fraction": 0.442,
+     "off_structure_after_shift": 0.4057
     }
    ],
    "recall": {
@@ -113,15 +169,57 @@
    },
    "audited_false_rate": null,
    "epi_median_km": {
-    "mean": 4.6763,
-    "min": 4.6763,
-    "max": 4.6763,
+    "mean": 4.6748,
+    "min": 4.6748,
+    "max": 4.6748,
+    "n": 1
+   },
+   "shift_km": {
+    "mean": 3.6212,
+    "min": 3.6212,
+    "max": 3.6212,
+    "n": 1
+   },
+   "scatter_median_km": {
+    "mean": 3.2662,
+    "min": 3.2662,
+    "max": 3.2662,
+    "n": 1
+   },
+   "epi_gt5km": {
+    "mean": 0.4544,
+    "min": 0.4544,
+    "max": 0.4544,
+    "n": 1
+   },
+   "dz_median_km": {
+    "mean": 9.12,
+    "min": 9.12,
+    "max": 9.12,
+    "n": 1
+   },
+   "depth_mode_share": {
+    "mean": 0.0058,
+    "min": 0.0058,
+    "max": 0.0058,
+    "n": 1
+   },
+   "depth_band_share": {
+    "mean": 0.1616,
+    "min": 0.1616,
+    "max": 0.1616,
     "n": 1
    },
    "off_structure_fraction": {
     "mean": 0.442,
     "min": 0.442,
     "max": 0.442,
+    "n": 1
+   },
+   "off_structure_after_shift": {
+    "mean": 0.4057,
+    "min": 0.4057,
+    "max": 0.4057,
     "n": 1
    },
    "cost_usd": {
@@ -159,7 +257,14 @@
      "union_support": 0.8511,
      "audited_false_rate": null,
      "epi_median_km": 1.6304,
-     "off_structure_fraction": 0.1366
+     "shift_km": 1.1423,
+     "scatter_median_km": 1.0432,
+     "epi_gt5km": 0.0713,
+     "dz_median_km": 8.0765,
+     "depth_mode_share": 0.028,
+     "depth_band_share": 0.2159,
+     "off_structure_fraction": 0.1366,
+     "off_structure_after_shift": 0.1414
     }
    ],
    "recall": {
@@ -187,10 +292,52 @@
     "max": 1.6304,
     "n": 1
    },
+   "shift_km": {
+    "mean": 1.1423,
+    "min": 1.1423,
+    "max": 1.1423,
+    "n": 1
+   },
+   "scatter_median_km": {
+    "mean": 1.0432,
+    "min": 1.0432,
+    "max": 1.0432,
+    "n": 1
+   },
+   "epi_gt5km": {
+    "mean": 0.0713,
+    "min": 0.0713,
+    "max": 0.0713,
+    "n": 1
+   },
+   "dz_median_km": {
+    "mean": 8.0765,
+    "min": 8.0765,
+    "max": 8.0765,
+    "n": 1
+   },
+   "depth_mode_share": {
+    "mean": 0.028,
+    "min": 0.028,
+    "max": 0.028,
+    "n": 1
+   },
+   "depth_band_share": {
+    "mean": 0.2159,
+    "min": 0.2159,
+    "max": 0.2159,
+    "n": 1
+   },
    "off_structure_fraction": {
     "mean": 0.1366,
     "min": 0.1366,
     "max": 0.1366,
+    "n": 1
+   },
+   "off_structure_after_shift": {
+    "mean": 0.1414,
+    "min": 0.1414,
+    "max": 0.1414,
     "n": 1
    },
    "cost_usd": null,
