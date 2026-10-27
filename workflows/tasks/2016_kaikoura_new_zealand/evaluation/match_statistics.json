@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-26T23:50:28+00:00",
+  "generated_utc": "2026-10-27T19:53:04+00:00",
   "evaluation_window": {
     "start_utc": "2016-12-01T00:00:00Z",
     "end_utc": "2016-12-09T00:00:00Z"
@@ -31,8 +31,8 @@
       "color": "#009E73"
     },
     "expert": {
-      "label": "Expert reproduction (r6)",
-      "records": 13426,
+      "label": "Expert reproduction (r8)",
+      "records": 13423,
       "color": "#E69F00"
     }
   },
@@ -54,19 +54,19 @@
       "plotted_records": 1507
     },
     "expert": {
-      "path": "expert/export/r6/60_catalog/catalog_events.csv",
-      "round": "r6",
-      "plotted_records": 13426,
+      "path": "expert/export/r8/60_catalog/catalog_events.csv",
+      "round": "r8",
+      "plotted_records": 13423,
       "selection": "complete round catalog (all rows)"
     }
   },
   "statistics": {
     "expert": {
-      "records": 13426,
+      "records": 13423,
       "versus": {
         "tan": {
           "matched": 5083,
-          "precision": 0.3785937732757336,
+          "precision": 0.37867838784176416,
           "recall": 0.5229423868312757,
           "median_abs_dt_s": 0.458301,
           "median_epicentral_km": 3.3892954769522183,
@@ -75,7 +75,7 @@
         },
         "lanza": {
           "matched": 120,
-          "precision": 0.008937881722031879,
+          "precision": 0.008939879311629293,
           "recall": 0.9836065573770492,
           "median_abs_dt_s": 0.6215095,
           "median_epicentral_km": 3.0503151362201093,
@@ -84,16 +84,16 @@
         },
         "chamberlain": {
           "matched": 1855,
-          "precision": 0.13816475495307612,
+          "precision": 0.13819563435893614,
           "recall": 0.8207964601769911,
           "median_abs_dt_s": 0.395284,
           "median_epicentral_km": 3.4097984751408084,
-          "median_depth_difference_km": 0.5299000000000014,
-          "mad_depth_difference_km": 2.1322750000000017
+          "median_depth_difference_km": 0.5345999999999993,
+          "mad_depth_difference_km": 2.135300000000001
         },
         "geonet": {
           "matched": 1380,
-          "precision": 0.10278563980336661,
+          "precision": 0.10280861208373687,
           "recall": 0.9157266091572661,
           "median_abs_dt_s": 0.41212899999999997,
           "median_epicentral_km": 3.162313745624165,

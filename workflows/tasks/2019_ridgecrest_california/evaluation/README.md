@@ -21,6 +21,7 @@ sequence over the fixed evaluation window
    epicentral 0.44 / 0.79 / 0.46 / 0.60 km; depth vs Shelly −0.09 km (MAD
    0.56); 0.5 % of events > 1 km from every Shelly/Ross/Liu event (ComCat
    1.5 %). Round history in expert/PLAN.md (stages 60, 62, 63).
+   *Update 2026-10-28:* the expert population is now round `57_coda_duplicates` = `12_dense_layered` with stage-65 direct ML, the depth-bound large events restored by stage 66 (M7.1, M6.4, M5.4) and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `12_dense_layered` predate it. Benchmark scores: `metrics_v1_baseline.json`.
 3. **Agent reproductions** — completed Claude Code × GLM-5.3 runs:
    `runs/min/claude/glm-5.3/20261013T215003Z` (the Q1 `min` arm),
    `runs/tools/claude/glm-5.3/20261015T020300Z` (the Q2 `tools` arm;

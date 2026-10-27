@@ -24,6 +24,7 @@ sequence over the fixed evaluation window **[2011-11-11T00:00:00Z,
    event (r3: 1.5 %; McMahon itself 0.8 %); r5: 0.04 %. Rounds registered in
    `EXPERT_ROUNDS` (r2–r5). Expert depths are converted from sea level to
    below the surface with the model datum (0.28 km).
+   *Update 2026-10-28:* the expert population is now round `r7` = `r5` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r5` predate it. Benchmark scores: `metrics_v1_baseline.json`.
 3. **Agent reproductions** — none completed yet; register arms in
    `AGENT_RUNS` inside `plot_evaluation_comparison.py`.
 

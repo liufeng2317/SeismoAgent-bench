@@ -15,6 +15,7 @@ fixed evaluation window **[2020-03-18T00:00:00Z, 2020-03-26T00:00:00Z)**:
    Match&Locate events of stage 60, shifted with their templates, with
    chained relative magnitudes. Rounds are registered in `EXPERT_ROUNDS`
    (`load_expert(round_)`; r6, r7, r8); stage 60 scores against r6.
+   *Update 2026-10-28:* the expert population is now round `r11` = `r8` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r8` predate it. Benchmark scores: `metrics_v1_baseline.json`.
 3. **Agent reproductions** — none completed yet; arms are registered in
    `AGENT_RUNS` inside `plot_evaluation_comparison.py` as runs finish
    (`min`, `tools`, `guided`).

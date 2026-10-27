@@ -23,6 +23,7 @@ over the fixed evaluation window **[2017-06-11T00:00:00Z, 2017-06-19T00:00:00Z)*
    (r7: 3.5 %); ComCat recall 99.0 %, Shelly net 50.7 % (r7 99.4 / 52.1 %).
    Rounds registered in `EXPERT_ROUNDS` (r5–r9); depths below sea level
    converted to below-surface with the model datum (2.3 km).
+   *Update 2026-10-28:* the expert population is now round `r11` = `r9` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r9` predate it. Benchmark scores: `metrics_v1_baseline.json`.
 3. **Agent reproductions** — none completed yet; register arms in
    `AGENT_RUNS` inside `plot_evaluation_comparison.py` as runs finish.
 

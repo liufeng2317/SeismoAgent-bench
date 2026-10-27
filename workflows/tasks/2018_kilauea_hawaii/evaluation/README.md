@@ -21,6 +21,7 @@ earthquake (inside the window, outside the summit box):
    fraction 0.8 %), chained relative magnitudes. Rounds registered in
    `EXPERT_ROUNDS` (r3, r4, r7). Expert depths are converted from sea level to
    below the surface with the model datum (1.07 km).
+   *Update 2026-10-28:* the expert population is now round `r9` = `r7` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r7` predate it. Benchmark scores: `metrics_v1_baseline.json`.
 3. **Agent reproductions** — none completed yet; register arms in
    `AGENT_RUNS` inside `plot_evaluation_comparison.py`.
 

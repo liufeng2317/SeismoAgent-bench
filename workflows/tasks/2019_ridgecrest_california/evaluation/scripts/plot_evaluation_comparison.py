@@ -58,7 +58,9 @@ FOCUS_AGENT = 'agent_tools'
 # 12_dense_layered, 2026-10-25). Its depths
 # are below sea level; +0.7 km puts them on the working catalog's convention
 # (below the nominal 0.7-km-ASL surface, association.yaml reference_elevation_km).
-EXPERT_CATALOG = TASK / 'expert/export/12_dense_layered/60_catalog/catalog_events.csv'
+# 2026-10-28: round 57_coda_duplicates = 12_dense_layered + stage-65 direct ML, the depth-bound large
+# events restored by stage 66 (M7.1, M6.4, M5.4; depth empty) and stage-67 coda ghosts removed.
+EXPERT_CATALOG = TASK / 'expert/export/57_coda_duplicates/60_catalog/catalog_events.csv'
 EXPERT_DEPTH = ('depth_bsl_km', 0.7)
 AGENT_RUNS = {
     'agent_min': {

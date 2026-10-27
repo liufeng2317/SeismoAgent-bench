@@ -82,8 +82,9 @@ EXPERT_ROUNDS = {
     'r3': (EXPERT / 'export/r3/60_catalog/catalog_events.csv', 'origin_time_utc', 'depth_bsl_km'),
     'r4': (EXPERT / 'export/r4/60_catalog/catalog_events.csv', 'origin_time_utc', 'depth_bsl_km'),
     'r5': (EXPERT / 'export/r5/60_catalog/catalog_events.csv', 'origin_time_utc', 'depth_bsl_km'),
+    'r7': (EXPERT / 'export/r7/60_catalog/catalog_events.csv', 'origin_time_utc', 'depth_bsl_km'),  # stages 65/67 (2026-10-28)
 }
-EXPERT_ROUND = 'r5'
+EXPERT_ROUND = 'r7'
 # ----------------------------------------------------------------------------
 
 EXPERT_COLOR = '#E69F00'
