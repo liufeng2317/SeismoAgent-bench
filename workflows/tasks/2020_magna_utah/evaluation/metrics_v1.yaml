@@ -15,9 +15,14 @@ references:
   pang: {roles: DLSM, depth_datum: sea_level}         # relocated; Mc sentinels parsed to NaN
   baker: {roles: DS, depth_datum: unknown}            # picks collapsed to events; datum unspecified
   uuss: {roles: DLM, depth_datum: sea_level}          # operational
+pick_reference:                     # L5 (§5): reference phase picks, relative to data/<case>/
+  key: baker
+  format: baker_csv
+  path: data/catalogs/BAKER2021_0220200316/BAKER2021_0220200316__catalog_picks.csv
 expert:
   final: {path: expert/export/r11/60_catalog/catalog_events.csv, time_column: origin_time_utc,
-          depth_column: depth_bsl_km, depth_datum: sea_level}
+          depth_column: depth_bsl_km, depth_datum: sea_level,
+          picks: expert/export/r8/03_associate_gamma/full/picks.csv}
   blind: {path: expert/export/r1/04_locate_nonlinloc/full/events.csv, time_column: origin_time,
           depth_column: depth_below_sea_level_km, depth_datum: sea_level, keep: {status: LOCATED}}
 leakage_patterns:

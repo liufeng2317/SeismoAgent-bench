@@ -10,6 +10,7 @@ import pandas as pd
 from SeismoAgentBench.scoring.catalog_metrics.audit import audited_false_rate
 from SeismoAgentBench.scoring.catalog_metrics.dimensions import b_value, magnitude_classes
 from SeismoAgentBench.scoring.catalog_metrics.matching import correspond, match
+from SeismoAgentBench.scoring.catalog_metrics.picks_l5 import _collapse_shelly, score_picks_l5
 from SeismoAgentBench.scoring.catalog_metrics.metrics import (
     ceilings, depth_profile, location, m90, off_structure_fraction, pair_distance_error, union_support)
 from SeismoAgentBench.scoring.catalog_metrics.tables import Population, standardize
@@ -140,6 +141,25 @@ class MetricTest(unittest.TestCase):
             self.assertAlmostEqual(result["p_false"], 2 / 3, places=4)  # undecidable excluded
             self.assertAlmostEqual(result["rate"], 0.4 * 2 / 3, places=4)
             self.assertEqual(result["spot_check"], {"events": 2, "agreement": 0.5})
+
+    def test_picks_pair_one_to_one_on_common_stations(self):
+        ref = pd.DataFrame({"station": ["XX.A", "XX.A", "XX.B", "XX.C"], "phase": ["P", "P", "P", "P"],
+                            "time": [100.0, 110.0, 200.0, 300.0]})
+        # two candidates near one reference pick: only one pairs; XX.D is not a common station
+        cand = pd.DataFrame({"station": ["XX.A", "XX.A", "XX.B", "XX.D"], "phase": ["P", "P", "P", "P"],
+                             "time": [100.05, 100.3, 200.4, 300.0]})
+        p = score_picks_l5(cand, ref, (0.0, 1000.0))["phases"]["P"]
+        self.assertEqual((p["reference"], p["candidate"]), (3, 3))  # XX.C and XX.D drop out
+        self.assertEqual((p["matched_0.5s"], p["matched_0.1s"]), (2, 1))
+
+    def test_shelly_release_collapses_to_one_arrival_per_event_station_phase(self):
+        # three templates report one detection, a second match_id repeats it 0.2 s later,
+        # and a separate earthquake arrives 5 s later
+        raw = pd.DataFrame({"match_id": [1, 1, 1, 2, 3], "network": ["WY"] * 5, "station": ["A"] * 5,
+                            "phase": ["P"] * 5, "arrival": [10.0, 10.3, 10.1, 10.2, 15.0],
+                            "weight": [0.2, 0.9, 0.5, 0.4, 0.7]})
+        out = _collapse_shelly(raw)
+        self.assertEqual(sorted(out.arrival.round(2)), [10.3, 15.0])
 
     def test_off_structure_uses_other_references_only(self):
         ref = population("ref", [0.0, 10.0], [40.0, 40.0], [-100.0, -100.0], [5.0, 5.0])

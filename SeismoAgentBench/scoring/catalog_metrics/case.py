@@ -183,6 +183,30 @@ def _strength_time_headline(score: dict) -> dict:
             "recall_after_large": after.get("recall_after"), "recall_other": after.get("recall_other")}
 
 
+def pick_metrics(case: Case, picks_csv: Path) -> dict | None:
+    """L5 against the case's pick reference (metrics_v1.yaml pick_reference), if it has one."""
+    spec = case.config.get("pick_reference")
+    if not spec:
+        return None
+    from .picks_l5 import read_candidate_picks, read_reference_picks, score_picks_l5
+    if "frame" not in spec:
+        root = case.task_dir.parents[2] / "data" / case.task_dir.name
+        spec["frame"] = read_reference_picks(root / spec["path"], spec["format"])
+    out = score_picks_l5(read_candidate_picks(picks_csv), spec["frame"], (case.mask["start"], case.mask["end"]))
+    out["reference"] = spec["key"]
+    return out
+
+
+def _picks_headline(picks: dict | None) -> dict:
+    if not picks:
+        return {}
+    out = {}
+    for phase, entry in picks["phases"].items():
+        out[f"pick_recall_{phase}"] = entry.get("recall_0.5s")
+        out[f"pick_residual_mad_{phase}_s"] = entry.get("residual_mad_s")
+    return out
+
+
 def _scorer_record() -> dict:
     from SeismoAgentBench.execution.version import tools_snapshot
     snap = tools_snapshot(Path(__file__).resolve().parent)
@@ -210,6 +234,10 @@ def score_baseline(task_dir: Path, *, write: bool = True) -> dict:
                                         off_structure_km=case.config["off_structure_km"],
                                         primary=case.primary, mask=case.mask))
         score["headline"] = headline(score, case, ceiling)
+        picks_csv = case.config["expert"][key].get("picks")
+        if picks_csv:
+            score["picks"] = pick_metrics(case, case.task_dir / picks_csv)
+            score["headline"].update(_picks_headline(score["picks"]))
         rows[pop.key] = score
     report = {**_scorer_record(), "task": case.task_dir.name, "references": _references_record(case),
               "expert": {k: v.notes for k, v in case.expert.items()}, "ceilings": ceiling, "rows": rows}
@@ -265,6 +293,8 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
         audit = audited_false_rate(out_dir / REVIEW_DIR, 1 - score["union_support"]["fraction"]
                                    if score["union_support"]["fraction"] is not None else None)
         report["headline"]["audited_false_rate"] = audit["rate"] if audit else None
+        report["scores"]["picks"] = pick_metrics(case, work / "picks.csv")
+        report["headline"].update(_picks_headline(report["scores"]["picks"]))
         if write:
             from .figures import location_figure
             ref = case.refs[case.primary["location"]]

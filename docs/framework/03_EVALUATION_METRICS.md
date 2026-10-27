@@ -238,9 +238,23 @@ Kaikōura (12); M ≥ 5 (≤ 6 events per case) is read from the event list.
 
 ### L5 — Phase picks (P references; Magna, Maple Creek)
 
-Scored with `SeismoAgentBench/scoring/picks.py`: P and S recall and precision
-at 0.1 s and 0.5 s tolerance, median and MAD of the time residual, for picks
-on stations common to both sets.
+Reference picks (`pick_reference` in `metrics_v1.yaml`): Magna, Baker &
+Whidden (2021) manual picks; Maple Creek, the Shelly & Hardebeck (2019)
+correlation-derived release, collapsed to one arrival per detection, station
+and phase (highest weight; the release repeats each arrival once per
+matching template, ~12 times) and merged within 0.5 s per station and phase.
+Only the evaluation window and the stations present in both sets are used.
+Within each station and phase, candidate and reference picks are paired one
+to one, greedily by |dt| ≤ 0.5 s; the 0.1 s figures are the subset of those
+pairs.
+
+| Metric | Definition |
+|---|---|
+| `recall_0.5s`, `recall_0.1s` | paired / reference picks, per phase — headline `pick_recall_P`, `pick_recall_S` |
+| `precision_0.5s`, `precision_0.1s` | paired / candidate picks; a lower bound, since the reference covers only its own catalog's events |
+| `residual_median_s`, `residual_mad_s` | candidate − reference time of the 0.5 s pairs — headline `pick_residual_mad_<phase>_s` |
+
+The expert's own stage-03 picks are scored the same way (baseline expert-final row).
 
 ### L6 — Process and cost
 
@@ -285,6 +299,7 @@ Per case and configuration:
 5. depth artefacts: `depth_mode_share`;
 6. by magnitude class: `f1` (with recall, precision) and mean `dt`, `epi`, `dmag`; strength: `dmag` median and std, `dmag_slope_per_unit`; time: mean `dt`, `recall_after_large`;
 7. `off_structure_fraction` and `off_structure_after_shift`;
+   phase picks where a pick reference exists: `pick_recall_P/S`, `pick_residual_mad_P/S_s`;
 8. cost and wall time.
 
 Rows: each Agent configuration, *expert (blind)*, *expert (final)*, and each
