@@ -39,11 +39,12 @@ scientific limitations are described in each variant prompt and enforced by
 the machine-checkable output contracts (`output_contract_min.json`,
 `output_contract.json`). `prompt_tools.md` exposes the local seismotools library — PhaseNet;
 GaMMA, PyOcto and REAL (association); NonLinLoc and HypoInverse (absolute
-location); hypoDD, GrowClust and ccdt (relative relocation) — while leaving
+location); hypoDD, GrowClust and ccdt (relative relocation); Match&Locate
+(template matching) — while leaving
 method selection to the Agent. Each run records the seismotools commit in
 its provenance (`tools`).
 Runs before 2026-10-27 used the earlier tools prompt, which listed only
-PhaseNet, GaMMA, NonLinLoc and hypoDD.
+PhaseNet, GaMMA, NonLinLoc and hypoDD. Match&Locate was added on 2026-10-28.
 
 The dataset is an eight-day window (~11 GB, 1,184 daily per-channel MiniSEED
 files, 47 short-period stations of the Salt Lake Valley area — the 2019
