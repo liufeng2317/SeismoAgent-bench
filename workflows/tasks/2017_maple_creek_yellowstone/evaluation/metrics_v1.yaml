@@ -17,7 +17,7 @@ references:
   comcat: {roles: DLSM, depth_datum: surface}         # UUSS depths below the local surface
   shelly: {roles: D, time_only: true}                 # detections from the phase release
 expert:
-  final: {path: expert/export/r9/60_catalog/catalog_events.csv, time_column: origin_time_utc,
+  final: {path: expert/export/r11/60_catalog/catalog_events.csv, time_column: origin_time_utc,
           depth_column: depth_bsl_km, depth_datum: sea_level}
   blind: {path: expert/export/r1/04_locate_nonlinloc/full/events.csv, time_column: origin_time,
           depth_column: depth_below_sea_level_km, depth_datum: sea_level, keep: {status: LOCATED}}

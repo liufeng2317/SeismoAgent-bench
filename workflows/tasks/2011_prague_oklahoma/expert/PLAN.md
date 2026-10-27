@@ -255,3 +255,22 @@ depth +0.03 km, origin −0.007 s). Membership and magnitudes are r4's.
 
 M&L rows improve as much as picked rows (vs Cochran 0.487 → 0.383 km,
 picked 0.446 → 0.356). **Adopted**; evaluation layer = r5.
+
+## Baseline corrections (2026-10-28) — stages 65, 67
+
+Metrics v1 exposed three pipeline defects shared across cases (user decision 2026-10-28:
+unfreeze the expert baselines). Catalog-level rounds, no rerun of stages 01-60:
+
+- **r6** (stage 65, direct ML): 48 picked events with a direct ML
+  (≥ 3 stations, MAD ≤ 0.5), 24 adopted (24 had no magnitude);
+  direct − chain by direct ML: (-9.0, 1.0] +0.09 (n 10), (1.0, 2.0] +0.06 (n 14).
+- **r7** (stage 67, coda ghosts): 1 Match&Locate detections removed (of 1 with M ≥ 1.5); rule from the Ridgecrest blind review.
+- Final catalog **r7** (6,963 events) replaces r5 as expert final in `evaluation/metrics_v1.yaml`. Metrics v1, expert final:
+
+| metric | r5 | r7 |
+|---|---|---|
+| f1_M2 | 0.99 | 1.00 |
+| f1_M3 | 1.00 | 1.00 |
+| precision_M2 | 0.99 | 1.00 |
+| dmag_slope_per_unit | -0.22 | -0.22 |
+| recall_norm | 1.83 | 1.83 |

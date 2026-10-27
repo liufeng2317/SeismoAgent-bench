@@ -240,3 +240,24 @@ M&L rows move from 2.06 to 3.14 km (median, 68 matches) and its picked
 rows' p90 from 5.3 to 8.1 km, while post-mainshock rows improve (picked
 0.74/2.47 → 0.67/2.12 km, M&L 1.03/2.47 → 0.79/2.26 km). **Adopted**;
 evaluation layer = r7.
+
+## Baseline corrections (2026-10-28) — stages 65, 67
+
+Metrics v1 exposed three pipeline defects shared across cases (user decision 2026-10-28:
+unfreeze the expert baselines). Catalog-level rounds, no rerun of stages 01-60:
+
+- **r8** (stage 65, direct ML): 351 picked events with a direct ML
+  (≥ 3 stations, MAD ≤ 0.5), 313 adopted (312 had no magnitude);
+  direct − chain by direct ML: (1.0, 2.0] -0.03 (n 5), (2.0, 3.0] +0.20 (n 29), (3.0, 3.5] +0.03 (n 4), (3.5, 4.0] -0.41 (n 1).
+- **r9** (stage 67, coda ghosts): 49 Match&Locate detections removed (of 299 with M ≥ 1.5); rule from the Ridgecrest blind review.
+- Final catalog **r9** (8,174 events) replaces r7 as expert final in `evaluation/metrics_v1.yaml`. Metrics v1, expert final:
+
+| metric | r7 | r9 |
+|---|---|---|
+| f1_M2 | 0.79 | 0.81 |
+| f1_M3 | 0.81 | 0.83 |
+| f1_M4 | 0.80 | 0.80 |
+| precision_M2 | 0.70 | 0.73 |
+| dmag_mean_M4 | 0.05 | 0.05 |
+| dmag_slope_per_unit | -0.13 | -0.13 |
+| recall_norm | 1.16 | 1.16 |

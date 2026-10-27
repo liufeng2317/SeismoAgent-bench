@@ -17,7 +17,7 @@ references:
   chamberlain: {roles: DSM, depth_datum: sea_level}   # corrected GrowClust, 3-D frame
   geonet: {roles: DM, depth_datum: sea_level}         # operational; fixed-depth solutions -> no L
 expert:
-  final: {path: expert/export/r6/60_catalog/catalog_events.csv, time_column: origin_time_utc,
+  final: {path: expert/export/r8/60_catalog/catalog_events.csv, time_column: origin_time_utc,
           depth_column: depth_bsl_km, depth_datum: sea_level}
   blind: {path: expert/export/r1/04_locate_nonlinloc/full/events.csv, time_column: origin_time,
           depth_column: depth_below_sea_level_km, depth_datum: sea_level, keep: {status: LOCATED}}

@@ -208,3 +208,26 @@ not rerun. Stage-04 test on the r3 associations: Chamberlain 3.95/7.45 →
 M&L rows improve most (vs Lanza 4.75 → 2.49 km, vs Tan 4.51 → 4.10 km).
 GeoNet loses 3 matches. The 1-D vs 3-D offset (r2) remains the dominant term.
 **Adopted**; evaluation layer = r6.
+
+## Baseline corrections (2026-10-28) — stages 65, 67
+
+Metrics v1 exposed three pipeline defects shared across cases (user decision 2026-10-28:
+unfreeze the expert baselines). Catalog-level rounds, no rerun of stages 01-60:
+
+- **r7** (stage 65, direct ML): 544 picked events with a direct ML
+  (≥ 3 stations, MAD ≤ 0.5), 278 adopted (273 had no magnitude);
+  direct − chain by direct ML: (1.0, 2.0] +0.11 (n 106), (2.0, 3.0] +0.32 (n 155), (3.0, 3.5] +0.24 (n 5), (3.5, 4.0] +1.53 (n 2), (4.0, 5.0] +0.18 (n 3).
+- **r8** (stage 67, coda ghosts): 3 Match&Locate detections removed (of 166 with M ≥ 1.5); rule from the Ridgecrest blind review.
+- Final catalog **r8** (13,423 events) replaces r6 as expert final in `evaluation/metrics_v1.yaml`. Metrics v1, expert final:
+
+| metric | r6 | r8 |
+|---|---|---|
+| f1_M2 | 0.93 | 0.93 |
+| f1_M3 | 0.98 | 0.95 |
+| f1_M4 | 1.00 | 0.94 |
+| f1_M5 | – | 1.00 |
+| precision_M2 | 0.96 | 0.95 |
+| dmag_mean_M4 | -0.25 | -0.11 |
+| dmag_mean_M5 | – | -0.10 |
+| dmag_slope_per_unit | -0.08 | -0.03 |
+| recall_norm | 1.17 | 1.17 |

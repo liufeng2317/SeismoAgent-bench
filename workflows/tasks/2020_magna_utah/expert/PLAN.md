@@ -700,3 +700,26 @@ EDT moves epicentres 0.4 km further from every reference here and shifts
 depths by ~1 km; the basin layer was calibrated under GAU (r4), so the method
 change would need a re-calibration. stage 04 keeps GAU_ANALYTIC (the knob
 `nonlinloc.yaml location_method` now exists, default GAU).
+
+## Baseline corrections (2026-10-28) — stages 65, 67
+
+Metrics v1 exposed three pipeline defects shared across cases (user decision 2026-10-28:
+unfreeze the expert baselines). Catalog-level rounds, no rerun of stages 01-60:
+
+- **r10** (stage 65, direct ML): 59 picked events with a direct ML
+  (≥ 3 stations, MAD ≤ 0.5), 13 adopted (12 had no magnitude);
+  direct − chain by direct ML: (-9.0, 1.0] -0.21 (n 4), (1.0, 2.0] +0.02 (n 36), (2.0, 3.0] +0.36 (n 6), (5.0, 9.0] +0.74 (n 1).
+- **r11** (stage 67, coda ghosts): 15 Match&Locate detections removed (of 44 with M ≥ 1.5); rule from the Ridgecrest blind review.
+- Final catalog **r11** (5,507 events) replaces r8 as expert final in `evaluation/metrics_v1.yaml`. Metrics v1, expert final:
+
+| metric | r8 | r11 |
+|---|---|---|
+| f1_M2 | 0.95 | 0.96 |
+| f1_M3 | 0.97 | 0.99 |
+| f1_M4 | 1.00 | 1.00 |
+| f1_M5 | – | 1.00 |
+| precision_M2 | 0.91 | 0.93 |
+| dmag_mean_M4 | -0.59 | -0.44 |
+| dmag_mean_M5 | -0.98 | -0.24 |
+| dmag_slope_per_unit | -0.19 | -0.18 |
+| recall_norm | 1.16 | 1.16 |

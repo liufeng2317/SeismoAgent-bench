@@ -263,3 +263,27 @@ double-difference relocations and moves M&L events with their templates'
 stage-62 displacement, so an absolute-locator change reaches it only through
 a rerun of stages 52, 60, 62 and 63. Not done; the knob
 (`nonlinloc.yaml location_method`) is in place for that rerun.
+
+## Baseline corrections (2026-10-28) — stages 65, 66, 67
+
+Metrics v1 exposed three pipeline defects shared across cases (user decision 2026-10-28:
+unfreeze the expert baselines). Catalog-level rounds, no rerun of stages 01-60:
+
+- **53_direct_magnitude** (stage 65, direct ML): 310 picked events with a direct ML
+  (≥ 3 stations, MAD ≤ 0.5), 35 adopted (27 had no magnitude);
+  direct − chain by direct ML: (-9.0, 1.0] +0.12 (n 8), (1.0, 2.0] +0.31 (n 149), (2.0, 3.0] +0.25 (n 103), (3.0, 3.5] +0.32 (n 15), (3.5, 4.0] +0.43 (n 5), (4.0, 5.0] +0.43 (n 3).
+- **56_large_events** (stage 66): 38 depth-bound picked events with direct ML ≥ 3.5 restored (M7.1 → ML 5.88, M6.4 → 5.85, M5.4 → 5.36; ML saturates for the M7.1), 29 same-event Match&Locate rows dropped. Round 54 (all exclusion reasons) rejected: 10 of 15 location-quality removals lie 20–77 km from any ComCat event.
+- **57_coda_duplicates** (stage 67, coda ghosts): 629 Match&Locate detections removed (of 3337 with M ≥ 1.5); rule from the Ridgecrest blind review.
+- Final catalog **57_coda_duplicates** (17,917 events) replaces 12_dense_layered as expert final in `evaluation/metrics_v1.yaml`. Metrics v1, expert final:
+
+| metric | 12_dense_layered | 57_coda_duplicates |
+|---|---|---|
+| f1_M2 | 0.82 | 0.85 |
+| f1_M3 | 0.87 | 0.88 |
+| f1_M4 | 0.89 | 0.91 |
+| f1_M5 | 0.57 | 1.00 |
+| precision_M2 | 0.76 | 0.81 |
+| dmag_mean_M4 | -0.00 | 0.03 |
+| dmag_mean_M5 | -0.09 | -0.39 |
+| dmag_slope_per_unit | 0.01 | 0.02 |
+| recall_norm | 1.40 | 1.39 |

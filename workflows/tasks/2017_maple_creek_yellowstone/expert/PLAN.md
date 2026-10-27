@@ -336,3 +336,24 @@ M&L rows vs ComCat 1.22 → 0.91 km; picked rows 0.86 → 0.90 km (median; the
 p90 and the off-fault share improve). One ComCat event fewer matched.
 **Adopted**; evaluation layer = r9. The +1.4 km depth offset to ComCat is
 unchanged (documented r5–r7 input difference).
+
+## Baseline corrections (2026-10-28) — stages 65, 67
+
+Metrics v1 exposed three pipeline defects shared across cases (user decision 2026-10-28:
+unfreeze the expert baselines). Catalog-level rounds, no rerun of stages 01-60:
+
+- **r10** (stage 65, direct ML): 10 picked events with a direct ML
+  (≥ 3 stations, MAD ≤ 0.5), 2 adopted (1 had no magnitude);
+  direct − chain by direct ML: (-9.0, 1.0] -0.06 (n 1), (1.0, 2.0] +0.56 (n 7), (4.0, 5.0] +0.69 (n 1).
+- **r11** (stage 67, coda ghosts): 2 Match&Locate detections removed (of 14 with M ≥ 1.5); rule from the Ridgecrest blind review.
+- Final catalog **r11** (12,600 events) replaces r9 as expert final in `evaluation/metrics_v1.yaml`. Metrics v1, expert final:
+
+| metric | r9 | r11 |
+|---|---|---|
+| f1_M2 | 1.00 | 1.00 |
+| f1_M3 | 1.00 | 1.00 |
+| f1_M4 | – | 1.00 |
+| precision_M2 | 1.00 | 1.00 |
+| dmag_mean_M4 | -0.90 | -0.21 |
+| dmag_slope_per_unit | -0.32 | -0.31 |
+| recall_norm | 1.15 | 1.15 |
