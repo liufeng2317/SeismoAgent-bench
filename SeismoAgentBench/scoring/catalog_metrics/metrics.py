@@ -333,7 +333,9 @@ def score_population(cand: Population, refs: Mapping[str, Population], *, expert
     authority = refs.get(primary.get("magnitude"))
     if authority is not None and authority.key != cand.key:
         pairs = correspond(cand, authority)["pairs"]
-        out["by_magnitude"] = magnitude_classes(cand, authority, center, pairs)
+        supported = np.ones(len(cand.events), dtype=bool)
+        supported[out["union_support"]["unsupported_index"]] = False
+        out["by_magnitude"] = magnitude_classes(cand, authority, center, pairs, supported)
         out["strength"] = strength(cand, authority, pairs)
         detection_ref = refs.get(primary.get("detection"))
         if detection_ref is not None and detection_ref.key != cand.key and mask is not None:

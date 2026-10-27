@@ -58,8 +58,13 @@ def magnitude_bias(cand: Population, authority: Population, pairs) -> float | No
     return float(np.median(dm)) if len(dm) >= BIAS_MIN_PAIRS else None
 
 
-def magnitude_classes(cand: Population, authority: Population, center, pairs=None) -> dict:
-    """Recall, precision, F1 and matched-pair error distributions for M>=2, 3, 4, 5."""
+def magnitude_classes(cand: Population, authority: Population, center, pairs=None, supported=None) -> dict:
+    """Recall, precision, F1 and matched-pair error distributions for M>=2, 3, 4, 5.
+
+    A candidate event counts as real when it matches an authority event or,
+    given ``supported`` (union support, §5 L1), any other reference: an
+    operational catalog can be incomplete even at M 2 (Kilauea, 4-5 May 2018).
+    """
     if pairs is None:
         pairs = correspond(cand, authority)["pairs"]
     bias = magnitude_bias(cand, authority, pairs)
@@ -68,6 +73,7 @@ def magnitude_classes(cand: Population, authority: Population, center, pairs=Non
     aligned = m_cand - (bias or 0.0)
     matched_cand = np.zeros(len(m_cand), dtype=bool)
     matched_cand[pairs.a] = True
+    real = matched_cand | (supported if supported is not None else False)
     pair_of_ref = np.full(len(m_ref), -1)
     pair_of_ref[pairs.b] = np.arange(len(pairs))
     errors = _pair_errors(cand, authority, pairs, center)
@@ -81,13 +87,14 @@ def magnitude_classes(cand: Population, authority: Population, center, pairs=Non
         recall = hit.mean()
         cand_in = np.isfinite(aligned) & (aligned >= t - 1e-9)
         raw_in = np.isfinite(m_cand) & (m_cand >= t - 1e-9)
-        precision = matched_cand[cand_in].mean() if cand_in.any() else None
+        precision = real[cand_in].mean() if cand_in.any() else None
         f1 = (2 * precision * recall / (precision + recall)
               if precision is not None and precision + recall > 0 else None)
         sel = pair_of_ref[ref_in][hit]
         entry = {"reference_events": int(len(ref_in)), "matched": int(hit.sum()), "recall": _num(recall),
                  "candidate_events": int(cand_in.sum()), "precision": _num(precision), "f1": _num(f1),
-                 "precision_unaligned": _num(matched_cand[raw_in].mean()) if raw_in.any() else None,
+                 "precision_unaligned": _num(real[raw_in].mean()) if raw_in.any() else None,
+                 "precision_authority_only": _num(matched_cand[cand_in].mean()) if cand_in.any() else None,
                  "dt_s": _describe(errors["dt_s"][sel]), "epi_km": _describe(errors["epi_km"][sel], signed=False),
                  "dz_km": _describe(errors["dz_km"][sel]), "dmag": _describe(errors["dmag"][sel])}
         if cand.depth_known is False or authority.depth_known is False:

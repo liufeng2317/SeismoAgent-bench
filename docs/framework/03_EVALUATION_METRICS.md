@@ -211,14 +211,17 @@ authority (A) and the primary detection reference:
 are omitted). A candidate event enters class M ≥ T when its magnitude minus
 the candidate's median offset from A (over all matched pairs, ≥ 5 pairs) is
 ≥ T, so precision and F1 measure detection and the calibration is scored by
-`dmag`; `precision_unaligned` uses the raw magnitudes. Above M 2–3 the
-authority is complete, so precision against it is meaningful, unlike at
-small magnitudes (§5 L1). Per class:
+`dmag`; `precision_unaligned` uses the raw magnitudes. A candidate event of
+the class counts as real when it matches an A event or is supported by U
+(§5 L1): operational catalogs are not complete at M 2 during crises
+(Kīlauea 4–5 May 2018: half of the expert's M2+ events missing from HVO
+are in Shelly, Wei or Matoza); `precision_authority_only` keeps the
+stricter value. Per class:
 
 | Metric | Definition |
 |---|---|
 | `recall` | matched A events of the class / A events of the class |
-| `precision` | candidate events of the class matched to any A event / candidate events of the class |
+| `precision` | candidate events of the class matched to any A event or supported by U / candidate events of the class |
 | **`f1`** | 2PR / (P + R) |
 | `dt_s`, `epi_km`, `dz_km`, `dmag` | distributions (n, mean, median, std, p90) over the matched A events of the class |
 | `events` | every A event of the class, matched or missed, with its errors — listed for classes of ≤ 20 events and for M ≥ 4 |
