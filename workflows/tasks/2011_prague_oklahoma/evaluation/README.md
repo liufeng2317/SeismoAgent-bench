@@ -59,16 +59,26 @@ for it.
 | `02_reproduction_population_diagnostics` | (a) magnitude–frequency (types differ), (b) depth CDF, (c) cumulative detections (the mainshock precedes the window; no marker). |
 | `03_agent_reference_correspondence` | Per focus agent arm: \|Δt\| vs expert, epicentral p50/p90 vs expert/Cochran/McMahon, magnitude bias vs expert, depth vs Cochran. |
 
-## Per-run evaluation
+## Per-run scoring (metrics v1)
+
+Runs are scored with the pre-registered metrics
+(`docs/framework/03_EVALUATION_METRICS.md`), configured for this case in
+`metrics_v1.yaml`. From the repository root, with the evaluation environment
+(`/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python`):
 
 ```bash
-cd workflows/tasks/2011_prague_oklahoma/evaluation/scripts
-/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python evaluate_run.py \
-  --run-dir ../../runs/<variant>/<harness>/<model>/<RUN_ID>
+# one run: output contract + metrics v1 (both declared in task_<variant>.json)
+python -m SeismoAgentBench evaluate --run-dir workflows/tasks/2011_prague_oklahoma/runs/<variant>/<harness>/<model>/<run_id>
+# every run, per configuration (scores unscored runs; failed runs count as zero for detection)
+python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir workflows/tasks/2011_prague_oklahoma
+# reference ceilings and the expert final / blind rows
+python -m SeismoAgentBench.scoring.catalog_metrics baseline --task-dir workflows/tasks/2011_prague_oklahoma
 ```
 
-Smoke-tested 2026-10-23 with the r2 catalog as a pseudo run (Cochran
-63.0 %, McMahon 73.4 %, epicentral 0.49 km).
+Per run: `<run>/evaluation/metrics_v1.json`, `location_diagnostics.png`,
+`audit_sample.csv`; per case: `metrics_v1_summary.json`, `metrics_v1_baseline.json`.
+The figures in this directory are descriptive; their matcher statistics are
+not benchmark scores.
 
 ## Implementation
 
@@ -76,7 +86,7 @@ References are read and masked by the expert stage-05 module
 (`expert/04_comparison/05_match_references.py`) — one implementation for
 round feedback and evaluation. `plot_evaluation_comparison.py` is shared with
 Kīlauea and Kaikōura except for its settings block (title, primary
-reference, view, rounds); `evaluate_run.py` is case-independent.
+reference, view, rounds).
 
 ## Regenerating
 

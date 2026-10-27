@@ -87,9 +87,10 @@ override the defaults. Override `RUN_ID` and `TIMEOUT` when needed.
 
 The expert scientific workflow remains under `expert/` and is not part of
 the Agent task interface; its round-by-round tuning log is `expert/PLAN.md`.
-Cross-run evaluation figures and match statistics live under `evaluation/`
-(see `evaluation/README.md`); each completed run additionally gets its own
-evaluation via `evaluation/scripts/evaluate_run.py --run-dir <run>`.
+Runs are scored with `python -m SeismoAgentBench evaluate --run-dir <run>`
+(metrics v1, configured in `evaluation/metrics_v1.yaml`); cross-run
+summaries and descriptive figures live under `evaluation/` (see
+`evaluation/README.md`).
 
 Large waveform files, source catalogs and generated analysis products remain in
 the external data store and are not copied into Git.

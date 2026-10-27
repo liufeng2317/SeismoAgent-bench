@@ -60,24 +60,17 @@ Contracts: `output_contract_min.json` (picks + catalog) and
 
 ## Scoring wiring status
 
-All task specs declare `evaluation.scorers` and reference a machine-checkable
-`output_contract`, so `python -m SeismoAgentBench evaluate` validates CSV
-columns (`artifact-contract@1`) out of the box. `phase-picking-basic@1` is
-declared and will be recorded as `skipped` until a reference picks CSV is
-passed via `--pick-reference`.
-
-Two wiring gaps are known and deliberate:
-
-1. **Event-level catalog scoring** (`catalog-basic@1`) is not declared because
-   that scorer requires the framework's JSON catalog artifact, while the task
-   contract uses `catalog.csv`. Wiring it needs either a CSV catalog scorer or
-   a declared conversion step.
-2. **Column-name mismatch in `phase-picking-basic@1`**: the scorer reads
-   `station`, `phase`, `arrival_time_utc`
-   (`SeismoAgentBench/scoring/picks.py` REQUIRED_COLUMNS) while the task
-   contract uses `station_id` and `time_utc`. Before scoring, a thin adapter
-   must map `station_id` → `station` and `time_utc` → `arrival_time_utc`.
-   The reference picks CSV must be authored in the scorer's column vocabulary.
+Every task spec declares `artifact-contract@1` and `catalog-metrics@1`, so
+`python -m SeismoAgentBench evaluate --run-dir <run>` validates the CSV
+contract and scores the run with the pre-registered metrics v1
+(`docs/framework/03_EVALUATION_METRICS.md`; case configuration in
+`evaluation/metrics_v1.yaml`): detection, location, structure and magnitude
+against every reference in its assigned roles, by magnitude class, plus
+process, leakage and the unsupported-event audit sample. Configurations are
+aggregated with `python -m SeismoAgentBench.scoring.catalog_metrics summary
+--task-dir <this task>` (see `evaluation/README.md`). Runs started before
+2026-10-28 carry the earlier scorer declaration in their control snapshot
+and are scored with the summary command.
 
 ## Cost and sequencing
 

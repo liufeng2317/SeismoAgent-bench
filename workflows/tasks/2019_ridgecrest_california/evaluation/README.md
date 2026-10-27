@@ -40,9 +40,6 @@ sequence over the fixed evaluation window
 | `04_reproduction_hourly_rates` | Single-panel hourly-rate timeline, all populations, symlog scale. |
 | `05_three_way_comparison` | Focused six-panel comparison of Shelly, the expert reproduction, and one agent run (`--agent`, default `tools`), displayed as `reference`, `expert`, and `claude glm5.3 (tools)`. All three maps share the fixed reference-box extent; agent events outside the box are clipped and only counted in the red annotation. |
 
-`match_statistics.json` records the populations, provenance, matching
-criteria and all pair statistics shown in the figures; the recall and
-matched-pair panels feature the arm named by `FOCUS_AGENT` (`agent_tools`).
 
 ## Event correspondence criteria
 
@@ -63,53 +60,26 @@ Medians are vs Expert. Since 2026-10-25 the expert is the stage-60 union
 reference columns are unchanged. The `tools` arm still roughly doubles both
 precision and recall over `min` against every population.
 
-## Per-run evaluation
+## Per-run scoring (metrics v1)
 
-This directory holds the **cross-run** comparison. Each run additionally
-gets its own evaluation next to its record, produced by
-`scripts/evaluate_run.py`:
-
-```text
-<run>/evaluation/match_statistics.json      per-run stats (same schema and
-                                            matcher as the cross-run file)
-<run>/evaluation/figures/01_run_vs_references    reference vs expert vs run
-                                                 (maps at the fixed reference-box extent)
-<run>/evaluation/figures/02_run_correspondence   matched-pair diagnostics
-```
+Runs are scored with the pre-registered metrics
+(`docs/framework/03_EVALUATION_METRICS.md`), configured for this case in
+`metrics_v1.yaml`. From the repository root, with the evaluation environment
+(`/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python`):
 
 ```bash
-cd workflows/tasks/2019_ridgecrest_california/evaluation/scripts
-/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python evaluate_run.py \
-  --run-dir ../../runs/tools/claude/glm-5.3/20261015T020300Z
-# every run that produced a catalog:
-for d in ../../runs/*/*/*/*/; do
-  [ -f "$d/work/catalog.csv" ] && \
-  /liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python evaluate_run.py --run-dir "$d"
-done
+# one run: output contract + metrics v1 (both declared in task_<variant>.json)
+python -m SeismoAgentBench evaluate --run-dir workflows/tasks/2019_ridgecrest_california/runs/<variant>/<harness>/<model>/<run_id>
+# every run, per configuration (scores unscored runs; failed runs count as zero for detection)
+python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir workflows/tasks/2019_ridgecrest_california
+# reference ceilings and the expert final / blind rows
+python -m SeismoAgentBench.scoring.catalog_metrics baseline --task-dir workflows/tasks/2019_ridgecrest_california
 ```
 
-The per-run numbers are computed by the same greedy matcher (4 s / 15 km)
-as the cross-run statistics, so the `agent_tools` block of the tools run's
-`match_statistics.json` is identical to the one in this directory. This is
-deliberately separate from the package's formal scorer path
-(`python -m SeismoAgentBench evaluate --run-dir …`), which writes contract/
-scientific score JSONs, uses different matching criteria, and only accepts
-runs in terminal success-ish states.
-
-### Where the code lives (cross-case convention)
-
-Per-case evaluation code stays under `workflows/tasks/<case>/evaluation/scripts/`;
-the cross-case contract is the convention, not a shared package: a script
-named `evaluate_run.py`, CLI `--run-dir <run>`, outputs
-`<run>/evaluation/{match_statistics.json, figures/}`, plus a cross-run
-comparison script at case level. Reasons not to put an engine in the
-`SeismoAgentBench` package today: the package is matplotlib-free (only the
-eval environment installs plotting), and this is currently the only case
-with gated reference catalogs and a house comparison-figure API. When a
-second case gains references, lift the shared core (population records,
-greedy matcher, statistics, compact figure set) into
-`SeismoAgentBench/evaluation/` driven by per-case config; the
-`evaluate_run.py --run-dir` CLI contract survives that move unchanged.
+Per run: `<run>/evaluation/metrics_v1.json`, `location_diagnostics.png`,
+`audit_sample.csv`; per case: `metrics_v1_summary.json`, `metrics_v1_baseline.json`.
+The figures in this directory are descriptive; their matcher statistics are
+not benchmark scores.
 
 ## Style and palette
 
@@ -131,7 +101,6 @@ the population bar regardless of color.
 cd workflows/tasks/2019_ridgecrest_california/evaluation/scripts
 /liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python plot_evaluation_comparison.py
 /liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python plot_evaluation_comparison_three_way.py [--agent agent_tools]
-/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python evaluate_run.py --run-dir <run>
 ```
 
 Requires the reference-audit gate to be current

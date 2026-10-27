@@ -14,7 +14,7 @@ Outputs (evaluation/figures):
      stage-rate heatmap, recall-by-magnitude
   03_agent_reference_correspondence   matched-pair diagnostics
   04_reproduction_hourly_rates        events-per-hour timeline
-Also writes evaluation/match_statistics.json.
+Benchmark scores come from metrics v1 (SeismoAgentBench/scoring/catalog_metrics); these are figures only.
 """
 import argparse
 import bisect
@@ -585,15 +585,6 @@ def main():
         fig_diagnostics(out, cfg, audit, pops, stats)
         fig_correspondence(out, cfg, audit, pops, stats)
         fig_rates(out, cfg, audit, pops)
-    report = {
-        'generated_utc': datetime.now(timezone.utc).isoformat(timespec='seconds'),
-        'populations': {r['key']: {'label': r['label'], 'records': len(r['rows']),
-                                   'color': r['color']} for r in pops},
-        'inputs': inputs,
-        'statistics': stats,
-    }
-    (args.task_dir / 'evaluation' / 'match_statistics.json').write_text(
-        json.dumps(report, indent=2, ensure_ascii=False) + '\n')
     print(json.dumps({r['key']: len(r['rows']) for r in pops}, ensure_ascii=False))
     print('Figures:', out)
 

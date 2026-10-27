@@ -28,8 +28,6 @@ fixed evaluation window **[2020-03-18T00:00:00Z, 2020-03-26T00:00:00Z)**:
 | `02_reproduction_population_diagnostics` | (a) magnitude–frequency (cumulative counts, Baker's −10 "no magnitude" sentinels excluded), (b) depth distribution (CDF, km below sea level), (c) cumulative detections with time (dotted line = mainshock) — the completeness differences between catalogs read directly as the gaps between curves. One shared legend. |
 | `03_agent_reference_correspondence` | Matched-pair diagnostics for the focus agent arm: (a) \|Δ origin time\| vs expert, (b) epicentral p50/p90 vs expert/pang/uuss, (c) magnitude bias vs expert magnitude with running median, (d) depth-vs-depth vs pang with 1:1 line. Written per-run (and cross-run once agent runs are registered). |
 
-`match_statistics.json` records the populations, provenance, matching
-criteria and all pair statistics shown in the figures.
 
 ## Event correspondence criteria
 
@@ -70,51 +68,26 @@ are themselves mislocated shallow; depths shallower than ~4 km bsl are not to
 be interpreted. The r8 epicentral median (1.09 vs 0.88 km in r7) reflects a
 rigid offset of the DD cluster, not added scatter.
 
-## Per-run evaluation
+## Per-run scoring (metrics v1)
 
-This directory holds the **cross-run** comparison. Each run additionally
-gets its own evaluation next to its record, produced by
-`scripts/evaluate_run.py`:
-
-```text
-<run>/evaluation/match_statistics.json      per-run stats (same schema and
-                                            matcher as the cross-run file)
-<run>/evaluation/figures/01_run_vs_references   same layout as figure 01 with
-                                                 three columns: pang | expert | run
-<run>/evaluation/figures/02_run_correspondence  matched-pair diagnostics
-```
+Runs are scored with the pre-registered metrics
+(`docs/framework/03_EVALUATION_METRICS.md`), configured for this case in
+`metrics_v1.yaml`. From the repository root, with the evaluation environment
+(`/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python`):
 
 ```bash
-cd workflows/tasks/2020_magna_utah/evaluation/scripts
-/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python evaluate_run.py \
-  --run-dir ../../runs/tools/claude/<model>/<RUN_ID>
-# every run that produced a catalog:
-for d in ../../runs/*/*/*/*/; do
-  [ -f "$d/work/catalog.csv" ] && \
-    /liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python evaluate_run.py --run-dir "$d"
-done
+# one run: output contract + metrics v1 (both declared in task_<variant>.json)
+python -m SeismoAgentBench evaluate --run-dir workflows/tasks/2020_magna_utah/runs/<variant>/<harness>/<model>/<run_id>
+# every run, per configuration (scores unscored runs; failed runs count as zero for detection)
+python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir workflows/tasks/2020_magna_utah
+# reference ceilings and the expert final / blind rows
+python -m SeismoAgentBench.scoring.catalog_metrics baseline --task-dir workflows/tasks/2020_magna_utah
 ```
 
-The per-run numbers use the same greedy matcher (4 s / 15 km) as the
-cross-run statistics, so a run's block in its own `match_statistics.json`
-is identical to the one this directory would print for it. This is
-deliberately separate from the package's formal scorer path
-(`python -m SeismoAgentBench evaluate --run-dir …`), which writes contract/
-scientific score JSONs, uses different matching criteria, and only accepts
-runs in terminal success-ish states.
-
-### Where the code lives (cross-case convention)
-
-Per-case evaluation code stays under `workflows/tasks/<case>/evaluation/scripts/`;
-the cross-case contract is the convention, not a shared package: a script
-named `evaluate_run.py`, CLI `--run-dir <run>`, outputs
-`<run>/evaluation/{match_statistics.json, figures/}`. The Magna comparison
-module is self-contained (stdlib + numpy + matplotlib + PyYAML); its
-reference readers are ports of the expert stage-05 readers and any reader
-fix must be applied in both places. If a third case gains references, lift
-the shared core (population records, greedy matcher, statistics, compact
-figure set) into `SeismoAgentBench/evaluation/` driven by per-case config;
-the `evaluate_run.py --run-dir` CLI contract survives that move unchanged.
+Per run: `<run>/evaluation/metrics_v1.json`, `location_diagnostics.png`,
+`audit_sample.csv`; per case: `metrics_v1_summary.json`, `metrics_v1_baseline.json`.
+The figures in this directory are descriptive; their matcher statistics are
+not benchmark scores.
 
 ## Style and palette
 
@@ -138,7 +111,6 @@ marks the M 5.7 mainshock anchor.
 ```bash
 cd workflows/tasks/2020_magna_utah/evaluation/scripts
 /liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python plot_evaluation_comparison.py
-/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python evaluate_run.py --run-dir <run>
 ```
 
 Reference cohorts are gated by the expert validation config (masked counts

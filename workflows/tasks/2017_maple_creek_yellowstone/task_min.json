@@ -37,10 +37,7 @@
         "name": "artifact-contract",
         "version": "1"
       },
-      {
-        "name": "phase-picking-basic",
-        "version": "1"
-      }
+      {"name": "catalog-metrics", "version": "1"}
     ]
   }
 }

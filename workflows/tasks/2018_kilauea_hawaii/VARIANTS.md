@@ -63,18 +63,17 @@ Ridgecrest contracts (the output schema is case-independent).
 
 ## Scoring wiring status
 
-All task specs declare `evaluation.scorers` and reference a machine-checkable
-`output_contract`, so `python -m SeismoAgentBench evaluate` validates CSV
-columns (`artifact-contract@1`) out of the box. `phase-picking-basic@1` is
-declared and will be recorded as `skipped` until a reference picks CSV is
-passed via `--pick-reference`. The same two wiring gaps as the Ridgecrest
-case apply and are deliberate: no event-level `catalog-basic@1` scorer for
-the CSV contract, and a column-name adapter
-(`station_id`→`station`, `time_utc`→`arrival_time_utc`) needed before
-`phase-picking-basic@1` runs. Event-level scoring in practice goes through
-`evaluation/scripts/evaluate_run.py` (greedy 4 s / 15 km matcher against
-the expert catalog, Shelly, Wei, Matoza and ComCat; see
-`evaluation/README.md`).
+Every task spec declares `artifact-contract@1` and `catalog-metrics@1`, so
+`python -m SeismoAgentBench evaluate --run-dir <run>` validates the CSV
+contract and scores the run with the pre-registered metrics v1
+(`docs/framework/03_EVALUATION_METRICS.md`; case configuration in
+`evaluation/metrics_v1.yaml`): detection, location, structure and magnitude
+against every reference in its assigned roles, by magnitude class, plus
+process, leakage and the unsupported-event audit sample. Configurations are
+aggregated with `python -m SeismoAgentBench.scoring.catalog_metrics summary
+--task-dir <this task>` (see `evaluation/README.md`). Runs started before
+2026-10-28 carry the earlier scorer declaration in their control snapshot
+and are scored with the summary command.
 
 ## Cost and sequencing
 

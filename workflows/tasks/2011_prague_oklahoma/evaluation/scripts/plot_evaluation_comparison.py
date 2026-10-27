@@ -23,7 +23,8 @@ Isken 60 s / 5 km). Reference depth datums are unstated (local surface
 
 Outputs (evaluation/): figures/01_reproduction_spatial_comparison,
 figures/02_reproduction_population_diagnostics, figures/03_agent_reference_
-correspondence (per-run via evaluate_run.py), match_statistics.json.
+correspondence (focus agent arm).
+Benchmark scores come from metrics v1 (SeismoAgentBench/scoring/catalog_metrics); these are figures only.
 """
 import argparse
 import bisect
@@ -540,17 +541,6 @@ def main():
         fig_diagnostics(figures, populations)
         wrote = fig_correspondence(figures, populations)
 
-    report = {
-        'generated_utc': datetime.now(timezone.utc).isoformat(timespec='seconds'),
-        'evaluation_window': {'start_utc': MASK['window']['start_utc'], 'end_utc': MASK['window']['end_utc']},
-        'matching': {'dt_max_s': DT_MAX_S, 'd_max_km': D_MAX_KM, 'method': 'greedy one-to-one by (distance, dt)'},
-        'populations': {p['key']: {'label': p['label'], 'records': len(p['rows']), 'color': p['color']}
-                        for p in populations},
-        'inputs': inputs,
-        'statistics': stats,
-    }
-    (out / 'match_statistics.json').write_text(
-        json.dumps(report, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
     for p in populations:
         if p['key'] in stats:
             v = stats[p['key']]['versus']

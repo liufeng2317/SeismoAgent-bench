@@ -132,6 +132,7 @@ def evaluate_run(run_dir: str | Path, *, reference_manifest: str | Path | None =
     scientific = None
     summary = None
     pick_score = None
+    catalog_metrics = None
     for plan_item in scorer_plan:
         definition = registry.resolve(plan_item["name"], plan_item["version"])
         if definition.handler is None:
@@ -169,6 +170,9 @@ def evaluate_run(run_dir: str | Path, *, reference_manifest: str | Path | None =
         elif outcome["result_key"] == "pick_scientific_score":
             pick_score = outcome["payload"]
             result["pick_scientific_scoring"] = "passed"
+        elif outcome["result_key"] == "catalog_metrics":
+            catalog_metrics = outcome["payload"]
+            result["catalog_metrics"] = "passed"
     _write_json(score_dir / "scorer_plan.json", {
         "schema_version": 1, "status": "completed", "scorers": scorer_plan,
     })
@@ -191,4 +195,7 @@ def evaluate_run(run_dir: str | Path, *, reference_manifest: str | Path | None =
         output_result["task_summary"] = summary
     if pick_score is not None:
         output_result["pick_scientific_score"] = pick_score
+    if catalog_metrics is not None:
+        output_result["catalog_metrics"] = {"headline": catalog_metrics.get("headline"),
+                                            "completion": catalog_metrics.get("completion")}
     return output_result

@@ -60,21 +60,27 @@ better than ComCat's (expert PLAN.md, depth-offset diagnostic).
 | `02_reproduction_population_diagnostics` | (a) magnitude–frequency (Shelly included; magnitude types differ), (b) depth CDF (located populations), (c) cumulative detections with time (dotted line = Mw 4.4). |
 | `03_agent_reference_correspondence` | Per focus agent arm: \|Δt\| vs expert, epicentral p50/p90 vs expert/ComCat, magnitude bias vs expert, depth vs ComCat. |
 
-`match_statistics.json` records populations, provenance, criteria and all
-pair statistics.
 
-## Per-run evaluation
+## Per-run scoring (metrics v1)
+
+Runs are scored with the pre-registered metrics
+(`docs/framework/03_EVALUATION_METRICS.md`), configured for this case in
+`metrics_v1.yaml`. From the repository root, with the evaluation environment
+(`/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python`):
 
 ```bash
-cd workflows/tasks/2017_maple_creek_yellowstone/evaluation/scripts
-/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python evaluate_run.py \
-  --run-dir ../../runs/<variant>/<harness>/<model>/<RUN_ID>
+# one run: output contract + metrics v1 (both declared in task_<variant>.json)
+python -m SeismoAgentBench evaluate --run-dir workflows/tasks/2017_maple_creek_yellowstone/runs/<variant>/<harness>/<model>/<run_id>
+# every run, per configuration (scores unscored runs; failed runs count as zero for detection)
+python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir workflows/tasks/2017_maple_creek_yellowstone
+# reference ceilings and the expert final / blind rows
+python -m SeismoAgentBench.scoring.catalog_metrics baseline --task-dir workflows/tasks/2017_maple_creek_yellowstone
 ```
 
-writes `<run>/evaluation/{match_statistics.json, figures/01_run_vs_references,
-figures/02_run_correspondence}` with the same matcher. Smoke-tested
-2026-10-23 with the r5 catalog as a pseudo run (ComCat 95.7 %, Shelly net
-8.6 % — identical to expert stage 05).
+Per run: `<run>/evaluation/metrics_v1.json`, `location_diagnostics.png`,
+`audit_sample.csv`; per case: `metrics_v1_summary.json`, `metrics_v1_baseline.json`.
+The figures in this directory are descriptive; their matcher statistics are
+not benchmark scores.
 
 ## Regenerating
 
