@@ -21,7 +21,18 @@ pick_id,event_id,station_id,channel_id,phase,time_utc,probability,uncertainty_s,
 event_id,origin_time_utc,latitude,longitude,depth_km,magnitude,magnitude_type,n_picks,n_p_picks,n_s_picks,status
 ```
 
-Use ISO 8601 UTC timestamps. `event_id` must match between the two files and may be empty for an unassociated pick. `depth_km` is kilometres below sea level, positive down. `status` is `accepted`, `uncertain` or `rejected`; keep rejected rows in the files (they are not scored). `catalog.csv` may add, after the columns above, `horizontal_uncertainty_km`, `depth_uncertainty_km` and `origin_time_uncertainty_s` (1σ; may be empty).
+Field conventions:
+
+- UTF-8, comma-separated, the header rows above in exactly this order (followed only by the optional catalog columns below); the empty string for unavailable fields; no units inside cells.
+- `station_id` is `NET.STA` (for example `UU.AVE`). `channel_id` is the full SEED channel `NET.STA.LOC.CHA` with an empty location code written as an empty segment (for example `UU.AVE.01.ENE`, or `XX.ABC..HNE` when the location code is empty).
+- `phase` is `P` or `S`. `time_utc` and `origin_time_utc` are ISO 8601 UTC timestamps ending in `Z` or `+00:00`.
+- `probability` is a detector-assigned quality score in [0, 1]; `uncertainty_s` is a pick-time uncertainty in seconds; both may be empty.
+- `event_id` must match between the two files; an empty `event_id` marks an unassociated pick.
+- `status` is `accepted`, `uncertain` or `rejected`; keep rejected rows in the files (they are not scored).
+- `latitude` and `longitude` are decimal degrees (WGS84). `depth_km` is kilometres below sea level, positive down; it may be empty when depth is not resolvable.
+- `magnitude` may be empty; `magnitude_type` is a short code such as `ML`, `Md`, `Mw` or `M`.
+- `n_picks`, `n_p_picks` and `n_s_picks` count the non-rejected `picks.csv` rows of the event.
+- `catalog.csv` may add, after the columns above, `horizontal_uncertainty_km`, `depth_uncertainty_km` and `origin_time_uncertainty_s` (1σ; may be empty).
 
 ### Validity conditions
 
