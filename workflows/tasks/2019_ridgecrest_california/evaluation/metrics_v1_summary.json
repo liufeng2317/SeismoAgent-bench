@@ -1,0 +1,211 @@
+{
+ "metrics_version": 1,
+ "scorer_commit": "fcf4666e4212563f39e8b53d8e42c43690181f3c",
+ "scorer_dirty": false,
+ "generated_utc": "2026-10-27T04:24:12+00:00",
+ "task": "2019_ridgecrest_california",
+ "configurations": [
+  {
+   "variant": "base",
+   "harness": "claude",
+   "model": "glm-5.3",
+   "launched": 1,
+   "leakage_flagged": [],
+   "completion_rate": 1.0,
+   "runs": [
+    {
+     "run_id": "20261013T043225Z",
+     "completed": true,
+     "recall": 0.1487,
+     "recall_norm": 0.2233,
+     "union_support": 0.848,
+     "audited_false_rate": null,
+     "epi_median_km": 2.2264,
+     "off_structure_fraction": 0.197
+    }
+   ],
+   "recall": {
+    "mean": 0.1487,
+    "min": 0.1487,
+    "max": 0.1487,
+    "n": 1
+   },
+   "recall_norm": {
+    "mean": 0.2233,
+    "min": 0.2233,
+    "max": 0.2233,
+    "n": 1
+   },
+   "union_support": {
+    "mean": 0.848,
+    "min": 0.848,
+    "max": 0.848,
+    "n": 1
+   },
+   "audited_false_rate": null,
+   "epi_median_km": {
+    "mean": 2.2264,
+    "min": 2.2264,
+    "max": 2.2264,
+    "n": 1
+   },
+   "off_structure_fraction": {
+    "mean": 0.197,
+    "min": 0.197,
+    "max": 0.197,
+    "n": 1
+   },
+   "cost_usd": {
+    "mean": 19.4533,
+    "min": 19.4533,
+    "max": 19.4533,
+    "n": 1
+   },
+   "elapsed_s": {
+    "mean": 11356.4,
+    "min": 11356.4,
+    "max": 11356.4,
+    "n": 1
+   },
+   "turns": {
+    "mean": 253.0,
+    "min": 253.0,
+    "max": 253.0,
+    "n": 1
+   }
+  },
+  {
+   "variant": "min",
+   "harness": "claude",
+   "model": "glm-5.3",
+   "launched": 1,
+   "leakage_flagged": [],
+   "completion_rate": 1.0,
+   "runs": [
+    {
+     "run_id": "20261013T215003Z",
+     "completed": true,
+     "recall": 0.3394,
+     "recall_norm": 0.5097,
+     "union_support": 0.5655,
+     "audited_false_rate": null,
+     "epi_median_km": 4.6763,
+     "off_structure_fraction": 0.442
+    }
+   ],
+   "recall": {
+    "mean": 0.3394,
+    "min": 0.3394,
+    "max": 0.3394,
+    "n": 1
+   },
+   "recall_norm": {
+    "mean": 0.5097,
+    "min": 0.5097,
+    "max": 0.5097,
+    "n": 1
+   },
+   "union_support": {
+    "mean": 0.5655,
+    "min": 0.5655,
+    "max": 0.5655,
+    "n": 1
+   },
+   "audited_false_rate": null,
+   "epi_median_km": {
+    "mean": 4.6763,
+    "min": 4.6763,
+    "max": 4.6763,
+    "n": 1
+   },
+   "off_structure_fraction": {
+    "mean": 0.442,
+    "min": 0.442,
+    "max": 0.442,
+    "n": 1
+   },
+   "cost_usd": {
+    "mean": 17.3908,
+    "min": 17.3908,
+    "max": 17.3908,
+    "n": 1
+   },
+   "elapsed_s": {
+    "mean": 15315.2,
+    "min": 15315.2,
+    "max": 15315.2,
+    "n": 1
+   },
+   "turns": {
+    "mean": 231.0,
+    "min": 231.0,
+    "max": 231.0,
+    "n": 1
+   }
+  },
+  {
+   "variant": "tools",
+   "harness": "claude",
+   "model": "glm-5.3",
+   "launched": 1,
+   "leakage_flagged": [],
+   "completion_rate": 1.0,
+   "runs": [
+    {
+     "run_id": "20261015T020300Z",
+     "completed": true,
+     "recall": 0.7854,
+     "recall_norm": 1.1795,
+     "union_support": 0.8511,
+     "audited_false_rate": null,
+     "epi_median_km": 1.6304,
+     "off_structure_fraction": 0.1366
+    }
+   ],
+   "recall": {
+    "mean": 0.7854,
+    "min": 0.7854,
+    "max": 0.7854,
+    "n": 1
+   },
+   "recall_norm": {
+    "mean": 1.1795,
+    "min": 1.1795,
+    "max": 1.1795,
+    "n": 1
+   },
+   "union_support": {
+    "mean": 0.8511,
+    "min": 0.8511,
+    "max": 0.8511,
+    "n": 1
+   },
+   "audited_false_rate": null,
+   "epi_median_km": {
+    "mean": 1.6304,
+    "min": 1.6304,
+    "max": 1.6304,
+    "n": 1
+   },
+   "off_structure_fraction": {
+    "mean": 0.1366,
+    "min": 0.1366,
+    "max": 0.1366,
+    "n": 1
+   },
+   "cost_usd": null,
+   "elapsed_s": {
+    "mean": 73815.3,
+    "min": 73815.3,
+    "max": 73815.3,
+    "n": 1
+   },
+   "turns": {
+    "mean": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "n": 1
+   }
+  }
+ ]
+}
