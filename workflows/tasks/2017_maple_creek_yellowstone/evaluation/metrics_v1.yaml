@@ -1,0 +1,31 @@
+# Pre-registered metrics v1 (docs/framework/03_EVALUATION_METRICS.md) for Maple Creek 2017.
+# Scored with: python -m SeismoAgentBench.scoring.catalog_metrics {baseline,run} --task-dir <this task>
+metrics_version: 1
+references_loader: stage05          # expert/04_comparison/05_match_references.py + validation.yaml gates
+mask:                               # expert/00_config/validation.yaml, depth converted to sea level
+  start_utc: '2017-06-11T00:00:00Z'
+  end_utc: '2017-06-19T00:00:00Z'
+  latitude: [44.70, 44.84]
+  longitude: [-111.13, -110.93]
+  depth_bsl_km: [-5.3, 17.7]        # [-3, 20] below the 2.3-km surface
+surface_elevation_km: 2.3           # expert association.yaml reference_elevation_km
+off_structure_km: 1.0
+# Shelly has no ceiling (no other complete detection catalog), so the normalised
+# headline uses ComCat; Shelly recall_net is reported alongside.
+primary: {detection: comcat, location: comcat}
+references:
+  comcat: {roles: DLSM, depth_datum: surface}         # UUSS depths below the local surface
+  shelly: {roles: D, time_only: true}                 # detections from the phase release
+expert:
+  final: {path: expert/export/r9/60_catalog/catalog_events.csv, time_column: origin_time_utc,
+          depth_column: depth_bsl_km, depth_datum: sea_level}
+  blind: {path: expert/export/r1/04_locate_nonlinloc/full/events.csv, time_column: origin_time,
+          depth_column: depth_below_sea_level_km, depth_datum: sea_level, keep: {status: LOCATED}}
+leakage_patterns:
+  - '10\.1029/2018GL081607'
+  - '10\.1029/2019GL082376'
+  - '10\.5066/P13JCJ2I'
+  - 'PANG2019|SHELLY2019|USGS_UUSS_COMCAT'
+  - 'data/catalogs/'
+  - 'fdsnws/event'
+  - 'earthquake\.usgs\.gov/(earthquakes|fdsnws)'

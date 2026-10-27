@@ -1,0 +1,37 @@
+# Pre-registered metrics v1 (docs/framework/03_EVALUATION_METRICS.md) for Kīlauea 2018.
+# Scored with: python -m SeismoAgentBench.scoring.catalog_metrics {baseline,run} --task-dir <this task>
+metrics_version: 1
+references_loader: stage05          # expert/04_comparison/05_match_references.py + validation.yaml gates
+mask:                               # expert/00_config/validation.yaml, depth converted to sea level
+  start_utc: '2018-05-01T00:00:00Z'
+  end_utc: '2018-05-09T00:00:00Z'
+  latitude: [19.30, 19.50]
+  longitude: [-155.40, -155.15]
+  depth_bsl_km: [-4.07, 18.93]      # [-3, 20] below the 1.07-km surface
+surface_elevation_km: 1.07          # expert association.yaml reference_elevation_km
+off_structure_km: 1.0
+primary: {detection: shelly, location: shelly}
+references:
+  # Datums unstated or mixed; compared as below-surface depths.
+  shelly: {roles: DLSM, depth_datum: surface}         # hypocentroids
+  wei: {roles: DLSM, depth_datum: surface}            # 3-D NonLinLoc (frame differs from 1-D)
+  matoza: {roles: DSM, depth_datum: surface}          # GrowClust
+  comcat: {roles: DLM, depth_datum: surface}          # HVO operational
+expert:
+  final: {path: expert/export/r7/60_catalog/catalog_events.csv, time_column: origin_time_utc,
+          depth_column: depth_bsl_km, depth_datum: sea_level}
+  blind: {path: expert/export/r1/04_locate_nonlinloc/full/events.csv, time_column: origin_time,
+          depth_column: depth_below_sea_level_km, depth_datum: sea_level, keep: {status: LOCATED}}
+leakage_patterns:
+  - '10\.1029/2019GL085636'
+  - '10\.1029/2021EA001979'
+  - '10\.1029/2020EA001253'
+  - '10\.1002/2014GL059819'
+  - '10\.1016/j\.epsl\.2020\.116653'
+  - '10\.5061/dryad\.np5hqbzw9'
+  - '10\.5066/P13JCJ2I'
+  - '10\.5066/P9DMIFMW'
+  - 'SHELLY2019|WEI2022|MATOZA20(14|21)|LENGLINE2021|USGS_HVO_COMCAT'
+  - 'data/catalogs/'
+  - 'fdsnws/event'
+  - 'earthquake\.usgs\.gov/(earthquakes|fdsnws)'

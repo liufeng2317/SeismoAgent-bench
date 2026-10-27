@@ -1,0 +1,710 @@
+{
+ "metrics_version": 1,
+ "scorer_commit": "eb6942ac70a6b7e77ffc6fe1762318d206b8f74a",
+ "scorer_dirty": true,
+ "generated_utc": "2026-10-27T04:03:16+00:00",
+ "task": "2017_maple_creek_yellowstone",
+ "references": {
+  "comcat": {
+   "events": 626,
+   "roles": "DLMS",
+   "depth_known": true,
+   "time_only": false,
+   "gates": null
+  },
+  "shelly": {
+   "events": 18062,
+   "roles": "D",
+   "depth_known": false,
+   "time_only": true,
+   "gates": null
+  }
+ },
+ "expert": {
+  "final": {
+   "path": "expert/export/r9/60_catalog/catalog_events.csv",
+   "events": 12424
+  },
+  "blind": {
+   "path": "expert/export/r1/04_locate_nonlinloc/full/events.csv",
+   "events": 1432
+  }
+ },
+ "ceilings": {
+  "comcat": {
+   "value": 0.8562,
+   "by": "shelly",
+   "recalls": {
+    "shelly": 0.8562
+   }
+  },
+  "shelly": {
+   "value": 0.0307,
+   "by": "comcat",
+   "recalls": {
+    "comcat": 0.0307
+   }
+  }
+ },
+ "rows": {
+  "comcat": {
+   "events": 626,
+   "located": 626,
+   "versus": {
+    "shelly": {
+     "gates": [
+      1.0,
+      null
+     ],
+     "roles": "D",
+     "detection": {
+      "matched": 616,
+      "reference_events": 18062,
+      "recall": 0.0341,
+      "chance": 62,
+      "recall_net": 0.0307,
+      "recall_by_mag": [
+       {
+        "magnitude_from": -2.5,
+        "events": 29,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": -2.0,
+        "events": 1164,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": -1.5,
+        "events": 4756,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": -1.0,
+        "events": 5387,
+        "recall": 0.0004
+       },
+       {
+        "magnitude_from": -0.5,
+        "events": 3455,
+        "recall": 0.0052
+       },
+       {
+        "magnitude_from": 0.0,
+        "events": 1584,
+        "recall": 0.0562
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 842,
+        "recall": 0.2292
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 475,
+        "recall": 0.3368
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 209,
+        "recall": 0.4019
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 95,
+        "recall": 0.3579
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 44,
+        "recall": 0.6136
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 17,
+        "recall": 0.4706
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 2,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": 4.0,
+        "events": 1,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 1,
+        "recall": 0.0
+       }
+      ],
+      "M90": null
+     }
+    }
+   },
+   "union_support": {
+    "fraction": 0.885,
+    "fraction_raw": 0.984,
+    "supported": 616,
+    "chance": 62,
+    "events": 626,
+    "members": [
+     "shelly"
+    ]
+   },
+   "off_structure": {
+    "fraction": null,
+    "events": 0,
+    "radius_km": 1.0
+   },
+   "local_thickness_km": 0.2082,
+   "magnitude_coverage": 1.0
+  },
+  "shelly": {
+   "events": 18062,
+   "located": 0,
+   "versus": {
+    "comcat": {
+     "gates": [
+      1.0,
+      null
+     ],
+     "roles": "DLMS",
+     "detection": {
+      "matched": 616,
+      "reference_events": 626,
+      "recall": 0.984,
+      "chance": 80,
+      "recall_net": 0.8562,
+      "recall_by_mag": [
+       {
+        "magnitude_from": -0.5,
+        "events": 19,
+        "recall": 0.8947
+       },
+       {
+        "magnitude_from": 0.0,
+        "events": 159,
+        "recall": 0.9623
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 210,
+        "recall": 0.9952
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 105,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 76,
+        "recall": 0.9868
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 35,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 17,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 4,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 4.0,
+        "events": 1,
+        "recall": 1.0
+       }
+      ],
+      "M90": -0.3
+     },
+     "magnitude": {
+      "pairs": 616,
+      "dmag_median": 0.15,
+      "dmag_mad": 0.27,
+      "by_type": {
+       "unspecified": {
+        "pairs": 616,
+        "dmag_median": 0.15,
+        "dmag_mad": 0.27
+       }
+      }
+     }
+    }
+   },
+   "union_support": {
+    "fraction": 0.0297,
+    "fraction_raw": 0.0341,
+    "supported": 616,
+    "chance": 80,
+    "events": 18062,
+    "members": [
+     "comcat"
+    ]
+   },
+   "off_structure": {
+    "fraction": null,
+    "events": 0,
+    "radius_km": 1.0,
+    "members": [
+     "comcat"
+    ]
+   },
+   "local_thickness_km": null,
+   "magnitude_coverage": 0.9999
+  },
+  "expert_final": {
+   "events": 12424,
+   "located": 12424,
+   "versus": {
+    "comcat": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DLMS",
+     "detection": {
+      "matched": 619,
+      "reference_events": 626,
+      "recall": 0.9888,
+      "recall_by_mag": [
+       {
+        "magnitude_from": -0.5,
+        "events": 19,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 0.0,
+        "events": 159,
+        "recall": 0.9686
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 210,
+        "recall": 0.9905
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 105,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 76,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 35,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 17,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 4,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 4.0,
+        "events": 1,
+        "recall": 1.0
+       }
+      ],
+      "M90": -0.3
+     },
+     "location": {
+      "pairs": 619,
+      "epi_median_km": 0.895,
+      "epi_p90_km": 1.8985,
+      "dt_median_s": 0.0897,
+      "depth_pairs": 619,
+      "dz_median_km": 1.4612,
+      "dz_mad_km": 0.69
+     },
+     "magnitude": {
+      "pairs": 616,
+      "dmag_median": 0.1525,
+      "dmag_mad": 0.227,
+      "by_type": {
+       "unspecified": {
+        "pairs": 616,
+        "dmag_median": 0.1525,
+        "dmag_mad": 0.227
+       }
+      }
+     },
+     "pair_distance_error": {
+      "pairs": 2922,
+      "median_km": 0.5849,
+      "p90_km": 1.7641
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 614,
+       "recall": 0.9808,
+       "epi_median_km": 0.8915
+      },
+      "1s_3km": {
+       "matched": 599,
+       "recall": 0.9569,
+       "epi_median_km": 0.8753
+      }
+     }
+    },
+    "shelly": {
+     "gates": [
+      1.0,
+      null
+     ],
+     "roles": "D",
+     "detection": {
+      "matched": 10264,
+      "reference_events": 18062,
+      "recall": 0.5683,
+      "chance": 1032,
+      "recall_net": 0.5111,
+      "recall_by_mag": [
+       {
+        "magnitude_from": -2.5,
+        "events": 29,
+        "recall": 0.4483
+       },
+       {
+        "magnitude_from": -2.0,
+        "events": 1164,
+        "recall": 0.4785
+       },
+       {
+        "magnitude_from": -1.5,
+        "events": 4756,
+        "recall": 0.516
+       },
+       {
+        "magnitude_from": -1.0,
+        "events": 5387,
+        "recall": 0.6089
+       },
+       {
+        "magnitude_from": -0.5,
+        "events": 3455,
+        "recall": 0.6148
+       },
+       {
+        "magnitude_from": 0.0,
+        "events": 1584,
+        "recall": 0.5777
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 842,
+        "recall": 0.5594
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 475,
+        "recall": 0.5621
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 209,
+        "recall": 0.5072
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 95,
+        "recall": 0.3895
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 44,
+        "recall": 0.6364
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 17,
+        "recall": 0.5882
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 2,
+        "recall": 0.5
+       },
+       {
+        "magnitude_from": 4.0,
+        "events": 1,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 1,
+        "recall": 0.0
+       }
+      ],
+      "M90": null
+     }
+    }
+   },
+   "union_support": {
+    "fraction": 0.7486,
+    "fraction_raw": 0.8267,
+    "supported": 10271,
+    "chance": 970,
+    "events": 12424,
+    "members": [
+     "comcat",
+     "shelly"
+    ]
+   },
+   "off_structure": {
+    "fraction": 0.0028,
+    "events": 12424,
+    "radius_km": 1.0,
+    "members": [
+     "comcat"
+    ]
+   },
+   "local_thickness_km": 0.0023,
+   "magnitude_coverage": 0.9973,
+   "headline": {
+    "recall": 0.9888,
+    "ceiling": 0.8562,
+    "recall_norm": 1.1549,
+    "union_support": 0.7486,
+    "epi_median_km": 0.895,
+    "off_structure_fraction": 0.0028
+   }
+  },
+  "expert_blind": {
+   "events": 1432,
+   "located": 1432,
+   "versus": {
+    "comcat": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DLMS",
+     "detection": {
+      "matched": 587,
+      "reference_events": 626,
+      "recall": 0.9377,
+      "recall_by_mag": [
+       {
+        "magnitude_from": -0.5,
+        "events": 19,
+        "recall": 0.4737
+       },
+       {
+        "magnitude_from": 0.0,
+        "events": 159,
+        "recall": 0.9057
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 210,
+        "recall": 0.9429
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 105,
+        "recall": 0.9905
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 76,
+        "recall": 0.9868
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 35,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 17,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 4,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 4.0,
+        "events": 1,
+        "recall": 1.0
+       }
+      ],
+      "M90": -0.3
+     },
+     "location": {
+      "pairs": 587,
+      "epi_median_km": 1.1794,
+      "epi_p90_km": 2.4018,
+      "dt_median_s": 0.4724,
+      "depth_pairs": 587,
+      "dz_median_km": 0.8762,
+      "dz_mad_km": 0.7875
+     },
+     "magnitude": {
+      "pairs": 0,
+      "dmag_median": null,
+      "dmag_mad": null,
+      "by_type": {}
+     },
+     "pair_distance_error": {
+      "pairs": 2854,
+      "median_km": 1.1461,
+      "p90_km": 2.8043
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 581,
+       "recall": 0.9281,
+       "epi_median_km": 1.1704
+      },
+      "1s_3km": {
+       "matched": 554,
+       "recall": 0.885,
+       "epi_median_km": 1.1359
+      }
+     }
+    },
+    "shelly": {
+     "gates": [
+      1.0,
+      null
+     ],
+     "roles": "D",
+     "detection": {
+      "matched": 1315,
+      "reference_events": 18062,
+      "recall": 0.0728,
+      "chance": 156,
+      "recall_net": 0.0642,
+      "recall_by_mag": [
+       {
+        "magnitude_from": -2.5,
+        "events": 29,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": -2.0,
+        "events": 1164,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": -1.5,
+        "events": 4756,
+        "recall": 0.0002
+       },
+       {
+        "magnitude_from": -1.0,
+        "events": 5387,
+        "recall": 0.0046
+       },
+       {
+        "magnitude_from": -0.5,
+        "events": 3455,
+        "recall": 0.0741
+       },
+       {
+        "magnitude_from": 0.0,
+        "events": 1584,
+        "recall": 0.262
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 842,
+        "recall": 0.3587
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 475,
+        "recall": 0.3621
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 209,
+        "recall": 0.3589
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 95,
+        "recall": 0.4105
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 44,
+        "recall": 0.4773
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 17,
+        "recall": 0.4118
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 2,
+        "recall": 0.5
+       },
+       {
+        "magnitude_from": 4.0,
+        "events": 1,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 1,
+        "recall": 1.0
+       }
+      ],
+      "M90": null
+     }
+    }
+   },
+   "union_support": {
+    "fraction": 0.8841,
+    "fraction_raw": 0.9525,
+    "supported": 1364,
+    "chance": 98,
+    "events": 1432,
+    "members": [
+     "comcat",
+     "shelly"
+    ]
+   },
+   "off_structure": {
+    "fraction": 0.0335,
+    "events": 1432,
+    "radius_km": 1.0,
+    "members": [
+     "comcat"
+    ]
+   },
+   "local_thickness_km": 0.1713,
+   "magnitude_coverage": 0.0,
+   "headline": {
+    "recall": 0.9377,
+    "ceiling": 0.8562,
+    "recall_norm": 1.0952,
+    "union_support": 0.8841,
+    "epi_median_km": 1.1794,
+    "off_structure_fraction": 0.0335
+   }
+  }
+ }
+}

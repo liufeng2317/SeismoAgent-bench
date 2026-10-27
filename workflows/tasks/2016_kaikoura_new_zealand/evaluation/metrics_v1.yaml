@@ -1,0 +1,32 @@
+# Pre-registered metrics v1 (docs/framework/03_EVALUATION_METRICS.md) for Kaikōura 2016.
+# Scored with: python -m SeismoAgentBench.scoring.catalog_metrics {baseline,run} --task-dir <this task>
+metrics_version: 1
+references_loader: stage05          # expert/04_comparison/05_match_references.py + validation.yaml gates
+mask:                               # expert/00_config/validation.yaml (model datum 0 km = sea level)
+  start_utc: '2016-12-01T00:00:00Z'
+  end_utc: '2016-12-09T00:00:00Z'
+  latitude: [-43.5, -41.2]
+  longitude: [172.0, 175.2]
+  depth_bsl_km: [-3.0, 60.0]
+surface_elevation_km: 0.0           # expert association.yaml reference_elevation_km
+off_structure_km: 5.0               # sparse network and 1-D vs 3-D frame offsets of 3-4 km
+primary: {detection: chamberlain, location: lanza}   # Tan has no comparably complete partner (ceiling 0.16)
+references:
+  tan: {roles: DSM, depth_datum: sea_level}
+  lanza: {roles: LS, depth_datum: sea_level}          # 122 HypoDD origins
+  chamberlain: {roles: DSM, depth_datum: sea_level}   # corrected GrowClust, 3-D frame
+  geonet: {roles: DM, depth_datum: sea_level}         # operational; fixed-depth solutions -> no L
+expert:
+  final: {path: expert/export/r6/60_catalog/catalog_events.csv, time_column: origin_time_utc,
+          depth_column: depth_bsl_km, depth_datum: sea_level}
+  blind: {path: expert/export/r1/04_locate_nonlinloc/full/events.csv, time_column: origin_time,
+          depth_column: depth_below_sea_level_km, depth_datum: sea_level, keep: {status: LOCATED}}
+leakage_patterns:
+  - '10\.1029/2019GL082780'
+  - '10\.1029/2021JB022304'
+  - '10\.1029/2024JB028735'
+  - '10\.5281/zenodo\.10937462'
+  - 'CHAMBERLAIN2021|GEONET_2016_KAIKOURA|LANZA2019|TAN2024'
+  - 'data/catalogs/'
+  - 'fdsnws/event'
+  - 'quakesearch\.geonet|api\.geonet\.org\.nz/quake|wfs\.geonet\.org\.nz'

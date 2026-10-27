@@ -8,7 +8,7 @@ import numpy as np
 from scipy.spatial import cKDTree
 from scipy.stats import spearmanr
 
-from .matching import SENSITIVITY_GATES, correspond
+from .matching import CHANCE_SHIFT_S, SENSITIVITY_GATES, correspond, match
 from .tables import Population, local_xyz
 
 MAG_BIN = 0.5
@@ -214,17 +214,35 @@ def versus(cand: Population, ref: Population, center) -> dict:
 
 
 def union_support(cand: Population, union: Iterable[Population]) -> dict:
-    """Fraction of candidate events matched to at least one located population of U (§5 L1)."""
-    supported = np.zeros(len(cand.events), dtype=bool)
+    """Fraction of candidate events matched to at least one population of U (§5 L1).
+
+    Located members match under their primary gates. Time-only members match
+    on |dt| alone; their chance coincidences are removed in aggregate: the
+    events that only a 60-s shifted time-only member would support, among
+    those no located member supports, are subtracted (``fraction``);
+    ``fraction_raw`` keeps them.
+    """
+    n = len(cand.events)
+    located = np.zeros(n, dtype=bool)
+    timed = np.zeros(n, dtype=bool)
+    shifted = np.zeros(n, dtype=bool)
     members = []
     for pop in union:
-        if pop.key == cand.key or pop.time_only:
+        if pop.key == cand.key:
             continue
-        supported[correspond(cand, pop)["pairs"].a] = True
+        result = correspond(cand, pop)
+        if result["gates"][1] is None:
+            timed[result["pairs"].a] = True
+            dt_max = result["gates"][0]
+            shifted[match(cand, pop, dt_max, None, shift_b_s=CHANCE_SHIFT_S).a] = True
+        else:
+            located[result["pairs"].a] = True
         members.append(pop.key)
-    n = len(cand.events)
-    return {"fraction": _num(supported.mean()) if n else None, "supported": int(supported.sum()), "events": n,
-            "members": members, "unsupported_index": np.flatnonzero(~supported)}
+    supported = located | timed
+    chance = int((shifted & ~located).sum())
+    return {"fraction": _num((supported.sum() - chance) / n) if n else None,
+            "fraction_raw": _num(supported.mean()) if n else None, "supported": int(supported.sum()),
+            "chance": chance, "events": n, "members": members, "unsupported_index": np.flatnonzero(~supported)}
 
 
 def ceilings(refs: Mapping[str, Population]) -> dict:

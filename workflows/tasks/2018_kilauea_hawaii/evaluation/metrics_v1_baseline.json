@@ -1,0 +1,2263 @@
+{
+ "metrics_version": 1,
+ "scorer_commit": "eb6942ac70a6b7e77ffc6fe1762318d206b8f74a",
+ "scorer_dirty": true,
+ "generated_utc": "2026-10-27T04:03:34+00:00",
+ "task": "2018_kilauea_hawaii",
+ "references": {
+  "shelly": {
+   "events": 1902,
+   "roles": "DLMS",
+   "depth_known": true,
+   "time_only": false,
+   "gates": null
+  },
+  "wei": {
+   "events": 3627,
+   "roles": "DLMS",
+   "depth_known": true,
+   "time_only": false,
+   "gates": null
+  },
+  "matoza": {
+   "events": 1020,
+   "roles": "DMS",
+   "depth_known": true,
+   "time_only": false,
+   "gates": null
+  },
+  "comcat": {
+   "events": 496,
+   "roles": "DLM",
+   "depth_known": true,
+   "time_only": false,
+   "gates": null
+  }
+ },
+ "expert": {
+  "final": {
+   "path": "expert/export/r7/60_catalog/catalog_events.csv",
+   "events": 5245
+  },
+  "blind": {
+   "path": "expert/export/r1/04_locate_nonlinloc/full/events.csv",
+   "events": 2875
+  }
+ },
+ "ceilings": {
+  "shelly": {
+   "value": 0.5573,
+   "by": "wei",
+   "recalls": {
+    "wei": 0.5573,
+    "matoza": 0.2892,
+    "comcat": 0.1451
+   }
+  },
+  "wei": {
+   "value": 0.2925,
+   "by": "shelly",
+   "recalls": {
+    "shelly": 0.2925,
+    "matoza": 0.2277,
+    "comcat": 0.1141
+   }
+  },
+  "matoza": {
+   "value": 0.8098,
+   "by": "wei",
+   "recalls": {
+    "shelly": 0.5392,
+    "wei": 0.8098,
+    "comcat": 0.448
+   }
+  },
+  "comcat": {
+   "value": 0.9214,
+   "by": "matoza",
+   "recalls": {
+    "shelly": 0.5565,
+    "wei": 0.8347,
+    "matoza": 0.9214
+   }
+  }
+ },
+ "rows": {
+  "shelly": {
+   "events": 1902,
+   "located": 1902,
+   "versus": {
+    "wei": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DLMS",
+     "detection": {
+      "matched": 1061,
+      "reference_events": 3627,
+      "recall": 0.2925,
+      "recall_by_mag": [
+       {
+        "magnitude_from": -1.0,
+        "events": 3,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": -0.5,
+        "events": 10,
+        "recall": 0.2
+       },
+       {
+        "magnitude_from": 0.0,
+        "events": 61,
+        "recall": 0.2295
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 379,
+        "recall": 0.1926
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 1245,
+        "recall": 0.3285
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 914,
+        "recall": 0.3337
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 241,
+        "recall": 0.361
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 45,
+        "recall": 0.4889
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 13,
+        "recall": 0.6923
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 7,
+        "recall": 0.5714
+       },
+       {
+        "magnitude_from": 4.0,
+        "events": 3,
+        "recall": 0.6667
+       },
+       {
+        "magnitude_from": 5.0,
+        "events": 1,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 5.5,
+        "events": 1,
+        "recall": 0.0
+       }
+      ],
+      "M90": null
+     },
+     "location": {
+      "pairs": 1061,
+      "epi_median_km": 1.4059,
+      "epi_p90_km": 5.6399,
+      "dt_median_s": 0.3293,
+      "depth_pairs": 1061,
+      "dz_median_km": 0.8247,
+      "dz_mad_km": 1.0396
+     },
+     "magnitude": {
+      "pairs": 928,
+      "dmag_median": -0.11,
+      "dmag_mad": 0.38,
+      "by_type": {
+       "unspecified": {
+        "pairs": 928,
+        "dmag_median": -0.11,
+        "dmag_mad": 0.38
+       }
+      }
+     },
+     "pair_distance_error": {
+      "pairs": 4700,
+      "median_km": 0.4938,
+      "p90_km": 3.5571
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 941,
+       "recall": 0.2594,
+       "epi_median_km": 1.1619
+      },
+      "1s_3km": {
+       "matched": 827,
+       "recall": 0.228,
+       "epi_median_km": 0.918
+      }
+     }
+    },
+    "matoza": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DMS",
+     "detection": {
+      "matched": 550,
+      "reference_events": 1020,
+      "recall": 0.5392,
+      "recall_by_mag": [
+       {
+        "magnitude_from": 0.0,
+        "events": 43,
+        "recall": 0.6977
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 141,
+        "recall": 0.4894
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 270,
+        "recall": 0.563
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 234,
+        "recall": 0.5128
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 192,
+        "recall": 0.5104
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 113,
+        "recall": 0.5841
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 16,
+        "recall": 0.5625
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 9,
+        "recall": 0.5556
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 2,
+        "recall": 0.5
+       }
+      ],
+      "M90": null
+     },
+     "magnitude": {
+      "pairs": 550,
+      "dmag_median": 0.0,
+      "dmag_mad": 0.0,
+      "by_type": {
+       "unspecified": {
+        "pairs": 550,
+        "dmag_median": 0.0,
+        "dmag_mad": 0.0
+       }
+      }
+     },
+     "pair_distance_error": {
+      "pairs": 2412,
+      "median_km": 0.1926,
+      "p90_km": 2.724
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 511,
+       "recall": 0.501
+      },
+      "1s_3km": {
+       "matched": 464,
+       "recall": 0.4549
+      }
+     }
+    },
+    "comcat": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DLM",
+     "detection": {
+      "matched": 276,
+      "reference_events": 496,
+      "recall": 0.5565,
+      "recall_by_mag": [
+       {
+        "magnitude_from": 0.5,
+        "events": 8,
+        "recall": 0.75
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 30,
+        "recall": 0.7
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 136,
+        "recall": 0.5294
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 193,
+        "recall": 0.5233
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 105,
+        "recall": 0.5905
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 13,
+        "recall": 0.6154
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 9,
+        "recall": 0.5556
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 2,
+        "recall": 0.5
+       }
+      ],
+      "M90": null
+     },
+     "location": {
+      "pairs": 276,
+      "epi_median_km": 0.5663,
+      "epi_p90_km": 1.9042,
+      "dt_median_s": 0.22,
+      "depth_pairs": 276,
+      "dz_median_km": 0.166,
+      "dz_mad_km": 0.341
+     },
+     "magnitude": {
+      "pairs": 276,
+      "dmag_median": 0.0,
+      "dmag_mad": 0.06,
+      "by_type": {
+       "unspecified": {
+        "pairs": 276,
+        "dmag_median": 0.0,
+        "dmag_mad": 0.06
+       }
+      }
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 267,
+       "recall": 0.5383,
+       "epi_median_km": 0.543
+      },
+      "1s_3km": {
+       "matched": 255,
+       "recall": 0.5141,
+       "epi_median_km": 0.4933
+      }
+     }
+    }
+   },
+   "union_support": {
+    "fraction": 0.5994,
+    "fraction_raw": 0.5994,
+    "supported": 1140,
+    "chance": 0,
+    "events": 1902,
+    "members": [
+     "wei",
+     "matoza",
+     "comcat"
+    ]
+   },
+   "off_structure": {
+    "fraction": 0.0,
+    "events": 1902,
+    "radius_km": 1.0,
+    "members": [
+     "wei",
+     "matoza"
+    ]
+   },
+   "local_thickness_km": 0.0237,
+   "magnitude_coverage": 1.0
+  },
+  "wei": {
+   "events": 3627,
+   "located": 3627,
+   "versus": {
+    "shelly": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DLMS",
+     "detection": {
+      "matched": 1060,
+      "reference_events": 1902,
+      "recall": 0.5573,
+      "recall_by_mag": [
+       {
+        "magnitude_from": -1.0,
+        "events": 1,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": -0.5,
+        "events": 52,
+        "recall": 0.0769
+       },
+       {
+        "magnitude_from": 0.0,
+        "events": 431,
+        "recall": 0.2761
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 499,
+        "recall": 0.507
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 456,
+        "recall": 0.6842
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 212,
+        "recall": 0.7358
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 144,
+        "recall": 0.8403
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 84,
+        "recall": 0.881
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 17,
+        "recall": 0.8824
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 5,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 1,
+        "recall": 1.0
+       }
+      ],
+      "M90": 2.6
+     },
+     "location": {
+      "pairs": 1060,
+      "epi_median_km": 1.4058,
+      "epi_p90_km": 5.5579,
+      "dt_median_s": 0.3292,
+      "depth_pairs": 1060,
+      "dz_median_km": -0.8231,
+      "dz_mad_km": 1.0379
+     },
+     "magnitude": {
+      "pairs": 927,
+      "dmag_median": 0.11,
+      "dmag_mad": 0.38,
+      "by_type": {
+       "unspecified": {
+        "pairs": 927,
+        "dmag_median": 0.11,
+        "dmag_mad": 0.38
+       }
+      }
+     },
+     "pair_distance_error": {
+      "pairs": 5180,
+      "median_km": 2.0991,
+      "p90_km": 9.1834
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 941,
+       "recall": 0.4947,
+       "epi_median_km": 1.1619
+      },
+      "1s_3km": {
+       "matched": 827,
+       "recall": 0.4348,
+       "epi_median_km": 0.918
+      }
+     }
+    },
+    "matoza": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DMS",
+     "detection": {
+      "matched": 826,
+      "reference_events": 1020,
+      "recall": 0.8098,
+      "recall_by_mag": [
+       {
+        "magnitude_from": 0.0,
+        "events": 43,
+        "recall": 0.5581
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 141,
+        "recall": 0.7943
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 270,
+        "recall": 0.8704
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 234,
+        "recall": 0.7991
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 192,
+        "recall": 0.8177
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 113,
+        "recall": 0.8053
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 16,
+        "recall": 0.5625
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 9,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 2,
+        "recall": 1.0
+       }
+      ],
+      "M90": 3.5
+     },
+     "magnitude": {
+      "pairs": 784,
+      "dmag_median": -0.02,
+      "dmag_mad": 0.33,
+      "by_type": {
+       "unspecified": {
+        "pairs": 784,
+        "dmag_median": -0.02,
+        "dmag_mad": 0.33
+       }
+      }
+     },
+     "pair_distance_error": {
+      "pairs": 3758,
+      "median_km": 1.3347,
+      "p90_km": 4.2954
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 778,
+       "recall": 0.7627
+      },
+      "1s_3km": {
+       "matched": 734,
+       "recall": 0.7196
+      }
+     }
+    },
+    "comcat": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DLM",
+     "detection": {
+      "matched": 414,
+      "reference_events": 496,
+      "recall": 0.8347,
+      "recall_by_mag": [
+       {
+        "magnitude_from": 0.5,
+        "events": 8,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 30,
+        "recall": 0.9
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 136,
+        "recall": 0.8456
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 193,
+        "recall": 0.829
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 105,
+        "recall": 0.8095
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 13,
+        "recall": 0.6154
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 9,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 2,
+        "recall": 1.0
+       }
+      ],
+      "M90": 3.5
+     },
+     "location": {
+      "pairs": 414,
+      "epi_median_km": 1.066,
+      "epi_p90_km": 2.2686,
+      "dt_median_s": 0.159,
+      "depth_pairs": 414,
+      "dz_median_km": -1.1371,
+      "dz_mad_km": 0.9011
+     },
+     "magnitude": {
+      "pairs": 392,
+      "dmag_median": -0.26,
+      "dmag_mad": 0.23,
+      "by_type": {
+       "unspecified": {
+        "pairs": 392,
+        "dmag_median": -0.26,
+        "dmag_mad": 0.23
+       }
+      }
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 401,
+       "recall": 0.8085,
+       "epi_median_km": 1.0287
+      },
+      "1s_3km": {
+       "matched": 392,
+       "recall": 0.7903,
+       "epi_median_km": 1.0035
+      }
+     }
+    }
+   },
+   "union_support": {
+    "fraction": 0.3926,
+    "fraction_raw": 0.3926,
+    "supported": 1424,
+    "chance": 0,
+    "events": 3627,
+    "members": [
+     "shelly",
+     "matoza",
+     "comcat"
+    ]
+   },
+   "off_structure": {
+    "fraction": 0.1117,
+    "events": 3627,
+    "radius_km": 1.0,
+    "members": [
+     "shelly",
+     "matoza"
+    ]
+   },
+   "local_thickness_km": 0.3424,
+   "magnitude_coverage": 0.8059
+  },
+  "matoza": {
+   "events": 1020,
+   "located": 1020,
+   "versus": {
+    "shelly": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DLMS",
+     "detection": {
+      "matched": 550,
+      "reference_events": 1902,
+      "recall": 0.2892,
+      "recall_by_mag": [
+       {
+        "magnitude_from": -1.0,
+        "events": 1,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": -0.5,
+        "events": 52,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": 0.0,
+        "events": 431,
+        "recall": 0.0696
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 499,
+        "recall": 0.1443
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 456,
+        "recall": 0.2982
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 212,
+        "recall": 0.533
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 144,
+        "recall": 0.7431
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 84,
+        "recall": 0.8452
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 17,
+        "recall": 0.8824
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 5,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 1,
+        "recall": 1.0
+       }
+      ],
+      "M90": 2.9
+     },
+     "location": {
+      "pairs": 550,
+      "epi_median_km": 0.8953,
+      "epi_p90_km": 3.4821,
+      "dt_median_s": 0.3645,
+      "depth_pairs": 550,
+      "dz_median_km": 0.956,
+      "dz_mad_km": 0.5635
+     },
+     "magnitude": {
+      "pairs": 550,
+      "dmag_median": 0.0,
+      "dmag_mad": 0.0,
+      "by_type": {
+       "unspecified": {
+        "pairs": 550,
+        "dmag_median": 0.0,
+        "dmag_mad": 0.0
+       }
+      }
+     },
+     "pair_distance_error": {
+      "pairs": 2515,
+      "median_km": 0.5622,
+      "p90_km": 5.7665
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 511,
+       "recall": 0.2687,
+       "epi_median_km": 0.8414
+      },
+      "1s_3km": {
+       "matched": 464,
+       "recall": 0.244,
+       "epi_median_km": 0.7971
+      }
+     }
+    },
+    "wei": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DLMS",
+     "detection": {
+      "matched": 826,
+      "reference_events": 3627,
+      "recall": 0.2277,
+      "recall_by_mag": [
+       {
+        "magnitude_from": -1.0,
+        "events": 3,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": -0.5,
+        "events": 10,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": 0.0,
+        "events": 61,
+        "recall": 0.0328
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 379,
+        "recall": 0.0739
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 1245,
+        "recall": 0.2112
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 914,
+        "recall": 0.3698
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 241,
+        "recall": 0.4606
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 45,
+        "recall": 0.6
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 13,
+        "recall": 0.6154
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 7,
+        "recall": 0.7143
+       },
+       {
+        "magnitude_from": 4.0,
+        "events": 3,
+        "recall": 0.6667
+       },
+       {
+        "magnitude_from": 5.0,
+        "events": 1,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": 5.5,
+        "events": 1,
+        "recall": 0.0
+       }
+      ],
+      "M90": null
+     },
+     "location": {
+      "pairs": 826,
+      "epi_median_km": 0.9795,
+      "epi_p90_km": 3.0556,
+      "dt_median_s": 0.1792,
+      "depth_pairs": 826,
+      "dz_median_km": 1.7113,
+      "dz_mad_km": 1.1068
+     },
+     "magnitude": {
+      "pairs": 784,
+      "dmag_median": 0.02,
+      "dmag_mad": 0.33,
+      "by_type": {
+       "unspecified": {
+        "pairs": 784,
+        "dmag_median": 0.02,
+        "dmag_mad": 0.33
+       }
+      }
+     },
+     "pair_distance_error": {
+      "pairs": 3786,
+      "median_km": 0.7163,
+      "p90_km": 4.1279
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 778,
+       "recall": 0.2145,
+       "epi_median_km": 0.9204
+      },
+      "1s_3km": {
+       "matched": 734,
+       "recall": 0.2024,
+       "epi_median_km": 0.8798
+      }
+     }
+    },
+    "comcat": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DLM",
+     "detection": {
+      "matched": 457,
+      "reference_events": 496,
+      "recall": 0.9214,
+      "recall_by_mag": [
+       {
+        "magnitude_from": 0.5,
+        "events": 8,
+        "recall": 0.875
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 30,
+        "recall": 0.9333
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 136,
+        "recall": 0.9044
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 193,
+        "recall": 0.9275
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 105,
+        "recall": 0.9333
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 13,
+        "recall": 0.9231
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 9,
+        "recall": 0.8889
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 2,
+        "recall": 1.0
+       }
+      ],
+      "M90": 0.7
+     },
+     "location": {
+      "pairs": 457,
+      "epi_median_km": 0.7614,
+      "epi_p90_km": 1.8886,
+      "dt_median_s": 0.164,
+      "depth_pairs": 457,
+      "dz_median_km": 1.092,
+      "dz_mad_km": 0.564
+     },
+     "magnitude": {
+      "pairs": 457,
+      "dmag_median": 0.0,
+      "dmag_mad": 0.0,
+      "by_type": {
+       "unspecified": {
+        "pairs": 457,
+        "dmag_median": 0.0,
+        "dmag_mad": 0.0
+       }
+      }
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 451,
+       "recall": 0.9093,
+       "epi_median_km": 0.7435
+      },
+      "1s_3km": {
+       "matched": 435,
+       "recall": 0.877,
+       "epi_median_km": 0.7305
+      }
+     }
+    }
+   },
+   "union_support": {
+    "fraction": 0.9186,
+    "fraction_raw": 0.9186,
+    "supported": 937,
+    "chance": 0,
+    "events": 1020,
+    "members": [
+     "shelly",
+     "wei",
+     "comcat"
+    ]
+   },
+   "off_structure": {
+    "fraction": 0.0039,
+    "events": 1020,
+    "radius_km": 1.0,
+    "members": [
+     "shelly",
+     "wei"
+    ]
+   },
+   "local_thickness_km": 0.1975,
+   "magnitude_coverage": 1.0
+  },
+  "comcat": {
+   "events": 496,
+   "located": 496,
+   "versus": {
+    "shelly": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DLMS",
+     "detection": {
+      "matched": 276,
+      "reference_events": 1902,
+      "recall": 0.1451,
+      "recall_by_mag": [
+       {
+        "magnitude_from": -1.0,
+        "events": 1,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": -0.5,
+        "events": 52,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": 0.0,
+        "events": 431,
+        "recall": 0.0046
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 499,
+        "recall": 0.014
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 456,
+        "recall": 0.0307
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 212,
+        "recall": 0.283
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 144,
+        "recall": 0.7431
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 84,
+        "recall": 0.8095
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 17,
+        "recall": 0.7059
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 5,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 1,
+        "recall": 1.0
+       }
+      ],
+      "M90": null
+     },
+     "location": {
+      "pairs": 276,
+      "epi_median_km": 0.5663,
+      "epi_p90_km": 1.9042,
+      "dt_median_s": 0.22,
+      "depth_pairs": 276,
+      "dz_median_km": -0.166,
+      "dz_mad_km": 0.341
+     },
+     "magnitude": {
+      "pairs": 276,
+      "dmag_median": 0.0,
+      "dmag_mad": 0.06,
+      "by_type": {
+       "unspecified": {
+        "pairs": 276,
+        "dmag_median": 0.0,
+        "dmag_mad": 0.06
+       }
+      }
+     },
+     "pair_distance_error": {
+      "pairs": 1329,
+      "median_km": 0.4161,
+      "p90_km": 1.9762
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 267,
+       "recall": 0.1404,
+       "epi_median_km": 0.543
+      },
+      "1s_3km": {
+       "matched": 255,
+       "recall": 0.1341,
+       "epi_median_km": 0.4933
+      }
+     }
+    },
+    "wei": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DLMS",
+     "detection": {
+      "matched": 414,
+      "reference_events": 3627,
+      "recall": 0.1141,
+      "recall_by_mag": [
+       {
+        "magnitude_from": -1.0,
+        "events": 3,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": -0.5,
+        "events": 10,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": 0.0,
+        "events": 61,
+        "recall": 0.0164
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 379,
+        "recall": 0.0132
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 1245,
+        "recall": 0.0498
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 914,
+        "recall": 0.2123
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 241,
+        "recall": 0.3734
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 45,
+        "recall": 0.5333
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 13,
+        "recall": 0.6154
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 7,
+        "recall": 0.8571
+       },
+       {
+        "magnitude_from": 4.0,
+        "events": 3,
+        "recall": 0.6667
+       },
+       {
+        "magnitude_from": 5.0,
+        "events": 1,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": 5.5,
+        "events": 1,
+        "recall": 0.0
+       }
+      ],
+      "M90": null
+     },
+     "location": {
+      "pairs": 414,
+      "epi_median_km": 1.066,
+      "epi_p90_km": 2.2685,
+      "dt_median_s": 0.159,
+      "depth_pairs": 414,
+      "dz_median_km": 1.1371,
+      "dz_mad_km": 0.9011
+     },
+     "magnitude": {
+      "pairs": 392,
+      "dmag_median": 0.26,
+      "dmag_mad": 0.23,
+      "by_type": {
+       "unspecified": {
+        "pairs": 392,
+        "dmag_median": 0.26,
+        "dmag_mad": 0.23
+       }
+      }
+     },
+     "pair_distance_error": {
+      "pairs": 1938,
+      "median_km": 0.5296,
+      "p90_km": 2.5818
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 401,
+       "recall": 0.1106,
+       "epi_median_km": 1.0287
+      },
+      "1s_3km": {
+       "matched": 392,
+       "recall": 0.1081,
+       "epi_median_km": 1.0035
+      }
+     }
+    },
+    "matoza": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DMS",
+     "detection": {
+      "matched": 457,
+      "reference_events": 1020,
+      "recall": 0.448,
+      "recall_by_mag": [
+       {
+        "magnitude_from": 0.0,
+        "events": 43,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 141,
+        "recall": 0.0496
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 270,
+        "recall": 0.1333
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 234,
+        "recall": 0.5085
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 192,
+        "recall": 0.9115
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 113,
+        "recall": 0.8761
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 16,
+        "recall": 0.6875
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 9,
+        "recall": 0.8889
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 2,
+        "recall": 1.0
+       }
+      ],
+      "M90": 3.5
+     },
+     "magnitude": {
+      "pairs": 457,
+      "dmag_median": 0.0,
+      "dmag_mad": 0.0,
+      "by_type": {
+       "unspecified": {
+        "pairs": 457,
+        "dmag_median": 0.0,
+        "dmag_mad": 0.0
+       }
+      }
+     },
+     "pair_distance_error": {
+      "pairs": 2094,
+      "median_km": 0.6705,
+      "p90_km": 2.694
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 451,
+       "recall": 0.4422
+      },
+      "1s_3km": {
+       "matched": 435,
+       "recall": 0.4265
+      }
+     }
+    }
+   },
+   "union_support": {
+    "fraction": 0.9778,
+    "fraction_raw": 0.9778,
+    "supported": 485,
+    "chance": 0,
+    "events": 496,
+    "members": [
+     "shelly",
+     "wei",
+     "matoza"
+    ]
+   },
+   "off_structure": {
+    "fraction": 0.0,
+    "events": 496,
+    "radius_km": 1.0,
+    "members": [
+     "shelly",
+     "wei",
+     "matoza"
+    ]
+   },
+   "local_thickness_km": 0.3176,
+   "magnitude_coverage": 1.0
+  },
+  "expert_final": {
+   "events": 5245,
+   "located": 5245,
+   "versus": {
+    "shelly": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DLMS",
+     "detection": {
+      "matched": 1229,
+      "reference_events": 1902,
+      "recall": 0.6462,
+      "recall_by_mag": [
+       {
+        "magnitude_from": -1.0,
+        "events": 1,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": -0.5,
+        "events": 52,
+        "recall": 0.0577
+       },
+       {
+        "magnitude_from": 0.0,
+        "events": 431,
+        "recall": 0.2831
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 499,
+        "recall": 0.6513
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 456,
+        "recall": 0.8004
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 212,
+        "recall": 0.816
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 144,
+        "recall": 0.9514
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 84,
+        "recall": 0.9762
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 17,
+        "recall": 0.9412
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 5,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 1,
+        "recall": 1.0
+       }
+      ],
+      "M90": 1.6
+     },
+     "location": {
+      "pairs": 1229,
+      "epi_median_km": 0.7551,
+      "epi_p90_km": 3.0626,
+      "dt_median_s": 0.2077,
+      "depth_pairs": 1229,
+      "dz_median_km": 0.54,
+      "dz_mad_km": 0.4845
+     },
+     "magnitude": {
+      "pairs": 960,
+      "dmag_median": -0.026,
+      "dmag_mad": 0.193,
+      "by_type": {
+       "unspecified": {
+        "pairs": 960,
+        "dmag_median": -0.026,
+        "dmag_mad": 0.193
+       }
+      }
+     },
+     "pair_distance_error": {
+      "pairs": 5930,
+      "median_km": 0.5493,
+      "p90_km": 2.8185
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 1158,
+       "recall": 0.6088,
+       "epi_median_km": 0.7216
+      },
+      "1s_3km": {
+       "matched": 1087,
+       "recall": 0.5715,
+       "epi_median_km": 0.677
+      }
+     }
+    },
+    "wei": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DLMS",
+     "detection": {
+      "matched": 2436,
+      "reference_events": 3627,
+      "recall": 0.6716,
+      "recall_by_mag": [
+       {
+        "magnitude_from": -1.0,
+        "events": 3,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": -0.5,
+        "events": 10,
+        "recall": 0.5
+       },
+       {
+        "magnitude_from": 0.0,
+        "events": 61,
+        "recall": 0.3279
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 379,
+        "recall": 0.5251
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 1245,
+        "recall": 0.7068
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 914,
+        "recall": 0.7867
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 241,
+        "recall": 0.7759
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 45,
+        "recall": 0.8889
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 13,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 7,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 4.0,
+        "events": 3,
+        "recall": 0.6667
+       },
+       {
+        "magnitude_from": 5.0,
+        "events": 1,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 5.5,
+        "events": 1,
+        "recall": 1.0
+       }
+      ],
+      "M90": 2.5
+     },
+     "location": {
+      "pairs": 2436,
+      "epi_median_km": 1.4282,
+      "epi_p90_km": 5.0158,
+      "dt_median_s": 0.2374,
+      "depth_pairs": 2436,
+      "dz_median_km": 1.9976,
+      "dz_mad_km": 1.2642
+     },
+     "magnitude": {
+      "pairs": 1461,
+      "dmag_median": -0.194,
+      "dmag_mad": 0.336,
+      "by_type": {
+       "unspecified": {
+        "pairs": 1461,
+        "dmag_median": -0.194,
+        "dmag_mad": 0.336
+       }
+      }
+     },
+     "pair_distance_error": {
+      "pairs": 11269,
+      "median_km": 0.8701,
+      "p90_km": 5.724
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 2170,
+       "recall": 0.5983,
+       "epi_median_km": 1.2161
+      },
+      "1s_3km": {
+       "matched": 1824,
+       "recall": 0.5029,
+       "epi_median_km": 1.0139
+      }
+     }
+    },
+    "matoza": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DMS",
+     "detection": {
+      "matched": 898,
+      "reference_events": 1020,
+      "recall": 0.8804,
+      "recall_by_mag": [
+       {
+        "magnitude_from": 0.0,
+        "events": 43,
+        "recall": 0.5349
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 141,
+        "recall": 0.7872
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 270,
+        "recall": 0.9037
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 234,
+        "recall": 0.9103
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 192,
+        "recall": 0.9219
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 113,
+        "recall": 0.9292
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 16,
+        "recall": 0.875
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 9,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 2,
+        "recall": 1.0
+       }
+      ],
+      "M90": 0.8
+     },
+     "magnitude": {
+      "pairs": 700,
+      "dmag_median": -0.11,
+      "dmag_mad": 0.3365,
+      "by_type": {
+       "unspecified": {
+        "pairs": 700,
+        "dmag_median": -0.11,
+        "dmag_mad": 0.3365
+       }
+      }
+     },
+     "pair_distance_error": {
+      "pairs": 4076,
+      "median_km": 0.532,
+      "p90_km": 2.2769
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 854,
+       "recall": 0.8373
+      },
+      "1s_3km": {
+       "matched": 803,
+       "recall": 0.7873
+      }
+     }
+    },
+    "comcat": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DLM",
+     "detection": {
+      "matched": 458,
+      "reference_events": 496,
+      "recall": 0.9234,
+      "recall_by_mag": [
+       {
+        "magnitude_from": 0.5,
+        "events": 8,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 30,
+        "recall": 0.9667
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 136,
+        "recall": 0.9265
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 193,
+        "recall": 0.9223
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 105,
+        "recall": 0.9143
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 13,
+        "recall": 0.7692
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 9,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 2,
+        "recall": 1.0
+       }
+      ],
+      "M90": 0.7
+     },
+     "location": {
+      "pairs": 458,
+      "epi_median_km": 1.0588,
+      "epi_p90_km": 2.547,
+      "dt_median_s": 0.0996,
+      "depth_pairs": 458,
+      "dz_median_km": 1.105,
+      "dz_mad_km": 0.5575
+     },
+     "magnitude": {
+      "pairs": 390,
+      "dmag_median": -0.2725,
+      "dmag_mad": 0.3485,
+      "by_type": {
+       "unspecified": {
+        "pairs": 390,
+        "dmag_median": -0.2725,
+        "dmag_mad": 0.3485
+       }
+      }
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 451,
+       "recall": 0.9093,
+       "epi_median_km": 1.0323
+      },
+      "1s_3km": {
+       "matched": 431,
+       "recall": 0.869,
+       "epi_median_km": 0.969
+      }
+     }
+    }
+   },
+   "union_support": {
+    "fraction": 0.5346,
+    "fraction_raw": 0.5346,
+    "supported": 2804,
+    "chance": 0,
+    "events": 5245,
+    "members": [
+     "shelly",
+     "wei",
+     "matoza",
+     "comcat"
+    ]
+   },
+   "off_structure": {
+    "fraction": 0.0019,
+    "events": 5245,
+    "radius_km": 1.0,
+    "members": [
+     "shelly",
+     "wei",
+     "matoza"
+    ]
+   },
+   "local_thickness_km": 0.1379,
+   "magnitude_coverage": 0.6768,
+   "headline": {
+    "recall": 0.6462,
+    "ceiling": 0.5573,
+    "recall_norm": 1.1595,
+    "union_support": 0.5346,
+    "epi_median_km": 0.7551,
+    "off_structure_fraction": 0.0019
+   }
+  },
+  "expert_blind": {
+   "events": 2875,
+   "located": 2875,
+   "versus": {
+    "shelly": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DLMS",
+     "detection": {
+      "matched": 982,
+      "reference_events": 1902,
+      "recall": 0.5163,
+      "recall_by_mag": [
+       {
+        "magnitude_from": -1.0,
+        "events": 1,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": -0.5,
+        "events": 52,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": 0.0,
+        "events": 431,
+        "recall": 0.1323
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 499,
+        "recall": 0.4248
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 456,
+        "recall": 0.6974
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 212,
+        "recall": 0.7547
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 144,
+        "recall": 0.9167
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 84,
+        "recall": 0.9643
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 17,
+        "recall": 0.9412
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 5,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 1,
+        "recall": 1.0
+       }
+      ],
+      "M90": 1.9
+     },
+     "location": {
+      "pairs": 982,
+      "epi_median_km": 0.784,
+      "epi_p90_km": 3.6958,
+      "dt_median_s": 0.2112,
+      "depth_pairs": 982,
+      "dz_median_km": 0.6147,
+      "dz_mad_km": 0.6077
+     },
+     "magnitude": {
+      "pairs": 0,
+      "dmag_median": null,
+      "dmag_mad": null,
+      "by_type": {}
+     },
+     "pair_distance_error": {
+      "pairs": 4684,
+      "median_km": 0.9014,
+      "p90_km": 7.8198
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 909,
+       "recall": 0.4779,
+       "epi_median_km": 0.689
+      },
+      "1s_3km": {
+       "matched": 855,
+       "recall": 0.4495,
+       "epi_median_km": 0.6317
+      }
+     }
+    },
+    "wei": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DLMS",
+     "detection": {
+      "matched": 2046,
+      "reference_events": 3627,
+      "recall": 0.5641,
+      "recall_by_mag": [
+       {
+        "magnitude_from": -1.0,
+        "events": 3,
+        "recall": 0.0
+       },
+       {
+        "magnitude_from": -0.5,
+        "events": 10,
+        "recall": 0.4
+       },
+       {
+        "magnitude_from": 0.0,
+        "events": 61,
+        "recall": 0.2131
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 379,
+        "recall": 0.3958
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 1245,
+        "recall": 0.6185
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 914,
+        "recall": 0.7057
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 241,
+        "recall": 0.722
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 45,
+        "recall": 0.8667
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 13,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 7,
+        "recall": 0.8571
+       },
+       {
+        "magnitude_from": 4.0,
+        "events": 3,
+        "recall": 0.6667
+       },
+       {
+        "magnitude_from": 5.0,
+        "events": 1,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 5.5,
+        "events": 1,
+        "recall": 0.0
+       }
+      ],
+      "M90": 2.7
+     },
+     "location": {
+      "pairs": 2046,
+      "epi_median_km": 1.3828,
+      "epi_p90_km": 5.0528,
+      "dt_median_s": 0.2263,
+      "depth_pairs": 2046,
+      "dz_median_km": 1.9453,
+      "dz_mad_km": 1.2529
+     },
+     "magnitude": {
+      "pairs": 0,
+      "dmag_median": null,
+      "dmag_mad": null,
+      "by_type": {}
+     },
+     "pair_distance_error": {
+      "pairs": 9571,
+      "median_km": 1.0946,
+      "p90_km": 7.132
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 1829,
+       "recall": 0.5043,
+       "epi_median_km": 1.2058
+      },
+      "1s_3km": {
+       "matched": 1549,
+       "recall": 0.4271,
+       "epi_median_km": 1.0302
+      }
+     }
+    },
+    "matoza": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DMS",
+     "detection": {
+      "matched": 861,
+      "reference_events": 1020,
+      "recall": 0.8441,
+      "recall_by_mag": [
+       {
+        "magnitude_from": 0.0,
+        "events": 43,
+        "recall": 0.4884
+       },
+       {
+        "magnitude_from": 0.5,
+        "events": 141,
+        "recall": 0.7234
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 270,
+        "recall": 0.8704
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 234,
+        "recall": 0.8761
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 192,
+        "recall": 0.8854
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 113,
+        "recall": 0.9115
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 16,
+        "recall": 0.875
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 9,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 2,
+        "recall": 1.0
+       }
+      ],
+      "M90": 2.3
+     },
+     "magnitude": {
+      "pairs": 0,
+      "dmag_median": null,
+      "dmag_mad": null,
+      "by_type": {}
+     },
+     "pair_distance_error": {
+      "pairs": 3913,
+      "median_km": 0.6862,
+      "p90_km": 3.5898
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 811,
+       "recall": 0.7951
+      },
+      "1s_3km": {
+       "matched": 756,
+       "recall": 0.7412
+      }
+     }
+    },
+    "comcat": {
+     "gates": [
+      4.0,
+      15.0
+     ],
+     "roles": "DLM",
+     "detection": {
+      "matched": 446,
+      "reference_events": 496,
+      "recall": 0.8992,
+      "recall_by_mag": [
+       {
+        "magnitude_from": 0.5,
+        "events": 8,
+        "recall": 0.875
+       },
+       {
+        "magnitude_from": 1.0,
+        "events": 30,
+        "recall": 0.9667
+       },
+       {
+        "magnitude_from": 1.5,
+        "events": 136,
+        "recall": 0.9118
+       },
+       {
+        "magnitude_from": 2.0,
+        "events": 193,
+        "recall": 0.886
+       },
+       {
+        "magnitude_from": 2.5,
+        "events": 105,
+        "recall": 0.8952
+       },
+       {
+        "magnitude_from": 3.0,
+        "events": 13,
+        "recall": 0.7692
+       },
+       {
+        "magnitude_from": 3.5,
+        "events": 9,
+        "recall": 1.0
+       },
+       {
+        "magnitude_from": 4.5,
+        "events": 2,
+        "recall": 1.0
+       }
+      ],
+      "M90": 2.3
+     },
+     "location": {
+      "pairs": 446,
+      "epi_median_km": 1.0975,
+      "epi_p90_km": 2.5767,
+      "dt_median_s": 0.1111,
+      "depth_pairs": 446,
+      "dz_median_km": 1.0775,
+      "dz_mad_km": 0.6181
+     },
+     "magnitude": {
+      "pairs": 0,
+      "dmag_median": null,
+      "dmag_mad": null,
+      "by_type": {}
+     },
+     "sensitivity": {
+      "2s_5km": {
+       "matched": 438,
+       "recall": 0.8831,
+       "epi_median_km": 1.0633
+      },
+      "1s_3km": {
+       "matched": 419,
+       "recall": 0.8448,
+       "epi_median_km": 1.0018
+      }
+     }
+    }
+   },
+   "union_support": {
+    "fraction": 0.7732,
+    "fraction_raw": 0.7732,
+    "supported": 2223,
+    "chance": 0,
+    "events": 2875,
+    "members": [
+     "shelly",
+     "wei",
+     "matoza",
+     "comcat"
+    ]
+   },
+   "off_structure": {
+    "fraction": 0.0042,
+    "events": 2875,
+    "radius_km": 1.0,
+    "members": [
+     "shelly",
+     "wei",
+     "matoza"
+    ]
+   },
+   "local_thickness_km": 0.2766,
+   "magnitude_coverage": 0.0,
+   "headline": {
+    "recall": 0.5163,
+    "ceiling": 0.5573,
+    "recall_norm": 0.9264,
+    "union_support": 0.7732,
+    "epi_median_km": 0.784,
+    "off_structure_fraction": 0.0042
+   }
+  }
+ }
+}

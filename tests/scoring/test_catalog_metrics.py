@@ -87,13 +87,18 @@ class MetricTest(unittest.TestCase):
         self.assertEqual(off_structure_fraction(far, [ref], CENTER, 1.0)["fraction"], 1.0)
         self.assertIsNone(off_structure_fraction(ref, [ref], CENTER, 1.0)["fraction"])
 
-    def test_union_support_skips_itself_and_time_only_members(self):
-        cand = population("cand", [0.0, 50.0], [40.0, 40.0], [-100.0, -100.0])
+    def test_union_support_skips_itself_and_corrects_time_only_chance(self):
+        # Event 0 is supported by a located member, event 1 by a time-only member.
+        # Event 2 coincides with a time-only event only after the 60-s shift
+        # (a chance coincidence), so it is removed from the net fraction.
+        cand = population("cand", [0.0, 50.0, 200.0], [40.0] * 3, [-100.0] * 3)
         located = population("loc", [0.0], [40.0], [-100.0])
-        time_only = population("tonly", [50.0], roles="D", time_only=True)
+        time_only = population("tonly", [50.0, 140.0], roles="D", time_only=True)
         result = union_support(cand, [cand, located, time_only])
-        self.assertEqual(result["members"], ["loc"])
-        self.assertEqual(result["fraction"], 0.5)
+        self.assertEqual(result["members"], ["loc", "tonly"])
+        self.assertAlmostEqual(result["fraction_raw"], 2 / 3, places=4)
+        self.assertEqual(result["chance"], 1)
+        self.assertAlmostEqual(result["fraction"], 1 / 3, places=4)
 
 
 if __name__ == "__main__":

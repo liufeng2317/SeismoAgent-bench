@@ -1,0 +1,38 @@
+# Pre-registered metrics v1 (docs/framework/03_EVALUATION_METRICS.md) for Ridgecrest 2019.
+# Scored with: python -m SeismoAgentBench.scoring.catalog_metrics {baseline,run} --task-dir <this task>
+metrics_version: 1
+references_loader: adapter          # evaluation/metrics_v1_adapter.py (audited five-source loader)
+mask:                               # analysis/processing.yaml candidate window and native bounds
+  start_utc: '2019-07-04T00:00:00Z'
+  end_utc: '2019-07-07T00:00:00Z'
+  latitude: [35.45, 36.05]
+  longitude: [-117.90, -117.20]
+  depth_bsl_km: [-0.7, 19.3]        # [0, 20] below the nominal 0.7-km surface
+surface_elevation_km: 0.7           # expert association.yaml reference_elevation_km
+off_structure_km: 1.0
+primary: {detection: shelly, location: shelly}
+references:
+  # Datums are not harmonised across sources; compared as below-surface depths (expert convention).
+  shelly: {roles: DLSM, depth_datum: surface}             # template matching; primary
+  liu: {roles: DLS, depth_datum: surface}                 # ML picker + GaMMA, relocated
+  ross_relocated: {roles: DLS, depth_datum: surface}      # QTM relocated subset
+  awr_hypocenters: {roles: D, depth_datum: surface}       # long-term GaMMA
+  official_earthquake: {roles: DLM, depth_datum: surface} # ComCat (SCSN) operational
+expert:
+  final: {path: expert/export/12_dense_layered/60_catalog/catalog_events.csv, time_column: origin_time_utc,
+          depth_column: depth_bsl_km, depth_datum: sea_level}
+  blind: {path: expert/export/01_baseline/04_locate_nonlinloc/full/events.csv, time_column: origin_time,
+          depth_column: depth_below_sea_level_km, depth_datum: sea_level, keep: {status: LOCATED}}
+leakage_patterns:
+  - '10\.1785/0220190309'
+  - '10\.1029/2019GL086189'
+  - '10\.1126/science\.aaz0109'
+  - '10\.1093/gji/ggaf001'
+  - '10\.22002/5af05-cah73'
+  - '10\.22002/f40da-hww21'
+  - '10\.5066/P9JN6H0N'
+  - 'SHELLY2020|LIU2020|ROSS2019|AWR2025|USGS_SCSN_COMCAT'
+  - 'data/catalogs/'
+  - 'fdsnws/event'
+  - 'earthquake\.usgs\.gov/(earthquakes|fdsnws)'
+  - 'scedc\.caltech\.edu/(eq-catalogs|data/cat)'

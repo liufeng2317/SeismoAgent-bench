@@ -1,0 +1,33 @@
+# Pre-registered metrics v1 (docs/framework/03_EVALUATION_METRICS.md) for Prague 2011.
+# Scored with: python -m SeismoAgentBench.scoring.catalog_metrics {baseline,run} --task-dir <this task>
+metrics_version: 1
+references_loader: stage05          # expert/04_comparison/05_match_references.py + validation.yaml gates
+mask:                               # expert/00_config/validation.yaml, depth converted to sea level
+  start_utc: '2011-11-11T00:00:00Z'
+  end_utc: '2011-11-19T00:00:00Z'
+  latitude: [35.452, 35.558]
+  longitude: [-96.873, -96.733]
+  depth_bsl_km: [-3.28, 19.72]      # [-3, 20] below the 0.28-km surface
+surface_elevation_km: 0.28          # expert association.yaml reference_elevation_km
+off_structure_km: 1.0
+primary: {detection: cochran, location: cochran}
+references:
+  # Datums are unstated in the publications; compared as below-surface depths (±0.3 km caveat).
+  cochran: {roles: DLSM, depth_datum: surface}
+  mcmahon: {roles: DS, depth_datum: surface}
+  isken: {roles: L, depth_datum: surface, gates: [60.0, 5.0]}   # origin times to the minute
+  comcat: {roles: M, depth_datum: unknown}                      # 11 events
+expert:
+  final: {path: expert/export/r5/60_catalog/catalog_events.csv, time_column: origin_time_utc,
+          depth_column: depth_bsl_km, depth_datum: sea_level}
+  blind: {path: expert/export/r1/04_locate_nonlinloc/full/events.csv, time_column: origin_time,
+          depth_column: depth_below_sea_level_km, depth_datum: sea_level, keep: {status: LOCATED}}
+leakage_patterns:                   # withheld products: reference DOIs, catalog folders, event services
+  - '10\.1093/gji/ggaa153'
+  - '10\.1002/2017GL072944'
+  - '10\.1785/0120160150'
+  - '10\.5066/F7FJ2FNT'
+  - 'COCHRAN2020|MCMAHON2017|ISKEN2017|USGS_TUL_COMCAT'
+  - 'data/catalogs/'
+  - 'fdsnws/event'
+  - 'earthquake\.usgs\.gov/(earthquakes|fdsnws)'

@@ -51,7 +51,11 @@ Two principles follow from the expert work on the six cases:
 
 Roles: **D** detection (recall, union support), **L** absolute location,
 **S** relative structure, **M** magnitude, **P** phase picks. The primary
-detection and location references (bold) feed the headline metrics.
+detection and location references (bold) feed the headline metrics. The
+primary detection reference must have an informative ceiling, i.e. another
+independent catalog of comparable completeness; where the largest catalog
+has none (Kaikōura: Tan; Maple Creek: Shelly) its raw recall is reported
+alongside the normalised headline.
 
 | Case | Reference | Roles | Notes |
 |---|---|---|---|
@@ -61,21 +65,21 @@ detection and location references (bold) feed the headline metrics.
 | | AWR 2025 v2 | D | long-term GaMMA |
 | | ComCat (SCSN) | D L M | operational |
 | Magna 2020 | **Pang 2020** | D L S M | relocated; primary |
-| | Baker & Whidden 2021 | D P | picks collapsed to events; depth datum unknown → no L depth |
+| | Baker & Whidden 2021 | D S P | picks collapsed to events; depth datum unknown → no L depth |
 | | ComCat (UUSS) | D L M | operational |
 | Prague 2011 | **Cochran 2020** | D L S M | template-enhanced relocated; primary |
 | | McMahon 2017 | D S | subspace detections, Bayesloc |
 | | Isken & Mooney 2017 | L | 6 M > 3 manual relocations; 60 s / 5 km gates |
 | | ComCat | M | 11 events; auxiliary |
-| Maple Creek 2017 | **ComCat (UUSS)** | D L S M | only located reference; primary |
-| | **Shelly & Hardebeck 2019** | D P | time-only detections; primary for detection (`recall_net`) |
-| Kīlauea 2018 | **Shelly & Thelen 2019** | D L M | hypocentroids; primary |
-| | Wei 2022 | D L M | 3-D NonLinLoc (frame differs from 1-D) |
+| Maple Creek 2017 | **ComCat (UUSS)** | D L S M | only located reference; detection and location primary, ceiling from Shelly |
+| | Shelly & Hardebeck 2019 | D P | time-only detections (`recall_net` reported; no ceiling) |
+| Kīlauea 2018 | **Shelly & Thelen 2019** | D L S M | hypocentroids; primary |
+| | Wei 2022 | D L S M | 3-D NonLinLoc (frame differs from 1-D) |
 | | Matoza 2021 | D S M | GrowClust |
 | | ComCat (HVO) | D L M | operational |
-| Kaikōura 2016 | **Tan 2024** | D M | detection primary |
-| | **Lanza 2019** | L | 122 HypoDD origins; location primary |
-| | Chamberlain 2021 | D S M | corrected GrowClust (3-D frame) |
+| Kaikōura 2016 | Tan 2024 | D S M | largest detection catalog (raw recall reported) |
+| | **Lanza 2019** | L S | 122 HypoDD origins; location primary |
+| | **Chamberlain 2021** | D S M | corrected GrowClust (3-D frame); detection primary, ceiling from Tan |
 | | GeoNet | D M | operational; fixed-depth solutions → no L |
 
 A reference's depth enters L only when its datum is known (sea level or
@@ -124,7 +128,7 @@ stated surface datum convertible with the case's model datum).
 | `recall_by_mag[R]` | recall in 0.5-unit bins of the reference magnitude |
 | `M90[R]` | lowest reference magnitude M (taken from the reference's own magnitudes, to 0.1) such that recall of reference events with magnitude ≥ M is ≥ 0.9, over at least 10 events (calibration-free completeness proxy; undefined if never reached) |
 | `event_ratio` | scored Agent events / N of the primary detection reference |
-| **`union_support`** | fraction of scored Agent events matched (primary gates) to at least one event of U = all located D references ∪ expert (final) — headline precision proxy. Time-only references are not members (their chance coincidences cannot be removed per event); for expert and reference rows U excludes the row itself and the expert |
+| **`union_support`** | fraction of scored Agent events matched (primary gates) to at least one event of U = all D references ∪ expert (final) — headline precision proxy. Time-only members match on \|Δt\| ≤ 1 s; the events that only the 60-s shifted time-only reference would support (among those no located member supports) are subtracted as chance (`union_support_raw` keeps them). For expert and reference rows U excludes the row itself and the expert |
 | `audited_false_rate` | see below |
 
 **Audit of unsupported events.** From each scored run, draw a stratified
