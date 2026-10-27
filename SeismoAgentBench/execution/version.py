@@ -50,3 +50,27 @@ def probe_executable_version(
     if lines:
         record["version"] = lines[0][:500]
     return record
+
+
+SEISMOTOOLS = Path(__file__).resolve().parents[2] / "seismotools"
+
+
+def tools_snapshot(tools_dir: Path = SEISMOTOOLS, *, timeout: float = 10.0) -> dict[str, object]:
+    """Identify the shared tool library an Agent could use: git commit and local changes.
+
+    Tools are added over time (for example new associators and locators), so a
+    run records which snapshot was visible. Metadata only: a missing git or a
+    non-repository directory yields null fields instead of an error.
+    """
+    record: dict[str, object] = {"path": str(tools_dir), "commit": None, "dirty": None}
+    try:
+        head = subprocess.run(["git", "-C", str(tools_dir), "rev-parse", "HEAD"], stdout=subprocess.PIPE,
+                              stderr=subprocess.DEVNULL, text=True, timeout=timeout, check=True)
+        status = subprocess.run(["git", "-C", str(tools_dir), "status", "--porcelain", "--", "."],
+                                stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, timeout=timeout,
+                                check=True)
+    except (OSError, subprocess.SubprocessError):
+        return record
+    record["commit"] = head.stdout.strip() or None
+    record["dirty"] = bool(status.stdout.strip())
+    return record

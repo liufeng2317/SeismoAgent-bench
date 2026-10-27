@@ -10,7 +10,7 @@ from .experiment import ExperimentSpecError, expand_experiment, load_experiment_
 from .monitor import finalize_run, run_status
 from .paths import RunLayout, RunLayoutError
 from .runner import ExecutionError, RunContext, RunnerInterrupted, run_command
-from .version import probe_executable_version
+from .version import probe_executable_version, tools_snapshot
 
 __all__ = [
     "AgentConfigError", "AuthConfigError", "ClaudeCommandError", "ClaudeCommandSpec",
@@ -20,7 +20,7 @@ __all__ = [
     "RunnerInterrupted",
     "expand_experiment", "finalize_run", "load_agent_config", "load_env_file",
     "load_experiment_spec",
-    "load_environment_config", "prepare_codex_runtime_home", "probe_executable_version",
+    "load_environment_config", "prepare_codex_runtime_home", "probe_executable_version", "tools_snapshot",
     "probe_runtime", "resolve_auth", "run_status", "write_environment_config_snapshot",
     "run_command", "write_agent_config_snapshot",
 ]

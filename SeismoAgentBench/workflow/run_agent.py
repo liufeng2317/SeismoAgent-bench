@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from SeismoAgentBench.agent.contract import AgentSpec
-from SeismoAgentBench.execution import (run_command, write_agent_config_snapshot,
+from SeismoAgentBench.execution import (run_command, tools_snapshot, write_agent_config_snapshot,
                                         write_environment_config_snapshot)
 from SeismoAgentBench.reporting import write_environment_record
 
@@ -52,6 +52,7 @@ def run_agent(task_path: str | Path, manifest_path: str | Path | None, agent: Ag
         "agent": {"name": agent.name, "version": agent.version},
         "command": {"argv": list(agent.command), "kind": "agent"},
         "references": references,
+        "tools": tools_snapshot(),
     }
     (record_dir / "provenance.json").write_text(
         json.dumps(provenance, indent=2, sort_keys=True) + "\n", encoding="utf-8")
