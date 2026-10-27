@@ -1,0 +1,62 @@
+# Expert ladder: one catalog per adopted round, in order (analysis only; scored with metrics v1).
+# kind: start | location | detection | qc | magnitude | dedupe
+steps:
+- round: r1
+  step: baseline port
+  kind: start
+  path: expert/export/r1/10_validate_catalog/events.csv
+  time_column: origin_time
+  depth_column: depth_below_sea_level_km
+  keep:
+    status: LOCATED
+  depth_datum: sea_level
+- round: r2
+  step: association bounds to the summit
+  kind: detection
+  path: expert/export/r2/10_validate_catalog/events.csv
+  time_column: origin_time
+  depth_column: depth_below_sea_level_km
+  keep:
+    status: LOCATED
+  depth_datum: sea_level
+- round: r3
+  step: WA prefilter 0.5–1 Hz
+  kind: magnitude
+  path: expert/export/r3/10_validate_catalog/events.csv
+  time_column: origin_time
+  depth_column: depth_below_sea_level_km
+  keep:
+    status: LOCATED
+  depth_datum: sea_level
+- round: r4
+  step: Match&Locate
+  kind: detection
+  path: expert/export/r4/60_catalog/catalog_events.csv
+  time_column: origin_time_utc
+  depth_column: depth_bsl_km
+  depth_datum: sea_level
+- round: r7
+  step: NLL EDT_OT_WT (r5/r6 rejected)
+  kind: location
+  path: expert/export/r7/60_catalog/catalog_events.csv
+  time_column: origin_time_utc
+  depth_column: depth_bsl_km
+  depth_datum: sea_level
+- round: r8
+  step: direct ML (stage 65)
+  kind: magnitude
+  path: expert/export/r8/60_catalog/catalog_events.csv
+  time_column: origin_time_utc
+  depth_column: depth_bsl_km
+  depth_datum: sea_level
+- round: r9
+  step: coda ghosts removed (stage 67)
+  kind: dedupe
+  path: expert/export/r9/60_catalog/catalog_events.csv
+  time_column: origin_time_utc
+  depth_column: depth_bsl_km
+  depth_datum: sea_level
+
+# Component swap (catalog_metrics swap): expert model and locator setup of this round.
+swap:
+  picks_round: r7

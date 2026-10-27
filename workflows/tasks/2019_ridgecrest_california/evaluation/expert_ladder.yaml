@@ -1,0 +1,79 @@
+# Expert ladder: one catalog per adopted round, in order (analysis only; scored with metrics v1).
+# kind: start | location | detection | qc | magnitude | dedupe
+steps:
+- round: 01_baseline
+  step: baseline (PhaseNet, GaMMA, NLL)
+  kind: start
+  path: expert/export/01_baseline/10_validate_catalog/events.csv
+  time_column: origin_time
+  depth_column: depth_below_sea_level_km
+  keep:
+    status: LOCATED
+  depth_datum: sea_level
+- round: 07_match_locate
+  step: double difference (stage 52) + Match&Locate (stage 60)
+  kind: detection
+  path: expert/export/07_match_locate/60_catalog/catalog_events.csv
+  time_column: origin_time_utc
+  depth_column: depth_bsl_km
+  depth_datum: sea_level
+- round: 08_location_quality
+  step: location-quality rule (CC link, gap, sigma_x)
+  kind: qc
+  path: expert/export/08_location_quality/60_catalog/catalog_events.csv
+  time_column: origin_time_utc
+  depth_column: depth_bsl_km
+  depth_datum: sea_level
+- round: 09_close_events
+  step: close events need template support
+  kind: qc
+  path: expert/export/09_close_events/60_catalog/catalog_events.csv
+  time_column: origin_time_utc
+  depth_column: depth_bsl_km
+  depth_datum: sea_level
+- round: 10_layered_frame
+  step: Shelly layered frame (stage 63)
+  kind: location
+  path: expert/export/10_layered_frame/60_catalog/catalog_events.csv
+  time_column: origin_time_utc
+  depth_column: depth_bsl_km
+  depth_datum: sea_level
+- round: 11_dense_templates
+  step: dense 0.5 km templates
+  kind: detection
+  path: expert/export/11_dense_templates/60_catalog/catalog_events.csv
+  time_column: origin_time_utc
+  depth_column: depth_bsl_km
+  depth_datum: sea_level
+- round: 12_dense_layered
+  step: dense templates in the layered frame
+  kind: location
+  path: expert/export/12_dense_layered/60_catalog/catalog_events.csv
+  time_column: origin_time_utc
+  depth_column: depth_bsl_km
+  depth_datum: sea_level
+- round: 53_direct_magnitude
+  step: direct ML (stage 65)
+  kind: magnitude
+  path: expert/export/53_direct_magnitude/60_catalog/catalog_events.csv
+  time_column: origin_time_utc
+  depth_column: depth_bsl_km
+  depth_datum: sea_level
+- round: 56_large_events
+  step: depth-bound large events restored (stage 66)
+  kind: qc
+  path: expert/export/56_large_events/60_catalog/catalog_events.csv
+  time_column: origin_time_utc
+  depth_column: depth_bsl_km
+  depth_datum: sea_level
+- round: 57_coda_duplicates
+  step: coda ghosts removed (stage 67)
+  kind: dedupe
+  path: expert/export/57_coda_duplicates/60_catalog/catalog_events.csv
+  time_column: origin_time_utc
+  depth_column: depth_bsl_km
+  depth_datum: sea_level
+
+# Component swap (catalog_metrics swap): expert model and locator setup of this round.
+swap:
+  picks_round: 01_baseline
