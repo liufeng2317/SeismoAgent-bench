@@ -21,7 +21,7 @@ anchor is the GeoNet M5.5 2016p913880 (2016-12-04 03:15:47).
    cover, min 8 stations, N×MAD 10; null-run false fraction 0.26 %), chained relative
    magnitudes. Rounds registered in `EXPERT_ROUNDS` (r3–r6). All depths are
    below sea level (model datum 0 km).
-   *Update 2026-10-28:* the expert population is now round `r8` = `r6` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r6` predate it. Benchmark scores: `metrics_v1_baseline.json`.
+   *Update 2026-10-28:* the expert population is now round `r8` = `r6` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r6` predate it. Benchmark scores: `expert/metrics_v1_baseline.json`.
 3. **Agent reproductions** — none completed yet; register arms in
    `AGENT_RUNS` inside `plot_evaluation_comparison.py`.
 
@@ -45,7 +45,7 @@ Lanza 1.2 km) and in origin time by up to 0.6 s, so |Δt| (0.42–0.63 s here)
 is not a sharp diagnostic. GeoNet depths are ~6 km deeper than all other
 catalogs (fixed-depth solutions are common in it).
 
-## Figures (`figures/`)
+## Figures (`expert/figures/`)
 
 | File | Content |
 |---|---|
@@ -71,7 +71,8 @@ python -m SeismoAgentBench.scoring.catalog_metrics baseline --task-dir workflows
 ```
 
 Per run: `<run>/evaluation/metrics_v1.json`, `location_diagnostics.png`,
-`audit_sample.csv`; per case: `metrics_v1_summary.json`, `metrics_v1_baseline.json`.
+`audit_sample.csv`; per case: `agents/metrics_v1_summary.json`, `expert/metrics_v1_baseline.json`.
+Layout: `expert/` (`metrics_v1_baseline.json`, `expert_ladder.{yaml,json}`, `figures/`: references + expert); `agents/` (`metrics_v1_summary.json`; per run `<variant>__<harness>__<model>__<run_id>/scores.json` and `figures/`, written by the `summary` command and the figure script); `comparison/figures/` (references + expert + all runs).
 The figures in this directory are descriptive; their matcher statistics are
 not benchmark scores.
 

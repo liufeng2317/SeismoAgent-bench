@@ -33,6 +33,10 @@ CONFIG_FILE = "metrics_v1.yaml"
 ADAPTER_FILE = "metrics_v1_adapter.py"
 RUN_SCORE_FILE = "metrics_v1.json"
 BASELINE_FILE = "metrics_v1_baseline.json"
+# Task evaluation layout: expert/ (references + expert yardsticks, ladder),
+# agents/ (per-run scores and figures, summary), comparison/ (all together).
+EXPERT_DIR = Path("evaluation/expert")
+AGENTS_DIR = Path("evaluation/agents")
 FIGURE_FILE = "location_diagnostics.png"
 SEA_LEVEL_MARKER = "below sea level"
 
@@ -242,7 +246,8 @@ def score_baseline(task_dir: Path, *, write: bool = True) -> dict:
     report = {**_scorer_record(), "task": case.task_dir.name, "references": _references_record(case),
               "expert": {k: v.notes for k, v in case.expert.items()}, "ceilings": ceiling, "rows": rows}
     if write:
-        out = case.task_dir / "evaluation" / BASELINE_FILE
+        out = case.task_dir / EXPERT_DIR / BASELINE_FILE
+        out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
     return report
 

@@ -15,12 +15,12 @@ fixed evaluation window **[2020-03-18T00:00:00Z, 2020-03-26T00:00:00Z)**:
    Match&Locate events of stage 60, shifted with their templates, with
    chained relative magnitudes. Rounds are registered in `EXPERT_ROUNDS`
    (`load_expert(round_)`; r6, r7, r8); stage 60 scores against r6.
-   *Update 2026-10-28:* the expert population is now round `r11` = `r8` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r8` predate it. Benchmark scores: `metrics_v1_baseline.json`.
+   *Update 2026-10-28:* the expert population is now round `r11` = `r8` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r8` predate it. Benchmark scores: `expert/metrics_v1_baseline.json`.
 3. **Agent reproductions** — none completed yet; arms are registered in
    `AGENT_RUNS` inside `plot_evaluation_comparison.py` as runs finish
    (`min`, `tools`, `guided`).
 
-## Figures (`figures/`)
+## Figures (`expert/figures/`)
 
 | File | Content |
 |---|---|
@@ -85,7 +85,8 @@ python -m SeismoAgentBench.scoring.catalog_metrics baseline --task-dir workflows
 ```
 
 Per run: `<run>/evaluation/metrics_v1.json`, `location_diagnostics.png`,
-`audit_sample.csv`; per case: `metrics_v1_summary.json`, `metrics_v1_baseline.json`.
+`audit_sample.csv`; per case: `agents/metrics_v1_summary.json`, `expert/metrics_v1_baseline.json`.
+Layout: `expert/` (`metrics_v1_baseline.json`, `expert_ladder.{yaml,json}`, `figures/`: references + expert); `agents/` (`metrics_v1_summary.json`; per run `<variant>__<harness>__<model>__<run_id>/scores.json` and `figures/`, written by the `summary` command and the figure script); `comparison/figures/` (references + expert + all runs).
 The figures in this directory are descriptive; their matcher statistics are
 not benchmark scores.
 

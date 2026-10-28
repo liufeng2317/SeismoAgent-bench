@@ -23,7 +23,7 @@ over the fixed evaluation window **[2017-06-11T00:00:00Z, 2017-06-19T00:00:00Z)*
    (r7: 3.5 %); ComCat recall 99.0 %, Shelly net 50.7 % (r7 99.4 / 52.1 %).
    Rounds registered in `EXPERT_ROUNDS` (r5–r9); depths below sea level
    converted to below-surface with the model datum (2.3 km).
-   *Update 2026-10-28:* the expert population is now round `r11` = `r9` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r9` predate it. Benchmark scores: `metrics_v1_baseline.json`.
+   *Update 2026-10-28:* the expert population is now round `r11` = `r9` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r9` predate it. Benchmark scores: `expert/metrics_v1_baseline.json`.
 3. **Agent reproductions** — none completed yet; register arms in
    `AGENT_RUNS` inside `plot_evaluation_comparison.py` as runs finish.
 
@@ -52,7 +52,7 @@ count); against Shelly 77 % of expert events have a detection within 1 s
 input difference, not a locator artifact: our picks fit our hypocentres
 better than ComCat's (expert PLAN.md, depth-offset diagnostic).
 
-## Figures (`figures/`)
+## Figures (`expert/figures/`)
 
 | File | Content |
 |---|---|
@@ -78,7 +78,8 @@ python -m SeismoAgentBench.scoring.catalog_metrics baseline --task-dir workflows
 ```
 
 Per run: `<run>/evaluation/metrics_v1.json`, `location_diagnostics.png`,
-`audit_sample.csv`; per case: `metrics_v1_summary.json`, `metrics_v1_baseline.json`.
+`audit_sample.csv`; per case: `agents/metrics_v1_summary.json`, `expert/metrics_v1_baseline.json`.
+Layout: `expert/` (`metrics_v1_baseline.json`, `expert_ladder.{yaml,json}`, `figures/`: references + expert); `agents/` (`metrics_v1_summary.json`; per run `<variant>__<harness>__<model>__<run_id>/scores.json` and `figures/`, written by the `summary` command and the figure script); `comparison/figures/` (references + expert + all runs).
 The figures in this directory are descriptive; their matcher statistics are
 not benchmark scores.
 

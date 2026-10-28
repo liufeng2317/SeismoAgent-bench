@@ -592,7 +592,7 @@ def main():
     parser.add_argument('--out-dir', type=Path, default=TASK / 'evaluation')
     args = parser.parse_args()
     out = args.out_dir
-    figures = out / 'figures'
+    figures = out / 'expert' / 'figures'  # agent runs: agents/ and comparison/
     figures.mkdir(parents=True, exist_ok=True)
 
     populations, inputs = load_populations()

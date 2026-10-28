@@ -576,7 +576,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--task-dir', type=Path, default=TASK)
     args = parser.parse_args()
-    out = args.task_dir / 'evaluation' / 'figures'
+    out = args.task_dir / 'evaluation' / 'agents' / 'pilot' / 'figures'  # pilot runs vs expert and references
     out.mkdir(parents=True, exist_ok=True)
     cfg, audit, pops, inputs = load_populations()
     stats = compute_stats(pops)

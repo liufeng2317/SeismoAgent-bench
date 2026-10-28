@@ -3,7 +3,7 @@
 The Agent's picks and pick-to-event associations are kept; only the absolute
 location step is replaced by the expert's: its 1-D velocity model, NonLinLoc
 grid, error settings and location method (expert ``00_config`` and the stage-03
-inputs of ``swap.picks_round`` in ``evaluation/expert_ladder.yaml``), without
+inputs of ``swap.picks_round`` in ``evaluation/expert/expert_ladder.yaml``), without
 station delays.
 Scoring the relocated catalog next to the Agent's own locations separates
 errors of the front end (picks, association) from those of the velocity model
@@ -23,7 +23,7 @@ import numpy as np
 import pandas as pd
 import yaml
 
-from .case import SEA_LEVEL_MARKER, _strip, headline, load_case
+from .case import EXPERT_DIR, SEA_LEVEL_MARKER, _strip, headline, load_case
 from .metrics import ceilings, score_population
 from .tables import Population, in_mask, read_candidate_catalog
 
@@ -34,7 +34,7 @@ KEYS = ("recall_norm", "shift_km", "scatter_median_km", "epi_gt5km", "dz_median_
 
 
 def _inputs(case, run_dir: Path, out: Path) -> tuple[Path, Path, Path, dict]:
-    spec = yaml.safe_load((case.task_dir / "evaluation/expert_ladder.yaml").read_text())["swap"]
+    spec = yaml.safe_load((case.task_dir / EXPERT_DIR / "expert_ladder.yaml").read_text())["swap"]
     expert = case.task_dir / "expert"
     assoc = expert / "export" / spec["picks_round"] / "03_associate_gamma/full"
     settings = json.loads((assoc / "inputs.json").read_text())
@@ -112,7 +112,7 @@ def run_swap(task_dir: Path, run_dir: Path, *, workers: int = 16, python: str = 
         rows[name] = {k: h.get(k) for k in KEYS}
         rows[name]["events_in_mask"] = int(len(pop.events))
     report = {"run": str(run_dir.relative_to(case.task_dir)),
-              "picks_round": yaml.safe_load((case.task_dir / "evaluation/expert_ladder.yaml").read_text())["swap"]["picks_round"],
+              "picks_round": yaml.safe_load((case.task_dir / EXPERT_DIR / "expert_ladder.yaml").read_text())["swap"]["picks_round"],
               "location_method": config["location_method"], "station_delays": False,
               "agent_events": int(len(native)), "relocated": int(ids.sum()),
               "arrivals_used": int(len(pd.read_csv(arrivals))), "rows": rows}

@@ -346,11 +346,12 @@ spec declares `artifact-contract@1` and `catalog-metrics@1`; this is the only sc
 
 | Output | Content | Tracked |
 |---|---|---|
-| `evaluation/metrics_v1_baseline.json` | ceilings; reference, expert-final and expert-blind rows | yes |
+| `evaluation/expert/metrics_v1_baseline.json` | ceilings; reference, expert-final and expert-blind rows | yes |
 | `<run>/evaluation/metrics_v1.json` | one run: completion, catalog notes, all metrics, headline, process, leakage | no (runs/ is ignored) |
 | `<run>/evaluation/location_diagnostics.png` | offset vectors (shift vs scatter), offset CDF with expert yardsticks, depth distribution with the densest band, map of offsets and off-structure events | no |
 | `<run>/evaluation/audit_sample.csv`, `audit/` | the audit sample (drawn once) and its blind review package: `plots/`, `key.csv`, `labels.csv`, `spot_check.csv` | no |
-| `evaluation/metrics_v1_summary.json` | per configuration over repeated runs (§6) | yes |
+| `evaluation/agents/metrics_v1_summary.json` | per configuration over repeated runs (§6) | yes |
+| `evaluation/agents/<variant>__<harness>__<model>__<run_id>/` | `scores.json` (formal state, headline, process, audit, swap; reference-only rescue score when present) and `figures/` | yes |
 
 The leakage scan reads only the Agent's tool-call inputs (its accesses), not
 text that appears in tool results such as fetched documents or directory

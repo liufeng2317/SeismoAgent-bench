@@ -1,6 +1,6 @@
 """Expert ladder: every adopted expert round scored with metrics v1 (analysis, not a benchmark score).
 
-``evaluation/expert_ladder.yaml`` lists one catalog per adopted round in order,
+``evaluation/expert/expert_ladder.yaml`` lists one catalog per adopted round in order,
 with the step it added and its kind (start, location, detection, qc,
 magnitude, dedupe). Each catalog is masked and scored exactly like the expert
 rows of the baseline, so consecutive rows show what each expert step added -
@@ -14,7 +14,7 @@ from pathlib import Path
 
 import yaml
 
-from .case import _expert, _scorer_record, _strip, headline, load_case
+from .case import EXPERT_DIR, _expert, _scorer_record, _strip, headline, load_case
 from .metrics import ceilings, score_population
 
 LADDER_FILE = "expert_ladder.yaml"
@@ -23,7 +23,7 @@ OUTPUT_FILE = "expert_ladder.json"
 
 def score_ladder(task_dir: Path, *, write: bool = True) -> dict:
     case = load_case(task_dir)
-    steps = yaml.safe_load((case.task_dir / "evaluation" / LADDER_FILE).read_text(encoding="utf-8"))["steps"]
+    steps = yaml.safe_load((case.task_dir / EXPERT_DIR / LADDER_FILE).read_text(encoding="utf-8"))["steps"]
     ceiling = ceilings(case.refs)
     rows = []
     for step in steps:
@@ -36,5 +36,5 @@ def score_ladder(task_dir: Path, *, write: bool = True) -> dict:
                      "headline": headline(score, case, ceiling)})
     report = {**_scorer_record(), "task": case.task_dir.name, "steps": rows}
     if write:
-        (case.task_dir / "evaluation" / OUTPUT_FILE).write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
+        (case.task_dir / EXPERT_DIR / OUTPUT_FILE).write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
     return report
