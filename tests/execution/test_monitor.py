@@ -62,7 +62,10 @@ class MonitorTests(unittest.TestCase):
     def test_finalize_closes_abandoned_record_and_cleans_runtime_root(self):
         self._write_pid(999999999, 12345)
         stale = Path(tempfile.mkdtemp(prefix="seismoagentbench-abandoned-"))
+        (stale / "home/work").mkdir(parents=True)
+        (stale / "home/work/picks.csv").write_text("pick_id\n", encoding="utf-8")
         report = finalize_run(self.run)
+        self.assertTrue((self.run / "record/runtime_home/work/picks.csv").is_file())
         self.assertEqual(report["state"], "interrupted")
         self.assertEqual(report["failure_reason"], "runner_lost")
         self.assertIn("finished_at", report)

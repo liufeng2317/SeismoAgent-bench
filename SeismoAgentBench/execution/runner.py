@@ -335,6 +335,33 @@ def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, 
                        result=record / "run_result.json"), attempt)
 
 
+# Files an Agent leaves in its runtime HOME (outside BENCH_WORK) are kept
+# under record/runtime_home when the runtime root is removed, so the run
+# stays traceable. Hidden entries (harness config, session files, tool and
+# model caches) and the XDG cache are not kept; credentials never live in
+# HOME (env file values are in the environment, codex auth in codex_home).
+RUNTIME_HOME_SKIP = frozenset({"cache"})
+
+
+def preserve_runtime_home(runtime_root: Path, record: Path) -> list[str]:
+    """Copy the Agent-created, non-hidden entries of runtime_root/home into record/runtime_home."""
+    home = Path(runtime_root) / "home"
+    if not home.is_dir():
+        return []
+    kept = []
+    for entry in sorted(home.iterdir()):
+        if entry.name.startswith(".") or entry.name in RUNTIME_HOME_SKIP:
+            continue
+        target = Path(record) / "runtime_home" / entry.name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if entry.is_dir() and not entry.is_symlink():
+            shutil.copytree(entry, target, symlinks=True, dirs_exist_ok=True)
+        else:
+            shutil.copy2(entry, target, follow_symlinks=False)
+        kept.append(entry.name)
+    return kept
+
+
 def _environment(context: RunContext, extra_env: Mapping[str, str] | None = None,
                  auth_source_home: str | Path | None = None) -> tuple[dict[str, str], Path]:
     runtime_root = Path(tempfile.mkdtemp(prefix=f"seismoagentbench-{context.run_id}-"))
@@ -470,6 +497,13 @@ def run_command(task_path: str | Path, manifest_path: str | Path | None, command
             if process is not None and process.stdout is not None:
                 process.stdout.close()
             if runtime_root is not None:
+                try:
+                    kept = preserve_runtime_home(runtime_root, context.record)
+                except OSError as exc:
+                    kept = []
+                    result["runtime_home_error"] = str(exc)
+                if kept:
+                    result["runtime_home_preserved"] = kept
                 shutil.rmtree(runtime_root, ignore_errors=True)
             usage_path = context.record / "usage_summary.json"
             _write_json(usage_path, summarize_usage(event_log))

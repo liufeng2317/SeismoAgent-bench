@@ -18,6 +18,7 @@ import socket
 import tempfile
 from typing import Any
 
+from SeismoAgentBench.execution.runner import preserve_runtime_home
 from SeismoAgentBench.reporting.transcript import summarize_usage
 
 _LIVE_STATES = {"preparing", "running"}
@@ -163,12 +164,13 @@ def _newest_work_mtime(work: Path) -> str | None:
     return datetime.fromtimestamp(newest, timezone.utc).isoformat()
 
 
-def _remove_stale_runtime_roots(run_id: Any) -> list[str]:
+def _remove_stale_runtime_roots(run_id: Any, record: Path) -> list[str]:
     if not isinstance(run_id, str) or not run_id:
         return []
     removed = []
     for candidate in Path(tempfile.gettempdir()).glob(f"seismoagentbench-{run_id}-*"):
         if candidate.is_dir():
+            preserve_runtime_home(candidate, record)
             shutil.rmtree(candidate, ignore_errors=True)
             removed.append(candidate.name)
     return removed
@@ -201,7 +203,7 @@ def finalize_run(run_dir: str | Path, *, force: bool = False) -> dict[str, Any]:
     _write(record / "usage_summary.json", summarize_usage(record / "execution.jsonl"))
     result["usage_summary"] = "record/usage_summary.json"
     result["usage_summary_partial"] = True
-    removed = _remove_stale_runtime_roots(result.get("run_id"))
+    removed = _remove_stale_runtime_roots(result.get("run_id"), record)
     _write(record / "run_result.json", result)
     report = dict(result)
     report["stale_runtime_roots_removed"] = removed

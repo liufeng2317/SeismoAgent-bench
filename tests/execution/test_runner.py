@@ -173,6 +173,22 @@ class RunnerTests(unittest.TestCase):
         self.assertTrue(auth.is_file())
         self.assertFalse((self.root / "auth-run/work/.codex_home").exists())
 
+    def test_files_left_in_runtime_home_are_kept_in_record(self):
+        code = (
+            "import json,os,pathlib; h=pathlib.Path(os.environ['HOME']); "
+            "(h/'work/out').mkdir(parents=True); (h/'work/out/catalog.csv').write_text('event_id\\n'); "
+            "(h/'notes.txt').write_text('n'); (h/'.claude').mkdir(); (h/'.claude/session.jsonl').write_text('{}'); "
+            "(h/'cache').mkdir(exist_ok=True); (h/'cache/model.bin').write_text('w'); "
+            "pathlib.Path(os.environ['BENCH_OUTPUT'],'result.json').write_text(json.dumps({'ok': True}))"
+        )
+        result = run_command(self.task, self.manifest, [sys.executable, "-c", code], self.root, "home-run", timeout=10)
+        kept = self.root / "home-run/record/runtime_home"
+        self.assertEqual(result["state"], "completed")
+        self.assertEqual(result["runtime_home_preserved"], ["notes.txt", "work"])
+        self.assertTrue((kept / "work/out/catalog.csv").is_file())
+        self.assertFalse((kept / ".claude").exists())
+        self.assertFalse((kept / "cache").exists())
+
     def test_declared_inputs_are_linked_into_run_input_view(self):
         source_dir = Path(self.tmp.name) / "waveforms"
         source_dir.mkdir()
