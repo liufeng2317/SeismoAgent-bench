@@ -80,8 +80,8 @@ for a custom leaf name). The model segment defaults to the agent config's
 the CLI as `--model`.
 
 `bash run.sh` runs the default `min` variant; `VARIANT=<name> bash run.sh`
-selects any packaged variant. `AGENT=claude bash run.sh` runs the same variants through
-the Claude Code CLI instead of Codex; it authenticates from
+selects any packaged variant. The Agent is Claude Code by default
+(`AGENT=codex bash run.sh` selects Codex); Claude authenticates from
 `SeismoAgentBench/configs/agents/claude.env` (chmod 600, git-ignored;
 `ANTHROPIC_BASE_URL` and `ANTHROPIC_AUTH_TOKEN`) — `CLAUDE_ENV_FILE`,
 `CLAUDE_BIN`, `CLAUDE_MODEL`, `CLAUDE_MAX_TURNS` and `CLAUDE_EXTRA_PATH`

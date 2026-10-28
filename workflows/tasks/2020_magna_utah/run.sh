@@ -4,7 +4,7 @@ set -euo pipefail
 TASK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "$TASK_DIR/../../.." && pwd)"
 VARIANT="${VARIANT:-min}"
-AGENT="${AGENT:-codex}"
+AGENT="${AGENT:-claude}"  # formal runs: Claude Code x GLM (configs/agents/claude.yaml)
 PYTHON="${PYTHON:-/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python}"
 # Any packaged variant: task_<variant>.json in this directory.
 TASK_FILE="$TASK_DIR/task_${VARIANT}.json"
