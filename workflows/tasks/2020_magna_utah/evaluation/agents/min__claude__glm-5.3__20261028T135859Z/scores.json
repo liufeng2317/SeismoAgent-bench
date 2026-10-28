@@ -1,0 +1,29 @@
+{
+ "run": {
+  "variant": "min",
+  "harness": "claude",
+  "model": "glm-5.3",
+  "run_id": "20261028T135859Z",
+  "path": "runs/min/claude/glm-5.3/20261028T135859Z"
+ },
+ "formal_state": "artifact_invalid",
+ "run_state": "artifact_invalid",
+ "completion": {
+  "completed": false,
+  "problems": [
+   "picks.csv: missing",
+   "catalog.csv: missing"
+  ],
+  "contract": "runs/min/claude/glm-5.3/20261028T135859Z/control/output_contract.json"
+ },
+ "headline": {
+  "recall": 0.0,
+  "recall_norm": 0.0
+ },
+ "process": {
+  "cost_usd": 12.630659000000005,
+  "elapsed_s": 14662.8,
+  "turns": 5
+ },
+ "leakage_flag": false
+}
