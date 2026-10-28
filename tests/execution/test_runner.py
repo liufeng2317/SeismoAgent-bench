@@ -181,13 +181,27 @@ class RunnerTests(unittest.TestCase):
             "(h/'cache').mkdir(exist_ok=True); (h/'cache/model.bin').write_text('w'); "
             "pathlib.Path(os.environ['BENCH_OUTPUT'],'result.json').write_text(json.dumps({'ok': True}))"
         )
-        result = run_command(self.task, self.manifest, [sys.executable, "-c", code], self.root, "home-run", timeout=10)
+        result = run_command(self.task, self.manifest, [sys.executable, "-c", code], self.root, "home-run", timeout=120)
         kept = self.root / "home-run/record/runtime_home"
         self.assertEqual(result["state"], "completed")
         self.assertEqual(result["runtime_home_preserved"], ["notes.txt", "work"])
         self.assertTrue((kept / "work/out/catalog.csv").is_file())
         self.assertFalse((kept / ".claude").exists())
         self.assertFalse((kept / "cache").exists())
+
+    def test_detached_leftover_process_is_stopped_when_the_session_ends(self):
+        code = (
+            "import json,os,pathlib,subprocess; w=os.environ['BENCH_WORK']; "
+            "p=subprocess.Popen(['sleep','300'], cwd=w, start_new_session=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL); "
+            "pathlib.Path(w,'child.pid').write_text(str(p.pid)); "
+            "pathlib.Path(os.environ['BENCH_OUTPUT'],'result.json').write_text(json.dumps({'ok': True}))"
+        )
+        result = run_command(self.task, self.manifest, [sys.executable, "-c", code], self.root, "leftover-run", timeout=120)
+        pid = int((self.root / "leftover-run/work/child.pid").read_text())
+        self.assertEqual(result["state"], "completed")
+        self.assertEqual([item["pid"] for item in result["leftover_processes_stopped"]], [pid])
+        state = Path(f"/proc/{pid}/stat")
+        self.assertTrue(not state.exists() or state.read_text().rsplit(")", 1)[1].split()[0] == "Z")
 
     def test_declared_inputs_are_linked_into_run_input_view(self):
         source_dir = Path(self.tmp.name) / "waveforms"

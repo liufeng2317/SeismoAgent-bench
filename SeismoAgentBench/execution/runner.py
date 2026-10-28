@@ -343,6 +343,51 @@ def _context(root: Path, run_id: str, task: dict[str, Any], manifest: dict[str, 
 RUNTIME_HOME_SKIP = frozenset({"cache"})
 
 
+def stop_leftover_processes(roots: Sequence[Path], *, grace_s: float = 5.0) -> list[dict[str, Any]]:
+    """Stop processes the Agent left behind when its session ended.
+
+    An Agent can detach work from the harness's process group (setsid,
+    nohup); such a process would keep running, and writing into the run, after
+    the run has ended. Any live process other than this runner whose command
+    line or working directory refers to one of ``roots`` is sent SIGTERM, then
+    SIGKILL after ``grace_s``. Returns what was stopped (pid, command prefix).
+    """
+    keys = [str(Path(root)) for root in roots]
+    own = os.getpid()
+
+    def matches() -> list[tuple[int, str]]:
+        found = []
+        for entry in Path("/proc").iterdir():
+            if not entry.name.isdigit() or int(entry.name) == own:
+                continue
+            try:
+                state = (entry / "stat").read_text().rsplit(")", 1)[1].split()[0]
+                command = (entry / "cmdline").read_bytes().replace(b"\0", b" ").decode(errors="replace").strip()
+                cwd = os.readlink(entry / "cwd")
+            except (OSError, IndexError):
+                continue
+            if state != "Z" and any(key in command or cwd == key or cwd.startswith(key + "/") for key in keys):
+                found.append((int(entry.name), command[:300]))
+        return found
+
+    stopped = []
+    for pid, command in matches():
+        try:
+            os.kill(pid, signal.SIGTERM)
+            stopped.append({"pid": pid, "command": command})
+        except (ProcessLookupError, PermissionError):
+            pass
+    deadline = time.monotonic() + grace_s
+    while stopped and matches() and time.monotonic() < deadline:
+        time.sleep(0.2)
+    for pid, _ in matches():
+        try:
+            os.kill(pid, signal.SIGKILL)
+        except (ProcessLookupError, PermissionError):
+            pass
+    return stopped
+
+
 def preserve_runtime_home(runtime_root: Path, record: Path) -> list[str]:
     """Copy the Agent-created, non-hidden entries of runtime_root/home into record/runtime_home."""
     home = Path(runtime_root) / "home"
@@ -496,6 +541,13 @@ def run_command(task_path: str | Path, manifest_path: str | Path | None, command
                 append_execution_line(f"launcher produced no output\n", event_stream, human_stream)
             if process is not None and process.stdout is not None:
                 process.stdout.close()
+            if process is not None:
+                # work/ and the runtime root, not record/: a reader tailing the
+                # execution log must survive.
+                leftovers = stop_leftover_processes(
+                    [context.work] + ([runtime_root] if runtime_root is not None else []))
+                if leftovers:
+                    result["leftover_processes_stopped"] = leftovers
             if runtime_root is not None:
                 try:
                     kept = preserve_runtime_home(runtime_root, context.record)
