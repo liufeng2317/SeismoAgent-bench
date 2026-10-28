@@ -24,9 +24,15 @@ sequence over the fixed evaluation window **[2011-11-11T00:00:00Z,
    event (r3: 1.5 %; McMahon itself 0.8 %); r5: 0.04 %. Rounds registered in
    `EXPERT_ROUNDS` (r2–r5). Expert depths are converted from sea level to
    below the surface with the model datum (0.28 km).
-   *Update 2026-10-28:* the expert population is now round `r7` = `r5` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r5` predate it. Benchmark scores: `metrics_v1_baseline.json`.
-3. **Agent reproductions** — none completed yet; register arms in
-   `AGENT_RUNS` inside `plot_evaluation_comparison.py`.
+   *Update 2026-10-28:* the expert population is now round `r7` = `r5` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r5` predate it. Benchmark scores: `expert/metrics_v1_baseline.json`.
+3. **Agent runs** — every run under `runs/` is found by the figure script
+   (`discover_runs`) and exported by the `summary` command to
+   `agents/<variant>__<harness>__<model>__<run_id>/`. Formal runs of
+   2026-10-28 (Claude Code × GLM-5.3):
+   - `min__claude__glm-5.3__20261028T020935Z` — formal state
+     `artifact_invalid` (outputs written to $HOME/work); drawn and scored from
+     its recovered outputs as *rescue*, reference only;
+   - `tools__claude__glm-5.3__20261028T043719Z` — scored.
 
 ## Event correspondence criteria
 
@@ -40,7 +46,6 @@ count box-filtered expert events (r3: Cochran 0.967 here vs 0.952).
 | Population | vs Cochran (R) | vs McMahon (R) | median \|Δt\| Cochran | epicentral Cochran | dZ vs Cochran (MAD) |
 |---|---|---|---|---|---|
 | **Expert (r5)** | 2,006 (96.5 %) | 2,266 (96.7 %) | 0.07 s | 0.37 km | +0.12 (0.40) |
-| agent arms | — no completed runs yet — | | | | |
 
 Isken: 6/6, epicentral 0.32 km, depth −1.61 km (Isken deeper — gradient
 half-space model there; Cochran agrees with the expert). ComCat 11/11.
@@ -51,13 +56,17 @@ picked (−0.22) and Match&Locate rows (−0.24) — a constant calibration offs
 not affect detection or location scores; magnitude comparisons should allow
 for it.
 
-## Figures (`figures/`)
+## Figures
+
+`expert/figures/` (references + expert), `agents/<run>/figures/` (references +
+expert + that run, plus its `location_diagnostics` from the scorer) and
+`comparison/figures/` (references + expert + all runs) share the panels below.
 
 | File | Content |
 |---|---|
 | `01_reproduction_spatial_comparison` | Cochran, McMahon, ComCat, expert, agent arms (Isken omitted: 6 events): map density in 0.25 km cells, km east/north of the Mw 5.7 epicentre (star, Cochran location), depth section along the major axis of Cochran's epicentres (pointing NE), depth below the surface. |
 | `02_reproduction_population_diagnostics` | (a) magnitude–frequency (types differ), (b) depth CDF, (c) cumulative detections (the mainshock precedes the window; no marker). |
-| `03_agent_reference_correspondence` | Per focus agent arm: \|Δt\| vs expert, epicentral p50/p90 vs expert/Cochran/McMahon, magnitude bias vs expert, depth vs Cochran. |
+| `03_agent_reference_correspondence` (per run, `agents/<run>/figures/`) | For that run: \|Δt\| vs expert, epicentral p50/p90 vs expert/Cochran/McMahon, magnitude bias vs expert, depth vs Cochran. |
 
 ## Per-run scoring (metrics v1)
 
@@ -76,7 +85,8 @@ python -m SeismoAgentBench.scoring.catalog_metrics baseline --task-dir workflows
 ```
 
 Per run: `<run>/evaluation/metrics_v1.json`, `location_diagnostics.png`,
-`audit_sample.csv`; per case: `metrics_v1_summary.json`, `metrics_v1_baseline.json`.
+`audit_sample.csv`; per case: `agents/metrics_v1_summary.json`, `expert/metrics_v1_baseline.json`.
+Layout: `expert/` (`metrics_v1_baseline.json`, `expert_ladder.{yaml,json}`, `figures/`: references + expert); `agents/` (`metrics_v1_summary.json`; per run `<variant>__<harness>__<model>__<run_id>/scores.json` and `figures/`, written by the `summary` command and the figure script); `comparison/figures/` (references + expert + all runs).
 The figures in this directory are descriptive; their matcher statistics are
 not benchmark scores.
 

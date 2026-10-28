@@ -10,7 +10,9 @@ Populations, all inside the evaluation window [2011-11-11T00:00Z, 2011-11-19T00:
            to the minute, so matched at 60 s / 5 km — a location anchor
   comcat   ComCat operational (11 events)
   expert   this repository's expert workflow, round catalog r3 (r2 + Match&Locate)
-  agent_*  completed agent runs (``AGENT_RUNS``; extend as arms complete)
+  <run>    every Agent run under runs/ (``discover_runs``); a run without
+           work/catalog.csv is drawn from its recovered outputs, labelled
+           'rescue' (reference only, not a formal result)
 
 References are read and masked by the expert stage-05 module itself
 (``expert/04_comparison/05_match_references.py``: readers, cohort mask) —
@@ -21,9 +23,9 @@ Correspondence: greedy one-to-one pairing by (distance, dt) within
 Isken 60 s / 5 km). Reference depth datums are unstated (local surface
 ~0.28 km ASL); expert depths are converted from sea level with the model datum.
 
-Outputs (evaluation/): figures/01_reproduction_spatial_comparison,
-figures/02_reproduction_population_diagnostics, figures/03_agent_reference_
-correspondence (focus agent arm).
+Outputs (evaluation/): expert/figures/{01,02} (references + expert);
+agents/<run>/figures/{01,02,03} (references + expert + that run; 03 = matched-
+pair correspondence); comparison/figures/{01,02} (references + expert + all runs).
 Benchmark scores come from metrics v1 (SeismoAgentBench/scoring/catalog_metrics); these are figures only.
 """
 import argparse
@@ -91,18 +93,37 @@ EXPERT_ROUND = 'r7'
 EXPERT_COLOR = '#E69F00'
 AGENT_TOOLS_COLOR = '#56B4E9'
 AGENT_MIN_COLOR = '#F0E442'
-SHORT_LABELS.update({'expert': f'Expert ({EXPERT_ROUND})', 'agent_min': 'Agent min', 'agent_tools': 'Agent tools'})
+SHORT_LABELS.update({'expert': f'Expert ({EXPERT_ROUND})'})
 MODEL_DATUM_KM = float(yaml.safe_load((EXPERT / '00_config' / 'association.yaml').read_text())
                        ['reference_elevation_km'])
 
-AGENT_RUNS = {
-    # 'agent_tools': {
-    #     'label': 'Agent tools', 'color': AGENT_TOOLS_COLOR,
-    #     'catalog': TASK / 'runs/tools/claude/glm-5.3/<RUN_ID>/work/catalog.csv',
-    #     'run_id': 'runs/tools/claude/glm-5.3/<RUN_ID>',
-    # },
-}
-FOCUS_AGENT = 'agent_tools'
+RUN_COLORS = {'min': AGENT_MIN_COLOR, 'tools': AGENT_TOOLS_COLOR}
+# Recovered outputs of a run whose work/ holds none (late or misplaced; reference only).
+RESCUE_SOURCES = ('record/late_outputs', 'record/agent_home_work_mirror', 'record/runtime_home/work/out',
+                  'record/runtime_home/work')
+
+
+def discover_runs():
+    """Every Agent run under runs/<variant>/<harness>/<model>/<run_id>, keyed by its agents/ folder name."""
+    runs = {}
+    for run in sorted((TASK / 'runs').glob('*/*/*/*')):
+        if not (run / 'control').is_dir():
+            continue
+        variant, harness, model, run_id = run.relative_to(TASK / 'runs').parts
+        catalog, rescue = run / 'work' / 'catalog.csv', False
+        if not catalog.is_file():
+            found = [run / d / 'catalog.csv' for d in RESCUE_SOURCES if (run / d / 'catalog.csv').is_file()]
+            if not found:
+                continue
+            catalog, rescue = found[0], True
+        key = f'{variant}__{harness}__{model}__{run_id}'
+        runs[key] = {'label': f'Agent {variant}' + (' (rescue)' if rescue else ''), 'variant': variant,
+                     'color': RUN_COLORS.get(variant, AGENT_TOOLS_COLOR), 'catalog': catalog, 'rescue': rescue,
+                     'run_id': str(run.relative_to(TASK))}
+    return runs
+
+
+AGENT_RUNS = discover_runs()
 
 DT_MAX_S = 4.0
 D_MAX_KM = 15.0
@@ -187,10 +208,8 @@ def load_expert(round_=EXPERT_ROUND):
 
 
 def agent_run_style(key):
-    color = AGENT_RUNS.get(key, {}).get('color', AGENT_TOOLS_COLOR)
-    if key == 'agent_min':
-        return color, (0, (4, 2, 1, 2))
-    return color, '-'
+    meta = AGENT_RUNS.get(key, {})
+    return meta.get('color', AGENT_TOOLS_COLOR), ((0, (4, 2, 1, 2)) if meta.get('rescue') else '-')
 
 
 def load_populations():
@@ -456,7 +475,7 @@ def fig_diagnostics(out, pops):
     plt.close(fig)
 
 
-def fig_correspondence(out, pops, focus_agent=FOCUS_AGENT, stem='03_agent_reference_correspondence'):
+def fig_correspondence(out, pops, focus_agent, stem='03_agent_reference_correspondence'):
     """Matched-pair diagnostics for the focus agent population."""
     focus = next((p for p in pops if p['key'] == focus_agent), None)
     if focus is None:
@@ -531,15 +550,27 @@ def main():
     parser.add_argument('--out-dir', type=Path, default=TASK / 'evaluation')
     args = parser.parse_args()
     out = args.out_dir
-    figures = out / 'figures'
-    figures.mkdir(parents=True, exist_ok=True)
 
     populations, inputs = load_populations()
+    base = [p for p in populations if p['key'] in REFS or p['key'] == 'expert']
+    runs = [p for p in populations if p['key'] in AGENT_RUNS]
     stats = compute_stats(populations)
     with style.publication_style():
-        fig_spatial(figures, populations)
-        fig_diagnostics(figures, populations)
-        wrote = fig_correspondence(figures, populations)
+        expert_figures = out / 'expert' / 'figures'
+        expert_figures.mkdir(parents=True, exist_ok=True)
+        fig_spatial(expert_figures, base)
+        fig_diagnostics(expert_figures, base)
+        for run in runs:
+            figures = out / 'agents' / run['key'] / 'figures'
+            figures.mkdir(parents=True, exist_ok=True)
+            fig_spatial(figures, base + [run])
+            fig_diagnostics(figures, base + [run])
+            fig_correspondence(figures, base + [run], run['key'])
+        if runs:
+            comparison = out / 'comparison' / 'figures'
+            comparison.mkdir(parents=True, exist_ok=True)
+            fig_spatial(comparison, populations)
+            fig_diagnostics(comparison, populations)
 
     for p in populations:
         if p['key'] in stats:
@@ -547,8 +578,6 @@ def main():
             print(f"{p['key']}: {len(p['rows']):,} events; " + '; '.join(
                 f"vs {k} {e['matched']:,} (R {e['recall']:.1%}, epi {e['median_epicentral_km'] or 0:.2f} km)"
                 for k, e in v.items()))
-    if not wrote:
-        print('correspondence figure skipped (no focus agent run registered)')
 
 
 if __name__ == '__main__':
