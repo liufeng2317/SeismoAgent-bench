@@ -121,8 +121,8 @@ def normalize_ot_range(ot_range: Any) -> str:
         String range or two-value date/time sequence.
 
     Accepted forms include:
-    - ``"20190704-20190707"``
-    - ``("2019-07-04", "2019-07-07")``
+    - ``"20000101-20000104"``
+    - ``("2000-01-01", "2000-01-04")``
     - ``(UTCDateTime(...), UTCDateTime(...))``
     - ``(datetime.datetime(...), datetime.datetime(...))``
 

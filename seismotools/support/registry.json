@@ -49,7 +49,7 @@
       "license_status": "Project code; no third-party source bundled."
     },
     "pyocto": {
-      "implementation": "PyOcto 0.1.9 (Jannes M\u00fcnchmeyer) from the PyPI sdist (sha256 6f985b92...6d19), C++ core built locally with patch 0001 into runtime/build/site; adapter interface/run.py (interface version 1)",
+      "implementation": "PyOcto 0.1.9 (Jannes Münchmeyer) from the PyPI sdist (sha256 6f985b92...6d19), C++ core built locally with patch 0001 into runtime/build/site; adapter interface/run.py (interface version 1)",
       "variants": [
         "VelocityModel1D (layered, step or linear)"
       ],
@@ -211,42 +211,6 @@
       "sha256": "f38176da88c429c1dc80eb23659c4284a06bb78be9a9568060b5da24987d6d34"
     },
     {
-      "path": "hypodd/runtime/python/HypoDDpy/examples/ridgecrest_fdtcc/input/fdtcc_station.dat",
-      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_runner/examples/ridgecrest_fdtcc/input/fdtcc_station.dat",
-      "bytes": 1384,
-      "sha256": "e657cc8393d1ce064374382f429b0d82cbb1be750e807e6fcfcbfd0a34e62548"
-    },
-    {
-      "path": "hypodd/runtime/python/HypoDDpy/examples/ridgecrest_fdtcc/input/station.sta",
-      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_runner/examples/ridgecrest_fdtcc/input/station.sta",
-      "bytes": 1680,
-      "sha256": "9793ea66c0253d30c3e53c824523ee5c748868848cc7c45c82f65f91cde83f92"
-    },
-    {
-      "path": "hypodd/runtime/python/HypoDDpy/examples/ridgecrest_fdtcc/run_ridgecrest_fdtcc_example.py",
-      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_runner/examples/ridgecrest_fdtcc/run_ridgecrest_fdtcc_example.py",
-      "bytes": 4739,
-      "sha256": "8fa752dfe83e7db056cdae3a3d4144b3332fe11ad84b214266841310fd921aeb"
-    },
-    {
-      "path": "hypodd/runtime/python/HypoDDpy/examples/ridgecrest_nocc/input/phase_20190705-test.dat",
-      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_runner/examples/ridgecrest_nocc/input/phase_20190705-test.dat",
-      "bytes": 45203,
-      "sha256": "0d79e2a49ec476d749d6a3443993258863412781b856da2ad30a8b4d14680958"
-    },
-    {
-      "path": "hypodd/runtime/python/HypoDDpy/examples/ridgecrest_nocc/input/station.sta",
-      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_runner/examples/ridgecrest_nocc/input/station.sta",
-      "bytes": 1680,
-      "sha256": "9793ea66c0253d30c3e53c824523ee5c748868848cc7c45c82f65f91cde83f92"
-    },
-    {
-      "path": "hypodd/runtime/python/HypoDDpy/examples/ridgecrest_nocc/run_ridgecrest_fdtcc_example.py",
-      "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_runner/examples/ridgecrest_nocc/run_ridgecrest_fdtcc_example.py",
-      "bytes": 2575,
-      "sha256": "69f83e733d42c12217b6db64415af25b68b7ec2fca7f8513e181dfe7b7192023"
-    },
-    {
       "path": "hypodd/runtime/python/HypoDDpy/hypodd_runner/__init__.py",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_runner/hypodd_runner/__init__.py",
       "bytes": 3364,
@@ -273,8 +237,8 @@
     {
       "path": "hypodd/runtime/python/HypoDDpy/hypodd_runner/config.py",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_runner/hypodd_runner/config.py",
-      "bytes": 26439,
-      "sha256": "0a4aab7f6bfd05fc62e15ff923561d5f2079563b277dba31e17b25805c5db7e1"
+      "bytes": 26408,
+      "sha256": "0827b08a519c20a54b03b1b079222800426654114a20baf8a6559c76eeffd1fa"
     },
     {
       "path": "hypodd/runtime/python/HypoDDpy/hypodd_runner/errors.py",
@@ -381,8 +345,8 @@
     {
       "path": "hypodd/runtime/python/HypoDDpy/hypodd_runner/mk_pha.py",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_runner/hypodd_runner/mk_pha.py",
-      "bytes": 10685,
-      "sha256": "fe9b64e2cec40792dca29890d5396938a2948ffdb2a6e7480f7a5b8b32066fc6"
+      "bytes": 10684,
+      "sha256": "f8209b7c71857aaffbea6d3c8f4c921fea5e162f8129a04dfaddbe671505e4b3"
     },
     {
       "path": "hypodd/runtime/python/HypoDDpy/hypodd_runner/mk_sta.py",
@@ -399,8 +363,8 @@
     {
       "path": "hypodd/runtime/python/HypoDDpy/hypodd_runner/pal2hypodd.py",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_runner/hypodd_runner/pal2hypodd.py",
-      "bytes": 7408,
-      "sha256": "e5ef770085fcfe55c4e7db92feada875e8e9190c055dcc1b01c6ccf59cf83802"
+      "bytes": 7406,
+      "sha256": "90e067c8c4f799eca101812583758a2b6731c8873f191c4a84ee0fbdd472101c"
     },
     {
       "path": "hypodd/runtime/python/HypoDDpy/hypodd_runner/params.py",
@@ -411,8 +375,8 @@
     {
       "path": "hypodd/runtime/python/HypoDDpy/hypodd_runner/ph2dt.py",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_runner/hypodd_runner/ph2dt.py",
-      "bytes": 8227,
-      "sha256": "beb0ed5daeb66082735fdbe32ea891cc32f09d961219de48d7d1dc17a2e989cc"
+      "bytes": 8224,
+      "sha256": "2d6856cb167150c71dcedcaaa6781929e52e203a0c0d50ce95216be1b0736277"
     },
     {
       "path": "hypodd/runtime/python/HypoDDpy/hypodd_runner/pha_format.py",
@@ -429,8 +393,8 @@
     {
       "path": "hypodd/runtime/python/HypoDDpy/hypodd_runner/run_hypoDD.py",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_runner/hypodd_runner/run_hypoDD.py",
-      "bytes": 59426,
-      "sha256": "435f006fd1d336c315b3cd53a914579b25455b8fd970fe18758e5e8e3b134ce5"
+      "bytes": 59415,
+      "sha256": "e9a11f0e0b526a643307548798b5c4344fc11462d25d1d26d2e777d26e9d8a6d"
     },
     {
       "path": "hypodd/runtime/python/HypoDDpy/hypodd_runner/station_id.py",
@@ -496,7 +460,7 @@
       "path": "hypodd/runtime/python/HypoDDpy/hypodd_runner/time_window.py",
       "source": "TRACE-1.1/seismoagent/library/basic_fun/HypoDD/hypodd_runner/hypodd_runner/time_window.py",
       "bytes": 14471,
-      "sha256": "9df562c1b9dcf6c83a3d586d6adceeac5037d267b299f3b22ea44bb1efdc0e0e"
+      "sha256": "20e166f0f8e68934cb391fcb45af88736e400e9d0913e681b84a2d6df50155f2"
     },
     {
       "path": "hypodd/runtime/python/HypoDDpy/pyproject.toml",

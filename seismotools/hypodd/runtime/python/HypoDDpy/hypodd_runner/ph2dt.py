@@ -77,7 +77,7 @@ def read_fpha(pha_file):
     pha_file : str
         Path to the phase file. Each event should start with a header line
         containing ``origin_time, lat, lon, depth, mag[, evid]`` (comma-separated).
-        ``origin_time`` may be ``YYYYMMDDHHMMSS.SS`` or ISO-8601 (e.g. ``2019-07-04T16:13:43.220000Z``).
+        ``origin_time`` may be ``YYYYMMDDHHMMSS.SS`` or ISO-8601 (e.g. ``2000-01-01T12:00:00.000000Z``).
         ``lat``, ``lon``, and ``depth`` must be numeric; ``mag`` is filled as
         ``0.0`` when missing/bad. ``evid`` may be omitted and then assigned
         sequentially. Subsequent lines contain station picks for that
@@ -88,13 +88,13 @@ def read_fpha(pha_file):
         hypodd_runner input contract.
         The format of the phase file is as follows:
         ```
-            20190704161343.44,35.7158,-117.5010,14.6,1.60,0
-            CI.TOW2,2019-07-04T16:13:48.528000Z,2019-07-04T16:13:53.308000Z
-            CI.SRT,2019-07-04T16:13:47.888000Z,-1
+            20000101120000.00,10.0000,20.0000,10.0,1.50,0
+            XX.STA1,2000-01-01T12:00:04.500000Z,2000-01-01T12:00:08.100000Z
+            XX.STA2,2000-01-01T12:00:03.900000Z,-1
             ...
-            20190704170255.38,35.7087,-117.5010,13.5,4.40,1
-            CI.TOW2,2019-07-04T17:03:00.428000Z,2019-07-04T17:03:05.268000Z
-            CI.SRT,-1,2019-07-04T17:03:03.888000Z
+            20000101130000.00,10.0100,20.0100,9.5,2.10,1
+            XX.STA1,2000-01-01T13:00:04.400000Z,2000-01-01T13:00:08.000000Z
+            XX.STA2,-1,2000-01-01T13:00:07.000000Z
             ...
         ```
 

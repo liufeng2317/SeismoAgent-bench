@@ -8,7 +8,7 @@ those public functions and the native ph2dt/HypoDD runner.
 Important: built-in defaults are demo placeholders. Real relocation tasks must
 override at least ``hypo_root``, ``fsta``, ``fpha``, ``output_folder``,
 ``ctlg_code``, ``ot_range``, ``lat_range``, and ``lon_range`` with values derived
-from the current data. Do not copy the default Ridgecrest/demo time or spatial
+from the current data. Do not copy the placeholder time or spatial
 bounds into a new task; ``mk_pha`` applies those bounds before ``ph2dt`` and can
 filter all events if they are wrong.
 
@@ -65,7 +65,7 @@ def _default_config_dict(
     fsta: str = "./example_pal.sta",
     fpha: str = "./eg_pal_hyp_full.pha",
     dep_corr: float = 0,
-    ot_range: str = "20190704-20190707",
+    ot_range: str = "20000101-20000102",
     lat_range: list[float] = None,
     lon_range: list[float] = None,
     num_grids: list[int] = None,
@@ -131,9 +131,9 @@ def _default_config_dict(
     if output_folder is None:
         output_folder = os.path.join(_current_dir(), "data", "output")
     if lat_range is None:
-        lat_range = [35.45, 36.05]
+        lat_range = [0.0, 1.0]
     if lon_range is None:
-        lon_range = [-117.8, -117.25]
+        lon_range = [0.0, 1.0]
     if num_grids is None:
         num_grids = [1, 1]
     if xy_pad is None:
@@ -281,7 +281,7 @@ class Config(object):
         self.hypodd_inp_mode = params["hypodd_inp_mode"]  # 'programmatic': generate by getinp order; 'template': substitute template
 
         # input and output files
-        self.ctlg_code = params["ctlg_code"]  # Output prefix (e.g., ridgecrest → ridgecrest.reloc / .pha)
+        self.ctlg_code = params["ctlg_code"]  # Output prefix (e.g., mycase → mycase.reloc / .pha)
         self.output_folder = params["output_folder"]  # Output directory for ph2dt, hypoDD, merged/plot outputs
         self.fsta = params["fsta"]  # Station list (input for mk_sta / HypoDD)
         self.fpha = params["fpha"]  # Complete phase catalog (after format conversion, used for mk_pha, ph2dt)

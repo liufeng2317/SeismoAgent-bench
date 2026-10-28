@@ -29,8 +29,8 @@ class PAL2HypoDD_PhaseConverter:
         """
         Check if a line is an event line.
         Event lines may start with an ISO datetime string 
-        (e.g. '2019-07-04T16:13:42.989200Z') 
-        or a UNIX timestamp (e.g. '1562256822.98').
+        (e.g. '2000-01-01T12:00:00.000000Z') 
+        or a UNIX timestamp (e.g. '946728000.00').
         """
         line = line.strip()
         if not line:
@@ -59,8 +59,8 @@ class PAL2HypoDD_PhaseConverter:
         """
         Convert input into 'YYYYMMDDHHMMSS.SS' format.
         Accepts:
-        - ISO8601 string like '2019-07-04T16:13:42.989200Z'
-        - UNIX timestamp (int/float/str) like '1562256822.98'
+        - ISO8601 string like '2000-01-01T12:00:00.000000Z'
+        - UNIX timestamp (int/float/str) like '946728000.00'
         - datetime object
         - Already formatted string 'YYYYMMDDHHMMSS.SS' (returns unchanged)
         """
