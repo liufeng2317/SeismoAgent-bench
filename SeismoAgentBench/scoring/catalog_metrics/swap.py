@@ -3,7 +3,7 @@
 The Agent's picks and pick-to-event associations are kept; only the absolute
 location step is replaced by the expert's: its 1-D velocity model, NonLinLoc
 grid, error settings and location method (expert ``00_config`` and the stage-03
-inputs of ``swap.picks_round`` in ``evaluation/expert/expert_ladder.yaml``), without
+inputs of ``swap.picks_round`` in ``evaluation/human_in_loop/expert_ladder.yaml``), without
 station delays.
 Scoring the relocated catalog next to the Agent's own locations separates
 errors of the front end (picks, association) from those of the velocity model

@@ -24,7 +24,7 @@ sequence over the fixed evaluation window **[2011-11-11T00:00:00Z,
    event (r3: 1.5 %; McMahon itself 0.8 %); r5: 0.04 %. Rounds registered in
    `EXPERT_ROUNDS` (r2–r5). Expert depths are converted from sea level to
    below the surface with the model datum (0.28 km).
-   *Update 2026-10-28:* the expert population is now round `r7` = `r5` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r5` predate it. Benchmark scores: `expert/metrics_v1_baseline.json`.
+   *Update 2026-10-28:* the expert population is now round `r7` = `r5` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r5` predate it. Benchmark scores: `human_in_loop/metrics_v1_baseline.json`.
 3. **Agent runs** — every run under `runs/` is found by the figure script
    (`discover_runs`) and exported by the `summary` command to
    `agents/<variant>__<harness>__<model>__<run_id>/`. Formal runs of
@@ -58,9 +58,9 @@ for it.
 
 ## Figures
 
-`expert/figures/` (references + expert), `agents/<run>/figures/` (references +
-expert + that run, plus its `location_diagnostics` from the scorer) and
-`comparison/figures/` (references + expert + all runs) share the panels below.
+`human_in_loop/figures/` (references + human-in-loop agent), `agents/<run>/figures/`
+(references + human-in-loop agent + that run, plus its `location_diagnostics` from the scorer) and
+`comparison/figures/` (references + human-in-loop agent + all runs) share the panels below.
 
 | File | Content |
 |---|---|
@@ -85,8 +85,9 @@ python -m SeismoAgentBench.scoring.catalog_metrics baseline --task-dir workflows
 ```
 
 Per run: `<run>/evaluation/metrics_v1.json`, `location_diagnostics.png`,
-`audit_sample.csv`; per case: `agents/metrics_v1_summary.json`, `expert/metrics_v1_baseline.json`.
-Layout: `expert/` (`metrics_v1_baseline.json`, `expert_ladder.{yaml,json}`, `figures/`: references + expert); `agents/` (`metrics_v1_summary.json`; per run `<variant>__<harness>__<model>__<run_id>/scores.json` and `figures/`, written by the `summary` command and the figure script); `comparison/figures/` (references + expert + all runs).
+`audit_sample.csv`; per case: `agents/metrics_v1_summary.json`, `human_in_loop/metrics_v1_baseline.json`.
+Layout: `human_in_loop/` (`metrics_v1_baseline.json`, `expert_ladder.{yaml,json}`, `figures/`: references + human-in-loop agent); `agents/` (`metrics_v1_summary.json`; per run `<variant>__<harness>__<model>__<run_id>/scores.json` and `figures/`, written by the `summary` command and the figure script); `comparison/figures/` (references + human-in-loop agent + all runs).
+Terminology: the *human-in-loop agent* is the catalog earlier called "expert" — an Agent workflow in which we steered every stage by hand; file and metric keys keep `expert` (`expert_final`, `expert_blind`, `expert_ladder`, the `expert/` pipeline) because metrics v1 is frozen.
 The figures in this directory are descriptive; their matcher statistics are
 not benchmark scores.
 

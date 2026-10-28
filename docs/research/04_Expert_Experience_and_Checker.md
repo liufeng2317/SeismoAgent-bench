@@ -28,7 +28,7 @@ and how much of the gap to the expert does the checker close?**
 
 ### 2.1 Within the range an expert would consider: modest for detection, large for location and magnitude
 
-Expert ladder (`evaluation/expert/expert_ladder.json`; each row one adopted round,
+Expert ladder (`evaluation/human_in_loop/expert_ladder.json`; each row one adopted round,
 one change):
 
 | Stage | Change (case) | Effect |

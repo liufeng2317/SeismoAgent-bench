@@ -1,6 +1,6 @@
 """Expert ladder: every adopted expert round scored with metrics v1 (analysis, not a benchmark score).
 
-``evaluation/expert/expert_ladder.yaml`` lists one catalog per adopted round in order,
+``evaluation/human_in_loop/expert_ladder.yaml`` lists one catalog per adopted round in order,
 with the step it added and its kind (start, location, detection, qc,
 magnitude, dedupe). Each catalog is masked and scored exactly like the expert
 rows of the baseline, so consecutive rows show what each expert step added -

@@ -86,7 +86,7 @@ AGENT_RUNS = {
 SHORT_LABELS = {
     'shelly': 'Shelly', 'liu': 'Liu', 'ross_relocated': 'Ross rel.',
     'awr_hypocenters': 'AWR v2', 'official_earthquake': 'Official',
-    'expert': 'Expert', 'agent_min': 'Agent min', 'agent_tools': 'Agent tools',
+    'expert': 'Human-in-loop agent', 'agent_min': 'Agent min', 'agent_tools': 'Agent tools',
     'agent_legacy': 'Agent legacy',
 }
 
@@ -152,7 +152,7 @@ def load_references():
     expert_rows = read_ours(EXPERT_CATALOG, 'origin_time_utc', *EXPERT_DEPTH)
     if not expert_rows:
         raise ValueError(f'No expert rows in window: {EXPERT_CATALOG}')
-    populations.append(as_record('expert', 'Expert reproduction', EXPERT_COLOR, expert_rows))
+    populations.append(as_record('expert', 'Human-in-loop agent', EXPERT_COLOR, expert_rows))
     inputs['expert'] = {'path': str(EXPERT_CATALOG.relative_to(TASK)), 'plotted_records': len(expert_rows)}
     return cfg, audit, populations, inputs
 
@@ -376,7 +376,7 @@ def fig_diagnostics(out, cfg, audit, pops, stats):
     # Recall of reference events by magnitude band (focus agent arm).
     bands = [(0, 1), (1, 2), (2, 3), (3, 8)]
     width = .38
-    for k, (ref_key, label) in enumerate((('expert', 'vs Expert'), ('shelly', 'vs Shelly'))):
+    for k, (ref_key, label) in enumerate((('expert', 'vs human-in-loop'), ('shelly', 'vs Shelly'))):
         ref = next(r for r in pops if r['key'] == ref_key)
         m = stats[FOCUS_AGENT]['versus'][ref_key]
         xs, ys, ns = [], [], []
@@ -433,7 +433,7 @@ def fig_correspondence(out, cfg, audit, pops, stats, focus_agent=FOCUS_AGENT,
     adist = fig.add_subplot(grid[0, 1])
     amg = fig.add_subplot(grid[1, 0])
     adep = fig.add_subplot(grid[1, 1])
-    refs = [('expert', 'Expert'), ('shelly', 'Shelly')]
+    refs = [('expert', 'Human-in-loop'), ('shelly', 'Shelly')]
     # (a) origin-time differences of matched pairs.
     bins = np.linspace(0, DT_MAX_S, 33)
     for key, label in refs:
@@ -482,7 +482,7 @@ def fig_correspondence(out, cfg, audit, pops, stats, focus_agent=FOCUS_AGENT,
     amg.axhline(0, color='#999999', lw=.6)
     amg.set_xlim(0, 6.5)
     amg.set_ylim(-3, 1.5)
-    amg.set_xlabel('Expert magnitude')
+    amg.set_xlabel('Human-in-loop magnitude')
     amg.set_ylabel('Δ magnitude (agent − expert)')
     house.panel_label(amg, 'c', f'Magnitude bias (n = {len(dm):,})')
     # (d) depth comparison of matched pairs.
@@ -496,7 +496,7 @@ def fig_correspondence(out, cfg, audit, pops, stats, focus_agent=FOCUS_AGENT,
     adep.plot([0, 20], [0, 20], color='#999999', lw=.7)
     adep.set_xlim(0, 20)
     adep.set_ylim(0, 25)
-    adep.set_xlabel('Expert depth (km)')
+    adep.set_xlabel('Human-in-loop depth (km)')
     adep.set_ylabel('Agent depth (km)')
     house.panel_label(adep, 'd', 'Depth comparison')
     house.save_figure(fig, out / stem)

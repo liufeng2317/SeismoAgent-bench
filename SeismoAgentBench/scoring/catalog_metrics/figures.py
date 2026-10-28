@@ -69,7 +69,7 @@ def location_figure(path: Path, cand: Population, ref: Population, structure: li
         if key in expert:
             xe, xr = _offsets(expert[key], ref, center)
             e = np.hypot(*(xe[:, :2] - xr[:, :2]).T)
-            _cdf(b, e, color, f"expert {key} (median {np.median(e):.2f} km)", style)
+            _cdf(b, e, color, f"human-in-loop {key} (median {np.median(e):.2f} km)", style)
     b.set(xscale="log", xlim=(0.03, 15), ylim=(0, 1), xlabel=f"epicentral offset from {ref.key} (km)",
           ylabel="cumulative fraction of matched events")
     b.grid(color="0.92", lw=0.6)

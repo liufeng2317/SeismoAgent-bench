@@ -33,9 +33,10 @@ CONFIG_FILE = "metrics_v1.yaml"
 ADAPTER_FILE = "metrics_v1_adapter.py"
 RUN_SCORE_FILE = "metrics_v1.json"
 BASELINE_FILE = "metrics_v1_baseline.json"
-# Task evaluation layout: expert/ (references + expert yardsticks, ladder),
-# agents/ (per-run scores and figures, summary), comparison/ (all together).
-EXPERT_DIR = Path("evaluation/expert")
+# Task evaluation layout: human_in_loop/ (references + the human-in-loop agent
+# yardsticks, i.e. the "expert" rows, and its ladder), agents/ (per-run scores
+# and figures, summary), comparison/ (all together).
+EXPERT_DIR = Path("evaluation/human_in_loop")
 AGENTS_DIR = Path("evaluation/agents")
 FIGURE_FILE = "location_diagnostics.png"
 SEA_LEVEL_MARKER = "below sea level"

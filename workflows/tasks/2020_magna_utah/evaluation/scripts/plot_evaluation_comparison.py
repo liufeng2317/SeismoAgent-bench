@@ -27,6 +27,7 @@ in both places. Event correspondence: greedy one-to-one pairing by
 the same gates as the expert primary matcher and the Ridgecrest evaluation.
 """
 import argparse
+import textwrap
 import bisect
 import csv as _csv
 import importlib.util
@@ -61,7 +62,7 @@ AGENT_TOOLS_COLOR = '#56B4E9'
 AGENT_MIN_COLOR = '#F0E442'
 SHORT_LABELS = {
     'pang': 'Pang et al. 2020', 'baker': 'Baker et al. 2021', 'uuss': 'UUSS / ComCat',
-    'expert': 'Expert', 'agent_min': 'Agent min', 'agent_tools': 'Agent tools',
+    'expert': 'Human-in-loop agent', 'agent_min': 'Agent min', 'agent_tools': 'Agent tools',
 }
 # Depth datums: only sea-level pairs enter depth-difference statistics.
 DATUMS = {'pang': 'sea_level', 'baker': 'unspecified_relocated',
@@ -82,7 +83,7 @@ EXPERT_ROUNDS = {
     'r11': (TASK / 'expert/export/r11/60_catalog/catalog_events.csv', 'origin_time_utc', 'depth_bsl_km'),  # stages 65/67 (2026-10-28)
 }
 EXPERT_ROUND = 'r11'
-SHORT_LABELS['expert'] = f'Expert ({EXPERT_ROUND})'
+SHORT_LABELS['expert'] = f'Human-in-loop agent ({EXPERT_ROUND})'
 EXPERT_CATALOG = EXPERT_ROUNDS[EXPERT_ROUND][0]
 
 AGENT_RUNS = {
@@ -238,7 +239,7 @@ def load_expert(round_=EXPERT_ROUND):
     rows = read_catalog(path, time_col, depth_col=depth_col)
     if not rows:
         raise ValueError(f'No expert rows in window: {path}')
-    rec = as_record('expert', f'Expert reproduction ({round_})', EXPERT_COLOR, rows)
+    rec = as_record('expert', f'Human-in-loop agent ({round_})', EXPERT_COLOR, rows)
     return rec, {'path': str(path.relative_to(TASK)), 'round': round_, 'plotted_records': len(rows),
                  'selection': 'complete round catalog (all rows)'}
 
@@ -405,13 +406,16 @@ def spatial_grid(pops, stem, title):
     sec_h = 0.68
     width = style.WIDTH_INCHES
     col_w = (width - 0.8) / ncol
-    height = col_w * (map_h + sec_h) + 1.55
+    title_h = 0.42 + (0.2 if ncol >= 5 else 0.0)  # room for two-line panel titles
+    height = col_w * (map_h + sec_h) + 1.55 + (title_h - 0.42)
     fig = plt.figure(figsize=(width, height))
     gs = fig.add_gridspec(2, ncol, height_ratios=[map_h, sec_h], hspace=0.42, wspace=0.10,
-                          left=0.075, right=0.99, top=1 - 0.42 / height, bottom=0.95 / height)
+                          left=0.075, right=0.99, top=1 - title_h / height, bottom=0.95 / height)
     mappable = None
     for k, (p, (m, sec)) in enumerate(zip(pops, grids)):
         name = SHORT_LABELS.get(p['key'], p['label'])
+        if len(pops) >= 5:  # narrow columns: two-line titles
+            name = textwrap.fill(name, 16)
         for row, (ub, vb, h, outside) in enumerate((m, sec)):
             ax = fig.add_subplot(gs[row, k])
             mappable = ax.pcolormesh(ub, vb, h, cmap=DENSITY_CMAP, norm=norm, rasterized=True)
@@ -457,7 +461,7 @@ def spatial_grid(pops, stem, title):
 
 def fig_spatial(out, pops):
     spatial_grid(pops, out / '01_reproduction_spatial_comparison',
-                 '2020 Magna, Utah — where each catalog places the sequence')
+                 '2020 Magna, Utah')
 
 
 def _ccdf(ax, values, color, label, linestyle='-'):
@@ -528,9 +532,9 @@ def fig_correspondence(out, pops, focus_agent=FOCUS_AGENT,
     pairs_e = match(focus, expert)
     axes[0].hist([dt for _, _, _, dt in pairs_e], bins=np.linspace(0, DT_MAX_S, 21),
                  color=focus['color'], edgecolor='black', linewidth=.4)
-    axes[0].set_xlabel('|Δ origin time| vs expert (s)')
+    axes[0].set_xlabel('|Δ origin time| vs human-in-loop (s)')
     axes[0].set_ylabel('pairs')
-    panel_label(axes[0], 'a', f'|Δt| ({SHORT_LABELS.get(focus_agent, focus_agent)} vs expert)')
+    panel_label(axes[0], 'a', f'|Δt| ({SHORT_LABELS.get(focus_agent, focus_agent)} vs human-in-loop)')
 
     groups = [match(focus, other) for other in (expert, pang, uuss)]
     labels = ['expert', 'pang', 'uuss']
@@ -562,7 +566,7 @@ def fig_correspondence(out, pops, focus_agent=FOCUS_AGENT,
             runx.append(xv)
     axes[2].plot(runx, run, color='black', lw=1.2, label='running median')
     axes[2].axhline(0, color='#555555', lw=.6, ls=':')
-    axes[2].set_xlabel('expert magnitude')
+    axes[2].set_xlabel('human-in-loop magnitude')
     axes[2].set_ylabel('Δ magnitude')
     axes[2].legend(fontsize=6)
     panel_label(axes[2], 'c', 'Magnitude bias')
@@ -592,7 +596,7 @@ def main():
     parser.add_argument('--out-dir', type=Path, default=TASK / 'evaluation')
     args = parser.parse_args()
     out = args.out_dir
-    figures = out / 'expert' / 'figures'  # agent runs: agents/ and comparison/
+    figures = out / 'human_in_loop' / 'figures'  # agent runs: agents/ and comparison/
     figures.mkdir(parents=True, exist_ok=True)
 
     populations, inputs = load_populations()

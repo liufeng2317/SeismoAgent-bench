@@ -344,9 +344,11 @@ python -m SeismoAgentBench.scoring.catalog_metrics audit --task-dir workflows/ta
 `python -m SeismoAgentBench evaluate --run-dir <run>` runs the same scorer: every task
 spec declares `artifact-contract@1` and `catalog-metrics@1`; this is the only scoring path.
 
+Terminology (2026-10-29): the *human-in-loop agent* is the catalog earlier called "expert" — an Agent workflow in which we steered every stage by hand; file and metric keys keep `expert` (`expert_final`, `expert_blind`, `expert_ladder`, the `expert/` pipeline) because metrics v1 is frozen.
+
 | Output | Content | Tracked |
 |---|---|---|
-| `evaluation/expert/metrics_v1_baseline.json` | ceilings; reference, expert-final and expert-blind rows | yes |
+| `evaluation/human_in_loop/metrics_v1_baseline.json` | ceilings; reference, expert-final and expert-blind rows | yes |
 | `<run>/evaluation/metrics_v1.json` | one run: completion, catalog notes, all metrics, headline, process, leakage | no (runs/ is ignored) |
 | `<run>/evaluation/location_diagnostics.png` | offset vectors (shift vs scatter), offset CDF with expert yardsticks, depth distribution with the densest band, map of offsets and off-structure events | no |
 | `<run>/evaluation/audit_sample.csv`, `audit/` | the audit sample (drawn once) and its blind review package: `plots/`, `key.csv`, `labels.csv`, `spot_check.csv` | no |

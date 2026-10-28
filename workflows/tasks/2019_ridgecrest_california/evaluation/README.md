@@ -21,7 +21,7 @@ sequence over the fixed evaluation window
    epicentral 0.44 / 0.79 / 0.46 / 0.60 km; depth vs Shelly −0.09 km (MAD
    0.56); 0.5 % of events > 1 km from every Shelly/Ross/Liu event (ComCat
    1.5 %). Round history in expert/PLAN.md (stages 60, 62, 63).
-   *Update 2026-10-28:* the expert population is now round `57_coda_duplicates` = `12_dense_layered` with stage-65 direct ML, the depth-bound large events restored by stage 66 (M7.1, M6.4, M5.4) and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `12_dense_layered` predate it. Benchmark scores: `expert/metrics_v1_baseline.json`.
+   *Update 2026-10-28:* the expert population is now round `57_coda_duplicates` = `12_dense_layered` with stage-65 direct ML, the depth-bound large events restored by stage 66 (M7.1, M6.4, M5.4) and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `12_dense_layered` predate it. Benchmark scores: `human_in_loop/metrics_v1_baseline.json`.
 3. **Agent pilot runs** — completed Claude Code × GLM-5.3 runs made before the
    2026-10-28 prompt revision (window, field conventions, Match&Locate), kept in
    `runs_pilot/` (summary `agents/pilot/metrics_v1_summary_pilot.json`) so that they do not
@@ -80,8 +80,9 @@ python -m SeismoAgentBench.scoring.catalog_metrics baseline --task-dir workflows
 ```
 
 Per run: `<run>/evaluation/metrics_v1.json`, `location_diagnostics.png`,
-`audit_sample.csv`; per case: `agents/metrics_v1_summary.json`, `expert/metrics_v1_baseline.json`.
-Layout: `expert/` (`metrics_v1_baseline.json`, `expert_ladder.{yaml,json}`, `figures/`: references + expert); `agents/` (`metrics_v1_summary.json`; per run `<variant>__<harness>__<model>__<run_id>/scores.json` and `figures/`, written by the `summary` command and the figure script); `comparison/figures/` (references + expert + all runs).
+`audit_sample.csv`; per case: `agents/metrics_v1_summary.json`, `human_in_loop/metrics_v1_baseline.json`.
+Layout: `human_in_loop/` (`metrics_v1_baseline.json`, `expert_ladder.{yaml,json}`, `figures/`: references + human-in-loop agent); `agents/` (`metrics_v1_summary.json`; per run `<variant>__<harness>__<model>__<run_id>/scores.json` and `figures/`, written by the `summary` command and the figure script); `comparison/figures/` (references + human-in-loop agent + all runs).
+Terminology: the *human-in-loop agent* is the catalog earlier called "expert" — an Agent workflow in which we steered every stage by hand; file and metric keys keep `expert` (`expert_final`, `expert_blind`, `expert_ladder`, the `expert/` pipeline) because metrics v1 is frozen.
 The figures in this directory are descriptive; their matcher statistics are
 not benchmark scores.
 
