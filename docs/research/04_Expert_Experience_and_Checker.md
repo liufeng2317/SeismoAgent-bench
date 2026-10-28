@@ -54,7 +54,7 @@ Ridgecrest 1.20 → 1.40). Location and magnitude choices change precision by
 
 | Wrong choice | Effect | Source |
 |---|---|---|
-| Agent's own velocity model / locator (Ridgecrest tools, min) | depth +8 to +9 km, origin time −0.6 / +0.5 s; relocating the same picks with the expert locator gives −1.0 / −1.5 km | component swap, `runs/*/evaluation/swap/` |
+| Agent's own velocity model / locator (Ridgecrest tools, min) | depth +8 to +9 km, origin time −0.6 / +0.5 s; relocating the same picks with the expert locator gives −1.0 / −1.5 km | component swap, `runs_pilot/*/evaluation/swap/` (pilot runs, pre-2026-10-28 prompts) |
 | Agent fixes depth at 10 km (Magna min) | 42 % of events at one depth; 2 % after expert relocation | swap |
 | Agent magnitude scale (Ridgecrest min, Magna min) | −0.99 and +0.57 offsets, b 0.38 vs 0.60 | metrics v1 strength |
 | Grid bound at the surface (Ridgecrest blind) | 16 % of events at the grid top; the mainshocks among them | ladder, stage 66 |

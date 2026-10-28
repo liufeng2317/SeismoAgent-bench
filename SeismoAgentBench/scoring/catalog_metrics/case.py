@@ -247,9 +247,12 @@ def score_baseline(task_dir: Path, *, write: bool = True) -> dict:
     return report
 
 
+RUN_ROOTS = ("runs", "runs_pilot")  # runs_pilot: pre-2026-10-28 prompts, scorable but outside the summary
+
+
 def run_layout(task_dir: Path, run_dir: Path) -> dict:
     parts = run_dir.resolve().relative_to(task_dir.resolve()).parts
-    if len(parts) != 5 or parts[0] != "runs":
+    if len(parts) != 5 or parts[0] not in RUN_ROOTS:
         raise ValueError(f"run directory must be <task>/runs/<variant>/<harness>/<model>/<run_id>: {run_dir}")
     return {"variant": parts[1], "harness": parts[2], "model": parts[3], "run_id": parts[4],
             "path": "/".join(parts)}

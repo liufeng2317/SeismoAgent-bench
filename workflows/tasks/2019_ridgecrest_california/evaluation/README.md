@@ -22,12 +22,15 @@ sequence over the fixed evaluation window
    0.56); 0.5 % of events > 1 km from every Shelly/Ross/Liu event (ComCat
    1.5 %). Round history in expert/PLAN.md (stages 60, 62, 63).
    *Update 2026-10-28:* the expert population is now round `57_coda_duplicates` = `12_dense_layered` with stage-65 direct ML, the depth-bound large events restored by stage 66 (M7.1, M6.4, M5.4) and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `12_dense_layered` predate it. Benchmark scores: `metrics_v1_baseline.json`.
-3. **Agent reproductions** — completed Claude Code × GLM-5.3 runs:
-   `runs/min/claude/glm-5.3/20261013T215003Z` (the Q1 `min` arm),
-   `runs/tools/claude/glm-5.3/20261015T020300Z` (the Q2 `tools` arm;
+3. **Agent pilot runs** — completed Claude Code × GLM-5.3 runs made before the
+   2026-10-28 prompt revision (window, field conventions, Match&Locate), kept in
+   `runs_pilot/` (summary `metrics_v1_summary_pilot.json`) so that they do not
+   enter the formal summary:
+   `runs_pilot/min/claude/glm-5.3/20261013T215003Z` (the Q1 `min` arm),
+   `runs_pilot/tools/claude/glm-5.3/20261015T020300Z` (the Q2 `tools` arm;
    11,611 events in window, runner session lost at 6.5 h but the agent
    finished — record closed via `finalize`), and the historical
-   legacy-baseline run `runs/base/claude/glm-5.3/20261013T043225Z`
+   legacy-baseline run `runs_pilot/base/claude/glm-5.3/20261013T043225Z`
    (retired prompt; shown for strategy-variance context only).
 
 ## Figures (`figures/`)

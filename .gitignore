@@ -79,6 +79,7 @@ data/**/*.xml
 # Local large run outputs are exposed through a machine-specific project link.
 /runs
 workflows/tasks/*/runs/
+workflows/tasks/*/runs_pilot/
 
 # Continuous waveforms remain local after the source-layout migration.
 data/**/waveforms

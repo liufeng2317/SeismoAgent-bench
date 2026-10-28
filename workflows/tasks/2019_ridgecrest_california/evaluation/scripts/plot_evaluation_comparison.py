@@ -66,20 +66,20 @@ AGENT_RUNS = {
     'agent_min': {
         'label': 'Agent min',
         'color': AGENT_MIN_COLOR,
-        'catalog': TASK / 'runs/min/claude/glm-5.3/20261013T215003Z/work/catalog.csv',
-        'run_id': 'runs/min/claude/glm-5.3/20261013T215003Z',
+        'catalog': TASK / 'runs_pilot/min/claude/glm-5.3/20261013T215003Z/work/catalog.csv',
+        'run_id': 'runs_pilot/min/claude/glm-5.3/20261013T215003Z',
     },
     'agent_tools': {
         'label': 'Agent tools',
         'color': AGENT_TOOLS_COLOR,
-        'catalog': TASK / 'runs/tools/claude/glm-5.3/20261015T020300Z/work/catalog.csv',
-        'run_id': 'runs/tools/claude/glm-5.3/20261015T020300Z',
+        'catalog': TASK / 'runs_pilot/tools/claude/glm-5.3/20261015T020300Z/work/catalog.csv',
+        'run_id': 'runs_pilot/tools/claude/glm-5.3/20261015T020300Z',
     },
     'agent_legacy': {
         'label': 'Agent legacy',
         'color': AGENT_LEGACY_COLOR,
-        'catalog': TASK / 'runs/base/claude/glm-5.3/20261013T043225Z/work/catalog.csv',
-        'run_id': 'runs/base/claude/glm-5.3/20261013T043225Z',
+        'catalog': TASK / 'runs_pilot/base/claude/glm-5.3/20261013T043225Z/work/catalog.csv',
+        'run_id': 'runs_pilot/base/claude/glm-5.3/20261013T043225Z',
     },
 }
 
