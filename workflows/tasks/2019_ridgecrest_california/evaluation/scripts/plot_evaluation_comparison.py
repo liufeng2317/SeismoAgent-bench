@@ -273,6 +273,8 @@ def fig_spatial(out, cfg, audit, pops):
         if i // 3 < 2:
             ax.set_xlabel('')
     ax = fig.add_subplot(grid[3, :])
+    box = ax.get_position()  # room on the left for the population names
+    ax.set_position([box.x0 + 0.06, box.y0, box.width - 0.06, box.height])
     y = np.arange(len(pops))
     ax.barh(y, [len(r['rows']) for r in pops], color=[r['color'] for r in pops], height=.58)
     ax.set_yticks(y, labels=[SHORT_LABELS[r['key']] for r in pops], fontsize=6)
