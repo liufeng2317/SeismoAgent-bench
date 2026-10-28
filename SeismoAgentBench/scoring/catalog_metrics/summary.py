@@ -8,7 +8,8 @@ from pathlib import Path
 
 import numpy as np
 
-from .case import RUN_SCORE_FILE, _scorer_record, score_run
+from .agents import export_runs
+from .case import AGENTS_DIR, RUN_SCORE_FILE, _scorer_record, score_run
 
 SUMMARY_FILE = "metrics_v1_summary.json"
 # Detection metrics (recall*, f1_*) count a failed run as zero; the others average completed runs only.
@@ -56,5 +57,7 @@ def summarize(task_dir: Path, *, rescore: bool = False, write: bool = True) -> d
         configurations.append(entry)
     report = {**_scorer_record(), "task": task_dir.name, "configurations": configurations}
     if write:
-        (task_dir / "evaluation" / SUMMARY_FILE).write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
+        (task_dir / AGENTS_DIR).mkdir(parents=True, exist_ok=True)
+        (task_dir / AGENTS_DIR / SUMMARY_FILE).write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
+        report["exported"] = export_runs(task_dir)  # evaluation/agents/<run>/
     return report
