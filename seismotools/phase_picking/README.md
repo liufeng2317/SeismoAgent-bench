@@ -92,6 +92,5 @@ From the project root, run:
 conda run -n seismoagent python seismotools/support/tools_usage_validation/validate_phasenet.py
 ```
 
-This loads the local CPU weights and performs both a synthetic forward pass and
-a bounded Ridgecrest waveform inference. It verifies executable model plumbing,
+This loads the local CPU weights and performs a synthetic forward pass. It verifies executable model plumbing,
 not scientific equivalence of a complete catalog.

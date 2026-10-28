@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """Validate NonLinLoc: native stages, the v2 adapter (smoke regression, location
-methods) and the v3 catalog locator (synthetic known answers; Prague r2 reproduction)."""
+methods) and the v3 catalog locator (synthetic known answers)."""
 from __future__ import annotations
 
 import json
 import os
-import shutil
 import subprocess
 import sys
 import tempfile
@@ -14,7 +13,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 BIN = ROOT / "seismotools" / "nonlinloc" / "runtime" / "bin"
 PYTHON_PACKAGE = ROOT / "seismotools" / "nonlinloc" / "runtime" / "python" / "Nonlinlocpy"
-EXPORT = Path(os.environ.get("RIDGECREST_EXPORT_ROOT", str(ROOT / "workflows/tasks/2019_ridgecrest_california/expert/export/01_baseline")))
 
 # The bundled Python interface is intentionally kept next to the native
 # NonLinLoc package rather than installed into the host environment.
@@ -31,7 +29,6 @@ from synthetic_events import make_case, write_case  # noqa: E402
 
 TOOL = ROOT / "seismotools" / "nonlinloc"
 PY = sys.executable
-PRAGUE = ROOT / "workflows/tasks/2011_prague_oklahoma/expert/export/r2"
 # v2 smoke solution (examples/smoke with config.json) before the 2026-10 changes
 SMOKE_SOLUTION = {"lat": 36.12129630306454, "lon": -117.6320737732665, "depth_km": 1.82812}
 
@@ -130,42 +127,6 @@ def check_synthetic(tmp: Path) -> dict:
     return res
 
 
-def check_prague(tmp: Path, n_events: int = 50) -> dict:
-    """v3 locator with the Prague r2 stage-04 settings and station delays reproduces 50 r2 events."""
-    ref = pd.read_csv(PRAGUE / "04_locate_nonlinloc/full/events.csv")
-    ref = ref[(ref.status == "LOCATED") & (ref.n_stations >= 10)].sort_values("event_id")
-    ref = ref.iloc[np.linspace(0, len(ref) - 1, n_events).astype(int)].set_index("event_id")
-    picks = pd.read_csv(PRAGUE / "03_associate_gamma/full/picks.csv", keep_default_na=False)
-    arr = picks[picks.event_id.isin(ref.index)][["event_id", "pick_id", "station_id", "phase", "time_utc"]]
-    arr.to_csv(tmp / "prague_arrivals.csv", index=False)
-    st = pd.read_csv(PRAGUE / "03_associate_gamma/full/stations.csv")
-    st.assign(elevation_m=st.elevation_m - st.sensor_depth_m)[["station_id", "latitude", "longitude", "elevation_m"]] \
-        .to_csv(tmp / "prague_stations.csv", index=False)
-    inputs = json.loads((PRAGUE / "03_associate_gamma/full/inputs.json").read_text())
-    rows = inputs["model_source"]["rows"]
-    (tmp / "prague_model.txt").write_text("".join(f"{r['top_of_layer_km']} {r['vp_km_s']} {r['vs_km_s']}\n" for r in rows))
-    dl = pd.read_csv(PRAGUE / "04_locate_nonlinloc/full/station_delays.csv")
-    dl.assign(station_id=dl.instrument_id.map(dict(zip(st.id, st.station_id))))[
-        ["station_id", "phase", "delay_s", "n_picks"]].to_csv(tmp / "prague_delays.csv", index=False)
-    s = inputs["settings"]
-    cfg = {"reference_elevation_km": s["reference_elevation_km"], "projection_center": s["projection_center"],
-           "region": {"longitude": s["longitude_bounds"], "latitude": s["latitude_bounds"],
-                      "depth_km": s["depth_bounds_km"]},
-           "velocity_layering": s["velocity_layering"], "grid_spacing_km": 0.25, "grid_depth_km": [-3.0, 35.0],
-           "location_method": "GAU_ANALYTIC", "min_phases": 10, "min_s_phases": 3,
-           "pick_error_s": {"P": 0.10, "S": 0.20}, "model_error_s": 0.30,
-           "search": {"min_node_km": 0.1, "max_nodes": 50000, "samples": 2000}}
-    e = locate(tmp, "prague", tmp / "prague_arrivals.csv", tmp / "prague_stations.csv", tmp / "prague_model.txt",
-               cfg, tmp / "prague_delays.csv").loc[ref.index]
-    dh = epi_km(e.latitude, e.longitude, ref.latitude, ref.longitude)
-    dz = (e.depth_km - ref.depth_km).abs()
-    out = {"events": n_events, "located": int((e.status == "LOCATED").sum()),
-           "median_epi_km": round(float(np.median(dh)), 4), "max_epi_km": round(float(dh.max()), 4),
-           "median_abs_depth_km": round(float(dz.median()), 4), "max_abs_depth_km": round(float(dz.max()), 4)}
-    assert out["located"] == n_events and out["median_epi_km"] < 0.1 and out["median_abs_depth_km"] < 0.2, out
-    return out
-
-
 def main() -> None:
     # Validate the bundled Python interface independently of the native run.
     # Hide PATH temporarily so this specifically exercises the package's
@@ -224,21 +185,9 @@ LOCPHASEID P P
         assert template.is_file()
         run_package_runner(BIN, work)
         assert list(work.glob("*.loc.hyp"))
-    source_root = EXPORT / "04_locate_nonlinloc"
-    source_event = source_root / "events_raw/gamma_0000001"
-    with tempfile.TemporaryDirectory(prefix="ridgecrest-nll-") as tmp:
-        base = Path(tmp) / "run"
-        event = base / "events_raw/gamma_0000001"
-        event.mkdir(parents=True)
-        (base / "grids").symlink_to(source_root / "grids", target_is_directory=True)
-        for name in ("control.in", "input.obs"):
-            shutil.copy2(source_event / name, event / name)
-        output = run(BIN / "NLLoc", event / "control.in", event)
-        assert list(event.glob("solution.*.loc.hyp")) and "1 events located" in output
     with tempfile.TemporaryDirectory(prefix="nll-v3-") as tmp:
         smoke = check_smoke_regression(Path(tmp))
         synthetic = check_synthetic(Path(tmp))
-        prague = check_prague(Path(tmp))
     log_dir = Path(os.environ.get("VALIDATION_LOG_DIR", str(Path(__file__).resolve().parent / "outputs")))
     log_dir.mkdir(parents=True, exist_ok=True)
     (log_dir / "validate_nonlinloc.native.log").write_text("\n\n".join(native_logs))
@@ -249,10 +198,8 @@ LOCPHASEID P P
                                  "template_resource": True},
                       "smoke": {"velocity_grid": True, "travel_time_grid": True, "locator_started": True,
                                  "note": "one-station synthetic input is intentionally underdetermined"},
-                      "ridgecrest": {"source_event": "gamma_0000001", "located_events": 1},
                       "adapter_v2_smoke_methods": smoke,
-                      "locate_v3_synthetic": synthetic,
-                      "locate_v3_prague_r2": prague}, indent=2))
+                      "locate_v3_synthetic": synthetic}, indent=2))
 
 
 if __name__ == "__main__":

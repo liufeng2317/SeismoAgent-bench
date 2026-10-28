@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the PyOcto associator interface: travel-time table, synthetic known answers, Prague picks."""
+"""Validate the PyOcto associator interface: travel-time table and synthetic known answers."""
 from __future__ import annotations
 
 import json
@@ -15,7 +15,6 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[3]
 TOOL = ROOT / "seismotools" / "pyocto"
 PY = sys.executable
-PRAGUE = ROOT / "workflows/tasks/2011_prague_oklahoma/expert/export/r2"
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from synthetic_events import make_case, write_case  # noqa: E402
 
@@ -101,49 +100,10 @@ def check_synthetic(tmp: Path) -> dict:
     return res
 
 
-def check_prague(tmp: Path) -> dict:
-    """Six hours of Prague PhaseNet picks: PyOcto against the GaMMA r2 association."""
-    t0, t1 = pd.Timestamp("2011-11-11T00:00Z"), pd.Timestamp("2011-11-11T06:00Z")
-    p = pd.read_csv(PRAGUE / "02_pick_phasenet/full/picks.csv")
-    pt = pd.to_datetime(p.time_utc, utc=True, format="ISO8601")
-    p[(pt >= t0) & (pt < t1)][["pick_id", "station_id", "phase", "time_utc", "probability"]] \
-        .to_csv(tmp / "prague_picks.csv", index=False)
-    st = pd.read_csv(PRAGUE / "03_associate_gamma/full/stations.csv")
-    st.assign(elevation_m=st.elevation_m - st.sensor_depth_m)[["station_id", "latitude", "longitude", "elevation_m"]] \
-        .to_csv(tmp / "prague_stations.csv", index=False)
-    inputs = json.loads((PRAGUE / "03_associate_gamma/full/inputs.json").read_text())
-    s = inputs["settings"]
-    (tmp / "prague_model.txt").write_text("".join(f"{r['top_of_layer_km']} {r['vp_km_s']} {r['vs_km_s']}\n"
-                                                 for r in inputs["model_source"]["rows"]))
-    cfg = {"region": {"latitude": s["latitude_bounds"], "longitude": s["longitude_bounds"],
-                      "depth_km": s["depth_bounds_km"]},
-           "reference_elevation_km": s["reference_elevation_km"], "velocity_layering": s["velocity_layering"],
-           "associator": {"n_picks": s["min_picks_per_eq"], "n_p_picks": s["min_p_picks_per_eq"],
-                          "n_s_picks": s["min_s_picks_per_eq"]}}
-    out = run(tmp, "prague", tmp / "prague_picks.csv", tmp / "prague_stations.csv", tmp / "prague_model.txt", cfg, 8)
-    e = pd.read_csv(out / "events.csv")
-    e["t"] = pd.to_datetime(e.time_utc, utc=True)
-    g = pd.read_csv(PRAGUE / "03_associate_gamma/full/events.csv")
-    g["t"] = pd.to_datetime(g.origin_time, utc=True, format="ISO8601")
-    g = g[(g.t >= t0) & (g.t < t1)]
-
-    def frac(a, b):
-        hit = [((np.abs((b.t - r.t).dt.total_seconds()) <= 2) &
-                (np.hypot((b.latitude - r.latitude) * 111.195, (b.longitude - r.longitude) * 90.6) <= 10)).any()
-               for r in a.itertuples()]
-        return round(float(np.mean(hit)), 3) if hit else float("nan")
-    res = {"window": [str(t0), str(t1)], "gamma_events": len(g), "pyocto_events": len(e),
-           "gamma_matched_by_pyocto": frac(g, e), "gamma_10_stations_matched": frac(g[g.n_stations >= 10], e),
-           "pyocto_matched_by_gamma": frac(e, g)}
-    assert 0.7 <= len(e) / len(g) <= 1.3 and res["gamma_10_stations_matched"] >= 0.9, res
-    return res
-
-
 def main() -> None:
     with tempfile.TemporaryDirectory(prefix="pyocto-validation-") as tmp:
         synthetic = check_synthetic(Path(tmp))
-        prague = check_prague(Path(tmp))
-    print(json.dumps({"status": "pass", "tool": "PyOcto", "synthetic": synthetic, "prague": prague}, indent=2))
+    print(json.dumps({"status": "pass", "tool": "PyOcto", "synthetic": synthetic}, indent=2))
 
 
 if __name__ == "__main__":

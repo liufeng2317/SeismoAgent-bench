@@ -4,7 +4,7 @@ PyOcto (Münchmeyer 2024, *Seismica*) is a high-throughput phase associator:
 it partitions space and time into octree nodes and refines those whose
 predicted arrivals explain enough picks, then locates each event on the node
 grid. It handles high event rates and large networks quickly (six hours of
-Prague PhaseNet picks, 6,313 picks, in about 20 s).
+PhaseNet picks of a dense local network, 6,313 picks, in about 20 s).
 
 ```text
 pyocto/
@@ -38,6 +38,6 @@ picks can be handed to any locator (for example
 Validation (`support/tools_usage_validation/validate_pyocto.py`): the
 travel-time table against analytic half-space times; the shared synthetic
 case with noise, false and dropped picks (40/40 events, ≥ 99 % of true picks
-on the right event; 1 and 4 threads identical); six Prague hours against the
-GaMMA association (93 % of GaMMA events, 99 % of those with ≥ 10 stations).
+on the right event; 1 and 4 threads identical); on six hours of real
+picks it finds 93 % of the GaMMA events, 99 % of those with ≥ 10 stations.
 Upstream documentation: https://pyocto.readthedocs.io (version 0.1.9 API).

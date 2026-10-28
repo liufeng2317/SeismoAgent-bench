@@ -1,6 +1,6 @@
 """Multi-event NonLinLoc catalog location (``interface/locate.py``).
 
-Generalised from the expert stage-04 locators: one local aeqd frame, P and S
+Generalised from per-event NonLinLoc runs: one local aeqd frame, P and S
 travel-time grids computed once per station (``GRID2D``), one ``NLLoc`` run per
 event (arrival group) in a thread pool, fixed station delays (``LOCDELAY``)
 optional. Depths are km below ``reference_elevation_km``; station z is that

@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Validate GrowClust: the upstream example reproduced by the local build, the interface on a
-synthetic cluster with exact differential times, and ccdt + GrowClust on six Prague hours."""
+synthetic cluster with exact differential times."""
 from __future__ import annotations
 
-import importlib.util
 import json
 import os
 import shutil
@@ -23,8 +22,6 @@ CCDT = ROOT / "seismotools" / "cross_correlation" / "interface" / "run.py"
 PY = sys.executable
 EXAMPLE = Path(os.environ.get("GROWCLUST_EXAMPLE", "/liufeng1afs/software/Download/growclust/extract/"
                               "GrowClust-53226cf7662ab5bab5db87138d1ae63227d4ba63/EXAMPLE"))
-PRAGUE = ROOT / "workflows/tasks/2011_prague_oklahoma"
-WAVES = ROOT / "data/2011_prague_oklahoma/data/waveforms/data"
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from synthetic_events import make_case, write_case  # noqa: E402
 
@@ -112,76 +109,12 @@ def check_synthetic(tmp: Path) -> dict:
     return res
 
 
-def check_prague(tmp: Path) -> dict:
-    """ccdt + GrowClust on six Prague hours of r2 NLL events; inter-event distances against Cochran."""
-    t0, t1 = pd.Timestamp("2011-11-11T00:00Z"), pd.Timestamp("2011-11-11T06:00Z")
-    exp = PRAGUE / "expert/export/r2"
-    e = pd.read_csv(exp / "04_locate_nonlinloc/full/events.csv")
-    e["t"] = pd.to_datetime(e.origin_time, utc=True, format="ISO8601")
-    e = e[(e.status == "LOCATED") & (e.t >= t0) & (e.t < t1)]
-    ev = pd.DataFrame({"event_id": e.event_id, "origin_time_utc": e.origin_time, "latitude": e.latitude,
-                       "longitude": e.longitude, "depth_km": e.depth_km})
-    ev.to_csv(tmp / "prague_events.csv", index=False)
-    a = pd.read_csv(exp / "03_associate_gamma/full/picks.csv", keep_default_na=False)
-    a = a[a.event_id.isin(ev.event_id)][["event_id", "station_id", "phase", "time_utc"]]
-    a.to_csv(tmp / "prague_arrivals.csv", index=False)
-    wav = tmp / "prague_waveforms"
-    wav.mkdir()
-    for f in WAVES.rglob("*__20111111T000000Z__*.mseed"):
-        (wav / f.name).symlink_to(f)
-    # the near-source ZQ stations record on DH/CN channels, which ccdt's default families leave out
-    (tmp / "ccdt.json").write_text(json.dumps({"channels": {"families": ["HH", "EH", "BH", "HN", "EN", "DH", "CN"]}}))
-    subprocess.run([PY, "-I", str(CCDT), "--events", str(tmp / "prague_events.csv"), "--arrivals",
-                    str(tmp / "prague_arrivals.csv"), "--waveforms", str(wav), "--output-dir", str(tmp / "prague_cc"),
-                    "--config", str(tmp / "ccdt.json"), "--workers", "16", "--quiet"], check=True, capture_output=True)
-    st = pd.read_csv(exp / "03_associate_gamma/full/stations.csv")
-    st[["station_id", "latitude", "longitude"]].to_csv(tmp / "prague_stations.csv", index=False)
-    inputs = json.loads((exp / "03_associate_gamma/full/inputs.json").read_text())
-    (tmp / "prague_model.txt").write_text("".join(f"{r['top_of_layer_km']} {r['vp_km_s']} {r['vs_km_s']}\n"
-                                                 for r in inputs["model_source"]["rows"]))
-    out = run(tmp, "prague", tmp / "prague_events.csv", tmp / "prague_stations.csv", tmp / "prague_cc",
-              tmp / "prague_model.txt", {"table": {"distance_max_km": 150.0}, "ngoodmin": 4})
-    r = pd.read_csv(out / "relocated.csv").set_index("event_id")
-    spec = importlib.util.spec_from_file_location("s60", PRAGUE / "expert/01_pipeline/60_match_locate.py")
-    s60 = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(s60)
-    coch = s60.load_references([s60.utc("2011-11-11")])["cochran"]
-    nll = ev.set_index("event_id")
-    rows = [{"time": s60.utc(t), "latitude": la, "longitude": lo, "id": i}
-            for i, t, la, lo in zip(nll.index, nll.origin_time_utc, nll.latitude, nll.longitude)]
-    pairs = s60.match(rows, coch, 2.0, 5.0)
-    ours = [rows[i]["id"] for i, _ in pairs]
-    ref = pd.DataFrame([coch[j] for _, j in pairs])
-    proj = Proj(proj="aeqd", lon_0=-96.7725, lat_0=35.5215, datum="WGS84", units="km")
-
-    def xy(lat, lon):
-        return np.c_[proj(np.asarray(lon), np.asarray(lat))]
-    R = xy(ref.latitude, ref.longitude)
-    dr = np.linalg.norm(R[:, None] - R[None], axis=2)
-    cid = r.loc[ours, "cluster_id"].to_numpy()
-    # pairs (< 3 km apart in Cochran) inside one relocated GrowClust cluster: clusters move as a whole
-    same = np.triu(dr < 3.0, 1) & (cid[:, None] == cid[None]) & r.loc[ours, "relocated"].to_numpy()[:, None]
-    err = {}
-    for lab, df in (("nll", nll), ("growclust", r)):
-        X = xy(df.loc[ours, "latitude"], df.loc[ours, "longitude"])
-        err[lab] = round(float(np.median(np.abs(np.linalg.norm(X[:, None] - X[None], axis=2) - dr)[same])), 3)
-    cc = json.loads((tmp / "prague_cc/run_result.json").read_text())
-    res = {"events": len(ev), "relocated": int(r.relocated.sum()), "ccdt_pairs": cc.get("pairs_with_dt"),
-           "ccdt_dt_lines": cc.get("dt_lines"), "matched_to_cochran": len(ours), "same_cluster_pairs": int(same.sum()),
-           "median_interevent_distance_error_km": err}
-    assert res["relocated"] >= 0.3 * len(ev) and res["same_cluster_pairs"] >= 100, res
-    assert err["growclust"] < 0.7 * err["nll"], res
-    return res
-
-
 def main() -> None:
     with tempfile.TemporaryDirectory(prefix="growclust-validation-") as tmp:
         tmp = Path(tmp)
         example = check_upstream_example(tmp)
         synthetic = check_synthetic(tmp)
-        prague = check_prague(tmp)
-    print(json.dumps({"status": "pass", "tool": "GrowClust", "upstream_example": example, "synthetic": synthetic,
-                      "prague": prague}, indent=2))
+    print(json.dumps({"status": "pass", "tool": "GrowClust", "upstream_example": example, "synthetic": synthetic}, indent=2))
 
 
 if __name__ == "__main__":

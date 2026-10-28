@@ -106,14 +106,13 @@ native control reference.
 ## Validation
 
 The project validation checks package import, bundled template resolution, the
-three native stages on a tiny synthetic grid, one bounded Ridgecrest event, the
-adapter's smoke solution under all three location methods, the catalog locator
-on a synthetic half-space case (known hypocentres; one outlier pick) and its
-reproduction of 50 Prague expert (r2) locations:
+three native stages on a tiny synthetic grid, the adapter's smoke solution
+under all three location methods and the catalog locator on a synthetic
+half-space case (known hypocentres; one outlier pick):
 
 ```bash
 python seismotools/support/tools_usage_validation/validate_nonlinloc.py
 ```
 
-This verifies executability and input/output plumbing. It is not a claim that a
-new case catalog is scientifically equivalent to an expert catalog.
+This verifies executability and input/output plumbing, not the scientific
+accuracy of a catalog.

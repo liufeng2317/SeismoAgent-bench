@@ -72,7 +72,8 @@ PYTHON="$PYTHON" bash seismotools/support/tools_usage_validation/run_all.sh
 
 The integrity check verifies the tracked tool snapshot. The import check loads
 the local Python packages and model weights on CPU. `run_all.sh` executes a
-small synthetic check and a bounded Ridgecrest data check for each tool. These
+small synthetic check for each tool, plus the upstream example where one
+exists. These
 checks verify that the local interfaces start and produce expected artifacts;
 they do not establish scientific accuracy of a complete catalog.
 

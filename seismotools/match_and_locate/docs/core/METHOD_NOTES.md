@@ -34,8 +34,8 @@ For one template and one continuous segment with `n` channel-phase rows:
 ## Approximations and what they mean on a local network
 
 - **Linear moveout.** Relative travel time is linearised about the template.
-  For the Magna network (43 stations, 4–39 km from a 10 km deep source) and
-  the case's layered model, worst-direction errors per station are:
+  For a local network of 43 stations, 4–39 km from a 10 km deep source, and
+  a layered model, worst-direction errors per station are:
 
   | Offset from template | P median / max | S median / max |
   |---|---|---|

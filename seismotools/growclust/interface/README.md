@@ -44,7 +44,8 @@ Requires the build (`python seismotools/support/build_native.py --tool growclust
 ## Notes from validation
 
 With sparse cross-correlation data, keep the upstream `ngoodmin 0` out: on six
-Prague hours (most event pairs with 1–2 CC differential times) the default
-relocated 157 of 185 events but did not improve inter-event distances against
-Cochran (0.47 → 0.45 km); `ngoodmin 4` relocated 110 and halved the error
+hours of a dense local sequence (most event pairs with 1–2 CC differential
+times) the default relocated 157 of 185 events but did not improve
+inter-event distances against an independent relocated catalog
+(0.47 → 0.45 km); `ngoodmin 4` relocated 110 and halved the error
 (0.30 → 0.15 km), `ngoodmin 8` 51 events, 0.19 → 0.06 km.

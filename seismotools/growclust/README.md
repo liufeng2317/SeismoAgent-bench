@@ -3,9 +3,8 @@
 GrowClust (Trugman & Shearer 2017, *SRL* 88, 379) relocates earthquakes by
 hierarchical cluster growth: event pairs are joined in order of their
 cross-correlation similarity, and each growing cluster is relocated with an
-L1 (robust) misfit on the differential times. It is the relative relocation
-method used by, e.g., Ross et al. (2019) for Ridgecrest, and an alternative
-to hypoDD (L2, damped least squares) on the same `dt.cc` data.
+L1 (robust) misfit on the differential times. It is a widely used
+alternative to hypoDD (L2, damped least squares) on the same `dt.cc` data.
 
 ```text
 growclust/
@@ -33,6 +32,6 @@ Validation (`support/tools_usage_validation/validate_growclust.py`): the
 local build reproduces the upstream Spanish Springs example exactly (1,616
 events); on a synthetic 60-event cluster perturbed by 0.5 km with exact
 differential times, relative positions are recovered to 13 m horizontally
-(53 m 3-D); on six Prague hours (ccdt + GrowClust, `ngoodmin 4`) inter-event
-distances agree twice as well with Cochran's catalog as the NLL input
-(0.30 → 0.15 km).
+(53 m 3-D); on six hours of a dense local sequence (ccdt + GrowClust, `ngoodmin 4`)
+inter-event distances agree twice as well with an independent relocated
+catalog as the absolute-location input (0.30 → 0.15 km).

@@ -42,7 +42,7 @@ DEFAULT_CONFIG = {
     "pad_s": 30.0,            # neighbouring data read around each file (filter start-up, boundaries)
     "edge_guard_s": 3.0,      # a window must sit this far from a trace end or gap
     "taper_s": 2.0,
-    # Defaults from the Ridgecrest pick check (tools_usage_validation): at SNR >= 3
+    # Defaults from a real-data pick check: at SNR >= 3
     # and CC >= 0.7, 6 % of P measurements differ from PhaseNet pick
     # differences by > 0.1 s (12 % at SNR >= 2, CC >= 0.6).
     "snr": {"noise_s": 2.0, "min": 3.0},

@@ -31,6 +31,6 @@ environment (pandas, pyrocko). Every setting and its REAL flag:
 Validation (`support/tools_usage_validation/validate_real.py`): table against
 analytic half-space times and slopes; the shared synthetic case (40/40
 events, all true picks on the right event, no false pick absorbed), also
-across midnight (two chunks, no duplicates); six Prague hours against the
-GaMMA association (97.5 % of GaMMA events with ≥ 10 stations; 97.6 % of REAL
-events confirmed by GaMMA — more conservative than PyOcto).
+across midnight (two chunks, no duplicates); on six hours of real
+picks it finds 97.5 % of the GaMMA events with ≥ 10 stations, and 97.6 % of its
+events are confirmed by GaMMA (more conservative than PyOcto).

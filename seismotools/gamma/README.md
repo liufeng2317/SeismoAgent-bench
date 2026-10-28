@@ -86,6 +86,5 @@ Run the project validation from the repository root:
 conda run -n seismoagent python seismotools/support/tools_usage_validation/validate_gamma.py
 ```
 
-It checks a deterministic synthetic association and one bounded Ridgecrest
-event. Passing confirms local execution and file plumbing, not scientific
+It checks a deterministic synthetic association. Passing confirms local execution and file plumbing, not scientific
 accuracy of a full catalog.

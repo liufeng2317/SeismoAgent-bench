@@ -63,7 +63,7 @@ Defaults: `runtime/python/ccdt/pipeline.py` `DEFAULT_CONFIG`.
 |---|---|
 | Kernels | Pearson curves identical to a brute-force loop (3e-16); parabola recovers a 0.3-sample offset to 4e-4 |
 | Synthetic known answers (`examples/smoke`): 40 events, 12 stations, fractional-sample arrivals, a midnight file boundary, a 1/2-component station, an E-only station, a 200 Hz station, a polarity-reversed station, an overlapping pair, picks exact / ±0.1 s / +0.15 s predicted | dt error median 0.005 samples, p95 0.023 (100 Hz), 0.014 (200 Hz); no bias from arrival errors (median ≤ 5e-4 samples per class); no polarity-reversed or overlapping pair accepted with a wrong dt; 1 and 4 workers give identical `dt.cc` |
-| Ridgecrest real data: 76 well-picked events (2019-07-05 10–12 UTC), PhaseNet picks as arrivals | 1,496 accepted; CC dt − pick dt median 0.8 ms, MAD 18 ms, robust slope 0.989, 8.5 % beyond 0.1 s (pick errors included) |
+| Real data: 76 well-picked events of a dense aftershock sequence (two hours), PhaseNet picks as arrivals | 1,496 accepted; CC dt − pick dt median 0.8 ms, MAD 18 ms, robust slope 0.989, 8.5 % beyond 0.1 s (pick errors included) |
 
 ## Relation to FDTCC
 

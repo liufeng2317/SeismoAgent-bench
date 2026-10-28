@@ -30,8 +30,8 @@ environment.
 Validation (`support/tools_usage_validation/validate_hypoinverse.py`): the
 gfortran build reproduces the upstream `testone` summary and archive exactly;
 synthetic known hypocentres in both hemispheres within 0.03 km (epicentre),
-0.12 km (depth) and 0.013 s; 50 Prague events agree with the NonLinLoc expert
-locations to 0.24 km (median epicentre) and 0.44 km (median |Δdepth|), with a
+0.12 km (depth) and 0.013 s; on 50 real events it agrees with NonLinLoc
+to 0.24 km (median epicentre) and 0.44 km (median |Δdepth|), with a
 lower RMS (0.06 s) from HypoInverse's distance and residual weighting.
 Manual: https://pubs.usgs.gov/publication/ofr02171 (also `doc/hyp1.40.pdf` in
 the archive).

@@ -116,6 +116,6 @@ conda run -n seismoagent python seismotools/support/tools_usage_validation/valid
 ```
 
 The check covers the local Python package and templates, a synthetic native CT
-relocation, and a bounded Ridgecrest CT replay. Passing verifies local
+relocation. Passing verifies local
 execution and file plumbing, not scientific accuracy of a full relocation
 catalog.
