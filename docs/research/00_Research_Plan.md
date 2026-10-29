@@ -151,10 +151,11 @@ Within the closed-reference, raw-waveform task the Agent arms form a ladder in w
 | S0 | `min` | task, data, output contract | Can a general Agent build a trusted catalog on its own? | implemented |
 | S1 | `tools` | validated tool library `seismotools` with usage docs | What do tools add? | implemented |
 | S2 | `knowledge` | tools + case-agnostic expert knowledge given up front (§2.5) | What does knowledge add on top of tools? | not implemented |
-| S3 | `checker` | tools + knowledge + reference-free checker, with upstream repair required (§2.5) | Does automated validation close the gap to the expert? | not implemented |
+| S2c | `checker` | tools + reference-free checker, no knowledge (§2.5) | Does knowing *that* something is wrong let the Agent find and repair it? | not implemented; run first (2026-10-30) |
+| S3 | `knowledge_checker` | tools + knowledge + checker (§2.5) | Does knowledge plus automated validation close the gap to the expert? | not implemented; run after S2c |
 | — | human-in-loop final | — | upper bound | done (all six) |
 
-Optional: `tools + checker` without knowledge on three cases chosen from the S1 failure modes. It separates *knowing how to do it* from *knowing that it went wrong*.
+Decided 2026-10-30: both components are built, and the `checker` arm (S2c: tools + checker, no knowledge) runs before S3. Compared with S1 it isolates the effect of automated validation; S2 versus S3 and S2c versus S3 then separate knowing how to do it from knowing that it went wrong.
 
 **Yardstick.** The human-in-loop final is the single yardstick and the upper bound. It used the references during its iteration, so part of it is out of an Agent's reach; that part is attributed with the expert ladder and the intervention coding ([`01_Expert_Experience_and_Checker.md`](./01_Expert_Experience_and_Checker.md) §5). The first-round blind catalog is not a yardstick: it used no template matching.
 
@@ -170,7 +171,7 @@ The `guided` arm (expert scaffolding, fixed window, `report.md` contract) varies
 
 | Layer | Form | Why this form |
 |---|---|---|
-| Diagnostics | a deterministic program in `seismotools/checker/` (CLI) that reads the Agent's picks, events and catalog and writes `checker_report.json` plus figures; rules and ranges only, no case numbers, no references | same status as every other tool; no LLM inside, so it cannot rationalise a symptom away; identical for any Agent |
+| Diagnostics | a deterministic program in `seismotools/checker/` (CLI) that reads the Agent's picks, events, catalog and the station metadata and writes `checker_report.json` plus figures; rules and ranges only, no case numbers, no references. It reports **symptoms only** (what is measured and where it falls outside the expected range), never a cause or a repair: deciding what a symptom means and what to change is the Agent's job (decided 2026-10-30) | same status as every other tool; no LLM inside, so it cannot rationalise a symptom away; identical for any Agent |
 | Knowledge | an Agent Skill (`SKILL.md` + reference files): method choices, safe parameter ranges, known pitfalls; in S3 also the symptom → likely cause → upstream repair table of [`01_Expert_Experience_and_Checker.md`](./01_Expert_Experience_and_Checker.md) §3 | an open format that general Agents load natively (Claude Code skills; Codex skills); progressive disclosure keeps it out of context until relevant |
 
 **Delivery.** The skill is installed in the Agent's runtime skill directory. An Agent without skill support gets the same files linked from the prompt, as `prompt_tools.md` does for the tools. The S2 and S3 prompts add one line naming the skill, just as S1 adds the tools section.
@@ -184,9 +185,9 @@ The skill holds what an expert knows before looking at any data:
 - magnitude: units, direct versus chained ML, large-event handling;
 - pitfalls observed in the runs and the ladder, e.g. never fix depth silently, check the magnitude scale, apply the PhaseNet blinding offset, do not let station terms absorb a frame shift.
 
-#### S3 — checker
+#### S2c and S3 — checker
 
-The same skill adds the diagnostics tool and the playbook. The contract adds two items:
+In S2c the checker skill only says that the tool exists, what it measures and that its report and a disposition per flag are part of the output; it gives no causes and no repairs. In S3 the knowledge skill adds the symptom → likely cause → upstream repair playbook. In both arms the contract adds two items:
 
 - `checker_report.json`, produced by the checker on the submitted catalog;
 - one disposition per flag: `fixed` (with what changed) or `justified` (with evidence).

@@ -35,8 +35,8 @@ Component swap (Agent picks, expert locator): the back-end errors largely disapp
 | Phase | Work | Runs | Estimate |
 |---|---|---:|---|
 | A (now) | finish S0/S1 on six cases (Prague, Magna, Maple Creek, Kīlauea scored; Kaikōura running; then Ridgecrest); swap, blind audit (labels for Maple Creek and Kīlauea), second-rater check. In parallel without compute: tier table (research plan §2.2), intervention coding (`01_Expert_Experience_and_Checker.md` §5) | 4 left | ~1 week, single queue, 5–8 h per run |
-| B | build the checker CLI and the knowledge skill; skill delivery in the runner; checker contract and scorer verification; debug on pilot runs (not counted) | 0 formal | 3–5 days |
-| C | S2 and S3 on six cases; S1 repeats on Prague and Magna; second model S1/S3 on three cases; optional `tools + checker` on three | ~25 | ~7–8 days single queue |
+| B | build the checker CLI (symptoms only) and validate it on the human-in-loop catalogs and the scored S0/S1 runs before freezing its thresholds; the knowledge skill; skill delivery in the runner; checker contract and scorer verification; debug on a pilot run (not counted) | 0 formal | 4–6 days |
+| C | first S2c `checker` (tools + checker, no knowledge) on six cases, then S2 `knowledge` and S3 `knowledge_checker`; S1 repeats on Prague and Magna; second model S1/S3 on three cases | ~30 | ~9–10 days single queue |
 | D | analysis, figures, writing | — | — |
 
 ## 3. Trusted-catalog standard
