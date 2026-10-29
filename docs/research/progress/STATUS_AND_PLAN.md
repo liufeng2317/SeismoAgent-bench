@@ -26,7 +26,7 @@ recall_norm against the primary detection reference (final in brackets); `recall
 | Kīlauea min | 0.90 (1.22) | 0.25 (0.57) | 0.42 | origin times 0.9 s off; magnitude −2.43; 17 % at one depth | 8 criteria |
 | Kīlauea tools | 0.88 (1.22) | 0.42 (0.57) | 0.37 | detection only | detection, detection_tight, completeness |
 
-Component swap (Agent picks, expert locator): the back-end errors largely disappear — Maple Creek tools depth −2.18 → −0.31 km and origin time 1.01 → 0.20 s; Prague tools depth +1.10 → 0.00 km; Magna tools depth −1.94 → −0.96 km, shift 2.50 → 1.61 km.
+Component swap (Agent picks, expert locator): the back-end errors largely disappear — Maple Creek tools depth −2.18 → −0.31 km and origin time 1.01 → 0.20 s; Prague tools depth +1.10 → 0.00 km; Magna tools depth −1.94 → −0.96 km, shift 2.50 → 1.61 km; Kīlauea min depth +1.29 → −0.03 km and origin time 0.90 → 0.19 s.
 
 ## 2. Work plan
 

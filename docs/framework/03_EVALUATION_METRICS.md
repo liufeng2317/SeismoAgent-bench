@@ -310,4 +310,4 @@ Effect on the human-in-loop finals: recall_norm Prague 1.85, Magna 1.14, Maple C
 
 Audit samples are drawn once. The labelled reviews of Prague `tools` and Magna `tools` keep their v1 samples, drawn from the events v1 left unsupported; v2's tighter gates leave more events unsupported, so those samples cover a subset of the v2 unsupported events. The unlabelled Maple Creek samples were redrawn under v2; Kīlauea's were first drawn under v2.
 
-v1 scores remain in git history (last v1 commit: the parent of the commit that adds this section) and in each run's `evaluation/metrics_v1.json`.
+v1 scores remain in git history (last v1 state: commit 9a7c066; v2 definition fe5ffe9, re-scored outputs 68dfa28) and in each run's `evaluation/metrics_v1.json`.

@@ -201,5 +201,50 @@
   "sampled": 50,
   "unsupported": 809,
   "labels": null
+ },
+ "swap": {
+  "picks_round": "r7",
+  "location_method": "EDT_OT_WT",
+  "relocated": 3550,
+  "rows": {
+   "agent_locations": {
+    "recall_norm": 0.8998,
+    "recall_tight": 0.2478,
+    "shift_km": 0.2301,
+    "scatter_median_km": 1.0114,
+    "epi_gt5km": 0.0,
+    "dz_median_km": 2.044,
+    "dt_median_s": 0.9,
+    "depth_mode_share": 0.1651,
+    "off_structure_fraction": 0.0077,
+    "off_structure_after_shift": 0.0093,
+    "dt_mean_s": -0.8489,
+    "dt_std_s": 0.4549,
+    "recall_final": 0.4198,
+    "shift_final_km": 0.1348,
+    "dz_final_km": 1.2925,
+    "dt_final_s": 0.9657,
+    "events_in_mask": 3131
+   },
+   "expert_locator": {
+    "recall_norm": 0.8423,
+    "recall_tight": 0.3964,
+    "shift_km": 0.4233,
+    "scatter_median_km": 0.5563,
+    "epi_gt5km": 0.0,
+    "dz_median_km": 0.6227,
+    "dt_median_s": 0.191,
+    "depth_mode_share": 0.0302,
+    "off_structure_fraction": 0.0005,
+    "off_structure_after_shift": 0.0015,
+    "dt_mean_s": 0.089,
+    "dt_std_s": 0.331,
+    "recall_final": 0.3612,
+    "shift_final_km": 0.0616,
+    "dz_final_km": -0.0312,
+    "dt_final_s": 0.0348,
+    "events_in_mask": 4192
+   }
+  }
  }
 }

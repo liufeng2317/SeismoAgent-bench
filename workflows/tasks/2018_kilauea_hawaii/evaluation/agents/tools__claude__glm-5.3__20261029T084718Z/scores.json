@@ -196,5 +196,50 @@
   "sampled": 50,
   "unsupported": 112,
   "labels": null
+ },
+ "swap": {
+  "picks_round": "r7",
+  "location_method": "EDT_OT_WT",
+  "relocated": 2697,
+  "rows": {
+   "agent_locations": {
+    "recall_norm": 0.8827,
+    "recall_tight": 0.4162,
+    "shift_km": 0.4807,
+    "scatter_median_km": 0.6144,
+    "epi_gt5km": 0.0,
+    "dz_median_km": 1.014,
+    "dt_median_s": 0.3007,
+    "depth_mode_share": 0.037,
+    "off_structure_fraction": 0.0009,
+    "off_structure_after_shift": 0.0009,
+    "dt_mean_s": -0.2784,
+    "dt_std_s": 0.3104,
+    "recall_final": 0.3746,
+    "shift_final_km": 0.0653,
+    "dz_final_km": 0.4487,
+    "dt_final_s": 0.3645,
+    "events_in_mask": 2136
+   },
+   "expert_locator": {
+    "recall_norm": 0.879,
+    "recall_tight": 0.4182,
+    "shift_km": 0.4722,
+    "scatter_median_km": 0.5994,
+    "epi_gt5km": 0.0,
+    "dz_median_km": 0.6518,
+    "dt_median_s": 0.1892,
+    "depth_mode_share": 0.0289,
+    "off_structure_fraction": 0.0038,
+    "off_structure_after_shift": 0.0024,
+    "dt_mean_s": 0.0701,
+    "dt_std_s": 0.324,
+    "recall_final": 0.3706,
+    "shift_final_km": 0.0,
+    "dz_final_km": 0.0,
+    "dt_final_s": 0.0325,
+    "events_in_mask": 2121
+   }
+  }
  }
 }
