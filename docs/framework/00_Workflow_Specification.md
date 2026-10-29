@@ -44,7 +44,7 @@ A task spec requires `task_id`, `version` and `task_prompt_file`. Optional field
 
 An output contract lists artifacts with `id`, `path`, `kind`, `required` and an optional column `schema`; paths are relative to the Agent's work directory.
 
-The input file has `schema_version` 1, `case_id`, an optional `description` and a non-empty list of `entries`. Each entry has `id`, an absolute `path`, `type` (`file` or `folder`) and optional `notes` (`SeismoAgentBench/task/schemas/input_manifest.schema.json`). The runner checks the schema, unique entry ids, absolute paths and types. It does not check that the paths exist; an entry whose path is missing is left out of the input view.
+The input file has `schema_version` 1, `case_id`, an optional `description` and a non-empty list of `entries`. Each entry has `id`, an absolute `path`, `type` (`file` or `folder`) and optional `notes` (`SeismoAgentBench/task/schemas/input_manifest.schema.json`). The runner checks the schema, unique entry ids, absolute paths and types, and stops before the Agent starts if an entry's path does not exist.
 
 ### 3.2 Run
 

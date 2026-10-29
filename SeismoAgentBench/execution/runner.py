@@ -95,6 +95,7 @@ def _prepare_input_view(work: Path, manifest: Mapping[str, Any] | None) -> None:
         raise ExecutionError(f"input view already exists: {view}")
     view.mkdir(mode=0o755)
     if manifest is None:
+        view.chmod(0o555)  # read-only like a populated view; nothing to link
         return
     for entry in (manifest or {}).get("entries", []):
         if not isinstance(entry, Mapping):
@@ -106,7 +107,8 @@ def _prepare_input_view(work: Path, manifest: Mapping[str, Any] | None) -> None:
             continue
         source = Path(raw_path)
         if not source.exists():
-            continue
+            # A missing input would silently shrink what the Agent sees; stop before it starts.
+            raise ExecutionError(f"input entry {entry_id!r} does not exist: {raw_path}")
         source = source.resolve(strict=True)
         target = view / source.name
         if target.exists() or target.is_symlink():

@@ -61,7 +61,7 @@ LON_MIN, LON_MAX = -110.55, -110.15
 DEPTH_MIN, DEPTH_MAX = 0.0, 15.0
 PRODUCTS = [{'id': 'operational_full', 'kind': 'usgs_csv', 'path': 'USGS_UUSS_COMCAT_2017__catalog_operational_full.csv', 'unit': 'event', 'role': 'baseline', 'note': 'Full UUSS/WY ComCat operational snapshot.'}, {'id': 'operational_benchmark', 'kind': 'usgs_csv', 'path': 'USGS_UUSS_COMCAT_2017__catalog_operational_benchmark.csv', 'unit': 'event', 'role': 'baseline', 'note': 'Frozen UUSS/WY operational benchmark snapshot.'}]
 FORCE = False
-OVERVIEW = 'Official operational baseline; the local Shelly release is phase-only and remains separate.'
+OVERVIEW = 'Official operational catalog (UUSS); the primary detection and location reference for Maple Creek since the 2026-10-22 box correction. Shelly phases and the detection times derived from them remain a separate, time-only product.'
 
 
 def finite_float(value):

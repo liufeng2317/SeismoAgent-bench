@@ -8,7 +8,7 @@ SeismoAgentBench evaluates what an AI agent can do when asked to build an earthq
   <img src="docs/research/assets/seismoagentbench_overview.svg" alt="SeismoAgentBench project overview" width="960">
 </p>
 
-The benchmark is built around real, published earthquake and volcanic sequences. It separates data preparation and scientific reference validation from the later task of reproducing catalogs with agents.
+The benchmark is built around six real, published earthquake and volcanic sequences. Each case has several independent reference catalogs and a human-in-loop catalog (an Agent workflow we steered by hand) that serves as the upper bound; general-purpose Agents build catalogs from the same waveforms and are scored against both.
 
 The extraction contract for paper methods, catalog schemas, and case-level synthesis is defined in [`docs/data/preparation/02_Extraction_Contract.md`](docs/data/preparation/02_Extraction_Contract.md).
 
@@ -16,11 +16,11 @@ The current status and work plan are tracked in [`docs/research/progress/STATUS_
 
 ## Evaluation environment
 
-The current trusted-development execution path is implemented in [`SeismoAgentBench/execution`](SeismoAgentBench/execution). It creates a fresh run directory, records the command and environment, applies a timeout, and keeps agent execution separate from artifact validation and scoring. Formal isolation is a replaceable future execution backend; it is not required by the task and scoring contracts.
+Formal runs are launched by each case's `workflows/tasks/<case>/run.sh`, which runs Claude Code with GLM-5.3 through `python -m SeismoAgentBench run-claude` in a fresh run directory under `workflows/tasks/<case>/runs/`, records the command, environment and transcript, applies a time budget, and keeps execution separate from scoring (`python -m SeismoAgentBench evaluate`). The run layout is described in [`docs/framework/01_Run_Layout_and_Records.md`](docs/framework/01_Run_Layout_and_Records.md); execution runs on the host (trusted development), and stronger isolation is a replaceable backend.
 
 ## Professional tool snapshots
 
-[seismotools/](seismotools/README.md) contains copied PhaseNet/DPP/EQTransformer models, GaMMA, NonLinLoc and hypoDD sources, local weight identities, usage documentation and validation/build commands. It provides versioned implementation inputs for future controlled tool comparisons; case data and experiment scripts stay separate. Existing expert runs retain their recorded tool paths.
+[seismotools/](seismotools/README.md) contains copied PhaseNet/DPP/EQTransformer models, GaMMA, NonLinLoc and hypoDD sources, local weight identities, usage documentation and validation/build commands. It is the validated tool library offered to Agents in the `tools` stage and used by the human-in-loop workflow; case data and experiment scripts stay separate, and every run records the tool commit it saw.
 
 ## What this project does
 
@@ -30,7 +30,7 @@ The current trusted-development execution path is implemented in [`SeismoAgentBe
 - Keeps multiple reference catalogs separate when they measure different scientific capabilities.
 - Provides official operational catalogs as Q3 baselines, not as universal ground truth.
 - Prepares article extraction, catalog summaries, visualizations, waveform manifests, and evaluation-ready inputs.
-- Will later evaluate agentic catalog construction under controlled observation and expert-guidance conditions.
+- Runs general-purpose Agents in stages that each add one factor (tools, knowledge, automated validation) and scores every catalog with pre-registered metrics, including a trusted-catalog verdict.
 
 ## The benchmark idea
 
@@ -58,32 +58,47 @@ The central question is:
 
 > How independently, and to what level of scientific quality, can an agent construct an earthquake catalog from seismic observations?
 
+## Study design
+
+| Stage | The Agent additionally gets | Status |
+|---|---|---|
+| S0 `min` | task, data, output contract | formal runs in progress |
+| S1 `tools` | the validated tool library `seismotools` | formal runs in progress |
+| S2 `knowledge` | case-agnostic expert knowledge as an Agent Skill | designed |
+| S3 `checker` | a reference-free checker and repair playbook | designed |
+| upper bound | the human-in-loop final catalog | done for all six cases |
+
+Every run is scored with catalog metrics v2: detection, location, structure and magnitude against several references and directly against the human-in-loop final, plus a trusted-catalog verdict on event reality, time, space and strength (accuracy and stability), with completeness reported apart. Design: [`docs/research/00_Research_Plan.md`](docs/research/00_Research_Plan.md); metrics: [`docs/framework/02_Catalog_Metrics.md`](docs/framework/02_Catalog_Metrics.md).
+
 ## Phase I cases
 
-| Case | Regime | Main challenge |
-|---|---|---|
-| [Prague, Oklahoma](data/2011_prague_oklahoma) | Mainshock–aftershock | Changing heterogeneous network |
-| [Kaikōura, New Zealand](data/2016_kaikoura_new_zealand) | Dense aftershock sequence | Temporary network and relocation |
-| [Maple Creek, Yellowstone](data/2017_maple_creek_yellowstone) | Earthquake swarm | Sparse routine catalog |
-| [Kīlauea, Hawaiʻi](data/2018_kilauea_hawaii) | Volcanic eruption sequence | High-rate changing sources |
-| [Ridgecrest, California](data/2019_ridgecrest_california) | Dense faulting sequence | Overlapping events and complex geometry |
-| [Magna, Utah](data/2020_magna_utah) | Moderate earthquake sequence | Permanent versus nodal networks |
+| Case | Regime | Difficulty tier | Main challenge |
+|---|---|---|---|
+| [Prague, Oklahoma](data/2011_prague_oklahoma) | Induced aftershock sequence | basic | Changing heterogeneous network |
+| [Magna, Utah](data/2020_magna_utah) | Moderate mainshock–aftershock | basic | Basin structure; permanent versus nodal networks |
+| [Maple Creek, Yellowstone](data/2017_maple_creek_yellowstone) | Earthquake swarm | intermediate | Sparse routine catalog; vertical-only stations |
+| [Kīlauea, Hawaiʻi](data/2018_kilauea_hawaii) | Volcanic caldera collapse | intermediate | High rate; Mw 6.9 inside the window |
+| [Ridgecrest, California](data/2019_ridgecrest_california) | M6.4 / M7.1 sequence | hard | Mainshock coda; overlapping events |
+| [Kaikōura, New Zealand](data/2016_kaikoura_new_zealand) | Multi-fault aftershocks | hard | 260-km network; 3-D structure |
+
+Windows, tiers and primary references: [`docs/data/00_Case_Registry.md`](docs/data/00_Case_Registry.md).
 
 The cases are deliberately different. The goal is not one leaderboard, but a capability profile showing where an agent succeeds, fails, or needs expert intervention.
 
 ## Project stages
 
 ```text
-1. Verify papers and data releases
-2. Read and extract article methods and scope
-3. Organize and normalize reference catalogs
-4. Freeze common benchmark windows
-5. Prepare waveform and station manifests
-6. Run agentic catalog-construction experiments
-7. Compare against role-specific references and baselines
+1. Verify papers and data releases                       done
+2. Read and extract article methods and scope            done (23 extractions)
+3. Organize and normalize reference catalogs             done
+4. Freeze common benchmark windows                       done (2026-10-28)
+5. Prepare waveform and station manifests                done
+6. Build human-in-loop catalogs (upper bound)            done (six cases)
+7. Run Agent stages S0-S3                                S0/S1 in progress; S2/S3 designed
+8. Score against references and the human-in-loop final  metrics v2, per run
 ```
 
-Current work is concentrated on stages 1–5. Agent reproduction is intentionally the next stage, after the data and reference conditions are frozen.
+Current status, scored runs and the work plan: [`docs/research/progress/STATUS_AND_PLAN.md`](docs/research/progress/STATUS_AND_PLAN.md).
 
 ## Repository map
 
@@ -141,14 +156,7 @@ Reference catalogs are role-specific expert targets, not a single absolute truth
 
 ## Project status
 
-Phase I has six cases, archived reference materials, paper-level extraction records, research-catalog audits, and official operational snapshots. The benchmark windows were frozen with metrics v1 on 2026-10-28 (`window_status: frozen`); data-level masked statistics and figures remain descriptive. Literature, catalog, official-baseline and observation gaps are recorded in their dedicated manifests and case analyses.
-
-Next deliverables are:
-
-- consolidation of scientific window choices and existing exploratory figures;
-- freeze the station/channel conditions from the downloaded waveform archives;
-- recovery of confirmed missing products (for example the Pang Maple Creek event table and the Magna Baker paper) without substituting unrelated data;
-- controlled agent reproduction and role-specific evaluation.
+Phase I has six cases with archived references, extraction records, catalog audits, official operational snapshots, frozen windows (2026-10-28) and human-in-loop final catalogs. Formal S0/S1 Agent runs (Claude Code × GLM-5.3) are scored for four cases; Kaikōura and Ridgecrest are running or queued. No run has yet reached the trusted-catalog standard. Next: finish S0/S1, then build the knowledge skill and the checker for S2/S3. Details and open items: [`docs/research/progress/STATUS_AND_PLAN.md`](docs/research/progress/STATUS_AND_PLAN.md).
 
 ## Documentation
 
@@ -167,8 +175,10 @@ Next deliverables are:
 - [Data organization rules](data/README.md)
 - [Repository cleanup and retention decisions (2026-09-24)](docs/archive/2026-09-24_repository_cleanup.md)
 
-**Canonical project name:** `SeismoAgentBench`  \ **Repository slug:** `seismoagent-bench`  \ **Short form:** `SABench`
+- **Canonical project name:** `SeismoAgentBench`
+- **Repository slug:** `seismoagent-bench`
+- **Short form:** `SABench`
 
-The project code package is [`SeismoAgentBench/`](SeismoAgentBench/README.md). Source registry tools are one utility under [`utils/source_prepare/`](SeismoAgentBench/utils/source_prepare/), with regression tests in [`tests/`](tests/). Ridgecrest is the first case using the versioned source registry; see its [source registry and commands](data/2019_ridgecrest_california/README.md#source-整理入口). Evaluation will be implemented separately.
+The project code package is [`SeismoAgentBench/`](SeismoAgentBench/README.md). Source registry tools are one utility under [`utils/source_prepare/`](SeismoAgentBench/utils/source_prepare/), with regression tests in [`tests/`](tests/). Ridgecrest is the first case using the versioned source registry; see its [source registry and commands](data/2019_ridgecrest_california/README.md#source-整理入口). Scoring lives in [`SeismoAgentBench/scoring/`](SeismoAgentBench/scoring/).
 
 Automated regressions use one entry point: `python -B -m unittest discover -s tests -v`. Follow the [test maintenance rules](tests/AGENTS.md) when adding or changing tests.

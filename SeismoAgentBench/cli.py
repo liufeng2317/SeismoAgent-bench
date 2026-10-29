@@ -21,7 +21,6 @@ from SeismoAgentBench.task import load_json, render_agent_prompt
 from SeismoAgentBench.workflow import evaluate_run, execute_experiment, run_agent
 
 
-_RUN_FAILURES = {"execution_failed", "execution_timeout", "artifact_invalid", "scoring_failed"}
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -229,6 +228,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 argv[-1] = "<BENCH_AGENT_PROMPT>"
             launcher["argv"] = argv
             provenance["launcher"] = launcher
+            if args.campaign_id:
+                provenance["run_layout"] = layout.record()  # campaign, variant and agent of a campaign run
             provenance["command"] = {"kind": harness, "reference": "launcher.argv"}
             provenance_path.write_text(
                 json.dumps(provenance, indent=2, sort_keys=True) + "\n", encoding="utf-8")

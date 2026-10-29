@@ -53,9 +53,9 @@ Waveforms are stored in external archives, and each case's `data/waveforms` is a
 
 - `references/` contains only papers, supplementary materials, and reading/extraction results.
 - `data/catalogs/` contains catalogs, phase picks, focal mechanisms, original release archives, and product-level statistics used for benchmark validation.
-- `analysis/` contains case-level scientific designs, candidate windows, cross-product audits, and figures. Statistics for an individual product remain under that catalog's `analysis/` directory.
+- `analysis/` contains case-level scientific designs, the frozen window declaration, cross-product audits, and figures. Statistics for an individual product remain under that catalog's `analysis/` directory.
 - `scripts/observations/` contains executable data-preparation tools and run logs; logs are not status manifests.
-- Cross-case statistics are consolidated in `docs/data/01_Case_Data_Inventory.md`, with case-level detail in `docs/data/01_Case_Data_Inventory.md`. Product stats JSON files and catalog READMEs remain the underlying evidence.
+- Cross-case statistics and case-level detail are consolidated in `docs/data/01_Case_Data_Inventory.md`; windows, tiers and primary references are in `docs/data/00_Case_Registry.md`. Product stats JSON files and catalog READMEs remain the underlying evidence.
 
 ## Naming and Associations
 
@@ -77,7 +77,7 @@ Waveforms are stored in external archives, and each case's `data/waveforms` is a
 
 ## Processing and Output Policy
 
-- `analysis/processing.yaml` is the entry point for candidate-window and product declarations; a filename containing `benchmark` does not indicate a formal freeze.
+- `analysis/processing.yaml` is the entry point for the frozen window (`window_status: frozen`, `window_freeze`) and the product declarations; the evaluation cohort mask is the task's `workflows/tasks/<case>/expert/00_config/validation.yaml`. A filename containing `benchmark` and the `candidate` field of `waveform_inventory.json` are names kept from before the freeze.
 - A catalog README is the manually maintained entry point for provenance, schema, units, version discrepancies, and limitations. `analysis/catalog_analysis.md` and the stats/figures directories contain generated products.
 - Every derived record must preserve its source/product identity, native ID or source row number, and input-file hash. Cross-catalog event associations require an explicit crosswalk.
 - Events, relative events, phase picks, focal mechanisms, and different versions of the same catalog must be processed separately; temporal or spatial overlap is not grounds for combining their counts.

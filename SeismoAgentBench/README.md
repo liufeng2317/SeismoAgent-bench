@@ -1,87 +1,63 @@
 # SeismoAgentBench 代码包
 
-整体 benchmark 的控制流程见 [benchmark workflow plan](../docs/framework/00_Workflow_Specification.md)。该计划定义任务、输入 manifest、执行后端、agent、工具适配器、scorer 和 provenance 的边界。`SeismoAgentBench/` 承载项目的稳定控制代码和支撑工具；来源整理是 `utils/` 下的一个子功能，不代表整个 benchmark 架构。Python 导入路径区分大小写，统一使用 `SeismoAgentBench`。
+`SeismoAgentBench/` 是 benchmark 的可复用代码：任务与输入契约、Agent 运行与记录、评分（含地震目录指标）以及资料准备工具。工作流规范见 [00_Workflow_Specification.md](../docs/framework/00_Workflow_Specification.md)，运行目录与记录见 [01_Run_Layout_and_Records.md](../docs/framework/01_Run_Layout_and_Records.md)，目录指标见 [02_Catalog_Metrics.md](../docs/framework/02_Catalog_Metrics.md)。Python 导入路径区分大小写，统一使用 `SeismoAgentBench`。
 
 ```text
 SeismoAgentBench/
-├── __init__.py
-├── task/                   # task and input-manifest contracts
-├── execution/              # trusted-development run control
-├── workflow/               # end-to-end stage orchestration
-├── scoring/                # artifact validation and scoring interfaces
-└── utils/
-    ├── __init__.py
-    └── source_prepare/
-        ├── __init__.py
-        ├── __main__.py     # source 专属命令行入口
-        ├── sources.py      # 来源契约、文件盘点、完整性检查和声明式筛选
-        └── catalog.py      # 来源目录的基础解析、统计与对应诊断
+├── cli.py                  # python -m SeismoAgentBench <command>
+├── task/                   # task spec、输入 manifest、输出约定的校验与 Agent prompt 渲染；schemas/ 为 JSON schema
+├── agent/                  # Agent 身份与命令契约（tools.py 的工具适配器目前不参与运行）
+├── execution/              # 运行目录、子进程执行、Claude/Codex 命令构造、配置校验、运行记录
+├── workflow/               # run_agent、evaluate_run、experiment：把执行、记录、评分串起来
+├── scoring/                # 评分注册表；artifact-contract@1、catalog-metrics@1
+│   └── catalog_metrics/    # 地震目录指标 v2：匹配、L0–L7、可信目录判定、基线、ladder、组件替换、盲审
+├── reporting/              # 运行报告、批量汇总、transcript 解析与用量统计
+├── configs/                # agents/、environments/（含依赖清单与主机工具安装脚本）、prompts/
+└── utils/source_prepare/   # 资料准备：来源登记、文件盘点、来源目录诊断
 ```
 
 ## 职责边界
 
 | 位置 | 职责 |
 |---|---|
-| `SeismoAgentBench/task/` | 任务、输入 manifest 及其契约校验 |
-| `SeismoAgentBench/execution/` | 运行目录、命令执行和运行记录 |
-| `SeismoAgentBench/scoring/` | 输出产物校验及后续科学评分接口 |
-| `utils/source_prepare/` | 来源登记、路径/哈希检查、资料盘点与准备阶段的目录诊断 |
-| 根目录 `workflows/data_preparation/` | 下载、转换和批处理入口；逐步调用可复用模块，避免复制实现 |
-| `data/<case>/scripts/` | 案例专属原生字段解析、来源核验编排、分析与绘图脚本 |
-| `data/` | 资料文件、配置、来源证据及生成的核验结果 |
-| 根目录 `tests/` | 按功能域集中维护回归测试；不在案例目录复制共用测试 |
+| `SeismoAgentBench/` | 可跨案例复用的代码；不含具体地震的目录选择、坐标范围、图件布局或专属分析 |
+| `workflows/tasks/<case>/` | 任务包（`task_<variant>.json`、`prompt_<variant>.md`、`input.json`、输出约定、`run.sh`）、human-in-loop（expert）流程和评估结果 |
+| `workflows/data_preparation/` | 下载、解析、抽取和目录审计的批处理入口 |
+| `data/<case>/` | 资料、来源证据、案例专属脚本与生成的核验结果 |
+| `seismotools/` | 提供给 Agent 和 expert 流程的专业地震工具 |
+| 根目录 `tests/` | 按功能域维护的回归测试，规则见 [tests/AGENTS.md](../tests/AGENTS.md) |
 
-`SeismoAgentBench/` 只接收可跨案例复用的代码，不包含具体地震的目录选择、科学阶段、坐标范围、图件布局或专属分析内容。这类逻辑保留在 `data/<case>/scripts/`；仅服务单个案例的辅助函数先在案例内维护，出现明确复用需求后再提取公共接口。原始资料、配置和生成图件仍分别保存在案例的 `data/`、`analysis/` 等相应目录。
+根包和子包的 `__init__.py` 不在导入时加载数据或执行核验；专业逻辑按领域建模块，不预先创建空模块。
 
-专业逻辑应按领域命名并形成明确模块，而不是全部堆入 `utils/`。例如后续实际实现波形处理或目录操作时，再建立对应专业模块；不提前创建没有实现的 `core/`、`models/` 或 `pipelines/`。目前 `source_prepare/catalog.py` 中的函数服务于来源核验；当专业模块确实需要复用时，再抽取相应领域基础能力，避免反向依赖整个资料准备流程。
+## 命令
 
-根包及 `utils` 的 `__init__.py` 只说明职责，不批量导入子模块，不在导入时加载数据或执行核验。source 命令保留在子包入口，不把它设置为整个项目的默认 CLI。评测后续独立组织，不放进 `source_prepare/`。
+正式运行通过各案例的 `run.sh` 启动，它调用 `run-claude`（Claude Code × GLM，prompt 经标准输入传入）并把运行放在 `workflows/tasks/<case>/runs/<variant>/<harness>/<model>/<run_id>/`：
 
-## 使用
+```bash
+VARIANT=tools bash workflows/tasks/2018_kilauea_hawaii/run.sh       # 后台运行，打印 runner 日志位置
+python -m SeismoAgentBench status --run-dir <run>                   # 只读：状态、耗时、已有产物
+python -m SeismoAgentBench finalize --run-dir <run>                 # 关闭 runner 已丢失的运行
+python -m SeismoAgentBench evaluate --run-dir <run>                 # artifact-contract@1 + catalog-metrics@1
+python -m SeismoAgentBench.scoring.catalog_metrics {baseline,run,summary,audit,ladder,swap} --task-dir workflows/tasks/<case> [--run-dir <run>]
+```
 
-从仓库根目录运行，使用 Python 3.10+ 和 PyYAML：
+全部子命令：`run-agent`（任意命令作为 Agent）、`run-claude`、`run-codex`、`evaluate`、`status`、`finalize`、`plan-experiment`、`execute-experiment`。批量运行用 experiment YAML：`plan-experiment` 只展开并校验运行单元，`execute-experiment` 依次执行；它是次要路径，正式运行不用。
+
+Agent 配置（`configs/agents/*.yaml`）只允许 `harness`、`model`、`reasoning_effort`、`executable`、`version_command` 和 `auth`（`mode`、`env_file`、`codex_home`）；凭据放在 git 忽略的 env 文件里，不写进 YAML。环境配置（`configs/environments/*.yaml`）选择 Python 解释器和网络、安装策略，启动时探测并写入运行记录。
+
+资料准备工具的用法：
 
 ```bash
 python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir data/2019_ridgecrest_california
 python -B -m SeismoAgentBench.utils.source_prepare inventory --case-dir data/2019_ridgecrest_california
-python -B -m SeismoAgentBench.utils.source_prepare validate-sources --case-dir data/2019_ridgecrest_california --verify-files
+```
+
+来源契约 v2 目前只有 Ridgecrest 接入；数据组织规则见 [data/README.md](../data/README.md)。
+
+## 测试
+
+```bash
 python -B -m unittest discover -s tests -v
 ```
 
-外部评测 worker 可以通过薄 CLI 运行同一套流程：
-
-```bash
-python -m SeismoAgentBench run-agent \
-  --task task.json \
-  --manifest input_manifest.json \
-  --agent-name example-agent \
-  --agent-version 1 \
-  --run-root runs \
-  --run-id trial-001 \
-  -- python agent_entrypoint.py
-```
-
-CLI 只负责参数解析和退出码映射，执行、产物校验、评分及报告仍由对应模块完成。
-
-Agent 配置只描述运行所需的非敏感信息：`harness`、可执行文件、版本命令、模型、 `runtime.mode`、`runtime.reasoning_effort` 和外部认证模式。认证文件或环境变量通过命令行提供，不写入 YAML。当前 Codex 仅支持 `runtime.mode: host-direct`；配置中的运行模式会被校验并实际传递给 launcher。
-
-批量运行使用 experiment YAML。它声明 Agent、任务、variant、输出根目录和并发设置； `plan-experiment` 只展开并校验运行单元，`execute-experiment` 才会依次执行它们：
-
-```bash
-python -m SeismoAgentBench plan-experiment --spec experiment.yaml
-python -m SeismoAgentBench execute-experiment --spec experiment.yaml
-```
-
-每个 run 的 `record/usage_summary.json` 保存可用的 turn、事件和 token 统计；批量运行在 `_batches/<batch-id>/` 下生成 `summary.json` 和 `summary.md`。这些记录用于运行审计，不参与科学评分。
-
-库调用使用明确的子模块路径，例如：
-
-```python
-from SeismoAgentBench.utils.source_prepare.sources import load_case, inventory
-```
-
-旧的 `seismoagentbench` 导入与 `python -m seismoagentbench` 命令已替换，不保留第二份实现。来源契约及数据组织规则见 [data/README.md](../data/README.md)。当前只有 Ridgecrest 接入来源契约 v2，其余案例的迁移范围没有因包路径调整而改变。
-
-## 测试边界
-
-自动化测试统一放在根目录 `tests/`，按功能域组织。当前 source 工具只保留 `tests/source_prepare/test_registry.py` 的最小注册与路径边界测试；不为每个新 case 复制一套。完整来源文件核验仍通过工具命令显式执行。新增或修改测试遵守 [测试维护规则](../tests/AGENTS.md)。
+测试按功能域放在根目录 `tests/`。启动子进程的 runner 和工作流测试在主机负载高时可能因启动慢而报 `execution_timeout`，这类失败与代码改动无关。

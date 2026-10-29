@@ -10,6 +10,7 @@ from tests.task_helpers import write_task_package
 
 from SeismoAgentBench.execution import ExecutionError, run_command
 from SeismoAgentBench.execution import runner as runner_module
+from SeismoAgentBench.execution.runner import _prepare_input_view
 
 
 TASK = {
@@ -211,6 +212,19 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual([item["pid"] for item in result["leftover_processes_stopped"]], [pid])
         state = Path(f"/proc/{pid}/stat")
         self.assertTrue(not state.exists() or state.read_text().rsplit(")", 1)[1].split()[0] == "Z")
+
+    def test_missing_input_entry_stops_before_the_agent_starts(self):
+        work = Path(self.tmp.name) / "view-missing"
+        work.mkdir()
+        manifest = {"entries": [{"id": "waveforms", "path": str(Path(self.tmp.name) / "absent"), "type": "folder"}]}
+        with self.assertRaisesRegex(ExecutionError, "does not exist"):
+            _prepare_input_view(work, manifest)
+
+    def test_input_view_is_read_only_without_a_manifest(self):
+        work = Path(self.tmp.name) / "view-empty"
+        work.mkdir()
+        _prepare_input_view(work, None)
+        self.assertEqual((work / "input").stat().st_mode & 0o777, 0o555)
 
     def test_declared_inputs_are_linked_into_run_input_view(self):
         source_dir = Path(self.tmp.name) / "waveforms"

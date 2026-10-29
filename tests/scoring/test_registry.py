@@ -25,7 +25,18 @@ class ScorerRegistryTests(unittest.TestCase):
             context = ScorerContext(task={}, output_dir=work, validation={})
             with self.assertRaises(ScorerUnavailable) as caught:
                 handler(context)
-            self.assertIn(str(Path(tmp, "case", "evaluation", "metrics.yaml")), str(caught.exception))
+            self.assertIn("metrics.yaml", str(caught.exception))
+            self.assertIn(str(work.parent), str(caught.exception))
+
+    def test_catalog_metrics_skips_a_run_outside_a_task_package(self):
+        # A campaign run (<run_root>/<task_id>/<run_id>) is too shallow: a clear skip, not an IndexError.
+        with tempfile.TemporaryDirectory() as tmp:
+            work = Path(tmp, "task", "run1", "work")
+            work.mkdir(parents=True)
+            handler = default_scorer_registry().resolve("catalog-metrics", "1").handler
+            with self.assertRaises(ScorerUnavailable) as caught:
+                handler(ScorerContext(task={}, output_dir=work, validation={}))
+            self.assertIn("<task>/runs/<variant>/<harness>/<model>/<run_id>", str(caught.exception))
 
     def test_unknown_scorer_is_rejected(self):
         with self.assertRaisesRegex(ScorerRegistryError, "not registered"):

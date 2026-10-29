@@ -1,6 +1,6 @@
 # USGS_UUSS_COMCAT_2017 catalog-local analysis
 
-Official operational baseline; the local Shelly release is phase-only and remains separate.
+Official operational catalog (UUSS); the primary detection and location reference for Maple Creek since the 2026-10-22 box correction. Shelly phases and the detection times derived from them remain a separate, time-only product.
 
 - Parser version: `maple-local-v1-compact`
 - Benchmark window: `[2017-06-11T00:00:00Z, 2017-06-19T00:00:00Z)`
@@ -11,8 +11,8 @@ Official operational baseline; the local Shelly release is phase-only and remain
 
 | Product | Kind | Full rows | Unique native IDs | Benchmark/time rows |
 |---|---|---:|---:|---:|
-| `operational_full` | `usgs_csv` | 9 | 9 | 5 |
-| `operational_benchmark` | `usgs_csv` | 5 | 5 | 5 |
+| `operational_full` | `usgs_csv` | 2447 | 2447 | 626 |
+| `operational_benchmark` | `usgs_csv` | 626 | 626 | 626 |
 
 ## Product semantics
 

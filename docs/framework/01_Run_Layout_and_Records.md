@@ -12,9 +12,9 @@ Formal runs live at `workflows/tasks/<case>/runs/<variant>/<harness>/<model>/<ru
 - The script runs `python -m SeismoAgentBench run-claude` (or `run-codex`) with `--task`, `--input input.json`, `--run-root runs/<variant>/<harness>/<model>`, `--run-id`, `--agent-config`, `--environment-config configs/environments/seismoagent_eval.yaml`, a temporary env file and `--timeout`.
 - With `DETACH=1` (default) the runner starts in its own session (`setsid nohup`) and writes its console output to `runs/<variant>/<harness>/<model>/runner-<run_id>.log`. The script waits up to 180 s for `record/runner.pid`, then deletes the temporary env file. `DETACH=0` runs attached.
 
-The catalog-metrics scorer finds the case from this path depth and is skipped for a run stored anywhere else.
+The catalog-metrics scorer finds the case from this path depth; for a run stored anywhere else (for example a campaign run) it is skipped with a message naming the required layout.
 
-Without `run.sh`, a run lands at `<run_root>/<run_id>/`. With `--campaign-id` it lands at `<run_root>/<task_id>/<run_id>/`; the campaign, variant and agent then appear only in the `run_layout` field of the CLI output. A `run_id` is one path component. An existing run directory is an error unless `--resume` is given and the run is in `execution_retryable`.
+Without `run.sh`, a run lands at `<run_root>/<run_id>/`. With `--campaign-id` it lands at `<run_root>/<task_id>/<run_id>/`; the campaign, variant and agent are recorded as `run_layout` in `record/provenance.json` and in the CLI output. A `run_id` is one path component. An existing run directory is an error unless `--resume` is given and the run is in `execution_retryable`.
 
 ## 2. Directory tree
 
@@ -45,7 +45,7 @@ Without `run.sh`, a run lands at `<run_root>/<run_id>/`. With `--campaign-id` it
 
 `work/` is the Agent's only writable directory and its current directory. `BENCH_WORK` and `BENCH_OUTPUT` both point to it. Output-contract paths are relative to it (for example `catalog.csv` and `picks.csv`); the Agent chooses any other layout.
 
-`work/input/` is the input view (`BENCH_INPUT`): one symbolic link per input entry, named by the basename of the source path (not by the entry id), with the directory set read-only (mode 555). Data are not copied. Two entries with the same basename are an error. Without an input file the directory is created empty.
+`work/input/` is the input view (`BENCH_INPUT`): one symbolic link per input entry, named by the basename of the source path (not by the entry id), with the directory set read-only (mode 555). Data are not copied. Two entries with the same basename, or an entry whose path does not exist, are an error before the Agent starts. Without an input file the directory is created empty and read-only.
 
 ## 5. record/
 
@@ -58,7 +58,7 @@ Without `run.sh`, a run lands at `<run_root>/<run_id>/`. With `--campaign-id` it
 | `timeline.json` | runner | event arrival times and gaps from `execution.log` |
 | `runner.pid` | runner | runner pid, host, process start time; read by `status`, `finalize` and `run.sh` |
 | `environment.json` | run workflow | runtime facts (Python, OS, architecture, Conda environment, network and installation policy, time budget) and the work, input and output directories |
-| `provenance.json` | run workflow; CLI | Agent name and version, references to the control files, `tools` (the `seismotools` path, commit and dirty flag), and `launcher`: executable and version, argv, `prompt_via` (`stdin` or `argv`), model, working directory, `credentials_included: false`. A prompt on argv is replaced by `<BENCH_AGENT_PROMPT>` |
+| `provenance.json` | run workflow; CLI | Agent name and version, references to the control files, `tools` (the `seismotools` path, commit and dirty flag), and `launcher`: executable and version, argv, `prompt_via` (`stdin` or `argv`), model, working directory, `credentials_included: false`. A prompt on argv is replaced by `<BENCH_AGENT_PROMPT>`. A campaign run adds `run_layout` |
 | `artifact_manifest.json` | evaluator | the result of the output-contract check |
 | `runtime_home/` | runner | non-hidden files the Agent left in its temporary `HOME`; only when there are any |
 

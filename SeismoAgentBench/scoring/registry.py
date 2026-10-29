@@ -91,9 +91,14 @@ def _catalog_metrics_handler(context: ScorerContext) -> dict[str, Any]:
     from .catalog_metrics.case import RUN_SCORE_FILE, _jsonable, score_run
 
     run_dir = context.output_dir.parent  # <run>/work; work may be a symlink, so do not resolve it
-    task_dir = run_dir.parents[4]  # <task>/runs/<variant>/<harness>/<model>/<run_id>
-    if not (task_dir / "evaluation" / "metrics.yaml").is_file():
-        raise ScorerUnavailable(f"catalog-metrics requires {task_dir}/evaluation/metrics.yaml")
+    parents = run_dir.parents
+    task_dir = parents[4] if len(parents) > 4 else None  # <task>/runs/<variant>/<harness>/<model>/<run_id>
+    if task_dir is None or parents[3].name not in ("runs", "runs_pilot") \
+            or not (task_dir / "evaluation" / "metrics.yaml").is_file():
+        raise ScorerUnavailable(
+            "catalog-metrics scores only runs stored in a task package at "
+            "<task>/runs/<variant>/<harness>/<model>/<run_id> with <task>/evaluation/metrics.yaml; "
+            f"this run is at {run_dir}")
     report = score_run(task_dir, run_dir)
     payload = json.loads(json.dumps(report, default=_jsonable))
     return {"output_file": RUN_SCORE_FILE, "result_key": "catalog_metrics", "payload": payload}
