@@ -52,7 +52,7 @@
 | Ridgecrest | 17,902 | 1.39 | 0.37 | 0.21 | −0.09 | −0.09 |
 | Magna | 5,412 | 1.16 | 0.95 | 0.48 | +0.09 | +0.08 |
 
-迭代过程本身也是重要发现（详见 `04_Expert_Experience_and_Checker.md`）：
+迭代过程本身也是重要发现（详见 `docs/research/01_Expert_Experience_and_Checker.md`）：
 
 - **专家能力主要体现在"纠错"上。** 在专家的合理范围内调参数，检测只变化 ≤ 0.07。换方法（模板匹配）则在每个案例上提升 0.2–0.6。超出合理范围的单个错误选择，带来的误差是专家误差的 5–10 倍，比如速度模型、网格边界、震级尺度。
 - **评估体系反过来查出了专家目录自身的缺陷，并已修正**（2026-10-28）：
@@ -142,5 +142,5 @@
 
 相关文档：
 - 评估准则 `docs/framework/03_EVALUATION_METRICS.md`
-- 专家经验与检查器 `docs/research/04_Expert_Experience_and_Checker.md`
+- 专家经验与检查器 `docs/research/01_Expert_Experience_and_Checker.md`
 - 各案例结果 `workflows/tasks/<case>/evaluation/`（`human_in_loop/`、`agents/`、`comparison/`）

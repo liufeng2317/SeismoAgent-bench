@@ -15,9 +15,9 @@ sequences. It separates data preparation and scientific reference validation
 from the later task of reproducing catalogs with agents.
 
 The extraction contract for paper methods, catalog schemas, and case-level
-synthesis is defined in [`docs/research/01_3_Information_Extraction_Schema.md`](docs/research/01_3_Information_Extraction_Schema.md).
+synthesis is defined in [`docs/data/preparation/INFORMATION_EXTRACTION_SCHEMA.md`](docs/data/preparation/INFORMATION_EXTRACTION_SCHEMA.md).
 
-The current implementation and scientific readiness are tracked in [`docs/research/03_PROJECT_STATUS.md`](docs/research/03_PROJECT_STATUS.md).
+The current status and work plan are tracked in [`docs/research/progress/STATUS_AND_PLAN.md`](docs/research/progress/STATUS_AND_PLAN.md).
 
 ## Evaluation environment
 
@@ -186,15 +186,20 @@ Next deliverables are:
 
 ## Documentation
 
+- [Documentation index](docs/README.md)
 - [Research plan](docs/research/00_Research_Plan.md)
-- [Case details](docs/research/01_1_Case_details.md)
-- [Information extraction schema](docs/research/01_3_Information_Extraction_Schema.md)
-- [Paper parsing audit](docs/research/01_4_Paper_Parsing_Audit.md)
-- [Framework documentation](docs/framework/README.md)
+- [Expert experience and checker](docs/research/01_Expert_Experience_and_Checker.md)
+- [Paper outline](docs/research/02_Paper_Outline.md)
+- [Status and work plan](docs/research/progress/STATUS_AND_PLAN.md)
+- [Case registry](docs/data/CASE_REGISTRY.md)
+- [Candidate case pool](docs/data/CASE_POOL.md)
 - [Six-case data summary](docs/data/CASES_SUMMARY.md)
 - [Case-by-case data details](docs/data/CASE_DETAILS.md)
+- [Information extraction schema](docs/data/preparation/INFORMATION_EXTRACTION_SCHEMA.md)
+- [Paper parsing audit](docs/data/preparation/PAPER_PARSING_AUDIT.md)
+- [Framework documentation](docs/framework/README.md)
 - [Data organization rules](data/README.md)
-- [Repository cleanup and retention decisions](docs/research/02_Repository_Cleanup.md)
+- [Repository cleanup and retention decisions (2026-09-24)](docs/archive/2026-09-24_repository_cleanup.md)
 
 **Canonical project name:** `SeismoAgentBench`  \
 **Repository slug:** `seismoagent-bench`  \

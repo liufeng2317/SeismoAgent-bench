@@ -1,6 +1,6 @@
 # Case registry
 
-This is the navigation and scientific-role index. Case-specific interpretation and processing notes live in the linked analysis; numerical audits belong to each catalog README and its generated outputs.
+This is the navigation and scientific-role index. Case-specific interpretation and processing notes live in the linked analysis; numerical audits belong to each catalog README and its generated outputs. The candidate pool beyond these six cases is in [`CASE_POOL.md`](CASE_POOL.md); what each case record must contain is in [`preparation/COLLECTION_STANDARD.md`](preparation/COLLECTION_STANDARD.md).
 
 | Case ID | Case | Regime | Reference focus | Main role | Design priority | Case analysis |
 |---|---|---|---|---|---|---|
@@ -10,6 +10,21 @@ This is the navigation and scientific-role index. Case-specific interpretation a
 | `MAPLE2017` | Maple Creek 2017 | Yellowstone swarm | Shelly & Hardebeck (2019) | Swarm detection, relative relocation | A | [`MAPLE2017_analysis.md`](../../data/2017_maple_creek_yellowstone/analysis/MAPLE2017_analysis.md) |
 | `KILAUEA2018` | Kīlauea 2018 | Volcanic / caldera collapse | Shelly & Thelen (2019) | Volcanic high-rate monitoring | A− | [`KILAUEA2018_analysis.md`](../../data/2018_kilauea_hawaii/analysis/KILAUEA2018_analysis.md) |
 | `KAIKOURA2016` | Kaikōura 2016 | Complex multi-fault aftershock | Lanza et al. (2019) | 3-D location, relocation, uncertainty | A− / hard tier | [`KAIKOURA2016_analysis.md`](../../data/2016_kaikoura_new_zealand/analysis/KAIKOURA2016_analysis.md) |
+
+## Evaluation setup
+
+Evaluation windows are half-open UTC intervals fixed in each task's `workflows/tasks/<case>/expert/00_config/validation.yaml` and used by metrics v1; primary references and their roles are fixed in [`03_EVALUATION_METRICS.md`](../framework/03_EVALUATION_METRICS.md) §3. Difficulty tiers are defined in the [research plan](../research/00_Research_Plan.md) §2.2.
+
+| Case | Difficulty tier | Evaluation window | Primary detection reference | Primary location reference |
+|---|---|---|---|---|
+| Prague 2011 | basic | 2011-11-11 – 11-19 | Cochran 2020 | Cochran 2020 |
+| Magna 2020 | basic | 2020-03-18 – 03-26 | Pang 2020 | Pang 2020 |
+| Maple Creek 2017 | intermediate | 2017-06-11 – 06-19 | ComCat (UUSS); ceiling from Shelly & Hardebeck 2019 | ComCat (UUSS) |
+| Kīlauea 2018 | intermediate | 2018-05-01 – 05-09 | Shelly & Thelen 2019 | Shelly & Thelen 2019 |
+| Ridgecrest 2019 | hard | 2019-07-04 15:35:29 – 07-07 | Shelly 2020 | Shelly 2020 |
+| Kaikōura 2016 | hard | 2016-12-01 – 12-09 | Chamberlain 2021; ceiling from Tan 2024 | Lanza 2019 |
+
+The research plan v0.2 (2026-09-18) listed earlier proposed windows (e.g. Magna Mar 18–25) and, for Prague, McMahon 2017 as primary; both are superseded by the table above.
 
 ## Quality hierarchy
 
@@ -35,9 +50,9 @@ Quality tier, evaluation role, quality by dimension, and reference independence 
 | `waveform-sampled` | Representative waveform requests successfully tested |
 | `data-frozen` | Catalog, metadata, and waveform manifest versioned for experiments |
 
-Current status for all six cases: `window_status: not_frozen` in the case processing configuration. Existing time/space selections and derived counts are exploratory; they do not establish waveform readiness or a formal evaluation freeze.
+The data-preparation configuration (`data/<case>/analysis/processing.yaml`) still records `window_status: not_frozen` for all six cases: the data-level windows and derived counts there are exploratory. The evaluation windows are fixed separately by metrics v1 (table above).
 
-Cross-case readiness is maintained in the [data summary](../data/CASES_SUMMARY.md), while product counts, official catalogs, literature gaps, and case-specific limitations are organized in the [case details](../data/CASE_DETAILS.md).
+Cross-case readiness is maintained in the [data summary](CASES_SUMMARY.md), while product counts, official catalogs, literature gaps, and case-specific limitations are organized in the [case details](CASE_DETAILS.md).
 
 ## Case-analysis requirements
 

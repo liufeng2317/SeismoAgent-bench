@@ -1,6 +1,6 @@
 # Expert experience, parameter sensitivity and the self-improving checker
 
-Status: working summary, 2026-10-28; stages revised 2026-10-29 (§5, [`05_Paper_Outline_and_Plan.md`](./05_Paper_Outline_and_Plan.md)). Numbers are metrics v1 (frozen, `docs/framework/03_EVALUATION_METRICS.md`) unless a source is named.
+Status: working summary, 2026-10-28; revised 2026-10-29. The Agent stages and the form of the checker are defined in the [research plan](./00_Research_Plan.md) §2.4–2.5; this document holds the evidence, the checker rules and the intervention coding. Numbers are metrics v1 (frozen, `docs/framework/03_EVALUATION_METRICS.md`) unless a source is named.
 
 ## 1. Thesis
 
@@ -98,23 +98,23 @@ Checks that did **not** work and should not be in a checker: an RMS onset test f
 
 1. The checker must be reference-free and case-agnostic (rules and ranges, no case-specific numbers), and its use logged, so a checker arm does not become a leakage channel.
 2. The checker was learned on these six cases. Report checker-arm results separately for the cases a rule came from and the others, or hold out cases when writing it, so the gain is not circular.
-3. The checker's form must not change the Agent: diagnostics are a deterministic tool in `seismotools/checker/`, the knowledge and the playbook are an Agent Skill, and the contract requires the checker report with a disposition per flag. No custom loop and no subagent (05 §5).
+3. The checker's form must not change the Agent: diagnostics are a deterministic tool in `seismotools/checker/`, the knowledge and the playbook are an Agent Skill, and the contract requires the checker report with a disposition per flag. No custom loop and no subagent ([research plan](./00_Research_Plan.md) §2.5).
 4. Some expert gains are reference-informed (Ridgecrest layered frame from Shelly's model; Magna ML recalibration against UUSS). Agent runs are compared with the final (the upper bound), and the ladder separates these steps from what an Agent could have known.
 5. Every run gets the component swap: front-end versus back-end attribution is the most direct test of what a checker would have fixed.
 
-## 5. Agent evaluation stages (revised 2026-10-29)
+## 5. Human-in-loop interventions
 
-Each stage differs from the previous one by exactly one factor, so its gain is attributable. The human-in-loop final is the single yardstick (the upper bound); the first-round blind catalog is not, because it used no template matching (`03_EVALUATION_METRICS.md` §11).
+The human-in-loop final is the upper bound, but it was reached with references in view. Coding what the human did in each round shows which part of the final an Agent could reach on its own, and through which stage. Status: planned for Phase A ([`progress/STATUS_AND_PLAN.md`](./progress/STATUS_AND_PLAN.md)), no compute.
 
-| Stage | The Agent additionally gets | Question it answers |
+Code every intervention in the six `expert/PLAN.md` histories and the ladder (`evaluation/human_in_loop/expert_ladder.json`) into one of four classes:
+
+| Class | Example | Automatable by |
 |---|---|---|
-| S0 `min` | task, data, output contract | Can a general Agent build a usable catalog on its own? |
-| S1 `tools` | the validated tool library (`seismotools`) with usage docs | What do tools add? |
-| S2 `knowledge` | case-agnostic knowledge up front, as an Agent Skill: method choices, safe parameter ranges, pitfalls (§2.2) | What does knowledge add on top of tools? |
-| S3 `checker` | the §3 diagnostics as a tool and the symptom → cause → repair playbook; the contract requires the checker report and a disposition per flag | Does automated validation close the gap to the final? |
+| execution / tool | fix a tool call, resampling, file handling | tools (S1) |
+| method choice | add template matching, EDT, direct ML | knowledge (S2) |
+| reference-free diagnosis | depth pile-up, origin-time–depth coupling, coda ghosts | checker (S3) |
+| reference-informed diagnosis | Ridgecrest layered frame from Shelly; Magna ML calibration against UUSS | not automatable without references |
 
-Changed from 2026-10-28: S2 was "checker, symptoms only" and S3 "checker + playbook". That ladder had no stage for knowledge without a checker, so the paper's third question (does knowledge matter?) had no contrast. "Diagnosis versus repair knowledge" is now the optional `tools + checker` arm on three cases chosen from the S1 failure modes.
+The share of each class, weighted by its ladder effect, predicts the largest gap closure S3 can achieve. The last class is the part of the final no Agent can reach without references.
 
-`guided` (generic workflow scaffolding, fixed window, report contract) varies a different axis — how prescriptive the task statement is — and changes the window and contract; it is not on this ladder and is optional.
-
-Run plan, repeats, usability criteria and gap-closure reporting: [`05_Paper_Outline_and_Plan.md`](./05_Paper_Outline_and_Plan.md) §4, §6, §8–9. Every run is scored with metrics v1 and gets the component swap.
+The stage ladder these classes map onto changed on 2026-10-29: S2 was "checker, symptoms only" and S3 "checker + playbook". That ladder had no stage for knowledge without a checker, so the question "does knowledge matter?" had no contrast. "Diagnosis versus repair knowledge" is now the optional `tools + checker` arm.

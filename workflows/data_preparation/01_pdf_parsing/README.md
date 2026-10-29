@@ -59,7 +59,7 @@ Audit existing outputs without submitting new MinerU jobs:
 
 ```bash
 python workflows/data_preparation/01_pdf_parsing/audit_mineru_outputs.py \
-  --report docs/research/01_4_Paper_Parsing_Audit.md
+  --report docs/data/preparation/PAPER_PARSING_AUDIT.md
 ```
 
 The audit checks task success, page-count agreement between MinerU model and

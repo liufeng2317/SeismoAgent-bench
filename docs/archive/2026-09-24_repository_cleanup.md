@@ -23,7 +23,7 @@
 ## 统一后的入口
 
 - [项目说明](../../README.md)：目的、阶段与运行入口。
-- [案例注册表](01_1_Case_details.md)：案例角色与 case analysis 导航，不再复制完整窗口数值表。
+- [案例注册表](../data/CASE_REGISTRY.md)：案例角色与 case analysis 导航，不再复制完整窗口数值表。
 - [六案统计总览](../data/CASES_SUMMARY.md)：波形、台站、catalog、official baseline 和文献资产的跨案例统计。
 - [按案例详细信息](../data/CASE_DETAILS.md)：每案的观测、研究/官方 catalog、文献和限制。
 - [数据组织规则](../../data/README.md)：保留策略、命名、备份和处理产物规则。
@@ -177,7 +177,7 @@
 
 ### 重复跨案例审查
 
-- `docs/01_2_Case_Data_Audit.md` → [保留位置](01_1_Case_details.md)
+- `docs/01_2_Case_Data_Audit.md` → [保留位置](../data/CASE_REGISTRY.md)
 
 ### 重复校验器合并
 

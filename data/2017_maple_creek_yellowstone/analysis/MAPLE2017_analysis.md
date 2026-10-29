@@ -13,7 +13,7 @@
 
 
 > This is the detailed case audit. Cross-case summary belongs in
-> docs/research/01_1_Case_details.md; source-specific reading and file-level audits live
+> docs/data/CASE_REGISTRY.md; source-specific reading and file-level audits live
 > beside each paper or catalog.
 
 

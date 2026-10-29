@@ -3,7 +3,7 @@
 > Current preparation state: `window_status: not_frozen` in [processing.yaml](processing.yaml). Earlier “frozen/v1” windows and counts below are retained as exploratory audit history, not approved evaluation inputs.
 
 
-> **Source of truth:** This file is the detailed, mutable analysis record for `PRAGUE2011`. The cross-case summary is maintained in [`docs/research/01_1_Case_details.md`](../../../docs/research/01_1_Case_details.md).
+> **Source of truth:** This file is the detailed, mutable analysis record for `PRAGUE2011`. The cross-case summary is maintained in [`docs/data/CASE_REGISTRY.md`](../../../docs/data/CASE_REGISTRY.md).
 
 ## Status
 
