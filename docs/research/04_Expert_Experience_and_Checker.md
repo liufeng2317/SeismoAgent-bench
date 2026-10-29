@@ -77,15 +77,21 @@ until re-tuned; EDT helped five cases and hurt Magna for the same reason.
 Relocating an Agent's own picks and associations with the expert's model and
 locator (no station delays):
 
-| Run | Agent's own locations | Expert locator, Agent's picks | Expert blind |
+| Run | Agent's own locations | Expert locator, Agent's picks | Human-in-loop final |
 |---|---|---|---|
-| Ridgecrest tools | scatter 1.04 km, dZ +8.1 km, off-structure 14 % | 0.80 km, −1.0 km, 8 % | 0.82 km, −1.2 km, 8 % |
-| Ridgecrest min | 3.27 km, +9.1 km, 44 % | 1.75 km, −1.5 km, 33 % | 0.82 km, −1.2 km, 8 % |
-| Magna min | 1.03 km, fixed depth 42 %, off 4 % | 1.00 km, 2 %, 0.4 % | 0.83 km, 2 %, 0.4 % |
+| Ridgecrest tools | scatter 1.04 km, dZ +8.1 km, off-structure 14 % | 0.80 km, −1.0 km, 8 % | 0.21 km, −0.09 km, 0.5 % |
+| Ridgecrest min | 3.27 km, +9.1 km, 44 % | 1.75 km, −1.5 km, 33 % | 0.21 km, −0.09 km, 0.5 % |
+| Magna min | 1.03 km, fixed depth 42 %, off 4 % | 1.00 km, 2 %, 0.4 % | 0.48 km, 1 %, 0.3 % |
+| Magna tools (formal, 2026-10-28) | shift 2.50 km, scatter 0.38 km, dZ −1.72 km | shift 1.63 km, 1.12 km, −0.76 km | shift 0.95 km, 0.48 km, +0.09 km |
 
-With tools, the Agent's front end (picking, association) reaches the expert
-blind level; its large errors are back-end *choices*. Without tools, both
-ends fail. These are exactly the errors a checker can see without references
+With tools, relocating the Agent's picks with the expert's model and
+locator removes most of its depth error, so its large errors are back-end
+*choices*. The remaining distance to the final (Ridgecrest scatter 0.80 vs
+0.21 km, off-structure 8 % vs 0.5 %) is what the expert's later steps add —
+station delays, template matching, double difference, the layered frame —
+and is attributed with the ladder. Without tools, both ends fail.
+(Ridgecrest and Magna min are pilot runs; the human-in-loop final is the
+upper bound, see `03_EVALUATION_METRICS.md` §11.) These are exactly the errors a checker can see without references
 (depth pile-ups, origin-time–depth coupling, fixed depths, magnitude-scale
 sanity).
 
@@ -132,15 +138,18 @@ RMS-based location rules (too blunt; high-RMS templates still detect well).
    separately for the cases a rule came from and the others, or hold out
    cases when writing it, so the gain is not circular.
 3. Some expert gains are reference-informed (Ridgecrest layered frame from
-   Shelly's model; Magna ML recalibration against UUSS); the expert blind row
-   and the ladder separate them from what an Agent could have known.
+   Shelly's model; Magna ML recalibration against UUSS). Agent runs are
+   compared with the final (the upper bound), and the ladder separates these
+   steps from what an Agent could have known.
 4. Every run gets the component swap: front-end versus back-end attribution
    is the most direct test of what a checker would have fixed.
 
 ## 5. Agent evaluation stages
 
 Each stage differs from the previous one by exactly one factor, so its gain
-is attributable. The expert blind and expert final rows are the yardsticks.
+is attributable. The human-in-loop final is the single yardstick (the upper
+bound); the first-round blind catalog is not, because it used no template
+matching (`03_EVALUATION_METRICS.md` §11).
 
 | Stage | The Agent additionally gets | Question it answers |
 |---|---|---|

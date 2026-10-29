@@ -111,6 +111,12 @@ stated surface datum convertible with the case's model datum).
     (Ridgecrest `01_baseline`, other cases `r1` stage 04), configured from the
     ported pipeline and published velocity models before any comparison with
     the case's references.
+  - *Reporting convention (2026-10-29, §11):* Agent runs are compared with the
+    final row only — the human-in-loop agent's result is the Agent's upper
+    bound. The blind row is still computed but is not a yardstick: it used no
+    template matching, while the `tools` arm offers Match&Locate. The gap to the
+    final, including its reference-informed part, is attributed step by step
+    with the expert ladder.
 - **Method-variance floor** for location: the spread between locators on the
   same associations (Prague stage 70: median 0.37 km, the largest epicentre
   distance from the median of four locators; `expert/PLAN.md` "Method
@@ -304,8 +310,9 @@ Per case and configuration:
    phase picks where a pick reference exists: `pick_recall_P/S`, `pick_residual_mad_P/S_s`;
 8. cost and wall time.
 
-Rows: each Agent configuration, *expert (blind)*, *expert (final)*, and each
-reference scored against the primary reference (the ceiling rows).
+Rows: each Agent configuration, *expert (final)* (the upper bound), and each
+reference scored against the primary reference (the ceiling rows). *Expert
+(blind)* appears only as the first step of the expert ladder (§11).
 
 ## 8. Output conventions fixed for scoring
 
@@ -382,3 +389,11 @@ the scorer.
 | 10-28 | Blind review package and spot check | Reviewer workflow decided (Claude labels, user spot-checks 10) |
 | 10-28 | L5 phase picks wired (Baker; Shelly release collapsed per event/station/phase) | Decided to score picks before the formal runs |
 
+## 11. Reporting conventions after the freeze
+
+These change how results are presented, not any metric or scoring code.
+
+| Date | Convention | Reason |
+|---|---|---|
+| 10-29 | Agent runs are compared with the *expert (final)* row only; *expert (blind)* is described only as the first ladder step | Blind used no template matching while the `tools` arm offers Match&Locate, so it is not a fair yardstick; the final is the Agent's upper bound and the ladder attributes the gap |
+| 10-29 | The expert catalog is called the *human-in-loop agent* in figures and text; keys keep `expert` | It is an Agent workflow steered by hand |

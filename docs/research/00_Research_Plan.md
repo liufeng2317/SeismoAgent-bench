@@ -150,8 +150,10 @@ checker produces catalogs usable for scientific discovery.
 | S2 | `tools + checker` | a checker skill that runs reference-free diagnostics on the Agent's own products and reports symptoms only | Once told that a stage is wrong, does the Agent find and repair the cause? | planned, not implemented |
 | S3 | `tools + checker + playbook` | the symptom → likely cause → upstream repair knowledge | Does encoded expert experience close the gap (self-improving loop)? | planned, not implemented |
 
-Yardsticks: expert blind (first-round standard workflow, before any reference
-comparison) and expert final (reference-informed upper control). The
+Yardstick: the human-in-loop final (reference-informed upper bound); its
+reference-informed steps are attributed with the expert ladder. The
+first-round blind catalog is not a yardstick: it used no template matching
+(2026-10-29). The
 existing `guided` arm varies how prescriptive the task statement is and also
 changes the window and contract; it is not on this ladder and is optional.
 Constraints for S2/S3: reference-free, case-agnostic rules; checker use

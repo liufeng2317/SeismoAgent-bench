@@ -53,7 +53,8 @@ external scorer reads the completed run and produces the evaluation report.
   path `python -m SeismoAgentBench evaluate` (catalog-metrics@1), blind review
   of unsupported events, L5 picks for Magna and Maple Creek.
 - Expert baselines corrected and fixed for all six cases (final and blind rows
-  in each `evaluation/human_in_loop/metrics_v1_baseline.json`); expert ladder recorded per case.
+  in each `evaluation/human_in_loop/metrics_v1_baseline.json`; Agent runs are
+  compared with the final only, 2026-10-29); expert ladder recorded per case.
 - Zero-cost analyses: expert ladder (what each expert step adds) and component
   swap (Agent front end versus model/locator choice) —
   [`04_Expert_Experience_and_Checker.md`](./04_Expert_Experience_and_Checker.md).
