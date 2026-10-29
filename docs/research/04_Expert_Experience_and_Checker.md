@@ -1,6 +1,7 @@
 # Expert experience, parameter sensitivity and the self-improving checker
 
-Status: working summary, 2026-10-28. Numbers are metrics v1 (frozen,
+Status: working summary, 2026-10-28; stages revised 2026-10-29 (§5,
+[`05_Paper_Outline_and_Plan.md`](./05_Paper_Outline_and_Plan.md)). Numbers are metrics v1 (frozen,
 `docs/framework/03_EVALUATION_METRICS.md`) unless a source is named.
 
 ## 1. Thesis
@@ -137,14 +138,19 @@ RMS-based location rules (too blunt; high-RMS templates still detect well).
 2. The checker was learned on these six cases. Report checker-arm results
    separately for the cases a rule came from and the others, or hold out
    cases when writing it, so the gain is not circular.
-3. Some expert gains are reference-informed (Ridgecrest layered frame from
+3. The checker's form must not change the Agent: diagnostics are a
+   deterministic tool in `seismotools/checker/`, the knowledge and the
+   playbook are an Agent Skill, and the contract requires the checker report
+   with a disposition per flag. No custom loop and no subagent
+   (05 §5).
+4. Some expert gains are reference-informed (Ridgecrest layered frame from
    Shelly's model; Magna ML recalibration against UUSS). Agent runs are
    compared with the final (the upper bound), and the ladder separates these
    steps from what an Agent could have known.
-4. Every run gets the component swap: front-end versus back-end attribution
+5. Every run gets the component swap: front-end versus back-end attribution
    is the most direct test of what a checker would have fixed.
 
-## 5. Agent evaluation stages
+## 5. Agent evaluation stages (revised 2026-10-29)
 
 Each stage differs from the previous one by exactly one factor, so its gain
 is attributable. The human-in-loop final is the single yardstick (the upper
@@ -154,17 +160,20 @@ matching (`03_EVALUATION_METRICS.md` §11).
 | Stage | The Agent additionally gets | Question it answers |
 |---|---|---|
 | S0 `min` | task, data, output contract | Can a general Agent build a usable catalog on its own? |
-| S1 `tools` | the validated tool library (`seismotools`) with usage docs | Is the gap tool access/execution, or scientific judgement? |
-| S2 `tools + checker` | a checker skill that runs the §3 diagnostics on its own products and reports symptoms, without causes or fixes | Once told *that* something is wrong, does the Agent find and repair the cause? |
-| S3 `tools + checker + playbook` | the §3 symptom → cause → repair knowledge | Does encoded expert experience let the Agent close the gap (self-improving loop)? |
+| S1 `tools` | the validated tool library (`seismotools`) with usage docs | What do tools add? |
+| S2 `knowledge` | case-agnostic knowledge up front, as an Agent Skill: method choices, safe parameter ranges, pitfalls (§2.2) | What does knowledge add on top of tools? |
+| S3 `checker` | the §3 diagnostics as a tool and the symptom → cause → repair playbook; the contract requires the checker report and a disposition per flag | Does automated validation close the gap to the final? |
+
+Changed from 2026-10-28: S2 was "checker, symptoms only" and S3 "checker +
+playbook". That ladder had no stage for knowledge without a checker, so the
+paper's third question (does knowledge matter?) had no contrast. "Diagnosis
+versus repair knowledge" is now the optional `tools + checker` arm on
+three cases chosen from the S1 failure modes.
 
 `guided` (generic workflow scaffolding, fixed window, report contract)
 varies a different axis — how prescriptive the task statement is — and
 changes the window and contract; it is not on this ladder and is optional.
 
-Minimal run plan: S0, S1 and S3 on all six cases (18 runs); S2 on three
-cases chosen from the S1 failure modes (3 runs), because S2 versus S3 is the
-cleanest test of "diagnosis versus repair knowledge"; repeats only where the
-spread between two runs exceeds half the stage effect. Every run is scored
-with metrics v1 and gets the component swap.
-
+Run plan, repeats, usability criteria and gap-closure reporting:
+[`05_Paper_Outline_and_Plan.md`](./05_Paper_Outline_and_Plan.md) §4, §6, §8–9.
+Every run is scored with metrics v1 and gets the component swap.

@@ -98,6 +98,12 @@ The candidate pool should include different monitoring conditions, such as:
 
 The objective is **diversity of scientific difficulty**, not geographic diversity for its own sake.
 
+The six Phase I cases are grouped into three difficulty tiers (2026-10-29):
+basic — Prague, Magna; intermediate — Maple Creek, Kīlauea; hard —
+Ridgecrest, Kaikōura. Tiers are assigned from features known before any run
+and checked against the expert's difficulty
+([`05_Paper_Outline_and_Plan.md`](./05_Paper_Outline_and_Plan.md) §3).
+
 ### Two experimental dimensions
 
 The benchmark should explicitly control both:
@@ -133,32 +139,33 @@ flowchart LR
     E["Expert Workflow Prescription"] --> P
 ```
 
-#### Agent capability stages (plan, 2026-10-28)
+#### Agent capability stages (revised 2026-10-29)
 
 Within the closed-reference, raw-waveform task, the Agent arms form a ladder
-in which each stage adds exactly one factor. The working hypothesis (evidence
-in [`04_Expert_Experience_and_Checker.md`](./04_Expert_Experience_and_Checker.md))
-is that an expert catalog needs experience — parameter strategies, stage
-diagnosis and upstream repair — that can be encoded as a reference-free
-checker; the central question is whether a general Agent without such a
-checker produces catalogs usable for scientific discovery.
+in which each stage adds exactly one factor. The paper outline, case tiers,
+usability criteria and work plan are in
+[`05_Paper_Outline_and_Plan.md`](./05_Paper_Outline_and_Plan.md); the
+evidence that expert results need experience is in
+[`04_Expert_Experience_and_Checker.md`](./04_Expert_Experience_and_Checker.md).
 
 | Stage | Arm | Agent additionally gets | Question | Status |
 |---|---|---|---|---|
 | S0 | `min` | task, data, output contract | Can a general Agent build a usable catalog on its own? | implemented |
-| S1 | `tools` | validated tool library (`seismotools`) and usage docs | Is the gap tool access/execution or scientific judgement? | implemented |
-| S2 | `tools + checker` | a checker skill that runs reference-free diagnostics on the Agent's own products and reports symptoms only | Once told that a stage is wrong, does the Agent find and repair the cause? | planned, not implemented |
-| S3 | `tools + checker + playbook` | the symptom → likely cause → upstream repair knowledge | Does encoded expert experience close the gap (self-improving loop)? | planned, not implemented |
+| S1 | `tools` | validated tool library (`seismotools`) and usage docs | What do tools add? | implemented |
+| S2 | `knowledge` | tools + case-agnostic expert knowledge given up front (method choices, parameter ranges, pitfalls), as an Agent Skill | What does knowledge add on top of tools? | planned, not implemented |
+| S3 | `checker` | tools + knowledge + a reference-free diagnostics tool and the symptom → cause → upstream repair playbook; the contract requires the checker report and a disposition per flag | Does automated validation close the gap to the expert? | planned, not implemented |
 
-Yardstick: the human-in-loop final (reference-informed upper bound); its
-reference-informed steps are attributed with the expert ladder. The
-first-round blind catalog is not a yardstick: it used no template matching
-(2026-10-29). The
-existing `guided` arm varies how prescriptive the task statement is and also
-changes the window and contract; it is not on this ladder and is optional.
-Constraints for S2/S3: reference-free, case-agnostic rules; checker use
-logged; results reported separately for the cases a rule was learned from
-and for the others.
+The Agent, its loop and the model never change across stages; every stage
+only adds files to the Agent's environment (no custom loop or subagent;
+05 §5). Yardstick: the human-in-loop final (reference-informed upper
+bound); its reference-informed steps are attributed with the expert ladder
+and the intervention coding (05 §7). The first-round blind catalog is not a
+yardstick: it used no template matching (2026-10-29). The existing `guided`
+arm varies how prescriptive the task statement is and also changes the
+window and contract; it is not on this ladder and is optional. Constraints
+for S2/S3: reference-free, case-agnostic rules; use logged; results
+reported separately for the cases a rule was learned from and for the
+others.
 
 ### Target leakage control
 

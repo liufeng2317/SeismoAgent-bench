@@ -17,7 +17,7 @@ The benchmark first measures what a general-purpose Agent can achieve independen
 
 ### Baseline
 
-The baseline is a general-purpose Agent without expert seismological knowledge or specialized seismic tools. Codex is the first baseline Agent. The deterministic `main.py` baseline verifies task execution and catalog artifact generation, while the Ridgecrest phase-picking workflow test verifies the end-to-end task path with real waveform inputs.
+The baseline is a general-purpose Agent without expert seismological knowledge or specialized seismic tools. The formal runs use Claude Code with GLM-5.3 (2026-10-28); a second model is planned for S1 and S3 on three cases. The deterministic `main.py` baseline verifies task execution and catalog artifact generation, while the Ridgecrest phase-picking workflow test verifies the end-to-end task path with real waveform inputs.
 
 ### Benchmarking progress
 
@@ -47,8 +47,10 @@ exposes the declared inputs to the Agent, launches the selected Agent through
 its adapter, and preserves the Agent's artifacts and execution records. The
 external scorer reads the completed run and produces the evaluation report.
 
-## Evaluation status and plan (2026-10-28)
+## Evaluation status and plan (2026-10-29)
 
+- Paper outline, case tiers, revised Agent stages, usability criteria and
+  work plan: [`05_Paper_Outline_and_Plan.md`](./05_Paper_Outline_and_Plan.md).
 - Metrics v1 frozen (`docs/framework/03_EVALUATION_METRICS.md`); single scoring
   path `python -m SeismoAgentBench evaluate` (catalog-metrics@1), blind review
   of unsupported events, L5 picks for Magna and Maple Creek.
@@ -58,11 +60,14 @@ external scorer reads the completed run and produces the evaluation report.
 - Zero-cost analyses: expert ladder (what each expert step adds) and component
   swap (Agent front end versus model/locator choice) —
   [`04_Expert_Experience_and_Checker.md`](./04_Expert_Experience_and_Checker.md).
-- Agent stages: S0 `min` and S1 `tools` implemented; S2 `tools + checker` and
-  S3 `tools + checker + playbook` planned, not implemented
-  ([`00_Research_Plan.md`](./00_Research_Plan.md), "Agent capability stages").
-- Next: formal S0/S1 runs on the six cases (one each), repeats only where two
-  runs differ by more than half the stage effect; every run scored with
-  metrics v1 and component swap. The four earlier Ridgecrest/Magna runs
-  predate the output conventions and remain development runs.
-
+- Agent stages (revised 2026-10-29): S0 `min` and S1 `tools` implemented;
+  S2 `knowledge` (tools + case-agnostic knowledge as an Agent Skill) and
+  S3 `checker` (+ reference-free diagnostics tool and repair playbook)
+  planned, not implemented.
+- Formal runs: Prague and Magna S0/S1 done and scored; Maple Creek `min`
+  running; Maple Creek `tools`, Kīlauea, Kaikōura and Ridgecrest queued.
+  The four earlier Ridgecrest/Magna runs predate the output conventions and
+  remain development runs.
+- Next (05 §9): finish S0/S1; in parallel the tier table, frozen usability
+  criteria and coding of the human-in-loop interventions; then build the
+  checker and the knowledge skill for S2/S3.
