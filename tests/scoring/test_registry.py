@@ -17,7 +17,7 @@ class ScorerRegistryTests(unittest.TestCase):
 
     def test_catalog_metrics_finds_the_task_package_of_a_run(self):
         # <task>/runs/<variant>/<harness>/<model>/<run_id>/work: the handler must look for
-        # <task>/evaluation/metrics_v1.yaml, not one level too high or too low.
+        # <task>/evaluation/metrics.yaml, not one level too high or too low.
         with tempfile.TemporaryDirectory() as tmp:
             work = Path(tmp, "case", "runs", "min", "claude", "model", "run1", "work")
             work.mkdir(parents=True)
@@ -25,7 +25,7 @@ class ScorerRegistryTests(unittest.TestCase):
             context = ScorerContext(task={}, output_dir=work, validation={})
             with self.assertRaises(ScorerUnavailable) as caught:
                 handler(context)
-            self.assertIn(str(Path(tmp, "case", "evaluation", "metrics_v1.yaml")), str(caught.exception))
+            self.assertIn(str(Path(tmp, "case", "evaluation", "metrics.yaml")), str(caught.exception))
 
     def test_unknown_scorer_is_rejected(self):
         with self.assertRaisesRegex(ScorerRegistryError, "not registered"):

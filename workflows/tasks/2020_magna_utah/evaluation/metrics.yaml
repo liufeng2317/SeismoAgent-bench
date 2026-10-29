@@ -1,6 +1,6 @@
-# Pre-registered metrics v1 (docs/framework/03_EVALUATION_METRICS.md) for Magna 2020.
+# Pre-registered catalog metrics, v2 (docs/framework/03_EVALUATION_METRICS.md) for Magna 2020.
 # Scored with: python -m SeismoAgentBench.scoring.catalog_metrics {baseline,run} --task-dir <this task>
-metrics_version: 1
+metrics_version: 2
 references_loader: stage05          # expert/04_comparison/05_match_references.py + validation.yaml gates
 mask:                               # expert/00_config/validation.yaml (sea-level depth bounds)
   start_utc: '2020-03-18T00:00:00Z'

@@ -82,18 +82,18 @@ def default_scorer_registry() -> ScorerRegistry:
 
 
 def _catalog_metrics_handler(context: ScorerContext) -> dict[str, Any]:
-    """Pre-registered metrics v1 (docs/framework/03_EVALUATION_METRICS.md) for a task-package run.
+    """Pre-registered catalog metrics (docs/framework/03_EVALUATION_METRICS.md) for a task-package run.
 
     The run must live at <task>/runs/<variant>/<harness>/<model>/<run_id>; the task
-    package provides evaluation/metrics_v1.yaml. Imported lazily: the subpackage
+    package provides evaluation/metrics.yaml. Imported lazily: the subpackage
     needs numpy, pandas, scipy and PyYAML.
     """
     from .catalog_metrics.case import RUN_SCORE_FILE, _jsonable, score_run
 
     run_dir = context.output_dir.parent  # <run>/work; work may be a symlink, so do not resolve it
     task_dir = run_dir.parents[4]  # <task>/runs/<variant>/<harness>/<model>/<run_id>
-    if not (task_dir / "evaluation" / "metrics_v1.yaml").is_file():
-        raise ScorerUnavailable(f"catalog-metrics requires {task_dir}/evaluation/metrics_v1.yaml")
+    if not (task_dir / "evaluation" / "metrics.yaml").is_file():
+        raise ScorerUnavailable(f"catalog-metrics requires {task_dir}/evaluation/metrics.yaml")
     report = score_run(task_dir, run_dir)
     payload = json.loads(json.dumps(report, default=_jsonable))
     return {"output_file": RUN_SCORE_FILE, "result_key": "catalog_metrics", "payload": payload}

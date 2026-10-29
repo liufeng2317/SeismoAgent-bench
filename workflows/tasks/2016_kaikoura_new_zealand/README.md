@@ -1,8 +1,6 @@
 # Kaikōura 2016 earthquake-catalog task
 
-This directory is the complete runnable task package for the 2016 Kaikōura,
-New Zealand catalog-construction case. Its public task interface consists of the
-task definitions, prompts, input declaration and runner:
+This directory is the complete runnable task package for the 2016 Kaikōura, New Zealand catalog-construction case. Its public task interface consists of the task definitions, prompts, input declaration and runner:
 
 ```text
 input.json        # read-only source folder declaration
@@ -15,11 +13,7 @@ prompt_guided.md  # prompt with expert workflow scaffolding
 run.sh            # agent entry point; select VARIANT=min|tools|guided
 ```
 
-The three variants form a minimal single-factor experiment around the
-research questions (see `VARIANTS.md`): whether a general-purpose agent can
-reach expert-level results on its own (`min`, scored against the `expert/`
-workflow reference), whether expert tools matter (`tools` vs `min`), and
-whether expert experience matters (`guided` vs `min`). Nothing is retired here yet.
+The three variants form a minimal single-factor experiment around the research questions (see `VARIANTS.md`): whether a general-purpose agent can reach expert-level results on its own (`min`, scored against the `expert/` workflow reference), whether expert tools matter (`tools` vs `min`), and whether expert experience matters (`guided` vs `min`). Nothing is retired here yet.
 
 The source folder declared in `input.json` is linked read-only during a run as:
 
@@ -29,37 +23,11 @@ $BENCH_OUTPUT/input/waveforms/
 └── stations/
 ```
 
-The Agent must discover the available files, state its processing scope and
-methods, and write a reproducible candidate catalog and supporting results
-under `$BENCH_OUTPUT`. The default runner uses the separate
-`seismoagent_eval` environment so that package installation does not modify
-the shared `seismoagent` environment. The required catalog format and
-scientific limitations are described in each variant prompt and enforced by
-the machine-checkable output contracts (`output_contract_min.json`,
-`output_contract.json`). `prompt_tools.md` exposes the local seismotools library — PhaseNet;
-GaMMA, PyOcto and REAL (association); NonLinLoc and HypoInverse (absolute
-location); hypoDD, GrowClust and ccdt (relative relocation); Match&Locate
-(template matching) — while leaving
-method selection to the Agent. Each run records the seismotools commit in
-its provenance (`tools`).
+The Agent must discover the available files, state its processing scope and methods, and write a reproducible candidate catalog and supporting results under `$BENCH_OUTPUT`. The default runner uses the separate `seismoagent_eval` environment so that package installation does not modify the shared `seismoagent` environment. The required catalog format and scientific limitations are described in each variant prompt and enforced by the machine-checkable output contracts (`output_contract_min.json`, `output_contract.json`). `prompt_tools.md` exposes the local seismotools library — PhaseNet; GaMMA, PyOcto and REAL (association); NonLinLoc and HypoInverse (absolute location); hypoDD, GrowClust and ccdt (relative relocation); Match&Locate (template matching) — while leaving method selection to the Agent. Each run records the seismotools commit in its provenance (`tools`).
 
-The dataset is an eight-day window (~12 GB, 1,439 daily per-channel MiniSEED
-files, 53 stations: 44 GeoNet NZ sites — HH and EH at 100 Hz, plus HN
-strong-motion channels at 200 Hz — and nine Z1 temporary sites, HH/EH at
-100 Hz) of the 2016 Kaikōura aftershock sequence, 2016-12-01 → 12-09,
-18 days after the 2016-11-13 Mw 7.8 mainshock. The network spans ~260 km
-along the rupture. The runner's wall-clock
-budget defaults to twenty-four hours (`tools` forty-eight, because its
-science stages are the long pole). Override with `TIMEOUT`, in seconds, when
-a different processing budget is needed; the budget is also rendered into
-the agent's runtime context so the agent can plan against the deadline.
+The dataset is an eight-day window (~12 GB, 1,439 daily per-channel MiniSEED files, 53 stations: 44 GeoNet NZ sites — HH and EH at 100 Hz, plus HN strong-motion channels at 200 Hz — and nine Z1 temporary sites, HH/EH at 100 Hz) of the 2016 Kaikōura aftershock sequence, 2016-12-01 → 12-09, 18 days after the 2016-11-13 Mw 7.8 mainshock. The network spans ~260 km along the rupture. The runner's wall-clock budget defaults to twenty-four hours (`tools` forty-eight, because its science stages are the long pole). Override with `TIMEOUT`, in seconds, when a different processing budget is needed; the budget is also rendered into the agent's runtime context so the agent can plan against the deadline.
 
-By default `run.sh` starts the runner detached in its own session
-(`setsid`), so closing the launching terminal cannot kill a multi-hour run;
-the runner log lands next to the run tree as
-`runs/<variant>/<harness>/<model>/runner-<RUN_ID>.log` and live events keep
-streaming to `<run>/record/execution.log`. Set `DETACH=0` for the previous
-attached, streaming behavior. Two probes close the observability gap:
+By default `run.sh` starts the runner detached in its own session (`setsid`), so closing the launching terminal cannot kill a multi-hour run; the runner log lands next to the run tree as `runs/<variant>/<harness>/<model>/runner-<RUN_ID>.log` and live events keep streaming to `<run>/record/execution.log`. Set `DETACH=0` for the previous attached, streaming behavior. Two probes close the observability gap:
 
 ```bash
 # periodic status probe (state, elapsed, idle seconds, artifact presence)
@@ -75,25 +43,10 @@ runs/<variant>/<harness>/<model>/<timestamp>/
 # e.g. runs/min/claude/glm-5.3/20260113T093000Z/
 ```
 
-The timestamp leaf is one attempt of that configuration (override `RUN_ID`
-for a custom leaf name). The model segment defaults to the agent config's
-`model` line; `CLAUDE_MODEL` / `CODEX_MODEL` override it and are passed to
-the CLI as `--model`.
+The timestamp leaf is one attempt of that configuration (override `RUN_ID` for a custom leaf name). The model segment defaults to the agent config's `model` line; `CLAUDE_MODEL` / `CODEX_MODEL` override it and are passed to the CLI as `--model`.
 
-`bash run.sh` runs the default `min` variant; `VARIANT=<name> bash run.sh`
-selects any packaged variant. The Agent is Claude Code by default
-(`AGENT=codex bash run.sh` selects Codex); Claude authenticates from
-`SeismoAgentBench/configs/agents/claude.env` (chmod 600, git-ignored;
-`ANTHROPIC_BASE_URL` and `ANTHROPIC_AUTH_TOKEN`) — `CLAUDE_ENV_FILE`,
-`CLAUDE_BIN`, `CLAUDE_MODEL`, `CLAUDE_MAX_TURNS` and `CLAUDE_EXTRA_PATH`
-override the defaults. Override `RUN_ID` and `TIMEOUT` when needed.
+`bash run.sh` runs the default `min` variant; `VARIANT=<name> bash run.sh` selects any packaged variant. The Agent is Claude Code by default (`AGENT=codex bash run.sh` selects Codex); Claude authenticates from `SeismoAgentBench/configs/agents/claude.env` (chmod 600, git-ignored; `ANTHROPIC_BASE_URL` and `ANTHROPIC_AUTH_TOKEN`) — `CLAUDE_ENV_FILE`, `CLAUDE_BIN`, `CLAUDE_MODEL`, `CLAUDE_MAX_TURNS` and `CLAUDE_EXTRA_PATH` override the defaults. Override `RUN_ID` and `TIMEOUT` when needed.
 
-The expert scientific workflow remains under `expert/` and is not part of
-the Agent task interface; its round-by-round tuning log is `expert/PLAN.md`.
-Runs are scored with `python -m SeismoAgentBench evaluate --run-dir <run>`
-(metrics v1, configured in `evaluation/metrics_v1.yaml`); cross-run
-summaries and descriptive figures live under `evaluation/` (see
-`evaluation/README.md`).
+The expert scientific workflow remains under `expert/` and is not part of the Agent task interface; its round-by-round tuning log is `expert/PLAN.md`. Runs are scored with `python -m SeismoAgentBench evaluate --run-dir <run>` (catalog metrics v2, configured in `evaluation/metrics.yaml`); cross-run summaries and descriptive figures live under `evaluation/` (see `evaluation/README.md`).
 
-Large waveform files, source catalogs and generated analysis products remain in
-the external data store and are not copied into Git.
+Large waveform files, source catalogs and generated analysis products remain in the external data store and are not copied into Git.

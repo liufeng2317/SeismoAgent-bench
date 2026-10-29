@@ -1,6 +1,6 @@
-# Pre-registered metrics v1 (docs/framework/03_EVALUATION_METRICS.md) for Kaikōura 2016.
+# Pre-registered catalog metrics, v2 (docs/framework/03_EVALUATION_METRICS.md) for Kaikōura 2016.
 # Scored with: python -m SeismoAgentBench.scoring.catalog_metrics {baseline,run} --task-dir <this task>
-metrics_version: 1
+metrics_version: 2
 references_loader: stage05          # expert/04_comparison/05_match_references.py + validation.yaml gates
 mask:                               # expert/00_config/validation.yaml (model datum 0 km = sea level)
   start_utc: '2016-12-01T00:00:00Z'
@@ -10,6 +10,7 @@ mask:                               # expert/00_config/validation.yaml (model da
   depth_bsl_km: [-3.0, 60.0]
 surface_elevation_km: 0.0           # expert association.yaml reference_elevation_km
 off_structure_km: 5.0               # sparse network and 1-D vs 3-D frame offsets of 3-4 km
+primary_gates: [4.0, 15.0]          # v2 default is 2 s / 5 km; the 260-km network and 1-D vs 3-D frame offsets (final scatter 1.9 km) keep the wider gates
 primary: {detection: chamberlain, location: lanza, magnitude: geonet}   # Tan has no comparably complete partner (ceiling 0.16)
 references:
   tan: {roles: DSM, depth_datum: sea_level}

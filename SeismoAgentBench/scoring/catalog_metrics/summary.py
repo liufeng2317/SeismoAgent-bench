@@ -11,9 +11,9 @@ import numpy as np
 from .agents import export_runs
 from .case import AGENTS_DIR, RUN_SCORE_FILE, _scorer_record, score_run
 
-SUMMARY_FILE = "metrics_v1_summary.json"
+SUMMARY_FILE = "metrics_summary.json"
 # Detection metrics (recall*, f1_*) count a failed run as zero; the others average completed runs only.
-DETECTION_PREFIXES = ("recall", "f1_")
+DETECTION_PREFIXES = ("recall", "f1_")  # recall_final and recall_tight too
 PROCESS = ("cost_usd", "elapsed_s", "turns")
 
 
@@ -45,7 +45,10 @@ def summarize(task_dir: Path, *, rescore: bool = False, write: bool = True) -> d
                  "leakage_flagged": [r["run"]["run_id"] for r in reports if r["process"]["leakage"].get("flag")],
                  "completion_rate": round(len(completed) / len(clean), 4) if clean else None,
                  "runs": [{"run_id": r["run"]["run_id"], "completed": r["completion"]["completed"],
+                           "usable": (r.get("usability") or {}).get("usable"),
+                           "usability_failed": (r.get("usability") or {}).get("failed"),
                            **{k: r["headline"].get(k) for k in keys}} for r in reports], "metrics": {}}
+        entry["usable_runs"] = sum(1 for r in clean if (r.get("usability") or {}).get("usable") is True)
         for key in keys:
             if key.startswith(DETECTION_PREFIXES):
                 values = [r["headline"].get(key) if r["completion"]["completed"] else 0.0 for r in clean]

@@ -8,8 +8,8 @@ import numpy as np
 
 from .tables import KM_PER_DEG, Population
 
-PRIMARY_GATES = (4.0, 15.0)
-SENSITIVITY_GATES = ((2.0, 5.0), (1.0, 3.0))
+PRIMARY_GATES = (2.0, 5.0)  # v2; v1 used 4 s / 15 km, larger than a compact swarm (Maple Creek)
+SENSITIVITY_GATES = ((4.0, 15.0), (1.0, 3.0))
 TIME_ONLY_GATE_S = 1.0
 CHANCE_SHIFT_S = 60.0
 
@@ -80,15 +80,22 @@ def match(a: Population, b: Population, dt_max: float, d_max: float | None, *,
 
 
 def gates_for(a: Population, b: Population) -> tuple[float, float | None]:
-    """Primary gates of a pairing: time only if either side is, else the reference override."""
+    """Primary gates of a pairing: time only if either side is, else the reference override,
+    else the case's primary gates carried by the reference, else ``PRIMARY_GATES``."""
     if a.time_only or b.time_only:
         return TIME_ONLY_GATE_S, None
-    return tuple(b.gates) if b.gates else PRIMARY_GATES
+    if b.gates:
+        return tuple(b.gates)
+    return tuple(b.primary_gates) if b.primary_gates else PRIMARY_GATES
 
 
 def correspond(a: Population, b: Population, gates: tuple[float, float | None] | None = None) -> dict:
-    """Pairs under the given (default primary) gates, with the chance count for time-only pairing."""
+    """Pairs under the given (default primary) gates, with the chance count.
+
+    The same matcher run against ``b`` shifted by 60 s counts coincidences at
+    the sequence's own event density (v2: for located and time-only pairing).
+    """
     dt_max, d_max = gates if gates is not None else gates_for(a, b)
     pairs = match(a, b, dt_max, d_max)
-    chance = len(match(a, b, dt_max, None, shift_b_s=CHANCE_SHIFT_S)) if d_max is None else 0
+    chance = len(match(a, b, dt_max, d_max, shift_b_s=CHANCE_SHIFT_S))
     return {"pairs": pairs, "chance": chance, "gates": [dt_max, d_max]}

@@ -30,7 +30,8 @@ class Population:
     roles: frozenset = frozenset()
     depth_known: bool = True
     time_only: bool = False
-    gates: tuple | None = None
+    gates: tuple | None = None  # reference-specific gates (coarse origin times)
+    primary_gates: tuple | None = None  # the case's primary gates when this population is the reference side
     notes: dict = field(default_factory=dict)
 
     @property

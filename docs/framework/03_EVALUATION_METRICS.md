@@ -1,63 +1,30 @@
-# Evaluation metrics (v1, pre-registered)
+# Evaluation metrics (v2, pre-registered)
 
-This document fixes how every Agent catalog is scored. Pre-registered on
-2026-10-27, revised while it was implemented and before any formal Agent run
-was scored (§10), and **frozen on 2026-10-28** with the commit that adds §10.
-A change to any definition, gate, mask, reference role or expert catalog from
-now on creates a new version; every run is then re-scored with that version,
-and each score file records the version it used (`metrics_version: 1`) and
-the scorer commit.
+This document fixes how every Agent catalog is scored. Version 1 was pre-registered on 2026-10-27, revised while it was implemented and before any formal Agent run was scored (§10), and frozen on 2026-10-28. **Version 2 replaced it on 2026-10-30** (§12): the first scored runs showed that v1's headline hid catalogs that were scattered or systematically biased (Maple Creek). Every baseline, ladder round and run has been re-scored with v2. A change to any definition, gate, mask, reference role, expert catalog or usability threshold from now on creates a new version; every run is then re-scored with that version, and each score file records the version it used (`metrics_version: 2`) and the scorer commit.
 
 Two principles follow from the expert work on the six cases:
 
-- **Reference catalogs are not ground truth.** They do not recover each other
-  fully (reference-to-reference recall 0.53–0.70 under the gates below), and
-  their absolute locations differ by the velocity-model frame (up to ~3.5 km
-  at Kaikōura). Every metric is therefore reported against several references,
-  each used only for the roles it supports, and next to two yardsticks: the
-  reference-to-reference value and the expert value.
-- **No composite score.** The output is a capability profile per case and
-  configuration; the headline metrics are listed in §7.
+- **Reference catalogs are not ground truth.** They do not recover each other fully (primary-reference ceilings 0.49–0.69 under the gates below; Maple Creek 0.98, where ComCat holds only 626 larger events), and their absolute locations differ by the velocity-model frame (up to ~3.5 km at Kaikōura). Every metric is therefore reported against several references, each used only for the roles it supports, and next to two yardsticks: the reference-to-reference value and the human-in-loop final, which every catalog is also compared with directly (v2).
+- **No composite score.** The output is a capability profile per case and configuration; the headline metrics are listed in §7.
 
 ## 1. Scored population
 
-- **Rows.** All rows of the Agent's `catalog.csv` except those with
-  `status = rejected` (case-insensitive). A sensitivity variant scores only
-  `status = accepted`. Rows without latitude, longitude or origin time count
-  toward the event total but never enter correspondence.
-- **Mask.** Each case's cohort mask in `expert/00_config/validation.yaml`
-  (half-open time window, region box, depth bounds) is applied identically to
-  references, expert and Agent. Agent rows outside the mask are reported as
-  `out_of_mask_fraction` and are not scored further. Rows without a depth are
-  kept in the mask test on time and epicentre alone.
-- **Depth datum.** `depth_km` is kilometres below sea level, positive down,
-  for every variant (§8). Reference depths are converted to the same datum
-  where the datum is known; where it is not, the reference has no depth role.
+- **Rows.** All rows of the Agent's `catalog.csv` except those with `status = rejected` (case-insensitive). A sensitivity variant scores only `status = accepted`. Rows without latitude, longitude or origin time count toward the event total but never enter correspondence.
+- **Mask.** Each case's cohort mask in `expert/00_config/validation.yaml` (half-open time window, region box, depth bounds) is applied identically to references, expert and Agent. Agent rows outside the mask are reported as `out_of_mask_fraction` and are not scored further. v2 puts `out_of_mask_fraction` in the headline and the usability criteria (§7a); it does not count those rows as false events, because the prompts state the time window but not the region, so an out-of-region event may be a real regional earthquake. Rows without a depth are kept in the mask test on time and epicentre alone.
+- **Depth datum.** `depth_km` is kilometres below sea level, positive down, for every variant (§8). Reference depths are converted to the same datum where the datum is known; where it is not, the reference has no depth role.
 
 ## 2. Event correspondence
 
-- **Matcher.** Greedy one-to-one pairing of candidate events with reference
-  events, ranked by epicentral distance, then |Δt|.
-- **Primary gates:** |Δt| ≤ 4 s and epicentral distance ≤ 15 km — the gates
-  of the expert stage-05 matcher in every case.
-- **Sensitivity gates:** 2 s / 5 km and 1 s / 3 km, reported for every
-  detection and location metric.
-- **Reference-specific gates.** A reference whose origin times are coarse
-  keeps its own gates (Isken & Mooney 2017: 60 s / 5 km).
-- **Time-only references** (Maple Creek, Shelly & Hardebeck 2019): pairing on
-  |Δt| ≤ 1 s alone. The same matcher run against the reference shifted by
-  60 s counts chance coincidences; `recall_net = (matched − chance) / N_ref`
-  is the reported recall.
+- **Matcher.** Greedy one-to-one pairing of candidate events with reference events, ranked by epicentral distance, then |Δt|.
+- **Primary gates (v2):** |Δt| ≤ 2 s and epicentral distance ≤ 5 km. A case may set `primary_gates` in its `evaluation/metrics.yaml`: Kaikōura keeps 4 s / 15 km, where the 260-km network and the 1-D vs 3-D frame offset leave the final's own epicentres 1.9 km scattered about the references (its recall falls from 0.81 to 0.64 at 2 s / 5 km; in the other cases by ≤ 0.04). v1 used 4 s / 15 km everywhere, a gate larger than the whole Maple Creek swarm.
+- **Sensitivity gates:** 4 s / 15 km and 1 s / 3 km, reported for every detection and location metric. The 1 s / 3 km recall is the headline `recall_tight`.
+- **Chance correction (v2, every pairing).** The same matcher run against the reference shifted by 60 s counts coincidences at the sequence's own event density: chance rate p = chance / N. An observed rate m = matched / N is m = r + (1 − r) p for a true rate r, so `recall_net = (m − p) / (1 − p)`, clipped at 0. The same correction gives `union_support` and the precision against the final. v1 corrected only time-only pairing and subtracted p, which over-corrects a dense, complete catalog (Maple Creek final: 0.76 instead of 0.98).
+- **Reference-specific gates.** A reference whose origin times are coarse keeps its own gates (Isken & Mooney 2017: 60 s / 5 km).
+- **Time-only references** (Maple Creek, Shelly & Hardebeck 2019): pairing on |Δt| ≤ 1 s alone, chance-corrected as above.
 
 ## 3. Reference roles
 
-Roles: **D** detection (recall, union support), **L** absolute location,
-**S** relative structure, **M** magnitude, **P** phase picks. The primary
-detection and location references (bold) feed the headline metrics. The
-primary detection reference must have an informative ceiling, i.e. another
-independent catalog of comparable completeness; where the largest catalog
-has none (Kaikōura: Tan; Maple Creek: Shelly) its raw recall is reported
-alongside the normalised headline.
+Roles: **D** detection (recall, union support), **L** absolute location, **S** relative structure, **M** magnitude, **P** phase picks. The primary detection and location references (bold) feed the headline metrics. The primary detection reference must have an informative ceiling, i.e. another independent catalog of comparable completeness; where the largest catalog has none (Kaikōura: Tan; Maple Creek: Shelly) its raw recall is reported alongside the normalised headline.
 
 | Case | Reference | Roles | Notes |
 |---|---|---|---|
@@ -84,45 +51,19 @@ alongside the normalised headline.
 | | **Chamberlain 2021** | D S M | corrected GrowClust (3-D frame); detection primary, ceiling from Tan |
 | | GeoNet | D M | operational; fixed-depth solutions → no L |
 
-**Magnitude authority.** Magnitude classes and the strength dimension use
-one catalog per case, the operational network catalog with calibrated
-ML/Mw that is complete above M 2–3: Ridgecrest ComCat (SCSN), Magna UUSS,
-Kīlauea ComCat (HVO), Kaikōura GeoNet, Maple Creek ComCat (UUSS). Prague's
-2011 ComCat holds 11 events in the window, so Cochran sets its classes.
-Research catalogs use differing magnitude scales (Magna M2+: Pang 375,
-UUSS 140 events) and are not used for classes.
+**Magnitude authority.** Magnitude classes and the strength dimension use one catalog per case, the operational network catalog with calibrated ML/Mw that is complete above M 2–3: Ridgecrest ComCat (SCSN), Magna UUSS, Kīlauea ComCat (HVO), Kaikōura GeoNet, Maple Creek ComCat (UUSS). Prague's 2011 ComCat holds 11 events in the window, so Cochran sets its classes. Research catalogs use differing magnitude scales (Magna M2+: Pang 375, UUSS 140 events) and are not used for classes.
 
-A reference's depth enters L only when its datum is known (sea level or
-stated surface datum convertible with the case's model datum).
+A reference's depth enters L only when its datum is known (sea level or stated surface datum convertible with the case's model datum).
 
 ## 4. Yardsticks
 
-- **Reference ceiling** for a detection reference R:
-  `ceiling(R) = max over other D references S of matched(S, R) / N_R`,
-  computed with the same matcher, mask and gates. It is the recall that an
-  independent high-quality catalog actually reaches; values above it are
-  possible (the expert exceeds it in all five scoreable cases) and are not
-  capped.
+- **Reference ceiling** for a detection reference R: `ceiling(R) = max over other D references S of recall_net(S, R)`, computed with the same matcher, mask and gates. It is the recall that an independent high-quality catalog actually reaches; values above it are possible (the expert exceeds it in all five scoreable cases) and are not capped.
 - **Expert rows.** Two expert catalogs are scored with the same code:
-  - *expert (final)* — the final round of each case. It was tuned with the
-    hidden references in view and is reported as a **reference-informed upper
-    control**, not as a blind result;
-  - *expert (blind)* — the located-event catalog of the first round
-    (Ridgecrest `01_baseline`, other cases `r1` stage 04), configured from the
-    ported pipeline and published velocity models before any comparison with
-    the case's references.
-  - *Reporting convention (2026-10-29, §11):* Agent runs are compared with the
-    final row only — the human-in-loop agent's result is the Agent's upper
-    bound. The blind row is still computed but is not a yardstick: it used no
-    template matching, while the `tools` arm offers Match&Locate. The gap to the
-    final, including its reference-informed part, is attributed step by step
-    with the expert ladder.
-- **Method-variance floor** for location: the spread between locators on the
-  same associations (Prague stage 70: median 0.37 km, the largest epicentre
-  distance from the median of four locators; `expert/PLAN.md` "Method
-  comparison"). Agent–reference location differences
-  below the larger of this floor and the reference-to-reference offset are
-  read as equivalent.
+  - *expert (final)* — the final round of each case. It was tuned with the hidden references in view and is reported as a **reference-informed upper control**, not as a blind result;
+  - *expert (blind)* — the located-event catalog of the first round (Ridgecrest `01_baseline`, other cases `r1` stage 04), configured from the ported pipeline and published velocity models before any comparison with the case's references.
+  - *Reporting convention (2026-10-29, §11):* Agent runs are compared with the final row only — the human-in-loop agent's result is the Agent's upper bound. The blind row is still computed but is not a yardstick: it used no template matching, while the `tools` arm offers Match&Locate. The gap to the final, including its reference-informed part, is attributed step by step with the expert ladder.
+- **Direct comparison with the final (v2).** Every other catalog — reference rows, the blind round, ladder rounds, Agent runs and their component swaps — is also matched one to one with *expert (final)* under the primary gates (`versus_final`): `recall_final` (share of the final's events recovered), `precision_final` (share of the catalog's events the final contains), both chance-corrected; `event_ratio_final`; and the catalog minus the final: `shift_final_km`, `scatter_final_km`, `dz_final_km`, `dt_final_s`. The final is the Agent's upper bound, and against a sparse primary reference (Maple Creek ComCat, 626 events) only this comparison shows how much of the small-event population a catalog misses.
+- **Method-variance floor** for location: the spread between locators on the same associations (Prague stage 70: median 0.37 km, the largest epicentre distance from the median of four locators; `expert/PLAN.md` "Method comparison"). Agent–reference location differences below the larger of this floor and the reference-to-reference offset are read as equivalent.
 
 ## 5. Metrics
 
@@ -139,36 +80,20 @@ stated surface datum convertible with the case's model datum).
 
 | Metric | Definition |
 |---|---|
-| `recall[R]` | matched / N_R, for every D reference |
-| **`recall_norm[R]`** | `recall[R] / ceiling(R)` — headline for the primary detection reference |
+| `recall[R]`, `recall_net[R]` | matched / N_R, and the chance-corrected rate (§2) used for every derived value; headline `recall_ref_<R>` for every D reference |
+| **`recall_norm[R]`** | `recall_net[R] / ceiling(R)` — headline for the primary detection reference |
+| **`recall_tight`** | `recall_net` against the primary detection reference at 1 s / 3 km: a catalog with right events at wrong times or places falls here, not in `recall_norm` |
 | `recall_by_mag[R]` | recall in 0.5-unit bins of the reference magnitude |
 | `M90[R]` | lowest reference magnitude M (taken from the reference's own magnitudes, to 0.1) such that recall of reference events with magnitude ≥ M is ≥ 0.9, over at least 10 events (calibration-free completeness proxy; undefined if never reached) |
 | `event_ratio` | scored Agent events / N of the primary detection reference |
-| **`union_support`** | fraction of scored Agent events matched (primary gates) to at least one event of U = all D references ∪ expert (final) — headline precision proxy. Time-only members match on \|Δt\| ≤ 1 s; the events that only the 60-s shifted time-only reference would support (among those no located member supports) are subtracted as chance (`union_support_raw` keeps them). For expert and reference rows U excludes the row itself and the expert |
+| **`union_support`** | fraction of scored Agent events matched (primary gates) to at least one event of U = all D references ∪ expert (final) — headline precision proxy. Time-only members match on \|Δt\| ≤ 1 s. Chance-corrected (§2) with the events U shifted by 60 s would support (`union_support_raw` keeps them). For expert and reference rows U excludes the row itself and the expert |
 | `audited_false_rate` | see below |
 
-**Audit of unsupported events.** From each scored run, draw a stratified
-random sample of the events without support in U (50, or all if fewer;
-strata by Agent `n_picks` tercile, fixed seed); `audit_sample.csv` is drawn
-once and never redrawn. `catalog_metrics audit` turns it into a blind review
-package (`<run>/evaluation/audit/`): figures `aNN.png` in random order, each
-showing the six nearest stations (2–15 Hz) with the event's predicted P/S
-and those of the run's own other events — no reference catalog — and
-`key.csv` (aNN → event), opened only after labelling. The first reviewer
-(Claude) labels every figure *earthquake* (own P/S arrivals at ≥ 2 near
-stations), *not_earthquake* (none at the predicted times) or *undecidable*
-in `labels.csv`; a second reviewer (the user) labels the random subset in
-`spot_check.csv` (10 figures), and their agreement is reported. The
-estimated false-event rate is `(1 − union_support) × p_false`, with
-`p_false = not / (earthquake + not)` and a Wilson 95 % interval; it is
-computed only when every sample is labelled. Reviews are kept next to the
-run evaluation and reused across metric versions.
+**Audit of unsupported events.** From each scored run, draw a stratified random sample of the events without support in U (50, or all if fewer; strata by Agent `n_picks` tercile, fixed seed); `audit_sample.csv` is drawn once and never redrawn. `catalog_metrics audit` turns it into a blind review package (`<run>/evaluation/audit/`): figures `aNN.png` in random order, each showing the six nearest stations (2–15 Hz) with the event's predicted P/S and those of the run's own other events — no reference catalog — and `key.csv` (aNN → event), opened only after labelling. The first reviewer (Claude) labels every figure *earthquake* (own P/S arrivals at ≥ 2 near stations), *not_earthquake* (none at the predicted times) or *undecidable* in `labels.csv`; a second reviewer (the user) labels the random subset in `spot_check.csv` (10 figures), and their agreement is reported. The estimated false-event rate is `(1 − union_support) × p_false`, with `p_false = not / (earthquake + not)` and a Wilson 95 % interval; it is computed only when every sample is labelled. Reviews are kept next to the run evaluation and reused across metric versions.
 
 ### L2 — Absolute location (L references, matched pairs)
 
-A median epicentral offset mixes a common shift (velocity-model or frame
-difference) with scatter (location precision), hides tails, and says nothing
-about depth artefacts. L2 therefore separates them:
+A median epicentral offset mixes a common shift (velocity-model or frame difference) with scatter (location precision), hides tails, and says nothing about depth artefacts. L2 therefore separates them:
 
 | Metric | Definition |
 |---|---|
@@ -177,7 +102,7 @@ about depth artefacts. L2 therefore separates them:
 | **`scatter_median[R]`**, `scatter_p90` | distance of each offset vector from the shift — the precision part |
 | `epi_median_by_period` | median offset in four equal-count periods of origin time (a problem confined to part of the sequence does not move the overall median) |
 | **`dz_median[R]`**, `dz_mad[R]`, `dz_gt2km` | candidate − reference depth (sea-level datum). Reported also when a datum is unknown, flagged `depth_datum_known: false`; the value is then uncertain by up to the surface elevation, which does not hide errors of several km |
-| `dt_median[R]` | median \|Δ origin time\| |
+| `dt_median[R]` | median \|Δ origin time\| — headline `dt_median_s` against the primary location reference |
 
 Population depth profile (no matching), for every catalog:
 
@@ -203,13 +128,11 @@ Population depth profile (no matching), for every catalog:
 | `mag_coverage` | fraction of scored Agent events with a magnitude |
 | `dmag_median[R]`, `dmag_mad[R]` | Agent − reference magnitude, by Agent `magnitude_type` |
 
-A constant offset reflects calibration (the expert itself runs 0.22 below
-Cochran); the MAD is the quality measure.
+A constant offset reflects calibration (the expert itself runs 0.22 below Cochran); the MAD is the quality measure.
 
 ### Time, space and strength by magnitude class
 
-Every catalog is also read along three dimensions against the magnitude
-authority (A) and the primary detection reference:
+Every catalog is also read along three dimensions against the magnitude authority (A) and the primary detection reference:
 
 | Dimension | Metric | Definition |
 |---|---|---|
@@ -222,16 +145,7 @@ authority (A) and the primary detection reference:
 | strength | `Mc`, `b` (± σ), `b_difference` | maximum curvature + 0.2 and the Aki–Utsu b-value (Shi & Bolt σ) above it, for candidate and A |
 | strength | `magnitude_coverage` | fraction of candidate events with a magnitude |
 
-**Magnitude classes M ≥ 2, 3, 4, 5** (by A magnitude; classes with no A event
-are omitted). A candidate event enters class M ≥ T when its magnitude minus
-the candidate's median offset from A (over all matched pairs, ≥ 5 pairs) is
-≥ T, so precision and F1 measure detection and the calibration is scored by
-`dmag`; `precision_unaligned` uses the raw magnitudes. A candidate event of
-the class counts as real when it matches an A event or is supported by U
-(§5 L1): operational catalogs are not complete at M 2 during crises
-(Kīlauea 4–5 May 2018: half of the expert's M2+ events missing from HVO
-are in Shelly, Wei or Matoza); `precision_authority_only` keeps the
-stricter value. Per class:
+**Magnitude classes M ≥ 2, 3, 4, 5** (by A magnitude; classes with no A event are omitted). A candidate event enters class M ≥ T when its magnitude minus the candidate's median offset from A (over all matched pairs, ≥ 5 pairs) is ≥ T, so precision and F1 measure detection and the calibration is scored by `dmag`; `precision_unaligned` uses the raw magnitudes. A candidate event of the class counts as real when it matches an A event or is supported by U (§5 L1): operational catalogs are not complete at M 2 during crises (Kīlauea 4–5 May 2018: half of the expert's M2+ events missing from HVO are in Shelly, Wei or Matoza); `precision_authority_only` keeps the stricter value. Per class:
 
 | Metric | Definition |
 |---|---|
@@ -241,20 +155,11 @@ stricter value. Per class:
 | `dt_s`, `epi_km`, `dz_km`, `dmag` | distributions (n, mean, median, std, p90) over the matched A events of the class |
 | `events` | every A event of the class, matched or missed, with its errors — listed for classes of ≤ 20 events and for M ≥ 4 |
 
-M ≥ 4 has enough events for distributions only at Ridgecrest (88) and
-Kaikōura (12); M ≥ 5 (≤ 6 events per case) is read from the event list.
+M ≥ 4 has enough events for distributions only at Ridgecrest (88) and Kaikōura (12); M ≥ 5 (≤ 6 events per case) is read from the event list.
 
 ### L5 — Phase picks (P references; Magna, Maple Creek)
 
-Reference picks (`pick_reference` in `metrics_v1.yaml`): Magna, Baker &
-Whidden (2021) manual picks; Maple Creek, the Shelly & Hardebeck (2019)
-correlation-derived release, collapsed to one arrival per detection, station
-and phase (highest weight; the release repeats each arrival once per
-matching template, ~12 times) and merged within 0.5 s per station and phase.
-Only the evaluation window and the stations present in both sets are used.
-Within each station and phase, candidate and reference picks are paired one
-to one, greedily by |dt| ≤ 0.5 s; the 0.1 s figures are the subset of those
-pairs.
+Reference picks (`pick_reference` in `metrics.yaml`): Magna, Baker & Whidden (2021) manual picks; Maple Creek, the Shelly & Hardebeck (2019) correlation-derived release, collapsed to one arrival per detection, station and phase (highest weight; the release repeats each arrival once per matching template, ~12 times) and merged within 0.5 s per station and phase. Only the evaluation window and the stations present in both sets are used. Within each station and phase, candidate and reference picks are paired one to one, greedily by |dt| ≤ 0.5 s; the 0.1 s figures are the subset of those pairs.
 
 | Metric | Definition |
 |---|---|
@@ -266,18 +171,11 @@ The expert's own stage-03 picks are scored the same way (baseline expert-final r
 
 ### L6 — Process and cost
 
-From the run record: wall time, cost (USD), input/output/cached tokens,
-turns, tool calls over 300 s, compactions. **Leakage flags:** every URL and
-file path accessed outside the run directory is listed from the transcript;
-an access matching the case's withheld products (reference DOIs, data
-repositories and catalogue services in `data/<case>/data/catalogs/*/README.md`)
-sets `leakage_flag`. A flagged run is reported but excluded from headline
-means.
+From the run record: wall time, cost (USD), input/output/cached tokens, turns, tool calls over 300 s, compactions. **Leakage flags:** every URL and file path accessed outside the run directory is listed from the transcript; an access matching the case's withheld products (reference DOIs, data repositories and catalogue services in `data/<case>/data/catalogs/*/README.md`) sets `leakage_flag`. A flagged run is reported but excluded from headline means.
 
 ### L7 — Reliability self-assessment (optional columns)
 
-Computed only when the Agent fills `horizontal_uncertainty_km` (and
-`depth_uncertainty_km`), against the primary location reference:
+Computed only when the Agent fills `horizontal_uncertainty_km` (and `depth_uncertainty_km`), against the primary location reference:
 
 | Metric | Definition |
 |---|---|
@@ -288,57 +186,61 @@ The missing columns do not change any other score.
 
 ## 6. Repeats and failed runs
 
-- Each configuration (case × variant × harness × model) runs at least twice,
-  target three times. Means are reported with the min–max range.
-- **Detection metrics** (`recall`, `recall_norm`, `M90` as "not reached")
-  count a failed run (no contract-valid catalog) as zero and are averaged
-  over all launched runs.
-- **Location, structure, magnitude and pick metrics** are averaged over
-  completed runs only and are always shown together with `completion_rate`.
+- Each configuration (case × variant × harness × model) runs at least twice, target three times. Means are reported with the min–max range.
+- **Detection metrics** (`recall*` including `recall_tight` and `recall_final`, `f1_*`, `M90` as "not reached") count a failed run (no contract-valid catalog) as zero and are averaged over all launched runs. A failed run is not usable (§7a).
+- **Location, structure, magnitude and pick metrics** are averaged over completed runs only and are always shown together with `completion_rate`.
 
 ## 7. Headline table
 
 Per case and configuration:
 
-1. `completion_rate`;
-2. `recall_norm` vs the primary detection reference (raw `recall` in brackets);
-3. `union_support` and `audited_false_rate`;
-4. vs the primary location reference: `shift`, `scatter_median`, `epi_gt5km`, `dz_median`;
+1. `completion_rate` and the usability verdict (§7a), with the failed criteria;
+2. detection: `recall_norm` vs the primary detection reference, `recall_tight` (1 s / 3 km), `recall_ref_<R>` for every other D reference (Maple Creek: Shelly), and against the final `recall_final` and `event_ratio_final`;
+3. precision and region: `union_support`, `precision_final`, `audited_false_rate`, `out_of_mask_fraction`;
+4. vs the primary location reference: `shift`, `scatter_median`, `epi_gt5km`, `dz_median`, `dt_median_s`; vs the final: `shift_final_km`, `dz_final_km`, `dt_final_s`;
 5. depth artefacts: `depth_mode_share`;
 6. by magnitude class: `f1` (with recall, precision) and mean `dt`, `epi`, `dmag`; strength: `dmag` median and std, `dmag_slope_per_unit`; time: mean `dt`, `recall_after_large`;
-7. `off_structure_fraction` and `off_structure_after_shift`;
-   phase picks where a pick reference exists: `pick_recall_P/S`, `pick_residual_mad_P/S_s`;
+7. `off_structure_fraction` and `off_structure_after_shift`; phase picks where a pick reference exists: `pick_recall_P/S`, `pick_residual_mad_P/S_s`;
 8. cost and wall time.
 
-Rows: each Agent configuration, *expert (final)* (the upper bound), and each
-reference scored against the primary reference (the ceiling rows). *Expert
-(blind)* appears only as the first step of the expert ladder (§11).
+Read the headline with the run's map and depth section next to the final's (`evaluation/comparison/` figures): a scattered or shifted catalog is obvious there, and every v2 headline item was added because a figure showed what the v1 numbers did not.
+
+Rows: each Agent configuration, *expert (final)* (the upper bound), and each reference scored against the primary reference (the ceiling rows). *Expert (blind)* appears only as the first step of the expert ladder (§11).
+
+## 7a. Usability (v2)
+
+A run's catalog is **usable for science** when every applicable criterion passes, each read against the human-in-loop final of the same case (`usability.py`; per run in `metrics.json` → `usability`, per configuration `usable_runs` in the summary). Absolute thresholds are relaxed to the final's own value plus a margin where the final itself would fail them, so the final always passes. A criterion whose metric the final lacks does not apply; one the final has but the run lacks fails. A failed run is not usable.
+
+| Criterion | Metric | Passes when |
+|---|---|---|
+| `detection` | `recall_norm` | ≥ 0.9 × final |
+| `detection_tight` | `recall_tight` | ≥ 0.9 × final |
+| `completeness_vs_final` | `recall_final` | ≥ 0.5 |
+| `inside_region` | `out_of_mask_fraction` | ≤ max(0.10, final + 0.05) |
+| `false_events` | `audited_false_rate` | ≤ 0.02; *pending* until the blind review is labelled |
+| `location_shift` | `shift_km` | ≤ max(1.0 km, final + 0.5 km) |
+| `origin_time` | `dt_median_s` | ≤ max(0.3 s, final + 0.2 s) |
+| `depth_vs_final` | `dz_final_km` | \|value\| ≤ 1.0 km |
+| `depth_pileup` | `depth_mode_share` | ≤ max(0.05, final + 0.02) |
+| `structure` | `off_structure_fraction` | ≤ max(0.05, 3 × final) |
+| `magnitude_offset` | `dmag_median` | \|value\| ≤ \|final\| + 0.2 |
+| `large_events_present` | `recall_M4`, `recall_M5` | 1.0 for each class the final has |
+
+`usable` is true when all pass, false when any fails, and null while only the audit is pending.
 
 ## 8. Output conventions fixed for scoring
 
-These are format conventions, not scientific guidance, and are stated in
-every variant's prompt (`min`, `tools`, `guided`):
+These are format conventions, not scientific guidance, and are stated in every variant's prompt (`min`, `tools`, `guided`):
 
 - `depth_km` is kilometres below sea level, positive down.
-- `status` is `accepted`, `uncertain` or `rejected`; rejected rows stay in
-  the files and are not scored.
-- `catalog.csv` may carry, after the required columns, the optional columns
-  `horizontal_uncertainty_km`, `depth_uncertainty_km` and
-  `origin_time_uncertainty_s` (1σ). Empty values are allowed.
+- `status` is `accepted`, `uncertain` or `rejected`; rejected rows stay in the files and are not scored.
+- `catalog.csv` may carry, after the required columns, the optional columns `horizontal_uncertainty_km`, `depth_uncertainty_km` and `origin_time_uncertainty_s` (1σ). Empty values are allowed.
 
-Runs launched before these conventions (Ridgecrest and Magna, 2026-10-13 to
-2026-10-22) carry `depth_datum_known: false`; their depth differences are
-reported with that flag.
+Runs launched before these conventions (Ridgecrest and Magna, 2026-10-13 to 2026-10-22) carry `depth_datum_known: false`; their depth differences are reported with that flag.
 
 ## 9. Implementation
 
-The scorer is shared code in `SeismoAgentBench/scoring/catalog_metrics/`;
-each case provides only `evaluation/metrics_v1.yaml` (mask, roles, datums,
-primary references, expert catalogs, leakage patterns) and, where its
-references are not read by the expert stage-05 module, a
-`metrics_v1_adapter.py` (Ridgecrest). Every score file records
-`metrics_version`, the scorer's git commit and dirty flag, the gates, the
-reference counts after masking and the audit sample.
+The scorer is shared code in `SeismoAgentBench/scoring/catalog_metrics/`; each case provides only `evaluation/metrics.yaml` (mask, roles, datums, primary references, optional `primary_gates`, expert catalogs, leakage patterns) and, where its references are not read by the expert stage-05 module, a `metrics_adapter.py` (Ridgecrest). File names carry no version since v2. Every score file records `metrics_version`, the scorer's git commit and dirty flag, the gates, the reference counts after masking and the audit sample.
 
 ```bash
 python -m SeismoAgentBench.scoring.catalog_metrics baseline --task-dir workflows/tasks/<case>
@@ -348,31 +250,24 @@ python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir workflows/
 python -m SeismoAgentBench.scoring.catalog_metrics audit --task-dir workflows/tasks/<case> --run-dir <run>
 ```
 
-`python -m SeismoAgentBench evaluate --run-dir <run>` runs the same scorer: every task
-spec declares `artifact-contract@1` and `catalog-metrics@1`; this is the only scoring path.
+`python -m SeismoAgentBench evaluate --run-dir <run>` runs the same scorer: every task spec declares `artifact-contract@1` and `catalog-metrics@1`; this is the only scoring path. (`@1` is the scorer's interface version; the metric definitions are versioned by `metrics_version`.) Score the baseline before runs: the usability verdict reads the final's headline from `metrics_baseline.json`.
 
-Terminology (2026-10-29): the *human-in-loop agent* is the catalog earlier called "expert" — an Agent workflow in which we steered every stage by hand; file and metric keys keep `expert` (`expert_final`, `expert_blind`, `expert_ladder`, the `expert/` pipeline) because metrics v1 is frozen.
+Terminology (2026-10-29): the *human-in-loop agent* is the catalog earlier called "expert" — an Agent workflow in which we steered every stage by hand; file and metric keys keep `expert` (`expert_final`, `expert_blind`, `expert_ladder`, the `expert/` pipeline).
 
 | Output | Content | Tracked |
 |---|---|---|
-| `evaluation/human_in_loop/metrics_v1_baseline.json` | ceilings; reference, expert-final and expert-blind rows | yes |
-| `<run>/evaluation/metrics_v1.json` | one run: completion, catalog notes, all metrics, headline, process, leakage | no (runs/ is ignored) |
+| `evaluation/human_in_loop/metrics_baseline.json` | ceilings; reference, expert-final and expert-blind rows | yes |
+| `<run>/evaluation/metrics.json` | one run: completion, catalog notes, all metrics, headline, usability, process, leakage | no (runs/ is ignored) |
 | `<run>/evaluation/location_diagnostics.png` | offset vectors (shift vs scatter), offset CDF with expert yardsticks, depth distribution with the densest band, map of offsets and off-structure events | no |
 | `<run>/evaluation/audit_sample.csv`, `audit/` | the audit sample (drawn once) and its blind review package: `plots/`, `key.csv`, `labels.csv`, `spot_check.csv` | no |
-| `evaluation/agents/metrics_v1_summary.json` | per configuration over repeated runs (§6) | yes |
-| `evaluation/agents/<variant>__<harness>__<model>__<run_id>/` | `scores.json` (formal state, headline, process, audit, swap; reference-only rescue score when present) and `figures/` | yes |
+| `evaluation/agents/metrics_summary.json` | per configuration over repeated runs (§6), with `usable_runs` | yes |
+| `evaluation/agents/<variant>__<harness>__<model>__<run_id>/` | `scores.json` (formal state, metrics version, headline, usability, process, audit, swap; reference-only rescue score when present) and `figures/` | yes |
 
-The leakage scan reads only the Agent's tool-call inputs (its accesses), not
-text that appears in tool results such as fetched documents or directory
-listings; withheld-product patterns are reference DOIs, repository paths of
-reference data, expert outputs and scores, and earthquake-catalogue services.
+The leakage scan reads only the Agent's tool-call inputs (its accesses), not text that appears in tool results such as fetched documents or directory listings; withheld-product patterns are reference DOIs, repository paths of reference data, expert outputs and scores, and earthquake-catalogue services.
 
 ## 10. Revision history before the freeze
 
-All revisions below were made between pre-registration (2026-10-27, commit
-2255ccf) and the freeze; no formal Agent run had been scored. The four
-development runs (Ridgecrest base/min/tools, Magna min) were used to test
-the scorer.
+All revisions below were made between pre-registration (2026-10-27, commit 2255ccf) and the freeze; no formal Agent run had been scored. The four development runs (Ridgecrest base/min/tools, Magna min) were used to test the scorer.
 
 | Date | Change | Reason |
 |---|---|---|
@@ -391,9 +286,28 @@ the scorer.
 
 ## 11. Reporting conventions after the freeze
 
-These change how results are presented, not any metric or scoring code.
+These change how results are presented, not any metric or scoring code. Conventions of 10-29 carry over to v2.
 
 | Date | Convention | Reason |
 |---|---|---|
 | 10-29 | Agent runs are compared with the *expert (final)* row only; *expert (blind)* is described only as the first ladder step | Blind used no template matching while the `tools` arm offers Match&Locate, so it is not a fair yardstick; the final is the Agent's upper bound and the ladder attributes the gap |
 | 10-29 | The expert catalog is called the *human-in-loop agent* in figures and text; keys keep `expert` | It is an Agent workflow steered by hand |
+
+## 12. Version 2 (2026-10-30)
+
+Trigger: the first scored Maple Creek runs. The `min` catalog was scattered over the whole region and its depths sat on velocity-model interfaces; the `tools` catalog was 2 km shallower than the final with origin times 1 s late and held a quarter of the final's events. v1 gave them recall_norm 1.06 and 1.12 against the final's 1.15, and the draft usability criteria passed `tools`. The causes were the gates (4 s / 15 km is larger than the swarm, so v1's `min` recall fell from 0.91 to 0.05 at 1 s / 3 km), a sparse primary reference (ComCat, 626 events) that saturates, out-of-region rows that left no trace in the headline (80 % for `min`), and location compared only with a reference whose depths are 1.5 km shallower than the final's.
+
+| Change | Section |
+|---|---|
+| Primary gates 2 s / 5 km; case override `primary_gates` (Kaikōura 4 s / 15 km); 4 s / 15 km becomes a sensitivity gate | §2 |
+| Chance correction for every pairing, as `(m − p) / (1 − p)` | §2 |
+| Every catalog compared directly with the human-in-loop final | §4 |
+| Headline adds `recall_tight`, `recall_ref_<R>`, `dt_median_s`, `out_of_mask_fraction` and the comparison with the final | §5, §7 |
+| Usability criteria with thresholds relative to the final | §7a |
+| File names without version (`metrics.yaml`, `metrics.json`, `metrics_baseline.json`, `metrics_summary.json`, `metrics_adapter.py`) | §9 |
+
+Effect on the human-in-loop finals: recall_norm Prague 1.85, Magna 1.14, Maple Creek 0.99, Kīlauea 1.22, Ridgecrest 1.38, Kaikōura 1.17 (v1: 1.83, 1.16, 1.15, 1.16, 1.39, 1.17); Maple Creek's ceiling rises from 0.86 to 0.98 because v1 over-corrected Shelly's time-only matches.
+
+Audit samples are drawn once. The labelled reviews of Prague `tools` and Magna `tools` keep their v1 samples, drawn from the events v1 left unsupported; v2's tighter gates leave more events unsupported, so those samples cover a subset of the v2 unsupported events. The unlabelled Maple Creek samples were redrawn under v2; Kīlauea's were first drawn under v2.
+
+v1 scores remain in git history (last v1 commit: the parent of the commit that adds this section) and in each run's `evaluation/metrics_v1.json`.

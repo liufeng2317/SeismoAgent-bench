@@ -1,34 +1,18 @@
 # Kaikōura 2016 evaluation figures
 
-Compares catalog "reproductions" of the 2016 Kaikōura aftershock sequence over
-the fixed evaluation window **[2016-12-01T00:00:00Z, 2016-12-09T00:00:00Z)** —
-18 days after the 2016-11-13 Mw 7.8 (outside the window); the in-window
-anchor is the GeoNet M5.5 2016p913880 (2016-12-04 03:15:47).
+Compares catalog "reproductions" of the 2016 Kaikōura aftershock sequence over the fixed evaluation window **[2016-12-01T00:00:00Z, 2016-12-09T00:00:00Z)** — 18 days after the 2016-11-13 Mw 7.8 (outside the window); the in-window anchor is the GeoNet M5.5 2016p913880 (2016-12-04 03:15:47).
 
-1. **References** (cohort mask and hard count gates in
-   `expert/00_config/validation.yaml`: −43.5…−41.2 N, 172.0…175.2 E, depth
-   −3…60 km):
+1. **References** (cohort mask and hard count gates in `expert/00_config/validation.yaml`: −43.5…−41.2 N, 172.0…175.2 E, depth −3…60 km):
    - Tan et al. (2024) SUGAR table S10 — detection primary (9,720);
    - Lanza et al. (2019) HypoDD preferred origins — location primary (122);
    - Chamberlain et al. (2021) corrected GrowClust catalog (2,260);
    - GeoNet operational, earthquake + unknown types (1,507).
-2. **Human-expert reproduction** — `expert/` round r6 complete catalog
-   (`expert/export/r6/60_catalog/catalog_events.csv`, 13,426 events): the r5
-   catalog moved to NonLinLoc EDT_OT_WT locations (stage 64: picked events
-   relocated, Match&Locate events shifted with their templates). r5 is the r3
-   NLL catalog (Chamberlain 1-D average of NZ3D, station delays, GaMMA DBSCAN
-   eps 15 s) plus the stage-60 Match&Locate events (1,492 templates at 1 km
-   cover, min 8 stations, N×MAD 10; null-run false fraction 0.26 %), chained relative
-   magnitudes. Rounds registered in `EXPERT_ROUNDS` (r3–r6). All depths are
-   below sea level (model datum 0 km).
-   *Update 2026-10-28:* the expert population is now round `r8` = `r6` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r6` predate it. Benchmark scores: `human_in_loop/metrics_v1_baseline.json`.
-3. **Agent reproductions** — none completed yet; register arms in
-   `AGENT_RUNS` inside `plot_evaluation_comparison.py`.
+2. **Human-expert reproduction** — `expert/` round r6 complete catalog (`expert/export/r6/60_catalog/catalog_events.csv`, 13,426 events): the r5 catalog moved to NonLinLoc EDT_OT_WT locations (stage 64: picked events relocated, Match&Locate events shifted with their templates). r5 is the r3 NLL catalog (Chamberlain 1-D average of NZ3D, station delays, GaMMA DBSCAN eps 15 s) plus the stage-60 Match&Locate events (1,492 templates at 1 km cover, min 8 stations, N×MAD 10; null-run false fraction 0.26 %), chained relative magnitudes. Rounds registered in `EXPERT_ROUNDS` (r3–r6). All depths are below sea level (model datum 0 km). *Update 2026-10-28:* the expert population is now round `r8` = `r6` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r6` predate it. Benchmark scores: `human_in_loop/metrics_baseline.json`.
+3. **Agent reproductions** — none completed yet; register arms in `AGENT_RUNS` inside `plot_evaluation_comparison.py`.
 
 ## Event correspondence criteria
 
-Greedy one-to-one pairing by (distance, Δt) within **|Δt| ≤ 4 s and 15 km**
-(the gates of every case). Populations are complete catalogs in the window.
+Greedy one-to-one pairing by (distance, Δt) within **|Δt| ≤ 4 s and 15 km** (the gates of every case). Populations are complete catalogs in the window.
 
 | Population | vs Tan (R) | vs Lanza (R) | vs Chamberlain (R) | vs GeoNet (R) | epicentral Chamberlain | dZ vs Chamberlain (MAD) |
 |---|---|---|---|---|---|---|
@@ -36,14 +20,7 @@ Greedy one-to-one pairing by (distance, Δt) within **|Δt| ≤ 4 s and 15 km**
 | Expert (r5) | 5,081 (52.3 %) | 120 (98.4 %) | 1,850 (81.9 %) | 1,383 (91.8 %) | 3.77 km | +0.20 (2.53) |
 | agent arms | — no completed runs yet — | | | | | |
 
-Epicentral differences are 3.1–3.8 km against every reference. The expert
-locations sit 2–3 km north of the three 3-D-model relocations but not of
-GeoNet (1-D, like the expert): a 1-D vs 3-D velocity-model difference,
-documented in expert PLAN.md r2 and not tuned. The references disagree among
-themselves at this level (GeoNet vs the others 3.2–4.3 km; Chamberlain vs
-Lanza 1.2 km) and in origin time by up to 0.6 s, so |Δt| (0.42–0.63 s here)
-is not a sharp diagnostic. GeoNet depths are ~6 km deeper than all other
-catalogs (fixed-depth solutions are common in it).
+Epicentral differences are 3.1–3.8 km against every reference. The expert locations sit 2–3 km north of the three 3-D-model relocations but not of GeoNet (1-D, like the expert): a 1-D vs 3-D velocity-model difference, documented in expert PLAN.md r2 and not tuned. The references disagree among themselves at this level (GeoNet vs the others 3.2–4.3 km; Chamberlain vs Lanza 1.2 km) and in origin time by up to 0.6 s, so |Δt| (0.42–0.63 s here) is not a sharp diagnostic. GeoNet depths are ~6 km deeper than all other catalogs (fixed-depth solutions are common in it).
 
 ## Figures (`human_in_loop/figures/`)
 
@@ -54,15 +31,12 @@ catalogs (fixed-depth solutions are common in it).
 | `03_agent_reference_correspondence` | Per focus agent arm: \|Δt\| vs expert, epicentral p50/p90 vs expert/Lanza/Chamberlain/Tan, magnitude bias vs expert, depth vs Chamberlain. |
 
 
-## Per-run scoring (metrics v1)
+## Per-run scoring (catalog metrics, v2)
 
-Runs are scored with the pre-registered metrics
-(`docs/framework/03_EVALUATION_METRICS.md`), configured for this case in
-`metrics_v1.yaml`. From the repository root, with the evaluation environment
-(`/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python`):
+Runs are scored with the pre-registered metrics (`docs/framework/03_EVALUATION_METRICS.md`), configured for this case in `metrics.yaml`. From the repository root, with the evaluation environment (`/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python`):
 
 ```bash
-# one run: output contract + metrics v1 (both declared in task_<variant>.json)
+# one run: output contract + catalog metrics (both declared in task_<variant>.json)
 python -m SeismoAgentBench evaluate --run-dir workflows/tasks/2016_kaikoura_new_zealand/runs/<variant>/<harness>/<model>/<run_id>
 # every run, per configuration (scores unscored runs; failed runs count as zero for detection)
 python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir workflows/tasks/2016_kaikoura_new_zealand
@@ -70,19 +44,11 @@ python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir workflows/
 python -m SeismoAgentBench.scoring.catalog_metrics baseline --task-dir workflows/tasks/2016_kaikoura_new_zealand
 ```
 
-Per run: `<run>/evaluation/metrics_v1.json`, `location_diagnostics.png`,
-`audit_sample.csv`; per case: `agents/metrics_v1_summary.json`, `human_in_loop/metrics_v1_baseline.json`.
-Layout: `human_in_loop/` (`metrics_v1_baseline.json`, `expert_ladder.{yaml,json}`, `figures/`: references + human-in-loop agent); `agents/` (`metrics_v1_summary.json`; per run `<variant>__<harness>__<model>__<run_id>/scores.json` and `figures/`, written by the `summary` command and the figure script); `comparison/figures/` (references + human-in-loop agent + all runs).
-Terminology: the *human-in-loop agent* is the catalog earlier called "expert" — an Agent workflow in which we steered every stage by hand; file and metric keys keep `expert` (`expert_final`, `expert_blind`, `expert_ladder`, the `expert/` pipeline) because metrics v1 is frozen.
-The figures in this directory are descriptive; their matcher statistics are
-not benchmark scores.
+Per run: `<run>/evaluation/metrics.json`, `location_diagnostics.png`, `audit_sample.csv`; per case: `agents/metrics_summary.json`, `human_in_loop/metrics_baseline.json`. Layout: `human_in_loop/` (`metrics_baseline.json`, `expert_ladder.{yaml,json}`, `figures/`: references + human-in-loop agent); `agents/` (`metrics_summary.json`; per run `<variant>__<harness>__<model>__<run_id>/scores.json` and `figures/`, written by the `summary` command and the figure script); `comparison/figures/` (references + human-in-loop agent + all runs). Terminology: the *human-in-loop agent* is the catalog earlier called "expert" — an Agent workflow in which we steered every stage by hand; file and metric keys keep `expert` (`expert_final`, `expert_blind`, `expert_ladder`, the `expert/` pipeline). The figures in this directory are descriptive; their matcher statistics are not benchmark scores.
 
 ## Implementation
 
-References are read and masked by the expert stage-05 module
-(`expert/04_comparison/05_match_references.py`) — one implementation for
-round feedback and evaluation. `plot_evaluation_comparison.py` is shared with
-Prague and Kīlauea except for its settings block.
+References are read and masked by the expert stage-05 module (`expert/04_comparison/05_match_references.py`) — one implementation for round feedback and evaluation. `plot_evaluation_comparison.py` is shared with Prague and Kīlauea except for its settings block.
 
 ## Regenerating
 
@@ -90,6 +56,4 @@ Prague and Kīlauea except for its settings block.
 /liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python plot_evaluation_comparison.py
 ```
 
-Style: `data/2016_kaikoura_new_zealand/scripts/figures/figure_style.py` (same
-publication style as Prague/Maple/Magna); references in Okabe–Ito blue,
-purple, vermillion and green, expert orange.
+Style: `data/2016_kaikoura_new_zealand/scripts/figures/figure_style.py` (same publication style as Prague/Maple/Magna); references in Okabe–Ito blue, purple, vermillion and green, expert orange.

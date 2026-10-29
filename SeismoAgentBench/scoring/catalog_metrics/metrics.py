@@ -43,6 +43,22 @@ def _mad(values: np.ndarray):
 
 # ------------------------------------------------------------------ L1
 
+def net_rate(matched: int, chance: int, n: int):
+    """Chance-corrected match rate (v2).
+
+    With chance rate p = chance / n from the 60-s shifted run, an observed
+    rate m = matched / n is m = r + (1 - r) p for true rate r: a coincidence
+    only adds a match where no true one exists. So r = (m - p) / (1 - p),
+    clipped at 0. (v1 subtracted p, which over-corrects dense catalogs.)
+    """
+    if not n:
+        return None
+    p = chance / n
+    if p >= 1:
+        return 0.0
+    return _num(max((matched / n - p) / (1 - p), 0.0))
+
+
 def recall_by_magnitude(mags: np.ndarray, hit: np.ndarray) -> list[dict]:
     ok = np.isfinite(mags)
     if not ok.any():
@@ -74,10 +90,8 @@ def m90(mags: np.ndarray, hit: np.ndarray) -> float | None:
 
 def detection(ref: Population, result: Mapping[str, Any]) -> dict:
     pairs, n = result["pairs"], len(ref.events)
-    out = {"matched": len(pairs), "reference_events": n, "recall": _num(len(pairs) / n) if n else None}
-    if result["gates"][1] is None:
-        out["chance"] = result["chance"]
-        out["recall_net"] = _num((len(pairs) - result["chance"]) / n) if n else None
+    out = {"matched": len(pairs), "reference_events": n, "recall": _num(len(pairs) / n) if n else None,
+           "chance": result["chance"], "recall_net": net_rate(len(pairs), result["chance"], n)}
     hit = np.zeros(n, dtype=bool)
     hit[pairs.b] = True
     mags = ref.events.magnitude.to_numpy()
@@ -87,7 +101,7 @@ def detection(ref: Population, result: Mapping[str, Any]) -> dict:
 
 
 def effective_recall(entry: Mapping[str, Any]):
-    """Chance-corrected recall for time-only pairing, raw recall otherwise."""
+    """Chance-corrected recall (v2: every reference; v1 corrected time-only pairing only)."""
     return entry.get("recall_net", entry.get("recall"))
 
 
@@ -252,10 +266,12 @@ def versus(cand: Population, ref: Population, center) -> dict:
     if located_pair and not ref.gates and ref.roles & {"D", "L"}:
         out["sensitivity"] = {}
         for gates in SENSITIVITY_GATES:
-            p = correspond(cand, ref, gates)["pairs"]
-            entry = {"matched": len(p)}
+            result_g = correspond(cand, ref, gates)
+            p, n = result_g["pairs"], len(ref.events)
+            entry = {"matched": len(p), "chance": result_g["chance"]}
             if "D" in ref.roles:
-                entry["recall"] = _num(len(p) / len(ref.events)) if len(ref.events) else None
+                entry["recall"] = _num(len(p) / n) if n else None
+                entry["recall_net"] = net_rate(len(p), result_g["chance"], n)
             if "L" in ref.roles:
                 entry["epi_median_km"] = _median(p.distance_km)
             out["sensitivity"][f"{gates[0]:g}s_{gates[1]:g}km"] = entry
@@ -265,33 +281,46 @@ def versus(cand: Population, ref: Population, center) -> dict:
 def union_support(cand: Population, union: Iterable[Population]) -> dict:
     """Fraction of candidate events matched to at least one population of U (§5 L1).
 
-    Located members match under their primary gates. Time-only members match
-    on |dt| alone; their chance coincidences are removed in aggregate: the
-    events that only a 60-s shifted time-only member would support, among
-    those no located member supports, are subtracted (``fraction``);
-    ``fraction_raw`` keeps them.
+    Located members match under their primary gates, time-only members on
+    |dt| alone. Chance coincidences are removed in aggregate (v2: for every
+    member): the number of candidate events that U shifted by 60 s would
+    support sets the chance rate of ``net_rate`` (``fraction``); ``fraction_raw`` keeps them.
     """
     n = len(cand.events)
-    located = np.zeros(n, dtype=bool)
-    timed = np.zeros(n, dtype=bool)
+    supported = np.zeros(n, dtype=bool)
     shifted = np.zeros(n, dtype=bool)
     members = []
     for pop in union:
         if pop.key == cand.key:
             continue
         result = correspond(cand, pop)
-        if result["gates"][1] is None:
-            timed[result["pairs"].a] = True
-            dt_max = result["gates"][0]
-            shifted[match(cand, pop, dt_max, None, shift_b_s=CHANCE_SHIFT_S).a] = True
-        else:
-            located[result["pairs"].a] = True
+        supported[result["pairs"].a] = True
+        dt_max, d_max = result["gates"]
+        shifted[match(cand, pop, dt_max, d_max, shift_b_s=CHANCE_SHIFT_S).a] = True
         members.append(pop.key)
-    supported = located | timed
-    chance = int((shifted & ~located).sum())
-    return {"fraction": _num((supported.sum() - chance) / n) if n else None,
+    chance = int(shifted.sum())
+    return {"fraction": net_rate(int(supported.sum()), chance, n),
             "fraction_raw": _num(supported.mean()) if n else None, "supported": int(supported.sum()),
             "chance": chance, "events": n, "members": members, "unsupported_index": np.flatnonzero(~supported)}
+
+
+def versus_final(cand: Population, final: Population, center) -> dict:
+    """The candidate against the human-in-loop final, the yardstick and upper bound (v2).
+
+    ``recall`` is the share of the final's events the candidate recovers,
+    ``precision`` the share of candidate events the final contains (both
+    chance-corrected, one-to-one, primary gates); ``location`` is the
+    candidate minus the final (shift, scatter, dz, |dt|).
+    """
+    result = correspond(cand, final)
+    pairs, chance = result["pairs"], result["chance"]
+    n_final, n_cand = len(final.events), len(cand.events)
+    return {"gates": result["gates"], "final_events": n_final, "candidate_events": n_cand,
+            "matched": len(pairs), "chance": chance,
+            "recall": net_rate(len(pairs), chance, n_final),
+            "precision": net_rate(len(pairs), chance, n_cand),
+            "event_ratio": _num(n_cand / n_final) if n_final else None,
+            "location": location(cand, final, pairs, center)}
 
 
 def ceilings(refs: Mapping[str, Population]) -> dict:
@@ -310,14 +339,15 @@ def ceilings(refs: Mapping[str, Population]) -> dict:
 
 def score_population(cand: Population, refs: Mapping[str, Population], *, expert: Population | None,
                      center, off_structure_km: float, primary: Mapping[str, str] | None = None,
-                     mask: Mapping[str, Any] | None = None) -> dict:
-    """Metrics of one catalog against every reference (and the expert)."""
+                     mask: Mapping[str, Any] | None = None, yardstick: Population | None = None) -> dict:
+    """Metrics of one catalog against every reference; ``expert`` joins the union U (runs only),
+    ``yardstick`` (the human-in-loop final) is compared directly with every other catalog."""
     out = {"events": int(len(cand.events)), "located": int(cand.located.sum()), "versus": {}}
     for key, ref in refs.items():
         if key != cand.key:
             out["versus"][key] = versus(cand, ref, center)
-    if expert is not None and expert.key != cand.key:
-        out["versus"][expert.key] = versus(cand, expert, center)
+    if yardstick is not None and yardstick.key != cand.key:
+        out["versus_final"] = versus_final(cand, yardstick, center)
     union = [r for r in refs.values() if "D" in r.roles] + ([expert] if expert is not None else [])
     out["union_support"] = union_support(cand, union)
     structure = [r for r in refs.values() if "S" in r.roles]

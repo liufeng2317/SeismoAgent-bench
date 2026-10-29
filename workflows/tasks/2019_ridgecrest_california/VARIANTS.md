@@ -1,9 +1,6 @@
 # Ridgecrest prompt variants
 
-A minimal single-factor family built around the experiment's research
-questions. Every arm shares the same input, output schema and scoring; each
-arm differs from the control (`min`) by exactly one factor, so score deltas
-attribute to that factor and nothing else.
+A minimal single-factor family built around the experiment's research questions. Every arm shares the same input, output schema and scoring; each arm differs from the control (`min`) by exactly one factor, so score deltas attribute to that factor and nothing else.
 
 ## Research questions → variants
 
@@ -14,9 +11,7 @@ attribute to that factor and nothing else.
 | Q3. Does expert experience matter? | `guided` vs `min` | `guided` |
 | Q4. Is RIS needed in a feedback-driven workflow? | `ris` vs `min` — future arm, design pending | — |
 
-The expert level in Q1 is not a prompt variant: it is the result of the
-`expert/` scientific workflow (and published references), used as the scoring
-benchmark for every arm.
+The expert level in Q1 is not a prompt variant: it is the result of the `expert/` scientific workflow (and published references), used as the scoring benchmark for every arm.
 
 ## Variant matrix
 
@@ -26,68 +21,34 @@ benchmark for every arm.
 | `tools` | `task_tools.json` | + `### Tools`: local PhaseNet; GaMMA / PyOcto / REAL; NonLinLoc / HypoInverse; hypoDD / GrowClust / ccdt; Match&Locate (picking; association; location; relocation; template matching) with validated usage docs | minimal | stated window | local provided | min |
 | `guided` | `task_guided.json` | + expert scaffolding: fixed three-day window, pipeline stages, QC gates, tuning discipline, report | expert-scaffolded | fixed window | neutral public | default |
 
-Contracts: `output_contract_min.json` (picks + catalog) and
-`output_contract.json` (picks + catalog + report.md).
+Contracts: `output_contract_min.json` (picks + catalog) and `output_contract.json` (picks + catalog + report.md).
 
 ## Design decisions
 
-- **Scope.** Every arm states the processing window
-  `[2019-07-04T00:00:00Z, 2019-07-07T00:00:00Z)`: it is part of the task definition, not expert
-  guidance, and the supplied `waveform_inventory.json` names it anyway.
-  Before 2026-10-28 `min` and `tools` left it to self-scoping; an
-  unstated window measured whether the Agent read the inventory (and,
-  where the input holds more days than the window, how much budget it
-  spent outside it) rather than scientific judgement. `guided` adds the
-  daily-file mapping and the margin rule. All arms are scored on the
-  same evaluation window.
-- **What ships with tools.** The `tools` arm carries the tools' validated
-  usage notes (the PhaseNet example, the 100 Hz resampling rule) because they
-  are part of the tool package. The legacy variant's workflow mandates
-  (mandatory stage ordering, execution/repair rules) were deliberately not
-  carried over — those are guidance, not tools.
-- **Contracts.** `min` and `tools` use the same two-artifact contract so the
-  Q2 contrast changes output requirements not at all; `guided` adds
-  `report.md` because reporting discipline is part of expert experience.
-- **One factor per contrast.** Agent, harness and model are replication
-  dimensions (run the same arm across `claude` / `codex` and models), not
-  variants.
+- **Scope.** Every arm states the processing window `[2019-07-04T00:00:00Z, 2019-07-07T00:00:00Z)`: it is part of the task definition, not expert guidance, and the supplied `waveform_inventory.json` names it anyway. Before 2026-10-28 `min` and `tools` left it to self-scoping; an unstated window measured whether the Agent read the inventory (and, where the input holds more days than the window, how much budget it spent outside it) rather than scientific judgement. `guided` adds the daily-file mapping and the margin rule. All arms are scored on the same evaluation window.
+- **What ships with tools.** The `tools` arm carries the tools' validated usage notes (the PhaseNet example, the 100 Hz resampling rule) because they are part of the tool package. The legacy variant's workflow mandates (mandatory stage ordering, execution/repair rules) were deliberately not carried over — those are guidance, not tools.
+- **Contracts.** `min` and `tools` use the same two-artifact contract so the Q2 contrast changes output requirements not at all; `guided` adds `report.md` because reporting discipline is part of expert experience.
+- **One factor per contrast.** Agent, harness and model are replication dimensions (run the same arm across `claude` / `codex` and models), not variants.
 
 ## Validity conditions common to every variant
 
-- No existing Ridgecrest catalogs, published picks, known locations or other
-  reference products may be used to construct or tune the result.
+- No existing Ridgecrest catalogs, published picks, known locations or other reference products may be used to construct or tune the result.
 - Values must not be fabricated; empty-but-honest is always acceptable.
-- The framework boundary rules (read-only input view, writable `$BENCH_OUTPUT`,
-  no reference/hidden materials) apply to all variants via `framework.md`.
+- The framework boundary rules (read-only input view, writable `$BENCH_OUTPUT`, no reference/hidden materials) apply to all variants via `framework.md`.
 
 ## Scoring wiring status
 
-Every task spec declares `artifact-contract@1` and `catalog-metrics@1`, so
-`python -m SeismoAgentBench evaluate --run-dir <run>` validates the CSV
-contract and scores the run with the pre-registered metrics v1
-(`docs/framework/03_EVALUATION_METRICS.md`; case configuration in
-`evaluation/metrics_v1.yaml`): detection, location, structure and magnitude
-against every reference in its assigned roles, by magnitude class, plus
-process, leakage and the unsupported-event audit sample. Configurations are
-aggregated with `python -m SeismoAgentBench.scoring.catalog_metrics summary
---task-dir <this task>` (see `evaluation/README.md`). Runs started before
-2026-10-28 carry the earlier scorer declaration in their control snapshot
-and are scored with the summary command.
+Every task spec declares `artifact-contract@1` and `catalog-metrics@1`, so `python -m SeismoAgentBench evaluate --run-dir <run>` validates the CSV contract and scores the run with the pre-registered catalog metrics, v2 (`docs/framework/03_EVALUATION_METRICS.md`; case configuration in `evaluation/metrics.yaml`): detection, location, structure and magnitude against every reference in its assigned roles, by magnitude class, plus process, leakage and the unsupported-event audit sample. Configurations are aggregated with `python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir <this task>` (see `evaluation/README.md`). Runs started before 2026-10-28 carry the earlier scorer declaration in their control snapshot and are scored with the summary command.
 
 ## Cost and sequencing
 
-Every arm processes the three-day window (≈5 GB; the input holds 23 days)
-on CPU-only hardware and fits the default budget. The 2026-10-13 legacy-baseline claude run
-completed a self-scoped three-day build in 3 h 09 m / $19.45, which doubles
-as the pipeline-validation record.
+Every arm processes the three-day window (≈5 GB; the input holds 23 days) on CPU-only hardware and fits the default budget. The 2026-10-13 legacy-baseline claude run completed a self-scoped three-day build in 3 h 09 m / $19.45, which doubles as the pipeline-validation record.
 
 1. `min` — capability baseline (Q1), scored against the expert reference.
-2. `tools`, `guided` — each vs `min`, same agent and model; repeat key cells
-   at least twice before attributing deltas to the factor.
+2. `tools`, `guided` — each vs `min`, same agent and model; repeat key cells at least twice before attributing deltas to the factor.
 3. `ris` — after the feedback-loop design is settled.
 
-When comparing variants, prefer same agent, same model, same reasoning effort
-and `RUN_ID` timestamps close together.
+When comparing variants, prefer same agent, same model, same reasoning effort and `RUN_ID` timestamps close together.
 
 ## Running
 
@@ -97,15 +58,8 @@ VARIANT=min bash run.sh                      # min is the default
 AGENT=claude VARIANT=tools bash run.sh       # any arm through Claude Code
 ```
 
-Runs land in `runs/<variant>/<harness>/<model>/<timestamp>/` (one experiment
-factor per path segment) with the usual control/work/record layout. The
-runner accepts any `task_<variant>.json` present in this directory, so the
-future `ris` arm will not require editing `run.sh`. Historical runs under
-`runs/base/` used the retired legacy baseline prompt (preserved in that run's
-`control/agent_prompt.md`).
+Runs land in `runs/<variant>/<harness>/<model>/<timestamp>/` (one experiment factor per path segment) with the usual control/work/record layout. The runner accepts any `task_<variant>.json` present in this directory, so the future `ris` arm will not require editing `run.sh`. Historical runs under `runs/base/` used the retired legacy baseline prompt (preserved in that run's `control/agent_prompt.md`).
 
 ## Retired variants
 
-`base_standard`, `base_notools`, `base_full`, the legacy `base`, the legacy
-two-hour `tools`, and earlier drafts (`pubtools`, `staged`) are archived under
-`attic/` with rebuild recipes in `attic/README.md`.
+`base_standard`, `base_notools`, `base_full`, the legacy `base`, the legacy two-hour `tools`, and earlier drafts (`pubtools`, `staged`) are archived under `attic/` with rebuild recipes in `attic/README.md`.

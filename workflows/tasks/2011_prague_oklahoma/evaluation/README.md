@@ -1,66 +1,32 @@
 # Prague 2011 evaluation figures
 
-Compares catalog "reproductions" of the 2011 Prague, Oklahoma aftershock
-sequence over the fixed evaluation window **[2011-11-11T00:00:00Z,
-2011-11-19T00:00:00Z)** — the stable-network interval five days after the
-2011-11-06 Mw 5.7 mainshock (which is outside the window):
+Compares catalog "reproductions" of the 2011 Prague, Oklahoma aftershock sequence over the fixed evaluation window **[2011-11-11T00:00:00Z, 2011-11-19T00:00:00Z)** — the stable-network interval five days after the 2011-11-06 Mw 5.7 mainshock (which is outside the window):
 
-1. **References** (cohort mask and hard count gates in
-   `expert/00_config/validation.yaml`; the Cochran window envelope widened to
-   three decimals):
+1. **References** (cohort mask and hard count gates in `expert/00_config/validation.yaml`; the Cochran window envelope widened to three decimals):
    - Cochran et al. (2020) template-enhanced relocated catalog — primary (2,078);
    - McMahon et al. (2017) subspace-detection release (2,343);
-   - Isken & Mooney (2017) Table S3, M>3 manual relocations (6) — origin
-     times to the minute, matched at 60 s / 5 km: a location anchor;
+   - Isken & Mooney (2017) Table S3, M>3 manual relocations (6) — origin times to the minute, matched at 60 s / 5 km: a location anchor;
    - ComCat operational (11; sparse in 2011).
-2. **Human-expert reproduction** — `expert/` round r5 complete catalog
-   (`expert/export/r5/60_catalog/catalog_events.csv`, 6,964 events): the r4
-   catalog moved to NonLinLoc EDT_OT_WT locations (stage 64: picked events
-   relocated, Match&Locate events shifted with their templates). r4 is the r3
-   union (Keranen model, step layers, station delays, stage-60 Match&Locate at
-   N×MAD 9.5) with the location-quality rule of 2026-10-26 — a source event
-   stays, and may place events as a template, only with ≥ 1 waveform CC link
-   to a neighbour (ccdt). 1.0 % of events lie > 1 km from every Cochran/McMahon
-   event (r3: 1.5 %; McMahon itself 0.8 %); r5: 0.04 %. Rounds registered in
-   `EXPERT_ROUNDS` (r2–r5). Expert depths are converted from sea level to
-   below the surface with the model datum (0.28 km).
-   *Update 2026-10-28:* the expert population is now round `r7` = `r5` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r5` predate it. Benchmark scores: `human_in_loop/metrics_v1_baseline.json`.
-3. **Agent runs** — every run under `runs/` is found by the figure script
-   (`discover_runs`) and exported by the `summary` command to
-   `agents/<variant>__<harness>__<model>__<run_id>/`. Formal runs of
-   2026-10-28 (Claude Code × GLM-5.3):
-   - `min__claude__glm-5.3__20261028T020935Z` — formal state
-     `artifact_invalid` (outputs written to $HOME/work); drawn and scored from
-     its recovered outputs as *rescue*, reference only;
+2. **Human-expert reproduction** — `expert/` round r5 complete catalog (`expert/export/r5/60_catalog/catalog_events.csv`, 6,964 events): the r4 catalog moved to NonLinLoc EDT_OT_WT locations (stage 64: picked events relocated, Match&Locate events shifted with their templates). r4 is the r3 union (Keranen model, step layers, station delays, stage-60 Match&Locate at N×MAD 9.5) with the location-quality rule of 2026-10-26 — a source event stays, and may place events as a template, only with ≥ 1 waveform CC link to a neighbour (ccdt). 1.0 % of events lie > 1 km from every Cochran/McMahon event (r3: 1.5 %; McMahon itself 0.8 %); r5: 0.04 %. Rounds registered in `EXPERT_ROUNDS` (r2–r5). Expert depths are converted from sea level to below the surface with the model datum (0.28 km). *Update 2026-10-28:* the expert population is now round `r7` = `r5` with stage-65 direct ML and stage-67 coda ghosts removed (expert/PLAN.md "Baseline corrections"); numbers below that name `r5` predate it. Benchmark scores: `human_in_loop/metrics_baseline.json`.
+3. **Agent runs** — every run under `runs/` is found by the figure script (`discover_runs`) and exported by the `summary` command to `agents/<variant>__<harness>__<model>__<run_id>/`. Formal runs of 2026-10-28 (Claude Code × GLM-5.3):
+   - `min__claude__glm-5.3__20261028T020935Z` — formal state `artifact_invalid` (outputs written to $HOME/work); drawn and scored from its recovered outputs as *rescue*, reference only;
    - `tools__claude__glm-5.3__20261028T043719Z` — scored.
 
 ## Event correspondence criteria
 
-Greedy one-to-one pairing by (distance, Δt) within **|Δt| ≤ 4 s and 15 km**
-(Ridgecrest/Magna/Maple gates); a reference's own `gates` override (Isken
-60 s / 5 km). Reference depth datums are unstated; all are compared as
-below-surface depths (±0.3 km caveat). Populations are complete catalogs in
-the window (Magna convention), so recall here can exceed stage 05/60, which
-count box-filtered expert events (r3: Cochran 0.967 here vs 0.952).
+Greedy one-to-one pairing by (distance, Δt) within **|Δt| ≤ 4 s and 15 km** (Ridgecrest/Magna/Maple gates); a reference's own `gates` override (Isken 60 s / 5 km). Reference depth datums are unstated; all are compared as below-surface depths (±0.3 km caveat). Populations are complete catalogs in the window (Magna convention), so recall here can exceed stage 05/60, which count box-filtered expert events (r3: Cochran 0.967 here vs 0.952).
 
 | Population | vs Cochran (R) | vs McMahon (R) | median \|Δt\| Cochran | epicentral Cochran | dZ vs Cochran (MAD) |
 |---|---|---|---|---|---|
 | **Expert (r5)** | 2,006 (96.5 %) | 2,266 (96.7 %) | 0.07 s | 0.37 km | +0.12 (0.40) |
 
-Isken: 6/6, epicentral 0.32 km, depth −1.61 km (Isken deeper — gradient
-half-space model there; Cochran agrees with the expert). ComCat 11/11.
+Isken: 6/6, epicentral 0.32 km, depth −1.61 km (Isken deeper — gradient half-space model there; Cochran agrees with the expert). ComCat 11/11.
 
-Magnitudes: expert ML runs **0.22 below Cochran** (MAD 0.23), the same for
-picked (−0.22) and Match&Locate rows (−0.24) — a constant calibration offset
-(provisional Hutton–Boore ML vs Cochran's magnitudes), not a scatter. It does
-not affect detection or location scores; magnitude comparisons should allow
-for it.
+Magnitudes: expert ML runs **0.22 below Cochran** (MAD 0.23), the same for picked (−0.22) and Match&Locate rows (−0.24) — a constant calibration offset (provisional Hutton–Boore ML vs Cochran's magnitudes), not a scatter. It does not affect detection or location scores; magnitude comparisons should allow for it.
 
 ## Figures
 
-`human_in_loop/figures/` (references + human-in-loop agent), `agents/<run>/figures/`
-(references + human-in-loop agent + that run, plus its `location_diagnostics` from the scorer) and
-`comparison/figures/` (references + human-in-loop agent + all runs) share the panels below.
+`human_in_loop/figures/` (references + human-in-loop agent), `agents/<run>/figures/` (references + human-in-loop agent + that run, plus its `location_diagnostics` from the scorer) and `comparison/figures/` (references + human-in-loop agent + all runs) share the panels below.
 
 | File | Content |
 |---|---|
@@ -68,15 +34,12 @@ for it.
 | `02_reproduction_population_diagnostics` | (a) magnitude–frequency (types differ), (b) depth CDF, (c) cumulative detections (the mainshock precedes the window; no marker). |
 | `03_agent_reference_correspondence` (per run, `agents/<run>/figures/`) | For that run: \|Δt\| vs expert, epicentral p50/p90 vs expert/Cochran/McMahon, magnitude bias vs expert, depth vs Cochran. |
 
-## Per-run scoring (metrics v1)
+## Per-run scoring (catalog metrics, v2)
 
-Runs are scored with the pre-registered metrics
-(`docs/framework/03_EVALUATION_METRICS.md`), configured for this case in
-`metrics_v1.yaml`. From the repository root, with the evaluation environment
-(`/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python`):
+Runs are scored with the pre-registered metrics (`docs/framework/03_EVALUATION_METRICS.md`), configured for this case in `metrics.yaml`. From the repository root, with the evaluation environment (`/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python`):
 
 ```bash
-# one run: output contract + metrics v1 (both declared in task_<variant>.json)
+# one run: output contract + catalog metrics (both declared in task_<variant>.json)
 python -m SeismoAgentBench evaluate --run-dir workflows/tasks/2011_prague_oklahoma/runs/<variant>/<harness>/<model>/<run_id>
 # every run, per configuration (scores unscored runs; failed runs count as zero for detection)
 python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir workflows/tasks/2011_prague_oklahoma
@@ -84,20 +47,11 @@ python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir workflows/
 python -m SeismoAgentBench.scoring.catalog_metrics baseline --task-dir workflows/tasks/2011_prague_oklahoma
 ```
 
-Per run: `<run>/evaluation/metrics_v1.json`, `location_diagnostics.png`,
-`audit_sample.csv`; per case: `agents/metrics_v1_summary.json`, `human_in_loop/metrics_v1_baseline.json`.
-Layout: `human_in_loop/` (`metrics_v1_baseline.json`, `expert_ladder.{yaml,json}`, `figures/`: references + human-in-loop agent); `agents/` (`metrics_v1_summary.json`; per run `<variant>__<harness>__<model>__<run_id>/scores.json` and `figures/`, written by the `summary` command and the figure script); `comparison/figures/` (references + human-in-loop agent + all runs).
-Terminology: the *human-in-loop agent* is the catalog earlier called "expert" — an Agent workflow in which we steered every stage by hand; file and metric keys keep `expert` (`expert_final`, `expert_blind`, `expert_ladder`, the `expert/` pipeline) because metrics v1 is frozen.
-The figures in this directory are descriptive; their matcher statistics are
-not benchmark scores.
+Per run: `<run>/evaluation/metrics.json`, `location_diagnostics.png`, `audit_sample.csv`; per case: `agents/metrics_summary.json`, `human_in_loop/metrics_baseline.json`. Layout: `human_in_loop/` (`metrics_baseline.json`, `expert_ladder.{yaml,json}`, `figures/`: references + human-in-loop agent); `agents/` (`metrics_summary.json`; per run `<variant>__<harness>__<model>__<run_id>/scores.json` and `figures/`, written by the `summary` command and the figure script); `comparison/figures/` (references + human-in-loop agent + all runs). Terminology: the *human-in-loop agent* is the catalog earlier called "expert" — an Agent workflow in which we steered every stage by hand; file and metric keys keep `expert` (`expert_final`, `expert_blind`, `expert_ladder`, the `expert/` pipeline). The figures in this directory are descriptive; their matcher statistics are not benchmark scores.
 
 ## Implementation
 
-References are read and masked by the expert stage-05 module
-(`expert/04_comparison/05_match_references.py`) — one implementation for
-round feedback and evaluation. `plot_evaluation_comparison.py` is shared with
-Kīlauea and Kaikōura except for its settings block (title, primary
-reference, view, rounds).
+References are read and masked by the expert stage-05 module (`expert/04_comparison/05_match_references.py`) — one implementation for round feedback and evaluation. `plot_evaluation_comparison.py` is shared with Kīlauea and Kaikōura except for its settings block (title, primary reference, view, rounds).
 
 ## Regenerating
 
@@ -105,5 +59,4 @@ reference, view, rounds).
 /liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python plot_evaluation_comparison.py
 ```
 
-Style: `data/2011_prague_oklahoma/scripts/figures/figure_style.py` (copied
-from the Maple/Magna style module).
+Style: `data/2011_prague_oklahoma/scripts/figures/figure_style.py` (copied from the Maple/Magna style module).

@@ -1,6 +1,6 @@
-# Pre-registered metrics v1 (docs/framework/03_EVALUATION_METRICS.md) for Kīlauea 2018.
+# Pre-registered catalog metrics, v2 (docs/framework/03_EVALUATION_METRICS.md) for Kīlauea 2018.
 # Scored with: python -m SeismoAgentBench.scoring.catalog_metrics {baseline,run} --task-dir <this task>
-metrics_version: 1
+metrics_version: 2
 references_loader: stage05          # expert/04_comparison/05_match_references.py + validation.yaml gates
 mask:                               # expert/00_config/validation.yaml, depth converted to sea level
   start_utc: '2018-05-01T00:00:00Z'

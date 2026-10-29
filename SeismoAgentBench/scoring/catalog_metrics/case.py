@@ -1,10 +1,10 @@
 """Case configuration and scoring entry points (docs/framework/03_EVALUATION_METRICS.md).
 
-Each task package provides ``evaluation/metrics_v1.yaml`` (mask, roles,
+Each task package provides ``evaluation/metrics.yaml`` (mask, roles,
 datums, expert catalogs, leakage patterns). The reference cohorts come from
 ``references_loader``: ``stage05`` reads them through the case's expert
 stage-05 module and its hard count gates; ``adapter`` calls
-``load_references(task_dir, config)`` in ``evaluation/metrics_v1_adapter.py``.
+``load_references(task_dir, config)`` in ``evaluation/metrics_adapter.py``.
 Either returns masked DataFrames with ``time``, ``latitude``, ``longitude``,
 ``depth_km`` (in the reference's own datum), ``magnitude`` and optionally
 ``event_id``, ``magnitude_type``. Everything else is shared.
@@ -26,13 +26,15 @@ import yaml
 from . import METRICS_VERSION
 from .audit import REVIEW_DIR, SAMPLE_FILE, audited_false_rate, sample_unsupported
 from .metrics import ceilings, effective_recall, score_population
+from .usability import usability
 from .process import consistency, contract_status, process_metrics
 from .tables import ROLES, Population, epoch_seconds, in_mask, read_candidate_catalog, standardize
 
-CONFIG_FILE = "metrics_v1.yaml"
-ADAPTER_FILE = "metrics_v1_adapter.py"
-RUN_SCORE_FILE = "metrics_v1.json"
-BASELINE_FILE = "metrics_v1_baseline.json"
+# File names carry no version; every config and score records its metrics_version.
+CONFIG_FILE = "metrics.yaml"
+ADAPTER_FILE = "metrics_adapter.py"
+RUN_SCORE_FILE = "metrics.json"
+BASELINE_FILE = "metrics_baseline.json"
 # Task evaluation layout: human_in_loop/ (references + the human-in-loop agent
 # yardsticks, i.e. the "expert" rows, and its ladder), agents/ (per-run scores
 # and figures, summary), comparison/ (all together).
@@ -73,7 +75,8 @@ def _population(key: str, frame: pd.DataFrame, spec: dict, config: dict) -> Popu
         raise ValueError(f"{key}: unknown roles {sorted(roles - ROLES)}")
     return Population(key=key, events=standardize(frame, depth_offset_km=offset or 0.0), roles=roles,
                       depth_known=offset is not None, time_only=bool(spec.get("time_only")),
-                      gates=tuple(spec["gates"]) if spec.get("gates") else None)
+                      gates=tuple(spec["gates"]) if spec.get("gates") else None,
+                      primary_gates=tuple(config["primary_gates"]) if config.get("primary_gates") else None)
 
 
 def _mask(config: dict) -> dict:
@@ -125,8 +128,10 @@ def _expert(key: str, spec: dict, case_cfg: dict, task_dir: Path, mask: dict) ->
     rename = {spec["time_column"]: "time", spec["depth_column"]: "depth_km"}
     frame = frame.drop(columns=[c for c in rename.values() if c in frame and c not in rename]).rename(columns=rename)
     pop = _population(key, frame, {"roles": "", "depth_datum": spec["depth_datum"]}, case_cfg)
-    pop.events = pop.events[in_mask(pop.events, mask)].reset_index(drop=True)
-    pop.notes = {"path": spec["path"], "events": int(len(pop.events))}
+    inside = in_mask(pop.events, mask)
+    pop.events = pop.events[inside].reset_index(drop=True)
+    pop.notes = {"path": spec["path"], "events": int(len(pop.events)),
+                 "out_of_mask_fraction": round(float(1 - inside.mean()), 4) if len(inside) else None}
     return pop
 
 
@@ -150,22 +155,37 @@ def _strip(score: dict) -> dict:
     return score
 
 
+TIGHT_GATES = "1s_3km"
+
+
 def headline(score: dict, case: Case, ceiling: dict) -> dict:
     p = case.primary
-    det = score["versus"][p["detection"]]["detection"]
-    recall = effective_recall(det)
+    primary_det = score["versus"].get(p["detection"])
+    det = primary_det["detection"] if primary_det else None  # None: the row is the primary reference itself
+    recall = effective_recall(det) if det else None
     ceil = ceiling[p["detection"]]["value"]
-    loc = score["versus"][p["location"]].get("location", {})
+    tight = ((primary_det or {}).get("sensitivity") or {}).get(TIGHT_GATES) or {}
+    loc = (score["versus"].get(p["location"]) or {}).get("location", {})
     depth = score.get("depth_profile") or {}
+    final = score.get("versus_final") or {}
+    floc = final.get("location") or {}
     return {"recall": recall, "ceiling": ceil,
             "recall_norm": round(recall / ceil, 4) if recall is not None and ceil else None,
+            "recall_tight": tight.get("recall_net"),
+            **{f"recall_ref_{k}": effective_recall(v["detection"]) for k, v in score["versus"].items()
+               if "detection" in v},
             "union_support": score["union_support"]["fraction"],
             "epi_median_km": loc.get("epi_median_km"), "shift_km": loc.get("shift_km"),
             "scatter_median_km": loc.get("scatter_median_km"), "epi_gt5km": loc.get("epi_gt5km"),
             "dz_median_km": loc.get("dz_median_km"), "depth_datum_known": loc.get("depth_datum_known"),
+            "dt_median_s": loc.get("dt_median_s"),
             "depth_mode_share": depth.get("mode_share"), "depth_band_share": depth.get("band_share"),
             "off_structure_fraction": score["off_structure"]["fraction"],
             "off_structure_after_shift": (score.get("off_structure_after_shift") or {}).get("fraction"),
+            "recall_final": final.get("recall"), "precision_final": final.get("precision"),
+            "event_ratio_final": final.get("event_ratio"), "shift_final_km": floc.get("shift_km"),
+            "scatter_final_km": floc.get("scatter_median_km"), "dz_final_km": floc.get("dz_median_km"),
+            "dt_final_s": floc.get("dt_median_s"),
             **_class_headline(score), **_strength_time_headline(score)}
 
 
@@ -189,7 +209,7 @@ def _strength_time_headline(score: dict) -> dict:
 
 
 def pick_metrics(case: Case, picks_csv: Path) -> dict | None:
-    """L5 against the case's pick reference (metrics_v1.yaml pick_reference), if it has one."""
+    """L5 against the case's pick reference (metrics.yaml pick_reference), if it has one."""
     spec = case.config.get("pick_reference")
     if not spec:
         return None
@@ -230,15 +250,17 @@ def score_baseline(task_dir: Path, *, write: bool = True) -> dict:
     case = load_case(task_dir)
     ceiling = ceilings(case.refs)
     rows = {}
+    final = case.expert.get("final")
     for key, ref in case.refs.items():  # U excludes the expert for reference rows (§5 L1)
         rows[key] = _strip(score_population(ref, case.refs, expert=None, center=case.center,
                                             off_structure_km=case.config["off_structure_km"],
-                                        primary=case.primary, mask=case.mask))
+                                            primary=case.primary, mask=case.mask, yardstick=final))
     for key, pop in case.expert.items():
         score = _strip(score_population(pop, case.refs, expert=None, center=case.center,
                                         off_structure_km=case.config["off_structure_km"],
-                                        primary=case.primary, mask=case.mask))
+                                        primary=case.primary, mask=case.mask, yardstick=final))
         score["headline"] = headline(score, case, ceiling)
+        score["headline"]["out_of_mask_fraction"] = pop.notes.get("out_of_mask_fraction")
         picks_csv = case.config["expert"][key].get("picks")
         if picks_csv:
             score["picks"] = pick_metrics(case, case.task_dir / picks_csv)
@@ -294,7 +316,7 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
         status["consistency"] = consistency(raw_catalog, raw_picks)
         score = score_population(cand, case.refs, expert=case.expert.get("final"), center=case.center,
                                  off_structure_km=case.config["off_structure_km"],
-                                 primary=case.primary, mask=case.mask)
+                                 primary=case.primary, mask=case.mask, yardstick=case.expert.get("final"))
         ceiling = ceilings(case.refs)
         unsupported = score["union_support"]["unsupported_index"]
         sample = sample_unsupported(cand, unsupported)
@@ -304,6 +326,7 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
         report["headline"]["audited_false_rate"] = audit["rate"] if audit else None
         report["scores"]["picks"] = pick_metrics(case, work / "picks.csv")
         report["headline"].update(_picks_headline(report["scores"]["picks"]))
+        report["headline"]["out_of_mask_fraction"] = notes["out_of_mask_fraction"]
         if write:
             from .figures import location_figure
             ref = case.refs[case.primary["location"]]
@@ -313,8 +336,9 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
         report["audit"] = {"sample_file": SAMPLE_FILE, "sampled": int(len(sample)),
                            "unsupported": int(len(unsupported)), "labels": audit}
     else:
-        report["headline"] = {"recall": 0.0, "recall_norm": 0.0}
+        report["headline"] = {"recall": 0.0, "recall_norm": 0.0, "recall_tight": 0.0, "recall_final": 0.0}
         sample = None
+    report["usability"] = usability(report["headline"], final_headline(case), status["completed"])
     if write:
         out_dir.mkdir(exist_ok=True)
         if sample is not None and not (out_dir / SAMPLE_FILE).exists():
@@ -322,6 +346,17 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
         (out_dir / RUN_SCORE_FILE).write_text(json.dumps(report, indent=1, default=_jsonable) + "\n",
                                               encoding="utf-8")
     return report
+
+
+def final_headline(case: Case) -> dict | None:
+    """The human-in-loop final's headline from the scored baseline (score ``baseline`` first)."""
+    path = case.task_dir / EXPERT_DIR / BASELINE_FILE
+    if not path.is_file():
+        return None
+    baseline = json.loads(path.read_text(encoding="utf-8"))
+    if baseline.get("metrics_version") != METRICS_VERSION:
+        return None
+    return (baseline["rows"].get("expert_final") or {}).get("headline")
 
 
 def _jsonable(value: Any):

@@ -12,8 +12,10 @@ from SeismoAgentBench.scoring.catalog_metrics.dimensions import b_value, magnitu
 from SeismoAgentBench.scoring.catalog_metrics.matching import correspond, match
 from SeismoAgentBench.scoring.catalog_metrics.picks_l5 import _collapse_shelly, score_picks_l5
 from SeismoAgentBench.scoring.catalog_metrics.metrics import (
-    ceilings, depth_profile, location, m90, off_structure_fraction, pair_distance_error, union_support)
+    ceilings, depth_profile, location, m90, net_rate, off_structure_fraction, pair_distance_error,
+    union_support, versus_final)
 from SeismoAgentBench.scoring.catalog_metrics.tables import Population, standardize
+from SeismoAgentBench.scoring.catalog_metrics.usability import usability
 
 T0 = pd.Timestamp("2020-01-01T00:00:00Z")
 CENTER = (-100.0, 40.0)
@@ -53,13 +55,55 @@ class MatchingTest(unittest.TestCase):
         result = correspond(cand, ref)
         self.assertIsNone(result["gates"][1])
         self.assertGreater(len(result["pairs"]), 0)
-        net = (len(result["pairs"]) - result["chance"]) / 600
-        self.assertLess(abs(net), 0.05)
+        self.assertLess(net_rate(len(result["pairs"]), result["chance"], 600), 0.05)
+
+
+    def test_located_recall_is_chance_corrected(self):
+        # A compact, dense swarm: random candidates inside the same box match a
+        # located reference by coincidence; the 60-s shifted run removes it (v2).
+        rng = np.random.default_rng(3)
+        n_ref, n_cand = 2000, 1500
+        ref = population("ref", np.sort(rng.uniform(0, 7200, n_ref)), 40 + rng.uniform(0, 0.05, n_ref),
+                         -100 + rng.uniform(0, 0.05, n_ref))
+        cand = population("cand", np.sort(rng.uniform(0, 7200, n_cand)), 40 + rng.uniform(0, 0.05, n_cand),
+                          -100 + rng.uniform(0, 0.05, n_cand))
+        result = correspond(cand, ref)
+        self.assertEqual(result["gates"], [2.0, 5.0])
+        self.assertGreater(len(result["pairs"]) / n_ref, 0.3)  # raw recall looks real
+        self.assertLess(net_rate(len(result["pairs"]), result["chance"], n_ref), 0.05)
+
+    def test_chance_correction_keeps_a_complete_dense_catalog_complete(self):
+        # Every reference event has its true partner; coincidences add nothing (v1's subtraction would).
+        rng = np.random.default_rng(5)
+        t = np.sort(rng.uniform(0, 7200, 2000))
+        lat, lon = 40 + rng.uniform(0, 0.05, 2000), -100 + rng.uniform(0, 0.05, 2000)
+        result = correspond(population("cand", t + 0.2, lat, lon), population("ref", t, lat, lon))
+        self.assertGreater(result["chance"], 200)
+        self.assertGreater(net_rate(len(result["pairs"]), result["chance"], 2000), 0.97)
+
+    def test_primary_gates_follow_the_reference_then_the_case(self):
+        ref = population("ref", [0.0], [40.0], [-100.0])
+        cand = population("cand", [3.0], [40.0], [-100.0])
+        self.assertEqual(len(correspond(cand, ref)["pairs"]), 0)  # 3 s > the 2-s default
+        ref.primary_gates = (4.0, 15.0)
+        self.assertEqual(len(correspond(cand, ref)["pairs"]), 1)
 
 
 class MetricTest(unittest.TestCase):
+    def test_versus_final_reports_completeness_precision_and_offsets(self):
+        times = np.sort(np.random.default_rng(4).uniform(0, 1e7, 100))  # sparse: no chance coincidence
+        final = population("expert_final", times, [40.0] * 100, [-100.0] * 100, [5.0] * 100, roles="")
+        cand = population("cand", times[:40] + 0.5, [40.0] * 40, [-100.0] * 40, [3.0] * 40)
+        out = versus_final(cand, final, CENTER)
+        self.assertAlmostEqual(out["recall"], 0.4)
+        self.assertAlmostEqual(out["precision"], 1.0)
+        self.assertAlmostEqual(out["event_ratio"], 0.4)
+        self.assertAlmostEqual(out["location"]["dz_median_km"], -2.0)
+        self.assertAlmostEqual(out["location"]["dt_median_s"], 0.5)
+
     def test_ceiling_is_the_best_other_reference(self):
-        times = np.arange(0, 1000, 10.0)
+        # Irregular times: a periodic sequence would line up with itself under the 60-s chance shift.
+        times = np.sort(np.random.default_rng(2).uniform(0, 100000, 100))
         lat, lon = [40.0] * 100, [-100.0] * 100
         r = population("r", times, lat, lon)
         half = population("half", times[:50], lat[:50], lon[:50])
@@ -167,6 +211,24 @@ class MetricTest(unittest.TestCase):
         self.assertEqual(off_structure_fraction(far, [ref], CENTER, 1.0)["fraction"], 1.0)
         self.assertIsNone(off_structure_fraction(ref, [ref], CENTER, 1.0)["fraction"])
 
+    def test_usability_reads_thresholds_against_the_final(self):
+        final = {"recall_norm": 1.2, "recall_tight": 0.9, "out_of_mask_fraction": 0.0, "shift_km": 1.1,
+                 "dt_median_s": 0.1, "depth_mode_share": 0.01, "off_structure_fraction": 0.01,
+                 "dmag_median": -0.25, "recall_M4": 1.0}
+        good = {"recall_norm": 1.1, "recall_tight": 0.85, "recall_final": 0.7, "out_of_mask_fraction": 0.05,
+                "audited_false_rate": None, "shift_km": 1.5, "dt_median_s": 0.2, "dz_final_km": 0.4,
+                "depth_mode_share": 0.02, "off_structure_fraction": 0.03, "dmag_median": -0.4, "recall_M4": 1.0}
+        out = usability(good, final, True)
+        self.assertIsNone(out["usable"])  # only the audit is open
+        self.assertEqual(out["pending"], ["false_events"])
+        self.assertEqual(out["checks"]["location_shift"]["threshold"], 1.6)  # the final's own shift + 0.5
+        bad = {**good, "audited_false_rate": 0.01, "dt_median_s": 1.0, "recall_tight": 0.4}
+        out = usability(bad, final, True)
+        self.assertFalse(out["usable"])
+        self.assertEqual(sorted(out["failed"]), ["detection_tight", "origin_time"])
+        self.assertTrue(usability({**good, "audited_false_rate": 0.01}, final, True)["usable"])
+        self.assertFalse(usability({}, final, False)["usable"])
+
     def test_union_support_skips_itself_and_corrects_time_only_chance(self):
         # Event 0 is supported by a located member, event 1 by a time-only member.
         # Event 2 coincides with a time-only event only after the 60-s shift
@@ -178,7 +240,7 @@ class MetricTest(unittest.TestCase):
         self.assertEqual(result["members"], ["loc", "tonly"])
         self.assertAlmostEqual(result["fraction_raw"], 2 / 3, places=4)
         self.assertEqual(result["chance"], 1)
-        self.assertAlmostEqual(result["fraction"], 1 / 3, places=4)
+        self.assertAlmostEqual(result["fraction"], 0.5, places=4)  # (2/3 - 1/3) / (1 - 1/3)
 
 
 if __name__ == "__main__":

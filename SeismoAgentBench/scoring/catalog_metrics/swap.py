@@ -29,8 +29,9 @@ from .tables import Population, in_mask, read_candidate_catalog
 
 ROOT = Path(__file__).resolve().parents[3]
 LOCATE = ROOT / "seismotools/nonlinloc/interface/locate.py"
-KEYS = ("recall_norm", "shift_km", "scatter_median_km", "epi_gt5km", "dz_median_km", "depth_mode_share",
-        "off_structure_fraction", "off_structure_after_shift", "dt_mean_s", "dt_std_s")
+KEYS = ("recall_norm", "recall_tight", "shift_km", "scatter_median_km", "epi_gt5km", "dz_median_km",
+        "dt_median_s", "depth_mode_share", "off_structure_fraction", "off_structure_after_shift", "dt_mean_s",
+        "dt_std_s", "recall_final", "shift_final_km", "dz_final_km", "dt_final_s")
 
 
 def _inputs(case, run_dir: Path, out: Path) -> tuple[Path, Path, Path, dict]:
@@ -107,7 +108,7 @@ def run_swap(task_dir: Path, run_dir: Path, *, workers: int = 16, python: str = 
         pop.events = events[in_mask(events, case.mask, depth_known=datum_known)].reset_index(drop=True)
         score = _strip(score_population(pop, case.refs, expert=case.expert.get("final"), center=case.center,
                                         off_structure_km=case.config["off_structure_km"], primary=case.primary,
-                                        mask=case.mask))
+                                        mask=case.mask, yardstick=case.expert.get("final")))
         h = headline(score, case, ceiling)
         rows[name] = {k: h.get(k) for k in KEYS}
         rows[name]["events_in_mask"] = int(len(pop.events))
