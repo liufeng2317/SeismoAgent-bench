@@ -1,0 +1,509 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SeismoAgentBench 研究脉络</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column; the research question rows drive everything below them (click a question to trace it through stages and cases). Palette: seismogram paper, ink, one trace teal; amber only for "running". */
+:root {
+  --bg: #f3f6f7;
+  --surface: #ffffff;
+  --ink: #16212b;
+  --muted: #5a6872;
+  --line: #d3dce1;
+  --trace: #0b6f78;
+  --trace-soft: #e1eff0;
+  --done: #2f7a46;
+  --done-soft: #e3f1e7;
+  --run: #a8620a;
+  --run-soft: #fbefdc;
+  --fail: #a53a30;
+  --fail-soft: #f8e4e1;
+  --idle: #7b8790;
+  --idle-soft: #eceff1;
+  --f-display: "Noto Serif SC", "Songti SC", "STSong", serif;
+  --f-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1519; --surface: #172026; --ink: #e4ebef; --muted: #98a6ae; --line: #2b3840;
+    --trace: #4fb8c1; --trace-soft: #173338; --done: #6cc489; --done-soft: #183021; --run: #e4a54b; --run-soft: #3a2a12;
+    --fail: #ec8a7f; --fail-soft: #3b1e1b; --idle: #8d9aa2; --idle-soft: #222c32; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1519; --surface: #172026; --ink: #e4ebef; --muted: #98a6ae; --line: #2b3840;
+  --trace: #4fb8c1; --trace-soft: #173338; --done: #6cc489; --done-soft: #183021; --run: #e4a54b; --run-soft: #3a2a12;
+  --fail: #ec8a7f; --fail-soft: #3b1e1b; --idle: #8d9aa2; --idle-soft: #222c32; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.7; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 64px; display: grid; gap: 56px; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.3; }
+h2 { font-size: 22px; }
+h3 { font-size: 16px; }
+p { margin: 0; }
+.mono, .num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
+.lead { color: var(--muted); max-width: 62ch; }
+section { display: grid; gap: 18px; }
+.sec-head { display: grid; gap: 6px; }
+
+/* header */
+header { display: grid; gap: 14px; }
+header h1 { font-size: clamp(26px, 4.4vw, 40px); }
+header .q2 { font-family: var(--f-display); font-size: clamp(17px, 2.4vw, 21px); color: var(--trace); }
+.trace-line { width: 100%; height: 46px; display: block; }
+.trace-line path { fill: none; stroke: var(--trace); stroke-width: 1.4; }
+.trace-line .base { stroke: var(--line); stroke-width: 1; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; color: var(--muted); }
+.meta b { color: var(--ink); font-weight: 500; }
+
+/* status chips */
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 2px 9px; border-radius: 999px; white-space: nowrap; border: 1px solid transparent; }
+.chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.s-done { color: var(--done); background: var(--done-soft); }
+.s-run { color: var(--run); background: var(--run-soft); }
+.s-fail { color: var(--fail); background: var(--fail-soft); }
+.s-idle { color: var(--idle); background: var(--idle-soft); }
+.s-plan { color: var(--muted); background: transparent; border-color: var(--line); }
+.s-plan::before { background: transparent; border: 1.5px solid currentColor; width: 5px; height: 5px; }
+
+/* question map */
+.qmap { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.qhead, .qrow { display: grid; grid-template-columns: minmax(170px, 1.1fr) minmax(150px, 1fr) minmax(220px, 2fr) 120px; gap: 18px; padding: 14px 4px; border-bottom: 1px solid var(--line); align-items: start; }
+.qhead { font-size: 12px; color: var(--muted); letter-spacing: .06em; padding-block: 8px; }
+.qrow > * { min-width: 0; }
+.qbtn { all: unset; cursor: pointer; display: grid; gap: 2px; }
+.qbtn:focus-visible { outline: 2px solid var(--trace); outline-offset: 4px; border-radius: 4px; }
+.qbtn .k { font-family: var(--f-mono); font-size: 12px; color: var(--trace); }
+.qbtn .t { font-weight: 700; }
+.qbtn .h { font-size: 12px; color: var(--muted); }
+.qrow .exp { font-size: 14px; }
+.qrow .exp code, .stage code, .doc code { font-family: var(--f-mono); font-size: 12.5px; background: var(--trace-soft); color: var(--trace); padding: 0 5px; border-radius: 4px; }
+.qrow .ev { font-size: 14px; color: var(--muted); }
+.qrow .ev b { color: var(--ink); font-weight: 500; }
+.qrow.active { background: var(--trace-soft); }
+.hint { font-size: 13px; color: var(--muted); }
+
+/* focus dimming */
+body[data-focus] [data-q] { transition: opacity .2s; }
+body[data-focus="1"] [data-q]:not([data-q~="1"]),
+body[data-focus="2"] [data-q]:not([data-q~="2"]),
+body[data-focus="3"] [data-q]:not([data-q~="3"]),
+body[data-focus="4"] [data-q]:not([data-q~="4"]) { opacity: .3; }
+@media (prefers-reduced-motion: reduce) { body[data-focus] [data-q] { transition: none; } }
+
+/* stage ladder */
+.ladder-scroll { overflow-x: auto; }
+.ladder { display: grid; grid-template-columns: repeat(5, minmax(170px, 1fr)); gap: 0; min-width: 860px; position: relative; }
+.stage { padding: 16px 16px 18px; display: grid; gap: 8px; align-content: start; border-left: 1px solid var(--line); position: relative; }
+.stage:first-child { border-left: 0; }
+.stage .id { font-family: var(--f-mono); font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.stage .name { font-family: var(--f-display); font-size: 18px; }
+.stage .gets { font-size: 13.5px; }
+.stage .asks { font-size: 13px; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 8px; }
+.stage .step { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--line); }
+.stage.on .step { background: var(--trace); }
+.stage.cap { background: var(--surface); }
+
+/* checker box */
+.twocol { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: grid; gap: 10px; align-content: start; }
+.panel ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; font-size: 14px; }
+.panel li::marker { color: var(--trace); }
+
+/* case matrix */
+.tbl-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 820px; font-size: 13.5px; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: .04em; background: var(--bg); }
+tbody tr:last-child td { border-bottom: 0; }
+td.tier { font-family: var(--f-display); font-weight: 700; white-space: nowrap; }
+td .case { font-weight: 700; }
+td .sub { display: block; font-size: 12px; color: var(--muted); }
+td .val { display: block; font-family: var(--f-mono); font-size: 12px; color: var(--muted); margin-top: 4px; font-variant-numeric: tabular-nums; }
+td .val b { color: var(--ink); font-weight: 500; }
+tr.tier-start td { border-top: 2px solid var(--line); }
+
+/* findings */
+.findings { display: grid; gap: 14px; counter-reset: f; }
+.finding { display: grid; grid-template-columns: 36px 1fr; gap: 12px; }
+.finding::before { counter-increment: f; content: counter(f); font-family: var(--f-mono); font-size: 13px; color: var(--trace); border: 1px solid var(--trace); border-radius: 50%; width: 28px; height: 28px; display: grid; place-items: center; }
+.finding h3 { margin-bottom: 4px; }
+.finding p { font-size: 14px; color: var(--muted); max-width: 72ch; }
+.finding p b { color: var(--ink); font-weight: 500; }
+.caveat { font-size: 13px; color: var(--muted); border-left: 3px solid var(--run); padding-left: 12px; }
+
+/* timeline */
+.phases { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.phase { border-top: 4px solid var(--line); padding-top: 12px; display: grid; gap: 6px; align-content: start; }
+.phase.now { border-top-color: var(--run); }
+.phase .ph { font-family: var(--f-mono); font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; gap: 6px; }
+.phase h3 { font-size: 15px; }
+.phase ul { margin: 0; padding-left: 1.1em; font-size: 13px; color: var(--muted); display: grid; gap: 3px; }
+.meter { height: 6px; background: var(--idle-soft); border-radius: 3px; overflow: hidden; display: flex; }
+.meter i { display: block; height: 100%; }
+.meter .m-done { background: var(--done); }
+.meter .m-run { background: var(--run); }
+.meter-label { font-size: 12px; color: var(--muted); font-family: var(--f-mono); }
+
+/* criteria + docs */
+.crit { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; font-size: 13.5px; }
+.crit dt { color: var(--muted); }
+.crit dd { margin: 0; font-family: var(--f-mono); font-size: 12.5px; }
+.docs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px 24px; }
+.doc { display: grid; gap: 2px; font-size: 13.5px; padding-block: 8px; border-top: 1px solid var(--line); }
+.doc span { color: var(--muted); font-size: 13px; }
+footer { font-size: 12px; color: var(--muted); }
+
+@media (max-width: 760px) {
+  .qhead { display: none; }
+  .qrow { grid-template-columns: 1fr; gap: 6px; }
+  .phases { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 440px) {
+  .phases { grid-template-columns: 1fr; }
+  .wrap { padding-inline: 16px; }
+}
+</style>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">SeismoAgentBench · 研究脉络 · 更新于 2026-10-30</div>
+  <h1>Agent 能否自动构建高精度地震目录？</h1>
+  <p class="q2">如果不能，缺的是工具、知识，还是检验自己结果的能力？</p>
+  <svg class="trace-line" viewBox="0 0 1000 46" preserveAspectRatio="none" aria-hidden="true">
+    <line class="base" x1="0" y1="23" x2="1000" y2="23"></line>
+    <path d="M0 23 L180 23 L188 21 L194 26 L200 19 L206 27 L214 22 L230 23 L420 23 L426 15 L431 33 L437 8 L443 38 L449 12 L456 31 L463 17 L471 28 L480 20 L492 25 L510 22 L540 23 L700 23 L706 20 L711 27 L717 18 L724 26 L733 22 L750 23 L1000 23"></path>
+  </svg>
+  <div class="meta">
+    <span>案例 <b>6 个，分 3 档</b></span>
+    <span>评估 <b>metrics v2（2026-10-30，含可用性判定）</b></span>
+    <span>正式运行 <b>Claude Code × GLM-5.3</b></span>
+    <span>唯一标尺 <b>human-in-loop final（上限）</b></span>
+  </div>
+</header>
+
+<section aria-labelledby="s-q">
+  <div class="sec-head">
+    <div class="eyebrow">问题 → 实验 → 证据</div>
+    <h2 id="s-q">研究问题与当前进度</h2>
+    <p class="hint">点击左列的问题，下方阶段和案例表会只突出与它相关的部分；再点一次取消。</p>
+  </div>
+  <div class="qmap" role="list">
+    <div class="qhead" aria-hidden="true"><span>研究问题</span><span>对应实验</span><span>当前证据</span><span>状态</span></div>
+
+    <div class="qrow" role="listitem" data-row="1">
+      <button class="qbtn" type="button" data-pick="1" id="q1"><span class="k">问题 1</span><span class="t">案例分层</span><span class="h">从简单到复杂、覆盖不同场景</span></button>
+      <div class="exp">六个案例分 <b>基础 / 进阶 / 困难</b> 三档</div>
+      <div class="ev">诱发、震群、火山、中强主震、大震序列、复杂多断层；运行前按客观特征定档，再用专家迭代轮数（<b>7–11 轮</b>）、blind → final 的变化和参考目录间上限检验。特征表待整理。</div>
+      <div><span class="chip s-run">Phase A 进行中</span></div>
+    </div>
+
+    <div class="qrow" role="listitem" data-row="2">
+      <button class="qbtn" type="button" data-pick="2" id="q2"><span class="k">问题 2</span><span class="t">工具的作用</span><span class="h">工具对高精度目录有多重要</span></button>
+      <div class="exp">S0 <code>min</code> → S1 <code>tools</code></div>
+      <div class="ev">四个已评分案例中，<b>没有一个运行达到"可用"</b>。Prague、Magna 的 min 没交出结果；Maple Creek 的 min 目录基本是噪声（严门限召回 <b>0.04</b>，80 % 事件在区域外）。tools 只找回 final 的 <b>22–51 %</b> 事件，并带有系统误差。</div>
+      <div><span class="chip s-done">四案例已评分</span></div>
+    </div>
+
+    <div class="qrow" role="listitem" data-row="3">
+      <button class="qbtn" type="button" data-pick="3" id="q3"><span class="k">问题 3</span><span class="t">知识的作用</span><span class="h">专家知识对高精度目录有多重要</span></button>
+      <div class="exp">S1 → S2 <code>knowledge</code></div>
+      <div class="ev">还没有 Agent 实验。间接证据：用专家定位器重新定位 Agent 自己的拾取后，深度和时间误差大部分消失（Maple Creek tools 深度差 −2.18 → <b>−0.31 km</b>，发震时刻 1.01 → <b>0.20 s</b>），说明误差主要来自<b>后端选择</b>，属于事先可以告诉它的知识。</div>
+      <div><span class="chip s-plan">已设计，待实现</span></div>
+    </div>
+
+    <div class="qrow" role="listitem" data-row="4">
+      <button class="qbtn" type="button" data-pick="4" id="q4"><span class="k">问题 4</span><span class="t">如何提升结果</span><span class="h">人在环路迭代；经验变成自动验证</span></button>
+      <div class="exp">human-in-loop final；S2 → S3 <code>checker</code></div>
+      <div class="ev">六个 final 已完成，专家 ladder 已记录每一步的增益；checker 规则表（症状 → 原因 → 上游修复）已整理。待做：<b>干预分类</b>、checker 工具和 knowledge skill。</div>
+      <div><span class="chip s-plan">final 完成，checker 待实现</span></div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="s-ladder">
+  <div class="sec-head">
+    <div class="eyebrow">每一级只多一个因素</div>
+    <h2 id="s-ladder">Agent 能力阶梯</h2>
+    <p class="lead">Agent 本身、模型和运行方式在各阶段保持不变，每一级只往它的环境里多放一样东西。所有阶段都和 human-in-loop final 比较，主要指标是缺口弥补比例 <span class="mono">(S<sub>k</sub> − S1) / (final − S1)</span>。</p>
+  </div>
+  <div class="ladder-scroll">
+    <div class="ladder">
+      <div class="stage on" data-q="2">
+        <span class="step"></span>
+        <div class="id"><span>S0 · min</span><span class="chip s-run">4/6 已评分</span></div>
+        <div class="name">基线</div>
+        <div class="gets">任务说明、数据、输出约定</div>
+        <div class="asks">通用 Agent 自己能做出可用的目录吗？</div>
+      </div>
+      <div class="stage on" data-q="2">
+        <span class="step"></span>
+        <div class="id"><span>S1 · tools</span><span class="chip s-run">4/6 已评分</span></div>
+        <div class="name">+ 工具</div>
+        <div class="gets">验证过的工具库 <code>seismotools</code> 及用法文档</div>
+        <div class="asks">工具带来多少提升？</div>
+      </div>
+      <div class="stage" data-q="3">
+        <span class="step"></span>
+        <div class="id"><span>S2 · knowledge</span><span class="chip s-plan">待实现</span></div>
+        <div class="name">+ 知识</div>
+        <div class="gets">不针对具体案例的专家知识（Agent Skill）：方法选择、参数范围、常见错误</div>
+        <div class="asks">在工具之上，知识还能补多少？</div>
+      </div>
+      <div class="stage" data-q="4">
+        <span class="step"></span>
+        <div class="id"><span>S3 · checker</span><span class="chip s-plan">待实现</span></div>
+        <div class="name">+ 自动验证</div>
+        <div class="gets">不依赖参考目录的诊断工具和修复经验；提交时附 checker 报告，每个标记写明已修复或给出理由</div>
+        <div class="asks">自动验证能把差距补到哪里？</div>
+      </div>
+      <div class="stage cap" data-q="4">
+        <span class="step"></span>
+        <div class="id"><span>上限</span><span class="chip s-done">六案完成</span></div>
+        <div class="name">human-in-loop final</div>
+        <div class="gets">研究者逐轮诊断、修改上游、重跑，迭代 7–11 轮</div>
+        <div class="asks">其中参考了参考目录的那部分，Agent 无法独立达到</div>
+      </div>
+    </div>
+  </div>
+  <p class="hint">可选对照：在 3 个案例上加跑 <span class="mono">tools + checker</span>（不给知识），区分"知道怎么做"和"知道哪里做错了"。</p>
+</section>
+
+<section aria-labelledby="s-checker" data-q="3 4">
+  <div class="sec-head">
+    <div class="eyebrow">保持"通用 Agent"的结论成立</div>
+    <h2 id="s-checker">知识和 checker 的形式</h2>
+  </div>
+  <div class="twocol">
+    <div class="panel">
+      <h3>两层，都是放进环境的文件</h3>
+      <ul>
+        <li><b>诊断</b>：确定性的命令行工具 <span class="mono">seismotools/checker/</span>，读 Agent 自己的拾取和目录，输出 <span class="mono">checker_report.json</span>。里面没有 LLM，不会把异常解释掉。</li>
+        <li><b>知识和修复经验</b>：Agent Skill（<span class="mono">SKILL.md</span> + 参考文件）。不支持 skill 的 Agent 从 prompt 链接同样的文件。</li>
+        <li><b>唯一的强制</b>：输出约定要求附报告和处置；评分时重跑 checker 核对。不写自定义循环。</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>不用 subagent 的原因</h3>
+      <ul>
+        <li>subagent 的定义方式各平台不同，结论只能代表一个平台。</li>
+        <li>多一个 LLM 就多一份算力和意见，提升分不清来自知识还是架构。</li>
+        <li>已观察到的问题是自我合理化：Prague tools 把 ML −8 解释成"超安静台阵的微震"。确定性标记加必须处置，比再问一个 LLM 更对症。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="s-cases">
+  <div class="sec-head">
+    <div class="eyebrow">案例 × 阶段</div>
+    <h2 id="s-cases">六个案例的进度</h2>
+    <p class="lead">第一个数是 recall_norm（扣除偶然匹配后的召回率，除以参考目录之间互相召回的上限），final 一栏同时给出偏移。Agent 格子里的"找回 final"是它找回了 final 中多少比例的事件。红色表示可用性判定未通过，后面列出主要原因。每个配置目前只跑了一次。</p>
+  </div>
+  <div class="tbl-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col" data-q="1">难度</th>
+          <th scope="col" data-q="1">案例与场景</th>
+          <th scope="col" data-q="4">human-in-loop final</th>
+          <th scope="col" data-q="2">S0 min</th>
+          <th scope="col" data-q="2">S1 tools</th>
+          <th scope="col" data-q="3">S2 knowledge</th>
+          <th scope="col" data-q="4">S3 checker</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="tier-start">
+          <td class="tier" rowspan="2" data-q="1">基础</td>
+          <td data-q="1"><span class="case">Prague 2011</span><span class="sub">诱发余震 · 23 台 · 8 天</span></td>
+          <td data-q="4"><span class="chip s-done">完成</span><span class="val"><b>1.85</b> · 偏移 0.18 km</span></td>
+          <td data-q="2"><span class="chip s-fail">不可用</span><span class="val">结果写错位置，记 0</span></td>
+          <td data-q="2"><span class="chip s-fail">不可用</span><span class="val"><b>1.38</b> · 找回 final 46 % · 深度 +1.10 km · 震级 −2.77（单位错）</span></td>
+          <td data-q="3"><span class="chip s-plan">计划</span></td>
+          <td data-q="4"><span class="chip s-plan">计划</span></td>
+        </tr>
+        <tr>
+          <td data-q="1"><span class="case">Magna 2020</span><span class="sub">Mw 5.7 余震 · 47 台 · 8 天</span></td>
+          <td data-q="4"><span class="chip s-done">完成</span><span class="val"><b>1.14</b> · 偏移 0.95 km</span></td>
+          <td data-q="2"><span class="chip s-fail">不可用</span><span class="val">后台流水线崩溃，记 0</span></td>
+          <td data-q="2"><span class="chip s-fail">不可用</span><span class="val"><b>0.87</b> · 找回 final 51 % · 偏移 2.50 km · 深度 −1.94 km</span></td>
+          <td data-q="3"><span class="chip s-plan">计划</span></td>
+          <td data-q="4"><span class="chip s-plan">计划</span></td>
+        </tr>
+        <tr class="tier-start">
+          <td class="tier" rowspan="2" data-q="1">进阶</td>
+          <td data-q="1"><span class="case">Maple Creek 2017</span><span class="sub">Yellowstone 震群 · 27 台 · 8 天</span></td>
+          <td data-q="4"><span class="chip s-done">完成</span><span class="val"><b>0.99</b> · 偏移 0.59 km</span></td>
+          <td data-q="2"><span class="chip s-fail">不可用</span><span class="val"><b>0.34</b> · 严门限 0.04 · 80 % 在区域外 · 56 % 偏离结构</span></td>
+          <td data-q="2"><span class="chip s-fail">不可用</span><span class="val"><b>0.96</b> · 找回 final 22 % · 时间 +1.0 s · 深度 −2.18 km</span></td>
+          <td data-q="3"><span class="chip s-plan">计划</span></td>
+          <td data-q="4"><span class="chip s-plan">计划</span></td>
+        </tr>
+        <tr>
+          <td data-q="1"><span class="case">Kīlauea 2018</span><span class="sub">火山塌陷 · 时间窗内有 Mw 6.9 · 25 台</span></td>
+          <td data-q="4"><span class="chip s-done">完成</span><span class="val"><b>1.22</b> · 偏移 0.56 km</span></td>
+          <td data-q="2"><span class="chip s-fail">不可用</span><span class="val"><b>0.90</b> · 找回 final 42 % · 震级 −2.43 · 时间 0.9 s</span></td>
+          <td data-q="2"><span class="chip s-fail">不可用</span><span class="val"><b>0.88</b> · 找回 final 37 % · 只差在检测</span></td>
+          <td data-q="3"><span class="chip s-plan">计划</span></td>
+          <td data-q="4"><span class="chip s-plan">计划</span></td>
+        </tr>
+        <tr class="tier-start">
+          <td class="tier" rowspan="2" data-q="1">困难</td>
+          <td data-q="1"><span class="case">Ridgecrest 2019</span><span class="sub">M6.4 / M7.1 序列 · 42 台 · 3 天</span></td>
+          <td data-q="4"><span class="chip s-done">完成</span><span class="val"><b>1.38</b> · 偏移 0.37 km</span></td>
+          <td data-q="2"><span class="chip s-idle">排队</span></td>
+          <td data-q="2"><span class="chip s-idle">排队</span></td>
+          <td data-q="3"><span class="chip s-plan">计划</span></td>
+          <td data-q="4"><span class="chip s-plan">计划</span></td>
+        </tr>
+        <tr>
+          <td data-q="1"><span class="case">Kaikōura 2016</span><span class="sub">Mw 7.8 多断层余震 · 53 台 · 跨度 260 km</span></td>
+          <td data-q="4"><span class="chip s-done">完成</span><span class="val"><b>1.17</b> · 偏移 1.13 km</span></td>
+          <td data-q="2"><span class="chip s-run">运行中</span></td>
+          <td data-q="2"><span class="chip s-run">运行中</span></td>
+          <td data-q="3"><span class="chip s-plan">计划</span></td>
+          <td data-q="4"><span class="chip s-plan">计划</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section aria-labelledby="s-find">
+  <div class="sec-head">
+    <div class="eyebrow">初步结论</div>
+    <h2 id="s-find">目前能说什么</h2>
+  </div>
+  <div class="findings">
+    <div class="finding" data-q="2">
+      <div><h3>工具是必要条件</h3><p>没有工具时，Agent 要从头实现整条流程：Prague 和 Magna 的 min 都没交出有效结果；Prague 补评的拾取整体早 2.5 s。交出结果的两个 min 也有根本问题：Maple Creek 的目录基本是噪声（1 s / 3 km 门限下召回 <b>0.04</b>，80 % 事件在区域外，深度落在速度模型分层面上），Kīlauea 的震级尺度偏 <b>−2.4</b>。</p></div>
+    </div>
+    <div class="finding" data-q="2 3">
+      <div><h3>工具不是充分条件</h3><p>四个 tools 运行没有一个达到"可用"。它们只找回 final 的 <b>22–51 %</b> 事件，差距基本对应模板匹配：Agent 调用了 Match&amp;Locate，却几乎没用它新增事件。系统误差集中在后端选择：与 final 相比深度差 <b>+1.10 / −1.94 / −2.18 km</b>，Maple Creek 发震时刻整体晚 <b>1.0 s</b>，Magna 平移 <b>2.5 km</b>，Prague 震级尺度错 <b>2.77</b>。换用专家定位器后，这些误差大部分消失。</p></div>
+    </div>
+    <div class="finding" data-q="4">
+      <div><h3>Agent 识别不了自己的系统误差</h3><p>2.5 s 的时间偏移、2.7 个单位的震级偏差、2.5 km 的平移，都能用不依赖参考目录的简单检查发现，但 Agent 没有做，或做了却给出错误解释。这正是 S2 知识和 S3 checker 要检验的部分。</p></div>
+    </div>
+  </div>
+  <p class="caveat">单模型、每个配置只跑一次，已评分四个案例。评估已从 metrics v1 升级到 v2：v1 的宽门限和稀疏主参考目录让散乱、偏移的目录也拿到高分（Maple Creek min 在 v1 下 recall_norm 1.06，tools 1.12）。Kaikōura、Ridgecrest 的结果出来后再定结论。</p>
+</section>
+
+<section aria-labelledby="s-plan">
+  <div class="sec-head">
+    <div class="eyebrow">工作计划</div>
+    <h2 id="s-plan">接下来做什么</h2>
+  </div>
+  <div class="phases">
+    <div class="phase now">
+      <div class="ph"><span>Phase A</span><span class="chip s-run">进行中</span></div>
+      <h3>跑完 S0 / S1</h3>
+      <div class="meter" role="img" aria-label="12 个运行中 8 个已评分，2 个运行中，2 个排队"><i class="m-done" style="width:66.7%"></i><i class="m-run" style="width:16.7%;opacity:.55"></i></div>
+      <div class="meter-label">12 个运行：已评分 8 · 运行中 2 · 排队 2</div>
+      <ul>
+        <li>评分、组件替换、盲审及第二人抽查</li>
+        <li>不占算力：难度特征表、human-in-loop 干预分类；Maple Creek 与 Kīlauea 的盲审标注</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="ph"><span>Phase B</span><span class="chip s-plan">3–5 天</span></div>
+      <h3>构建 knowledge 和 checker</h3>
+      <ul>
+        <li>checker 命令行工具与 knowledge skill</li>
+        <li>运行器支持 skill；输出约定和评分核对</li>
+        <li>在预实验上调试（不计入正式结果）</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="ph"><span>Phase C</span><span class="chip s-plan">约 25 个运行</span></div>
+      <h3>S2 / S3 正式运行</h3>
+      <ul>
+        <li>六案例的 S2、S3</li>
+        <li>Prague、Magna 重复 S1，估计运行间波动</li>
+        <li>第二个模型在每档各一个案例上跑 S1 / S3</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="ph"><span>Phase D</span><span class="chip s-plan">之后</span></div>
+      <h3>分析与写作</h3>
+      <ul>
+        <li>阶段热图、缺口弥补瀑布图</li>
+        <li>组件替换、干预分类、checker 使用情况</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="s-crit">
+  <div class="twocol">
+    <div class="panel" data-q="1 2 3 4">
+      <div class="eyebrow">metrics v2 §7a · 2026-10-30 固定</div>
+      <h3 id="s-crit">"可用于科学研究"的标准</h3>
+      <dl class="crit">
+        <dt>完成</dt><dd>交出符合约定的目录</dd>
+        <dt>检测</dt><dd>recall_norm 与 1 s/3 km 召回均 ≥ 0.9 × final；找回 final ≥ 50 %</dd>
+        <dt>区域</dt><dd>区域外事件 ≤ max(10 %, final + 5 %)</dd>
+        <dt>精度</dt><dd>盲审虚假率 ≤ 2 %</dd>
+        <dt>定位</dt><dd>偏移 ≤ max(1 km, final + 0.5 km)；|Δt| ≤ max(0.3 s, final + 0.2 s)</dd>
+        <dt>深度</dt><dd>与 final 深度差 ≤ 1 km；单一深度占比 ≤ max(5 %, final + 2 %)</dd>
+        <dt>结构</dt><dd>偏离结构 ≤ max(5 %, 3 × final)</dd>
+        <dt>震级</dt><dd>|dmag| ≤ |final| + 0.2；M ≥ 4 事件齐全</dd>
+      </dl>
+    </div>
+    <div class="panel">
+      <div class="eyebrow">尚未决定</div>
+      <h3>待定事项</h3>
+      <ul>
+        <li>第二个模型和运行平台的选择</li>
+        <li>是否加一个留出案例（如 South Napa 2014 或 Westmorland 2020）检验泛化</li>
+        <li>任务 prompt 没给区域范围：区域外事件只做门槛、不算虚假；是否在后续任务版本里写明区域</li>
+        <li>Prague、Magna tools 的盲审沿用 v1 样本，是否补抽 v2 样本</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="s-docs">
+  <div class="sec-head">
+    <div class="eyebrow">详细内容在哪里</div>
+    <h2 id="s-docs">文档地图</h2>
+  </div>
+  <div class="docs">
+    <div class="doc"><code>docs/research/00_Research_Plan.md</code><span>研究设计：难度档、阶段、checker 形式、对照</span></div>
+    <div class="doc"><code>docs/research/01_Expert_Experience_and_Checker.md</code><span>专家经验证据、checker 规则、干预分类</span></div>
+    <div class="doc"><code>docs/research/02_Paper_Outline.md</code><span>论文问题、论点与证据、章节与图</span></div>
+    <div class="doc"><code>docs/research/progress/STATUS_AND_PLAN.md</code><span>当前进度、工作计划、可用性标准</span></div>
+    <div class="doc"><code>docs/data/CASE_REGISTRY.md</code><span>六案例、难度档、评估时间窗、主参考目录</span></div>
+    <div class="doc"><code>docs/framework/03_EVALUATION_METRICS.md</code><span>评估指标 metrics v2 与可用性标准</span></div>
+  </div>
+</section>
+
+<footer>数据截至 2026-10-30；数值来自各案例 <span class="mono">evaluation/agents/metrics_summary.json</span>（metrics v2）。</footer>
+</div>
+
+<script>
+(function () {
+  var body = document.body;
+  var buttons = document.querySelectorAll('[data-pick]');
+  buttons.forEach(function (b) {
+    b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', function () {
+      var q = b.getAttribute('data-pick');
+      var same = body.getAttribute('data-focus') === q;
+      document.querySelectorAll('.qrow').forEach(function (r) { r.classList.remove('active'); });
+      buttons.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+      if (same) { body.removeAttribute('data-focus'); return; }
+      body.setAttribute('data-focus', q);
+      b.setAttribute('aria-pressed', 'true');
+      var row = document.querySelector('.qrow[data-row="' + q + '"]');
+      if (row) row.classList.add('active');
+    });
+  });
+})();
+</script>

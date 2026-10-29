@@ -1,5 +1,7 @@
 # SeismoAgentBench 进展总结（截至 2026-10-29）
 
+> **更正（2026-10-30）：** 本文数值来自 metrics v1。Maple Creek 的结果显示 v1 的 headline 会掩盖散乱或有系统偏差的目录，评估已升级为 metrics v2（门限 2 s / 5 km、全部匹配做偶然匹配校正、直接与 final 比较、增加可用性判定），所有结果已重新评分，部分数值有变化（例如 Prague tools recall_norm 1.38 不变，final 1.83 → 1.85；Magna tools 0.88 → 0.87）。最新数值见 `docs/research/progress/STATUS_AND_PLAN.md`，改动说明见 `docs/framework/03_EVALUATION_METRICS.md` §12。结论方向不变，且更明确：目前没有任何 Agent 运行达到"可用"。
+
 ## 一句话概述
 
 我们整理了 6 个地震监测案例，用 human-in-loop 的方式为每个案例构建了专家级地震目录作为基准，制定并冻结了评估准则（metrics v1），并在 Prague 和 Magna 两个案例上完成了第一批正式 Agent 测试（Claude Code × GLM-5.3）。

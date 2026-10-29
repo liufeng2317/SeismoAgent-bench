@@ -20,18 +20,18 @@ The paper answers it in four parts:
 | Claim | Evidence | Status |
 |---|---|---|
 | Difficulty rises across the tiers | tier features (research plan §2.2) and expert difficulty: rounds, blind → final gap, ceiling | features to tabulate |
-| Tools are necessary | S0 vs S1 on six cases: completion, recall_norm, pick timing | Prague, Magna, Maple Creek done; Kīlauea running |
-| Tools are not sufficient | S1 vs final: detection ~75 % of final (template matching barely used), back-end systematic errors (swap) | Prague, Magna done; Maple Creek scored |
+| Tools are necessary | S0 vs S1 on six cases: completion, recall_norm, recall_tight, structure, pick timing | Prague, Magna, Maple Creek, Kīlauea scored; Kaikōura running |
+| Tools are not sufficient | S1 vs final: no tools run usable; 22–51 % of the final's events recovered; back-end systematic errors that the expert locator removes (swap) | four cases scored |
 | Knowledge helps, and where | S2 vs S1 per dimension and tier | not started |
 | Automated validation closes the gap | S3 vs S2; gap closure (S3 − S1)/(final − S1) per dimension | not started |
 | Part of the final is unreachable without references | human-in-loop intervention coding (`01_Expert_Experience_and_Checker.md` §5); expert ladder | ladder done; coding not started |
-| A usable catalog is (or is not) reached | usability criteria (draft in `progress/STATUS_AND_PLAN.md`), pass/fail per case × stage | criteria drafted, not frozen |
+| A usable catalog is (or is not) reached | usability verdict (metrics v2 §7a), pass/fail per case × stage | criteria fixed in v2; no S0/S1 run usable so far (8 scored) |
 
 ## 3. Sections and figures
 
 1. **Introduction** — agentic science; earthquake catalogs as a complete, objectively testable task.
 2. **Benchmark** — six tiered cases; multiple references and the ceiling; the human-in-loop final as the upper bound.
-3. **Evaluation** — metrics v1; shift/scatter decomposition; component swap; blind audit; usability criteria.
+3. **Evaluation** — catalog metrics v2 (gates at the sequence scale, chance correction, direct comparison with the final); shift/scatter decomposition; component swap; blind audit; usability verdict. Include the v1 → v2 lesson: a headline that hides a scattered catalog.
 4. **Results I: tools** — S0 vs S1 (necessary, not sufficient).
 5. **Results II: knowledge** — S1 vs S2 by dimension and tier.
 6. **Results III: human-in-loop iteration** — expert ladder; intervention coding.

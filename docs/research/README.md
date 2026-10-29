@@ -10,6 +10,8 @@ Reading order:
 | [`progress/STATUS_AND_PLAN.md`](progress/STATUS_AND_PLAN.md) | current status, work plan, draft usability criteria, open items | continuously |
 | [`progress/`](progress/) `YYYY-MM-DD_progress_summary.md` | dated progress summaries (Chinese) | one per report, not edited afterwards |
 
+[`research_map.html`](research_map.html) is a one-page Chinese overview (research questions, stage ladder, case progress, work plan) for viewing in a browser; update it together with `progress/STATUS_AND_PLAN.md`.
+
 `assets/` holds figures used by these documents and the repository README.
 
 Elsewhere: case and data documents in [`../data/`](../data/), evaluation metrics and run contracts in [`../framework/`](../framework/).

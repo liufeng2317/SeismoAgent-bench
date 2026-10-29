@@ -1,6 +1,6 @@
 # Expert experience, parameter sensitivity and the self-improving checker
 
-Status: working summary, 2026-10-28; revised 2026-10-29. The Agent stages and the form of the checker are defined in the [research plan](./00_Research_Plan.md) §2.4–2.5; this document holds the evidence, the checker rules and the intervention coding. Numbers are metrics v1 (frozen, `docs/framework/03_EVALUATION_METRICS.md`) unless a source is named.
+Status: working summary, 2026-10-28; revised 2026-10-29. The Agent stages and the form of the checker are defined in the [research plan](./00_Research_Plan.md) §2.4–2.5; this document holds the evidence, the checker rules and the intervention coding. Numbers are metrics v1 (2026-10-28) unless a source is named; v2 (2026-10-30, `docs/framework/03_EVALUATION_METRICS.md` §12) tightens the gates and compares every catalog with the final, which changes some values but none of the conclusions here.
 
 ## 1. Thesis
 

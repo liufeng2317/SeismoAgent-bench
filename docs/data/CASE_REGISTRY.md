@@ -13,7 +13,7 @@ This is the navigation and scientific-role index. Case-specific interpretation a
 
 ## Evaluation setup
 
-Evaluation windows are half-open UTC intervals fixed in each task's `workflows/tasks/<case>/expert/00_config/validation.yaml` and used by metrics v1; primary references and their roles are fixed in [`03_EVALUATION_METRICS.md`](../framework/03_EVALUATION_METRICS.md) §3. Difficulty tiers are defined in the [research plan](../research/00_Research_Plan.md) §2.2.
+Evaluation windows are half-open UTC intervals fixed in each task's `workflows/tasks/<case>/expert/00_config/validation.yaml` and used by the catalog metrics (fixed with v1, kept in v2); primary references and their roles are fixed in [`03_EVALUATION_METRICS.md`](../framework/03_EVALUATION_METRICS.md) §3. Difficulty tiers are defined in the [research plan](../research/00_Research_Plan.md) §2.2.
 
 | Case | Difficulty tier | Evaluation window | Primary detection reference | Primary location reference |
 |---|---|---|---|---|

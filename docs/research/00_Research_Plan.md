@@ -211,7 +211,7 @@ An independent reviewer — a fresh session of the same general Agent given the 
 - **Repeats.** Metrics v1 §6 asks for at least two runs per configuration. First pass: one run per case × stage. Second runs go first to S1 and S3 (the headline contrast), starting with Prague and Magna S1, to measure run-to-run spread before deciding the rest.
 - **Second model.** Run S1 and S3 on three cases (one per tier) with a second model, so the conclusion is about agentic methods rather than one model (GLM-5.3 in Claude Code so far).
 - **Held-out generalisation (optional).** One case from Tier B of the candidate pool ([`CASE_POOL.md`](../data/CASE_POOL.md) §3; e.g. South Napa 2014 or Westmorland 2020) with references and ceiling but no human-in-loop final, run under S1 and S3. Neither the knowledge nor the checker rules were learned from it.
-- **Analyses for every run:** metrics v1, component swap, blind audit. The second rater spot-checks 10 per run.
+- **Analyses for every run:** catalog metrics v2 with the usability verdict, component swap, blind audit. The second rater spot-checks 10 per run.
 
 ### 2.7 Target leakage control
 
@@ -265,7 +265,7 @@ Reference quality, evaluation role, and methodological independence must be kept
 
 ### 3.4 Metrics and usability
 
-Every run is scored with the pre-registered metrics v1 ([`03_EVALUATION_METRICS.md`](../framework/03_EVALUATION_METRICS.md)): a capability profile per case and stage, no composite score. Rules for choosing the primary reference of a case are in [`COLLECTION_STANDARD.md`](../data/preparation/COLLECTION_STANDARD.md) §2. A pass/fail usability summary over the metrics is drafted in [`progress/STATUS_AND_PLAN.md`](./progress/STATUS_AND_PLAN.md) and moves to the metrics document (§11) when frozen, before the first S2 run.
+Every run is scored with the pre-registered catalog metrics, v2 since 2026-10-30 ([`03_EVALUATION_METRICS.md`](../framework/03_EVALUATION_METRICS.md)): a capability profile per case and stage, no composite score, read next to the run's map and depth section. Rules for choosing the primary reference of a case are in [`COLLECTION_STANDARD.md`](../data/preparation/COLLECTION_STANDARD.md) §2. A pass/fail usability verdict, read against the final of the same case, is part of v2 (metrics §7a): it answers the core question per case and stage.
 
 ---
 
