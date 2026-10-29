@@ -1,0 +1,112 @@
+{
+ "run": {
+  "variant": "min",
+  "harness": "claude",
+  "model": "glm-5.3",
+  "run_id": "20261028T220720Z",
+  "path": "runs/min/claude/glm-5.3/20261028T220720Z"
+ },
+ "formal_state": "scored",
+ "run_state": "scored",
+ "completion": {
+  "completed": true,
+  "consistency": {
+   "coordinates_valid": 1.0,
+   "pick_counts_agree": 1.0,
+   "pick_event_ids_exist": 1.0
+  },
+  "contract": "runs/min/claude/glm-5.3/20261028T220720Z/control/output_contract.json",
+  "problems": []
+ },
+ "headline": {
+  "audited_false_rate": null,
+  "b_difference": 0.487,
+  "ceiling": 0.8562,
+  "depth_band_share": 0.4086,
+  "depth_datum_known": true,
+  "depth_mode_share": 0.2698,
+  "dmag_mean_M2": 0.0618,
+  "dmag_mean_M3": -0.2833,
+  "dmag_mean_M4": null,
+  "dmag_median": 0.64,
+  "dmag_slope_per_unit": -0.4909,
+  "dmag_std": 0.4001,
+  "dt_mean_M2": 0.1642,
+  "dt_mean_M3": 0.049,
+  "dt_mean_M4": -1.202,
+  "dt_mean_s": 0.2178,
+  "dt_std_s": 1.1256,
+  "dz_median_km": -2.87,
+  "epi_gt5km": 0.5697,
+  "epi_mean_M2": 5.3122,
+  "epi_mean_M3": 5.8094,
+  "epi_mean_M4": 3.6728,
+  "epi_median_km": 5.2988,
+  "f1_M2": 0.7829,
+  "f1_M3": 0.6154,
+  "f1_M4": null,
+  "off_structure_after_shift": 0.6389,
+  "off_structure_fraction": 0.5615,
+  "pick_recall_P": 0.5351,
+  "pick_recall_S": 0.4564,
+  "pick_residual_mad_P_s": 0.0374,
+  "pick_residual_mad_S_s": 0.0651,
+  "precision_M2": 0.6857,
+  "precision_M3": 0.5,
+  "precision_M4": null,
+  "recall": 0.9058,
+  "recall_M2": 0.9123,
+  "recall_M3": 0.8,
+  "recall_M4": 1.0,
+  "recall_after_large": 0.9038,
+  "recall_norm": 1.0579,
+  "recall_other": 0.9059,
+  "scatter_median_km": 3.7963,
+  "shift_km": 3.8716,
+  "union_support": 0.7783
+ },
+ "process": {
+  "cost_usd": 30.812215999999967,
+  "elapsed_s": 37990.7,
+  "turns": 400
+ },
+ "leakage_flag": false,
+ "audit": {
+  "sampled": 50,
+  "unsupported": 1373,
+  "labels": null
+ },
+ "swap": {
+  "picks_round": "r9",
+  "location_method": "EDT_OT_WT",
+  "relocated": 2860,
+  "rows": {
+   "agent_locations": {
+    "recall_norm": 1.0579,
+    "shift_km": 3.8716,
+    "scatter_median_km": 3.7963,
+    "epi_gt5km": 0.5697,
+    "dz_median_km": -2.87,
+    "depth_mode_share": 0.2698,
+    "off_structure_fraction": 0.5615,
+    "off_structure_after_shift": 0.6389,
+    "dt_mean_s": 0.2178,
+    "dt_std_s": 1.1256,
+    "events_in_mask": 6824
+   },
+   "expert_locator": {
+    "recall_norm": 0.9571,
+    "shift_km": 1.9095,
+    "scatter_median_km": 3.4675,
+    "epi_gt5km": 0.3216,
+    "dz_median_km": -1.8063,
+    "depth_mode_share": 0.1326,
+    "off_structure_fraction": 0.4692,
+    "off_structure_after_shift": 0.4536,
+    "dt_mean_s": 0.3328,
+    "dt_std_s": 0.4843,
+    "events_in_mask": 32286
+   }
+  }
+ }
+}

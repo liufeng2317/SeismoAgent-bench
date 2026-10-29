@@ -1,0 +1,112 @@
+{
+ "run": {
+  "variant": "tools",
+  "harness": "claude",
+  "model": "glm-5.3",
+  "run_id": "20261028T220746Z",
+  "path": "runs/tools/claude/glm-5.3/20261028T220746Z"
+ },
+ "formal_state": "scored",
+ "run_state": "scored",
+ "completion": {
+  "completed": true,
+  "consistency": {
+   "coordinates_valid": 1.0,
+   "pick_counts_agree": 1.0,
+   "pick_event_ids_exist": 1.0
+  },
+  "contract": "runs/tools/claude/glm-5.3/20261028T220746Z/control/output_contract.json",
+  "problems": []
+ },
+ "headline": {
+  "audited_false_rate": null,
+  "b_difference": 0.699,
+  "ceiling": 0.8562,
+  "depth_band_share": 0.2656,
+  "depth_datum_known": true,
+  "depth_mode_share": 0.0375,
+  "dmag_mean_M2": -0.3379,
+  "dmag_mean_M3": -0.306,
+  "dmag_mean_M4": 0.05,
+  "dmag_median": 0.195,
+  "dmag_slope_per_unit": -0.4438,
+  "dmag_std": 0.3706,
+  "dt_mean_M2": 1.242,
+  "dt_mean_M3": 1.2706,
+  "dt_mean_M4": 1.037,
+  "dt_mean_s": 1.0186,
+  "dt_std_s": 0.2875,
+  "dz_median_km": -0.0665,
+  "epi_gt5km": 0.01,
+  "epi_mean_M2": 2.0979,
+  "epi_mean_M3": 1.8905,
+  "epi_mean_M4": 1.1356,
+  "epi_median_km": 1.2387,
+  "f1_M2": 0.9912,
+  "f1_M3": 1.0,
+  "f1_M4": 1.0,
+  "off_structure_after_shift": 0.1706,
+  "off_structure_fraction": 0.1179,
+  "pick_recall_P": 0.5744,
+  "pick_recall_S": 0.5436,
+  "pick_residual_mad_P_s": 0.028,
+  "pick_residual_mad_S_s": 0.0593,
+  "precision_M2": 1.0,
+  "precision_M3": 1.0,
+  "precision_M4": 1.0,
+  "recall": 0.9585,
+  "recall_M2": 0.9825,
+  "recall_M3": 1.0,
+  "recall_M4": 1.0,
+  "recall_after_large": 0.9615,
+  "recall_norm": 1.1195,
+  "recall_other": 0.9582,
+  "scatter_median_km": 1.1726,
+  "shift_km": 0.7107,
+  "union_support": 0.9853
+ },
+ "process": {
+  "cost_usd": 21.826486000000006,
+  "elapsed_s": 8276.3,
+  "turns": 335
+ },
+ "leakage_flag": false,
+ "audit": {
+  "sampled": 46,
+  "unsupported": 46,
+  "labels": null
+ },
+ "swap": {
+  "picks_round": "r9",
+  "location_method": "EDT_OT_WT",
+  "relocated": 1409,
+  "rows": {
+   "agent_locations": {
+    "recall_norm": 1.1195,
+    "shift_km": 0.7107,
+    "scatter_median_km": 1.1726,
+    "epi_gt5km": 0.01,
+    "dz_median_km": -0.0665,
+    "depth_mode_share": 0.0375,
+    "off_structure_fraction": 0.1179,
+    "off_structure_after_shift": 0.1706,
+    "dt_mean_s": 1.0186,
+    "dt_std_s": 0.2875,
+    "events_in_mask": 3411
+   },
+   "expert_locator": {
+    "recall_norm": 1.0542,
+    "shift_km": 1.2895,
+    "scatter_median_km": 1.6801,
+    "epi_gt5km": 0.0319,
+    "dz_median_km": 0.7112,
+    "depth_mode_share": 0.0338,
+    "off_structure_fraction": 0.0668,
+    "off_structure_after_shift": 0.074,
+    "dt_mean_s": 0.1388,
+    "dt_std_s": 0.3772,
+    "events_in_mask": 3740
+   }
+  }
+ }
+}
