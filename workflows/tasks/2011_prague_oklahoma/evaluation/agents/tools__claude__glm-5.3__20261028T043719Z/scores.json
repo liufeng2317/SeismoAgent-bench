@@ -18,27 +18,39 @@
    "coordinates_valid": 1.0
   }
  },
+ "metrics_version": 2,
  "headline": {
-  "recall": 0.7257,
-  "ceiling": 0.5265,
-  "recall_norm": 1.3783,
-  "union_support": 0.9723,
-  "epi_median_km": 0.3308,
-  "shift_km": 0.2047,
-  "scatter_median_km": 0.2563,
-  "epi_gt5km": 0.0146,
-  "dz_median_km": 1.236,
+  "recall": 0.7058,
+  "ceiling": 0.5131,
+  "recall_norm": 1.3756,
+  "recall_tight": 0.6991,
+  "recall_ref_cochran": 0.7058,
+  "recall_ref_mcmahon": 0.8234,
+  "union_support": 0.9591,
+  "epi_median_km": 0.3257,
+  "shift_km": 0.2067,
+  "scatter_median_km": 0.2513,
+  "epi_gt5km": 0.0,
+  "dz_median_km": 1.235,
   "depth_datum_known": true,
+  "dt_median_s": 0.128,
   "depth_mode_share": 0.0177,
   "depth_band_share": 0.225,
   "off_structure_fraction": 0.0203,
-  "off_structure_after_shift": 0.0206,
-  "recall_M2": 0.9833,
+  "off_structure_after_shift": 0.0203,
+  "recall_final": 0.4639,
+  "precision_final": 0.9412,
+  "event_ratio_final": 0.5011,
+  "shift_final_km": 0.0307,
+  "scatter_final_km": 0.2568,
+  "dz_final_km": 1.0987,
+  "dt_final_s": 0.0768,
+  "recall_M2": 0.9667,
   "precision_M2": 0.9767,
-  "f1_M2": 0.98,
-  "epi_mean_M2": 0.666,
-  "dt_mean_M2": 0.0757,
-  "dmag_mean_M2": -3.0125,
+  "f1_M2": 0.9717,
+  "epi_mean_M2": 0.5792,
+  "dt_mean_M2": 0.0612,
+  "dmag_mean_M2": -2.9976,
   "recall_M3": 1.0,
   "precision_M3": 1.0,
   "f1_M3": 1.0,
@@ -46,14 +58,116 @@
   "dt_mean_M3": 0.1615,
   "dmag_mean_M3": -2.995,
   "dmag_median": -2.77,
-  "dmag_std": 0.3805,
-  "dmag_slope_per_unit": -0.2851,
+  "dmag_std": 0.3741,
+  "dmag_slope_per_unit": -0.2751,
   "b_difference": 0.262,
-  "dt_mean_s": 0.104,
-  "dt_std_s": 0.3542,
+  "dt_mean_s": 0.1169,
+  "dt_std_s": 0.1572,
   "recall_after_large": 0.5833,
-  "recall_other": 0.7274,
-  "audited_false_rate": 0.0006
+  "recall_other": 0.7123,
+  "audited_false_rate": 0.0009,
+  "out_of_mask_fraction": 0.0943
+ },
+ "usability": {
+  "usable": false,
+  "failed": [
+   "detection",
+   "detection_tight",
+   "completeness_vs_final",
+   "depth_vs_final",
+   "magnitude_offset"
+  ],
+  "pending": [],
+  "checks": {
+   "detection": {
+    "metric": "recall_norm",
+    "value": 1.3756,
+    "op": ">=",
+    "threshold": 1.6653,
+    "final": 1.8503,
+    "verdict": "fail"
+   },
+   "detection_tight": {
+    "metric": "recall_tight",
+    "value": 0.6991,
+    "op": ">=",
+    "threshold": 0.8485,
+    "final": 0.9428,
+    "verdict": "fail"
+   },
+   "completeness_vs_final": {
+    "metric": "recall_final",
+    "value": 0.4639,
+    "op": ">=",
+    "threshold": 0.5,
+    "final": null,
+    "verdict": "fail"
+   },
+   "inside_region": {
+    "metric": "out_of_mask_fraction",
+    "value": 0.0943,
+    "op": "<=",
+    "threshold": 0.1,
+    "final": 0.0281,
+    "verdict": "pass"
+   },
+   "false_events": {
+    "metric": "audited_false_rate",
+    "value": 0.0009,
+    "op": "<=",
+    "threshold": 0.02,
+    "final": null,
+    "verdict": "pass"
+   },
+   "location_shift": {
+    "metric": "shift_km",
+    "value": 0.2067,
+    "op": "<=",
+    "threshold": 1.0,
+    "final": 0.176,
+    "verdict": "pass"
+   },
+   "origin_time": {
+    "metric": "dt_median_s",
+    "value": 0.128,
+    "op": "<=",
+    "threshold": 0.3,
+    "final": 0.0673,
+    "verdict": "pass"
+   },
+   "depth_vs_final": {
+    "metric": "dz_final_km",
+    "value": 1.0987,
+    "op": "abs<=",
+    "threshold": 1.0,
+    "final": null,
+    "verdict": "fail"
+   },
+   "depth_pileup": {
+    "metric": "depth_mode_share",
+    "value": 0.0177,
+    "op": "<=",
+    "threshold": 0.1107,
+    "final": 0.0907,
+    "verdict": "pass"
+   },
+   "structure": {
+    "metric": "off_structure_fraction",
+    "value": 0.0203,
+    "op": "<=",
+    "threshold": 0.05,
+    "final": 0.0004,
+    "verdict": "pass"
+   },
+   "magnitude_offset": {
+    "metric": "dmag_median",
+    "value": -2.77,
+    "op": "abs<=",
+    "threshold": 0.43,
+    "final": -0.23,
+    "verdict": "fail"
+   }
+  }
  },
  "process": {
   "cost_usd": 24.019563999999992,
@@ -63,7 +177,7 @@
  "leakage_flag": false,
  "audit": {
   "sampled": 50,
-  "unsupported": 94,
+  "unsupported": 134,
   "labels": {
    "counts": {
     "earthquake": 46,
@@ -71,10 +185,10 @@
     "undecidable": 3
    },
    "p_false": 0.0213,
-   "rate": 0.0006,
+   "rate": 0.0009,
    "rate_ci95": [
-    0.0001,
-    0.0031
+    0.0002,
+    0.0045
    ]
   }
  },
@@ -84,29 +198,41 @@
   "relocated": 2561,
   "rows": {
    "agent_locations": {
-    "recall_norm": 1.3783,
-    "shift_km": 0.2047,
-    "scatter_median_km": 0.2563,
-    "epi_gt5km": 0.0146,
-    "dz_median_km": 1.236,
+    "recall_norm": 1.3756,
+    "recall_tight": 0.6991,
+    "shift_km": 0.2067,
+    "scatter_median_km": 0.2513,
+    "epi_gt5km": 0.0,
+    "dz_median_km": 1.235,
+    "dt_median_s": 0.128,
     "depth_mode_share": 0.0177,
     "off_structure_fraction": 0.0203,
-    "off_structure_after_shift": 0.0206,
-    "dt_mean_s": 0.104,
-    "dt_std_s": 0.3542,
+    "off_structure_after_shift": 0.0203,
+    "dt_mean_s": 0.1169,
+    "dt_std_s": 0.1572,
+    "recall_final": 0.4639,
+    "shift_final_km": 0.0307,
+    "dz_final_km": 1.0987,
+    "dt_final_s": 0.0768,
     "events_in_mask": 3391
    },
    "expert_locator": {
-    "recall_norm": 1.116,
-    "shift_km": 0.1939,
-    "scatter_median_km": 0.3153,
-    "epi_gt5km": 0.0115,
-    "dz_median_km": 0.1612,
+    "recall_norm": 1.1164,
+    "recall_tight": 0.5683,
+    "shift_km": 0.1951,
+    "scatter_median_km": 0.3114,
+    "epi_gt5km": 0.0,
+    "dz_median_km": 0.1602,
+    "dt_median_s": 0.068,
     "depth_mode_share": 0.0698,
     "off_structure_fraction": 0.0063,
     "off_structure_after_shift": 0.0063,
-    "dt_mean_s": 0.0444,
-    "dt_std_s": 0.3009,
+    "dt_mean_s": 0.0517,
+    "dt_std_s": 0.1511,
+    "recall_final": 0.3388,
+    "shift_final_km": 0.0,
+    "dz_final_km": 0.0,
+    "dt_final_s": 0.0193,
     "events_in_mask": 3562
    }
   }

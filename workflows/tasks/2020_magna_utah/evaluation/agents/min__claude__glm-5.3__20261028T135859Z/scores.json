@@ -16,9 +16,20 @@
   ],
   "contract": "runs/min/claude/glm-5.3/20261028T135859Z/control/output_contract.json"
  },
+ "metrics_version": 2,
  "headline": {
   "recall": 0.0,
-  "recall_norm": 0.0
+  "recall_norm": 0.0,
+  "recall_tight": 0.0,
+  "recall_final": 0.0
+ },
+ "usability": {
+  "usable": false,
+  "failed": [
+   "completed"
+  ],
+  "pending": [],
+  "checks": {}
  },
  "process": {
   "cost_usd": 12.630659000000005,

@@ -18,21 +18,34 @@
    "coordinates_valid": 1.0
   }
  },
+ "metrics_version": 2,
  "headline": {
-  "recall": 0.6167,
-  "ceiling": 0.7002,
-  "recall_norm": 0.8807,
-  "union_support": 0.9762,
-  "epi_median_km": 2.5087,
-  "shift_km": 2.4988,
-  "scatter_median_km": 0.3803,
-  "epi_gt5km": 0.0117,
+  "recall": 0.5888,
+  "ceiling": 0.6801,
+  "recall_norm": 0.8658,
+  "recall_tight": 0.521,
+  "recall_ref_pang": 0.5888,
+  "recall_ref_baker": 0.6725,
+  "recall_ref_uuss": 0.9265,
+  "union_support": 0.967,
+  "epi_median_km": 2.5045,
+  "shift_km": 2.4963,
+  "scatter_median_km": 0.3718,
+  "epi_gt5km": 0.0,
   "dz_median_km": -1.721,
   "depth_datum_known": true,
+  "dt_median_s": 0.113,
   "depth_mode_share": 0.0199,
   "depth_band_share": 0.3651,
   "off_structure_fraction": 0.0035,
   "off_structure_after_shift": 0.0032,
+  "recall_final": 0.5081,
+  "precision_final": 0.9237,
+  "event_ratio_final": 0.5745,
+  "shift_final_km": 2.3541,
+  "scatter_final_km": 0.5069,
+  "dz_final_km": -1.94,
+  "dt_final_s": 0.197,
   "recall_M2": 0.9786,
   "precision_M2": 0.9855,
   "f1_M2": 0.982,
@@ -58,18 +71,130 @@
   "dt_mean_M5": 0.024,
   "dmag_mean_M5": 0.31,
   "dmag_median": 0.67,
-  "dmag_std": 0.2048,
-  "dmag_slope_per_unit": -0.1556,
+  "dmag_std": 0.2037,
+  "dmag_slope_per_unit": -0.1551,
   "b_difference": 0.171,
-  "dt_mean_s": -0.1102,
-  "dt_std_s": 0.2732,
-  "recall_after_large": 0.7333,
-  "recall_other": 0.6021,
-  "audited_false_rate": 0.0017,
+  "dt_mean_s": -0.1041,
+  "dt_std_s": 0.1531,
+  "recall_after_large": 0.7097,
+  "recall_other": 0.595,
+  "audited_false_rate": 0.0024,
   "pick_recall_P": 0.8382,
   "pick_residual_mad_P_s": 0.03,
   "pick_recall_S": 0.668,
-  "pick_residual_mad_S_s": 0.05
+  "pick_residual_mad_S_s": 0.05,
+  "out_of_mask_fraction": 0.0269
+ },
+ "usability": {
+  "usable": false,
+  "failed": [
+   "detection",
+   "detection_tight",
+   "location_shift",
+   "depth_vs_final",
+   "magnitude_offset"
+  ],
+  "pending": [],
+  "checks": {
+   "detection": {
+    "metric": "recall_norm",
+    "value": 0.8658,
+    "op": ">=",
+    "threshold": 1.0285,
+    "final": 1.1428,
+    "verdict": "fail"
+   },
+   "detection_tight": {
+    "metric": "recall_tight",
+    "value": 0.521,
+    "op": ">=",
+    "threshold": 0.6975,
+    "final": 0.775,
+    "verdict": "fail"
+   },
+   "completeness_vs_final": {
+    "metric": "recall_final",
+    "value": 0.5081,
+    "op": ">=",
+    "threshold": 0.5,
+    "final": null,
+    "verdict": "pass"
+   },
+   "inside_region": {
+    "metric": "out_of_mask_fraction",
+    "value": 0.0269,
+    "op": "<=",
+    "threshold": 0.1,
+    "final": 0.0173,
+    "verdict": "pass"
+   },
+   "false_events": {
+    "metric": "audited_false_rate",
+    "value": 0.0024,
+    "op": "<=",
+    "threshold": 0.02,
+    "final": null,
+    "verdict": "pass"
+   },
+   "location_shift": {
+    "metric": "shift_km",
+    "value": 2.4963,
+    "op": "<=",
+    "threshold": 1.4507,
+    "final": 0.9507,
+    "verdict": "fail"
+   },
+   "origin_time": {
+    "metric": "dt_median_s",
+    "value": 0.113,
+    "op": "<=",
+    "threshold": 0.326,
+    "final": 0.126,
+    "verdict": "pass"
+   },
+   "depth_vs_final": {
+    "metric": "dz_final_km",
+    "value": -1.94,
+    "op": "abs<=",
+    "threshold": 1.0,
+    "final": null,
+    "verdict": "fail"
+   },
+   "depth_pileup": {
+    "metric": "depth_mode_share",
+    "value": 0.0199,
+    "op": "<=",
+    "threshold": 0.05,
+    "final": 0.0115,
+    "verdict": "pass"
+   },
+   "structure": {
+    "metric": "off_structure_fraction",
+    "value": 0.0035,
+    "op": "<=",
+    "threshold": 0.05,
+    "final": 0.0031,
+    "verdict": "pass"
+   },
+   "magnitude_offset": {
+    "metric": "dmag_median",
+    "value": 0.67,
+    "op": "abs<=",
+    "threshold": 0.28,
+    "final": 0.08,
+    "verdict": "fail"
+   },
+   "large_events_present": {
+    "metric": "recall_M4+recall_M5",
+    "value": {
+     "recall_M4": 1.0,
+     "recall_M5": 1.0
+    },
+    "op": "all ==",
+    "threshold": 1.0,
+    "verdict": "pass"
+   }
+  }
  },
  "process": {
   "cost_usd": 61.31489799999995,
@@ -79,7 +204,7 @@
  "leakage_flag": false,
  "audit": {
   "sampled": 50,
-  "unsupported": 74,
+  "unsupported": 91,
   "labels": {
    "counts": {
     "earthquake": 39,
@@ -87,10 +212,10 @@
     "undecidable": 8
    },
    "p_false": 0.0714,
-   "rate": 0.0017,
+   "rate": 0.0024,
    "rate_ci95": [
-    0.0006,
-    0.0045
+    0.0008,
+    0.0063
    ]
   }
  },

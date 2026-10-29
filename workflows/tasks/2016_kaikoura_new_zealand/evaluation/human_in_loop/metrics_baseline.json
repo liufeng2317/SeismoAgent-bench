@@ -1,8 +1,8 @@
 {
- "metrics_version": 1,
- "scorer_commit": "fc4037c7f5a5a49936b0419c641e80d173d06660",
- "scorer_dirty": false,
- "generated_utc": "2026-10-27T20:48:00+00:00",
+ "metrics_version": 2,
+ "scorer_commit": "9a7c066f8acadc5c58e9aa35c417fd2f7ed9ce6b",
+ "scorer_dirty": true,
+ "generated_utc": "2026-10-29T15:59:29+00:00",
  "task": "2016_kaikoura_new_zealand",
  "references": {
   "tan": {
@@ -37,36 +37,38 @@
  "expert": {
   "final": {
    "path": "expert/export/r8/60_catalog/catalog_events.csv",
-   "events": 12924
+   "events": 12924,
+   "out_of_mask_fraction": 0.0372
   },
   "blind": {
    "path": "expert/export/r1/04_locate_nonlinloc/full/events.csv",
-   "events": 4758
+   "events": 4758,
+   "out_of_mask_fraction": 0.0885
   }
  },
  "ceilings": {
   "tan": {
-   "value": 0.1626,
+   "value": 0.1581,
    "by": "chamberlain",
    "recalls": {
-    "chamberlain": 0.1626,
-    "geonet": 0.1455
+    "chamberlain": 0.1581,
+    "geonet": 0.1439
    }
   },
   "chamberlain": {
-   "value": 0.6991,
+   "value": 0.6947,
    "by": "tan",
    "recalls": {
-    "tan": 0.6991,
-    "geonet": 0.2801
+    "tan": 0.6947,
+    "geonet": 0.2782
    }
   },
   "geonet": {
-   "value": 0.9383,
+   "value": 0.9371,
    "by": "tan",
    "recalls": {
-    "tan": 0.9383,
-    "chamberlain": 0.42
+    "tan": 0.9371,
+    "chamberlain": 0.4154
    }
   }
  },
@@ -111,12 +113,14 @@
       "p90_km": 3.0661
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 111,
-       "epi_median_km": 1.627
+      "4s_15km": {
+       "matched": 119,
+       "chance": 1,
+       "epi_median_km": 1.7455
       },
       "1s_3km": {
        "matched": 96,
+       "chance": 1,
        "epi_median_km": 1.4771
       }
      }
@@ -131,6 +135,8 @@
       "matched": 1580,
       "reference_events": 2260,
       "recall": 0.6991,
+      "chance": 33,
+      "recall_net": 0.6947,
       "recall_by_mag": [
        {
         "magnitude_from": 0.0,
@@ -203,13 +209,17 @@
       "p90_km": 7.9653
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 1331,
-       "recall": 0.5889
+      "4s_15km": {
+       "matched": 1580,
+       "chance": 33,
+       "recall": 0.6991,
+       "recall_net": 0.6947
       },
       "1s_3km": {
        "matched": 850,
-       "recall": 0.3761
+       "chance": 2,
+       "recall": 0.3761,
+       "recall_net": 0.3756
       }
      }
     },
@@ -223,6 +233,8 @@
       "matched": 1414,
       "reference_events": 1507,
       "recall": 0.9383,
+      "chance": 28,
+      "recall_net": 0.9371,
       "recall_by_mag": [
        {
         "magnitude_from": 1.0,
@@ -285,22 +297,63 @@
       }
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 975,
-       "recall": 0.647
+      "4s_15km": {
+       "matched": 1414,
+       "chance": 28,
+       "recall": 0.9383,
+       "recall_net": 0.9371
       },
       "1s_3km": {
        "matched": 407,
-       "recall": 0.2701
+       "chance": 2,
+       "recall": 0.2701,
+       "recall_net": 0.2691
       }
      }
     }
    },
+   "versus_final": {
+    "gates": [
+     4.0,
+     15.0
+    ],
+    "final_events": 12924,
+    "candidate_events": 9720,
+    "matched": 5083,
+    "chance": 248,
+    "recall": 0.3814,
+    "precision": 0.5105,
+    "event_ratio": 0.7521,
+    "location": {
+     "pairs": 5083,
+     "epi_median_km": 3.3773,
+     "epi_p90_km": 7.7399,
+     "epi_gt2km": 0.7836,
+     "epi_gt5km": 0.2607,
+     "shift_east_km": 0.8039,
+     "shift_north_km": -1.5874,
+     "shift_km": 1.7793,
+     "scatter_median_km": 2.7819,
+     "scatter_p90_km": 7.4124,
+     "dt_median_s": 0.4583,
+     "epi_median_by_period_km": [
+      3.4232,
+      3.2879,
+      3.3545,
+      3.4471
+     ],
+     "depth_pairs": 5083,
+     "dz_median_km": -1.0137,
+     "dz_mad_km": 2.5919,
+     "dz_gt2km": 0.6148,
+     "depth_datum_known": true
+    }
+   },
    "union_support": {
-    "fraction": 0.2438,
+    "fraction": 0.2395,
     "fraction_raw": 0.2438,
     "supported": 2370,
-    "chance": 0,
+    "chance": 55,
     "events": 9720,
     "members": [
      "chamberlain",
@@ -759,6 +812,8 @@
       "matched": 119,
       "reference_events": 9720,
       "recall": 0.0122,
+      "chance": 0,
+      "recall_net": 0.0122,
       "recall_by_mag": [
        {
         "magnitude_from": -1.0,
@@ -835,13 +890,17 @@
       "p90_km": 3.46
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 111,
-       "recall": 0.0114
+      "4s_15km": {
+       "matched": 119,
+       "chance": 0,
+       "recall": 0.0122,
+       "recall_net": 0.0122
       },
       "1s_3km": {
        "matched": 96,
-       "recall": 0.0099
+       "chance": 0,
+       "recall": 0.0099,
+       "recall_net": 0.0099
       }
      }
     },
@@ -855,6 +914,8 @@
       "matched": 121,
       "reference_events": 2260,
       "recall": 0.0535,
+      "chance": 0,
+      "recall_net": 0.0535,
       "recall_by_mag": [
        {
         "magnitude_from": 0.0,
@@ -921,13 +982,17 @@
       "p90_km": 2.094
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 117,
-       "recall": 0.0518
+      "4s_15km": {
+       "matched": 121,
+       "chance": 0,
+       "recall": 0.0535,
+       "recall_net": 0.0535
       },
       "1s_3km": {
        "matched": 90,
-       "recall": 0.0398
+       "chance": 0,
+       "recall": 0.0398,
+       "recall_net": 0.0398
       }
      }
     },
@@ -941,6 +1006,8 @@
       "matched": 121,
       "reference_events": 1507,
       "recall": 0.0803,
+      "chance": 0,
+      "recall_net": 0.0803,
       "recall_by_mag": [
        {
         "magnitude_from": 1.0,
@@ -997,15 +1064,56 @@
       "by_type": {}
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 102,
-       "recall": 0.0677
+      "4s_15km": {
+       "matched": 121,
+       "chance": 0,
+       "recall": 0.0803,
+       "recall_net": 0.0803
       },
       "1s_3km": {
        "matched": 56,
-       "recall": 0.0372
+       "chance": 0,
+       "recall": 0.0372,
+       "recall_net": 0.0372
       }
      }
+    }
+   },
+   "versus_final": {
+    "gates": [
+     4.0,
+     15.0
+    ],
+    "final_events": 12924,
+    "candidate_events": 122,
+    "matched": 120,
+    "chance": 2,
+    "recall": 0.0091,
+    "precision": 0.9833,
+    "event_ratio": 0.0094,
+    "location": {
+     "pairs": 120,
+     "epi_median_km": 3.0481,
+     "epi_p90_km": 6.0709,
+     "epi_gt2km": 0.7917,
+     "epi_gt5km": 0.225,
+     "shift_east_km": -0.5328,
+     "shift_north_km": -1.0016,
+     "shift_km": 1.1345,
+     "scatter_median_km": 2.7846,
+     "scatter_p90_km": 6.3793,
+     "dt_median_s": 0.6215,
+     "epi_median_by_period_km": [
+      2.882,
+      3.5783,
+      2.6709,
+      3.0713
+     ],
+     "depth_pairs": 120,
+     "dz_median_km": 0.8656,
+     "dz_mad_km": 1.2955,
+     "dz_gt2km": 0.35,
+     "depth_datum_known": true
     }
    },
    "union_support": {
@@ -1439,6 +1547,8 @@
       "matched": 1580,
       "reference_events": 9720,
       "recall": 0.1626,
+      "chance": 51,
+      "recall_net": 0.1581,
       "recall_by_mag": [
        {
         "magnitude_from": -1.0,
@@ -1521,13 +1631,17 @@
       "p90_km": 8.2547
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 1332,
-       "recall": 0.137
+      "4s_15km": {
+       "matched": 1580,
+       "chance": 51,
+       "recall": 0.1626,
+       "recall_net": 0.1581
       },
       "1s_3km": {
        "matched": 850,
-       "recall": 0.0874
+       "chance": 4,
+       "recall": 0.0874,
+       "recall_net": 0.0871
       }
      }
     },
@@ -1567,12 +1681,14 @@
       "p90_km": 1.9491
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 117,
-       "epi_median_km": 1.1343
+      "4s_15km": {
+       "matched": 121,
+       "chance": 1,
+       "epi_median_km": 1.1872
       },
       "1s_3km": {
        "matched": 90,
+       "chance": 1,
        "epi_median_km": 0.9837
       }
      }
@@ -1587,6 +1703,8 @@
       "matched": 633,
       "reference_events": 1507,
       "recall": 0.42,
+      "chance": 12,
+      "recall_net": 0.4154,
       "recall_by_mag": [
        {
         "magnitude_from": 1.0,
@@ -1649,22 +1767,63 @@
       }
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 384,
-       "recall": 0.2548
+      "4s_15km": {
+       "matched": 633,
+       "chance": 12,
+       "recall": 0.42,
+       "recall_net": 0.4154
       },
       "1s_3km": {
        "matched": 107,
-       "recall": 0.071
+       "chance": 1,
+       "recall": 0.071,
+       "recall_net": 0.0704
       }
      }
     }
    },
+   "versus_final": {
+    "gates": [
+     4.0,
+     15.0
+    ],
+    "final_events": 12924,
+    "candidate_events": 2260,
+    "matched": 1855,
+    "chance": 101,
+    "recall": 0.1368,
+    "precision": 0.8124,
+    "event_ratio": 0.1749,
+    "location": {
+     "pairs": 1855,
+     "epi_median_km": 3.4078,
+     "epi_p90_km": 6.6015,
+     "epi_gt2km": 0.8426,
+     "epi_gt5km": 0.2119,
+     "shift_east_km": 0.6453,
+     "shift_north_km": -2.3997,
+     "shift_km": 2.485,
+     "scatter_median_km": 2.1995,
+     "scatter_p90_km": 6.2052,
+     "dt_median_s": 0.3953,
+     "epi_median_by_period_km": [
+      3.562,
+      3.5297,
+      3.4676,
+      3.0883
+     ],
+     "depth_pairs": 1855,
+     "dz_median_km": -0.5346,
+     "dz_mad_km": 2.1353,
+     "dz_gt2km": 0.5186,
+     "depth_datum_known": true
+    }
+   },
    "union_support": {
-    "fraction": 0.7071,
+    "fraction": 0.7003,
     "fraction_raw": 0.7071,
     "supported": 1598,
-    "chance": 0,
+    "chance": 51,
     "events": 2260,
     "members": [
      "tan",
@@ -2063,6 +2222,8 @@
       "matched": 1414,
       "reference_events": 9720,
       "recall": 0.1455,
+      "chance": 18,
+      "recall_net": 0.1439,
       "recall_by_mag": [
        {
         "magnitude_from": -1.0,
@@ -2145,13 +2306,17 @@
       "p90_km": 15.1617
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 974,
-       "recall": 0.1002
+      "4s_15km": {
+       "matched": 1414,
+       "chance": 18,
+       "recall": 0.1455,
+       "recall_net": 0.1439
       },
       "1s_3km": {
        "matched": 407,
-       "recall": 0.0419
+       "chance": 1,
+       "recall": 0.0419,
+       "recall_net": 0.0418
       }
      }
     },
@@ -2191,12 +2356,14 @@
       "p90_km": 4.5593
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 102,
-       "epi_median_km": 2.8197
+      "4s_15km": {
+       "matched": 121,
+       "chance": 0,
+       "epi_median_km": 3.1838
       },
       "1s_3km": {
        "matched": 56,
+       "chance": 0,
        "epi_median_km": 2.1424
       }
      }
@@ -2211,6 +2378,8 @@
       "matched": 633,
       "reference_events": 2260,
       "recall": 0.2801,
+      "chance": 6,
+      "recall_net": 0.2782,
       "recall_by_mag": [
        {
         "magnitude_from": 0.0,
@@ -2283,22 +2452,63 @@
       "p90_km": 15.9738
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 384,
-       "recall": 0.1699
+      "4s_15km": {
+       "matched": 633,
+       "chance": 6,
+       "recall": 0.2801,
+       "recall_net": 0.2782
       },
       "1s_3km": {
        "matched": 107,
-       "recall": 0.0473
+       "chance": 0,
+       "recall": 0.0473,
+       "recall_net": 0.0473
       }
      }
     }
    },
+   "versus_final": {
+    "gates": [
+     4.0,
+     15.0
+    ],
+    "final_events": 12924,
+    "candidate_events": 1507,
+    "matched": 1380,
+    "chance": 47,
+    "recall": 0.1035,
+    "precision": 0.913,
+    "event_ratio": 0.1166,
+    "location": {
+     "pairs": 1380,
+     "epi_median_km": 3.1552,
+     "epi_p90_km": 8.3984,
+     "epi_gt2km": 0.7007,
+     "epi_gt5km": 0.2848,
+     "shift_east_km": 0.1189,
+     "shift_north_km": -0.0034,
+     "shift_km": 0.1189,
+     "scatter_median_km": 3.1732,
+     "scatter_p90_km": 8.4047,
+     "dt_median_s": 0.4121,
+     "epi_median_by_period_km": [
+      2.8368,
+      3.0084,
+      3.5877,
+      3.3965
+     ],
+     "depth_pairs": 1380,
+     "dz_median_km": 5.5938,
+     "dz_mad_km": 5.6187,
+     "dz_gt2km": 0.8188,
+     "depth_datum_known": true
+    }
+   },
    "union_support": {
-    "fraction": 0.9429,
+    "fraction": 0.9422,
     "fraction_raw": 0.9429,
     "supported": 1421,
-    "chance": 0,
+    "chance": 19,
     "events": 1507,
     "members": [
      "tan",
@@ -2353,6 +2563,8 @@
       "matched": 5083,
       "reference_events": 9720,
       "recall": 0.5229,
+      "chance": 242,
+      "recall_net": 0.5108,
       "recall_by_mag": [
        {
         "magnitude_from": -1.0,
@@ -2435,13 +2647,17 @@
       "p90_km": 9.4418
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 3743,
-       "recall": 0.3851
+      "4s_15km": {
+       "matched": 5083,
+       "chance": 242,
+       "recall": 0.5229,
+       "recall_net": 0.5108
       },
       "1s_3km": {
        "matched": 2035,
-       "recall": 0.2094
+       "chance": 9,
+       "recall": 0.2094,
+       "recall_net": 0.2086
       }
      }
     },
@@ -2481,12 +2697,14 @@
       "p90_km": 5.5932
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 93,
-       "epi_median_km": 2.685
+      "4s_15km": {
+       "matched": 120,
+       "chance": 1,
+       "epi_median_km": 3.0503
       },
       "1s_3km": {
        "matched": 47,
+       "chance": 0,
        "epi_median_km": 2.0451
       }
      }
@@ -2501,6 +2719,8 @@
       "matched": 1855,
       "reference_events": 2260,
       "recall": 0.8208,
+      "chance": 94,
+      "recall_net": 0.813,
       "recall_by_mag": [
        {
         "magnitude_from": 0.0,
@@ -2573,13 +2793,17 @@
       "p90_km": 7.4161
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 1459,
-       "recall": 0.6456
+      "4s_15km": {
+       "matched": 1855,
+       "chance": 94,
+       "recall": 0.8208,
+       "recall_net": 0.813
       },
       "1s_3km": {
        "matched": 703,
-       "recall": 0.3111
+       "chance": 3,
+       "recall": 0.3111,
+       "recall_net": 0.3101
       }
      }
     },
@@ -2593,6 +2817,8 @@
       "matched": 1380,
       "reference_events": 1507,
       "recall": 0.9157,
+      "chance": 47,
+      "recall_net": 0.913,
       "recall_by_mag": [
        {
         "magnitude_from": 1.0,
@@ -2655,22 +2881,26 @@
       }
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 980,
-       "recall": 0.6503
+      "4s_15km": {
+       "matched": 1380,
+       "chance": 47,
+       "recall": 0.9157,
+       "recall_net": 0.913
       },
       "1s_3km": {
        "matched": 583,
-       "recall": 0.3869
+       "chance": 2,
+       "recall": 0.3869,
+       "recall_net": 0.386
       }
      }
     }
    },
    "union_support": {
-    "fraction": 0.4346,
+    "fraction": 0.422,
     "fraction_raw": 0.4346,
     "supported": 5617,
-    "chance": 0,
+    "chance": 282,
     "events": 12924,
     "members": [
      "tan",
@@ -3118,20 +3348,32 @@
     }
    },
    "headline": {
-    "recall": 0.8208,
-    "ceiling": 0.6991,
-    "recall_norm": 1.1741,
-    "union_support": 0.4346,
+    "recall": 0.813,
+    "ceiling": 0.6947,
+    "recall_norm": 1.1703,
+    "recall_tight": 0.3101,
+    "recall_ref_tan": 0.5108,
+    "recall_ref_chamberlain": 0.813,
+    "recall_ref_geonet": 0.913,
+    "union_support": 0.422,
     "epi_median_km": 3.0481,
     "shift_km": 1.1345,
     "scatter_median_km": 2.7846,
     "epi_gt5km": 0.225,
     "dz_median_km": -0.8656,
     "depth_datum_known": true,
+    "dt_median_s": 0.6215,
     "depth_mode_share": 0.0103,
     "depth_band_share": 0.1014,
     "off_structure_fraction": 0.0081,
     "off_structure_after_shift": 0.0077,
+    "recall_final": null,
+    "precision_final": null,
+    "event_ratio_final": null,
+    "shift_final_km": null,
+    "scatter_final_km": null,
+    "dz_final_km": null,
+    "dt_final_s": null,
     "recall_M2": 0.9058,
     "precision_M2": 0.9509,
     "f1_M2": 0.9278,
@@ -3163,7 +3405,8 @@
     "dt_mean_s": 0.27,
     "dt_std_s": 0.6517,
     "recall_after_large": 0.8273,
-    "recall_other": 0.8201
+    "recall_other": 0.8201,
+    "out_of_mask_fraction": 0.0372
    }
   },
   "expert_blind": {
@@ -3180,6 +3423,8 @@
       "matched": 3540,
       "reference_events": 9720,
       "recall": 0.3642,
+      "chance": 78,
+      "recall_net": 0.3591,
       "recall_by_mag": [
        {
         "magnitude_from": -1.0,
@@ -3256,13 +3501,17 @@
       "p90_km": 9.9138
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 2339,
-       "recall": 0.2406
+      "4s_15km": {
+       "matched": 3540,
+       "chance": 78,
+       "recall": 0.3642,
+       "recall_net": 0.3591
       },
       "1s_3km": {
        "matched": 1091,
-       "recall": 0.1122
+       "chance": 3,
+       "recall": 0.1122,
+       "recall_net": 0.112
       }
      }
     },
@@ -3302,12 +3551,14 @@
       "p90_km": 7.7812
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 68,
-       "epi_median_km": 3.2764
+      "4s_15km": {
+       "matched": 101,
+       "chance": 0,
+       "epi_median_km": 4.1594
       },
       "1s_3km": {
        "matched": 28,
+       "chance": 0,
        "epi_median_km": 2.288
       }
      }
@@ -3322,6 +3573,8 @@
       "matched": 1268,
       "reference_events": 2260,
       "recall": 0.5611,
+      "chance": 28,
+      "recall_net": 0.5556,
       "recall_by_mag": [
        {
         "magnitude_from": 0.0,
@@ -3388,13 +3641,17 @@
       "p90_km": 9.5011
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 741,
-       "recall": 0.3279
+      "4s_15km": {
+       "matched": 1268,
+       "chance": 28,
+       "recall": 0.5611,
+       "recall_net": 0.5556
       },
       "1s_3km": {
        "matched": 273,
-       "recall": 0.1208
+       "chance": 2,
+       "recall": 0.1208,
+       "recall_net": 0.12
       }
      }
     },
@@ -3408,6 +3665,8 @@
       "matched": 1171,
       "reference_events": 1507,
       "recall": 0.777,
+      "chance": 22,
+      "recall_net": 0.7737,
       "recall_by_mag": [
        {
         "magnitude_from": 1.0,
@@ -3464,22 +3723,63 @@
       "by_type": {}
      },
      "sensitivity": {
-      "2s_5km": {
-       "matched": 765,
-       "recall": 0.5076
+      "4s_15km": {
+       "matched": 1171,
+       "chance": 22,
+       "recall": 0.777,
+       "recall_net": 0.7737
       },
       "1s_3km": {
        "matched": 449,
-       "recall": 0.2979
+       "chance": 1,
+       "recall": 0.2979,
+       "recall_net": 0.2975
       }
      }
     }
    },
+   "versus_final": {
+    "gates": [
+     4.0,
+     15.0
+    ],
+    "final_events": 12924,
+    "candidate_events": 4758,
+    "matched": 4420,
+    "chance": 203,
+    "recall": 0.3315,
+    "precision": 0.9258,
+    "event_ratio": 0.3682,
+    "location": {
+     "pairs": 4420,
+     "epi_median_km": 2.092,
+     "epi_p90_km": 5.2226,
+     "epi_gt2km": 0.5124,
+     "epi_gt5km": 0.1093,
+     "shift_east_km": -1.0606,
+     "shift_north_km": 0.5944,
+     "shift_km": 1.2158,
+     "scatter_median_km": 1.5288,
+     "scatter_p90_km": 5.072,
+     "dt_median_s": 0.1801,
+     "epi_median_by_period_km": [
+      2.1253,
+      2.0976,
+      2.0771,
+      1.9157
+     ],
+     "depth_pairs": 4420,
+     "dz_median_km": 1.9219,
+     "dz_mad_km": 1.897,
+     "dz_gt2km": 0.5848,
+     "depth_datum_known": true
+    }
+   },
    "union_support": {
-    "fraction": 0.7825,
+    "fraction": 0.7781,
     "fraction_raw": 0.7825,
     "supported": 3723,
-    "chance": 0,
+    "chance": 93,
     "events": 4758,
     "members": [
      "tan",
@@ -3891,20 +4191,32 @@
     }
    },
    "headline": {
-    "recall": 0.5611,
-    "ceiling": 0.6991,
-    "recall_norm": 0.8026,
-    "union_support": 0.7825,
+    "recall": 0.5556,
+    "ceiling": 0.6947,
+    "recall_norm": 0.7998,
+    "recall_tight": 0.12,
+    "recall_ref_tan": 0.3591,
+    "recall_ref_chamberlain": 0.5556,
+    "recall_ref_geonet": 0.7737,
+    "union_support": 0.7781,
     "epi_median_km": 4.1554,
     "shift_km": 2.122,
     "scatter_median_km": 2.9402,
     "epi_gt5km": 0.3267,
     "dz_median_km": -0.0946,
     "depth_datum_known": true,
+    "dt_median_s": 0.4984,
     "depth_mode_share": 0.0189,
     "depth_band_share": 0.0946,
     "off_structure_fraction": 0.0132,
     "off_structure_after_shift": 0.0109,
+    "recall_final": 0.3315,
+    "precision_final": 0.9258,
+    "event_ratio_final": 0.3682,
+    "shift_final_km": 1.2158,
+    "scatter_final_km": 1.5288,
+    "dz_final_km": 1.9219,
+    "dt_final_s": 0.1801,
     "recall_M2": 0.7451,
     "precision_M2": null,
     "f1_M2": null,
@@ -3936,7 +4248,8 @@
     "dt_mean_s": 0.4285,
     "dt_std_s": 0.6935,
     "recall_after_large": 0.55,
-    "recall_other": 0.5623
+    "recall_other": 0.5623,
+    "out_of_mask_fraction": 0.0885
    }
   }
  }
