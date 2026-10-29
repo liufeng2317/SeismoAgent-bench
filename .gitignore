@@ -108,4 +108,4 @@ data/2019_ridgecrest_california/analysis/figures/instrument_response/response_ex
 /data/2016_kaikoura_new_zealand/references/TAN2024_JB028735/parsed/supplement/2024jb028735-sup-0004-table si-s11__extracted.md
 
 # Host-specific proxy/bootstrap script from external evaluation notes.
-docs/reference/codex-eval-tutorial/scripts/setup_proxy_env.sh
+docs/archive/2026-09_geodatabench_codex_notes/scripts/setup_proxy_env.sh
