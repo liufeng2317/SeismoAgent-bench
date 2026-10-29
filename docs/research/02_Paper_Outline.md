@@ -31,7 +31,7 @@ The paper answers it in four parts:
 
 1. **Introduction** — agentic science; earthquake catalogs as a complete, objectively testable task.
 2. **Benchmark** — six tiered cases; multiple references and the ceiling; the human-in-loop final as the upper bound.
-3. **Evaluation** — catalog metrics v2 (gates at the sequence scale, chance correction, direct comparison with the final); shift/scatter decomposition; component swap; blind audit; trusted-catalog verdict by dimension, completeness apart. Include the v1 → v2 lesson: a headline that hides a scattered catalog.
+3. **Evaluation** ([`03_Scoring_Method.md`](03_Scoring_Method.md)) — catalog metrics v2 (gates at the sequence scale, chance correction, direct comparison with the final); shift/scatter decomposition; component swap; blind audit; trusted-catalog verdict by dimension, completeness apart. Include the v1 → v2 lesson: a headline that hides a scattered catalog.
 4. **Results I: tools** — S0 vs S1 (necessary, not sufficient).
 5. **Results II: knowledge** — S1 vs S2 by dimension and tier.
 6. **Results III: human-in-loop iteration** — expert ladder; intervention coding.

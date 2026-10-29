@@ -1,5 +1,7 @@
 """CLI: ``python -m SeismoAgentBench.scoring.catalog_metrics {baseline,run,summary,audit,ladder,swap} --task-dir T [--run-dir R]``.
 
+``table`` writes the complete score table across all cases (docs/research/progress/SCORE_TABLE.md).
+
 audit prepares the blind review of a scored run (evaluation/audit/); rerun ``run`` after labelling.
 """
 
@@ -13,17 +15,25 @@ from .audit import prepare_review
 from .case import score_baseline, score_run
 from .ladder import score_ladder
 from .swap import run_swap
+from .table import write_table
 from .summary import summarize
 
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(prog="python -m SeismoAgentBench.scoring.catalog_metrics",
                                      description=__doc__)
-    parser.add_argument("command", choices=("baseline", "run", "summary", "audit", "ladder", "swap"))
-    parser.add_argument("--task-dir", type=Path, required=True)
+    parser.add_argument("command", choices=("baseline", "run", "summary", "audit", "ladder", "swap", "table"))
+    parser.add_argument("--task-dir", type=Path, help="workflows/tasks/<case> (every command except table)")
+    parser.add_argument("--tasks-root", type=Path, default=Path("workflows/tasks"), help="table: all task packages")
+    parser.add_argument("--output", type=Path, default=Path("docs/research/progress/SCORE_TABLE.md"), help="table: output file")
     parser.add_argument("--run-dir", type=Path, help="runs/<variant>/<harness>/<model>/<run_id> (command run)")
     parser.add_argument("--rescore", action="store_true", help="summary: rescore every run first")
     args = parser.parse_args(argv)
+    if args.command == "table":
+        print(write_table(args.tasks_root, args.output))
+        return 0
+    if args.task_dir is None:
+        parser.error(f"{args.command} needs --task-dir")
     if args.command == "baseline":
         report = score_baseline(args.task_dir)
         summary = {k: v.get("headline") for k, v in report["rows"].items() if "headline" in v}

@@ -1,6 +1,6 @@
 # Evaluation metrics (v2, pre-registered)
 
-This document fixes how every Agent catalog is scored. Version 1 was pre-registered on 2026-10-27, revised while it was implemented and before any formal Agent run was scored (§10), and frozen on 2026-10-28. **Version 2 replaced it on 2026-10-30** (§12): the first scored runs showed that v1's headline hid catalogs that were scattered or systematically biased (Maple Creek). Every baseline, ladder round and run has been re-scored with v2. A change to any definition, gate, mask, reference role, expert catalog or trust threshold from now on creates a new version; every run is then re-scored with that version, and each score file records the version it used (`metrics_version: 2`) and the scorer commit.
+This document fixes how every Agent catalog is scored. A readable walk-through with a worked example is [`03_Scoring_Method.md`](../research/03_Scoring_Method.md); the current numbers are in [`SCORE_TABLE.md`](../research/progress/SCORE_TABLE.md). Version 1 was pre-registered on 2026-10-27, revised while it was implemented and before any formal Agent run was scored (§10), and frozen on 2026-10-28. **Version 2 replaced it on 2026-10-30** (§12): the first scored runs showed that v1's headline hid catalogs that were scattered or systematically biased (Maple Creek). Every baseline, ladder round and run has been re-scored with v2. A change to any definition, gate, mask, reference role, expert catalog or trust threshold from now on creates a new version; every run is then re-scored with that version, and each score file records the version it used (`metrics_version: 2`) and the scorer commit.
 
 Two principles follow from the expert work on the six cases:
 
@@ -252,6 +252,7 @@ python -m SeismoAgentBench.scoring.catalog_metrics run --task-dir workflows/task
     --run-dir workflows/tasks/<case>/runs/<variant>/<harness>/<model>/<run_id>
 python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir workflows/tasks/<case> [--rescore]
 python -m SeismoAgentBench.scoring.catalog_metrics audit --task-dir workflows/tasks/<case> --run-dir <run>
+python -m SeismoAgentBench.scoring.catalog_metrics table   # docs/research/progress/SCORE_TABLE.md, all cases
 ```
 
 `python -m SeismoAgentBench evaluate --run-dir <run>` runs the same scorer: every task spec declares `artifact-contract@1` and `catalog-metrics@1`; this is the only scoring path. (`@1` is the scorer's interface version; the metric definitions are versioned by `metrics_version`.) Score the baseline before runs: the trust verdict reads the final's headline from `metrics_baseline.json`.

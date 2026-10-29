@@ -57,6 +57,15 @@ CRITERIA: list[Criterion] = [
     ("strength", "stability", "magnitude_scale", _key("dmag_slope_per_unit"), "abs<=",
      lambda f: max(0.2, abs(f) + 0.1), True),
 ]
+# Headline key each criterion reads (after_large_events is the ratio recall_after_large / recall_other).
+CRITERION_METRIC = {
+    "inside_region": "out_of_mask_fraction", "false_events": "audited_false_rate",
+    "time_bias": "time_bias_final_s", "time_spread": "time_mad_final_s", "after_large_events": "after_large",
+    "horizontal_shift": "shift_final_km", "depth_bias": "dz_final_km", "horizontal_scatter": "scatter_final_km",
+    "off_structure": "off_structure_fraction", "depth_pileup": "depth_mode_share",
+    "magnitude_offset": "dmag_median", "magnitude_spread": "dmag_std", "magnitude_scale": "dmag_slope_per_unit",
+    "large_events_present": "recall_M4",
+}
 # The final's value that sets a threshold, where it is not the same headline key.
 FINAL_SOURCE = {"horizontal_scatter": "scatter_median_km"}
 
