@@ -15,11 +15,18 @@ class ClaudeCommandTests(unittest.TestCase):
             "/opt/claude/bin/claude", "--print", "--verbose",
             "--output-format", "stream-json", "--model", "glm-5.3",
             "--dangerously-skip-permissions",
-            "Read BENCH_INPUT_MANIFEST and write output files.",
         ])
+        # The prompt goes to stdin: on argv any `ps | grep <tool name>` in the session would match it.
+        self.assertEqual(spec.stdin_text(), "Read BENCH_INPUT_MANIFEST and write output files.")
         record = spec.record()
         self.assertFalse(record["credentials_included"])
         self.assertTrue(record["host_direct"])
+        self.assertEqual(record["prompt_via"], "stdin")
+
+    def test_prompt_can_still_be_passed_on_argv(self):
+        spec = ClaudeCommandSpec("/opt/claude/bin/claude", None, "/tmp/work", "test", prompt_via_stdin=False)
+        self.assertEqual(spec.argv()[-1], "test")
+        self.assertIsNone(spec.stdin_text())
 
     def test_rejects_relative_working_directory(self):
         with self.assertRaises(ClaudeCommandError):
@@ -37,7 +44,7 @@ class ClaudeCommandTests(unittest.TestCase):
         argv = spec.argv()
         self.assertNotIn("--model", argv)
         self.assertNotIn("--dangerously-skip-permissions", argv)
-        self.assertEqual(argv[-1], "test")
+        self.assertNotIn("test", argv)
         self.assertEqual(spec.record()["max_turns"], 40)
 
 

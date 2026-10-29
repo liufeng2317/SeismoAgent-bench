@@ -18,6 +18,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 from typing import Any, Callable, Mapping, Sequence
 
@@ -440,12 +441,33 @@ def _environment(context: RunContext, extra_env: Mapping[str, str] | None = None
     return env, runtime_root
 
 
+def _feed_stdin(process: subprocess.Popen[bytes], text: str) -> None:
+    """Write ``text`` to the process's stdin from a thread (no deadlock on a large prompt), then close it."""
+    def _write() -> None:
+        try:
+            assert process.stdin is not None
+            process.stdin.write(text.encode("utf-8"))
+        except (BrokenPipeError, OSError):
+            pass
+        finally:
+            try:
+                process.stdin.close()
+            except (BrokenPipeError, OSError):
+                pass
+    threading.Thread(target=_write, daemon=True).start()
+
+
 def run_command(task_path: str | Path, manifest_path: str | Path | None, command: Sequence[str],
                 run_root: str | Path, run_id: str, *, timeout: float = 600,
                 extra_env: Mapping[str, str] | None = None,
                 resume: bool = False, agent_prompt: str | None = None,
-                auth_source_home: str | Path | None = None) -> dict[str, Any]:
-    """Validate inputs and run one command in a fresh trusted-development context."""
+                auth_source_home: str | Path | None = None,
+                stdin_text: str | None = None) -> dict[str, Any]:
+    """Validate inputs and run one command in a fresh trusted-development context.
+
+    ``stdin_text`` (the Agent prompt, for harnesses that read it from standard
+    input) is written to the process and stdin closed; otherwise stdin is empty.
+    """
     if not command or not all(isinstance(item, str) and item for item in command):
         raise ExecutionError("command must be a non-empty sequence of strings")
     if timeout <= 0:
@@ -498,8 +520,11 @@ def run_command(task_path: str | Path, manifest_path: str | Path | None, command
             env, runtime_root = _environment(context, extra_env, auth_source_home)
             installed_handlers = _install_signal_guards()
             process = subprocess.Popen(list(command), cwd=context.work, env=env,
-                                       stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                       stdin=subprocess.PIPE if stdin_text is not None else subprocess.DEVNULL,
+                                       stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                        start_new_session=True)
+            if stdin_text is not None:
+                _feed_stdin(process, stdin_text)
             try:
                 # Stays inside the inner try so a stop signal arriving while
                 # the pid record is written still closes the run record.

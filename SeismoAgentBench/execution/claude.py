@@ -18,6 +18,11 @@ class ClaudeCommandSpec:
     credentials, settings, or execute the command. The process working
     directory is set by the runner; ``working_dir`` is recorded for
     provenance.
+
+    By default the prompt goes to the process's standard input, not argv:
+    on argv it is visible to every ``ps``/``pgrep`` in the session, and an
+    Agent that kills processes by a pattern from its own prompt (a tool
+    name, say) kills itself (Kaikoura tools, 2026-10-29).
     """
 
     claude_bin: str
@@ -27,6 +32,7 @@ class ClaudeCommandSpec:
     max_turns: int | None = None
     bypass_permissions: bool = True
     extra_args: tuple[str, ...] = ()
+    prompt_via_stdin: bool = True
 
     def __post_init__(self) -> None:
         if not self.claude_bin:
@@ -54,14 +60,20 @@ class ClaudeCommandSpec:
         if self.bypass_permissions:
             command.append("--dangerously-skip-permissions")
         command.extend(self.extra_args)
-        command.append(self.prompt)
+        if not self.prompt_via_stdin:
+            command.append(self.prompt)
         return command
+
+    def stdin_text(self) -> str | None:
+        """The text to write to the process's standard input (the prompt), if any."""
+        return self.prompt if self.prompt_via_stdin else None
 
     def record(self) -> dict[str, object]:
         """Return a JSON-safe command record without credentials."""
         return {
             "executable": self.claude_bin,
             "argv": self.argv(),
+            "prompt_via": "stdin" if self.prompt_via_stdin else "argv",
             "model": self.model,
             "working_dir": self.working_dir,
             "max_turns": self.max_turns,

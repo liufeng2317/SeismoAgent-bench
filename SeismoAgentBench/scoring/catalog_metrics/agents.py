@@ -67,7 +67,8 @@ def export_run(task_dir: Path, run_dir: Path) -> Path:
 def export_runs(task_dir: Path) -> list[str]:
     task_dir = task_dir.resolve()
     written = []
+    from .summary import excluded_reason
     for run_dir in sorted((task_dir / "runs").glob("*/*/*/*")):
-        if (run_dir / "control").is_dir():
+        if (run_dir / "control").is_dir() and excluded_reason(run_dir) is None:
             written.append(export_run(task_dir, run_dir).name)
     return written

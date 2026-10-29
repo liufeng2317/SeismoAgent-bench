@@ -55,6 +55,15 @@ class RunnerTests(unittest.TestCase):
         self.assertFalse((run / "control/output_contract.json").exists())
         self.assertTrue((run / "work/result.txt").is_file())
 
+    def test_stdin_text_reaches_the_process_and_stays_off_argv(self):
+        code = ("import os,pathlib,sys; text=sys.stdin.read(); assert 'MatchLocate2' not in ' '.join(sys.argv); "
+                "pathlib.Path(os.environ['BENCH_OUTPUT'],'prompt.txt').write_text(text)")
+        prompt = "Use MatchLocate2.\n" * 2000  # larger than a pipe buffer
+        result = run_command(self.task, self.manifest, [sys.executable, "-c", code], self.root, "run-stdin",
+                             timeout=120, stdin_text=prompt)
+        self.assertEqual(result["state"], "completed")
+        self.assertEqual((self.root / "run-stdin/work/prompt.txt").read_text(), prompt)
+
     def test_completed_run_writes_context_and_log(self):
         code = "import json,os,pathlib; assert pathlib.Path(os.environ['BENCH_WORK']) == pathlib.Path.cwd(); pathlib.Path(os.environ['BENCH_OUTPUT'],'result.json').write_text(json.dumps({'ok': True}))"
         result = run_command(self.task, self.manifest, [sys.executable, "-c", code], self.root, "run-001", timeout=10)

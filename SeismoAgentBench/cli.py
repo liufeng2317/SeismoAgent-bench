@@ -209,6 +209,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     agent_prompt=rendered_prompt,
                     auth_source_home=configured_codex_home,
                     runtime_context=runtime_context,
+                    stdin_text=spec.stdin_text() if harness == "claude" else None,
                 )
                 if result["run"]["state"] != "execution_retryable" or attempt + 1 >= args.max_attempts:
                     break

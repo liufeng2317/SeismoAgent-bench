@@ -296,6 +296,7 @@ These change how results are presented, not any metric or scoring code. Conventi
 |---|---|---|
 | 10-29 | Agent runs are compared with the *expert (final)* row only; *expert (blind)* is described only as the first ladder step | Blind used no template matching while the `tools` arm offers Match&Locate, so it is not a fair yardstick; the final is the Agent's upper bound and the ladder attributes the gap |
 | 10-29 | The expert catalog is called the *human-in-loop agent* in figures and text; keys keep `expert` | It is an Agent workflow steered by hand |
+| 10-30 | A run stopped by a harness defect, not by the Agent's own work, is marked with `EXCLUDED.md` (the reason) in its run folder, left out of the summary and the export (listed under `excluded_runs`), and repeated once the defect is fixed. Failures of the Agent's own making still count (§6) | Kaikōura `tools` 20261029T123626Z: the runner put the prompt on the Claude process's argv, so the Agent's `ps \| grep MatchLocate2 \| kill -9` killed its own session; the runner now passes the prompt on stdin |
 
 ## 12. Version 2 (2026-10-30)
 

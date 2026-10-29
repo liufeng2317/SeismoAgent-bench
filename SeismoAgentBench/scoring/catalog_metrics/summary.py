@@ -15,6 +15,14 @@ SUMMARY_FILE = "metrics_summary.json"
 # Detection metrics (recall*, f1_*) count a failed run as zero; the others average completed runs only.
 DETECTION_PREFIXES = ("recall", "f1_")  # recall_final and recall_tight too
 PROCESS = ("cost_usd", "elapsed_s", "turns")
+# A run stopped by a harness defect (not by the Agent's own work) carries this file, with the
+# reason, and is left out of the summary and the export; it is listed under excluded_runs.
+EXCLUDED_FILE = "EXCLUDED.md"
+
+
+def excluded_reason(run_dir: Path) -> str | None:
+    marker = run_dir / EXCLUDED_FILE
+    return marker.read_text(encoding="utf-8").strip() if marker.is_file() else None
 
 
 def _stats(values: list) -> dict | None:
@@ -28,9 +36,14 @@ def _stats(values: list) -> dict | None:
 def summarize(task_dir: Path, *, rescore: bool = False, write: bool = True) -> dict:
     task_dir = task_dir.resolve()
     groups = defaultdict(list)
+    excluded = []
     for run_dir in sorted((task_dir / "runs").glob("*/*/*/*")):
         if not (run_dir / "control").is_dir():
             continue  # runner logs and other non-run entries
+        reason = excluded_reason(run_dir)
+        if reason is not None:
+            excluded.append({"run": str(run_dir.relative_to(task_dir)), "reason": reason})
+            continue
         path = run_dir / "evaluation" / RUN_SCORE_FILE
         report = score_run(task_dir, run_dir) if rescore or not path.is_file() else json.loads(path.read_text())
         run = report["run"]
@@ -58,7 +71,8 @@ def summarize(task_dir: Path, *, rescore: bool = False, write: bool = True) -> d
         for key in PROCESS:
             entry[key] = _stats([r["process"].get(key) for r in clean])
         configurations.append(entry)
-    report = {**_scorer_record(), "task": task_dir.name, "configurations": configurations}
+    report = {**_scorer_record(), "task": task_dir.name, "configurations": configurations,
+              "excluded_runs": excluded}
     if write:
         (task_dir / AGENTS_DIR).mkdir(parents=True, exist_ok=True)
         (task_dir / AGENTS_DIR / SUMMARY_FILE).write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")

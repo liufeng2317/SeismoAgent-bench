@@ -62,7 +62,8 @@ class ClaudeCliTests(unittest.TestCase):
             self.assertEqual(provenance["command"]["kind"], "claude")
             self.assertEqual(provenance["launcher"]["model"], "glm-5.3")
             self.assertEqual(provenance["launcher"]["max_turns"], 5)
-            self.assertEqual(provenance["launcher"]["argv"][-1], "<BENCH_AGENT_PROMPT>")
+            self.assertEqual(provenance["launcher"]["prompt_via"], "stdin")  # the prompt is not on argv
+            self.assertEqual(provenance["launcher"]["argv"][-1], "--dangerously-skip-permissions")
             self.assertIn("--dangerously-skip-permissions", provenance["launcher"]["argv"])
             for record_file in (run / "record").iterdir():
                 self.assertNotIn(SECRET, record_file.read_text(errors="replace"),

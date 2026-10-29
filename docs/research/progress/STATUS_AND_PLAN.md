@@ -8,7 +8,7 @@ Living document: what is done, what runs, what comes next. The design is defined
 - **Human-in-loop baselines.** Final and blind rows in each `evaluation/human_in_loop/metrics_baseline.json` (v2); Agent runs are compared with the final only; expert ladder re-scored per case.
 - **Zero-cost analyses.** Expert ladder and component swap — [`01_Expert_Experience_and_Checker.md`](../01_Expert_Experience_and_Checker.md).
 - **Agent stages.** S0 `min` and S1 `tools` implemented; S2 `knowledge` and S3 `checker` designed ([research plan](../00_Research_Plan.md) §2.4–2.5), not implemented.
-- **Formal runs** (Claude Code × GLM-5.3, one per case and stage): Prague, Magna, Maple Creek and Kīlauea S0/S1 scored; Kaikōura running; Ridgecrest queued. The four earlier Ridgecrest/Magna runs predate the output conventions and remain development runs.
+- **Formal runs** (Claude Code × GLM-5.3, one per case and stage): Prague, Magna, Maple Creek and Kīlauea S0/S1 scored; Kaikōura `min` running; Kaikōura `tools` re-launched 2026-10-29 18:39 UTC after the first attempt was excluded (harness defect: the prompt sat on the Claude process's argv and the Agent's `kill -9` by pattern matched its own session; the runner now passes the prompt on stdin; metrics §11); Ridgecrest queued, with the fixed runner. The four earlier Ridgecrest/Magna runs predate the output conventions and remain development runs.
 - **Framework.** Task definitions, input mapping, Agent execution through adapters, run records and the external scorer are documented in [`docs/framework/`](../../framework/).
 
 ### Scored runs (metrics v2)
