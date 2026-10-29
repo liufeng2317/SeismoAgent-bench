@@ -5,7 +5,7 @@
 > Current preparation state: `window_status: frozen` in [processing.yaml](processing.yaml) (2026-10-28, with metrics v1). The v1 window below is the frozen evaluation window; counts below come from data-level analysis masks, while the evaluation cohort (time, region, depth) is defined in `workflows/tasks/2017_maple_creek_yellowstone/expert/00_config/validation.yaml`.
 
 
-> This is the detailed case audit. Cross-case summary belongs in docs/data/CASE_REGISTRY.md; source-specific reading and file-level audits live beside each paper or catalog.
+> This is the detailed case audit. Cross-case summary belongs in docs/data/00_Case_Registry.md; source-specific reading and file-level audits live beside each paper or catalog.
 
 
 ## 1. Case identity and benchmark purpose
@@ -18,7 +18,7 @@
 | Largest event | Mw 4.4 on 2017-06-16 |
 | Scientific role | Swarm detection, relative location, migration, and fault-network geometry |
 | v1 benchmark window | 2017-06-11T00:00:00Z <= t < 2017-06-19T00:00:00Z |
-| Frozen spatial/depth mask | 44.45 <= latitude <= 44.75; -110.55 <= longitude <= -110.15; 0 <= depth_km <= 15 |
+| Frozen spatial/depth mask | 44.70 <= latitude <= 44.84; -111.13 <= longitude <= -110.93; -3 <= depth_km <= 20 below the local surface (the ComCat query box corrected on 2026-10-22; evaluation mask in `workflows/tasks/2017_maple_creek_yellowstone/expert/00_config/validation.yaml`) |
 | Network design | Yellowstone/UUSS plus EarthScope/IRIS; preserve station and template lineage |
 | Waveform design upper bound | About 19.6 GB for 27 stations x 3 components x 100 Hz x int32 x 8 days; actual volume depends on gaps and selected channels |
 
@@ -30,12 +30,12 @@ The eight-day interval is frozen for consistency with the official baseline quer
 |---|---|---|---|---|---|
 | Shelly & Hardebeck 2019, DOI 10.1029/2018GL081607 | Genuine enhanced catalog paper; local USGS file is phase-only | Primary article-level target for template-enhanced detection and relative geometry | Q1 relative geometry; Q2 detection; Q3 absolute location | Low-Medium against matched-filter agents | Paper, SI, phase release ready; article event table not locally staged |
 | Pang et al. 2019, DOI 10.1029/2019GL082376 | Genuine 3,345-event HYPOINVERSE + GrowClust paper | Independent high-resolution secondary location reference | Q1/Q2 | Medium-High method independence; shared UUSS/IRIS waveforms | Paper and SI ready; machine-readable event catalog missing |
-| USGS/UUSS ComCat snapshot | Official operational export, not research truth | Q3 baseline and interoperability check | Q3 | Higher operational independence, but not independent of routine network | Full and frozen CSV snapshots ready; only 9/5 rows returned |
+| USGS/UUSS ComCat snapshot | Official operational export, not research truth | Primary detection, location and magnitude reference in the metrics (`workflows/tasks/2017_maple_creek_yellowstone/evaluation/metrics.yaml`) | Q3 | Higher operational independence, but not independent of routine network | Full and window CSV snapshots ready: 2,447 / 626 events after the 2026-10-22 box correction; the Mw 4.4 anchor uu60203137 is included |
 | MAPLE_RELATED_OPEN | Sheldon, Nevada 2023 paper, not Yellowstone | Context only; exclude from benchmark | N/A for Maple | N/A | Kept only to document misclassification |
 
 ### Interpretation
 
-Shelly is the best local primary reference for a template-enhanced swarm benchmark, but the event-level relocated table is not present in the staged USGS release. Pang is the key independent location reference and should not be dropped merely because its table is currently missing. The official ComCat snapshot provides a reproducible low-resolution baseline, but its five events in the frozen mask must not be interpreted as catalog completeness.
+Shelly is the best local primary reference for a template-enhanced swarm benchmark, but the event-level relocated table is not present in the staged USGS release. Pang is the key independent location reference and should not be dropped merely because its table is currently missing. The official ComCat snapshot (626 reviewed events in the frozen window and box) is the located primary reference; it is an operational catalog, so it must not be interpreted as complete, and the Shelly-derived time-only detection table gives the detection ceiling.
 
 ## 3. Shelly article and local phase release
 
@@ -92,10 +92,10 @@ Query definition is versioned in workflows/data_preparation/00_catalog_downloadi
 
 | Snapshot | Rows | Local range | Notes |
 |---|---:|---|---|
-| Full 2017-06-11 to 2017-09-15 | 9 | M 0.16-1.86; depth 2.08-5.97 km | All reviewed, network uu |
-| Frozen 2017-06-11 to 2017-06-19 and spatial/depth mask | 5 | M 1.01-1.86; depth 2.20-4.67 km | All reviewed, network uu |
+| Full 2017-06-11 to 2017-09-15 | 2,447 | M -0.99-4.36; depth -1.38-13.85 km | All reviewed, network uu |
+| Frozen 2017-06-11 to 2017-06-19 and spatial/depth mask | 626 | M -0.32-4.36; depth 1.24-13.85 km | All reviewed, network uu; includes the Mw 4.4 anchor uu60203137 |
 
-The low count likely reflects the exact ComCat/UUSS query and source filters; it is not a statement that the swarm had five events. Preserve the snapshots for reproducibility but do not use them as a completeness truth set.
+Both snapshots come from the box corrected on 2026-10-22 (downloaded 2026-10-22; checksums in the catalog README). The earlier box lay about 40 km east of the swarm and is superseded. The window snapshot is a subset of the full snapshot. Preserve the snapshots for reproducibility but do not use them as a completeness truth set.
 
 ## 6. Catalog comparability and valid metrics
 

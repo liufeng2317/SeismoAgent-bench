@@ -193,7 +193,7 @@ Origin-time agreement worsens; held absolute-arrival RMS rises 0.40297→0.41073
 
 ## Navigation and maintenance
 
-Reusable professional implementations are copied into [project seismotools](../../../seismotools/README.md). Historical case scripts still resolve their recorded original tool paths; using the new snapshots in a future run requires an explicit path configuration and a new run record.
+Reusable professional implementations are copied into [project seismotools](../../../../seismotools/README.md). Historical case scripts still resolve their recorded original tool paths; using the new snapshots in a future run requires an explicit path configuration and a new run record.
 
 
 - [Delivery and reproduction](docs/EXPERT_DELIVERY.md): use this for the supported current workflow.

@@ -1,4 +1,4 @@
-"""L5 phase picks against a reference pick set (docs/framework/03_EVALUATION_METRICS.md §5 L5).
+"""L5 phase picks against a reference pick set (docs/framework/02_Catalog_Metrics.md §5 L5).
 
 Picks are compared on the stations present in both sets, within the case's
 evaluation window. Within each (station, phase) group candidate and

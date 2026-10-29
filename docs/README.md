@@ -1,11 +1,16 @@
 # Documentation
 
-Project documentation is separated by purpose:
+Files are named `NN_Title_Case.md`, numbered in reading order within each folder; dated records are `YYYY-MM-DD_...`. One line per paragraph or list item, no manual line wrapping.
 
-- [`research/`](research/) — the research: questions and benchmark design, expert-experience evidence and the checker, the paper outline, and progress ([index](research/README.md)).
-- [`data/`](data/) — the cases and their data: [case registry](data/CASE_REGISTRY.md) (the six Phase I cases, tiers, windows, primary references), [candidate case pool](data/CASE_POOL.md), [six-case data summary](data/CASES_SUMMARY.md), [case-by-case details](data/CASE_DETAILS.md), and [`preparation/`](data/preparation/) (collection standard, literature extraction schema, paper parsing audit).
-- [`framework/`](framework/) — reusable benchmark workflow, run contracts, evaluation metrics, implementation constraints and implementation logs.
-- [`framework/schemas/`](framework/schemas/) — shared task and catalog schemas used by the framework and source-analysis scripts.
-- [`archive/`](archive/) — dated records that are no longer maintained (e.g. the 2026-09-24 repository cleanup).
+| Folder | Holds | Start with |
+|---|---|---|
+| [`research/`](research/) | the research: questions and benchmark design, expert-experience evidence and the checker, the paper outline, status and work plan, a one-page Chinese overview (`research_map.html`), dated progress summaries | [`research/README.md`](research/README.md) |
+| [`framework/`](framework/) | the reusable benchmark framework: workflow, run layout and records, catalog metrics with the trusted-catalog standard, development process | [`framework/README.md`](framework/README.md) |
+| [`data/`](data/) | the cases and their data: case registry (tiers, frozen windows, primary references), case data inventory, candidate case pool; `preparation/` holds the case record standard, the extraction contract, the MinerU parsing audit and the data-preparation schemas | [`data/00_Case_Registry.md`](data/00_Case_Registry.md) |
+| [`archive/`](archive/) | records that are no longer maintained: the 2026-09-24 repository cleanup, the September 2026 framework implementation logs, external GeoDataBench Codex notes | — |
 
-Case-specific scientific interpretation remains under `data/<case>/analysis/`; case-specific expert workflow documentation remains under `workflows/tasks/<case>/expert/docs/`; per-case evaluation results are under `workflows/tasks/<case>/evaluation/`.
+Elsewhere in the repository:
+
+- Case-specific scientific interpretation: `data/<case>/analysis/`; catalog provenance: `data/<case>/data/catalogs/*/README.md`.
+- Task packages, the human-in-loop (expert) workflow and per-case evaluation results: `workflows/tasks/<case>/` (`expert/docs/`, `evaluation/`).
+- Agent and environment configuration, including the evaluation environment's pinned requirements and host tool installer: `SeismoAgentBench/configs/`.

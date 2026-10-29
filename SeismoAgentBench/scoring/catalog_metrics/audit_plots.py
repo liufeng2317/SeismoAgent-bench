@@ -1,4 +1,4 @@
-"""Waveform review plots for audited events (docs/framework/03_EVALUATION_METRICS.md §5 L1 audit).
+"""Waveform review plots for audited events (docs/framework/02_Catalog_Metrics.md §5 L1 audit).
 
 One PNG per event: three-component records of the nearest stations, 2-15 Hz,
 each trace normalised, aligned on the event's origin time, with the event's

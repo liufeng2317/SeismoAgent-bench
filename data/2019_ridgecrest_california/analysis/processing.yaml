@@ -3,7 +3,7 @@ case_id: 2019_ridgecrest_california
 window_status: frozen
 window_freeze:
   frozen_on: '2026-10-28'
-  authority: metrics v1 (docs/framework/03_EVALUATION_METRICS.md); the evaluation cohort mask (time, region, depth) is workflows/tasks/2019_ridgecrest_california/expert/00_config/validation.yaml
+  authority: metrics v1 (docs/framework/02_Catalog_Metrics.md); the evaluation cohort mask (time, region, depth) is workflows/tasks/2019_ridgecrest_california/expert/00_config/validation.yaml
   evaluation_window:
     start_utc: '2019-07-04T15:35:29.400Z'
     end_utc: '2019-07-07T00:00:00Z'
@@ -40,7 +40,7 @@ scientific_design:
   - closed_reference
   - open_literature_sanitized
   - expert_guided
-  station_policy: permanent_network_candidate; station/channel availability not yet verified
+  station_policy: full_waveform_root; the task input is the whole local waveform archive (workflows/tasks/2019_ridgecrest_california/input.json), 42 stations with data in the window per the waveform inventory; the Agent selects stations
   reference_policy:
     detection: Shelly with Liu and earthquake-only SCSN cross-checks; no universal truth set
     relative_geometry: Shelly and Ross nbranch>1; compare matched-event geometry

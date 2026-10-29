@@ -82,7 +82,7 @@ def default_scorer_registry() -> ScorerRegistry:
 
 
 def _catalog_metrics_handler(context: ScorerContext) -> dict[str, Any]:
-    """Pre-registered catalog metrics (docs/framework/03_EVALUATION_METRICS.md) for a task-package run.
+    """Pre-registered catalog metrics (docs/framework/02_Catalog_Metrics.md) for a task-package run.
 
     The run must live at <task>/runs/<variant>/<harness>/<model>/<run_id>; the task
     package provides evaluation/metrics.yaml. Imported lazily: the subpackage

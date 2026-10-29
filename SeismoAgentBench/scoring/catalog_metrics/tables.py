@@ -1,4 +1,4 @@
-"""Standard event tables and the cohort mask (docs/framework/03_EVALUATION_METRICS.md §1)."""
+"""Standard event tables and the cohort mask (docs/framework/02_Catalog_Metrics.md §1)."""
 
 from __future__ import annotations
 

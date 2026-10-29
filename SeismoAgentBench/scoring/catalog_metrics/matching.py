@@ -1,4 +1,4 @@
-"""Event correspondence (docs/framework/03_EVALUATION_METRICS.md §2)."""
+"""Event correspondence (docs/framework/02_Catalog_Metrics.md §2)."""
 
 from __future__ import annotations
 

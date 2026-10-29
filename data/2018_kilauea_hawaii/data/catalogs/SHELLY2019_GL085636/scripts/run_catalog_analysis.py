@@ -296,12 +296,12 @@ def normalized_fields(kind):
 
 def schema_reference(kind):
     if kind == "lengline":
-        return "docs/framework/schemas/catalog_relative_event.schema.yaml"
+        return "docs/data/preparation/schemas/catalog_relative_event.schema.yaml"
     if kind == "mcmahon_phase":
-        return "docs/framework/schemas/catalog_parent_phase.schema.yaml"
+        return "docs/data/preparation/schemas/catalog_parent_phase.schema.yaml"
     if kind == "phase_csv":
-        return "docs/framework/schemas/catalog_correlation_phase.schema.yaml"
-    return "docs/framework/schemas/catalog_event.schema.yaml"
+        return "docs/data/preparation/schemas/catalog_correlation_phase.schema.yaml"
+    return "docs/data/preparation/schemas/catalog_event.schema.yaml"
 
 
 def write_normalized(product):

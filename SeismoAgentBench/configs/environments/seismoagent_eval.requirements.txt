@@ -12,6 +12,9 @@ h5py==3.14.0
 lxml==5.4.0
 PyYAML==6.0.2
 
+# Geospatial tables (installed in seismoagent_eval; used by some case scripts)
+geopandas==1.0.1
+
 # Network requests and progress reporting
 requests==2.32.4
 tqdm==4.67.1

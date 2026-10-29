@@ -1,4 +1,4 @@
-# Pre-registered catalog metrics, v2 (docs/framework/03_EVALUATION_METRICS.md) for Ridgecrest 2019.
+# Pre-registered catalog metrics, v2 (docs/framework/02_Catalog_Metrics.md) for Ridgecrest 2019.
 # Scored with: python -m SeismoAgentBench.scoring.catalog_metrics {baseline,run} --task-dir <this task>
 metrics_version: 2
 references_loader: adapter          # evaluation/metrics_adapter.py (audited five-source loader)

@@ -1,6 +1,6 @@
 # Information extraction contract
 
-This document defines the structured extraction performed **after** PDF and supplement parsing. It is an extraction contract, not a prose reading-note template.
+This document defines the structured extraction performed **after** PDF and supplement parsing (see [`03_MinerU_Parsing_Audit.md`](03_MinerU_Parsing_Audit.md)). It is an extraction contract, not a prose reading-note template. Paths below are relative to a case folder `data/<case>/`; the JSON schema is [`schemas/paper_catalog_extraction.schema.yaml`](schemas/paper_catalog_extraction.schema.yaml).
 
 ## 1. Evidence-first input policy
 
@@ -9,7 +9,7 @@ Each source must be extracted from all available parsed material:
 ```text
 references/<SOURCE_ID>/parsed/paper/
 references/<SOURCE_ID>/parsed/supplement/
-catalogs/<CATALOG_ID>/
+data/catalogs/<CATALOG_ID>/
 ```
 
 The extractor must inspect both the paper and its supplements. A catalog's construction details may be described primarily in a supporting-information PDF, DOCX, table, or data dictionary rather than in the article body.
@@ -22,11 +22,11 @@ Every non-trivial value must reference one or more evidence objects. Missing val
 
 | Layer | Location | Purpose |
 |---|---|---|
-| Source files | `paper/`, `supplement/`, `catalogs/*/raw/` | Immutable PDFs, tables, catalogs, and archives |
+| Source files | `references/<SOURCE_ID>/paper/`, `references/<SOURCE_ID>/supplement/`, `data/catalogs/*/raw/` | Immutable PDFs, tables, catalogs, and archives |
 | Parsed text | `parsed/paper/`, `parsed/supplement/` | MinerU Markdown, DOCX/XLSX/TXT derivatives and images |
 | Structured extraction | `parsed/extraction/*.json` | Machine-readable facts, workflow, products, and evidence |
 
-`*__paper_reading.md` holds human-readable paper notes; catalog provenance and field audits are consolidated in `catalogs/<CATALOG_ID>/README.md`. They may be retained for navigation, but new factual extraction should be written to JSON and should not depend on prose notes as the canonical record. Case-level comparison remains in `data/<CASE>/analysis/`.
+`*__paper_reading.md` holds human-readable paper notes; catalog provenance and field audits are consolidated in `data/catalogs/<CATALOG_ID>/README.md`. They may be retained for navigation, but new factual extraction should be written to JSON and should not depend on prose notes as the canonical record. Case-level comparison remains in `data/<CASE>/analysis/`.
 
 ## 3. Compact extraction object
 
@@ -73,7 +73,7 @@ Keep supplementary station/phase/focal-mechanism/structural/uncertainty products
 5. Reconstruct `construction_workflow.stages` in source-to-product order.
 6. Put non-primary products, findings, benchmark use, and gaps in `additional_information`.
 7. Add evidence directly to each factual object.
-8. Write and validate the JSON against the YAML template.
+8. Write and validate the JSON against [`schemas/paper_catalog_extraction.schema.yaml`](schemas/paper_catalog_extraction.schema.yaml).
 9. Update the case-level analysis only after the source JSON is reviewed.
 
 The repository batch checker is `workflows/data_preparation/03_information_extraction/validate_all_extractions.py`. It checks evidence/release paths, product-specific schemas, status versus human-review flags, and locally measurable row counts. A `partial` extraction is expected when the paper, supplement, or final release is incomplete; it must not be promoted to `verified` merely because the JSON parses.

@@ -1,4 +1,4 @@
-"""Time, space and strength by magnitude class (docs/framework/03_EVALUATION_METRICS.md §5, §5.1).
+"""Time, space and strength by magnitude class (docs/framework/02_Catalog_Metrics.md §5, §5.1).
 
 Magnitude classes use the case's magnitude authority (its operational
 catalog; Prague: Cochran). A candidate event enters class M>=T after its

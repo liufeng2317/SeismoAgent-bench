@@ -1,5 +1,7 @@
 # Repository cleanup — 2026-09-24
 
+> 历史记录。文中链接已在 2026-10-29/30 文档重组时改为新路径；其中关于时间窗未冻结、注册表不复制窗口表等说法已被之后的变更取代，以 `docs/data/00_Case_Registry.md` 为准。
+
 本轮目标：减少前期整理产生的重复入口和可丢弃副本，同时保留科学证据、原始数据、运行入口和工作区中已有的未提交工作。操作基于当前工作区，没有重置 Git、重跑目录处理或改动科学筛选参数。
 
 ## 必要性判断与处理
@@ -23,9 +25,9 @@
 ## 统一后的入口
 
 - [项目说明](../../README.md)：目的、阶段与运行入口。
-- [案例注册表](../data/CASE_REGISTRY.md)：案例角色与 case analysis 导航，不再复制完整窗口数值表。
-- [六案统计总览](../data/CASES_SUMMARY.md)：波形、台站、catalog、official baseline 和文献资产的跨案例统计。
-- [按案例详细信息](../data/CASE_DETAILS.md)：每案的观测、研究/官方 catalog、文献和限制。
+- [案例注册表](../data/00_Case_Registry.md)：案例角色与 case analysis 导航，不再复制完整窗口数值表。
+- [六案统计总览](../data/01_Case_Data_Inventory.md)：波形、台站、catalog、official baseline 和文献资产的跨案例统计。
+- [按案例详细信息](../data/01_Case_Data_Inventory.md)：每案的观测、研究/官方 catalog、文献和限制。
 - [数据组织规则](../../data/README.md)：保留策略、命名、备份和处理产物规则。
 - `data/<case>/data/catalogs/<catalog>/README.md`：人工维护的来源、字段、质量、原文说明。
 - `data/<case>/data/catalogs/<catalog>/analysis/catalog_analysis.md`：脚本生成的处理报告。
@@ -177,7 +179,7 @@
 
 ### 重复跨案例审查
 
-- `docs/01_2_Case_Data_Audit.md` → [保留位置](../data/CASE_REGISTRY.md)
+- `docs/01_2_Case_Data_Audit.md` → [保留位置](../data/00_Case_Registry.md)
 
 ### 重复校验器合并
 

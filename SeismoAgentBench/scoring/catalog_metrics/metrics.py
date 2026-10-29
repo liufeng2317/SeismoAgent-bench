@@ -1,4 +1,4 @@
-"""Metrics L1-L4 and L7 of docs/framework/03_EVALUATION_METRICS.md (§4-§5)."""
+"""Metrics L1-L4 and L7 of docs/framework/02_Catalog_Metrics.md (§4-§5)."""
 
 from __future__ import annotations
 

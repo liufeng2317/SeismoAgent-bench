@@ -1,4 +1,4 @@
-"""Trusted-catalog verdict (docs/framework/03_EVALUATION_METRICS.md §7a, v2).
+"""Trusted-catalog verdict (docs/framework/02_Catalog_Metrics.md §7a, v2).
 
 Does a run's catalog reach the standard of a trusted catalog? Judged on four
 dimensions, each read against the human-in-loop final of the same case:

@@ -33,7 +33,7 @@ Median |Δt|: 0.21 s (Shelly), 0.24 s (Wei), 0.26 s (Matoza), 0.11 s (ComCat). R
 
 ## Per-run scoring (catalog metrics, v2)
 
-Runs are scored with the pre-registered metrics (`docs/framework/03_EVALUATION_METRICS.md`), configured for this case in `metrics.yaml`. From the repository root, with the evaluation environment (`/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python`):
+Runs are scored with the pre-registered metrics (`docs/framework/02_Catalog_Metrics.md`), configured for this case in `metrics.yaml`. From the repository root, with the evaluation environment (`/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python`):
 
 ```bash
 # one run: output contract + catalog metrics (both declared in task_<variant>.json)

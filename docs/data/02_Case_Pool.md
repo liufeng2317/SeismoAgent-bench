@@ -25,6 +25,8 @@ The table below is a **research candidate pool**, not a final ranking. Cases mar
 
 ## 2. Tier A — Phase I highest-priority cases
 
+The six Tier A cases became the Phase I set. Their current primary references, windows and tiers are in [`00_Case_Registry.md`](00_Case_Registry.md); the table below is the selection record of 2026-09-18 and names the primaries proposed then (since changed for Prague, Maple Creek and Kaikōura).
+
 | Case | Sequence / regime | Candidate primary reference(s) | Reference methods | Waveform / data access | Why selected | Main concern |
 |---|---|---|---|---|---|---|
 | **2019 Ridgecrest, California** | Dense foreshock–mainshock–aftershock sequence | Shelly (2020), 34,091 events; Ross et al. (2019) secondary | Template matching, waveform correlation, precise relative relocation / GrowClust-style structural catalog | SCEDC/SCSN public | Excellent public data, widely accepted high-resolution target, extreme association density, existing TRACE baseline | Shared raw-data lineage among references; target-method leakage must be controlled |
@@ -74,4 +76,4 @@ The current strategy is:
 - **Tier B:** retain scientifically strong alternatives with good reference catalogs;
 - **Tier C:** preserve specialized cases that require further access checks, short-window design, or stronger archival targets.
 
-The candidate pool should remain editable until waveform access, exact benchmark windows, and reference-file schemas are confirmed.
+Tiers B and C remain editable. A case moves into the benchmark only after the checks of [`preparation/01_Case_Record_Standard.md`](preparation/01_Case_Record_Standard.md) §3; waveform access and data-release dates noted here (e.g. the Nippes temporary-network release expected for October 2026) are as of 2026-09-18 and must be re-checked first.

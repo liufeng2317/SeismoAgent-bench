@@ -1,6 +1,6 @@
 # SeismoAgentBench 代码包
 
-整体 benchmark 的控制流程见 [benchmark workflow plan](../docs/framework/00_BENCHMARK_WORKFLOW_PLAN.md)。该计划定义任务、输入 manifest、执行后端、agent、工具适配器、scorer 和 provenance 的边界。`SeismoAgentBench/` 承载项目的稳定控制代码和支撑工具；来源整理是 `utils/` 下的一个子功能，不代表整个 benchmark 架构。Python 导入路径区分大小写，统一使用 `SeismoAgentBench`。
+整体 benchmark 的控制流程见 [benchmark workflow plan](../docs/framework/00_Workflow_Specification.md)。该计划定义任务、输入 manifest、执行后端、agent、工具适配器、scorer 和 provenance 的边界。`SeismoAgentBench/` 承载项目的稳定控制代码和支撑工具；来源整理是 `utils/` 下的一个子功能，不代表整个 benchmark 架构。Python 导入路径区分大小写，统一使用 `SeismoAgentBench`。
 
 ```text
 SeismoAgentBench/
@@ -63,22 +63,16 @@ python -m SeismoAgentBench run-agent \
 
 CLI 只负责参数解析和退出码映射，执行、产物校验、评分及报告仍由对应模块完成。
 
-Agent 配置只描述运行所需的非敏感信息：`harness`、可执行文件、版本命令、模型、
-`runtime.mode`、`runtime.reasoning_effort` 和外部认证模式。认证文件或环境变量通过
-命令行提供，不写入 YAML。当前 Codex 仅支持 `runtime.mode: host-direct`；配置中的
-运行模式会被校验并实际传递给 launcher。
+Agent 配置只描述运行所需的非敏感信息：`harness`、可执行文件、版本命令、模型、 `runtime.mode`、`runtime.reasoning_effort` 和外部认证模式。认证文件或环境变量通过命令行提供，不写入 YAML。当前 Codex 仅支持 `runtime.mode: host-direct`；配置中的运行模式会被校验并实际传递给 launcher。
 
-批量运行使用 experiment YAML。它声明 Agent、任务、variant、输出根目录和并发设置；
-`plan-experiment` 只展开并校验运行单元，`execute-experiment` 才会依次执行它们：
+批量运行使用 experiment YAML。它声明 Agent、任务、variant、输出根目录和并发设置； `plan-experiment` 只展开并校验运行单元，`execute-experiment` 才会依次执行它们：
 
 ```bash
 python -m SeismoAgentBench plan-experiment --spec experiment.yaml
 python -m SeismoAgentBench execute-experiment --spec experiment.yaml
 ```
 
-每个 run 的 `record/usage_summary.json` 保存可用的 turn、事件和 token 统计；批量运行
-在 `_batches/<batch-id>/` 下生成 `summary.json` 和 `summary.md`。这些记录用于运行审计，
-不参与科学评分。
+每个 run 的 `record/usage_summary.json` 保存可用的 turn、事件和 token 统计；批量运行在 `_batches/<batch-id>/` 下生成 `summary.json` 和 `summary.md`。这些记录用于运行审计，不参与科学评分。
 
 库调用使用明确的子模块路径，例如：
 

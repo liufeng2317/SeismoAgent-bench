@@ -2,7 +2,7 @@
   "audit_version": 1,
   "case_id": "2019_ridgecrest_california",
   "window_status": "frozen",
-  "config_sha256": "5df411dce806c724a18581dafe2bb1c051501fe68cae01f6055a0ac17ec70130",
+  "config_sha256": "74989aeaa26953c913c34133f748b2cf772c65d5f91d8cf387c236bdc2842df7",
   "candidate_window": {
     "start_utc": "2019-07-04T00:00:00Z",
     "end_utc": "2019-07-07T00:00:00Z",

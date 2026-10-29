@@ -1,268 +1,118 @@
-# SeismoAgentBench Benchmark Workflow Specification
+# Workflow Specification
 
-## 1. Purpose
+This document states the purpose, principles and stage sequence of a SeismoAgentBench run: task package, run, records, evaluation.
 
-This document specifies the standard workflow for running and evaluating seismic-data analysis agents with SeismoAgentBench. It defines the required stages, interfaces, artifacts and status semantics. Implementations may use different execution technologies, but they must preserve these contracts.
+## 1. Purpose and scope
 
-The specification is dataset-independent. Dataset-specific data, task instructions, reference products and scientific parameters are supplied through versioned task packages and input manifests.
+SeismoAgentBench runs a coding Agent (Claude Code or Codex CLI) on a seismic catalog-construction task and evaluates what it produced. The package `SeismoAgentBench/` is dataset-independent; everything specific to a case lives in its task package `workflows/tasks/<case>/` and its data under `data/<case>/`.
 
-## 2. Workflow
+The runner records a command execution on the host. It is not a security sandbox: every run record carries `execution_profile: trusted-development` and `formal_evaluation_eligible: false`.
 
-The required workflow is:
+Every file and directory a run produces is described in [01_Run_Layout_and_Records.md](01_Run_Layout_and_Records.md). The metric definitions are in [02_Catalog_Metrics.md](02_Catalog_Metrics.md).
 
-```text
-Task registration
-      ↓
-Input manifest validation
-      ↓
-Execution preparation
-      ↓
-Agent and tool execution
-      ↓
-Artifact validation
-      ↓
-Scoring
-      ↓
-Metric aggregation
-      ↓
-Reporting and provenance capture
-```
+## 2. Principles
 
-The stages are ordered. A stage must not consume artifacts that its predecessor has not declared valid. Logging and provenance are recorded throughout the workflow.
+1. The task package is the case contract. Generic modules contain no case paths, catalogs, expert answers, station lists or plotting rules.
+2. The task prompt is the primary contract for the Agent. The output contract and the input file add machine-readable details; they do not replace the prompt.
+3. Execution and evaluation are separate. The runner never scores; the evaluator never starts the Agent and can be repeated on the same run.
+4. A process exit status describes execution only. It is never read as a scientific score.
+5. Runs are never overwritten. Each run gets a new `run_id`; an existing run directory is an error unless the run is resumed from `execution_retryable`, and a resumed attempt archives the previous one first.
+6. The Agent writes only below its work directory. Control and record files are written by the framework.
+7. Reference catalogs and expert products are kept out of the Agent's prompt and input view. The framework prompt forbids using them, and the scorer's leakage scan checks the Agent's tool-call inputs ([02_Catalog_Metrics.md](02_Catalog_Metrics.md) §9).
+8. Every run is traceable: control snapshots of the task, the exact Agent prompt, the launcher argv without credentials, the executable version, the `seismotools` commit and the event stream.
 
-## 3. Stage requirements
-
-### 3.1 Task registration
-
-A task specification MUST declare:
-
-- `task_id` and task version;
-- Agent-facing task prompt;
-- the Agent-facing task prompt;
-- optional structured input requirements;
-- optional output hints or schemas;
-- permitted tool capabilities;
-- execution limits;
-- scorer name and scorer version;
-- metric definitions;
-- failure handling policy.
-
-A task specification MUST NOT contain private reference products or depend on a particular agent implementation.
-
-The task prompt is the primary task contract and defines the scientific
-objective, inputs and expected outputs. A task package MAY provide an
-`input_manifest.json` for machine-readable input details and MAY provide an
-`output_contract.json` for optional structural checks. Neither file is
-required for a task to run.
-
-**Input:** task specification.  
-**Output:** validated, versioned task record.
-
-### 3.2 Input manifest validation
-
-When supplied, an input manifest MUST be versioned and MUST provide stable
-logical entry IDs. Each entry MUST declare its semantic `data_type`, physical
-`format`, source or resolved path and read-only intent. A task without a
-manifest describes its inputs directly in the task prompt.
-
-The controller MUST validate:
-
-- manifest schema and version;
-- unique entry IDs;
-- path existence and file type;
-- read-only declarations;
-- compatibility with task requirements;
-- consistency of declared metadata where checked.
-
-**Input:** task record and input manifest.  
-**Output:** resolved manifest and validation record.
-
-### 3.3 Execution preparation
-
-The execution backend MUST:
-
-- allocate an immutable `run_id`;
-- create the run record and declared work areas;
-- select and record an execution profile;
-- prepare the declared runtime;
-- apply timeout and resource policies where supported;
-- expose the standard run context to the agent.
-
-The standard context MUST provide equivalent values for:
+## 3. Stage sequence
 
 ```text
-BENCH_TASK_SPEC
-BENCH_INPUT_MANIFEST
-BENCH_WORK
-BENCH_OUTPUT
+task package → run → records → evaluation
 ```
 
-A backend MAY copy, mount or directly resolve manifest entries. This implementation choice MUST NOT alter the task or agent contract.
+### 3.1 Task package
 
-**Input:** validated task and manifest.  
-**Output:** prepared run context and environment record.
+A task package `workflows/tasks/<case>/` holds:
 
-### 3.4 Agent and tool execution
-
-The agent MUST receive the task contract and manifest through the run context. It MUST write declared products below `BENCH_OUTPUT`.
-
-Tools MUST be invoked through registered adapters when adapter support is available. An adapter MUST record:
-
-- executable or package identity;
-- version;
-- arguments and parameters;
-- model or auxiliary-file identity;
-- start/end time;
-- exit status;
-- stdout/stderr locations.
-
-A process exit status describes execution state only. It MUST NOT be interpreted as a scientific score.
-
-**Input:** run context.  
-**Output:** agent artifacts, tool records and execution log.
-
-### 3.5 Artifact validation
-
-The controller MUST validate agent products before scoring. It MUST check:
-
-- required artifacts exist;
-- artifacts are inside the declared output area;
-- file and structured-data schemas are valid;
-- required provenance fields are present;
-- output does not overwrite task, manifest or run-control records.
-
-Invalid or incomplete products MUST receive an explicit artifact-validation failure. They MUST NOT be silently repaired.
-
-**Input:** agent artifacts and task output contract.  
-**Output:** validated artifact set or artifact failure record.
-
-### 3.6 Scoring
-
-An external scorer MAY run after Agent execution. It MUST be separate from the
-Agent command and MUST read the task prompt, Agent outputs and authorized
-reference products. The framework does not require a scorer or impose a
-universal output format.
-
-A scorer MUST record:
-
-- scorer name and version;
-- reference identity;
-- matching and tolerance policy;
-- per-item scores;
-- diagnostics;
-- scorer status.
-
-Scientific metrics MAY include detection, association, phase-pick, location, depth, magnitude, uncertainty and output-completeness measures, depending on the task contract.
-
-**Input:** task record, validated artifacts and authorized references.  
-**Output:** versioned score record.
-
-### 3.7 Metric aggregation
-
-The aggregation component MUST combine scores according to the task metric definition. It SHOULD provide both instance-level and benchmark-level results. Aggregation MUST preserve the distinction between missing, failed and valid scores.
-
-**Input:** score records.  
-**Output:** metric summary.
-
-### 3.8 Reporting and provenance
-
-A run report MUST distinguish at least:
-
-```text
-validation_failed
-execution_failed
-execution_timeout
-artifact_invalid
-scoring_failed
-scored
-```
-
-A report MUST preserve:
-
-```text
-task_spec.json
-input_manifest.json
-environment.json
-agent_command.json
-execution.log
-output/
-score/score.json
-run_result.json
-```
-
-Provenance SHOULD include tool versions, parameters, model identities, source identities, timestamps and execution profile. Private reference contents MUST NOT be copied into public reports.
-
-## 4. Required run artifacts
-
-```text
-<run-root>/
-  task_spec.json
-  input_manifest.json
-  environment.json
-  agent_command.json
-  execution.log
-  output/
-  artifacts.json
-  score/
-    score.json
-  run_result.json
-  evaluation_report.json
-```
-
-Run directories MUST be uniquely identified and MUST NOT be silently overwritten. A rerun MUST receive a new `run_id`.
-
-## 5. Package responsibilities
-
-```text
-SeismoAgentBench/                 # reusable workflow implementation
-  task/                           # task specifications and input manifests
-  execution/                      # run control and execution backends
-  workflow/                       # end-to-end stage orchestration
-  agent/                          # agent entry points and tool adapters
-  scoring/                        # output validation, scoring and metrics
-  reporting/                      # run artifacts and provenance reports
-  utils/                          # small cross-cutting utilities only
-
-workflows/tasks/<instance>/                 # task packages and instance configuration
-data/<instance>/      # instance data and source evidence
-seismotools/                      # versioned scientific-tool snapshots
-```
-
-Generic modules MUST NOT contain instance-specific paths, catalogs, expert answers, station lists or plotting rules.
-
-The package is organized by stable workflow responsibilities rather than by every conceptual object:
-
-| Module | Responsibility | Excludes |
-| --- | --- | --- |
-| `task/` | Task records, output contracts, input manifests and validation | Agent implementation and reference answers |
-| `execution/` | Run creation, runtime preparation, backend dispatch and limits | Scientific scoring rules |
-| `workflow/` | Ordered execution, artifact validation and score-record orchestration | Scientific algorithms and reference comparisons |
-| `agent/` | Agent entry points and adapters for approved scientific tools | Private references and aggregate metrics |
-| `scoring/` | Output-contract checks, scientific scorers and metric aggregation | Process launching and environment setup |
-| `reporting/` | Run summaries, provenance and exportable reports | Instance-specific analysis scripts |
-| `utils/` | Small utilities shared by more than one stable module | Workflow stages and catch-all domain logic |
-
-Schemas live with the module that owns the contract until their size and reuse justify a separate package. A generic `core/` directory is not created in advance; shared identifiers and errors remain with the owning module until a real cross-module dependency exists. Command-line entry points are thin wrappers and do not require a separate `cli/` package at the start.
-
-The following areas remain outside the reusable control library:
-
-| Area | Responsibility |
+| File | Content |
 | --- | --- |
-| `workflows/tasks/<instance>/` | Task instructions, instance configuration and instance-level scorers |
-| `data/<instance>/` | Source data, reference evidence and instance-specific preparation scripts |
-| `seismotools/` | Versioned scientific-tool source, documentation and runtime assets |
+| `task_<variant>.json` | task spec for one variant (`min`, `tools`, `guided`) |
+| `prompt_<variant>.md` | the task prompt the spec names in `task_prompt_file` |
+| `output_contract.json`, `output_contract_min.json` | required output artifacts; each spec names one in `output_contract` |
+| `input.json` | the input file: read-only data entries for the Agent |
+| `run.sh` | the launcher for formal runs |
+| `evaluation/metrics.yaml` | the case configuration of the catalog-metrics scorer |
 
-Only create a module when it has an implemented responsibility and at least one stable caller. Do not create empty directories for anticipated features.
+A task spec requires `task_id`, `version` and `task_prompt_file`. Optional fields are `title`, `summary`, `output_contract`, `category`, `software`, `required_system_packages`, `taxonomy`, `input_requirements`, `reference_requirements` and `evaluation` (validated in `SeismoAgentBench/task/validation.py`). A spec has no fields for permitted tools, execution limits or failure policy: the tool policy is stated in the prompt (`taxonomy.tool_policy` only labels it), the time budget is the runner timeout set by `run.sh`, and failures are classified by the runner (§4). Every task spec declares the scorers `artifact-contract@1` and `catalog-metrics@1` under `evaluation.scorers`.
 
-## 6. Conformance criteria
+An output contract lists artifacts with `id`, `path`, `kind`, `required` and an optional column `schema`; paths are relative to the Agent's work directory.
 
-An implementation conforms to this specification when it:
+The input file has `schema_version` 1, `case_id`, an optional `description` and a non-empty list of `entries`. Each entry has `id`, an absolute `path`, `type` (`file` or `folder`) and optional `notes` (`SeismoAgentBench/task/schemas/input_manifest.schema.json`). The runner checks the schema, unique entry ids, absolute paths and types. It does not check that the paths exist; an entry whose path is missing is left out of the input view.
 
-1. validates versioned task and input contracts;
-2. uses immutable task and run identifiers;
-3. exposes the standard run context;
-4. separates agent execution from artifact validation and scoring;
-5. records explicit failure states;
-6. produces the required run artifacts;
-7. preserves tool and environment provenance;
-8. supports a replaceable execution backend without changing task or scorer contracts.
+### 3.2 Run
+
+`run.sh` starts `python -m SeismoAgentBench run-claude` (or `run-codex` with `AGENT=codex`). The command:
+
+1. loads the Agent config (`configs/agents/<harness>.yaml`, whose `harness` must match the command), the environment config (only `mode: host-direct` is supported) and the env file with credentials, of which only the variable names are recorded;
+2. renders the Agent prompt: the task prompt, the framework rules (`configs/prompts/framework.md`), the runtime context with the time budget, the output hints from the output contract and the additional instructions passed with `--prompt`;
+3. builds the launcher argv and runs the Agent through the runner (`execution/runner.py`).
+
+The runner creates the run directory and its control snapshots, links the input view, and starts the Agent with the work directory as current directory. The process gets a reduced environment (`PATH=/usr/bin:/bin`, a fresh `HOME` and `TMPDIR` under a temporary runtime root, one BLAS thread), the run variables below, and the env-file values. Claude Code receives the Agent prompt on standard input; Codex receives it as the last argv element. The runner streams the output into the record, rewrites the run result every 300 s as a heartbeat, kills the process group at the timeout, stops processes the Agent left running, and keeps non-hidden files from the temporary `HOME`.
+
+| Variable | Value | Set |
+| --- | --- | --- |
+| `BENCH_TASK_SPEC` | `control/task_spec.json` | always |
+| `BENCH_WORK` | `work/` | always |
+| `BENCH_OUTPUT` | `work/` (same as `BENCH_WORK`) | always |
+| `BENCH_INPUT` | `work/input/` | always |
+| `BENCH_INPUT_MANIFEST` | `control/input_manifest.json` | only with an input file |
+| `BENCH_OUTPUT_CONTRACT` | `control/output_contract.json` | only when the task declares an output contract |
+| `PYTHON` | the Python of the environment config (`run.sh` also writes it to the env file) | when configured |
+
+The Agent calls scientific tools directly through its shell. The tool-adapter classes in `SeismoAgentBench/agent/tools.py` are not used in runs. Tool provenance is the `seismotools` commit and dirty flag in `record/provenance.json` together with the Agent's tool calls in `record/execution.jsonl`.
+
+### 3.3 Records
+
+The runner, the run workflow and the CLI write `control/` and `record/`; the Agent writes `work/`. [01_Run_Layout_and_Records.md](01_Run_Layout_and_Records.md) lists every file and who writes it. `python -m SeismoAgentBench status --run-dir <run>` probes a run read-only; `finalize` closes a run whose runner died.
+
+### 3.4 Evaluation
+
+`python -m SeismoAgentBench evaluate --run-dir <run>` is the only scoring path (`workflow/evaluate_run.py`):
+
+1. Only runs in `completed`, `scored`, `artifact_invalid` or `scoring_failed` are evaluated; for any other state only `evaluation/report.json` is written.
+2. The artifacts in `work/` are checked against `control/output_contract.json`. A failure sets `artifact_invalid`.
+3. The scorers declared in the task spec are resolved in the registry (`scoring/registry.py`) and written to `evaluation/scorer_plan.json`, then run in order. A scorer that lacks an optional input is recorded as `skipped`. A scorer that raises sets `scoring_failed`. Without `artifact-contract@1` the run is also `scoring_failed`.
+4. Otherwise the run is `scored`. The state is written back to `record/run_result.json`.
+
+Registered scorers are `artifact-contract@1` and `catalog-metrics@1` (local), and `catalog-basic@1` and `phase-picking-basic@1` (reference-based, declared by no task). `catalog-metrics@1` is the shared code in `SeismoAgentBench/scoring/catalog_metrics/`, configured per case by `workflows/tasks/<case>/evaluation/metrics.yaml`; it is skipped when the run is not at the formal run path. Its own CLI (`python -m SeismoAgentBench.scoring.catalog_metrics`) also scores baselines, summarizes repeated runs and prepares audits ([02_Catalog_Metrics.md](02_Catalog_Metrics.md) §9).
+
+## 4. Run states
+
+| State | Set by | Meaning |
+| --- | --- | --- |
+| `preparing`, `running` | runner | live run |
+| `completed` | runner | the Agent process exited with code 0 |
+| `execution_failed` | runner | non-zero exit; `failure_reason` is `nonzero_exit`, `quota_exhausted`, `usage_limit`, `max_turns_exceeded`, or `launcher_error` when the process could not start |
+| `execution_retryable` | runner | non-zero exit with `failure_reason` `capacity` or `rate_limited`; `--max-attempts` retries it, and `--resume` starts a new attempt in the same run directory |
+| `execution_timeout` | runner | the timeout was reached and the process group killed |
+| `interrupted` | runner or `finalize` | `failure_reason` `runner_signal:SIGTERM` or `runner_signal:SIGINT`; `runner_lost` when `finalize` closes a run whose runner died |
+| `artifact_invalid` | evaluator | the output contract check failed |
+| `scoring_failed` | evaluator | a declared scorer failed, or `artifact-contract@1` is not declared |
+| `scored` | evaluator | `artifact-contract@1` scored and no declared scorer failed |
+
+The runner ignores `SIGHUP`, so a closed terminal does not end a run. `cli_error` is not a run state: when the CLI cannot prepare or record a run it prints `{"state": "cli_error", ...}` on standard error and exits with code 2. The `run-*` and `evaluate` commands exit 0 for `completed` or `scored` and 3 otherwise.
+
+## 5. Package layout
+
+| Path | Responsibility |
+| --- | --- |
+| `SeismoAgentBench/task/` | task, input-file and output-contract validation; prompt rendering; schemas |
+| `SeismoAgentBench/execution/` | runner, Claude and Codex launchers, run layout, configs, runtime probe, status and finalize, experiment plans |
+| `SeismoAgentBench/workflow/` | run one Agent, evaluate one run, execute an experiment |
+| `SeismoAgentBench/agent/` | the Agent identity and command (`AgentSpec`) |
+| `SeismoAgentBench/scoring/` | artifact checks, scorer registry, catalog metrics |
+| `SeismoAgentBench/reporting/` | environment, evaluation-report, event-log and batch records |
+| `SeismoAgentBench/configs/` | Agent configs, environment configs, framework prompt |
+| `SeismoAgentBench/utils/` | source registry and catalog utilities used by data preparation |
+| `workflows/tasks/<case>/` | task packages, case evaluation configuration, runs |
+| `data/<case>/` | case data, reference evidence and preparation scripts |
+| `seismotools/` | versioned scientific tools offered to the Agent |
+
+A module is created only when it has an implemented responsibility and a caller.

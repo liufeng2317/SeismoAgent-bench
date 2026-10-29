@@ -4,7 +4,7 @@ Living document: what is done, what runs, what comes next. The design is defined
 
 ## 1. Status (2026-10-30)
 
-- **Metrics v2** (2026-10-30, [`03_EVALUATION_METRICS.md`](../../framework/03_EVALUATION_METRICS.md) §12). The Maple Creek runs showed that v1's headline hid a scattered `min` catalog and a biased `tools` catalog. v2 sets primary gates at 2 s / 5 km (Kaikōura 4 s / 15 km), corrects every match for chance, compares every catalog directly with the human-in-loop final, adds tight-gate recall, origin time and out-of-region share to the headline, and gives each run a trusted-catalog verdict on four dimensions — event reality, time, space, strength — with completeness against the final reported apart (§7a). All baselines, ladders, runs and swaps were re-scored; single scoring path `python -m SeismoAgentBench evaluate` (catalog-metrics@1).
+- **Metrics v2** (2026-10-30, [`02_Catalog_Metrics.md`](../../framework/02_Catalog_Metrics.md) §12). The Maple Creek runs showed that v1's headline hid a scattered `min` catalog and a biased `tools` catalog. v2 sets primary gates at 2 s / 5 km (Kaikōura 4 s / 15 km), corrects every match for chance, compares every catalog directly with the human-in-loop final, adds tight-gate recall, origin time and out-of-region share to the headline, and gives each run a trusted-catalog verdict on four dimensions — event reality, time, space, strength — with completeness against the final reported apart (§7a). All baselines, ladders, runs and swaps were re-scored; single scoring path `python -m SeismoAgentBench evaluate` (catalog-metrics@1).
 - **Human-in-loop baselines.** Final and blind rows in each `evaluation/human_in_loop/metrics_baseline.json` (v2); Agent runs are compared with the final only; expert ladder re-scored per case.
 - **Zero-cost analyses.** Expert ladder and component swap — [`01_Expert_Experience_and_Checker.md`](../01_Expert_Experience_and_Checker.md).
 - **Agent stages.** S0 `min` and S1 `tools` implemented; S2 `knowledge` and S3 `checker` designed ([research plan](../00_Research_Plan.md) §2.4–2.5), not implemented.
@@ -39,7 +39,7 @@ Component swap (Agent picks, expert locator): the back-end errors largely disapp
 
 ## 3. Trusted-catalog standard
 
-Fixed with metrics v2 on 2026-10-30: [`03_EVALUATION_METRICS.md`](../../framework/03_EVALUATION_METRICS.md) §7a. Event reality, then time, space and strength, each judged on accuracy (offset from the final) and stability (spread and consistency); completeness against the final is reported apart. The scorer writes the verdict into every run's `metrics.json` (`trust`) and the per-configuration `trusted_runs` into `metrics_summary.json`.
+Fixed with metrics v2 on 2026-10-30: [`02_Catalog_Metrics.md`](../../framework/02_Catalog_Metrics.md) §7a. Event reality, then time, space and strength, each judged on accuracy (offset from the final) and stability (spread and consistency); completeness against the final is reported apart. The scorer writes the verdict into every run's `metrics.json` (`trust`) and the per-configuration `trusted_runs` into `metrics_summary.json`.
 
 ## 4. Open items
 

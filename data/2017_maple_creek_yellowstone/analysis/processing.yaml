@@ -10,7 +10,7 @@ processing_policy:
 window_status: frozen
 window_freeze:
   frozen_on: '2026-10-28'
-  authority: metrics v1 (docs/framework/03_EVALUATION_METRICS.md); the evaluation cohort mask (time, region, depth) is workflows/tasks/2017_maple_creek_yellowstone/expert/00_config/validation.yaml
+  authority: metrics v1 (docs/framework/02_Catalog_Metrics.md); the evaluation cohort mask (time, region, depth) is workflows/tasks/2017_maple_creek_yellowstone/expert/00_config/validation.yaml
   evaluation_window:
     start_utc: '2017-06-11T00:00:00Z'
     end_utc: '2017-06-19T00:00:00Z'

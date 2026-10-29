@@ -3,7 +3,7 @@
 > Current preparation state: `window_status: frozen` in [processing.yaml](processing.yaml) (2026-10-28, with metrics v1). The v1 window below is the frozen evaluation window; counts below come from data-level analysis masks, while the evaluation cohort (time, region, depth) is defined in `workflows/tasks/2011_prague_oklahoma/expert/00_config/validation.yaml`.
 
 
-> **Source of truth:** This file is the detailed, mutable analysis record for `PRAGUE2011`. The cross-case summary is maintained in [`docs/data/CASE_REGISTRY.md`](../../../docs/data/CASE_REGISTRY.md).
+> **Source of truth:** This file is the detailed, mutable analysis record for `PRAGUE2011`. The cross-case summary is maintained in [`docs/data/00_Case_Registry.md`](../../../docs/data/00_Case_Registry.md).
 
 ## Status
 

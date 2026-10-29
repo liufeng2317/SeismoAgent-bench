@@ -1,4 +1,4 @@
-"""Blind audit of unsupported events (docs/framework/03_EVALUATION_METRICS.md §5 L1)."""
+"""Blind audit of unsupported events (docs/framework/02_Catalog_Metrics.md §5 L1)."""
 
 from __future__ import annotations
 

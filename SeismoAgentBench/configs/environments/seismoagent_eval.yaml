@@ -1,4 +1,5 @@
 # Execution environment definition for the seismoagent_eval Python environment.
+# Pinned direct Python dependencies: seismoagent_eval.requirements.txt (see ../README.md).
 mode: host-direct
 python: /liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python
 network_policy: allowed

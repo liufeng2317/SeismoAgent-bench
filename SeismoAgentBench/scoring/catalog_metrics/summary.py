@@ -1,4 +1,4 @@
-"""Per-configuration summary over repeated runs (docs/framework/03_EVALUATION_METRICS.md §6-§7)."""
+"""Per-configuration summary over repeated runs (docs/framework/02_Catalog_Metrics.md §6-§7)."""
 
 from __future__ import annotations
 

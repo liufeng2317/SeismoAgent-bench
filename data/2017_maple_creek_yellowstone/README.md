@@ -13,4 +13,4 @@
 
 当前 `window_status: frozen`（2026-10-28 随 metrics v1 冻结；评测时间、区域和深度掩膜见 `workflows/tasks/2017_maple_creek_yellowstone/expert/00_config/validation.yaml`）。`workflows/data_preparation/` 仅在有案例级执行工具时建立；目录自身的解析脚本保留在 `data/catalogs/<SOURCE_ID>/workflows/data_preparation/`。
 
-当前候选窗为 `2017-06-11` 至 `06-19` UTC，27 个 phase-manifest 台站均有波形。研究侧当前只有 phase 产品，event-level 表仍缺；official baseline 的旧空间窗不覆盖 Mw 4.4 锚点，不能作为已冻结基线。见 [六案统计](../../docs/data/CASES_SUMMARY.md) 和 [Maple Creek 详细信息](../../docs/data/CASE_DETAILS.md#3-maple-creek-yellowstone-2017)。
+评测时间窗（已冻结）为 `2017-06-11` 至 `06-19` UTC，27 个 phase-manifest 台站均有波形。研究侧有 Shelly 的 phase 产品和由其派生的检测事件表（时间窗内 18,062 个，仅有时间）；Pang 2019 的事件表仍缺。official baseline（UUSS ComCat）的空间框已于 2026-10-22 修正，覆盖 Mw 4.4 锚点（全量 2,447 个、时间窗内 626 个），是主检测和主定位参考。见 [案例数据清单](../../docs/data/01_Case_Data_Inventory.md) 和 [Maple Creek 详细信息](../../docs/data/01_Case_Data_Inventory.md#3-maple-creek-yellowstone-2017)。

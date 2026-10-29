@@ -1,93 +1,56 @@
-# Implementation process constraints
+# Development Process
 
-These rules apply to every SeismoAgentBench implementation step.
+This document states how a change to SeismoAgentBench is made, validated and committed.
 
-## Required cycle
+## 1. Cycle
 
 ```text
-Define → Implement → Validate → Confirm → Commit → Plan next
+Define → Implement → Validate → Confirm → Commit
 ```
 
-### 1. Define
+### 1.1 Define
 
-Before editing, state:
+Before editing, state one concrete objective, the files involved, the validation command and the stopping condition.
 
-- one concrete objective;
-- scope and files involved;
-- expected input and output;
-- validation command;
-- stopping condition.
-
-### 2. Implement
+### 1.2 Implement
 
 - Change only what the objective requires.
-- Do not mix unrelated refactoring or formatting.
+- Do not mix in unrelated refactoring or formatting.
 - Do not add speculative modules, parameters or tests.
-- Record new issues as separate follow-up items.
+- Note new issues as separate follow-up items.
 
-### 3. Validate
+### 1.3 Validate
 
-Run the smallest reliable check for the change, such as:
+Run the smallest reliable check for the change: an import check, a focused test, a deterministic smoke run, a schema or artifact check, or a scientific comparison when scientific output changes. Inspect the relevant output, not only the exit code.
 
-- syntax/import checks;
-- focused tests;
-- deterministic smoke runs;
-- schema or artifact checks;
-- scientific comparison when scientific output changes.
+### 1.4 Confirm
 
-Record the command and result. Inspect the relevant output, not only the exit code.
+Mark the change as one of:
 
-### 4. Confirm and stop
+- **complete**: the objective and the stopping condition are met;
+- **blocked**: a named external dependency prevents validation;
+- **follow-up**: the objective is met and a separate issue remains.
 
-Mark the step as one of:
+Stop tuning once the stopping condition is met.
 
-- **complete** — objective and stopping condition are satisfied;
-- **blocked** — a specific external dependency prevents validation;
-- **follow-up** — the objective is complete and a separate issue remains.
-
-Do not continue tuning after the stopping condition is met.
-
-### 5. Commit
-
-After confirmation:
+### 1.5 Commit
 
 ```bash
 git status --short
 git diff --check
-git add <files-for-this-step>
-git commit -m "<verified change>"
+git add <files-for-this-change>
+git diff --cached
+git commit
 ```
 
-Each commit MUST:
+Each commit contains only the completed change and excludes large data, generated caches, credentials, personal information and unrelated edits.
 
-- contain only the completed step;
-- exclude large data, generated caches, credentials, personal information and unrelated changes;
-- describe the resulting behavior.
+## 2. Record of a change
 
-### 6. Plan the next step
+The commit message is the record of a change. Its subject names the change; its body says what changed, why, and how it was validated (the command or comparison and its result). No separate implementation log is kept.
 
-Only after the commit, record:
+The step records written in September 2026 are archived at `docs/archive/2026-09_framework_implementation_logs/`. They are history only and are not updated.
 
-- what was established;
-- what remains necessary;
-- the next single objective;
-- why further tuning is not yet required.
+## 3. Uncommitted work
 
-## Minimal step record
-
-```text
-Objective:
-Scope:
-Inputs / outputs:
-Validation:
-Result:
-Decision:
-Commit:
-Next step:
-```
-
-An implementation step is complete only when the objective is defined, the result is validated, the decision is recorded and the focused Git commit exists.
-
-## Backlog commit rule
-
-Before starting a new implementation phase, review all uncommitted work. Group it into small logical commits by function or document, and commit the groups separately. Do not commit large scientific data, raw waveforms, generated bulk products, credentials, personal information or local runtime state. Check the staged file list and `git diff --cached` before each commit.
+Before starting a new phase, review all uncommitted work, group it into small logical commits by function or document, and commit the groups separately. Check the staged file list and `git diff --cached` before each commit. Never commit scientific data, raw waveforms, generated bulk products, run directories, credentials, personal information or local runtime state.

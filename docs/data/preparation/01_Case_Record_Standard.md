@@ -1,6 +1,6 @@
-# Case information-collection standard
+# Case record standard
 
-What to record for every benchmark case and its reference catalogs, how to choose the primary reference, and what to verify before a case is used. Moved from the research plan v0.2, Part III, on 2026-10-29. The resulting records are the case analyses under `data/<case>/analysis/` indexed in [`CASE_REGISTRY.md`](../CASE_REGISTRY.md); literature extraction follows [`INFORMATION_EXTRACTION_SCHEMA.md`](INFORMATION_EXTRACTION_SCHEMA.md).
+What to record for every benchmark case and its reference catalogs, how to choose the primary reference, and what to verify before a case is used. Moved from the research plan v0.2, Part III, on 2026-10-29. The resulting records are the case analyses under `data/<case>/analysis/` indexed in [`00_Case_Registry.md`](../00_Case_Registry.md); literature extraction follows [`02_Extraction_Contract.md`](02_Extraction_Contract.md).
 
 ## 1. Information-collection standard
 
@@ -118,3 +118,33 @@ Secondary catalogs should be preserved when they offer:
 | **Freeze what information is hidden from the Agent** | Prevents target leakage. |
 | **Freeze the Agent input condition** | Raw-only and assisted tasks must remain distinct. |
 | **Assign an evaluation role to every reference product** | Detection, phase timing, absolute location, relative location, and uncertainty should not be scored against one undifferentiated target. |
+
+The six Phase I cases passed these checks; their windows were frozen on 2026-10-28 ([`../00_Case_Registry.md`](../00_Case_Registry.md)).
+
+## 4. Case analysis file and preparation status
+
+Each case's analysis file (`data/<case>/analysis/<CASE>_analysis.md`) must maintain:
+
+Each detailed analysis file must maintain:
+
+- case scientific context and regime;
+- primary, secondary, baseline, and auxiliary catalogs;
+- Q1–Q4 quality tier and dimension-specific quality profile;
+- evaluation role and reference independence;
+- full and benchmark time/space scope;
+- network and station/channel conditions;
+- catalog schema, event counts, and release reconciliation;
+- candidate and frozen benchmark windows;
+- waveform access, data gaps, and volume estimates;
+- allowed metrics, excluded interpretations, risks, and final freeze decision.
+
+Preparation status of a case:
+
+| Status | Meaning |
+|---|---|
+| `inventory` | Reference and case information collected; no catalog freeze |
+| `catalog-calibration` | Catalog files downloaded and schemas/release counts being reconciled |
+| `window-candidate` | Candidate time/space window proposed but not frozen |
+| `window-frozen` | Exact time, spatial, and event-inclusion rules frozen |
+| `waveform-sampled` | Representative waveform requests successfully tested |
+| `data-frozen` | Catalog, metadata, and waveform manifest versioned for experiments |

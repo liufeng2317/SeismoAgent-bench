@@ -1,0 +1,3 @@
+# Archived external notes
+
+These notes were copied from another project (GeoDataBench / earth_data_agent_bench, host dev-d, September 2026) as background on running Codex CLI evaluations. They do not describe SeismoAgentBench: the `geodatabench` commands, the agent-config and experiment-spec templates, the paths and the model names do not apply here, and the templates fail this repository's config validation. For SeismoAgentBench runs see [`docs/framework/01_Run_Layout_and_Records.md`](../../framework/01_Run_Layout_and_Records.md). `scripts/setup_proxy_env.sh` is a host-specific script kept locally and git-ignored.

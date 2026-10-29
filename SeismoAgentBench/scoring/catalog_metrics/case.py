@@ -1,4 +1,4 @@
-"""Case configuration and scoring entry points (docs/framework/03_EVALUATION_METRICS.md).
+"""Case configuration and scoring entry points (docs/framework/02_Catalog_Metrics.md).
 
 Each task package provides ``evaluation/metrics.yaml`` (mask, roles,
 datums, expert catalogs, leakage patterns). The reference cohorts come from

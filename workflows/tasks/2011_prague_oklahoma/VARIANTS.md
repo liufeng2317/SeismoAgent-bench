@@ -38,7 +38,7 @@ Contracts: `output_contract_min.json` (picks + catalog) and `output_contract.jso
 
 ## Scoring wiring status
 
-Every task spec declares `artifact-contract@1` and `catalog-metrics@1`, so `python -m SeismoAgentBench evaluate --run-dir <run>` validates the CSV contract and scores the run with the pre-registered catalog metrics, v2 (`docs/framework/03_EVALUATION_METRICS.md`; case configuration in `evaluation/metrics.yaml`): detection, location, structure and magnitude against every reference in its assigned roles, by magnitude class, plus process, leakage and the unsupported-event audit sample. Configurations are aggregated with `python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir <this task>` (see `evaluation/README.md`). Runs started before 2026-10-28 carry the earlier scorer declaration in their control snapshot and are scored with the summary command.
+Every task spec declares `artifact-contract@1` and `catalog-metrics@1`, so `python -m SeismoAgentBench evaluate --run-dir <run>` validates the CSV contract and scores the run with the pre-registered catalog metrics, v2 (`docs/framework/02_Catalog_Metrics.md`; case configuration in `evaluation/metrics.yaml`): detection, location, structure and magnitude against every reference in its assigned roles, by magnitude class, plus process, leakage and the unsupported-event audit sample. Configurations are aggregated with `python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir <this task>` (see `evaluation/README.md`). Runs started before 2026-10-28 carry the earlier scorer declaration in their control snapshot and are scored with the summary command.
 
 ## Cost and sequencing
 

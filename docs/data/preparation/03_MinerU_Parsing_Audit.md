@@ -4,10 +4,10 @@
 
 ## Coverage
 
-- Paper PDFs discovered: **23**
+- Paper PDFs discovered: **25**
 - Successful MinerU tasks: **22**
-- Failed or unresolved tasks: **1**
-- Stable `parsed/paper/*__mineru.md` derivatives present: **22/23**
+- Failed or unresolved tasks: **3**
+- Stable `parsed/paper/*__mineru.md` derivatives present: **22/25**
 - Outputs with Unicode replacement characters: **4**
 - Outputs with missing image references: **0**
 
@@ -25,6 +25,7 @@
 | 2017_maple_creek_yellowstone | MAPLE_RELATED_OPEN | success | 16 | 16 | 75899 | 0 | 19 | 4 | yes |
 | 2017_maple_creek_yellowstone | PANG2019_GL082376 | success | 11 | 11 | 51213 | 0 | 10 | 0 | yes |
 | 2017_maple_creek_yellowstone | SHELLY2019_GL081607 | success | 9 | 9 | 46323 | 0 | 8 | 0 | yes |
+| 2018_kilauea_hawaii | HVO2002_OFR02157 | unknown | None | None | 0 | 0 | 0 | 0 | no |
 | 2018_kilauea_hawaii | LENGLINE2021_EPSL116653 | success | 11 | 11 | 56472 | 0 | 12 | 0 | yes |
 | 2018_kilauea_hawaii | MATOZA2014_GL059819 | success | 9 | 9 | 39883 | 0 | 12 | 0 | yes |
 | 2018_kilauea_hawaii | MATOZA2021_EA001253 | success | 10 | 10 | 35140 | 0 | 18 | 0 | yes |
@@ -37,6 +38,7 @@
 | 2019_ridgecrest_california | LIU2020_GL086189 | success | 9 | 9 | 38660 | 0 | 10 | 0 | yes |
 | 2019_ridgecrest_california | ROSS2019_SCIENCE | success | 7 | 7 | 31559 | 0 | 12 | 0 | yes |
 | 2019_ridgecrest_california | SHELLY2020_0220190309 | success | 8 | 8 | 28460 | 1 | 15 | 0 | yes |
+| 2020_magna_utah | BJARNASON_PECHMANN_1989_BSSA | unknown | None | None | 0 | 0 | 0 | 0 | no |
 | 2020_magna_utah | PANG2020_GL089798 | success | 10 | 10 | 47751 | 0 | 5 | 0 | yes |
 
 ## Interpretation
@@ -51,7 +53,9 @@
 
 ## Failed or unresolved outputs
 
-- `2011_prague_oklahoma/MCMAHON2017_DISSERTATION`: [{'file': 'MCMAHON2017_DISSERTATION__paper.pdf', 'error': 'MinerU result missing or post-processing failed'}] A local retry is currently blocked before submission because the active Python environment cannot import the official parser dependency `loguru`; no claim of a successful retry is made.
+- `2011_prague_oklahoma/MCMAHON2017_DISSERTATION`: [{'file': 'MCMAHON2017_DISSERTATION__paper.pdf', 'error': 'MinerU result missing or post-processing failed'}]
+- `2018_kilauea_hawaii/HVO2002_OFR02157`: no successful summary
+- `2020_magna_utah/BJARNASON_PECHMANN_1989_BSSA`: no successful summary
 
 ## OCR/encoding review queue
 
@@ -59,27 +63,3 @@
 - `2017_maple_creek_yellowstone/MAPLE_RELATED_OPEN`: 4 replacement characters
 - `2018_kilauea_hawaii/QUAKEFLOW_GJI_GGAC355`: 4 replacement characters
 - `2018_kilauea_hawaii/WEI2022_EA001979`: 3 replacement characters
-
-The audit also flags control-character or broken-formula review for `LENGLINE2021_EPSL116653` and `AWR2025_CALTECHDATA`, even though their Markdown contains no U+FFFD count.
-
-## Readiness decision
-
-### Sufficient for
-
-- locating the article's scientific question, catalog lineage, network description, detection/association/relocation workflow, and qualitative limitations for the 22 successful paper bundles;
-- drafting a first-pass paper reading note when reported numbers are checked against the source PDF and an evidence anchor is recorded;
-- identifying which local catalogs are genuinely associated with each article.
-
-### Not yet sufficient for
-
-- final machine-readable extraction of exact thresholds, formula parameters, signs, units, or table values from the OCR/control-character review queue;
-- claiming complete reference preparation, because supplementary products are not covered by this paper-only parser;
-- treating `MCMAHON2017_DISSERTATION` as parsed (its task failed and has no local Markdown/model output);
-- treating `MAPLE_RELATED_OPEN` as Yellowstone evidence or the QuakeFlow evaluation deck as a Kīlauea event catalog.
-
-### Ordered remediation queue
-
-1. Retry `MCMAHON2017_DISSERTATION` only if the dissertation is needed as a method source; it is not a primary catalog target.
-2. Manually audit catalog-bearing supplementary PDFs and local XLSX/XML/DOCX products when exact thresholds or schema fields are needed; the core event tables have already been audited where machine-readable files are present.
-3. Perform a visual PDF pass for every quantitative claim containing a replacement character or broken formula, then add page/figure/table anchors to the paper reading notes.
-4. Build station-day/channel availability and waveform manifests; MinerU success alone does not establish catalog or waveform readiness.

@@ -1,6 +1,6 @@
 # Expert experience, parameter sensitivity and the self-improving checker
 
-Status: working summary, 2026-10-28; revised 2026-10-29. The Agent stages and the form of the checker are defined in the [research plan](./00_Research_Plan.md) §2.4–2.5; this document holds the evidence, the checker rules and the intervention coding. Numbers are metrics v1 (2026-10-28) unless a source is named; v2 (2026-10-30, `docs/framework/03_EVALUATION_METRICS.md` §12) tightens the gates and compares every catalog with the final, which changes some values but none of the conclusions here.
+Status: working summary, 2026-10-28; revised 2026-10-29. The Agent stages and the form of the checker are defined in the [research plan](./00_Research_Plan.md) §2.4–2.5; this document holds the evidence, the checker rules and the intervention coding. Numbers are metrics v1 (2026-10-28) unless a source is named; v2 (2026-10-30, `docs/framework/02_Catalog_Metrics.md` §12) tightens the gates and compares every catalog with the final, which changes some values but none of the conclusions here.
 
 ## 1. Thesis
 
@@ -66,7 +66,7 @@ Relocating an Agent's own picks and associations with the expert's model and loc
 | Magna min | 1.03 km, fixed depth 42 %, off 4 % | 1.00 km, 2 %, 0.4 % | 0.48 km, 1 %, 0.3 % |
 | Magna tools (formal, 2026-10-28) | shift 2.50 km, scatter 0.38 km, dZ −1.72 km | shift 1.63 km, 1.12 km, −0.76 km | shift 0.95 km, 0.48 km, +0.09 km |
 
-With tools, relocating the Agent's picks with the expert's model and locator removes most of its depth error, so its large errors are back-end *choices*. The remaining distance to the final (Ridgecrest scatter 0.80 vs 0.21 km, off-structure 8 % vs 0.5 %) is what the expert's later steps add — station delays, template matching, double difference, the layered frame — and is attributed with the ladder. Without tools, both ends fail. (Ridgecrest and Magna min are pilot runs; the human-in-loop final is the upper bound, see `03_EVALUATION_METRICS.md` §11.) These are exactly the errors a checker can see without references (depth pile-ups, origin-time–depth coupling, fixed depths, magnitude-scale sanity).
+With tools, relocating the Agent's picks with the expert's model and locator removes most of its depth error, so its large errors are back-end *choices*. The remaining distance to the final (Ridgecrest scatter 0.80 vs 0.21 km, off-structure 8 % vs 0.5 %) is what the expert's later steps add — station delays, template matching, double difference, the layered frame — and is attributed with the ladder. Without tools, both ends fail. (Ridgecrest and Magna min are pilot runs; the human-in-loop final is the upper bound, see `02_Catalog_Metrics.md` §11.) These are exactly the errors a checker can see without references (depth pile-ups, origin-time–depth coupling, fixed depths, magnitude-scale sanity).
 
 ### 2.4 Summary
 

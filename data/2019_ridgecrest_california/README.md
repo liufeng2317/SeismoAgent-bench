@@ -21,7 +21,7 @@ python -B data/2019_ridgecrest_california/scripts/catalogs/audit_references.py
 python -B -m unittest discover -s tests/source_prepare
 ```
 
-区域 StationXML 发现范围是 404 站，不是最终评测输入；来源子集和当前波形台站也尚未冻结。见 [六案统计](../../docs/data/CASES_SUMMARY.md) 和 [Ridgecrest 详细信息](../../docs/data/CASE_DETAILS.md#5-ridgecrest-california-2019)。大目录、波形、论文原件和敏感配置保留本地，文件维护规则见 [资料组织说明](../README.md)。
+区域 StationXML 发现范围是 404 站，不是评测输入；任务输入是整个本地波形目录（时间窗内 42 站有数据），由 Agent 自行选台。见 [案例数据清单](../../docs/data/01_Case_Data_Inventory.md) 和 [Ridgecrest 详细信息](../../docs/data/01_Case_Data_Inventory.md#5-ridgecrest-california-2019)。大目录、波形、论文原件和敏感配置保留本地，文件维护规则见 [资料组织说明](../README.md)。
 
 ## Source 整理入口
 

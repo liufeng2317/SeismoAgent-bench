@@ -6,8 +6,8 @@ The `data/` directory contains the observation-data entry points, reference cata
 
 | File | Sole responsibility | Excludes |
 |---|---|---|
-| [CASES_SUMMARY.md](../docs/data/CASES_SUMMARY.md) | Cross-case statistics for events, waveforms, stations, catalogs, official baselines, and literature assets | Detailed product provenance for an individual case |
-| [CASE_DETAILS.md](../docs/data/CASE_DETAILS.md) | Case-by-case observation, research-catalog, official-catalog, literature, and limitation details | Cross-case aggregate tables |
+| [01_Case_Data_Inventory.md](../docs/data/01_Case_Data_Inventory.md) | Cross-case statistics for events, waveforms, stations, catalogs, official baselines, and literature assets | Detailed product provenance for an individual case |
+| [01_Case_Data_Inventory.md](../docs/data/01_Case_Data_Inventory.md) | Case-by-case observation, research-catalog, official-catalog, literature, and limitation details | Cross-case aggregate tables |
 
 For further details, consult `<case>/README.md`, `<case>/analysis/processing.yaml`, and the relevant source/catalog `README.md` first. Historical download logs and scientific discussion remain within the case directories and are not duplicated in the top-level documents.
 
@@ -55,7 +55,7 @@ Waveforms are stored in external archives, and each case's `data/waveforms` is a
 - `data/catalogs/` contains catalogs, phase picks, focal mechanisms, original release archives, and product-level statistics used for benchmark validation.
 - `analysis/` contains case-level scientific designs, candidate windows, cross-product audits, and figures. Statistics for an individual product remain under that catalog's `analysis/` directory.
 - `scripts/observations/` contains executable data-preparation tools and run logs; logs are not status manifests.
-- Cross-case statistics are consolidated in `docs/data/CASES_SUMMARY.md`, with case-level detail in `docs/data/CASE_DETAILS.md`. Product stats JSON files and catalog READMEs remain the underlying evidence.
+- Cross-case statistics are consolidated in `docs/data/01_Case_Data_Inventory.md`, with case-level detail in `docs/data/01_Case_Data_Inventory.md`. Product stats JSON files and catalog READMEs remain the underlying evidence.
 
 ## Naming and Associations
 
@@ -94,5 +94,5 @@ Do not commit credentials, `.env` files, model caches, or temporary fragments. B
 1. After updating a source or downloading data, run the corresponding catalog or observation inventory first.
 2. Update provenance and limitations in the source/catalog README.
 3. Regenerate or inspect the relevant product statistics if catalog products have changed.
-4. Update the case section in `docs/data/CASE_DETAILS.md`.
-5. Synchronize the cross-case tables in `docs/data/CASES_SUMMARY.md`.
+4. Update the case section in `docs/data/01_Case_Data_Inventory.md`.
+5. Synchronize the cross-case tables in `docs/data/01_Case_Data_Inventory.md`.

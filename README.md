@@ -10,7 +10,7 @@ SeismoAgentBench evaluates what an AI agent can do when asked to build an earthq
 
 The benchmark is built around real, published earthquake and volcanic sequences. It separates data preparation and scientific reference validation from the later task of reproducing catalogs with agents.
 
-The extraction contract for paper methods, catalog schemas, and case-level synthesis is defined in [`docs/data/preparation/INFORMATION_EXTRACTION_SCHEMA.md`](docs/data/preparation/INFORMATION_EXTRACTION_SCHEMA.md).
+The extraction contract for paper methods, catalog schemas, and case-level synthesis is defined in [`docs/data/preparation/02_Extraction_Contract.md`](docs/data/preparation/02_Extraction_Contract.md).
 
 The current status and work plan are tracked in [`docs/research/progress/STATUS_AND_PLAN.md`](docs/research/progress/STATUS_AND_PLAN.md).
 
@@ -89,12 +89,10 @@ Current work is concentrated on stages 1–5. Agent reproduction is intentionall
 
 ```text
 docs/
-  research/                 scientific design, case inventory and data preparation
-  framework/                reusable benchmark workflow and implementation records
-
-docs/data/
-  CASES_SUMMARY.md          cross-case data and readiness statistics
-  CASE_DETAILS.md           case-by-case observation and catalog details
+  research/                 questions, benchmark design, evidence, paper outline, status
+  framework/                workflow, run layout and records, catalog metrics, process
+  data/                     case registry, case data inventory, case pool, preparation
+  archive/                  records no longer maintained
 
 data/
   <case>/references/        source papers and supplementary materials
@@ -113,7 +111,7 @@ workflows/tasks/
   <task>/                   benchmark task packages and case-specific workflows
 ```
 
-Detailed organization rules belong in [data/README.md](data/README.md), and the current data readiness belongs in [docs/data/CASES_SUMMARY.md](docs/data/CASES_SUMMARY.md).
+Detailed organization rules belong in [data/README.md](data/README.md), and the current data readiness belongs in [docs/data/01_Case_Data_Inventory.md](docs/data/01_Case_Data_Inventory.md).
 
 ## Quick start
 
@@ -159,13 +157,13 @@ Next deliverables are:
 - [Expert experience and checker](docs/research/01_Expert_Experience_and_Checker.md)
 - [Paper outline](docs/research/02_Paper_Outline.md)
 - [Status and work plan](docs/research/progress/STATUS_AND_PLAN.md)
-- [Case registry](docs/data/CASE_REGISTRY.md)
-- [Candidate case pool](docs/data/CASE_POOL.md)
-- [Six-case data summary](docs/data/CASES_SUMMARY.md)
-- [Case-by-case data details](docs/data/CASE_DETAILS.md)
-- [Information extraction schema](docs/data/preparation/INFORMATION_EXTRACTION_SCHEMA.md)
-- [Paper parsing audit](docs/data/preparation/PAPER_PARSING_AUDIT.md)
+- [Case registry](docs/data/00_Case_Registry.md)
+- [Candidate case pool](docs/data/02_Case_Pool.md)
+- [Case data inventory](docs/data/01_Case_Data_Inventory.md)
+- [Extraction contract](docs/data/preparation/02_Extraction_Contract.md)
+- [MinerU parsing audit](docs/data/preparation/03_MinerU_Parsing_Audit.md)
 - [Framework documentation](docs/framework/README.md)
+- [Catalog metrics and trusted-catalog standard](docs/framework/02_Catalog_Metrics.md)
 - [Data organization rules](data/README.md)
 - [Repository cleanup and retention decisions (2026-09-24)](docs/archive/2026-09-24_repository_cleanup.md)
 
