@@ -4,7 +4,17 @@
 
 ## 1. 定位与原则
 
-checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 + checker）和 S3（工具 + 知识 + checker）中提供给 Agent。它回答一个问题：**只看 Agent 自己交出的目录、拾取和台站信息，这个目录有哪些可测量的异常？**
+checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 + checker）和 S3（工具 + 知识 + checker）中提供给 Agent。它回答一个问题：**只看 Agent 自己的拾取、事件表、目录和台站信息，当前这一步的产物有哪些可测量的异常？**
+
+**分阶段（2026-10-30 决定）：** checker 不是只在最后检查一次，而是在流程中随时可用，以便在上游及时纠错。三个阶段，每个阶段同时运行它之前各阶段的检查：
+
+| 阶段 | 需要的产物 | 典型时机 |
+|---|---|---|
+| `picks` | `picks.csv`（关联与否均可），可选的波形目录 | 拾取之后 |
+| `association` | 拾取和事件表（可以还没有位置） | 关联之后 |
+| `catalog` | 已定位的目录（可以还没有震级） | 定位、模板匹配、重定位、震级之后，以及提交前 |
+
+什么时候运行、运行几次由 Agent 决定，框架不在每一步强制检查；输出约定只要求提交时附上对最终目录的 `catalog` 阶段报告。
 
 | 原则 | 含义 |
 |---|---|
@@ -17,17 +27,60 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 ## 2. 输入与输出
 
 ```bash
-python seismotools/checker/interface/run.py --catalog catalog.csv --picks picks.csv \
-    --stations <StationXML 文件或目录 | stations.csv> --output-dir checker/ [--no-model-ensemble]
+python seismotools/checker/interface/run.py --stage picks --picks picks.csv \
+    --stations <StationXML 文件或目录 | stations.csv> [--waveforms <波形数据目录>] --output-dir checker/
+python seismotools/checker/interface/run.py --stage association --catalog events.csv --picks picks.csv ...
+python seismotools/checker/interface/run.py --stage catalog --catalog catalog.csv --picks picks.csv ... [--no-model-ensemble]
 ```
 
-- **输入：** 输出约定的两个文件（`rejected` 行不参与）；台站来自 StationXML（解析 Network/Station 的经纬度和高程，同一台站多个时段取中位数）或 CSV（`station_id, latitude, longitude, elevation_m`）。拾取的 `station_id` 为 `NET.STA`。
+- **输入：** 输出约定的两个文件（`rejected` 行不参与）；`picks` 阶段只需拾取文件；`--waveforms` 指向波形数据目录时，按文件名 `NET.STA.LOC.CHA__起始__结束.mseed` 得到哪些台站、哪些台站日有数据，以及哪些台站只有垂直分量。台站来自 StationXML（解析 Network/Station 的经纬度和高程，同一台站多个时段取中位数）或 CSV（`station_id, latitude, longitude, elevation_m`）。拾取的 `station_id` 为 `NET.STA`。
 - **预处理：** 以台站中位位置为原点建局部平面坐标（km）。每条已关联拾取连接到其事件和台站，计算震中距、震源距（深度用海平面以下深度加台站高程，即相对台站的深度）和走时 `tt = 拾取时刻 − 发震时刻`。
 - **输出：** `checker_report.json`（每项检查的测量值、单位、预期范围、样本数、是否报警、症状描述、细节；报警汇总；所用参数；输入文件哈希）和 `checker_diagnostics.png`（事件与台站分布、深度直方图、P 走时–震源距、Wadati 发震时刻差直方图）。退出码 0，无论是否报警；输入无法读取时为 2。
 
 ## 3. 检查项目
 
 按可信目录判定的四个维度组织（[`03_Scoring_Method.md`](03_Scoring_Method.md) §2.6）。"状态"一栏是根据 §4 检验结果的当前判断：**保留报警**、**需校准**、**仅报告**（测量值写进报告，不报警）。
+
+### 3.0 拾取阶段与关联阶段
+
+这些检查在定位之前就能运行（`picks`、`association` 阶段），也包含在 `catalog` 阶段里。
+
+**silent_stations：有数据却没有拾取的台站**（`picks`，需要 `--waveforms`）
+- 计算：拾取覆盖的时间段内有波形文件的台站中，一个拾取都没有的台站占比；列出这些台站，并标出其中只有垂直分量的台站。
+- 门槛：占比 ≤ 10 %。
+- 依据：拾取器要求三分量时会跳过只有垂直分量的台站；台站代码、通道选择或数据读取出错也会让整台站无拾取。少了台站，检测和定位都会变差，而且这种问题越早发现越好。
+- 状态：**保留报警**。Maple tools（8/27，全部只有垂直分量）、Kīlauea tools（5/25，全部只有垂直分量）报警；Ridgecrest human-in-loop 第一轮也报警（5/42，3 个只有垂直分量），这是真实问题，正是 human-in-loop 后来在 Maple 第 3–4 轮修正的那类。
+
+**station_day_gaps：有数据却没有拾取的台站日**（`picks`，需要 `--waveforms`）
+- 计算：在其他日子有拾取的台站中，有波形数据但当天没有任何拾取的台站日占比。
+- 门槛：≤ 5 %。
+- 依据：分天处理时某些天失败或漏跑。
+- 状态：所有目录都没有报警，保留作为安全检查。
+
+**duplicate_picks：重复拾取**（`picks`）
+- 计算：同一台站、同一震相，相邻两个拾取间隔 ≤ 0.3 s 的拾取占比。
+- 门槛：≤ 2 %。
+- 依据：分段处理的重叠窗口没有去重，或多个拾取器的结果直接合并。
+- 状态：**保留报警**。Maple min 11 % 报警，其余均为 0。
+
+**s_to_p_ratio：S/P 拾取比**（`picks`）
+- 计算：S 拾取数 / P 拾取数；同时列出有 P 无 S 的台站。
+- 门槛：≥ 0.3。
+- 状态：所有目录都在 0.6–1.1 之间，没有报警。仅报告。
+
+**associated_share：已关联拾取占比**（`association`）
+- 计算：有事件编号的拾取占全部拾取的比例。
+- 门槛：≥ 20 %。
+- 局限：很多 Agent 只提交已关联的拾取（占比 100 %），此时没有信息量。
+- 状态：仅报告。
+
+**association_busy_hours：忙碌时段的关联**（`association`）
+- 计算：按小时统计拾取数和关联占比；拾取最多的 10 % 小时里的关联占比，相对全部时段关联占比的比值。
+- 门槛：≥ 0.5。
+- 依据：事件率很高时（主震尾波、震群高峰），关联的时间窗不够或拾取互相混淆，关联率会掉下来。
+- 状态：所有目录都没有报警（最低 Ridgecrest 0.96），保留作为安全检查。
+
+另外 `association` 阶段已经可以运行 **events_with_few_picks** 和 **duplicate_events**（没有位置时只按时间判断重复）。
 
 ### 3.1 事件真实性
 
@@ -164,6 +217,8 @@ python seismotools/checker/interface/run.py --catalog catalog.csv --picks picks.
 | 走时截距 | Maple 0.90 ⚑、Kīlauea 0.72 ⚑、Kaikōura 0.97 ⚑ | Kīlauea min 1.19 ⚑ | 仅报告或放宽 |
 | S−P 深度 | Prague +1.08 ⚑ | Magna tools +2.03 ⚑、Maple tools +1.19 ⚑、Maple min −1.44 ⚑ | 放宽到约 1.5 km |
 
+**拾取与关联阶段的结果（开发副本，2026-10-30）：** 有数据却无拾取的台站、重复拾取、拾取过少的事件三项能可靠区分，保留报警（逐项见 §3.0）；已关联占比、忙碌时段关联、S/P 比、无拾取台站日都没有在任何目录上报警，作为信息或安全检查保留。
+
 **结论：**
 1. 质量类检查（拾取过少、深度堆积、震级范围、重复事件）能可靠地区分，保留报警。
 2. 时间和深度的物理一致性检查测得很准，但被结构偏差盖住：相对 human-in-loop 的差值能反映真实误差，绝对值却在干净目录上也会报警。速度模型造成的整体偏差无法只靠 Agent 自己的数据可靠判定，这是 checker 的根本边界，也是 S3 中知识部分要解决的问题。
@@ -179,7 +234,7 @@ python seismotools/checker/interface/run.py --catalog catalog.csv --picks picks.
 
 ## 6. 冻结前待办
 
-1. 完成模型组检查的完整检验，决定报警还是仅报告。
+1. 完成模型组检查的完整检验，决定报警还是仅报告；之后把分阶段的开发副本合并回 seismotools。
 2. 按检验结果确定各项门槛：干净目录不报警是首要条件。
 3. 实现震级与检测距离的一致性检查，并检验。
 4. 用合成数据写回归测试（每项检查一个已知答案的样例）。

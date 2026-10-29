@@ -61,9 +61,17 @@ def agent_runs(task: Path):
         yield f"{s['run']['variant']}__{s['run']['run_id']}", work / "catalog.csv", work / "picks.csv", stations, s
 
 
-def run_checker(catalog: Path, picks: Path, stations: Path, out: Path, python: str) -> dict:
-    subprocess.run([python, "-W", "ignore", str(CHECKER), "--catalog", str(catalog), "--picks", str(picks),
-                    "--stations", str(stations), "--output-dir", str(out)], check=True, capture_output=True, text=True)
+def run_checker(catalog: Path, picks: Path, stations: Path, out: Path, python: str, *, checker: Path = CHECKER,
+                stage: str | None = None, waveforms: Path | None = None, ensemble: bool = True) -> dict:
+    cmd = [python, "-W", "ignore", str(checker), "--catalog", str(catalog), "--picks", str(picks),
+           "--stations", str(stations), "--output-dir", str(out), "--no-figures"]
+    if stage:
+        cmd += ["--stage", stage]
+    if waveforms:
+        cmd += ["--waveforms", str(waveforms)]
+    if not ensemble:
+        cmd.append("--no-model-ensemble")
+    subprocess.run(cmd, check=True, capture_output=True, text=True)
     return json.loads((out / "checker_report.json").read_text())
 
 
@@ -71,29 +79,38 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--python", default=sys.executable)
     parser.add_argument("--cases", nargs="*", default=CASES)
+    parser.add_argument("--checker", type=Path, default=CHECKER, help="checker entry point (a development copy, for example)")
+    parser.add_argument("--stages", nargs="*", help="run these stages (picks, association, catalog); default: the checker's default only")
+    parser.add_argument("--no-model-ensemble", action="store_true")
+    parser.add_argument("--output", type=Path, default=OUT)
     args = parser.parse_args()
+    out_root = args.output
     rows = []
     for case in args.cases:
         task = ROOT / "workflows/tasks" / case
-        targets = [("human_in_loop", *expert_inputs(task, OUT / case / "human_in_loop" / "inputs"), None)]
-        targets += [(name, cat, pk, st, s) for name, cat, pk, st, s in agent_runs(task)]
-        for name, cat, pk, st, scores in targets:
-            report = run_checker(cat, pk, st, OUT / case / name, args.python)
+        hil_waveforms = (ROOT / "data" / case / "data/waveforms/data").resolve()
+        targets = [("human_in_loop", *expert_inputs(task, out_root / case / "human_in_loop" / "inputs"), None, hil_waveforms)]
+        targets += [(name, cat, pk, st, s, (cat.parent / "input/waveforms/data").resolve()) for name, cat, pk, st, s in agent_runs(task)]
+        for name, cat, pk, st, scores, wf in targets:
+          for stage in (args.stages or [None]):
+            label = name if stage is None else f"{name}@{stage}"
+            report = run_checker(cat, pk, st, out_root / case / label, args.python, checker=args.checker, stage=stage,
+                                 waveforms=wf if stage else None, ensemble=not args.no_model_ensemble)
             known = {k: (scores or {}).get("headline", {}).get(k) for k in KNOWN} if scores else {}
             for c in report["checks"]:
-                rows.append({"case": case, "catalog": name, "check": c["id"], "dimension": c["dimension"],
+                rows.append({"case": case, "catalog": label, "check": c["id"], "dimension": c["dimension"],
                              "measured": c["measured"], "n": c["n"], "flag": c["flag"],
                              "not_evaluated": (c.get("details") or {}).get("not_evaluated"),
                              **{f"known_{k}": v for k, v in known.items()}})
-            print(f"{case} {name}: {len(report['flags'])} flags")
+            print(f"{case} {label}: {len(report['flags'])} flags", flush=True)
     table = pd.DataFrame(rows)
-    OUT.mkdir(parents=True, exist_ok=True)
-    table.to_csv(OUT / "summary.csv", index=False)
+    out_root.mkdir(parents=True, exist_ok=True)
+    table.to_csv(out_root / "summary.csv", index=False)
     wide = table.pivot_table(index="check", columns=["case", "catalog"], values="measured", aggfunc="first")
     flags = table.pivot_table(index="check", columns=["case", "catalog"], values="flag", aggfunc="first")
     cells = wide.round(3).astype(str).where(~flags.fillna(False).astype(bool), wide.round(3).astype(str) + " ⚑")
-    (OUT / "summary.md").write_text(cells.to_markdown() + "\n", encoding="utf-8")
-    print(OUT / "summary.md")
+    (out_root / "summary.md").write_text(cells.to_markdown() + "\n", encoding="utf-8")
+    print(out_root / "summary.md")
     return 0
 
 
