@@ -20,6 +20,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "source"))
 
 from catalog_checker.checks import Data, run_checks  # noqa: E402
+from catalog_checker.ensemble import model_ensemble  # noqa: E402
 from catalog_checker.io import read_catalog, read_picks, read_stations  # noqa: E402
 from catalog_checker.report import build_report, write_figures, write_report  # noqa: E402
 
@@ -33,6 +34,9 @@ def main(argv=None) -> int:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--config", type=Path, help="JSON overriding default ranges (see README); records itself in the report")
     parser.add_argument("--no-figures", action="store_true")
+    parser.add_argument("--no-model-ensemble", action="store_true",
+                        help="skip relocating a sample of events with the generic velocity models (the slow check)")
+    parser.add_argument("--keep-ensemble-dir", type=Path, help="keep the relocation inputs and outputs here")
     args = parser.parse_args(argv)
     try:
         events, picks, stations = read_catalog(args.catalog), read_picks(args.picks), read_stations(args.stations)
@@ -45,11 +49,18 @@ def main(argv=None) -> int:
     config = json.loads(args.config.read_text()) if args.config else None
     data = Data(events, picks, stations)
     checks, extras = run_checks(data, config)
+    if not args.no_model_ensemble:
+        w = extras.get("wadati")
+        vpvs = float(w.vpvs.median()) if w is not None and len(w) >= 20 else None
+        ens_checks, ens = model_ensemble(data, extras["config"], vpvs, args.keep_ensemble_dir)
+        checks += ens_checks
+        extras["ensemble"] = ens
     report = build_report(checks, data, {"catalog": args.catalog, "picks": args.picks, "stations": args.stations},
                           extras["config"])
     args.output_dir.mkdir(parents=True, exist_ok=True)
     figures = [] if args.no_figures else write_figures(data, extras, args.output_dir)
     report["figures"] = figures
+    report["model_ensemble"] = extras.get("ensemble")
     path = write_report(report, args.output_dir)
     flags = report["flags"]
     print(f"{path}: {len(flags)} flag(s) from {len(checks)} checks")
