@@ -5,9 +5,7 @@
 **Repository/CLI slug:** `seismoagent-bench`  
 **Short abbreviation:** SABench
 
-`SeismoAgentBench` is the canonical project name. The hyphenated
-`seismoagent-bench` form is reserved for repository names, command-line
-commands, URLs, and other contexts where lowercase slugs are preferred.
+`SeismoAgentBench` is the canonical project name. The hyphenated `seismoagent-bench` form is reserved for repository names, command-line commands, URLs, and other contexts where lowercase slugs are preferred.
 
 ## Benchmark Design, Candidate Pool, and Phase I Case Inventory
 
@@ -98,11 +96,7 @@ The candidate pool should include different monitoring conditions, such as:
 
 The objective is **diversity of scientific difficulty**, not geographic diversity for its own sake.
 
-The six Phase I cases are grouped into three difficulty tiers (2026-10-29):
-basic — Prague, Magna; intermediate — Maple Creek, Kīlauea; hard —
-Ridgecrest, Kaikōura. Tiers are assigned from features known before any run
-and checked against the expert's difficulty
-([`05_Paper_Outline_and_Plan.md`](./05_Paper_Outline_and_Plan.md) §3).
+The six Phase I cases are grouped into three difficulty tiers (2026-10-29): basic — Prague, Magna; intermediate — Maple Creek, Kīlauea; hard — Ridgecrest, Kaikōura. Tiers are assigned from features known before any run and checked against the expert's difficulty ([`05_Paper_Outline_and_Plan.md`](./05_Paper_Outline_and_Plan.md) §3).
 
 ### Two experimental dimensions
 
@@ -141,12 +135,7 @@ flowchart LR
 
 #### Agent capability stages (revised 2026-10-29)
 
-Within the closed-reference, raw-waveform task, the Agent arms form a ladder
-in which each stage adds exactly one factor. The paper outline, case tiers,
-usability criteria and work plan are in
-[`05_Paper_Outline_and_Plan.md`](./05_Paper_Outline_and_Plan.md); the
-evidence that expert results need experience is in
-[`04_Expert_Experience_and_Checker.md`](./04_Expert_Experience_and_Checker.md).
+Within the closed-reference, raw-waveform task, the Agent arms form a ladder in which each stage adds exactly one factor. The paper outline, case tiers, usability criteria and work plan are in [`05_Paper_Outline_and_Plan.md`](./05_Paper_Outline_and_Plan.md); the evidence that expert results need experience is in [`04_Expert_Experience_and_Checker.md`](./04_Expert_Experience_and_Checker.md).
 
 | Stage | Arm | Agent additionally gets | Question | Status |
 |---|---|---|---|---|
@@ -155,17 +144,7 @@ evidence that expert results need experience is in
 | S2 | `knowledge` | tools + case-agnostic expert knowledge given up front (method choices, parameter ranges, pitfalls), as an Agent Skill | What does knowledge add on top of tools? | planned, not implemented |
 | S3 | `checker` | tools + knowledge + a reference-free diagnostics tool and the symptom → cause → upstream repair playbook; the contract requires the checker report and a disposition per flag | Does automated validation close the gap to the expert? | planned, not implemented |
 
-The Agent, its loop and the model never change across stages; every stage
-only adds files to the Agent's environment (no custom loop or subagent;
-05 §5). Yardstick: the human-in-loop final (reference-informed upper
-bound); its reference-informed steps are attributed with the expert ladder
-and the intervention coding (05 §7). The first-round blind catalog is not a
-yardstick: it used no template matching (2026-10-29). The existing `guided`
-arm varies how prescriptive the task statement is and also changes the
-window and contract; it is not on this ladder and is optional. Constraints
-for S2/S3: reference-free, case-agnostic rules; use logged; results
-reported separately for the cases a rule was learned from and for the
-others.
+The Agent, its loop and the model never change across stages; every stage only adds files to the Agent's environment (no custom loop or subagent; 05 §5). Yardstick: the human-in-loop final (reference-informed upper bound); its reference-informed steps are attributed with the expert ladder and the intervention coding (05 §7). The first-round blind catalog is not a yardstick: it used no template matching (2026-10-29). The existing `guided` arm varies how prescriptive the task statement is and also changes the window and contract; it is not on this ladder and is optional. Constraints for S2/S3: reference-free, case-agnostic rules; use logged; results reported separately for the cases a rule was learned from and for the others.
 
 ### Target leakage control
 

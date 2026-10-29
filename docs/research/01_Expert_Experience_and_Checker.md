@@ -1,36 +1,24 @@
 # Expert experience, parameter sensitivity and the self-improving checker
 
-Status: working summary, 2026-10-28; stages revised 2026-10-29 (§5,
-[`05_Paper_Outline_and_Plan.md`](./05_Paper_Outline_and_Plan.md)). Numbers are metrics v1 (frozen,
-`docs/framework/03_EVALUATION_METRICS.md`) unless a source is named.
+Status: working summary, 2026-10-28; stages revised 2026-10-29 (§5, [`05_Paper_Outline_and_Plan.md`](./05_Paper_Outline_and_Plan.md)). Numbers are metrics v1 (frozen, `docs/framework/03_EVALUATION_METRICS.md`) unless a source is named.
 
 ## 1. Thesis
 
-An expert-quality earthquake catalog is not the output of a fixed tool chain.
-It comes from a loop of *run → diagnose → repair upstream → rerun*, and the
-knowledge that drives the loop is experience:
+An expert-quality earthquake catalog is not the output of a fixed tool chain. It comes from a loop of *run → diagnose → repair upstream → rerun*, and the knowledge that drives the loop is experience:
 
-1. **parameter and method strategies** — which choices matter at each stage
-   and which ranges are safe;
-2. **diagnosis** — when a stage's result looks wrong, which upstream choice
-   most likely caused it;
-3. **repair** — what to change upstream, and how to confirm the change helped
-   without the hidden references.
+1. **parameter and method strategies** — which choices matter at each stage and which ranges are safe;
+2. **diagnosis** — when a stage's result looks wrong, which upstream choice most likely caused it;
+3. **repair** — what to change upstream, and how to confirm the change helped without the hidden references.
 
-This experience can be written down as a reference-free **checker**: a set of
-internal diagnostics with a symptom → cause → repair playbook, which an
-Agent could call to improve its own catalog.
+This experience can be written down as a reference-free **checker**: a set of internal diagnostics with a symptom → cause → repair playbook, which an Agent could call to improve its own catalog.
 
-The benchmark's central question follows: **does a general-purpose Agent,
-given no such checker, produce a catalog usable for scientific discovery —
-and how much of the gap to the expert does the checker close?**
+The benchmark's central question follows: **does a general-purpose Agent, given no such checker, produce a catalog usable for scientific discovery — and how much of the gap to the expert does the checker close?**
 
 ## 2. How much the choices matter
 
 ### 2.1 Within the range an expert would consider: modest for detection, large for location and magnitude
 
-Expert ladder (`evaluation/human_in_loop/expert_ladder.json`; each row one adopted round,
-one change):
+Expert ladder (`evaluation/human_in_loop/expert_ladder.json`; each row one adopted round, one change):
 
 | Stage | Change (case) | Effect |
 |---|---|---|
@@ -45,11 +33,7 @@ one change):
 | magnitude | ML distance recalibration, station corrections (Magna) | dmag spread 0.21 → 0.13, slope −0.24 → −0.05 |
 | magnitude | direct ML for large events (Maple; Magna) | M4+ offset −0.90 → −0.21; M5.7 4.72 → 5.46 |
 
-Detection parameters move the normalised recall by ≤ 0.07; a change of
-*method* — template matching — moves it by 0.2–0.6 in every case (Prague
-1.17 → 1.81, Magna 0.79 → 1.16, Kīlauea 0.93 → 1.15, Kaikōura 0.88 → 1.17,
-Ridgecrest 1.20 → 1.40). Location and magnitude choices change precision by
-20–50 %.
+Detection parameters move the normalised recall by ≤ 0.07; a change of *method* — template matching — moves it by 0.2–0.6 in every case (Prague 1.17 → 1.81, Magna 0.79 → 1.16, Kīlauea 0.93 → 1.15, Kaikōura 0.88 → 1.17, Ridgecrest 1.20 → 1.40). Location and magnitude choices change precision by 20–50 %.
 
 ### 2.2 Outside that range: an order of magnitude larger
 
@@ -69,14 +53,11 @@ Ridgecrest 1.20 → 1.40). Location and magnitude choices change precision by
 | Chained relative magnitudes (all cases) | large events compressed (direct − chain +0.36 at M2–3, +0.74 for M5.7); spread doubles at Kīlauea | stage 65 |
 | Coda of large events in Match&Locate (Ridgecrest) | 629 ghost detections, inflated M2–3 | stage 67 review |
 
-Choices also **interact**: the Magna basin layer was tuned under a linear
-ramp, so the physically more faithful step layering made results worse
-until re-tuned; EDT helped five cases and hurt Magna for the same reason.
+Choices also **interact**: the Magna basin layer was tuned under a linear ramp, so the physically more faithful step layering made results worse until re-tuned; EDT helped five cases and hurt Magna for the same reason.
 
 ### 2.3 Where Agent errors actually sit (component swap)
 
-Relocating an Agent's own picks and associations with the expert's model and
-locator (no station delays):
+Relocating an Agent's own picks and associations with the expert's model and locator (no station delays):
 
 | Run | Agent's own locations | Expert locator, Agent's picks | Human-in-loop final |
 |---|---|---|---|
@@ -85,32 +66,17 @@ locator (no station delays):
 | Magna min | 1.03 km, fixed depth 42 %, off 4 % | 1.00 km, 2 %, 0.4 % | 0.48 km, 1 %, 0.3 % |
 | Magna tools (formal, 2026-10-28) | shift 2.50 km, scatter 0.38 km, dZ −1.72 km | shift 1.63 km, 1.12 km, −0.76 km | shift 0.95 km, 0.48 km, +0.09 km |
 
-With tools, relocating the Agent's picks with the expert's model and
-locator removes most of its depth error, so its large errors are back-end
-*choices*. The remaining distance to the final (Ridgecrest scatter 0.80 vs
-0.21 km, off-structure 8 % vs 0.5 %) is what the expert's later steps add —
-station delays, template matching, double difference, the layered frame —
-and is attributed with the ladder. Without tools, both ends fail.
-(Ridgecrest and Magna min are pilot runs; the human-in-loop final is the
-upper bound, see `03_EVALUATION_METRICS.md` §11.) These are exactly the errors a checker can see without references
-(depth pile-ups, origin-time–depth coupling, fixed depths, magnitude-scale
-sanity).
+With tools, relocating the Agent's picks with the expert's model and locator removes most of its depth error, so its large errors are back-end *choices*. The remaining distance to the final (Ridgecrest scatter 0.80 vs 0.21 km, off-structure 8 % vs 0.5 %) is what the expert's later steps add — station delays, template matching, double difference, the layered frame — and is attributed with the ladder. Without tools, both ends fail. (Ridgecrest and Magna min are pilot runs; the human-in-loop final is the upper bound, see `03_EVALUATION_METRICS.md` §11.) These are exactly the errors a checker can see without references (depth pile-ups, origin-time–depth coupling, fixed depths, magnitude-scale sanity).
 
 ### 2.4 Summary
 
-- Within an expert's working range, parameters change detection little and
-  precision moderately; the big detection gain needs a different method.
-- Outside it, single choices produce errors 5–10× the expert's (depth, frame,
-  magnitude scale) and are invisible in a recall number.
-- The expert reached the final catalog by detecting such failures in
-  intermediate results and repairing upstream; several of those repairs were
-  only found because the evaluation looked at the right diagnostic (depth
-  profile, magnitude by class, event lists of large events).
+- Within an expert's working range, parameters change detection little and precision moderately; the big detection gain needs a different method.
+- Outside it, single choices produce errors 5–10× the expert's (depth, frame, magnitude scale) and are invisible in a recall number.
+- The expert reached the final catalog by detecting such failures in intermediate results and repairing upstream; several of those repairs were only found because the evaluation looked at the right diagnostic (depth profile, magnitude by class, event lists of large events).
 
 ## 3. The checker: stage diagnostics, likely causes, upstream repairs
 
-Every check below uses only the Agent's own data and products (no reference
-catalog). "Evidence" names where the rule was learned.
+Every check below uses only the Agent's own data and products (no reference catalog). "Evidence" names where the rule was learned.
 
 | Stage | Reference-free check | Symptom | Most likely cause | Upstream repair | Evidence |
 |---|---|---|---|---|---|
@@ -126,36 +92,19 @@ catalog). "Evidence" names where the rule was learned.
 | magnitude | direct ML on a subset vs chained ML; slope vs magnitude; b-value and Mc plausibility | large events compressed; b far from ~1 | relative chains, clipping, calibration | direct ML for large events; distance and station terms; flag saturation | stage 65; Magna r2–r3 |
 | QC / completeness | largest events present; per-period counts | mainshocks or aftershock bursts missing | bulk rule deleting large events | restore depth-bound large events, keep flags | stage 66 |
 
-Checks that did **not** work and should not be in a checker: an RMS onset
-test for coda ghosts (39 % of real M2–3 detections fail it in dense coda);
-RMS-based location rules (too blunt; high-RMS templates still detect well).
+Checks that did **not** work and should not be in a checker: an RMS onset test for coda ghosts (39 % of real M2–3 detections fail it in dense coda); RMS-based location rules (too blunt; high-RMS templates still detect well).
 
 ## 4. Implications for the evaluation design
 
-1. The checker must be reference-free and case-agnostic (rules and ranges,
-   no case-specific numbers), and its use logged, so a checker arm does not
-   become a leakage channel.
-2. The checker was learned on these six cases. Report checker-arm results
-   separately for the cases a rule came from and the others, or hold out
-   cases when writing it, so the gain is not circular.
-3. The checker's form must not change the Agent: diagnostics are a
-   deterministic tool in `seismotools/checker/`, the knowledge and the
-   playbook are an Agent Skill, and the contract requires the checker report
-   with a disposition per flag. No custom loop and no subagent
-   (05 §5).
-4. Some expert gains are reference-informed (Ridgecrest layered frame from
-   Shelly's model; Magna ML recalibration against UUSS). Agent runs are
-   compared with the final (the upper bound), and the ladder separates these
-   steps from what an Agent could have known.
-5. Every run gets the component swap: front-end versus back-end attribution
-   is the most direct test of what a checker would have fixed.
+1. The checker must be reference-free and case-agnostic (rules and ranges, no case-specific numbers), and its use logged, so a checker arm does not become a leakage channel.
+2. The checker was learned on these six cases. Report checker-arm results separately for the cases a rule came from and the others, or hold out cases when writing it, so the gain is not circular.
+3. The checker's form must not change the Agent: diagnostics are a deterministic tool in `seismotools/checker/`, the knowledge and the playbook are an Agent Skill, and the contract requires the checker report with a disposition per flag. No custom loop and no subagent (05 §5).
+4. Some expert gains are reference-informed (Ridgecrest layered frame from Shelly's model; Magna ML recalibration against UUSS). Agent runs are compared with the final (the upper bound), and the ladder separates these steps from what an Agent could have known.
+5. Every run gets the component swap: front-end versus back-end attribution is the most direct test of what a checker would have fixed.
 
 ## 5. Agent evaluation stages (revised 2026-10-29)
 
-Each stage differs from the previous one by exactly one factor, so its gain
-is attributable. The human-in-loop final is the single yardstick (the upper
-bound); the first-round blind catalog is not, because it used no template
-matching (`03_EVALUATION_METRICS.md` §11).
+Each stage differs from the previous one by exactly one factor, so its gain is attributable. The human-in-loop final is the single yardstick (the upper bound); the first-round blind catalog is not, because it used no template matching (`03_EVALUATION_METRICS.md` §11).
 
 | Stage | The Agent additionally gets | Question it answers |
 |---|---|---|
@@ -164,16 +113,8 @@ matching (`03_EVALUATION_METRICS.md` §11).
 | S2 `knowledge` | case-agnostic knowledge up front, as an Agent Skill: method choices, safe parameter ranges, pitfalls (§2.2) | What does knowledge add on top of tools? |
 | S3 `checker` | the §3 diagnostics as a tool and the symptom → cause → repair playbook; the contract requires the checker report and a disposition per flag | Does automated validation close the gap to the final? |
 
-Changed from 2026-10-28: S2 was "checker, symptoms only" and S3 "checker +
-playbook". That ladder had no stage for knowledge without a checker, so the
-paper's third question (does knowledge matter?) had no contrast. "Diagnosis
-versus repair knowledge" is now the optional `tools + checker` arm on
-three cases chosen from the S1 failure modes.
+Changed from 2026-10-28: S2 was "checker, symptoms only" and S3 "checker + playbook". That ladder had no stage for knowledge without a checker, so the paper's third question (does knowledge matter?) had no contrast. "Diagnosis versus repair knowledge" is now the optional `tools + checker` arm on three cases chosen from the S1 failure modes.
 
-`guided` (generic workflow scaffolding, fixed window, report contract)
-varies a different axis — how prescriptive the task statement is — and
-changes the window and contract; it is not on this ladder and is optional.
+`guided` (generic workflow scaffolding, fixed window, report contract) varies a different axis — how prescriptive the task statement is — and changes the window and contract; it is not on this ladder and is optional.
 
-Run plan, repeats, usability criteria and gap-closure reporting:
-[`05_Paper_Outline_and_Plan.md`](./05_Paper_Outline_and_Plan.md) §4, §6, §8–9.
-Every run is scored with metrics v1 and gets the component swap.
+Run plan, repeats, usability criteria and gap-closure reporting: [`05_Paper_Outline_and_Plan.md`](./05_Paper_Outline_and_Plan.md) §4, §6, §8–9. Every run is scored with metrics v1 and gets the component swap.

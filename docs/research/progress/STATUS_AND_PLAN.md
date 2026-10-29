@@ -42,32 +42,14 @@ flowchart LR
     S --> H[Evaluation report]
 ```
 
-The framework prepares one run from a task definition and run configuration,
-exposes the declared inputs to the Agent, launches the selected Agent through
-its adapter, and preserves the Agent's artifacts and execution records. The
-external scorer reads the completed run and produces the evaluation report.
+The framework prepares one run from a task definition and run configuration, exposes the declared inputs to the Agent, launches the selected Agent through its adapter, and preserves the Agent's artifacts and execution records. The external scorer reads the completed run and produces the evaluation report.
 
 ## Evaluation status and plan (2026-10-29)
 
-- Paper outline, case tiers, revised Agent stages, usability criteria and
-  work plan: [`05_Paper_Outline_and_Plan.md`](./05_Paper_Outline_and_Plan.md).
-- Metrics v1 frozen (`docs/framework/03_EVALUATION_METRICS.md`); single scoring
-  path `python -m SeismoAgentBench evaluate` (catalog-metrics@1), blind review
-  of unsupported events, L5 picks for Magna and Maple Creek.
-- Expert baselines corrected and fixed for all six cases (final and blind rows
-  in each `evaluation/human_in_loop/metrics_v1_baseline.json`; Agent runs are
-  compared with the final only, 2026-10-29); expert ladder recorded per case.
-- Zero-cost analyses: expert ladder (what each expert step adds) and component
-  swap (Agent front end versus model/locator choice) —
-  [`04_Expert_Experience_and_Checker.md`](./04_Expert_Experience_and_Checker.md).
-- Agent stages (revised 2026-10-29): S0 `min` and S1 `tools` implemented;
-  S2 `knowledge` (tools + case-agnostic knowledge as an Agent Skill) and
-  S3 `checker` (+ reference-free diagnostics tool and repair playbook)
-  planned, not implemented.
-- Formal runs: Prague and Magna S0/S1 done and scored; Maple Creek `min`
-  running; Maple Creek `tools`, Kīlauea, Kaikōura and Ridgecrest queued.
-  The four earlier Ridgecrest/Magna runs predate the output conventions and
-  remain development runs.
-- Next (05 §9): finish S0/S1; in parallel the tier table, frozen usability
-  criteria and coding of the human-in-loop interventions; then build the
-  checker and the knowledge skill for S2/S3.
+- Paper outline, case tiers, revised Agent stages, usability criteria and work plan: [`05_Paper_Outline_and_Plan.md`](./05_Paper_Outline_and_Plan.md).
+- Metrics v1 frozen (`docs/framework/03_EVALUATION_METRICS.md`); single scoring path `python -m SeismoAgentBench evaluate` (catalog-metrics@1), blind review of unsupported events, L5 picks for Magna and Maple Creek.
+- Expert baselines corrected and fixed for all six cases (final and blind rows in each `evaluation/human_in_loop/metrics_v1_baseline.json`; Agent runs are compared with the final only, 2026-10-29); expert ladder recorded per case.
+- Zero-cost analyses: expert ladder (what each expert step adds) and component swap (Agent front end versus model/locator choice) — [`04_Expert_Experience_and_Checker.md`](./04_Expert_Experience_and_Checker.md).
+- Agent stages (revised 2026-10-29): S0 `min` and S1 `tools` implemented; S2 `knowledge` (tools + case-agnostic knowledge as an Agent Skill) and S3 `checker` (+ reference-free diagnostics tool and repair playbook) planned, not implemented.
+- Formal runs: Prague and Magna S0/S1 done and scored; Maple Creek `min` running; Maple Creek `tools`, Kīlauea, Kaikōura and Ridgecrest queued. The four earlier Ridgecrest/Magna runs predate the output conventions and remain development runs.
+- Next (05 §9): finish S0/S1; in parallel the tier table, frozen usability criteria and coding of the human-in-loop interventions; then build the checker and the knowledge skill for S2/S3.
