@@ -1,6 +1,6 @@
 # KILAUEA2018 — Case Analysis
 
-> Current preparation state: `window_status: not_frozen` in [processing.yaml](processing.yaml). Earlier “frozen/v1” windows and counts below are retained as exploratory audit history, not approved evaluation inputs.
+> Current preparation state: `window_status: frozen` in [processing.yaml](processing.yaml) (2026-10-28, with metrics v1). The v1 window below is the frozen evaluation window; counts below come from data-level analysis masks, while the evaluation cohort (time, region, depth) is defined in `workflows/tasks/2018_kilauea_hawaii/expert/00_config/validation.yaml`.
 
 
 > **Source of truth:** This file is the detailed, mutable analysis record for `KILAUEA2018`. The cross-case summary is maintained in [`docs/data/CASE_REGISTRY.md`](../../../docs/data/CASE_REGISTRY.md).
@@ -227,17 +227,11 @@ Processing entry points and product declarations are in [processing.yaml](proces
 
 ### Pilot conclusions
 
-1. **Primary summit task:** Shelly S1 is the principal high-resolution
-   detection/relative-location reference; S2 is a separate sensitivity product.
-2. **Broad detection/location cross-check:** Wei should be compared only after
-   applying the same space/time mask and retaining its 1,930 numeric-magnitude
-   subset as a separate sensitivity population.
-3. **Official baseline:** HVO `operational_benchmark` is the Q3 baseline;
-   it must not be merged with research catalogs.
-4. **Auxiliary products:** Matoza 2021, Lengliné, and Matoza 2014 answer
-   different scientific questions and should remain product-specific.
-5. **Next preparation step:** derive station/channel/day manifests and waveform
-   download windows; do not infer waveform volume from event-row counts.
+1. **Primary summit task:** Shelly S1 is the principal high-resolution detection/relative-location reference; S2 is a separate sensitivity product.
+2. **Broad detection/location cross-check:** Wei should be compared only after applying the same space/time mask and retaining its 1,930 numeric-magnitude subset as a separate sensitivity population.
+3. **Official baseline:** HVO `operational_benchmark` is the Q3 baseline; it must not be merged with research catalogs.
+4. **Auxiliary products:** Matoza 2021, Lengliné, and Matoza 2014 answer different scientific questions and should remain product-specific.
+5. **Next preparation step:** derive station/channel/day manifests and waveform download windows; do not infer waveform volume from event-row counts.
 
 ### Re-run commands
 
@@ -248,5 +242,4 @@ python3 data/2018_kilauea_hawaii/data/catalogs/SHELLY2019_GL085636/workflows/dat
 python3 data/2018_kilauea_hawaii/data/catalogs/WEI2022_EA001979/workflows/data_preparation/run_catalog_analysis.py
 ```
 
-Use `--only <product_id>` for a targeted product and `--force` only when
-the raw source has changed or the parser has been deliberately revised.
+Use `--only <product_id>` for a targeted product and `--force` only when the raw source has changed or the parser has been deliberately revised.

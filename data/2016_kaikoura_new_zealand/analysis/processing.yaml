@@ -7,9 +7,16 @@ processing_policy:
   plot_profile: minimal
   figure_format: png
   figure_dpi: 300
-window_status: not_frozen
+window_status: frozen
+window_freeze:
+  frozen_on: '2026-10-28'
+  authority: metrics v1 (docs/framework/03_EVALUATION_METRICS.md); the evaluation cohort mask (time, region, depth) is workflows/tasks/2016_kaikoura_new_zealand/expert/00_config/validation.yaml
+  evaluation_window:
+    start_utc: '2016-12-01T00:00:00Z'
+    end_utc: '2016-12-09T00:00:00Z'
+    interval: half_open
 scientific_design:
-  status: candidate_design_reference_audit_only
+  status: frozen_2026-10-28_metrics_v1
   primary_question: Can an agent deliver accurate absolute and relative locations
     through a complex multi-fault sequence under a mixed permanent/temporary
     network whose geometry changes the relocation problem?
@@ -17,7 +24,7 @@ scientific_design:
     start_utc: '2016-12-01T00:00:00Z'
     end_utc: '2016-12-09T00:00:00Z'
     interval: half_open
-    status: exploratory_candidate_not_scientific_freeze
+    status: frozen_2026-10-28_metrics_v1
     source: v1 benchmark window (analysis/KAIKOURA2016_analysis.md) chosen for
       active STREWN temporary deployment; the early post-mainshock window
       (2016-11-13 to 11-20, permanent-network stress condition) remains a

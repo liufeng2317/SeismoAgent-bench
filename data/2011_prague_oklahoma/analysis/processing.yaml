@@ -7,9 +7,16 @@ processing_policy:
   plot_profile: minimal
   figure_format: png
   figure_dpi: 300
-window_status: not_frozen
+window_status: frozen
+window_freeze:
+  frozen_on: '2026-10-28'
+  authority: metrics v1 (docs/framework/03_EVALUATION_METRICS.md); the evaluation cohort mask (time, region, depth) is workflows/tasks/2011_prague_oklahoma/expert/00_config/validation.yaml
+  evaluation_window:
+    start_utc: '2011-11-11T00:00:00Z'
+    end_utc: '2011-11-19T00:00:00Z'
+    interval: half_open
 scientific_design:
-  status: candidate_design_reference_audit_only
+  status: frozen_2026-10-28_metrics_v1
   primary_question: Can an agent sustain detection, association and location
     quality through an induced aftershock sequence recorded by a mixed
     RAMP/USArray/permanent network whose geometry changes during deployment?
@@ -17,7 +24,7 @@ scientific_design:
     start_utc: '2011-11-11T00:00:00Z'
     end_utc: '2011-11-19T00:00:00Z'
     interval: half_open
-    status: exploratory_candidate_not_scientific_freeze
+    status: frozen_2026-10-28_metrics_v1
     source: v1 core window (analysis/PRAGUE2011_analysis.md) chosen because the
       last temporary stations became fully operational on 2011-11-11; the
       changing-network interval 2011-11-04 to 11-11 remains a separate stress

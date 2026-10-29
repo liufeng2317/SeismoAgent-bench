@@ -7,18 +7,25 @@ processing_policy:
   plot_profile: minimal
   figure_format: png
   figure_dpi: 300
-window_status: not_frozen
+window_status: frozen
+window_freeze:
+  frozen_on: '2026-10-28'
+  authority: metrics v1 (docs/framework/03_EVALUATION_METRICS.md); the evaluation cohort mask (time, region, depth) is workflows/tasks/2017_maple_creek_yellowstone/expert/00_config/validation.yaml
+  evaluation_window:
+    start_utc: '2017-06-11T00:00:00Z'
+    end_utc: '2017-06-19T00:00:00Z'
+    interval: half_open
 scientific_design:
-  status: candidate_design_reference_audit_only
+  status: frozen_2026-10-28_metrics_v1
   primary_question: Can an agent detect and locate a Yellowstone swarm under a mixed
     permanent/temporary network with template-lineage references?
   candidate_window:
     start_utc: '2017-06-11T00:00:00Z'
     end_utc: '2017-06-19T00:00:00Z'
     interval: half_open
-    status: exploratory_candidate_not_scientific_freeze
-    source: analysis/MAPLE2017_analysis.md frozen v1 benchmark window (retained as
-      exploratory audit history until this case freezes its own window)
+    status: frozen_2026-10-28_metrics_v1
+    source: analysis/MAPLE2017_analysis.md v1 benchmark window, frozen with metrics
+      v1 on 2026-10-28
   primary_input_condition: raw_waveforms_and_station_metadata
   station_policy: shelly_phase_manifest_candidate; 27 network-station pairs selected
     by the phase release inside the window; channel/location availability verified

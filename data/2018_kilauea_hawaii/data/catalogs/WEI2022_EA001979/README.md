@@ -11,7 +11,7 @@
 
 ## Local catalog audit
 
-> Earlier window/mask statistics are exploratory. Current freeze status is defined by the case `analysis/processing.yaml`, which is `not_frozen`; retained historical “frozen” wording does not override it.
+> The case window is frozen (`window_status: frozen` in the case `analysis/processing.yaml`, 2026-10-28, with metrics v1). Window/mask statistics in this README use catalog-local masks; the evaluation cohort (time, region, depth) is defined in `workflows/tasks/2018_kilauea_hawaii/expert/00_config/validation.yaml`, and its counts may differ.
 
 ### Provenance
 
@@ -43,11 +43,7 @@ SourceTime Lat Lon Dep AzimuthalGap MinDist Nobs RMS StdX StdY StdZ Mag MagType 
 | `MagType` | `d` = duration/coda magnitude, `l` = local magnitude, `Unk` = no magnitude |
 | `StdMag` | Magnitude standard deviation; `0.00` commonly accompanies `Unk` and should not be interpreted as zero uncertainty |
 
-There are no malformed rows. The file contains 219,396 `d`, 88,621 `l`, and
-67,719 `Unk` magnitude-type rows. Numeric magnitude values are present for
-308,017 rows; the global numeric range is −2.25 to 7.14. The paper's final
-catalog count is therefore an event-row count, not a count restricted to rows
-with measured magnitude.
+There are no malformed rows. The file contains 219,396 `d`, 88,621 `l`, and 67,719 `Unk` magnitude-type rows. Numeric magnitude values are present for 308,017 rows; the global numeric range is −2.25 to 7.14. The paper's final catalog count is therefore an event-row count, not a count restricted to rows with measured magnitude.
 
 ### Full-file audit
 
@@ -66,14 +62,11 @@ with measured magnitude.
 | `AzimuthalGap` | 11.601–359.987° |
 | `MinDist` | 0.0029–135.2407 km |
 
-Negative depths and very large uncertainty values are present in the native
-release. They are retained for provenance; benchmark masks must state whether
-they are excluded rather than silently normalizing them.
+Negative depths and very large uncertainty values are present in the native release. They are retained for provenance; benchmark masks must state whether they are excluded rather than silently normalizing them.
 
 ### Frozen Kīlauea summit benchmark mask
 
-The case-level v1 rule is the half-open UTC interval
-`2018-05-01T00:00:00Z ≤ SourceTime < 2018-05-09T00:00:00Z`, with:
+The case-level v1 rule is the half-open UTC interval `2018-05-01T00:00:00Z ≤ SourceTime < 2018-05-09T00:00:00Z`, with:
 
 ```text
 19.30° ≤ Lat ≤ 19.50°
@@ -81,11 +74,7 @@ The case-level v1 rule is the half-open UTC interval
 0 km ≤ Dep ≤ 20 km
 ```
 
-Applying this mask to the local file gives **2,369 event rows**. Of these,
-**1,930 rows have numeric magnitudes** (`d` or `l`); the older case summary's
-“Wei 1,930 events” value counted only this magnitude-available subset. Both
-counts should be retained until the benchmark task explicitly chooses whether
-its detection metric requires a magnitude.
+Applying this mask to the local file gives **2,369 event rows**. Of these, **1,930 rows have numeric magnitudes** (`d` or `l`); the older case summary's “Wei 1,930 events” value counted only this magnitude-available subset. Both counts should be retained until the benchmark task explicitly chooses whether its detection metric requires a magnitude.
 
 | Field | All 2,369 masked rows | Numeric-magnitude subset (1,930) |
 |---|---:|---:|
@@ -101,9 +90,7 @@ its detection metric requires a magnitude.
 | `StdZ` | 0.2662–26.7032 | 0.2662–26.7032 |
 | `MagType` | `d`: 1,554; `l`: 376; `Unk`: 439 | `d`: 1,554; `l`: 376 |
 
-The mask is a summit-task comparison with Shelly & Thelen, not a claim that
-Wei's entire island/offshore catalog has summit-only support. Network labels and
-deployment dates must be retained when constructing waveform subsets.
+The mask is a summit-task comparison with Shelly & Thelen, not a claim that Wei's entire island/offshore catalog has summit-only support. Network labels and deployment dates must be retained when constructing waveform subsets.
 
 ### Construction and quality summary
 
@@ -118,42 +105,22 @@ STA/LTA triggers on filtered components
   → duplicate removal and final Data Set S1
 ```
 
-The article reports 650,899 associated trigger/event candidates, 503,339
-successfully located events, 420,963 locations used in re-association, and a
-final 375,736-event release. The distributed product is automatic and
-heterogeneous rather than a manually reviewed truth set. Offshore OBS picks
-are explicitly described as lower quality; some events were removed when only
-KSFG supplied a P pick. The event-rate changes around nodal-array deployment
-are observation-process effects as well as possible seismicity changes.
+The article reports 650,899 associated trigger/event candidates, 503,339 successfully located events, 420,963 locations used in re-association, and a final 375,736-event release. The distributed product is automatic and heterogeneous rather than a manually reviewed truth set. Offshore OBS picks are explicitly described as lower quality; some events were removed when only KSFG supplied a P pick. The event-rate changes around nodal-array deployment are observation-process effects as well as possible seismicity changes.
 
 ### Benchmark role and relation to other Kīlauea products
 
 - **Quality tier:** Q2 broad enhanced-detection/3-D-location reference.
-- **Primary use:** secondary target for broad-island, flank, and offshore
-  detection/association/location; independent cross-check against HVO routine
-  and Shelly summit products.
-- **Shelly relation:** Shelly & Thelen uses summit waveform templates,
-  correlation-derived differential times, and hypoDD to produce a dense
-  relative-location summit catalog. Wei uses STA/LTA, automatic P/S picking,
-  NonLinLoc, and mixed onshore/offshore networks. They must not be merged or
-  ranked without a common space/time/network mask.
-- **HVO relation:** HVO is the Q3 operational baseline; Wei reports more events
-  and lower estimated \(M_c\), but the gain partly reflects temporary arrays and
-  network-dependent detection.
-- **Independence:** medium–high methodological independence from Shelly, but
-  shared waveform archives and comparison catalogs remain common lineage.
+- **Primary use:** secondary target for broad-island, flank, and offshore detection/association/location; independent cross-check against HVO routine and Shelly summit products.
+- **Shelly relation:** Shelly & Thelen uses summit waveform templates, correlation-derived differential times, and hypoDD to produce a dense relative-location summit catalog. Wei uses STA/LTA, automatic P/S picking, NonLinLoc, and mixed onshore/offshore networks. They must not be merged or ranked without a common space/time/network mask.
+- **HVO relation:** HVO is the Q3 operational baseline; Wei reports more events and lower estimated \(M_c\), but the gain partly reflects temporary arrays and network-dependent detection.
+- **Independence:** medium–high methodological independence from Shelly, but shared waveform archives and comparison catalogs remain common lineage.
 
 ### Known limitations and follow-up
 
-1. The local file has no event IDs; use source time plus row hash only as a
-   reproducibility key, not as a cross-catalog physical association.
-2. Confirm the units/definitions of `StdX/StdY/StdZ`, `AzimuthalGap`, and
-   `MinDist` from the local SI before uncertainty metrics are frozen.
-3. Parse `Wei2022_Kilauea_SI.pdf` to archive exact Text S1–S11/Table S1–S4
-   detector, station, and comparison parameters.
-4. Generate catalog map, depth section, daily-rate/network-availability plot,
-   magnitude-frequency plot, and missing-magnitude mask under this catalog
-   directory without modifying the raw file.
+1. The local file has no event IDs; use source time plus row hash only as a reproducibility key, not as a cross-catalog physical association.
+2. Confirm the units/definitions of `StdX/StdY/StdZ`, `AzimuthalGap`, and `MinDist` from the local SI before uncertainty metrics are frozen.
+3. Parse `Wei2022_Kilauea_SI.pdf` to archive exact Text S1–S11/Table S1–S4 detector, station, and comparison parameters.
+4. Generate catalog map, depth section, daily-rate/network-availability plot, magnitude-frequency plot, and missing-magnitude mask under this catalog directory without modifying the raw file.
 
 ## Generated analysis
 

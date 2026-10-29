@@ -1,6 +1,6 @@
 # SeismoAgentBench 六案例详细信息
 
-本文档按 case 组织地震信息、观测数据、研究 catalog、official operational catalog、文献状态和已知限制。跨案例统计见 [CASES_SUMMARY.md](CASES_SUMMARY.md)。所有窗口和统计目前均属于准备/审计阶段，`window_status` 仍为 `not_frozen`。
+本文档按 case 组织地震信息、观测数据、研究 catalog、official operational catalog、文献状态和已知限制。跨案例统计见 [CASES_SUMMARY.md](CASES_SUMMARY.md)。时间窗已于 2026-10-28 随 metrics v1 冻结（`window_status: frozen`）；本文统计使用数据层掩膜，评测样本以各任务的 `validation.yaml` 为准。
 
 ## 共同规则
 

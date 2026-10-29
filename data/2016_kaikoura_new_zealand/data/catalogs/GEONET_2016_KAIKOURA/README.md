@@ -14,7 +14,7 @@
 
 ## Local catalog audit
 
-> Earlier window/mask statistics are exploratory. Current freeze status is defined by the case `analysis/processing.yaml`, which is `not_frozen`; retained historical “frozen” wording does not override it.
+> The case window is frozen (`window_status: frozen` in the case `analysis/processing.yaml`, 2026-10-28, with metrics v1). Window/mask statistics in this README use catalog-local masks; the evaluation cohort (time, region, depth) is defined in `workflows/tasks/2016_kaikoura_new_zealand/expert/00_config/validation.yaml`, and its counts may differ.
 
 ### Provenance and query
 
@@ -27,12 +27,7 @@
 | Role | Q3 official operational baseline; not a high-resolution truth catalog |
 | Format | GeoNet pipe-delimited text export; source header and fields preserved |
 
-The full snapshot uses the half-open interval `2016-11-13T00:00:00` to
-`2017-05-14T00:00:00`, latitude −43.5 to −41.2°N, longitude 172.0–175.2°E,
-and depth 0–60 km.  The frozen benchmark uses
-`2016-12-01T00:00:00Z <= time < 2016-12-09T00:00:00Z` with the same spatial and
-depth mask.  Queries were downloaded in 30-day chunks and de-duplicated by
-`EventID`.
+The full snapshot uses the half-open interval `2016-11-13T00:00:00` to `2017-05-14T00:00:00`, latitude −43.5 to −41.2°N, longitude 172.0–175.2°E, and depth 0–60 km.  The frozen benchmark uses `2016-12-01T00:00:00Z <= time < 2016-12-09T00:00:00Z` with the same spatial and depth mask.  Queries were downloaded in 30-day chunks and de-duplicated by `EventID`.
 
 ### Files and integrity
 
@@ -41,9 +36,7 @@ depth mask.  Queries were downloaded in 30-day chunks and de-duplicated by
 | Full | [`GEONET_2016_KAIKOURA__catalog_operational_full.txt`](GEONET_2016_KAIKOURA__catalog_operational_full.txt) | 15,948 | 15,948 | `5a21b838538b9da69fdf0be48c6e7db3e398822f5f5b4b11a2984fac4d7a48de` |
 | Benchmark | [`GEONET_2016_KAIKOURA__catalog_operational_benchmark.txt`](GEONET_2016_KAIKOURA__catalog_operational_benchmark.txt) | 1,507 | 1,507 | `f724a697a617946ff461ce55e306dabb2d96846a77cb952c9e7ecb9d03fc406e` |
 
-There are no duplicate IDs or malformed timestamps.  The first line begins
-with `#EventID`; parsers should strip the comment marker from the field name
-without changing data rows.
+There are no duplicate IDs or malformed timestamps.  The first line begins with `#EventID`; parsers should strip the comment marker from the field name without changing data rows.
 
 ### Local audit
 
@@ -52,25 +45,14 @@ without changing data rows.
 | Full | 2016-11-13T01:15:53 – 2017-05-13T22:50:47 | −43.495–−41.201° | 172.001–175.195°E | 0.1–59.8 | 0.8–7.8 | `M` 15,920; `ML` 19; `MLv` 7; `Mw(mB)` 2 | unknown 10,548; earthquake 5,399; not locatable 1 |
 | Frozen benchmark | 2016-12-01T00:01:07 – 2016-12-08T23:52:07 | −43.481–−41.266° | 172.011–175.188°E | 2.0–54.7 | 1.2–5.5 | `M` 1,507 | unknown 1,233; earthquake 274 |
 
-All rows are attributed to author/catalog/contributor `GNS`.  Native columns
-include `EventID`, UTC time, location, depth, author/catalog provenance,
-`MagType`, magnitude, location name, and event type.  The broad `M` field is a
-GeoNet source label, not automatically equivalent to local magnitude or the
-research catalogs' (M_L) fields.
+All rows are attributed to author/catalog/contributor `GNS`.  Native columns include `EventID`, UTC time, location, depth, author/catalog provenance, `MagType`, magnitude, location name, and event type.  The broad `M` field is a GeoNet source label, not automatically equivalent to local magnitude or the research catalogs' (M_L) fields.
 
 ### Q3 role and limitations
 
-- Use as the official GeoNet/GNS operational baseline for event-ID, origin-time,
-  location, and magnitude interoperability with Lanza, Tan, and Chamberlain.
-- Do **not** treat it as the high-precision Lanza relocation truth or as a
-  complete small-event catalog.  Operational event types are predominantly
-  `unknown`, and the network/location solution and magnitude scale evolve with
-  routine processing.
-- The full snapshot includes the mainshock and the long post-mainshock period;
-  the benchmark snapshot is the exact eight-day comparison window.  Preserve
-  both rather than re-querying live GeoNet during scoring.
-- Keep GeoNet's source-native event IDs and `M`/`ML` labels; any conversion to
-  a common magnitude scale must be an explicit downstream calibration.
+- Use as the official GeoNet/GNS operational baseline for event-ID, origin-time, location, and magnitude interoperability with Lanza, Tan, and Chamberlain.
+- Do **not** treat it as the high-precision Lanza relocation truth or as a complete small-event catalog.  Operational event types are predominantly `unknown`, and the network/location solution and magnitude scale evolve with routine processing.
+- The full snapshot includes the mainshock and the long post-mainshock period; the benchmark snapshot is the exact eight-day comparison window.  Preserve both rather than re-querying live GeoNet during scoring.
+- Keep GeoNet's source-native event IDs and `M`/`ML` labels; any conversion to a common magnitude scale must be an explicit downstream calibration.
 
 ## Generated analysis
 

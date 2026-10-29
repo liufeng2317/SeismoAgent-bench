@@ -11,6 +11,6 @@
 
 区分拾取记录、重定位事件、ISC 对比档案和官方快照。
 
-当前 `window_status: not_frozen`。`workflows/data_preparation/` 仅在有案例级执行工具时建立；目录自身的解析脚本保留在 `data/catalogs/<SOURCE_ID>/workflows/data_preparation/`。
+当前 `window_status: frozen`（2026-10-28 随 metrics v1 冻结；评测时间、区域和深度掩膜见 `workflows/tasks/2020_magna_utah/expert/00_config/validation.yaml`）。`workflows/data_preparation/` 仅在有案例级执行工具时建立；目录自身的解析脚本保留在 `data/catalogs/<SOURCE_ID>/workflows/data_preparation/`。
 
 当前候选窗为 `2020-03-18` 至 `03-26` UTC；47 站是可用性下载 superset，不等同于 Pang 论文的 39 站条件。见 [六案统计](../../docs/data/CASES_SUMMARY.md) 和 [Magna 详细信息](../../docs/data/CASE_DETAILS.md#6-magna-utah-2020)；共享规则见 [资料组织说明](../README.md)。

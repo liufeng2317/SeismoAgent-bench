@@ -1,6 +1,6 @@
 # PRAGUE2011 — Case Analysis
 
-> Current preparation state: `window_status: not_frozen` in [processing.yaml](processing.yaml). Earlier “frozen/v1” windows and counts below are retained as exploratory audit history, not approved evaluation inputs.
+> Current preparation state: `window_status: frozen` in [processing.yaml](processing.yaml) (2026-10-28, with metrics v1). The v1 window below is the frozen evaluation window; counts below come from data-level analysis masks, while the evaluation cohort (time, region, depth) is defined in `workflows/tasks/2011_prague_oklahoma/expert/00_config/validation.yaml`.
 
 
 > **Source of truth:** This file is the detailed, mutable analysis record for `PRAGUE2011`. The cross-case summary is maintained in [`docs/data/CASE_REGISTRY.md`](../../../docs/data/CASE_REGISTRY.md).
@@ -10,8 +10,7 @@
 - Case ID: `PRAGUE2011`
 - Phase: reference calibration and data preparation
 - Status: `v1 benchmark window frozen`
-- Information extraction: Cochran paper and catalog audit completed; remaining
-  references are pending the same structured extraction.
+- Information extraction: Cochran paper and catalog audit completed; remaining references are pending the same structured extraction.
 - Primary reference: Cochran et al. (2020) enhanced catalog
 - Frozen v1 core window: 2011-11-11 to 2011-11-19 UTC
 - Optional stress window: 2011-11-04 to 2011-11-11
@@ -64,8 +63,7 @@ The detailed first-pass extraction is maintained beside the source products:
 - [Isken paper reading](../references/ISKEN2017_BSSA0120160150/parsed/paper/ISKEN2017_BSSA0120160150__paper_reading.md)
 - [Isken catalog summary](../data/catalogs/ISKEN2017_BSSA0120160150/README.md)
 
-These files distinguish article-reported values from local-file audit values;
-the case-level tables above remain the benchmark decision record.
+These files distinguish article-reported values from local-file audit values; the case-level tables above remain the benchmark decision record.
 
 ## Calibration checklist
 
@@ -74,13 +72,8 @@ the case-level tables above remain the benchmark decision record.
 - [x] Preserve the McMahon 5,446-event release separately; reconcile the paper's 5,262 filtered subset only through an explicit event/quality crosswalk.
 - [x] Extract McMahon paper/catalog construction and local E/P schema.
 - [x] Extract Isken Table S3 paper/catalog construction and sparse-anchor role.
-- [x] Confirm the station list: Table S1 is not retrievable (publisher blocked), so the
-  31-station set is reconstructed by rule (18 ZQ + 3 GS + 9 nearest TA + OK FNO) with
-  distance/pick evidence in the observation manifest; deployment dates come from the
-  EarthScope channel epochs. Isken Table S1 remains outstanding.
-- [x] Identify archive provenance for ZQ and NEIC waveform subsets: everything archives
-  at EarthScope, but ZQ LC01–LC08 (the paper's USGS NEIC subset) are metadata-only there —
-  dataselect returns 204 across their full deployment epochs (see Waveform archive status).
+- [x] Confirm the station list: Table S1 is not retrievable (publisher blocked), so the 31-station set is reconstructed by rule (18 ZQ + 3 GS + 9 nearest TA + OK FNO) with distance/pick evidence in the observation manifest; deployment dates come from the EarthScope channel epochs. Isken Table S1 remains outstanding.
+- [x] Identify archive provenance for ZQ and NEIC waveform subsets: everything archives at EarthScope, but ZQ LC01–LC08 (the paper's USGS NEIC subset) are metadata-only there — dataselect returns 204 across their full deployment epochs (see Waveform archive status).
 - [ ] Subset all references to the same time and spatial window.
 - [ ] Record the primary reference's inclusion and uncertainty filters.
 - [ ] Acquire McMahon SI/Table S1–S2 and resolve P-record timestamp semantics.
@@ -104,29 +97,12 @@ The stable-network window is preferred for the core benchmark because the last t
 
 ### Waveform archive status (2026-10-12)
 
-The reconstructed 31-station set was probed per channel-day (EarthScope dataselect,
-one-second samples at 00/06/12/18 UTC; `analysis/station_availability_probe.json`),
-then downloaded day-by-day with the exact-epoch plan
-(`scripts/observations/`, 744 requests → 552 day-files, ~7 GB on disk).
+The reconstructed 31-station set was probed per channel-day (EarthScope dataselect, one-second samples at 00/06/12/18 UTC; `analysis/station_availability_probe.json`), then downloaded day-by-day with the exact-epoch plan (`scripts/observations/`, 744 requests → 552 day-files, ~7 GB on disk).
 
-- **23 of 31 stations are fully retrievable** from EarthScope: ZQ LC09–LC18
-  (250 Hz CN/DH), GS OK020–OK022 (100 Hz HH), OK FNO (100 Hz HH, with partial
-  availability on 11-14/11-16), and all 9 TA stations (40 Hz BH).
-- **ZQ LC01–LC08 are metadata-only at EarthScope.** Their channel epochs
-  (from 2011-11-06/07/08) and full responses exist, but dataselect returns
-  HTTP 204 for every request across the whole deployment span — the paper's
-  "USGS NEIC archives" subset was never deposited publicly (no alternate
-  network code exists; the only other LC01–LC08 hit is network SY synthetic
-  data). This is terminal archive evidence recorded in the download run, not
-  a retrieval failure; the 192 no-data requests are the paper trail.
-- Consequence for the benchmark condition: the dense local ring around the
-  epicentre keeps 10 RAMP (LC09–LC18, 1.6–15 km) + 3 GS stations; LC01–LC08
-  (1.0–8.3 km, the closest sites) exist only as StationXML. Station-level
-  evaluation must treat these eight as metadata-present/waveform-absent, and
-  any station-count comparison against the paper's 31 must carry this caveat.
-- ZQ.LC17 carries a placeholder latitude (exactly 35.0000) in EarthScope
-  metadata; its coordinates are flagged unverified (see the inventory's
-  metadata audit).
+- **23 of 31 stations are fully retrievable** from EarthScope: ZQ LC09–LC18 (250 Hz CN/DH), GS OK020–OK022 (100 Hz HH), OK FNO (100 Hz HH, with partial availability on 11-14/11-16), and all 9 TA stations (40 Hz BH).
+- **ZQ LC01–LC08 are metadata-only at EarthScope.** Their channel epochs (from 2011-11-06/07/08) and full responses exist, but dataselect returns HTTP 204 for every request across the whole deployment span — the paper's "USGS NEIC archives" subset was never deposited publicly (no alternate network code exists; the only other LC01–LC08 hit is network SY synthetic data). This is terminal archive evidence recorded in the download run, not a retrieval failure; the 192 no-data requests are the paper trail.
+- Consequence for the benchmark condition: the dense local ring around the epicentre keeps 10 RAMP (LC09–LC18, 1.6–15 km) + 3 GS stations; LC01–LC08 (1.0–8.3 km, the closest sites) exist only as StationXML. Station-level evaluation must treat these eight as metadata-present/waveform-absent, and any station-count comparison against the paper's 31 must carry this caveat.
+- ZQ.LC17 carries a placeholder latitude (exactly 35.0000) in EarthScope metadata; its coordinates are flagged unverified (see the inventory's metadata audit).
 
 ## Main risks
 
@@ -256,27 +232,16 @@ Processing entry points and product declarations are in [processing.yaml](proces
 
 ### Interpretation
 
-Cochran and McMahon are separate enhanced-detection populations with different
-waveform/template lineages and release filters; they must not be concatenated.
-Isken provides a high-quality but deliberately sparse location/fault anchor.
-The McMahon phase table is a pick-level product and its 82,537 rows are not an
-event count. ComCat is an operational baseline. Magnitudes remain source-native
-or unresolved and should not be ranked across products without calibration.
+Cochran and McMahon are separate enhanced-detection populations with different waveform/template lineages and release filters; they must not be concatenated. Isken provides a high-quality but deliberately sparse location/fault anchor. The McMahon phase table is a pick-level product and its 82,537 rows are not an event count. ComCat is an operational baseline. Magnitudes remain source-native or unresolved and should not be ranked across products without calibration.
 
-The 2,078 Cochran time-only count is the canonical v1 primary denominator; 2,076
-is the rounded spatial/depth sensitivity. The 11-row ComCat benchmark is retained
-as downloaded, even though the rounded research mask also returns 11 rows.
+The 2,078 Cochran time-only count is the canonical v1 primary denominator; 2,076 is the rounded spatial/depth sensitivity. The 11-row ComCat benchmark is retained as downloaded, even though the rounded research mask also returns 11 rows.
 
 ### Next preparation steps
 
-1. Build the Prague station-day/channel manifest for the 31-station reference
-   condition and verify ZQ/TA/OK/US/GS archive availability.
-2. Keep the 2011-11-04–11-11 changing-network interval as a separate stress
-   window; do not mix it into the v1 score.
-3. Resolve McMahon P-record timestamp semantics and recover the missing SI/Data
-   Set files before attempting exact phase-level reproduction.
-4. Construct an explicit origin-time/space crosswalk for Cochran, McMahon,
-   Isken and ComCat; do not join native event IDs directly.
+1. Build the Prague station-day/channel manifest for the 31-station reference condition and verify ZQ/TA/OK/US/GS archive availability.
+2. Keep the 2011-11-04–11-11 changing-network interval as a separate stress window; do not mix it into the v1 score.
+3. Resolve McMahon P-record timestamp semantics and recover the missing SI/Data Set files before attempting exact phase-level reproduction.
+4. Construct an explicit origin-time/space crosswalk for Cochran, McMahon, Isken and ComCat; do not join native event IDs directly.
 
 ### Re-run commands
 
@@ -287,5 +252,4 @@ python3 data/2011_prague_oklahoma/data/catalogs/COCHRAN2020_GJIGGAA153/workflows
 python3 data/2011_prague_oklahoma/data/catalogs/MCMAHON2017_GL072944/workflows/data_preparation/run_catalog_analysis.py
 ```
 
-Use `--only <product_id>` for a targeted product and `--full-plots` only when
-an exploratory diagnostic is needed.
+Use `--only <product_id>` for a targeted product and `--full-plots` only when an exploratory diagnostic is needed.

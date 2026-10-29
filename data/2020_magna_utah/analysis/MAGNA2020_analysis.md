@@ -1,45 +1,27 @@
 # MAGNA2020 — Magna, Utah case analysis
 
-> Current preparation state: `window_status: not_frozen` in [processing.yaml](processing.yaml). Earlier “frozen/v1” windows and counts below are retained as exploratory audit history, not approved evaluation inputs.
+> Current preparation state: `window_status: frozen` in [processing.yaml](processing.yaml) (2026-10-28, with metrics v1). The v1 window below is the frozen evaluation window; counts below come from data-level analysis masks, while the evaluation cohort (time, region, depth) is defined in `workflows/tasks/2020_magna_utah/expert/00_config/validation.yaml`.
 
 
-> This is the case-level synthesis.  Paper reading and file-level catalog
-> audits live beside their source products; this file records how to use them
-> together without conflating event, pick, network, or quality populations.
+> This is the case-level synthesis.  Paper reading and file-level catalog audits live beside their source products; this file records how to use them together without conflating event, pick, network, or quality populations.
 
 ## Status and case identity
 
 - **Case ID:** `MAGNA2020`
-- **Sequence:** 18 March 2020 (M_w 5.7) Magna mainshock and aftershocks,
-  Salt Lake Valley, Utah, USA.
-- **v1 benchmark window:** `2020-03-18T00:00:00Z <= origin_time <
-  2020-03-26T00:00:00Z` (8 calendar days).
-- **Common mask:** `40.69 <= lat <= 40.84`, `-112.14 <= lon <= -111.94`,
-  `-1.3 <= depth_km <= 13.1`.
-- **Audit status:** the Pang paper and ISC catalog are parsed and reconciled;
-  the Baker ISC pick release is parsed.  The Pang S1 supplement and Baker
-  article PDF are still missing, so method reproduction is not yet closed.
+- **Sequence:** 18 March 2020 (M_w 5.7) Magna mainshock and aftershocks, Salt Lake Valley, Utah, USA.
+- **v1 benchmark window:** `2020-03-18T00:00:00Z <= origin_time < 2020-03-26T00:00:00Z` (8 calendar days).
+- **Common mask:** `40.69 <= lat <= 40.84`, `-112.14 <= lon <= -111.94`, `-1.3 <= depth_km <= 13.1`.
+- **Audit status:** the Pang paper and ISC catalog are parsed and reconciled; the Baker ISC pick release is parsed.  The Pang S1 supplement and Baker article PDF are still missing, so method reproduction is not yet closed.
 
 ## Scientific role
 
-This is a medium-scale mainshock–aftershock case with two complementary
-research products:
+This is a medium-scale mainshock–aftershock case with two complementary research products:
 
-1. **Pang et al. (2020):** permanent-network matched filtering followed by
-   high-precision relative relocation.  It is the primary geometric target.
-2. **Baker et al. (2021):** machine-learning picks and event locations under a
-   dense temporary/nodal observation condition.  It is a secondary pick-level
-   and network-condition target.
-3. **UUSS/USGS operational export:** Q3 baseline only; it is not a substitute
-   for either research catalog.
+1. **Pang et al. (2020):** permanent-network matched filtering followed by high-precision relative relocation.  It is the primary geometric target.
+2. **Baker et al. (2021):** machine-learning picks and event locations under a dense temporary/nodal observation condition.  It is a secondary pick-level and network-condition target.
+3. **UUSS/USGS operational export:** Q3 baseline only; it is not a substitute for either research catalog.
 
-Pang and Baker must remain separate tasks.  Pang used 39 stations/226 channels
-and explicitly did not use the 180-node deployment; Baker's release contains
-repeated P/S picks under 205 `UU` and 2 `GS` station codes, but roughly 175 of
-those `UU` codes are numeric identifiers from the temporary nodal deployment
-that the ISC release mislabels as network `UU` (EarthScope metadata has no such
-channels).  The permanent `UU` population is only the ~30 alphabetic codes, so
-a raw station count cannot be compared across the two products.
+Pang and Baker must remain separate tasks.  Pang used 39 stations/226 channels and explicitly did not use the 180-node deployment; Baker's release contains repeated P/S picks under 205 `UU` and 2 `GS` station codes, but roughly 175 of those `UU` codes are numeric identifiers from the temporary nodal deployment that the ISC release mislabels as network `UU` (EarthScope metadata has no such channels).  The permanent `UU` population is only the ~30 alphabetic codes, so a raw station count cannot be compared across the two products.
 
 ## Reference evaluation matrix
 
@@ -51,21 +33,15 @@ a raw station count cannot be compared across the two products.
 
 Detailed source notes:
 
-- [Pang paper reading](../references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper_reading.md)
-  separates article-reported populations from local release counts.
-- [Pang catalog audit](../data/catalogs/PANG2020_GL089798/README.md)
-  records byte identity, timestamp anomalies, and strict/normalized window counts.
-- [Baker catalog audit](../data/catalogs/BAKER2021_0220200316/README.md)
-  treats the CSV as pick-level and aggregates event counts explicitly.
+- [Pang paper reading](../references/PANG2020_GL089798/parsed/paper/PANG2020_GL089798__paper_reading.md) separates article-reported populations from local release counts.
+- [Pang catalog audit](../data/catalogs/PANG2020_GL089798/README.md) records byte identity, timestamp anomalies, and strict/normalized window counts.
+- [Baker catalog audit](../data/catalogs/BAKER2021_0220200316/README.md) treats the CSV as pick-level and aggregates event counts explicitly.
 
 ## Paper-derived construction details
 
 ### Pang et al. (2020)
 
-The article reports a UUSS urban–regional network of 203 stations (40 broadband,
-97 strong-motion, 66 short-period) and five temporary telemetered additions.
-For matched filtering it selected all available data within 40 km: 39 stations,
-226 channels, nominally 100 Hz.  The paper's workflow was:
+The article reports a UUSS urban–regional network of 203 stations (40 broadband, 97 strong-motion, 66 short-period) and five temporary telemetered additions. For matched filtering it selected all available data within 40 km: 39 stations, 226 channels, nominally 100 Hz.  The paper's workflow was:
 
 ```text
 UUSS routine picks/locations
@@ -79,33 +55,15 @@ UUSS routine picks/locations
   → waveform differential times + hierarchical clustered relocation
 ```
 
-The paper reports 56,679 P templates, 30,491 S templates, 5,501 new
-aftershocks, and 5,623 relocated aftershocks.  The mainshock and many larger
-aftershocks were not relatively relocated because of waveform complexity.  It
-reports 2,103 routine UUSS locations by 30 April (2,077 with a magnitude type).
-The local release's 3,595 `Template-Matching` rows and 2,144 blank-type rows
-do not reproduce those article populations one-to-one; preserve both sets of
-numbers and do not infer a relocation flag that is absent from the file.
+The paper reports 56,679 P templates, 30,491 S templates, 5,501 new aftershocks, and 5,623 relocated aftershocks.  The mainshock and many larger aftershocks were not relatively relocated because of waveform complexity.  It reports 2,103 routine UUSS locations by 30 April (2,077 with a magnitude type). The local release's 3,595 `Template-Matching` rows and 2,144 blank-type rows do not reproduce those article populations one-to-one; preserve both sets of numbers and do not infer a relocation flag that is absent from the file.
 
 ### Baker et al. (2021)
 
-The Baker PDF is not present locally.  The ISC README identifies the CSV as a
-machine-learning-derived catalog containing P, S, first-motion, location, and
-magnitude fields.  The file-level audit confirms approximately 142k P and 188k
-S picks, consistent with the rounded counts recorded in the project inventory.
-The article inventory records a 180-station three-component 5-Hz nodal
-deployment, but exact detector/association/QC parameters and sample-rate
-metadata must be verified from the paper before reproduction.  Until then,
-Baker is a data-backed secondary target, not a fully extracted literature
-reference.
+The Baker PDF is not present locally.  The ISC README identifies the CSV as a machine-learning-derived catalog containing P, S, first-motion, location, and magnitude fields.  The file-level audit confirms approximately 142k P and 188k S picks, consistent with the rounded counts recorded in the project inventory. The article inventory records a 180-station three-component 5-Hz nodal deployment, but exact detector/association/QC parameters and sample-rate metadata must be verified from the paper before reproduction.  Until then, Baker is a data-backed secondary target, not a fully extracted literature reference.
 
 ## Frozen-window catalog comparison
 
-The following counts use the source-native files and explicit aggregation rules.
-Pang counts are event rows; Baker counts are one event per `event_number` plus
-separate pick rows.  Pang's strict parser excludes seven in-window rows whose
-seconds field is written as `-0.xxx` or `60.xxx`; a normalized sensitivity is
-kept in the catalog summary.
+The following counts use the source-native files and explicit aggregation rules. Pang counts are event rows; Baker counts are one event per `event_number` plus separate pick rows.  Pang's strict parser excludes seven in-window rows whose seconds field is written as `-0.xxx` or `60.xxx`; a normalized sensitivity is kept in the catalog summary.
 
 | Product | Time-only | Common mask | Magnitude sensitivity | Notes |
 |---|---:|---:|---:|---|
@@ -113,44 +71,26 @@ kept in the catalog summary.
 | Baker ISC | 3,782 events / 164,276 picks | **3,712 events / 161,567 picks** | 3,351 events / 150,379 picks with `magnitude > -4` | 329,611 picks; 5,885 total events |
 | UUSS/USGS baseline | See baseline README | See baseline README | Source magnitude scale | Q3 only |
 
-For the recommended common mask, Pang event ranges are 40.6933–40.8368°N,
-−112.1375–−111.9413°E, −1.28–13.02 km, and `Mc > -4` values −3.9–5.67.
-Baker event ranges are 40.6905–40.8285°N, −112.1396667–−111.9463333°E, and
-0.1–13.1 km; source `magnitude > -4` values span −1.0888675–5.70.
-The magnitude fields are not equivalent and should not be used for a direct
-catalog ranking without a separate calibration.
+For the recommended common mask, Pang event ranges are 40.6933–40.8368°N, −112.1375–−111.9413°E, −1.28–13.02 km, and `Mc > -4` values −3.9–5.67. Baker event ranges are 40.6905–40.8285°N, −112.1396667–−111.9463333°E, and 0.1–13.1 km; source `magnitude > -4` values span −1.0888675–5.70. The magnitude fields are not equivalent and should not be used for a direct catalog ranking without a separate calibration.
 
 ## Network and waveform preparation
 
 ### Comparable primary condition
 
-For the core Pang task, retrieve the 39-station/226-channel UUSS-compatible
-waveforms from the IRIS/EarthScope DMC (and optional COSMOS strong-motion data)
-for the frozen window.  Preserve network, station, channel, sample rate, and
-availability flags.  The paper's matched-filter processing span begins one day
-before the mainshock, so a reproduction may need a 17 March pre-roll even though
-the scoring window starts on 18 March.
+For the core Pang task, retrieve the 39-station/226-channel UUSS-compatible waveforms from the IRIS/EarthScope DMC (and optional COSMOS strong-motion data) for the frozen window.  Preserve network, station, channel, sample rate, and availability flags.  The paper's matched-filter processing span begins one day before the mainshock, so a reproduction may need a 17 March pre-roll even though the scoring window starts on 18 March.
 
 ### Separate Baker nodal condition
 
-Treat Baker as a separate observation regime.  Keep the 180-node deployment
-metadata distinct from the permanent UUSS network and do not mix Baker picks
-into the Pang target.  The local CSV alone cannot establish station-day
-availability or waveform completeness.
+Treat Baker as a separate observation regime.  Keep the 180-node deployment metadata distinct from the permanent UUSS network and do not mix Baker picks into the Pang target.  The local CSV alone cannot establish station-day availability or waveform completeness.
 
 ### Storage upper bounds (not downloaded waveforms)
 
 These are raw int32 continuous-data upper bounds, not measured file sizes:
 
-- Pang channel-based upper bound: `226 channels × 100 Hz × 4 bytes × 8 days`
-  ≈ **62.5 GB decimal** (58.2 GiB).  A 39×3-component approximation is
-  ≈32.3 GB because the paper's 226 channels are not exactly 39×3.
-- Baker nodal upper bound, if the inventory's 250 samples/s value is confirmed:
-  `180 × 3 × 250 Hz × 4 bytes × 8 days` ≈ **373.2 GB decimal**.  This is
-  provisional while the Baker PDF and station/sample-rate metadata are missing.
+- Pang channel-based upper bound: `226 channels × 100 Hz × 4 bytes × 8 days` ≈ **62.5 GB decimal** (58.2 GiB).  A 39×3-component approximation is ≈32.3 GB because the paper's 226 channels are not exactly 39×3.
+- Baker nodal upper bound, if the inventory's 250 samples/s value is confirmed: `180 × 3 × 250 Hz × 4 bytes × 8 days` ≈ **373.2 GB decimal**.  This is provisional while the Baker PDF and station/sample-rate metadata are missing.
 
-No waveform archive is counted as complete until station-day availability and
-actual downloaded byte manifests are recorded.
+No waveform archive is counted as complete until station-day availability and actual downloaded byte manifests are recorded.
 
 ## Benchmark decisions, risks, and next actions
 
@@ -164,9 +104,7 @@ actual downloaded byte manifests are recorded.
 | Missing literature | Download Pang S1 and Baker article PDF; only then finalize exact reproducibility parameters |
 | Baseline | Use UUSS/USGS snapshot as Q3 operational context, never as a replacement for research references |
 
-**Recommended v1 target:** Pang's common-mask event geometry under the 39-station
-permanent-network condition.  Baker's pick/event product is a secondary
-comparison track after the missing article and nodal metadata are recovered.
+**Recommended v1 target:** Pang's common-mask event geometry under the 39-station permanent-network condition.  Baker's pick/event product is a secondary comparison track after the missing article and nodal metadata are recovered.
 
 ## Sources and local files
 

@@ -1,6 +1,6 @@
 # KAIKOURA2016 — Case Analysis
 
-> Current preparation state: `window_status: not_frozen` in [processing.yaml](processing.yaml). Earlier “frozen/v1” windows and counts below are retained as exploratory audit history, not approved evaluation inputs.
+> Current preparation state: `window_status: frozen` in [processing.yaml](processing.yaml) (2026-10-28, with metrics v1). The v1 window below is the frozen evaluation window; counts below come from data-level analysis masks, while the evaluation cohort (time, region, depth) is defined in `workflows/tasks/2016_kaikoura_new_zealand/expert/00_config/validation.yaml`.
 
 
 > **Source of truth:** This file is the detailed, mutable analysis record for `KAIKOURA2016`. The cross-case summary is maintained in [`docs/data/CASE_REGISTRY.md`](../../../docs/data/CASE_REGISTRY.md).

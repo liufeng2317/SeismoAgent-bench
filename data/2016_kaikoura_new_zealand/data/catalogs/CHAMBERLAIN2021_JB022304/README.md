@@ -11,7 +11,7 @@
 
 ## Local catalog audit
 
-> Earlier window/mask statistics are exploratory. Current freeze status is defined by the case `analysis/processing.yaml`, which is `not_frozen`; retained historical “frozen” wording does not override it.
+> The case window is frozen (`window_status: frozen` in the case `analysis/processing.yaml`, 2026-10-28, with metrics v1). Window/mask statistics in this README use catalog-local masks; the evaluation cohort (time, region, depth) is defined in `workflows/tasks/2016_kaikoura_new_zealand/expert/00_config/validation.yaml`, and its counts may differ.
 
 ### Provenance and product lineage
 
@@ -30,23 +30,13 @@
 
 ### Native schema and units
 
-Both CSVs expose the same 37 column names, including `time`, `latitude`,
-`longitude`, `depth`, `magnitude`, `local_magnitude`, phase/station counts,
-uncertainties, `event_id`, `stations`, `template-id`, `strike`, `dip`, `rake`,
-`kappa`, `scalar error`, and `Slip style`. The leading `Unnamed: 0.1` and
-`Unnamed: 0` columns are export indices, not event identifiers.
+Both CSVs expose the same 37 column names, including `time`, `latitude`, `longitude`, `depth`, `magnitude`, `local_magnitude`, phase/station counts, uncertainties, `event_id`, `stations`, `template-id`, `strike`, `dip`, `rake`, `kappa`, `scalar error`, and `Slip style`. The leading `Unnamed: 0.1` and `Unnamed: 0` columns are export indices, not event identifiers.
 
-- `time` is parseable as UTC-like ISO text with microsecond precision; no timezone
-suffix is encoded in the CSV, so the audit treats it as UTC because the article's
-workflow and case definition use UTC.
-- `depth` is stored in metres in the CSV and is converted to kilometres in the
-statistics below.
-- `magnitude` and `local_magnitude` are numerically identical for the populated
-rows and are labelled `ML` in 33,278 rows; 50 rows have no magnitude.
-- `event_id` is a stable `smi:local/...` string in the corrected file. The
-corrected file has 33,328 unique IDs and no duplicate IDs or times.
-- `station_count`, phase-count and uncertainty fields are retained as published;
-zero and missing values are not imputed.
+- `time` is parseable as UTC-like ISO text with microsecond precision; no timezone suffix is encoded in the CSV, so the audit treats it as UTC because the article's workflow and case definition use UTC.
+- `depth` is stored in metres in the CSV and is converted to kilometres in the statistics below.
+- `magnitude` and `local_magnitude` are numerically identical for the populated rows and are labelled `ML` in 33,278 rows; 50 rows have no magnitude.
+- `event_id` is a stable `smi:local/...` string in the corrected file. The corrected file has 33,328 unique IDs and no duplicate IDs or times.
+- `station_count`, phase-count and uncertainty fields are retained as published; zero and missing values are not imputed.
 
 ### Corrected catalog audit
 
@@ -67,33 +57,19 @@ zero and missing values are not imputed.
 | Complete strike/dip/rake mechanism rows | 1,756 |
 | Slip-style labels | Strike-slip 17,172; Unknown 8,818; Reverse 4,267; Normal 3,071 |
 
-The paper reports 33,328 final events and 27,431 GrowClust relocations. The CSV
-does not expose a plainly named `relocated` flag, so the latter count should not
-be reverse-engineered from `template-id`, focal-mechanism fields, or missing
-values without the Zenodo code/QuakeML archive.
+The paper reports 33,328 final events and 27,431 GrowClust relocations. The CSV does not expose a plainly named `relocated` flag, so the latter count should not be reverse-engineered from `template-id`, focal-mechanism fields, or missing values without the Zenodo code/QuakeML archive.
 
 ### Legacy-versus-corrected comparison
 
-The legacy file has 34,704 rows but only 33,329 unique event IDs: 1,375 IDs are
-duplicated, and one row is visibly malformed/column-shifted (`event_id = 0.0`,
-`time = 201`, `magnitude_type = ML`). After deduplicating on `event_id`, all
-33,328 corrected IDs are shared. For the shared IDs, the non-focal fields
-(time, coordinates, depth, magnitudes, phase/station counts, uncertainties,
-station lists and template IDs) match within numeric representation. The
-correction changes focal-mechanism values (1,770 shared rows have changed
-strike/dip/rake values; 7,013 have changed `Slip style` labels). Therefore:
+The legacy file has 34,704 rows but only 33,329 unique event IDs: 1,375 IDs are duplicated, and one row is visibly malformed/column-shifted (`event_id = 0.0`, `time = 201`, `magnitude_type = ML`). After deduplicating on `event_id`, all 33,328 corrected IDs are shared. For the shared IDs, the non-focal fields (time, coordinates, depth, magnitudes, phase/station counts, uncertainties, station lists and template IDs) match within numeric representation. The correction changes focal-mechanism values (1,770 shared rows have changed strike/dip/rake values; 7,013 have changed `Slip style` labels). Therefore:
 
 1. use the corrected CSV for all benchmark statistics;
-2. retain the legacy CSV only to document release lineage and the focal-mechanism
-correction;
+2. retain the legacy CSV only to document release lineage and the focal-mechanism correction;
 3. never count the two files together.
 
 ### Frozen Kaikōura benchmark window
 
-Case rule: half-open UTC time interval
-`2016-12-01T00:00:00Z <= time < 2016-12-09T00:00:00Z`, followed by the common
-mask `−43.5 <= latitude <= −41.2`, `172.0 <= longitude <= 175.2`, and
-`0 <= depth_km <= 60`.
+Case rule: half-open UTC time interval `2016-12-01T00:00:00Z <= time < 2016-12-09T00:00:00Z`, followed by the common mask `−43.5 <= latitude <= −41.2`, `172.0 <= longitude <= 175.2`, and `0 <= depth_km <= 60`.
 
 | Field | Time-only selection | Common benchmark mask |
 |---|---:|---:|
@@ -105,34 +81,21 @@ mask `−43.5 <= latitude <= −41.2`, `172.0 <= longitude <= 175.2`, and
 | Local magnitude | 0.475050–5.303747; 2 missing | 0.475050–5.303747; 2 missing |
 | Complete focal mechanisms | 114 | 113 |
 
-The common mask removes 59 time-window rows. This is a case-comparison rule,
-not a claim that the removed catalog locations are all physically invalid.
+The common mask removes 59 time-window rows. This is a case-comparison rule, not a claim that the removed catalog locations are all physically invalid.
 
 ### Benchmark role and limitations
 
-- **Tier:** Q2 dense matched-filter / relative-location reference; use only the
-reported high-quality GrowClust subset as a metric-specific Q1 location/
-uncertainty anchor.
-- **Best use:** compare detection expansion, event separation, relative fault
-geometry and uncertainty calibration under a long-duration, changing-network
-condition.
-- **Not a universal truth catalog:** template inheritance from Lanza, variable
-network coverage, and matched-filter morphology bias make completeness and
-absolute-location comparisons conditional.
-- **Catalog–paper alignment:** aligned at the headline 33,328-event count and
-corrected release lineage; the 27,431 relocated subset and the one-row
-1,755-versus-1,756 focal-mechanism discrepancy remain explicit unresolved
-release metadata issues.
+- **Tier:** Q2 dense matched-filter / relative-location reference; use only the reported high-quality GrowClust subset as a metric-specific Q1 location/ uncertainty anchor.
+- **Best use:** compare detection expansion, event separation, relative fault geometry and uncertainty calibration under a long-duration, changing-network condition.
+- **Not a universal truth catalog:** template inheritance from Lanza, variable network coverage, and matched-filter morphology bias make completeness and absolute-location comparisons conditional.
+- **Catalog–paper alignment:** aligned at the headline 33,328-event count and corrected release lineage; the 27,431 relocated subset and the one-row 1,755-versus-1,756 focal-mechanism discrepancy remain explicit unresolved release metadata issues.
 
 ### Local outputs and next actions
 
 - Paper reading: `../../../references/CHAMBERLAIN2021_JB022304/parsed/paper/CHAMBERLAIN2021_JB022304__paper_reading.md`
 - Case synthesis: `../../../analysis/KAIKOURA2016_analysis.md`
-- Raw/source CSVs are preserved in this directory; future plots should be
-written under `raw/` or a dedicated `figures/` subdirectory without modifying
-the two source files.
-- If exact relocation membership or focal-mechanism provenance is required,
-archive and parse the corrected QuakeML/software bundle from Zenodo 6763130.
+- Raw/source CSVs are preserved in this directory; future plots should be written under `raw/` or a dedicated `figures/` subdirectory without modifying the two source files.
+- If exact relocation membership or focal-mechanism provenance is required, archive and parse the corrected QuakeML/software bundle from Zenodo 6763130.
 
 ## Generated analysis
 

@@ -7,14 +7,12 @@
 - Companion XML: raw/Correlation-derived_seismic_phase_arrival_times_v2.xml.
 - Local audit: README.md.
 - CSV audit: 6,260,580 data rows; SHA-256 a1828099eb2a51339e01ffca191d6e4d98df27ad889c18837aa41278dd128d6c.
-- Product meaning: correlation-derived P/S phase arrivals with template and match
-  IDs; this is an auxiliary phase product, not an event-origin catalog.
-- The article reports 15,912 well-located and 30,411 magnitude events, but those
-  article-level event tables are not present in this directory.
+- Product meaning: correlation-derived P/S phase arrivals with template and match IDs; this is an auxiliary phase product, not an event-origin catalog.
+- The article reports 15,912 well-located and 30,411 magnitude events, but those article-level event tables are not present in this directory.
 
 ## Local catalog audit
 
-> Earlier window/mask statistics are exploratory. Current freeze status is defined by the case `analysis/processing.yaml`, which is `not_frozen`; retained historical “frozen” wording does not override it.
+> The case window is frozen (`window_status: frozen` in the case `analysis/processing.yaml`, 2026-10-28, with metrics v1). Window/mask statistics in this README use catalog-local masks; the evaluation cohort (time, region, depth) is defined in `workflows/tasks/2017_maple_creek_yellowstone/expert/00_config/validation.yaml`, and its counts may differ.
 
 ### Provenance and product identity
 
@@ -44,9 +42,7 @@ Header:
 | ccdiff | Difference between largest and second-largest absolute peaks |
 | chanloc | Channel and location code joined by a period |
 
-The file has no origin time, latitude, longitude, depth, location uncertainty, or
-event-level quality flag. It cannot provide the spatial/depth event summary
-needed for a standalone reference catalog without an event table.
+The file has no origin time, latitude, longitude, depth, location uncertainty, or event-level quality flag. It cannot provide the spatial/depth event summary needed for a standalone reference catalog without an event table.
 
 ### Full-file audit
 
@@ -65,53 +61,38 @@ needed for a standalone reference catalog without an event table.
 | Finite mag range | -6.99 to 5.17; four additional finite values are below -10 and should be flagged |
 | chanloc cardinality | 15 |
 
-The XML metadata declares a Yellowstone magnitude domain of 0.35 to 3.65,
-which does not match local rows (5.17, negative extremes, and nine -inf
-values). Preserve raw values and create a QC flag before magnitude metrics.
+The XML metadata declares a Yellowstone magnitude domain of 0.35 to 3.65, which does not match local rows (5.17, negative extremes, and nine -inf values). Preserve raw values and create a QC flag before magnitude metrics.
 
-The XML describes Yellowstone coverage as 11 June to 6 September 2017, while
-local arrivals extend to 17 September. The article itself reports scanning
-through 14 September. Keep the discrepancy explicit; do not silently truncate.
+The XML describes Yellowstone coverage as 11 June to 6 September 2017, while local arrivals extend to 17 September. The article itself reports scanning through 14 September. Keep the discrepancy explicit; do not silently truncate.
 
 ### Frozen benchmark-window audit
 
 Case-level spatial/depth mask:
 
-    44.45 N <= latitude <= 44.75 N
-    -110.55 E <= longitude <= -110.15 E
-    0 km <= depth <= 15 km
+    44.45 N <= latitude <= 44.75 N -110.55 E <= longitude <= -110.15 E 0 km <= depth <= 15 km
 
-This mask cannot be applied to the phase-only file because coordinates and depth
-are absent. Only a time filter is reproducible:
+This mask cannot be applied to the phase-only file because coordinates and depth are absent. Only a time filter is reproducible:
 
 | Half-open UTC window | Phase rows | Unique match_id | Unique template_id | Station pairs |
 |---|---:|---:|---:|---:|
 | 2017-06-11 <= t < 2017-06-18 (7 days) | 1,536,742 | 22,858 | not retained in prior audit | 27 |
 | 2017-06-11 <= t < 2017-06-19 (8 days, frozen v1) | 1,591,090 | 23,660 | 1,119 | 27 |
 
-These are phase observations and phase-associated IDs, not validated event counts.
-Article-reported 15,912 and 30,411 populations remain separate.
+These are phase observations and phase-associated IDs, not validated event counts. Article-reported 15,912 and 30,411 populations remain separate.
 
 ### Quality tier and use
 
-- Q4 auxiliary phase product by itself: phase timing, template/match lineage,
-  and waveform detector diagnostics.
-- Article-level Shelly catalog: Q1 relative geometry and Q2
-  template-enhanced detection, but its event table is not staged locally.
-- Independence: low against a matched-filter or correlation differential-time
-  agent because the release shares the study lineage.
-- Do not treat each CSV row as an event, use match_id as the article catalog
-  count, or apply a spatial/depth mask without joining an event-origin product.
+- Q4 auxiliary phase product by itself: phase timing, template/match lineage, and waveform detector diagnostics.
+- Article-level Shelly catalog: Q1 relative geometry and Q2 template-enhanced detection, but its event table is not staged locally.
+- Independence: low against a matched-filter or correlation differential-time agent because the release shares the study lineage.
+- Do not treat each CSV row as an event, use match_id as the article catalog count, or apply a spatial/depth mask without joining an event-origin product.
 
 ### Reproducibility and pending work
 
 1. Keep the checksums above in any external data manifest.
-2. Parse full USGS metadata if station-day availability or template/event
-   crosswalks are needed.
-3. Acquire or reconstruct the article event-level relocated table only with
-   explicit provenance; never infer locations from phase arrivals.
-4. Generate phase-count, correlation-quality, station-availability, and
-   template-lineage plots under raw/ or a derived catalog directory.
+2. Parse full USGS metadata if station-day availability or template/event crosswalks are needed.
+3. Acquire or reconstruct the article event-level relocated table only with explicit provenance; never infer locations from phase arrivals.
+4. Generate phase-count, correlation-quality, station-availability, and template-lineage plots under raw/ or a derived catalog directory.
 
 ## Generated analysis
 
@@ -119,23 +100,10 @@ Article-reported 15,912 and 30,411 populations remain separate.
 
 ## Derived detection-event table (time-only reference)
 
-`scripts/derive_detection_events.py` (2026-10-22) turns the phase release into
-one row per detected event with an estimated origin time and no location:
-median arrival per match_id and station-phase; origin = median of (arrival −
-travel time from the Mw 4.4 epicentre at 8 km depth in the UUSS Yellowstone 1-D
-model); match_ids whose common station-phase arrivals agree within 0.05 s are
-merged as duplicates (union-find).
+`scripts/derive_detection_events.py` (2026-10-22) turns the phase release into one row per detected event with an estimated origin time and no location: median arrival per match_id and station-phase; origin = median of (arrival − travel time from the Mw 4.4 epicentre at 8 km depth in the UUSS Yellowstone 1-D model); match_ids whose common station-phase arrivals agree within 0.05 s are merged as duplicates (union-find).
 
-- Output: `analysis/derived/detection_events/SHELLY2019_GL081607__detection_events_v1.csv`
-  (93,162 events from 115,447 match_ids; 22,285 merges), statistics in
-  `analysis/stats/detection_events/detection_events_v1.json`.
-- Window 2017-06-11 → 06-19: 18,062 events (≈29× ComCat). Median 4
-  station-phases per event (10th percentile 1), so recall should be reported
-  per observation tier.
-- Accuracy vs ComCat (report only, no calibration): 624 of 626 ComCat events
-  have a Shelly event within 1.5 s; origin difference −0.10 s, MAD 0.11 s.
-- Known limit: ~550 window pairs closer than 0.05 s share no station-phase and
-  stay unmerged (Poisson expectation ~65); one-to-one recall against this table
-  is biased low by at most ~3%.
-- Stations WY.YMS and WY.YNM have no metadata in the case inventory; their
-  arrivals are dropped.
+- Output: `analysis/derived/detection_events/SHELLY2019_GL081607__detection_events_v1.csv` (93,162 events from 115,447 match_ids; 22,285 merges), statistics in `analysis/stats/detection_events/detection_events_v1.json`.
+- Window 2017-06-11 → 06-19: 18,062 events (≈29× ComCat). Median 4 station-phases per event (10th percentile 1), so recall should be reported per observation tier.
+- Accuracy vs ComCat (report only, no calibration): 624 of 626 ComCat events have a Shelly event within 1.5 s; origin difference −0.10 s, MAD 0.11 s.
+- Known limit: ~550 window pairs closer than 0.05 s share no station-phase and stay unmerged (Poisson expectation ~65); one-to-one recall against this table is biased low by at most ~3%.
+- Stations WY.YMS and WY.YNM have no metadata in the case inventory; their arrivals are dropped.

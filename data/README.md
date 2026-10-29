@@ -69,7 +69,7 @@ Waveforms are stored in external archives, and each case's `data/waveforms` is a
 
 ## Status and Statistical Conventions
 
-- All six cases currently have `window_status: not_frozen`; the current windows and statistics support preparation and auditing and do not constitute a formally frozen benchmark.
+- All six cases have `window_status: frozen` (2026-10-28, with metrics v1); each `analysis/processing.yaml` records the frozen evaluation window, and the evaluation cohort mask is `workflows/tasks/<case>/expert/00_config/validation.yaml`. Statistics computed with data-level masks remain descriptive and may differ from evaluation cohort counts.
 - “Waveform file count” means readable daily MiniSEED files in the external archive. “Candidate-window file count” is determined from the header time ranges recorded in the inventory.
 - “Station manifest/metadata count” and “stations with downloaded waveforms” are reported separately. The former describes the design or discovery scope; the latter describes the local payload.
 - An official operational catalog is a Q3 comparison baseline, not a high-resolution research truth catalog.

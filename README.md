@@ -2,31 +2,21 @@
 
 ### Agentic Seismic Catalog Benchmark
 
-SeismoAgentBench evaluates what an AI agent can do when asked to build an
-earthquake catalog from continuous seismic observations—and how much expert
-guidance is still required.
+SeismoAgentBench evaluates what an AI agent can do when asked to build an earthquake catalog from continuous seismic observations—and how much expert guidance is still required.
 
 <p align="center">
   <img src="docs/research/assets/seismoagentbench_overview.svg" alt="SeismoAgentBench project overview" width="960">
 </p>
 
-The benchmark is built around real, published earthquake and volcanic
-sequences. It separates data preparation and scientific reference validation
-from the later task of reproducing catalogs with agents.
+The benchmark is built around real, published earthquake and volcanic sequences. It separates data preparation and scientific reference validation from the later task of reproducing catalogs with agents.
 
-The extraction contract for paper methods, catalog schemas, and case-level
-synthesis is defined in [`docs/data/preparation/INFORMATION_EXTRACTION_SCHEMA.md`](docs/data/preparation/INFORMATION_EXTRACTION_SCHEMA.md).
+The extraction contract for paper methods, catalog schemas, and case-level synthesis is defined in [`docs/data/preparation/INFORMATION_EXTRACTION_SCHEMA.md`](docs/data/preparation/INFORMATION_EXTRACTION_SCHEMA.md).
 
 The current status and work plan are tracked in [`docs/research/progress/STATUS_AND_PLAN.md`](docs/research/progress/STATUS_AND_PLAN.md).
 
 ## Evaluation environment
 
-The current trusted-development execution path is implemented in
-[`SeismoAgentBench/execution`](SeismoAgentBench/execution). It creates a fresh
-run directory, records the command and environment, applies a timeout, and
-keeps agent execution separate from artifact validation and scoring. Formal
-isolation is a replaceable future execution backend; it is not required by the
-task and scoring contracts.
+The current trusted-development execution path is implemented in [`SeismoAgentBench/execution`](SeismoAgentBench/execution). It creates a fresh run directory, records the command and environment, applies a timeout, and keeps agent execution separate from artifact validation and scoring. Formal isolation is a replaceable future execution backend; it is not required by the task and scoring contracts.
 
 ## Professional tool snapshots
 
@@ -35,18 +25,12 @@ task and scoring contracts.
 ## What this project does
 
 - Curates six information-rich seismic benchmark cases.
-- Verifies the papers, supplements, waveform context, and published catalogs
-  associated with each case.
-- Freezes common time, space, depth, network, and quality conditions for fair
-  comparisons.
-- Keeps multiple reference catalogs separate when they measure different
-  scientific capabilities.
-- Provides official operational catalogs as Q3 baselines, not as universal
-  ground truth.
-- Prepares article extraction, catalog summaries, visualizations, waveform
-  manifests, and evaluation-ready inputs.
-- Will later evaluate agentic catalog construction under controlled observation
-  and expert-guidance conditions.
+- Verifies the papers, supplements, waveform context, and published catalogs associated with each case.
+- Freezes common time, space, depth, network, and quality conditions for fair comparisons.
+- Keeps multiple reference catalogs separate when they measure different scientific capabilities.
+- Provides official operational catalogs as Q3 baselines, not as universal ground truth.
+- Prepares article extraction, catalog summaries, visualizations, waveform manifests, and evaluation-ready inputs.
+- Will later evaluate agentic catalog construction under controlled observation and expert-guidance conditions.
 
 ## The benchmark idea
 
@@ -72,8 +56,7 @@ flowchart LR
 
 The central question is:
 
-> How independently, and to what level of scientific quality, can an agent
-> construct an earthquake catalog from seismic observations?
+> How independently, and to what level of scientific quality, can an agent construct an earthquake catalog from seismic observations?
 
 ## Phase I cases
 
@@ -86,9 +69,7 @@ The central question is:
 | [Ridgecrest, California](data/2019_ridgecrest_california) | Dense faulting sequence | Overlapping events and complex geometry |
 | [Magna, Utah](data/2020_magna_utah) | Moderate earthquake sequence | Permanent versus nodal networks |
 
-The cases are deliberately different. The goal is not one leaderboard, but a
-capability profile showing where an agent succeeds, fails, or needs expert
-intervention.
+The cases are deliberately different. The goal is not one leaderboard, but a capability profile showing where an agent succeeds, fails, or needs expert intervention.
 
 ## Project stages
 
@@ -102,8 +83,7 @@ intervention.
 7. Compare against role-specific references and baselines
 ```
 
-Current work is concentrated on stages 1–5. Agent reproduction is intentionally
-the next stage, after the data and reference conditions are frozen.
+Current work is concentrated on stages 1–5. Agent reproduction is intentionally the next stage, after the data and reference conditions are frozen.
 
 ## Repository map
 
@@ -133,9 +113,7 @@ workflows/tasks/
   <task>/                   benchmark task packages and case-specific workflows
 ```
 
-Detailed organization rules belong in [data/README.md](data/README.md), and
-the current data readiness belongs in
-[docs/data/CASES_SUMMARY.md](docs/data/CASES_SUMMARY.md).
+Detailed organization rules belong in [data/README.md](data/README.md), and the current data readiness belongs in [docs/data/CASES_SUMMARY.md](docs/data/CASES_SUMMARY.md).
 
 ## Quick start
 
@@ -161,27 +139,17 @@ python workflows/data_preparation/00_catalog_downloading/download_official_basel
 
 ## Reference interpretation
 
-Reference catalogs are role-specific expert targets, not a single absolute
-truth set. A catalog can be excellent for detection completeness or relative
-relocation while being unsuitable for absolute-location evaluation. Each case
-therefore records the reference role, spatial and temporal scope, quality tier,
-and network condition separately.
+Reference catalogs are role-specific expert targets, not a single absolute truth set. A catalog can be excellent for detection completeness or relative relocation while being unsuitable for absolute-location evaluation. Each case therefore records the reference role, spatial and temporal scope, quality tier, and network condition separately.
 
 ## Project status
 
-Phase I has six cases, archived reference materials, paper-level extraction
-records, research-catalog audits, and official operational snapshots. The
-current case configurations explicitly mark benchmark windows as `not_frozen`;
-existing masked statistics and figures are exploratory. Literature, catalog,
-official-baseline and observation gaps are recorded in their dedicated
-manifests and case analyses.
+Phase I has six cases, archived reference materials, paper-level extraction records, research-catalog audits, and official operational snapshots. The benchmark windows were frozen with metrics v1 on 2026-10-28 (`window_status: frozen`); data-level masked statistics and figures remain descriptive. Literature, catalog, official-baseline and observation gaps are recorded in their dedicated manifests and case analyses.
 
 Next deliverables are:
 
 - consolidation of scientific window choices and existing exploratory figures;
 - freeze the station/channel conditions from the downloaded waveform archives;
-- recovery of confirmed missing products (for example the Pang Maple Creek
-  event table and the Magna Baker paper) without substituting unrelated data;
+- recovery of confirmed missing products (for example the Pang Maple Creek event table and the Magna Baker paper) without substituting unrelated data;
 - controlled agent reproduction and role-specific evaluation.
 
 ## Documentation
@@ -201,9 +169,7 @@ Next deliverables are:
 - [Data organization rules](data/README.md)
 - [Repository cleanup and retention decisions (2026-09-24)](docs/archive/2026-09-24_repository_cleanup.md)
 
-**Canonical project name:** `SeismoAgentBench`  \
-**Repository slug:** `seismoagent-bench`  \
-**Short form:** `SABench`
+**Canonical project name:** `SeismoAgentBench`  \ **Repository slug:** `seismoagent-bench`  \ **Short form:** `SABench`
 
 The project code package is [`SeismoAgentBench/`](SeismoAgentBench/README.md). Source registry tools are one utility under [`utils/source_prepare/`](SeismoAgentBench/utils/source_prepare/), with regression tests in [`tests/`](tests/). Ridgecrest is the first case using the versioned source registry; see its [source registry and commands](data/2019_ridgecrest_california/README.md#source-整理入口). Evaluation will be implemented separately.
 

@@ -2,24 +2,18 @@
 
 - `source_ref`: `LANZA2019_GL082780`
 - DOI: [10.1029/2019GL082780](https://doi.org/10.1029/2019GL082780)
-- Product: AGU/Wiley Data Set S1, relocated hypocenters and P/S arrival picks
-  in QuakeML format.
+- Product: AGU/Wiley Data Set S1, relocated hypocenters and P/S arrival picks in QuakeML format.
 - Core file: `raw/grl59060-sup-0003-ds01.xml`
 - SHA-256: `c87a16de4fb28be7cd873b03e93b3d410c6e2237d7ed443affbe798670fbd478`
 - Local event objects: 2,655 (2,012 with HypoDD origins and 643 SIMUL-only)
 - Local picks: 110,810 P + 72,149 S = 182,959 pick elements
 - Station codes represented in picks: 81
 
-The XML was downloaded as part of the paper's supporting-information bundle and
-is staged here separately from the narrative SI (`references/LANZA2019_GL082780/supplement/`).
-The original filename is preserved under `raw/`; the source is not rewritten or
-silently normalized. The article reports 2,013 final clustered HypoDD events,
-whereas this local XML contains 2,012 HypoDD origin objects; see the catalog
-summary for the discrepancy and for the frozen-window masks.
+The XML was downloaded as part of the paper's supporting-information bundle and is staged here separately from the narrative SI (`references/LANZA2019_GL082780/supplement/`). The original filename is preserved under `raw/`; the source is not rewritten or silently normalized. The article reports 2,013 final clustered HypoDD events, whereas this local XML contains 2,012 HypoDD origin objects; see the catalog summary for the discrepancy and for the frozen-window masks.
 
 ## Local catalog audit
 
-> Earlier window/mask statistics are exploratory. Current freeze status is defined by the case `analysis/processing.yaml`, which is `not_frozen`; retained historical “frozen” wording does not override it.
+> The case window is frozen (`window_status: frozen` in the case `analysis/processing.yaml`, 2026-10-28, with metrics v1). Window/mask statistics in this README use catalog-local masks; the evaluation cohort (time, region, depth) is defined in `workflows/tasks/2016_kaikoura_new_zealand/expert/00_config/validation.yaml`, and its counts may differ.
 
 ### Product identity
 
@@ -34,10 +28,7 @@ summary for the discrepancy and for the frozen-window masks.
 | Local HypoDD-origin count | 2,012 (one-event discrepancy; unresolved) |
 | Local event-object count | 2,655 unique event IDs |
 
-The XML is not an independent operational catalog. It is the release product
-of a reviewed-event, REST/kpick, simul2014, and HypoDD relocation workflow. Its
-event IDs are local QuakeML IDs (`smi:local/2017p...`) and should not be joined
-to GeoNet/Tan/Chamberlain IDs by string equality.
+The XML is not an independent operational catalog. It is the release product of a reviewed-event, REST/kpick, simul2014, and HypoDD relocation workflow. Its event IDs are local QuakeML IDs (`smi:local/2017p...`) and should not be joined to GeoNet/Tan/Chamberlain IDs by string equality.
 
 ### Event and origin structure
 
@@ -55,17 +46,11 @@ to GeoNet/Tan/Chamberlain IDs by string equality.
 | `preferredMagnitudeID` | absent from all event objects |
 | Magnitude type | generic `M` in all 2,655 elements; physical scale unresolved |
 
-When both origins exist, the article says the HypoDD origin is preferred. The
-local XML implements that through `preferredOriginID`. For the 643 SIMUL-only
-events, no preferred-origin link is serialized. A normalization script should
-record `origin_method` explicitly and should not fill missing preferred IDs with
-an invented identifier.
+When both origins exist, the article says the HypoDD origin is preferred. The local XML implements that through `preferredOriginID`. For the 643 SIMUL-only events, no preferred-origin link is serialized. A normalization script should record `origin_method` explicitly and should not fill missing preferred IDs with an invented identifier.
 
 ### Local ranges
 
-The following ranges use the selected/preferred origin where available and the
-sole SIMUL origin otherwise. Depth is converted from QuakeML metres to positive
-downward kilometres.
+The following ranges use the selected/preferred origin where available and the sole SIMUL origin otherwise. Depth is converted from QuakeML metres to positive downward kilometres.
 
 | Field | Full local range |
 |---|---:|
@@ -76,10 +61,7 @@ downward kilometres.
 | Generic `M` value | 2.2 – 7.4 |
 | Pick-time uncertainty | 0.02 – 0.55 s where populated |
 
-The full spatial/depth ranges are wider than the main-paper selection rectangle
-because the XML retains SIMUL-only and poorly constrained origins. Sixteen
-preferred/sole origins have negative depth and 35 have depth >=50 km. These are
-not deleted from the source file; they require an explicit benchmark mask.
+The full spatial/depth ranges are wider than the main-paper selection rectangle because the XML retains SIMUL-only and poorly constrained origins. Sixteen preferred/sole origins have negative depth and 35 have depth >=50 km. These are not deleted from the source file; they require an explicit benchmark mask.
 
 By origin method:
 
@@ -88,9 +70,7 @@ By origin method:
 | HypoDD preferred | 2,012 | 0.045–41.389 | 2.2–7.4 |
 | SIMUL only/fallback | 643 | −0.94–164.12 | 2.6–6.7 |
 
-HypoDD origins do not carry a `quality` child in this XML. SIMUL origins do
-carry `usedPhaseCount`, `standardError`, `azimuthalGap`, and `minimumDistance`;
-those fields must not be interpreted as HypoDD quality values.
+HypoDD origins do not carry a `quality` child in this XML. SIMUL origins do carry `usedPhaseCount`, `standardError`, `azimuthalGap`, and `minimumDistance`; those fields must not be interpreted as HypoDD quality values.
 
 ### Pick and station fields
 
@@ -105,14 +85,9 @@ those fields must not be interpreted as HypoDD quality values.
 | Arrival links | Origins link to picks through `arrival/pickID`; arrival `phase` is serialized as `None` in the local XML, so use pick `phaseHint` for P/S labels |
 | Pick uncertainty | `time/uncertainty`, seconds; 0.02–0.55 s in populated elements |
 
-The Text SI reports 114,140 high-quality P and 73,783 high-quality S picks after
-REST+kpick QC. The XML totals are lower and do not label kpick picks separately.
-This is a release-level discrepancy, not a reason to append synthetic rows.
+The Text SI reports 114,140 high-quality P and 73,783 high-quality S picks after REST+kpick QC. The XML totals are lower and do not label kpick picks separately. This is a release-level discrepancy, not a reason to append synthetic rows.
 
-Table S1 independently lists 81 stations: 24 STREWN temporary stations and 57
-GeoNet entries. It does not establish station-day availability; temporary and
-strong-motion gaps must be obtained from waveform metadata if network-aware
-scoring is required.
+Table S1 independently lists 81 stations: 24 STREWN temporary stations and 57 GeoNet entries. It does not establish station-day availability; temporary and strong-motion gaps must be obtained from waveform metadata if network-aware scoring is required.
 
 ### Construction lineage and quality rules
 
@@ -132,16 +107,10 @@ The paper/SI workflow is:
 Important reported filters and products:
 
 - Text S1: 3 of 2,768 inputs fail REST; 2,765 are picked/located by REST.
-- Main §4.1: 2,655 simul2014 locations; 110 poor-depth events are not carried
-  into the clustered interpretation.
-- Main §4.2: 1,359,256 phase differential times and 187,138 waveform
-  cross-correlation differential times; ~24% of events are discarded by the
-  10-km clustering condition; article reports 2,013 HypoDD events.
-- Main §4.2/Text S5: waveform cross-correlation uses 1–20 Hz, 1-s P/S windows
-  beginning 0.2 s before picks; threshold >0.65 is a relocation link rule, not
-  a detection completeness threshold.
-- Text S4: most estimated simul2014 model-related absolute uncertainties are
-  below 2 km under an assumed slowness uncertainty of ~0.02 s/km.
+- Main §4.1: 2,655 simul2014 locations; 110 poor-depth events are not carried into the clustered interpretation.
+- Main §4.2: 1,359,256 phase differential times and 187,138 waveform cross-correlation differential times; ~24% of events are discarded by the 10-km clustering condition; article reports 2,013 HypoDD events.
+- Main §4.2/Text S5: waveform cross-correlation uses 1–20 Hz, 1-s P/S windows beginning 0.2 s before picks; threshold >0.65 is a relocation link rule, not a detection completeness threshold.
+- Text S4: most estimated simul2014 model-related absolute uncertainties are below 2 km under an assumed slowness uncertainty of ~0.02 s/km.
 
 ### Frozen benchmark masks
 
@@ -167,10 +136,7 @@ Applying these rules to the local XML gives:
 | Time + spatial/depth mask | **122** | 110 HypoDD + 12 SIMUL | lat −42.92922–−41.56183; lon 172.76817–175.18033; depth 1.921–37.01 km; generic `M` 2.2–5.8 |
 | Time + mask + generic `M >= 3` sensitivity only | 120 | 110 HypoDD + 10 SIMUL | Magnitude type remains unresolved; do not use as canonical count |
 
-The paper describes the selected input as `M_L >= 3`, but the distributed
-QuakeML preserves only generic `M` and includes two common-mask values below 3.
-The canonical benchmark label is therefore **122 released XML events under the
-common mask**, with the `M >= 3` count retained only as a sensitivity audit.
+The paper describes the selected input as `M_L >= 3`, but the distributed QuakeML preserves only generic `M` and includes two common-mask values below 3. The canonical benchmark label is therefore **122 released XML events under the common mask**, with the `M >= 3` count retained only as a sensitivity audit.
 
 ### Benchmark role
 

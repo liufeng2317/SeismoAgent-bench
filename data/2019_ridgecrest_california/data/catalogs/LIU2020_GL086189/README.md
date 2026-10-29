@@ -7,18 +7,15 @@
 
 ## Local catalog audit
 
-> Earlier window/mask statistics are exploratory. Current freeze status is defined by the case `analysis/processing.yaml`, which is `not_frozen`; retained historical “frozen” wording does not override it.
+> The case window is frozen (`window_status: frozen` in the case `analysis/processing.yaml`, 2026-10-28, with metrics v1). Window/mask statistics in this README use catalog-local masks; the evaluation cohort (time, region, depth) is defined in `workflows/tasks/2019_ridgecrest_california/expert/00_config/validation.yaml`, and its counts may differ.
 
 ### Provenance and schema
 
 - Source article: Liu et al. (2020), DOI [10.1029/2019GL086189](https://doi.org/10.1029/2019GL086189).
-- Article product: Table S1, the final hypoDD catalog from the PhaseNet → REAL →
-  VELEST → hypoDD workflow.
+- Article product: Table S1, the final hypoDD catalog from the PhaseNet → REAL → VELEST → hypoDD workflow.
 - Local file: `LIU2020_GL086189__catalog_tableS1.txt`.
 - Native header: `yr mo day hr min sec lat lon dep mag`.
-- There is no explicit event ID, station count, phase count or uncertainty
-  column. Treat each complete row as one event and retain the origin-time and
-  coordinate tuple as the reproducibility key.
+- There is no explicit event ID, station count, phase count or uncertainty column. Treat each complete row as one event and retain the origin-time and coordinate tuple as the reproducibility key.
 
 | File | Bytes | Data rows | Duplicate origin times | SHA-256 |
 |---|---:|---:|---:|---|
@@ -37,14 +34,11 @@
 | Missing/non-numeric fields | None detected |
 | Event IDs | Not supplied; 15,445 unique origin times |
 
-The file is a final hypoDD event table, not a phase-pick table. The article's
-16,563-event REAL and 16,112-event VELEST populations are intermediate and are
-not present as separate local files.
+The file is a final hypoDD event table, not a phase-pick table. The article's 16,563-event REAL and 16,112-event VELEST populations are intermediate and are not present as separate local files.
 
 ### Frozen benchmark-window audit
 
-Rule: half-open UTC time interval 2019-07-04 through 2019-07-07, common latitude
-35.45–36.05°N, longitude −117.90–−117.20°, depth 0–20 km.
+Rule: half-open UTC time interval 2019-07-04 through 2019-07-07, common latitude 35.45–36.05°N, longitude −117.90–−117.20°, depth 0–20 km.
 
 | Field | Time-only | Common mask |
 |---|---:|---:|
@@ -57,15 +51,10 @@ Rule: half-open UTC time interval 2019-07-04 through 2019-07-07, common latitude
 
 ### Quality and comparison notes
 
-- **Tier:** Q2 independent-method research catalog; use as a strong
-  method-specific secondary, not a universal truth set.
-- The strict minimum of five P and 13 total picks, <200° station gap and <0.6 s
-  VELEST residual, and hypoDD pick filtering improve location quality but create
-  documented omissions (SI Text S3).
-- Magnitudes are not directly interchangeable with SCSN, Shelly or Ross without
-  scale harmonization; the authors document systematic differences above ML 4.
-- The source file is small enough to version, but the SI DOCX and any future
-  normalized derivative should retain the original checksum and row order.
+- **Tier:** Q2 independent-method research catalog; use as a strong method-specific secondary, not a universal truth set.
+- The strict minimum of five P and 13 total picks, <200° station gap and <0.6 s VELEST residual, and hypoDD pick filtering improve location quality but create documented omissions (SI Text S3).
+- Magnitudes are not directly interchangeable with SCSN, Shelly or Ross without scale harmonization; the authors document systematic differences above ML 4.
+- The source file is small enough to version, but the SI DOCX and any future normalized derivative should retain the original checksum and row order.
 
 ### Local outputs
 

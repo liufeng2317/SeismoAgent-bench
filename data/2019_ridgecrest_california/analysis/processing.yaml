@@ -1,8 +1,16 @@
 schema_version: 2
 case_id: 2019_ridgecrest_california
-window_status: not_frozen
+window_status: frozen
+window_freeze:
+  frozen_on: '2026-10-28'
+  authority: metrics v1 (docs/framework/03_EVALUATION_METRICS.md); the evaluation cohort mask (time, region, depth) is workflows/tasks/2019_ridgecrest_california/expert/00_config/validation.yaml
+  evaluation_window:
+    start_utc: '2019-07-04T15:35:29.400Z'
+    end_utc: '2019-07-07T00:00:00Z'
+    interval: half_open
+  note: the data window (candidate_window) starts at 2019-07-04T00:00:00Z; evaluation starts at the common start of the reference catalogs, 2019-07-04T15:35:29.4Z.
 scientific_design:
-  status: candidate_design_reference_audit_only
+  status: frozen_2026-10-28_metrics_v1
   primary_question: Can an agent construct a usable earthquake catalog from identical observations across
     low-rate and mainshock-coda conditions?
   candidate_window:
@@ -19,7 +27,7 @@ scientific_design:
       depth_km:
       - 0
       - 20
-    status: exploratory_legacy_mask_not_scientific_freeze
+    status: frozen_2026-10-28_metrics_v1
     depth_datum_harmonized: false
   anchor_event_ids:
     mw6_4: ci38443183

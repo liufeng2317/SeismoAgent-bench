@@ -5,23 +5,17 @@
 - Official data page: [SCEDC QTM Ridgecrest catalog](https://scedc.caltech.edu/data/qtm-ridgecrest.html).
 - Raw archive: `raw/ROSS2019_SCIENCE__catalog_qtm.tar.gz`.
 
-The SCEDC release is the article-associated QTM/GrowClust-format catalog. It
-contains relocated origin parameters, event and cluster IDs, differential-pair
-counts, residuals, location errors and initial catalog locations. Successful
-relocations are flagged by `nbranch > 1`; the Mw 7.1 mainshock depth is poorly
-constrained, so use the SCSN hypocenter for that event. The paper's Science DC1
-supplement was archived and directly read on 2026-09-25; see the reference README and paper reading for the methods audit.
+The SCEDC release is the article-associated QTM/GrowClust-format catalog. It contains relocated origin parameters, event and cluster IDs, differential-pair counts, residuals, location errors and initial catalog locations. Successful relocations are flagged by `nbranch > 1`; the Mw 7.1 mainshock depth is poorly constrained, so use the SCSN hypocenter for that event. The paper's Science DC1 supplement was archived and directly read on 2026-09-25; see the reference README and paper reading for the methods audit.
 
 ## Local catalog audit
 
-> Earlier window/mask statistics are exploratory. Current freeze status is defined by the case `analysis/processing.yaml`, which is `not_frozen`; retained historical “frozen” wording does not override it.
+> The case window is frozen (`window_status: frozen` in the case `analysis/processing.yaml`, 2026-10-28, with metrics v1). Window/mask statistics in this README use catalog-local masks; the evaluation cohort (time, region, depth) is defined in `workflows/tasks/2019_ridgecrest_california/expert/00_config/validation.yaml`, and its counts may differ.
 
 ### Provenance and native schema
 
 - Source article: Ross et al. (2019), DOI [10.1126/science.aaz0109](https://doi.org/10.1126/science.aaz0109).
 - Official release: [SCEDC QTM Ridgecrest catalog](https://scedc.caltech.edu/data/qtm-ridgecrest.html).
-- Local archive: `raw/ROSS2019_SCIENCE__catalog_qtm.tar.gz`, containing one
-  file named `ridgecrest_qtm.cat`.
+- Local archive: `raw/ROSS2019_SCIENCE__catalog_qtm.tar.gz`, containing one file named `ridgecrest_qtm.cat`.
 - Archive SHA-256: `dcb0035f69c6ea9a960e45544f31bdacb38cb7f502c3d29af827da4ff6850849`.
 - Archive member: 111,918 whitespace-delimited data rows, no header row.
 
@@ -39,9 +33,7 @@ The official SCEDC schema is:
 | 20–22 | `eh`, `ez`, `et` horizontal/vertical/origin-time errors (km, km, s) |
 | 23–25 | `latC`, `lonC`, `depC` initial/catalog location |
 
-SCEDC defines a successfully relocated solution as `nbranch > 1`. Rows with
-`nbranch = 1` have zero differential-time support in the local release and
-should not be silently treated as GrowClust relocations.
+SCEDC defines a successfully relocated solution as `nbranch > 1`. Rows with `nbranch = 1` have zero differential-time support in the local release and should not be silently treated as GrowClust relocations.
 
 ### Full archive audit
 
@@ -61,15 +53,11 @@ should not be silently treated as GrowClust relocations.
 | Differential RMS | `rmsP` 0–0.48 s; `rmsS` 0–0.76 s |
 | Error fields | `eh` −1–0.989 km; `ez` −1–1.425 km; `et` −1–0.198 s; −1 denotes unavailable in this release |
 
-The archive therefore combines an initial/operational population with the
-successfully relocated subset. For relative-location metrics use `nbranch > 1`
-and retain all error/QC fields.
+The archive therefore combines an initial/operational population with the successfully relocated subset. For relative-location metrics use `nbranch > 1` and retain all error/QC fields.
 
 ### Frozen benchmark-window audit
 
-Case-wide rule: `2019-07-04T00:00:00Z <= time < 2019-07-07T00:00:00Z`, latitude
-35.45–36.05°N, longitude −117.90–−117.20°, depth 0–20 km, applied to the
-relocated (`latR`, `lonR`, `depR`) fields.
+Case-wide rule: `2019-07-04T00:00:00Z <= time < 2019-07-07T00:00:00Z`, latitude 35.45–36.05°N, longitude −117.90–−117.20°, depth 0–20 km, applied to the relocated (`latR`, `lonR`, `depR`) fields.
 
 | Field | Time-only | Common mask |
 |---|---:|---:|
@@ -82,28 +70,20 @@ relocated (`latR`, `lonR`, `depR`) fields.
 | Depth | −0.417–24.500 km | 0.018–19.700 km |
 | Magnitude | −0.82–7.10 | −0.82–7.10 |
 
-The count `12,768` is not a count of successfully relocated events; the
-metric-specific relocated target is `6,463` under the same mask.
+The count `12,768` is not a count of successfully relocated events; the metric-specific relocated target is `6,463` under the same mask.
 
 ### Quality and limitations
 
-- **Tier:** Q1 structural/relative relocation for `nbranch > 1`; Q2–Q3 for
-  initial-only rows and absolute mainshock depths.
-- The Mw 7.1 mainshock depth is explicitly poorly constrained; use the SCSN
-  hypocenter for that event.
-- The local archive has 13 duplicate origin times but unique event IDs; retain
-  IDs for joins and do not deduplicate on time alone.
-- Science DC1 is now archived; EH/HH selection and relocation thresholds have
-  been verified. Historical station/channel inventory, continuous coverage and
-  numerical model configuration remain unresolved. Catalog statistics above
-  remain the earlier official-schema/local-field audit.
+- **Tier:** Q1 structural/relative relocation for `nbranch > 1`; Q2–Q3 for initial-only rows and absolute mainshock depths.
+- The Mw 7.1 mainshock depth is explicitly poorly constrained; use the SCSN hypocenter for that event.
+- The local archive has 13 duplicate origin times but unique event IDs; retain IDs for joins and do not deduplicate on time alone.
+- Science DC1 is now archived; EH/HH selection and relocation thresholds have been verified. Historical station/channel inventory, continuous coverage and numerical model configuration remain unresolved. Catalog statistics above remain the earlier official-schema/local-field audit.
 
 ### Local outputs
 
 - Paper reading: `../../../references/ROSS2019_SCIENCE/parsed/paper/ROSS2019_SCIENCE__paper_reading.md`
 - Case synthesis: `../../../analysis/RIDGE2019_analysis.md`
-- Raw archive is preserved unchanged; extract an ignored working copy only when
-  generating plots or normalized derivatives.
+- Raw archive is preserved unchanged; extract an ignored working copy only when generating plots or normalized derivatives.
 
 ## Generated analysis
 

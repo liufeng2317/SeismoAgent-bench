@@ -50,7 +50,7 @@ Quality tier, evaluation role, quality by dimension, and reference independence 
 | `waveform-sampled` | Representative waveform requests successfully tested |
 | `data-frozen` | Catalog, metadata, and waveform manifest versioned for experiments |
 
-The data-preparation configuration (`data/<case>/analysis/processing.yaml`) still records `window_status: not_frozen` for all six cases: the data-level windows and derived counts there are exploratory. The evaluation windows are fixed separately by metrics v1 (table above).
+All six cases are `window-frozen` (2026-10-28, with metrics v1): each `data/<case>/analysis/processing.yaml` records `window_status: frozen` and the evaluation window of the table above. Counts computed with data-level masks remain descriptive; the evaluation cohort is the task's `validation.yaml`.
 
 Cross-case readiness is maintained in the [data summary](CASES_SUMMARY.md), while product counts, official catalogs, literature gaps, and case-specific limitations are organized in the [case details](CASE_DETAILS.md).
 

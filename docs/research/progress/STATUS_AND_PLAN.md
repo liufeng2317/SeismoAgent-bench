@@ -40,4 +40,3 @@ Per-case exceptions are allowed only where the final itself fails a criterion. E
 - Second model and harness choice (research plan §2.6).
 - Held-out case: whether, and which (research plan §2.6).
 - The task-level `VARIANTS.md` files still list `guided` as the knowledge arm (Q3). Update them when S2/S3 task files are added in Phase B.
-- Data-level `processing.yaml` files still record `window_status: not_frozen`; the evaluation windows are fixed by metrics v1 ([`CASE_REGISTRY.md`](../../data/CASE_REGISTRY.md)). Decide whether to mark the data windows frozen.

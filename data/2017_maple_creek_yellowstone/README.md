@@ -11,6 +11,6 @@
 
 区分已获得的事件目录、震相辅助资料和缺失产品；目录存在不代表事件产品已就绪。
 
-当前 `window_status: not_frozen`。`workflows/data_preparation/` 仅在有案例级执行工具时建立；目录自身的解析脚本保留在 `data/catalogs/<SOURCE_ID>/workflows/data_preparation/`。
+当前 `window_status: frozen`（2026-10-28 随 metrics v1 冻结；评测时间、区域和深度掩膜见 `workflows/tasks/2017_maple_creek_yellowstone/expert/00_config/validation.yaml`）。`workflows/data_preparation/` 仅在有案例级执行工具时建立；目录自身的解析脚本保留在 `data/catalogs/<SOURCE_ID>/workflows/data_preparation/`。
 
 当前候选窗为 `2017-06-11` 至 `06-19` UTC，27 个 phase-manifest 台站均有波形。研究侧当前只有 phase 产品，event-level 表仍缺；official baseline 的旧空间窗不覆盖 Mw 4.4 锚点，不能作为已冻结基线。见 [六案统计](../../docs/data/CASES_SUMMARY.md) 和 [Maple Creek 详细信息](../../docs/data/CASE_DETAILS.md#3-maple-creek-yellowstone-2017)。

@@ -6,13 +6,11 @@
 - Article release DOI: [10.22002/f40da-hww21](https://doi.org/10.22002/f40da-hww21)
 - Files: `AWR2025_CALTECHDATA__catalog_hypocenters_v2.csv` and `AWR2025_CALTECHDATA__catalog_moment_tensors_v2.csv`
 
-The local Version 2 files are preserved without trimming. They are a long-term
-Ridgecrest sequence product distinct from the compact July 2019 Shelly, Liu and
-Ross catalogs; `magnitude_gamma` is not relabeled as ML or Mw.
+The local Version 2 files are preserved without trimming. They are a long-term Ridgecrest sequence product distinct from the compact July 2019 Shelly, Liu and Ross catalogs; `magnitude_gamma` is not relabeled as ML or Mw.
 
 ## Local catalog audit
 
-> Earlier window/mask statistics are exploratory. Current freeze status is defined by the case `analysis/processing.yaml`, which is `not_frozen`; retained historical “frozen” wording does not override it.
+> The case window is frozen (`window_status: frozen` in the case `analysis/processing.yaml`, 2026-10-28, with metrics v1). Window/mask statistics in this README use catalog-local masks; the evaluation cohort (time, region, depth) is defined in `workflows/tasks/2019_ridgecrest_california/expert/00_config/validation.yaml`, and its counts may differ.
 
 ### Provenance and files
 
@@ -29,17 +27,11 @@ Ross catalogs; `magnitude_gamma` is not relabeled as ML or Mw.
 
 #### Hypocenters
 
-Columns: `evid,time,latitude,longitude,depth_km,magnitude_gamma,qnpair,qndiffP,qndiffS,rmsP,rmsS`.
-`evid` is unique in the local file. `magnitude_gamma` is a release-specific
-amplitude/gamma magnitude; no standard ML/Mw label is supplied. `qnpair` is
-positive for all rows, while differential P/S counts can be zero.
+Columns: `evid,time,latitude,longitude,depth_km,magnitude_gamma,qnpair,qndiffP,qndiffS,rmsP,rmsS`. `evid` is unique in the local file. `magnitude_gamma` is a release-specific amplitude/gamma magnitude; no standard ML/Mw label is supplied. `qnpair` is positive for all rows, while differential P/S counts can be zero.
 
 #### Moment tensors
 
-Columns include `evid,time,latitude,longitude,depth_km,magnitude,moment`, six
-moment-tensor components, isotropic/CLVD terms and uncertainties, two nodal
-planes, strike/dip/rake standard deviations, and `n_picks_used`. All 4,890 local
-rows have at least 15 picks and angular standard deviations below 7.5°.
+Columns include `evid,time,latitude,longitude,depth_km,magnitude,moment`, six moment-tensor components, isotropic/CLVD terms and uncertainties, two nodal planes, strike/dip/rake standard deviations, and `n_picks_used`. All 4,890 local rows have at least 15 picks and angular standard deviations below 7.5°.
 
 ### Full release audit
 
@@ -57,39 +49,25 @@ rows have at least 15 picks and angular standard deviations below 7.5°.
 
 ### Frozen benchmark-window audit
 
-Rule: half-open UTC 2019-07-04 through 2019-07-07; latitude 35.45–36.05°N;
-longitude −117.90–−117.20°; depth 0–20 km.
+Rule: half-open UTC 2019-07-04 through 2019-07-07; latitude 35.45–36.05°N; longitude −117.90–−117.20°; depth 0–20 km.
 
 | Product | Time-only | Common mask | Common-mask time range |
 |---|---:|---:|---|
 | Hypocenters | 5,842 | 5,737 | 2019-07-04 04:03:01.162–2019-07-06 23:59:20.494 UTC |
 | Moment tensors | 258 | 254 | 2019-07-04 16:13:43.096–2019-07-06 23:56:34.234 UTC |
 
-Hypocenter common-mask ranges: latitude 35.505180–36.050000°N, longitude
-−117.877930–−117.267740°, depth 0.692–14.732 km, gamma magnitude 0.056–4.585.
-Moment-tensor common-mask ranges: latitude 35.548390–36.038930°N, longitude
-−117.847810–−117.366030°, depth 0.921–12.866 km, magnitude 1.8739–4.1146.
+Hypocenter common-mask ranges: latitude 35.505180–36.050000°N, longitude −117.877930–−117.267740°, depth 0.692–14.732 km, gamma magnitude 0.056–4.585. Moment-tensor common-mask ranges: latitude 35.548390–36.038930°N, longitude −117.847810–−117.366030°, depth 0.921–12.866 km, magnitude 1.8739–4.1146.
 
 ### Article-versus-release reconciliation
 
-The article reports 214,467 retained relocated hypocenters and 4,892 accepted
-moment tensors. The local Version 2 release has 222,864 and 4,890 rows. No
-single obvious threshold on the local `qndiffP/qndiffS` fields reproduces the
-article count, so these are recorded as release/version differences. Do not
-trim the local files to the article counts without obtaining the exact article
-supplementary ZIP or release manifest.
+The article reports 214,467 retained relocated hypocenters and 4,892 accepted moment tensors. The local Version 2 release has 222,864 and 4,890 rows. No single obvious threshold on the local `qndiffP/qndiffS` fields reproduces the article count, so these are recorded as release/version differences. Do not trim the local files to the article counts without obtaining the exact article supplementary ZIP or release manifest.
 
 ### Benchmark role and limitations
 
-- **Tier:** Q2 long-term methodological auxiliary; metric-specific Q1 for the
-  accepted relative-location and moment-tensor uncertainty subsets.
-- The catalog spans a changing 66-station, multi-network deployment and is not
-  a stationary July-2019 observation condition.
-- `magnitude_gamma` must remain distinct from ML/Mw; it is unsuitable for direct
-  magnitude comparisons without calibration.
-- The workflow uses PhaseNO, GaMMA, HypoSVI and GrowClust, so method overlap
-  with a future Agent implementation can create leakage; use AWR primarily as
-  an auxiliary cross-check, not the sole hidden target.
+- **Tier:** Q2 long-term methodological auxiliary; metric-specific Q1 for the accepted relative-location and moment-tensor uncertainty subsets.
+- The catalog spans a changing 66-station, multi-network deployment and is not a stationary July-2019 observation condition.
+- `magnitude_gamma` must remain distinct from ML/Mw; it is unsuitable for direct magnitude comparisons without calibration.
+- The workflow uses PhaseNO, GaMMA, HypoSVI and GrowClust, so method overlap with a future Agent implementation can create leakage; use AWR primarily as an auxiliary cross-check, not the sole hidden target.
 
 ### Local outputs
 

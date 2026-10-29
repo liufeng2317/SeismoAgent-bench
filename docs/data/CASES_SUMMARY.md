@@ -1,6 +1,6 @@
 # SeismoAgentBench 六案例数据总览
 
-**统计日期：2026-10-15。** 本文档只做六个案例的横向比较；每个案例的地震、观测、研究 catalog、official catalog 和文献详情统一见 [CASE_DETAILS.md](CASE_DETAILS.md)。六案当前均为 `window_status: not_frozen`。
+**统计日期：2026-10-15。** 本文档只做六个案例的横向比较；每个案例的地震、观测、研究 catalog、official catalog 和文献详情统一见 [CASE_DETAILS.md](CASE_DETAILS.md)。六案时间窗已于 2026-10-28 随 metrics v1 冻结（`window_status: frozen`）；本文统计使用数据层掩膜，评测样本以各任务的 `validation.yaml` 为准。
 
 ## 统计口径
 

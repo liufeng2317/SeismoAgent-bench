@@ -11,6 +11,6 @@
 
 区分地震、LP 事件、相对坐标和近似绝对坐标；不同观测定义不合并为一个目录。
 
-当前 `window_status: not_frozen`。`workflows/data_preparation/` 仅在有案例级执行工具时建立；目录自身的解析脚本保留在 `data/catalogs/<SOURCE_ID>/workflows/data_preparation/`。
+当前 `window_status: frozen`（2026-10-28 随 metrics v1 冻结；评测时间、区域和深度掩膜见 `workflows/tasks/2018_kilauea_hawaii/expert/00_config/validation.yaml`）。`workflows/data_preparation/` 仅在有案例级执行工具时建立；目录自身的解析脚本保留在 `data/catalogs/<SOURCE_ID>/workflows/data_preparation/`。
 
 当前候选窗为 `2018-05-01` 至 `05-09` UTC，25 个 phase-manifest 台站均有波形；逐日探针全部存在，但采样时刻存在不等于无微小缺口。见 [六案统计](../../docs/data/CASES_SUMMARY.md) 和 [Kīlauea 详细信息](../../docs/data/CASE_DETAILS.md#4-kīlauea-hawaiʻi-2018)；共享规则见 [资料组织说明](../README.md)。

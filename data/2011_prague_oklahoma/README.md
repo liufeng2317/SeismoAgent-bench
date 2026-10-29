@@ -12,6 +12,6 @@
 
 保留主目录、重定位目录、子空间检测和震相产品的区别。
 
-当前 `window_status: not_frozen`。`workflows/data_preparation/` 仅在有案例级执行工具时建立；目录自身的解析脚本保留在 `data/catalogs/<SOURCE_ID>/workflows/data_preparation/`。
+当前 `window_status: frozen`（2026-10-28 随 metrics v1 冻结；评测时间、区域和深度掩膜见 `workflows/tasks/2011_prague_oklahoma/expert/00_config/validation.yaml`）。`workflows/data_preparation/` 仅在有案例级执行工具时建立；目录自身的解析脚本保留在 `data/catalogs/<SOURCE_ID>/workflows/data_preparation/`。
 
 当前候选窗为 `2011-11-11` 至 `11-19` UTC；31 站元数据集合中已有 23 站波形，不能把设计台站数当作下载台站数。见 [六案统计](../../docs/data/CASES_SUMMARY.md) 和 [Prague 详细信息](../../docs/data/CASE_DETAILS.md#1-prague-oklahoma-2011)；共享规则见 [资料组织说明](../README.md)。

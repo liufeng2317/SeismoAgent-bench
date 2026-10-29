@@ -1,20 +1,11 @@
 # MAPLE2017 - 2017 Maple Creek, Yellowstone case analysis
 
-> Update 2026-10-22 (expert preparation): the ComCat query box is corrected to
-> the swarm footprint (626 window events, was 5 from a box ~40 km east);
-> Shelly's phase release is turned into a time-only detection reference
-> (18,062 window events, origin accuracy vs ComCat MAD 0.11 s; SHELLY catalog
-> README); the UUSS Yellowstone 1-D model is registered in
-> `data/models/velocity_models.json`. Pang's table is still unpublished. The
-> statements below about the 5-row baseline and the 44.45–44.75 N mask are
-> superseded.
+> Update 2026-10-22 (expert preparation): the ComCat query box is corrected to the swarm footprint (626 window events, was 5 from a box ~40 km east); Shelly's phase release is turned into a time-only detection reference (18,062 window events, origin accuracy vs ComCat MAD 0.11 s; SHELLY catalog README); the UUSS Yellowstone 1-D model is registered in `data/models/velocity_models.json`. Pang's table is still unpublished. The statements below about the 5-row baseline and the 44.45–44.75 N mask are superseded.
 
-> Current preparation state: `window_status: not_frozen` in [processing.yaml](processing.yaml). Earlier “frozen/v1” windows and counts below are retained as exploratory audit history, not approved evaluation inputs.
+> Current preparation state: `window_status: frozen` in [processing.yaml](processing.yaml) (2026-10-28, with metrics v1). The v1 window below is the frozen evaluation window; counts below come from data-level analysis masks, while the evaluation cohort (time, region, depth) is defined in `workflows/tasks/2017_maple_creek_yellowstone/expert/00_config/validation.yaml`.
 
 
-> This is the detailed case audit. Cross-case summary belongs in
-> docs/data/CASE_REGISTRY.md; source-specific reading and file-level audits live
-> beside each paper or catalog.
+> This is the detailed case audit. Cross-case summary belongs in docs/data/CASE_REGISTRY.md; source-specific reading and file-level audits live beside each paper or catalog.
 
 
 ## 1. Case identity and benchmark purpose
@@ -31,10 +22,7 @@
 | Network design | Yellowstone/UUSS plus EarthScope/IRIS; preserve station and template lineage |
 | Waveform design upper bound | About 19.6 GB for 27 stations x 3 components x 100 Hz x int32 x 8 days; actual volume depends on gaps and selected channels |
 
-The eight-day interval is frozen for consistency with the official baseline query.
-The older inventory also records a compact seven-day interval ending 2017-06-18;
-both phase-only counts are retained below so that the historical choice remains
-traceable.
+The eight-day interval is frozen for consistency with the official baseline query. The older inventory also records a compact seven-day interval ending 2017-06-18; both phase-only counts are retained below so that the historical choice remains traceable.
 
 ## 2. Reference evaluation matrix
 
@@ -47,53 +35,35 @@ traceable.
 
 ### Interpretation
 
-Shelly is the best local primary reference for a template-enhanced swarm
-benchmark, but the event-level relocated table is not present in the staged
-USGS release. Pang is the key independent location reference and should not be
-dropped merely because its table is currently missing. The official ComCat
-snapshot provides a reproducible low-resolution baseline, but its five events
-in the frozen mask must not be interpreted as catalog completeness.
+Shelly is the best local primary reference for a template-enhanced swarm benchmark, but the event-level relocated table is not present in the staged USGS release. Pang is the key independent location reference and should not be dropped merely because its table is currently missing. The official ComCat snapshot provides a reproducible low-resolution baseline, but its five events in the frozen mask must not be interpreted as catalog completeness.
 
 ## 3. Shelly article and local phase release
 
 ### Article-reported populations
 
-- 2,289 routinely cataloged events supplied waveform templates from 11 June to
-  6 September 2017.
+- 2,289 routinely cataloged events supplied waveform templates from 11 June to 6 September 2017.
 - Continuous scanning covered 11 June to 14 September.
-- 34.1 million correlation-derived differential times and 1.3 million
-  routine-catalog differential times entered hypoDD.
-- 15,912 events retained at least 50 P and 50 S correlation observations and
-  were considered well located.
-- A less stringent threshold (at least 15 P and 30 S) yielded a 30,411-event
-  magnitude catalog.
+- 34.1 million correlation-derived differential times and 1.3 million routine-catalog differential times entered hypoDD.
+- 15,912 events retained at least 50 P and 50 S correlation observations and were considered well located.
+- A less stringent threshold (at least 15 P and 30 S) yielded a 30,411-event magnitude catalog.
 - The article states nearly 2,500 routine events and magnitudes up to Mw 4.4.
 
 These are article values, not local CSV row counts.
 
 ### Local USGS phase release audit
 
-File:
-catalogs/SHELLY2019_GL081607/raw/Yellowstone_2017_correlation_phase_arrivals.csv
+File: catalogs/SHELLY2019_GL081607/raw/Yellowstone_2017_correlation_phase_arrivals.csv
 
 - 6,260,580 data rows, no malformed rows under the 11-column parser.
 - 115,448 unique match IDs and 1,147 unique template IDs.
 - P rows 3,933,935; S rows 2,326,645.
 - Networks: WY 4,864,384; PB 1,394,725; US 872; TA 371; IW 228.
-- 29 network-station pairs in the full file; 27 in the frozen eight-day time
-  interval.
+- 29 network-station pairs in the full file; 27 in the frozen eight-day time interval.
 - Arrival span 2017-06-11T06:09:19.444800Z to 2017-09-17T16:13:09.091100Z.
-- SHA-256 CSV:
-  a1828099eb2a51339e01ffca191d6e4d98df27ad889c18837aa41278dd128d6c.
-- The companion XML SHA-256 is
-  547cbc7e43b11d47b2c10098850904151b4b63de5b95dc6c2d1edb147f1a96e5.
+- SHA-256 CSV: a1828099eb2a51339e01ffca191d6e4d98df27ad889c18837aa41278dd128d6c.
+- The companion XML SHA-256 is 547cbc7e43b11d47b2c10098850904151b4b63de5b95dc6c2d1edb147f1a96e5.
 
-The phase file has no origin time, latitude, longitude, depth, or event-level
-uncertainty. match_id is repeated across station/phase rows and cannot be
-treated as an independently located event count. The local magnitude column
-contains nine -inf values and four finite values below -10; finite values span
--6.99 to 5.17. This conflicts with the XML's declared magnitude domain and
-requires QC before any magnitude metric.
+The phase file has no origin time, latitude, longitude, depth, or event-level uncertainty. match_id is repeated across station/phase rows and cannot be treated as an independently located event count. The local magnitude column contains nine -inf values and four finite values below -10; finite values span -6.99 to 5.17. This conflicts with the XML's declared magnitude domain and requires QC before any magnitude metric.
 
 ### Time-only window counts
 
@@ -102,45 +72,30 @@ requires QC before any magnitude metric.
 | 2017-06-11 <= t < 2017-06-18 | 1,536,742 | 22,858 | Historical seven-day compact window; phase-associated IDs |
 | 2017-06-11 <= t < 2017-06-19 | 1,591,090 | 23,660 | Frozen eight-day v1 window; phase-associated IDs |
 
-The spatial/depth mask cannot be applied to this release. The article-level
-15,912 and 30,411 event populations must be reported separately.
+The spatial/depth mask cannot be applied to this release. The article-level 15,912 and 30,411 event populations must be reported separately.
 
 ## 4. Pang article and missing event table
 
-Pang genuinely constructs a 3,345-event catalog over 2017-06-12 to 2018-03-13.
-It uses UUSS HYPOINVERSE absolute locations, about 4.4 million BCSEIS
-differential times, and GrowClust relocation of 3,257 events. Twenty-two local
-and two regional stations were used; median absolute errors are about 500 m
-horizontal and 730 m depth, while bootstrap relative errors are about 62 m
-horizontal and 86 m vertical. Coda magnitudes span Mc -1.7 to 4.4 with
-completeness near Mc 0.5.
+Pang genuinely constructs a 3,345-event catalog over 2017-06-12 to 2018-03-13. It uses UUSS HYPOINVERSE absolute locations, about 4.4 million BCSEIS differential times, and GrowClust relocation of 3,257 events. Twenty-two local and two regional stations were used; median absolute errors are about 500 m horizontal and 730 m depth, while bootstrap relative errors are about 62 m horizontal and 86 m vertical. Coda magnitudes span Mc -1.7 to 4.4 with completeness near Mc 0.5.
 
-The local supplementary PDF is method/figure material, not a CSV, QuakeML, or
-spreadsheet event table. No verified public machine-readable 3,345-row table
-has been staged. Therefore:
+The local supplementary PDF is method/figure material, not a CSV, QuakeML, or spreadsheet event table. No verified public machine-readable 3,345-row table has been staged. Therefore:
 
 - Pang remains a real, important secondary reference.
 - The Pang catalog column is missing, not partial.
-- No Pang row count, coordinate range, or frozen-window count is asserted as a
-  local audit.
+- No Pang row count, coordinate range, or frozen-window count is asserted as a local audit.
 - The Shelly USGS phase release cannot be relabeled as Pang.
-- The next acquisition action is to find an author/publisher/repository release
-  whose provenance explicitly identifies the 3,345-event table and relocation
-  status.
+- The next acquisition action is to find an author/publisher/repository release whose provenance explicitly identifies the 3,345-event table and relocation status.
 
 ## 5. Official baseline audit
 
-Query definition is versioned in
-workflows/data_preparation/00_catalog_downloading/official_baseline_windows.json.
+Query definition is versioned in workflows/data_preparation/00_catalog_downloading/official_baseline_windows.json.
 
 | Snapshot | Rows | Local range | Notes |
 |---|---:|---|---|
 | Full 2017-06-11 to 2017-09-15 | 9 | M 0.16-1.86; depth 2.08-5.97 km | All reviewed, network uu |
 | Frozen 2017-06-11 to 2017-06-19 and spatial/depth mask | 5 | M 1.01-1.86; depth 2.20-4.67 km | All reviewed, network uu |
 
-The low count likely reflects the exact ComCat/UUSS query and source filters;
-it is not a statement that the swarm had five events. Preserve the snapshots
-for reproducibility but do not use them as a completeness truth set.
+The low count likely reflects the exact ComCat/UUSS query and source filters; it is not a statement that the swarm had five events. Preserve the snapshots for reproducibility but do not use them as a completeness truth set.
 
 ## 6. Catalog comparability and valid metrics
 
@@ -152,24 +107,15 @@ for reproducibility but do not use them as a completeness truth set.
 | Pang article-reported counts vs ComCat rows | No | Different populations and detection thresholds |
 | Common spatial/depth event benchmark | Only for ComCat currently | Shelly local phase release and Pang local table lack event coordinates |
 
-Do not collapse phase rows, article event counts, and official baseline rows into a
-single leaderboard. Keep event detection, phase timing, absolute location, and
-relative location as separate tasks.
+Do not collapse phase rows, article event counts, and official baseline rows into a single leaderboard. Keep event detection, phase timing, absolute location, and relative location as separate tasks.
 
 ## 7. Remaining data-preparation actions
 
-1. Acquire and checksum Pang's 3,345-event machine-readable table, preferably
-   from an author/publisher/repository DOI.
-2. Locate the Shelly article's event-level relocated/magnitude table, if it is
-   distinct from the USGS phase release; record whether it contains 15,912,
-   30,411, or another filtered population.
-3. Obtain station metadata and station-day availability for the 27-station
-   Shelly setup and the 24-station Pang relocation setup.
-4. Download the common eight-day waveforms only after station/channel selection
-   is frozen; retain network and template lineage.
-5. Generate derived plots under each catalog directory: daily phase/event rate,
-   station availability, spatial/depth map when event tables are available,
-   magnitude-frequency curves with QC flags, and phase-quality distributions.
+1. Acquire and checksum Pang's 3,345-event machine-readable table, preferably from an author/publisher/repository DOI.
+2. Locate the Shelly article's event-level relocated/magnitude table, if it is distinct from the USGS phase release; record whether it contains 15,912, 30,411, or another filtered population.
+3. Obtain station metadata and station-day availability for the 27-station Shelly setup and the 24-station Pang relocation setup.
+4. Download the common eight-day waveforms only after station/channel selection is frozen; retain network and template lineage.
+5. Generate derived plots under each catalog directory: daily phase/event rate, station availability, spatial/depth map when event tables are available, magnitude-frequency curves with QC flags, and phase-quality distributions.
 
 ## Catalog processing
 
@@ -177,14 +123,10 @@ Processing entry points and product declarations are in [processing.yaml](proces
 
 ### Next preparation steps
 
-1. Acquire and checksum Pang's 3,345-event machine-readable table before any
-   event-level Shelly–Pang comparison.
-2. Keep phase timing, event detection, absolute location and relative location
-   as separate benchmark tasks.
-3. Build station-day/channel manifests for the 27-station Shelly phase release
-   and the 24-station Pang relocation design before waveform download.
-4. Create an explicit cross-catalog event crosswalk; never join local
-   `event_id` values directly.
+1. Acquire and checksum Pang's 3,345-event machine-readable table before any event-level Shelly–Pang comparison.
+2. Keep phase timing, event detection, absolute location and relative location as separate benchmark tasks.
+3. Build station-day/channel manifests for the 27-station Shelly phase release and the 24-station Pang relocation design before waveform download.
+4. Create an explicit cross-catalog event crosswalk; never join local `event_id` values directly.
 
 ### Re-run commands
 

@@ -6,13 +6,11 @@
 - Canonical article event catalog: `raw_article/SHELLY2020_0220190309__catalog_DataS1.txt`
 - Auxiliary phase-arrival release: `raw/Ridgecrest_2019_correlation_phase_arrivals.csv`
 
-Data S1 is the 34,091-row article event catalog. The 5,703,270-row phase CSV
-contains template/match/station/phase arrivals and is retained separately for
-pick-level analysis; it is not an event catalog and must not replace Data S1.
+Data S1 is the 34,091-row article event catalog. The 5,703,270-row phase CSV contains template/match/station/phase arrivals and is retained separately for pick-level analysis; it is not an event catalog and must not replace Data S1.
 
 ## Local catalog audit
 
-> Earlier window/mask statistics are exploratory. Current freeze status is defined by the case `analysis/processing.yaml`, which is `not_frozen`; retained historical “frozen” wording does not override it.
+> The case window is frozen (`window_status: frozen` in the case `analysis/processing.yaml`, 2026-10-28, with metrics v1). Window/mask statistics in this README use catalog-local masks; the evaluation cohort (time, region, depth) is defined in `workflows/tasks/2019_ridgecrest_california/expert/00_config/validation.yaml`, and its counts may differ.
 
 ### Provenance and product distinction
 
@@ -24,10 +22,7 @@ pick-level analysis; it is not an event catalog and must not replace Data S1.
 
 ### Canonical Data S1 schema and checksum
 
-The text file has comments followed by eleven whitespace-delimited fields:
-`YYYY MM dd hh mm ss.sss lat lon depth mag ID`. Depth is in km relative to
-an approximately 0.7-km-asl surface datum. IDs are stable strings in the local
-file; no header row is present in the data section.
+The text file has comments followed by eleven whitespace-delimited fields: `YYYY MM dd hh mm ss.sss lat lon depth mag ID`. Depth is in km relative to an approximately 0.7-km-asl surface datum. IDs are stable strings in the local file; no header row is present in the data section.
 
 | File | Bytes | Data rows | Unique IDs | Duplicate IDs | Duplicate origin times | SHA-256 |
 |---|---:|---:|---:|---:|---:|---|
@@ -45,18 +40,11 @@ file; no header row is present in the data section.
 | Negative magnitudes | 195 rows |
 | Missing fields | None detected in the eleven native columns |
 
-The recomputed full-file audit flags 17 records deeper than 100 km, with a
-maximum of 556.58 km. All remain intact in the raw product. The candidate
-numerical depth mask excludes them; it does not resolve depth datums or
-establish a physical correction. Source row/ID details are in the
-[case audit](../../../analysis/reference_audit.json). The source header states
-that IDs are not CISN IDs and depths use a surface approximately 0.7 km
-above sea level.
+The recomputed full-file audit flags 17 records deeper than 100 km, with a maximum of 556.58 km. All remain intact in the raw product. The candidate numerical depth mask excludes them; it does not resolve depth datums or establish a physical correction. Source row/ID details are in the [case audit](../../../analysis/reference_audit.json). The source header states that IDs are not CISN IDs and depths use a surface approximately 0.7 km above sea level.
 
 ### Frozen benchmark-window audit
 
-Rule: `2019-07-04T00:00:00Z <= time < 2019-07-07T00:00:00Z`; latitude
-35.45–36.05°N; longitude −117.90–−117.20°; depth 0–20 km.
+Rule: `2019-07-04T00:00:00Z <= time < 2019-07-07T00:00:00Z`; latitude 35.45–36.05°N; longitude −117.90–−117.20°; depth 0–20 km.
 
 | Field | Time-only | Common mask |
 |---|---:|---:|
@@ -67,41 +55,24 @@ Rule: `2019-07-04T00:00:00Z <= time < 2019-07-07T00:00:00Z`; latitude
 | Depth | 0.089–556.580 km | 0.159–19.953 km |
 | Magnitude | −0.34–7.10 | −0.10–7.10 |
 
-The 57 rows excluded by the common mask are not deleted; the mask is only a
-comparison rule shared by the six-case benchmark.
+The 57 rows excluded by the common mask are not deleted; the mask is only a comparison rule shared by the six-case benchmark.
 
 ### Auxiliary phase-arrival release audit
 
-`raw/Ridgecrest_2019_correlation_phase_arrivals.csv` is a row-per-template /
-match / station / phase table with columns
-`template_id,match_id,network,station,phase,arrival,weight,mag,ccmax,ccdiff,chanloc`.
-It has 5,703,270 data rows (SHA-256
-`0b77237b497265ebc94768acd955a9de5eb4c7f78f130922254e4c9ed4122d9f`), 209,213
-unique `match_id` values, 6,744 template IDs, 30 network-station pairs and
-P/S counts of 2,536,859 / 3,166,411. Arrival times span 2019-07-04
-00:56:40.090300 to 2019-07-16 23:59:55.419000 UTC. This product is useful for
-pick-level and station-coverage analyses but is not the article's 34,091-row
-event catalog.
+`raw/Ridgecrest_2019_correlation_phase_arrivals.csv` is a row-per-template / match / station / phase table with columns `template_id,match_id,network,station,phase,arrival,weight,mag,ccmax,ccdiff,chanloc`. It has 5,703,270 data rows (SHA-256 `0b77237b497265ebc94768acd955a9de5eb4c7f78f130922254e4c9ed4122d9f`), 209,213 unique `match_id` values, 6,744 template IDs, 30 network-station pairs and P/S counts of 2,536,859 / 3,166,411. Arrival times span 2019-07-04 00:56:40.090300 to 2019-07-16 23:59:55.419000 UTC. This product is useful for pick-level and station-coverage analyses but is not the article's 34,091-row event catalog.
 
 ### Benchmark role and limitations
 
-- **Tier:** Q1 for relative-location/detection structure; Q2 for absolute
-  location and completeness.
-- The file contains no event-level uncertainty, station-count or relocation-
-  quality columns. Use article thresholds and the separate phase release for
-  method-level checks.
-- The catalog is mostly unreviewed and template-conditioned. Event rates and
-  small-magnitude completeness change sharply during coda-saturated intervals.
-- For the Mw 6.4 and Mw 7.1 events, prefer the SCSN hypocenter or another
-  absolute-location product over the correlation-derived centroid.
+- **Tier:** Q1 for relative-location/detection structure; Q2 for absolute location and completeness.
+- The file contains no event-level uncertainty, station-count or relocation- quality columns. Use article thresholds and the separate phase release for method-level checks.
+- The catalog is mostly unreviewed and template-conditioned. Event rates and small-magnitude completeness change sharply during coda-saturated intervals.
+- For the Mw 6.4 and Mw 7.1 events, prefer the SCSN hypocenter or another absolute-location product over the correlation-derived centroid.
 
 ### Local outputs
 
 - Paper reading: `../../../references/SHELLY2020_0220190309/parsed/paper/SHELLY2020_0220190309__paper_reading.md`
 - Case synthesis: `../../../analysis/RIDGE2019_analysis.md`
-- Raw files remain unchanged under `raw_article/` and `raw/`; any figures or
-  normalized derivatives should be written below a separate `figures/` or
-  `derived/` directory.
+- Raw files remain unchanged under `raw_article/` and `raw/`; any figures or normalized derivatives should be written below a separate `figures/` or `derived/` directory.
 
 ## Generated analysis
 

@@ -11,7 +11,7 @@
 
 ## Local catalog audit
 
-> Earlier window/mask statistics are exploratory. Current freeze status is defined by the case `analysis/processing.yaml`, which is `not_frozen`; retained historical “frozen” wording does not override it.
+> The case window is frozen (`window_status: frozen` in the case `analysis/processing.yaml`, 2026-10-28, with metrics v1). Window/mask statistics in this README use catalog-local masks; the evaluation cohort (time, region, depth) is defined in `workflows/tasks/2018_kilauea_hawaii/expert/00_config/validation.yaml`, and its counts may differ.
 
 ### Provenance and products
 
@@ -31,18 +31,11 @@
 | `SHELLY2019_GL085636__catalog_S2.txt` | 43,950 | `112b8079cbc9970b7db5b8910bad90a7b9d30e3db19161deae22fb0307d3db13` | Polarity-cluster event catalog |
 | `raw/Kilauea_2018_correlation_phase_arrivals.csv` | 8,582,492 | `be6bab5bca8dff5355d763495ac2f9a5c54d157f80b0f315095e3d3caf1d8dc4` | Auxiliary P/S arrival rows; local-only |
 
-S1 has 14 whitespace-delimited fields (`year month day hour minute second
-lat lon depth x y z magnitude eventID`); S2 has 12 fields, adding a leading
-`cluster#` and omitting x/y/z. The raw header files document the same formats.
-The event IDs are Shelly/USGS local identifiers and are explicitly not HVO IDs.
+S1 has 14 whitespace-delimited fields (`year month day hour minute second lat lon depth x y z magnitude eventID`); S2 has 12 fields, adding a leading `cluster#` and omitting x/y/z. The raw header files document the same formats. The event IDs are Shelly/USGS local identifiers and are explicitly not HVO IDs.
 
-- `depth` is in kilometres below the Kīlauea summit datum, nominally 1.2 km
-above sea level; negative values are valid source values and are not silently
-clipped.
+- `depth` is in kilometres below the Kīlauea summit datum, nominally 1.2 km above sea level; negative values are valid source values and are not silently clipped.
 - S1 and S2 have unique event IDs and no exact duplicate rows.
-- S2's 43,950 IDs are a subset of S1's 44,188 IDs; 238 S1 events have no
-polarity-cluster row. On shared IDs, S2 rounds latitude/longitude but retains the
-same depth and magnitude.
+- S2's 43,950 IDs are a subset of S1's 44,188 IDs; 238 S1 events have no polarity-cluster row. On shared IDs, S2 rounds latitude/longitude but retains the same depth and magnitude.
 
 ### Full-file audit
 
@@ -60,9 +53,7 @@ same depth and magnitude.
 | Phase CSV stations/network | — | 25 unique stations, all `HV` in local release |
 | Phase CSV time span | — | 2018-04-29 00:27:50.5581–2018-08-06 23:55:36.9803 UTC |
 
-The phase CSV has `template_id`, `match_id`, `network`, `station`, `phase`,
-`arrival`, `weight`, `mag`, `ccmax`, `ccdiff`, and `chanloc`. It is a many-row
-phase product, so its row count must not be compared directly to event counts.
+The phase CSV has `template_id`, `match_id`, `network`, `station`, `phase`, `arrival`, `weight`, `mag`, `ccmax`, `ccdiff`, and `chanloc`. It is a many-row phase product, so its row count must not be compared directly to event counts.
 
 ### Frozen summit benchmark mask
 
@@ -80,30 +71,20 @@ Case rule:
 | S1 | 1,902 | **1,883** | 2018-05-01 00:13:40.880–2018-05-08 23:56:20.560 UTC |
 | S2 | 1,896 | **1,877** | 2018-05-01 00:13:40.880–2018-05-08 23:56:20.560 UTC |
 
-The common mask removes 19 S1 rows and 19 S2 rows, mostly because of negative
-summit-referenced depth or the explicit spatial/depth boundary. These are
-comparison rules, not a claim that every excluded source is physically invalid.
+The common mask removes 19 S1 rows and 19 S2 rows, mostly because of negative summit-referenced depth or the explicit spatial/depth boundary. These are comparison rules, not a claim that every excluded source is physically invalid.
 
 ### Benchmark role and limitations
 
-- **Quality tier:** Q1 relative-location/geometry reference for retained events;
-Q2 dense detection/completeness reference within the summit network condition.
-- **Best use:** high-rate event recovery, relative hypocentroid geometry,
-polarity-cluster structure, and sequence-rate response conditional on network
-availability.
-- **Not a universal truth catalog:** HVO template dependence, changing run
-conditions, approximate magnitudes, and summit-referenced depths limit absolute
-and cross-domain comparisons.
-- **Alignment verdict:** S1/S2 and the article headline (44,188 events,
-2,823 templates, 10P+10S retention) are aligned. The phase CSV is an aligned
-auxiliary pick release, not the article's event table; use separate metrics.
+- **Quality tier:** Q1 relative-location/geometry reference for retained events; Q2 dense detection/completeness reference within the summit network condition.
+- **Best use:** high-rate event recovery, relative hypocentroid geometry, polarity-cluster structure, and sequence-rate response conditional on network availability.
+- **Not a universal truth catalog:** HVO template dependence, changing run conditions, approximate magnitudes, and summit-referenced depths limit absolute and cross-domain comparisons.
+- **Alignment verdict:** S1/S2 and the article headline (44,188 events, 2,823 templates, 10P+10S retention) are aligned. The phase CSV is an aligned auxiliary pick release, not the article's event table; use separate metrics.
 
 ### Local outputs
 
 - Paper reading: `../../../references/SHELLY2019_GL085636/parsed/paper/SHELLY2019_GL085636__paper_reading.md`
 - Case synthesis: `../../../analysis/KILAUEA2018_analysis.md`
-- Future plots should be written under a dedicated `figures/` directory or
-`raw/` derivative area without modifying the source-native catalogs.
+- Future plots should be written under a dedicated `figures/` directory or `raw/` derivative area without modifying the source-native catalogs.
 
 ## Generated analysis
 

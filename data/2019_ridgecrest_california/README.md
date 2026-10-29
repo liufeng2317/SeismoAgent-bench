@@ -12,12 +12,12 @@
 | [references/](references/) | 文献、补充材料、解析与提取记录 |
 | [scripts/](scripts/README.md) | 按 catalogs / figures / observations 分层的案例脚本与下载入口 |
 
-当前仍为 `not_frozen`；结构迁移不改变科学设计或正式评测状态。
+当前 `window_status: frozen`（2026-10-28 随 metrics v1 冻结）：数据窗为 2019-07-04 00:00 – 07-07 UTC，评测自参考目录共同起点 07-04 15:35:29.4 UTC 起算，掩膜见 `workflows/tasks/2019_ridgecrest_california/expert/00_config/validation.yaml`。
 
 在仓库根目录复算：
 
 ```bash
-python -B data/2019_ridgecrest_california/workflows/data_preparation/catalogs/audit_references.py
+python -B data/2019_ridgecrest_california/scripts/catalogs/audit_references.py
 python -B -m unittest discover -s tests/source_prepare
 ```
 

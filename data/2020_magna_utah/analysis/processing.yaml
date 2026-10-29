@@ -1,14 +1,21 @@
 case_id: 2020_magna_utah
-window_status: not_frozen
+window_status: frozen
+window_freeze:
+  frozen_on: '2026-10-28'
+  authority: metrics v1 (docs/framework/03_EVALUATION_METRICS.md); the evaluation cohort mask (time, region, depth) is workflows/tasks/2020_magna_utah/expert/00_config/validation.yaml
+  evaluation_window:
+    start_utc: '2020-03-18T00:00:00Z'
+    end_utc: '2020-03-26T00:00:00Z'
+    interval: half_open
 scientific_design:
-  status: candidate_design_reference_audit_only
+  status: frozen_2026-10-28_metrics_v1
   primary_question: Can an agent construct a usable catalog under a dense urban permanent-network
     condition with pick-level references, without conflating permanent and nodal deployments?
   candidate_window:
     start_utc: '2020-03-18T00:00:00Z'
     end_utc: '2020-03-26T00:00:00Z'
     interval: half_open
-    status: exploratory_candidate_not_scientific_freeze
+    status: frozen_2026-10-28_metrics_v1
     source: 8-day compact window covering the M5.7 mainshock (2020-03-18 13:09 UTC)
       and early aftershocks; the full article processing span (2020-03-17 to
       04-30) remains a separate large-volume option pending archive storage.

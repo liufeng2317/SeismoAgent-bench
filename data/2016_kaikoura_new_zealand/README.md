@@ -11,6 +11,6 @@
 
 保留 GrowClust 版本、SUGAR S10/S11、关联震相和机制解之间的区别；补充材料中的同源表通过软链接引用。
 
-当前 `window_status: not_frozen`。`workflows/data_preparation/` 仅在有案例级执行工具时建立；目录自身的解析脚本保留在 `data/catalogs/<SOURCE_ID>/workflows/data_preparation/`。
+当前 `window_status: frozen`（2026-10-28 随 metrics v1 冻结；评测时间、区域和深度掩膜见 `workflows/tasks/2016_kaikoura_new_zealand/expert/00_config/validation.yaml`）。`workflows/data_preparation/` 仅在有案例级执行工具时建立；目录自身的解析脚本保留在 `data/catalogs/<SOURCE_ID>/workflows/data_preparation/`。
 
 当前候选窗为 `2016-12-01` 至 `12-09` UTC；81 站 Table S1/元数据集合中已有 53 站适用波形，strong-motion-only 等站不应计为已下载速度波形。见 [六案统计](../../docs/data/CASES_SUMMARY.md) 和 [Kaikōura 详细信息](../../docs/data/CASE_DETAILS.md#2-kaikōura-new-zealand-2016)；共享规则见 [资料组织说明](../README.md)。
