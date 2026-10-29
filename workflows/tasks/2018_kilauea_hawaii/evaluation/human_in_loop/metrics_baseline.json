@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "9a7c066f8acadc5c58e9aa35c417fd2f7ed9ce6b",
+ "scorer_commit": "3b28279bfa815b0eb0caa0a6722d5ea45908e0cf",
  "scorer_dirty": true,
- "generated_utc": "2026-10-29T15:56:41+00:00",
+ "generated_utc": "2026-10-29T17:58:19+00:00",
  "task": "2018_kilauea_hawaii",
  "references": {
   "shelly": {
@@ -443,6 +443,11 @@
     "recall": 0.2123,
     "precision": 0.5938,
     "event_ratio": 0.3659,
+    "time": {
+     "pairs": 1157,
+     "bias_s": -0.0726,
+     "mad_s": 0.194
+    },
     "location": {
      "pairs": 1157,
      "epi_median_km": 0.721,
@@ -1019,6 +1024,11 @@
     "recall": 0.4062,
     "precision": 0.5868,
     "event_ratio": 0.6978,
+    "time": {
+     "pairs": 2167,
+     "bias_s": 0.1341,
+     "mad_s": 0.1715
+    },
     "location": {
      "pairs": 2167,
      "epi_median_km": 1.216,
@@ -1716,6 +1726,11 @@
     "recall": 0.1601,
     "precision": 0.833,
     "event_ratio": 0.1962,
+    "time": {
+     "pairs": 854,
+     "bias_s": 0.2197,
+     "mad_s": 0.1268
+    },
     "location": {
      "pairs": 854,
      "epi_median_km": 1.0434,
@@ -2397,6 +2412,11 @@
     "recall": 0.0839,
     "precision": 0.9062,
     "event_ratio": 0.0954,
+    "time": {
+     "pairs": 451,
+     "bias_s": 0.051,
+     "mad_s": 0.0886
+    },
     "location": {
      "pairs": 451,
      "epi_median_km": 1.0323,
@@ -3250,7 +3270,10 @@
     "shift_final_km": null,
     "scatter_final_km": null,
     "dz_final_km": null,
+    "dz_mad_final_km": null,
     "dt_final_s": null,
+    "time_bias_final_s": null,
+    "time_mad_final_s": null,
     "recall_M2": 0.9006,
     "precision_M2": 0.6949,
     "f1_M2": 0.7845,
@@ -3743,6 +3766,11 @@
     "recall": 0.5132,
     "precision": 0.9415,
     "event_ratio": 0.5531,
+    "time": {
+     "pairs": 2712,
+     "bias_s": -0.0006,
+     "mad_s": 0.0264
+    },
     "location": {
      "pairs": 2712,
      "epi_median_km": 0.1613,
@@ -4055,7 +4083,10 @@
     "shift_final_km": 0.0,
     "scatter_final_km": 0.1613,
     "dz_final_km": 0.0,
+    "dz_mad_final_km": 0.125,
     "dt_final_s": 0.0262,
+    "time_bias_final_s": -0.0006,
+    "time_mad_final_s": 0.0264,
     "recall_M2": 0.8727,
     "precision_M2": null,
     "f1_M2": null,

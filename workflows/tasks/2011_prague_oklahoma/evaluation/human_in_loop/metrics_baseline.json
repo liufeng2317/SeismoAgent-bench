@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "9a7c066f8acadc5c58e9aa35c417fd2f7ed9ce6b",
+ "scorer_commit": "3b28279bfa815b0eb0caa0a6722d5ea45908e0cf",
  "scorer_dirty": true,
- "generated_utc": "2026-10-29T15:55:53+00:00",
+ "generated_utc": "2026-10-29T17:55:49+00:00",
  "task": "2011_prague_oklahoma",
  "references": {
   "cochran": {
@@ -228,6 +228,11 @@
     "recall": 0.2848,
     "precision": 0.9497,
     "event_ratio": 0.3071,
+    "time": {
+     "pairs": 1977,
+     "bias_s": -0.0565,
+     "mad_s": 0.0407
+    },
     "location": {
      "pairs": 1977,
      "epi_median_km": 0.3624,
@@ -465,6 +470,11 @@
     "recall": 0.3216,
     "precision": 0.9505,
     "event_ratio": 0.3462,
+    "time": {
+     "pairs": 2231,
+     "bias_s": -0.1517,
+     "mad_s": 0.1645
+    },
     "location": {
      "pairs": 2231,
      "epi_median_km": 0.2111,
@@ -949,6 +959,11 @@
     "recall": 0.0,
     "precision": 0.0,
     "event_ratio": 0.0009,
+    "time": {
+     "pairs": 0,
+     "bias_s": null,
+     "mad_s": null
+    },
     "location": {
      "pairs": 0
     }
@@ -1383,6 +1398,11 @@
     "recall": 0.0015,
     "precision": 0.9091,
     "event_ratio": 0.0016,
+    "time": {
+     "pairs": 10,
+     "bias_s": 0.3006,
+     "mad_s": 0.2015
+    },
     "location": {
      "pairs": 10,
      "epi_median_km": 0.8326,
@@ -2167,7 +2187,10 @@
     "shift_final_km": null,
     "scatter_final_km": null,
     "dz_final_km": null,
+    "dz_mad_final_km": null,
     "dt_final_s": null,
+    "time_bias_final_s": null,
+    "time_mad_final_s": null,
     "recall_M2": 0.9833,
     "precision_M2": 1.0,
     "f1_M2": 0.9916,
@@ -2460,6 +2483,11 @@
     "recall": 0.3627,
     "precision": 0.981,
     "event_ratio": 0.3773,
+    "time": {
+     "pairs": 2506,
+     "bias_s": 0.017,
+     "mad_s": 0.0475
+    },
     "location": {
      "pairs": 2506,
      "epi_median_km": 0.2734,
@@ -2732,7 +2760,10 @@
     "shift_final_km": 0.0,
     "scatter_final_km": 0.2734,
     "dz_final_km": -0.0625,
+    "dz_mad_final_km": 0.2188,
     "dt_final_s": 0.0544,
+    "time_bias_final_s": 0.017,
+    "time_mad_final_s": 0.0475,
     "recall_M2": 0.95,
     "precision_M2": null,
     "f1_M2": null,

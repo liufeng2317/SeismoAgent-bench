@@ -44,7 +44,10 @@
   "shift_final_km": 1.0223,
   "scatter_final_km": 3.9542,
   "dz_final_km": -3.81,
+  "dz_mad_final_km": 1.8737,
   "dt_final_s": 0.8477,
+  "time_bias_final_s": 0.3919,
+  "time_mad_final_s": 0.6368,
   "recall_M2": 0.2807,
   "precision_M2": 0.625,
   "f1_M2": 0.3874,
@@ -78,121 +81,165 @@
   "pick_residual_mad_S_s": 0.0651,
   "out_of_mask_fraction": 0.7958
  },
- "usability": {
-  "usable": false,
+ "trust": {
+  "trusted": false,
   "failed": [
-   "detection",
-   "detection_tight",
-   "completeness_vs_final",
    "inside_region",
-   "location_shift",
-   "origin_time",
-   "depth_vs_final",
+   "time_bias",
+   "time_spread",
+   "after_large_events",
+   "horizontal_shift",
+   "depth_bias",
+   "horizontal_scatter",
+   "off_structure",
    "depth_pileup",
-   "structure",
-   "magnitude_offset"
+   "magnitude_offset",
+   "magnitude_spread",
+   "magnitude_scale"
   ],
   "pending": [
    "false_events"
   ],
-  "checks": {
-   "detection": {
-    "metric": "recall_norm",
-    "value": 0.3401,
-    "op": ">=",
-    "threshold": 0.8943,
-    "final": 0.9937,
-    "verdict": "fail"
+  "dimensions": {
+   "reality": {
+    "verdict": "fail",
+    "checks": {
+     "inside_region": {
+      "aspect": "accuracy",
+      "value": 0.7958,
+      "op": "<=",
+      "threshold": 0.1,
+      "final": 0.0141,
+      "verdict": "fail"
+     },
+     "false_events": {
+      "aspect": "accuracy",
+      "value": null,
+      "op": "<=",
+      "threshold": 0.02,
+      "final": null,
+      "verdict": "pending"
+     }
+    }
    },
-   "detection_tight": {
-    "metric": "recall_tight",
-    "value": 0.0403,
-    "op": ">=",
-    "threshold": 0.8574,
-    "final": 0.9527,
-    "verdict": "fail"
+   "time": {
+    "verdict": "fail",
+    "checks": {
+     "time_bias": {
+      "aspect": "accuracy",
+      "value": 0.3919,
+      "op": "abs<=",
+      "threshold": 0.3,
+      "final": null,
+      "verdict": "fail"
+     },
+     "time_spread": {
+      "aspect": "stability",
+      "value": 0.6368,
+      "op": "<=",
+      "threshold": 0.3,
+      "final": null,
+      "verdict": "fail"
+     },
+     "after_large_events": {
+      "aspect": "stability",
+      "value": 0.5133,
+      "op": ">=",
+      "threshold": 0.7828,
+      "final": 0.9785,
+      "verdict": "fail"
+     }
+    }
    },
-   "completeness_vs_final": {
-    "metric": "recall_final",
-    "value": 0.1289,
-    "op": ">=",
-    "threshold": 0.5,
-    "final": null,
-    "verdict": "fail"
+   "space": {
+    "verdict": "fail",
+    "checks": {
+     "horizontal_shift": {
+      "aspect": "accuracy",
+      "value": 1.0223,
+      "op": "<=",
+      "threshold": 1.0,
+      "final": null,
+      "verdict": "fail"
+     },
+     "depth_bias": {
+      "aspect": "accuracy",
+      "value": -3.81,
+      "op": "abs<=",
+      "threshold": 1.0,
+      "final": null,
+      "verdict": "fail"
+     },
+     "horizontal_scatter": {
+      "aspect": "stability",
+      "value": 3.9542,
+      "op": "<=",
+      "threshold": 1.0,
+      "final": 0.6527,
+      "verdict": "fail"
+     },
+     "off_structure": {
+      "aspect": "stability",
+      "value": 0.5615,
+      "op": "<=",
+      "threshold": 0.05,
+      "final": 0.0028,
+      "verdict": "fail"
+     },
+     "depth_pileup": {
+      "aspect": "stability",
+      "value": 0.2698,
+      "op": "<=",
+      "threshold": 0.0566,
+      "final": 0.0366,
+      "verdict": "fail"
+     }
+    }
    },
-   "inside_region": {
-    "metric": "out_of_mask_fraction",
-    "value": 0.7958,
-    "op": "<=",
-    "threshold": 0.1,
-    "final": 0.0141,
-    "verdict": "fail"
-   },
-   "false_events": {
-    "metric": "audited_false_rate",
-    "value": null,
-    "op": "<=",
-    "threshold": 0.02,
-    "final": null,
-    "verdict": "pending"
-   },
-   "location_shift": {
-    "metric": "shift_km",
-    "value": 1.6233,
-    "op": "<=",
-    "threshold": 1.0906,
-    "final": 0.5906,
-    "verdict": "fail"
-   },
-   "origin_time": {
-    "metric": "dt_median_s",
-    "value": 0.834,
-    "op": "<=",
-    "threshold": 0.3,
-    "final": 0.0885,
-    "verdict": "fail"
-   },
-   "depth_vs_final": {
-    "metric": "dz_final_km",
-    "value": -3.81,
-    "op": "abs<=",
-    "threshold": 1.0,
-    "final": null,
-    "verdict": "fail"
-   },
-   "depth_pileup": {
-    "metric": "depth_mode_share",
-    "value": 0.2698,
-    "op": "<=",
-    "threshold": 0.0566,
-    "final": 0.0366,
-    "verdict": "fail"
-   },
-   "structure": {
-    "metric": "off_structure_fraction",
-    "value": 0.5615,
-    "op": "<=",
-    "threshold": 0.05,
-    "final": 0.0028,
-    "verdict": "fail"
-   },
-   "magnitude_offset": {
-    "metric": "dmag_median",
-    "value": 0.655,
-    "op": "abs<=",
-    "threshold": 0.352,
-    "final": 0.152,
-    "verdict": "fail"
-   },
-   "large_events_present": {
-    "metric": "recall_M4",
-    "value": {
-     "recall_M4": 1.0
-    },
-    "op": "all ==",
-    "threshold": 1.0,
-    "verdict": "pass"
+   "strength": {
+    "verdict": "fail",
+    "checks": {
+     "magnitude_offset": {
+      "aspect": "accuracy",
+      "value": 0.655,
+      "op": "abs<=",
+      "threshold": 0.352,
+      "final": 0.152,
+      "verdict": "fail"
+     },
+     "magnitude_spread": {
+      "aspect": "stability",
+      "value": 0.42,
+      "op": "<=",
+      "threshold": 0.3878,
+      "final": 0.2878,
+      "verdict": "fail"
+     },
+     "magnitude_scale": {
+      "aspect": "stability",
+      "value": -0.5417,
+      "op": "abs<=",
+      "threshold": 0.4094,
+      "final": -0.3094,
+      "verdict": "fail"
+     },
+     "large_events_present": {
+      "aspect": "accuracy",
+      "value": {
+       "recall_M4": 1.0
+      },
+      "op": "all ==",
+      "threshold": 1.0,
+      "verdict": "pass"
+     }
+    }
    }
+  },
+  "completeness": {
+   "recall_norm": 0.3401,
+   "recall_tight": 0.0403,
+   "recall_final": 0.1289,
+   "event_ratio_final": 0.5493
   }
  },
  "process": {
@@ -212,29 +259,41 @@
   "relocated": 2860,
   "rows": {
    "agent_locations": {
-    "recall_norm": 1.0579,
-    "shift_km": 3.8716,
-    "scatter_median_km": 3.7963,
-    "epi_gt5km": 0.5697,
-    "dz_median_km": -2.87,
+    "recall_norm": 0.3401,
+    "recall_tight": 0.0403,
+    "shift_km": 1.6233,
+    "scatter_median_km": 3.081,
+    "epi_gt5km": 0.0,
+    "dz_median_km": -1.84,
+    "dt_median_s": 0.834,
     "depth_mode_share": 0.2698,
     "off_structure_fraction": 0.5615,
-    "off_structure_after_shift": 0.6389,
-    "dt_mean_s": 0.2178,
-    "dt_std_s": 1.1256,
+    "off_structure_after_shift": 0.6309,
+    "dt_mean_s": 0.0686,
+    "dt_std_s": 1.0073,
+    "recall_final": 0.1289,
+    "shift_final_km": 1.0223,
+    "dz_final_km": -3.81,
+    "dt_final_s": 0.8477,
     "events_in_mask": 6824
    },
    "expert_locator": {
-    "recall_norm": 0.9571,
-    "shift_km": 1.9095,
-    "scatter_median_km": 3.4675,
-    "epi_gt5km": 0.3216,
-    "dz_median_km": -1.8063,
+    "recall_norm": 0.5574,
+    "recall_tight": 0.2949,
+    "shift_km": 1.3661,
+    "scatter_median_km": 2.5981,
+    "epi_gt5km": 0.0,
+    "dz_median_km": -0.6319,
+    "dt_median_s": 0.3817,
     "depth_mode_share": 0.1326,
     "off_structure_fraction": 0.4692,
-    "off_structure_after_shift": 0.4536,
-    "dt_mean_s": 0.3328,
-    "dt_std_s": 0.4843,
+    "off_structure_after_shift": 0.4571,
+    "dt_mean_s": 0.2643,
+    "dt_std_s": 0.4478,
+    "recall_final": 0.0432,
+    "shift_final_km": 0.7497,
+    "dz_final_km": -2.345,
+    "dt_final_s": 0.4259,
     "events_in_mask": 32286
    }
   }

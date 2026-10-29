@@ -44,7 +44,10 @@
   "shift_final_km": 0.0307,
   "scatter_final_km": 0.2568,
   "dz_final_km": 1.0987,
+  "dz_mad_final_km": 0.3856,
   "dt_final_s": 0.0768,
+  "time_bias_final_s": 0.0588,
+  "time_mad_final_s": 0.0492,
   "recall_M2": 0.9667,
   "precision_M2": 0.9767,
   "f1_M2": 0.9717,
@@ -68,105 +71,144 @@
   "audited_false_rate": 0.0009,
   "out_of_mask_fraction": 0.0943
  },
- "usability": {
-  "usable": false,
+ "trust": {
+  "trusted": false,
   "failed": [
-   "detection",
-   "detection_tight",
-   "completeness_vs_final",
-   "depth_vs_final",
+   "depth_bias",
    "magnitude_offset"
   ],
   "pending": [],
-  "checks": {
-   "detection": {
-    "metric": "recall_norm",
-    "value": 1.3756,
-    "op": ">=",
-    "threshold": 1.6653,
-    "final": 1.8503,
-    "verdict": "fail"
+  "dimensions": {
+   "reality": {
+    "verdict": "pass",
+    "checks": {
+     "inside_region": {
+      "aspect": "accuracy",
+      "value": 0.0943,
+      "op": "<=",
+      "threshold": 0.1,
+      "final": 0.0281,
+      "verdict": "pass"
+     },
+     "false_events": {
+      "aspect": "accuracy",
+      "value": 0.0009,
+      "op": "<=",
+      "threshold": 0.02,
+      "final": null,
+      "verdict": "pass"
+     }
+    }
    },
-   "detection_tight": {
-    "metric": "recall_tight",
-    "value": 0.6991,
-    "op": ">=",
-    "threshold": 0.8485,
-    "final": 0.9428,
-    "verdict": "fail"
+   "time": {
+    "verdict": "pass",
+    "checks": {
+     "time_bias": {
+      "aspect": "accuracy",
+      "value": 0.0588,
+      "op": "abs<=",
+      "threshold": 0.3,
+      "final": null,
+      "verdict": "pass"
+     },
+     "time_spread": {
+      "aspect": "stability",
+      "value": 0.0492,
+      "op": "<=",
+      "threshold": 0.3,
+      "final": null,
+      "verdict": "pass"
+     },
+     "after_large_events": {
+      "aspect": "stability",
+      "value": 0.8189,
+      "op": ">=",
+      "threshold": 0.7705,
+      "final": 0.9631,
+      "verdict": "pass"
+     }
+    }
    },
-   "completeness_vs_final": {
-    "metric": "recall_final",
-    "value": 0.4639,
-    "op": ">=",
-    "threshold": 0.5,
-    "final": null,
-    "verdict": "fail"
+   "space": {
+    "verdict": "fail",
+    "checks": {
+     "horizontal_shift": {
+      "aspect": "accuracy",
+      "value": 0.0307,
+      "op": "<=",
+      "threshold": 1.0,
+      "final": null,
+      "verdict": "pass"
+     },
+     "depth_bias": {
+      "aspect": "accuracy",
+      "value": 1.0987,
+      "op": "abs<=",
+      "threshold": 1.0,
+      "final": null,
+      "verdict": "fail"
+     },
+     "horizontal_scatter": {
+      "aspect": "stability",
+      "value": 0.2568,
+      "op": "<=",
+      "threshold": 1.0,
+      "final": 0.3059,
+      "verdict": "pass"
+     },
+     "off_structure": {
+      "aspect": "stability",
+      "value": 0.0203,
+      "op": "<=",
+      "threshold": 0.05,
+      "final": 0.0004,
+      "verdict": "pass"
+     },
+     "depth_pileup": {
+      "aspect": "stability",
+      "value": 0.0177,
+      "op": "<=",
+      "threshold": 0.1107,
+      "final": 0.0907,
+      "verdict": "pass"
+     }
+    }
    },
-   "inside_region": {
-    "metric": "out_of_mask_fraction",
-    "value": 0.0943,
-    "op": "<=",
-    "threshold": 0.1,
-    "final": 0.0281,
-    "verdict": "pass"
-   },
-   "false_events": {
-    "metric": "audited_false_rate",
-    "value": 0.0009,
-    "op": "<=",
-    "threshold": 0.02,
-    "final": null,
-    "verdict": "pass"
-   },
-   "location_shift": {
-    "metric": "shift_km",
-    "value": 0.2067,
-    "op": "<=",
-    "threshold": 1.0,
-    "final": 0.176,
-    "verdict": "pass"
-   },
-   "origin_time": {
-    "metric": "dt_median_s",
-    "value": 0.128,
-    "op": "<=",
-    "threshold": 0.3,
-    "final": 0.0673,
-    "verdict": "pass"
-   },
-   "depth_vs_final": {
-    "metric": "dz_final_km",
-    "value": 1.0987,
-    "op": "abs<=",
-    "threshold": 1.0,
-    "final": null,
-    "verdict": "fail"
-   },
-   "depth_pileup": {
-    "metric": "depth_mode_share",
-    "value": 0.0177,
-    "op": "<=",
-    "threshold": 0.1107,
-    "final": 0.0907,
-    "verdict": "pass"
-   },
-   "structure": {
-    "metric": "off_structure_fraction",
-    "value": 0.0203,
-    "op": "<=",
-    "threshold": 0.05,
-    "final": 0.0004,
-    "verdict": "pass"
-   },
-   "magnitude_offset": {
-    "metric": "dmag_median",
-    "value": -2.77,
-    "op": "abs<=",
-    "threshold": 0.43,
-    "final": -0.23,
-    "verdict": "fail"
+   "strength": {
+    "verdict": "fail",
+    "checks": {
+     "magnitude_offset": {
+      "aspect": "accuracy",
+      "value": -2.77,
+      "op": "abs<=",
+      "threshold": 0.43,
+      "final": -0.23,
+      "verdict": "fail"
+     },
+     "magnitude_spread": {
+      "aspect": "stability",
+      "value": 0.3741,
+      "op": "<=",
+      "threshold": 0.4731,
+      "final": 0.3731,
+      "verdict": "pass"
+     },
+     "magnitude_scale": {
+      "aspect": "stability",
+      "value": -0.2751,
+      "op": "abs<=",
+      "threshold": 0.3143,
+      "final": -0.2143,
+      "verdict": "pass"
+     }
+    }
    }
+  },
+  "completeness": {
+   "recall_norm": 1.3756,
+   "recall_tight": 0.6991,
+   "recall_final": 0.4639,
+   "event_ratio_final": 0.5011
   }
  },
  "process": {

@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "9a7c066f8acadc5c58e9aa35c417fd2f7ed9ce6b",
+ "scorer_commit": "3b28279bfa815b0eb0caa0a6722d5ea45908e0cf",
  "scorer_dirty": true,
- "generated_utc": "2026-10-29T16:08:04+00:00",
+ "generated_utc": "2026-10-29T18:02:11+00:00",
  "task": "2017_maple_creek_yellowstone",
  "configurations": [
   {
@@ -16,18 +16,20 @@
     {
      "run_id": "20261028T220720Z",
      "completed": true,
-     "usable": false,
-     "usability_failed": [
-      "detection",
-      "detection_tight",
-      "completeness_vs_final",
+     "trusted": false,
+     "trust_failed": [
       "inside_region",
-      "location_shift",
-      "origin_time",
-      "depth_vs_final",
+      "time_bias",
+      "time_spread",
+      "after_large_events",
+      "horizontal_shift",
+      "depth_bias",
+      "horizontal_scatter",
+      "off_structure",
       "depth_pileup",
-      "structure",
-      "magnitude_offset"
+      "magnitude_offset",
+      "magnitude_spread",
+      "magnitude_scale"
      ],
      "b_difference": 0.487,
      "depth_band_share": 0.4086,
@@ -44,6 +46,7 @@
      "dt_median_s": 0.834,
      "dt_std_s": 1.0073,
      "dz_final_km": -3.81,
+     "dz_mad_final_km": 1.8737,
      "dz_median_km": -1.84,
      "epi_gt5km": 0.0,
      "epi_mean_M2": 3.1625,
@@ -78,6 +81,8 @@
      "scatter_median_km": 3.081,
      "shift_final_km": 1.0223,
      "shift_km": 1.6233,
+     "time_bias_final_s": 0.3919,
+     "time_mad_final_s": 0.6368,
      "union_support": 0.5646
     }
    ],
@@ -170,6 +175,12 @@
      "mean": -3.81,
      "min": -3.81,
      "max": -3.81,
+     "n": 1
+    },
+    "dz_mad_final_km": {
+     "mean": 1.8737,
+     "min": 1.8737,
+     "max": 1.8737,
      "n": 1
     },
     "dz_median_km": {
@@ -376,6 +387,18 @@
      "max": 1.6233,
      "n": 1
     },
+    "time_bias_final_s": {
+     "mean": 0.3919,
+     "min": 0.3919,
+     "max": 0.3919,
+     "n": 1
+    },
+    "time_mad_final_s": {
+     "mean": 0.6368,
+     "min": 0.6368,
+     "max": 0.6368,
+     "n": 1
+    },
     "union_support": {
      "mean": 0.5646,
      "min": 0.5646,
@@ -383,7 +406,7 @@
      "n": 1
     }
    },
-   "usable_runs": 0,
+   "trusted_runs": 0,
    "cost_usd": {
     "mean": 30.8122,
     "min": 30.8122,
@@ -414,14 +437,14 @@
     {
      "run_id": "20261028T220746Z",
      "completed": true,
-     "usable": false,
-     "usability_failed": [
-      "detection_tight",
-      "completeness_vs_final",
+     "trusted": false,
+     "trust_failed": [
       "inside_region",
-      "origin_time",
-      "depth_vs_final",
-      "structure"
+      "time_bias",
+      "depth_bias",
+      "horizontal_scatter",
+      "off_structure",
+      "magnitude_scale"
      ],
      "b_difference": 0.699,
      "depth_band_share": 0.2656,
@@ -440,6 +463,7 @@
      "dt_median_s": 1.011,
      "dt_std_s": 0.2732,
      "dz_final_km": -2.1839,
+     "dz_mad_final_km": 0.986,
      "dz_median_km": -0.069,
      "epi_gt5km": 0.0,
      "epi_mean_M2": 2.0979,
@@ -476,6 +500,8 @@
      "scatter_median_km": 1.1692,
      "shift_final_km": 0.9069,
      "shift_km": 0.7099,
+     "time_bias_final_s": 1.1492,
+     "time_mad_final_s": 0.1594,
      "union_support": 0.9285
     }
    ],
@@ -580,6 +606,12 @@
      "mean": -2.1839,
      "min": -2.1839,
      "max": -2.1839,
+     "n": 1
+    },
+    "dz_mad_final_km": {
+     "mean": 0.986,
+     "min": 0.986,
+     "max": 0.986,
      "n": 1
     },
     "dz_median_km": {
@@ -798,6 +830,18 @@
      "max": 0.7099,
      "n": 1
     },
+    "time_bias_final_s": {
+     "mean": 1.1492,
+     "min": 1.1492,
+     "max": 1.1492,
+     "n": 1
+    },
+    "time_mad_final_s": {
+     "mean": 0.1594,
+     "min": 0.1594,
+     "max": 0.1594,
+     "n": 1
+    },
     "union_support": {
      "mean": 0.9285,
      "min": 0.9285,
@@ -805,7 +849,7 @@
      "n": 1
     }
    },
-   "usable_runs": 0,
+   "trusted_runs": 0,
    "cost_usd": {
     "mean": 21.8265,
     "min": 21.8265,

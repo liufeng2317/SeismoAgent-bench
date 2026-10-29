@@ -15,7 +15,7 @@ from SeismoAgentBench.scoring.catalog_metrics.metrics import (
     ceilings, depth_profile, location, m90, net_rate, off_structure_fraction, pair_distance_error,
     union_support, versus_final)
 from SeismoAgentBench.scoring.catalog_metrics.tables import Population, standardize
-from SeismoAgentBench.scoring.catalog_metrics.usability import usability
+from SeismoAgentBench.scoring.catalog_metrics.trust import trust_verdict
 
 T0 = pd.Timestamp("2020-01-01T00:00:00Z")
 CENTER = (-100.0, 40.0)
@@ -100,6 +100,7 @@ class MetricTest(unittest.TestCase):
         self.assertAlmostEqual(out["event_ratio"], 0.4)
         self.assertAlmostEqual(out["location"]["dz_median_km"], -2.0)
         self.assertAlmostEqual(out["location"]["dt_median_s"], 0.5)
+        self.assertAlmostEqual(out["time"]["bias_s"], 0.5)
 
     def test_ceiling_is_the_best_other_reference(self):
         # Irregular times: a periodic sequence would line up with itself under the 60-s chance shift.
@@ -211,23 +212,27 @@ class MetricTest(unittest.TestCase):
         self.assertEqual(off_structure_fraction(far, [ref], CENTER, 1.0)["fraction"], 1.0)
         self.assertIsNone(off_structure_fraction(ref, [ref], CENTER, 1.0)["fraction"])
 
-    def test_usability_reads_thresholds_against_the_final(self):
-        final = {"recall_norm": 1.2, "recall_tight": 0.9, "out_of_mask_fraction": 0.0, "shift_km": 1.1,
-                 "dt_median_s": 0.1, "depth_mode_share": 0.01, "off_structure_fraction": 0.01,
-                 "dmag_median": -0.25, "recall_M4": 1.0}
-        good = {"recall_norm": 1.1, "recall_tight": 0.85, "recall_final": 0.7, "out_of_mask_fraction": 0.05,
-                "audited_false_rate": None, "shift_km": 1.5, "dt_median_s": 0.2, "dz_final_km": 0.4,
-                "depth_mode_share": 0.02, "off_structure_fraction": 0.03, "dmag_median": -0.4, "recall_M4": 1.0}
-        out = usability(good, final, True)
-        self.assertIsNone(out["usable"])  # only the audit is open
-        self.assertEqual(out["pending"], ["false_events"])
-        self.assertEqual(out["checks"]["location_shift"]["threshold"], 1.6)  # the final's own shift + 0.5
-        bad = {**good, "audited_false_rate": 0.01, "dt_median_s": 1.0, "recall_tight": 0.4}
-        out = usability(bad, final, True)
-        self.assertFalse(out["usable"])
-        self.assertEqual(sorted(out["failed"]), ["detection_tight", "origin_time"])
-        self.assertTrue(usability({**good, "audited_false_rate": 0.01}, final, True)["usable"])
-        self.assertFalse(usability({}, final, False)["usable"])
+    def test_trust_judges_four_dimensions_and_reports_completeness_apart(self):
+        final = {"out_of_mask_fraction": 0.0, "scatter_median_km": 1.5, "off_structure_fraction": 0.01,
+                 "depth_mode_share": 0.01, "dmag_median": -0.25, "dmag_std": 0.3, "dmag_slope_per_unit": -0.05,
+                 "recall_after_large": 0.8, "recall_other": 0.9, "recall_M4": 1.0}
+        good = {"out_of_mask_fraction": 0.05, "audited_false_rate": None, "time_bias_final_s": 0.1,
+                "time_mad_final_s": 0.05, "recall_after_large": 0.7, "recall_other": 0.9, "shift_final_km": 0.4,
+                "dz_final_km": -0.5, "scatter_final_km": 1.2, "off_structure_fraction": 0.02,
+                "depth_mode_share": 0.03, "dmag_median": -0.4, "dmag_std": 0.35, "dmag_slope_per_unit": -0.2,
+                "recall_M4": 1.0, "recall_final": 0.3}
+        out = trust_verdict(good, final, True)
+        self.assertIsNone(out["trusted"])  # only the audit is open
+        self.assertEqual(out["dimensions"]["reality"]["verdict"], "pending")
+        self.assertEqual(out["dimensions"]["space"]["checks"]["horizontal_scatter"]["threshold"], 1.5)
+        self.assertEqual(out["completeness"]["recall_final"], 0.3)  # reported, not judged
+        self.assertTrue(trust_verdict({**good, "audited_false_rate": 0.01}, final, True)["trusted"])
+        biased = {**good, "audited_false_rate": 0.01, "time_bias_final_s": 1.0, "dz_final_km": -2.2}
+        out = trust_verdict(biased, final, True)
+        self.assertFalse(out["trusted"])
+        self.assertEqual(sorted(out["failed"]), ["depth_bias", "time_bias"])
+        self.assertEqual(out["dimensions"]["strength"]["verdict"], "pass")
+        self.assertFalse(trust_verdict({}, final, False)["trusted"])
 
     def test_union_support_skips_itself_and_corrects_time_only_chance(self):
         # Event 0 is supported by a located member, event 1 by a time-only member.

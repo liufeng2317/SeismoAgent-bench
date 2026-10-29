@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "9a7c066f8acadc5c58e9aa35c417fd2f7ed9ce6b",
+ "scorer_commit": "3b28279bfa815b0eb0caa0a6722d5ea45908e0cf",
  "scorer_dirty": true,
- "generated_utc": "2026-10-29T15:56:18+00:00",
+ "generated_utc": "2026-10-29T17:56:37+00:00",
  "task": "2020_magna_utah",
  "references": {
   "pang": {
@@ -328,6 +328,11 @@
     "recall": 0.5856,
     "precision": 0.7776,
     "event_ratio": 0.7703,
+    "time": {
+     "pairs": 3326,
+     "bias_s": -0.091,
+     "mad_s": 0.099
+    },
     "location": {
      "pairs": 3326,
      "epi_median_km": 1.0823,
@@ -963,6 +968,11 @@
     "recall": 0.5473,
     "precision": 0.8176,
     "event_ratio": 0.6859,
+    "time": {
+     "pairs": 3084,
+     "bias_s": -0.16,
+     "mad_s": 0.12
+    },
     "location": {
      "pairs": 3084,
      "epi_median_km": 1.0904,
@@ -1647,6 +1657,11 @@
     "recall": 0.2349,
     "precision": 0.9597,
     "event_ratio": 0.2646,
+    "time": {
+     "pairs": 1380,
+     "bias_s": -0.04,
+     "mad_s": 0.09
+    },
     "location": {
      "pairs": 1380,
      "epi_median_km": 1.1761,
@@ -2520,7 +2535,10 @@
     "shift_final_km": null,
     "scatter_final_km": null,
     "dz_final_km": null,
+    "dz_mad_final_km": null,
     "dt_final_s": null,
+    "time_bias_final_s": null,
+    "time_mad_final_s": null,
     "recall_M2": 0.9857,
     "precision_M2": 0.9315,
     "f1_M2": 0.9578,
@@ -3006,6 +3024,11 @@
     "recall": 0.3821,
     "precision": 0.9816,
     "event_ratio": 0.4163,
+    "time": {
+     "pairs": 2216,
+     "bias_s": 0.2401,
+     "mad_s": 0.1379
+    },
     "location": {
      "pairs": 2216,
      "epi_median_km": 1.4941,
@@ -3398,7 +3421,10 @@
     "shift_final_km": 1.3102,
     "scatter_final_km": 0.7418,
     "dz_final_km": 0.1975,
+    "dz_mad_final_km": 0.8527,
     "dt_final_s": 0.2474,
+    "time_bias_final_s": 0.2401,
+    "time_mad_final_s": 0.1379,
     "recall_M2": 0.9714,
     "precision_M2": null,
     "f1_M2": null,

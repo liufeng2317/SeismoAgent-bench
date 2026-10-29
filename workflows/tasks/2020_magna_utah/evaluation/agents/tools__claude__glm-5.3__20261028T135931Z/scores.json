@@ -45,7 +45,10 @@
   "shift_final_km": 2.3541,
   "scatter_final_km": 0.5069,
   "dz_final_km": -1.94,
+  "dz_mad_final_km": 0.82,
   "dt_final_s": 0.197,
+  "time_bias_final_s": -0.19,
+  "time_mad_final_s": 0.081,
   "recall_M2": 0.9786,
   "precision_M2": 0.9855,
   "f1_M2": 0.982,
@@ -85,115 +88,155 @@
   "pick_residual_mad_S_s": 0.05,
   "out_of_mask_fraction": 0.0269
  },
- "usability": {
-  "usable": false,
+ "trust": {
+  "trusted": false,
   "failed": [
-   "detection",
-   "detection_tight",
-   "location_shift",
-   "depth_vs_final",
+   "horizontal_shift",
+   "depth_bias",
    "magnitude_offset"
   ],
   "pending": [],
-  "checks": {
-   "detection": {
-    "metric": "recall_norm",
-    "value": 0.8658,
-    "op": ">=",
-    "threshold": 1.0285,
-    "final": 1.1428,
-    "verdict": "fail"
+  "dimensions": {
+   "reality": {
+    "verdict": "pass",
+    "checks": {
+     "inside_region": {
+      "aspect": "accuracy",
+      "value": 0.0269,
+      "op": "<=",
+      "threshold": 0.1,
+      "final": 0.0173,
+      "verdict": "pass"
+     },
+     "false_events": {
+      "aspect": "accuracy",
+      "value": 0.0024,
+      "op": "<=",
+      "threshold": 0.02,
+      "final": null,
+      "verdict": "pass"
+     }
+    }
    },
-   "detection_tight": {
-    "metric": "recall_tight",
-    "value": 0.521,
-    "op": ">=",
-    "threshold": 0.6975,
-    "final": 0.775,
-    "verdict": "fail"
+   "time": {
+    "verdict": "pass",
+    "checks": {
+     "time_bias": {
+      "aspect": "accuracy",
+      "value": -0.19,
+      "op": "abs<=",
+      "threshold": 0.3,
+      "final": null,
+      "verdict": "pass"
+     },
+     "time_spread": {
+      "aspect": "stability",
+      "value": 0.081,
+      "op": "<=",
+      "threshold": 0.3,
+      "final": null,
+      "verdict": "pass"
+     },
+     "after_large_events": {
+      "aspect": "stability",
+      "value": 1.1928,
+      "op": ">=",
+      "threshold": 0.9235,
+      "final": 1.1544,
+      "verdict": "pass"
+     }
+    }
    },
-   "completeness_vs_final": {
-    "metric": "recall_final",
-    "value": 0.5081,
-    "op": ">=",
-    "threshold": 0.5,
-    "final": null,
-    "verdict": "pass"
+   "space": {
+    "verdict": "fail",
+    "checks": {
+     "horizontal_shift": {
+      "aspect": "accuracy",
+      "value": 2.3541,
+      "op": "<=",
+      "threshold": 1.0,
+      "final": null,
+      "verdict": "fail"
+     },
+     "depth_bias": {
+      "aspect": "accuracy",
+      "value": -1.94,
+      "op": "abs<=",
+      "threshold": 1.0,
+      "final": null,
+      "verdict": "fail"
+     },
+     "horizontal_scatter": {
+      "aspect": "stability",
+      "value": 0.5069,
+      "op": "<=",
+      "threshold": 1.0,
+      "final": 0.474,
+      "verdict": "pass"
+     },
+     "off_structure": {
+      "aspect": "stability",
+      "value": 0.0035,
+      "op": "<=",
+      "threshold": 0.05,
+      "final": 0.0031,
+      "verdict": "pass"
+     },
+     "depth_pileup": {
+      "aspect": "stability",
+      "value": 0.0199,
+      "op": "<=",
+      "threshold": 0.05,
+      "final": 0.0115,
+      "verdict": "pass"
+     }
+    }
    },
-   "inside_region": {
-    "metric": "out_of_mask_fraction",
-    "value": 0.0269,
-    "op": "<=",
-    "threshold": 0.1,
-    "final": 0.0173,
-    "verdict": "pass"
-   },
-   "false_events": {
-    "metric": "audited_false_rate",
-    "value": 0.0024,
-    "op": "<=",
-    "threshold": 0.02,
-    "final": null,
-    "verdict": "pass"
-   },
-   "location_shift": {
-    "metric": "shift_km",
-    "value": 2.4963,
-    "op": "<=",
-    "threshold": 1.4507,
-    "final": 0.9507,
-    "verdict": "fail"
-   },
-   "origin_time": {
-    "metric": "dt_median_s",
-    "value": 0.113,
-    "op": "<=",
-    "threshold": 0.326,
-    "final": 0.126,
-    "verdict": "pass"
-   },
-   "depth_vs_final": {
-    "metric": "dz_final_km",
-    "value": -1.94,
-    "op": "abs<=",
-    "threshold": 1.0,
-    "final": null,
-    "verdict": "fail"
-   },
-   "depth_pileup": {
-    "metric": "depth_mode_share",
-    "value": 0.0199,
-    "op": "<=",
-    "threshold": 0.05,
-    "final": 0.0115,
-    "verdict": "pass"
-   },
-   "structure": {
-    "metric": "off_structure_fraction",
-    "value": 0.0035,
-    "op": "<=",
-    "threshold": 0.05,
-    "final": 0.0031,
-    "verdict": "pass"
-   },
-   "magnitude_offset": {
-    "metric": "dmag_median",
-    "value": 0.67,
-    "op": "abs<=",
-    "threshold": 0.28,
-    "final": 0.08,
-    "verdict": "fail"
-   },
-   "large_events_present": {
-    "metric": "recall_M4+recall_M5",
-    "value": {
-     "recall_M4": 1.0,
-     "recall_M5": 1.0
-    },
-    "op": "all ==",
-    "threshold": 1.0,
-    "verdict": "pass"
+   "strength": {
+    "verdict": "fail",
+    "checks": {
+     "magnitude_offset": {
+      "aspect": "accuracy",
+      "value": 0.67,
+      "op": "abs<=",
+      "threshold": 0.28,
+      "final": 0.08,
+      "verdict": "fail"
+     },
+     "magnitude_spread": {
+      "aspect": "stability",
+      "value": 0.2037,
+      "op": "<=",
+      "threshold": 0.3071,
+      "final": 0.2071,
+      "verdict": "pass"
+     },
+     "magnitude_scale": {
+      "aspect": "stability",
+      "value": -0.1551,
+      "op": "abs<=",
+      "threshold": 0.2811,
+      "final": -0.1811,
+      "verdict": "pass"
+     },
+     "large_events_present": {
+      "aspect": "accuracy",
+      "value": {
+       "recall_M4": 1.0,
+       "recall_M5": 1.0
+      },
+      "op": "all ==",
+      "threshold": 1.0,
+      "verdict": "pass"
+     }
+    }
    }
+  },
+  "completeness": {
+   "recall_norm": 0.8658,
+   "recall_tight": 0.521,
+   "recall_final": 0.5081,
+   "event_ratio_final": 0.5745
   }
  },
  "process": {
@@ -225,29 +268,41 @@
   "relocated": 2325,
   "rows": {
    "agent_locations": {
-    "recall_norm": 0.8807,
-    "shift_km": 2.4988,
-    "scatter_median_km": 0.3803,
-    "epi_gt5km": 0.0117,
+    "recall_norm": 0.8658,
+    "recall_tight": 0.521,
+    "shift_km": 2.4963,
+    "scatter_median_km": 0.3718,
+    "epi_gt5km": 0.0,
     "dz_median_km": -1.721,
+    "dt_median_s": 0.113,
     "depth_mode_share": 0.0199,
     "off_structure_fraction": 0.0035,
     "off_structure_after_shift": 0.0032,
-    "dt_mean_s": -0.1102,
-    "dt_std_s": 0.2732,
+    "dt_mean_s": -0.1041,
+    "dt_std_s": 0.1531,
+    "recall_final": 0.5081,
+    "shift_final_km": 2.3541,
+    "dz_final_km": -1.94,
+    "dt_final_s": 0.197,
     "events_in_mask": 3109
    },
    "expert_locator": {
-    "recall_norm": 0.6968,
-    "shift_km": 1.6308,
-    "scatter_median_km": 1.1187,
-    "epi_gt5km": 0.0133,
-    "dz_median_km": -0.7588,
+    "recall_norm": 0.6781,
+    "recall_tight": 0.3822,
+    "shift_km": 1.6094,
+    "scatter_median_km": 1.1013,
+    "epi_gt5km": 0.0,
+    "dz_median_km": -0.755,
+    "dt_median_s": 0.1508,
     "depth_mode_share": 0.0165,
     "off_structure_fraction": 0.0022,
     "off_structure_after_shift": 0.0036,
-    "dt_mean_s": 0.1006,
-    "dt_std_s": 0.2954,
+    "dt_mean_s": 0.1068,
+    "dt_std_s": 0.2148,
+    "recall_final": 0.381,
+    "shift_final_km": 1.7158,
+    "dz_final_km": -0.9569,
+    "dt_final_s": 0.1495,
     "events_in_mask": 3116
    }
   }

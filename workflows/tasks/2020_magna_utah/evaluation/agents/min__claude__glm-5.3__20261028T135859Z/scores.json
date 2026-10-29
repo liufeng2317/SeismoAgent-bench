@@ -23,13 +23,19 @@
   "recall_tight": 0.0,
   "recall_final": 0.0
  },
- "usability": {
-  "usable": false,
+ "trust": {
+  "trusted": false,
   "failed": [
    "completed"
   ],
   "pending": [],
-  "checks": {}
+  "dimensions": {},
+  "completeness": {
+   "recall_norm": 0.0,
+   "recall_tight": 0.0,
+   "recall_final": 0.0,
+   "event_ratio_final": null
+  }
  },
  "process": {
   "cost_usd": 12.630659000000005,

@@ -26,7 +26,7 @@ import yaml
 from . import METRICS_VERSION
 from .audit import REVIEW_DIR, SAMPLE_FILE, audited_false_rate, sample_unsupported
 from .metrics import ceilings, effective_recall, score_population
-from .usability import usability
+from .trust import trust_verdict
 from .process import consistency, contract_status, process_metrics
 from .tables import ROLES, Population, epoch_seconds, in_mask, read_candidate_catalog, standardize
 
@@ -169,6 +169,7 @@ def headline(score: dict, case: Case, ceiling: dict) -> dict:
     depth = score.get("depth_profile") or {}
     final = score.get("versus_final") or {}
     floc = final.get("location") or {}
+    ftime = final.get("time") or {}
     return {"recall": recall, "ceiling": ceil,
             "recall_norm": round(recall / ceil, 4) if recall is not None and ceil else None,
             "recall_tight": tight.get("recall_net"),
@@ -185,7 +186,8 @@ def headline(score: dict, case: Case, ceiling: dict) -> dict:
             "recall_final": final.get("recall"), "precision_final": final.get("precision"),
             "event_ratio_final": final.get("event_ratio"), "shift_final_km": floc.get("shift_km"),
             "scatter_final_km": floc.get("scatter_median_km"), "dz_final_km": floc.get("dz_median_km"),
-            "dt_final_s": floc.get("dt_median_s"),
+            "dz_mad_final_km": floc.get("dz_mad_km"), "dt_final_s": floc.get("dt_median_s"),
+            "time_bias_final_s": ftime.get("bias_s"), "time_mad_final_s": ftime.get("mad_s"),
             **_class_headline(score), **_strength_time_headline(score)}
 
 
@@ -338,7 +340,7 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
     else:
         report["headline"] = {"recall": 0.0, "recall_norm": 0.0, "recall_tight": 0.0, "recall_final": 0.0}
         sample = None
-    report["usability"] = usability(report["headline"], final_headline(case), status["completed"])
+    report["trust"] = trust_verdict(report["headline"], final_headline(case), status["completed"])
     if write:
         out_dir.mkdir(exist_ok=True)
         if sample is not None and not (out_dir / SAMPLE_FILE).exists():

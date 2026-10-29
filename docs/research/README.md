@@ -7,7 +7,7 @@ Reading order:
 | [`00_Research_Plan.md`](00_Research_Plan.md) | the benchmark design, defined once: core questions, case tiers, Agent stages S0–S3, form of the knowledge and the checker, controls, leakage rules, reference principles, expected outputs | the design changes |
 | [`01_Expert_Experience_and_Checker.md`](01_Expert_Experience_and_Checker.md) | evidence that expert catalogs need experience (expert ladder, out-of-range choices, component swap), the reference-free checker rules, human-in-loop intervention coding | new evidence or checker rules |
 | [`02_Paper_Outline.md`](02_Paper_Outline.md) | the paper's question, claims with the evidence each needs, sections and figures | the paper plan changes |
-| [`progress/STATUS_AND_PLAN.md`](progress/STATUS_AND_PLAN.md) | current status, work plan, draft usability criteria, open items | continuously |
+| [`progress/STATUS_AND_PLAN.md`](progress/STATUS_AND_PLAN.md) | current status with the trusted-catalog verdicts, work plan, open items | continuously |
 | [`progress/`](progress/) `YYYY-MM-DD_progress_summary.md` | dated progress summaries (Chinese) | one per report, not edited afterwards |
 
 [`research_map.html`](research_map.html) is a one-page Chinese overview (research questions, stage ladder, case progress, work plan) for viewing in a browser; update it together with `progress/STATUS_AND_PLAN.md`.

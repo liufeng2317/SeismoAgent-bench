@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "9a7c066f8acadc5c58e9aa35c417fd2f7ed9ce6b",
+ "scorer_commit": "3b28279bfa815b0eb0caa0a6722d5ea45908e0cf",
  "scorer_dirty": true,
- "generated_utc": "2026-10-29T16:17:20+00:00",
+ "generated_utc": "2026-10-29T18:07:15+00:00",
  "task": "2011_prague_oklahoma",
  "configurations": [
   {
@@ -16,8 +16,8 @@
     {
      "run_id": "20261028T020935Z",
      "completed": false,
-     "usable": false,
-     "usability_failed": [
+     "trusted": false,
+     "trust_failed": [
       "completed"
      ],
      "recall": 0.0,
@@ -52,7 +52,7 @@
      "n": 1
     }
    },
-   "usable_runs": 0,
+   "trusted_runs": 0,
    "cost_usd": {
     "mean": 12.6536,
     "min": 12.6536,
@@ -83,12 +83,9 @@
     {
      "run_id": "20261028T043719Z",
      "completed": true,
-     "usable": false,
-     "usability_failed": [
-      "detection",
-      "detection_tight",
-      "completeness_vs_final",
-      "depth_vs_final",
+     "trusted": false,
+     "trust_failed": [
+      "depth_bias",
       "magnitude_offset"
      ],
      "audited_false_rate": 0.0009,
@@ -107,6 +104,7 @@
      "dt_median_s": 0.128,
      "dt_std_s": 0.1572,
      "dz_final_km": 1.0987,
+     "dz_mad_final_km": 0.3856,
      "dz_median_km": 1.235,
      "epi_gt5km": 0.0,
      "epi_mean_M2": 0.5792,
@@ -135,6 +133,8 @@
      "scatter_median_km": 0.2513,
      "shift_final_km": 0.0307,
      "shift_km": 0.2067,
+     "time_bias_final_s": 0.0588,
+     "time_mad_final_s": 0.0492,
      "union_support": 0.9591
     }
    ],
@@ -233,6 +233,12 @@
      "mean": 1.0987,
      "min": 1.0987,
      "max": 1.0987,
+     "n": 1
+    },
+    "dz_mad_final_km": {
+     "mean": 0.3856,
+     "min": 0.3856,
+     "max": 0.3856,
      "n": 1
     },
     "dz_median_km": {
@@ -403,6 +409,18 @@
      "max": 0.2067,
      "n": 1
     },
+    "time_bias_final_s": {
+     "mean": 0.0588,
+     "min": 0.0588,
+     "max": 0.0588,
+     "n": 1
+    },
+    "time_mad_final_s": {
+     "mean": 0.0492,
+     "min": 0.0492,
+     "max": 0.0492,
+     "n": 1
+    },
     "union_support": {
      "mean": 0.9591,
      "min": 0.9591,
@@ -410,7 +428,7 @@
      "n": 1
     }
    },
-   "usable_runs": 0,
+   "trusted_runs": 0,
    "cost_usd": {
     "mean": 24.0196,
     "min": 24.0196,

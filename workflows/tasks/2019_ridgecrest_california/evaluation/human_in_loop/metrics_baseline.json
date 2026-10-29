@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "9a7c066f8acadc5c58e9aa35c417fd2f7ed9ce6b",
+ "scorer_commit": "3b28279bfa815b0eb0caa0a6722d5ea45908e0cf",
  "scorer_dirty": true,
- "generated_utc": "2026-10-29T15:57:28+00:00",
+ "generated_utc": "2026-10-29T17:59:50+00:00",
  "task": "2019_ridgecrest_california",
  "references": {
   "shelly": {
@@ -587,6 +587,11 @@
     "recall": 0.3562,
     "precision": 0.8794,
     "event_ratio": 0.431,
+    "time": {
+     "pairs": 6880,
+     "bias_s": -0.2587,
+     "mad_s": 0.0851
+    },
     "location": {
      "pairs": 6880,
      "epi_median_km": 0.4296,
@@ -2277,6 +2282,11 @@
     "recall": 0.2966,
     "precision": 0.9158,
     "event_ratio": 0.3487,
+    "time": {
+     "pairs": 5772,
+     "bias_s": -0.3797,
+     "mad_s": 0.0403
+    },
     "location": {
      "pairs": 5772,
      "epi_median_km": 0.4525,
@@ -4111,6 +4121,11 @@
     "recall": 0.2925,
     "precision": 0.8677,
     "event_ratio": 0.361,
+    "time": {
+     "pairs": 5693,
+     "bias_s": -0.251,
+     "mad_s": 0.053
+    },
     "location": {
      "pairs": 5693,
      "epi_median_km": 0.7674,
@@ -5635,6 +5650,11 @@
     "recall": 0.2761,
     "precision": 0.9299,
     "event_ratio": 0.3205,
+    "time": {
+     "pairs": 5377,
+     "bias_s": -0.535,
+     "mad_s": 0.052
+    },
     "location": {
      "pairs": 5377,
      "epi_median_km": 1.0056,
@@ -7127,6 +7147,11 @@
     "recall": 0.2813,
     "precision": 0.8205,
     "event_ratio": 0.3667,
+    "time": {
+     "pairs": 5502,
+     "bias_s": -0.27,
+     "mad_s": 0.05
+    },
     "location": {
      "pairs": 5502,
      "epi_median_km": 0.5764,
@@ -9179,7 +9204,10 @@
     "shift_final_km": null,
     "scatter_final_km": null,
     "dz_final_km": null,
+    "dz_mad_final_km": null,
     "dt_final_s": null,
+    "time_bias_final_s": null,
+    "time_mad_final_s": null,
     "recall_M2": 0.8543,
     "precision_M2": 0.7972,
     "f1_M2": 0.8247,
@@ -9833,6 +9861,11 @@
     "recall": 0.3781,
     "precision": 0.7546,
     "event_ratio": 0.5228,
+    "time": {
+     "pairs": 7255,
+     "bias_s": -0.1107,
+     "mad_s": 0.1123
+    },
     "location": {
      "pairs": 7255,
      "epi_median_km": 1.1792,
@@ -11196,7 +11229,10 @@
     "shift_final_km": 0.8183,
     "scatter_final_km": 0.8457,
     "dz_final_km": -1.1479,
+    "dz_mad_final_km": 1.8438,
     "dt_final_s": 0.1358,
+    "time_bias_final_s": -0.1107,
+    "time_mad_final_s": 0.1123,
     "recall_M2": 0.8029,
     "precision_M2": null,
     "f1_M2": null,

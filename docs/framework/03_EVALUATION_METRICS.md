@@ -1,6 +1,6 @@
 # Evaluation metrics (v2, pre-registered)
 
-This document fixes how every Agent catalog is scored. Version 1 was pre-registered on 2026-10-27, revised while it was implemented and before any formal Agent run was scored (§10), and frozen on 2026-10-28. **Version 2 replaced it on 2026-10-30** (§12): the first scored runs showed that v1's headline hid catalogs that were scattered or systematically biased (Maple Creek). Every baseline, ladder round and run has been re-scored with v2. A change to any definition, gate, mask, reference role, expert catalog or usability threshold from now on creates a new version; every run is then re-scored with that version, and each score file records the version it used (`metrics_version: 2`) and the scorer commit.
+This document fixes how every Agent catalog is scored. Version 1 was pre-registered on 2026-10-27, revised while it was implemented and before any formal Agent run was scored (§10), and frozen on 2026-10-28. **Version 2 replaced it on 2026-10-30** (§12): the first scored runs showed that v1's headline hid catalogs that were scattered or systematically biased (Maple Creek). Every baseline, ladder round and run has been re-scored with v2. A change to any definition, gate, mask, reference role, expert catalog or trust threshold from now on creates a new version; every run is then re-scored with that version, and each score file records the version it used (`metrics_version: 2`) and the scorer commit.
 
 Two principles follow from the expert work on the six cases:
 
@@ -10,7 +10,7 @@ Two principles follow from the expert work on the six cases:
 ## 1. Scored population
 
 - **Rows.** All rows of the Agent's `catalog.csv` except those with `status = rejected` (case-insensitive). A sensitivity variant scores only `status = accepted`. Rows without latitude, longitude or origin time count toward the event total but never enter correspondence.
-- **Mask.** Each case's cohort mask in `expert/00_config/validation.yaml` (half-open time window, region box, depth bounds) is applied identically to references, expert and Agent. Agent rows outside the mask are reported as `out_of_mask_fraction` and are not scored further. v2 puts `out_of_mask_fraction` in the headline and the usability criteria (§7a); it does not count those rows as false events, because the prompts state the time window but not the region, so an out-of-region event may be a real regional earthquake. Rows without a depth are kept in the mask test on time and epicentre alone.
+- **Mask.** Each case's cohort mask in `expert/00_config/validation.yaml` (half-open time window, region box, depth bounds) is applied identically to references, expert and Agent. Agent rows outside the mask are reported as `out_of_mask_fraction` and are not scored further. v2 puts `out_of_mask_fraction` in the headline and the trusted-catalog standard (§7a, event reality); it does not count those rows as false events, because the prompts state the time window but not the region, so an out-of-region event may be a real regional earthquake. Rows without a depth are kept in the mask test on time and epicentre alone.
 - **Depth datum.** `depth_km` is kilometres below sea level, positive down, for every variant (§8). Reference depths are converted to the same datum where the datum is known; where it is not, the reference has no depth role.
 
 ## 2. Event correspondence
@@ -187,14 +187,14 @@ The missing columns do not change any other score.
 ## 6. Repeats and failed runs
 
 - Each configuration (case × variant × harness × model) runs at least twice, target three times. Means are reported with the min–max range.
-- **Detection metrics** (`recall*` including `recall_tight` and `recall_final`, `f1_*`, `M90` as "not reached") count a failed run (no contract-valid catalog) as zero and are averaged over all launched runs. A failed run is not usable (§7a).
+- **Detection metrics** (`recall*` including `recall_tight` and `recall_final`, `f1_*`, `M90` as "not reached") count a failed run (no contract-valid catalog) as zero and are averaged over all launched runs. A failed run does not reach the trusted-catalog standard (§7a).
 - **Location, structure, magnitude and pick metrics** are averaged over completed runs only and are always shown together with `completion_rate`.
 
 ## 7. Headline table
 
 Per case and configuration:
 
-1. `completion_rate` and the usability verdict (§7a), with the failed criteria;
+1. `completion_rate` and the trusted-catalog verdict (§7a) per dimension — reality, time, space, strength — with the failed criteria;
 2. detection: `recall_norm` vs the primary detection reference, `recall_tight` (1 s / 3 km), `recall_ref_<R>` for every other D reference (Maple Creek: Shelly), and against the final `recall_final` and `event_ratio_final`;
 3. precision and region: `union_support`, `precision_final`, `audited_false_rate`, `out_of_mask_fraction`;
 4. vs the primary location reference: `shift`, `scatter_median`, `epi_gt5km`, `dz_median`, `dt_median_s`; vs the final: `shift_final_km`, `dz_final_km`, `dt_final_s`;
@@ -207,26 +207,30 @@ Read the headline with the run's map and depth section next to the final's (`eva
 
 Rows: each Agent configuration, *expert (final)* (the upper bound), and each reference scored against the primary reference (the ceiling rows). *Expert (blind)* appears only as the first step of the expert ladder (§11).
 
-## 7a. Usability (v2)
+## 7a. Trusted-catalog standard (v2)
 
-A run's catalog is **usable for science** when every applicable criterion passes, each read against the human-in-loop final of the same case (`usability.py`; per run in `metrics.json` → `usability`, per configuration `usable_runs` in the summary). Absolute thresholds are relaxed to the final's own value plus a margin where the final itself would fail them, so the final always passes. A criterion whose metric the final lacks does not apply; one the final has but the run lacks fails. A failed run is not usable.
+Does a run's catalog reach the standard of a trusted catalog? The verdict is read on four dimensions against the human-in-loop final of the same case (`trust.py`; per run in `metrics.json` → `trust`, per configuration `trusted_runs` in the summary). First, the events must be real; then time, space and strength are each judged on **accuracy** (a systematic offset from the final) and **stability** (spread and consistency). A run is trusted when all four dimensions pass; the verdict also lists each dimension, so the profile shows where a catalog fails.
 
-| Criterion | Metric | Passes when |
-|---|---|---|
-| `detection` | `recall_norm` | ≥ 0.9 × final |
-| `detection_tight` | `recall_tight` | ≥ 0.9 × final |
-| `completeness_vs_final` | `recall_final` | ≥ 0.5 |
-| `inside_region` | `out_of_mask_fraction` | ≤ max(0.10, final + 0.05) |
-| `false_events` | `audited_false_rate` | ≤ 0.02; *pending* until the blind review is labelled |
-| `location_shift` | `shift_km` | ≤ max(1.0 km, final + 0.5 km) |
-| `origin_time` | `dt_median_s` | ≤ max(0.3 s, final + 0.2 s) |
-| `depth_vs_final` | `dz_final_km` | \|value\| ≤ 1.0 km |
-| `depth_pileup` | `depth_mode_share` | ≤ max(0.05, final + 0.02) |
-| `structure` | `off_structure_fraction` | ≤ max(0.05, 3 × final) |
-| `magnitude_offset` | `dmag_median` | \|value\| ≤ \|final\| + 0.2 |
-| `large_events_present` | `recall_M4`, `recall_M5` | 1.0 for each class the final has |
+**Completeness is reported next to the verdict, not judged**: `recall_norm`, `recall_tight`, `recall_final`, `event_ratio_final`. An incomplete catalog of accurate events can be trusted — an operational catalog is the usual example — and the gap in completeness is read separately against the final.
 
-`usable` is true when all pass, false when any fails, and null while only the audit is pending.
+| Dimension | Aspect | Criterion | Metric | Passes when |
+|---|---|---|---|---|
+| reality | | events inside the region | `out_of_mask_fraction` | ≤ max(0.10, final + 0.05) |
+| reality | | few false events | `audited_false_rate` | ≤ 0.02; *pending* until the blind review is labelled |
+| time | accuracy | origin-time bias | `time_bias_final_s` (median signed candidate − final) | \|value\| ≤ 0.3 s |
+| time | stability | origin-time spread | `time_mad_final_s` | ≤ 0.3 s |
+| time | stability | detection after large events | `recall_after_large / recall_other` | ≥ 0.8 × final |
+| space | accuracy | horizontal shift | `shift_final_km` | ≤ 1.0 km |
+| space | accuracy | depth bias | `dz_final_km` | \|value\| ≤ 1.0 km |
+| space | stability | horizontal scatter | `scatter_final_km` | ≤ max(1.0 km, the final's own scatter about the primary reference) |
+| space | stability | events on the known structure | `off_structure_fraction` | ≤ max(0.05, 3 × final) |
+| space | stability | no depth pile-up | `depth_mode_share` | ≤ max(0.05, final + 0.02) |
+| strength | accuracy | magnitude offset | `dmag_median` (vs the magnitude authority) | \|value\| ≤ \|final\| + 0.2 |
+| strength | accuracy | large events present | `recall_M4`, `recall_M5` | 1.0 for each class the final has |
+| strength | stability | magnitude spread | `dmag_std` | ≤ max(0.3, final + 0.1) |
+| strength | stability | no compressed scale | `dmag_slope_per_unit` | \|value\| ≤ max(0.2, \|final\| + 0.1) |
+
+Thresholds are absolute, relaxed to the final's own value plus a margin where the final itself would fail them; criteria measured against the final use absolute thresholds. A criterion whose metric the final lacks does not apply; a metric the run lacks fails it. A dimension is *pending* when only the audit is open; `trusted` is true when all dimensions pass, false when any fails, null while only the audit is pending. A failed run is not trusted.
 
 ## 8. Output conventions fixed for scoring
 
@@ -250,18 +254,18 @@ python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir workflows/
 python -m SeismoAgentBench.scoring.catalog_metrics audit --task-dir workflows/tasks/<case> --run-dir <run>
 ```
 
-`python -m SeismoAgentBench evaluate --run-dir <run>` runs the same scorer: every task spec declares `artifact-contract@1` and `catalog-metrics@1`; this is the only scoring path. (`@1` is the scorer's interface version; the metric definitions are versioned by `metrics_version`.) Score the baseline before runs: the usability verdict reads the final's headline from `metrics_baseline.json`.
+`python -m SeismoAgentBench evaluate --run-dir <run>` runs the same scorer: every task spec declares `artifact-contract@1` and `catalog-metrics@1`; this is the only scoring path. (`@1` is the scorer's interface version; the metric definitions are versioned by `metrics_version`.) Score the baseline before runs: the trust verdict reads the final's headline from `metrics_baseline.json`.
 
 Terminology (2026-10-29): the *human-in-loop agent* is the catalog earlier called "expert" — an Agent workflow in which we steered every stage by hand; file and metric keys keep `expert` (`expert_final`, `expert_blind`, `expert_ladder`, the `expert/` pipeline).
 
 | Output | Content | Tracked |
 |---|---|---|
 | `evaluation/human_in_loop/metrics_baseline.json` | ceilings; reference, expert-final and expert-blind rows | yes |
-| `<run>/evaluation/metrics.json` | one run: completion, catalog notes, all metrics, headline, usability, process, leakage | no (runs/ is ignored) |
+| `<run>/evaluation/metrics.json` | one run: completion, catalog notes, all metrics, headline, trust verdict, process, leakage | no (runs/ is ignored) |
 | `<run>/evaluation/location_diagnostics.png` | offset vectors (shift vs scatter), offset CDF with expert yardsticks, depth distribution with the densest band, map of offsets and off-structure events | no |
 | `<run>/evaluation/audit_sample.csv`, `audit/` | the audit sample (drawn once) and its blind review package: `plots/`, `key.csv`, `labels.csv`, `spot_check.csv` | no |
-| `evaluation/agents/metrics_summary.json` | per configuration over repeated runs (§6), with `usable_runs` | yes |
-| `evaluation/agents/<variant>__<harness>__<model>__<run_id>/` | `scores.json` (formal state, metrics version, headline, usability, process, audit, swap; reference-only rescue score when present) and `figures/` | yes |
+| `evaluation/agents/metrics_summary.json` | per configuration over repeated runs (§6), with `trusted_runs` | yes |
+| `evaluation/agents/<variant>__<harness>__<model>__<run_id>/` | `scores.json` (formal state, metrics version, headline, trust verdict, process, audit, swap; reference-only rescue score when present) and `figures/` | yes |
 
 The leakage scan reads only the Agent's tool-call inputs (its accesses), not text that appears in tool results such as fetched documents or directory listings; withheld-product patterns are reference DOIs, repository paths of reference data, expert outputs and scores, and earthquake-catalogue services.
 
@@ -303,10 +307,12 @@ Trigger: the first scored Maple Creek runs. The `min` catalog was scattered over
 | Chance correction for every pairing, as `(m − p) / (1 − p)` | §2 |
 | Every catalog compared directly with the human-in-loop final | §4 |
 | Headline adds `recall_tight`, `recall_ref_<R>`, `dt_median_s`, `out_of_mask_fraction` and the comparison with the final | §5, §7 |
-| Usability criteria with thresholds relative to the final | §7a |
+| Trusted-catalog standard: event reality, then time, space and strength by accuracy and stability, thresholds relative to the final; completeness reported apart | §7a |
 | File names without version (`metrics.yaml`, `metrics.json`, `metrics_baseline.json`, `metrics_summary.json`, `metrics_adapter.py`) | §9 |
 
 Effect on the human-in-loop finals: recall_norm Prague 1.85, Magna 1.14, Maple Creek 0.99, Kīlauea 1.22, Ridgecrest 1.38, Kaikōura 1.17 (v1: 1.83, 1.16, 1.15, 1.16, 1.39, 1.17); Maple Creek's ceiling rises from 0.86 to 0.98 because v1 over-corrected Shelly's time-only matches.
+
+Revision on the same day, before any conclusion rested on it: the first v2 draft judged one *usability* list of eleven criteria, with completeness against the final among them, and called every run "not usable". It was replaced by the trusted-catalog standard above (four dimensions, accuracy and stability, completeness reported apart), which says where a catalog fails and does not mark an accurate but incomplete catalog as untrustworthy. It also adds the signed origin-time comparison with the final (`time_bias_final_s`, `time_mad_final_s`) and `dz_mad_final_km`.
 
 Audit samples are drawn once. The labelled reviews of Prague `tools` and Magna `tools` keep their v1 samples, drawn from the events v1 left unsupported; v2's tighter gates leave more events unsupported, so those samples cover a subset of the v2 unsupported events. The unlabelled Maple Creek samples were redrawn under v2; Kīlauea's were first drawn under v2.
 

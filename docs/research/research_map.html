@@ -182,7 +182,7 @@ footer { font-size: 12px; color: var(--muted); }
   </svg>
   <div class="meta">
     <span>案例 <b>6 个，分 3 档</b></span>
-    <span>评估 <b>metrics v2（2026-10-30，含可用性判定）</b></span>
+    <span>评估 <b>metrics v2（2026-10-30，含可信目录判定）</b></span>
     <span>正式运行 <b>Claude Code × GLM-5.3</b></span>
     <span>唯一标尺 <b>human-in-loop final（上限）</b></span>
   </div>
@@ -207,7 +207,7 @@ footer { font-size: 12px; color: var(--muted); }
     <div class="qrow" role="listitem" data-row="2">
       <button class="qbtn" type="button" data-pick="2" id="q2"><span class="k">问题 2</span><span class="t">工具的作用</span><span class="h">工具对高精度目录有多重要</span></button>
       <div class="exp">S0 <code>min</code> → S1 <code>tools</code></div>
-      <div class="ev">四个已评分案例中，<b>没有一个运行达到"可用"</b>。Prague、Magna 的 min 没交出结果；Maple Creek 的 min 目录基本是噪声（严门限召回 <b>0.04</b>，80 % 事件在区域外）。tools 只找回 final 的 <b>22–51 %</b> 事件，并带有系统误差。</div>
+      <div class="ev">四个已评分案例中，<b>没有一个运行达到可信目录标准</b>。Prague、Magna 的 min 没交出结果；Maple Creek 的 min 目录基本是噪声（严门限召回 <b>0.04</b>，80 % 事件在区域外）。tools 的问题集中在空间和强度（后端选择），完整度只有 final 的 <b>22–51 %</b>；Kīlauea tools 只差在时间（−0.36 s）。</div>
       <div><span class="chip s-done">四案例已评分</span></div>
     </div>
 
@@ -240,7 +240,7 @@ footer { font-size: 12px; color: var(--muted); }
         <div class="id"><span>S0 · min</span><span class="chip s-run">4/6 已评分</span></div>
         <div class="name">基线</div>
         <div class="gets">任务说明、数据、输出约定</div>
-        <div class="asks">通用 Agent 自己能做出可用的目录吗？</div>
+        <div class="asks">通用 Agent 自己能做出可信的目录吗？</div>
       </div>
       <div class="stage on" data-q="2">
         <span class="step"></span>
@@ -304,7 +304,7 @@ footer { font-size: 12px; color: var(--muted); }
   <div class="sec-head">
     <div class="eyebrow">案例 × 阶段</div>
     <h2 id="s-cases">六个案例的进度</h2>
-    <p class="lead">第一个数是 recall_norm（扣除偶然匹配后的召回率，除以参考目录之间互相召回的上限），final 一栏同时给出偏移。Agent 格子里的"找回 final"是它找回了 final 中多少比例的事件。红色表示可用性判定未通过，后面列出主要原因。每个配置目前只跑了一次。</p>
+    <p class="lead">Agent 格子先给可信目录判定的四个维度：真实 · 时间 · 空间 · 强度（✓ 通过，✗ 未通过，… 盲审待做），再给 recall_norm（扣除偶然匹配后的召回率，除以参考目录之间互相召回的上限）和完整度"找回 final"。final 一栏给出 recall_norm 和偏移。每个配置目前只跑了一次。</p>
   </div>
   <div class="tbl-scroll">
     <table>
@@ -324,16 +324,16 @@ footer { font-size: 12px; color: var(--muted); }
           <td class="tier" rowspan="2" data-q="1">基础</td>
           <td data-q="1"><span class="case">Prague 2011</span><span class="sub">诱发余震 · 23 台 · 8 天</span></td>
           <td data-q="4"><span class="chip s-done">完成</span><span class="val"><b>1.85</b> · 偏移 0.18 km</span></td>
-          <td data-q="2"><span class="chip s-fail">不可用</span><span class="val">结果写错位置，记 0</span></td>
-          <td data-q="2"><span class="chip s-fail">不可用</span><span class="val"><b>1.38</b> · 找回 final 46 % · 深度 +1.10 km · 震级 −2.77（单位错）</span></td>
+          <td data-q="2"><span class="chip s-fail">未交出结果</span><span class="val">结果写错位置，记 0</span></td>
+          <td data-q="2"><span class="chip s-fail">真✓ 时✓ 空✗ 强✗</span><span class="val"><b>1.38</b> · 找回 final 46 % · 深度 +1.10 km · 震级 −2.77（单位错）</span></td>
           <td data-q="3"><span class="chip s-plan">计划</span></td>
           <td data-q="4"><span class="chip s-plan">计划</span></td>
         </tr>
         <tr>
           <td data-q="1"><span class="case">Magna 2020</span><span class="sub">Mw 5.7 余震 · 47 台 · 8 天</span></td>
           <td data-q="4"><span class="chip s-done">完成</span><span class="val"><b>1.14</b> · 偏移 0.95 km</span></td>
-          <td data-q="2"><span class="chip s-fail">不可用</span><span class="val">后台流水线崩溃，记 0</span></td>
-          <td data-q="2"><span class="chip s-fail">不可用</span><span class="val"><b>0.87</b> · 找回 final 51 % · 偏移 2.50 km · 深度 −1.94 km</span></td>
+          <td data-q="2"><span class="chip s-fail">未交出结果</span><span class="val">后台流水线崩溃，记 0</span></td>
+          <td data-q="2"><span class="chip s-fail">真✓ 时✓ 空✗ 强✗</span><span class="val"><b>0.87</b> · 找回 final 51 % · 平移 2.35 km · 深度 −1.94 km · 震级 +0.67</span></td>
           <td data-q="3"><span class="chip s-plan">计划</span></td>
           <td data-q="4"><span class="chip s-plan">计划</span></td>
         </tr>
@@ -341,16 +341,16 @@ footer { font-size: 12px; color: var(--muted); }
           <td class="tier" rowspan="2" data-q="1">进阶</td>
           <td data-q="1"><span class="case">Maple Creek 2017</span><span class="sub">Yellowstone 震群 · 27 台 · 8 天</span></td>
           <td data-q="4"><span class="chip s-done">完成</span><span class="val"><b>0.99</b> · 偏移 0.59 km</span></td>
-          <td data-q="2"><span class="chip s-fail">不可用</span><span class="val"><b>0.34</b> · 严门限 0.04 · 80 % 在区域外 · 56 % 偏离结构</span></td>
-          <td data-q="2"><span class="chip s-fail">不可用</span><span class="val"><b>0.96</b> · 找回 final 22 % · 时间 +1.0 s · 深度 −2.18 km</span></td>
+          <td data-q="2"><span class="chip s-fail">真✗ 时✗ 空✗ 强✗</span><span class="val"><b>0.34</b> · 找回 final 13 % · 80 % 在区域外 · 56 % 偏离结构</span></td>
+          <td data-q="2"><span class="chip s-fail">真✗ 时✗ 空✗ 强✗</span><span class="val"><b>0.96</b> · 找回 final 22 % · 时间 +1.15 s · 深度 −2.18 km</span></td>
           <td data-q="3"><span class="chip s-plan">计划</span></td>
           <td data-q="4"><span class="chip s-plan">计划</span></td>
         </tr>
         <tr>
           <td data-q="1"><span class="case">Kīlauea 2018</span><span class="sub">火山塌陷 · 时间窗内有 Mw 6.9 · 25 台</span></td>
           <td data-q="4"><span class="chip s-done">完成</span><span class="val"><b>1.22</b> · 偏移 0.56 km</span></td>
-          <td data-q="2"><span class="chip s-fail">不可用</span><span class="val"><b>0.90</b> · 找回 final 42 % · 震级 −2.43 · 时间 0.9 s</span></td>
-          <td data-q="2"><span class="chip s-fail">不可用</span><span class="val"><b>0.88</b> · 找回 final 37 % · 只差在检测</span></td>
+          <td data-q="2"><span class="chip s-fail">真✗ 时✗ 空✗ 强✗</span><span class="val"><b>0.90</b> · 找回 final 42 % · 时间 −0.96 s · 震级 −2.43</span></td>
+          <td data-q="2"><span class="chip s-run">真… 时✗ 空✓ 强✓</span><span class="val"><b>0.88</b> · 找回 final 37 % · 只差时间 −0.36 s（限 0.3 s）</span></td>
           <td data-q="3"><span class="chip s-plan">计划</span></td>
           <td data-q="4"><span class="chip s-plan">计划</span></td>
         </tr>
@@ -386,7 +386,7 @@ footer { font-size: 12px; color: var(--muted); }
       <div><h3>工具是必要条件</h3><p>没有工具时，Agent 要从头实现整条流程：Prague 和 Magna 的 min 都没交出有效结果；Prague 补评的拾取整体早 2.5 s。交出结果的两个 min 也有根本问题：Maple Creek 的目录基本是噪声（1 s / 3 km 门限下召回 <b>0.04</b>，80 % 事件在区域外，深度落在速度模型分层面上），Kīlauea 的震级尺度偏 <b>−2.4</b>。</p></div>
     </div>
     <div class="finding" data-q="2 3">
-      <div><h3>工具不是充分条件</h3><p>四个 tools 运行没有一个达到"可用"。它们只找回 final 的 <b>22–51 %</b> 事件，差距基本对应模板匹配：Agent 调用了 Match&amp;Locate，却几乎没用它新增事件。系统误差集中在后端选择：与 final 相比深度差 <b>+1.10 / −1.94 / −2.18 km</b>，Maple Creek 发震时刻整体晚 <b>1.0 s</b>，Magna 平移 <b>2.5 km</b>，Prague 震级尺度错 <b>2.77</b>。换用专家定位器后，这些误差大部分消失。</p></div>
+      <div><h3>工具不是充分条件</h3><p>四个 tools 运行没有一个达到可信目录标准，完整度也只有 final 的 <b>22–51 %</b>。完整度的差距基本对应模板匹配：Agent 调用了 Match&amp;Locate，却几乎没用它新增事件。可信度的问题集中在空间和强度，来自后端选择：与 final 相比深度差 <b>+1.10 / −1.94 / −2.18 km</b>，Maple Creek 发震时刻整体晚 <b>1.0 s</b>，Magna 平移 <b>2.5 km</b>，Prague 震级尺度错 <b>2.77</b>。换用专家定位器后，这些误差大部分消失。</p></div>
     </div>
     <div class="finding" data-q="4">
       <div><h3>Agent 识别不了自己的系统误差</h3><p>2.5 s 的时间偏移、2.7 个单位的震级偏差、2.5 km 的平移，都能用不依赖参考目录的简单检查发现，但 Agent 没有做，或做了却给出错误解释。这正是 S2 知识和 S3 checker 要检验的部分。</p></div>
@@ -444,16 +444,13 @@ footer { font-size: 12px; color: var(--muted); }
   <div class="twocol">
     <div class="panel" data-q="1 2 3 4">
       <div class="eyebrow">metrics v2 §7a · 2026-10-30 固定</div>
-      <h3 id="s-crit">"可用于科学研究"的标准</h3>
+      <h3 id="s-crit">可信目录标准</h3>
       <dl class="crit">
-        <dt>完成</dt><dd>交出符合约定的目录</dd>
-        <dt>检测</dt><dd>recall_norm 与 1 s/3 km 召回均 ≥ 0.9 × final；找回 final ≥ 50 %</dd>
-        <dt>区域</dt><dd>区域外事件 ≤ max(10 %, final + 5 %)</dd>
-        <dt>精度</dt><dd>盲审虚假率 ≤ 2 %</dd>
-        <dt>定位</dt><dd>偏移 ≤ max(1 km, final + 0.5 km)；|Δt| ≤ max(0.3 s, final + 0.2 s)</dd>
-        <dt>深度</dt><dd>与 final 深度差 ≤ 1 km；单一深度占比 ≤ max(5 %, final + 2 %)</dd>
-        <dt>结构</dt><dd>偏离结构 ≤ max(5 %, 3 × final)</dd>
-        <dt>震级</dt><dd>|dmag| ≤ |final| + 0.2；M ≥ 4 事件齐全</dd>
+        <dt>事件真实</dt><dd>区域外 ≤ max(10 %, final + 5 %)；盲审虚假率 ≤ 2 %</dd>
+        <dt>时间</dt><dd>准确：与 final 的时间偏差 ≤ 0.3 s；稳定：离散 ≤ 0.3 s，大震后不漏检</dd>
+        <dt>空间</dt><dd>准确：平移 ≤ 1 km，深度偏差 ≤ 1 km；稳定：离散、偏离结构、深度堆积</dd>
+        <dt>强度</dt><dd>准确：震级偏差 ≤ |final| + 0.2，M ≥ 4 齐全；稳定：离散、无尺度压缩</dd>
+        <dt>完整度</dt><dd>单独报告（找回 final 的比例、recall_norm），不计入判定</dd>
       </dl>
     </div>
     <div class="panel">
@@ -478,9 +475,9 @@ footer { font-size: 12px; color: var(--muted); }
     <div class="doc"><code>docs/research/00_Research_Plan.md</code><span>研究设计：难度档、阶段、checker 形式、对照</span></div>
     <div class="doc"><code>docs/research/01_Expert_Experience_and_Checker.md</code><span>专家经验证据、checker 规则、干预分类</span></div>
     <div class="doc"><code>docs/research/02_Paper_Outline.md</code><span>论文问题、论点与证据、章节与图</span></div>
-    <div class="doc"><code>docs/research/progress/STATUS_AND_PLAN.md</code><span>当前进度、工作计划、可用性标准</span></div>
+    <div class="doc"><code>docs/research/progress/STATUS_AND_PLAN.md</code><span>当前进度（含可信目录判定）、工作计划</span></div>
     <div class="doc"><code>docs/data/CASE_REGISTRY.md</code><span>六案例、难度档、评估时间窗、主参考目录</span></div>
-    <div class="doc"><code>docs/framework/03_EVALUATION_METRICS.md</code><span>评估指标 metrics v2 与可用性标准</span></div>
+    <div class="doc"><code>docs/framework/03_EVALUATION_METRICS.md</code><span>评估指标 metrics v2 与可信目录标准</span></div>
   </div>
 </section>
 

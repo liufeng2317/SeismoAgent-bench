@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "9a7c066f8acadc5c58e9aa35c417fd2f7ed9ce6b",
+ "scorer_commit": "3b28279bfa815b0eb0caa0a6722d5ea45908e0cf",
  "scorer_dirty": true,
- "generated_utc": "2026-10-29T15:55:12+00:00",
+ "generated_utc": "2026-10-29T17:57:32+00:00",
  "task": "2017_maple_creek_yellowstone",
  "references": {
   "comcat": {
@@ -158,6 +158,11 @@
     "recall": 0.0414,
     "precision": 0.977,
     "event_ratio": 0.0504,
+    "time": {
+     "pairs": 614,
+     "bias_s": 0.0563,
+     "mad_s": 0.0799
+    },
     "location": {
      "pairs": 614,
      "epi_median_km": 0.8915,
@@ -303,6 +308,11 @@
     "recall": 0.8104,
     "precision": 0.542,
     "event_ratio": 1.454,
+    "time": {
+     "pairs": 10263,
+     "bias_s": -0.0279,
+     "mad_s": 0.1166
+    },
     "location": {
      "pairs": 10263,
      "epi_median_km": null,
@@ -1163,7 +1173,10 @@
     "shift_final_km": null,
     "scatter_final_km": null,
     "dz_final_km": null,
+    "dz_mad_final_km": null,
     "dt_final_s": null,
+    "time_bias_final_s": null,
+    "time_mad_final_s": null,
     "recall_M2": 1.0,
     "precision_M2": 1.0,
     "f1_M2": 1.0,
@@ -1451,6 +1464,11 @@
     "recall": 0.0956,
     "precision": 0.9629,
     "event_ratio": 0.1153,
+    "time": {
+     "pairs": 1387,
+     "bias_s": 0.4836,
+     "mad_s": 0.0563
+    },
     "location": {
      "pairs": 1387,
      "epi_median_km": 0.9014,
@@ -1800,7 +1818,10 @@
     "shift_final_km": 0.3876,
     "scatter_final_km": 0.6492,
     "dz_final_km": -0.5625,
+    "dz_mad_final_km": 0.41,
     "dt_final_s": 0.4837,
+    "time_bias_final_s": 0.4836,
+    "time_mad_final_s": 0.0563,
     "recall_M2": 1.0,
     "precision_M2": null,
     "f1_M2": null,

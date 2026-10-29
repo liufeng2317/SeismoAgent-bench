@@ -33,7 +33,7 @@ def _score_part(score: dict | None, swap: dict | None) -> dict:
         part["completion"] = score["completion"]
         part["metrics_version"] = score.get("metrics_version")
         part["headline"] = score["headline"]
-        part["usability"] = score.get("usability")
+        part["trust"] = score.get("trust")
         part["process"] = {k: score["process"].get(k) for k in PROCESS_KEYS}
         part["leakage_flag"] = (score["process"].get("leakage") or {}).get("flag")
         if score.get("audit"):

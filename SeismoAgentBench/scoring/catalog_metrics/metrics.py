@@ -309,17 +309,21 @@ def versus_final(cand: Population, final: Population, center) -> dict:
 
     ``recall`` is the share of the final's events the candidate recovers,
     ``precision`` the share of candidate events the final contains (both
-    chance-corrected, one-to-one, primary gates); ``location`` is the
-    candidate minus the final (shift, scatter, dz, |dt|).
+    chance-corrected, one-to-one, primary gates); ``time`` the signed origin-time
+    difference (median bias, MAD); ``location`` the candidate minus the final
+    (shift, scatter, dz, |dt|).
     """
     result = correspond(cand, final)
     pairs, chance = result["pairs"], result["chance"]
     n_final, n_cand = len(final.events), len(cand.events)
+    # Signed origin-time difference: a mean offset is a model or picking bias that trades off with depth.
+    dt = cand.events.time.to_numpy()[pairs.a] - final.events.time.to_numpy()[pairs.b]
     return {"gates": result["gates"], "final_events": n_final, "candidate_events": n_cand,
             "matched": len(pairs), "chance": chance,
             "recall": net_rate(len(pairs), chance, n_final),
             "precision": net_rate(len(pairs), chance, n_cand),
             "event_ratio": _num(n_cand / n_final) if n_final else None,
+            "time": {"pairs": int(len(dt)), "bias_s": _median(dt), "mad_s": _mad(dt)},
             "location": location(cand, final, pairs, center)}
 
 

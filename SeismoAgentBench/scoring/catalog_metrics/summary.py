@@ -45,10 +45,10 @@ def summarize(task_dir: Path, *, rescore: bool = False, write: bool = True) -> d
                  "leakage_flagged": [r["run"]["run_id"] for r in reports if r["process"]["leakage"].get("flag")],
                  "completion_rate": round(len(completed) / len(clean), 4) if clean else None,
                  "runs": [{"run_id": r["run"]["run_id"], "completed": r["completion"]["completed"],
-                           "usable": (r.get("usability") or {}).get("usable"),
-                           "usability_failed": (r.get("usability") or {}).get("failed"),
+                           "trusted": (r.get("trust") or {}).get("trusted"),
+                           "trust_failed": (r.get("trust") or {}).get("failed"),
                            **{k: r["headline"].get(k) for k in keys}} for r in reports], "metrics": {}}
-        entry["usable_runs"] = sum(1 for r in clean if (r.get("usability") or {}).get("usable") is True)
+        entry["trusted_runs"] = sum(1 for r in clean if (r.get("trust") or {}).get("trusted") is True)
         for key in keys:
             if key.startswith(DETECTION_PREFIXES):
                 values = [r["headline"].get(key) if r["completion"]["completed"] else 0.0 for r in clean]

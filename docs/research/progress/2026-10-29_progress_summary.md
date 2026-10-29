@@ -1,6 +1,6 @@
 # SeismoAgentBench 进展总结（截至 2026-10-29）
 
-> **更正（2026-10-30）：** 本文数值来自 metrics v1。Maple Creek 的结果显示 v1 的 headline 会掩盖散乱或有系统偏差的目录，评估已升级为 metrics v2（门限 2 s / 5 km、全部匹配做偶然匹配校正、直接与 final 比较、增加可用性判定），所有结果已重新评分，部分数值有变化（例如 Prague tools recall_norm 1.38 不变，final 1.83 → 1.85；Magna tools 0.88 → 0.87）。最新数值见 `docs/research/progress/STATUS_AND_PLAN.md`，改动说明见 `docs/framework/03_EVALUATION_METRICS.md` §12。结论方向不变，且更明确：目前没有任何 Agent 运行达到"可用"。
+> **更正（2026-10-30）：** 本文数值来自 metrics v1。Maple Creek 的结果显示 v1 的 headline 会掩盖散乱或有系统偏差的目录，评估已升级为 metrics v2（门限 2 s / 5 km、全部匹配做偶然匹配校正、直接与 final 比较、增加可用性判定），所有结果已重新评分，部分数值有变化（例如 Prague tools recall_norm 1.38 不变，final 1.83 → 1.85；Magna tools 0.88 → 0.87）。最新数值见 `docs/research/progress/STATUS_AND_PLAN.md`，改动说明见 `docs/framework/03_EVALUATION_METRICS.md` §12。结论方向不变，且更明确：目前没有任何 Agent 运行达到"可信目录标准"（事件真实性、时间、空间、强度四个维度，完整度单独报告）。
 
 ## 一句话概述
 

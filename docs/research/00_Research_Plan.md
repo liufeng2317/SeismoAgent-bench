@@ -148,7 +148,7 @@ Within the closed-reference, raw-waveform task the Agent arms form a ladder in w
 
 | Stage | Arm | Agent additionally gets | Question | Status |
 |---|---|---|---|---|
-| S0 | `min` | task, data, output contract | Can a general Agent build a usable catalog on its own? | implemented |
+| S0 | `min` | task, data, output contract | Can a general Agent build a trusted catalog on its own? | implemented |
 | S1 | `tools` | validated tool library `seismotools` with usage docs | What do tools add? | implemented |
 | S2 | `knowledge` | tools + case-agnostic expert knowledge given up front (§2.5) | What does knowledge add on top of tools? | not implemented |
 | S3 | `checker` | tools + knowledge + reference-free checker, with upstream repair required (§2.5) | Does automated validation close the gap to the expert? | not implemented |
@@ -211,7 +211,7 @@ An independent reviewer — a fresh session of the same general Agent given the 
 - **Repeats.** Metrics v1 §6 asks for at least two runs per configuration. First pass: one run per case × stage. Second runs go first to S1 and S3 (the headline contrast), starting with Prague and Magna S1, to measure run-to-run spread before deciding the rest.
 - **Second model.** Run S1 and S3 on three cases (one per tier) with a second model, so the conclusion is about agentic methods rather than one model (GLM-5.3 in Claude Code so far).
 - **Held-out generalisation (optional).** One case from Tier B of the candidate pool ([`CASE_POOL.md`](../data/CASE_POOL.md) §3; e.g. South Napa 2014 or Westmorland 2020) with references and ceiling but no human-in-loop final, run under S1 and S3. Neither the knowledge nor the checker rules were learned from it.
-- **Analyses for every run:** catalog metrics v2 with the usability verdict, component swap, blind audit. The second rater spot-checks 10 per run.
+- **Analyses for every run:** catalog metrics v2 with the trusted-catalog verdict, component swap, blind audit. The second rater spot-checks 10 per run.
 
 ### 2.7 Target leakage control
 
@@ -263,9 +263,9 @@ Reference catalogs are not absolute ground truth. Each case may contain multiple
 
 Reference quality, evaluation role, and methodological independence must be kept separate. A case may use several products for detection, phase timing, association, absolute location, relative relocation, completeness, and uncertainty; no single catalog should be treated as complete truth for every dimension. The detailed quality tiers, scope fields, and allowed metrics are specified in [`CASE_REGISTRY.md`](../data/CASE_REGISTRY.md).
 
-### 3.4 Metrics and usability
+### 3.4 Metrics and the trusted-catalog standard
 
-Every run is scored with the pre-registered catalog metrics, v2 since 2026-10-30 ([`03_EVALUATION_METRICS.md`](../framework/03_EVALUATION_METRICS.md)): a capability profile per case and stage, no composite score, read next to the run's map and depth section. Rules for choosing the primary reference of a case are in [`COLLECTION_STANDARD.md`](../data/preparation/COLLECTION_STANDARD.md) §2. A pass/fail usability verdict, read against the final of the same case, is part of v2 (metrics §7a): it answers the core question per case and stage.
+Every run is scored with the pre-registered catalog metrics, v2 since 2026-10-30 ([`03_EVALUATION_METRICS.md`](../framework/03_EVALUATION_METRICS.md)): a capability profile per case and stage, no composite score, read next to the run's map and depth section. The trusted-catalog verdict (metrics §7a) answers the core question per case and stage: are the events real, and are their times, locations and magnitudes accurate and stable against the human-in-loop final? Completeness against the final is reported beside it, not folded into it.
 
 ---
 

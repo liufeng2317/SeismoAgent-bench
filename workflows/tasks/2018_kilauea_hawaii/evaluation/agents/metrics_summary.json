@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "90b1cf02a886e80ee9758e2bc3bea257223a985d",
- "scorer_dirty": false,
- "generated_utc": "2026-10-29T16:37:18+00:00",
+ "scorer_commit": "3b28279bfa815b0eb0caa0a6722d5ea45908e0cf",
+ "scorer_dirty": true,
+ "generated_utc": "2026-10-29T18:02:39+00:00",
  "task": "2018_kilauea_hawaii",
  "configurations": [
   {
@@ -16,14 +16,12 @@
     {
      "run_id": "20261029T084653Z",
      "completed": true,
-     "usable": false,
-     "usability_failed": [
-      "detection",
-      "detection_tight",
-      "completeness_vs_final",
+     "trusted": false,
+     "trust_failed": [
       "inside_region",
-      "origin_time",
-      "depth_vs_final",
+      "time_bias",
+      "depth_bias",
+      "horizontal_scatter",
       "depth_pileup",
       "magnitude_offset"
      ],
@@ -44,6 +42,7 @@
      "dt_median_s": 0.9,
      "dt_std_s": 0.4549,
      "dz_final_km": 1.2925,
+     "dz_mad_final_km": 1.1913,
      "dz_median_km": 2.044,
      "epi_gt5km": 0.0,
      "epi_mean_M2": 1.7344,
@@ -78,6 +77,8 @@
      "scatter_median_km": 1.0114,
      "shift_final_km": 0.1348,
      "shift_km": 0.2301,
+     "time_bias_final_s": -0.9643,
+     "time_mad_final_s": 0.2639,
      "union_support": 0.733
     }
    ],
@@ -182,6 +183,12 @@
      "mean": 1.2925,
      "min": 1.2925,
      "max": 1.2925,
+     "n": 1
+    },
+    "dz_mad_final_km": {
+     "mean": 1.1913,
+     "min": 1.1913,
+     "max": 1.1913,
      "n": 1
     },
     "dz_median_km": {
@@ -388,6 +395,18 @@
      "max": 0.2301,
      "n": 1
     },
+    "time_bias_final_s": {
+     "mean": -0.9643,
+     "min": -0.9643,
+     "max": -0.9643,
+     "n": 1
+    },
+    "time_mad_final_s": {
+     "mean": 0.2639,
+     "min": 0.2639,
+     "max": 0.2639,
+     "n": 1
+    },
     "union_support": {
      "mean": 0.733,
      "min": 0.733,
@@ -395,7 +414,7 @@
      "n": 1
     }
    },
-   "usable_runs": 0,
+   "trusted_runs": 0,
    "cost_usd": {
     "mean": 18.3944,
     "min": 18.3944,
@@ -426,11 +445,9 @@
     {
      "run_id": "20261029T084718Z",
      "completed": true,
-     "usable": false,
-     "usability_failed": [
-      "detection",
-      "detection_tight",
-      "completeness_vs_final"
+     "trusted": false,
+     "trust_failed": [
+      "time_bias"
      ],
      "b_difference": -0.058,
      "depth_band_share": 0.3216,
@@ -448,6 +465,7 @@
      "dt_median_s": 0.3007,
      "dt_std_s": 0.3104,
      "dz_final_km": 0.4487,
+     "dz_mad_final_km": 0.38,
      "dz_median_km": 1.014,
      "epi_gt5km": 0.0,
      "epi_mean_M2": 1.2174,
@@ -482,6 +500,8 @@
      "scatter_median_km": 0.6144,
      "shift_final_km": 0.0653,
      "shift_km": 0.4807,
+     "time_bias_final_s": -0.3636,
+     "time_mad_final_s": 0.0737,
      "union_support": 0.9452
     }
    ],
@@ -580,6 +600,12 @@
      "mean": 0.4487,
      "min": 0.4487,
      "max": 0.4487,
+     "n": 1
+    },
+    "dz_mad_final_km": {
+     "mean": 0.38,
+     "min": 0.38,
+     "max": 0.38,
      "n": 1
     },
     "dz_median_km": {
@@ -786,6 +812,18 @@
      "max": 0.4807,
      "n": 1
     },
+    "time_bias_final_s": {
+     "mean": -0.3636,
+     "min": -0.3636,
+     "max": -0.3636,
+     "n": 1
+    },
+    "time_mad_final_s": {
+     "mean": 0.0737,
+     "min": 0.0737,
+     "max": 0.0737,
+     "n": 1
+    },
     "union_support": {
      "mean": 0.9452,
      "min": 0.9452,
@@ -793,7 +831,7 @@
      "n": 1
     }
    },
-   "usable_runs": 0,
+   "trusted_runs": 0,
    "cost_usd": {
     "mean": 17.703,
     "min": 17.703,
