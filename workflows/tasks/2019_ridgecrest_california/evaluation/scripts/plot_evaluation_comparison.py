@@ -599,7 +599,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--task-dir', type=Path, default=TASK)
     parser.add_argument('--runs', choices=('pilot', 'formal'), default='pilot',
-                        help='pilot: the October pilot runs (agents/pilot/figures); formal: the latest finished formal run '
+                        help='pilot: the October pilot runs (archive/pilot/figures); formal: the latest finished formal run '
                              'of each variant (comparison/figures)')
     args = parser.parse_args()
     global FOCUS_AGENT
@@ -610,7 +610,7 @@ def main():
             raise SystemExit('no finished formal run')
         out = args.task_dir / 'evaluation' / 'comparison' / 'figures'
     else:
-        out = args.task_dir / 'evaluation' / 'agents' / 'pilot' / 'figures'  # pilot runs vs expert and references
+        out = args.task_dir / 'evaluation' / 'archive' / 'pilot' / 'figures'  # pilot runs vs expert and references
     FOCUS_AGENT = FOCUS_AGENT if FOCUS_AGENT in AGENT_RUNS else next(iter(AGENT_RUNS))
     out.mkdir(parents=True, exist_ok=True)
     cfg, audit, pops, inputs = load_populations()

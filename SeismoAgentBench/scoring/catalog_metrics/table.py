@@ -1,4 +1,5 @@
-"""Complete score table across cases (docs/research/progress/SCORE_TABLE.md).
+"""Complete score table across cases (docs/research/progress/SCORE_TABLE.md) and the one-page
+overview beside it (RESULTS_OVERVIEW.md).
 
 Built only from tracked outputs, so it can be regenerated after every run:
 each case's ``evaluation/human_in_loop/metrics_baseline.json`` (references,
@@ -94,13 +95,15 @@ def _case_rows(task: Path) -> tuple[list[Row], dict | None, list]:
         run = s["run"]
         label = f"{run['variant']} ({run['harness']} × {run['model']}, {run['run_id']})"
         rows.append(Row(label, s.get("headline") or {}, s.get("trust"),
-                        {"state": s.get("formal_state") or s.get("run_state"), "swap": s.get("swap"),
+                        {"key": scores.parent.name, "variant": run["variant"],
+                         "state": s.get("formal_state") or s.get("run_state"), "swap": s.get("swap"),
                          "audit": s.get("audit"), "process": s.get("process"),
                          "leakage": s.get("leakage_flag"), "completed": (s.get("completion") or {}).get("completed")}))
         rescue = s.get("rescue_reference_only")
         if rescue:
             rows.append(Row(f"{run['variant']} — rescue, reference only", rescue.get("headline") or {},
-                            rescue.get("trust"), {"state": "not a formal result", "swap": rescue.get("swap")}))
+                            rescue.get("trust"), {"state": "not a formal result", "swap": rescue.get("swap"),
+                                                  "key": scores.parent.name, "variant": run["variant"], "rescue": True}))
     summary = _load(task / AGENTS_DIR / SUMMARY_FILE) or {}
     return rows, baseline, summary.get("excluded_runs", [])
 
@@ -217,7 +220,74 @@ def build(tasks_root: Path) -> str:
     return "\n".join(out)
 
 
+OVERVIEW_FILE = "RESULTS_OVERVIEW.md"
+VARIANTS = ("min", "tools")  # configuration ladder columns (docs/research/00_Research_Plan.md §2.4); later stages add columns
+
+
+def _verdict_word(r: Row) -> str:
+    t = r.trust or {}
+    if not t:
+        return "—"
+    return {True: "**trusted**", False: "not trusted", None: "pending"}[t.get("trusted")]
+
+
+def _overview_cell(r: Row | None) -> str:
+    if r is None:
+        return "—"
+    if not r.extra.get("completed"):
+        return f"no valid catalog ({r.extra.get('state') or 'failed'})"
+    t = r.trust or {}
+    failed = len(t.get("failed") or [])
+    return f"{_verdict_word(r)} · {failed} failed · recall {_fmt(r.h.get('recall_final'))}"
+
+
+def build_overview(tasks_root: Path, output_dir: Path) -> str:
+    """One-page overview: the case × configuration matrix and one row per run with the headline numbers."""
+    matrix, runs, other = [], [], []
+    for case_id, name, tier in CASES:
+        task = tasks_root / case_id
+        rows, _, excl = _case_rows(task)
+        formal = [r for r in rows if r.label != "human-in-loop final" and not r.extra.get("rescue")]
+        latest = {v: ([r for r in formal if r.extra.get("variant") == v] or [None])[-1] for v in VARIANTS}
+        matrix.append([tier, name] + [_overview_cell(latest[v]) for v in VARIANTS])
+        for r in formal + [r for r in rows if r.extra.get("rescue")]:
+            fig = task / AGENTS_DIR / r.extra["key"] / "figures"
+            suffix = "_rescue" if r.extra.get("rescue") else ""
+            links = [f"[{label}]({Path(_relative(fig / f'{stem}{suffix}.png', output_dir)).as_posix()})"
+                     for stem, label in (("spatial_comparison", "map"), ("location_diagnostics", "offsets"))
+                     if (fig / f"{stem}{suffix}.png").is_file()]
+            if not r.extra.get("rescue") and not r.extra.get("completed"):
+                row = [name, r.extra.get("variant") or "—", r.extra.get("state") or "failed", "no valid catalog"] + ["—"] * 9
+            else:
+                state = "completed" if r.extra.get("completed") else (r.extra.get("state") or "—")
+                row = [name, r.extra.get("variant") or "—", state, _verdict_word(r),
+                       r.cell("recall_final"), r.cell("time_bias_final_s"), r.cell("dz_final_km"), r.cell("shift_final_km"),
+                       r.cell("scatter_final_km"), r.cell("dmag_median"), r.cell("depth_mode_share"),
+                       ", ".join((r.trust or {}).get("failed") or []) or "—", " · ".join(links) or "—"]
+            (other if r.extra.get("rescue") else runs).append(row)
+        other += [[name, e["run"], "excluded", e["reason"]] for e in excl]
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    out = ["# Results overview", "",
+           f"Generated {now} by `python -m SeismoAgentBench.scoring.catalog_metrics table` together with [`SCORE_TABLE.md`](SCORE_TABLE.md) (every metric, by dimension); do not edit by hand. A run is judged against the human-in-loop final of its case (catalog metrics v{METRICS_VERSION}, trusted-catalog standard §7a of `docs/framework/02_Catalog_Metrics.md`).",
+           "", "## 1. Cases × configurations", "",
+           "Latest formal run per cell: verdict · number of failed trusted-catalog criteria · recall against the final.", ""]
+    out += _table(["Tier", "Case"] + list(VARIANTS), matrix) + [""]
+    out += ["## 2. Runs", "",
+            "Values against the human-in-loop final; ✗ marks a value that fails its criterion. Δt origin time (s), Δz depth (km), shift = median horizontal offset (km), scatter = spread about it (km), Δmag against the primary magnitude reference, depth pile = share in the densest 1-km slice. Figures: the scorer's standard spatial comparison (reference, final, run on one extent) and offset diagnostics.", ""]
+    out += _table(["Case", "Config", "State", "Verdict", "Recall", "Δt", "Δz", "Shift", "Scatter", "Δmag", "Depth pile", "Failed criteria", "Figures"], runs) + [""]
+    if other:
+        out += ["## 3. Not formal results", "", "Reference-only rescues (outputs recovered outside work/) and runs excluded for a harness defect.", ""]
+        out += _table(["Case", "Run", "State", "Note"], [[o[0], o[1], o[2], o[3]] if len(o) == 4 else [o[0], o[1], "rescue, reference only", f"{o[3]}; failed: {o[11]}"] for o in other]) + [""]
+    return "\n".join(out)
+
+
+def _relative(path: Path, start: Path) -> str:
+    import os
+    return os.path.relpath(path.resolve(), start.resolve())
+
+
 def write_table(tasks_root: Path, output: Path) -> Path:
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(build(tasks_root) + "\n", encoding="utf-8")
+    (output.parent / OVERVIEW_FILE).write_text(build_overview(tasks_root, output.parent) + "\n", encoding="utf-8")
     return output
