@@ -15,6 +15,27 @@ import sys
 from pathlib import Path
 
 RUN = Path(__file__).resolve().parents[2] / "interface/run.py"
+SOURCE = Path(__file__).resolve().parents[2] / "source"
+MAGNITUDE_SEES_IT = {"magnitude_range", "magnitude_detection", "b_value"}
+
+
+def magnitude_variants(i: Path) -> None:
+    """Catalogs whose magnitudes equal the checker's recomputed standard ML, and the same shifted by -2.68
+    (an amplitude in mm used with the constant for nm)."""
+    sys.path.insert(0, str(SOURCE))
+    import pandas as pd
+    from catalog_checker.checks import Data
+    from catalog_checker.io import read_catalog, read_picks, read_stations, read_waveform_streams
+    from catalog_checker.magnitude_recompute import standard_ml, station_amplitudes
+    d = Data(read_catalog(i / "catalog.csv"), read_picks(i / "picks.csv"), read_stations(i / "stations.csv"))
+    streams, _, _ = read_waveform_streams(i / "waveforms")
+    index = streams[["file", "seed_id", "station_id", "location", "channel", "component", "file_start", "file_end"]].drop_duplicates("file")
+    amps = station_amplitudes(d, index, i / "stations.xml", list(d.events.event_id))
+    ml = amps.assign(ml=standard_ml(amps.amplitude_nm, amps.hypocentral_km)).groupby("event_id").ml.median()
+    cat = pd.read_csv(i / "catalog.csv")
+    cat["magnitude"] = cat.event_id.map(ml).round(3)
+    cat.to_csv(i / "variants/catalog_ml_consistent.csv", index=False)
+    cat.assign(magnitude=cat.magnitude - 2.68).to_csv(i / "variants/catalog_ml_unit_error.csv", index=False)
 
 
 LOCATION_SEES_IT = {"depth_at_edges", "depth_single_value", "depth_layers", "sp_depth_offset", "travel_time_intercept",
@@ -45,6 +66,12 @@ def scenarios(i: Path) -> list[tuple]:
          + picks + base, {"relocation_shift"}, LOCATION_SEES_IT),
         ("relocation_collapsed", ["--stage", "relocation", "--catalog", str(v / "relocated_collapsed.csv"), "--catalog-before", str(i / "catalog.csv")]
          + picks + base, {"relocation_thinning"}, LOCATION_SEES_IT | {"relocation_large_moves"}),
+        ("magnitude_recompute_consistent", ["--stage", "magnitude", "--catalog", str(v / "catalog_ml_consistent.csv"),
+                                            "--waveforms", str(i / "waveforms"), "--stations", str(i / "stations.xml")] + picks,
+         set(), MAGNITUDE_SEES_IT),
+        ("magnitude_recompute_unit_error", ["--stage", "magnitude", "--catalog", str(v / "catalog_ml_unit_error.csv"),
+                                            "--waveforms", str(i / "waveforms"), "--stations", str(i / "stations.xml")] + picks,
+         {"magnitude_recompute"}, MAGNITUDE_SEES_IT),
     ]
 
 
@@ -55,6 +82,7 @@ def main() -> int:
     parser.add_argument("--python", default=sys.executable)
     args = parser.parse_args()
     ok = True
+    magnitude_variants(args.inputs_dir)
     for name, cli, expected, *allowed in scenarios(args.inputs_dir):
         allowed = allowed[0] if allowed else set()
         out = args.output_dir / name

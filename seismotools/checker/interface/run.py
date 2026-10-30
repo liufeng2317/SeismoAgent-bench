@@ -15,7 +15,8 @@ Stages, in processing order: ``data`` (stations, channels, gaps, representative 
 after preprocessing), ``picks`` (picks, associated or not; with --waveforms also the onsets and
 amplitudes under a sample of picks), ``association`` (picks and an event table whose locations may be
 missing), ``location`` (the located catalog; with --model-ensemble also the relocation of a sample
-with generic velocity models), ``relocation`` (the relocated catalog against --catalog-before), ``magnitude``. Each stage also runs the
+with generic velocity models), ``relocation`` (the relocated catalog against --catalog-before), ``magnitude`` (with --waveforms and StationXML also the
+recomputation of a standard local magnitude for a sample of events). Each stage also runs the
 cheaper checks of the stages before it; ``all`` runs everything the given inputs allow.
 
 Writes ``checker_report.json`` (``flags``: products out of their expected range, with the symptom;
@@ -142,6 +143,11 @@ def main(argv=None) -> int:
         ens_checks, ens = model_ensemble(data, extras["config"], vpvs, args.keep_ensemble_dir)
         checks += ens_checks
         sections["model_ensemble"] = ens
+
+    if streams is not None and args.stage in ("magnitude", "all") and data.events.magnitude.notna().any():
+        from catalog_checker.magnitude_recompute import magnitude_recompute
+        index = streams[["file", "seed_id", "station_id", "location", "channel", "component", "file_start", "file_end"]].drop_duplicates("file")
+        checks.append(magnitude_recompute(data, index, args.stations, config))
 
     if figures_on and upto >= STAGES.index("association") and args.stage != "relocation":
         from catalog_checker.stage_figures import association_figures, location_figures

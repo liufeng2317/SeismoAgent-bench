@@ -27,6 +27,23 @@ def utc(t: float) -> str:
     return (START + t).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
 
 
+def write_stationxml(stations: pd.DataFrame, path: Path) -> None:
+    """Flat velocity response: 1e9 counts per m/s on HHZ/HHN/HHE at 50 Hz."""
+    from obspy.core.inventory import Channel, Inventory, Network, Response, Site, Station
+    nets = {}
+    for _, s in stations.iterrows():
+        net, sta = s.station_id.split(".")
+        chans = [Channel(code=f"HH{c}", location_code="", latitude=s.latitude, longitude=s.longitude, elevation=s.elevation_m,
+                         depth=0.0, azimuth={"Z": 0.0, "N": 0.0, "E": 90.0}[c], dip={"Z": -90.0, "N": 0.0, "E": 0.0}[c],
+                         sample_rate=RATE, start_date=START - 86400,
+                         response=Response.from_paz(zeros=[], poles=[], stage_gain=1e9, stage_gain_frequency=1.0,
+                                                    input_units="M/S", output_units="COUNTS"))
+                 for c in "ZNE"]
+        nets.setdefault(net, []).append(Station(code=sta, latitude=s.latitude, longitude=s.longitude, elevation=s.elevation_m,
+                                                site=Site(name=sta), channels=chans, start_date=START - 86400))
+    Inventory(networks=[Network(code=n, stations=st) for n, st in nets.items()], source="synthetic").write(str(path), format="STATIONXML")
+
+
 def pulse(n: int, rate: float, f: float, decay: float) -> np.ndarray:
     t = np.arange(n) / rate
     return np.sin(2 * np.pi * f * t) * np.exp(-t / decay)
@@ -45,6 +62,7 @@ def main() -> int:
     stations = pd.DataFrame({"station_id": [f"XX.S{i:02d}" for i in range(10)], "latitude": LAT0 + sy / KM,
                              "longitude": LON0 + sx / (KM * np.cos(np.radians(LAT0))), "elevation_m": 300.0})
     stations.to_csv(out / "stations.csv", index=False)
+    write_stationxml(stations, out / "stations.xml")
 
     n_ev = 80
     t0 = np.sort(rng.uniform(60, 7140, n_ev))
