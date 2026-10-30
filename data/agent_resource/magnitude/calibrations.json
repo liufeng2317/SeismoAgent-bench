@@ -1,0 +1,2181 @@
+{
+ "description": "Local-magnitude calibration functions -logA0 from standard compilations. ML = log10(A) + (-logA0) [+ station correction], with A in the unit and on the instrument stated per entry. Expressions: R hypocentral km, D epicentral km, T period s, ML a first estimate for magnitude-dependent branches; log = log10.",
+ "sources": {
+  "DS_3.1_rev1.pdf": {
+   "sha256": "74f310f29da8965fe02f5d280dcac52c53673005c5d241823291933b8e6f7003"
+  },
+  "GB+17740-2017.pdf": {
+   "sha256": "85f4c7fb1019593f6595b5513dcb8e780d0b3a04065e1b5006d75efdebc41887"
+  },
+  "IS_3.3_rev1.pdf": {
+   "sha256": "cca138c894b136b8a3dcacf7155688feafb28a198445498a08f9785ab2785917"
+  }
+ },
+ "entries": [
+  {
+   "id": "iaspei_standard",
+   "region": "IASPEI standard (attenuation like southern California; recommended where no regional calibration exists)",
+   "expressions": [
+    {
+     "expr": "1.11*log(R) + 0.00189*R - 2.09",
+     "valid": "R < 1000"
+    }
+   ],
+   "amplitude": {
+    "unit": "nm",
+    "instrument": "Wood-Anderson response, static magnification 1 (IS 3.3 Table 1)",
+    "measure": "half peak-to-peak",
+    "components": "each horizontal separately"
+   },
+   "distance": "hypocentral R (km)",
+   "anchor": {
+    "R": 100,
+    "value": 0.318,
+    "rule": "-logA0(100 km) = 0.318 for amplitudes in nm (3.0 - 2.682)"
+   },
+   "source": {
+    "document": "IS_3.3_rev1.pdf",
+    "where": "eq. (1)"
+   },
+   "station_correction": null,
+   "verification": "transcribed from the source table; checked against the rendered page"
+  },
+  {
+   "id": "richter_1958_table",
+   "region": "Richter (1958) classical table (southern California)",
+   "table": {
+    "distance": "epicentral D (km)",
+    "points": [
+     [
+      0.0,
+      1.4
+     ],
+     [
+      10.0,
+      1.5
+     ],
+     [
+      20.0,
+      1.7
+     ],
+     [
+      30.0,
+      2.1
+     ],
+     [
+      40.0,
+      2.4
+     ],
+     [
+      50.0,
+      2.6
+     ],
+     [
+      60.0,
+      2.8
+     ],
+     [
+      70.0,
+      2.8
+     ],
+     [
+      80.0,
+      2.9
+     ],
+     [
+      90.0,
+      3.0
+     ],
+     [
+      100.0,
+      3.0
+     ],
+     [
+      120.0,
+      3.1
+     ],
+     [
+      140.0,
+      3.2
+     ],
+     [
+      160.0,
+      3.3
+     ],
+     [
+      180.0,
+      3.4
+     ],
+     [
+      200.0,
+      3.5
+     ],
+     [
+      220.0,
+      3.65
+     ],
+     [
+      240.0,
+      3.7
+     ],
+     [
+      260.0,
+      3.8
+     ],
+     [
+      280.0,
+      3.9
+     ],
+     [
+      300.0,
+      4.0
+     ],
+     [
+      320.0,
+      4.1
+     ],
+     [
+      340.0,
+      4.2
+     ],
+     [
+      360.0,
+      4.3
+     ],
+     [
+      380.0,
+      4.4
+     ],
+     [
+      400.0,
+      4.5
+     ],
+     [
+      420.0,
+      4.5
+     ],
+     [
+      440.0,
+      4.6
+     ],
+     [
+      460.0,
+      4.6
+     ],
+     [
+      480.0,
+      4.7
+     ],
+     [
+      500.0,
+      4.7
+     ],
+     [
+      520.0,
+      4.8
+     ],
+     [
+      540.0,
+      4.8
+     ],
+     [
+      560.0,
+      4.9
+     ],
+     [
+      580.0,
+      4.9
+     ],
+     [
+      600.0,
+      4.9
+     ]
+    ]
+   },
+   "amplitude": {
+    "unit": "mm",
+    "instrument": "classical Wood-Anderson record (oWA, magnification 2800)",
+    "measure": "maximum trace amplitude",
+    "components": "horizontal"
+   },
+   "distance": "epicentral D (km)",
+   "anchor": {
+    "D": 100,
+    "value": 3.0,
+    "rule": "-logA0(100 km) = 3.0 for amplitudes in mm on a WA record (Richter's definition)"
+   },
+   "source": {
+    "document": "DS_3.1_rev1.pdf",
+    "where": "Table 1"
+   },
+   "verification": "parsed table (MinerU), checked against the rendered page",
+   "station_correction": null
+  },
+  {
+   "id": "hutton_boore_1987",
+   "region": "Southern California",
+   "expressions": [
+    {
+     "expr": "1.110*log(R/100) + 0.00189*(R - 100) + 3.0",
+     "valid": "10 <= R <= 700"
+    }
+   ],
+   "amplitude": {
+    "unit": "mm",
+    "instrument": "WA record (oWA)",
+    "measure": "half peak-to-peak",
+    "components": "horizontal"
+   },
+   "distance": "hypocentral R (km)",
+   "anchor": {
+    "R": 100,
+    "value": 3.0,
+    "rule": "-logA0(100 km) = 3.0 for amplitudes in mm on a WA record (Richter's definition)"
+   },
+   "source": {
+    "document": "DS_3.1_rev1.pdf",
+    "where": "Table 2"
+   },
+   "station_correction": null,
+   "verification": "transcribed from the source table; checked against the rendered page"
+  },
+  {
+   "id": "uhrhammer_2011_base",
+   "region": "California (statewide; base term only)",
+   "expressions": [
+    {
+     "expr": "1.11*log(R) + 0.00189*R + 0.591",
+     "valid": "8 <= R <= 500"
+    }
+   ],
+   "amplitude": {
+    "unit": "mm",
+    "instrument": "WA record, new response (nWA) with amplitude in mm",
+    "measure": "half peak-to-peak",
+    "components": "horizontal"
+   },
+   "distance": "hypocentral R (km)",
+   "anchor": {
+    "R": 100,
+    "value": 3.0,
+    "rule": "-logA0(100 km) = 3.0 for amplitudes in mm on a WA record (Richter's definition)"
+   },
+   "station_correction": "plus a sixth-order Chebyshev term TP(n)*T(n,z) and station corrections S (DS 3.1 Comment 1.4; Uhrhammer et al. 2011), not included",
+   "source": {
+    "document": "DS_3.1_rev1.pdf",
+    "where": "Table 2"
+   },
+   "verification": "transcribed from the source table; checked against the rendered page"
+  },
+  {
+   "id": "vidal_munguia_1999_baja",
+   "region": "Mexico, Baja California",
+   "expressions": [
+    {
+     "expr": "1.1319*log(R/100) + 0.0017*(R - 100) + 3.0",
+     "valid": "0 < R <= 400"
+    }
+   ],
+   "amplitude": {
+    "unit": "mm",
+    "instrument": "WA (csmWA in DS 3.1)",
+    "measure": "half peak-to-peak",
+    "components": "horizontal"
+   },
+   "distance": "hypocentral R (km)",
+   "anchor": {
+    "R": 100,
+    "value": 3.0,
+    "rule": "-logA0(100 km) = 3.0 for amplitudes in mm on a WA record (Richter's definition)"
+   },
+   "source": {
+    "document": "DS_3.1_rev1.pdf",
+    "where": "Table 2"
+   },
+   "station_correction": null,
+   "verification": "transcribed from the source table; checked against the rendered page"
+  },
+  {
+   "id": "vidal_munguia_1999_imperial",
+   "region": "Mexico, Imperial Valley",
+   "expressions": [
+    {
+     "expr": "1.0134*log(R/100) + 0.0025*(R - 100) + 3.0",
+     "valid": "0 < R <= 400"
+    }
+   ],
+   "amplitude": {
+    "unit": "mm",
+    "instrument": "WA (csmWA in DS 3.1)",
+    "measure": "half peak-to-peak",
+    "components": "horizontal"
+   },
+   "distance": "hypocentral R (km)",
+   "anchor": {
+    "R": 100,
+    "value": 3.0,
+    "rule": "-logA0(100 km) = 3.0 for amplitudes in mm on a WA record (Richter's definition)"
+   },
+   "source": {
+    "document": "DS_3.1_rev1.pdf",
+    "where": "Table 2"
+   },
+   "station_correction": null,
+   "verification": "transcribed from the source table; checked against the rendered page"
+  },
+  {
+   "id": "pechmann_2007_utah",
+   "region": "US Intermountain Belt (Utah)",
+   "table_ref": "richter_1958_table",
+   "amplitude": {
+    "unit": "mm",
+    "instrument": "WA record (oWA)",
+    "measure": "maximum trace amplitude",
+    "components": "arithmetic mean of the two horizontals"
+   },
+   "distance": "epicentral D (km), D <= 600",
+   "anchor": {
+    "D": 100,
+    "value": 3.0,
+    "rule": "-logA0(100 km) = 3.0 for amplitudes in mm on a WA record (Richter's definition)"
+   },
+   "station_correction": "station corrections S (Pechmann et al. 2007), not included",
+   "source": {
+    "document": "DS_3.1_rev1.pdf",
+    "where": "Table 2"
+   },
+   "verification": "transcribed from the source table; checked against the rendered page"
+  },
+  {
+   "id": "kim_1998_eastern_north_america",
+   "region": "Eastern North America",
+   "expressions": [
+    {
+     "expr": "1.55*log(D) - 0.22",
+     "valid": "100 <= D <= 800",
+     "component": "horizontal"
+    },
+    {
+     "expr": "1.45*log(D) + 0.11",
+     "valid": "100 <= D <= 800",
+     "component": "vertical"
+    }
+   ],
+   "amplitude": {
+    "unit": "mm",
+    "instrument": "WA record (oWA)",
+    "measure": "half peak-to-peak",
+    "components": "horizontal or vertical (separate expressions)"
+   },
+   "distance": "epicentral D (km)",
+   "anchor": {
+    "D": 100,
+    "value": 3.0,
+    "rule": "-logA0(100 km) = 3.0 for amplitudes in mm on a WA record (Richter's definition)",
+    "tolerance": 0.15
+   },
+   "source": {
+    "document": "DS_3.1_rev1.pdf",
+    "where": "Table 2"
+   },
+   "station_correction": null,
+   "verification": "transcribed from the source table; checked against the rendered page"
+  },
+  {
+   "id": "baumbach_2003_nw_turkey",
+   "region": "NW Turkey",
+   "expressions": [
+    {
+     "expr": "log(R/17) + 0.00960*(R - 17) + 2",
+     "valid": "5 <= R <= 62"
+    },
+    {
+     "expr": "log(R/62) + 0.00960*(R - 62) + 2.95",
+     "valid": "62 <= R <= 110"
+    }
+   ],
+   "amplitude": {
+    "unit": "mm",
+    "instrument": "WA record (oWA)",
+    "measure": "half peak-to-peak",
+    "components": "horizontal"
+   },
+   "distance": "hypocentral R (km)",
+   "anchor": {
+    "R": 17,
+    "value": 2.0,
+    "rule": "ML 3 = 10 mm at 17 km (DS 3.1 Comment 1.2)"
+   },
+   "station_correction": "minus station corrections S (Baumbach et al. 2003), not included",
+   "source": {
+    "document": "DS_3.1_rev1.pdf",
+    "where": "Table 2"
+   },
+   "verification": "transcribed from the source table; checked against the rendered page"
+  },
+  {
+   "id": "kiratzi_papazachos_1984_greece",
+   "region": "Greece",
+   "expressions": [
+    {
+     "expr": "1.58*log(R/100) + 3.0",
+     "valid": "ML <= 3.7"
+    },
+    {
+     "expr": "2.00*log(R/100) + 3.0",
+     "valid": "ML > 3.7"
+    }
+   ],
+   "amplitude": {
+    "unit": "mm",
+    "instrument": "WA record (oWA)",
+    "measure": "half peak-to-peak",
+    "components": "horizontal"
+   },
+   "distance": "hypocentral R (km); DS 3.1 range 100 <= D <= 800",
+   "anchor": {
+    "R": 100,
+    "value": 3.0,
+    "rule": "-logA0(100 km) = 3.0 for amplitudes in mm on a WA record (Richter's definition)"
+   },
+   "source": {
+    "document": "DS_3.1_rev1.pdf",
+    "where": "Table 2"
+   },
+   "verification": "the ML <= 3.7 branch is printed in the NW Turkey row; DS 3.1 Table 2 sets this formula one row above its region in the PDF (and in the MinerU table); assignment moved one row down, supported by the anchor test, the unit noted in the Reference column and the component",
+   "station_correction": null
+  },
+  {
+   "id": "muco_minga_1991_albania",
+   "region": "Albania",
+   "expressions": [
+    {
+     "expr": "1.6627*log(D) + 0.0008*D - 0.433",
+     "valid": "10 <= D <= 600"
+    }
+   ],
+   "amplitude": {
+    "unit": "mm",
+    "instrument": "Muco & Minga (1991); oWA",
+    "measure": "half peak-to-peak",
+    "components": "horizontal"
+   },
+   "distance": "epicentral D (km)",
+   "anchor": {
+    "D": 100,
+    "value": 3.0,
+    "rule": "-logA0(100 km) = 3.0 for amplitudes in mm on a WA record (Richter's definition)"
+   },
+   "station_correction": null,
+   "source": {
+    "document": "DS_3.1_rev1.pdf",
+    "where": "Table 2"
+   },
+   "verification": "DS 3.1 Table 2 sets this formula one row above its region in the PDF (and in the MinerU table); assignment moved one row down, supported by the anchor test, the unit noted in the Reference column and the component"
+  },
+  {
+   "id": "wahlstrom_strauch_1984_central_europe",
+   "region": "Central Europe",
+   "expressions": [
+    {
+     "expr": "0.83*log(R) + (0.0017/T)*(R - 100) + 1.41",
+     "valid": "100 <= D <= 650"
+    }
+   ],
+   "amplitude": {
+    "unit": "mm",
+    "instrument": "Wahlström & Strauch (1984); oWA; T = period of the maximum (s)",
+    "measure": "half peak-to-peak",
+    "components": "vertical"
+   },
+   "distance": "hypocentral R (km)",
+   "anchor": {
+    "R": 100,
+    "value": 3.0,
+    "rule": "-logA0(100 km) = 3.0 for amplitudes in mm on a WA record (Richter's definition)",
+    "T": 1.0
+   },
+   "station_correction": null,
+   "source": {
+    "document": "DS_3.1_rev1.pdf",
+    "where": "Table 2"
+   },
+   "verification": "DS 3.1 Table 2 sets this formula one row above its region in the PDF (and in the MinerU table); assignment moved one row down, supported by the anchor test, the unit noted in the Reference column and the component"
+  },
+  {
+   "id": "stange_2006_sw_germany",
+   "region": "SW Germany (Baden-Württemberg)",
+   "expressions": [
+    {
+     "expr": "1.11*log(R) + 0.95*R/1000 + 0.69",
+     "valid": "10 < R < 1000"
+    }
+   ],
+   "amplitude": {
+    "unit": "mm",
+    "instrument": "Stange (2006); oWA",
+    "measure": "half peak-to-peak",
+    "components": "vertical"
+   },
+   "distance": "hypocentral R (km)",
+   "anchor": {
+    "R": 100,
+    "value": 3.0,
+    "rule": "-logA0(100 km) = 3.0 for amplitudes in mm on a WA record (Richter's definition)"
+   },
+   "station_correction": null,
+   "source": {
+    "document": "DS_3.1_rev1.pdf",
+    "where": "Table 2"
+   },
+   "verification": "DS 3.1 Table 2 sets this formula one row above its region in the PDF (and in the MinerU table); assignment moved one row down, supported by the anchor test, the unit noted in the Reference column and the component"
+  },
+  {
+   "id": "alsaker_1991_norway",
+   "region": "Norway / Fennoscandia",
+   "expressions": [
+    {
+     "expr": "0.91*log(R) + 0.00087*R + 1.010",
+     "valid": "0 < R <= 1500"
+    }
+   ],
+   "amplitude": {
+    "unit": "mm",
+    "instrument": "Alsaker et al. (1991); new WA response yet amplitude in mm",
+    "measure": "half peak-to-peak",
+    "components": "vertical"
+   },
+   "distance": "hypocentral R (km)",
+   "anchor": {
+    "R": 100,
+    "value": 3.0,
+    "rule": "-logA0(100 km) = 3.0 for amplitudes in mm on a WA record (Richter's definition)"
+   },
+   "station_correction": null,
+   "source": {
+    "document": "DS_3.1_rev1.pdf",
+    "where": "Table 2"
+   },
+   "verification": "DS 3.1 Table 2 sets this formula one row above its region in the PDF (and in the MinerU table); assignment moved one row down, supported by the anchor test, the unit noted in the Reference column and the component"
+  },
+  {
+   "id": "langston_1998_tanzania",
+   "region": "Tanzania",
+   "expressions": [
+    {
+     "expr": "0.776*log(R/17) + 0.000902*(R - 17) + 2.0",
+     "valid": "0 < R <= 1000"
+    }
+   ],
+   "amplitude": {
+    "unit": "mm",
+    "instrument": "Langston et al. (1998); WA version uncertain in DS 3.1 (?oWA?); ML 3 = 10 mm at 17 km",
+    "measure": "half peak-to-peak",
+    "components": "horizontal"
+   },
+   "distance": "hypocentral R (km)",
+   "anchor": {
+    "R": 17,
+    "value": 2.0,
+    "rule": "ML 3 = 10 mm at 17 km (DS 3.1 Comment 1.2)"
+   },
+   "station_correction": null,
+   "source": {
+    "document": "DS_3.1_rev1.pdf",
+    "where": "Table 2"
+   },
+   "verification": "DS 3.1 Table 2 sets this formula one row above its region in the PDF (and in the MinerU table); assignment moved one row down, supported by the anchor test, the unit noted in the Reference column and the component"
+  },
+  {
+   "id": "saunders_2011_south_africa",
+   "region": "South Africa",
+   "expressions": [
+    {
+     "expr": "1.075*log(R) + 0.00061*R - 1.89",
+     "valid": "0 < R < 1000"
+    }
+   ],
+   "amplitude": {
+    "unit": "nm",
+    "instrument": "Saunders et al. (2011) (spelt Sauder in DS 3.1); new WA response with amplitude in nm",
+    "measure": "half peak-to-peak",
+    "components": "vertical"
+   },
+   "distance": "hypocentral R (km)",
+   "anchor": {
+    "R": 100,
+    "value": 0.318,
+    "rule": "-logA0(100 km) = 0.318 for amplitudes in nm (3.0 - 2.682)"
+   },
+   "station_correction": "plus station corrections S, not included",
+   "source": {
+    "document": "DS_3.1_rev1.pdf",
+    "where": "Table 2"
+   },
+   "verification": "DS 3.1 Table 2 sets this formula one row above its region in the PDF (and in the MinerU table); assignment moved one row down, supported by the anchor test, the unit noted in the Reference column and the component"
+  },
+  {
+   "id": "greenhalgh_singh_1986_south_australia",
+   "region": "South Australia",
+   "expressions": [
+    {
+     "expr": "1.10*log(D) + 0.0013*D + 0.7",
+     "valid": "40 < D < 700"
+    }
+   ],
+   "amplitude": {
+    "unit": "mm",
+    "instrument": "Greenhalgh & Singh (1986); oWA",
+    "measure": "half peak-to-peak",
+    "components": "vertical"
+   },
+   "distance": "epicentral D (km)",
+   "anchor": {
+    "D": 100,
+    "value": 3.0,
+    "rule": "-logA0(100 km) = 3.0 for amplitudes in mm on a WA record (Richter's definition)"
+   },
+   "station_correction": null,
+   "source": {
+    "document": "DS_3.1_rev1.pdf",
+    "where": "Table 2"
+   },
+   "verification": "DS 3.1 Table 2 sets this formula one row above its region in the PDF (and in the MinerU table); assignment moved one row down, supported by the anchor test, the unit noted in the Reference column and the component"
+  },
+  {
+   "id": "gb17740_2017_r11",
+   "region": "China, Heilongjiang, Jilin, Liaoning, Inner Mongolia, Beijing, Tianjin, Hebei, Shanxi, Shandong, Henan, Ningxia, Shaanxi",
+   "table": {
+    "distance": "epicentral D (km)",
+    "points": [
+     [
+      5.0,
+      1.9
+     ],
+     [
+      10.0,
+      2.0
+     ],
+     [
+      15.0,
+      2.2
+     ],
+     [
+      20.0,
+      2.3
+     ],
+     [
+      25.0,
+      2.5
+     ],
+     [
+      30.0,
+      2.7
+     ],
+     [
+      35.0,
+      2.9
+     ],
+     [
+      40.0,
+      2.9
+     ],
+     [
+      45.0,
+      3.0
+     ],
+     [
+      50.0,
+      3.1
+     ],
+     [
+      55.0,
+      3.2
+     ],
+     [
+      60.0,
+      3.3
+     ],
+     [
+      70.0,
+      3.3
+     ],
+     [
+      75.0,
+      3.4
+     ],
+     [
+      85.0,
+      3.3
+     ],
+     [
+      90.0,
+      3.4
+     ],
+     [
+      100.0,
+      3.4
+     ],
+     [
+      110.0,
+      3.5
+     ],
+     [
+      120.0,
+      3.5
+     ],
+     [
+      130.0,
+      3.6
+     ],
+     [
+      140.0,
+      3.6
+     ],
+     [
+      150.0,
+      3.7
+     ],
+     [
+      160.0,
+      3.7
+     ],
+     [
+      170.0,
+      3.8
+     ],
+     [
+      180.0,
+      3.8
+     ],
+     [
+      190.0,
+      3.9
+     ],
+     [
+      200.0,
+      3.9
+     ],
+     [
+      210.0,
+      3.9
+     ],
+     [
+      220.0,
+      3.9
+     ],
+     [
+      230.0,
+      4.0
+     ],
+     [
+      240.0,
+      4.1
+     ],
+     [
+      250.0,
+      4.1
+     ],
+     [
+      260.0,
+      4.1
+     ],
+     [
+      270.0,
+      4.2
+     ],
+     [
+      280.0,
+      4.2
+     ],
+     [
+      290.0,
+      4.3
+     ],
+     [
+      300.0,
+      4.2
+     ],
+     [
+      310.0,
+      4.3
+     ],
+     [
+      320.0,
+      4.3
+     ],
+     [
+      330.0,
+      4.4
+     ],
+     [
+      340.0,
+      4.4
+     ],
+     [
+      350.0,
+      4.4
+     ],
+     [
+      360.0,
+      4.5
+     ],
+     [
+      370.0,
+      4.5
+     ],
+     [
+      380.0,
+      4.5
+     ],
+     [
+      390.0,
+      4.5
+     ],
+     [
+      400.0,
+      4.6
+     ],
+     [
+      420.0,
+      4.6
+     ],
+     [
+      430.0,
+      4.6
+     ],
+     [
+      440.0,
+      4.6
+     ],
+     [
+      450.0,
+      4.6
+     ],
+     [
+      460.0,
+      4.6
+     ],
+     [
+      470.0,
+      4.7
+     ],
+     [
+      500.0,
+      4.8
+     ],
+     [
+      510.0,
+      4.8
+     ],
+     [
+      530.0,
+      4.8
+     ],
+     [
+      540.0,
+      4.8
+     ],
+     [
+      550.0,
+      4.8
+     ],
+     [
+      560.0,
+      4.9
+     ],
+     [
+      570.0,
+      4.8
+     ],
+     [
+      580.0,
+      4.9
+     ],
+     [
+      600.0,
+      4.9
+     ],
+     [
+      610.0,
+      5.0
+     ],
+     [
+      620.0,
+      5.0
+     ],
+     [
+      650.0,
+      5.1
+     ],
+     [
+      700.0,
+      5.2
+     ],
+     [
+      750.0,
+      5.2
+     ],
+     [
+      800.0,
+      5.2
+     ],
+     [
+      850.0,
+      5.2
+     ],
+     [
+      900.0,
+      5.3
+     ],
+     [
+      1000.0,
+      5.3
+     ]
+    ]
+   },
+   "amplitude": {
+    "unit": "micrometre",
+    "instrument": "DD-1 short-period seismograph simulation (GB 17740-2017 Annex B.1)",
+    "measure": "maximum S (or Lg) amplitude",
+    "components": "mean of the N and E maxima, A = (AN + AE)/2"
+   },
+   "distance": "epicentral D (km)",
+   "formula": "ML = lg(A) + R(D)",
+   "source": {
+    "document": "GB+17740-2017.pdf",
+    "where": "eq. (1), Table A.1"
+   },
+   "verification": "parsed table (MinerU), checked against the rendered page",
+   "station_correction": null
+  },
+  {
+   "id": "gb17740_2017_r12",
+   "region": "China, Fujian, Guangdong, Guangxi, Hainan, Jiangsu, Shanghai, Zhejiang, Jiangxi, Hunan, Hubei, Anhui",
+   "table": {
+    "distance": "epicentral D (km)",
+    "points": [
+     [
+      5.0,
+      1.8
+     ],
+     [
+      10.0,
+      1.9
+     ],
+     [
+      15.0,
+      2.1
+     ],
+     [
+      20.0,
+      2.2
+     ],
+     [
+      25.0,
+      2.4
+     ],
+     [
+      30.0,
+      2.6
+     ],
+     [
+      35.0,
+      2.8
+     ],
+     [
+      40.0,
+      2.9
+     ],
+     [
+      45.0,
+      3.0
+     ],
+     [
+      50.0,
+      3.1
+     ],
+     [
+      55.0,
+      3.2
+     ],
+     [
+      60.0,
+      3.3
+     ],
+     [
+      70.0,
+      3.3
+     ],
+     [
+      75.0,
+      3.4
+     ],
+     [
+      85.0,
+      3.3
+     ],
+     [
+      90.0,
+      3.4
+     ],
+     [
+      100.0,
+      3.4
+     ],
+     [
+      110.0,
+      3.5
+     ],
+     [
+      120.0,
+      3.5
+     ],
+     [
+      130.0,
+      3.6
+     ],
+     [
+      140.0,
+      3.6
+     ],
+     [
+      150.0,
+      3.7
+     ],
+     [
+      160.0,
+      3.7
+     ],
+     [
+      170.0,
+      3.8
+     ],
+     [
+      180.0,
+      3.7
+     ],
+     [
+      190.0,
+      3.8
+     ],
+     [
+      200.0,
+      3.9
+     ],
+     [
+      210.0,
+      4.0
+     ],
+     [
+      220.0,
+      4.0
+     ],
+     [
+      230.0,
+      4.1
+     ],
+     [
+      240.0,
+      4.1
+     ],
+     [
+      250.0,
+      4.2
+     ],
+     [
+      260.0,
+      4.2
+     ],
+     [
+      270.0,
+      4.2
+     ],
+     [
+      280.0,
+      4.3
+     ],
+     [
+      290.0,
+      4.4
+     ],
+     [
+      300.0,
+      4.4
+     ],
+     [
+      310.0,
+      4.5
+     ],
+     [
+      320.0,
+      4.4
+     ],
+     [
+      330.0,
+      4.5
+     ],
+     [
+      340.0,
+      4.5
+     ],
+     [
+      350.0,
+      4.5
+     ],
+     [
+      360.0,
+      4.6
+     ],
+     [
+      370.0,
+      4.6
+     ],
+     [
+      380.0,
+      4.6
+     ],
+     [
+      390.0,
+      4.6
+     ],
+     [
+      400.0,
+      4.7
+     ],
+     [
+      420.0,
+      4.7
+     ],
+     [
+      430.0,
+      4.7
+     ],
+     [
+      440.0,
+      4.7
+     ],
+     [
+      450.0,
+      4.7
+     ],
+     [
+      460.0,
+      4.7
+     ],
+     [
+      470.0,
+      4.7
+     ],
+     [
+      500.0,
+      4.7
+     ],
+     [
+      510.0,
+      4.8
+     ],
+     [
+      530.0,
+      4.8
+     ],
+     [
+      540.0,
+      4.8
+     ],
+     [
+      550.0,
+      4.8
+     ],
+     [
+      560.0,
+      4.9
+     ],
+     [
+      570.0,
+      4.9
+     ],
+     [
+      580.0,
+      4.9
+     ],
+     [
+      600.0,
+      4.9
+     ],
+     [
+      610.0,
+      5.0
+     ],
+     [
+      620.0,
+      5.0
+     ],
+     [
+      650.0,
+      5.1
+     ],
+     [
+      700.0,
+      5.2
+     ],
+     [
+      750.0,
+      5.2
+     ],
+     [
+      800.0,
+      5.2
+     ],
+     [
+      850.0,
+      5.2
+     ],
+     [
+      900.0,
+      5.3
+     ],
+     [
+      1000.0,
+      5.3
+     ]
+    ]
+   },
+   "amplitude": {
+    "unit": "micrometre",
+    "instrument": "DD-1 short-period seismograph simulation (GB 17740-2017 Annex B.1)",
+    "measure": "maximum S (or Lg) amplitude",
+    "components": "mean of the N and E maxima, A = (AN + AE)/2"
+   },
+   "distance": "epicentral D (km)",
+   "formula": "ML = lg(A) + R(D)",
+   "source": {
+    "document": "GB+17740-2017.pdf",
+    "where": "eq. (1), Table A.1"
+   },
+   "verification": "parsed table (MinerU), checked against the rendered page",
+   "station_correction": null
+  },
+  {
+   "id": "gb17740_2017_r13",
+   "region": "China, Yunnan, Sichuan, Chongqing, Guizhou",
+   "table": {
+    "distance": "epicentral D (km)",
+    "points": [
+     [
+      5.0,
+      2.0
+     ],
+     [
+      10.0,
+      2.0
+     ],
+     [
+      15.0,
+      2.1
+     ],
+     [
+      20.0,
+      2.2
+     ],
+     [
+      25.0,
+      2.4
+     ],
+     [
+      30.0,
+      2.6
+     ],
+     [
+      35.0,
+      2.7
+     ],
+     [
+      40.0,
+      2.8
+     ],
+     [
+      45.0,
+      2.9
+     ],
+     [
+      50.0,
+      3.0
+     ],
+     [
+      55.0,
+      3.1
+     ],
+     [
+      60.0,
+      3.2
+     ],
+     [
+      70.0,
+      3.2
+     ],
+     [
+      75.0,
+      3.3
+     ],
+     [
+      85.0,
+      3.3
+     ],
+     [
+      90.0,
+      3.4
+     ],
+     [
+      100.0,
+      3.4
+     ],
+     [
+      110.0,
+      3.5
+     ],
+     [
+      120.0,
+      3.5
+     ],
+     [
+      130.0,
+      3.6
+     ],
+     [
+      140.0,
+      3.6
+     ],
+     [
+      150.0,
+      3.7
+     ],
+     [
+      160.0,
+      3.7
+     ],
+     [
+      170.0,
+      3.8
+     ],
+     [
+      180.0,
+      3.8
+     ],
+     [
+      190.0,
+      3.9
+     ],
+     [
+      200.0,
+      3.9
+     ],
+     [
+      210.0,
+      3.9
+     ],
+     [
+      220.0,
+      3.9
+     ],
+     [
+      230.0,
+      4.0
+     ],
+     [
+      240.0,
+      4.0
+     ],
+     [
+      250.0,
+      4.0
+     ],
+     [
+      260.0,
+      4.1
+     ],
+     [
+      270.0,
+      4.2
+     ],
+     [
+      280.0,
+      4.1
+     ],
+     [
+      290.0,
+      4.2
+     ],
+     [
+      300.0,
+      4.3
+     ],
+     [
+      310.0,
+      4.4
+     ],
+     [
+      320.0,
+      4.4
+     ],
+     [
+      330.0,
+      4.5
+     ],
+     [
+      340.0,
+      4.5
+     ],
+     [
+      350.0,
+      4.5
+     ],
+     [
+      360.0,
+      4.5
+     ],
+     [
+      370.0,
+      4.5
+     ],
+     [
+      380.0,
+      4.6
+     ],
+     [
+      390.0,
+      4.6
+     ],
+     [
+      400.0,
+      4.7
+     ],
+     [
+      420.0,
+      4.7
+     ],
+     [
+      430.0,
+      4.8
+     ],
+     [
+      440.0,
+      4.8
+     ],
+     [
+      450.0,
+      4.8
+     ],
+     [
+      460.0,
+      4.8
+     ],
+     [
+      470.0,
+      4.8
+     ],
+     [
+      500.0,
+      4.8
+     ],
+     [
+      510.0,
+      4.9
+     ],
+     [
+      530.0,
+      4.9
+     ],
+     [
+      540.0,
+      4.9
+     ],
+     [
+      550.0,
+      4.9
+     ],
+     [
+      560.0,
+      4.9
+     ],
+     [
+      570.0,
+      4.9
+     ],
+     [
+      580.0,
+      4.9
+     ],
+     [
+      600.0,
+      4.9
+     ],
+     [
+      610.0,
+      5.0
+     ],
+     [
+      620.0,
+      5.0
+     ],
+     [
+      650.0,
+      5.1
+     ],
+     [
+      700.0,
+      5.2
+     ],
+     [
+      750.0,
+      5.2
+     ],
+     [
+      800.0,
+      5.2
+     ],
+     [
+      850.0,
+      5.2
+     ],
+     [
+      900.0,
+      5.3
+     ],
+     [
+      1000.0,
+      5.3
+     ]
+    ]
+   },
+   "amplitude": {
+    "unit": "micrometre",
+    "instrument": "DD-1 short-period seismograph simulation (GB 17740-2017 Annex B.1)",
+    "measure": "maximum S (or Lg) amplitude",
+    "components": "mean of the N and E maxima, A = (AN + AE)/2"
+   },
+   "distance": "epicentral D (km)",
+   "formula": "ML = lg(A) + R(D)",
+   "source": {
+    "document": "GB+17740-2017.pdf",
+    "where": "eq. (1), Table A.1"
+   },
+   "verification": "parsed table (MinerU), checked against the rendered page",
+   "station_correction": null
+  },
+  {
+   "id": "gb17740_2017_r14",
+   "region": "China, Qinghai, Tibet, Gansu",
+   "table": {
+    "distance": "epicentral D (km)",
+    "points": [
+     [
+      5.0,
+      2.0
+     ],
+     [
+      10.0,
+      2.1
+     ],
+     [
+      15.0,
+      2.2
+     ],
+     [
+      20.0,
+      2.3
+     ],
+     [
+      25.0,
+      2.5
+     ],
+     [
+      30.0,
+      2.6
+     ],
+     [
+      35.0,
+      2.8
+     ],
+     [
+      40.0,
+      2.9
+     ],
+     [
+      45.0,
+      3.0
+     ],
+     [
+      50.0,
+      3.1
+     ],
+     [
+      55.0,
+      3.2
+     ],
+     [
+      60.0,
+      3.2
+     ],
+     [
+      70.0,
+      3.2
+     ],
+     [
+      75.0,
+      3.3
+     ],
+     [
+      85.0,
+      3.4
+     ],
+     [
+      90.0,
+      3.5
+     ],
+     [
+      100.0,
+      3.5
+     ],
+     [
+      110.0,
+      3.6
+     ],
+     [
+      120.0,
+      3.6
+     ],
+     [
+      130.0,
+      3.7
+     ],
+     [
+      140.0,
+      3.7
+     ],
+     [
+      150.0,
+      3.8
+     ],
+     [
+      160.0,
+      3.7
+     ],
+     [
+      170.0,
+      3.8
+     ],
+     [
+      180.0,
+      3.8
+     ],
+     [
+      190.0,
+      3.9
+     ],
+     [
+      200.0,
+      3.9
+     ],
+     [
+      210.0,
+      4.0
+     ],
+     [
+      220.0,
+      4.0
+     ],
+     [
+      230.0,
+      4.1
+     ],
+     [
+      240.0,
+      4.1
+     ],
+     [
+      250.0,
+      4.1
+     ],
+     [
+      260.0,
+      4.1
+     ],
+     [
+      270.0,
+      4.2
+     ],
+     [
+      280.0,
+      4.1
+     ],
+     [
+      290.0,
+      4.2
+     ],
+     [
+      300.0,
+      4.2
+     ],
+     [
+      310.0,
+      4.3
+     ],
+     [
+      320.0,
+      4.3
+     ],
+     [
+      330.0,
+      4.4
+     ],
+     [
+      340.0,
+      4.4
+     ],
+     [
+      350.0,
+      4.5
+     ],
+     [
+      360.0,
+      4.5
+     ],
+     [
+      370.0,
+      4.4
+     ],
+     [
+      380.0,
+      4.5
+     ],
+     [
+      390.0,
+      4.5
+     ],
+     [
+      400.0,
+      4.5
+     ],
+     [
+      420.0,
+      4.6
+     ],
+     [
+      430.0,
+      4.7
+     ],
+     [
+      440.0,
+      4.8
+     ],
+     [
+      450.0,
+      4.8
+     ],
+     [
+      460.0,
+      4.8
+     ],
+     [
+      470.0,
+      4.8
+     ],
+     [
+      500.0,
+      4.8
+     ],
+     [
+      510.0,
+      4.9
+     ],
+     [
+      530.0,
+      4.9
+     ],
+     [
+      540.0,
+      4.9
+     ],
+     [
+      550.0,
+      4.9
+     ],
+     [
+      560.0,
+      4.9
+     ],
+     [
+      570.0,
+      4.9
+     ],
+     [
+      580.0,
+      4.9
+     ],
+     [
+      600.0,
+      4.9
+     ],
+     [
+      610.0,
+      5.0
+     ],
+     [
+      620.0,
+      5.0
+     ],
+     [
+      650.0,
+      5.1
+     ],
+     [
+      700.0,
+      5.2
+     ],
+     [
+      750.0,
+      5.2
+     ],
+     [
+      800.0,
+      5.2
+     ],
+     [
+      850.0,
+      5.2
+     ],
+     [
+      900.0,
+      5.3
+     ],
+     [
+      1000.0,
+      5.3
+     ]
+    ]
+   },
+   "amplitude": {
+    "unit": "micrometre",
+    "instrument": "DD-1 short-period seismograph simulation (GB 17740-2017 Annex B.1)",
+    "measure": "maximum S (or Lg) amplitude",
+    "components": "mean of the N and E maxima, A = (AN + AE)/2"
+   },
+   "distance": "epicentral D (km)",
+   "formula": "ML = lg(A) + R(D)",
+   "source": {
+    "document": "GB+17740-2017.pdf",
+    "where": "eq. (1), Table A.1"
+   },
+   "verification": "parsed table (MinerU), checked against the rendered page",
+   "station_correction": null
+  },
+  {
+   "id": "gb17740_2017_r15",
+   "region": "China, Xinjiang",
+   "table": {
+    "distance": "epicentral D (km)",
+    "points": [
+     [
+      5.0,
+      2.0
+     ],
+     [
+      10.0,
+      2.1
+     ],
+     [
+      15.0,
+      2.2
+     ],
+     [
+      20.0,
+      2.3
+     ],
+     [
+      25.0,
+      2.5
+     ],
+     [
+      30.0,
+      2.6
+     ],
+     [
+      35.0,
+      2.8
+     ],
+     [
+      40.0,
+      2.8
+     ],
+     [
+      45.0,
+      2.9
+     ],
+     [
+      50.0,
+      3.0
+     ],
+     [
+      55.0,
+      3.1
+     ],
+     [
+      60.0,
+      3.2
+     ],
+     [
+      70.0,
+      3.2
+     ],
+     [
+      75.0,
+      3.3
+     ],
+     [
+      85.0,
+      3.3
+     ],
+     [
+      90.0,
+      3.4
+     ],
+     [
+      100.0,
+      3.4
+     ],
+     [
+      110.0,
+      3.6
+     ],
+     [
+      120.0,
+      3.6
+     ],
+     [
+      130.0,
+      3.6
+     ],
+     [
+      140.0,
+      3.6
+     ],
+     [
+      150.0,
+      3.7
+     ],
+     [
+      160.0,
+      3.7
+     ],
+     [
+      170.0,
+      3.8
+     ],
+     [
+      180.0,
+      3.8
+     ],
+     [
+      190.0,
+      3.9
+     ],
+     [
+      200.0,
+      3.9
+     ],
+     [
+      210.0,
+      3.9
+     ],
+     [
+      220.0,
+      4.0
+     ],
+     [
+      230.0,
+      4.0
+     ],
+     [
+      240.0,
+      4.0
+     ],
+     [
+      250.0,
+      4.1
+     ],
+     [
+      260.0,
+      4.1
+     ],
+     [
+      270.0,
+      4.2
+     ],
+     [
+      280.0,
+      4.1
+     ],
+     [
+      290.0,
+      4.2
+     ],
+     [
+      300.0,
+      4.3
+     ],
+     [
+      310.0,
+      4.4
+     ],
+     [
+      320.0,
+      4.4
+     ],
+     [
+      330.0,
+      4.4
+     ],
+     [
+      340.0,
+      4.4
+     ],
+     [
+      350.0,
+      4.5
+     ],
+     [
+      360.0,
+      4.5
+     ],
+     [
+      370.0,
+      4.5
+     ],
+     [
+      380.0,
+      4.5
+     ],
+     [
+      390.0,
+      4.5
+     ],
+     [
+      400.0,
+      4.6
+     ],
+     [
+      420.0,
+      4.7
+     ],
+     [
+      430.0,
+      4.7
+     ],
+     [
+      440.0,
+      4.8
+     ],
+     [
+      450.0,
+      4.8
+     ],
+     [
+      460.0,
+      4.8
+     ],
+     [
+      470.0,
+      4.8
+     ],
+     [
+      500.0,
+      4.8
+     ],
+     [
+      510.0,
+      4.9
+     ],
+     [
+      530.0,
+      4.9
+     ],
+     [
+      540.0,
+      4.9
+     ],
+     [
+      550.0,
+      4.9
+     ],
+     [
+      560.0,
+      4.9
+     ],
+     [
+      570.0,
+      4.9
+     ],
+     [
+      580.0,
+      4.9
+     ],
+     [
+      600.0,
+      4.9
+     ],
+     [
+      610.0,
+      5.0
+     ],
+     [
+      620.0,
+      5.0
+     ],
+     [
+      650.0,
+      5.1
+     ],
+     [
+      700.0,
+      5.2
+     ],
+     [
+      750.0,
+      5.2
+     ],
+     [
+      800.0,
+      5.2
+     ],
+     [
+      850.0,
+      5.2
+     ],
+     [
+      900.0,
+      5.3
+     ],
+     [
+      1000.0,
+      5.3
+     ]
+    ]
+   },
+   "amplitude": {
+    "unit": "micrometre",
+    "instrument": "DD-1 short-period seismograph simulation (GB 17740-2017 Annex B.1)",
+    "measure": "maximum S (or Lg) amplitude",
+    "components": "mean of the N and E maxima, A = (AN + AE)/2"
+   },
+   "distance": "epicentral D (km)",
+   "formula": "ML = lg(A) + R(D)",
+   "source": {
+    "document": "GB+17740-2017.pdf",
+    "where": "eq. (1), Table A.1"
+   },
+   "verification": "parsed table (MinerU), checked against the rendered page",
+   "station_correction": null
+  }
+ ]
+}

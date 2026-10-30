@@ -1,0 +1,337 @@
+# THE $M_{L}$ SCALE IN SOUTHERN CALIFORNIA
+
+By L. K. HUTTON AND DAVID M. BOORE
+
+## ABSTRACT
+
+Measurements (9,941) of peak amplitudes on Wood-Anderson instruments (or simulated Wood-Anderson instruments) in the Southern California Seismographic Network for 972 earthquakes, primarily located in southern California, were studied with the aim of determining a new distance correction curve for use in determining the local magnitude, $M_{L}$ . Events in the Mammoth Lakes area were found to give an unusual attenuation pattern and were excluded from the analysis, as were readings from any one earthquake at distances beyond the first occurrence of amplitudes less than 0.3 mm. The remaining 7,355 amplitudes from 814 earthquakes yielded the following equation for $M_{L}$ distance correction, $\log A_{0}$
+
+$$
+- \log A _ {0} = 1. 1 1 0 \log (r / 1 0 0) + 0. 0 0 1 8 9 (r - 1 0 0) + 3. 0
+$$
+
+where r is hypocentral distance in kilometers. A new set of station corrections was also determined from the analysis. The standard deviation of the $M_{L}$ residuals obtained by using this curve and the station corrections was 0.21. The data used to derive the equation came from earthquakes with hypocentral distances ranging from about 10 to 700 km and focal depths down to 20 km (with most depths less than 10 km). The $\log A_{0}$ values from this equation are similar to the standard values listed in Richter (1958) for 50 < r < 200 km (in accordance with the definition of $M_{L}$ , the $\log A_{0}$ value for r = 100 km was constrained to equal his value). The Wood-Anderson amplitudes decay less rapidly, however, than implied by Richter's correction. Because of this, the routinely determined magnitudes have been too low for nearby stations (r < 50 km) and too high for distant stations (r > 200 km). The effect at close distances is consistent with that found in several other studies, and is simply due to a difference in the observed $\approx 1/r$ geometrical spreading for body waves and the $1/r^{2}$ spreading assumed by Gutenberg and Richter in the construction of the $\log A_{0}$ table.
+
+$M_{L}$ 's computed from our curve and those reported in the Caltech catalog show a systematic dependence on magnitude: small earthquakes have larger magnitudes than in the catalog and large earthquakes have smaller magnitudes (by as much as 0.6 units). To a large extent, these systematic differences are due to the nonuniform distribution of data in magnitude-distance space (small earthquakes are preferentially recorded at close distances relative to large earthquakes). For large earthquakes, however, the difference in the two magnitudes is not solely due to the new correction for attenuation; magnitudes computed using Richter's $\log A_{0}$ curve are also low relative to the catalog values. The differences in that case may be due to subjective judgment on the part of those determining the catalog magnitudes, the use of data other than the Caltech Wood-Anderson seismographs, the use of different station corrections, or the use of teleseismic magnitude determinations. Whatever their cause, the departures at large magnitude may explain a 1.0:0.7 proportionality found by Luco (1982) between $M_{L}$ 's determined from real Wood-Anderson records and those from records synthesized from strong-motion instruments. If it were not for the biases in reported magnitudes, Luco's finding would imply a magnitude-dependent shape in the attenuation curves. We studied residuals in three magnitude classes ( $2.0 < M_{L} \leq 3.5$ , $3.5 < M_{L} \leq 5.5$ , and $5.5 < M_{L} \leq 7.0$ ) and found no support for such a magnitude dependence.
+
+Based on our results, we propose that local magnitude scales be defined such that $M_{L}=3$ correspond to 10 mm of motion on a Wood-Anderson instrument at 17 km hypocentral distance, rather than 1 mm of motion at 100 km. This is consistent with the original definition of magnitude in southern California and will allow more meaningful comparison of earthquakes in regions having very different attenuation of waves within the first 100 km.
+
+## INTRODUCTION
+
+Since Richter's pioneering work in 1935 (Richter, 1935), numbers have been routinely assigned to earthquakes based on instrumental recordings, with the intention of representing in an objective way the "size" of the event. The original purpose was to facilitate cataloging of earthquakes without depending exclusively on felt intensities to compare one event to another. Richter's work introduced the so-called local magnitude scale $(M_L)$ , based on the Wood-Anderson seismograph which was prevalent at that time. Richter has stated that his expectations for the scale were modest and that he intended its use to the nearest half unit only.
+
+By contrast, the southern California seismicity catalog since 1932 approaches 70,000 events. Approximately 10,000 of these have at least some Wood-Anderson amplitude readings and a local magnitude assigned to the nearest tenth of a unit. Numerous other magnitude scales based on teleseismic recordings, long-period recordings, seismic moment, and peak acceleration and velocity from strong-motion records have all been calibrated against events of known local magnitude (e.g., Lee et al., 1972; Schnabel and Seed, 1973; Seed et al., 1976; Espinosa, 1979, 1980; Joyner et al., 1981; Hanks and Boore, 1984; Bakun, 1985). Statistical and other seismicity studies are very sensitive to consistent application of these magnitude scales. Public policy decisions on questions of emergency response and earthquake insurance, as well as engineering design criteria, routinely hinge on instrumental magnitude computations done with Richter's graphically determined attenuation table (Richter, 1958) and, in southern California, largely the original station corrections.
+
+Some problems have become apparent over the years of routine Caltech network analysis. Seismographic stations in northern and southern California seldom yield the same magnitude for the same earthquake. Workers who do routine magnitude assignment are aware that distant stations produce magnitudes that are too high, and nearby stations produce magnitudes that are too low, relative to stations at intermediate distances (on the order of 100 km). In general, only the practice of averaging values from all available stations has prevented this from being more of a problem than it is.
+
+In this paper, we bring some modern computing power to bear on establishing the attenuation curve and station corrections to be used in southern California. Similar work has been done recently with success in central California (Bakun and Joyner, 1984), the Great Basin of the Western United States (Chavez and Priestley, 1985; Rogers et al., 1986), northeastern United States (Ebel, 1982), Japan (Takeo and Abe, 1981; Y. Fujino and R. Inoue, written communication, 1985), Greece (Kiratzi and Papazachos, 1984), New Zealand (Haines, 1981), and South Australia (Greenhalgh and Singh, 1986).
+
+## DATA
+
+We used routine Wood-Anderson amplitude recordings from the Southern California Seismographic Network, which is operated jointly by the California Institute of Technology (CIT) and the U.S. Geological Survey. The amplitudes are read as one-half the peak-to-peak distance on the largest single swing of the S wave. This procedure differs slightly from that specified in Richter's book (Richter, 1958). Richter (1958) calls for use of the largest amplitude regardless of what phase it belongs to, whereas Gutenberg and Richter (1956) say to ignore any P phase. The latter seems to have been the CIT practice for a long time. Amplitudes as small as 0.1 mm are commonly read and used in magnitude determinations. Readings less than 0.3 mm, however, were excluded from our data set.
+
+The current routine CIT procedures for assigning $M_{L}$ is to compute a magnitude for each Wood-Anderson instrument, apply the station corrections, and then take the median of the values to obtain the local magnitude of the earthquake. In the past, the local magnitude appears to have been chosen from the list of station magnitudes based partly on the analyst's experience concerning the reliability of the individual stations. Richter (1958) states that the mean of the station magnitudes should be used. In this study, we used the mean because of the relative ease in handling the statistics. If there are several stations and they agree relatively well, the difference between mean and median should be small.
+
+The main body of the data arose from the preparation of a catalog for 1975 through 1983 (Hutton et al., 1985). All events with more than 10 Wood-Anderson amplitudes were included in the present study. The bulk of these events had $M_{L}$ in the 2 to 4 range (see Table 1). For that reason, we supplemented the data set with events above $M_{L}$ 5.0, back in time to the beginning of the catalog in 1932 (Hileman et al., 1974; Friedman et al., 1976), requiring only that “several” Wood-Anderson readings were available.
+
+As work progressed, we discovered that the data set was also deficient at close distances. We therefore supplemented the data set again with events for 1983 and 1984, requiring that at least six Wood-Anderson readings be available and that at least one be from a station closer than 50 km to the epicenter.
+
+In addition to its network of traditional Wood-Anderson instruments (supposedly with a static magnification of 2,800), CIT maintains a few film-recording instruments with the same frequency response and a nominal magnification (from ground to viewer screen) of 100 (see Gutenberg and Richter, 1956). These instruments are labeled 9, 10, 11, 12, and 13, respectively, in this paper. Occasionally, the same instrument was operated at different stations for limited times; to avoid confusion, a suffix has been added to make the identification unique. These low-magnification instruments yield data only on the largest events ( $M_L$ 5.0+), yet they have been a continual problem in routine analysis because the ratios of the amplitudes on seismograms from these instruments to those from true Wood-Anderson seismographs is clearly not 28, as it should be. This question will be addressed later in the paper. A few of the other horizontal-component instruments (in particular, SNC and SWM) were apparently not Wood-Anderson seismographs. We have included data from these instruments, although the number of recordings is small. Furthermore, the instruments at ISA and GLA are horizontal Benioff seismometers with filters to simulate the response of a photographic Wood-Anderson.
+
+TABLE 1  
+DISTRIBUTION OF RECORDINGS BY DISTANCE AND MAGNITUDE\*
+
+<table><tr><td rowspan="2">log R(km)</td><td colspan="12"> $M_L$ </td></tr><tr><td>2.0</td><td>2.5</td><td>3.0</td><td>3.5</td><td>4.0</td><td>4.5</td><td>5.0</td><td>5.5</td><td>6.0</td><td>6.5</td><td>7.0</td><td>7.5</td></tr><tr><td>-0.2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>0.0</td><td>0</td><td>0</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>0.2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>0.4</td><td>0</td><td>0</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>0.6</td><td>0</td><td>2</td><td>7</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>0.8</td><td>0</td><td>0</td><td>8</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1.0</td><td>0</td><td>8</td><td>18</td><td>4</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1.2</td><td>0</td><td>37</td><td>30</td><td>12</td><td>3</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1.4</td><td>0</td><td>41</td><td>54</td><td>37</td><td>6</td><td>3</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1.6</td><td>0</td><td>57</td><td>143</td><td>84</td><td>31</td><td>20</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1.8</td><td>0</td><td>72</td><td>194</td><td>185</td><td>67</td><td>36</td><td>13</td><td>0</td><td>2</td><td>0</td><td>0</td><td>0</td></tr><tr><td>2.0</td><td>0</td><td>84</td><td>381</td><td>445</td><td>225</td><td>112</td><td>43</td><td>15</td><td>3</td><td>3</td><td>0</td><td>0</td></tr><tr><td>2.2</td><td>0</td><td>34</td><td>516</td><td>631</td><td>357</td><td>177</td><td>93</td><td>26</td><td>2</td><td>6</td><td>0</td><td>0</td></tr><tr><td>2.4</td><td>0</td><td>0</td><td>178</td><td>577</td><td>491</td><td>312</td><td>158</td><td>71</td><td>12</td><td>11</td><td>2</td><td>0</td></tr><tr><td>2.6</td><td>0</td><td>0</td><td>11</td><td>151</td><td>288</td><td>247</td><td>153</td><td>104</td><td>32</td><td>33</td><td>2</td><td>0</td></tr><tr><td>2.8</td><td>0</td><td>0</td><td>0</td><td>2</td><td>25</td><td>33</td><td>33</td><td>39</td><td>25</td><td>23</td><td>3</td><td>0</td></tr><tr><td>3.0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>4</td><td>0</td><td>0</td></tr><tr><td>3.2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></table>
+
+\* Distance and magnitude shown are center values of data bins.
+
+In this study, we include no synthetic Wood-Anderson data from strong-motion accelerographs [such as used by Kanamori and Jennings (1978) and Luco (1982)]. We felt that it would be impossible to determine reliable station corrections with the few recordings at each site. Furthermore, there is some uncertainty in the magnification to be used for the Wood-Anderson instruments. The specified value of 2,800 is used in simulations of Wood-Anderson response from accelerograph records, but there is evidence (B. A. Bolt, oral communication, 1984; T. V. McEvilly, oral communication, 1984) that the effective magnification of operating Wood-Anderson instruments may be systematically lower than this (as low as or lower than 2,000). Such a difference is of no concern if only Wood-Anderson instruments are used to compute $M_{L}$ , or if enough accelerograph recordings are available to allow magnification differences to be absorbed into an apparent station correction. So far, tilt test measurements on operational Wood-Anderson instruments in southern California have been inconclusive. Gutenberg (1957), however, presents shake table results which indicate a low-frequency magnification of about 2,800.
+
+The goal was a data set incorporating as much magnitude-distance space as possible (Table 1) and with a good geographic distribution of epicenters, rather than one derived from a complete catalog above some $M_{L}$ . Maps showing the locations of the earthquakes and stations used in this study are given in Figure 1. Earthquakes were included inside CIT's normal reporting region (Hileman et al., 1974), which covers southern California and Owens Valley and extends slightly into Nevada and into Mexico. Explosions were excluded. A few events from central California were also included. As can be seen from Figure 1, the widespread distribution of both earthquakes and stations will result in an attenuation relation that is an average over much of the southern California region. Sufficient data are probably available to break the region into smaller areas that might have a closer resemblance to the various tectonic provinces, but aside from a consideration of the Mammoth Lakes earthquakes, we have not attempted this.
+
+The earthquake hypocenters and Wood-Anderson amplitudes were entered into the computer from the routine index card files; no amplitudes were read from the seismograms especially for this study. The resulting data set consisted of a total of 9,941 horizontal-component amplitudes for 972 earthquakes (amplitudes on the two components are counted separately).
+
+## PROCEDURES
+
+Following previous work (Joyner and Boore, 1981; Bakun and Joyner, 1984), we represented the peak Wood-Anderson amplitude by the following (where for the sake of clarity, subscripts representing a particular site and earthquake are not shown)
+
+![](images/83556ec8f1bfcdd14c4571396566f94b31fb1b8ca3d397de37a94d84f1e4cd50.jpg)
+
+![](images/1279d76c0f7136ea99fdd8ccb445a5761456882495954980fe979b7486218a43.jpg)  
+FIG. 1. Maps of southern and central California, showing events (top) and stations (bottom) used in the analysis. The Mammoth Lakes earthquakes are enclosed in the box in the upper central part of the top panel.
+
+$$
+\log A = \log A _ {0} + M _ {L} - S\tag{1}
+$$
+
+and
+
+$$
+- \log A _ {0} = n \log (r / 1 0 0) + K (r - 1 0 0) + 3. 0\tag{2}
+$$
+
+where A = the measured amplitude in millimeters, r = hypocentral distance in kilometers, and n, K, S, and $M_{L}$ are constants to be determined from regression analysis. The S are the station corrections for each station, assumed to be independent of source size and source region. $M_{L}$ is the event magnitude computed with the new station corrections and attenuation parameters. In this study, we will refer to this magnitude as $M_{L}(HB)$ (for the authors of this paper), to keep it distinct from the catalog value $M_{L}(CIT)$ and the magnitude $M_{L}(R)$ computed using our data set and station corrections, with Richter's $\log A_{0}$ correction.
+
+Although the simple model of waves propagating from a point source, in which n represents geometric spreading and K attenuation, motivated the form of equation (1), we do not necessarily attach much physical significance to the parameters that emerge from the regression analysis.
+
+By definition, the zero point of the magnitude scale is determined by the constraint that a hypothetical Wood-Anderson instrument at 100 km from the epicenter record with an amplitude of 1 mm for a $M_{L}$ 3.0 shock. This is true in the previous equation, provided that the average station correction for a site with a standard Wood-Anderson instrument is zero. In the practice of maintaining a long-term network, however, stations and instruments may be installed, moved, or removed, and the averages of different sets of station corrections may cause the magnitude scale to drift. For that reason, we preferred to constrain the station correction for one particular instrument. The east-west component at Palomar (PLM) was chosen because it has had a long period of operation without needing maintenance and because data from it fit the aforementioned model well. Its station correction was taken to be -0.1. With this constraint, the average station correction for the present set of standard Wood-Anderson stations (BAR, CWC, ISA, PAS, PLM, RVR, SBC, and TIN) is almost zero (-0.02).
+
+In theory one could solve for all station corrections and event magnitudes, plus the attenuation and geometric spreading parameters, in one giant regression. Computer resources proved insufficient to do this, however, and the analysis was done instead in a series of iterated steps. Station residuals were computed using a starting set of parameters (all zero, including n and K) and event magnitudes taken from the Caltech catalog. Attenuation and geometric spreading parameters were then adjusted to fit these residuals, using a simple two-parameter regression, and a new set of station corrections and event magnitudes computed. Then the whole process was repeated. At each stage, the station corrections were adjusted so that the one for the east-west component of PLM was equal to -0.1. Convergence was achieved after 10 or 15 iterations. The results do not depend on the starting model.
+
+## ATTENUATION CURVE
+
+The regression results for several data selection procedures are listed in Table 2. These include several ways of dealing with small amplitudes and data sets with and without earthquakes near Mammoth Lakes. Also included are results when the factor n is constrained to unity.
+
+Small amplitudes were dealt with in two ways: either all amplitudes less than 0.3 mm were ignored, or readings from any station at hypocentral distances beyond the first occurrence of an amplitude less than our minimum amplitude of 0.3 mm were not included in the regression analysis. The latter selection criterion was used to prevent possible bias due to the neglection of small amplitude readings. There were no essential differences in the results (Table 2), possibly because individual station corrections help to compensate for amplitudes that are anomalously high or low. The complete data set was used in computing the magnitudes and residuals, given the new log $A_{0}$ curve and station corrections.
+
+![](images/0da9f784e1babec941ea226a9bc0bc0bde8b8d7d35ec7dde3dc0a7065680ac5a.jpg)  
+FIG. 2. Residuals from the regression as a function of distance for the data set with and without the Mammoth Lakes data (upper and lower parts, respectively). In this and subsequent figures (unless noted otherwise), residuals refer to the difference between the magnitude computed from a single station and the event magnitude obtained by averaging the individual station magnitudes; on the ordinate label this is indicated by " $M_{L}(sta) - M_{L}(eq)$ ." Each point is the average of all residuals in a nonoverlapping 20-km distance bin. The bars show the 95 per cent confidence limits of the estimates. The residuals were computed using the attenuation and station corrections obtained without the Mammoth Lakes data.
+
+The separation of the data set into groups with and without the Mammoth Lakes earthquakes was done because there are a large number of events in the region (shown by the box in Figure 1), and the region is outside the Caltech network. We did not want the overall results to be unduly sensitive to these earthquakes.
+
+Figure 2 shows the overall fit of the data to the attenuation model. Each point is the average of all residuals (corrected station magnitude minus event magnitude) in a 20-km distance window, and the bars are the 95 per cent confidence limits, based on the scatter. The top and bottom panels show the results of the analysis with and without the Mammoth Lakes earthquakes, respectively. When the Mammoth Lakes earthquakes are excluded, the residuals are featureless, indicating that the attenuation is well represented by the adopted functional form. The residuals obtained when using the complete data set show a rapid decay followed by an abrupt increase at 100 km. This feature, as well as the large positive residuals at 390 km, are due to strong systematic effects present when using the Mammoth Lakes data. The Mammoth Lakes data are discussed in more detail later in the paper.
+
+TABLE 2  
+RESULTS OF REGRESSION ANALYSIS
+
+<table><tr><td>Case</td><td>No. of Earthquakes</td><td>No. of Data</td><td> $n^*$ </td><td> $K^*$ </td><td> $\text{sdev}^\dagger$ </td></tr><tr><td colspan="6">All events</td></tr><tr><td>A‡</td><td>972</td><td>9,941</td><td>1.078 ± 0.017</td><td>0.00152 ± 0.0004</td><td>0.214</td></tr><tr><td>A,r‡</td><td>968</td><td>8,883</td><td>1.066 ± 0.017</td><td>0.00161 ± 0.0004</td><td>0.216</td></tr><tr><td colspan="6">Exclude Mammoth</td></tr><tr><td>A</td><td>818</td><td>8,301</td><td>1.112 ± 0.017</td><td>0.00181 ± 0.0004</td><td>0.207</td></tr><tr><td>A,r</td><td>814</td><td>7,355</td><td>1.110 ± 0.017</td><td>0.00189 ± 0.0005</td><td>0.208</td></tr><tr><td>A,r</td><td>814</td><td>7,355</td><td>1.0§</td><td>0.00215 ± 0.0002</td><td>0.209</td></tr></table>
+
+\* Uncertainties of coefficients are ± one standard deviation.  
+† Standard deviation of observed amplitudes about the predicted values.  
+$\ddagger$ Indicates method of dealing with small amplitudes. For “A,” all readings less than 0.3 mm excluded;  
+for "A, r," all readings at distance beyond the first occurrence of A < 0.3 mm were excluded.
+§ Constrained.
+
+As with the residuals plotted in Figure 2, the data from the Mammoth Lakes earthquakes have a significant impact on the derived attenuation curve. We have decided to adopt as a standard the attenuation curve derived without the Mammoth Lakes data and with the more restrictive selection criterion. These choices lead to the following equation for the $\log A_{0}$ curve
+
+$$
+- \log A _ {0} = 1. 1 1 0 \log (r / 1 0 0) + 0. 0 0 1 8 9 (r - 1 0 0) + 3. 0.\tag{3}
+$$
+
+Unless otherwise stated, this curve will be used from here on in the paper.
+
+The new version of the $A_{0}$ curve differs noticeably from that defined by the standard values (Table 22-1 in Richter, 1958). Figure 3 shows our curve for three different focal depths. For comparison, plots are also provided of both the curve derived with the larger data set (including the Mammoth Lakes earthquakes) and the discrete values from Richter's table. Although the agreement between our curves and the standard values is excellent between 50 and 200 km distance, magnitude estimates using our curves and data from stations at greater distances would be up to about 0.3 units smaller than those observed from Richter's curve. Stated differently, Richter's distance correction assumes a more rapid attenuation of the Wood-Anderson amplitudes than we have found. As we suggested in the introduction, this result was anticipated from routine observatory work assigning magnitudes.
+
+In contrast to our results, Bakun and Joyner (1984) do not find any significant divergence from Richter's $A_{0}$ values for distance beyond 100 km, for propagation paths in central California. It is curious and ironic that Richter's original $A_{0}$ values, derived from southern California data, should be more appropriate to central than southern California. Notwithstanding the systematic differences we found, Richter's attenuation is remarkably accurate, especially considering the few data upon which it was based: the $-\log A_{0}$ values reported by Richter (1935) seemed to have been based on the records from only 11 earthquakes (all occurring in January 1932) ranging in size from $M_{L}$ 1.5 to 4.5; the $-\log A_{0}$ values have undergone little change since (Gutenberg and Richter, 1942, 1956; Richter, 1958).
+
+![](images/c1d55414026d4f13894eb808f80e96ea208423b479f42af254416a31cce0367f.jpg)  
+FIG. 3. $A_{0}$ curve from the present study (for focal depths of 0, 10, and 20 km), along with values from the $A_{0}$ table in Richter (1958). The solid and dashed curves represent the regression results without and with the Mammoth Lakes data, respectively.
+
+Although for data at large distances our curves would lead to smaller $M_{L}$ values than obtained from the standard distance correction, the opposite holds for data at small distances. The systematic difference between the attenuation curves at small distances (less than about 40 km) agrees with findings for central California (Bakun and Joyner, 1984), as well as those from Japan (Y. Fujimo and R. Inoue, written communication, 1985), Italy (Bonamassa and Rovelli, 1986), and South Australia (Greenhalgh and Singh, 1986). Jennings and Kanamori (1983) have noticed a similar discrepancy with synthetic Wood-Anderson data reconstructed from strong-motion accelerograph recordings. The difference for distances less than about 100 km between the standard $\log A_{0}$ values and those from numerous recent studies has a simple explanation: although the recent work supports a geometrical spreading close to 1/r, Gutenberg and Richter (1942) assumed a geometrical spreading of $1/r^{2}$ and an average focal depth of 18 km (Figure 4), both of which are inappropriate for southern California, in their modification of the original $\log A_{0}$ values (Richter, 1935) for closer distances. They had no data closer than an epicentral distance of 22 km with which to check their resulting $\log A_{0}$ corrections.
+
+In spite of the good overall representation of the data in Figure 2, we find a considerable amount of variation in the shape of the $A_{0}$ curve from one station to another. Pasadena (PAS), Riverside (RVR), and Palomar (PLM) are good examples.
+
+![](images/8864366fd4908311d1f3f45ffad1ea6a529d9d542939c900a3a94f366541a930.jpg)  
+Log $\Delta$ (km)  
+FIG. 4. Comparison of the standard $-\log A_{0}$ values and the values given by a decay curve assuming $1/r^{2}$ geometrical spreading and a set of depths from 0 to 30 km. Gutenberg and Richter (1942) used a depth of 18 km.
+
+All three of these stations are well within the reporting area of the Caltech network and receive seismic energy well distributed in azimuth. Yet, each has a different trend in the residuals (Figure 5). In all cases, both components of the same station show the same trend and have similar station corrections, suggesting that the source of the differences are probably geological rather than instrumental.
+
+## STATION CORRECTIONS
+
+Differences in the station $A_{0}$ curves could presumably arise either: (1) from the source, including local geology and radiation pattern effects; (2) from differences in attenuation along the path; or (3) from differences in site geology. We have tried to circumvent the first problem by choosing a wide geographic distribution of hypocenters in our data set. However, swarms and aftershock sequences are known to have their own unique set of “station corrections” and, depending on how many swarm events were included, they might bias the solutions.
+
+In spite of the possible biasing effects of nonuniform distributions of data with distance and geographic area, we have adopted the station corrections in Table 3 as representations of average values that might be used in routine analysis. The hope is that for any earthquake the systematic effects at different stations will be of varying sign and so will be averaged out. This, of course, will not always happen, and it is possible that the accuracy of the magnitudes will only be several tenths of a unit, although the formal precision, as given by the standard error of the mean, is considerably less.
+
+Special mention should be given to the station corrections for the "100×" instruments (stations 9 through 13), almost all of which were colocated with standard Wood-Anderson instruments. Station corrections were obtained in two ways: as a result of the standard regression procedure, and by combining the regression results for the standard instruments with direct measurements, made by
+
+NS Component  
+EW Component  
+![](images/7c147b27b663885f6b5907cf0fb8957e6e7812a973762880d7ce717f5179ecae.jpg)  
+FIG. 5. Residuals as a function of distance for stations at Pasadena (PAS), Riverside (RVR), and Palomar (PLM), averaged over nonoverlapping 20-km distance bins. Residuals are shown for both north-south and east-west components. Bars are 95 per cent confidence limits.
+
+TABLE 3  
+STATION CODES, COORDINATES, AND CORRECTIONS
+
+<table><tr><td rowspan="2">Station</td><td rowspan="2" colspan="2">Latitude (°N)</td><td rowspan="2" colspan="2">Longitude (°W)</td><td>North-South Components</td><td>East-West Components</td></tr><tr><td>Stacor SEOM* (n)</td><td>Stacor SEOM* (n)</td></tr><tr><td>BAR</td><td>32</td><td>40.80</td><td>116</td><td>40.30</td><td>-0.16 ± 0.01 (428)</td><td></td></tr><tr><td>CWC</td><td>36</td><td>26.30</td><td>118</td><td>4.70</td><td>0.08 ± 0.01 (370)</td><td>0.04 ± 0.01 (359)</td></tr><tr><td>ISA</td><td>35</td><td>39.80</td><td>118</td><td>28.40</td><td>0.27 ± 0.01 (337)</td><td>0.25 ± 0.01 (321)</td></tr><tr><td>PAS</td><td>34</td><td>8.90</td><td>118</td><td>10.30</td><td>0.11 ± 0.01 (661)</td><td>0.15 ± 0.01 (650)</td></tr><tr><td>PLM</td><td>33</td><td>21.20</td><td>116</td><td>51.70</td><td>-0.10 ± 0.01 (525)</td><td>-0.10 ± 0.01 (446)</td></tr><tr><td>RVR</td><td>33</td><td>59.60</td><td>117</td><td>22.50</td><td>0.16 ± 0.01 (594)</td><td>0.04 ± 0.01 (561)</td></tr><tr><td>SBC</td><td>34</td><td>26.50</td><td>119</td><td>42.80</td><td>-0.17 ± 0.01 (492)</td><td>-0.15 ± 0.01 (477)</td></tr><tr><td>TIN</td><td>37</td><td>3.30</td><td>118</td><td>13.70</td><td>-0.35 ± 0.01 (379)</td><td>-0.37 ± 0.01 (358)</td></tr><tr><td>9</td><td>36</td><td>26.30</td><td>118</td><td>4.70</td><td>1.20 ± 0.02 (28)</td><td>1.26 ± 0.04 (23)</td></tr><tr><td>9HI</td><td>36</td><td>8.20</td><td>117</td><td>56.80</td><td>0.78 ± 0.05 (5)</td><td>0.76 ± 0.04 (5)</td></tr><tr><td>10</td><td>33</td><td>59.60</td><td>117</td><td>22.50</td><td>1.32 ± 0.04 (24)</td><td>1.28 ± 0.03 (28)</td></tr><tr><td>11P</td><td>34</td><td>8.90</td><td>118</td><td>10.30</td><td>1.11 ± 0.07 (5)</td><td>1.01 ± 0.03 (6)</td></tr><tr><td>11S</td><td>34</td><td>26.50</td><td>119</td><td>42.80</td><td>0.78 ± 0.07 (9)</td><td>0.81 ± 0.06 (8)</td></tr><tr><td>12</td><td>34</td><td>26.50</td><td>119</td><td>42.80</td><td>0.85 ± 0.02 (43)</td><td>0.81 ± 0.03 (40)</td></tr><tr><td>13</td><td>34</td><td>8.90</td><td>118</td><td>10.30</td><td>1.27 ± 0.03 (29)</td><td>1.27 ± 0.03 (25)</td></tr><tr><td>13E</td><td>32</td><td>47.90</td><td>115</td><td>32.90</td><td>0.35 ± 0.10 (10)</td><td>0.31 ± 0.11 (10)</td></tr><tr><td>GLA</td><td>33</td><td>3.15</td><td>114</td><td>49.59</td><td>-0.10 ± 0.05 (22)</td><td>-0.25 ± 0.05 (21)</td></tr><tr><td>HAI</td><td>36</td><td>8.20</td><td>117</td><td>56.80</td><td>-0.38 ± 0.03 (20)</td><td>-0.35 ± 0.03 (19)</td></tr><tr><td>LJC</td><td>32</td><td>51.80</td><td>117</td><td>15.20</td><td>-0.03 ± 0.19 (5)</td><td>0.16 ± 0.10 (3)</td></tr><tr><td>MWC</td><td>34</td><td>13.40</td><td>118</td><td>3.50</td><td>0.16 ± 0.04 (4)</td><td>0.15 ± 0.06 (4)</td></tr><tr><td>SNC</td><td>33</td><td>14.90</td><td>119</td><td>31.40</td><td></td><td>0.27 ± 0.06 (7)</td></tr><tr><td>SWM</td><td>34</td><td>43.10</td><td>118</td><td>34.90</td><td>-0.60 ± 0.06 (16)</td><td>-0.52 ± 0.06 (19)</td></tr><tr><td>WDY</td><td>35</td><td>42.00</td><td>118</td><td>50.60</td><td></td><td>0.45 ± 0.03 (34)</td></tr></table>
+
+\* SEOM = standard error of the mean. Number of data used to compute mean given in parentheses.
+
+Jennifer Haase, of the ratio of the response of colocated Wood-Anderson and "100×" instruments. Table 4 shows both the measured ratio (expressed as the logarithm of the ratio) and the estimated ratio obtained by subtracting the station corrections determined from the regression analysis (e.g., 9 - CWC). The logs of the ratios are within several tenths of one another. Also included in the table are the estimated station corrections for the "100×" instruments obtained by adding the observed Wood-Anderson corrections to the logarithms of the directly measured ratios of the responses. Because they are based on more measurements, we have taken these as the standard station corrections for the "100×" instruments.
+
+The designation of the lower magnification instruments has been put in quotes (i.e., “100×”) because it is clear from Table 4 that the relative gains of the standard and low-gain Wood-Anderson instruments cannot be 2,800 and 100, as advertised. This would give a logarithm ratio of 1.45. The average ratio is close to 1.1. If the Wood-Anderson response were really 2,800, this would imply that the low-gain instruments had a magnification of 200 rather than 100. On the other hand, if the Wood-Anderson gains are closer to 2,000, as some have suggested, the low-gain instruments would have a magnification of about 160. In any case, the derived station corrections should account for any difference in the gains.
+
+## RECOMPUTED MAGNITUDES
+
+The systematic divergence between Richter's $\log A_{0}$ and our results (Figure 3), coupled with the tendency for larger earthquakes to be recorded at greater distances.
+
+TABLE 4  
+RELATIVE GAINS AND STATION CORRECTIONS OF "100×" INSTRUMENTS
+
+<table><tr><td rowspan="2">Instrument</td><td colspan="2">log (WA/“100×”)*</td><td colspan="2">Station Correction*</td></tr><tr><td>Inferred</td><td>Measured</td><td>WA</td><td>“100×”</td></tr><tr><td>9, CWC:NS</td><td>0.97</td><td>1.12</td><td>0.08 (370)</td><td>1.20 (28)</td></tr><tr><td>:EW</td><td>1.00</td><td>1.22</td><td>0.04 (359)</td><td>1.26 (23)</td></tr><tr><td>10, RVR:NS</td><td>1.15</td><td>1.16</td><td>0.16 (594)</td><td>1.32 (24)</td></tr><tr><td>:EW</td><td>1.18</td><td>1.24</td><td>0.04 (561)</td><td>1.28 (28)</td></tr><tr><td>11S, SBC:NS</td><td>*</td><td>0.95</td><td>-0.17 (492)</td><td>0.78 (9)</td></tr><tr><td>:EW</td><td></td><td>0.96</td><td>-0.15 (477)</td><td>0.81 (8)</td></tr><tr><td>12, SBC:NS</td><td>0.80</td><td>1.02</td><td>-0.17 (492)</td><td>0.85 (43)</td></tr><tr><td>:EW</td><td>0.84</td><td>0.96</td><td>-0.15 (477)</td><td>0.81 (40)</td></tr><tr><td>13, PAS:NS</td><td>0.94</td><td>1.16</td><td>0.11 (661)</td><td>1.27 (29)</td></tr><tr><td>:EW</td><td>0.99</td><td>1.12</td><td>0.15 (650)</td><td>1.27 (25)</td></tr></table>
+
+\* The “inferred” values were obtained by subtracting the station corrections determined from the regression analysis. The “100X” station corrections listed in this table were obtained by adding the directly measured values of the logarithms of the amplitude ratio from Wood-Anderson (WA) and “100×” seismograms to the Wood-Anderson station correction determined by the regression analysis. The only readings at station 11S used in the regression analysis were from Mammoth Lakes earthquakes, and therefore the inferred gain ratio for this station was not included in the table.
+
+than smaller events (Table 1), leads to a systematic difference in $M_{L}$ values determined from our analysis and the “official” magnitudes reported in the CIT catalog (Hileman et al., 1974; Friedman et al., 1976; Hutton et al., 1985). As seen in Figure 6, the new $M_{L}$ values become progressively smaller than the catalog values as magnitude is increased. In some instances, the difference can be one-half magnitude unit. This has important implications, for many of these larger events are famous earthquakes whose magnitudes have been used in a variety of studies. Their local magnitudes may have weighed heavily in the calibration of other magnitude scales.
+
+The large difference for the bigger earthquakes is not solely a result of the new attenuation curve, however. The magnitudes recomputed with Richter's $\log A_{0}$ correction are also systematically lower than those in the catalog for the larger earthquakes (Figure 6, bottom). One factor in this difference could be the use of amplitudes from seismograms written by “100×” instruments, assuming a magnification of 100, in determining the catalog values. It could also indicate that some catalog values are not truly $M_{L}$ magnitudes but may have been determined from amplitudes at teleseismic distances. It is also possible that data from outside the Caltech network were used in assigning magnitudes. The discrepancy could also reflect subjective judgment used by the analysts in assigning magnitudes.
+
+A list of magnitudes for some notable earthquakes is given in Table 5, and to help assess the possible reasons for discrepancies between the catalog and recomputed magnitudes, the worksheets for a few of the events are given in the Appendix. The values in the table are not intended to be our best estimate of the magnitudes of the individual events. We have not reread the seismograms to verify the amplitudes, nor have we included amplitudes from instruments outside of the CIT network.
+
+![](images/e66b94f1892879555256ae5b413ba2c4bf3c2dae41e6cd53aa97c4bc5951a817.jpg)
+
+![](images/cd2ee283b2d8fa8325d9c7678ccad5e650b52eaf8af11ecb1ac582e244ae380b.jpg)  
+FIG. 6. Difference between recomputed magnitudes and those in the Caltech catalog for the same event. The upper panel used the new attenuation curve given by equation (3), and the lower panel used Richter's log $A_{0}$ correction. The new station corrections (Table 2) and the same data set (which excluded Mammoth Lakes data) were used in both parts of the figure. The short line segments at the right have a slope of -0.3, but its vertical placement is arbitrary (see text for significance of the slope).
+
+In addition to explaining problems that arise in routine analysis, the tendency of the recomputed magnitudes to be smaller than the catalog magnitudes for the larger earthquakes might explain inconsistencies noticed by Luco (1982). Luco's examination of $M_{L}$ determined from synthetic Wood-Anderson seismograms constructed by filtering of records from strong-motion accelerographs reveals a systematic difference between the synthetic and catalog $M_{L}$ 's, the synthetic $M_{L}$ 's being smaller. The magnitudes based on the synthetic Wood-Anderson seismograms were shown to increase by only 0.7 for each 1.0 increase in the catalog magnitudes. Because the catalog values were from records necessarily made at greater distances than the strong-motion recordings, Luco's finding, taken at face value, implies that the $A_{0}$ curve depends on earthquake magnitude as well as on hypocentral distance. The discrepancy noted by Luco would be substantially reduced, if not eliminated, by using our recomputed magnitudes. To illustrate this, a line with a slope of -0.3, as found by Luco, is superposed on Figure 6 (the vertical placement is arbitrary). The residuals are in rough agreement with the slope of the line over the magnitude range corresponding to the data used by Luco.
+
+The possibility of a magnitude-dependence in the shape of the attenuation curves was investigated by plotting the residuals as a function of distance in three different magnitude ranges. The new $A_{0}$ curve and station corrections, derived without the Mammoth Lakes data, were used in calculating all magnitudes (Figure 7). As seen in the figure, there are relatively few data points for the large events, making the
+
+TABLE 5  
+MAGNITUDES OF SELECTED EARTHQUAKES
+
+<table><tr><td>yy:mm:dd</td><td>Location</td><td> $M_L$  (CIT)</td><td> $M_L$  (R)</td><td> $M_L$  (HB)</td><td>N*</td></tr><tr><td>34-06-07</td><td>Parkfield</td><td>6.00</td><td>6.09 ± 0.06</td><td>5.91 ± 0.05</td><td>6</td></tr><tr><td>40-05-19</td><td>Imperial Valley</td><td>6.70</td><td>6.19 ± 0.08</td><td>6.03 ± 0.06</td><td>6</td></tr><tr><td>66-06-28</td><td>Parkfield</td><td>5.60</td><td>5.67 ± 0.05</td><td>5.56 ± 0.06</td><td>16</td></tr><tr><td>68-04-09</td><td>Borrego Mountain</td><td>6.40</td><td>6.31 ± 0.05</td><td>6.19 ± 0.04</td><td>8</td></tr><tr><td>71-02-09</td><td>San Fernando</td><td>6.40</td><td>5.81 ± 0.04</td><td>5.79 ± 0.04</td><td>5</td></tr><tr><td>73-02-21</td><td>Point Mugu</td><td>5.90</td><td>5.63 ± 0.07</td><td>5.57 ± 0.08</td><td>8</td></tr><tr><td>78-08-13</td><td>Santa Barbara</td><td>5.06</td><td>5.05 ± 0.03</td><td>5.01 ± 0.03</td><td>14</td></tr><tr><td>79-01-01</td><td>Malibu</td><td>5.24</td><td>4.90 ± 0.07</td><td>4.86 ± 0.07</td><td>18</td></tr><tr><td>79-03-15</td><td>Homestead Valley</td><td>4.96</td><td>5.01 ± 0.08</td><td>4.96 ± 0.08</td><td>14</td></tr><tr><td>79-03-15</td><td>Homestead Valley</td><td>5.27</td><td>5.32 ± 0.07</td><td>5.27 ± 0.06</td><td>12</td></tr><tr><td>79-03-15</td><td>Homestead Valley</td><td>4.85</td><td>4.80 ± 0.08</td><td>4.75 ± 0.08</td><td>11</td></tr><tr><td>79-06-30</td><td>Big Bear</td><td>4.81</td><td>4.74 ± 0.06</td><td>4.70 ± 0.07</td><td>18</td></tr><tr><td>79-10-15</td><td>Imperial Valley</td><td>6.51</td><td>6.40 ± 0.09</td><td>6.23 ± 0.07</td><td>12</td></tr><tr><td>79-10-15</td><td>Imperial Valley</td><td>5.20</td><td>5.11 ± 0.06</td><td>5.00 ± 0.06</td><td>5</td></tr><tr><td>79-10-16</td><td>Imperial Valley</td><td>5.15</td><td>5.11 ± 0.03</td><td>4.99 ± 0.03</td><td>20</td></tr><tr><td>79-10-16</td><td>Imperial Valley</td><td>5.10</td><td>5.12 ± 0.04</td><td>5.00 ± 0.03</td><td>19</td></tr><tr><td>79-10-16</td><td>Imperial Valley</td><td>5.52</td><td>5.46 ± 0.05</td><td>5.32 ± 0.03</td><td>20</td></tr><tr><td>80-05-25</td><td>Mammoth Lakes</td><td>6.31</td><td>6.21 ± 0.09</td><td>6.05 ± 0.07</td><td>16</td></tr><tr><td>80-05-25</td><td>Mammoth Lakes</td><td>6.45</td><td>6.36 ± 0.12</td><td>6.20 ± 0.09</td><td>9</td></tr><tr><td>80-05-27</td><td>Mammoth Lakes</td><td>6.41</td><td>5.84 ± 0.18</td><td>5.69 ± 0.17</td><td>7</td></tr><tr><td>80-06-09</td><td>Cerro Prieto</td><td>6.21</td><td>6.13 ± 0.07</td><td>5.97 ± 0.07</td><td>16</td></tr><tr><td>81-04-26</td><td>Westmorland</td><td>5.67</td><td>5.67 ± 0.07</td><td>5.54 ± 0.05</td><td>14</td></tr><tr><td>81-09-04</td><td>offshore</td><td>5.44</td><td>5.42 ± 0.05</td><td>5.36 ± 0.04</td><td>17</td></tr><tr><td>81-09-30</td><td>Mammoth Lakes</td><td>6.08</td><td>5.89 ± 0.08</td><td>5.72 ± 0.07</td><td>17</td></tr><tr><td>82-10-25</td><td>Coalinga</td><td>5.60</td><td>5.58 ± 0.06</td><td>5.46 ± 0.07</td><td>14</td></tr><tr><td>83-05-02</td><td>Coalinga</td><td>6.10</td><td>6.06 ± 0.09</td><td>5.93 ± 0.07</td><td>8</td></tr></table>
+
+\* Number of amplitudes used to determine $M_L$ (HB).
+
+## MAMMOTH LAKES EARTHQUAKES
+
+error bars large. Nevertheless, with the exception of a trend at large distances for the $M_{L}$ 2.0 to 3.5 set, which we believe is explained by the difficulty of measuring small motions, the data are consistent with a magnitude-independent shape for the attenuation of peak amplitude recorded on Wood-Anderson instruments.
+
+As mentioned before, the residuals from the Mammoth Lakes earthquakes show strong systematic effects. This is emphasized in Figure 8, which shows the residuals for only the Mammoth Lakes data, using the standard attenuation and station corrections (neither of which used the Mammoth Lakes data in their determination). Unfortunately, there is little overlap in the stations recording the events in any distance range, and therefore incorrectly chosen station corrections might explain some of the patterns. Figure 9 shows however, that, for both components of station TIN, the residuals for the Mammoth Lakes data and for the rest of the data differ considerably. Of course, the trends might be explained by some sort of dipping structure or azimuthally varying attenuation close to the TIN station. Other possibilities suggest themselves to explain the trend of the residuals within 100 km. Variations in focal mechanisms or the part of the focal sphere sampled by the rays could be an explanation. A more exotic explanation might be that the waves have traveled through a region of anomalously high attenuation, such as might be produced by an intrusion of magma. Since the effect is observed for events with travel paths entirely outside the caldera (Figure 10), it is unlikely that the inferred magma bodies within the Long Valley caldera could produce the effect. Ryall and Ryall (1984), however, have reported the possible existence of several magma bodies south of the caldera. Further study, including an examination of the seismograms at TIN for waveform distortions associated with propagation through a highly attenuative body and calculation of residuals from the 1986 Chalfant Valley earthquakes, would be required before any credence could be attached to such an explanation.
+
+![](images/42afcdc003cfce0d6d00a3be753e905f2958a84ccba96fae4ed8b64473eb014e.jpg)
+
+![](images/9e1e35e018847752feb8f81f42084ff914a27ffcb6f2312c320d0025d207db7b.jpg)
+
+![](images/3446a77ffbe6eb47f3d5b7be0b3095879d0f265651b974a35957af2c8e2c5f1b.jpg)  
+Hypocentral Distance (km)  
+FIG. 7. Residuals for all stations and components averaged over nonoverlapping 20-km distance bins, but limited to earthquakes between: (top) $M_{L}$ 2.0 and 3.5; (middle) $M_{L}$ 3.5 and 5.5; and (bottom) $M_{L}$ greater than 5.5. Bars are 95 per cent confidence limits.
+
+## A NEW DEFINITION OF $M_{L}$
+
+Richter's constraint that 1 mm of motion on a standard Wood-Anderson instrument at 100 km corresponds to $M_{L} = 3$ can be taken as the definition of local magnitude, from which local magnitude scales can be set up in other areas once the appropriate attenuation curve has been determined. Table 6 includes a listing of some scales for other areas. If the attenuation within the first 100 km has a large geographic variation, however, earthquakes in two regions with the same $M_{L}$ may have very different ground motions near the source; $M_{L}$ would not then be a good measure of source size. For example, the Wood-Anderson amplitude predicted at 15 km from Chavez and Priestley's $-\log A_{0}$ relation for the Great Basin of the Western United States is more than 2 times that given by our results for an earthquake with the same $M_{L}$ . To avoid this difficulty, it seems appropriate to establish a definition of magnitude at a closer distance, using the new $-\log A_{0}$ curve we have found for southern California so as to be consistent with Richter's original definition of $M_{L}$ . From equations (1) and (3), we predict that a magnitude 3 earthquake will produce an amplitude of 10 mm on a standard Wood-Anderson instrument at 17 km. We propose this as a new definition of local magnitude $[M_{L}(HB)]$ .
+
+![](images/f71ec40ebf46e78d490134b2e20407d3810e330d1a0333d793a8a54d4f9770b7.jpg)  
+Hypocentral Distance (km)
+
+FIG. 8. Residuals averaged over nonoverlapping 10-km distance bins for Mammoth Lakes data, using the standard attenuation and station corrections [equation (3) and Table 2, respectively]. Bars are 95 per cent confidence limits, and range of distances, for each station are also shown.  
+![](images/c7405da340ab761f819729a4e880236821dc19c5271d6f92b68e73e77d8a6ce8.jpg)
+
+![](images/f106e6c2b06e7198acc9fa83f1f90253fd831239797f05e202fa4585073b2908.jpg)  
+Hypocentral Distance (km)  
+FIG. 9. Residuals averaged over nonoverlapping 20-km distance bins at TIN, for Mammoth Lakes data (crosses) and the rest of the data (open circles). The standard attenuation and station corrections [equation (3) and Table 2, respectively] were used to compute the magnitudes. Upper panel is the north-south component and the lower panel is the east-west component.
+
+![](images/b865f3bbbceeffed6e54ac8c053d5126bcfada715561eb09d2b5fd1f2ed3778d.jpg)  
+FIG. 10. Map of Mammoth Lakes earthquakes (dots), station TIN (triangle), and Long Valley caldera (solid curve). Radii at various distances from TIN are shown.
+
+<div class="mineru-algorithm" style="white-space: pre-wrap; font-family:monospace;">
+log $A_0$ RELATIONS FOR VARIOUS REGIONS
+Southern California (Boore and Hutton, this paper)
+$-\log A_0 = 1.110 \log(R/100) + 0.00189 (R - 100) + 3.0$ $10 \leq R \leq 700 \text{ km}$
+Central California (Bakun and Joyner, 1984)
+$-\log A_0 = 1.000 \log(R/100) + 0.00301 (R - 100) + 3.0$ $0 \leq \Delta \leq 400 \text{ km}$
+Great Basin, Western United States (Chavez and Priestley, 1985)
+$-\log A_0 = \begin{cases} 1.00 \log(R/100) + 0.0069 (R - 100) + 3.0 \\ 0.83 \log(R/100) + 0.0026 (R - 100) + 3.0 \end{cases}$ $0 \leq \Delta \leq 90 \text{ km}$ $90 \leq \Delta \leq 600 \text{ km}$
+Greece (Kiratzi and Papazerchos, 1984)
+$-\log A_0 = \begin{cases} 1.58 \log(R/100) &amp; +3.0; M_L \leq 3.7 \\ 2.00 \log(R/100) &amp; +3.0; M_L &gt; 3.7 \end{cases}$ $100 \leq R \leq 1000 \text{ km}$
+Western Australia (Greenhalgh and Singh, 1986)
+$-\log A_0 = 1.10 \log \Delta/100 + 0.0013 (\Delta - 100) + 3.03$ $40 \leq \Delta \leq 600 \text{ km}$
+Japan (Y. Fujino and R. Inoue, written communication, 1985)
+$-\log A_0 = 1.098 \log R/100 + 0.0003 (R - 100) + 3.0$
+</div>
+
+Note: R and $\Delta$ are hypocentral and epicentral distances, respectively, in kilometers.
+
+## CONCLUSIONS
+
+We have derived an equation from which $\log A_{0}$ corrections for use in estimating local magnitudes $(M_{L})$ may be determined. This equation, based on the attenuation of peak motions from Wood-Anderson instruments as a function of hypocentral distance, was obtained from a regression analysis of 7,355 recordings from the Southern California Seismographic Network for 814 local earthquakes, ranging in size from $M_L$ 2.2 to $M_L$ 6.8. The attenuation we found is less rapid than that implied by the standard log $A_0$ values tabulated in Richter (1958). Because we constrain our values to equal his at a distance of 100 km, the difference in attenuation suggests that $M_L$ values using the standard log $A_0$ are underestimated from recordings less than about 50 km and overestimated from recordings beyond 200 km. Added to this systematic underestimation of magnitudes for the larger earthquakes is a strong tendency for the catalog values to be higher than the recomputed values even when Richter's attenuation correction is applied. The difference in magnitudes can exceed 0.5 units. These results may explain the different scaling, reported by Luco (1982), of peak motions from Wood-Anderson seismograms simulated from nearby strong-motion records and those from real Wood-Anderson instruments as an artifact of the systematic error in reported $M_L$ values, rather than being due to attenuation curves whose shapes depend on magnitude. We looked for such a shape dependence, but found none.
+
+We suggest that local magnitude be defined such that a magnitude 3 earthquake corresponds to 10 mm of motion on a Wood-Anderson instrument at a hypocentral distance of 17 km. This definition is consistent with Richter's original definition that a magnitude 3 would produce 1 mm of motion at 100 km, but it would allow a more meaningful comparison of earthquakes in situations where the attenuation of Wood-Anderson motions is strongly dependent on geographic region.
+
+The Seismological Laboratory of CIT is understandably reluctant to change the magnitudes of its most commonly referenced earthquakes. It is also reluctant to put this new $A_{0}$ curve into routine use, since it would cause a discontinuity in the local magnitude scale with time and wreak havoc with the seismicity statistics. Until such time as all phase and amplitude readings back to 1932 are in computer-readable form, routine magnitude determinations must continue to use the old definition of $M_{L}$ . The magnitudes computed from our attenuation curve and station corrections will probably be reported as well.
+
+## ACKNOWLEDGMENTS
+
+We thank T. V. McEvilly and Marvin Hilger of the University of California at Berkeley for sharing their knowledge of the magnification of the Wood-Anderson instrument, and William Joyner of the U.S. Geological Survey for many useful discussions and a review of the paper. We also benefited from the reviews of Stewart Greenhalgh and James Pechmann. Rob Cockerham provided locations for a subset of the Mammoth Lakes earthquakes, and both he and Bill Peppin discussed with us the possibility of magma bodies south of the Long Valley Caldera. A grant from the U.S. Nuclear Regulatory Commission provide partial support for one of us (D. M. B.). Funding for operation of the Southern California Network [including support for the other author (L. K. H.)] was provided by the U.S. Geological Survey, the California Division of Mines and Geology, the California Institute of Technology, and the Caltech Earthquake Research Affiliates. Contribution No. 4278, Division of Geological and Planetary Sciences, California Institute of Technology.
+
+## REFERENCES
+
+Bakun, W. H. (1985). Seismic moments, local magnitudes and coda-duration magnitudes for earthquakes in central California, Bull. Seism. Soc. Am. 75, 439–458.
+
+Bakun, W. H. and W. B. Joyner (1984). The $M_{L}$ scale in central California, Bull. Seism. Soc. Am. 74, 1827–1843.
+
+Bonamassa, O. and A. Rovelli (1986). On distance dependence of local magnitudes found from Italian strong-motion accelerograms, Bull. Seism. Soc. Am. 76, 579–581.
+
+Chavez, D. E. and K. R. Priestley (1985). $M_{L}$ observations in the Great Basin and $M_{0}$ versus $M_{L}$ relationships for the 1980 Mammoth Lakes, California, earthquake sequence, Bull. Seism. Soc. Am. 75, 1583–1598.
+
+Ebel, J. E. (1982). $M_{L}$ measurements for northeastern United States earthquakes, Bull. Seism. Soc. Am. 72, 1367–1378.
+
+Espinosa, A. F. (1979). Horizontal particle velocity and its relation to magnitude in the Western United States, Bull. Seism. Soc. Am. 69, 2037–2061.
+
+Espinosa, A. F. (1980). Attenuation of strong horizontal ground acceleration in the Western United States and their relation to $M_{L}$ , Bull. Seism. Soc. Am. 70, 583–616.
+
+Friedman, M. E., J. H. Whitcomb, C. R. Allen, and J. A. Hileman (1976). Seismicity of the Southern California Region: 1 January 1972 to 31 December 1974, Seismological Laboratory, California, Institute of Technology, Pasadena, California, 93 pp.
+
+Greenhalgh, S. A. and R. Singh (1986). A revised magnitude scale for South Australian earthquakes, Bull. Seism. Soc. Am. 76, 757–769.
+
+Gutenberg, B. (1957). Effects of ground on earthquake motion, Bull. Seism. Soc. Am. 47, 221–280.
+
+Gutenberg, B. and C. F. Richter (1942). Earthquake magnitude, intensity, energy, and acceleration, Bull. Seism. Soc. Am. 32, 163–191.
+
+Gutenberg, B. and C. F. Richter (1956). Earthquake magnitude, intensity, energy and acceleration, Bull. Seism. Soc. Am. 46, 105–145.
+
+Haines, A. J. (1981). A local magnitude scale for New Zealand earthquakes, Bull. Seism. Soc. Am. 71, 275–294.
+
+Hanks, T. C. and D. M. Boore (1984). Moment-magnitude relations in theory and practice, J. Geophys. Res. 89, 6229–6235.
+
+Hileman, J. A., C. R. Allen, and J. M. Nordquist (1974). Seismicity of the Southern California Region: 1 January 1932 to 31 December 1972, Seismological Laboratory, California Institute of Technology, Pasadena, California, 48 pp.
+
+Hutton, L. K., C. R. Allen, and C. E. Johnson (1985). Seismicity of Southern California: Earthquakes of $M_{L}$ 3.0 and Greater, 1975 through 1983, Seismological Laboratory, California Institute of Technology, Pasadena, California, 142 pp.
+
+Jennings, P. C. and H. Kanamori (1983). Effect of distance on local magnitudes found from strong-motion records, Bull. Seism. Soc. Am. 73, 265–280.
+
+Joyner, W. B. and D. M. Boore (1981). Peak horizontal acceleration and velocity from strong-motion records including records from the 1979 Imperial Valley, California, earthquake, Bull. Seism. Soc. Am. 71, 2011–2038.
+
+Joyner, W. B., D. M. Boore, and R. L. Porcella (1981). Peak horizontal acceleration and velocity from strong-motion records (abstract), Earthquake Notes 52, 80–81.
+
+Kanamori, H. and P. C. Jennings (1978). Determination of local magnitude, $M_{L}$ , from strong motion accelerograms, Bull. Seism. Soc. Am. 68, 471–485.
+
+Kiratzi, A. A. and B. C. Papazachos (1984). Magnitude scales for earthquakes in Greece, Bull. Seism. Soc. Am. 74, 969–985.
+
+Lee, W. H. K., R. E. Bennett, and K. L. Meagher (1972). A method of estimating magnitude of local earthquakes from signal duration, U.S. Geol. Surv., Open-File Rept., 28.
+
+Luco, J. R. (1982). A note on near-source estimates of local magnitude, Bull. Seism. Soc. Am. 72, 941-958.
+
+Richter, C. F. (1935). An instrumental earthquake magnitude scale, Bull. Seism. Soc. Am. 25, 1–31.
+
+Richter, C. F. (1958). Elementary Seismology, W. H. Freeman and Co., San Francisco, California, 578 pp.
+
+Rogers, A. M., S. C. Harmsen, R. B. Herrmann, and M. E. Meremonte (1986). A study of ground motion attenuation in the southern Great Basin, California-Nevada using several techniques for estimates of $Q_{s}$ , $\log A_{0}$ , and coda Q (submitted for publication).
+
+Ryall, A. S. and F. D. Ryall (1984). Shallow magma bodies related to lithospheric extension in the western Great Basin, western Nevada and eastern California (abstract), Earthquake Notes 55, 11-12.
+
+Schnabel, P. B. and H. B. Seed (1973). Accelerations in rock for earthquakes in the Western United States, Bull. Seism. Soc. Am. 63, 501–516.
+
+Seed, H. B., R. Murarka, J. Lysmer, and I. M. Idriss (1976). Relationships of maximum acceleration, maximum velocity, distance from source, and local site conditions for moderately strong earthquakes, Bull. Seism. Soc. Am. 66, 1323–1342.
+
+Takeo, M. and K. Abe (1981). Local magnitude determination from near-field accelerograms, Zisin, J. Seism. Soc. Jap. 34, 495–504.
+
+Trifunac, M. D. and J. N. Brune (1970). Complexity of energy release during the Imperial Valley, California, earthquake of 1940, Bull. Seism. Soc. Am. 60, 137–160.
+
+SEISMOLOGICAL LABORATORY
+CALIFORNIA INSTITUTE OF TECHNOLOGY
+PASADENA, CALIFORNIA 91125 (L.K.H.)
+
+U.S. GEOLOGICAL SURVEY
+MS 977
+345 MIDDLEFIELD ROAD
+MENLO PARK, CALIFORNIA 94025 (D.M.B.)
+
+Manuscript received 24 March 1987
+
+## APPENDIX
+
+Table A1 contains the details of the magnitude computation for several of the earthquakes in Table 5. As stated in the text, we have not reread the amplitudes; they were taken from the phase cards on fit at CIT. For the larger earthquakes, some of these readings are undoubtedly lower bounds, therefore leading to magnitude estimates that may be systematically low. As an example, Table 7 includes estimates of $M_{L}$ for the 1940 Imperial Valley earthquake using both the readings from the phase cards and from Trifunac and Brune's (1970) amplitudes read from the original seismograms. The $M_{L}$ is increased using Trifunac and Brune's amplitudes, but the catalog value is still much greater than that obtained from Wood-Anderson seismograms.
+
+The two Mammoth Lakes events in Table 7 form an interesting pair: for the second event the recordings at 11S lead to a very low estimate of the magnitude, but for the first event the same station provided magnitude estimates that were only exceeded by one other station. This leads to the suspicion that the amplitudes entered on the phase cards were incorrect for one of the events, again emphasizing that the original records should be consulted before accepting the values in Table 5 as best-estimated magnitudes.
+
+Rereading the original seismograms is beyond the scope of this project. The point we want to get across here is that magnitudes used for some of the “famous” earthquakes in southern California might be more poorly determined than is commonly supposed, and, if Table 5 as a whole is a reliable indication, the actual magnitudes could be at least several tenths of a unit smaller than the catalog values.
+
+## APPENDIX TABLE FOLLOWS
+
+WORKSHEETS FOR $M_{L}$ CALCULATIONS
+
+TABLE A1
+
+<table><tr><td>Station</td><td>R</td><td>NS: A</td><td> $M_L$ </td><td>STACOR</td><td> $M_L+$  STACOR</td><td>EW: A</td><td> $M_L$ </td><td>STACOR</td><td> $M_L+$  STACOR</td></tr><tr><td colspan="10">34-06-07 Parkfield</td></tr><tr><td>MWC</td><td>272</td><td>76.0</td><td>5.69</td><td>0.16</td><td>5.85</td><td>83.0</td><td>5.73</td><td>0.15</td><td>5.88</td></tr><tr><td>RVR</td><td>337</td><td>60.5</td><td>5.81</td><td>0.16</td><td>5.97</td><td>73.0</td><td>5.90</td><td>0.04</td><td>5.94</td></tr><tr><td>LJC</td><td>432</td><td>28.0</td><td>5.78</td><td>-0.03</td><td>5.75</td><td>40.0</td><td>5.93</td><td>0.16</td><td>6.09</td></tr><tr><td colspan="8"> $M_L (CIT): 6.00$ </td><td colspan="2"> $M_L (HB): 5.91$ </td></tr><tr><td colspan="10">40-05-19 Imperial Valley</td></tr><tr><td>RVR</td><td>224</td><td></td><td></td><td></td><td></td><td>130.0</td><td>5.74</td><td>0.04</td><td>5.78</td></tr><tr><td>PAS</td><td>294</td><td></td><td></td><td></td><td></td><td>120.0</td><td>5.97</td><td>0.15</td><td>6.12</td></tr><tr><td>HAI</td><td>439</td><td>107.0</td><td>6.38</td><td>-0.38</td><td>6.00</td><td>115.0</td><td>6.42</td><td>-0.35</td><td>6.07</td></tr><tr><td>TIN</td><td>540</td><td>88.0</td><td>6.59</td><td>-0.35</td><td>6.24</td><td>51.0</td><td>6.35</td><td>-0.37</td><td>5.98</td></tr><tr><td colspan="8"> $M_L (CIT): 6.70$ </td><td colspan="2"> $M_L (HB): 6.03$ </td></tr><tr><td colspan="10">40-05-19 (Using Trifunac and Brune&#x27;s Amplitudes)</td></tr><tr><td>RVR</td><td>224</td><td></td><td></td><td>0.16</td><td></td><td>188.0</td><td>5.90</td><td>0.04</td><td>5.94</td></tr><tr><td>PAS</td><td>294</td><td>160.0</td><td>6.09</td><td>0.11</td><td>6.20</td><td>125.0</td><td>5.98</td><td>0.15</td><td>6.13</td></tr><tr><td>HAI</td><td>439</td><td>141.0</td><td>6.50</td><td>-0.38</td><td>6.12</td><td>110.0</td><td>6.40</td><td>-0.35</td><td>6.05</td></tr><tr><td>TIN</td><td>540</td><td>79.0</td><td>6.54</td><td>-0.35</td><td>6.19</td><td>51.0</td><td>6.35</td><td>-0.37</td><td>5.98</td></tr><tr><td>MWC</td><td>290</td><td>181.0</td><td>6.13</td><td>0.16</td><td>6.29</td><td>143.0</td><td>6.03</td><td>0.15</td><td>6.18</td></tr><tr><td>SBC</td><td>435</td><td>153.0</td><td>6.53</td><td>-0.17</td><td>6.36</td><td>140.0</td><td>6.49</td><td>-0.15</td><td>6.34</td></tr><tr><td colspan="8"> $M_L (CIT): 6.70$ </td><td colspan="2"> $M_L (HB): 6.16$ </td></tr><tr><td colspan="10">71-02-09 San Fernando</td></tr><tr><td>10</td><td>105</td><td>25.0</td><td>4.43</td><td>1.32</td><td>5.75</td><td>28.1</td><td>4.48</td><td>1.28</td><td>5.76</td></tr><tr><td>12</td><td>121</td><td>75.0</td><td>5.01</td><td>0.85</td><td>5.86</td><td></td><td></td><td></td><td></td></tr><tr><td>9</td><td>227</td><td>7.2</td><td>4.49</td><td>1.20</td><td>5.69</td><td>10.0</td><td>4.63</td><td>1.26</td><td>5.89</td></tr><tr><td colspan="8"> $M_L (CIT): 6.40$ </td><td colspan="2"> $M_L (HB): 5.79$ </td></tr><tr><td colspan="10">73-02-21 Point Mugu</td></tr><tr><td>12</td><td>75</td><td>78.0</td><td>4.71</td><td>0.85</td><td>5.56</td><td>83.50</td><td>4.74</td><td>0.81</td><td>5.55</td></tr><tr><td>11P</td><td>80</td><td>20.0</td><td>4.16</td><td>1.11</td><td>5.27</td><td>32.00</td><td>4.36</td><td>1.01</td><td>5.37</td></tr><tr><td>10</td><td>154</td><td>15.9</td><td>4.51</td><td>1.32</td><td>5.83</td><td>25.00</td><td>4.71</td><td>1.28</td><td>5.99</td></tr><tr><td>TIN</td><td>340</td><td>56.3</td><td>5.79</td><td>-0.35</td><td>5.44</td><td>73.80</td><td>5.91</td><td>-0.37</td><td>5.54</td></tr><tr><td colspan="8"> $M_L (CIT): 5.90$ </td><td colspan="2"> $M_L (HB): 5.57$ </td></tr><tr><td colspan="10">80-05-25 Mammoth Lakes</td></tr><tr><td>9</td><td>140</td><td>18.0</td><td>4.49</td><td>1.20</td><td>5.69</td><td>24.50</td><td>4.62</td><td>1.26</td><td>5.88</td></tr><tr><td>11S</td><td>353</td><td>33.4</td><td>5.61</td><td>0.78</td><td>6.39</td><td>34.00</td><td>5.62</td><td>0.81</td><td>6.43</td></tr><tr><td>13</td><td>381</td><td>14.0</td><td>5.32</td><td>1.27</td><td>6.59</td><td></td><td></td><td></td><td></td></tr><tr><td>10</td><td>415</td><td>4.1</td><td>4.89</td><td>1.32</td><td>6.21</td><td>4.50</td><td>4.93</td><td>1.28</td><td>6.21</td></tr><tr><td>RVR</td><td>415</td><td>50.0</td><td>5.98</td><td>0.16</td><td>6.14</td><td></td><td></td><td></td><td></td></tr><tr><td>BAR</td><td>574</td><td>49.7</td><td>6.43</td><td>-0.16</td><td>6.27</td><td></td><td></td><td></td><td></td></tr><tr><td colspan="8"> $M_L (CIT): 6.45$ </td><td colspan="2"> $M_L (HB): 6.20$ </td></tr><tr><td colspan="10">80-05-27 Mammoth Lakes</td></tr><tr><td>9</td><td>132</td><td>12.0</td><td>4.27</td><td>1.20</td><td>5.47</td><td>18.50</td><td>4.46</td><td>1.26</td><td>5.72</td></tr><tr><td>11S</td><td>346</td><td>2.5</td><td>4.46</td><td>0.78</td><td>5.24</td><td>1.70</td><td>4.29</td><td>0.81</td><td>5.10</td></tr><tr><td>PAS</td><td>373</td><td>106.5</td><td>6.18</td><td>0.11</td><td>6.29</td><td></td><td></td><td></td><td></td></tr><tr><td>RVR</td><td>407</td><td>29.5</td><td>5.73</td><td>0.16</td><td>5.89</td><td>65.00</td><td>6.07</td><td>0.04</td><td>6.11</td></tr><tr><td colspan="8"> $M_L (CIT): 6.41$ </td><td colspan="2"> $M_L (HB): 5.69$ </td></tr></table>

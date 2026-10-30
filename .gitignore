@@ -37,6 +37,9 @@ __pycache__/
 # but keep these reproducible intermediate bundles local.
 **/parsed/paper/mineru/
 **/parsed/supplement/mineru/
+# Agent resources: source standards and MinerU bundles stay local; the stable Markdown is tracked.
+data/agent_resource/**/*.pdf
+data/agent_resource/**/parsed/mineru/
 
 # Copyrighted / bulky source material: keep provenance in README and manifest.
 **/paper/*.pdf
