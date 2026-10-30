@@ -58,9 +58,10 @@ def export_run(task_dir: Path, run_dir: Path) -> Path:
             "note": "outputs recovered outside work/ after the session ended; not a formal result (see rescue/README.md)",
             **_score_part(_json(rescue / RUN_SCORE_FILE), _json(rescue / "swap" / "swap.json"))}
     (out / "scores.json").write_text(json.dumps(record, indent=1) + "\n", encoding="utf-8")
-    for source, name in ((evaluation, "location_diagnostics.png"), (rescue, "location_diagnostics_rescue.png")):
-        if (source / "location_diagnostics.png").is_file():
-            shutil.copy2(source / "location_diagnostics.png", out / "figures" / name)
+    for source, suffix in ((evaluation, ""), (rescue, "_rescue")):
+        for figure in ("location_diagnostics", "spatial_comparison"):
+            if (source / f"{figure}.png").is_file():
+                shutil.copy2(source / f"{figure}.png", out / "figures" / f"{figure}{suffix}.png")
     return out
 
 

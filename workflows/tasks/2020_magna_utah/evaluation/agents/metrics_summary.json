@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "3b28279bfa815b0eb0caa0a6722d5ea45908e0cf",
+ "scorer_commit": "acddf59d21c937dac60d392d811c9863f0e64e7b",
  "scorer_dirty": true,
- "generated_utc": "2026-10-29T18:01:20+00:00",
+ "generated_utc": "2026-10-30T05:53:02+00:00",
  "task": "2020_magna_utah",
  "configurations": [
   {
@@ -568,5 +568,6 @@
     "n": 1
    }
   }
- ]
+ ],
+ "excluded_runs": []
 }

@@ -94,14 +94,36 @@ SHORT_LABELS.update({'expert': f'Human-in-loop agent ({EXPERT_ROUND})', 'agent_m
 MODEL_DATUM_KM = float(yaml.safe_load((EXPERT / '00_config' / 'association.yaml').read_text())
                        ['reference_elevation_km'])
 
-AGENT_RUNS = {
-    # 'agent_tools': {
-    #     'label': 'Agent tools', 'color': AGENT_TOOLS_COLOR,
-    #     'catalog': TASK / 'runs/tools/claude/glm-5.3/<RUN_ID>/work/catalog.csv',
-    #     'run_id': 'runs/tools/claude/glm-5.3/<RUN_ID>',
-    # },
-}
-FOCUS_AGENT = 'agent_tools'
+RUN_COLORS = {'min': AGENT_MIN_COLOR, 'tools': AGENT_TOOLS_COLOR}
+# Recovered outputs of a run whose work/ holds none (late or misplaced; reference only).
+RESCUE_SOURCES = ('record/late_outputs', 'record/agent_home_work_mirror', 'record/runtime_home/work/out',
+                  'record/runtime_home/work')
+
+
+def discover_runs():
+    """Every Agent run under runs/<variant>/<harness>/<model>/<run_id>, keyed by its agents/ folder name."""
+    runs = {}
+    for run in sorted((TASK / 'runs').glob('*/*/*/*')):
+        if not (run / 'control').is_dir() or (run / 'EXCLUDED.md').is_file():
+            continue  # not a run, or excluded (a harness defect stopped it; see EXCLUDED.md)
+        result = run / 'record' / 'run_result.json'
+        if result.is_file() and json.loads(result.read_text()).get('state') == 'running':
+            continue  # still running: its outputs are provisional
+        variant, harness, model, run_id = run.relative_to(TASK / 'runs').parts
+        catalog, rescue = run / 'work' / 'catalog.csv', False
+        if not catalog.is_file():
+            found = [run / d / 'catalog.csv' for d in RESCUE_SOURCES if (run / d / 'catalog.csv').is_file()]
+            if not found:
+                continue
+            catalog, rescue = found[0], True
+        key = f'{variant}__{harness}__{model}__{run_id}'
+        runs[key] = {'label': f'Agent {variant}' + (' (rescue)' if rescue else ''), 'variant': variant,
+                     'color': RUN_COLORS.get(variant, AGENT_TOOLS_COLOR), 'catalog': catalog, 'rescue': rescue,
+                     'run_id': str(run.relative_to(TASK))}
+    return runs
+
+
+AGENT_RUNS = discover_runs()
 
 DT_MAX_S = 4.0
 D_MAX_KM = 15.0
@@ -186,10 +208,8 @@ def load_expert(round_=EXPERT_ROUND):
 
 
 def agent_run_style(key):
-    color = AGENT_RUNS.get(key, {}).get('color', AGENT_TOOLS_COLOR)
-    if key == 'agent_min':
-        return color, (0, (4, 2, 1, 2))
-    return color, '-'
+    meta = AGENT_RUNS.get(key, {})
+    return meta.get('color', AGENT_TOOLS_COLOR), ((0, (4, 2, 1, 2)) if meta.get('rescue') else '-')
 
 
 def load_populations():
@@ -343,9 +363,10 @@ def spatial_grid(pops, stem, title):
     width = style.WIDTH_INCHES
     col_w = (width - 0.8) / ncol
     title_h = 0.42 + (0.2 if ncol >= 5 else 0.0)  # room for two-line panel titles
-    height = col_w * (map_h + sec_h) + 1.55 + (title_h - 0.42)
+    narrow = ncol >= 6  # narrow columns: more room between the rows, two-line depth label
+    height = col_w * (map_h + sec_h) + 1.55 + (title_h - 0.42) + (0.3 if narrow else 0.0)
     fig = plt.figure(figsize=(width, height))
-    gs = fig.add_gridspec(2, ncol, height_ratios=[map_h, sec_h], hspace=0.42, wspace=0.10,
+    gs = fig.add_gridspec(2, ncol, height_ratios=[map_h, sec_h], hspace=0.85 if narrow else 0.42, wspace=0.10,
                           left=0.075, right=0.99, top=1 - title_h / height, bottom=0.95 / height)
     hx, hy = _tick(VIEW['east'][1] - VIEW['east'][0]), _tick(VIEW['north'][1] - VIEW['north'][0])
     hz = _tick(VIEW['depth'][1] - VIEW['depth'][0])
@@ -381,7 +402,7 @@ def spatial_grid(pops, stem, title):
                 if star:
                     _star(ax, star[2], star[3])
                 ax.set_xlabel('along axis (km)' if ncol >= 5 else 'along major axis (km)', labelpad=1.5)
-                ylabel = DEPTH_LABEL
+                ylabel = DEPTH_LABEL.replace(' below ', '\nbelow ', 1) if narrow else DEPTH_LABEL
                 panel_label(ax, 'abcdefghijklmnop'[ncol + k], '')
             if k == 0:
                 ax.set_ylabel(ylabel)
@@ -458,7 +479,7 @@ def fig_diagnostics(out, pops):
     plt.close(fig)
 
 
-def fig_correspondence(out, pops, focus_agent=FOCUS_AGENT, stem='03_agent_reference_correspondence'):
+def fig_correspondence(out, pops, focus_agent, stem='03_agent_reference_correspondence'):
     """Matched-pair diagnostics for the focus agent population."""
     focus = next((p for p in pops if p['key'] == focus_agent), None)
     if focus is None:
@@ -533,15 +554,27 @@ def main():
     parser.add_argument('--out-dir', type=Path, default=TASK / 'evaluation')
     args = parser.parse_args()
     out = args.out_dir
-    figures = out / 'human_in_loop' / 'figures'  # agent runs: agents/ and comparison/
-    figures.mkdir(parents=True, exist_ok=True)
 
     populations, inputs = load_populations()
+    base = [p for p in populations if p['key'] in REFS or p['key'] == 'expert']
+    runs = [p for p in populations if p['key'] in AGENT_RUNS]
     stats = compute_stats(populations)
     with style.publication_style():
-        fig_spatial(figures, populations)
-        fig_diagnostics(figures, populations)
-        wrote = fig_correspondence(figures, populations)
+        expert_figures = out / 'human_in_loop' / 'figures'
+        expert_figures.mkdir(parents=True, exist_ok=True)
+        fig_spatial(expert_figures, base)
+        fig_diagnostics(expert_figures, base)
+        for run in runs:
+            figures = out / 'agents' / run['key'] / 'figures'
+            figures.mkdir(parents=True, exist_ok=True)
+            fig_spatial(figures, base + [run])
+            fig_diagnostics(figures, base + [run])
+            fig_correspondence(figures, base + [run], run['key'])
+        if runs:
+            comparison = out / 'comparison' / 'figures'
+            comparison.mkdir(parents=True, exist_ok=True)
+            fig_spatial(comparison, populations)
+            fig_diagnostics(comparison, populations)
 
     for p in populations:
         if p['key'] in stats:
@@ -549,8 +582,6 @@ def main():
             print(f"{p['key']}: {len(p['rows']):,} events; " + '; '.join(
                 f"vs {k} {e['matched']:,} (R {e['recall']:.1%}, epi {e['median_epicentral_km'] or 0:.2f} km)"
                 for k, e in v.items()))
-    if not wrote:
-        print('correspondence figure skipped (no focus agent run registered)')
 
 
 if __name__ == '__main__':

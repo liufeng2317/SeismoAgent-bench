@@ -1,6 +1,6 @@
 # Score table
 
-Generated 2026-10-29 19:48 UTC by `python -m SeismoAgentBench.scoring.catalog_metrics table` from the tracked score files (catalog metrics v2); do not edit by hand. How each number is computed: [`../03_Scoring_Method.md`](../03_Scoring_Method.md); definitions: [`docs/framework/02_Catalog_Metrics.md`](../../framework/02_Catalog_Metrics.md).
+Generated 2026-10-30 22:47 UTC by `python -m SeismoAgentBench.scoring.catalog_metrics table` from the tracked score files (catalog metrics v2); do not edit by hand. How each number is computed: [`../03_Scoring_Method.md`](../03_Scoring_Method.md); definitions: [`docs/framework/02_Catalog_Metrics.md`](../../framework/02_Catalog_Metrics.md).
 
 Rows are grouped by case in tier order; the first row of each case is the human-in-loop final, the upper bound every run is compared with (it has no values *against the final*). ✗ marks a value that fails a trusted-catalog criterion (§7a); ✓ / ✗ / … in the verdict table are pass / fail / pending (blind audit not labelled). Each configuration has one run so far.
 
@@ -19,8 +19,10 @@ The verdict judges whether the events are real and whether their time, space and
 | Maple Creek 2017 | tools (claude × glm-5.3, 20261028T220746Z) | scored | not trusted | ✗ | ✗ | ✗ | ✗ | inside_region, time_bias, depth_bias, horizontal_scatter, off_structure, magnitude_scale |
 | Kīlauea 2018 | min (claude × glm-5.3, 20261029T084653Z) | scored | not trusted | ✗ | ✗ | ✗ | ✗ | inside_region, time_bias, depth_bias, horizontal_scatter, depth_pileup, magnitude_offset |
 | Kīlauea 2018 | tools (claude × glm-5.3, 20261029T084718Z) | scored | not trusted | … | ✗ | ✓ | ✓ | time_bias |
-| Ridgecrest 2019 | no scored formal run yet | — | — | — | — | — | — | — |
-| Kaikōura 2016 | no scored formal run yet | — | — | — | — | — | — | — |
+| Ridgecrest 2019 | min (claude × glm-5.3, 20261029T203728Z) | completed | not trusted | ✗ | ✓ | ✗ | ✗ | inside_region, horizontal_shift, depth_bias, off_structure, magnitude_offset, magnitude_spread, large_events_present |
+| Ridgecrest 2019 | tools (claude × glm-5.3, 20261029T203757Z) | completed | not trusted | ✗ | ✓ | ✗ | ✗ | inside_region, depth_bias, off_structure, depth_pileup, magnitude_offset, large_events_present |
+| Kaikōura 2016 | min (claude × glm-5.3, 20261029T123602Z) | completed | not trusted | … | ✗ | ✗ | ✗ | time_bias, time_spread, after_large_events, horizontal_shift, horizontal_scatter, off_structure, depth_pileup, large_events_present |
+| Kaikōura 2016 | tools (claude × glm-5.3, 20261029T183933Z) | completed | not trusted | … | ✗ | ✗ | ✗ | time_bias, time_spread, horizontal_shift, horizontal_scatter, depth_pileup, magnitude_offset, large_events_present |
 
 ## 2. References and ceilings
 
@@ -71,7 +73,11 @@ Roles: D detection, L absolute location, S structure, M magnitude. Matching gate
 | Kīlauea 2018 | min (claude × glm-5.3, 20261029T084653Z) | 0.90 | 0.44 | 0.25 | 0.42 | 0.60 | 0.77 | 0.77 | 0.90 |
 | Kīlauea 2018 | tools (claude × glm-5.3, 20261029T084718Z) | 0.88 | 0.43 | 0.42 | 0.37 | 0.41 | 0.89 | 0.86 | 1.00 |
 | Ridgecrest 2019 | human-in-loop final | 1.38 | 0.88 | 0.86 | — | — | 0.82 | 0.86 | 0.90 |
+| Ridgecrest 2019 | min (claude × glm-5.3, 20261029T203728Z) | 1.01 | 0.64 | 0.59 | 0.30 | 0.43 | 0.76 | 0.76 | 0.87 |
+| Ridgecrest 2019 | tools (claude × glm-5.3, 20261029T203757Z) | 1.15 | 0.73 | 0.65 | 0.39 | 0.68 | 0.76 | 0.79 | 0.82 |
 | Kaikōura 2016 | human-in-loop final | 1.17 | 0.81 | 0.31 | — | — | 0.93 | 0.95 | 0.94 |
+| Kaikōura 2016 | min (claude × glm-5.3, 20261029T123602Z) | 0.13 | 0.09 | 0.00 | 0.04 | 0.11 | 0.26 | 0.15 | 0.11 |
+| Kaikōura 2016 | tools (claude × glm-5.3, 20261029T183933Z) | 0.96 | 0.67 | 0.08 | 0.43 | 0.68 | 0.87 | 0.82 | 0.87 |
 
 ## 4. Event reality
 
@@ -93,7 +99,11 @@ Share of rows outside the evaluation region, chance-corrected support by any ref
 | Kīlauea 2018 | min (claude × glm-5.3, 20261029T084653Z) | 45.3 % ✗ | 0.73 | 0.70 | — |
 | Kīlauea 2018 | tools (claude × glm-5.3, 20261029T084718Z) | 21.2 % | 0.95 | 0.93 | — |
 | Ridgecrest 2019 | human-in-loop final | 0.1 % | 0.49 | — | — |
+| Ridgecrest 2019 | min (claude × glm-5.3, 20261029T203728Z) | 20.9 % ✗ | 0.81 | 0.74 | — |
+| Ridgecrest 2019 | tools (claude × glm-5.3, 20261029T203757Z) | 12.0 % ✗ | 0.64 | 0.58 | — |
 | Kaikōura 2016 | human-in-loop final | 3.7 % | 0.42 | — | — |
+| Kaikōura 2016 | min (claude × glm-5.3, 20261029T123602Z) | 7.6 % | 0.43 | 0.39 | — |
+| Kaikōura 2016 | tools (claude × glm-5.3, 20261029T183933Z) | 2.5 % | 0.73 | 0.64 | — |
 
 ## 5. Time
 
@@ -115,7 +125,11 @@ Against the final: median signed origin-time difference and its MAD (seconds). A
 | Kīlauea 2018 | min (claude × glm-5.3, 20261029T084653Z) | -0.96 ✗ | 0.26 | 0.90 | 1.48 |
 | Kīlauea 2018 | tools (claude × glm-5.3, 20261029T084718Z) | -0.36 ✗ | 0.07 | 0.30 | 1.49 |
 | Ridgecrest 2019 | human-in-loop final | — | — | 0.26 | 0.99 |
+| Ridgecrest 2019 | min (claude × glm-5.3, 20261029T203728Z) | 0.25 | 0.08 | 0.52 | 0.93 |
+| Ridgecrest 2019 | tools (claude × glm-5.3, 20261029T203757Z) | 0.05 | 0.12 | 0.33 | 0.97 |
 | Kaikōura 2016 | human-in-loop final | — | — | 0.62 | 1.01 |
+| Kaikōura 2016 | min (claude × glm-5.3, 20261029T123602Z) | 2.56 ✗ | 0.40 ✗ | 2.15 | 0.77 ✗ |
+| Kaikōura 2016 | tools (claude × glm-5.3, 20261029T183933Z) | 0.63 ✗ | 0.44 ✗ | 0.43 | 1.02 |
 
 ## 6. Space
 
@@ -137,7 +151,11 @@ Against the final: common horizontal shift, scatter about it, median depth diffe
 | Kīlauea 2018 | min (claude × glm-5.3, 20261029T084653Z) | 0.13 | 1.31 ✗ | 1.29 ✗ | 0.23 | 1.01 | 2.04 | 0.8 % | 16.5 % ✗ |
 | Kīlauea 2018 | tools (claude × glm-5.3, 20261029T084718Z) | 0.07 | 0.38 | 0.45 | 0.48 | 0.61 | 1.01 | 0.1 % | 3.7 % |
 | Ridgecrest 2019 | human-in-loop final | — | — | — | 0.37 | 0.21 | -0.10 | 0.5 % | 0.5 % |
+| Ridgecrest 2019 | min (claude × glm-5.3, 20261029T203728Z) | 1.01 ✗ | 0.60 | -1.37 ✗ | 0.63 | 0.50 | -1.27 | 9.6 % ✗ | 1.2 % |
+| Ridgecrest 2019 | tools (claude × glm-5.3, 20261029T203757Z) | 0.59 | 0.83 | -2.31 ✗ | 0.20 | 0.74 | -2.35 | 17.1 % ✗ | 36.5 % ✗ |
 | Kaikōura 2016 | human-in-loop final | — | — | — | 1.13 | 2.78 | -0.87 | 0.8 % | 1.0 % |
+| Kaikōura 2016 | min (claude × glm-5.3, 20261029T123602Z) | 2.73 ✗ | 4.44 ✗ | 0.06 | 1.47 | 5.76 | -1.66 | 7.1 % ✗ | 50.1 % ✗ |
+| Kaikōura 2016 | tools (claude × glm-5.3, 20261029T183933Z) | 3.70 ✗ | 3.69 ✗ | 0.54 | 2.21 | 4.43 | 2.63 | 4.9 % | 12.5 % ✗ |
 
 ## 7. Strength
 
@@ -159,7 +177,11 @@ Against the magnitude authority (the operational catalog; Cochran for Prague): m
 | Kīlauea 2018 | min (claude × glm-5.3, 20261029T084653Z) | -2.43 ✗ | 0.32 | -0.12 | -0.29 | 1.00 |
 | Kīlauea 2018 | tools (claude × glm-5.3, 20261029T084718Z) | -0.06 | 0.38 | -0.16 | -0.06 | 1.00 |
 | Ridgecrest 2019 | human-in-loop final | -0.09 | 0.16 | 0.01 | -0.09 | 0.90 |
+| Ridgecrest 2019 | min (claude × glm-5.3, 20261029T203728Z) | 0.30 ✗ | 0.31 ✗ | -0.11 | -0.05 | 0.83 ✗ |
+| Ridgecrest 2019 | tools (claude × glm-5.3, 20261029T203757Z) | -1.21 ✗ | 0.20 | -0.03 | -0.02 | 0.86 ✗ |
 | Kaikōura 2016 | human-in-loop final | -0.12 | 0.41 | -0.03 | -0.41 | 1.00 |
+| Kaikōura 2016 | min (claude × glm-5.3, 20261029T123602Z) | -0.26 | 0.18 | -0.15 | -0.27 | 0.08 ✗ |
+| Kaikōura 2016 | tools (claude × glm-5.3, 20261029T183933Z) | -0.60 ✗ | 0.23 | -0.01 | -0.24 | 0.92 ✗ |
 
 ## 8. Phase picks
 
@@ -206,4 +228,16 @@ The run's own picks and associations relocated with the expert's velocity model 
 | Maple Creek 2017 | tools (claude × glm-5.3, 20261028T220746Z) | 2.3 | 21.83 | 335 | no | 50 of 203 unsupported events; not labelled |
 | Kīlauea 2018 | min (claude × glm-5.3, 20261029T084653Z) | 3.6 | 18.39 | 260 | no | 50 of 809 unsupported events; not labelled |
 | Kīlauea 2018 | tools (claude × glm-5.3, 20261029T084718Z) | 3.8 | 17.70 | 306 | no | 50 of 112 unsupported events; not labelled |
+| Ridgecrest 2019 | min (claude × glm-5.3, 20261029T203728Z) | 5.5 | 19.51 | 259 | no | 50 of 1,351 unsupported events; not labelled |
+| Ridgecrest 2019 | tools (claude × glm-5.3, 20261029T203757Z) | 9.7 | 28.49 | 16 | no | 50 of 3,974 unsupported events; not labelled |
+| Kaikōura 2016 | min (claude × glm-5.3, 20261029T123602Z) | 8.0 | 16.14 | 218 | no | 50 of 768 unsupported events; not labelled |
+| Kaikōura 2016 | tools (claude × glm-5.3, 20261029T183933Z) | 26.7 | 24.85 | 14 | no | 50 of 2,300 unsupported events; not labelled |
+
+## 11. Excluded runs
+
+Runs stopped by a harness defect, not by the Agent; repeated after the fix (metrics §11).
+
+| Case | Run | Reason |
+|---|---|---|
+| Kaikōura 2016 | runs/tools/claude/glm-5.3/20261029T123626Z | Excluded 2026-10-30: harness defect, not a formal result. The runner passed the task prompt on the Claude process's argv; the tools prompt names MatchLocate2, so the Agent's own `ps | grep MatchLocate2 | ... kill -9` (its last command, 17:01:15 UTC) matched and killed its Claude session (exit -9, state execution_failed, 4.4 h). work/catalog.csv is an intermediate version from 16:19 UTC. The runner now passes the prompt on stdin; the run is repeated with the fixed runner. |
 

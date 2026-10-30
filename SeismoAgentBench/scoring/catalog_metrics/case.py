@@ -41,6 +41,7 @@ BASELINE_FILE = "metrics_baseline.json"
 EXPERT_DIR = Path("evaluation/human_in_loop")
 AGENTS_DIR = Path("evaluation/agents")
 FIGURE_FILE = "location_diagnostics.png"
+SPATIAL_FILE = "spatial_comparison.png"
 SEA_LEVEL_MARKER = "below sea level"
 
 
@@ -330,8 +331,10 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
         report["headline"].update(_picks_headline(report["scores"]["picks"]))
         report["headline"]["out_of_mask_fraction"] = notes["out_of_mask_fraction"]
         if write:
-            from .figures import location_figure
+            from .figures import location_figure, spatial_figure
             ref = case.refs[case.primary["location"]]
+            spatial_figure(out_dir / SPATIAL_FILE, cand, ref, case.expert.get("final"), case.center,
+                           title=f"{case.task_dir.name} - {layout['path']}")
             location_figure(out_dir / FIGURE_FILE, cand, ref, [r for r in case.refs.values() if "S" in r.roles],
                             case.expert, case.center, off_structure_km=case.config["off_structure_km"],
                             title=f"{case.task_dir.name} - {layout['path']}")

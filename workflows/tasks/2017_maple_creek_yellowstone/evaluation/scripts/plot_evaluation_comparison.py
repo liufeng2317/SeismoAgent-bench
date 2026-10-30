@@ -101,8 +101,11 @@ def discover_runs():
     """Every Agent run under runs/<variant>/<harness>/<model>/<run_id>, keyed by its agents/ folder name."""
     runs = {}
     for run in sorted((TASK / 'runs').glob('*/*/*/*')):
-        if not (run / 'control').is_dir():
-            continue
+        if not (run / 'control').is_dir() or (run / 'EXCLUDED.md').is_file():
+            continue  # not a run, or excluded (a harness defect stopped it; see EXCLUDED.md)
+        result = run / 'record' / 'run_result.json'
+        if result.is_file() and json.loads(result.read_text()).get('state') == 'running':
+            continue  # still running: its outputs are provisional
         variant, harness, model, run_id = run.relative_to(TASK / 'runs').parts
         catalog, rescue = run / 'work' / 'catalog.csv', False
         if not catalog.is_file():

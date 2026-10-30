@@ -108,8 +108,11 @@ def discover_runs():
     """Every Agent run under runs/<variant>/<harness>/<model>/<run_id>, keyed by its agents/ folder name."""
     runs = {}
     for run in sorted((TASK / 'runs').glob('*/*/*/*')):
-        if not (run / 'control').is_dir():
-            continue
+        if not (run / 'control').is_dir() or (run / 'EXCLUDED.md').is_file():
+            continue  # not a run, or excluded (a harness defect stopped it; see EXCLUDED.md)
+        result = run / 'record' / 'run_result.json'
+        if result.is_file() and json.loads(result.read_text()).get('state') == 'running':
+            continue  # still running: its outputs are provisional
         variant, harness, model, run_id = run.relative_to(TASK / 'runs').parts
         catalog, rescue = run / 'work' / 'catalog.csv', False
         if not catalog.is_file():
@@ -364,9 +367,10 @@ def spatial_grid(pops, stem, title):
     width = style.WIDTH_INCHES
     col_w = (width - 0.8) / ncol
     title_h = 0.42 + (0.2 if ncol >= 5 else 0.0)  # room for two-line panel titles
-    height = col_w * (map_h + sec_h) + 1.55 + (title_h - 0.42)
+    narrow = ncol >= 6  # narrow columns: more room between the rows, two-line depth label
+    height = col_w * (map_h + sec_h) + 1.55 + (title_h - 0.42) + (0.3 if narrow else 0.0)
     fig = plt.figure(figsize=(width, height))
-    gs = fig.add_gridspec(2, ncol, height_ratios=[map_h, sec_h], hspace=0.42, wspace=0.10,
+    gs = fig.add_gridspec(2, ncol, height_ratios=[map_h, sec_h], hspace=0.85 if narrow else 0.42, wspace=0.10,
                           left=0.075, right=0.99, top=1 - title_h / height, bottom=0.95 / height)
     hx, hy = _tick(VIEW['east'][1] - VIEW['east'][0]), _tick(VIEW['north'][1] - VIEW['north'][0])
     hz = _tick(VIEW['depth'][1] - VIEW['depth'][0])
@@ -402,7 +406,7 @@ def spatial_grid(pops, stem, title):
                 if star:
                     _star(ax, star[2], star[3])
                 ax.set_xlabel('along axis (km)' if ncol >= 5 else 'along major axis (km)', labelpad=1.5)
-                ylabel = DEPTH_LABEL
+                ylabel = DEPTH_LABEL.replace(' below ', '\nbelow ', 1) if narrow else DEPTH_LABEL
                 panel_label(ax, 'abcdefghijklmnop'[ncol + k], '')
             if k == 0:
                 ax.set_ylabel(ylabel)

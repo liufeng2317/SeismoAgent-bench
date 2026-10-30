@@ -83,6 +83,27 @@ AGENT_RUNS = {
     },
 }
 
+PILOT_RUNS = dict(AGENT_RUNS)
+
+
+def formal_runs():
+    """The latest finished formal run of each variant (runs/<variant>/<harness>/<model>/<run_id>), under the
+    pilot keys agent_min / agent_tools; excluded runs (EXCLUDED.md) and running ones are left out."""
+    found = {}
+    for run in sorted((TASK / 'runs').glob('*/*/*/*')):
+        result = run / 'record' / 'run_result.json'
+        if not (run / 'control').is_dir() or (run / 'EXCLUDED.md').is_file() or not (run / 'work' / 'catalog.csv').is_file():
+            continue
+        if result.is_file() and json.loads(result.read_text()).get('state') == 'running':
+            continue
+        variant = run.relative_to(TASK / 'runs').parts[0]
+        if variant in ('min', 'tools'):
+            found[f'agent_{variant}'] = {'label': f'Agent {variant}', 'catalog': run / 'work' / 'catalog.csv',
+                                         'run_id': str(run.relative_to(TASK)),
+                                         'color': AGENT_MIN_COLOR if variant == 'min' else AGENT_TOOLS_COLOR}
+    return found
+
+
 SHORT_LABELS = {
     'shelly': 'Shelly', 'liu': 'Liu', 'ross_relocated': 'Ross rel.',
     'awr_hypocenters': 'AWR v2', 'official_earthquake': 'Official',
@@ -577,15 +598,27 @@ def compute_stats(pops, focus_agent=FOCUS_AGENT):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--task-dir', type=Path, default=TASK)
+    parser.add_argument('--runs', choices=('pilot', 'formal'), default='pilot',
+                        help='pilot: the October pilot runs (agents/pilot/figures); formal: the latest finished formal run '
+                             'of each variant (comparison/figures)')
     args = parser.parse_args()
-    out = args.task_dir / 'evaluation' / 'agents' / 'pilot' / 'figures'  # pilot runs vs expert and references
+    global FOCUS_AGENT
+    if args.runs == 'formal':
+        AGENT_RUNS.clear()
+        AGENT_RUNS.update(formal_runs())
+        if not AGENT_RUNS:
+            raise SystemExit('no finished formal run')
+        out = args.task_dir / 'evaluation' / 'comparison' / 'figures'
+    else:
+        out = args.task_dir / 'evaluation' / 'agents' / 'pilot' / 'figures'  # pilot runs vs expert and references
+    FOCUS_AGENT = FOCUS_AGENT if FOCUS_AGENT in AGENT_RUNS else next(iter(AGENT_RUNS))
     out.mkdir(parents=True, exist_ok=True)
     cfg, audit, pops, inputs = load_populations()
-    stats = compute_stats(pops)
+    stats = compute_stats(pops, focus_agent=FOCUS_AGENT)
     with house.publication_style():
         fig_spatial(out, cfg, audit, pops)
         fig_diagnostics(out, cfg, audit, pops, stats)
-        fig_correspondence(out, cfg, audit, pops, stats)
+        fig_correspondence(out, cfg, audit, pops, stats, focus_agent=FOCUS_AGENT)
         fig_rates(out, cfg, audit, pops)
     print(json.dumps({r['key']: len(r['rows']) for r in pops}, ensure_ascii=False))
     print('Figures:', out)
