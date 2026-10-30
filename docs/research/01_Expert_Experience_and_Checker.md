@@ -68,7 +68,34 @@ Relocating an Agent's own picks and associations with the expert's model and loc
 
 With tools, relocating the Agent's picks with the expert's model and locator removes most of its depth error, so its large errors are back-end *choices*. The remaining distance to the final (Ridgecrest scatter 0.80 vs 0.21 km, off-structure 8 % vs 0.5 %) is what the expert's later steps add — station delays, template matching, double difference, the layered frame — and is attributed with the ladder. Without tools, both ends fail. (Ridgecrest and Magna min are pilot runs; the human-in-loop final is the upper bound, see `02_Catalog_Metrics.md` §11.) These are exactly the errors a checker can see without references (depth pile-ups, origin-time–depth coupling, fixed depths, magnitude-scale sanity).
 
-### 2.4 Summary
+### 2.4 Knowledge swaps on the formal runs (2026-10-31)
+
+Two swaps on the formal `tools` runs (claude × glm-5.3) isolate what knowledge, rather than tools, would change. Everything else (picks, associations, event IDs) stays the Agent's own; scores use the same scorer and trusted-catalog verdict.
+
+**Velocity model.** All events relocated with the Agent's picks and the published regional model the expert used, applied the expert's way (reference elevation at the model datum, depth search 0–20 km below it, NonLinLoc EDT_OT_WT; no station delays, no expert tuning). Relocations that fail keep the Agent's solution.
+
+| Run | Model | Agent's own: dt / dZ | Swapped: dt / dZ | Failed criteria |
+|---|---|---|---|---|
+| Kīlauea tools | HVO Klein (linear) | −0.36 s / +0.45 km | 0.00 s / −0.06 km | 1 → **0** (audit pending) |
+| Prague tools | Keranen et al. (2013) | +0.06 s / +1.10 km | +0.01 s / −0.00 km | 2 → 2 (depth fixed; magnitude left; inside-region 10.4 % at the 10 % limit) |
+| Magna tools | Bjarnason & Pechmann (1989), published | −0.19 s / −1.94 km | +0.13 s / −1.59 km | 3 → 5 (10 % pinned at the search top; the expert's model adds a 2-km basin-fill layer) |
+| Maple tools | UUSS Yellowstone 1-D | +1.15 s / −2.18 km | +0.55 s / −3.25 km | 6 → 8 (21 % piled at the model's 2.8→5.2 km/s interface) |
+| Ridgecrest tools | LITHO1.0 (the expert's model comes from a target paper) | +0.05 s / −2.31 km, 36 % pinned | −0.32 s / +2.31 km, 3 % pinned | 6 → 8 |
+
+A first pass with a generic set-up (reference elevation at the highest station, no depth bound) gave the same Kīlauea and Prague gains but made Magna and Maple worse for a different reason (events above the datum): using a model the right way matters as much as choosing it. Which model fits best cannot be read from the travel-time residual: on 100-event samples the lowest-residual generic model was also the least biased only for Prague; at Kīlauea and Maple a generic model fitted better than the regional model and was far more biased.
+
+**Magnitude.** A reference implementation of the IASPEI standard ML (`data/agent_resource/magnitude/`) recomputed 30 events per run from the waveforms:
+
+| Run | Offset to the reference catalog | Catalog − recomputed standard ML | Cause |
+|---|---|---|---|
+| Prague tools | −2.77 | −2.60 (spread 0.05) | WA-record amplitude in mm used with the constant for nm (−2.68) |
+| Kīlauea min | −2.43 | −2.29 (0.14) | same |
+| Ridgecrest tools | −1.21 | −1.18 (0.10) | ObsPy's one-zero (velocity-input) WA response applied to displacement |
+| Magna tools | +0.67 | +0.19 (0.11) | implementation sound; the rest is regional calibration |
+
+**Reading.** The two largest error sources that keep runs from a trusted catalog are knowledge, not tools: the regional velocity model and how to use it, and the units of the magnitude relation. Both have standard, citable sources (regional models; IASPEI/NMSOP-2 for magnitudes) and both can be checked against the Agent's own data (the checker's depth pile-up, S−P depth and magnitude recomputation). Where the regional structure is not in a published model (a basin layer) or the model is only in a target paper, the knowledge is harder to obtain and the gain smaller.
+
+### 2.5 Summary
 
 - Within an expert's working range, parameters change detection little and precision moderately; the big detection gain needs a different method.
 - Outside it, single choices produce errors 5–10× the expert's (depth, frame, magnitude scale) and are invisible in a recall number.
