@@ -63,8 +63,9 @@ def agent_runs(task: Path):
 
 def run_checker(catalog: Path, picks: Path, stations: Path, out: Path, python: str, *, checker: Path = CHECKER,
                 stage: str | None = None, waveforms: Path | None = None, ensemble: bool = True) -> dict:
-    cmd = [python, "-W", "ignore", str(checker), "--catalog", str(catalog), "--picks", str(picks),
-           "--stations", str(stations), "--output-dir", str(out), "--no-figures"]
+    cmd = [python, "-W", "ignore", str(checker), "--stations", str(stations), "--output-dir", str(out), "--no-figures"]
+    if stage != "data":
+        cmd += ["--catalog", str(catalog), "--picks", str(picks)]
     if stage:
         cmd += ["--stage", stage]
     if waveforms:
@@ -80,7 +81,7 @@ def main() -> int:
     parser.add_argument("--python", default=sys.executable)
     parser.add_argument("--cases", nargs="*", default=CASES)
     parser.add_argument("--checker", type=Path, default=CHECKER, help="checker entry point (a development copy, for example)")
-    parser.add_argument("--stages", nargs="*", help="run these stages (picks, association, catalog); default: the checker's default only")
+    parser.add_argument("--stages", nargs="*", help="run these stages (data, picks, association, location, magnitude, all); default: the checker's default only")
     parser.add_argument("--no-model-ensemble", action="store_true")
     parser.add_argument("--output", type=Path, default=OUT)
     args = parser.parse_args()
@@ -89,10 +90,15 @@ def main() -> int:
     for case in args.cases:
         task = ROOT / "workflows/tasks" / case
         hil_waveforms = (ROOT / "data" / case / "data/waveforms/data").resolve()
-        targets = [("human_in_loop", *expert_inputs(task, out_root / case / "human_in_loop" / "inputs"), None, hil_waveforms)]
+        hil_cat, hil_picks, hil_stations = expert_inputs(task, out_root / case / "human_in_loop" / "inputs")
+        if args.stages:  # stage runs read channels and orientations from the StationXML the Agent receives
+            hil_stations = (ROOT / "data" / case / "data/waveforms/stations").resolve()
+        targets = [("human_in_loop", hil_cat, hil_picks, hil_stations, None, hil_waveforms)]
         targets += [(name, cat, pk, st, s, (cat.parent / "input/waveforms/data").resolve()) for name, cat, pk, st, s in agent_runs(task)]
         for name, cat, pk, st, scores, wf in targets:
           for stage in (args.stages or [None]):
+            if stage == "data" and name != "human_in_loop":
+                continue  # every run of a case receives the same waveforms
             label = name if stage is None else f"{name}@{stage}"
             report = run_checker(cat, pk, st, out_root / case / label, args.python, checker=args.checker, stage=stage,
                                  waveforms=wf if stage else None, ensemble=not args.no_model_ensemble)

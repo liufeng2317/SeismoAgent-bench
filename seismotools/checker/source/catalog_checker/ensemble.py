@@ -25,7 +25,7 @@ from .checks import Check, Data, _skip
 from .velocity import regional_models, with_vpvs
 
 LOCATE = Path(__file__).resolve().parents[3] / "nonlinloc/interface/locate.py"
-ENSEMBLE_DEFAULTS = {"ensemble_events": 300, "ensemble_min_phases": 8, "ensemble_min_s": 2,
+ENSEMBLE_DEFAULTS = {"ensemble_events": 100, "ensemble_min_phases": 8, "ensemble_min_s": 2,
                      "ensemble_depth_margin_km": 1.0, "ensemble_time_margin_s": 0.3,
                      "ensemble_outside_share_max": 0.5, "ensemble_workers": 8, "ensemble_timeout_s": 3600}
 
@@ -134,5 +134,7 @@ def model_ensemble(d: Data, config: dict, vpvs: float | None, workdir: Path | No
                f"{'after' if med_t > 0 else 'before'} every relocation with the generic models ({names}); median excess {med_t:+.2f} s.") if ft else None,
               {"median_excess_s": round(med_t, 3), "models_spread_s_median": round(float(np.median(ts.max(axis=1) - ts.min(axis=1))), 3)}),
     ]
+    figure = {"catalog_depth": cat.depth_km.to_numpy(), "catalog_time": cat.time.to_numpy(),
+              "models": {m: {"depth": zs[:, i], "time": ts[:, i]} for i, m in enumerate(located)}}
     return checks, {"models": per_model, "reference_elevation_km": ref_elev, "sampled_events": int(len(sample)),
-                    "common_events": len(common)}
+                    "common_events": len(common), "_figure": figure}

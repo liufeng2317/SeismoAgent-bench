@@ -12,7 +12,7 @@ import numpy as np
 from .checks import Check, Data
 
 REPORT_VERSION = 1
-DIMENSIONS = ("reality", "time", "space", "strength")
+DIMENSIONS = ("data", "reality", "time", "space", "strength")
 
 
 def _sha256(path: Path) -> str:
@@ -29,6 +29,7 @@ def build_report(checks: list[Check], d: Data, inputs: dict[str, Path], config: 
         "report_version": REPORT_VERSION,
         "generated_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "inputs": {k: {"path": str(v), "sha256": _sha256(v) if Path(v).is_file() else None} for k, v in inputs.items()},
+        "picks_total": int(len(d.all_picks)),
         "counts": {"events": int(len(d.events)), "located_events": int(d.events[["x", "y"]].notna().all(axis=1).sum()),
                    "associated_picks_at_known_stations": int(len(d.picks)), "stations": int(len(d.stations)),
                    "pick_stations_without_metadata": d.unmatched_stations[:50]},

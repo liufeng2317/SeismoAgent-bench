@@ -26,9 +26,12 @@ DEFAULTS: dict[str, Any] = {
     "tt_near_quantile": 0.6, "tt_min_picks": 200, "tt_intercept_max_s": 0.3,
     "station_residual_max_s": 0.5, "station_min_picks": 20, "azimuth_amplitude_max_s": 0.25,
     "depth_value_share_max": 0.05, "depth_edge_share_max": 0.05,
-    "sp_depth_min_events": 20, "sp_depth_offset_max_km": 1.0,
+    "sp_depth_min_events": 20, "sp_depth_offset_max_km": 1.5,
     "magnitude_median_range": [-1.0, 5.0], "magnitude_very_low": -2.0, "magnitude_very_low_share_max": 0.05,
     "b_value_range": [0.6, 1.6], "b_min_events": 100,
+    "detection_amplitude_range": [-2.3, 0.5], "detection_min_events": 50,
+    "event_fit_min_picks": 5, "event_outlier_s": 1.0, "event_outlier_pick_share": 0.2, "event_fit_share_max": 0.1,
+    "layer_bin_km": 0.1, "layer_neighbour_km": 1.0, "layer_excess_factor": 3.0, "layer_excess_share_max": 0.05,
     "rate_after_largest_n": 3, "rate_after_largest_window_s": 3600.0, "rate_after_largest_min_ratio": 0.5,
 }
 
@@ -59,13 +62,19 @@ def _skip(id_: str, dimension: str, unit: str, expected: str, n: int, why: str) 
 class Data:
     """Events, picks and stations in a local km frame centred on the station network."""
 
-    def __init__(self, events: pd.DataFrame, picks: pd.DataFrame, stations: pd.DataFrame):
-        self.events = events
+    def __init__(self, events: pd.DataFrame | None, picks: pd.DataFrame, stations: pd.DataFrame,
+                 waveforms: pd.DataFrame | None = None):
+        if events is None:
+            events = pd.DataFrame(columns=["event_id", "time", "latitude", "longitude", "depth_km", "magnitude"])
+        self.events = events.reset_index(drop=True)
         self.stations = stations
-        self.lat0 = float(stations.latitude.median()) if len(stations) else float(events.latitude.median())
-        self.lon0 = float(stations.longitude.median()) if len(stations) else float(events.longitude.median())
+        self.waveforms = waveforms
+        self.all_picks = picks  # every pick, associated or not
+        self.lat0 = float(stations.latitude.median())
+        self.lon0 = float(stations.longitude.median())
         self.events["x"], self.events["y"] = local_km(events.latitude, events.longitude, self.lat0, self.lon0)
         self.stations["x"], self.stations["y"] = local_km(stations.latitude, stations.longitude, self.lat0, self.lon0)
+        events = self.events
         p = picks[picks.event_id != ""].merge(events[["event_id", "time", "x", "y", "depth_km"]], on="event_id",
                                               suffixes=("", "_origin"))
         p = p.merge(stations[["station_id", "x", "y", "elevation_m"]], on="station_id", suffixes=("", "_sta"))
@@ -108,7 +117,9 @@ def isolated_events(d: Data, c: dict) -> Check:
 
 
 def duplicate_events(d: Data, c: dict) -> Check:
-    e = d.events.dropna(subset=["x", "y"]).sort_values("time")
+    located = d.events.dropna(subset=["x", "y"])
+    time_only = len(located) < 0.5 * len(d.events)
+    e = (d.events.assign(x=0.0, y=0.0) if time_only else located).sort_values("time")
     expected = f"share ≤ {c['duplicate_share_max']:.0%} within {c['duplicate_dt_s']} s and {c['duplicate_km']} km of another event"
     if len(e) < 2:
         return _skip("duplicate_events", "reality", "share", expected, len(e), "fewer than 2 events")
@@ -121,8 +132,10 @@ def duplicate_events(d: Data, c: dict) -> Check:
                 dup[i] = dup[j] = True
     share = float(dup.mean())
     flag = share > c["duplicate_share_max"]
+    where = "" if time_only else f" and {c['duplicate_km']} km"
     return Check("duplicate_events", "reality", share, "share", expected, len(e), flag,
-                 f"{share:.1%} of events have another event within {c['duplicate_dt_s']} s and {c['duplicate_km']} km." if flag else None)
+                 f"{share:.1%} of events have another event within {c['duplicate_dt_s']} s{where}." if flag else None,
+                 {"time_only": time_only})
 
 
 def few_picks(d: Data, c: dict) -> Check:
@@ -300,7 +313,25 @@ def station_residuals(d: Data, c: dict, fit: dict | None) -> list[Check]:
                   f"{len(bad)} of {len(st)} stations have median P residuals beyond ±{c['station_residual_max_s']} s ({', '.join(f'{s} {r:+.2f} s' for s, r in bad.res.items())})." if f1 else None),
             Check("station_residual_azimuth", "space", amp, "s", exp2, len(st), f2,
                   f"Station P residuals vary with azimuth from the event cluster with an amplitude of {amp:.2f} s (largest towards {toward:.0f}° from north)." if f2 else None,
-                  {"azimuth_deg_of_largest_residual": round(toward, 1)})]
+                  {"azimuth_deg_of_largest_residual": round(toward, 1),
+                   "per_station": {s: {"median_residual_s": round(float(r.res), 3), "n": int(r.n), "x_km": round(float(r.x), 2), "y_km": round(float(r.y), 2)}
+                                   for s, r in st.iterrows()}})]
+
+
+def azimuthal_gap(d: Data, c: dict) -> Check:
+    """Largest azimuthal gap of each located event's picked stations (reported)."""
+    expected = "reported: median gap and share of events with a gap > 180°"
+    p = d.picks.dropna(subset=["x"])
+    if p.empty:
+        return _skip("azimuthal_gap", "space", "deg", expected, 0, "no located events with picks at known stations")
+    az = np.degrees(np.arctan2(p.x_sta - p.x, p.y_sta - p.y)) % 360
+    gaps = []
+    for _, a in pd.Series(az.to_numpy(), index=p.event_id.to_numpy()).groupby(level=0):
+        s = np.unique(np.round(a.to_numpy(), 3))
+        gaps.append(360.0 if len(s) < 2 else float(np.max(np.diff(np.r_[s, s[0] + 360]))))
+    g = np.array(gaps)
+    return Check("azimuthal_gap", "space", float(np.median(g)), "deg", expected, len(g), False, None,
+                 {"share_gap_over_180": round(float((g > 180).mean()), 3), "quantiles_deg": {q: round(float(np.quantile(g, q)), 1) for q in (0.1, 0.5, 0.9)}})
 
 
 # ------------------------------------------------------------------ strength
@@ -337,12 +368,146 @@ def b_value(d: Data, c: dict) -> Check:
                  f"The Gutenberg–Richter b-value above Mc {mc:.1f} is {b:.2f}." if flag else None, {"mc": round(mc, 2)})
 
 
-def run_checks(d: Data, config: dict | None = None) -> tuple[list[Check], dict]:
+def event_travel_time_fit(d: Data, c: dict) -> Check:
+    """Picks that do not fit their event's travel-time curve.
+
+    The catalog's own median travel time against hypocentral distance (per phase, in distance bins of
+    equal pick count) is the reference curve; each event's median residual is removed (origin-time
+    error), and a pick is an outlier when its remaining residual exceeds ``event_outlier_s``. Picks
+    from another event or with the wrong phase label are outliers; structure and depth errors move
+    whole events and are mostly removed with the event's median.
+    """
+    expected = (f"share ≤ {c['event_fit_share_max']:.0%} of events with more than {c['event_outlier_pick_share']:.0%} of their picks "
+                f"off the catalog's median travel-time curve by > {c['event_outlier_s']} s")
+    p = d.picks[np.isfinite(d.picks.hyp_km) & np.isfinite(d.picks.tt)].copy()
+    if len(p) < 200:
+        return _skip("event_travel_time_fit", "reality", "share", expected, len(p), "fewer than 200 located picks")
+    p["res"] = np.nan
+    for ph, g in p.groupby("phase"):
+        if len(g) < 50:
+            continue
+        edges = np.unique(np.quantile(g.hyp_km, np.linspace(0, 1, min(40, len(g) // 25) + 1)))
+        mid = 0.5 * (edges[1:] + edges[:-1])
+        med = [np.median(g.tt[(g.hyp_km >= lo) & (g.hyp_km <= hi)]) for lo, hi in zip(edges[:-1], edges[1:])]
+        p.loc[g.index, "res"] = g.tt - np.interp(g.hyp_km, mid, med)
+    p = p.dropna(subset=["res"])
+    p["res"] -= p.groupby("event_id").res.transform("median")
+    n = p.groupby("event_id").res.size()
+    out = (p.res.abs() > c["event_outlier_s"]).groupby(p.event_id).mean()[n >= c["event_fit_min_picks"]]
+    if len(out) < 20:
+        return _skip("event_travel_time_fit", "reality", "share", expected, len(out), f"{len(out)} located events with ≥ {c['event_fit_min_picks']} picks")
+    share = float((out > c["event_outlier_pick_share"]).mean())
+    flag = False  # reported only: human-in-loop catalogs score 1–18 %, Agent runs 1–9 % (2026-10-30)
+    return Check("event_travel_time_fit", "reality", share, "share", expected, len(out), flag,
+                 (f"For {share:.0%} of {len(out):,} events more than {c['event_outlier_pick_share']:.0%} of the picks lie more than "
+                  f"{c['event_outlier_s']} s off the catalog's travel-time curve.") if flag else None,
+                 {"outlier_pick_share_overall": round(float((p.res.abs() > c["event_outlier_s"]).mean()), 4),
+                  "worst_events": out.sort_values(ascending=False).head(10).round(3).to_dict()})
+
+
+def depth_layers(d: Data, c: dict) -> Check:
+    """Thin depth slices inside the depth range holding far more events than the depths around them."""
+    expected = (f"share ≤ {c['layer_excess_share_max']:.0%} of events in excess of the neighbouring depths, counted in "
+                f"{c['layer_bin_km']} km slices holding ≥ 10 events, > {c['layer_excess_factor']:g}× and > 4 Poisson σ above the median of slices within ±{c['layer_neighbour_km']} km")
+    z = d.events.depth_km.dropna().to_numpy()
+    if len(z) < 50:
+        return _skip("depth_layers", "space", "share", expected, len(z), "fewer than 50 depths")
+    w = c["layer_bin_km"]
+    edges = np.arange(np.floor(z.min() / w) * w, z.max() + 2 * w, w)
+    counts, _ = np.histogram(z, edges)
+    k = int(round(c["layer_neighbour_km"] / w))
+    excess, layers = 0.0, []
+    for i, n in enumerate(counts):
+        nb = np.r_[counts[max(i - k, 0):max(i - 1, 0)], counts[i + 2:i + k + 1]]
+        if len(nb) < k // 2 or edges[i] < z.min() + 0.2 or edges[i + 1] > z.max() - 0.2:
+            continue  # pile-ups at the shallowest and deepest depths are depth_at_edges
+        ref = max(float(np.median(nb)), 1.0)
+        # far above the neighbours and beyond Poisson scatter of the neighbour level
+        if n >= 10 and n > c["layer_excess_factor"] * ref and n > ref + 4.0 * np.sqrt(ref) and n - ref >= 0.005 * len(z):
+            excess += n - ref
+            layers.append((round(float(edges[i]), 2), int(n), round(ref, 1)))
+    share = excess / len(z)
+    flag = share > c["layer_excess_share_max"]
+    top = sorted(layers, key=lambda x: -(x[1] - x[2]))[:6]
+    return Check("depth_layers", "space", share, "share", expected, len(z), flag,
+                 (f"{share:.1%} of events are excess events in thin depth slices "
+                  f"({', '.join(f'{a:.1f}–{a + w:.1f} km: {n} vs ~{r:g}' for a, n, r in top)}).") if flag else None,
+                 {"slices": [{"top_km": a, "events": n, "neighbour_median": r} for a, n, r in layers]})
+
+
+def magnitude_detection(d: Data, c: dict) -> Check:
+    """Wood-Anderson amplitude implied at the farthest detecting station, from the catalog magnitude.
+
+    log10 A = M − 1.11 log10(R/100) − 0.00189 (R − 100) − 3 (Hutton & Boore, 1987; A in mm, R hypocentral km).
+    Small events are detected out to where their amplitude reaches the noise, so for the smaller half of
+    the catalog this amplitude estimates the detection level, which a consistent magnitude scale keeps
+    at noise-like values. A magnitude offset moves it by the same amount.
+    """
+    lo, hi = c["detection_amplitude_range"]
+    expected = f"median log10 amplitude (mm) at the farthest detecting station, smaller half of events, in [{lo}, {hi}]"
+    p = d.picks[np.isfinite(d.picks.hyp_km)]
+    far = p.groupby("event_id").agg(r=("hyp_km", "max"), n=("hyp_km", "size"))
+    e = d.events.dropna(subset=["magnitude"]).merge(far[far.n >= 3], left_on="event_id", right_index=True)
+    if len(e) < c["detection_min_events"]:
+        return _skip("magnitude_detection", "strength", "log10 mm", expected, len(e), f"{len(e)} events with a magnitude and ≥ 3 located picks")
+    r = e.r.clip(lower=1.0)
+    loga = e.magnitude - 1.11 * np.log10(r / 100.0) - 0.00189 * (r - 100.0) - 3.0
+    small = loga[e.magnitude <= e.magnitude.median()]
+    med = float(small.median())
+    flag = not lo <= med <= hi
+    return Check("magnitude_detection", "strength", med, "log10 mm", expected, len(small), flag,
+                 (f"For the smaller half of events the magnitudes imply a Wood-Anderson amplitude of 10^{med:.1f} mm at the farthest "
+                  f"detecting station ({'below' if med < lo else 'above'} the expected range).") if flag else None,
+                 {"median_farthest_km_small_half": round(float(e.r[e.magnitude <= e.magnitude.median()].median()), 1),
+                  "median_magnitude_small_half": round(float(e.magnitude[e.magnitude <= e.magnitude.median()].median()), 2)})
+
+
+# Checks that measure correctly but cannot separate clean from faulty catalogs on the validation set
+# (human-in-loop rounds and scored Agent runs of the six cases, 2026-10-30): reported, never flagged.
+REPORT_ONLY = {
+    "events_outside_network": "real events outside the network (volcano flanks) exceed the range in clean catalogs (Kīlauea 28 %)",
+    "wadati_origin_offset": "3-D structure offsets clean catalogs by 0.5–0.9 s",
+    "travel_time_intercept": "clean catalogs reach 0.7–1.0 s",
+    "station_residual_outliers": "3-D structure gives clean regional catalogs large station terms (Kaikōura 18 stations)",
+    "station_residual_azimuth": "3-D structure gives clean regional catalogs azimuthal residuals (Kaikōura 0.32 s)",
+    "model_ensemble_depth": "generic models disagree by 3–19 km; flags a clean catalog (Maple) and points the wrong way on a faulty one",
+    "model_ensemble_time": "generic models disagree by 0.25–1.3 s; flags a clean catalog (Maple)",
+}
+
+
+def apply_report_only(checks: list[Check]) -> list[Check]:
+    for c in checks:
+        if c.id in REPORT_ONLY:
+            c.details = {**c.details, "reported_only": REPORT_ONLY[c.id]}
+            c.flag, c.symptom = False, None
+    return checks
+
+
+STAGES = ("data", "picks", "association", "location", "relocation", "magnitude", "all")
+
+
+def run_checks(d: Data, config: dict | None = None, stage: str = "all") -> tuple[list[Check], dict]:
+    """The checks of the picks, association, location and magnitude stages up to ``stage``.
+
+    The data stage, the waveform checks of the picks stage, the model ensemble and the relocation
+    stage need extra inputs and are run by the interface.
+    """
+    from .stages import association_checks, picks_checks
     c = {**DEFAULTS, **(config or {})}
-    checks = [outside_network(d, c), isolated_events(d, c), duplicate_events(d, c), few_picks(d, c)]
-    wad_offset, wad_spread, w = wadati_origin(d, c)
-    tt_check, fit = travel_time_fit(d, c)
-    checks += [wad_offset, wad_spread, tt_check, rate_after_largest(d, c)]
-    checks += depth_pileup(d, c) + [sp_depth(d, c, w)] + station_residuals(d, c, fit)
-    checks += [magnitude_range(d, c), b_value(d, c)]
-    return checks, {"wadati": w, "fit": fit, "config": c}
+    upto = STAGES.index(stage)
+    extras: dict = {"config": c, "stage": stage}
+    checks: list[Check] = []
+    if upto >= STAGES.index("picks"):
+        checks += picks_checks(d, c)
+    if upto >= STAGES.index("association"):
+        checks += association_checks(d, c) + [duplicate_events(d, c), few_picks(d, c), event_travel_time_fit(d, c)]
+    if upto >= STAGES.index("location"):
+        checks += [outside_network(d, c), isolated_events(d, c)]
+        wad_offset, wad_spread, w = wadati_origin(d, c)
+        tt_check, fit = travel_time_fit(d, c)
+        checks += [wad_offset, wad_spread, tt_check]
+        checks += [azimuthal_gap(d, c)] + depth_pileup(d, c) + [depth_layers(d, c), sp_depth(d, c, w)] + station_residuals(d, c, fit)
+        extras.update({"wadati": w, "fit": fit})
+    if upto >= STAGES.index("magnitude"):
+        checks += [magnitude_range(d, c), b_value(d, c), magnitude_detection(d, c), rate_after_largest(d, c)]
+    return checks, extras
