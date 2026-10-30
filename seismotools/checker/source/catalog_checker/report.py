@@ -24,7 +24,8 @@ def _sha256(path: Path) -> str:
 
 
 def build_report(checks: list[Check], d: Data, inputs: dict[str, Path], config: dict) -> dict:
-    flags = [c for c in checks if c.flag]
+    flags = [c for c in checks if c.flag and c.kind == "product"]
+    notes = [c for c in checks if c.flag and c.kind == "input"]
     return {
         "report_version": REPORT_VERSION,
         "generated_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -34,12 +35,19 @@ def build_report(checks: list[Check], d: Data, inputs: dict[str, Path], config: 
                    "associated_picks_at_known_stations": int(len(d.picks)), "stations": int(len(d.stations)),
                    "pick_stations_without_metadata": d.unmatched_stations[:50]},
         "summary": {dim: {"checks": sum(c.dimension == dim for c in checks),
-                          "flags": sum(c.dimension == dim and c.flag for c in checks)} for dim in DIMENSIONS},
+                          "flags": sum(c.dimension == dim and c in flags for c in checks)} for dim in DIMENSIONS},
         "flags": [{"flag_id": f"{c.dimension}.{c.id}", "dimension": c.dimension, "symptom": c.symptom,
                    "measured": c.record()["measured"], "unit": c.unit, "expected": c.expected} for c in flags],
+        "input_notes": [{"note_id": f"input.{c.id}", "symptom": c.symptom, "measured": c.record()["measured"],
+                         "unit": c.unit, "expected": c.expected} for c in notes],
+        "measurements": [{"id": c.id, "dimension": c.dimension, "measured": c.record()["measured"], "unit": c.unit, "n": int(c.n),
+                          "why_not_judged": c.details.get("reported_only")} for c in checks if c.kind == "report_only"],
         "checks": [c.record() for c in checks],
         "config": config,
-        "note": "Symptoms only: each flag states what was measured and the expected range. It does not name a cause or a repair.",
+        "note": ("Symptoms only. `flags`: products of the workflow outside their expected range; each states what was measured "
+                 "and the expected range, never a cause or a repair. `input_notes`: properties of the input data outside the "
+                 "usual range; they describe what the data allow, not an error of the workflow. `measurements`: values reported "
+                 "without an expected range, because on their own they do not show whether a catalog is right or wrong."),
     }
 
 

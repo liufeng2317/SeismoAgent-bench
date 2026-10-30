@@ -47,12 +47,15 @@ class Check:
     flag: bool
     symptom: str | None = None
     details: dict = field(default_factory=dict)
+    kind: str = "product"  # product: judged, flags; input: describes the input data, notes; report_only: measured, never judged
 
     def record(self) -> dict:
         value = None if self.measured is None or not np.isfinite(self.measured) else round(float(self.measured), 4)
-        return {"id": self.id, "dimension": self.dimension, "measured": value, "unit": self.unit,
-                "expected": self.expected, "n": int(self.n), "flag": bool(self.flag), "symptom": self.symptom,
-                "details": self.details}
+        report_only = self.kind == "report_only"
+        return {"id": self.id, "dimension": self.dimension, "kind": self.kind, "measured": value, "unit": self.unit,
+                "expected": None if report_only else self.expected, "n": int(self.n),
+                "flag": bool(self.flag) and self.kind == "product", "out_of_range": None if report_only else bool(self.flag),
+                "symptom": None if report_only else self.symptom, "details": self.details}
 
 
 def _skip(id_: str, dimension: str, unit: str, expected: str, n: int, why: str) -> Check:
@@ -397,7 +400,7 @@ def event_travel_time_fit(d: Data, c: dict) -> Check:
     if len(out) < 20:
         return _skip("event_travel_time_fit", "reality", "share", expected, len(out), f"{len(out)} located events with ≥ {c['event_fit_min_picks']} picks")
     share = float((out > c["event_outlier_pick_share"]).mean())
-    flag = False  # reported only: human-in-loop catalogs score 1–18 %, Agent runs 1–9 % (2026-10-30)
+    flag = False  # reported only (see REPORT_ONLY)
     return Check("event_travel_time_fit", "reality", share, "share", expected, len(out), flag,
                  (f"For {share:.0%} of {len(out):,} events more than {c['event_outlier_pick_share']:.0%} of the picks lie more than "
                   f"{c['event_outlier_s']} s off the catalog's travel-time curve.") if flag else None,
@@ -462,24 +465,35 @@ def magnitude_detection(d: Data, c: dict) -> Check:
                   "median_magnitude_small_half": round(float(e.magnitude[e.magnitude <= e.magnitude.median()].median()), 2)})
 
 
-# Checks that measure correctly but cannot separate clean from faulty catalogs on the validation set
-# (human-in-loop rounds and scored Agent runs of the six cases, 2026-10-30): reported, never flagged.
+# Checks that measure correctly but did not separate correct from faulty catalogs in validation
+# (docs/research/04_Checker_Design.md §10): reported, never flagged. The reasons are shown to the Agent,
+# so they stay general and name no case.
 REPORT_ONLY = {
-    "events_outside_network": "real events outside the network (volcano flanks) exceed the range in clean catalogs (Kīlauea 28 %)",
-    "wadati_origin_offset": "3-D structure offsets clean catalogs by 0.5–0.9 s",
-    "travel_time_intercept": "clean catalogs reach 0.7–1.0 s",
-    "station_residual_outliers": "3-D structure gives clean regional catalogs large station terms (Kaikōura 18 stations)",
-    "station_residual_azimuth": "3-D structure gives clean regional catalogs azimuthal residuals (Kaikōura 0.32 s)",
-    "model_ensemble_depth": "generic models disagree by 3–19 km; flags a clean catalog (Maple) and points the wrong way on a faulty one",
-    "model_ensemble_time": "generic models disagree by 0.25–1.3 s; flags a clean catalog (Maple)",
+    "events_outside_network": "real seismicity can lie outside the network, so the share alone does not show an error",
+    "wadati_origin_offset": "velocity structure alone can offset this value by close to a second in correct catalogs",
+    "travel_time_intercept": "velocity structure alone can give intercepts near a second in correct catalogs",
+    "station_residual_outliers": "3-D structure alone can give correct catalogs large station residuals",
+    "station_residual_azimuth": "3-D structure alone can give correct catalogs azimuth-dependent residuals",
+    "model_ensemble_depth": "generic velocity models differ from each other by several km in depth, more than most catalog errors",
+    "model_ensemble_time": "generic velocity models differ from each other by up to a second or more in origin time",
+    "pick_snr": "correct catalogs often keep many weak picks",
+    "event_travel_time_fit": "correct catalogs, especially on regional networks, show similar shares",
+    "azimuthal_gap": "describes the station geometry around each event; no expected range",
 }
+# Checks that describe the input data rather than the Agent's products: reported as input notes when out
+# of range; they need no disposition, since the Agent cannot change its input.
+INPUT_CHECKS = {"stations_with_data", "daily_station_count", "network_geometry", "channel_sample_rates", "data_gaps"}
 
 
 def apply_report_only(checks: list[Check]) -> list[Check]:
+    """Set each check's kind: report-only checks never flag, input checks become notes."""
     for c in checks:
         if c.id in REPORT_ONLY:
+            c.kind = "report_only"
             c.details = {**c.details, "reported_only": REPORT_ONLY[c.id]}
             c.flag, c.symptom = False, None
+        elif c.id in INPUT_CHECKS:
+            c.kind = "input"
     return checks
 
 

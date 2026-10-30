@@ -14,12 +14,13 @@ Usage:
 Stages, in processing order: ``data`` (stations, channels, gaps, representative records before and
 after preprocessing), ``picks`` (picks, associated or not; with --waveforms also the onsets and
 amplitudes under a sample of picks), ``association`` (picks and an event table whose locations may be
-missing), ``location`` (the located catalog, including the relocation of a sample with generic
-velocity models), ``relocation`` (the relocated catalog against --catalog-before), ``magnitude``. Each stage also runs the
+missing), ``location`` (the located catalog; with --model-ensemble also the relocation of a sample
+with generic velocity models), ``relocation`` (the relocated catalog against --catalog-before), ``magnitude``. Each stage also runs the
 cheaper checks of the stages before it; ``all`` runs everything the given inputs allow.
 
-Writes ``checker_report.json`` (every check with its measured value, expected range and, when out of
-range, the symptom; every figure with its numbers) and the figures as PNG.
+Writes ``checker_report.json`` (``flags``: products out of their expected range, with the symptom;
+``input_notes``: properties of the input data out of the usual range; ``measurements``: values
+reported without an expected range; every check and every figure with its numbers) and the figures as PNG.
 Exit code 0 whether or not flags are raised; 2 on unreadable inputs.
 """
 
@@ -56,8 +57,10 @@ def main(argv=None) -> int:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--config", type=Path, help="JSON overriding default ranges (see README); records itself in the report")
     parser.add_argument("--no-figures", action="store_true")
-    parser.add_argument("--no-model-ensemble", action="store_true",
-                        help="skip relocating a sample of events with the generic velocity models (the slow check)")
+    parser.add_argument("--model-ensemble", action="store_true",
+                        help="location stage: also relocate a sample of 100 events with six generic velocity models and report "
+                             "how the catalog compares (10–45 minutes; reported only)")
+    parser.add_argument("--no-model-ensemble", action="store_true", help="no effect (the ensemble is off unless --model-ensemble)")
     parser.add_argument("--keep-ensemble-dir", type=Path, help="keep the relocation inputs and outputs here")
     args = parser.parse_args(argv)
     upto = STAGES.index(args.stage)
@@ -132,7 +135,7 @@ def main(argv=None) -> int:
             name = relocation_figure(rextra, args.output_dir)
             figures += [name] if name else []
 
-    if args.stage in ("location", "all") and not args.no_model_ensemble:
+    if args.stage in ("location", "all") and args.model_ensemble and not args.no_model_ensemble:
         from catalog_checker.ensemble import model_ensemble
         w = extras.get("wadati")
         vpvs = float(w.vpvs.median()) if w is not None and len(w) >= 20 else None
@@ -170,9 +173,11 @@ def main(argv=None) -> int:
     report.update(sections)
     path = write_report(report, args.output_dir)
     flags = report["flags"]
-    print(f"{path}: {len(flags)} flag(s) from {len(checks)} checks; figures: {', '.join(figures) or 'none'}")
+    print(f"{path}: {len(flags)} flag(s), {len(report['input_notes'])} input note(s) from {len(checks)} checks; figures: {', '.join(figures) or 'none'}")
     for f in flags:
         print(f"  [{f['dimension']}] {f['symptom']}")
+    for n in report["input_notes"]:
+        print(f"  [input note] {n['symptom']}")
     return 0
 
 

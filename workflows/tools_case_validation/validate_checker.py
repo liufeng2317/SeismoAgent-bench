@@ -70,8 +70,8 @@ def run_checker(catalog: Path, picks: Path, stations: Path, out: Path, python: s
         cmd += ["--stage", stage]
     if waveforms:
         cmd += ["--waveforms", str(waveforms)]
-    if not ensemble:
-        cmd.append("--no-model-ensemble")
+    if ensemble:
+        cmd.append("--model-ensemble")
     subprocess.run(cmd, check=True, capture_output=True, text=True)
     return json.loads((out / "checker_report.json").read_text())
 

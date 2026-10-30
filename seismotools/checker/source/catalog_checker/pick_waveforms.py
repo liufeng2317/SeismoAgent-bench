@@ -106,7 +106,7 @@ def pick_waveform_checks(d: Data, index: pd.DataFrame, c: dict) -> tuple[list[Ch
     if len(clear) < 10:
         checks.append(_skip("pick_onset_offset", "time", "s", exp_off, len(clear), f"{len(clear)} sampled picks with a clear onset"))
     else:
-        # S onsets in P coda are not measured reliably by AIC: identical S picks scored +0.25 and +0.45 s (Maple), so only P flags
+        # S onsets in P coda are not measured reliably by AIC (identical S picks can score differently), so only P flags
         worst = ("P", per_phase["P"]) if per_phase.get("P", {}).get("n", 0) >= 10 else max(per_phase.items(), key=lambda kv: kv[1]["n"])
         med = worst[1]["median_offset_s"]
         flag = worst[0] == "P" and abs(med) > lim["P"]
@@ -119,7 +119,7 @@ def pick_waveform_checks(d: Data, index: pd.DataFrame, c: dict) -> tuple[list[Ch
         checks.append(_skip("pick_snr", "reality", "share", exp_snr, len(snr), f"{len(snr)} sampled picks with a readable record"))
     else:
         low = float((snr < c["pick_snr_low"]).mean())
-        flag = False  # clean catalogs keep many weak picks (Prague human-in-loop: 48 %); reported only
+        flag = False  # correct catalogs often keep many weak picks; reported only
         by = {ph: round(float((g.snr_at_pick < c["pick_snr_low"]).mean()), 3) for ph, g in m.dropna(subset=["snr_at_pick"]).groupby("phase")}
         checks.append(Check("pick_snr", "reality", low, "share", exp_snr, len(snr), flag,
                             f"{low:.0%} of {len(snr)} sampled picks have less than {c['pick_snr_low']:g}× more amplitude after the pick than before it." if flag else None,

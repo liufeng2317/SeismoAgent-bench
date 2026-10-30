@@ -3,7 +3,7 @@
 
 Each scenario lists the checks that must flag and the checks that may also flag because they see the
 same injected error from another stage; every other check must stay quiet. The clean scenarios must
-raise no flag at all. The model ensemble is skipped (it needs NonLinLoc and minutes).
+raise no flag at all. Input notes count as flags here. The model ensemble is off (it needs NonLinLoc and minutes).
 """
 
 from __future__ import annotations
@@ -58,14 +58,14 @@ def main() -> int:
     for name, cli, expected, *allowed in scenarios(args.inputs_dir):
         allowed = allowed[0] if allowed else set()
         out = args.output_dir / name
-        proc = subprocess.run([args.python, "-W", "ignore", str(RUN), *cli, "--output-dir", str(out), "--no-model-ensemble"],
+        proc = subprocess.run([args.python, "-W", "ignore", str(RUN), *cli, "--output-dir", str(out)],
                               capture_output=True, text=True)
         if proc.returncode != 0:
             print(f"FAIL {name}: exit {proc.returncode}\n{proc.stderr[-2000:]}")
             ok = False
             continue
         report = json.loads((out / "checker_report.json").read_text())
-        flagged = {c["id"] for c in report["checks"] if c["flag"]}
+        flagged = {c["id"] for c in report["checks"] if c["flag"] or (c["kind"] == "input" and c["out_of_range"])}
         good = expected <= flagged and not (flagged - expected - allowed)
         ok &= good
         print(f"{'ok  ' if good else 'FAIL'} {name}: flagged {sorted(flagged) or '-'}" + ("" if good else f", expected {sorted(expected) or '-'}"))
