@@ -1,0 +1,9 @@
+# Fast end-to-end test of the harness (no relocation): about a minute.
+scenarios:
+  - name: smoke_prague_drop_few
+    case: 2011_prague_oklahoma
+    run: tools/claude/glm-5.3/20261028T043719Z
+    change: event_selection
+    intervention: {type: drop_few_picks, min_p: 4}
+    pilots: [random]
+    pilot_events: 300

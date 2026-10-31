@@ -1,0 +1,33 @@
+# Knowledge swaps on the formal tools runs (docs/research/01_Expert_Experience_and_Checker.md §2.4), replayed:
+# the run's own picks relocated with the published regional model, used the expert's way.
+# change: velocity_model, so compare does not count depth_layers. Pilots: the same relocation on 300 events.
+defaults:
+  change: velocity_model
+  stage: location
+  pilot_events: 300
+  pilots: [best_recorded, random, time_uniform, pick_count_strata]
+scenarios:
+  - name: prague_tools_regional
+    case: 2011_prague_oklahoma
+    run: tools/claude/glm-5.3/20261028T043719Z
+    intervention: {type: relocate, model: keranen2013_prague_1d, datum_km: 0.28, layering: step, usage: expert}
+  - name: magna_tools_regional
+    case: 2020_magna_utah
+    run: tools/claude/glm-5.3/20261028T135931Z
+    intervention: {type: relocate, model: bjarnason_pechmann_1989_wasatch_front, datum_km: 1.48, layering: step, usage: expert}
+  - name: magna_tools_regional_basinfill
+    case: 2020_magna_utah
+    run: tools/claude/glm-5.3/20261028T135931Z
+    intervention: {type: relocate, model: bjarnason_pechmann_1989_plus_slv_basinfill2km, datum_km: 1.48, layering: step, usage: expert}
+  - name: maple_tools_regional
+    case: 2017_maple_creek_yellowstone
+    run: tools/claude/glm-5.3/20261028T220746Z
+    intervention: {type: relocate, model: uuss_yellowstone_1d, datum_km: 2.3, layering: step, usage: expert}
+  - name: kilauea_tools_regional
+    case: 2018_kilauea_hawaii
+    run: tools/claude/glm-5.3/20261029T084718Z
+    intervention: {type: relocate, model: hvo_klein_linear, datum_km: 1.07, layering: linear, usage: expert}
+  - name: ridgecrest_tools_litho1
+    case: 2019_ridgecrest_california
+    run: tools/claude/glm-5.3/20261029T203757Z
+    intervention: {type: relocate, model: litho1, usage: checker}
