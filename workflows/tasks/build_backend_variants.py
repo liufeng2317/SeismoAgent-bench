@@ -26,6 +26,8 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[2]
 TASKS = ROOT / "workflows/tasks"
 TOOLS = ROOT / "seismotools"
+# the backend arm sees the tools without the checker (one factor per arm): a view with every tool but the checker
+TOOLS_WITHOUT_CHECKER = ROOT / "workflows/tasks/_tool_views/without_checker"
 RESOURCE = ROOT / "data/agent_resource"
 FRONT_END_RUNS = {  # the formal tools run whose front end is reused
     "2011_prague_oklahoma": "tools/claude/glm-5.3/20261028T043719Z",
@@ -116,7 +118,7 @@ def prompt(case: str, arm: str) -> str:
             f"Process the half-open window `{window}`; the catalog reports events with origin time inside it.", "",
             "The picks are fixed: do not add picks or change pick times. You may reject picks (status `rejected`, kept in the file) and "
             "reject events (status `rejected`); every submitted pick keeps its `pick_id`, and every event keeps its `event_id`.", "",
-            TOOLS_SECTION.format(tools=TOOLS)]
+            TOOLS_SECTION.format(tools=TOOLS_WITHOUT_CHECKER if arm == "backend" else TOOLS)]
     if arm == "backend_checker":
         text.append(CHECKER_SECTION)
     if arm == "backend_knowledge":
