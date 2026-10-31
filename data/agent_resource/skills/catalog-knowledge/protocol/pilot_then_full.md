@@ -21,7 +21,7 @@ Do not use "the best-recorded events" as a stand-in for the catalog: they can mo
 
 On the pilot, check:
 
-- **code and tool use**: units (nm vs mm vs m; km vs m), sign and datum conventions (depth below sea level vs below the station or the model datum; station elevations), instrument response and Wood-Anderson response, column names and time formats. These errors affect every event alike, so the pilot shows them as clearly as the full run. Compare a few values with an independent computation (for magnitudes: `../../magnitude/ml_reference.py recompute`).
+- **code and tool use**: units (nm vs mm vs m; km vs m), sign and datum conventions (depth below sea level vs below the station or the model datum; station elevations), instrument response and Wood-Anderson response, column names and time formats. These errors affect every event alike, so the pilot shows them as clearly as the full run. Compare a few values with an independent computation (for magnitudes: `../../../magnitude/ml_reference.py recompute`).
 - **checker, item checks**: run the checker with `--pilot`. Checks of scope `item` (picks, Wadati, travel-time fit, S−P depth, magnitudes recomputed) are judged; checks of scope `population` are reported without a verdict.
 - **run time**: time per event or per hour of data, extrapolated to the full run.
 - **candidates**: run each candidate on the same pilot and compare their medians (how far depths and origin times move). Drop candidates that fail item checks; keep the rest for the full run.

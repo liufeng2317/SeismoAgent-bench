@@ -1,6 +1,6 @@
 ---
 name: catalog-knowledge
-description: Procedural knowledge for building an earthquake catalog from continuous waveforms - how to test a workflow on a pilot batch before the full run, how to decide between two candidate products (velocity models, locators, parameters) with the catalog checker, and which experiment separates the explanations when the checker's comparison is mixed. Use when planning a catalog workflow, when a checker flag appears, or before adopting any change to a product.
+description: Procedural knowledge for building an earthquake catalog from continuous waveforms - how to test a workflow on a pilot batch before the full run, how to decide between two candidate products with the catalog checker, what each checker symptom can mean and which experiment separates the causes, and which errors no check can see. Use when planning a catalog workflow, when a checker flag appears, or before adopting any change to a product.
 ---
 
 # Catalog knowledge
@@ -12,6 +12,8 @@ This skill holds what an analyst knows before looking at the data: how to organi
 | Planning the workflow; before any long computation | [`protocol/pilot_then_full.md`](protocol/pilot_then_full.md) |
 | About to adopt a change to a product (model, locator, parameters, filters) | [`playbooks/decide_between_candidates.md`](playbooks/decide_between_candidates.md) |
 | `compare.py` says `mixed` or `uncertain`, or a change raises a depth pile-up or layers | [`playbooks/decide_between_candidates.md`](playbooks/decide_between_candidates.md) §3 |
+| A checker flag or measurement you need to explain: candidate causes, the experiment that separates them, the repair | [`symptoms/README.md`](symptoms/README.md), then the file for the stage |
+| Errors no check can see (velocity model on average, magnitude calibration level, events in a mainshock's coda) — read before locating and before computing magnitudes | [`symptoms/not_visible.md`](symptoms/not_visible.md) |
 | Local magnitudes: formulas, units, calibration | [`../../magnitude/README.md`](../../magnitude/README.md) |
 
 Three rules hold throughout:
