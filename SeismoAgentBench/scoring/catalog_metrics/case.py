@@ -304,6 +304,12 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
     report = {**_scorer_record(), "task": case.task_dir.name, "run": layout, "completion": status,
               "process": process_metrics(run_dir, case.config.get("leakage_patterns", []))}
     out_dir = run_dir / "evaluation"
+    from . import checker_audit
+    if checker_audit.required(contract) or (work / checker_audit.REPORT).is_file():
+        try:
+            report["checker"] = checker_audit.audit(work, out_dir)
+        except Exception as exc:  # the checker audit never fails the score
+            report["checker"] = {"error": f"{type(exc).__name__}: {exc}"}
     if status["completed"]:
         prompt = (run_dir / "control" / "task_prompt.md").read_text(encoding="utf-8")
         depth_known = SEA_LEVEL_MARKER in prompt
