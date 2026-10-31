@@ -16,7 +16,7 @@ from pathlib import Path
 
 RUN = Path(__file__).resolve().parents[2] / "interface/run.py"
 SOURCE = Path(__file__).resolve().parents[2] / "source"
-MAGNITUDE_SEES_IT = {"magnitude_range", "magnitude_detection", "b_value"}
+MAGNITUDE_SEES_IT = {"magnitude_range", "magnitude_detection", "b_value", "largest_events_magnitude"}
 
 
 def magnitude_variants(i: Path) -> None:
@@ -71,7 +71,7 @@ def scenarios(i: Path) -> list[tuple]:
          set(), MAGNITUDE_SEES_IT),
         ("magnitude_recompute_unit_error", ["--stage", "magnitude", "--catalog", str(v / "catalog_ml_unit_error.csv"),
                                             "--waveforms", str(i / "waveforms"), "--stations", str(i / "stations.xml")] + picks,
-         {"magnitude_recompute"}, MAGNITUDE_SEES_IT),
+         {"magnitude_recompute", "largest_events_magnitude"}, MAGNITUDE_SEES_IT),
     ]
 
 

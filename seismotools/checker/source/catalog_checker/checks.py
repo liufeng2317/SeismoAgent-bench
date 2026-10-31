@@ -143,7 +143,8 @@ def duplicate_events(d: Data, c: dict) -> Check:
 
 def few_picks(d: Data, c: dict) -> Check:
     n_p = d.picks[d.picks.phase == "P"].groupby("event_id").size().reindex(d.events.event_id, fill_value=0)
-    expected = f"share ≤ {c['few_picks_share_max']:.0%} of events with fewer than {c['min_p_picks']} P picks"
+    expected = (f"share ≤ {c['few_picks_share_max']:.0%} of events with fewer than {c['min_p_picks']} P picks "
+                "(a measure of how well events are constrained, not of whether they are located correctly)")
     if not len(n_p):
         return _skip("events_with_few_picks", "reality", "share", expected, 0, "no events")
     share = float((n_p < c["min_p_picks"]).mean())
@@ -285,9 +286,12 @@ def sp_depth(d: Data, c: dict, w: pd.DataFrame) -> Check:
     med = float(np.median(per_event))
     flag = abs(med) > c["sp_depth_offset_max_km"]
     word = "deeper" if med > 0 else "shallower"
-    return Check("sp_depth_offset", "space", med, "km", expected, len(per_event), flag,
+    # Below the limit the sign of the difference is not reliable (velocity structure alone moves it by
+    # about a kilometre either way), so only its size is reported.
+    return Check("sp_depth_offset", "space", med if flag else abs(med), "km", expected, len(per_event), flag,
                  f"Depths implied by S−P times at stations closer than the source depth are {abs(med):.2f} km {word} than the catalog depths (median of {len(per_event):,} events)." if flag else None,
-                 {"sp_scale_km_per_s": round(k, 3)})
+                 {"sp_scale_km_per_s": round(k, 3),
+                  **({} if flag else {"direction": "not reported below the limit: velocity structure alone can move the value by about a kilometre either way"})})
 
 
 def station_residuals(d: Data, c: dict, fit: dict | None) -> list[Check]:
@@ -411,7 +415,8 @@ def event_travel_time_fit(d: Data, c: dict) -> Check:
 def depth_layers(d: Data, c: dict) -> Check:
     """Thin depth slices inside the depth range holding far more events than the depths around them."""
     expected = (f"share ≤ {c['layer_excess_share_max']:.0%} of events in excess of the neighbouring depths, counted in "
-                f"{c['layer_bin_km']} km slices holding ≥ 10 events, > {c['layer_excess_factor']:g}× and > 4 Poisson σ above the median of slices within ±{c['layer_neighbour_km']} km")
+                f"{c['layer_bin_km']} km slices holding ≥ 10 events, > {c['layer_excess_factor']:g}× and > 4 Poisson σ above the median of slices within ±{c['layer_neighbour_km']} km. "
+                "Slices also form at the interfaces of a correct layered velocity model, so the share alone does not rank two models")
     z = d.events.depth_km.dropna().to_numpy()
     if len(z) < 50:
         return _skip("depth_layers", "space", "share", expected, len(z), "fewer than 50 depths")
@@ -479,6 +484,8 @@ REPORT_ONLY = {
     "pick_snr": "correct catalogs often keep many weak picks",
     "event_travel_time_fit": "correct catalogs, especially on regional networks, show similar shares",
     "azimuthal_gap": "describes the station geometry around each event; no expected range",
+    "b_value": "early in an aftershock sequence the catalog is incomplete and maximum-curvature completeness underestimates b in correct catalogs",
+    "rate_after_largest": "the event rate after large events varies widely in correct catalogs",
 }
 # Checks that describe the input data rather than the Agent's products: reported as input notes when out
 # of range; they need no disposition, since the Agent cannot change its input.

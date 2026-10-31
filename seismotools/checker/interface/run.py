@@ -145,9 +145,10 @@ def main(argv=None) -> int:
         sections["model_ensemble"] = ens
 
     if streams is not None and args.stage in ("magnitude", "all") and data.events.magnitude.notna().any():
-        from catalog_checker.magnitude_recompute import magnitude_recompute
+        from catalog_checker.magnitude_recompute import largest_events_magnitude, magnitude_recompute
         index = streams[["file", "seed_id", "station_id", "location", "channel", "component", "file_start", "file_end"]].drop_duplicates("file")
         checks.append(magnitude_recompute(data, index, args.stations, config))
+        checks.append(largest_events_magnitude(data, index, args.stations, config))
 
     if figures_on and upto >= STAGES.index("association") and args.stage != "relocation":
         from catalog_checker.stage_figures import association_figures, location_figures

@@ -19,7 +19,8 @@ import pandas as pd
 
 from .checks import Check, Data, _skip
 
-RECOMPUTE_DEFAULTS = {"recompute_events": 20, "recompute_offset_max": 0.5, "recompute_min_events": 8}
+RECOMPUTE_DEFAULTS = {"recompute_events": 20, "recompute_offset_max": 0.5, "recompute_min_events": 8,
+                      "largest_events_n": 5, "largest_offset_max": 0.5, "largest_missing_max": 1, "clip_run_samples": 5}
 WA_IASPEI = {"zeros": [0j, 0j], "poles": [-5.49779 - 5.60886j, -5.49779 + 5.60886j], "gain": 1.0028, "sensitivity": 1.0}
 
 
@@ -50,8 +51,21 @@ def _inventory(path: Path):
     return inv
 
 
-def station_amplitudes(d: Data, index: pd.DataFrame, stations_path: Path, event_ids: list[str]) -> pd.DataFrame:
-    """Standard-ML inputs (amplitude in nm, hypocentral distance in km) per event, station and horizontal channel."""
+def clipped(raw: np.ndarray, run: int) -> bool:
+    """A record that sits at its own extreme value for more than ``run`` samples has hit the digitiser rail."""
+    x = np.abs(np.asarray(raw, float))
+    if not len(x):
+        return False
+    top = x.max()
+    return top > 0 and int((x >= 0.999 * top).sum()) > run
+
+
+def station_amplitudes(d: Data, index: pd.DataFrame, stations_path: Path, event_ids: list[str],
+                       long_window: bool = False, clip_run: int | None = None) -> pd.DataFrame:
+    """Standard-ML inputs (amplitude in nm, hypocentral distance in km) per event, station and horizontal channel.
+
+    ``long_window`` extends the window to S + max(30 s, 4 (S − P)) for the long S trains of large events;
+    ``clip_run`` drops records that sit at their extreme value for more than that many samples."""
     from obspy import UTCDateTime, read
     inv = _inventory(stations_path)
     rows = []
@@ -66,6 +80,8 @@ def station_amplitudes(d: Data, index: pd.DataFrame, stations_path: Path, event_
         first = tp if np.isfinite(tp) else ts
         last = ts if np.isfinite(ts) else tp + 0.7 * (tp - e.time)
         t0, t1 = first - 1.0, last + max(3.0, 0.5 * (last - e.time)) + 2.0
+        if long_window:
+            t1 = last + max(30.0, 4.0 * (last - first if np.isfinite(tp) and np.isfinite(ts) else last - e.time))
         r = float(sp.hyp_km.iloc[0])
         files = index[(index.station_id == sta) & index.component.isin(list("NE12")) & (index.file_start < t1) & (index.file_end > t0)]
         for seed, f in files.groupby("seed_id"):
@@ -73,6 +89,8 @@ def station_amplitudes(d: Data, index: pd.DataFrame, stations_path: Path, event_
                 st = read(str(f.file.iloc[0]), starttime=UTCDateTime(t0 - 30), endtime=UTCDateTime(t1 + 30))
                 st.merge(fill_value=0)
                 tr = st[0]
+                if clip_run is not None and clipped(tr.slice(UTCDateTime(t0), UTCDateTime(t1)).data, clip_run):
+                    continue
                 tr.detrend("demean")
                 tr.detrend("linear")
                 fs = tr.stats.sampling_rate
@@ -118,3 +136,48 @@ def magnitude_recompute(d: Data, index: pd.DataFrame, stations_path: Path, c: di
                  {"events": em.reset_index().round(3).to_dict("records"), "amplitudes": int(len(amps)),
                   "slope_catalog_vs_recomputed": None if slope is None else round(slope, 3),
                   "mad": round(float((diff - med).abs().median()), 3)})
+
+
+def largest_events_magnitude(d: Data, index: pd.DataFrame, stations_path: Path, c: dict) -> Check:
+    """The largest events: recomputed standard ML from unclipped records over a long window, against the catalog.
+
+    Candidates are the events picked at the most stations and the events with the largest catalog
+    magnitudes. Near records of large events are often clipped and short windows miss the S-wave
+    maximum, which makes their magnitudes too small; events without a magnitude are counted too.
+    """
+    c = {**RECOMPUTE_DEFAULTS, **c}
+    n, lim = c["largest_events_n"], c["largest_offset_max"]
+    expected = (f"|median catalog magnitude − recomputed standard ML| ≤ {lim} for the {n} events picked at the most stations and the "
+                f"{n} largest catalog magnitudes, and at most {c['largest_missing_max']} of them without a magnitude")
+    p = d.picks[np.isfinite(d.picks.hyp_km)]
+    nsta = p.groupby("event_id").station_id.nunique()
+    ev = d.events[d.events.event_id.isin(nsta.index)]
+    if ev.empty:
+        return _skip("largest_events_magnitude", "strength", "magnitude", expected, 0, "no located events with picks")
+    by_sta = list(nsta.loc[ev.event_id].sort_values(ascending=False).index[:n])
+    by_mag = list(ev.dropna(subset=["magnitude"]).sort_values("magnitude", ascending=False).event_id[:n])
+    cand = list(dict.fromkeys(by_sta + by_mag))
+    amps = station_amplitudes(d, index, stations_path, cand, long_window=True, clip_run=c["clip_run_samples"])
+    if amps.empty:
+        return _skip("largest_events_magnitude", "strength", "magnitude", expected, 0,
+                     "no unclipped amplitude measured (needs horizontal records and StationXML with responses)")
+    amps["ml"] = standard_ml(amps.amplitude_nm, amps.hypocentral_km)
+    rec = amps.groupby("event_id").ml.agg(["median", "size"]).rename(columns={"median": "recomputed", "size": "n_records"})
+    rec = rec[rec.n_records >= 3]
+    em = rec.join(ev.set_index("event_id")[["magnitude", "time"]], how="left")
+    missing = int(em.magnitude.isna().sum())
+    both = em.dropna(subset=["magnitude"])
+    diff = both.magnitude - both.recomputed
+    med = float(diff.median()) if len(diff) else float("nan")
+    flag = (len(diff) > 0 and abs(med) > lim) or missing > c["largest_missing_max"]
+    parts = []
+    if len(diff) and abs(med) > lim:
+        parts.append(f"the catalog magnitudes are {abs(med):.2f} units {'below' if med < 0 else 'above'} the standard ML "
+                     f"recomputed from unclipped records (median of {len(diff)}; largest recomputed {both.recomputed.max():.1f}, "
+                     f"catalog {both.magnitude.max():.1f})")
+    if missing > c["largest_missing_max"]:
+        parts.append(f"{missing} of the {len(em)} largest events have no magnitude")
+    return Check("largest_events_magnitude", "strength", med if len(diff) else None, "magnitude", expected, len(em), flag,
+                 ("For the largest events " + "; ".join(parts) + ".") if flag else None,
+                 {"events": em.reset_index().assign(time=lambda x: pd.to_datetime(x.time, unit="s", utc=True).dt.strftime("%Y-%m-%dT%H:%M:%SZ"))
+                  .round(3).to_dict("records"), "without_magnitude": missing})
