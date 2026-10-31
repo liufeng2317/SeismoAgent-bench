@@ -19,5 +19,6 @@
   "source": "source/catalog_checker",
   "runtime": "runtime/velocity_models",
   "validation": "examples/smoke/run.sh",
-  "status": "pre-freeze: interface and checks complete; the frozen version is recorded by commit in docs/research/04_Checker_Design.md \u00a712"
+  "status": "frozen 2026-11-01 for the S2c and S3 runs (git tag checker-v1.0); later changes get a new version and are recorded in docs/research/04_Checker_Design.md \u00a712",
+  "version": "1.0"
 }
