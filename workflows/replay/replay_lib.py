@@ -133,7 +133,8 @@ def relocate(run: Run, spec: dict, out: Path, event_ids=None, workers: int = 16)
         cfg = {"reference_elevation_km": ref_elev, "velocity_layering": "step", "grid_depth_km": [-3.0, 35.0],
                "region": {"latitude": [float(lat[0] - 0.18), float(lat[1] + 0.18)],
                           "longitude": [float(lon[0] - 0.18), float(lon[1] + 0.18)], "depth_km": [0, 20]},
-               "location_method": "EDT_OT_WT", "pick_error_s": {"P": 0.1, "S": 0.2}}
+               "location_method": "EDT_OT_WT", "pick_error_s": {"P": 0.1, "S": 0.2},
+               **({"grid_spacing_km": spec["grid_spacing_km"]} if spec.get("grid_spacing_km") else {})}
         (out / "relocated_model.txt").write_text("".join(f"{z:.3f} {vp:.3f} {vs:.3f}\n" for z, vp, vs in _model_rows(rows, ref_elev)))
         (out / "relocated_config.json").write_text(json.dumps(cfg))
         subprocess.run([sys.executable, "-I", str(LOCATE), "--arrivals", str(out / "arrivals.csv"), "--stations", str(out / "stations.csv"),
