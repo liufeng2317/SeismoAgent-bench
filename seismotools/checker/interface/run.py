@@ -61,6 +61,10 @@ def main(argv=None) -> int:
                         help="the Agent's preprocessed records, same file naming; compared with the raw records in the data stage")
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--config", type=Path, help="JSON overriding default ranges (see README); records itself in the report")
+    parser.add_argument("--location-setup", type=Path,
+                        help="location stage, optional: JSON describing the location set-up in km below sea level "
+                             "({\"interfaces_km_bsl\": [...], \"search_depth_km_bsl\": [top, bottom], \"grid_spacing_km\": g, "
+                             "\"grid_origin_km_bsl\": z0, \"trial_depth_km_bsl\": z}); the report then says where the most common depth lies relative to it")
     parser.add_argument("--no-figures", action="store_true")
     parser.add_argument("--model-ensemble", action="store_true",
                         help="location stage: also relocate a sample of 100 events with six generic velocity models and report "
@@ -93,6 +97,8 @@ def main(argv=None) -> int:
         print(f"checker: no stations found in {args.stations}", file=sys.stderr)
         return 2
     config = json.loads(args.config.read_text()) if args.config else {}
+    if args.location_setup:
+        config["location_setup"] = json.loads(args.location_setup.read_text())
     args.output_dir.mkdir(parents=True, exist_ok=True)
     figures_on = not args.no_figures
     wf_days = None if streams is None else pd.DataFrame({"station_id": streams.station_id, "channel": streams.channel,

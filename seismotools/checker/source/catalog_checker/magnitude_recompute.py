@@ -105,6 +105,29 @@ def station_amplitudes(d: Data, index: pd.DataFrame, stations_path: Path, event_
     return pd.DataFrame(rows, columns=["event_id", "station_id", "seed_id", "amplitude_nm", "hypocentral_km"])
 
 
+def _station_structure(amps: pd.DataFrame, em: pd.DataFrame, diff: pd.Series) -> dict:
+    """Where an offset sits: per-station terms, trend with distance, and the spread of station values per event.
+
+    A unit or response error in the Agent's code shifts every event by the same amount; an error in one
+    station's metadata shows as one station term far from the others (often by a round factor: 0.3 for 2,
+    1 for 10); a wrong distance correction shows as a trend of the offset with distance."""
+    a = amps.join(amps.groupby("event_id").ml.median().rename("event_ml"), on="event_id")
+    a["term"] = a.ml - a.event_ml
+    st = a.groupby("station_id").term.agg(["median", "size"])
+    st = st[st["size"] >= 3]
+    dist = a.groupby("event_id").hypocentral_km.median().reindex(diff.index)
+    trend = None
+    if diff.notna().sum() >= 8 and dist.nunique() > 2:
+        trend = round(float(np.polyfit(np.log10(dist.clip(lower=1.0)), diff, 1)[0]), 3)
+    spread = a.groupby("event_id").term.apply(lambda x: float(np.median(np.abs(x)))).median()
+    return {"station_terms": {k: round(float(v), 3) for k, v in st["median"].items()},
+            "stations_with_term_over_0.3": sorted(st.index[st["median"].abs() > 0.3]),
+            "offset_trend_per_log10_km": trend,
+            "median_station_spread": round(float(spread), 3) if np.isfinite(spread) else None,
+            "structure_note": "an offset common to all events and stations points to the magnitude code (units, response, constant); "
+                              "one station far from the others to that station's metadata; a trend with distance to the distance correction"}
+
+
 def magnitude_recompute(d: Data, index: pd.DataFrame, stations_path: Path, c: dict) -> Check:
     c = {**RECOMPUTE_DEFAULTS, **c}
     lim = c["recompute_offset_max"]
@@ -130,12 +153,13 @@ def magnitude_recompute(d: Data, index: pd.DataFrame, stations_path: Path, c: di
     med = float(diff.median())
     flag = abs(med) > lim
     slope = float(np.polyfit(em.recomputed, em.magnitude, 1)[0]) if em.recomputed.nunique() > 2 else None
+    structure = _station_structure(amps, em, diff)
     return Check("magnitude_recompute", "strength", med, "magnitude", expected, len(em), flag,
                  (f"Catalog magnitudes are {abs(med):.2f} units {'below' if med < 0 else 'above'} the standard local magnitude "
                   f"recomputed from the records (median of {len(em)} events, spread {float((diff - med).abs().median()):.2f}).") if flag else None,
                  {"events": em.reset_index().round(3).to_dict("records"), "amplitudes": int(len(amps)),
                   "slope_catalog_vs_recomputed": None if slope is None else round(slope, 3),
-                  "mad": round(float((diff - med).abs().median()), 3)})
+                  "mad": round(float((diff - med).abs().median()), 3), **structure})
 
 
 def largest_events_magnitude(d: Data, index: pd.DataFrame, stations_path: Path, c: dict) -> Check:

@@ -138,7 +138,12 @@ def duplicate_events(d: Data, c: dict) -> Check:
     where = "" if time_only else f" and {c['duplicate_km']} km"
     return Check("duplicate_events", "reality", share, "share", expected, len(e), flag,
                  f"{share:.1%} of events have another event within {c['duplicate_dt_s']} s{where}." if flag else None,
-                 {"time_only": time_only})
+                 {"time_only": time_only, **_pick_overlap(d, c)})
+
+
+def _pick_overlap(d: Data, c: dict) -> dict:
+    from .diagnostics import duplicate_pick_overlap
+    return duplicate_pick_overlap(d, c)
 
 
 def few_picks(d: Data, c: dict) -> Check:
@@ -486,6 +491,13 @@ REPORT_ONLY = {
     "azimuthal_gap": "describes the station geometry around each event; no expected range",
     "b_value": "early in an aftershock sequence the catalog is incomplete and maximum-curvature completeness underestimates b in correct catalogs",
     "rate_after_largest": "the event rate after large events varies widely in correct catalogs",
+    "depth_constraint": "describes how well depths can be constrained by the picks and the station geometry; not an error",
+    "pile_against_setup": "locates the most common depth relative to the declared location set-up; evidence for attributing a pile-up",
+    "station_delays": "station residuals also carry 3-D structure; the P/S ratio of a delay helps to tell a clock from a path",
+    "station_time_steps": "residuals also change when seismicity moves; a step equal in P and S points to a clock or instrument change",
+    "wadati_events": "event-by-event Vp/Vs scatters in correct catalogs; outlier S picks point to mispicks or wrong phase labels",
+    "day_night_ratio": "real seismicity has no daily cycle, but detection and blasting do; the ratio alone does not show an error",
+    "b_positive": "an estimate to read next to the standard b-value: a large difference points to incompleteness",
 }
 # Checks that describe the input data rather than the Agent's products: reported as input notes when out
 # of range; they need no disposition, since the Agent cannot change its input.
@@ -507,6 +519,9 @@ POPULATION = {
     "b_value": "the magnitude distribution needs the full catalog",
     "rate_after_largest": "the event rate after large events needs the full time span",
     "relocation_thinning": "local thickness is measured among neighbours, which depend on how many events there are",
+    "station_time_steps": "a step needs days of data on both sides",
+    "day_night_ratio": "the daily cycle needs many days of events",
+    "b_positive": "the magnitude distribution needs the full catalog",
 }
 
 
@@ -558,6 +573,15 @@ def run_checks(d: Data, config: dict | None = None, stage: str = "all") -> tuple
         checks += [wad_offset, wad_spread, tt_check]
         checks += [azimuthal_gap(d, c)] + depth_pileup(d, c) + [depth_layers(d, c), sp_depth(d, c, w)] + station_residuals(d, c, fit)
         extras.update({"wadati": w, "fit": fit})
+        from .diagnostics import (_residuals, day_night, depth_constraint, pile_against_setup, station_delays,
+                                  station_time_steps, wadati_events)
+        dc, per_event = depth_constraint(d, c)
+        res = _residuals(d) if len(d.picks) else pd.DataFrame()
+        checks += [dc, station_delays(d, c, res), station_time_steps(d, c, res), wadati_events(d, c), day_night(d, c)]
+        pile = pile_against_setup(d, c)
+        checks += [pile] if pile is not None else []
+        extras["depth_constraint"] = per_event
     if upto >= STAGES.index("magnitude"):
-        checks += [magnitude_range(d, c), b_value(d, c), magnitude_detection(d, c), rate_after_largest(d, c)]
+        from .diagnostics import b_positive
+        checks += [magnitude_range(d, c), b_value(d, c), b_positive(d, c), magnitude_detection(d, c), rate_after_largest(d, c)]
     return checks, extras
