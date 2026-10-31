@@ -16,7 +16,7 @@ from .checks import Check, _skip
 from .io import local_km
 
 RELOCATION_DEFAULTS = {
-    "relocated_share_min": 0.5, "shift_max_km": 1.5, "displacement_large_km": 5.0, "displacement_large_share_max": 0.05,
+    "relocated_share_min": 0.5, "relocated_min_picks": 8, "shift_max_km": 1.5, "displacement_large_km": 5.0, "displacement_large_share_max": 0.05,
     "thickness_neighbours": 20, "thickness_events": 3000, "thinning_ratio_max": 5.0,
 }
 
@@ -40,12 +40,16 @@ def local_thickness(xyz: np.ndarray, k: int, n: int) -> float:
     return float(np.median(out))
 
 
-def relocation_checks(before: pd.DataFrame, after: pd.DataFrame, lat0: float, lon0: float, c: dict) -> tuple[list[Check], dict]:
+def relocation_checks(before: pd.DataFrame, after: pd.DataFrame, lat0: float, lon0: float, c: dict,
+                      picks_per_event: pd.Series | None = None, before_uncertainty: dict | None = None) -> tuple[list[Check], dict]:
+    """``picks_per_event``: picks per event id, to count only events with enough picks to be relocated;
+    ``before_uncertainty``: median horizontal and depth uncertainty (km) reported for the catalog before relocation."""
     c = {**RELOCATION_DEFAULTS, **c}
     b = before.dropna(subset=["latitude", "longitude", "depth_km"]).drop_duplicates("event_id").set_index("event_id")
     a = after.dropna(subset=["latitude", "longitude", "depth_km"]).drop_duplicates("event_id").set_index("event_id")
     common = b.index.intersection(a.index)
-    exp_share = f"share ≥ {c['relocated_share_min']:.0%} of located events moved by relocation"
+    exp_share = (f"share ≥ {c['relocated_share_min']:.0%} of located events with ≥ {c['relocated_min_picks']} picks moved by relocation"
+                 if picks_per_event is not None else f"share ≥ {c['relocated_share_min']:.0%} of located events moved by relocation")
     if len(common) < 20:
         why = f"{len(common)} events in both catalogs (matched by event_id)"
         return [_skip(i, "space", u, e, len(common), why) for i, u, e in (
@@ -54,17 +58,26 @@ def relocation_checks(before: pd.DataFrame, after: pd.DataFrame, lat0: float, lo
     xb, xa = _xyz(b.loc[common], lat0, lon0), _xyz(a.loc[common], lat0, lon0)
     disp = xa - xb
     moved = np.linalg.norm(disp, axis=1) > 1e-3
-    share = float(moved.sum() / len(b))
-    checks = [Check("relocated_share", "space", share, "share", exp_share, len(b), share < c["relocated_share_min"],
-                    f"Only {moved.sum():,} of {len(b):,} located events changed position in relocation." if share < c["relocated_share_min"] else None,
+    # small events with few picks often cannot be linked; published relocations leave about half of them in place
+    eligible = b.index if picks_per_event is None else b.index[picks_per_event.reindex(b.index).fillna(0) >= c["relocated_min_picks"]]
+    moved_ids = common[moved]
+    n_el = max(len(eligible), 1)
+    share = float(len(moved_ids.intersection(eligible)) / n_el)
+    checks = [Check("relocated_share", "space", share, "share", exp_share, n_el, share < c["relocated_share_min"],
+                    f"Only {len(moved_ids.intersection(eligible)):,} of {n_el:,} located events with enough picks changed position in relocation." if share < c["relocated_share_min"] else None,
                     {"events_before": int(len(b)), "events_after": int(len(a)), "in_both": int(len(common)), "moved": int(moved.sum()),
                      "only_after": int(len(a.index.difference(b.index)))})]
     d = disp[moved] if moved.any() else disp
     med = np.median(d, axis=0)
     horiz = float(np.hypot(med[0], med[1]))
-    flag = horiz > c["shift_max_km"] or abs(med[2]) > c["shift_max_km"]
+    # a relative relocation should not move the catalog as a whole by more than its absolute location error
+    unc = before_uncertainty or {}
+    lim_h = max(c["shift_max_km"], float(unc.get("horizontal") or 0.0))
+    lim_z = max(c["shift_max_km"], float(unc.get("depth") or 0.0))
+    flag = horiz > lim_h or abs(med[2]) > lim_z
     checks.append(Check("relocation_shift", "space", max(horiz, abs(float(med[2]))), "km",
-                        f"median displacement of moved events ≤ {c['shift_max_km']} km horizontally and in depth", len(d), flag,
+                        f"median displacement of moved events ≤ {lim_h:.2g} km horizontally and ≤ {lim_z:.2g} km in depth "
+                        f"(the larger of {c['shift_max_km']} km and the median reported uncertainty before relocation)", len(d), flag,
                         (f"Relocation moved the events by a median {med[0]:+.2f} km east, {med[1]:+.2f} km north and {med[2]:+.2f} km down.") if flag else None,
                         {"median_east_km": round(float(med[0]), 3), "median_north_km": round(float(med[1]), 3), "median_down_km": round(float(med[2]), 3)}))
     dist = np.linalg.norm(d, axis=1)

@@ -36,6 +36,7 @@ import json
 import sys
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "source"))
@@ -142,7 +143,13 @@ def main(argv=None) -> int:
 
     if args.catalog_before is not None and upto >= STAGES.index("relocation"):
         from catalog_checker.relocation import read_dtcc, relocation_checks, relocation_figure
-        rchecks, rextra = relocation_checks(read_catalog(args.catalog_before), data.events, data.lat0, data.lon0, config)
+        raw_before = pd.read_csv(args.catalog_before, dtype=str, keep_default_na=False)
+        unc = {k: float(pd.to_numeric(raw_before[col], errors="coerce").median())
+               for k, col in (("horizontal", "horizontal_uncertainty_km"), ("depth", "depth_uncertainty_km")) if col in raw_before}
+        unc = {k: v for k, v in unc.items() if np.isfinite(v)}
+        npk = data.all_picks[data.all_picks.event_id != ""].groupby("event_id").size()
+        rchecks, rextra = relocation_checks(read_catalog(args.catalog_before), data.events, data.lat0, data.lon0, config,
+                                            picks_per_event=npk if len(npk) else None, before_uncertainty=unc or None)
         checks += rchecks
         sections["relocation"] = {"dtcc": read_dtcc(args.dtcc) if args.dtcc else None}
         if figures_on:

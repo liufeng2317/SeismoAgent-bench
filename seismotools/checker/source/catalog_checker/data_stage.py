@@ -16,7 +16,7 @@ from .waveforms import BAND_HZ, Reader, bandpass, energetic_windows, file_index,
 
 DATA_DEFAULTS = {
     "low_station_day_fraction": 0.5, "coverage_min": 0.9, "gap_station_day_share_max": 0.05,
-    "data_windows": 4, "data_window_s": 40.0, "data_window_pre_s": 8.0, "data_window_stations": 6, "processing_lag_max_s": 0.1,
+    "data_windows": 4, "data_window_s": 40.0, "data_window_pre_s": 8.0, "data_window_stations": 6, "processing_lag_max_samples": 2, "processing_lag_floor_s": 0.02,
 }
 INSTRUMENT = {"H": "seismometer", "L": "seismometer (low gain)", "N": "accelerometer", "P": "geophone", "G": "gravimeter"}
 
@@ -206,7 +206,7 @@ def representative_windows(streams: pd.DataFrame, window, processed: Path | None
                     nb = np.sqrt(np.mean(yy[n0] ** 2))
                     return float(np.sqrt(np.mean(yy[n1] ** 2)) / nb) if nb > 0 else np.nan
 
-                row = {"window": k, "station": sta, "component": comp, "seed_id": seed, "processed_from": label,
+                row = {"window": k, "station": sta, "component": comp, "seed_id": seed, "processed_from": label, "rate_hz": float(rate),
                        "snr_raw": round(snr(x), 2), "snr_standard": round(snr(std), 2), "snr_processed": round(snr(proc), 2),
                        "peak_hz_raw": round(peak_frequency(np.nan_to_num(x - np.nanmean(x))[n1], rate), 2),
                        "peak_hz_processed": round(peak_frequency(proc[n1], rate), 2),
@@ -217,14 +217,18 @@ def representative_windows(streams: pd.DataFrame, window, processed: Path | None
             names.append(_window_figure(panel, k, w, t0, output_dir))
     checks = []
     agent_rows = [r for r in summary if r["processed_from"] == "agent" and r["snr_standard"] and r["snr_standard"] >= 3]
-    exp = f"|median time shift of processed records against a zero-phase {BAND_HZ[0]:g}–{BAND_HZ[1]:g} Hz filter| ≤ {c['processing_lag_max_s']} s"
+    rates = [r["rate_hz"] for r in agent_rows] if agent_rows else []
+    lag_max = max(c["processing_lag_floor_s"], c["processing_lag_max_samples"] / float(np.median(rates))) if rates else c["processing_lag_floor_s"]
+    exp = (f"|median time shift of processed records against a zero-phase {BAND_HZ[0]:g}–{BAND_HZ[1]:g} Hz filter| ≤ "
+           f"{c['processing_lag_max_samples']} samples (≥ {c['processing_lag_floor_s']} s; {lag_max:.3f} s here): zero-phase processing shifts nothing, "
+           "and a shift of a few samples already biases cross-correlation times")
     if processed is None:
         checks.append(_skip("processing_time_shift", "data", "s", exp, 0, "no processed waveforms given"))
     elif not agent_rows:
         checks.append(_skip("processing_time_shift", "data", "s", exp, 0, "no processed record found for the selected windows"))
     else:
         lag = float(np.median([r["lag_processed_vs_standard_s"] for r in agent_rows]))
-        flag = abs(lag) > c["processing_lag_max_s"]
+        flag = abs(lag) > lag_max
         checks.append(Check("processing_time_shift", "data", lag, "s", exp, len(agent_rows), flag,
                             f"Processed records are shifted by {lag:+.2f} s (median of {len(agent_rows)} records) against the same records filtered zero-phase." if flag else None))
     details = {"scan": scan, "windows": [{"start_utc": f"{pd.Timestamp(w['start'], unit='s', tz='UTC'):%Y-%m-%dT%H:%M:%S}Z",

@@ -15,8 +15,8 @@ from .checks import Check, Data, _skip
 STAGE_DEFAULTS = {
     "silent_station_share_max": 0.10, "station_day_gap_share_max": 0.05,
     "duplicate_pick_s": 0.3, "duplicate_pick_share_max": 0.02,
-    "s_to_p_min": 0.3,
-    "associated_share_min": 0.2, "busy_hour_quantile": 0.9, "busy_hour_ratio_min": 0.5,
+    "s_to_p_min": 0.3, "s_to_p_max": 1.5,
+    "associated_share_min": 0.1, "busy_hour_quantile": 0.9, "busy_hour_ratio_min": 0.5,
 }
 
 
@@ -81,16 +81,17 @@ def duplicate_picks(d: Data, c: dict) -> Check:
 
 
 def s_to_p(d: Data, c: dict) -> Check:
-    expected = f"S picks ≥ {c['s_to_p_min']} × P picks"
+    expected = f"S picks between {c['s_to_p_min']} and {c['s_to_p_max']} × P picks"
     n_p = int((d.all_picks.phase == "P").sum())
     n_s = int((d.all_picks.phase == "S").sum())
     if n_p == 0:
         return _skip("s_to_p_ratio", "reality", "ratio", expected, 0, "no P picks")
     ratio = n_s / n_p
-    flag = ratio < c["s_to_p_min"]
+    flag = ratio < c["s_to_p_min"] or ratio > c["s_to_p_max"]
     no_s = sorted(set(d.all_picks[d.all_picks.phase == "P"].station_id) - set(d.all_picks[d.all_picks.phase == "S"].station_id))
-    return Check("s_to_p_ratio", "reality", ratio, "ratio", expected, n_p, flag,
-                 f"There are {ratio:.2f} S picks per P pick ({n_s:,} S, {n_p:,} P); {len(no_s)} stations have P picks but no S pick." if flag else None,
+    symptom = (f"There are {ratio:.2f} S picks per P pick ({n_s:,} S, {n_p:,} P); {len(no_s)} stations have P picks but no S pick."
+               if ratio < c["s_to_p_min"] else f"There are {ratio:.2f} S picks per P pick ({n_s:,} S, {n_p:,} P): more S than P picks.")
+    return Check("s_to_p_ratio", "reality", ratio, "ratio", expected, n_p, flag, symptom if flag else None,
                  {"stations_without_s": no_s})
 
 
