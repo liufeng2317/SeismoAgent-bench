@@ -1,0 +1,56 @@
+{
+  "task_id": "maple_2017_catalog_backend",
+  "version": "1",
+  "title": "Maple Creek 2017 earthquake-catalog construction (backend)",
+  "summary": "Back-end arm (iteration tier B): the picks and association of a formal tools run are given and fixed; the Agent locates, relocates and computes magnitudes with the location and relocation tools.",
+  "task_prompt_file": "prompt_backend.md",
+  "output_contract": "output_contract_min.json",
+  "category": "seismology",
+  "software": [
+    "Python",
+    "ObsPy",
+    "NonLinLoc",
+    "HypoInverse",
+    "hypoDD",
+    "GrowClust"
+  ],
+  "taxonomy": {
+    "domain": "seismology",
+    "task_type": "catalog_back_end",
+    "guidance": "minimal",
+    "scope": "back_end",
+    "tool_policy": "local_provided"
+  },
+  "input_requirements": [
+    {
+      "id": "waveform_data",
+      "data_type": "waveform",
+      "format": "MiniSEED",
+      "required": true
+    },
+    {
+      "id": "station_metadata",
+      "data_type": "station_metadata",
+      "format": "StationXML",
+      "required": true
+    },
+    {
+      "id": "phase_picks",
+      "data_type": "catalog",
+      "format": "CSV",
+      "required": true
+    }
+  ],
+  "evaluation": {
+    "scorers": [
+      {
+        "name": "artifact-contract",
+        "version": "1"
+      },
+      {
+        "name": "catalog-metrics",
+        "version": "1"
+      }
+    ]
+  }
+}

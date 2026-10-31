@@ -1,0 +1,56 @@
+{
+  "task_id": "kilauea_2018_catalog_backend_knowledge",
+  "version": "1",
+  "title": "Kīlauea 2018 earthquake-catalog construction (backend knowledge)",
+  "summary": "As backend_checker, plus the catalog-knowledge skill (pilot protocol, deciding between candidates, symptom playbook, errors no check sees) and the magnitude resource. Isolates the value of procedural knowledge on the back end.",
+  "task_prompt_file": "prompt_backend_knowledge.md",
+  "output_contract": "output_contract_checker.json",
+  "category": "seismology",
+  "software": [
+    "Python",
+    "ObsPy",
+    "NonLinLoc",
+    "HypoInverse",
+    "hypoDD",
+    "GrowClust"
+  ],
+  "taxonomy": {
+    "domain": "seismology",
+    "task_type": "catalog_back_end",
+    "guidance": "minimal",
+    "scope": "back_end",
+    "tool_policy": "local_provided"
+  },
+  "input_requirements": [
+    {
+      "id": "waveform_data",
+      "data_type": "waveform",
+      "format": "MiniSEED",
+      "required": true
+    },
+    {
+      "id": "station_metadata",
+      "data_type": "station_metadata",
+      "format": "StationXML",
+      "required": true
+    },
+    {
+      "id": "phase_picks",
+      "data_type": "catalog",
+      "format": "CSV",
+      "required": true
+    }
+  ],
+  "evaluation": {
+    "scorers": [
+      {
+        "name": "artifact-contract",
+        "version": "1"
+      },
+      {
+        "name": "catalog-metrics",
+        "version": "1"
+      }
+    ]
+  }
+}

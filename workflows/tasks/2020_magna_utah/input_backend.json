@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "case_id": "2020_magna_utah",
+  "description": "Read-only Magna 2020 waveform and station metadata root for the catalog-construction task. Back-end arm backend: adds the fixed front end.",
+  "entries": [
+    {
+      "id": "waveform_data_root",
+      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2020_magna_utah/waveforms",
+      "type": "folder",
+      "notes": "Explore the data/ and stations/ subdirectories. The source files are not copied into the run."
+    },
+    {
+      "id": "frontend_picks",
+      "path": "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2020_magna_utah/backend/frontend",
+      "type": "folder",
+      "notes": "Fixed picks and association (picks.csv, events.csv)."
+    }
+  ]
+}

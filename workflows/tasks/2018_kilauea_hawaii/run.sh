@@ -12,6 +12,9 @@ if [ ! -f "$TASK_FILE" ]; then
   echo "VARIANT must be the stem of an existing task_<variant>.json (min, tools, guided)" >&2
   exit 2
 fi
+# A variant may bring its own input manifest (input_<variant>.json), e.g. the back-end arms add the fixed front end.
+INPUT_FILE="$TASK_DIR/input_${VARIANT}.json"
+if [ ! -f "$INPUT_FILE" ]; then INPUT_FILE="$TASK_DIR/input.json"; fi
 AGENT_NAME="${AGENT}-kilauea-${VARIANT}"
 AGENT_CONFIG="$PROJECT_DIR/SeismoAgentBench/configs/agents/${AGENT}.yaml"
 # Experiment factors map one-to-one onto path segments:
@@ -34,6 +37,7 @@ RUN_ID="${RUN_ID:-$(date -u +%Y%m%dT%H%M%SZ)}"
 # gets a 48 h budget by default while other variants keep 24 h.
 case "$VARIANT" in
   tools) DEFAULT_TIMEOUT=172800 ;;
+  backend*) DEFAULT_TIMEOUT=43200 ;;  # back end only (tier B): 12 h
   *) DEFAULT_TIMEOUT=86400 ;;
 esac
 TIMEOUT="${TIMEOUT:-$DEFAULT_TIMEOUT}"
@@ -99,7 +103,7 @@ if [ "$AGENT" = "claude" ]; then
   if [ -n "${CLAUDE_MAX_TURNS:-}" ]; then CLAUDE_ARGS+=(--max-turns "$CLAUDE_MAX_TURNS"); fi
   CMD=("$PYTHON" -m SeismoAgentBench run-claude \
     --task "$TASK_FILE" \
-    --input "$TASK_DIR/input.json" \
+    --input "$INPUT_FILE" \
     --agent-name "$AGENT_NAME" \
     --agent-version 1 \
     --run-root "$RUN_ROOT" \
@@ -114,7 +118,7 @@ else
   if [ -n "${CODEX_MODEL:-}" ]; then CODEX_ARGS+=(--model "$CODEX_MODEL"); fi
   CMD=("$PYTHON" -m SeismoAgentBench run-codex \
     --task "$TASK_FILE" \
-    --input "$TASK_DIR/input.json" \
+    --input "$INPUT_FILE" \
     --agent-name "$AGENT_NAME" \
     --agent-version 1 \
     --run-root "$RUN_ROOT" \

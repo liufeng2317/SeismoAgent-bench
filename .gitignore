@@ -112,3 +112,6 @@ data/2019_ridgecrest_california/analysis/figures/instrument_response/response_ex
 
 # Host-specific proxy/bootstrap script from external evaluation notes.
 docs/archive/2026-09_geodatabench_codex_notes/scripts/setup_proxy_env.sh
+
+# Back-end task front ends (rebuilt by workflows/tasks/build_backend_variants.py from the runs)
+workflows/tasks/*/backend/frontend/*.csv

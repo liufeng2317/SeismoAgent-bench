@@ -63,3 +63,7 @@ Runs land in `runs/<variant>/<harness>/<model>/<timestamp>/` (one experiment fac
 ## Retired variants
 
 `base_standard`, `base_notools`, `base_full`, the legacy `base`, the legacy two-hour `tools`, and earlier drafts (`pubtools`, `staged`) are archived under `attic/` with rebuild recipes in `attic/README.md`.
+
+## Back-end arms
+
+`backend`, `backend_checker` and `backend_knowledge` reuse the fixed front end of the formal `tools` run and isolate the back end (iteration tier B); see [`../BACKEND_VARIANTS.md`](../BACKEND_VARIANTS.md).

@@ -1,0 +1,56 @@
+{
+  "task_id": "prague_2011_catalog_backend_checker",
+  "version": "1",
+  "title": "Prague 2011 earthquake-catalog construction (backend checker)",
+  "summary": "As backend, plus the catalog-checker skill and the checker contract (checker report on the submitted products and a disposition per flag). Isolates the value of the checker on the back end.",
+  "task_prompt_file": "prompt_backend_checker.md",
+  "output_contract": "output_contract_checker.json",
+  "category": "seismology",
+  "software": [
+    "Python",
+    "ObsPy",
+    "NonLinLoc",
+    "HypoInverse",
+    "hypoDD",
+    "GrowClust"
+  ],
+  "taxonomy": {
+    "domain": "seismology",
+    "task_type": "catalog_back_end",
+    "guidance": "minimal",
+    "scope": "back_end",
+    "tool_policy": "local_provided"
+  },
+  "input_requirements": [
+    {
+      "id": "waveform_data",
+      "data_type": "waveform",
+      "format": "MiniSEED",
+      "required": true
+    },
+    {
+      "id": "station_metadata",
+      "data_type": "station_metadata",
+      "format": "StationXML",
+      "required": true
+    },
+    {
+      "id": "phase_picks",
+      "data_type": "catalog",
+      "format": "CSV",
+      "required": true
+    }
+  ],
+  "evaluation": {
+    "scorers": [
+      {
+        "name": "artifact-contract",
+        "version": "1"
+      },
+      {
+        "name": "catalog-metrics",
+        "version": "1"
+      }
+    ]
+  }
+}

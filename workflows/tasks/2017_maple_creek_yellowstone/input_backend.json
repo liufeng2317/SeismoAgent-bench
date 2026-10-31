@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "case_id": "2017_maple_creek_yellowstone",
+  "description": "Read-only Maple Creek 2017 waveform and station metadata root for the catalog-construction task. Back-end arm backend: adds the fixed front end.",
+  "entries": [
+    {
+      "id": "waveform_data_root",
+      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2017_maple_creek_yellowstone/waveforms",
+      "type": "folder",
+      "notes": "Explore the data/ and stations/ subdirectories. The source files are not copied into the run."
+    },
+    {
+      "id": "frontend_picks",
+      "path": "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2017_maple_creek_yellowstone/backend/frontend",
+      "type": "folder",
+      "notes": "Fixed picks and association (picks.csv, events.csv)."
+    }
+  ]
+}

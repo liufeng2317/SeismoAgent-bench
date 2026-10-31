@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "case_id": "2018_kilauea_hawaii",
+  "description": "Read-only Kīlauea 2018 waveform and station metadata root for the catalog-construction task. Back-end arm backend_knowledge: adds the fixed front end.",
+  "entries": [
+    {
+      "id": "waveform_data_root",
+      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2018_kilauea_hawaii/waveforms",
+      "type": "folder",
+      "notes": "Explore the data/ and stations/ subdirectories. The source files are not copied into the run."
+    },
+    {
+      "id": "frontend_picks",
+      "path": "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2018_kilauea_hawaii/backend/frontend",
+      "type": "folder",
+      "notes": "Fixed picks and association (picks.csv, events.csv)."
+    },
+    {
+      "id": "agent_resource",
+      "path": "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/data/agent_resource",
+      "type": "folder",
+      "notes": "Skills (catalog-checker, catalog-knowledge) and the magnitude resource."
+    }
+  ]
+}

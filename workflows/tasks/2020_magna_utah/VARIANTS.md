@@ -59,3 +59,7 @@ AGENT=claude VARIANT=tools bash run.sh       # any arm through Claude Code
 ```
 
 Runs land in `runs/<variant>/<harness>/<model>/<timestamp>/` (one experiment factor per path segment) with the usual control/work/record layout. The runner accepts any `task_<variant>.json` present in this directory, so the future `ris` arm will not require editing `run.sh`.
+
+## Back-end arms
+
+`backend`, `backend_checker` and `backend_knowledge` reuse the fixed front end of the formal `tools` run and isolate the back end (iteration tier B); see [`../BACKEND_VARIANTS.md`](../BACKEND_VARIANTS.md).
