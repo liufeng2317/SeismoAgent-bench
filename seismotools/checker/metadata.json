@@ -1,0 +1,23 @@
+{
+  "tool": "catalog checker",
+  "interface_version": 1,
+  "report_version": 1,
+  "standard_entrypoint": "interface/run.py",
+  "other_entrypoints": [
+    "interface/compare.py",
+    "interface/pilot.py"
+  ],
+  "stages": [
+    "data",
+    "picks",
+    "association",
+    "location",
+    "relocation",
+    "magnitude",
+    "all"
+  ],
+  "source": "source/catalog_checker",
+  "runtime": "runtime/velocity_models",
+  "validation": "examples/smoke/run.sh",
+  "status": "pre-freeze: interface and checks complete; the frozen version is recorded by commit in docs/research/04_Checker_Design.md \u00a712"
+}

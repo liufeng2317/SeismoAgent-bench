@@ -19,6 +19,7 @@ catalogs and workflow outputs are stored outside this directory.
 | GrowClust | Relative relocation, L1 hierarchical cluster growth on cross-correlation times | `growclust/interface/run.py` |
 | MatchLocate2 | Template detection with grid-search location (Match&Locate; matched filter as the zero-grid case) | `match_and_locate/interface/prepare.py` then `run.py` |
 | ccdt | Waveform cross-correlation differential times (`dt.cc` for hypoDD / GrowClust) | `cross_correlation/interface/run.py` |
+| Catalog checker | Reference-free, stage-by-stage checks of the products (symptoms only); comparison of two candidate products; pilot batches | `checker/interface/run.py`, `compare.py`, `pilot.py` |
 
 The three phase-picking models share one implementation package but remain
 separate model choices. `hypoDD` CT and CT+CC are modes of the same program.
@@ -118,6 +119,7 @@ For implementation details and model-specific constraints, follow:
 - [hypoDD](hypodd/README.md)
 - [Match&Locate](match_and_locate/README.md)
 - [ccdt cross-correlation](cross_correlation/README.md)
+- [Catalog checker](checker/README.md)
 - [PyOcto](pyocto/README.md)
 - [REAL](real/README.md)
 - [GrowClust](growclust/README.md)
