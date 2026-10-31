@@ -55,7 +55,7 @@ class Check:
         return {"id": self.id, "dimension": self.dimension, "kind": self.kind, "measured": value, "unit": self.unit,
                 "expected": None if report_only else self.expected, "n": int(self.n),
                 "flag": bool(self.flag) and self.kind == "product", "out_of_range": None if report_only else bool(self.flag),
-                "symptom": None if report_only else self.symptom, "details": self.details}
+                "symptom": None if report_only else self.symptom, "scope": scope(self.id), "details": self.details}
 
 
 def _skip(id_: str, dimension: str, unit: str, expected: str, n: int, why: str) -> Check:
@@ -492,10 +492,39 @@ REPORT_ONLY = {
 INPUT_CHECKS = {"stations_with_data", "daily_station_count", "network_geometry", "channel_sample_rates", "data_gaps"}
 
 
-def apply_report_only(checks: list[Check]) -> list[Check]:
-    """Set each check's kind: report-only checks never flag, input checks become notes."""
+# Checks of the distribution of the whole catalog. Each of the other checks measures a property of single
+# picks, events or stations (a median or a share over them), which a pilot batch estimates as well as the
+# full run; these depend on how many events there are and how they are spread, so a pilot batch does
+# not show them. In replays of pilot batches against their full runs the item checks measured close to
+# the full-run values (verdicts differed only for values near a limit); these changed verdict often.
+POPULATION = {
+    "depth_single_value": "a pile-up of events at one depth often forms only among the weaker events of the full catalog",
+    "depth_at_edges": "a pile-up at the shallowest or deepest depth often forms only among the weaker events of the full catalog",
+    "depth_layers": "thin depth slices need the event density of the full catalog to stand out",
+    "isolated_events": "the distance to the nearest neighbour depends on how many events there are",
+    "duplicate_events": "pairs close in time and space depend on how many events there are",
+    "association_busy_hours": "busy hours are a property of the full time span",
+    "b_value": "the magnitude distribution needs the full catalog",
+    "rate_after_largest": "the event rate after large events needs the full time span",
+    "relocation_thinning": "local thickness is measured among neighbours, which depend on how many events there are",
+}
+
+
+def scope(check_id: str) -> str:
+    """'population' for checks of the whole catalog's distribution, 'item' for checks a pilot batch estimates."""
+    return "population" if check_id in POPULATION else "item"
+
+
+def apply_report_only(checks: list[Check], pilot: bool = False) -> list[Check]:
+    """Set each check's kind: report-only checks never flag, input checks become notes.
+
+    On a pilot batch (``pilot``) the population checks are reported but not judged either."""
     for c in checks:
-        if c.id in REPORT_ONLY:
+        if pilot and c.id in POPULATION and c.id not in REPORT_ONLY:
+            c.kind = "report_only"
+            c.details = {**c.details, "reported_only": "pilot batch: " + POPULATION[c.id] + "; judge it on the full run"}
+            c.flag, c.symptom = False, None
+        elif c.id in REPORT_ONLY:
             c.kind = "report_only"
             c.details = {**c.details, "reported_only": REPORT_ONLY[c.id]}
             c.flag, c.symptom = False, None

@@ -19,6 +19,10 @@ with generic velocity models), ``relocation`` (the relocated catalog against --c
 recomputation of a standard local magnitude for a sample of events). Each stage also runs the
 cheaper checks of the stages before it; ``all`` runs everything the given inputs allow.
 
+On a pilot batch (``--pilot``), checks of the whole catalog's distribution (scope ``population``:
+depth pile-ups and layers, isolated and duplicate events, b-value, rates) are reported without a
+verdict: judge them on the full run. Every other check (scope ``item``) a pilot batch estimates.
+
 Writes ``checker_report.json`` (``flags``: products out of their expected range, with the symptom;
 ``input_notes``: properties of the input data out of the usual range; ``measurements``: values
 reported without an expected range; every check and every figure with its numbers) and the figures as PNG.
@@ -63,6 +67,9 @@ def main(argv=None) -> int:
                              "how the catalog compares (10–45 minutes; reported only)")
     parser.add_argument("--no-model-ensemble", action="store_true", help="no effect (the ensemble is off unless --model-ensemble)")
     parser.add_argument("--keep-ensemble-dir", type=Path, help="keep the relocation inputs and outputs here")
+    parser.add_argument("--pilot", action="store_true",
+                        help="the products are from a pilot batch (a subset of the data): checks of the whole catalog's "
+                             "distribution (scope 'population') are reported but not judged")
     args = parser.parse_args(argv)
     upto = STAGES.index(args.stage)
     if args.stage == "data" and args.waveforms is None:
@@ -167,13 +174,14 @@ def main(argv=None) -> int:
     if sections.get("model_ensemble"):
         sections["model_ensemble"].pop("_figure", None)
 
-    apply_report_only(checks)
+    apply_report_only(checks, pilot=args.pilot)
     inputs = {"stations": args.stations}
     for key in ("picks", "catalog", "catalog_before", "dtcc", "waveforms", "processed_waveforms"):
         if getattr(args, key):
             inputs[key] = getattr(args, key)
     report = build_report(checks, data, inputs, extras["config"])
     report["stage"] = args.stage
+    report["pilot"] = bool(args.pilot)
     if figures_on and upto >= STAGES.index("location"):
         figures += write_figures(data, extras, args.output_dir)
     report["figures"] = figures

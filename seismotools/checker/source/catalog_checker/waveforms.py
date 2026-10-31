@@ -153,8 +153,40 @@ def energetic_windows(reader: Reader, index: pd.DataFrame, window: tuple[float, 
     ``min_separation_s`` apart.
     """
     t0, t1 = window
+    names, ratios, pair, count, medr = activity_scan(reader, index, window)
+    if not names:
+        return [], {"stations_scanned": 0}
+    order = np.lexsort((np.arange(len(count)), -np.nan_to_num(medr), -count))
+    chosen = []
+    for b in order:
+        if count[b] < 3 or len(chosen) >= n:
+            break
+        t = t0 + b * SCAN_BIN_S
+        if all(abs(t - c["bin_start"]) >= min_separation_s for c in chosen):
+            ranked = sorted(names, key=lambda s: -np.nan_to_num(pair[names.index(s), b]))
+            onsets = {}
+            for s in ranked:
+                seg = ratios[s][b * SCAN_BIN_S:(b + 2) * SCAN_BIN_S]
+                hit = np.where(seg >= SCAN_RATIO)[0]
+                if len(hit):
+                    onsets[s] = t + float(hit[0])
+            chosen.append({"bin_start": t, "energetic_stations": int(count[b]), "stations_ranked": ranked,
+                           "onsets": onsets, "start": min(onsets.values()) - 10.0 if onsets else t})
+    return chosen, {"stations_scanned": len(names), "bins": int(len(count)),
+                    "bins_with_3plus_energetic_stations": int((count >= 3).sum())}
+
+
+def activity_scan(reader: Reader, index: pd.DataFrame, window: tuple[float, float], stations: list[str] | None = None,
+                  background_s: float | None = None):
+    """Per 20-s bin, how many stations show energy well above their own noise (see energetic_windows).
+
+    The noise level is each station's median 1-s peak over the whole window, or with ``background_s`` a
+    running median over that many seconds (transients only: a slowly rising noise level, e.g. by day, does
+    not count). Returns (station names, per-station 1-s peak ratios, per-station 40-s maxima,
+    energetic-station count per bin, median ratio per bin)."""
+    t0, t1 = window
     nsec = int(np.ceil(t1 - t0))
-    stations = sorted(index.station_id.unique())
+    stations = sorted(index.station_id.unique()) if stations is None else stations
     ratios = {}
     for sta in stations:
         ch = station_channels(index, sta)
@@ -184,9 +216,13 @@ def energetic_windows(reader: Reader, index: pd.DataFrame, window: tuple[float, 
             reader._files.pop(path, None)
         med = np.nanmedian(peaks) if np.isfinite(peaks).any() else np.nan
         if np.isfinite(med) and med > 0:
-            ratios[sta] = peaks / med
+            if background_s:
+                local = pd.Series(peaks).rolling(int(background_s), center=True, min_periods=int(background_s) // 4).median()
+                ratios[sta] = peaks / np.where(local.to_numpy() > 0, local.to_numpy(), med)
+            else:
+                ratios[sta] = peaks / med
     if not ratios:
-        return [], {"stations_scanned": 0}
+        return [], {}, None, np.zeros(0, int), np.zeros(0)
     names = sorted(ratios)
     nb = nsec // SCAN_BIN_S
     r = np.stack([ratios[s][:nb * SCAN_BIN_S].reshape(nb, SCAN_BIN_S) for s in names])  # station x bin x s
@@ -195,21 +231,4 @@ def energetic_windows(reader: Reader, index: pd.DataFrame, window: tuple[float, 
     count = (pair >= SCAN_RATIO).sum(axis=0)
     with np.errstate(all="ignore"):
         medr = np.nanmedian(np.where(np.isfinite(pair), pair, np.nan), axis=0)
-    order = np.lexsort((np.arange(len(count)), -np.nan_to_num(medr), -count))
-    chosen = []
-    for b in order:
-        if count[b] < 3 or len(chosen) >= n:
-            break
-        t = t0 + b * SCAN_BIN_S
-        if all(abs(t - c["bin_start"]) >= min_separation_s for c in chosen):
-            ranked = sorted(names, key=lambda s: -np.nan_to_num(pair[names.index(s), b]))
-            onsets = {}
-            for s in ranked:
-                seg = ratios[s][b * SCAN_BIN_S:(b + 2) * SCAN_BIN_S]
-                hit = np.where(seg >= SCAN_RATIO)[0]
-                if len(hit):
-                    onsets[s] = t + float(hit[0])
-            chosen.append({"bin_start": t, "energetic_stations": int(count[b]), "stations_ranked": ranked,
-                           "onsets": onsets, "start": min(onsets.values()) - 10.0 if onsets else t})
-    return chosen, {"stations_scanned": len(names), "bins": int(len(count)),
-                    "bins_with_3plus_energetic_stations": int((count >= 3).sum())}
+    return names, ratios, pair, count, medr

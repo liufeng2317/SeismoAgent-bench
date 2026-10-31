@@ -9,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-from .checks import Check, Data
+from .checks import Check, Data, scope
 
 REPORT_VERSION = 1
 DIMENSIONS = ("data", "reality", "time", "space", "strength")
@@ -37,17 +37,19 @@ def build_report(checks: list[Check], d: Data, inputs: dict[str, Path], config: 
         "summary": {dim: {"checks": sum(c.dimension == dim for c in checks),
                           "flags": sum(c.dimension == dim and c in flags for c in checks)} for dim in DIMENSIONS},
         "flags": [{"flag_id": f"{c.dimension}.{c.id}", "dimension": c.dimension, "symptom": c.symptom,
-                   "measured": c.record()["measured"], "unit": c.unit, "expected": c.expected} for c in flags],
+                   "measured": c.record()["measured"], "unit": c.unit, "expected": c.expected, "scope": scope(c.id)} for c in flags],
         "input_notes": [{"note_id": f"input.{c.id}", "symptom": c.symptom, "measured": c.record()["measured"],
                          "unit": c.unit, "expected": c.expected} for c in notes],
         "measurements": [{"id": c.id, "dimension": c.dimension, "measured": c.record()["measured"], "unit": c.unit, "n": int(c.n),
-                          "why_not_judged": c.details.get("reported_only")} for c in checks if c.kind == "report_only"],
+                          "scope": scope(c.id), "why_not_judged": c.details.get("reported_only")} for c in checks if c.kind == "report_only"],
         "checks": [c.record() for c in checks],
         "config": config,
         "note": ("Symptoms only. `flags`: products of the workflow outside their expected range; each states what was measured "
                  "and the expected range, never a cause or a repair. `input_notes`: properties of the input data outside the "
                  "usual range; they describe what the data allow, not an error of the workflow. `measurements`: values reported "
-                 "without an expected range, because on their own they do not show whether a catalog is right or wrong."),
+                 "without an expected range, because on their own they do not show whether a catalog is right or wrong. `scope`: "
+                 "'item' checks measure single picks, events or stations and a pilot batch estimates them as well as the full run; "
+                 "'population' checks measure the distribution of the whole catalog and are judged on the full run only."),
     }
 
 
