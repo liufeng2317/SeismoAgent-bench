@@ -221,6 +221,10 @@ def pilot_events(run: Run, rule: str, n: int, seed: int = 0) -> list[str]:
         return list(ev.sort_values(["n", "time"], ascending=[False, True]).event_id[:n])
     if rule == "random":
         return list(ev.event_id.sample(n, random_state=seed))
+    if rule == "composite":  # seismotools/checker pilot.py: representative + busiest hour + largest events
+        from catalog_checker.pilot import select_events
+        parts = select_events(d.events, d.picks, {"events": n, "seed": seed})
+        return parts["representative"] + parts["busiest"] + parts["largest"]
     if rule in ("time_uniform", "pick_count_strata", "magnitude_strata"):
         if rule == "time_uniform":  # equal numbers from equal-duration windows: quiet periods count as much as busy ones
             key = pd.cut(ev.time, 30, labels=False)
@@ -238,21 +242,24 @@ def pilot_events(run: Run, rule: str, n: int, seed: int = 0) -> list[str]:
 
 # ------------------------------------------------------------------ what the Agent could see
 
-def checker_report(catalog: Path, picks: Path, run: Run, out: Path, stage: str = "location", waveforms: bool = False) -> dict:
+def checker_report(catalog: Path, picks: Path, run: Run, out: Path, stage: str = "location", waveforms: bool = False,
+                   pilot: bool = False) -> dict:
     report = out / "checker_report.json"
     if not report.is_file():
         cmd = [sys.executable, "-W", "ignore", str(CHECKER), "--stage", stage, "--catalog", str(catalog), "--picks", str(picks),
-               "--stations", str(run.stations), "--output-dir", str(out), "--no-figures"]
+               "--stations", str(run.stations), "--output-dir", str(out), "--no-figures"] + (["--pilot"] if pilot else [])
         if waveforms:
             cmd += ["--waveforms", str(run.waveforms)]
         subprocess.run(cmd, check=True, capture_output=True, text=True)
     return json.loads(report.read_text())
 
 
-def catalog_shift(before: Path, after: Path) -> dict:
+def catalog_shift(before: Path, after: Path, event_ids=None) -> dict:
     """Median change of the candidate against the current catalog over the events both locate (no reference)."""
     a = read_catalog(before).set_index("event_id")
     b = read_catalog(after).set_index("event_id")
+    if event_ids is not None:
+        a = a[a.index.isin(set(event_ids))]
     j = a.join(b, lsuffix="_a", rsuffix="_b", how="inner").dropna(subset=["depth_km_a", "depth_km_b"])
     moved = j[(j.depth_km_a != j.depth_km_b) | (j.time_a != j.time_b)]
     if moved.empty:
@@ -366,15 +373,21 @@ def run_scenario(sc: dict, out_root: Path, workers: int = 16, log=print) -> dict
     for rule in sc.get("pilots", []):
         n = sc.get("pilot_events", 300)
         ids = pilot_events(run, rule, n)
-        pdir = cand_dir / f"pilot_{rule}_{n}"
+        pdir = cand_dir / f"pilot_{rule}_{n}" if rule != "composite" else cand_dir / f"pilot_{rule}_{n}_v2"
+        flag_pilot = rule == "composite"  # the checker's pilot mode: population checks reported, not judged
         log(f"[{sc['name']}] pilot {rule} ({len(ids)} events) ...")
         tp = time.time()
         b_cat, b_pk = write_subset(run, ids, pdir / "base")
         p_cat = candidate(run, spec, pdir / "candidate", event_ids=ids, workers=workers)
-        b_rep = checker_report(b_cat, b_pk, run, pdir / "base" / f"checker_{stage}", stage, waveforms)
-        c_rep = checker_report(p_cat, b_pk, run, pdir / "candidate" / f"checker_{stage}", stage, waveforms)
+        b_rep = checker_report(b_cat, b_pk, run, pdir / "base" / f"checker_{stage}", stage, waveforms, flag_pilot)
+        c_rep = checker_report(p_cat, b_pk, run, pdir / "candidate" / f"checker_{stage}", stage, waveforms, flag_pilot)
         pc = compare_reports(b_rep, c_rep, change)
-        shift = catalog_shift(b_cat, p_cat)
+        rep_ids = None
+        if rule == "composite":
+            from catalog_checker.pilot import select_events
+            d = run.data()
+            rep_ids = select_events(d.events, d.picks, {"events": n})["representative"]
+        shift = catalog_shift(b_cat, p_cat, rep_ids)
         pred = {k: (round(s_base["values"][kk] + shift[k], 3) if shift.get(k) is not None and s_base["values"].get(kk) is not None else None)
                 for k, kk in (("dz_km", "dz_final_km"), ("dt_s", "time_bias_final_s"))}
         pilots.append({"rule": rule, "events": len(ids), "cost_s": round(time.time() - tp, 1), "verdict": pc["verdict"],

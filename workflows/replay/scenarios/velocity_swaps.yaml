@@ -5,7 +5,7 @@ defaults:
   change: velocity_model
   stage: location
   pilot_events: 300
-  pilots: [best_recorded, random, time_uniform, pick_count_strata]
+  pilots: [best_recorded, random, time_uniform, pick_count_strata, composite]
 scenarios:
   - name: prague_tools_regional
     case: 2011_prague_oklahoma
