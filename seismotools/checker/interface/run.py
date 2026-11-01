@@ -72,6 +72,10 @@ def main(argv=None) -> int:
                              "how the catalog compares (10–45 minutes; reported only)")
     parser.add_argument("--no-model-ensemble", action="store_true", help="no effect (the ensemble is off unless --model-ensemble)")
     parser.add_argument("--keep-ensemble-dir", type=Path, help="keep the relocation inputs and outputs here")
+    parser.add_argument("--recovery-test", action="store_true",
+                        help="location stage: synthetic recovery test with the model declared in --location-setup (\"model\", "
+                             "\"layering\", \"reference_elevation_km\"): how far depths and origin times would move if the structure "
+                             "differed within a plausible range (10–40 minutes; reported only)")
     parser.add_argument("--pilot", action="store_true",
                         help="the products are from a pilot batch (a subset of the data): checks of the whole catalog's "
                              "distribution (scope 'population') are reported but not judged")
@@ -184,6 +188,10 @@ def main(argv=None) -> int:
             names, fsum = magnitude_figures(data, args.output_dir)
             figures += names
             sections["magnitude_figures"] = fsum
+    if args.stage in ("location", "all") and args.recovery_test:
+        from catalog_checker.recovery import recovery_test
+        checks.append(recovery_test(data, extras["config"], args.keep_ensemble_dir))
+
     if sections.get("model_ensemble"):
         sections["model_ensemble"].pop("_figure", None)
 
