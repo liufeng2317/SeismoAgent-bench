@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -63,6 +64,7 @@ def run_agent(task_path: str | Path, manifest_path: str | Path | None, agent: Ag
     run_result = json.loads((record_dir / "run_result.json").read_text(encoding="utf-8"))
     run_result["agent"] = result["agent"]
     run_result["command"] = {"provenance": "record/provenance.json"}
-    (record_dir / "run_result.json").write_text(
-        json.dumps(run_result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    tmp = record_dir / f".run_result.json.{os.getpid()}.tmp"  # atomic, as the monitor writes it
+    tmp.write_text(json.dumps(run_result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    os.replace(tmp, record_dir / "run_result.json")
     return {"run": run_result}

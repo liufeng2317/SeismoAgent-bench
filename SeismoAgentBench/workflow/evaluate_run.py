@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -30,7 +31,9 @@ from SeismoAgentBench.task import load_json, validate_output_contract
 
 
 def _write_json(path: Path, value: Any) -> None:
-    path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    tmp = path.with_name(f".{path.name}.{os.getpid()}.tmp")  # atomic: never a truncated file for a concurrent reader
+    tmp.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    os.replace(tmp, path)
 
 
 def _catalog_artifact(task: dict[str, Any], output: Path) -> tuple[dict[str, Any], dict[str, Any]]:

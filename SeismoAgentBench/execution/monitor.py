@@ -30,8 +30,11 @@ def _now() -> str:
 
 
 def _write(path: Path, value: Any) -> None:
+    """Write JSON atomically: a reader never sees a truncated file while the heartbeat rewrites it."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    tmp = path.with_name(f".{path.name}.{os.getpid()}.tmp")
+    tmp.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    os.replace(tmp, path)
 
 
 def _read_json(path: Path) -> dict[str, Any] | None:
