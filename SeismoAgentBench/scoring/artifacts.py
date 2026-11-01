@@ -48,8 +48,8 @@ def _validate_declared_schema(item: Mapping[str, Any], path: Path) -> None:
     elif name == "checker-dispositions" and version == 1:
         # structure only; whether each flag is disposed of, and how, is reported by the checker audit
         value = json.loads(path.read_text(encoding="utf-8"))
-        if not isinstance(value, list) or not all(isinstance(e, dict) and "flag_id" in e for e in value):
-            raise ValueError("expected a JSON list of objects with a flag_id")
+        if not isinstance(value, list) or not all(isinstance(e, dict) for e in value):
+            raise ValueError("expected a JSON list of objects")  # entries without a flag_id are counted by the audit
     else:
         raise ValueError(f"unsupported artifact schema: {name}@{version}")
 

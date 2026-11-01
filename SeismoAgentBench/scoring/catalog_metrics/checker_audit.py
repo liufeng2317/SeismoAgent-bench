@@ -98,7 +98,8 @@ def audit(work: Path, out_dir: Path) -> dict:
             entries = json.loads(disp_path.read_text())
         except json.JSONDecodeError as exc:
             res["dispositions_error"] = str(exc)[:200]
-    by_flag = {e.get("flag_id"): e for e in entries if isinstance(e, dict)}
+    by_flag = {e.get("flag_id"): e for e in entries if isinstance(e, dict) and e.get("flag_id")}
+    res["entries_without_flag_id"] = sum(1 for e in entries if not (isinstance(e, dict) and e.get("flag_id")))
     rows = []
     for fid in sorted(flags_now):
         e = by_flag.get(fid)
@@ -127,7 +128,7 @@ def audit(work: Path, out_dir: Path) -> dict:
                      "disposed": sum(r["disposition"] is not None for r in rows),
                      "justified": sum(r["disposition"] == "justified" for r in rows),
                      "fixed_earlier": len(fixed_gone), "fixed_earlier_verified": len(fixed_verified),
-                     "problems": sum(r["problem"] is not None for r in rows)}
+                     "problems": sum(r["problem"] is not None for r in rows) + res["entries_without_flag_id"]}
     res["complete"] = bool(res["report_on_submission"].get("catalog") and res["report_on_submission"].get("picks")
                            and res["flags_agree"] and res["counts"]["problems"] == 0)
     return res
