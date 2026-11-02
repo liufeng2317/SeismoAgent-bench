@@ -71,6 +71,20 @@ def rerun(work: Path, out: Path, submitted: dict, python: str = sys.executable) 
     return json.loads((out / "checker_report.json").read_text())
 
 
+def _entries(value) -> tuple[list, str]:
+    """Disposition entries from the contract form (a list) or the common object forms keyed by flag_id."""
+    if isinstance(value, list):
+        return value, "list"
+    if isinstance(value, dict):
+        inner = value.get("dispositions", value)
+        if isinstance(inner, list):
+            return inner, "object with a dispositions list"
+        if isinstance(inner, dict):
+            return [{"flag_id": k, **v} if isinstance(v, dict) else {"flag_id": k, "disposition": v}
+                    for k, v in inner.items() if k.count(".") == 1], "object keyed by flag_id"
+    return [], "unreadable"
+
+
 def audit(work: Path, out_dir: Path) -> dict:
     report_path, disp_path = work / REPORT, work / DISPOSITIONS
     res: dict = {"checker_version": checker_version(), "report_present": report_path.is_file(),
@@ -96,7 +110,7 @@ def audit(work: Path, out_dir: Path) -> dict:
     entries = []
     if disp_path.is_file():
         try:
-            entries = json.loads(disp_path.read_text())
+            entries, res["dispositions_format"] = _entries(json.loads(disp_path.read_text()))
         except json.JSONDecodeError as exc:
             res["dispositions_error"] = str(exc)[:200]
     by_flag = {e.get("flag_id"): e for e in entries if isinstance(e, dict) and e.get("flag_id")}
