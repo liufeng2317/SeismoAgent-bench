@@ -1,0 +1,32 @@
+# Single-factor attribution of the back-end audit (docs/research/progress/backend_audit/): the formal tools run's
+# picks (the back-end arms' fixed front end), located the expert's way (EDT_OT_WT, reference elevation at the
+# stated datum), changing only the velocity model or its datum. Compare with velocity_swaps.yaml.
+defaults:
+  change: velocity_model
+  stage: location
+  pilots: []
+scenarios:
+  - name: kilauea_regional_linear_datum0       # the knowledge arm's choice: the right model, its top at sea level
+    case: 2018_kilauea_hawaii
+    run: tools/claude/glm-5.3/20261029T084718Z
+    intervention: {type: relocate, model: hvo_klein_linear, datum_km: 0.0, layering: linear, usage: expert}
+  - name: magna_crust1_datum148                # the checker arms' choice of model
+    case: 2020_magna_utah
+    run: tools/claude/glm-5.3/20261028T135931Z
+    intervention: {type: relocate, model: crust1, datum_km: 1.48, usage: expert}
+  - name: prague_crust1_datum028               # the knowledge arm's choice of model
+    case: 2011_prague_oklahoma
+    run: tools/claude/glm-5.3/20261028T043719Z
+    intervention: {type: relocate, model: crust1, datum_km: 0.28, usage: expert}
+  - name: maple_husen_linear_datum0            # the knowledge arm's model and datum
+    case: 2017_maple_creek_yellowstone
+    run: tools/claude/glm-5.3/20261028T220746Z
+    intervention: {type: relocate, model: file, path: /liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2017_maple_creek_yellowstone/runs/backend_knowledge/claude/glm-5.3/20261101T185422Z/work/runs/velocity_model_linear.txt, file_reference_km: 0.0, layering: linear, datum_km: 0.0, usage: expert}
+  - name: maple_husen_linear_datum23           # the same model with the regional model's datum
+    case: 2017_maple_creek_yellowstone
+    run: tools/claude/glm-5.3/20261028T220746Z
+    intervention: {type: relocate, model: file, path: /liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/2017_maple_creek_yellowstone/runs/backend_knowledge/claude/glm-5.3/20261101T185422Z/work/runs/velocity_model_linear.txt, file_reference_km: 0.0, layering: linear, datum_km: 2.3, usage: expert}
+  - name: maple_crust1_datum23
+    case: 2017_maple_creek_yellowstone
+    run: tools/claude/glm-5.3/20261028T220746Z
+    intervention: {type: relocate, model: crust1, datum_km: 2.3, usage: expert}

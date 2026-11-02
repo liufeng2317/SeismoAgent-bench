@@ -89,6 +89,15 @@ def write_subset(run: Run, event_ids, out: Path) -> tuple[Path, Path]:
 
 def _velocity_rows(run: Run, d: Data, spec: dict) -> list:
     model = spec["model"]
+    if model == "file":  # "depth vp vs" rows, depths below file_reference_km (km above sea level)
+        ref = float(spec.get("file_reference_km", 0.0))
+        tops = [tuple(map(float, line.split()[:3])) for line in Path(spec["path"]).read_text().splitlines()
+                if line.strip() and not line.lstrip().startswith("#")]
+        if spec.get("layering", "step") == "linear":
+            z = np.arange(tops[0][0], tops[-1][0] + 0.001, 0.25)
+            tops = [(float(zz), float(np.interp(zz, [t[0] for t in tops], [t[1] for t in tops])),
+                     float(np.interp(zz, [t[0] for t in tops], [t[2] for t in tops]))) for zz in z]
+        return [(t - ref, vp, vs) for t, vp, vs in tops]
     if model in ("litho1", "crust1"):
         ev = d.events.dropna(subset=["latitude"])
         return regional_models(np.r_[d.stations.latitude, ev.latitude.median()],
@@ -124,7 +133,7 @@ def relocate(run: Run, spec: dict, out: Path, event_ids=None, workers: int = 16)
                  ).to_csv(out / "arrivals.csv", index=False)
     d.stations[["station_id", "latitude", "longitude", "elevation_m"]].to_csv(out / "stations.csv", index=False)
     c = {**DEFAULTS, **ENSEMBLE_DEFAULTS, "ensemble_workers": workers, "ensemble_timeout_s": 30 * 3600}
-    if spec.get("usage", "expert") == "expert" and spec["model"] not in ("litho1", "crust1"):
+    if spec.get("usage", "expert") == "expert":
         datum_arg = spec.get("datum_km", "stations")
         ref_elev = float(d.stations.elevation_m.mean()) / 1000.0 if datum_arg == "stations" else float(datum_arg)
         ev = d.events.dropna(subset=["latitude"])

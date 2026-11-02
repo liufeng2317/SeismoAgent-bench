@@ -64,7 +64,27 @@
 4. **评估不能只看单次分数。** 需要每个变体重复运行，并对关键差异做决策级归因（本次审计的方法）。
 5. **`wadati_origin_offset` 保持只报告。** 它在三个案例上有用、在一个案例上方向相反。
 
-## 7. 下一步实验（单因素重定位，用 Agent 的固定拾取）
+## 7. 单因素归因实验结果（2026-11-02，`workflows/replay/scenarios/attribution.yaml`）
+
+同一批拾取（正式 tools 运行，即后端变体的固定前端），同一定位设置（NonLinLoc EDT_OT_WT，参考高程为指定基准面，深度搜索 0–20 km），只换模型或基准面：
+
+| 实验 | 时间偏差 | 深度偏差 | 对应的 Agent 运行 |
+|---|---|---|---|
+| Kīlauea 区域模型，基准面 1.07 km | +0.00 s | −0.06 km | — |
+| Kīlauea 区域模型，基准面 0（海平面） | −0.37 s | +0.32 km | knowledge −0.40 s |
+| Magna CRUST1.0 | +0.35 s | −0.44 km | checker 变体 +0.34 / +0.38 s |
+| Magna 区域模型加 2 km 盆地层 | +0.01 s | −3.05 km | — |
+| Prague 区域模型 | +0.01 s | −0.00 km | — |
+| Prague CRUST1.0 | +0.10 s | −0.03 km | knowledge +0.16 s、+0.26 km |
+| Maple Husen & Smith 梯度，基准面 0 | +1.27 s | −2.08 km | knowledge +1.18 s、−2.50 km |
+| Maple Husen & Smith 梯度，基准面 2.3 km | +1.13 s | −2.25 km | — |
+| Maple 区域模型 台阶 / 梯度 | +0.55 / +0.61 s | −3.25 / −1.28 km | — |
+| Maple CRUST1.0 | +1.68 s | −4.06 km | — |
+
+1. 审计的归因得到定量确认：Kīlauea knowledge 的时间偏差来自基准面（只移顶面就是 −0.37 s），Magna 两个 checker 变体的来自 CRUST1.0（+0.35 s），Maple knowledge 的来自 Husen & Smith 模型的近地表（+1.27 s；基准面放对只改善 0.14 s）。
+2. 单靠换模型修不好 Maple 和 Magna：Maple 没有一个模型使时间偏差通过；Magna 加盆地层时间修好、深度却偏 −3 km。专家最终目录还用了台站校正、自己的拾取和模板匹配。这两个案例里，模型对是必要条件，不是充分条件。
+
+## 8. 后续实验（未做）
 
 - Kīlauea E1：knowledge 配置只把参考高程改为 1.07 km → 预计时间偏差 −0.40 → ±0.1 s。
 - Maple E1/E2：knowledge 配置只换模型，以及两个变体互换模型 → 预计分数跟着模型走。
