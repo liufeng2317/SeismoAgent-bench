@@ -255,7 +255,7 @@ def day_night(d: Data, c: dict) -> Check:
                   "note": "a daytime excess in the larger events points to blasting; a night-time excess in the smaller events only points to daytime noise"})
 
 
-def b_positive(d: Data, c: dict) -> Check:
+def b_positive(d: Data, c: dict, standard: Check | None = None) -> Check:
     """b-value from positive magnitude differences of consecutive events (van der Elst, 2021), robust to
     the changing completeness early in a sequence; shown next to the standard estimate."""
     c = {**DIAGNOSTIC_DEFAULTS, **c}
@@ -267,8 +267,11 @@ def b_positive(d: Data, c: dict) -> Check:
     if len(pos) < c["b_positive_min_pairs"] or pos.mean() - delta <= 0:
         return _skip("b_positive", "strength", "b", expected, len(pos), f"{len(pos)} positive differences ≥ {delta}")
     b = float(np.log10(np.e) / (pos.mean() - delta))
+    std = None if standard is None else {"b": None if standard.measured is None else round(float(standard.measured), 3),
+                                          "mc": (standard.details or {}).get("mc"), "n": int(standard.n)}
     return Check("b_positive", "strength", b, "b", expected, len(pos), False, None,
-                 {"delta": delta, "note": "a standard b-value much lower than b-positive points to incompleteness rather than physics"})
+                 {"delta": delta, "standard_b_value": std,
+                  "note": "a standard b-value much lower than b-positive points to incompleteness rather than physics"})
 
 
 def duplicate_pick_overlap(d: Data, c: dict) -> dict:

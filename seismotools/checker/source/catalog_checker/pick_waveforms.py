@@ -83,11 +83,10 @@ def pick_waveform_checks(d: Data, index: pd.DataFrame, c: dict) -> tuple[list[Ch
     lim = c["pick_onset_offset_max_s"]
     exp_off = (f"|median P pick − AIC onset| ≤ {lim['P']} s for picks whose onset has SNR ≥ {c['onset_min_snr']:g} (S reported only); "
                "a zero-phase filter moves the AIC onset slightly early, so clean P picks lie a few hundredths of a second after it")
-    exp_snr = f"reported: share of picks with amplitude ratio < {c['pick_snr_low']:g} across the pick"
     picks = d.all_picks[d.all_picks.station_id.isin(set(index.station_id))]
     if picks.empty:
         why = "no picks at stations with waveform files"
-        return [_skip("pick_onset_offset", "time", "s", exp_off, 0, why), _skip("pick_snr", "reality", "share", exp_snr, 0, why)], {}
+        return [_skip("pick_onset_offset", "time", "s", exp_off, 0, why)], {}
     reader = Reader(index)
     sample = sample_picks(picks, c)
     p_first = picks[(picks.phase == "P") & (picks.event_id != "")].groupby(["event_id", "station_id"]).time.min().to_dict()
@@ -114,16 +113,11 @@ def pick_waveform_checks(d: Data, index: pd.DataFrame, c: dict) -> tuple[list[Ch
                             (f"Sampled {worst[0]} picks lie {abs(med):.2f} s {'after' if med > 0 else 'before'} the AIC onset of the "
                              f"{BAND_HZ[0]:g}–{BAND_HZ[1]:g} Hz record (median of {worst[1]['n']}).") if flag else None,
                             {"by_phase": per_phase, "phase_reported": worst[0]}))
+    # amplitude ratio across the pick: kept as a measurement in the details (correct catalogs keep many weak picks)
     snr = m.snr_at_pick.dropna()
-    if len(snr) < 10:
-        checks.append(_skip("pick_snr", "reality", "share", exp_snr, len(snr), f"{len(snr)} sampled picks with a readable record"))
-    else:
-        low = float((snr < c["pick_snr_low"]).mean())
-        flag = False  # correct catalogs often keep many weak picks; reported only
-        by = {ph: round(float((g.snr_at_pick < c["pick_snr_low"]).mean()), 3) for ph, g in m.dropna(subset=["snr_at_pick"]).groupby("phase")}
-        checks.append(Check("pick_snr", "reality", low, "share", exp_snr, len(snr), flag,
-                            f"{low:.0%} of {len(snr)} sampled picks have less than {c['pick_snr_low']:g}× more amplitude after the pick than before it." if flag else None,
-                            {"by_phase": by, "median_snr": round(float(snr.median()), 2)}))
+    if len(snr) >= 10:
+        details["share_picks_snr_below"] = {"threshold": c["pick_snr_low"], "share": round(float((snr < c["pick_snr_low"]).mean()), 3),
+                                            "median_snr": round(float(snr.median()), 2)}
     details["per_station"] = (m.groupby("station_id").agg(n=("offset_s", "size"), median_offset_s=("offset_s", "median"),
                                                           median_snr=("snr_at_pick", "median")).round(3).reset_index().to_dict("records"))
     return checks, {"measurements": m, **details}

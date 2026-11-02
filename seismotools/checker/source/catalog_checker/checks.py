@@ -479,25 +479,17 @@ def magnitude_detection(d: Data, c: dict) -> Check:
 # (docs/research/04_Checker_Design.md §10): reported, never flagged. The reasons are shown to the Agent,
 # so they stay general and name no case.
 REPORT_ONLY = {
-    "events_outside_network": "real seismicity can lie outside the network, so the share alone does not show an error",
     "wadati_origin_offset": "velocity structure alone can offset this value by close to a second in correct catalogs",
     "travel_time_intercept": "velocity structure alone can give intercepts near a second in correct catalogs",
     "station_residual_outliers": "3-D structure alone can give correct catalogs large station residuals",
     "station_residual_azimuth": "3-D structure alone can give correct catalogs azimuth-dependent residuals",
     "model_ensemble_depth": "generic velocity models differ from each other by several km in depth, more than most catalog errors",
     "model_ensemble_time": "generic velocity models differ from each other by up to a second or more in origin time",
-    "pick_snr": "correct catalogs often keep many weak picks",
-    "event_travel_time_fit": "correct catalogs, especially on regional networks, show similar shares",
-    "azimuthal_gap": "describes the station geometry around each event; no expected range",
-    "b_value": "early in an aftershock sequence the catalog is incomplete and maximum-curvature completeness underestimates b in correct catalogs",
-    "rate_after_largest": "the event rate after large events varies widely in correct catalogs",
     "depth_constraint": "describes how well depths can be constrained by the picks and the station geometry; not an error",
     "pile_against_setup": "locates the most common depth relative to the declared location set-up; evidence for attributing a pile-up",
     "station_delays": "station residuals also carry 3-D structure; the P/S ratio of a delay helps to tell a clock from a path",
-    "station_time_steps": "residuals also change when seismicity moves; a step equal in P and S points to a clock or instrument change",
-    "wadati_events": "event-by-event Vp/Vs scatters in correct catalogs; outlier S picks point to mispicks or wrong phase labels",
-    "day_night_ratio": "real seismicity has no daily cycle, but detection and blasting do; the ratio alone does not show an error",
-    "b_positive": "an estimate to read next to the standard b-value: a large difference points to incompleteness",
+    "b_positive": "b from positive magnitude differences, with the standard b-value in its details: a standard b much lower than b-positive points to incompleteness, not to physics",
+    "relocated_share": "small events with few links are often left unrelocated in correct relocations; loosening the linking thresholds to raise the share scatters the catalog",
 }
 # Checks that describe the input data rather than the Agent's products: reported as input notes when out
 # of range; they need no disposition, since the Agent cannot change its input.
@@ -516,11 +508,7 @@ POPULATION = {
     "isolated_events": "the distance to the nearest neighbour depends on how many events there are",
     "duplicate_events": "pairs close in time and space depend on how many events there are",
     "association_busy_hours": "busy hours are a property of the full time span",
-    "b_value": "the magnitude distribution needs the full catalog",
-    "rate_after_largest": "the event rate after large events needs the full time span",
     "relocation_thinning": "local thickness is measured among neighbours, which depend on how many events there are",
-    "station_time_steps": "a step needs days of data on both sides",
-    "day_night_ratio": "the daily cycle needs many days of events",
     "b_positive": "the magnitude distribution needs the full catalog",
 }
 
@@ -565,23 +553,23 @@ def run_checks(d: Data, config: dict | None = None, stage: str = "all") -> tuple
     if upto >= STAGES.index("picks"):
         checks += picks_checks(d, c)
     if upto >= STAGES.index("association"):
-        checks += association_checks(d, c) + [duplicate_events(d, c), few_picks(d, c), event_travel_time_fit(d, c)]
+        checks += association_checks(d, c) + [duplicate_events(d, c), few_picks(d, c)]
     if upto >= STAGES.index("location"):
-        checks += [outside_network(d, c), isolated_events(d, c)]
+        checks += [isolated_events(d, c)]
         wad_offset, wad_spread, w = wadati_origin(d, c)
         tt_check, fit = travel_time_fit(d, c)
         checks += [wad_offset, wad_spread, tt_check]
-        checks += [azimuthal_gap(d, c)] + depth_pileup(d, c) + [depth_layers(d, c), sp_depth(d, c, w)] + station_residuals(d, c, fit)
+        checks += depth_pileup(d, c) + [depth_layers(d, c), sp_depth(d, c, w)] + station_residuals(d, c, fit)
         extras.update({"wadati": w, "fit": fit})
         from .diagnostics import (_residuals, day_night, depth_constraint, pile_against_setup, station_delays,
                                   station_time_steps, wadati_events)
         dc, per_event = depth_constraint(d, c)
         res = _residuals(d) if len(d.picks) else pd.DataFrame()
-        checks += [dc, station_delays(d, c, res), station_time_steps(d, c, res), wadati_events(d, c), day_night(d, c)]
+        checks += [dc, station_delays(d, c, res)]
         pile = pile_against_setup(d, c)
         checks += [pile] if pile is not None else []
         extras["depth_constraint"] = per_event
     if upto >= STAGES.index("magnitude"):
         from .diagnostics import b_positive
-        checks += [magnitude_range(d, c), b_value(d, c), b_positive(d, c), magnitude_detection(d, c), rate_after_largest(d, c)]
+        checks += [magnitude_range(d, c), b_positive(d, c, b_value(d, c)), magnitude_detection(d, c)]
     return checks, extras
