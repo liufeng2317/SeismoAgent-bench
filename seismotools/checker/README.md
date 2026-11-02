@@ -79,6 +79,10 @@ Dimensions: `data` (input), `reality` (are the events real and complete), `time`
 
 Each stage also runs the cheaper checks of the stages before it.
 
+## What the checker's own models and formulas are for
+
+The checker carries generic velocity models (CRUST1.0, LITHO1.0 and global 1-D models, `runtime/velocity_models/`, used by `--model-ensemble`) and recomputes magnitudes with the IASPEI standard relation (`magnitude_recompute`). Both are references for comparison: they show how much a result depends on the model, and whether a magnitude code has a unit or response error. They are not recommended location models or magnitude formulas for any region: generic models miss near-surface structure (sediments, basins), and the standard magnitude relation differs from regional calibrations by a few tenths. Choose the location model and the magnitude calibration for the region yourself, and say which and why.
+
 ## Comparing two products
 
 `compare.py` takes the reports of a current product and a candidate built from the same input (run the checker with the same stage and inputs on both) and returns `better`, `worse`, `mixed`, `uncertain` or `no_difference` under a rule fixed in advance (printed in the output's `rule` field). `--change` names what differs (`velocity_model`, `location_method`, `picks`, `association`, `event_selection`, `relocation`, `magnitude`, `other`); checks that cannot rank that kind of change are listed but not counted. The verdict says which product the checks prefer, not that either is right.
