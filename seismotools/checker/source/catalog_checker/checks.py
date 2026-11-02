@@ -498,7 +498,6 @@ REPORT_ONLY = {
     "wadati_events": "event-by-event Vp/Vs scatters in correct catalogs; outlier S picks point to mispicks or wrong phase labels",
     "day_night_ratio": "real seismicity has no daily cycle, but detection and blasting do; the ratio alone does not show an error",
     "b_positive": "an estimate to read next to the standard b-value: a large difference points to incompleteness",
-    "recovery_test": "how far a plausible velocity-model error would move depths and origin times for this geometry; not the actual error",
 }
 # Checks that describe the input data rather than the Agent's products: reported as input notes when out
 # of range; they need no disposition, since the Agent cannot change its input.
