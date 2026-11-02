@@ -75,7 +75,8 @@ def audit(work: Path, out_dir: Path) -> dict:
     report_path, disp_path = work / REPORT, work / DISPOSITIONS
     res: dict = {"checker_version": checker_version(), "report_present": report_path.is_file(),
                  "dispositions_present": disp_path.is_file(),
-                 "checker_runs": len(list((work / "checker").rglob("checker_report.json"))) if (work / "checker").is_dir() else 0}
+                 # every checker report the Agent kept anywhere in its work directory (not only under checker/)
+                 "checker_runs": sum(1 for f in work.rglob("checker_report.json") if "input" not in f.relative_to(work).parts[:1])}
     if not report_path.is_file():
         return res
     submitted = json.loads(report_path.read_text())
