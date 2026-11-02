@@ -34,7 +34,7 @@ Start every location problem by reading `depth_constraint` in the checker report
 
 **`isolated_events` — events far from all others.** Tier B: false associations (check their picks: few picks, picks from distant stations only), events outside the network with poor geometry (gap > 180°), or real isolated seismicity. Large events must not be removed by a location-quality rule: the largest events are often isolated early in a sequence and have the worst geometry for their first picks.
 
-**`events_outside_network` (reported).** Real seismicity can lie outside; locations there have large, elongated errors in the direction away from the network. Report them with their errors; do not shift them.
+**Events beyond the network (no check).** Real seismicity can lie outside; locations there have large, elongated errors in the direction away from the network. Report them with their errors; do not shift them.
 
 ## Relative relocation (double difference, cluster-based)
 
@@ -46,5 +46,5 @@ Start every location problem by reading `depth_constraint` in the checker report
 
 **`relocation_large_moves` — many events moved by more than 5 km.** Tier B: poorly linked events (few neighbours, weak links), events far from their cluster, or a wrong pick set. Relocate those events alone with a different starting location; events that move back were unstable.
 
-**`relocated_share` low — few events with enough picks were moved.** Tier A/B: linking thresholds too strict (minimum links, maximum separation), cross-correlation computed for a subset only, events outside the clusters. Not an error when the events are small and isolated.
+**`relocated_share` (reported) low — few events with enough picks were moved.** Tier A/B: linking thresholds too strict (minimum links, maximum separation), cross-correlation computed for a subset only, events outside the clusters. Not an error when the events are small and isolated.
 - Do not loosen the linking thresholds only to raise the share. Events relocated on too few differential times move to wrong places and scatter the catalog; the tools' READMEs say which minimum numbers of links are safe. If you wrote an adoption rule for the relocation settings, keep it unless an experiment shows the stricter setting is wrong; justify the flag with the number of events that lack enough links instead.

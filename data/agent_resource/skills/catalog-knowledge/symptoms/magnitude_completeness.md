@@ -21,17 +21,24 @@ Formulas, units, the Wood-Anderson response and a reference implementation: [`..
 - Causes: near records clipped; amplitude window too short for a long S train; the event split into several events; ML saturating above about M 6 (use a moment magnitude for the largest events where available and say so).
 - Repair: measure large events on unclipped records (far stations, strong-motion channels), with a window of at least S + max(30 s, 4 × (S − P)); give every catalog event a magnitude or flag why it has none.
 
+**Compressed scale — small events too large relative to large ones.** Tier B for the measurement choices below, C for the calibration. Signs: `slope_catalog_vs_recomputed` in the `magnitude_recompute` details clearly below 1 (the catalog grows more slowly with size than the standard recompute); a low b-value in both estimates. Offline tests on three recorded sequences (300 events each, standard ML recomputed with one choice changed at a time):
+- **Records selected by their own amplitude.** Keeping only records ≥ 3 × the pre-event noise keeps, for small events, only the stations where the event happens to be strong: small events came out 0.1–0.25 units too large, the slope against independent magnitudes steepened by 0.01–0.17 per unit. Choose the stations before measuring (distance range, data quality, response), not by the amplitude being measured; an event without a measurable amplitude on the chosen stations has an upper bound, not a magnitude from its loudest station.
+- **A window far beyond the S train.** A window to S + 30 s in a busy sequence takes in other events' arrivals: up to 0.07 per unit steeper in the densest sequence. Use the S-train window (to S + max(3 s, 0.5 (S − origin)) + 2 s, as in `ml_reference.py`) for most events; keep the long window for the largest events and check that no larger event arrives in it.
+- **No effect in these tests:** a 1 Hz high-pass on the Wood-Anderson record; limiting stations to 100 km.
+- **What remains is calibration.** The standard relation alone was 0.04–0.12 per unit more compressed than regionally calibrated magnitudes (tier C): use the region's distance correction (`calibrations.json`).
+- Test without a reference: compute event magnitudes from all records of the chosen stations and from the records you kept; a difference that grows toward small magnitudes is selection bias.
+
 **`magnitude_range`, `magnitude_detection` — magnitudes implausibly low or high for what the stations detect.** Usually the same unit or response errors as above (`magnitude_detection` moves by the same amount as the magnitude offset). Recompute a few events with `magnitude/ml_reference.py recompute`.
 
 ## Completeness and the magnitude distribution
 
-**`b_value` low next to `b_positive` near 1 (both reported).** Tier B: the standard b-value is lowered by changing completeness early in a sequence (short-term aftershock incompleteness), not by physics. b-positive uses magnitude differences of consecutive events and is robust to it.
+**`b_positive` near 1 while the standard b-value in its details (`standard_b_value`) is low (reported).** Tier B: the standard b-value is lowered by changing completeness early in a sequence (short-term aftershock incompleteness), not by physics. b-positive uses magnitude differences of consecutive events and is robust to it.
 - A low b in both: magnitude compression (a magnitude scale that grows too slowly with size: where ML grows 1.5 times faster than Mw for small events, b in ML is two thirds of b in Mw), or mixed magnitude types. Split the distribution by magnitude type and by detection method and compare.
 
 **Missing events after the largest events.** After a mainshock of magnitude M the catalog is incomplete for hours: completeness is about Mc(M, t) = M − 4.5 − 0.75 log10(t / 1 day) (about M − 2.9 after ten minutes, M − 3.5 after an hour). Missing events above that curve are a failure of the workflow; in the first minutes of the mainshock's coda even large aftershocks are hidden from pickers and simple scans (see `not_visible.md`).
 
-**Rate changes (`rate_after_largest`, daily counts).** Tier B.
+**Rate changes (daily counts, the rate after the largest events; no check).** Tier B.
 - A change that affects only small events (and disappears above the completeness magnitude) points to detection: data gaps, fewer stations, noise, coda, associator saturation.
 - A change at all magnitudes points to real seismicity — or to a magnitude shift (processing or calibration change on that date). Compare the frequency–magnitude distributions before and after: a shift moves the whole curve, a rate change moves it up or down.
 
-**`day_night_ratio` (reported; needs ≥ 14 days of events).** A daytime excess in larger events points to blasting (check daytime working hours and weekdays; blasts have low high-to-low-frequency amplitude ratios). A night-time excess in small events only points to daytime noise hiding small events — a detection limit, not an error.
+**Day–night differences (no check; meaningful only with ≥ 14 days of events).** A daytime excess in larger events points to blasting (check daytime working hours and weekdays; blasts have low high-to-low-frequency amplitude ratios). A night-time excess in small events only points to daytime noise hiding small events — a detection limit, not an error.

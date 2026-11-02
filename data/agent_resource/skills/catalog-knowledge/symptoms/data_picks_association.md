@@ -24,16 +24,16 @@
 - Evidence: count horizontals per station in the metadata; stations with horizontals and P picks but no S picks point to the configuration.
 - Repair: pass three components; for vertical-only stations use P only (do not fabricate S from the vertical).
 
-**`s_to_p_ratio` above its range — more S than P picks.** Tier B: S picks on noise or on P coda (picker threshold too low on horizontals), or P picks missing. Evidence: S picks without a P at the same station and event; S picks that fall off their event's Wadati line (`wadati_events` details).
+**`s_to_p_ratio` above its range — more S than P picks.** Tier B: S picks on noise or on P coda (picker threshold too low on horizontals), or P picks missing. Evidence: S picks without a P at the same station and event; S picks that fall off their event's Wadati line (plot S−P against P time for single events).
 
 **`pick_onset_offset` — picks systematically early or late relative to the waveform onset.** Tier A/B.
 - Causes: the pick is the maximum of a probability curve, not the onset (machine-learning pickers trained on one network's habits); a time shift in preprocessing (see above); picks on filtered records with a causal filter.
 - Evidence: the offset is similar at all stations and for large and small events → method; it differs by station → station-specific processing.
-- Note: this check cannot see a clock error of the station, because the pick and the onset come from the same record. Clock errors show in `station_delays` (equal in P and S) and `station_time_steps`.
+- Note: this check cannot see a clock error of the station, because the pick and the onset come from the same record. Clock errors show in `station_delays` (equal in P and S) and as steps in a station's residuals over time.
 
 **Station delays (`station_delays` details, `station_residual_outliers`).** Tier B.
 - A delay that is the same in P and S (δS/δP ≈ 1) points to the station's clock or instrument; a delay about Vp/Vs times larger in S (≈ 1.7) points to the path (slow or fast ground under the station) or to an elevation or position error.
-- A step in time equal in P and S (`station_time_steps`) points to a clock jump or instrument change; a gradual change, larger in S, to seismicity moving.
+- A step in a station's residuals over time, equal in P and S (plot its residuals against time), points to a clock jump or instrument change; a gradual change, larger in S, to seismicity moving.
 - A constant clock offset and a constant site delay cannot be told apart from the catalog alone (tier C); station corrections absorb both.
 
 ## Association
@@ -53,7 +53,7 @@
 - Causes: the associator saturates at high event rates (it merges or drops events when events are seconds apart); picker misses in coda.
 - Evidence: in busy hours, picks per event rises and the share of unassociated picks rises; rerun the association of one busy hour with a smaller time window or a different associator and compare the number of events.
 
-**`event_travel_time_fit` (reported) — picks off their event's travel-time curve.** Tier B: picks from another event (association across overlapping events), wrong phase label, or a station with a wrong position. Evidence: the outlier picks belong to one station (position or clock) or are spread (association); relocate a few events without the outlier picks.
+**Picks off their event's travel-time curve (no check; read the residuals of single events).** Tier B: picks from another event (association across overlapping events), wrong phase label, or a station with a wrong position. Evidence: the outlier picks belong to one station (position or clock) or are spread (association); relocate a few events without the outlier picks.
 
 ## Detection beyond picking (template matching, matched filtering)
 

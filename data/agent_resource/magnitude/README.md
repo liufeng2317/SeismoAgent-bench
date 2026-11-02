@@ -45,6 +45,8 @@ or, for the classical form, `… → WA response with magnification 2080 → m �
 | Velocity or acceleration record treated as displacement | frequency dependent, often more than one unit |
 | Vector sum of the horizontals instead of one value per component | about +0.15 |
 | Clipped records of large events, or a window that ends before the S-wave maximum | large events too small |
+| Keeping only records above a signal-to-noise threshold | small events 0.1–0.25 too large: the scale is compressed |
+| A window far beyond the S train in a busy sequence | small events too large where other events arrive in the window |
 
 A pipeline with one of the first five mistakes gives magnitudes that are offset by an almost constant amount: compare a few events against an independent computation before trusting the scale.
 

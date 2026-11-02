@@ -55,27 +55,25 @@ Dimensions: `data` (input), `reality` (are the events real and complete), `time`
 | data | representative windows | the most energetic network-wide windows, raw against processed records (figures, SNR, peak frequency) | figures |
 | picks | `silent_stations`, `station_day_gaps` | stations or station-days with data but no picks | yes |
 | picks | `duplicate_picks`, `s_to_p_ratio` | repeated picks; S picks per P pick | yes |
-| picks | `pick_onset_offset` | P picks against the AIC onset on a sample of clear picks (S reported) | yes |
-| picks | `pick_snr` | share of picks with a low amplitude ratio across the pick | reported |
+| picks | `pick_onset_offset` | P picks against the AIC onset on a sample of clear picks (S reported; details: share of picks with a low amplitude ratio across the pick) | yes |
 | association | `associated_share`, `association_busy_hours` | share of picks in events, overall and in the busiest hours | yes |
 | association | `duplicate_events` | events within 1.5 s and 3 km of another (details: pairs sharing picks) | yes |
 | association | `events_with_few_picks` | events with fewer than 4 P picks | yes |
-| association | `event_travel_time_fit` | events whose picks lie off the catalog's travel-time curve | reported |
-| location | `isolated_events`, `events_outside_network` | events far from all others; events beyond the network | yes; reported |
+| location | `isolated_events` | events far from all others | yes |
 | location | `wadati_origin_spread`, `wadati_origin_offset` | origin times from each event's own S−P times against the catalog origin times | yes; reported |
 | location | `travel_time_intercept`, `station_residual_outliers`, `station_residual_azimuth` | P travel times against distance; residuals by station and azimuth | reported |
 | location | `depth_single_value`, `depth_at_edges`, `depth_layers` | events at one depth, at the shallowest or deepest depth, in thin depth slices | yes |
 | location | `sp_depth_offset` | depths implied by S−P times at stations closer than the source depth against catalog depths | yes |
-| location | `azimuthal_gap`, `depth_constraint` | station geometry per event; share of events with an S pick within 1.4 focal depths; make-up of the most common depth | reported |
+| location | `depth_constraint` | station geometry per event (azimuthal gap, nearest station); share of events with an S pick within 1.4 focal depths; make-up of the most common depth | reported |
 | location | `pile_against_setup` | distance of the most common depth to the features of `--location-setup` | reported |
-| location | `station_delays`, `station_time_steps`, `wadati_events` | P and S delays per station and their ratio; steps in a station's residuals over time; per-event Vp/Vs | reported |
-| location | `day_night_ratio` | daytime against night-time event rate (needs ≥ 14 days) | reported |
+| location | `station_delays` | P and S delays per station and their ratio | reported |
 | location | `model_ensemble_depth`, `model_ensemble_time` | catalog against relocations with generic models (`--model-ensemble`) | reported |
-| relocation | `relocated_share`, `relocation_shift`, `relocation_large_moves`, `relocation_thinning` | events moved; overall shift; large moves; thinning of local structure | yes |
+| relocation | `relocation_shift`, `relocation_large_moves`, `relocation_thinning` | overall shift; large moves; thinning of local structure | yes |
+| relocation | `relocated_share` | share of events with enough picks that relocation moved | reported |
 | magnitude | `magnitude_range`, `magnitude_detection` | plausible magnitudes; amplitude implied at the farthest detecting station | yes |
 | magnitude | `magnitude_recompute` | catalog magnitude against a standard local magnitude recomputed from the records for 20 events (details: station terms, trend with distance, spread) | yes |
 | magnitude | `largest_events_magnitude` | the same for the largest events, from unclipped records over a long window | yes |
-| magnitude | `b_value`, `b_positive`, `rate_after_largest` | magnitude distribution; event rate after the largest events | reported |
+| magnitude | `b_positive` | b-value from magnitude differences of consecutive events (details: the standard b-value and its completeness) | reported |
 
 Each stage also runs the cheaper checks of the stages before it.
 
