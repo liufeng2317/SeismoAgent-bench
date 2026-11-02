@@ -15,6 +15,7 @@ Start every location problem by reading `depth_constraint` in the checker report
 | not round, not at a set-up feature, mostly constrained events | the velocity model, or real structure | B/C | relocate with another model (`--model-ensemble` measures how far depths depend on the model); compare with S−P depths | see `../playbooks/decide_between_candidates.md` and `not_visible.md` |
 
 **`depth_layers` — thin depth slices with many more events than their neighbours.** Same causes as interface piles; with a correct layered model they also form at its interfaces, so this check alone cannot rank two models. Use the interface experiment above.
+- Real seismicity can also concentrate at one depth. Before changing the model or its representation to remove a slice, check whether the events in it are well constrained (S within 1.4 focal depths, many picks) and whether their S−P depths agree with the slice; a slice of well-constrained events that S−P times confirm is structure, not an artefact.
 
 ## Depth and origin-time offsets
 
@@ -22,6 +23,8 @@ Start every location problem by reading `depth_constraint` in the checker report
 - Causes: velocity model too fast or slow near the sources; wrong depth datum (depths below the surface reported as below sea level, or the reverse); S picks late or early (converted phases picked as S make depths wrong by km while errors shrink); origin times biased.
 - Evidence: an offset equal to the station elevation or the model datum points to the datum (tier A); an offset that grows with depth points to the velocity; an offset that comes only from a few stations points to their S picks.
 - Below its limit the sign of the difference is not reliable: velocity structure alone moves it by about 1 km.
+- The check reads catalog depths as kilometres below sea level (the output convention). Depths from a locator that measures them below a reference elevation, or that puts stations at the model's top (HypoInverse CRH), differ by about one station elevation: convert before reading the check.
+- Its scale comes from the distant stations' S−P times; where the near-surface Vp/Vs differs strongly from deeper down, the implied depths carry an offset of up to a kilometre or more. Do not drop station corrections or change Vp/Vs only to remove this flag; test the change on the other evidence first (Wadati origin times, the depth distribution, the residuals).
 
 **`wadati_origin_spread` — origin times from the event's own S−P times scatter about the catalog origin times.** Tier B: wrong S picks, Vp/Vs of the model unlike that of the data, or unstable locations. Compare the model's Vp/Vs with the data's Wadati Vp/Vs (`wadati_origin_offset` details: `median_vpvs`); relocate with Vs scaled to it.
 
@@ -44,3 +47,4 @@ Start every location problem by reading `depth_constraint` in the checker report
 **`relocation_large_moves` — many events moved by more than 5 km.** Tier B: poorly linked events (few neighbours, weak links), events far from their cluster, or a wrong pick set. Relocate those events alone with a different starting location; events that move back were unstable.
 
 **`relocated_share` low — few events with enough picks were moved.** Tier A/B: linking thresholds too strict (minimum links, maximum separation), cross-correlation computed for a subset only, events outside the clusters. Not an error when the events are small and isolated.
+- Do not loosen the linking thresholds only to raise the share. Events relocated on too few differential times move to wrong places and scatter the catalog; the tools' READMEs say which minimum numbers of links are safe. If you wrote an adoption rule for the relocation settings, keep it unless an experiment shows the stricter setting is wrong; justify the flag with the number of events that lack enough links instead.
