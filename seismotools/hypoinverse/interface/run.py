@@ -132,9 +132,13 @@ def write_inputs(arr: pd.DataFrame, stations: pd.DataFrame, rows, cfg: dict, out
             put(line, STA2, "elev", f"{int(round(r.elevation_m)):4d}")
             put(line, STA2, "period", "1.0")
             f.write("".join(line).rstrip() + "\n")
+    # hyp1.40 reads CRH layers with FORMAT(2F5.2): velocity in columns 1-5, layer-top depth in columns 6-10.
+    # A wider depth field shifts the digits and truncates the depth (1.17 km was read as 1 km).
+    if any(not 0.0 <= r[0] < 99.995 for r in rows):
+        raise ValueError("CRH layer tops must lie in [0, 99.99] km below the reference elevation")
     for k, col in (("p", 1), ("s", 2)):
         (out / f"{k}.crh").write_text(f"{k.upper()}MD {k.upper()} model\n" +
-                                      "".join(f"{r[col]:5.2f}{r[0]:7.2f}\n" for r in rows))
+                                      "".join(f"{r[col]:5.2f}{r[0]:5.2f}\n" for r in rows))
     ids = {e: i for i, e in enumerate(arr.event_id.drop_duplicates(), 1)}
     lim = cfg["uncertainty_codes_s"]
 
