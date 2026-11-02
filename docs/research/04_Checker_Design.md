@@ -332,7 +332,7 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 
 新门槛下，所有 human-in-loop 目录和运行的报警与改动前相同（关联比例、S/P 比无新增报警）；时移和相对定位两项只有合成回归测试（14 个场景通过），待有真实数据时再验证。
 
-### 10.5 后端任务（B 层）阶段性结果（2026-11-02，5 个案例；Kaikōura 因额度限制重跑中）
+### 10.5 后端任务（B 层）结果（2026-11-03，6 个案例）
 
 设计见 [`workflows/tasks/BACKEND_VARIANTS.md`](../../workflows/tasks/BACKEND_VARIANTS.md)：三个变体共用正式 tools 运行的拾取和关联，只做定位、相对定位和震级；`backend` 只有工具（看不到 checker），`backend_checker` 加 checker skill 和处置合同，`backend_knowledge` 再加知识 skill 和震级资源。每个变体每个案例只跑一次，结论是初步的。Ridgecrest、Kaikōura 在后台继续。
 
@@ -343,6 +343,10 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 | Magna | 3 项（深度 −1.94、水平 2.35、震级 +0.67） | 4 项 | 5 项（深度 +0.56，时间 +0.34） | 4 项（深度 −0.51，时间 +0.38） |
 | Maple | 6 项（时间 +1.15，深度 −2.18） | 7 项（含深度堆积） | **5 项**（时间 −0.05，深度 +0.44，水平 0.26） | 6 项（时间 +1.18，深度 −2.50） |
 | Ridgecrest | 6 项（深度 −2.31，震级 −1.21） | 6 项（深度 +1.31，震级 −0.98） | **4 项**（深度 +0.82，震级 +0.06） | **4 项**（深度 +1.10，震级 −0.08） |
+| Kaikōura | 7 项（时间 +0.63，水平 3.70，震级 −0.60） | 4 项（时间 +0.81，深度 −1.30，水平 1.94） | 4 项（时间 +0.60，**深度 +3.22**，水平 3.35） | 6 项（时间 +0.50，深度 +1.61，水平 3.53） |
+| **合计未通过** | 25 | 26 | **22** | 23 |
+
+相对 `backend`：`backend_checker` 3 个案例更好（Prague、Maple、Ridgecrest）、2 个更差（Kīlauea、Magna）、1 个持平（Kaikōura）；`backend_knowledge` 3 个更好、1 个持平、2 个更差。Kaikōura `backend_checker` 把唯一剩下的报警（hypoDD 后 36 % 事件移动超过 5 km）处置为 justified（"差分走时要求的、迭代收敛"），深度却从 +0.54 恶化到 +3.22 km：处置完整不等于处置正确，核对模块只查前者。
 
 1. **A 层错误被稳定挡住。** 不带 checker 的 `backend` 在 Prague（−1.43）和 Kīlauea（−0.99）都犯了震级响应/单位错误；两个带 checker 的变体在这两个案例上都没有。checker 运行 6–15 次，过程中出现的报警有修复（Prague 3 个，均对照旧报告核实）也有给证据的 justified。
 2. **C 层偏差没有改善，有时变差。** 带 checker 的 Agent 常会换速度模型或定位方法：Magna 深度修好了，时间偏差却变成不通过；Kīlauea 换成 HypoInverse 后时间偏差和水平离散变差。这是速度模型整体偏差在深度和发震时刻之间的权衡，checker 看不到（§10.3、文献 C 层）。
@@ -352,7 +356,7 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 **决策审计与单因素归因（[`progress/backend_audit/`](progress/backend_audit/README.md)）。** 逐个运行审计决定、重新评分中间目录、正演合成走时，并用同一批拾取只换一个因素重定位：
 
 - 时间和深度偏差几乎完全由近地表速度和基准面决定：Kīlauea knowledge 把区域模型顶面放在海平面（只改这一项复现 −0.37 s）；Magna 两个 checker 变体采用 checker 自带的 CRUST1.0（复现 +0.35 s）；Maple knowledge 用的已发表模型近地表太快（复现 +1.27 s）。Maple、Magna 单靠换模型无法同时通过时间和深度判据。
-- 不带 checker 的 `backend` 在 5 个案例中有 3 个犯了震级响应/单位错误（−1.43、−0.99、−0.98），带 checker 的两个变体 0 次——起作用的是 checker 与知识资源中的正确参考计算链，Agent 照用了它。
+- 不带 checker 的 `backend` 在 6 个案例中有 3 个犯了震级响应/单位错误（−1.43、−0.99、−0.98），带 checker 的两个变体 12 次运行 0 次——起作用的是 checker 与知识资源中的正确参考计算链，Agent 照用了它。
 - 几个"好结果"是碰巧（Prague checker 的 hypoDD 中心漂移、Maple checker 的基准面误设与 Vp/Vs 抵消）；4 次报警驱动的改动使结果变差（台阶改梯度、去掉台站校正和改 Vp/Vs、为提高 `relocated_share` 放宽连接、`compare.py` 选中离散更大的参数）。
 - checker 自带的通用模型和 IASPEI 复算被 Agent 当作推荐采用；`sp_depth_offset` 在 Prague 偏约 +1 至 +1.5 km，且对 HypoInverse 输出差一个台站高程；`wadati_origin_offset` 在三个案例与时间偏差一致、在 Maple 方向相反，保持只报告。
 - 工具 bug：HypoInverse 接口的 CRH 层深字段宽度错误，界面被截断（2afcdc8 修复；此前所有 HypoInverse 运行受影响）。有效性：一个运行向共享环境安装了包；一个运行访问了覆盖 Prague 的区域重定位目录论文（未读出、未使用）；Maple 专家的区域模型出自目标论文，不能作为知识资源。
