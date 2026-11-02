@@ -78,8 +78,6 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 
 ## 5. 阶段 3：震相关联
 
-归因诊断（仅报告，§10.3）：`duplicate_events` 的细节给出共用拾取的事件对数（区分重复录入与真实双震）。
-
 **目的：** 关联是否把拾取正确地组成了事件：有没有漏关联、拆分或合并。
 
 **数值检查：**
@@ -94,9 +92,9 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 
 **可视化：** `association_rates.png`：每小时拾取数、事件数和关联占比，标出震级最大的 3 个事件；`association_events.png`：拾取最多、最少（≥ 3）和最忙时段各 2 个事件，横轴震中距（没有位置时按到达先后排序），纵轴拾取时刻减发震时刻，P、S 和同一时段未关联的拾取分色。数值摘要给出每个事件的 P 视速度和残差标准差：Kīlauea tools 上拾取最多的事件残差 0.08–0.12 s，最忙时段两个相隔 14 s 的事件残差 0.6–0.7 s、P 视速度 84 km/s，拾取被混在一起。图能展示这类错误，但对整个目录的统计（上一行）区分不了，所以只作为图和摘要提供。
 
-## 6. 阶段 4：绝对定位
+归因诊断（仅报告，§10.3）：`duplicate_events` 的细节给出共用拾取的事件对数（区分重复录入与真实双震）。
 
-归因诊断（仅报告，§10.3）：`depth_constraint`（1.4 倍深度内有无 S、GT5 类几何、最常见深度的组成与是否为整数）、`pile_against_setup`（配合 `--location-setup`，堆积与界面、搜索边界、网格节点、试探深度的距离）、`station_delays`（δS/δP）、`station_time_steps`、`wadati_events`、`day_night_ratio`（需 ≥ 14 天）。
+## 6. 阶段 4：绝对定位
 
 **目的：** 位置和发震时刻是否合理、对速度模型有多敏感。
 
@@ -119,6 +117,8 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 
 **可视化：** `checker_diagnostics.png`（震中图、深度直方图、P 走时–震源距图叠加拟合直线、Wadati 发震时刻差直方图）；`location_sections.png`（东西和南北深度剖面、台站中位 P 残差地图）；`location_model_ensemble.png`（抽样事件在目录和每个通用模型下的深度分布；每个模型相对目录的深度差与发震时刻差）。
 
+归因诊断（仅报告，§10.3）：`depth_constraint`（1.4 倍深度内有无 S、GT5 类几何、最常见深度的组成与是否为整数）、`pile_against_setup`（配合 `--location-setup`，堆积与界面、搜索边界、网格节点、试探深度的距离）、`station_delays`（δS/δP）、`station_time_steps`、`wadati_events`、`day_night_ratio`（需 ≥ 14 天）。
+
 ## 7. 阶段 5：相对定位
 
 **目的：** 双差或聚类重定位是否只改善了相对位置，而没有引入整体平移或虚假结构。
@@ -140,8 +140,6 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 
 ## 8. 阶段 6：震级
 
-归因诊断（仅报告，§10.3）：`b_positive`（与常规 b 并读）；`magnitude_recompute` 细节中的台站项、偏差随距离的趋势、台站 ML 离散。
-
 | 检查 | 计算 | 门槛 | 状态 |
 |---|---|---|---|
 | 震级范围 | 震级中位数；低于 −2 的事件占比 | 中位数在 [−1, 5]，−2 以下 ≤ 5 % | **报警**（查出 Prague tools 单位错误） |
@@ -152,6 +150,8 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 | 震级复算 | 有 `--waveforms` 和带响应的 StationXML 时，按拾取数均匀抽 20 个事件：去仪器响应到位移，用 IASPEI 标准 WA 响应（IS 3.3 Table 1，静态放大 1）滤波，读每个水平分量的半峰峰值（nm），按 IASPEI 标准式算台站 ML，事件取中位数；报告"目录 − 复算"的中位数和离散 | \|中位数\| ≤ 0.5 | **报警**（2026-10-31）：Prague tools −2.60、Kīlauea min −2.29（振幅 mm 配 nm 的常数，−2.68）、Ridgecrest tools −1.18（ObsPy 的单零点 WA 响应用在位移上，少了 2πf）；Magna tools +0.19 不报，其余 +0.5 是区域标定差异。每个目录约 1–2 分钟 |
 
 **可视化：** `magnitude_distribution.png`：频度–震级图（累计和每 0.1 级）；震级对最远检测台站震源距的散点图，叠加 log A = −2.3、−1、0.5 mm 的等振幅曲线（Kīlauea min 的点大多落在 −2.3 曲线附近和以下）。
+
+归因诊断（仅报告，§10.3）：`b_positive`（与常规 b 并读）；`magnitude_recompute` 细节中的台站项、偏差随距离的趋势、台站 ML 离散。
 
 ## 9. 让 Agent 看图：测试结果
 
