@@ -62,4 +62,4 @@ Runs land in `runs/<variant>/<harness>/<model>/<timestamp>/` (one experiment fac
 
 ## Back-end arms
 
-`backend`, `backend_checker` and `backend_knowledge` reuse the fixed front end of the formal `tools` run and isolate the back end (iteration tier B); see [`../BACKEND_VARIANTS.md`](../BACKEND_VARIANTS.md).
+`backend`, `backend_checker` and `backend_knowledge` reuse the fixed front end of the formal `tools` run and isolate the back end (iteration tier B); see [`workflows/development/backend_tier_b/README.md`](../../development/backend_tier_b/README.md).

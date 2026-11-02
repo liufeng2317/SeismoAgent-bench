@@ -64,7 +64,7 @@
 4. **评估不能只看单次分数。** 需要每个变体重复运行，并对关键差异做决策级归因（本次审计的方法）。
 5. **`wadati_origin_offset` 保持只报告。** 它在三个案例上有用、在一个案例上方向相反。
 
-## 7. 单因素归因实验结果（2026-11-02，`workflows/replay/scenarios/attribution.yaml`）
+## 7. 单因素归因实验结果（2026-11-02，`workflows/development/replay/scenarios/attribution.yaml`）
 
 同一批拾取（正式 tools 运行，即后端变体的固定前端），同一定位设置（NonLinLoc EDT_OT_WT，参考高程为指定基准面，深度搜索 0–20 km），只换模型或基准面：
 

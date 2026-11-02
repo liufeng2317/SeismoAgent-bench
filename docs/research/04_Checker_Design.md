@@ -158,7 +158,7 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 
 ## 10. 检验方法与当前结果
 
-**方法：** `workflows/tools_case_validation/validate_checker.py` 在两类目录上运行 checker：每个案例 human-in-loop 的定位轮次（组件替换所用轮次的拾取、关联和定位结果，应当基本干净，衡量误报），以及每个已完成的正式 Agent 运行（相对 final 的误差已知，见 [`progress/SCORE_TABLE.md`](progress/SCORE_TABLE.md)，衡量检出）。`--stages` 按阶段运行（数据阶段每个案例只跑一次，因为同一案例的运行输入相同），结果写入被忽略的 `outputs/checker_stages*`。可视化不参与检验，但会对代表目录生成，人工检查图是否清楚、样本选得是否有代表性。
+**方法：** `workflows/development/tools_case_validation/validate_checker.py` 在两类目录上运行 checker：每个案例 human-in-loop 的定位轮次（组件替换所用轮次的拾取、关联和定位结果，应当基本干净，衡量误报），以及每个已完成的正式 Agent 运行（相对 final 的误差已知，见 [`progress/SCORE_TABLE.md`](progress/SCORE_TABLE.md)，衡量检出）。`--stages` 按阶段运行（数据阶段每个案例只跑一次，因为同一案例的运行输入相同），结果写入被忽略的 `outputs/checker_stages*`。可视化不参与检验，但会对代表目录生成，人工检查图是否清楚、样本选得是否有代表性。
 
 **合成回归测试：** `seismotools/checker/examples/smoke/run.sh` 生成 10 个台站、80 个事件、2 小时 50 Hz 的合成数据（含平坦速度响应的 StationXML），运行 14 个场景：每个阶段的干净输入不报警；混合采样率、预处理时移 0.3 s、拾取整体早 2.5 s、10 % 重复拾取、40 % 事件压在同一深度、震级偏 −3、重定位整体加深 2 km、重定位压到 4 个点、震级按 nm/mm 混用偏 −2.68（与复算一致的目录不报警），各自由预期的检查报警（其他阶段对同一错误的连带报警单独列出并允许）。全部通过，约 5 分钟。写测试时发现并修正了三个问题：S−P 很短时 S 的 AIC 搜索找到 P 初动；完全压缩的簇厚度为 0 时比值变成 NaN 而不报警；稀疏目录中泊松涨落被当成分层条带。
 
@@ -244,7 +244,7 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 
 ### 10.2 方案比较与小批量：离线重放（2026-10-31）
 
-正式运行一次要 5–27 小时，主要耗在后台计算，所以对 checker、比较规则和知识的修改不能靠重跑 Agent 来检验。离线重放（[`workflows/replay/`](../../workflows/replay/README.md)，第 A 层）复用已完成运行的拾取、目录和波形：用运行自己的拾取构造一个候选结果（例如换速度模型重定位），Agent 视角只看 checker 和 `compare.py`（不读参考目录），基准视角再用参考目录评分，判断 Agent 视角的决定是否正确。一个全量场景 10–82 分钟，一个小批量 1–3 分钟。
+正式运行一次要 5–27 小时，主要耗在后台计算，所以对 checker、比较规则和知识的修改不能靠重跑 Agent 来检验。离线重放（[`workflows/development/replay/`](../../workflows/development/replay/README.md)，第 A 层）复用已完成运行的拾取、目录和波形：用运行自己的拾取构造一个候选结果（例如换速度模型重定位），Agent 视角只看 checker 和 `compare.py`（不读参考目录），基准视角再用参考目录评分，判断 Agent 视角的决定是否正确。一个全量场景 10–82 分钟，一个小批量 1–3 分钟。
 
 **比较器（`seismotools/checker/interface/compare.py`）。** 输入同一阶段、同一输入的两份报告（当前结果和候选结果），只用参与判定的检查，每项检查有方向（越小越好、越接近零越好、越大越好、在范围内）和噪声容差；结论按预先固定的规则给出：更好（有改善、无变差）、更差、矛盾（有改善也有变差）、不确定（改善全部来自比例类检查，同时删掉了 5 % 以上的事件）、无差别。`--change` 说明改的是什么，已知不能比较该类改动的检查列出但不计入（换速度模型时的分层条带）。候选结果仍有报警时另行提示：少错不等于对。
 
@@ -334,7 +334,7 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 
 ### 10.5 后端任务（B 层）结果（2026-11-03，6 个案例）
 
-设计见 [`workflows/tasks/BACKEND_VARIANTS.md`](../../workflows/tasks/BACKEND_VARIANTS.md)：三个变体共用正式 tools 运行的拾取和关联，只做定位、相对定位和震级；`backend` 只有工具（看不到 checker），`backend_checker` 加 checker skill 和处置合同，`backend_knowledge` 再加知识 skill 和震级资源。每个变体每个案例只跑一次，结论是初步的。Ridgecrest、Kaikōura 在后台继续。
+设计见 [`workflows/development/backend_tier_b/README.md`](../../workflows/development/backend_tier_b/README.md)：三个变体共用正式 tools 运行的拾取和关联，只做定位、相对定位和震级；`backend` 只有工具（看不到 checker），`backend_checker` 加 checker skill 和处置合同，`backend_knowledge` 再加知识 skill 和震级资源。每个变体每个案例只跑一次，结论是初步的。Ridgecrest、Kaikōura 在后台继续。
 
 | 案例 | 正式 tools | backend | backend_checker | backend_knowledge |
 |---|---|---|---|---|
@@ -382,7 +382,7 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 6. 编写给 Agent 看的 README 和 skill，冻结 checker（记录提交号）。2026-11-01：`seismotools/checker/README.md`（各阶段输入、选项、输出各节、全部检查及是否判定、compare、pilot）、`seismotools/checker/metadata.json`、S2c 的 checker skill `data/agent_resource/skills/catalog-checker/SKILL.md`（工具说明、运行时机、合同：`work/checker/final/checker_report.json` 加 `work/checker/dispositions.json`，每个报警一条 `fixed`/`justified`；不给原因和修复）。处置文件格式已确认（2026-11-01），写入各案例的 `output_contract_checker.json`；评分器端 `SeismoAgentBench/scoring/catalog_metrics/checker_audit.py` 已实现（重跑核对、报警一致性、逐条处置核对、`fixed` 对照其引用的旧报告核实、checker 运行次数），见 `03_Scoring_Method.md` §2.7a，模拟提交测试通过。
 7. S2c 分析中记录每次修改是真修复还是表面处理（给深度加扰动、删事件、平移震级等）；用不参与校准的保留案例检验门槛。
 8. 有效性分类（§10.1，2026-10-31）后的修改：已完成（b 值和大震后事件率仅报告；S−P 深度门槛以下不报方向；新增大事件震级检查；报告中说明分层条带和拾取过少事件的含义）。
-9. 方案比较器 `compare.py`、检查的 `scope` 标注和 `--pilot`、小批量工具 `pilot.py`、离线重放 `workflows/replay/`（§10.2，2026-10-31）：已完成。Prague 1.75 km 堆积的成因已查清（台阶界面 + 0.5 km 网格，§10.2）；"矛盾"时的排查流程写入知识 skill 草稿（`data/agent_resource/skills/catalog-knowledge/`：SKILL.md、小批量协议、方案决定手册），其余症状手册（01 §3）待补。
+9. 方案比较器 `compare.py`、检查的 `scope` 标注和 `--pilot`、小批量工具 `pilot.py`、离线重放 `workflows/development/replay/`（§10.2，2026-10-31）：已完成。Prague 1.75 km 堆积的成因已查清（台阶界面 + 0.5 km 网格，§10.2）；"矛盾"时的排查流程写入知识 skill 草稿（`data/agent_resource/skills/catalog-knowledge/`：SKILL.md、小批量协议、方案决定手册），其余症状手册（01 §3）待补。
 10. 归因诊断第一批（§10.3，2026-11-01）：重复事件共用拾取、b-positive、震级偏差结构、深度约束分级与堆积组成、`--location-setup`、台站延迟 δS/δP、残差时间台阶、逐事件 Wadati、昼夜比；全部只报告。前四项有效，其余只作归因证据或不适用。尾波漏检扫描试过未采用（§10.3）。待做：波形级数据质控（噪声模型、尖峰、削波）、相对定位健康度、模板匹配检查；门槛复核已完成（§10.4）。每个症状按 A/B/C 三层的归因方式写进知识 skill 的症状手册（2026-11-01 完成：`data/agent_resource/skills/catalog-knowledge/symptoms/`，按阶段三个文件加"checker 看不到的问题"），checker 报告保持只报症状（2026-10-30 的原则）。
 11. **冻结（2026-11-01）：checker 1.0 = 提交 c620ee2，标签 `checker-v1.0`。** S2c、S3 运行使用此版本；评分器的核对记录 `seismotools/checker` 的提交号。之后的改动（波形级数据质控、相对定位健康度、模板匹配检查）作为新版本，并在此记录。
 12. **checker 1.1（2026-11-03，标签 `checker-v1.1`）：** 检查与 1.0 相同；README 新增"checker 自带模型和公式的用途"一节（通用模型和 IASPEI 复算只作对照）；知识 skill 更新（`not_visible.md` 的基准面、常速层与梯度、近地表低速层、定位程序差异；症状手册中 `relocated_share`、`depth_layers`、`sp_depth_offset` 的条目）。合成恢复测试未合并（§10.5）。B 层六个案例用的是 1.0；1.1 用于后续重复运行。

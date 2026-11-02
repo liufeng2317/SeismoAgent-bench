@@ -9,8 +9,8 @@ its synthetic and upstream-example checks; [validate_cases.py](validate_cases.py
 imports their helpers.
 
 ```bash
-bash workflows/tools_case_validation/run_all.sh          # all tools
-python workflows/tools_case_validation/validate_cases.py --tool nonlinloc
+bash workflows/development/tools_case_validation/run_all.sh          # all tools
+python workflows/development/tools_case_validation/validate_cases.py --tool nonlinloc
 ```
 
 Outputs go to the ignored `outputs/` directory. Run these checks after a

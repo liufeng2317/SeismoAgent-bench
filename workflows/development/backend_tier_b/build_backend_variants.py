@@ -9,9 +9,10 @@ arms differ by one factor each:
 - ``backend_checker``: + the catalog-checker skill and the checker contract (back-end S2c);
 - ``backend_knowledge``: + the catalog-checker and catalog-knowledge skills and the magnitude resource (back-end S3).
 
-Writes per case: ``backend/frontend/{picks.csv,events.csv,README.md}`` (the CSVs are not tracked;
-rerun this script to rebuild them from the run), ``input_<arm>.json``, ``prompt_<arm>.md``,
-``task_<arm>.json``. Usage: ``python workflows/tasks/build_backend_variants.py``.
+Writes per case, all under ``workflows/tasks/<case>/backend/``: ``frontend/{picks.csv,events.csv,README.md}``
+(the CSVs are not tracked; rerun this script to rebuild them from the run), ``input_<arm>.json``,
+``prompt_<arm>.md``, ``task_<arm>.json`` and a copy of ``output_contract_min.json`` (``output_contract_checker.json``
+is kept there by hand). Usage: ``python workflows/development/backend_tier_b/build_backend_variants.py``.
 """
 
 from __future__ import annotations
@@ -23,11 +24,11 @@ from pathlib import Path
 
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 TASKS = ROOT / "workflows/tasks"
 TOOLS = ROOT / "seismotools"
 # the backend arm sees the tools without the checker (one factor per arm): a view with every tool but the checker
-TOOLS_WITHOUT_CHECKER = ROOT / "workflows/tasks/_tool_views/without_checker"
+TOOLS_WITHOUT_CHECKER = Path(__file__).resolve().parent / "tool_views/without_checker"
 RESOURCE = ROOT / "data/agent_resource"
 FRONT_END_RUNS = {  # the formal tools run whose front end is reused
     "2011_prague_oklahoma": "tools/claude/glm-5.3/20261028T043719Z",
@@ -96,7 +97,7 @@ def frontend(case: str) -> Path:
         f"- `picks.csv`: {len(picks):,} picks in the output-contract columns; `event_id` gives the association (empty: unassociated); "
         f"rows with status `rejected` were rejected by that run. SHA-256 {sha256(out / 'picks.csv')}.\n"
         f"- `events.csv`: the {len(ev):,} associated events with their numbers of non-rejected picks. No locations, origin times or magnitudes are given.\n\n"
-        f"Built by `workflows/tasks/build_backend_variants.py` from `runs/{FRONT_END_RUNS[case]}/work/picks.csv` (the CSV files are not tracked).\n",
+        f"Built by `workflows/development/backend_tier_b/build_backend_variants.py` from `runs/{FRONT_END_RUNS[case]}/work/picks.csv` (the CSV files are not tracked).\n",
         encoding="utf-8")
     return out
 
@@ -163,9 +164,11 @@ def main() -> None:
     for case in FRONT_END_RUNS:
         frontend(case)
         for arm in ARMS:
-            (TASKS / case / f"prompt_{arm}.md").write_text(prompt(case, arm), encoding="utf-8")
-            (TASKS / case / f"task_{arm}.json").write_text(json.dumps(task_json(case, arm), indent=2, ensure_ascii=False) + "\n")
-            (TASKS / case / f"input_{arm}.json").write_text(json.dumps(input_json(case, arm), indent=2, ensure_ascii=False) + "\n")
+            (TASKS / case / f"backend/prompt_{arm}.md").write_text(prompt(case, arm), encoding="utf-8")
+            (TASKS / case / f"backend/task_{arm}.json").write_text(json.dumps(task_json(case, arm), indent=2, ensure_ascii=False) + "\n")
+            (TASKS / case / f"backend/input_{arm}.json").write_text(json.dumps(input_json(case, arm), indent=2, ensure_ascii=False) + "\n")
+        # the task specs refer to their contracts by a non-traversing relative path, so the contracts sit beside them
+        (TASKS / case / "backend/output_contract_min.json").write_text((TASKS / case / "output_contract_min.json").read_text())
         print(case, "done")
 
 

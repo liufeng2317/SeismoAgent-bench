@@ -57,7 +57,7 @@ The expert column comes from `evaluation/human_in_loop/expert_ladder.json` (roun
 | knowledge GrowClust ngoodmin 4 | 1,009 relocated | (NLL times kept) | −0.51 | 1.35 | **0.92** | 0.070 |
 | knowledge GrowClust ngoodmin 2 (final) | 1,717 relocated | +0.38 | −0.51 | 1.36 | **1.017** | 0.073 |
 
-Earlier replays of the tools run (`workflows/replay/outputs/records/magna_tools_*.json`: EDT_OT_WT, datum 1.48, no station delays) give the following. BP89 as steps: +0.13 s / −1.59 km. BP89 plus the basin layer as steps: +0.01 s / −3.05 km with a 12 % depth pile-up. BP89 as a linear gradient: +0.23 s / −0.88 km.
+Earlier replays of the tools run (`workflows/development/replay/outputs/records/magna_tools_*.json`: EDT_OT_WT, datum 1.48, no station delays) give the following. BP89 as steps: +0.13 s / −1.59 km. BP89 plus the basin layer as steps: +0.01 s / −3.05 km with a 12 % depth pile-up. BP89 as a linear gradient: +0.23 s / −0.88 km.
 
 ## 2. Decision table
 
@@ -208,7 +208,7 @@ Deviations:
 
 ## 6. Proposed single-factor experiments
 
-All of these use the recorded picks of the named run. They can be built with `workflows/replay` (`relocate` intervention: model, datum, layering) or directly with `seismotools/nonlinloc/interface/locate.py`, and scored with `score_run`-equivalent code as in this audit. Each changes one factor and predicts the direction of change.
+All of these use the recorded picks of the named run. They can be built with `workflows/development/replay` (`relocate` intervention: model, datum, layering) or directly with `seismotools/nonlinloc/interface/locate.py`, and scored with `score_run`-equivalent code as in this audit. Each changes one factor and predicts the direction of change.
 
 1. **Near-surface velocity explains the time bias (top priority).** Checker-arm picks (`runs/03_delays/arrivals_runB.csv` minus the rejected picks), CRUST1 Vp/Vs 1.66, no delays, EDT, steps, datum 0. Replace only the top section with the expert's shallow column (3.4 → 4.0 km/s down to sea level, 4.0 → 5.9 km/s to 2 km below sea level), everything else unchanged. Prediction: time +0.29 → about 0.0 ± 0.1 s; depth shallower by ~1 km; `travel_time_intercept` up by ~0.6 s; `wadati_origin_offset` toward −0.6 s. Repeat on the knowledge picks. Confirms §3.1 and tests whether the intercept is a usable time signal.
 2. **Expert-setup anchor, then one factor at a time back toward the agent setup.** Relocate the backend picks with the expert's absolute setup: BP89 + basin, linear, datum 1.48, GAU_ANALYTIC, model error 0.3 s, P/S errors 0.1/0.2 s, no delays. Prediction: about (−0.02 s, −0.2 km), the expert's r4/r5 ladder values. Then flip one factor each: EDT_OT_WT, step, datum 0, PhaseNet `uncertainty_s` weights, station delays, Vp/Vs 1.66. This measures the method and layering terms of §3.2 that were inferred only from expert tests. GAU_ANALYTIC needs a `location_method` key in the replay `relocate` spec (`replay_lib.relocate` hard-codes EDT_OT_WT).
@@ -238,4 +238,4 @@ Further checks, cheaper or already partly answered:
   - knowledge: `work/notes/decisions.md`, `work/checker/compare_*.json`, `work/scripts/make_dispositions.py`
 - Expert choices: `expert/README.md`, `expert/PLAN.md` (r1, r2, r4, r9, the EDT test), `expert/00_config/{config,association,nonlinloc}.yaml`, `expert/01_pipeline/09_estimate_magnitude.py`.
 - Regional model registry: `data/2020_magna_utah/data/models/velocity_models.json`. Magnitude resource: `data/agent_resource/magnitude/{README.md,calibrations.json}`.
-- Replays: `workflows/replay/outputs/records/magna_tools_regional{,_basinfill,_linear}.json`.
+- Replays: `workflows/development/replay/outputs/records/magna_tools_regional{,_basinfill,_linear}.json`.

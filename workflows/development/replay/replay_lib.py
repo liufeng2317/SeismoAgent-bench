@@ -19,7 +19,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 CHECKER = ROOT / "seismotools/checker/interface/run.py"
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "seismotools/checker/source"))
@@ -339,7 +339,7 @@ def benchmark_view(s_base: dict, s_cand: dict, change: str, verdict: str) -> dic
 def rescore(rec: dict) -> dict:
     """Recompute the benchmark view of a record from its cached catalogs (after a change to the scoring or truth rule)."""
     run = Run(rec["case"], rec["run"])
-    after = rec.get("catalogs", {}).get("after") or str(ROOT / "workflows/replay/outputs/cache" / run.key /
+    after = rec.get("catalogs", {}).get("after") or str(ROOT / "workflows/development/replay/outputs/cache" / run.key /
                                                          f"{rec['intervention']['type']}_{spec_hash(rec['intervention'])}" / "full/catalog.csv")
     rec["catalogs"] = {"before": str(run.catalog), "after": after}
     rec["benchmark_view"] = benchmark_view(score(run, run.catalog), score(run, Path(after)), rec["change"], rec["agent_view"]["verdict"])

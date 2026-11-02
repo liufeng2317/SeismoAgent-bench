@@ -1,18 +1,18 @@
-## 2017 Maple Creek, Yellowstone sequence monitoring (back end, expert tools)
+## 2016 Kaikōura sequence monitoring (back end, expert tools)
 
 ### Objective
 
-Phase picks and their association to events are given for the 2017 Maple Creek, Yellowstone sequence. Using them, the supplied waveform data and station metadata, complete the earthquake catalog: locate every event, add relative relocations where the data support them, and compute magnitudes.
+Phase picks and their association to events are given for the 2016 Kaikōura sequence. Using them, the supplied waveform data and station metadata, complete the earthquake catalog: locate every event, add relative relocations where the data support them, and compute magnitudes.
 
 The run-local input is available under `input/`: `input/waveforms/` (`data/` for waveforms, `stations/` for station metadata) and `input/frontend/` (`picks.csv` with the association in `event_id`, `events.csv` listing the events, `README.md`).
 
-Process the half-open window `[2017-06-11T00:00:00Z, 2017-06-19T00:00:00Z)`; the catalog reports events with origin time inside it.
+Process the half-open window `[2016-12-01T00:00:00Z, 2016-12-09T00:00:00Z)`; the catalog reports events with origin time inside it.
 
 The picks are fixed: do not add picks or change pick times. You may reject picks (status `rejected`, kept in the file) and reject events (status `rejected`); every submitted pick keeps its `pick_id`, and every event keeps its `event_id`.
 
 ### Tools
 
-The tools base directory is TOOLS_BASE_PATH=`/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/tasks/_tool_views/without_checker/`. The supplied implementations may be used through their standard execution paths. Before calling a tool, read its README, the relevant guidance under its `docs/` directory and the validated executable examples under its `examples/` directory, and use those materials to determine the method, parameters, input preparation and output interpretation.
+The tools base directory is TOOLS_BASE_PATH=`/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/workflows/development/backend_tier_b/tool_views/without_checker/`. The supplied implementations may be used through their standard execution paths. Before calling a tool, read its README, the relevant guidance under its `docs/` directory and the validated executable examples under its `examples/` directory, and use those materials to determine the method, parameters, input preparation and output interpretation.
 
 1. Absolute location: NonLinLoc and HypoInverse produce absolute locations using an explicit velocity model. NonLinLoc is a probabilistic grid search with selectable likelihood methods (`GAU_ANALYTIC`, `EDT`, `EDT_OT_WT`) and has a single-event and a catalog interface; HypoInverse is a linearised locator with distance and residual weighting. Tool resources and documentation are under `TOOLS_BASE_PATH/nonlinloc/` and `TOOLS_BASE_PATH/hypoinverse/`.
 2. Relative relocation: hypoDD and GrowClust produce relative locations when the associated events and differential times provide adequate support; waveform cross-correlation differential times can be measured with ccdt. This is an additional result, not a substitute for absolute locations. Tool resources and documentation are under `TOOLS_BASE_PATH/hypodd/`, `TOOLS_BASE_PATH/growclust/` and `TOOLS_BASE_PATH/cross_correlation/`.
@@ -35,7 +35,7 @@ event_id,origin_time_utc,latitude,longitude,depth_km,magnitude,magnitude_type,n_
 Field conventions:
 
 - UTF-8, comma-separated, the header rows above in exactly this order (followed only by the optional catalog columns below); the empty string for unavailable fields; no units inside cells.
-- `station_id` is `NET.STA` (for example `WY.YMC`). `channel_id` is the full SEED channel `NET.STA.LOC.CHA` with an empty location code written as an empty segment (for example `WY.YMC.01.EHE`, or `XX.ABC..HNE` when the location code is empty).
+- `station_id` is `NET.STA` (for example `NZ.KHZ`). `channel_id` is the full SEED channel `NET.STA.LOC.CHA` with an empty location code written as an empty segment (for example `NZ.KHZ.10.HHE`, or `XX.ABC..HNE` when the location code is empty).
 - `phase` is `P` or `S`. `time_utc` and `origin_time_utc` are ISO 8601 UTC timestamps ending in `Z` or `+00:00`.
 - `probability` is a detector-assigned quality score in [0, 1]; `uncertainty_s` is a pick-time uncertainty in seconds; both may be empty.
 - `event_id` must match between the two files; an empty `event_id` marks an unassociated pick.
@@ -47,7 +47,7 @@ Field conventions:
 
 ### Validity conditions
 
-- Do not use existing Maple Creek 2017 earthquake catalogs, published phase picks, known event locations, or other reference earthquake products to construct or tune the result.
+- Do not use existing Kaikōura 2016 earthquake catalogs, published phase picks, known event locations, or other reference earthquake products to construct or tune the result.
 - Do not fabricate values; leave a field empty when it cannot be defensibly estimated.
 - Do not modify the input directory, or the shared tools, weights, binaries or the evaluation environment.
 - Files inside generic tool examples may be read only to understand documented usage; do not use them as case observations.

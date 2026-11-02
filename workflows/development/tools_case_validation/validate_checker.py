@@ -25,7 +25,7 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 CHECKER = ROOT / "seismotools/checker/interface/run.py"
 OUT = Path(__file__).resolve().parent / "outputs/checker"
 CASES = ["2011_prague_oklahoma", "2020_magna_utah", "2017_maple_creek_yellowstone", "2018_kilauea_hawaii",

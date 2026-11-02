@@ -8,12 +8,14 @@ AGENT="${AGENT:-claude}"  # formal runs: Claude Code x GLM (configs/agents/claud
 PYTHON="${PYTHON:-/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python}"
 # Any packaged variant: task_<variant>.json in this directory.
 TASK_FILE="$TASK_DIR/task_${VARIANT}.json"
+# Development arms keep their files in a subfolder (the back-end arms in backend/).
+if [ ! -f "$TASK_FILE" ] && [ -f "$TASK_DIR/backend/task_${VARIANT}.json" ]; then TASK_FILE="$TASK_DIR/backend/task_${VARIANT}.json"; fi
 if [ ! -f "$TASK_FILE" ]; then
   echo "VARIANT must be the stem of an existing task_<variant>.json (min, tools, guided)" >&2
   exit 2
 fi
 # A variant may bring its own input manifest (input_<variant>.json), e.g. the back-end arms add the fixed front end.
-INPUT_FILE="$TASK_DIR/input_${VARIANT}.json"
+INPUT_FILE="$(dirname "$TASK_FILE")/input_${VARIANT}.json"
 if [ ! -f "$INPUT_FILE" ]; then INPUT_FILE="$TASK_DIR/input.json"; fi
 AGENT_NAME="${AGENT}-prague-${VARIANT}"
 AGENT_CONFIG="$PROJECT_DIR/SeismoAgentBench/configs/agents/${AGENT}.yaml"

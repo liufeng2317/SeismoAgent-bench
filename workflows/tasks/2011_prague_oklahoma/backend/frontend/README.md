@@ -5,4 +5,4 @@ Phase picks and their association to events from an automatic picking and associ
 - `picks.csv`: 115,524 picks in the output-contract columns; `event_id` gives the association (empty: unassociated); rows with status `rejected` were rejected by that run. SHA-256 2d13bbb13c1632d2d310d7c59bcebe4685cbf79c05a361a69f2d5c7b01d2d658.
 - `events.csv`: the 3,589 associated events with their numbers of non-rejected picks. No locations, origin times or magnitudes are given.
 
-Built by `workflows/tasks/build_backend_variants.py` from `runs/tools/claude/glm-5.3/20261028T043719Z/work/picks.csv` (the CSV files are not tracked).
+Built by `workflows/development/backend_tier_b/build_backend_variants.py` from `runs/tools/claude/glm-5.3/20261028T043719Z/work/picks.csv` (the CSV files are not tracked).
