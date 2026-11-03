@@ -63,9 +63,18 @@ def _latest_run(case: str, variant: str) -> Path | None:
     return runs[-1] if runs else None
 
 
+FINAL_OVERRIDE: dict[str, str] = {}  # case -> final catalog path (relative to the task) drawn instead of the scored one
+
+
 def catalogs(case: str) -> dict:
     """role -> (label, events cut to the mask, metrics headline or None)."""
     c = load_case(TASKS / case)
+    final_label = ROLE_TITLE["final"]
+    if case in FINAL_OVERRIDE:
+        from .case import _expert
+        spec = dict(c.config["expert"]["final"], path=FINAL_OVERRIDE[case])
+        c.expert["final"] = _expert("expert_final", spec, c.config, c.task_dir, c.mask)
+        final_label += f" ({Path(FINAL_OVERRIDE[case]).parts[-3]})"
     _, strongest, official = CASES[case]
     out = {"strongest": (REF_LABEL[strongest], c.refs[strongest].events, None),
            "official": (REF_LABEL[official], c.refs[official].events, None)}
@@ -77,7 +86,7 @@ def catalogs(case: str) -> dict:
         ev, _ = read_candidate_catalog(run / "work/catalog.csv")
         ev = ev[in_mask(ev, c.mask, depth_known=True)].reset_index(drop=True)
         out[role] = (ROLE_TITLE[role], ev, json.loads((run / "evaluation/metrics.json").read_text()))
-    out["final"] = (ROLE_TITLE["final"], c.expert["final"].events, None)
+    out["final"] = (final_label, c.expert["final"].events, None)
     return {"case": c, "catalogs": out}
 
 
@@ -303,7 +312,11 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, default=ROOT / "docs/research/assets/results_overview")
     ap.add_argument("--cases", nargs="*", default=list(CASES))
+    ap.add_argument("--final", action="append", default=[], metavar="CASE=PATH",
+                    help="draw this final catalog (path relative to the task) instead of the scored one")
+    ap.add_argument("--no-heatmap", action="store_true")
     a = ap.parse_args()
+    FINAL_OVERRIDE.update(dict(x.split("=", 1) for x in a.final))
     a.out.mkdir(parents=True, exist_ok=True)
     all_data = {}
     for case in a.cases:
@@ -312,8 +325,9 @@ def main() -> None:
         space_figure(case, data, a.out)
         detection_figure(case, data, a.out)
         print("figures:", case, flush=True)
-    heatmap_figure(all_data, a.out)
-    print("figures: criteria_heatmap")
+    if not a.no_heatmap:
+        heatmap_figure(all_data, a.out)
+        print("figures: criteria_heatmap")
 
 
 if __name__ == "__main__":
