@@ -1,0 +1,13 @@
+# Maple Creek: final r11 = r9 picked events (EDT) + r7 Match&Locate detections moved into the r9 frame (stage 64),
+# r10 direct ML, r11 coda ghosts removed. Paths relative to workflows/tasks/<case>/.
+new_round: r12
+final: expert/export/r11/60_catalog/catalog_events.csv
+located_picks: expert/export/r9/04_locate_nonlinloc/full/picks.csv     # event_id, pick_id, phase, residual_s
+picker_picks: expert/export/r9/02_pick_phasenet/full/picks.csv          # pick_id, station_id, time_utc
+templates: expert/export/r7/60_match_locate/full/inputs/templates.csv
+template_picks: expert/export/r7/60_match_locate/full/inputs/picks.csv
+stations: expert/export/r7/60_match_locate/full/inputs/stations.csv
+waveforms: data/2017_maple_creek_yellowstone/data/waveforms/data
+model: {registry: data/2017_maple_creek_yellowstone/data/models/velocity_models.json, key: uuss_yellowstone_1d, layering: step}
+datum_km: 2.3                     # model depth 0 = mean station level (match_locate.yaml model_datum_elevation_km)
+grid: {step_km: 0.25, step_depth_km: 0.5}
