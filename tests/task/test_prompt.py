@@ -87,3 +87,12 @@ class PromptRenderingTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PackagePolicyRenderingTests(unittest.TestCase):
+    def test_run_local_policy_tells_the_agent_where_to_install(self):
+        from SeismoAgentBench.task.prompt import _package_policy
+        text = _package_policy("run_local")
+        self.assertIn("$BENCH_OUTPUT", text)
+        self.assertIn("read-only", text)
+        self.assertEqual(_package_policy(None), "allowed")

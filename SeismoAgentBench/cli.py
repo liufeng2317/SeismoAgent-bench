@@ -12,7 +12,8 @@ from typing import Sequence
 from SeismoAgentBench.agent import AgentError, AgentSpec
 from SeismoAgentBench.execution import (ClaudeCommandError, ClaudeCommandSpec,
                                         CodexCommandError, CodexCommandSpec, ExecutionError,
-                                        AgentConfigError, RunLayout, expand_experiment,
+                                        AgentConfigError, RunLayout, compare_fingerprints,
+                                        environment_fingerprint, expand_experiment,
                                         finalize_run, load_agent_config, load_environment_config,
                                         load_env_file, load_experiment_spec,
                                         probe_executable_version, probe_runtime, resolve_auth,
@@ -155,6 +156,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             configured_python = configured.get("python")
             if configured_python:
                 env["PYTHON"] = configured_python
+            if configured.get("package_installation", "allowed") != "allowed":
+                env["PIP_REQUIRE_VIRTUALENV"] = "1"  # pip installs only inside a run-local venv
             runtime_mode = configured.get("mode", "host-direct")
             if runtime_mode != "host-direct":
                 raise CodexCommandError(
@@ -197,6 +200,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                                          str(effective_root / args.run_id / "work"),
                                          rendered_prompt, max_turns=args.max_turns)
             agent = AgentSpec.from_command(args.agent_name, args.agent_version, spec.argv())
+            env_before = environment_fingerprint(runtime_context.get("conda_prefix"))
             result = None
             for attempt in range(args.max_attempts):
                 result = run_agent(
@@ -231,6 +235,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             if args.campaign_id:
                 provenance["run_layout"] = layout.record()  # campaign, variant and agent of a campaign run
             provenance["command"] = {"kind": harness, "reference": "launcher.argv"}
+            # A run must leave the shared environment as it found it (validity, not scoring).
+            provenance["environment_integrity"] = compare_fingerprints(
+                env_before, environment_fingerprint(runtime_context.get("conda_prefix")))
             provenance_path.write_text(
                 json.dumps(provenance, indent=2, sort_keys=True) + "\n", encoding="utf-8")
             result[harness] = {"provenance": "provenance.json",

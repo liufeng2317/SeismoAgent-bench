@@ -40,3 +40,32 @@ class RuntimeProbeTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PackagePolicyTests(unittest.TestCase):
+    def test_run_local_policy_is_accepted_and_unknown_policy_rejected(self):
+        import tempfile
+        from pathlib import Path
+        from SeismoAgentBench.execution.environment import EnvironmentConfigError
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "environment.yaml"
+            source.write_text("package_installation: run_local\n", encoding="utf-8")
+            self.assertEqual(load_environment_config(source)["package_installation"], "run_local")
+            source.write_text("package_installation: sometimes\n", encoding="utf-8")
+            with self.assertRaises(EnvironmentConfigError):
+                load_environment_config(source)
+
+    def test_fingerprint_detects_an_installed_package(self):
+        import tempfile
+        from pathlib import Path
+        from SeismoAgentBench.execution.environment import compare_fingerprints, environment_fingerprint
+        with tempfile.TemporaryDirectory() as tmp:
+            site = Path(tmp) / "lib/python3.9/site-packages"
+            site.mkdir(parents=True)
+            (site / "numpy").mkdir()
+            before = environment_fingerprint(tmp)
+            (site / "pypdf-6.0.dist-info").mkdir()
+            change = compare_fingerprints(before, environment_fingerprint(tmp))
+        self.assertTrue(change["changed"])
+        self.assertEqual(change["added"], ["lib/python3.9/site-packages/pypdf-6.0.dist-info"])
+        self.assertEqual(compare_fingerprints(None, before), {"checked": False})

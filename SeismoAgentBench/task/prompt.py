@@ -11,6 +11,14 @@ from .validation import load_json, load_task, validate_manifest
 _DEFAULT_FRAMEWORK_PROMPT = (Path(__file__).resolve().parents[1] / "configs" / "prompts" / "framework.md")
 
 
+def _package_policy(policy: str | None) -> str:
+    if policy == "run_local":
+        return ("only into a virtual environment you create under `$BENCH_OUTPUT` "
+                "(`$PYTHON -m venv --system-site-packages $BENCH_OUTPUT/venv`, then use its `bin/python`); "
+                "the shared environment is read-only and pip refuses to install into it")
+    return _cell(policy or "allowed")
+
+
 def _load_framework_prompt(path: str | Path | None) -> str:
     source = _DEFAULT_FRAMEWORK_PROMPT if path is None else Path(path)
     try:
@@ -76,7 +84,7 @@ def render_agent_prompt(task_path: str | Path, manifest_path: str | Path | None 
         f"- Python: `{_cell(python.get('executable') or '$PYTHON')}` ({_cell(python.get('version') or 'selected at run time')})",
         f"- Conda environment: {_cell(runtime.get('conda_environment') or 'selected at run time')}",
         f"- Network policy: {_cell(runtime.get('network_policy') or 'allowed')}",
-        f"- Package installation: {_cell(runtime.get('package_installation') or 'allowed')}",
+        f"- Package installation: {_package_policy(runtime.get('package_installation'))}",
     ])
     budget = runtime.get("time_budget_s")
     if isinstance(budget, (int, float)) and not isinstance(budget, bool) and budget > 0:

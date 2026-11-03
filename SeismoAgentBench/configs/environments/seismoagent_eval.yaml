@@ -3,4 +3,4 @@
 mode: host-direct
 python: /liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python
 network_policy: allowed
-package_installation: allowed
+package_installation: run_local

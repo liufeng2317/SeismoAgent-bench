@@ -17,6 +17,9 @@ class EnvironmentConfigError(ValueError):
 
 
 _ENVIRONMENT_FIELDS = {"mode", "python", "network_policy", "package_installation"}
+# run_local: packages may be installed only into a virtual environment the Agent creates in its
+# run directory; pip refuses to install into the shared environment (PIP_REQUIRE_VIRTUALENV).
+PACKAGE_POLICIES = {"allowed", "blocked", "run_local"}
 
 
 def _os_release() -> str:
@@ -59,10 +62,43 @@ def load_environment_config(path: str | Path) -> dict[str, str]:
     for field in ("mode", "python"):
         if field in value and (not isinstance(value[field], str) or not value[field]):
             raise EnvironmentConfigError(f"environment config.{field} must be a non-empty string")
-    for field in ("network_policy", "package_installation"):
-        if field in value and value[field] not in {"allowed", "blocked"}:
-            raise EnvironmentConfigError(f"environment config.{field} must be allowed or blocked")
+    if "network_policy" in value and value["network_policy"] not in {"allowed", "blocked"}:
+        raise EnvironmentConfigError("environment config.network_policy must be allowed or blocked")
+    if "package_installation" in value and value["package_installation"] not in PACKAGE_POLICIES:
+        raise EnvironmentConfigError(
+            f"environment config.package_installation must be one of {', '.join(sorted(PACKAGE_POLICIES))}")
     return {str(key): str(item) for key, item in value.items()}
+
+
+def environment_fingerprint(prefix: str | Path | None) -> dict[str, Any] | None:
+    """Names of the installed packages of a conda prefix (conda-meta records and site-packages entries).
+
+    Comparing the fingerprint before and after a run shows whether the run changed the shared
+    environment (an install, upgrade or removal changes a name, since names carry versions)."""
+    if not prefix:
+        return None
+    root = Path(prefix)
+    names: list[str] = []
+    meta = root / "conda-meta"
+    if meta.is_dir():
+        names += [f"conda-meta/{p.name}" for p in meta.glob("*.json")]
+    for site in sorted(root.glob("lib/python*/site-packages")):
+        names += [f"{site.relative_to(root)}/{p.name}" for p in site.iterdir()]
+    if not names:
+        return None
+    names.sort()
+    import hashlib
+    return {"prefix": str(root), "entries": names,
+            "sha256": hashlib.sha256("\n".join(names).encode()).hexdigest()}
+
+
+def compare_fingerprints(before: Mapping[str, Any] | None, after: Mapping[str, Any] | None) -> dict[str, Any]:
+    """Record of what changed in the shared environment during a run (entries only, no contents)."""
+    if not before or not after:
+        return {"checked": False}
+    b, a = set(before["entries"]), set(after["entries"])
+    return {"checked": True, "prefix": before["prefix"], "changed": before["sha256"] != after["sha256"],
+            "added": sorted(a - b), "removed": sorted(b - a)}
 
 
 def write_environment_config_snapshot(run_dir: str | Path, config: Mapping[str, Any]) -> Path:

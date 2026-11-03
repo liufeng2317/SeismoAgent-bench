@@ -58,7 +58,7 @@ Without `run.sh`, a run lands at `<run_root>/<run_id>/`. With `--campaign-id` it
 | `timeline.json` | runner | event arrival times and gaps from `execution.log` |
 | `runner.pid` | runner | runner pid, host, process start time; read by `status`, `finalize` and `run.sh` |
 | `environment.json` | run workflow | runtime facts (Python, OS, architecture, Conda environment, network and installation policy, time budget) and the work, input and output directories |
-| `provenance.json` | run workflow; CLI | Agent name and version, references to the control files, `tools` (the `seismotools` path, commit and dirty flag), and `launcher`: executable and version, argv, `prompt_via` (`stdin` or `argv`), model, working directory, `credentials_included: false`. A prompt on argv is replaced by `<BENCH_AGENT_PROMPT>`. A campaign run adds `run_layout` |
+| `provenance.json` | run workflow; CLI | Agent name and version, references to the control files, `tools` (the `seismotools` path, commit and dirty flag), and `launcher`: executable and version, argv, `prompt_via` (`stdin` or `argv`), model, working directory, `credentials_included: false`. A prompt on argv is replaced by `<BENCH_AGENT_PROMPT>`. A campaign run adds `run_layout`. `environment_integrity`: whether the shared Conda environment's installed packages changed during the run (`changed`, `added`, `removed`; entry names only) |
 | `artifact_manifest.json` | evaluator | the result of the output-contract check |
 | `runtime_home/` | runner | non-hidden files the Agent left in its temporary `HOME`; only when there are any |
 
