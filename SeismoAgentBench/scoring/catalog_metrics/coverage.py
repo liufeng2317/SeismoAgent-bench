@@ -1,7 +1,7 @@
 """Station coverage of a case: the convex hull of the supplied stations, widened by a buffer.
 
 Events outside it lie beyond the network, where locations are poorly constrained; on recorded runs
-almost none of them belong to the sequence (research doc 04 §10.8). The ``inside_region`` criterion
+almost none of them belong to the sequence (docs/research/progress/checker_validation/07_scoring_questions.md). The ``inside_region`` criterion
 judges the share of located events outside the coverage; the share outside the scoring mask, which also
 counts real regional events inside the network, is reported only. The coverage is computed once per
 case from the StationXML under the input's ``stations/`` folder and cached in ``evaluation/``.

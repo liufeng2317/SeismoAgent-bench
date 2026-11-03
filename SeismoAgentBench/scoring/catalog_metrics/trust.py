@@ -42,7 +42,7 @@ def _key(name: str) -> Callable:
 
 CRITERIA: list[Criterion] = [
     # events beyond the station coverage (hull + 10 km): poorly constrained, almost never sequence events;
-    # the share outside the scoring mask also counts real regional events and is reported only (04 §10.8).
+    # the share outside the scoring mask also counts real regional events and is reported only (docs/research/progress/checker_validation/07_scoring_questions.md).
     # Where real seismicity lies beyond the network (the final has a share), the share also depends on how
     # many events inside were detected, so the margin scales with the final's share.
     ("reality", "accuracy", "inside_region", _key("out_of_coverage_fraction"), "<=", lambda f: max(0.05, 1.5 * f), True),
