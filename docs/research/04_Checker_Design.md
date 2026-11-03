@@ -409,7 +409,7 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 3. **高通和距离限制没有影响。**
 4. **剩下的是定标。** 标准关系本身比用区域定标的最终目录陡 0.04–0.12（C 层）。
 
-写进知识 skill（`symptoms/magnitude_completeness.md` 新增"压缩的震级标度"条目，`magnitude/README.md` §3 表加两行）：测量前按距离、数据质量和响应选台站，不按被测振幅选；没有可测振幅的事件给上限；大多数事件用 S 波列窗，长窗只用于最大事件并检查窗内无更大事件；用区域定标；不看参考的检验是"全部记录"和"保留记录"两种震级之差是否随震级减小而增大。checker 的 `magnitude_recompute` 细节中 `slope_catalog_vs_recomputed` 明显小于 1 是压缩的迹象。
+写进知识 skill（`symptoms/magnitude_completeness.md` 新增"压缩的震级标度"条目，`magnitude/README.md` §3 表加两行）：测量前按距离、数据质量和响应选台站，不按被测振幅选；没有可测振幅的事件给上限；大多数事件用 S 波列窗，长窗只用于最大事件并检查窗内无更大事件；用区域定标；不看参考的检验是"全部记录"和"保留记录"两种震级之差是否随震级减小而增大。checker 的 `magnitude_recompute` 细节中 `slope_catalog_vs_recomputed` 明显小于 1 是压缩的迹象，但它不能升级为判定检查：在 B 层 12 个带 checker 的运行上，它与评分器的震级标度判据不一致（Maple knowledge 1.01 却不通过，Magna checker 0.78 却通过；Prague 两个变体 0.92–0.93 不通过，Kaikōura 0.94–0.95 通过），因为标准复算本身相对参考也有压缩（上表），而且多个 Agent 直接沿用了复算代码，斜率近于 1 是循环的。保持只报告（在细节中）。
 
 ## 11. 在实验中的用法
 
