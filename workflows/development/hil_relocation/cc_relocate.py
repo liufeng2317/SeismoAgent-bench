@@ -89,9 +89,13 @@ def step_inputs(cfg: dict, task: Path, out: Path) -> dict:
     tp = pd.read_csv(task / cfg["template_picks"])
     tm = pd.read_csv(task / cfg["templates"])
     t_origin = dict(zip(tm.event_id, ts(tm.origin_time_utc)))
+    # a template kept in the final can have moved with the catalog's frame (Maple stage 64), and its detections
+    # moved with it: the detection-template origin difference is consistent only in the final's own frame
+    t_origin.update({e: origin[e] for e in t_origin if e in origin and not ev.location_source[ev.event_id.eq(e)].eq("ml").all()})
     ml = ev[ev.location_source.eq("ml")]
     rows = ml[["event_id", "template_id"]].merge(tp, left_on="template_id", right_on="event_id", suffixes=("", "_tmpl"))
     rows = rows[rows.template_id.isin(t_origin)]
+    # physical arrivals = template pick + (detection origin - template origin), both origins in the same frame
     shift = [origin[e] - t_origin[k] for e, k in zip(rows.event_id, rows.template_id)]
     derived = pd.DataFrame({"event_id": rows.event_id, "station_id": rows.station_id, "phase": rows.phase,
                             "time_utc": (ts(rows.time_utc) + pd.Series(shift, index=rows.index)).dt.strftime(
@@ -135,7 +139,7 @@ def step_ccdt(cfg: dict, out: Path, workers: int) -> dict:
     return json.loads((out / "ccdt/run_result.json").read_text())
 
 
-def step_growclust(cfg: dict, out: Path) -> dict:
+def step_growclust(cfg: dict, out: Path, ngoodmin: int | None = None, name: str = "growclust") -> dict:
     rows = model_rows(cfg)
     (out / "model.txt").write_text("".join(f"{z:.3f} {vp:.3f} {vs:.3f}\n" for z, vp, vs in rows))
     ev = pd.read_csv(out / "events.csv")
@@ -147,14 +151,14 @@ def step_growclust(cfg: dict, out: Path) -> dict:
             "table": {"depth_min_km": 0.0, "depth_max_km": float(math.ceil(ev.depth_km.max() + 5)), "depth_step_km": 0.5,
                       "distance_min_km": 0.0, "distance_max_km": float(math.ceil(dist + 20)), "distance_step_km": 1.0},
             "rmin": g.get("rmin", 0.6), "delmax_km": g.get("delmax_km", 80.0), "rmsmax_s": g.get("rmsmax_s", 0.2),
-            "ngoodmin": g.get("ngoodmin", 4), "nboot": 0}
-    (out / "growclust_config.json").write_text(json.dumps(conf, indent=2))
-    with (out / "growclust.log").open("w") as log:
+            "ngoodmin": g.get("ngoodmin", 4) if ngoodmin is None else ngoodmin, "nboot": 0}
+    (out / f"{name}_config.json").write_text(json.dumps(conf, indent=2))
+    with (out / f"{name}.log").open("w") as log:
         subprocess.run([PY, "-I", str(GROWCLUST), "--events", str(out / "events.csv"), "--stations", str(out / "stations.csv"),
                         "--dtcc", str(out / "ccdt"), "--velocity-model", str(out / "model.txt"), "--config",
-                        str(out / "growclust_config.json"), "--output-dir", str(out / "growclust"), "--overwrite"],
+                        str(out / f"{name}_config.json"), "--output-dir", str(out / name), "--overwrite"],
                        stdout=log, stderr=subprocess.STDOUT, check=True, env=_env())
-    return json.loads((out / "growclust/run_result.json").read_text())
+    return json.loads((out / name / "run_result.json").read_text())
 
 
 def relocation(cfg: dict, out: Path, keep_frame: bool | None = None) -> pd.DataFrame:
@@ -164,7 +168,7 @@ def relocation(cfg: dict, out: Path, keep_frame: bool | None = None) -> pd.DataF
     elevations and can move the whole catalog: Kilauea r6), keeping only the relative improvement; default from
     the case config."""
     ev = pd.read_csv(out / "events.csv")
-    r = pd.read_csv(out / "growclust/relocated.csv")
+    r = pd.read_csv(out / cfg.get("growclust_run", "growclust") / "relocated.csv")
     m = ev.merge(r[["event_id", "origin_time_utc", "latitude", "longitude", "depth_km", "relocated", "n_pairs"]],
                  on="event_id", how="left", suffixes=("", "_new"))
     dh = np.hypot((m.latitude_new - m.latitude) * 111.195,
@@ -216,7 +220,7 @@ def step_evaluate(cfg: dict, task: Path, out: Path) -> dict:
     res_all = {}
     for keep in (False, True):
         res_all["frame_kept" if keep else "as_relocated"] = _evaluate(cfg, case, relocation(cfg, out, keep))
-    (out / "evaluation.json").write_text(json.dumps(res_all, indent=1, default=str))
+    (out / f"evaluation_{cfg.get('growclust_run', 'growclust')}.json").write_text(json.dumps(res_all, indent=1, default=str))
     return res_all
 
 
@@ -293,12 +297,15 @@ def main() -> int:
     ap.add_argument("case")
     ap.add_argument("--step", default="all", choices=["all", "inputs", "ccdt", "growclust", "evaluate", "export"])
     ap.add_argument("--workers", type=int, default=32)
+    ap.add_argument("--ngoodmin", type=int, default=None, help="GrowClust ngoodmin (default: case config, else 4)")
+    ap.add_argument("--run-name", default="growclust", help="GrowClust output folder evaluated and exported")
     a = ap.parse_args()
     cfg, task, out = load(a.case)
+    cfg["growclust_run"] = a.run_name
     steps = ["inputs", "ccdt", "growclust", "evaluate", "export"] if a.step == "all" else [a.step]
     for s in steps:
         r = {"inputs": lambda: step_inputs(cfg, task, out), "ccdt": lambda: step_ccdt(cfg, out, a.workers),
-             "growclust": lambda: step_growclust(cfg, out), "evaluate": lambda: step_evaluate(cfg, task, out),
+             "growclust": lambda: step_growclust(cfg, out, a.ngoodmin, a.run_name), "evaluate": lambda: step_evaluate(cfg, task, out),
              "export": lambda: step_export(cfg, task, out)}[s]()
         print(s, json.dumps(r, default=str)[:1500], flush=True)
     return 0
