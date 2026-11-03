@@ -60,6 +60,7 @@ Dimensions: `data` (input), `reality` (are the events real and complete), `time`
 | association | `duplicate_events` | events within 1.5 s and 3 km of another (details: pairs sharing picks) | yes |
 | association | `events_with_few_picks` | events with fewer than 4 P picks | yes |
 | location | `isolated_events` | events far from all others | yes |
+| location | `events_beyond_stations` | located events more than 10 km outside the hull of the stations (details: count, aperture) | reported |
 | location | `wadati_origin_spread`, `wadati_origin_offset` | origin times from each event's own S−P times against the catalog origin times (spread; median offset, flagged only beyond 1.5 s) | yes |
 | location | `travel_time_intercept`, `station_residual_outliers`, `station_residual_azimuth` | P travel times against distance; residuals by station and azimuth | reported |
 | location | `depth_single_value`, `depth_at_edges`, `depth_layers` | events at one depth, at the shallowest or deepest depth, in thin depth slices | yes |
@@ -90,6 +91,10 @@ The checks and measurements are not criteria for choosing a velocity model eithe
 ## Pilot batches
 
 `pilot.py events --catalog --picks --output-dir` writes a pilot batch of about 300 events (representative 60 %, busiest hour 20 %, largest events 20 %) with `pilot.json` naming the events of each part. `pilot.py windows --waveforms --stations [--picks] --output-dir [--extract]` chooses time windows before any catalog exists (representative windows, the busiest window, the window of the strongest network-wide transient) and can extract their records. Run the checker on a pilot with `--pilot`.
+
+## Region
+
+`region.py --stations [--catalog] [--region LAT_MIN LAT_MAX LON_MIN LON_MAX] [--buffer-km 10] --output-dir` writes `region.json` with the station coverage (the convex hull of the stations widened by the buffer, in latitude/longitude and km about the network centre, and the aperture) and the given region if any; with `--catalog` also `events_region.csv` (`event_id, km_outside_station_hull, inside_station_coverage[, inside_given_region]`). Outside the coverage the network sees an event from one side only, so its distance and depth are poorly constrained. Inside the coverage a catalog can still hold real earthquakes from elsewhere in the network; a region given by the user (for example the task's study region) separates those. The tool does not remove events: whether to keep events outside the coverage or the given region is a decision for the catalog, and the rule should be stated.
 
 ## Validation
 

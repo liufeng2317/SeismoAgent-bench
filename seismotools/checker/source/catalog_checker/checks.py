@@ -18,7 +18,7 @@ from .io import local_km
 
 DEFAULTS: dict[str, Any] = {
     "outside_network_factor": 1.25, "outside_network_share_max": 0.10,
-    "isolated_nn_factor": 5.0, "isolated_floor_km": 2.0, "isolated_share_max": 0.10,
+    "isolated_nn_factor": 5.0, "isolated_floor_km": 2.0, "isolated_share_max": 0.10, "coverage_buffer_km": 10.0,
     "duplicate_dt_s": 1.5, "duplicate_km": 3.0, "duplicate_share_max": 0.02,
     "min_p_picks": 4, "few_picks_share_max": 0.20,
     "wadati_min_pairs": 4, "wadati_vpvs": [1.4, 2.2], "wadati_min_events": 20, "wadati_offset_max_s": 1.5,
@@ -103,6 +103,21 @@ def outside_network(d: Data, c: dict) -> Check:
     return Check("events_outside_network", "reality", share, "share", expected, len(e), flag,
                  f"{share:.1%} of located events lie farther than {c['outside_network_factor']}× the network radius ({radius:.0f} km) from the network centre." if flag else None,
                  {"network_radius_km": round(radius, 2)})
+
+
+def events_beyond_stations(d: Data, c: dict) -> Check:
+    """Share of located events farther than the buffer outside the hull of the stations (``region.py``)."""
+    from .region import km_outside_coverage, station_coverage
+    e = d.events.dropna(subset=["latitude", "longitude"])
+    expected = f"share of located events more than {c['coverage_buffer_km']:g} km outside the station hull"
+    if len(e) < 20 or len(d.stations) < 3:
+        return _skip("events_beyond_stations", "reality", "share", expected, len(e), "too few events or stations")
+    cov = station_coverage(d.stations, c["coverage_buffer_km"])
+    dist = km_outside_coverage(e.latitude, e.longitude, cov)
+    beyond = dist > c["coverage_buffer_km"]
+    return Check("events_beyond_stations", "reality", float(beyond.mean()), "share", expected, len(e), False, None,
+                 {"events_beyond": int(beyond.sum()), "median_km_outside_of_those": round(float(np.median(dist[beyond])), 1) if beyond.any() else None,
+                  "aperture_km": cov["aperture_km"], "note": "seismotools/checker/interface/region.py lists the events and writes the coverage"})
 
 
 def isolated_events(d: Data, c: dict) -> Check:
@@ -480,6 +495,7 @@ def magnitude_detection(d: Data, c: dict) -> Check:
 # so they stay general and name no case.
 REPORT_ONLY = {
     "travel_time_intercept": "velocity structure alone can give intercepts near a second in correct catalogs",
+    "events_beyond_stations": "real seismicity can lie beyond a local network; locations there are poorly constrained, not necessarily wrong",
     "station_residual_outliers": "3-D structure alone can give correct catalogs large station residuals",
     "station_residual_azimuth": "3-D structure alone can give correct catalogs azimuth-dependent residuals",
     "model_ensemble_depth": "generic velocity models differ from each other by several km in depth, more than most catalog errors",
@@ -554,7 +570,7 @@ def run_checks(d: Data, config: dict | None = None, stage: str = "all") -> tuple
     if upto >= STAGES.index("association"):
         checks += association_checks(d, c) + [duplicate_events(d, c), few_picks(d, c)]
     if upto >= STAGES.index("location"):
-        checks += [isolated_events(d, c)]
+        checks += [isolated_events(d, c), events_beyond_stations(d, c)]
         wad_offset, wad_spread, w = wadati_origin(d, c)
         tt_check, fit = travel_time_fit(d, c)
         checks += [wad_offset, wad_spread, tt_check]
