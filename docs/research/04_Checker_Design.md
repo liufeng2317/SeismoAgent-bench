@@ -428,6 +428,11 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 3. **震级：** 三个变体都没有单位或响应错误；`backend_checker` 的震级标度不通过（斜率 −0.70），推测是深度错误改变近台震源距的连带结果，未验证。
 4. 单次运行，结论是初步的；变体间差异主要来自速度模型的来源（文献检索、数字化或自拟），与 §10.5、§10.6 一致。
 
+**试水之后的离线修改（不跑 Agent，攒到下一轮统一测试）：**
+- `wadati_origin_offset` 判定，门槛 1.5 s（§12 第 14 条）：试水 `backend_checker` 运行 +2.47 s 报警，human-in-loop 目录都不报警。
+- NonLinLoc 接口（`seismotools/nonlinloc`，9f0d6d7）：不设 `region` 时，深度搜索原从参考高程开始（`grid_depth_km` 只管走时网格），参考高程在海平面而台站高出约 1 km 时浅部事件被压在搜索顶面；改为从台站平均高程（或 0，取较浅者）开始。用各运行自己的输入离线重定位全部事件：Kīlauea knowledge 众数深度占比 0.106 → 0.031（评分门槛 0.08），时间偏差不变，与最终目录的深度差中位数 0.258 → 0.253 km，顶面上的 79 个事件在最终目录中位于海平面以上 0.73 km；Maple checker、Magna backend 基本不变（0.052 → 0.039、0.054 → 0.056；深度差中位数 +0.01 km 以内）。改为从最高台站开始会把堆积移到空中（Kīlauea 深度差 0.270 km），未采用。参考高程设在台站高程时结果不变。
+- 知识 skill：只用从来源读到的模型数值，凭记忆或文字描述重建的模型不能冠以原名（2bbdbee）；S−P 共同偏短可能是模型，不要用同号台站延迟吸收（a8cc755）。
+
 ## 11. 在实验中的用法
 
 - **S2c（工具 + checker）：** checker skill（`data/agent_resource/skills/catalog-checker/SKILL.md`）说明工具存在、每个阶段测什么、何时运行，以及合同要求：提交 `work/checker/final/checker_report.json`（在提交的目录上运行）和 `work/checker/dispositions.json`（每个报警一条 `fixed`：改了什么、报警出现在哪份报告；或 `justified`：证据）。工具说明在 `seismotools/checker/README.md`，包括 `compare.py` 和 `pilot.py` 的用法；不提供原因或修复方法。合同文件为各案例的 `output_contract_checker.json`（后端变体在 `tasks/<case>/backend/`）。
