@@ -73,7 +73,7 @@ deviation, `erz_km` the vertical one.
 |---|---|---|
 | `reference_elevation_km` | 0 | depth datum (km above sea level) |
 | `projection_center` | station centroid | `[lon, lat]` of the local frame |
-| `region` | station box + `region_pad_km`, depth 0–30 | search volume `{latitude: [a, b], longitude: [a, b], depth_km: [top, bottom]}` |
+| `region` | station box + `region_pad_km`, depth from the mean station level (or 0, whichever is shallower) to 30 | search volume `{latitude: [a, b], longitude: [a, b], depth_km: [top, bottom]}`; depths relative to `reference_elevation_km`. `grid_depth_km` sets only the travel-time grid, not the search |
 | `region_pad_km` | 20 | pad of the default region |
 | `velocity_layering` | `step` | `step` (constant layers) or `linear` |
 | `grid_spacing_km` | 0.5 | travel-time grid spacing |

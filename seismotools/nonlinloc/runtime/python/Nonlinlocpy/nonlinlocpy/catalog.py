@@ -28,7 +28,7 @@ DEFAULT_CONFIG: Dict[str, Any] = {
     "reference_elevation_km": 0.0,
     "projection_center": None,          # [lon, lat]; default: station centroid
     "region": None,                     # {latitude: [a, b], longitude: [a, b], depth_km: [top, bottom]}
-    "region_pad_km": 20.0,              # default region: station box + pad, depth [highest station, 30]
+    "region_pad_km": 20.0,              # default region: station box + pad, depth [mean station level or 0 if lower, 30]
     "velocity_layering": "step",        # rows are constant layers (step) or nodes of a linear profile
     "grid_spacing_km": 0.5,             # travel-time grid spacing
     "grid_depth_km": [-3.0, 40.0],      # travel-time grid depth range
@@ -117,9 +117,9 @@ class CatalogLocator:
         if reg is None:
             pad = cfg["region_pad_km"]
             xb, yb = (st.x.min() - pad, st.x.max() + pad), (st.y.min() - pad, st.y.max() + pad)
-            # search from the land surface: stations above the reference elevation have z < 0, and a search
-            # that starts at the reference elevation pins shallow events to its top
-            zb = (min(0.0, math.floor(float(st.z.min()) / cfg["grid_spacing_km"]) * cfg["grid_spacing_km"]), 30.0)
+            # search from the mean land surface: with the reference elevation below the stations (z < 0), a
+            # search that starts at the reference elevation pins shallow events to its top
+            zb = (min(0.0, float(st.z.mean())), 30.0)
         else:
             corners = np.array([self.proj(lo, la) for lo in reg["longitude"] for la in reg["latitude"]])
             xb, yb = (corners[:, 0].min(), corners[:, 0].max()), (corners[:, 1].min(), corners[:, 1].max())
