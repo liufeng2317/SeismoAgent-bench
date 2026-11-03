@@ -101,6 +101,76 @@ A 层错误指有结构、数据能查出的错误（震级单位和响应、拾
 
 工具让六个案例都能完成，且不通过项大幅减少；但没有一个运行达到可信标准，找回的事件只有最终目录的 22–51 %（检测差距主要来自 human-in-loop 用的模板匹配）。
 
+**图（由 `python -m SeismoAgentBench.scoring.catalog_metrics.overview_figures` 生成，`assets/results_overview/`）。** 每个案例比较五个目录：最强参考目录、官方目录、S0 `min`、S1 `tools`、human-in-loop 最终目录，都按评分区域裁剪；颜色在所有图中固定对应目录。最强参考和官方目录分别是：Prague 为 Cochran、ComCat；Magna 为 Pang、UUSS；Maple Creek 为 Shelly（只有发震时刻，空间图不画）、ComCat；Kīlauea 为 Shelly、ComCat；Ridgecrest 为 Shelly、SCSN；Kaikōura 为 Chamberlain、GeoNet。
+
+**判据总览。** 每格是该判据的数值除以门槛（门槛由最终目录给出）：蓝色通过、红色超出，格内标 ✓ 或 ✗ 和数值；"–"表示不适用（最终目录与自身比较的项、参考目录没有的量）或配对太少。Ridgecrest 的最终目录本身也漏了主震尾波中的几个 M ≥ 4 事件，所以"大事件"一行全部不通过。
+
+![判据热力图](assets/results_overview/criteria_heatmap.png)
+
+读图要点：
+- S1 的红格集中在时间偏差（Maple、Kīlauea、Kaikōura）、深度偏差（Prague、Magna、Maple、Ridgecrest）、深度堆积（Ridgecrest、Kaikōura）和震级偏差（Prague、Magna、Ridgecrest、Kaikōura）；水平偏移在 Magna、Kaikōura 不通过。
+- 参考目录相对最终目录也有不通过的判据（例如 Kaikōura GeoNet 的深度偏差和水平离散、Kīlauea ComCat 的深度偏差），说明判据的门槛并不宽松。
+
+**各案例的空间分布和检测。** 空间图：上排震中，下排沿最终目录震中主轴的深度剖面，同一案例所有子图坐标范围相同。检测图：左侧各目录的时间—震级，右侧累计事件数、累计震级—频度分布（圆点为 Mc，最大曲率 + 0.2）、深度分布。
+
+| 案例 | 事件数（最强参考 / 官方 / S0 / S1 / 最终） | Mc（同上） |
+|---|---|---|
+| Prague | 2,078 / 11 / 未完成 / 3,391 / 6,767 | 0.4 / – / – / −2.5* / −0.3 |
+| Magna | 4,169 / 1,432 / 未完成 / 3,109 / 5,412 | 0.7 / 0.7 / – / 1.5 / 0.7 |
+| Maple Creek | 18,062 / 626 / 6,824 / 3,411 / 12,422 | −0.7 / 0.7 / 1.1 / 0.7 / −0.2 |
+| Kīlauea | 1,902 / 496 / 3,131 / 2,136 / 5,198 | 1.3 / 2.4 / −0.4* / 2.4 / 1.0 |
+| Ridgecrest | 7,716 / 6,564 / 7,748 / 12,239 / 17,902 | 1.3 / 2.0 / 2.0 / 0.4* / 1.0 |
+| Kaikōura | 2,260 / 1,507 / 1,384 / 8,817 / 12,924 | 1.6 / 2.4 / 2.0 / 1.5 / 0.8 |
+
+\* 震级整体偏低（单位或响应错误：Prague S1 −2.8、Kīlauea S0 −2.4、Ridgecrest S1 −1.2），Mc 不可比。
+
+读图要点：
+- S1 的空间分布比 S0 集中得多，但有定位假象：Ridgecrest 在网格顶部和速度分层界面上的水平条带，Maple 的震中落在 0.5 km 网格上；最终目录的结构最清晰。
+- S0 的错误在图上一眼可见：Maple 的震中散满整个区域，Kaikōura 大量事件压在 12 km 固定深度。
+- 事件数上，S1 在六个案例上都多于官方目录；最终目录（有模板匹配）除 Maple 外最多，Maple 的 Shelly 模板匹配目录更多（18,062）。Mc 上最终目录在可比的案例中最低或并列最低，Maple 的 Shelly 例外（−0.7）。
+
+<details><summary>Prague 2011</summary>
+
+![Prague 空间](assets/results_overview/2011_prague_oklahoma_space.png)
+![Prague 检测](assets/results_overview/2011_prague_oklahoma_detection.png)
+
+</details>
+
+<details><summary>Magna 2020</summary>
+
+![Magna 空间](assets/results_overview/2020_magna_utah_space.png)
+![Magna 检测](assets/results_overview/2020_magna_utah_detection.png)
+
+</details>
+
+<details><summary>Maple Creek 2017</summary>
+
+![Maple Creek 空间](assets/results_overview/2017_maple_creek_yellowstone_space.png)
+![Maple Creek 检测](assets/results_overview/2017_maple_creek_yellowstone_detection.png)
+
+</details>
+
+<details><summary>Kīlauea 2018</summary>
+
+![Kīlauea 空间](assets/results_overview/2018_kilauea_hawaii_space.png)
+![Kīlauea 检测](assets/results_overview/2018_kilauea_hawaii_detection.png)
+
+</details>
+
+<details><summary>Ridgecrest 2019</summary>
+
+![Ridgecrest 空间](assets/results_overview/2019_ridgecrest_california_space.png)
+![Ridgecrest 检测](assets/results_overview/2019_ridgecrest_california_detection.png)
+
+</details>
+
+<details><summary>Kaikōura 2016</summary>
+
+![Kaikōura 空间](assets/results_overview/2016_kaikoura_new_zealand_space.png)
+![Kaikōura 检测](assets/results_overview/2016_kaikoura_new_zealand_detection.png)
+
+</details>
+
 ### 4.2 后端消融（B 层，checker 1.0，2026-11-01 至 11-03）
 
 三个变体共用 S1 运行的拾取和关联，只做定位、相对定位和震级：`backend`（只有工具）、`backend_checker`（加 checker）、`backend_knowledge`（加 checker 和知识）。
