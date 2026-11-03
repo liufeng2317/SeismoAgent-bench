@@ -446,7 +446,7 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 2. 测试 GLM-5.3 能否读图（§9）：已完成，两次测试都判断正确。
 3. 阶段 1–6 的检查和图：已实现并合并进 `seismotools/checker`（718dd4e），合成回归测试全部通过。
 4. 报告分为报警、输入说明、测量值三部分；仅报告的原因改为通用说明（2026-10-30）。
-5. 补模板匹配阶段的检查（每个模板的检测数分布、相关系数相对 MAD 的分布、每日检测率突变、检测震级）：先看 Agent 实际如何使用 Match&Locate 再定。
+5. 补模板匹配阶段的检查（每个模板的检测数分布、相关系数相对 MAD 的分布、每日检测率突变、检测震级）：先看 Agent 实际如何使用 Match&Locate 再定。 2026-11-03 评估：六个案例专家流程的零假设检验（通道随机平移 ≥ 600 s）显示误检比例随 nMAD 门槛急剧下降（8 → 9.5 时从 34–94 % 降到 0.2–1.8 %），假检测集中在门槛附近；但仅有的两个 Agent 全量模板匹配（Ridgecrest、Magna tools）门槛都很保守（10.05、16.3），门槛附近几乎没有检测，误检不是问题；问题是漏检（以专家模板集估算，Magna 门槛 16.3 只保留 nMAD ≥ 9.5 检测的 38 %，Ridgecrest 10.05 保留 89 %）。漏检从产品本身看不出来，Agent 运行太少也无法校准判定门槛，故不新增检查；知识 skill 的零假设检验条目补充"用零假设检验在一组门槛上选通过的最低门槛，而不是取一个保险的高值"。
 6. 编写给 Agent 看的 README 和 skill，冻结 checker（记录提交号）。2026-11-01：`seismotools/checker/README.md`（各阶段输入、选项、输出各节、全部检查及是否判定、compare、pilot）、`seismotools/checker/metadata.json`、S2c 的 checker skill `data/agent_resource/skills/catalog-checker/SKILL.md`（工具说明、运行时机、合同：`work/checker/final/checker_report.json` 加 `work/checker/dispositions.json`，每个报警一条 `fixed`/`justified`；不给原因和修复）。处置文件格式已确认（2026-11-01），写入各案例的 `output_contract_checker.json`；评分器端 `SeismoAgentBench/scoring/catalog_metrics/checker_audit.py` 已实现（重跑核对、报警一致性、逐条处置核对、`fixed` 对照其引用的旧报告核实、checker 运行次数），见 `03_Scoring_Method.md` §2.7a，模拟提交测试通过。
 7. S2c 分析中记录每次修改是真修复还是表面处理（给深度加扰动、删事件、平移震级等）；用不参与校准的保留案例检验门槛。
 8. 有效性分类（§10.1，2026-10-31）后的修改：已完成（b 值和大震后事件率仅报告；S−P 深度门槛以下不报方向；新增大事件震级检查；报告中说明分层条带和拾取过少事件的含义）。
