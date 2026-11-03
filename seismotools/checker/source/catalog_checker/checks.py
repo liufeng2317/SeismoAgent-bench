@@ -21,7 +21,7 @@ DEFAULTS: dict[str, Any] = {
     "isolated_nn_factor": 5.0, "isolated_floor_km": 2.0, "isolated_share_max": 0.10,
     "duplicate_dt_s": 1.5, "duplicate_km": 3.0, "duplicate_share_max": 0.02,
     "min_p_picks": 4, "few_picks_share_max": 0.20,
-    "wadati_min_pairs": 4, "wadati_vpvs": [1.4, 2.2], "wadati_min_events": 20, "wadati_offset_max_s": 0.3,
+    "wadati_min_pairs": 4, "wadati_vpvs": [1.4, 2.2], "wadati_min_events": 20, "wadati_offset_max_s": 1.5,
     "wadati_spread_max_s": 0.5,
     "tt_near_quantile": 0.6, "tt_min_picks": 200, "tt_intercept_max_s": 0.3,
     "station_residual_max_s": 0.5, "station_min_picks": 20, "azimuth_amplitude_max_s": 0.25,
@@ -479,7 +479,6 @@ def magnitude_detection(d: Data, c: dict) -> Check:
 # (docs/research/04_Checker_Design.md §10): reported, never flagged. The reasons are shown to the Agent,
 # so they stay general and name no case.
 REPORT_ONLY = {
-    "wadati_origin_offset": "velocity structure alone can offset this value by close to a second in correct catalogs",
     "travel_time_intercept": "velocity structure alone can give intercepts near a second in correct catalogs",
     "station_residual_outliers": "3-D structure alone can give correct catalogs large station residuals",
     "station_residual_azimuth": "3-D structure alone can give correct catalogs azimuth-dependent residuals",

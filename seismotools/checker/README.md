@@ -60,7 +60,7 @@ Dimensions: `data` (input), `reality` (are the events real and complete), `time`
 | association | `duplicate_events` | events within 1.5 s and 3 km of another (details: pairs sharing picks) | yes |
 | association | `events_with_few_picks` | events with fewer than 4 P picks | yes |
 | location | `isolated_events` | events far from all others | yes |
-| location | `wadati_origin_spread`, `wadati_origin_offset` | origin times from each event's own S−P times against the catalog origin times | yes; reported |
+| location | `wadati_origin_spread`, `wadati_origin_offset` | origin times from each event's own S−P times against the catalog origin times (spread; median offset, flagged only beyond 1.5 s) | yes |
 | location | `travel_time_intercept`, `station_residual_outliers`, `station_residual_azimuth` | P travel times against distance; residuals by station and azimuth | reported |
 | location | `depth_single_value`, `depth_at_edges`, `depth_layers` | events at one depth, at the shallowest or deepest depth, in thin depth slices | yes |
 | location | `sp_depth_offset` | depths implied by S−P times at stations closer than the source depth against catalog depths | yes |
