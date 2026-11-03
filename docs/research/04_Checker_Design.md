@@ -411,6 +411,8 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 
 写进知识 skill（`symptoms/magnitude_completeness.md` 新增"压缩的震级标度"条目，`magnitude/README.md` §3 表加两行）：测量前按距离、数据质量和响应选台站，不按被测振幅选；没有可测振幅的事件给上限；大多数事件用 S 波列窗，长窗只用于最大事件并检查窗内无更大事件；用区域定标；不看参考的检验是"全部记录"和"保留记录"两种震级之差是否随震级减小而增大。checker 的 `magnitude_recompute` 细节中 `slope_catalog_vs_recomputed` 明显小于 1 是压缩的迹象，但它不能升级为判定检查：在 B 层 12 个带 checker 的运行上，它与评分器的震级标度判据不一致（Maple knowledge 1.01 却不通过，Magna checker 0.78 却通过；Prague 两个变体 0.92–0.93 不通过，Kaikōura 0.94–0.95 通过），因为标准复算本身相对参考也有压缩（上表），而且多个 Agent 直接沿用了复算代码，斜率近于 1 是循环的。保持只报告（在细节中）。
 
+**换模型时 `compare.py` 是否应不计 `sp_depth_offset`（2026-11-03，否）。** 用 §10.2 的 15 组换模型记录重算：不计它时判对 4 → 6、判错 3 → 5、未决 8 → 4，新增的两个错误都是把真正更好的梯度模型判为更差。它在 7 次"改善"中 3 次真更好、4 次真更差，单独不能排序，但留在规则里使 compare 停在 `mixed`，不下错误结论。保持原规则。
+
 ## 11. 在实验中的用法
 
 - **S2c（工具 + checker）：** checker skill（`data/agent_resource/skills/catalog-checker/SKILL.md`）说明工具存在、每个阶段测什么、何时运行，以及合同要求：提交 `work/checker/final/checker_report.json`（在提交的目录上运行）和 `work/checker/dispositions.json`（每个报警一条 `fixed`：改了什么、报警出现在哪份报告；或 `justified`：证据）。工具说明在 `seismotools/checker/README.md`，包括 `compare.py` 和 `pilot.py` 的用法；不提供原因或修复方法。合同文件为各案例的 `output_contract_checker.json`（后端变体在 `tasks/<case>/backend/`）。
