@@ -150,8 +150,12 @@ def step_growclust(cfg: dict, out: Path) -> dict:
     return json.loads((out / "growclust/run_result.json").read_text())
 
 
-def relocation(cfg: dict, out: Path) -> pd.DataFrame:
-    """Events with the accepted GrowClust position (la, lo, de, t_new) or the old one, and a status."""
+def relocation(cfg: dict, out: Path, keep_frame: bool | None = None) -> pd.DataFrame:
+    """Events with the accepted GrowClust position (la, lo, de, t_new) or the old one, and a status.
+
+    keep_frame: remove the median displacement of the relocated events (GrowClust, like hypoDD, ignores station
+    elevations and can move the whole catalog: Kilauea r6), keeping only the relative improvement; default from
+    the case config."""
     ev = pd.read_csv(out / "events.csv")
     r = pd.read_csv(out / "growclust/relocated.csv")
     m = ev.merge(r[["event_id", "origin_time_utc", "latitude", "longitude", "depth_km", "relocated", "n_pairs"]],
@@ -164,6 +168,15 @@ def relocation(cfg: dict, out: Path) -> pd.DataFrame:
         [m.relocated.isna(), ~m.relocated.astype(bool), dh >= 3, dto >= 1, ~m.depth_km_new.between(0, top)],
         ["not_in_output", "not_linked", "diverged_shift", "diverged_origin", "diverged_depth"], "relocated")
     ok = m.status.eq("relocated")
+    if keep_frame is None:
+        keep_frame = bool(cfg.get("keep_frame", False))
+    if keep_frame and ok.any():
+        shift = {c: float(np.median((m[c + "_new"] - m[c])[ok])) for c in ("latitude", "longitude", "depth_km")}
+        dt0 = float(np.median((ts(m.origin_time_utc_new) - ts(m.origin_time_utc)).dt.total_seconds()[ok]))
+        for c, v in shift.items():
+            m.loc[ok, c + "_new"] = m.loc[ok, c + "_new"] - v
+        m.loc[ok, "origin_time_utc_new"] = (ts(m.loc[ok, "origin_time_utc_new"]) - pd.Timedelta(seconds=dt0)).dt.strftime(
+            "%Y-%m-%dT%H:%M:%S.%fZ")
     m["la"] = np.where(ok, m.latitude_new, m.latitude)
     m["lo"] = np.where(ok, m.longitude_new, m.longitude)
     m["de"] = np.where(ok, m.depth_km_new, m.depth_km)
@@ -193,7 +206,16 @@ def step_evaluate(cfg: dict, task: Path, out: Path) -> dict:
     from SeismoAgentBench.scoring.catalog_metrics.matching import correspond
     from SeismoAgentBench.scoring.catalog_metrics.tables import Population
     case = load_case(task)
-    m = relocation(cfg, out)
+    res_all = {}
+    for keep in (False, True):
+        res_all["frame_kept" if keep else "as_relocated"] = _evaluate(cfg, case, relocation(cfg, out, keep))
+    (out / "evaluation.json").write_text(json.dumps(res_all, indent=1, default=str))
+    return res_all
+
+
+def _evaluate(cfg: dict, case, m: pd.DataFrame) -> dict:
+    from SeismoAgentBench.scoring.catalog_metrics.matching import correspond
+    from SeismoAgentBench.scoring.catalog_metrics.tables import Population
     lat0, lon0 = case.center[1], case.center[0]
     k = 111.195 * math.cos(math.radians(lat0))
     res = {"events": int(len(m)), "status": m.status.value_counts().to_dict(),
@@ -232,7 +254,6 @@ def step_evaluate(cfg: dict, task: Path, out: Path) -> dict:
         if len(e) > 50:
             th[f"reference_{key}"] = thickness((e.longitude - lon0) * k, (e.latitude - lat0) * 111.195, e.depth_km)
     res["local_thickness_km"] = th
-    (out / "evaluation.json").write_text(json.dumps(res, indent=1, default=str))
     return res
 
 
