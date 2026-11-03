@@ -17,6 +17,7 @@ CLASSES = (2.0, 3.0, 4.0, 5.0)
 LIST_EVENTS_UP_TO = 20       # list every reference event of a class this small (and of every M4+ class)
 LIST_FROM_MAGNITUDE = 4.0
 BIAS_MIN_PAIRS = 5
+SLOPE_MIN_PAIRS = 30  # a magnitude-scale slope from fewer pairs is not judged (04 §10.8)
 MC_BIN = 0.1
 MC_CORRECTION = 0.2          # maximum curvature + 0.2 (Woessner & Wiemer 2005)
 B_MIN_EVENTS = 50
@@ -154,6 +155,7 @@ def strength(cand: Population, authority: Population, pairs) -> dict:
     out = {"authority": authority.key, "pairs": int(ok.sum()), "dmag": _describe(dm[ok])}
     if ok.sum() >= BIAS_MIN_PAIRS:
         out["dmag"]["mad"] = _num(np.median(np.abs(dm[ok] - np.median(dm[ok]))))
+    if ok.sum() >= SLOPE_MIN_PAIRS:
         # Slope of dmag against the authority magnitude: < 0 means compression or saturation of large events.
         slope, intercept = np.polyfit(m_a[pairs.b][ok], dm[ok], 1)
         out["dmag_slope_per_unit"] = _num(slope)

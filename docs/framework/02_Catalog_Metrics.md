@@ -141,7 +141,7 @@ Every catalog is also read along three dimensions against the magnitude authorit
 | time | `recall_after_large` vs `recall_other` | recall of reference events within 1 h after any A event of M ≥ 4 (M ≥ 3 where none) against all other events: short-term incompleteness after large events |
 | space | L2, L3 | as above |
 | strength | `dmag` (mean, median, std, MAD, \|dmag\| p90) | candidate − A magnitude of matched pairs |
-| strength | `dmag_slope_per_unit` | least-squares slope of dmag against the A magnitude; negative = compressed scale or saturation of large events |
+| strength | `dmag_slope_per_unit` | least-squares slope of dmag against the A magnitude; negative = compressed scale or saturation of large events; computed from ≥ 30 pairs only (`dmag_pairs` in the headline) |
 | strength | `Mc`, `b` (± σ), `b_difference` | maximum curvature + 0.2 and the Aki–Utsu b-value (Shi & Bolt σ) above it, for candidate and A |
 | strength | `magnitude_coverage` | fraction of candidate events with a magnitude |
 
@@ -228,7 +228,7 @@ Does a run's catalog reach the standard of a trusted catalog? The verdict is rea
 | strength | accuracy | magnitude offset | `dmag_median` (vs the magnitude authority) | \|value\| ≤ \|final\| + 0.2 |
 | strength | accuracy | large events present | `recall_M4`, `recall_M5` | 1.0 for each class the final has |
 | strength | stability | magnitude spread | `dmag_std` | ≤ max(0.3, final + 0.1) |
-| strength | stability | no compressed scale | `dmag_slope_per_unit` | \|value\| ≤ max(0.2, \|final\| + 0.1) |
+| strength | stability | no compressed scale | `dmag_slope_per_unit` | \|value\| ≤ max(0.2, \|final\| + 0.1); `insufficient` (not judged) when the run has magnitudes but fewer than 30 pairs |
 
 Thresholds are absolute, relaxed to the final's own value plus a margin where the final itself would fail them; criteria measured against the final use absolute thresholds. A criterion whose metric the final lacks does not apply; a metric the run lacks fails it. A dimension is *pending* when only the audit is open; `trusted` is true when all dimensions pass, false when any fails, null while only the audit is pending. A failed run is not trusted.
 
@@ -298,6 +298,7 @@ These change how results are presented, not any metric or scoring code. Conventi
 | 10-29 | Agent runs are compared with the *expert (final)* row only; *expert (blind)* is described only as the first ladder step | Blind used no template matching while the `tools` arm offers Match&Locate, so it is not a fair yardstick; the final is the Agent's upper bound and the ladder attributes the gap |
 | 10-29 | The expert catalog is called the *human-in-loop agent* in figures and text; keys keep `expert` | It is an Agent workflow steered by hand |
 | 10-30 | A run stopped by a harness defect, not by the Agent's own work, is marked with `EXCLUDED.md` (the reason) in its run folder, left out of the summary and the export (listed under `excluded_runs`), and repeated once the defect is fixed. Failures of the Agent's own making still count (§6) | Kaikōura `tools` 20261029T123626Z: the runner put the prompt on the Claude process's argv, so the Agent's `ps \| grep MatchLocate2 \| kill -9` killed its own session; the runner now passes the prompt on stdin |
+| 11-04 | Magnitude-scale slope needs ≥ 30 matched pairs; with fewer the criterion is `insufficient`, not failed (`workflows/development/scoring_migrations/magnitude_slope_min_pairs.py` re-judged stored scores) | A run with origin times 1.7 s off matched 12 pairs and failed on a slope from them (research doc 04 §10.8) |
 
 ## 12. Version 2 (2026-10-30)
 

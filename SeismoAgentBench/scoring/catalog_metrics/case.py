@@ -206,7 +206,8 @@ def _strength_time_headline(score: dict) -> dict:
     s, t = score.get("strength") or {}, score.get("time") or {}
     after = t.get("after_large") or {}
     return {"dmag_median": (s.get("dmag") or {}).get("median"), "dmag_std": (s.get("dmag") or {}).get("std"),
-            "dmag_slope_per_unit": s.get("dmag_slope_per_unit"), "b_difference": s.get("b_difference"),
+            "dmag_slope_per_unit": s.get("dmag_slope_per_unit"), "dmag_pairs": s.get("pairs"),
+            "b_difference": s.get("b_difference"),
             "dt_mean_s": (t.get("dt_s") or {}).get("mean"), "dt_std_s": (t.get("dt_s") or {}).get("std"),
             "recall_after_large": after.get("recall_after"), "recall_other": after.get("recall_other")}
 

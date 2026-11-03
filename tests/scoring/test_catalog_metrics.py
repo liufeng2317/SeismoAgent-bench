@@ -267,3 +267,14 @@ class LeakageReviewTests(unittest.TestCase):
             self.assertFalse(out["flag"])
             self.assertEqual(out["review"], {r"scedc\.caltech\.edu/": {"calls": 1, "first_line": 1}})
             self.assertTrue(scan_transcript(path, [r"scedc\.caltech\.edu/data"], None)["flag"])
+
+
+class MagnitudeScaleMinimumTests(unittest.TestCase):
+    def test_slope_from_few_pairs_is_not_judged(self):
+        from SeismoAgentBench.scoring.catalog_metrics.trust import trust_verdict
+        final = {"dmag_slope_per_unit": -0.1, "dmag_median": 0.0, "dmag_std": 0.3}
+        few = trust_verdict({"dmag_slope_per_unit": None, "dmag_pairs": 12, "dmag_median": 0.0, "dmag_std": 0.3}, final, True)
+        self.assertEqual(few["dimensions"]["strength"]["checks"]["magnitude_scale"]["verdict"], "insufficient")
+        self.assertNotIn("magnitude_scale", few["failed"])
+        none = trust_verdict({"dmag_slope_per_unit": None, "dmag_pairs": 0}, final, True)
+        self.assertIn("magnitude_scale", none["failed"])

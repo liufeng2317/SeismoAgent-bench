@@ -106,7 +106,9 @@ def trust_verdict(headline: Mapping[str, Any], final: Mapping[str, Any] | None, 
             continue  # the final has no value: the criterion does not apply to this case
         threshold = round(rule(reference if reference is not None else 0.0), 4)
         value = getter(headline)
-        if value is None:
+        if value is None and name == "magnitude_scale" and (headline.get("dmag_pairs") or 0) >= 5:
+            verdict = "insufficient"  # magnitudes exist but too few pairs for a slope (SLOPE_MIN_PAIRS)
+        elif value is None:
             verdict = "pending" if name == "false_events" else "fail"
         else:
             verdict = "pass" if _passes(value, op, threshold) else "fail"
