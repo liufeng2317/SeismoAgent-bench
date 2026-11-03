@@ -352,7 +352,7 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 | Kaikōura | 7 项（时间 +0.63，水平 3.70，震级 −0.60） | 4 项（时间 +0.81，深度 −1.30，水平 1.94） | 4 项（时间 +0.60，**深度 +3.22**，水平 3.35） | 6 项（时间 +0.50，深度 +1.61，水平 3.53） |
 | **合计未通过** | 25 | 26 | **22** | 23 |
 
-相对 `backend`：`backend_checker` 3 个案例更好（Prague、Maple、Ridgecrest）、2 个更差（Kīlauea、Magna）、1 个持平（Kaikōura）；`backend_knowledge` 3 个更好、1 个持平、2 个更差。Kaikōura `backend_checker` 把唯一剩下的报警（hypoDD 后 36 % 事件移动超过 5 km）处置为 justified（"差分走时要求的、迭代收敛"），深度却从 +0.54 恶化到 +3.22 km：处置完整不等于处置正确，核对模块只查前者。
+相对 `backend`：`backend_checker` 3 个案例更好（Prague、Maple、Ridgecrest）、2 个更差（Kīlauea、Magna）、1 个持平（Kaikōura）；`backend_knowledge` 3 个更好、1 个持平、2 个更差。Kaikōura `backend_checker` 把唯一剩下的报警（hypoDD 后 36 % 事件移动超过 5 km）处置为 justified（"差分走时要求的、迭代收敛"），深度偏差为 +3.22 km（正式 tools 前端 +0.54）。更正（2026-11-03）：偏差在 hypoDD 之前已是 +3.00 km（`run/final/located.csv`），hypoDD 只加 0.22 km，大位移事件的深度变化上下各半，这条 justified 有数据支持。偏差来自绝对定位的模型选择：Agent 在 checker 的五个通用模型中按 `sp_depth_offset`、走时截距和 Wadati 偏差选了 iasp91（CRUST1.0 因 S−P 深度 +3.9 km 被否），正是 §10.6 显示不可靠的做法。为此 checker README 增加一段：检查和测量值不是选择速度模型的标准。核对模块只查处置是否完整，不查是否正确，这一点仍然成立，但这个例子不能作为"处置错误"的证据。
 
 1. **A 层错误被稳定挡住。** 不带 checker 的 `backend` 在 Prague（−1.43）和 Kīlauea（−0.99）都犯了震级响应/单位错误；两个带 checker 的变体在这两个案例上都没有。checker 运行 6–15 次，过程中出现的报警有修复（Prague 3 个，均对照旧报告核实）也有给证据的 justified。
 2. **C 层偏差没有改善，有时变差。** 带 checker 的 Agent 常会换速度模型或定位方法：Magna 深度修好了，时间偏差却变成不通过；Kīlauea 换成 HypoInverse 后时间偏差和水平离散变差。这是速度模型整体偏差在深度和发震时刻之间的权衡，checker 看不到（§10.3、文献 C 层）。
@@ -415,7 +415,7 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 
 - **S2c（工具 + checker）：** checker skill（`data/agent_resource/skills/catalog-checker/SKILL.md`）说明工具存在、每个阶段测什么、何时运行，以及合同要求：提交 `work/checker/final/checker_report.json`（在提交的目录上运行）和 `work/checker/dispositions.json`（每个报警一条 `fixed`：改了什么、报警出现在哪份报告；或 `justified`：证据）。工具说明在 `seismotools/checker/README.md`，包括 `compare.py` 和 `pilot.py` 的用法；不提供原因或修复方法。合同文件为各案例的 `output_contract_checker.json`（后端变体在 `tasks/<case>/backend/`）。
 - **S3（工具 + 知识 + checker）：** 另有知识 skill（`data/agent_resource/skills/catalog-knowledge/`）：小批量协议、两个候选间的决定与对照实验、按 A/B/C 三层的症状手册、checker 看不到的问题（速度模型的基准面、常速层与梯度、近地表低速层；震级定标；主震尾波），以及震级资源（`data/agent_resource/magnitude/`）。小批量协议只在 S3 提供。
-- **评分：** `SeismoAgentBench/scoring/catalog_metrics/checker_audit.py` 用同一版 checker 在提交的文件上重跑，核对报告是否针对提交文件（SHA-256）、报警是否一致、每个报警有无处置、`fixed` 是否属实（对照其引用的旧报告）、`justified` 有无证据，并统计 Agent 运行 checker 的次数；处置记录的列表和以 `flag_id` 为键的对象两种写法都能读（`03_Scoring_Method.md` §2.7a）。核对只查处置是否完整，不判断理由是否成立；后者对照评分和决策审计来看（§10.5，Kaikōura 的例子）。
+- **评分：** `SeismoAgentBench/scoring/catalog_metrics/checker_audit.py` 用同一版 checker 在提交的文件上重跑，核对报告是否针对提交文件（SHA-256）、报警是否一致、每个报警有无处置、`fixed` 是否属实（对照其引用的旧报告）、`justified` 有无证据，并统计 Agent 运行 checker 的次数；处置记录的列表和以 `flag_id` 为键的对象两种写法都能读（`03_Scoring_Method.md` §2.7a）。核对只查处置是否完整，不判断理由是否成立；后者对照评分和决策审计来看（§10.5）。
 - **迭代：** A 层离线重放（`workflows/development/replay/`）、B 层后端任务（`workflows/development/backend_tier_b/`，各案例文件在 `tasks/<case>/backend/`），C 层为完整正式运行。
 
 ## 12. 实施顺序
