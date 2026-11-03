@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "3b28279bfa815b0eb0caa0a6722d5ea45908e0cf",
+ "scorer_commit": "e6d4e4e4c22851fc36cb177821536ad6151058a2",
  "scorer_dirty": true,
- "generated_utc": "2026-10-29T17:55:49+00:00",
+ "generated_utc": "2026-11-03T19:36:36+00:00",
  "task": "2011_prague_oklahoma",
  "references": {
   "cochran": {
@@ -41,12 +41,14 @@
   "final": {
    "path": "expert/export/r7/60_catalog/catalog_events.csv",
    "events": 6767,
-   "out_of_mask_fraction": 0.0281
+   "out_of_mask_fraction": 0.0281,
+   "out_of_coverage_fraction": 0.0003
   },
   "blind": {
    "path": "expert/export/r1/04_locate_nonlinloc/full/events.csv",
    "events": 2553,
-   "out_of_mask_fraction": 0.107
+   "out_of_mask_fraction": 0.107,
+   "out_of_coverage_fraction": 0.0028
   }
  },
  "ceilings": {
@@ -1581,7 +1583,6 @@
      "abs_p90": 0.437,
      "mad": 0.14
     },
-    "dmag_slope_per_unit": 0.1217,
     "candidate": {
      "mc": null,
      "b": null,
@@ -2206,12 +2207,14 @@
     "dmag_median": -0.23,
     "dmag_std": 0.3731,
     "dmag_slope_per_unit": -0.2143,
+    "dmag_pairs": 1975,
     "b_difference": 0.26,
     "dt_mean_s": 0.0548,
     "dt_std_s": 0.1353,
     "recall_after_large": 0.9167,
     "recall_other": 0.9518,
-    "out_of_mask_fraction": 0.0281
+    "out_of_mask_fraction": 0.0281,
+    "out_of_coverage_fraction": 0.0003
    }
   },
   "expert_blind": {
@@ -2779,12 +2782,14 @@
     "dmag_median": null,
     "dmag_std": null,
     "dmag_slope_per_unit": null,
+    "dmag_pairs": 0,
     "b_difference": null,
     "dt_mean_s": 0.0867,
     "dt_std_s": 0.2117,
     "recall_after_large": 0.5833,
     "recall_other": 0.6066,
-    "out_of_mask_fraction": 0.107
+    "out_of_mask_fraction": 0.107,
+    "out_of_coverage_fraction": 0.0028
    }
   }
  }

@@ -278,3 +278,13 @@ class MagnitudeScaleMinimumTests(unittest.TestCase):
         self.assertNotIn("magnitude_scale", few["failed"])
         none = trust_verdict({"dmag_slope_per_unit": None, "dmag_pairs": 0}, final, True)
         self.assertIn("magnitude_scale", none["failed"])
+
+
+class StationCoverageTests(unittest.TestCase):
+    def test_events_beyond_the_buffer_are_outside(self):
+        from SeismoAgentBench.scoring.catalog_metrics.coverage import outside_coverage
+        cov = {"centre": [40.0, -112.0], "buffer_km": 10.0, "hull_km": [[-20, -20], [20, -20], [20, 20], [-20, 20]]}
+        k = 111.195 * 0.766044  # km per degree of longitude at 40 N
+        lat = [40.0, 40.0, 40.0, float("nan")]
+        lon = [-112.0, -112.0 + 25 / k, -112.0 + 35 / k, -112.0]
+        self.assertEqual(outside_coverage(lat, lon, cov).tolist(), [False, False, True, False])

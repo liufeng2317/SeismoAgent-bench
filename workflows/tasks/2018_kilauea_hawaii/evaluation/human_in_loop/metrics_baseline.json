@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "3b28279bfa815b0eb0caa0a6722d5ea45908e0cf",
+ "scorer_commit": "e6d4e4e4c22851fc36cb177821536ad6151058a2",
  "scorer_dirty": true,
- "generated_utc": "2026-10-29T17:58:19+00:00",
+ "generated_utc": "2026-11-03T19:37:45+00:00",
  "task": "2018_kilauea_hawaii",
  "references": {
   "shelly": {
@@ -38,12 +38,14 @@
   "final": {
    "path": "expert/export/r9/60_catalog/catalog_events.csv",
    "events": 5198,
-   "out_of_mask_fraction": 0.3641
+   "out_of_mask_fraction": 0.3641,
+   "out_of_coverage_fraction": 0.2508
   },
   "blind": {
    "path": "expert/export/r1/04_locate_nonlinloc/full/events.csv",
    "events": 2875,
-   "out_of_mask_fraction": 0.4343
+   "out_of_mask_fraction": 0.4343,
+   "out_of_coverage_fraction": 0.2572
   }
  },
  "ceilings": {
@@ -3295,12 +3297,14 @@
     "dmag_median": -0.269,
     "dmag_std": 0.4971,
     "dmag_slope_per_unit": -0.1222,
+    "dmag_pairs": 387,
     "b_difference": -0.424,
     "dt_mean_s": 0.0856,
     "dt_std_s": 0.3503,
     "recall_after_large": 0.9394,
     "recall_other": 0.5901,
-    "out_of_mask_fraction": 0.3641
+    "out_of_mask_fraction": 0.3641,
+    "out_of_coverage_fraction": 0.2508
    }
   },
   "expert_blind": {
@@ -4108,12 +4112,14 @@
     "dmag_median": null,
     "dmag_std": null,
     "dmag_slope_per_unit": null,
+    "dmag_pairs": 0,
     "b_difference": null,
     "dt_mean_s": 0.0581,
     "dt_std_s": 0.3605,
     "recall_after_large": 0.6364,
     "recall_other": 0.4692,
-    "out_of_mask_fraction": 0.4343
+    "out_of_mask_fraction": 0.4343,
+    "out_of_coverage_fraction": 0.2572
    }
   }
  }

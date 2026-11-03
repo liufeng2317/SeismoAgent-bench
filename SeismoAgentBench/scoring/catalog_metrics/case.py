@@ -26,6 +26,7 @@ import yaml
 from . import METRICS_VERSION
 from .audit import REVIEW_DIR, SAMPLE_FILE, audited_false_rate, sample_unsupported
 from .metrics import ceilings, effective_recall, score_population
+from .coverage import outside_coverage, station_coverage
 from .trust import trust_verdict
 from .process import consistency, contract_status, process_metrics
 from .tables import ROLES, Population, epoch_seconds, in_mask, read_candidate_catalog, standardize
@@ -130,9 +131,12 @@ def _expert(key: str, spec: dict, case_cfg: dict, task_dir: Path, mask: dict) ->
     frame = frame.drop(columns=[c for c in rename.values() if c in frame and c not in rename]).rename(columns=rename)
     pop = _population(key, frame, {"roles": "", "depth_datum": spec["depth_datum"]}, case_cfg)
     inside = in_mask(pop.events, mask)
+    located = pop.events.latitude.notna().to_numpy()
+    beyond = outside_coverage(pop.events.latitude, pop.events.longitude, station_coverage(task_dir))[located]
     pop.events = pop.events[inside].reset_index(drop=True)
     pop.notes = {"path": spec["path"], "events": int(len(pop.events)),
-                 "out_of_mask_fraction": round(float(1 - inside.mean()), 4) if len(inside) else None}
+                 "out_of_mask_fraction": round(float(1 - inside.mean()), 4) if len(inside) else None,
+                 "out_of_coverage_fraction": round(float(beyond.mean()), 4) if len(beyond) else None}
     return pop
 
 
@@ -265,6 +269,7 @@ def score_baseline(task_dir: Path, *, write: bool = True) -> dict:
                                         primary=case.primary, mask=case.mask, yardstick=final))
         score["headline"] = headline(score, case, ceiling)
         score["headline"]["out_of_mask_fraction"] = pop.notes.get("out_of_mask_fraction")
+        score["headline"]["out_of_coverage_fraction"] = pop.notes.get("out_of_coverage_fraction")
         picks_csv = case.config["expert"][key].get("picks")
         if picks_csv:
             score["picks"] = pick_metrics(case, case.task_dir / picks_csv)
@@ -318,9 +323,12 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
         events, notes = read_candidate_catalog(work / "catalog.csv")
         cand = Population(key="candidate", events=events, depth_known=depth_known)
         inside = in_mask(events, case.mask, depth_known=depth_known)
+        located = events.latitude.notna().to_numpy()
+        beyond = outside_coverage(events.latitude, events.longitude, station_coverage(case.task_dir))[located]
         cand.events = events[inside].reset_index(drop=True)
         notes.update({"scored": int(len(events)), "in_mask": int(inside.sum()),
                       "out_of_mask_fraction": round(float(1 - inside.mean()), 4) if len(events) else None,
+                      "out_of_coverage_fraction": round(float(beyond.mean()), 4) if len(beyond) else None,
                       "depth_datum": "sea_level" if depth_known else "unknown (run predates the convention)"})
         raw_catalog = pd.read_csv(work / "catalog.csv", dtype=str, keep_default_na=False)
         raw_picks = pd.read_csv(work / "picks.csv", dtype=str, keep_default_na=False)
@@ -338,6 +346,7 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
         report["scores"]["picks"] = pick_metrics(case, work / "picks.csv")
         report["headline"].update(_picks_headline(report["scores"]["picks"]))
         report["headline"]["out_of_mask_fraction"] = notes["out_of_mask_fraction"]
+        report["headline"]["out_of_coverage_fraction"] = notes["out_of_coverage_fraction"]
         if write:
             from .figures import location_figure, spatial_figure
             ref = case.refs[case.primary["location"]]

@@ -10,7 +10,7 @@ Two principles follow from the expert work on the six cases:
 ## 1. Scored population
 
 - **Rows.** All rows of the Agent's `catalog.csv` except those with `status = rejected` (case-insensitive). A sensitivity variant scores only `status = accepted`. Rows without latitude, longitude or origin time count toward the event total but never enter correspondence.
-- **Mask.** Each case's cohort mask in `expert/00_config/validation.yaml` (half-open time window, region box, depth bounds) is applied identically to references, expert and Agent. Agent rows outside the mask are reported as `out_of_mask_fraction` and are not scored further. v2 puts `out_of_mask_fraction` in the headline and the trusted-catalog standard (§7a, event reality); it does not count those rows as false events, because the prompts state the time window but not the region, so an out-of-region event may be a real regional earthquake. Rows without a depth are kept in the mask test on time and epicentre alone.
+- **Mask.** Each case's cohort mask in `expert/00_config/validation.yaml` (half-open time window, region box, depth bounds) is applied identically to references, expert and Agent. Agent rows outside the mask are reported as `out_of_mask_fraction` and are not scored further. v2 puts `out_of_mask_fraction` in the headline (reported only since 11-04) and judges event reality on `out_of_coverage_fraction`, the share of located rows more than 10 km outside the hull of the case's supplied stations (§7a); it does not count out-of-mask rows as false events, because the prompts state the time window but not the region, so an out-of-region event may be a real regional earthquake. Rows without a depth are kept in the mask test on time and epicentre alone.
 - **Depth datum.** `depth_km` is kilometres below sea level, positive down, for every variant (§8). Reference depths are converted to the same datum where the datum is known; where it is not, the reference has no depth role.
 
 ## 2. Event correspondence
@@ -73,7 +73,8 @@ A reference's depth enters L only when its datum is known (sea level or stated s
 |---|---|
 | `completed` | the run ended with contract-valid `catalog.csv` and `picks.csv` (required columns present) |
 | `consistency` | fraction of checks passed: every non-empty pick `event_id` exists in the catalog; `n_picks`, `n_p_picks`, `n_s_picks` equal the linked pick counts; timestamps parse; coordinates in range |
-| `out_of_mask_fraction` | §1 |
+| `out_of_mask_fraction` | §1 (reported) |
+| `out_of_coverage_fraction` | §1, `coverage.py` |
 | `completion_rate` | completed runs / launched runs for a configuration |
 
 ### L1 — Detection
@@ -215,7 +216,7 @@ Does a run's catalog reach the standard of a trusted catalog? The verdict is rea
 
 | Dimension | Aspect | Criterion | Metric | Passes when |
 |---|---|---|---|---|
-| reality | | events inside the region | `out_of_mask_fraction` | ≤ max(0.10, final + 0.05) |
+| reality | | events inside the station coverage | `out_of_coverage_fraction` | ≤ max(0.05, 1.5 × final) |
 | reality | | few false events | `audited_false_rate` | ≤ 0.02; *pending* until the blind review is labelled |
 | time | accuracy | origin-time bias | `time_bias_final_s` (median signed candidate − final) | \|value\| ≤ 0.3 s |
 | time | stability | origin-time spread | `time_mad_final_s` | ≤ 0.3 s |
@@ -299,6 +300,7 @@ These change how results are presented, not any metric or scoring code. Conventi
 | 10-29 | The expert catalog is called the *human-in-loop agent* in figures and text; keys keep `expert` | It is an Agent workflow steered by hand |
 | 10-30 | A run stopped by a harness defect, not by the Agent's own work, is marked with `EXCLUDED.md` (the reason) in its run folder, left out of the summary and the export (listed under `excluded_runs`), and repeated once the defect is fixed. Failures of the Agent's own making still count (§6) | Kaikōura `tools` 20261029T123626Z: the runner put the prompt on the Claude process's argv, so the Agent's `ps \| grep MatchLocate2 \| kill -9` killed its own session; the runner now passes the prompt on stdin |
 | 11-04 | Magnitude-scale slope needs ≥ 30 matched pairs; with fewer the criterion is `insufficient`, not failed (`workflows/development/scoring_migrations/magnitude_slope_min_pairs.py` re-judged stored scores) | A run with origin times 1.7 s off matched 12 pairs and failed on a slope from them (research doc 04 §10.8) |
+| 11-04 | `inside_region` judges `out_of_coverage_fraction` (located events more than 10 km outside the hull of the case's supplied stations, `coverage.py`, `evaluation/station_coverage.json`) ≤ max(0.05, 1.5 × final); `out_of_mask_fraction` is reported only (`scoring_migrations/inside_region_coverage.py` re-judged stored scores: 11 runs no longer fail, none newly fail) | The prompt names no region, so real regional events inside the network counted as failures (Maple, Ridgecrest: 9–14 % outside the mask, 0–1.4 % outside the coverage). The margin scales with the final because Kīlauea's real lower-rift seismicity lies beyond its summit network (final 25 %); chosen after seeing that case (research doc 04 §10.8) |
 
 ## 12. Version 2 (2026-10-30)
 

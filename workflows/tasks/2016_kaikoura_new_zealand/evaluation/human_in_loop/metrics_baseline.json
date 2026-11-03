@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "3b28279bfa815b0eb0caa0a6722d5ea45908e0cf",
+ "scorer_commit": "e6d4e4e4c22851fc36cb177821536ad6151058a2",
  "scorer_dirty": true,
- "generated_utc": "2026-10-29T17:59:06+00:00",
+ "generated_utc": "2026-11-03T19:36:57+00:00",
  "task": "2016_kaikoura_new_zealand",
  "references": {
   "tan": {
@@ -38,12 +38,14 @@
   "final": {
    "path": "expert/export/r8/60_catalog/catalog_events.csv",
    "events": 12924,
-   "out_of_mask_fraction": 0.0372
+   "out_of_mask_fraction": 0.0372,
+   "out_of_coverage_fraction": 0.0112
   },
   "blind": {
    "path": "expert/export/r1/04_locate_nonlinloc/full/events.csv",
    "events": 4758,
-   "out_of_mask_fraction": 0.0885
+   "out_of_mask_fraction": 0.0885,
+   "out_of_coverage_fraction": 0.0241
   }
  },
  "ceilings": {
@@ -3424,12 +3426,14 @@
     "dmag_median": -0.12,
     "dmag_std": 0.4119,
     "dmag_slope_per_unit": -0.0338,
+    "dmag_pairs": 1157,
     "b_difference": -0.408,
     "dt_mean_s": 0.27,
     "dt_std_s": 0.6517,
     "recall_after_large": 0.8273,
     "recall_other": 0.8201,
-    "out_of_mask_fraction": 0.0372
+    "out_of_mask_fraction": 0.0372,
+    "out_of_coverage_fraction": 0.0112
    }
   },
   "expert_blind": {
@@ -4275,12 +4279,14 @@
     "dmag_median": null,
     "dmag_std": null,
     "dmag_slope_per_unit": null,
+    "dmag_pairs": 0,
     "b_difference": null,
     "dt_mean_s": 0.4285,
     "dt_std_s": 0.6935,
     "recall_after_large": 0.55,
     "recall_other": 0.5623,
-    "out_of_mask_fraction": 0.0885
+    "out_of_mask_fraction": 0.0885,
+    "out_of_coverage_fraction": 0.0241
    }
   }
  }

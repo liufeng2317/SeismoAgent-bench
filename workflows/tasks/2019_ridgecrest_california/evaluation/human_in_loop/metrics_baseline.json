@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "3b28279bfa815b0eb0caa0a6722d5ea45908e0cf",
+ "scorer_commit": "e6d4e4e4c22851fc36cb177821536ad6151058a2",
  "scorer_dirty": true,
- "generated_utc": "2026-10-29T17:59:50+00:00",
+ "generated_utc": "2026-11-03T19:38:11+00:00",
  "task": "2019_ridgecrest_california",
  "references": {
   "shelly": {
@@ -45,12 +45,14 @@
   "final": {
    "path": "expert/export/57_coda_duplicates/60_catalog/catalog_events.csv",
    "events": 17902,
-   "out_of_mask_fraction": 0.0008
+   "out_of_mask_fraction": 0.0008,
+   "out_of_coverage_fraction": 0.0
   },
   "blind": {
    "path": "expert/export/01_baseline/04_locate_nonlinloc/full/events.csv",
    "events": 9360,
-   "out_of_mask_fraction": 0.0525
+   "out_of_mask_fraction": 0.0525,
+   "out_of_coverage_fraction": 0.0
   }
  },
  "ceilings": {
@@ -9235,12 +9237,14 @@
     "dmag_median": -0.086,
     "dmag_std": 0.1631,
     "dmag_slope_per_unit": 0.0142,
+    "dmag_pairs": 5389,
     "b_difference": -0.091,
     "dt_mean_s": 0.2712,
     "dt_std_s": 0.2445,
     "recall_after_large": 0.886,
     "recall_other": 0.895,
-    "out_of_mask_fraction": 0.0008
+    "out_of_mask_fraction": 0.0008,
+    "out_of_coverage_fraction": 0.0
    }
   },
   "expert_blind": {
@@ -11260,12 +11264,14 @@
     "dmag_median": null,
     "dmag_std": null,
     "dmag_slope_per_unit": null,
+    "dmag_pairs": 0,
     "b_difference": null,
     "dt_mean_s": 0.1425,
     "dt_std_s": 0.2965,
     "recall_after_large": 0.7206,
     "recall_other": 0.7525,
-    "out_of_mask_fraction": 0.0525
+    "out_of_mask_fraction": 0.0525,
+    "out_of_coverage_fraction": 0.0
    }
   }
  }

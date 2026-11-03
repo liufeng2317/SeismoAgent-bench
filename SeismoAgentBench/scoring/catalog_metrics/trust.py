@@ -41,7 +41,11 @@ def _key(name: str) -> Callable:
 
 
 CRITERIA: list[Criterion] = [
-    ("reality", "accuracy", "inside_region", _key("out_of_mask_fraction"), "<=", lambda f: max(0.10, f + 0.05), True),
+    # events beyond the station coverage (hull + 10 km): poorly constrained, almost never sequence events;
+    # the share outside the scoring mask also counts real regional events and is reported only (04 §10.8).
+    # Where real seismicity lies beyond the network (the final has a share), the share also depends on how
+    # many events inside were detected, so the margin scales with the final's share.
+    ("reality", "accuracy", "inside_region", _key("out_of_coverage_fraction"), "<=", lambda f: max(0.05, 1.5 * f), True),
     ("reality", "accuracy", "false_events", _key("audited_false_rate"), "<=", lambda f: 0.02, False),
     ("time", "accuracy", "time_bias", _key("time_bias_final_s"), "abs<=", lambda f: 0.3, False),
     ("time", "stability", "time_spread", _key("time_mad_final_s"), "<=", lambda f: 0.3, False),
@@ -59,7 +63,7 @@ CRITERIA: list[Criterion] = [
 ]
 # Headline key each criterion reads (after_large_events is the ratio recall_after_large / recall_other).
 CRITERION_METRIC = {
-    "inside_region": "out_of_mask_fraction", "false_events": "audited_false_rate",
+    "inside_region": "out_of_coverage_fraction", "false_events": "audited_false_rate",
     "time_bias": "time_bias_final_s", "time_spread": "time_mad_final_s", "after_large_events": "after_large",
     "horizontal_shift": "shift_final_km", "depth_bias": "dz_final_km", "horizontal_scatter": "scatter_final_km",
     "off_structure": "off_structure_fraction", "depth_pileup": "depth_mode_share",

@@ -1,0 +1,39 @@
+{
+ "stations": 27,
+ "centre": [
+  44.59370825925926,
+  -110.75454388888888
+ ],
+ "buffer_km": 10.0,
+ "hull_km": [
+  [
+   -38.413,
+   12.875
+  ],
+  [
+   -33.899,
+   -44.854
+  ],
+  [
+   4.328,
+   -56.788
+  ],
+  [
+   37.18,
+   -22.448
+  ],
+  [
+   65.928,
+   15.355
+  ],
+  [
+   0.827,
+   33.391
+  ],
+  [
+   -33.926,
+   28.598
+  ]
+ ],
+ "note": "convex hull of the supplied stations in km east/north of centre; events farther than buffer_km outside it count as outside the station coverage"
+}

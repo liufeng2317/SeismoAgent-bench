@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "3b28279bfa815b0eb0caa0a6722d5ea45908e0cf",
+ "scorer_commit": "e6d4e4e4c22851fc36cb177821536ad6151058a2",
  "scorer_dirty": true,
- "generated_utc": "2026-10-29T17:56:37+00:00",
+ "generated_utc": "2026-11-03T19:38:34+00:00",
  "task": "2020_magna_utah",
  "references": {
   "pang": {
@@ -31,12 +31,14 @@
   "final": {
    "path": "expert/export/r11/60_catalog/catalog_events.csv",
    "events": 5412,
-   "out_of_mask_fraction": 0.0173
+   "out_of_mask_fraction": 0.0173,
+   "out_of_coverage_fraction": 0.0004
   },
   "blind": {
    "path": "expert/export/r1/04_locate_nonlinloc/full/events.csv",
    "events": 2253,
-   "out_of_mask_fraction": 0.0941
+   "out_of_mask_fraction": 0.0941,
+   "out_of_coverage_fraction": 0.0
   }
  },
  "ceilings": {
@@ -2566,12 +2568,14 @@
     "dmag_median": 0.08,
     "dmag_std": 0.2071,
     "dmag_slope_per_unit": -0.1811,
+    "dmag_pairs": 1331,
     "b_difference": 0.3,
     "dt_mean_s": 0.083,
     "dt_std_s": 0.2055,
     "recall_after_large": 0.9054,
     "recall_other": 0.7843,
     "out_of_mask_fraction": 0.0173,
+    "out_of_coverage_fraction": 0.0004,
     "pick_recall_P": 0.8949,
     "pick_residual_mad_P_s": 0.03,
     "pick_recall_S": 0.8514,
@@ -3452,12 +3456,14 @@
     "dmag_median": null,
     "dmag_std": null,
     "dmag_slope_per_unit": null,
+    "dmag_pairs": 0,
     "b_difference": null,
     "dt_mean_s": 0.3168,
     "dt_std_s": 0.2136,
     "recall_after_large": 0.6538,
     "recall_other": 0.4595,
-    "out_of_mask_fraction": 0.0941
+    "out_of_mask_fraction": 0.0941,
+    "out_of_coverage_fraction": 0.0
    }
   }
  }

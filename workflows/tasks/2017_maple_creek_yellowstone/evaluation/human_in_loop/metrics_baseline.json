@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "3b28279bfa815b0eb0caa0a6722d5ea45908e0cf",
+ "scorer_commit": "e6d4e4e4c22851fc36cb177821536ad6151058a2",
  "scorer_dirty": true,
- "generated_utc": "2026-10-29T17:57:32+00:00",
+ "generated_utc": "2026-11-03T19:37:24+00:00",
  "task": "2017_maple_creek_yellowstone",
  "references": {
   "comcat": {
@@ -24,12 +24,14 @@
   "final": {
    "path": "expert/export/r11/60_catalog/catalog_events.csv",
    "events": 12422,
-   "out_of_mask_fraction": 0.0141
+   "out_of_mask_fraction": 0.0141,
+   "out_of_coverage_fraction": 0.0
   },
   "blind": {
    "path": "expert/export/r1/04_locate_nonlinloc/full/events.csv",
    "events": 1432,
-   "out_of_mask_fraction": 0.1231
+   "out_of_mask_fraction": 0.1231,
+   "out_of_coverage_fraction": 0.0006
   }
  },
  "ceilings": {
@@ -1198,12 +1200,14 @@
     "dmag_median": 0.152,
     "dmag_std": 0.2878,
     "dmag_slope_per_unit": -0.3094,
+    "dmag_pairs": 611,
     "b_difference": 0.427,
     "dt_mean_s": -0.0819,
     "dt_std_s": 0.1853,
     "recall_after_large": 0.9615,
     "recall_other": 0.9826,
     "out_of_mask_fraction": 0.0141,
+    "out_of_coverage_fraction": 0.0,
     "pick_recall_P": 0.5933,
     "pick_residual_mad_P_s": 0.0302,
     "pick_recall_S": 0.5907,
@@ -1843,12 +1847,14 @@
     "dmag_median": null,
     "dmag_std": null,
     "dmag_slope_per_unit": null,
+    "dmag_pairs": 0,
     "b_difference": null,
     "dt_mean_s": 0.4783,
     "dt_std_s": 0.2653,
     "recall_after_large": 0.8846,
     "recall_other": 0.9321,
-    "out_of_mask_fraction": 0.1231
+    "out_of_mask_fraction": 0.1231,
+    "out_of_coverage_fraction": 0.0006
    }
   }
  }
