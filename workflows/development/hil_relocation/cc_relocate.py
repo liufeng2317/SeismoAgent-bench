@@ -178,6 +178,19 @@ def relocation(cfg: dict, out: Path, keep_frame: bool | None = None) -> pd.DataF
     m["status"] = np.select(
         [m.relocated.isna(), ~m.relocated.astype(bool), dh >= 3, dto >= 1, ~m.depth_km_new.between(0, top)],
         ["not_in_output", "not_linked", "diverged_shift", "diverged_origin", "diverged_depth"], "relocated")
+    anchors = m.location_source.isin(cfg.get("anchor_sources", []))
+    if anchors.any():
+        # events already relocated with picks and CC (double difference) keep their positions; the others are moved
+        # into their frame by removing the anchors' median GrowClust displacement
+        moved = m.status.eq("relocated") & anchors
+        if moved.sum() >= 20:
+            for c in ("latitude", "longitude", "depth_km"):
+                m[c + "_new"] = m[c + "_new"] - float(np.median((m[c + "_new"] - m[c])[moved]))
+            dt0 = float(np.median((ts(m.origin_time_utc_new) - ts(m.origin_time_utc)).dt.total_seconds()[moved]))
+            new_t = ts(m.origin_time_utc_new) - pd.Timedelta(seconds=dt0)
+            m["origin_time_utc_new"] = new_t.dt.strftime("%Y-%m-%dT%H:%M:%S.%fZ").where(new_t.notna(), None)
+        m.loc[anchors & m.status.eq("relocated"), "status"] = "anchor_kept"
+        keep_frame = False
     ok = m.status.eq("relocated")
     if keep_frame is None:
         keep_frame = bool(cfg.get("keep_frame", False))

@@ -1,0 +1,13 @@
+# Prague: final r7 = r5 picked events (EDT) + r3 Match&Locate detections moved into the r5 frame, r6 direct ML, r7 coda ghosts.
+new_round: r8
+final: expert/export/r7/60_catalog/catalog_events.csv
+located_picks: expert/export/r5/04_locate_nonlinloc/full/picks.csv
+picker_picks: expert/export/r5/02_pick_phasenet/full/picks.csv
+templates: expert/export/r3/60_match_locate/full/inputs/templates.csv
+template_picks: expert/export/r3/60_match_locate/full/inputs/picks.csv
+stations: expert/export/r3/60_match_locate/full/inputs/stations.csv
+waveforms: data/2011_prague_oklahoma/data/waveforms/data
+model: {registry: data/2011_prague_oklahoma/data/models/velocity_models.json, key: keranen2013_prague_1d, layering: step}
+datum_km: 0.28
+grid: {step_km: 0.25, step_depth_km: 0.5}
+growclust: {ngoodmin: 2}

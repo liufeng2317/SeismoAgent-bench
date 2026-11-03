@@ -1,0 +1,15 @@
+# Ridgecrest: final 57_coda_duplicates = 07_match_locate union (dd: stage-52 picks+CC double difference; ml) after the
+# location-quality rule, large-event restore (56) and coda ghosts (57). dd events are anchors. Stage 62 tried hypoDD.
+new_round: 68_cc_relocation
+final: expert/export/57_coda_duplicates/60_catalog/catalog_events.csv
+located_picks: expert/export/01_baseline/04_locate_nonlinloc/full/picks.csv
+picker_picks: expert/export/02_pick_phasenet/full/picks.csv
+templates: expert/export/07_match_locate/60_match_locate/full_dense05/inputs/templates.csv
+template_picks: expert/export/07_match_locate/60_match_locate/full_dense05/inputs/picks.csv
+stations: expert/export/07_match_locate/60_match_locate/full_dense05/inputs/stations.csv
+waveforms: data/2019_ridgecrest_california/data/waveforms/data
+model: {registry: data/2019_ridgecrest_california/data/models/velocity_models.json, key: shelly_table1, layering: linear}
+datum_km: 0.7
+grid: {step_km: 0.25, step_depth_km: 0.5}
+growclust: {ngoodmin: 2, delmax_km: 120}
+anchor_sources: [dd]
