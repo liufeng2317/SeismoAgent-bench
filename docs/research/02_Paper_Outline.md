@@ -1,48 +1,159 @@
-# Paper outline
+# 论文大纲
 
-Status: outline agreed 2026-10-29. This document holds the paper's question, its claims with the evidence each needs, and the section and figure plan. The design it relies on (case tiers, Agent stages, form of the knowledge and the checker, controls) is defined in the [research plan](./00_Research_Plan.md); progress and the work plan are in [`progress/STATUS_AND_PLAN.md`](./progress/STATUS_AND_PLAN.md).
+状态：大纲于 2026-10-29 确定；2026-11-04 改为中文，并加入当前结果汇总（§4）、进度（§5）和预注册分析计划（§6）。本文写论文要回答的问题、每个论点需要的证据、章节和图的安排。所依赖的设计（案例分级、Agent 阶段、知识和 checker 的形式、对照）定义在[研究计划](./00_Research_Plan.md)；状态和工作计划在 [`progress/STATUS_AND_PLAN.md`](./progress/STATUS_AND_PLAN.md)；checker 的设计和检验在 [`04_Checker_Design.md`](./04_Checker_Design.md) 和 [`progress/checker_validation/`](./progress/checker_validation/README.md)。
 
-## 1. Goal and core question
+## 1. 目标与核心问题
 
-> **Can an agentic approach build high-precision earthquake catalogs automatically — and if not, is the missing piece tools, knowledge, or the ability to validate its own results?**
+> **Agent 方法能否自动构建高精度地震目录？如果不能，缺的是工具、知识，还是检验自身结果的能力？**
 
-The paper answers it in four parts:
+论文分四部分回答：
 
-1. **Cases in tiers.** Six cases, from basic to hard, across induced, swarm, volcanic, moderate and large mainshock–aftershock, and complex multi-fault settings ([research plan](./00_Research_Plan.md) §2.2).
-2. **Tools.** What a validated tool library adds to a general Agent (S0 → S1).
-3. **Knowledge.** What case-agnostic expert knowledge, given up front, adds on top of tools (S1 → S2).
-4. **Improving agentic catalogs.**
-   - *Human-in-loop iteration*: the human-in-loop final is the upper bound; coding each human intervention shows which of them could be automated ([`01_Expert_Experience_and_Checker.md`](./01_Expert_Experience_and_Checker.md) §5).
-   - *Expert experience as automated validation*: a reference-free checker run on the Agent's own products, with the Agent required to repair upstream (S2 → S3), and how much of the S1-to-final gap it closes.
+1. **分级案例。** 六个案例，从基础到困难，覆盖诱发地震、震群、火山、中强和大型主震–余震序列，以及复杂多断层环境（[研究计划](./00_Research_Plan.md) §2.2）。
+2. **工具。** 经过验证的工具库给通用 Agent 带来什么（S0 → S1）。
+3. **知识。** 事先给出、与案例无关的专家知识在工具之上还能带来什么（S1 → S2）。
+4. **改进 Agent 目录。**
+   - *human-in-loop 迭代*：human-in-loop 最终目录是上限；对每次人工干预编码，说明哪些可以自动化（[`01_Expert_Experience_and_Checker.md`](./01_Expert_Experience_and_Checker.md) §5）。
+   - *把专家经验变成自动检验*：在 Agent 自己的产物上运行不依赖参考目录的 checker，要求 Agent 回到上游修复（S2 → S3），并度量它弥合了 S1 到最终目录之间多少差距。
 
-## 2. Claims and the evidence each needs
+## 2. 论点与所需证据
 
-| Claim | Evidence | Status |
+| 论点 | 证据 | 现状（2026-11-04） |
 |---|---|---|
-| Difficulty rises across the tiers | tier features (research plan §2.2) and expert difficulty: rounds, blind → final gap, ceiling | features to tabulate |
-| Tools are necessary | S0 vs S1 on six cases: completion, recall_norm, recall_tight, structure, pick timing | Prague, Magna, Maple Creek, Kīlauea scored; Kaikōura running |
-| Tools are not sufficient | S1 vs final: no tools run reaches the trusted-catalog standard; space and strength fail on back-end choices the expert locator removes (swap); 22–51 % of the final's events recovered | four cases scored |
-| Knowledge helps, and where | S2 vs S1 per dimension and tier | not started |
-| Automated validation closes the gap | S3 vs S2; gap closure (S3 − S1)/(final − S1) per dimension | not started |
-| Part of the final is unreachable without references | human-in-loop intervention coding (`01_Expert_Experience_and_Checker.md` §5); expert ladder | ladder done; coding not started |
-| A trusted catalog is (or is not) reached | trusted-catalog verdict (metrics v2 §7a): reality, time, space, strength by accuracy and stability; completeness apart | none of 8 S0/S1 runs trusted; Kīlauea tools fails only on a −0.36 s time bias (audit pending) |
+| 难度随分级上升 | 分级特征（研究计划 §2.2）和专家难度：迭代轮数、盲目录到最终目录的差距、上限 | 特征待列表 |
+| 工具是必要的 | 六个案例上 S0 对 S1：完成度、`recall_norm`、`recall_tight`、结构、拾取时间 | 六个案例都已评分：两个 S0 运行没有完成，其余 S0 不通过 5–12 项，S1 不通过 1–7 项（§4.1） |
+| 工具不充分 | S1 对最终目录：没有一个 tools 运行达到可信标准；空间和强度维度失败在专家定位器能消除的后端选择上（组件替换）；只找回最终目录 22–51 % 的事件 | 六个案例都已评分，结论成立 |
+| 知识有帮助，帮助在哪里 | S2 对 S1，按维度和分级 | 只有后端版本（B 层）：知识变体与 checker 变体相近；知识修好了 Kīlauea 的基准面（试水批次），修不了先验速度模型 |
+| 自动检验能弥合差距 | S3 对 S2；按维度的差距弥合率 (S3 − S1)/(final − S1) | 只有后端版本：checker 稳定挡住震级单位和响应错误（A 层），时间和深度的整体偏差（C 层）没有改善（§4.3） |
+| 最终目录的一部分没有参考就到不了 | human-in-loop 干预编码；专家阶梯 | 阶梯完成；编码未开始 |
+| 是否达到可信目录 | 可信目录判定（指标 v2 §7a）：真实性、时间、空间、强度，按准确性和稳定性，完整性单列 | 至今没有一个运行被判可信；最接近的是 Kīlauea tools（只有时间偏差 −0.36 s 不通过）和 Kīlauea 知识后端试水（只有深度堆积不通过） |
 
-## 3. Sections and figures
+## 3. 章节与图
 
-1. **Introduction** — agentic science; earthquake catalogs as a complete, objectively testable task.
-2. **Benchmark** — six tiered cases; multiple references and the ceiling; the human-in-loop final as the upper bound.
-3. **Evaluation** ([`03_Scoring_Method.md`](03_Scoring_Method.md)) — catalog metrics v2 (gates at the sequence scale, chance correction, direct comparison with the final); shift/scatter decomposition; component swap; blind audit; trusted-catalog verdict by dimension, completeness apart. Include the v1 → v2 lesson: a headline that hides a scattered catalog.
-4. **Results I: tools** — S0 vs S1 (necessary, not sufficient).
-5. **Results II: knowledge** — S1 vs S2 by dimension and tier.
-6. **Results III: human-in-loop iteration** — expert ladder; intervention coding.
-7. **Results IV: automated validation** — S3; gap closure; checker use and dispositions; in-sample vs out-of-sample rules.
-8. **Discussion** — which catalog dimensions an Agent can be trusted with, in which settings; what still needs a human or a reference.
+1. **引言**：Agent 驱动的科学研究；地震目录是一个完整、可客观检验的任务。
+2. **基准**：六个分级案例；多个参考目录和上限；human-in-loop 最终目录作为上限。
+3. **评估**（[`03_Scoring_Method.md`](03_Scoring_Method.md)）：目录指标 v2（序列尺度的门限、偶然匹配校正、与最终目录直接比较）；平移与离散的分解；组件替换；盲审；按维度的可信目录判定，完整性单列。写进 v1 → v2 的教训：一个汇总数字掩盖了散乱的目录。也写进 2026-11-04 的两项口径修正（震级斜率至少 30 对；区域判据按台站覆盖）。
+4. **结果一：工具**：S0 对 S1（必要但不充分）。
+5. **结果二：知识**：S1 对 S2，按维度和分级。
+6. **结果三：human-in-loop 迭代**：专家阶梯；干预编码。
+7. **结果四：自动检验**：S3；差距弥合；checker 的使用和处置；规则来源案例与其他案例分开报告。
+8. **讨论**：哪些目录维度、在哪些情形下可以交给 Agent；哪些仍需要人或参考目录。可写入 checker 研究的边界：所有台站或事件共有的误差（速度模型、震级定标水平、主震尾波中的漏检）只靠 Agent 自己的数据判断不了。
 
-| Figure | Content |
+| 图 | 内容 |
 |---|---|
-| 1 | benchmark overview and case map with tiers |
-| 2 | heat map: case × stage × dimension, normalised to the final |
-| 3 | gap-closure waterfall S1 → S2 → S3 → final per tier |
-| 4 | component swap (front end vs back end) |
-| 5 | human-in-loop ladder and intervention classes |
-| 6 | checker use: flags raised, fixed, justified, missed |
+| 1 | 基准概览和带分级的案例地图 |
+| 2 | 热图：案例 × 阶段 × 维度，按最终目录归一化 |
+| 3 | 每个分级的差距弥合瀑布图 S1 → S2 → S3 → 最终目录 |
+| 4 | 组件替换（前端对后端） |
+| 5 | human-in-loop 阶梯和干预类别 |
+| 6 | checker 的使用：报警、修复、给出理由、漏报 |
+
+## 4. 当前结果汇总（2026-11-04）
+
+所有判定都按当前评分口径（指标 v2，加 2026-11-04 的两项修正）重新计算。每个配置大多只有一次运行，结论都是初步的。
+
+### 4.1 S0 和 S1：正式运行（2026-10-28 至 10-29）
+
+| 案例（分级） | S0 `min`：不通过的可信标准 | S1 `tools`：不通过的可信标准 | S1 找回最终目录事件的比例 |
+|---|---|---|---|
+| Prague（基础） | 未完成 | 2：深度偏差、震级偏差 | 46 % |
+| Magna（基础） | 未完成 | 3：深度偏差、水平偏移、震级偏差 | 51 % |
+| Maple Creek（中等） | 12 项 | 5：时间偏差、深度偏差、水平离散、偏离构造、震级标度 | 22 % |
+| Kīlauea（中等） | 5 项 | 1：时间偏差（−0.36 s） | 37 % |
+| Ridgecrest（困难） | 6 项 | 5：深度偏差、深度堆积、大事件、偏离构造、震级偏差 | 39 % |
+| Kaikōura（困难） | 8 项 | 7：时间、时间离散、水平偏移、水平离散、深度堆积、大事件、震级偏差 | 43 % |
+
+工具让六个案例都能完成，且不通过项大幅减少；但没有一个运行达到可信标准，找回的事件只有最终目录的 22–51 %（检测差距主要来自 human-in-loop 用的模板匹配）。
+
+### 4.2 后端消融（B 层，checker 1.0，2026-11-01 至 11-03）
+
+三个变体共用 S1 运行的拾取和关联，只做定位、相对定位和震级：`backend`（只有工具）、`backend_checker`（加 checker）、`backend_knowledge`（加 checker 和知识）。
+
+| 案例 | S1 tools | backend | backend_checker | backend_knowledge |
+|---|---|---|---|---|
+| Prague | 2 | 4 | 1 | 1 |
+| Magna | 3 | 4 | 4 | 4 |
+| Maple Creek | 5 | 6 | 4 | 5 |
+| Kīlauea | 1 | 1 | 3 | 2 |
+| Ridgecrest | 5 | 5 | 3 | 3 |
+| Kaikōura | 7 | 4 | 4 | 6 |
+| **合计** | 23 | 24 | **19** | 21 |
+
+统一测试试水（Kīlauea，checker 1.2，更新后的知识，2026-11-03）：`backend` 3 项、`backend_checker` 4 项、`backend_knowledge` **1 项**（时间偏差 +0.08 s、深度偏差 −0.07 km，只剩深度堆积；该项随后由 NonLinLoc 接口修正离线消除）。
+
+### 4.3 主要发现（细节见 [`04_Checker_Design.md`](./04_Checker_Design.md) §11）
+
+1. **A 层错误被稳定挡住。** 不带 checker 的后端变体 6 个案例有 3 个犯了震级响应或单位错误，带 checker 的 12 次运行 0 次；起作用的主要是工具里正确的参考计算，Agent 照用了它。
+2. **时间和深度的整体偏差来自速度模型（C 层），checker 和知识都没有修好。** 单因素重定位复现了主要偏差（模型顶面放在海平面、采用通用模型、近地表太快）。不提供具体模型时，数据只给方向不给水平；按任何单一测量值挑模型都会在某些案例上选错。
+3. **报警会诱导表面修复，处置完整不等于正确。** 4 次报警驱动的改动使结果变差；试水中只有 checker 的 Agent 把正确的报警解释为拾取问题，用台站延迟吸收。
+4. **知识在流程和约定上起作用。** 试水中知识变体从原图数字化模型、查明基准面，时间和深度都通过；只有 checker 的变体没取到模型数值、自拟了一个过慢的模型。
+5. **工具的约定本身是误差来源。** HypoInverse CRH 模型忽略台站高程、NonLinLoc 深度搜索从参考高程开始、hypoDD 和 GrowClust 把台站放在模型深度 0，都会造成系统偏差；前两项已改接口默认值。
+6. **水平偏移在三个案例上与一维模型的选择无关。** Kaikōura、Magna、Maple 上 10 个一维候选模型的水平偏移都在 1.1–2.9 km（门槛 1 km），需要台站项或三维结构来解释（分析进行中）。
+
+## 5. 进度（2026-11-04）
+
+**已完成：** 六个案例的数据、参考目录、上限和 human-in-loop 最终目录；S0、S1 正式运行和评分；组件替换和专家阶梯；评分方法 v2 和两项修正；checker 1.0–1.2 和 1.3 开发版及其检验；知识 skill（小批量协议、方案决定、症状手册、checker 看不到的问题、震级资源）；B 层后端消融；统一测试试水；运行环境写保护、泄漏扫描两层。
+
+**进行中：** 不提供模型时从数据建模型的离线检验（最小一维模型加台站校正，`workflows/development/replay/velocity_from_data.py`）；水平偏移归因。
+
+**未开始：**
+- 完整流程（含前端拾取、关联、模板匹配）的 S2c、S3 任务包；目前只有后端版本。
+- S2（只有知识、没有 checker）的运行。
+- 重复运行（研究计划 §2.6：先在 S1 和 S3 上重复）、第二个模型、保留案例。
+- human-in-loop 干预编码；分级特征表；差距弥合的计算和图。
+
+## 6. 预注册分析计划（草案，正式运行前冻结）
+
+正式的 S2c、S3（以及 S2，如果运行）开跑前，以下内容写定并记录提交号，之后不再改动；运行后发现的问题只作为附加分析报告，不改主分析。
+
+### 6.1 冻结的内容
+
+| 项目 | 冻结方式 |
+|---|---|
+| 评分 | 目录指标 v2 加 2026-11-04 两项修正（`docs/framework/02_Catalog_Metrics.md` 变更记录）；评分器提交号；每个案例的 `metrics.yaml`、`station_coverage.json`、`metrics_baseline.json` |
+| checker | 1.3 的标签和提交号；评分端核对用运行时的 checker 版本 |
+| 知识 skill 和震级资源 | `data/agent_resource/` 的提交号；不包含任何具体速度模型 |
+| 工具 | `seismotools` 的提交号（含 HypoInverse v2、NonLinLoc 搜索顶面） |
+| 任务 | 每个阶段的提示词、输出合同、时间预算；提示词不写研究区域 |
+| Agent | Claude Code × GLM-5.3，运行配置文件；第二个模型（如做）同样写定 |
+
+### 6.2 假设与比较
+
+| 编号 | 假设 | 比较 | 主要度量 |
+|---|---|---|---|
+| H1 | 工具是必要的 | S1 对 S0 | 完成度；不通过的可信标准数 |
+| H2 | 工具不充分 | S1 对最终目录 | 是否可信；各维度相对最终目录的差距 |
+| H3 | checker 加知识缩小差距 | S3 对 S1 | 不通过的可信标准数；差距弥合率 (S3 − S1)/(final − S1)，针对 `recall_norm`、水平偏移、`dz_median`、震级偏差，按分级报告 |
+| H4 | 知识的贡献不止于报警 | S3 对 S2c（消融） | 同 H3；A 层错误（单位、响应、基准面约定）的发生率 |
+| H5 | checker 挡不住 C 层偏差 | S2c、S3 的时间和深度偏差对 S1 | 时间、深度偏差的绝对值；预期不显著改善 |
+| H6 | 处置的质量 | S2c、S3 的处置记录 | 报警数、修复、给理由、漏报；按审计判断的错误处置比例 |
+
+方向预期：H1、H2 已由现有运行支持；H3 预期在 A 层错误多的案例（Prague、Ridgecrest、Kīlauea）改善、在速度模型主导的案例（Maple、Magna、Kaikōura）不改善；H5 预期成立。
+
+### 6.3 分析单位、重复和排除
+
+- 分析单位是一次运行；按案例配对比较（同一案例的不同阶段）。
+- 重复：主要对比（S1、S3）每个案例至少两次（研究计划 §2.6）；先做 Prague 和 Magna，以运行间离散决定其余。
+- 排除规则（运行前写定）：提供方限额或宕机中断的运行标为 `EXCLUDED` 并重跑；框架缺陷导致的中断同样处理；泄漏扫描命中扣留产品的运行报告但不进主分析；`environment_integrity` 显示共享环境被改动的运行报告但不进主分析；待审访问由人工核对后决定。
+- 所有运行都报告，不挑选。
+
+### 6.4 统计处理
+
+- 每个配置的运行数少（每案例 1–3 次），以描述为主：逐案例给出数值和变化方向，跨案例用符号检验（六个案例中改善的个数），重复运行给出离散范围。
+- 不对单次运行的差异下结论；单次差异小于同配置重复运行的离散时记为"无差别"。
+- 规则来源案例与其他案例分开报告（研究计划 §2.5）：checker 和知识的规则都在这六个案例上总结和校准（例如 Wadati 偏差门槛来自试水运行、区域判据的余量来自 Kīlauea），因此主结论以保留案例或"规则不来源于该案例"的部分为准；没有保留案例时如实说明。
+
+### 6.5 需要决定后才能冻结的事项
+
+1. 是否运行 S2（只有知识）。研究计划要求它来分离"知道怎么做"和"知道哪里错了"；但知识 skill 的小批量协议和方案决定都依赖 checker，单独拆开不自然。
+2. 正式比较用完整流程还是后端版本。完整流程能回答检测和完整性（目前差距最大的维度之一），但每次运行 5–27 小时；后端版本便宜，但前端固定。
+3. 重复次数、第二个模型和保留案例是否纳入本轮。
+4. 主要度量是"不通过的可信标准数"还是"差距弥合率"，或两者并列。
+
+## 7. 后续工作
+
+1. 完成离线的速度模型检验和水平偏移归因，结论写进知识 skill 或作为论文的边界结论。
+2. 冻结 checker 1.3 和知识 skill，做一次端到端冒烟测试。
+3. 决定 §6.5 的四项，冻结预注册计划。
+4. 搭建完整流程的 S2c、S3 任务包（如果选择完整流程）。
+5. 按预注册计划运行：先用最少的运行验证新知识和工具修复（例如 Maple 一次 S3），再按计划扩展。
+6. 并行完成 human-in-loop 干预编码、分级特征表、差距弥合计算和图。
