@@ -98,7 +98,7 @@ def _case_rows(task: Path) -> tuple[list[Row], dict | None, list]:
                         {"key": scores.parent.name, "variant": run["variant"],
                          "state": s.get("formal_state") or s.get("run_state"), "swap": s.get("swap"),
                          "audit": s.get("audit"), "process": s.get("process"),
-                         "leakage": s.get("leakage_flag"), "completed": (s.get("completion") or {}).get("completed")}))
+                         "leakage": s.get("leakage_flag"), "leakage_review": s.get("leakage_review"), "completed": (s.get("completion") or {}).get("completed")}))
         rescue = s.get("rescue_reference_only")
         if rescue:
             rows.append(Row(f"{run['variant']} — rescue, reference only", rescue.get("headline") or {},
@@ -164,7 +164,7 @@ def build(tasks_root: Path) -> str:
                 labels = a.get("labels") or {}
                 process_body.append([name, r.label, _fmt((p.get("elapsed_s") or 0) / 3600, 1) if p.get("elapsed_s") else "—",
                                      _fmt(p.get("cost_usd")), _fmt(p.get("turns")),
-                                     "yes" if r.extra.get("leakage") else "no",
+                                     "yes" if r.extra.get("leakage") else ("review" if r.extra.get("leakage_review") else "no"),
                                      (f"{a['sampled']} of {a['unsupported']:,} unsupported events; "
                                       + ("labelled" if labels else "not labelled")) if a else "—"])
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")

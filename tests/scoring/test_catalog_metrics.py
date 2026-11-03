@@ -250,3 +250,20 @@ class MetricTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class LeakageReviewTests(unittest.TestCase):
+    def test_review_patterns_list_accesses_without_setting_the_flag(self):
+        import json
+        import tempfile
+        from pathlib import Path
+        from SeismoAgentBench.scoring.catalog_metrics.process import scan_transcript
+        call = {"type": "assistant", "message": {"content": [
+            {"type": "tool_use", "name": "WebFetch", "input": {"url": "https://scedc.caltech.edu/data/page.html"}}]}}
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "execution.jsonl"
+            path.write_text(json.dumps(call) + "\n", encoding="utf-8")
+            out = scan_transcript(path, ["fdsnws/event"], None, [r"scedc\.caltech\.edu/"])
+            self.assertFalse(out["flag"])
+            self.assertEqual(out["review"], {r"scedc\.caltech\.edu/": {"calls": 1, "first_line": 1}})
+            self.assertTrue(scan_transcript(path, [r"scedc\.caltech\.edu/data"], None)["flag"])

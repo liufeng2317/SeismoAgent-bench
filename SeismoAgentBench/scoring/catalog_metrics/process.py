@@ -64,8 +64,8 @@ def consistency(catalog: pd.DataFrame, picks: pd.DataFrame) -> dict:
     return out
 
 
-def process_metrics(run_dir: Path, leakage_patterns: Iterable[str]) -> dict:
-    """Cost, time and leakage flags from ``record/`` (L6)."""
+def process_metrics(run_dir: Path, leakage_patterns: Iterable[str], review_patterns: Iterable[str] = ()) -> dict:
+    """Cost, time and leakage flags from ``record/`` (L6); review patterns list accesses to check by hand."""
     record = run_dir / "record"
     result = _json(record / "run_result.json")
     usage = _json(record / "usage_summary.json")
@@ -80,7 +80,7 @@ def process_metrics(run_dir: Path, leakage_patterns: Iterable[str]) -> dict:
     if out["elapsed_s"] is None and result.get("started_at") and result.get("finished_at"):
         span = pd.Timestamp(result["finished_at"]) - pd.Timestamp(result["started_at"])
         out["elapsed_s"] = round(span.total_seconds(), 1)  # records written before elapsed_s existed
-    out["leakage"] = scan_transcript(record / "execution.jsonl", leakage_patterns, run_dir)
+    out["leakage"] = scan_transcript(record / "execution.jsonl", leakage_patterns, run_dir, review_patterns)
     return out
 
 
@@ -103,16 +103,18 @@ def tool_inputs(path: Path):
 ABSOLUTE_PATH = re.compile(r"(?<![\w.])/(?:[\w.@+-]+/){2,}[\w.@+-]*")
 
 
-def scan_transcript(path: Path, patterns: Iterable[str], run_dir: Path | None = None) -> dict:
+def scan_transcript(path: Path, patterns: Iterable[str], run_dir: Path | None = None,
+                    review_patterns: Iterable[str] = ()) -> dict:
     """URLs and paths the Agent accessed (tool-call inputs) and hits of the withheld-product patterns.
 
     Text that only appears in tool results (fetched documents, listings) is
     not an access and is not scanned.
     """
     compiled = [(p, re.compile(p, re.IGNORECASE)) for p in patterns]
+    review = [(p, re.compile(p, re.IGNORECASE)) for p in review_patterns]
     if not path.is_file():
-        return {"scanned": False, "flag": None, "urls": [], "outside_paths": [], "hits": {}}
-    urls, outside, hits = set(), set(), {}
+        return {"scanned": False, "flag": None, "urls": [], "outside_paths": [], "hits": {}, "review": {}}
+    urls, outside, hits, to_review = set(), set(), {}, {}
     own = str(run_dir.resolve()) if run_dir is not None else None
     for number, text in tool_inputs(path):
         urls.update(m.rstrip(".,;") for m in URL.findall(text))
@@ -122,5 +124,11 @@ def scan_transcript(path: Path, patterns: Iterable[str], run_dir: Path | None = 
         for raw, rx in compiled:
             if rx.search(text):
                 hits.setdefault(raw, []).append(number)
+        for raw, rx in review:
+            if rx.search(text):
+                to_review.setdefault(raw, []).append(number)
+    # review: accesses that may or may not be a withheld product (a catalogue page read for its velocity
+    # model, a target paper fetched by URL); they do not set the flag and are checked by hand.
     return {"scanned": True, "flag": bool(hits), "urls": sorted(urls), "outside_paths": sorted(outside),
-            "hits": {k: {"calls": len(v), "first_line": v[0]} for k, v in hits.items()}}
+            "hits": {k: {"calls": len(v), "first_line": v[0]} for k, v in hits.items()},
+            "review": {k: {"calls": len(v), "first_line": v[0]} for k, v in to_review.items()}}

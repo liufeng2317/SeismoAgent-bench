@@ -33,5 +33,11 @@ leakage_patterns:
   - 'data/\d{4}_[a-z_]+/(data/catalogs|references|analysis)/'   # repository reference data
   - 'tasks/\d{4}_[a-z_]+/(expert|evaluation)/'                  # expert catalogs and scores
   - 'fdsnws/event'
-  - 'isc\.ac\.uk/(iscbulletin|cgi-bin)|seismicportal\.eu'
+  - 'isc\.ac\.uk/(iscbulletin|cgi-bin|dataset_repository)|seismicportal\.eu|doi\.org/10\.31905/'   # ISC bulletin and dataset repository
   - 'earthquake\.usgs\.gov/(earthquakes|fdsnws)'
+  - 'quake\.utah\.edu/[^\s"]*catalog'   # UUSS catalogues
+
+# Accesses listed for a manual check; they do not set the leakage flag (scoring/catalog_metrics/process.py).
+leakage_review_patterns:
+  - '(scedc\.caltech\.edu|ncedc\.org|quake\.utah\.edu|ou\.edu/ogs|geonet\.org\.nz|zenodo\.org|datadryad\.org|sciencebase\.gov|igppweb\.ucsd\.edu/~shearer)/'   # hosts of catalogues: read for a model, or downloaded?
+  - 'https?://[^\s"]*(magna)'   # a URL naming the sequence (paper, catalogue, data product)

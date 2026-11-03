@@ -36,6 +36,7 @@ def _score_part(score: dict | None, swap: dict | None) -> dict:
         part["trust"] = score.get("trust")
         part["process"] = {k: score["process"].get(k) for k in PROCESS_KEYS}
         part["leakage_flag"] = (score["process"].get("leakage") or {}).get("flag")
+        part["leakage_review"] = sorted((score["process"].get("leakage") or {}).get("review") or {})
         if score.get("audit"):
             part["audit"] = {k: score["audit"].get(k) for k in ("sampled", "unsupported", "labels")}
     if swap:

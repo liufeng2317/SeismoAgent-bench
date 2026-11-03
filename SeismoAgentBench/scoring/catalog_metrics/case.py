@@ -302,7 +302,8 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
     status = contract_status(work, contract)
     status["contract"] = str(contract_path.relative_to(case.task_dir))
     report = {**_scorer_record(), "task": case.task_dir.name, "run": layout, "completion": status,
-              "process": process_metrics(run_dir, case.config.get("leakage_patterns", []))}
+              "process": process_metrics(run_dir, case.config.get("leakage_patterns", []),
+                                         case.config.get("leakage_review_patterns", []))}
     out_dir = run_dir / "evaluation"
     from . import checker_audit
     if checker_audit.required(contract) or (work / checker_audit.REPORT).is_file():

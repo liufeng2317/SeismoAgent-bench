@@ -171,7 +171,7 @@ The expert's own stage-03 picks are scored the same way (baseline expert-final r
 
 ### L6 — Process and cost
 
-From the run record: wall time, cost (USD), input/output/cached tokens, turns, tool calls over 300 s, compactions. **Leakage flags:** every URL and file path accessed outside the run directory is listed from the transcript; an access matching the case's withheld products (reference DOIs, data repositories and catalogue services in `data/<case>/data/catalogs/*/README.md`) sets `leakage_flag`. A flagged run is reported but excluded from headline means.
+From the run record: wall time, cost (USD), input/output/cached tokens, turns, tool calls over 300 s, compactions. **Leakage flags:** every URL and file path accessed outside the run directory is listed from the transcript; an access matching the case's withheld products (reference DOIs, data repositories and catalogue services in `data/<case>/data/catalogs/*/README.md`) sets `leakage_flag`. A flagged run is reported but excluded from headline means. A second list, `leakage_review_patterns`, names accesses that may or may not be a withheld product: pages on catalogue hosts (SCEDC, NCEDC, UUSS, OGS, GeoNet, Zenodo, Dryad, ScienceBase, the Shearer group archive) and any URL naming the sequence. They are listed under `review` and shown as "review" in the process table, do not set the flag, and are checked by hand (an Agent reading a catalogue page for its velocity model is not leakage; downloading the catalogue is).
 
 ### L7 — Reliability self-assessment (optional columns)
 

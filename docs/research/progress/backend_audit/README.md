@@ -53,7 +53,7 @@
 | `checker_audit.py` 只统计 `work/checker/` 下的报告 | Kīlauea knowledge 实际运行 7 次被记成 1 次 | 改为统计 `work/` 下所有 checker 报告 |
 | Magna knowledge 的处置记录缺 `flag_id` | Agent 自己脚本的 bug | 已按"审计问题而非无效运行"处理（0784fc7） |
 | Prague `backend` 往共享评测环境 `pip install pypdf` | 违反"不得修改评测环境" | 运行环境需改为只读或让 Agent 用独立环境 |
-| Prague knowledge 访问了 Schoenball & Ellsworth 2017 俄克拉荷马重定位目录（覆盖 Prague） | 不在泄漏清单，未被标记；PDF 未读出，未使用 | 把区域重定位目录加入各案例泄漏清单 |
+| Prague knowledge 访问了 Schoenball & Ellsworth 2017 俄克拉荷马重定位目录论文 | 更正（2026-11-03）：该目录覆盖 2013-05 至 2016-11，不含 2011 年 Prague 序列；访问是为找速度模型，PDF 未读出，不构成泄漏 | 扣留清单补 OGS、UUSS 目录和 ISC 数据集仓库；新增只列出、不排除的待审清单（目录主机、含序列名的 URL），已有运行重扫后无新增排除，待审 4 个均为查速度模型 |
 | Maple 专家的 UUSS 模型出自 Pang et al. 2019（目标论文，在泄漏清单中） | 不能作为知识资源提供给 Agent | 区域速度模型资源必须逐个核查来源 |
 
 ## 6. 对设计的含义
