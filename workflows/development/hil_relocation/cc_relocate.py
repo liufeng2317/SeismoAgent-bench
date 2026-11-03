@@ -42,6 +42,13 @@ PY = "/liufeng1afs/software/miniconda3/envs/seismoagent_eval/bin/python"
 CCDT = ROOT / "seismotools/cross_correlation/interface/run.py"
 GROWCLUST = ROOT / "seismotools/growclust/interface/run.py"
 sys.path.insert(0, str(ROOT))
+# one thread per worker process: NumPy/FFT threads inside each ccdt worker otherwise oversubscribe the cores
+SINGLE_THREAD = {k: "1" for k in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS")}
+
+
+def _env() -> dict:
+    import os
+    return {**os.environ, **SINGLE_THREAD}
 
 
 def ts(s):
@@ -124,7 +131,7 @@ def step_ccdt(cfg: dict, out: Path, workers: int) -> dict:
         subprocess.run([PY, "-I", str(CCDT), "--events", str(out / "events.csv"), "--arrivals", str(out / "arrivals.csv"),
                         "--waveforms", str(out / "waveforms"), "--output-dir", str(out / "ccdt"), "--config",
                         str(out / "ccdt_config.json"), "--workers", str(workers), "--overwrite"],
-                       stdout=log, stderr=subprocess.STDOUT, check=True)
+                       stdout=log, stderr=subprocess.STDOUT, check=True, env=_env())
     return json.loads((out / "ccdt/run_result.json").read_text())
 
 
@@ -146,7 +153,7 @@ def step_growclust(cfg: dict, out: Path) -> dict:
         subprocess.run([PY, "-I", str(GROWCLUST), "--events", str(out / "events.csv"), "--stations", str(out / "stations.csv"),
                         "--dtcc", str(out / "ccdt"), "--velocity-model", str(out / "model.txt"), "--config",
                         str(out / "growclust_config.json"), "--output-dir", str(out / "growclust"), "--overwrite"],
-                       stdout=log, stderr=subprocess.STDOUT, check=True)
+                       stdout=log, stderr=subprocess.STDOUT, check=True, env=_env())
     return json.loads((out / "growclust/run_result.json").read_text())
 
 
