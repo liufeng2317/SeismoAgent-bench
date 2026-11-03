@@ -55,10 +55,10 @@ def ts(s):
     return pd.to_datetime(s, utc=True, format="ISO8601")
 
 
-def load(case: str) -> tuple[dict, Path, Path]:
+def load(case: str, tag: str = "") -> tuple[dict, Path, Path]:
     cfg = yaml.safe_load((HERE / "cases" / f"{case}.yaml").read_text())
     task = ROOT / "workflows/tasks" / case
-    out = task / "expert/export" / cfg["new_round"] / "68_cc_relocation"
+    out = task / "expert/export" / cfg["new_round"] / ("68_cc_relocation" + (f"_{tag}" if tag else ""))
     out.mkdir(parents=True, exist_ok=True)
     return cfg, task, out
 
@@ -299,8 +299,13 @@ def main() -> int:
     ap.add_argument("--workers", type=int, default=32)
     ap.add_argument("--ngoodmin", type=int, default=None, help="GrowClust ngoodmin (default: case config, else 4)")
     ap.add_argument("--run-name", default="growclust", help="GrowClust output folder evaluated and exported")
+    ap.add_argument("--min-cc", type=float, default=None, help="ccdt and GrowClust minimum CC (default: case config, else 0.6)")
+    ap.add_argument("--tag", default="", help="variant: separate working folder 68_cc_relocation_<tag>")
     a = ap.parse_args()
-    cfg, task, out = load(a.case)
+    cfg, task, out = load(a.case, a.tag)
+    if a.min_cc is not None:
+        cfg.setdefault("ccdt", {})["min_cc"] = a.min_cc
+        cfg.setdefault("growclust", {})["rmin"] = a.min_cc
     cfg["growclust_run"] = a.run_name
     steps = ["inputs", "ccdt", "growclust", "evaluate", "export"] if a.step == "all" else [a.step]
     for s in steps:
