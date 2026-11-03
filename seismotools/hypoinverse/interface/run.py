@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Locate a catalog of arrival groups with HypoInverse 1.40 (interface version 1).
+"""Locate a catalog of arrival groups with HypoInverse 1.40 (interface version 2).
 
 HypoInverse (Klein 2002, USGS OFR 02-171) is the linearised (Geiger) locator
 of the USGS/ANSS networks, with distance and residual weighting. This adapter
-writes its station file (format #2), CRH layer models for P and S (SAL), a
+writes its station file (format #2), CRE (or CRH) layer models for P and S (SAL), a
 Y2000 archive phase file and a command file, runs hyp1.40 and returns the
 seismotools locator contract (events.csv, arrivals.csv). See interface/README.md.
 """
@@ -23,8 +23,12 @@ import pandas as pd
 
 HERE = Path(__file__).resolve()
 BIN = HERE.parents[1] / "runtime" / "bin" / "hyp1.40"
-INTERFACE_VERSION = 1
+INTERFACE_VERSION = 2
 DEFAULT_CONFIG = {
+    "model_type": "CRE",               # CRE: stations at their elevations, model depth 0 at reference_elevation_km;
+                                       # CRH: all stations at the model top (elevations ignored; interface v1)
+    "reference_elevation_km": 0.0,     # CRE: elevation (km above sea level) of the model's depth 0;
+                                       # output depths are km below it
     "velocity_layering": "step",       # rows are constant layers (step) or nodes of a linear profile
     "linear_sublayer_km": 0.5,         # linear profiles become constant sublayers (CRH is constant layers)
     "lvz_policy": "error",             # CRH needs velocities increasing with depth: "error", or "clip"
@@ -84,6 +88,8 @@ def merge(base: dict, user: dict) -> dict:
         raise ValueError("velocity_layering must be step or linear")
     if out["lvz_policy"] not in ("error", "clip"):
         raise ValueError("lvz_policy must be error or clip")
+    if out["model_type"] not in ("CRH", "CRE"):
+        raise ValueError("model_type must be CRH or CRE")
     return out
 
 
@@ -114,6 +120,15 @@ def crh_rows(path: Path, cfg: dict):
     return out, changes
 
 
+def cre_top(stations: pd.DataFrame, cfg: dict) -> tuple[float, float]:
+    """CRE model top (km above sea level) and how far it lies above the model's depth 0 (0 for CRH)."""
+    if cfg["model_type"] != "CRE":
+        return 0.0, 0.0
+    ref = float(cfg["reference_elevation_km"])
+    top = max(ref, math.ceil(float(stations.elevation_m.max()) / 10.0) / 100.0)
+    return round(top - ref, 3), top
+
+
 def write_inputs(arr: pd.DataFrame, stations: pd.DataFrame, rows, cfg: dict, out: Path):
     alias = {s: f"S{i:04d}" for i, s in enumerate(stations.station_id, 1)}
     with (out / "stations.sta").open("w") as f:
@@ -132,7 +147,10 @@ def write_inputs(arr: pd.DataFrame, stations: pd.DataFrame, rows, cfg: dict, out
             put(line, STA2, "elev", f"{int(round(r.elevation_m)):4d}")
             put(line, STA2, "period", "1.0")
             f.write("".join(line).rstrip() + "\n")
-    # hyp1.40 reads CRH layers with FORMAT(2F5.2): velocity in columns 1-5, layer-top depth in columns 6-10.
+    shift, top = cre_top(stations, cfg)
+    if shift:  # CRE: the model top must not lie below a station; the first layer extends up to it
+        rows = [rows[0]] + [(z + shift, vp, vs) for z, vp, vs in rows[1:]]
+    # hyp1.40 reads CRH and CRE layers with FORMAT(2F5.2): velocity in columns 1-5, layer-top depth in columns 6-10.
     # A wider depth field shifts the digits and truncates the depth (1.17 km was read as 1 km).
     if any(not 0.0 <= r[0] < 99.995 for r in rows):
         raise ValueError("CRH layer tops must lie in [0, 99.99] km below the reference elevation")
@@ -179,9 +197,14 @@ def write_inputs(arr: pd.DataFrame, stations: pd.DataFrame, rows, cfg: dict, out
             put(term, {"id": (63, 10)}, "id", f"{ids[eid]:10d}")
             f.write("".join(term).rstrip() + "\n")
     rs, ds, di = cfg["residual_weighting"], cfg["distance_weighting"], cfg["initial_distance_weighting"]
-    cmd = ["200 T 1900 0", "LET 5 2 3 0 0", "H71 1 1 3", "STA 'stations.sta'", "CRH 1 'p.crh'", "CRH 2 's.crh'",
+    if cfg["model_type"] == "CRE":  # depths in hyp1.40 are then relative to sea level
+        models = [f"CRE 1 'p.crh' {top:.3f} T", f"CRE 2 's.crh' {top:.3f} T"]
+        trial = cfg["trial_depth_km"] - cfg["reference_elevation_km"]
+    else:
+        models, trial = ["CRH 1 'p.crh'", "CRH 2 's.crh'"], cfg["trial_depth_km"]
+    cmd = ["200 T 1900 0", "LET 5 2 3 0 0", "H71 1 1 3", "STA 'stations.sta'", *models,
            "SAL 1 2", f"ERR {cfg['timing_error_s']}", f"RMS {rs[0]} {rs[1]} {rs[2]} {rs[3]}",
-           f"MIN {cfg['min_stations']}", f"ZTR {cfg['trial_depth_km']} F",
+           f"MIN {cfg['min_stations']}", f"ZTR {trial:.2f} F",
            f"DI1 {di[0]} {di[1]} {di[2]} {di[3]}", f"DIS {ds[0]} {ds[1]} {ds[2]} {ds[3]}",
            "WET " + " ".join(str(w) for w in cfg["weight_factors"]),
            "JUN T", "ERF T", "TOP F", "LST 0 0 0", "KPR 1", "REP F F",
@@ -259,6 +282,8 @@ def locate(arrivals: pd.DataFrame, stations: pd.DataFrame, model: Path, cfg: dic
     if proc.returncode != 0 or not (out / "out.sum").exists():
         raise RuntimeError(f"hyp1.40 failed ({proc.returncode}); see {out / 'hyp.log'}")
     ev, links = parse(out, arr, alias, ids)
+    if cfg["model_type"] == "CRE" and len(ev):  # hyp1.40 reports CRE depths below sea level
+        ev["depth_km"] = (ev.depth_km + cfg["reference_elevation_km"]).round(3)
     located = set(ev.event_id) if len(ev) else set()
     missing_ev = [e for e in ids if e not in located]
     ev = pd.concat([ev, pd.DataFrame({"event_id": missing_ev, "status": "NOT_LOCATED"})], ignore_index=True)
@@ -266,7 +291,9 @@ def locate(arrivals: pd.DataFrame, stations: pd.DataFrame, model: Path, cfg: dic
             "n_s_phases", "n_stations", "gap_deg", "erh_km", "erz_km", "min_distance_km", "remark"]
     ev.reindex(columns=cols).sort_values("origin_time_utc").to_csv(out / "events.csv", index=False)
     links.to_csv(out / "arrivals.csv", index=False)
+    shift, top = cre_top(stations, cfg)
     return {"events_in": len(ids), "located": len(located), "crh_layers": len(rows), "lvz_clipped": lvz_changes,
+            "model_type": cfg["model_type"], "model_top_elevation_km": top if cfg["model_type"] == "CRE" else None,
             "time_resolution_s": 0.01}
 
 

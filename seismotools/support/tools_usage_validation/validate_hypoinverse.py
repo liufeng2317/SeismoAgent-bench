@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Validate HypoInverse: the upstream testone example reproduced by the local build, the interface on
-synthetic known hypocentres (both hemispheres)."""
+synthetic known hypocentres (both hemispheres), and on stations 0-2 km above the model datum (CRE models
+must recover the hypocentres; CRH, which ignores elevations, must not)."""
 from __future__ import annotations
 
 import json
@@ -76,12 +77,51 @@ def check_synthetic(tmp: Path) -> dict:
     return res
 
 
+def check_elevated(tmp: Path) -> dict:
+    """Uniform half-space, stations at 0-2 km elevation, events 2-10 km below sea level; exact arrivals."""
+    rng = np.random.default_rng(1)
+    lat0, lon0, vp, vs = 40.0, -112.0, 6.0, 3.46
+    kx = 111.195 * np.cos(np.radians(lat0))
+    st = pd.DataFrame({"station_id": [f"XX.E{i:02d}" for i in range(15)], "x": rng.uniform(-20, 20, 15),
+                       "y": rng.uniform(-20, 20, 15), "elevation_m": rng.uniform(0, 2000, 15).round()})
+    st["latitude"], st["longitude"] = lat0 + st.y / 111.195, lon0 + st.x / kx
+    ev = pd.DataFrame({"event_id": [f"e{i:03d}" for i in range(40)], "x": rng.uniform(-8, 8, 40),
+                       "y": rng.uniform(-8, 8, 40), "z": rng.uniform(2, 10, 40)})
+    ev["t"] = pd.Timestamp("2020-01-01T00:00:00Z") + pd.to_timedelta(np.arange(40) * 60, unit="s")
+    rows = []
+    for e in ev.itertuples():
+        for s in st.itertuples():
+            r = np.sqrt((e.x - s.x) ** 2 + (e.y - s.y) ** 2 + (e.z + s.elevation_m / 1000) ** 2)
+            for ph, v in (("P", vp), ("S", vs)):
+                rows.append({"event_id": e.event_id, "pick_id": f"{e.event_id}{s.station_id}{ph}", "station_id": s.station_id,
+                             "phase": ph, "time_utc": (e.t + pd.Timedelta(seconds=r / v)).strftime("%Y-%m-%dT%H:%M:%S.%fZ")})
+    d = tmp / "elevated"
+    d.mkdir()
+    pd.DataFrame(rows).to_csv(d / "arrivals.csv", index=False)
+    st[["station_id", "latitude", "longitude", "elevation_m"]].to_csv(d / "stations.csv", index=False)
+    (d / "model.txt").write_text(f"0.0 {vp} {vs}\n")
+    res = {}
+    for model_type in ("CRE", "CRH"):
+        out = run(tmp, f"elevated_{model_type}", d / "arrivals.csv", d / "stations.csv", d / "model.txt",
+                  {"model_type": model_type})
+        e = pd.read_csv(out / "events.csv").set_index("event_id").loc[ev.event_id]
+        dz = e.depth_km.to_numpy() - ev.z.to_numpy()
+        dt = (pd.to_datetime(e.origin_time_utc).reset_index(drop=True) - ev.t).dt.total_seconds().to_numpy()
+        res[model_type] = {"max_abs_depth_km": round(float(np.abs(dz).max()), 3), "median_depth_error_km": round(float(np.median(dz)), 3),
+                           "max_abs_origin_s": round(float(np.abs(dt).max()), 3)}
+    assert res["CRE"]["max_abs_depth_km"] < 0.2 and res["CRE"]["max_abs_origin_s"] < 0.03, res
+    assert res["CRH"]["median_depth_error_km"] > 0.5, res  # the known CRH limitation is still visible
+    return res
+
+
 def main() -> None:
     with tempfile.TemporaryDirectory(prefix="hypoinverse-validation-") as tmp:
         tmp = Path(tmp)
         testone = check_testone(tmp)
         synthetic = check_synthetic(tmp)
-    print(json.dumps({"status": "pass", "tool": "HypoInverse", "testone": testone, "synthetic": synthetic}, indent=2))
+        elevated = check_elevated(tmp)
+    print(json.dumps({"status": "pass", "tool": "HypoInverse", "testone": testone, "synthetic": synthetic,
+                      "elevated_stations": elevated}, indent=2))
 
 
 if __name__ == "__main__":

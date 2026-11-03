@@ -1,4 +1,4 @@
-# HypoInverse location interface (version 1)
+# HypoInverse location interface (version 2)
 
 ```bash
 python seismotools/hypoinverse/interface/run.py \
@@ -15,17 +15,17 @@ locators can be run on identical data.
 | File | Columns | Notes |
 |---|---|---|
 | `--arrivals` | `event_id, pick_id, station_id, phase, time_utc[, uncertainty_s]` | one row per (event, station, phase); an event's arrivals must lie within 999 s of its first minute |
-| `--stations` | `station_id, latitude, longitude, elevation_m` | elevation is written to the station file but CRH models ignore it (stations sit at the model surface) |
-| `--velocity-model` | text `depth_km vp_km_s vs_km_s` | first row at 0; P and S become two CRH models paired with `SAL 1 2` (no fixed Vp/Vs) |
+| `--stations` | `station_id, latitude, longitude, elevation_m` | with the default CRE models stations sit at their elevations; with `model_type` CRH elevations are ignored (all stations at the model top) |
+| `--velocity-model` | text `depth_km vp_km_s vs_km_s` | first row at 0, depths below `reference_elevation_km`; P and S become two layer models paired with `SAL 1 2` (no fixed Vp/Vs) |
 
 ## Outputs
 
 | File | Content |
 |---|---|
-| `events.csv` | `event_id, status (LOCATED / NOT_LOCATED), origin_time_utc, latitude, longitude, depth_km, rms_s, n_phases, n_s_phases, n_stations, gap_deg, erh_km, erz_km, min_distance_km, remark` (depth below the model surface; `remark` "-" = depth fixed by the program) |
+| `events.csv` | `event_id, status (LOCATED / NOT_LOCATED), origin_time_utc, latitude, longitude, depth_km, rms_s, n_phases, n_s_phases, n_stations, gap_deg, erh_km, erz_km, min_distance_km, remark` (depth in km below `reference_elevation_km`, negative above it, as in NonLinLoc's `locate.py`; with CRH, below the model top; `remark` "-" = depth fixed by the program) |
 | `arrivals.csv` | `event_id, pick_id, station_id, phase, residual_s, weight (used), distance_km` |
 | `out.sum`, `out.arc`, `out.prt` | native summary, archive and print files |
-| `stations.sta`, `p.crh`, `s.crh`, `phases.arc`, `locate.hyp`, `hyp.log` | generated inputs (stations aliased `S0001`…, net `XX`, component `HHZ`) and the run log |
+| `stations.sta`, `p.crh`, `s.crh`, `phases.arc`, `locate.hyp`, `hyp.log` | generated inputs (stations aliased `S0001`…, net `XX`, component `HHZ`; the layer files have the same format for CRE and CRH) and the run log |
 | `config.json`, `run_result.json` | merged configuration; counts and any LVZ clipping |
 
 ## How the adapter writes HypoInverse inputs
@@ -42,9 +42,11 @@ of poorly recorded events), `COP 3`, `CAR 1` and locates with `LOC`.
 
 | Key | Default | Meaning |
 |---|---|---|
+| `model_type` | `CRE` | `CRE` (HYPOELLIPSE-style layers, `CRE n file top T`): stations at their elevations, the model's depth 0 at `reference_elevation_km`; the model top is placed at the highest station if that lies above it, the first layer extending up to it. `CRH`: stations at the model top whatever their elevation (interface version 1 behaviour); at stations 1–2 km above the model's datum this shifts origin times by tenths of a second |
+| `reference_elevation_km` | 0 | elevation (km above sea level) of the model's depth 0, as in NonLinLoc's `locate.py`; output depths are below it |
 | `velocity_layering` | `step` | `linear` profiles become constant sublayers of `linear_sublayer_km` (0.5) |
 | `lvz_policy` | `error` | CRH models need velocities increasing with depth (manual); `clip` raises a slower (or equal) layer to 0.01 km/s above the one over it and reports each change in `run_result.json` |
-| `trial_depth_km` | 5 | `ZTR` (depth not fixed) |
+| `trial_depth_km` | 5 | `ZTR` (depth not fixed), km below `reference_elevation_km` |
 | `min_stations` | 4 | `MIN` |
 | `timing_error_s` | 0.10 | `ERR` |
 | `residual_weighting` | [4, 0.10, 2, 3] | `RMS` (NCSN defaults) |

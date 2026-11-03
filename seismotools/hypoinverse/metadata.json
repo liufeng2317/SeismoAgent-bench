@@ -3,14 +3,26 @@
   "method": "Linearised (Geiger) earthquake location with distance and residual weighting (Klein 2002, USGS OFR 02-171)",
   "implementation": "USGS Fortran 77 source built with gfortran; project adapter interface/run.py",
   "reported_version": "1.40 (6/2014)",
-  "interface_version": 1,
+  "interface_version": 2,
   "standard_entrypoint": "interface/run.py",
-  "native_programs": ["runtime/bin/hyp1.40"],
-  "outputs": ["events.csv", "arrivals.csv", "out.sum", "out.arc", "out.prt", "config.json", "run_result.json"],
+  "native_programs": [
+    "runtime/bin/hyp1.40"
+  ],
+  "outputs": [
+    "events.csv",
+    "arrivals.csv",
+    "out.sum",
+    "out.arc",
+    "out.prt",
+    "config.json",
+    "run_result.json"
+  ],
   "validation": "support/tools_usage_validation/validate_hypoinverse.py",
-  "upstream": {"repository": "https://www.usgs.gov/software/hypoinverse-earthquake-location",
-               "archive": "https://escweb.wr.usgs.gov/content/software/HYPOINVERSE/hyp1.40.tar",
-               "archive_sha256": "c7ef454f45df4c4f04eed599cd464e03223ffd69e6efc9aa8be0611fe7411006",
-               "license": "USGS software (U.S. Government work); no license file in the archive"},
+  "upstream": {
+    "repository": "https://www.usgs.gov/software/hypoinverse-earthquake-location",
+    "archive": "https://escweb.wr.usgs.gov/content/software/HYPOINVERSE/hyp1.40.tar",
+    "archive_sha256": "c7ef454f45df4c4f04eed599cd464e03223ffd69e6efc9aa8be0611fe7411006",
+    "license": "USGS software (U.S. Government work); no license file in the archive"
+  },
   "local_patches": []
 }

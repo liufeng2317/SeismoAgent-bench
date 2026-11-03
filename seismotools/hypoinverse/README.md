@@ -22,9 +22,11 @@ python seismotools/hypoinverse/interface/run.py --arrivals arrivals.csv --statio
 ```
 
 Inputs and outputs match the NonLinLoc catalog locator
-(`seismotools/nonlinloc/interface/locate.py`). Limits to know: CRH layer
-models cannot hold low-velocity zones (`lvz_policy`), station elevations are
-ignored, arrival times are rounded to 0.01 s. Use the project Python
+(`seismotools/nonlinloc/interface/locate.py`). Limits to know: layer models
+cannot hold low-velocity zones (`lvz_policy`), arrival times are rounded to
+0.01 s. Since interface version 2 the models are CRE (stations at their
+elevations, model depth 0 at `reference_elevation_km`, as in NonLinLoc);
+`model_type` CRH restores version 1, which ignores station elevations. Use the project Python
 environment.
 
 Validation (`support/tools_usage_validation/validate_hypoinverse.py`): the
