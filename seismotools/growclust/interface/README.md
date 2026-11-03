@@ -13,7 +13,7 @@ Requires the build (`python seismotools/support/build_native.py --tool growclust
 | Input | Content | Notes |
 |---|---|---|
 | `--events` | CSV `event_id, origin_time_utc, latitude, longitude, depth_km[, magnitude]` | the catalog given to ccdt (same origin times: dt.cc times are relative to them); depth below the model datum |
-| `--stations` | CSV `station_id (NET.STA), latitude, longitude` | station codes (after the network) unique, as in ccdt `dt.cc`; GrowClust ignores elevations |
+| `--stations` | CSV `station_id (NET.STA), latitude, longitude` | station codes (after the network) unique, as in ccdt `dt.cc`; GrowClust ignores elevations: give event depths and the model from the station level when stations lie well above the catalog's datum, and convert back |
 | `--dtcc` | ccdt output directory | `dt.cc` (DT = tt(id1) − tt(id2) → GrowClust `tdif_fmt 12`; weight = CC → `rxcor`) and `event_ids.csv`; run ccdt with `weight: cc` |
 | `--velocity-model` | text `depth_km vp_km_s vs_km_s` | rows are layer tops; `step` writes repeated depths (GrowClust interpolates linearly) |
 

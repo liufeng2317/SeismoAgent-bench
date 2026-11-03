@@ -49,6 +49,19 @@ first. The adapter copies inputs into the writable run directory, checks native
 exit status, records `hypodd.log`, and requires `hypoDD.loc` before reporting
 success.
 
+## Depth datum and station elevations
+
+This hypoDD version has no station elevations: every station sits at the
+model's depth 0 (`TOP` of the first layer), and event depths are measured from
+that level. When the catalog's depths are below sea level and the stations lie
+above it, add the station level to the depths and the layer tops before
+relocation and subtract it afterwards (`dep_corr` in the Python workflow, the
+mean station elevation in km); a model whose depths are already below the
+station level needs only the catalog depths shifted. On synthetic exact data
+with stations 1.6–2.8 km above sea level, skipping this moved the relocated
+cluster 0.2 km deeper and made relative locations about five times worse
+(median 0.14 against 0.02 km). GrowClust has the same convention.
+
 Input and output details are defined in:
 
 - [interface/input_schema.json](interface/input_schema.json)
