@@ -140,16 +140,22 @@ def step_ccdt(cfg: dict, out: Path, workers: int) -> dict:
 
 
 def step_growclust(cfg: dict, out: Path, ngoodmin: int | None = None, name: str = "growclust") -> dict:
-    rows = model_rows(cfg)
-    (out / "model.txt").write_text("".join(f"{z:.3f} {vp:.3f} {vs:.3f}\n" for z, vp, vs in rows))
     ev = pd.read_csv(out / "events.csv")
+    depth_max = float(math.ceil(ev.depth_km.max() + 15))  # events move during clustering: leave room below
+    rows = model_rows(cfg)
+    deep = [r for r in rows if r[0] > depth_max]
+    rows = [r for r in rows if r[0] <= depth_max] + deep[:1]  # GrowClust interpolates at most 1000 model points
+    (out / "model.txt").write_text("".join(f"{z:.3f} {vp:.3f} {vs:.3f}\n" for z, vp, vs in rows))
     st = pd.read_csv(out / "stations.csv")
-    dist = 111.195 * math.hypot(st.latitude.max() - st.latitude.min(),
-                                (st.longitude.max() - st.longitude.min()) * math.cos(math.radians(st.latitude.mean())))
+    # largest event-station distance (events can lie outside the network, Kilauea's lower rift)
+    k = math.cos(math.radians(st.latitude.mean()))
+    dist = 111.195 * float(np.max(np.hypot(ev.latitude.to_numpy()[:, None] - st.latitude.to_numpy()[None],
+                                           (ev.longitude.to_numpy()[:, None] - st.longitude.to_numpy()[None]) * k)))
+    step = float(max(1, math.ceil((dist + 20) / 480)))  # GrowClust tables hold at most 501 distance points
     g = cfg.get("growclust", {})
     conf = {"velocity_layering": cfg["model"].get("layering", "step"),
-            "table": {"depth_min_km": 0.0, "depth_max_km": float(math.ceil(ev.depth_km.max() + 5)), "depth_step_km": 0.5,
-                      "distance_min_km": 0.0, "distance_max_km": float(math.ceil(dist + 20)), "distance_step_km": 1.0},
+            "table": {"depth_min_km": 0.0, "depth_max_km": depth_max, "depth_step_km": 0.5,
+                      "distance_min_km": 0.0, "distance_max_km": float(math.ceil((dist + 20) / step) * step), "distance_step_km": step},
             "rmin": g.get("rmin", 0.6), "delmax_km": g.get("delmax_km", 80.0), "rmsmax_s": g.get("rmsmax_s", 0.2),
             "ngoodmin": g.get("ngoodmin", 4) if ngoodmin is None else ngoodmin, "nboot": 0}
     (out / f"{name}_config.json").write_text(json.dumps(conf, indent=2))
