@@ -11,6 +11,8 @@ every event with waveform cross-correlation differential times:
             the cross-correlation windows only); stations; waveform links
   ccdt      seismotools/cross_correlation -> dt.cc (catalog differential times from template-derived arrivals
             are never used: they collapse detections onto their template, Ridgecrest stage 62)
+  hypodd    alternative to growclust (Ridgecrest stage 62): hypoDD 1.3, dt.cc plus dt.ct from the picked events' own
+            picks, control cc3_d1; ``--step hypodd --run-name hypodd``, then evaluate/export with the same run name
   growclust seismotools/growclust with the case's expert model, depths from the model datum (stations sit at
             depth 0 in GrowClust), ngoodmin 4 (the tool's validation)
   evaluate  agreement with the references before and after (matched pairs), local thickness, share of events
@@ -19,7 +21,7 @@ every event with waveform cross-correlation differential times:
             is accepted if it moved < 3 km horizontally, its origin changed < 1 s and its depth lies in the model;
             Match&Locate events left on the grid get location_precision_h_km / _z_km of half the grid step
 
-Usage: cc_relocate.py CASE --step all|inputs|ccdt|growclust|evaluate|export [--workers 32]
+Usage: cc_relocate.py CASE --step all|inputs|ccdt|growclust|hypodd|evaluate|export [--workers 32]
 Case settings: cases/<case>.yaml (paths relative to workflows/tasks/<case>/).
 """
 from __future__ import annotations
@@ -165,6 +167,131 @@ def step_growclust(cfg: dict, out: Path, ngoodmin: int | None = None, name: str 
                         str(out / f"{name}_config.json"), "--output-dir", str(out / name), "--overwrite"],
                        stdout=log, stderr=subprocess.STDOUT, check=True, env=_env())
     return json.loads((out / name / "run_result.json").read_text())
+
+
+HYPODD_SRC = ROOT / "seismotools/hypodd/source"
+# Ridgecrest stage-14 control cc3_d1: CT+CC, LSQR, two sets (4 iterations damping 80, 8 iterations damping 40), CC
+# weights 3 (P) / 1.5 (S), catalog 1 / 0.5, no residual trimming; columns NITER WTCCP WTCCS WRCC WDCC WTCTP WTCTS WRCT WDCT DAMP
+HYPODD_SETS = ["4 3 1.5 -9 -9 1 .5 -9 -9 80", "8 3 1.5 -9 -9 1 .5 -9 -9 40"]
+RELOC_COLS = ["cusp", "lat", "lon", "depth", "x", "y", "z", "ex", "ey", "ez", "yr", "mo", "dy", "hr", "mi", "sc",
+              "mag", "nccp", "nccs", "nctp", "ncts", "rcc", "rct", "cid"]
+
+
+def step_hypodd(cfg: dict, out: Path, name: str = "hypodd") -> dict:
+    """hypoDD 1.3 (Ridgecrest stage 62): dt.cc from ccdt, dt.ct from the picked events' own picks only (template-
+    derived arrivals would collapse detections onto their template), over the ccdt neighbour pairs; a single
+    Vp/Vs ratio (hypoDD 1.3), the vertical travel-time ratio of the model down to the deepest event."""
+    run = out / name
+    run.mkdir(exist_ok=True)
+    ev = pd.read_csv(out / "events.csv")
+    ev["t"] = ts(ev.origin_time_utc)
+    ev["tr"] = ev.t.dt.round("10ms")                  # event.dat keeps HHMMSSss
+    idt = pd.read_csv(out / "ccdt/event_ids.csv")
+    cusp = {e: int(c) for e, c in zip(idt.event_id, idt.cusp_id)}
+    ev["cusp"] = ev.event_id.map(cusp)
+    with (run / "event.dat").open("w") as f:
+        for r in ev.itertuples():
+            f.write(f"{r.tr.strftime('%Y%m%d')} {r.tr.strftime('%H%M%S')}{int(round(r.tr.microsecond / 1e4)):02d} "
+                    f"{r.latitude:.7f} {r.longitude:.7f} {r.depth_km:.5f} "
+                    f"{0.0 if pd.isna(r.magnitude) else r.magnitude:.2f} 0 0 0 {r.cusp}\n")
+    st = pd.read_csv(out / "stations.csv")
+    st["code"] = st.station_id.str.split(".").str[-1]
+    assert st.code.is_unique, "hypoDD station codes must be unique"
+    with (run / "station.dat").open("w") as f:
+        for r in st.itertuples():
+            f.write(f"{r.code} {r.latitude:.7f} {r.longitude:.7f}\n")
+    # dt.cc re-referenced to the rounded origins: tt_r = tt + (o - o_r)
+    corr = dict(zip(ev.event_id, (ev.t - ev.tr).dt.total_seconds()))
+    inv = {v: k for k, v in cusp.items()}
+    n_cc = 0
+    with (out / "ccdt/dt.cc").open() as src, (run / "dt.cc").open("w") as f:
+        a = b = None
+        for line in src:
+            if line.startswith("#"):
+                _, i1, i2, _ = line.split()
+                a, b = inv[int(i1)], inv[int(i2)]
+                f.write(line)
+            else:
+                sta, dt, w, ph = line.split()
+                f.write(f"{sta:<7s} {float(dt) + corr[a] - corr[b]:10.5f} {w} {ph}\n")
+                n_cc += 1
+    arr = pd.read_csv(out / "arrivals.csv")
+    arr = arr[arr.source.eq("pick")]
+    o_r = dict(zip(ev.event_id, ev.tr))
+    arr["tt"] = [(t - o_r[e]).total_seconds() for e, t in zip(arr.event_id, ts(arr.time_utc))]
+    arr["code"] = arr.station_id.str.split(".").str[-1]
+    tt = {(e, c, p): v for e, c, p, v in zip(arr.event_id, arr.code, arr.phase, arr.tt)}
+    by_event: dict = {}
+    for e, c, p in tt:
+        by_event.setdefault(e, []).append((c, p))
+    sys.path.insert(0, str(ROOT / "seismotools/cross_correlation/runtime/python"))
+    from ccdt.pipeline import neighbour_pairs
+    pc = json.loads((out / "ccdt_config.json").read_text())["pairs"]
+    ij = neighbour_pairs(ev[["latitude", "longitude", "depth_km"]].to_numpy(), pc["max_distance_km"], pc["max_neighbors"])
+    ids = ev.event_id.to_numpy()
+    n_ct = 0
+    with (run / "dt.ct").open("w") as f:
+        for i, j in ij:
+            a, b = ids[i], ids[j]
+            common = [(c, p) for c, p in by_event.get(a, []) if (b, c, p) in tt]
+            if not common:
+                continue
+            f.write(f"# {cusp[a]:9d} {cusp[b]:9d}\n")
+            for c, p in common:
+                f.write(f"{c:<7s} {tt[(a, c, p)]:9.4f} {tt[(b, c, p)]:9.4f} 1.00 {p}\n")
+                n_ct += 1
+    # native build sized to the data
+    nat = out / "hypodd_native"
+    for part in ("include", "src/hypoDD"):
+        shutil.copytree(HYPODD_SRC / part, nat / part, dirs_exist_ok=True)
+    maxeve = max(7000, len(ev) + 100)
+    (nat / "include/hypoDD.inc").write_text(
+        "      integer*4 MAXEVE, MAXLAY, MAXDATA, MAXSTA, MAXEVE0,\n"
+        "     & MAXDATA0, MAXCL\n"
+        f"      parameter(MAXEVE={maxeve}, MAXLAY=15, MAXDATA={int((n_cc + n_ct) * 1.1) + 1000},\n"
+        f"     & MAXSTA={max(100, len(st) + 10)}, MAXEVE0=2, MAXDATA0=1, MAXCL={maxeve})\n")
+    cwd = nat / "src/hypoDD"
+    with (nat / "build.log").open("w") as log:
+        subprocess.run(["make", "clean"], cwd=cwd, stdout=log, stderr=subprocess.STDOUT, check=True)
+        subprocess.run(["make", "-j4", "FC=gfortran", "FFLAGS=-O2 -I../../include -std=legacy -fallow-argument-mismatch"],
+                       cwd=cwd, stdout=log, stderr=subprocess.STDOUT, check=True)
+    # control: model layers (hypoDD 1.3 takes P velocities and one Vp/Vs ratio)
+    rows = model_rows(cfg)
+    zmax = float(ev.depth_km.max())
+    tp = ts_ = 0.0
+    for k, (z, vp, vs) in enumerate(rows):
+        bot = min(rows[k + 1][0] if k + 1 < len(rows) else zmax, zmax)
+        if bot > z:
+            tp += (bot - z) / vp
+            ts_ += (bot - z) / vs
+    ratio = ts_ / tp
+    assert len(rows) <= 15, "hypoDD 1.3 MAXLAY 15: resample the model"
+    k = math.cos(math.radians(st.latitude.mean()))
+    dist = 111.195 * float(np.max(np.hypot(ev.latitude.to_numpy()[:, None] - st.latitude.to_numpy()[None],
+                                           (ev.longitude.to_numpy()[:, None] - st.longitude.to_numpy()[None]) * k)))
+    ctl = ["dt.cc", "dt.ct", "event.dat", "station.dat", "hypoDD.loc", "hypoDD.reloc", "hypoDD.sta", "hypoDD.res",
+           "hypoDD.src", f"3 3 {math.ceil(dist + 20)}", "0 0", f"2 2 {len(HYPODD_SETS)}", *HYPODD_SETS,
+           f"{len(rows)} {ratio:.3f}", " ".join(f"{z:.2f}" for z, _, _ in rows), " ".join(f"{vp:.3f}" for _, vp, _ in rows), "0"]
+    (run / "hypoDD.inp").write_text("\n".join(ctl) + "\n")
+    with (run / "console.log").open("w") as log:
+        subprocess.run([str(cwd / "hypoDD"), "hypoDD.inp"], cwd=run, stdout=log, stderr=subprocess.STDOUT,
+                       check=True, timeout=12 * 3600, env=_env())
+    # relocated.csv in the GrowClust layout, so relocation() / evaluate / export read either
+    r = pd.read_csv(run / "hypoDD.reloc", sep=r"\s+", header=None, names=RELOC_COLS, dtype=str)
+    for c in RELOC_COLS:
+        r[c] = pd.to_numeric(r[c], errors="coerce")
+    r["event_id"] = r.cusp.map(inv)
+    t_new = pd.to_datetime(dict(year=r.yr, month=r.mo, day=r.dy, hour=r.hr, minute=r.mi), utc=True,
+                           errors="coerce") + pd.to_timedelta(r.sc, unit="s")
+    rel = pd.DataFrame({"event_id": r.event_id, "origin_time_utc": t_new.dt.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                        "latitude": r.lat, "longitude": r.lon, "depth_km": r.depth,
+                        "relocated": r[["lat", "lon", "depth"]].notna().all(axis=1) & t_new.notna(),
+                        "n_pairs": r[["nccp", "nccs", "nctp", "ncts"]].sum(axis=1)})
+    rel.to_csv(run / "relocated.csv", index=False)
+    res = {"events": int(len(ev)), "dt_cc_lines": n_cc, "dt_ct_lines": n_ct, "vp_vs": round(ratio, 3),
+           "in_output": int(len(rel)), "relocated": int(rel.relocated.sum())}
+    (run / "run_result.json").write_text(json.dumps(res, indent=1))
+    return res
 
 
 def relocation(cfg: dict, out: Path, keep_frame: bool | None = None) -> pd.DataFrame:
@@ -314,10 +441,10 @@ def step_export(cfg: dict, task: Path, out: Path) -> dict:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("case")
-    ap.add_argument("--step", default="all", choices=["all", "inputs", "ccdt", "growclust", "evaluate", "export"])
+    ap.add_argument("--step", default="all", choices=["all", "inputs", "ccdt", "growclust", "hypodd", "evaluate", "export"])
     ap.add_argument("--workers", type=int, default=32)
     ap.add_argument("--ngoodmin", type=int, default=None, help="GrowClust ngoodmin (default: case config, else 4)")
-    ap.add_argument("--run-name", default="growclust", help="GrowClust output folder evaluated and exported")
+    ap.add_argument("--run-name", default="growclust", help="GrowClust or hypoDD output folder written, evaluated and exported")
     ap.add_argument("--min-cc", type=float, default=None, help="ccdt and GrowClust minimum CC (default: case config, else 0.6)")
     ap.add_argument("--tag", default="", help="variant: separate working folder 68_cc_relocation_<tag>")
     a = ap.parse_args()
@@ -329,7 +456,8 @@ def main() -> int:
     steps = ["inputs", "ccdt", "growclust", "evaluate", "export"] if a.step == "all" else [a.step]
     for s in steps:
         r = {"inputs": lambda: step_inputs(cfg, task, out), "ccdt": lambda: step_ccdt(cfg, out, a.workers),
-             "growclust": lambda: step_growclust(cfg, out, a.ngoodmin, a.run_name), "evaluate": lambda: step_evaluate(cfg, task, out),
+             "growclust": lambda: step_growclust(cfg, out, a.ngoodmin, a.run_name),
+             "hypodd": lambda: step_hypodd(cfg, out, a.run_name), "evaluate": lambda: step_evaluate(cfg, task, out),
              "export": lambda: step_export(cfg, task, out)}[s]()
         print(s, json.dumps(r, default=str)[:1500], flush=True)
     return 0
