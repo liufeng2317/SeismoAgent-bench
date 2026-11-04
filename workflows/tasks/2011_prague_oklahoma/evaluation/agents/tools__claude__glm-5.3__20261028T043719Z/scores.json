@@ -69,7 +69,9 @@
   "recall_after_large": 0.5833,
   "recall_other": 0.7123,
   "audited_false_rate": 0.0009,
-  "out_of_mask_fraction": 0.0943
+  "out_of_mask_fraction": 0.0943,
+  "dmag_pairs": 1473,
+  "out_of_coverage_fraction": 0.0
  },
  "trust": {
   "trusted": false,
@@ -84,10 +86,10 @@
     "checks": {
      "inside_region": {
       "aspect": "accuracy",
-      "value": 0.0943,
+      "value": 0.0,
       "op": "<=",
-      "threshold": 0.1,
-      "final": 0.0281,
+      "threshold": 0.05,
+      "final": 0.0003,
       "verdict": "pass"
      },
      "false_events": {
@@ -217,6 +219,7 @@
   "turns": 11
  },
  "leakage_flag": false,
+ "leakage_review": [],
  "audit": {
   "sampled": 50,
   "unsupported": 134,

@@ -1,0 +1,256 @@
+{
+ "run": {
+  "variant": "backend_knowledge",
+  "harness": "claude",
+  "model": "glm-5.3",
+  "run_id": "20261101T235536Z",
+  "path": "runs/backend_knowledge/claude/glm-5.3/20261101T235536Z"
+ },
+ "formal_state": "scored",
+ "run_state": "scored",
+ "completion": {
+  "completed": true,
+  "consistency": {
+   "coordinates_valid": 1.0,
+   "pick_counts_agree": 1.0,
+   "pick_event_ids_exist": 1.0
+  },
+  "contract": "runs/backend_knowledge/claude/glm-5.3/20261101T235536Z/control/output_contract.json",
+  "problems": []
+ },
+ "metrics_version": 2,
+ "headline": {
+  "audited_false_rate": null,
+  "b_difference": -0.015,
+  "ceiling": 0.6357,
+  "depth_band_share": 0.2043,
+  "depth_datum_known": true,
+  "depth_mode_share": 0.0282,
+  "dmag_mean_M2": -0.0719,
+  "dmag_mean_M3": -0.0307,
+  "dmag_mean_M4": 0.0814,
+  "dmag_mean_M5": -0.416,
+  "dmag_median": -0.08,
+  "dmag_slope_per_unit": -0.0046,
+  "dmag_std": 0.1474,
+  "dt_final_s": 0.28,
+  "dt_mean_M2": 0.0076,
+  "dt_mean_M3": 0.0135,
+  "dt_mean_M4": 0.0231,
+  "dt_mean_M5": 0.022,
+  "dt_mean_s": 0.0018,
+  "dt_median_s": 0.12,
+  "dt_std_s": 0.2658,
+  "dz_final_km": 1.101,
+  "dz_mad_final_km": 0.88,
+  "dz_median_km": 1.226,
+  "epi_gt5km": 0.0,
+  "epi_mean_M2": 0.7754,
+  "epi_mean_M3": 0.7273,
+  "epi_mean_M4": 0.7641,
+  "epi_mean_M5": 0.7095,
+  "epi_median_km": 0.5247,
+  "event_ratio_final": 0.6837,
+  "f1_M2": 0.8008,
+  "f1_M3": 0.8275,
+  "f1_M4": 0.8618,
+  "f1_M5": 0.9474,
+  "off_structure_after_shift": 0.1409,
+  "off_structure_fraction": 0.1402,
+  "out_of_mask_fraction": 0.1185,
+  "precision_M2": 0.7732,
+  "precision_M3": 0.8444,
+  "precision_M4": 0.8489,
+  "precision_M5": 0.9,
+  "precision_final": 0.6258,
+  "recall": 0.7755,
+  "recall_M2": 0.8304,
+  "recall_M3": 0.8113,
+  "recall_M4": 0.875,
+  "recall_M5": 1.0,
+  "recall_after_large": 0.7682,
+  "recall_final": 0.4168,
+  "recall_norm": 1.2199,
+  "recall_other": 0.7986,
+  "recall_ref_awr_hypocenters": 0.9121,
+  "recall_ref_liu": 0.9294,
+  "recall_ref_official_earthquake": 0.7983,
+  "recall_ref_ross_relocated": 0.7378,
+  "recall_ref_shelly": 0.7755,
+  "recall_tight": 0.7293,
+  "scatter_final_km": 0.5898,
+  "scatter_median_km": 0.4811,
+  "shift_final_km": 0.4323,
+  "shift_km": 0.1297,
+  "time_bias_final_s": -0.2755,
+  "time_mad_final_s": 0.0645,
+  "union_support": 0.6949,
+  "dmag_pairs": 5304,
+  "out_of_coverage_fraction": 0.0
+ },
+ "trust": {
+  "trusted": false,
+  "failed": [
+   "depth_bias",
+   "off_structure",
+   "large_events_present"
+  ],
+  "pending": [
+   "false_events"
+  ],
+  "dimensions": {
+   "reality": {
+    "verdict": "pending",
+    "checks": {
+     "inside_region": {
+      "aspect": "accuracy",
+      "value": 0.0,
+      "op": "<=",
+      "threshold": 0.05,
+      "final": 0.0,
+      "verdict": "pass"
+     },
+     "false_events": {
+      "aspect": "accuracy",
+      "value": null,
+      "op": "<=",
+      "threshold": 0.02,
+      "final": null,
+      "verdict": "pending"
+     }
+    }
+   },
+   "time": {
+    "verdict": "pass",
+    "checks": {
+     "time_bias": {
+      "aspect": "accuracy",
+      "value": -0.2755,
+      "op": "abs<=",
+      "threshold": 0.3,
+      "final": null,
+      "verdict": "pass"
+     },
+     "time_spread": {
+      "aspect": "stability",
+      "value": 0.0645,
+      "op": "<=",
+      "threshold": 0.3,
+      "final": null,
+      "verdict": "pass"
+     },
+     "after_large_events": {
+      "aspect": "stability",
+      "value": 0.9619,
+      "op": ">=",
+      "threshold": 0.792,
+      "final": 0.9899,
+      "verdict": "pass"
+     }
+    }
+   },
+   "space": {
+    "verdict": "fail",
+    "checks": {
+     "horizontal_shift": {
+      "aspect": "accuracy",
+      "value": 0.4323,
+      "op": "<=",
+      "threshold": 1.0,
+      "final": null,
+      "verdict": "pass"
+     },
+     "depth_bias": {
+      "aspect": "accuracy",
+      "value": 1.101,
+      "op": "abs<=",
+      "threshold": 1.0,
+      "final": null,
+      "verdict": "fail"
+     },
+     "horizontal_scatter": {
+      "aspect": "stability",
+      "value": 0.5898,
+      "op": "<=",
+      "threshold": 1.0,
+      "final": 0.2058,
+      "verdict": "pass"
+     },
+     "off_structure": {
+      "aspect": "stability",
+      "value": 0.1402,
+      "op": "<=",
+      "threshold": 0.05,
+      "final": 0.0052,
+      "verdict": "fail"
+     },
+     "depth_pileup": {
+      "aspect": "stability",
+      "value": 0.0282,
+      "op": "<=",
+      "threshold": 0.05,
+      "final": 0.0053,
+      "verdict": "pass"
+     }
+    }
+   },
+   "strength": {
+    "verdict": "fail",
+    "checks": {
+     "magnitude_offset": {
+      "aspect": "accuracy",
+      "value": -0.08,
+      "op": "abs<=",
+      "threshold": 0.286,
+      "final": -0.086,
+      "verdict": "pass"
+     },
+     "magnitude_spread": {
+      "aspect": "stability",
+      "value": 0.1474,
+      "op": "<=",
+      "threshold": 0.3,
+      "final": 0.1631,
+      "verdict": "pass"
+     },
+     "magnitude_scale": {
+      "aspect": "stability",
+      "value": -0.0046,
+      "op": "abs<=",
+      "threshold": 0.2,
+      "final": 0.0142,
+      "verdict": "pass"
+     },
+     "large_events_present": {
+      "aspect": "accuracy",
+      "value": {
+       "recall_M4": 0.875,
+       "recall_M5": 1.0
+      },
+      "op": "all ==",
+      "threshold": 1.0,
+      "verdict": "fail"
+     }
+    }
+   }
+  },
+  "completeness": {
+   "recall_norm": 1.2199,
+   "recall_tight": 0.7293,
+   "recall_final": 0.4168,
+   "event_ratio_final": 0.6837
+  }
+ },
+ "process": {
+  "cost_usd": 22.85065000000001,
+  "elapsed_s": 12687.8,
+  "turns": 366
+ },
+ "leakage_flag": false,
+ "leakage_review": [],
+ "audit": {
+  "sampled": 50,
+  "unsupported": 3387,
+  "labels": null
+ }
+}

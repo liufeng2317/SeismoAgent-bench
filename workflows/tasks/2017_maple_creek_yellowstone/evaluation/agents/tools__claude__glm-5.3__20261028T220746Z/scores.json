@@ -79,12 +79,13 @@
   "pick_residual_mad_P_s": 0.028,
   "pick_recall_S": 0.5436,
   "pick_residual_mad_S_s": 0.0593,
-  "out_of_mask_fraction": 0.1267
+  "out_of_mask_fraction": 0.1267,
+  "dmag_pairs": 593,
+  "out_of_coverage_fraction": 0.0064
  },
  "trust": {
   "trusted": false,
   "failed": [
-   "inside_region",
    "time_bias",
    "depth_bias",
    "horizontal_scatter",
@@ -96,15 +97,15 @@
   ],
   "dimensions": {
    "reality": {
-    "verdict": "fail",
+    "verdict": "pending",
     "checks": {
      "inside_region": {
       "aspect": "accuracy",
-      "value": 0.1267,
+      "value": 0.0064,
       "op": "<=",
-      "threshold": 0.1,
-      "final": 0.0141,
-      "verdict": "fail"
+      "threshold": 0.05,
+      "final": 0.0,
+      "verdict": "pass"
      },
      "false_events": {
       "aspect": "accuracy",
@@ -242,6 +243,7 @@
   "turns": 335
  },
  "leakage_flag": false,
+ "leakage_review": [],
  "audit": {
   "sampled": 50,
   "unsupported": 203,

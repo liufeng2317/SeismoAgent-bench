@@ -84,12 +84,13 @@
   "recall_after_large": 0.7329,
   "recall_other": 0.7519,
   "audited_false_rate": null,
-  "out_of_mask_fraction": 0.1202
+  "out_of_mask_fraction": 0.1202,
+  "dmag_pairs": 5099,
+  "out_of_coverage_fraction": 0.0
  },
  "trust": {
   "trusted": false,
   "failed": [
-   "inside_region",
    "depth_bias",
    "off_structure",
    "depth_pileup",
@@ -101,15 +102,15 @@
   ],
   "dimensions": {
    "reality": {
-    "verdict": "fail",
+    "verdict": "pending",
     "checks": {
      "inside_region": {
       "aspect": "accuracy",
-      "value": 0.1202,
+      "value": 0.0,
       "op": "<=",
-      "threshold": 0.1,
-      "final": 0.0008,
-      "verdict": "fail"
+      "threshold": 0.05,
+      "final": 0.0,
+      "verdict": "pass"
      },
      "false_events": {
       "aspect": "accuracy",
@@ -248,6 +249,7 @@
   "turns": 16
  },
  "leakage_flag": false,
+ "leakage_review": [],
  "audit": {
   "sampled": 50,
   "unsupported": 3974,

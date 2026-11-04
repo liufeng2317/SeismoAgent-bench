@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "0e402ea030bfb6e5cb0418bb7af14877d71764f3",
+ "scorer_commit": "6a6a9f977c502b940beec34d8fb96c7f6cc84a19",
  "scorer_dirty": false,
- "generated_utc": "2026-11-04T07:21:01+00:00",
+ "generated_utc": "2026-11-04T15:23:08+00:00",
  "task": "2016_kaikoura_new_zealand",
  "configurations": [
   {

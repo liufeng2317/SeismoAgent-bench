@@ -1,10 +1,1479 @@
 {
  "metrics_version": 2,
- "scorer_commit": "acddf59d21c937dac60d392d811c9863f0e64e7b",
- "scorer_dirty": true,
- "generated_utc": "2026-10-30T13:46:24+00:00",
+ "scorer_commit": "6a6a9f977c502b940beec34d8fb96c7f6cc84a19",
+ "scorer_dirty": false,
+ "generated_utc": "2026-11-04T15:23:08+00:00",
  "task": "2019_ridgecrest_california",
  "configurations": [
+  {
+   "variant": "backend",
+   "harness": "claude",
+   "model": "glm-5.3",
+   "launched": 1,
+   "leakage_flagged": [],
+   "completion_rate": 1.0,
+   "runs": [
+    {
+     "run_id": "20261101T235452Z",
+     "completed": true,
+     "trusted": false,
+     "trust_failed": [
+      "time_bias",
+      "depth_bias",
+      "off_structure",
+      "magnitude_offset",
+      "large_events_present"
+     ],
+     "b_difference": -0.101,
+     "depth_band_share": 0.1159,
+     "depth_mode_share": 0.0298,
+     "dmag_mean_M2": -0.9868,
+     "dmag_mean_M3": -0.8624,
+     "dmag_mean_M4": -0.6455,
+     "dmag_mean_M5": -0.95,
+     "dmag_median": -0.98,
+     "dmag_pairs": 5361,
+     "dmag_slope_per_unit": -0.0488,
+     "dmag_std": 0.2617,
+     "dt_final_s": 0.3634,
+     "dt_mean_M2": -0.0996,
+     "dt_mean_M3": -0.0946,
+     "dt_mean_M4": -0.0708,
+     "dt_mean_M5": -0.1652,
+     "dt_mean_s": -0.0922,
+     "dt_median_s": 0.14,
+     "dt_std_s": 0.2443,
+     "dz_final_km": 1.313,
+     "dz_mad_final_km": 0.548,
+     "dz_median_km": 1.189,
+     "epi_gt5km": 0.0,
+     "epi_mean_M2": 0.7375,
+     "epi_mean_M3": 0.7119,
+     "epi_mean_M4": 0.7599,
+     "epi_mean_M5": 0.9577,
+     "epi_median_km": 0.3249,
+     "event_ratio_final": 0.6776,
+     "f1_M2": 0.8013,
+     "f1_M3": 0.8205,
+     "f1_M4": 0.8444,
+     "f1_M5": 0.9268,
+     "off_structure_after_shift": 0.1161,
+     "off_structure_fraction": 0.1152,
+     "out_of_coverage_fraction": 0.0,
+     "out_of_mask_fraction": 0.1339,
+     "precision_M2": 0.771,
+     "precision_M3": 0.8285,
+     "precision_M4": 0.8158,
+     "precision_M5": 0.8636,
+     "precision_final": 0.6519,
+     "recall": 0.7873,
+     "recall_M2": 0.8341,
+     "recall_M3": 0.8127,
+     "recall_M4": 0.875,
+     "recall_M5": 1.0,
+     "recall_after_large": 0.7804,
+     "recall_final": 0.4296,
+     "recall_norm": 1.2385,
+     "recall_other": 0.8097,
+     "recall_ref_awr_hypocenters": 0.9188,
+     "recall_ref_liu": 0.936,
+     "recall_ref_official_earthquake": 0.8071,
+     "recall_ref_ross_relocated": 0.7464,
+     "recall_ref_shelly": 0.7873,
+     "recall_tight": 0.7611,
+     "scatter_final_km": 0.4905,
+     "scatter_median_km": 0.2463,
+     "shift_final_km": 0.4252,
+     "shift_km": 0.1753,
+     "time_bias_final_s": -0.36,
+     "time_mad_final_s": 0.04,
+     "union_support": 0.7201
+    }
+   ],
+   "metrics": {
+    "b_difference": {
+     "mean": -0.101,
+     "min": -0.101,
+     "max": -0.101,
+     "n": 1
+    },
+    "depth_band_share": {
+     "mean": 0.1159,
+     "min": 0.1159,
+     "max": 0.1159,
+     "n": 1
+    },
+    "depth_mode_share": {
+     "mean": 0.0298,
+     "min": 0.0298,
+     "max": 0.0298,
+     "n": 1
+    },
+    "dmag_mean_M2": {
+     "mean": -0.9868,
+     "min": -0.9868,
+     "max": -0.9868,
+     "n": 1
+    },
+    "dmag_mean_M3": {
+     "mean": -0.8624,
+     "min": -0.8624,
+     "max": -0.8624,
+     "n": 1
+    },
+    "dmag_mean_M4": {
+     "mean": -0.6455,
+     "min": -0.6455,
+     "max": -0.6455,
+     "n": 1
+    },
+    "dmag_mean_M5": {
+     "mean": -0.95,
+     "min": -0.95,
+     "max": -0.95,
+     "n": 1
+    },
+    "dmag_median": {
+     "mean": -0.98,
+     "min": -0.98,
+     "max": -0.98,
+     "n": 1
+    },
+    "dmag_pairs": {
+     "mean": 5361.0,
+     "min": 5361.0,
+     "max": 5361.0,
+     "n": 1
+    },
+    "dmag_slope_per_unit": {
+     "mean": -0.0488,
+     "min": -0.0488,
+     "max": -0.0488,
+     "n": 1
+    },
+    "dmag_std": {
+     "mean": 0.2617,
+     "min": 0.2617,
+     "max": 0.2617,
+     "n": 1
+    },
+    "dt_final_s": {
+     "mean": 0.3634,
+     "min": 0.3634,
+     "max": 0.3634,
+     "n": 1
+    },
+    "dt_mean_M2": {
+     "mean": -0.0996,
+     "min": -0.0996,
+     "max": -0.0996,
+     "n": 1
+    },
+    "dt_mean_M3": {
+     "mean": -0.0946,
+     "min": -0.0946,
+     "max": -0.0946,
+     "n": 1
+    },
+    "dt_mean_M4": {
+     "mean": -0.0708,
+     "min": -0.0708,
+     "max": -0.0708,
+     "n": 1
+    },
+    "dt_mean_M5": {
+     "mean": -0.1652,
+     "min": -0.1652,
+     "max": -0.1652,
+     "n": 1
+    },
+    "dt_mean_s": {
+     "mean": -0.0922,
+     "min": -0.0922,
+     "max": -0.0922,
+     "n": 1
+    },
+    "dt_median_s": {
+     "mean": 0.14,
+     "min": 0.14,
+     "max": 0.14,
+     "n": 1
+    },
+    "dt_std_s": {
+     "mean": 0.2443,
+     "min": 0.2443,
+     "max": 0.2443,
+     "n": 1
+    },
+    "dz_final_km": {
+     "mean": 1.313,
+     "min": 1.313,
+     "max": 1.313,
+     "n": 1
+    },
+    "dz_mad_final_km": {
+     "mean": 0.548,
+     "min": 0.548,
+     "max": 0.548,
+     "n": 1
+    },
+    "dz_median_km": {
+     "mean": 1.189,
+     "min": 1.189,
+     "max": 1.189,
+     "n": 1
+    },
+    "epi_gt5km": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 1
+    },
+    "epi_mean_M2": {
+     "mean": 0.7375,
+     "min": 0.7375,
+     "max": 0.7375,
+     "n": 1
+    },
+    "epi_mean_M3": {
+     "mean": 0.7119,
+     "min": 0.7119,
+     "max": 0.7119,
+     "n": 1
+    },
+    "epi_mean_M4": {
+     "mean": 0.7599,
+     "min": 0.7599,
+     "max": 0.7599,
+     "n": 1
+    },
+    "epi_mean_M5": {
+     "mean": 0.9577,
+     "min": 0.9577,
+     "max": 0.9577,
+     "n": 1
+    },
+    "epi_median_km": {
+     "mean": 0.3249,
+     "min": 0.3249,
+     "max": 0.3249,
+     "n": 1
+    },
+    "event_ratio_final": {
+     "mean": 0.6776,
+     "min": 0.6776,
+     "max": 0.6776,
+     "n": 1
+    },
+    "f1_M2": {
+     "mean": 0.8013,
+     "min": 0.8013,
+     "max": 0.8013,
+     "n": 1
+    },
+    "f1_M3": {
+     "mean": 0.8205,
+     "min": 0.8205,
+     "max": 0.8205,
+     "n": 1
+    },
+    "f1_M4": {
+     "mean": 0.8444,
+     "min": 0.8444,
+     "max": 0.8444,
+     "n": 1
+    },
+    "f1_M5": {
+     "mean": 0.9268,
+     "min": 0.9268,
+     "max": 0.9268,
+     "n": 1
+    },
+    "off_structure_after_shift": {
+     "mean": 0.1161,
+     "min": 0.1161,
+     "max": 0.1161,
+     "n": 1
+    },
+    "off_structure_fraction": {
+     "mean": 0.1152,
+     "min": 0.1152,
+     "max": 0.1152,
+     "n": 1
+    },
+    "out_of_coverage_fraction": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 1
+    },
+    "out_of_mask_fraction": {
+     "mean": 0.1339,
+     "min": 0.1339,
+     "max": 0.1339,
+     "n": 1
+    },
+    "precision_M2": {
+     "mean": 0.771,
+     "min": 0.771,
+     "max": 0.771,
+     "n": 1
+    },
+    "precision_M3": {
+     "mean": 0.8285,
+     "min": 0.8285,
+     "max": 0.8285,
+     "n": 1
+    },
+    "precision_M4": {
+     "mean": 0.8158,
+     "min": 0.8158,
+     "max": 0.8158,
+     "n": 1
+    },
+    "precision_M5": {
+     "mean": 0.8636,
+     "min": 0.8636,
+     "max": 0.8636,
+     "n": 1
+    },
+    "precision_final": {
+     "mean": 0.6519,
+     "min": 0.6519,
+     "max": 0.6519,
+     "n": 1
+    },
+    "recall": {
+     "mean": 0.7873,
+     "min": 0.7873,
+     "max": 0.7873,
+     "n": 1
+    },
+    "recall_M2": {
+     "mean": 0.8341,
+     "min": 0.8341,
+     "max": 0.8341,
+     "n": 1
+    },
+    "recall_M3": {
+     "mean": 0.8127,
+     "min": 0.8127,
+     "max": 0.8127,
+     "n": 1
+    },
+    "recall_M4": {
+     "mean": 0.875,
+     "min": 0.875,
+     "max": 0.875,
+     "n": 1
+    },
+    "recall_M5": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "recall_after_large": {
+     "mean": 0.7804,
+     "min": 0.7804,
+     "max": 0.7804,
+     "n": 1
+    },
+    "recall_final": {
+     "mean": 0.4296,
+     "min": 0.4296,
+     "max": 0.4296,
+     "n": 1
+    },
+    "recall_norm": {
+     "mean": 1.2385,
+     "min": 1.2385,
+     "max": 1.2385,
+     "n": 1
+    },
+    "recall_other": {
+     "mean": 0.8097,
+     "min": 0.8097,
+     "max": 0.8097,
+     "n": 1
+    },
+    "recall_ref_awr_hypocenters": {
+     "mean": 0.9188,
+     "min": 0.9188,
+     "max": 0.9188,
+     "n": 1
+    },
+    "recall_ref_liu": {
+     "mean": 0.936,
+     "min": 0.936,
+     "max": 0.936,
+     "n": 1
+    },
+    "recall_ref_official_earthquake": {
+     "mean": 0.8071,
+     "min": 0.8071,
+     "max": 0.8071,
+     "n": 1
+    },
+    "recall_ref_ross_relocated": {
+     "mean": 0.7464,
+     "min": 0.7464,
+     "max": 0.7464,
+     "n": 1
+    },
+    "recall_ref_shelly": {
+     "mean": 0.7873,
+     "min": 0.7873,
+     "max": 0.7873,
+     "n": 1
+    },
+    "recall_tight": {
+     "mean": 0.7611,
+     "min": 0.7611,
+     "max": 0.7611,
+     "n": 1
+    },
+    "scatter_final_km": {
+     "mean": 0.4905,
+     "min": 0.4905,
+     "max": 0.4905,
+     "n": 1
+    },
+    "scatter_median_km": {
+     "mean": 0.2463,
+     "min": 0.2463,
+     "max": 0.2463,
+     "n": 1
+    },
+    "shift_final_km": {
+     "mean": 0.4252,
+     "min": 0.4252,
+     "max": 0.4252,
+     "n": 1
+    },
+    "shift_km": {
+     "mean": 0.1753,
+     "min": 0.1753,
+     "max": 0.1753,
+     "n": 1
+    },
+    "time_bias_final_s": {
+     "mean": -0.36,
+     "min": -0.36,
+     "max": -0.36,
+     "n": 1
+    },
+    "time_mad_final_s": {
+     "mean": 0.04,
+     "min": 0.04,
+     "max": 0.04,
+     "n": 1
+    },
+    "union_support": {
+     "mean": 0.7201,
+     "min": 0.7201,
+     "max": 0.7201,
+     "n": 1
+    }
+   },
+   "trusted_runs": 0,
+   "cost_usd": {
+    "mean": 15.2954,
+    "min": 15.2954,
+    "max": 15.2954,
+    "n": 1
+   },
+   "elapsed_s": {
+    "mean": 13192.8,
+    "min": 13192.8,
+    "max": 13192.8,
+    "n": 1
+   },
+   "turns": {
+    "mean": 234.0,
+    "min": 234.0,
+    "max": 234.0,
+    "n": 1
+   }
+  },
+  {
+   "variant": "backend_checker",
+   "harness": "claude",
+   "model": "glm-5.3",
+   "launched": 1,
+   "leakage_flagged": [],
+   "completion_rate": 1.0,
+   "runs": [
+    {
+     "run_id": "20261101T235514Z",
+     "completed": true,
+     "trusted": false,
+     "trust_failed": [
+      "off_structure",
+      "magnitude_spread",
+      "large_events_present"
+     ],
+     "b_difference": 0.01,
+     "depth_band_share": 0.1155,
+     "depth_mode_share": 0.002,
+     "dmag_mean_M2": 0.0815,
+     "dmag_mean_M3": 0.1038,
+     "dmag_mean_M4": 0.1399,
+     "dmag_mean_M5": -0.41,
+     "dmag_median": 0.06,
+     "dmag_pairs": 5105,
+     "dmag_slope_per_unit": -0.0685,
+     "dmag_std": 0.4439,
+     "dt_final_s": 0.255,
+     "dt_mean_M2": 0.0119,
+     "dt_mean_M3": 0.0105,
+     "dt_mean_M4": -0.0087,
+     "dt_mean_M5": -0.0545,
+     "dt_mean_s": 0.0299,
+     "dt_median_s": 0.1,
+     "dt_std_s": 0.2536,
+     "dz_final_km": 0.82,
+     "dz_mad_final_km": 0.8925,
+     "dz_median_km": 0.6426,
+     "epi_gt5km": 0.0,
+     "epi_mean_M2": 0.7356,
+     "epi_mean_M3": 0.7446,
+     "epi_mean_M4": 0.8598,
+     "epi_mean_M5": 0.7373,
+     "epi_median_km": 0.319,
+     "event_ratio_final": 0.649,
+     "f1_M2": 0.7638,
+     "f1_M3": 0.7577,
+     "f1_M4": 0.8108,
+     "f1_M5": 0.9697,
+     "off_structure_after_shift": 0.1046,
+     "off_structure_fraction": 0.105,
+     "out_of_coverage_fraction": 0.0001,
+     "out_of_mask_fraction": 0.1635,
+     "precision_M2": 0.7496,
+     "precision_M3": 0.7648,
+     "precision_M4": 0.7828,
+     "precision_M5": 0.9412,
+     "precision_final": 0.6686,
+     "recall": 0.7627,
+     "recall_M2": 0.7786,
+     "recall_M3": 0.7507,
+     "recall_M4": 0.8409,
+     "recall_M5": 1.0,
+     "recall_after_large": 0.7608,
+     "recall_final": 0.4206,
+     "recall_norm": 1.1998,
+     "recall_other": 0.7829,
+     "recall_ref_awr_hypocenters": 0.8807,
+     "recall_ref_liu": 0.8888,
+     "recall_ref_official_earthquake": 0.767,
+     "recall_ref_ross_relocated": 0.7109,
+     "recall_ref_shelly": 0.7627,
+     "recall_tight": 0.7464,
+     "scatter_final_km": 0.415,
+     "scatter_median_km": 0.2779,
+     "shift_final_km": 0.3553,
+     "shift_km": 0.1433,
+     "time_bias_final_s": -0.25,
+     "time_mad_final_s": 0.09,
+     "union_support": 0.7344
+    }
+   ],
+   "metrics": {
+    "b_difference": {
+     "mean": 0.01,
+     "min": 0.01,
+     "max": 0.01,
+     "n": 1
+    },
+    "depth_band_share": {
+     "mean": 0.1155,
+     "min": 0.1155,
+     "max": 0.1155,
+     "n": 1
+    },
+    "depth_mode_share": {
+     "mean": 0.002,
+     "min": 0.002,
+     "max": 0.002,
+     "n": 1
+    },
+    "dmag_mean_M2": {
+     "mean": 0.0815,
+     "min": 0.0815,
+     "max": 0.0815,
+     "n": 1
+    },
+    "dmag_mean_M3": {
+     "mean": 0.1038,
+     "min": 0.1038,
+     "max": 0.1038,
+     "n": 1
+    },
+    "dmag_mean_M4": {
+     "mean": 0.1399,
+     "min": 0.1399,
+     "max": 0.1399,
+     "n": 1
+    },
+    "dmag_mean_M5": {
+     "mean": -0.41,
+     "min": -0.41,
+     "max": -0.41,
+     "n": 1
+    },
+    "dmag_median": {
+     "mean": 0.06,
+     "min": 0.06,
+     "max": 0.06,
+     "n": 1
+    },
+    "dmag_pairs": {
+     "mean": 5105.0,
+     "min": 5105.0,
+     "max": 5105.0,
+     "n": 1
+    },
+    "dmag_slope_per_unit": {
+     "mean": -0.0685,
+     "min": -0.0685,
+     "max": -0.0685,
+     "n": 1
+    },
+    "dmag_std": {
+     "mean": 0.4439,
+     "min": 0.4439,
+     "max": 0.4439,
+     "n": 1
+    },
+    "dt_final_s": {
+     "mean": 0.255,
+     "min": 0.255,
+     "max": 0.255,
+     "n": 1
+    },
+    "dt_mean_M2": {
+     "mean": 0.0119,
+     "min": 0.0119,
+     "max": 0.0119,
+     "n": 1
+    },
+    "dt_mean_M3": {
+     "mean": 0.0105,
+     "min": 0.0105,
+     "max": 0.0105,
+     "n": 1
+    },
+    "dt_mean_M4": {
+     "mean": -0.0087,
+     "min": -0.0087,
+     "max": -0.0087,
+     "n": 1
+    },
+    "dt_mean_M5": {
+     "mean": -0.0545,
+     "min": -0.0545,
+     "max": -0.0545,
+     "n": 1
+    },
+    "dt_mean_s": {
+     "mean": 0.0299,
+     "min": 0.0299,
+     "max": 0.0299,
+     "n": 1
+    },
+    "dt_median_s": {
+     "mean": 0.1,
+     "min": 0.1,
+     "max": 0.1,
+     "n": 1
+    },
+    "dt_std_s": {
+     "mean": 0.2536,
+     "min": 0.2536,
+     "max": 0.2536,
+     "n": 1
+    },
+    "dz_final_km": {
+     "mean": 0.82,
+     "min": 0.82,
+     "max": 0.82,
+     "n": 1
+    },
+    "dz_mad_final_km": {
+     "mean": 0.8925,
+     "min": 0.8925,
+     "max": 0.8925,
+     "n": 1
+    },
+    "dz_median_km": {
+     "mean": 0.6426,
+     "min": 0.6426,
+     "max": 0.6426,
+     "n": 1
+    },
+    "epi_gt5km": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 1
+    },
+    "epi_mean_M2": {
+     "mean": 0.7356,
+     "min": 0.7356,
+     "max": 0.7356,
+     "n": 1
+    },
+    "epi_mean_M3": {
+     "mean": 0.7446,
+     "min": 0.7446,
+     "max": 0.7446,
+     "n": 1
+    },
+    "epi_mean_M4": {
+     "mean": 0.8598,
+     "min": 0.8598,
+     "max": 0.8598,
+     "n": 1
+    },
+    "epi_mean_M5": {
+     "mean": 0.7373,
+     "min": 0.7373,
+     "max": 0.7373,
+     "n": 1
+    },
+    "epi_median_km": {
+     "mean": 0.319,
+     "min": 0.319,
+     "max": 0.319,
+     "n": 1
+    },
+    "event_ratio_final": {
+     "mean": 0.649,
+     "min": 0.649,
+     "max": 0.649,
+     "n": 1
+    },
+    "f1_M2": {
+     "mean": 0.7638,
+     "min": 0.7638,
+     "max": 0.7638,
+     "n": 1
+    },
+    "f1_M3": {
+     "mean": 0.7577,
+     "min": 0.7577,
+     "max": 0.7577,
+     "n": 1
+    },
+    "f1_M4": {
+     "mean": 0.8108,
+     "min": 0.8108,
+     "max": 0.8108,
+     "n": 1
+    },
+    "f1_M5": {
+     "mean": 0.9697,
+     "min": 0.9697,
+     "max": 0.9697,
+     "n": 1
+    },
+    "off_structure_after_shift": {
+     "mean": 0.1046,
+     "min": 0.1046,
+     "max": 0.1046,
+     "n": 1
+    },
+    "off_structure_fraction": {
+     "mean": 0.105,
+     "min": 0.105,
+     "max": 0.105,
+     "n": 1
+    },
+    "out_of_coverage_fraction": {
+     "mean": 0.0001,
+     "min": 0.0001,
+     "max": 0.0001,
+     "n": 1
+    },
+    "out_of_mask_fraction": {
+     "mean": 0.1635,
+     "min": 0.1635,
+     "max": 0.1635,
+     "n": 1
+    },
+    "precision_M2": {
+     "mean": 0.7496,
+     "min": 0.7496,
+     "max": 0.7496,
+     "n": 1
+    },
+    "precision_M3": {
+     "mean": 0.7648,
+     "min": 0.7648,
+     "max": 0.7648,
+     "n": 1
+    },
+    "precision_M4": {
+     "mean": 0.7828,
+     "min": 0.7828,
+     "max": 0.7828,
+     "n": 1
+    },
+    "precision_M5": {
+     "mean": 0.9412,
+     "min": 0.9412,
+     "max": 0.9412,
+     "n": 1
+    },
+    "precision_final": {
+     "mean": 0.6686,
+     "min": 0.6686,
+     "max": 0.6686,
+     "n": 1
+    },
+    "recall": {
+     "mean": 0.7627,
+     "min": 0.7627,
+     "max": 0.7627,
+     "n": 1
+    },
+    "recall_M2": {
+     "mean": 0.7786,
+     "min": 0.7786,
+     "max": 0.7786,
+     "n": 1
+    },
+    "recall_M3": {
+     "mean": 0.7507,
+     "min": 0.7507,
+     "max": 0.7507,
+     "n": 1
+    },
+    "recall_M4": {
+     "mean": 0.8409,
+     "min": 0.8409,
+     "max": 0.8409,
+     "n": 1
+    },
+    "recall_M5": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "recall_after_large": {
+     "mean": 0.7608,
+     "min": 0.7608,
+     "max": 0.7608,
+     "n": 1
+    },
+    "recall_final": {
+     "mean": 0.4206,
+     "min": 0.4206,
+     "max": 0.4206,
+     "n": 1
+    },
+    "recall_norm": {
+     "mean": 1.1998,
+     "min": 1.1998,
+     "max": 1.1998,
+     "n": 1
+    },
+    "recall_other": {
+     "mean": 0.7829,
+     "min": 0.7829,
+     "max": 0.7829,
+     "n": 1
+    },
+    "recall_ref_awr_hypocenters": {
+     "mean": 0.8807,
+     "min": 0.8807,
+     "max": 0.8807,
+     "n": 1
+    },
+    "recall_ref_liu": {
+     "mean": 0.8888,
+     "min": 0.8888,
+     "max": 0.8888,
+     "n": 1
+    },
+    "recall_ref_official_earthquake": {
+     "mean": 0.767,
+     "min": 0.767,
+     "max": 0.767,
+     "n": 1
+    },
+    "recall_ref_ross_relocated": {
+     "mean": 0.7109,
+     "min": 0.7109,
+     "max": 0.7109,
+     "n": 1
+    },
+    "recall_ref_shelly": {
+     "mean": 0.7627,
+     "min": 0.7627,
+     "max": 0.7627,
+     "n": 1
+    },
+    "recall_tight": {
+     "mean": 0.7464,
+     "min": 0.7464,
+     "max": 0.7464,
+     "n": 1
+    },
+    "scatter_final_km": {
+     "mean": 0.415,
+     "min": 0.415,
+     "max": 0.415,
+     "n": 1
+    },
+    "scatter_median_km": {
+     "mean": 0.2779,
+     "min": 0.2779,
+     "max": 0.2779,
+     "n": 1
+    },
+    "shift_final_km": {
+     "mean": 0.3553,
+     "min": 0.3553,
+     "max": 0.3553,
+     "n": 1
+    },
+    "shift_km": {
+     "mean": 0.1433,
+     "min": 0.1433,
+     "max": 0.1433,
+     "n": 1
+    },
+    "time_bias_final_s": {
+     "mean": -0.25,
+     "min": -0.25,
+     "max": -0.25,
+     "n": 1
+    },
+    "time_mad_final_s": {
+     "mean": 0.09,
+     "min": 0.09,
+     "max": 0.09,
+     "n": 1
+    },
+    "union_support": {
+     "mean": 0.7344,
+     "min": 0.7344,
+     "max": 0.7344,
+     "n": 1
+    }
+   },
+   "trusted_runs": 0,
+   "cost_usd": {
+    "mean": 22.8819,
+    "min": 22.8819,
+    "max": 22.8819,
+    "n": 1
+   },
+   "elapsed_s": {
+    "mean": 11507.1,
+    "min": 11507.1,
+    "max": 11507.1,
+    "n": 1
+   },
+   "turns": {
+    "mean": 360.0,
+    "min": 360.0,
+    "max": 360.0,
+    "n": 1
+   }
+  },
+  {
+   "variant": "backend_knowledge",
+   "harness": "claude",
+   "model": "glm-5.3",
+   "launched": 1,
+   "leakage_flagged": [],
+   "completion_rate": 1.0,
+   "runs": [
+    {
+     "run_id": "20261101T235536Z",
+     "completed": true,
+     "trusted": false,
+     "trust_failed": [
+      "depth_bias",
+      "off_structure",
+      "large_events_present"
+     ],
+     "b_difference": -0.015,
+     "depth_band_share": 0.2043,
+     "depth_mode_share": 0.0282,
+     "dmag_mean_M2": -0.0719,
+     "dmag_mean_M3": -0.0307,
+     "dmag_mean_M4": 0.0814,
+     "dmag_mean_M5": -0.416,
+     "dmag_median": -0.08,
+     "dmag_pairs": 5304,
+     "dmag_slope_per_unit": -0.0046,
+     "dmag_std": 0.1474,
+     "dt_final_s": 0.28,
+     "dt_mean_M2": 0.0076,
+     "dt_mean_M3": 0.0135,
+     "dt_mean_M4": 0.0231,
+     "dt_mean_M5": 0.022,
+     "dt_mean_s": 0.0018,
+     "dt_median_s": 0.12,
+     "dt_std_s": 0.2658,
+     "dz_final_km": 1.101,
+     "dz_mad_final_km": 0.88,
+     "dz_median_km": 1.226,
+     "epi_gt5km": 0.0,
+     "epi_mean_M2": 0.7754,
+     "epi_mean_M3": 0.7273,
+     "epi_mean_M4": 0.7641,
+     "epi_mean_M5": 0.7095,
+     "epi_median_km": 0.5247,
+     "event_ratio_final": 0.6837,
+     "f1_M2": 0.8008,
+     "f1_M3": 0.8275,
+     "f1_M4": 0.8618,
+     "f1_M5": 0.9474,
+     "off_structure_after_shift": 0.1409,
+     "off_structure_fraction": 0.1402,
+     "out_of_coverage_fraction": 0.0,
+     "out_of_mask_fraction": 0.1185,
+     "precision_M2": 0.7732,
+     "precision_M3": 0.8444,
+     "precision_M4": 0.8489,
+     "precision_M5": 0.9,
+     "precision_final": 0.6258,
+     "recall": 0.7755,
+     "recall_M2": 0.8304,
+     "recall_M3": 0.8113,
+     "recall_M4": 0.875,
+     "recall_M5": 1.0,
+     "recall_after_large": 0.7682,
+     "recall_final": 0.4168,
+     "recall_norm": 1.2199,
+     "recall_other": 0.7986,
+     "recall_ref_awr_hypocenters": 0.9121,
+     "recall_ref_liu": 0.9294,
+     "recall_ref_official_earthquake": 0.7983,
+     "recall_ref_ross_relocated": 0.7378,
+     "recall_ref_shelly": 0.7755,
+     "recall_tight": 0.7293,
+     "scatter_final_km": 0.5898,
+     "scatter_median_km": 0.4811,
+     "shift_final_km": 0.4323,
+     "shift_km": 0.1297,
+     "time_bias_final_s": -0.2755,
+     "time_mad_final_s": 0.0645,
+     "union_support": 0.6949
+    }
+   ],
+   "metrics": {
+    "b_difference": {
+     "mean": -0.015,
+     "min": -0.015,
+     "max": -0.015,
+     "n": 1
+    },
+    "depth_band_share": {
+     "mean": 0.2043,
+     "min": 0.2043,
+     "max": 0.2043,
+     "n": 1
+    },
+    "depth_mode_share": {
+     "mean": 0.0282,
+     "min": 0.0282,
+     "max": 0.0282,
+     "n": 1
+    },
+    "dmag_mean_M2": {
+     "mean": -0.0719,
+     "min": -0.0719,
+     "max": -0.0719,
+     "n": 1
+    },
+    "dmag_mean_M3": {
+     "mean": -0.0307,
+     "min": -0.0307,
+     "max": -0.0307,
+     "n": 1
+    },
+    "dmag_mean_M4": {
+     "mean": 0.0814,
+     "min": 0.0814,
+     "max": 0.0814,
+     "n": 1
+    },
+    "dmag_mean_M5": {
+     "mean": -0.416,
+     "min": -0.416,
+     "max": -0.416,
+     "n": 1
+    },
+    "dmag_median": {
+     "mean": -0.08,
+     "min": -0.08,
+     "max": -0.08,
+     "n": 1
+    },
+    "dmag_pairs": {
+     "mean": 5304.0,
+     "min": 5304.0,
+     "max": 5304.0,
+     "n": 1
+    },
+    "dmag_slope_per_unit": {
+     "mean": -0.0046,
+     "min": -0.0046,
+     "max": -0.0046,
+     "n": 1
+    },
+    "dmag_std": {
+     "mean": 0.1474,
+     "min": 0.1474,
+     "max": 0.1474,
+     "n": 1
+    },
+    "dt_final_s": {
+     "mean": 0.28,
+     "min": 0.28,
+     "max": 0.28,
+     "n": 1
+    },
+    "dt_mean_M2": {
+     "mean": 0.0076,
+     "min": 0.0076,
+     "max": 0.0076,
+     "n": 1
+    },
+    "dt_mean_M3": {
+     "mean": 0.0135,
+     "min": 0.0135,
+     "max": 0.0135,
+     "n": 1
+    },
+    "dt_mean_M4": {
+     "mean": 0.0231,
+     "min": 0.0231,
+     "max": 0.0231,
+     "n": 1
+    },
+    "dt_mean_M5": {
+     "mean": 0.022,
+     "min": 0.022,
+     "max": 0.022,
+     "n": 1
+    },
+    "dt_mean_s": {
+     "mean": 0.0018,
+     "min": 0.0018,
+     "max": 0.0018,
+     "n": 1
+    },
+    "dt_median_s": {
+     "mean": 0.12,
+     "min": 0.12,
+     "max": 0.12,
+     "n": 1
+    },
+    "dt_std_s": {
+     "mean": 0.2658,
+     "min": 0.2658,
+     "max": 0.2658,
+     "n": 1
+    },
+    "dz_final_km": {
+     "mean": 1.101,
+     "min": 1.101,
+     "max": 1.101,
+     "n": 1
+    },
+    "dz_mad_final_km": {
+     "mean": 0.88,
+     "min": 0.88,
+     "max": 0.88,
+     "n": 1
+    },
+    "dz_median_km": {
+     "mean": 1.226,
+     "min": 1.226,
+     "max": 1.226,
+     "n": 1
+    },
+    "epi_gt5km": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 1
+    },
+    "epi_mean_M2": {
+     "mean": 0.7754,
+     "min": 0.7754,
+     "max": 0.7754,
+     "n": 1
+    },
+    "epi_mean_M3": {
+     "mean": 0.7273,
+     "min": 0.7273,
+     "max": 0.7273,
+     "n": 1
+    },
+    "epi_mean_M4": {
+     "mean": 0.7641,
+     "min": 0.7641,
+     "max": 0.7641,
+     "n": 1
+    },
+    "epi_mean_M5": {
+     "mean": 0.7095,
+     "min": 0.7095,
+     "max": 0.7095,
+     "n": 1
+    },
+    "epi_median_km": {
+     "mean": 0.5247,
+     "min": 0.5247,
+     "max": 0.5247,
+     "n": 1
+    },
+    "event_ratio_final": {
+     "mean": 0.6837,
+     "min": 0.6837,
+     "max": 0.6837,
+     "n": 1
+    },
+    "f1_M2": {
+     "mean": 0.8008,
+     "min": 0.8008,
+     "max": 0.8008,
+     "n": 1
+    },
+    "f1_M3": {
+     "mean": 0.8275,
+     "min": 0.8275,
+     "max": 0.8275,
+     "n": 1
+    },
+    "f1_M4": {
+     "mean": 0.8618,
+     "min": 0.8618,
+     "max": 0.8618,
+     "n": 1
+    },
+    "f1_M5": {
+     "mean": 0.9474,
+     "min": 0.9474,
+     "max": 0.9474,
+     "n": 1
+    },
+    "off_structure_after_shift": {
+     "mean": 0.1409,
+     "min": 0.1409,
+     "max": 0.1409,
+     "n": 1
+    },
+    "off_structure_fraction": {
+     "mean": 0.1402,
+     "min": 0.1402,
+     "max": 0.1402,
+     "n": 1
+    },
+    "out_of_coverage_fraction": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 1
+    },
+    "out_of_mask_fraction": {
+     "mean": 0.1185,
+     "min": 0.1185,
+     "max": 0.1185,
+     "n": 1
+    },
+    "precision_M2": {
+     "mean": 0.7732,
+     "min": 0.7732,
+     "max": 0.7732,
+     "n": 1
+    },
+    "precision_M3": {
+     "mean": 0.8444,
+     "min": 0.8444,
+     "max": 0.8444,
+     "n": 1
+    },
+    "precision_M4": {
+     "mean": 0.8489,
+     "min": 0.8489,
+     "max": 0.8489,
+     "n": 1
+    },
+    "precision_M5": {
+     "mean": 0.9,
+     "min": 0.9,
+     "max": 0.9,
+     "n": 1
+    },
+    "precision_final": {
+     "mean": 0.6258,
+     "min": 0.6258,
+     "max": 0.6258,
+     "n": 1
+    },
+    "recall": {
+     "mean": 0.7755,
+     "min": 0.7755,
+     "max": 0.7755,
+     "n": 1
+    },
+    "recall_M2": {
+     "mean": 0.8304,
+     "min": 0.8304,
+     "max": 0.8304,
+     "n": 1
+    },
+    "recall_M3": {
+     "mean": 0.8113,
+     "min": 0.8113,
+     "max": 0.8113,
+     "n": 1
+    },
+    "recall_M4": {
+     "mean": 0.875,
+     "min": 0.875,
+     "max": 0.875,
+     "n": 1
+    },
+    "recall_M5": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "recall_after_large": {
+     "mean": 0.7682,
+     "min": 0.7682,
+     "max": 0.7682,
+     "n": 1
+    },
+    "recall_final": {
+     "mean": 0.4168,
+     "min": 0.4168,
+     "max": 0.4168,
+     "n": 1
+    },
+    "recall_norm": {
+     "mean": 1.2199,
+     "min": 1.2199,
+     "max": 1.2199,
+     "n": 1
+    },
+    "recall_other": {
+     "mean": 0.7986,
+     "min": 0.7986,
+     "max": 0.7986,
+     "n": 1
+    },
+    "recall_ref_awr_hypocenters": {
+     "mean": 0.9121,
+     "min": 0.9121,
+     "max": 0.9121,
+     "n": 1
+    },
+    "recall_ref_liu": {
+     "mean": 0.9294,
+     "min": 0.9294,
+     "max": 0.9294,
+     "n": 1
+    },
+    "recall_ref_official_earthquake": {
+     "mean": 0.7983,
+     "min": 0.7983,
+     "max": 0.7983,
+     "n": 1
+    },
+    "recall_ref_ross_relocated": {
+     "mean": 0.7378,
+     "min": 0.7378,
+     "max": 0.7378,
+     "n": 1
+    },
+    "recall_ref_shelly": {
+     "mean": 0.7755,
+     "min": 0.7755,
+     "max": 0.7755,
+     "n": 1
+    },
+    "recall_tight": {
+     "mean": 0.7293,
+     "min": 0.7293,
+     "max": 0.7293,
+     "n": 1
+    },
+    "scatter_final_km": {
+     "mean": 0.5898,
+     "min": 0.5898,
+     "max": 0.5898,
+     "n": 1
+    },
+    "scatter_median_km": {
+     "mean": 0.4811,
+     "min": 0.4811,
+     "max": 0.4811,
+     "n": 1
+    },
+    "shift_final_km": {
+     "mean": 0.4323,
+     "min": 0.4323,
+     "max": 0.4323,
+     "n": 1
+    },
+    "shift_km": {
+     "mean": 0.1297,
+     "min": 0.1297,
+     "max": 0.1297,
+     "n": 1
+    },
+    "time_bias_final_s": {
+     "mean": -0.2755,
+     "min": -0.2755,
+     "max": -0.2755,
+     "n": 1
+    },
+    "time_mad_final_s": {
+     "mean": 0.0645,
+     "min": 0.0645,
+     "max": 0.0645,
+     "n": 1
+    },
+    "union_support": {
+     "mean": 0.6949,
+     "min": 0.6949,
+     "max": 0.6949,
+     "n": 1
+    }
+   },
+   "trusted_runs": 0,
+   "cost_usd": {
+    "mean": 22.8507,
+    "min": 22.8507,
+    "max": 22.8507,
+    "n": 1
+   },
+   "elapsed_s": {
+    "mean": 12687.8,
+    "min": 12687.8,
+    "max": 12687.8,
+    "n": 1
+   },
+   "turns": {
+    "mean": 366.0,
+    "min": 366.0,
+    "max": 366.0,
+    "n": 1
+   }
+  },
   {
    "variant": "min",
    "harness": "claude",
@@ -18,7 +1487,6 @@
      "completed": true,
      "trusted": false,
      "trust_failed": [
-      "inside_region",
       "horizontal_shift",
       "depth_bias",
       "off_structure",
@@ -34,6 +1502,7 @@
      "dmag_mean_M4": 0.376,
      "dmag_mean_M5": -0.212,
      "dmag_median": 0.3,
+     "dmag_pairs": 3866,
      "dmag_slope_per_unit": -0.1136,
      "dmag_std": 0.3106,
      "dt_final_s": 0.256,
@@ -60,6 +1529,7 @@
      "f1_M5": 1.0,
      "off_structure_after_shift": 0.0937,
      "off_structure_fraction": 0.0964,
+     "out_of_coverage_fraction": 0.0023,
      "out_of_mask_fraction": 0.2089,
      "precision_M2": 0.799,
      "precision_M3": 0.8189,
@@ -137,6 +1607,12 @@
      "mean": 0.3,
      "min": 0.3,
      "max": 0.3,
+     "n": 1
+    },
+    "dmag_pairs": {
+     "mean": 3866.0,
+     "min": 3866.0,
+     "max": 3866.0,
      "n": 1
     },
     "dmag_slope_per_unit": {
@@ -293,6 +1769,12 @@
      "mean": 0.0964,
      "min": 0.0964,
      "max": 0.0964,
+     "n": 1
+    },
+    "out_of_coverage_fraction": {
+     "mean": 0.0023,
+     "min": 0.0023,
+     "max": 0.0023,
      "n": 1
     },
     "out_of_mask_fraction": {
@@ -497,7 +1979,6 @@
      "completed": true,
      "trusted": false,
      "trust_failed": [
-      "inside_region",
       "depth_bias",
       "off_structure",
       "depth_pileup",
@@ -512,6 +1993,7 @@
      "dmag_mean_M4": -0.8213,
      "dmag_mean_M5": -1.152,
      "dmag_median": -1.21,
+     "dmag_pairs": 5099,
      "dmag_slope_per_unit": -0.0285,
      "dmag_std": 0.1969,
      "dt_final_s": 0.1281,
@@ -538,6 +2020,7 @@
      "f1_M5": 0.8621,
      "off_structure_after_shift": 0.1669,
      "off_structure_fraction": 0.1707,
+     "out_of_coverage_fraction": 0.0,
      "out_of_mask_fraction": 0.1202,
      "precision_M2": 0.7277,
      "precision_M3": 0.7946,
@@ -615,6 +2098,12 @@
      "mean": -1.21,
      "min": -1.21,
      "max": -1.21,
+     "n": 1
+    },
+    "dmag_pairs": {
+     "mean": 5099.0,
+     "min": 5099.0,
+     "max": 5099.0,
      "n": 1
     },
     "dmag_slope_per_unit": {
@@ -771,6 +2260,12 @@
      "mean": 0.1707,
      "min": 0.1707,
      "max": 0.1707,
+     "n": 1
+    },
+    "out_of_coverage_fraction": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
      "n": 1
     },
     "out_of_mask_fraction": {

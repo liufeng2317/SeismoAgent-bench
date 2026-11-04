@@ -86,7 +86,9 @@
   "pick_residual_mad_P_s": 0.03,
   "pick_recall_S": 0.668,
   "pick_residual_mad_S_s": 0.05,
-  "out_of_mask_fraction": 0.0269
+  "out_of_mask_fraction": 0.0269,
+  "dmag_pairs": 1255,
+  "out_of_coverage_fraction": 0.0
  },
  "trust": {
   "trusted": false,
@@ -102,10 +104,10 @@
     "checks": {
      "inside_region": {
       "aspect": "accuracy",
-      "value": 0.0269,
+      "value": 0.0,
       "op": "<=",
-      "threshold": 0.1,
-      "final": 0.0173,
+      "threshold": 0.05,
+      "final": 0.0004,
       "verdict": "pass"
      },
      "false_events": {
@@ -245,6 +247,7 @@
   "turns": 42
  },
  "leakage_flag": false,
+ "leakage_review": [],
  "audit": {
   "sampled": 50,
   "unsupported": 91,

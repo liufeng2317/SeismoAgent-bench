@@ -43,6 +43,7 @@
   "turns": 207
  },
  "leakage_flag": false,
+ "leakage_review": [],
  "rescue_reference_only": {
   "note": "outputs recovered outside work/ after the session ended; not a formal result (see rescue/README.md)",
   "completion": {
@@ -262,6 +263,7 @@
    "turns": 207
   },
   "leakage_flag": false,
+  "leakage_review": [],
   "audit": {
    "sampled": 50,
    "unsupported": 582,
