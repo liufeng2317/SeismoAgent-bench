@@ -3,7 +3,7 @@
 
 No case gets a specific velocity model (decision 2026-11-03). Seismologists then build one from the data: a
 minimum 1-D model searched jointly with station corrections, chosen by the travel-time misfit (VELEST). This
-replays that on the representative pilot of each formal tools run (500 events, the subset and the generic
+replays that on the representative pilot of each formal tools run (300 events, the subset and the generic
 CRUST1.0 column of ``near_surface.py``): every velocity of the column is scaled by a factor; for each factor
 the events are located with NonLinLoc EDT_OT_WT, then station corrections are iterated (median P and S residual
 per station with at least 10 picks, minus the network median of each phase, so a shared offset is not absorbed;

@@ -29,15 +29,18 @@ def main() -> None:
         r = json.loads(f.read_text())
         st = [s for s in r["steps"] if s.get("dt_s") is not None and s.get("dz_km") is not None]
         last = max(s["iteration"] for s in st)
-        rules = {
-            "generic": next(s for s in st if s["scale"] == 1.0 and s["iteration"] == 0),
-            "station corrections": next((s for s in st if s["scale"] == 1.0 and s["iteration"] == last),
-                                        max((s for s in st if s["scale"] == 1.0), key=lambda s: s["iteration"])),
+        unit = [s for s in st if s["scale"] == 1.0]          # variants with a reduced scale range have none
+        rules = {}
+        if unit:
+            rules["generic"] = next(s for s in unit if s["iteration"] == 0)
+            rules["station corrections"] = max(unit, key=lambda s: s["iteration"])
+        rules.update({
             "minimum misfit": min(st, key=lambda s: s["median_rms_s"]),
             "minimum misfit, corrected": min((s for s in st if s["iteration"] == last), key=lambda s: s["median_rms_s"]),
             "best in hindsight": min(st, key=err),
-        }
-        print(r["case"])
+        })
+        scales = sorted({s["scale"] for s in st})
+        print(f"{f.stem}  (scales {scales[0]:.2f}-{scales[-1]:.2f}, damping {r.get('damping', 1.0)}, cap {r.get('cap_s')})")
         for k, s in rules.items():
             print(f"  {k:26s} {fmt(s)}")
 

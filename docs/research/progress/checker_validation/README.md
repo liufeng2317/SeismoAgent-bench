@@ -11,5 +11,6 @@
 | [`05_near_surface_magnitude_matching.md`](05_near_surface_magnitude_matching.md) | 2026-11-03 | 不给区域模型时能否约束近地表；震级标度压缩的来源；`compare.py` 规则的一项检验；模板匹配阶段的评估 |
 | [`06_trial_and_tool_fixes.md`](06_trial_and_tool_fixes.md) | 2026-11-03 至 11-04 | 统一测试试水批次（Kīlauea × 三个后端变体，checker 1.2）；之后的离线修复（Wadati 门槛、NonLinLoc 搜索顶面、HypoInverse CRE、hypoDD 基准面、知识条目） |
 | [`07_scoring_questions.md`](07_scoring_questions.md) | 2026-11-04 | 评分口径的两项决定：震级斜率最少 30 对；`inside_region` 按台站覆盖判定 |
+| [`08_velocity_from_data.md`](08_velocity_from_data.md) | 2026-11-03 至 11-04 | 不给区域模型时从数据建最小一维模型（整列缩放加台站校正，按残差选）：四个案例有用、一个无变化、一个出错；阻尼无效；残差附近模型的深度离散是不确定度下限 |
 
 检验用到的工具：`workflows/development/tools_case_validation/validate_checker.py`（在 human-in-loop 轮次和正式运行上跑 checker）、`seismotools/checker/examples/smoke/run.sh`（合成回归测试）、`workflows/development/replay/`（离线重放和诊断脚本）、`workflows/development/backend_tier_b/`（B 层后端任务）、`workflows/development/scoring_migrations/`（评分规则改动后对已存分数重判）。输出目录都不纳入版本库。
