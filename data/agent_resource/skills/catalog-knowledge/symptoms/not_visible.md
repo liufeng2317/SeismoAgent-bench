@@ -37,6 +37,15 @@ Where no regional model can be used, the standard alternative is to build one fr
 3. **An interior minimum is not proof.** In one sequence the minimum was interior and the depths were still 2 km too deep. Compare the chosen model with the geology (slow ground under sediment and basin stations should give positive corrections there; layer velocities should be plausible for the rocks) before adopting it.
 4. **Report the spread.** Relocate with every model whose misfit is within about 20 % of the minimum and report the range of depths and origin times as a lower bound on the uncertainty (0.15–4.5 km in these tests; the true depth was outside that range in five of six sequences). State that the model was built from the data and not checked against independent information.
 
+## The horizontal frame: station corrections and relocation
+
+A common horizontal shift of all epicentres is invisible to every check: the catalog stays internally consistent. In the offline tests on six recorded sequences, the shift did not come from the picks (replacing them with an analyst's picks moved the epicentres by at most 0.3 km) or from which stations were used, but from two things:
+
+1. **Station corrections.** A 1-D location without station corrections shifted the whole catalog by 1.5–3 km in two sequences with strong lateral structure; adding station corrections (per phase, the network median of each phase removed) brought it within 0.5 km of a catalog located with corrections, and closer to independent catalogs. A regional 1-D model did not help without them: it shifted the epicentres as much as a generic one, in another direction. Compute station corrections once the model is chosen and relocate with them; report the horizontal change they cause.
+2. **Laterally local layers.** A regional model that contains a layer present only under part of the network (basin fill, a sedimentary wedge) puts it under every station when used as a 1-D model; in one test this was the likely cause of a shift of all epicentres by about 2.5 km. Use such a layer only where it exists, through station corrections or by leaving it out of the shared model, and compare both.
+
+Relative relocation (hypoDD, GrowClust) also moves the absolute frame, by 0.3–2.3 km in these tests, because those programs place all stations at the model's top and use their own model. Compare the relocated catalog's centroid with the absolute locations before adopting it, and say which frame the catalog is in. Independent catalogs of the same sequence can differ from each other by 1–2.5 km in their frames; a shift within that range is a choice of frame, not an error that the data can resolve.
+
 ## The absolute level of the magnitude scale
 
 A magnitude scale whose distance correction or constant does not suit the region shifts all magnitudes by 0.1–0.4 units. Station terms and the constant trade off; the catalog is consistent with itself. Use the calibration of the region (`../../../magnitude/calibrations.json`), state which one, and where moment magnitudes of some events exist, compare with them.

@@ -13,7 +13,7 @@ This skill holds what an analyst knows before looking at the data: how to organi
 | About to adopt a change to a product (model, locator, parameters, filters) | [`playbooks/decide_between_candidates.md`](playbooks/decide_between_candidates.md) |
 | `compare.py` says `mixed` or `uncertain`, or a change raises a depth pile-up or layers | [`playbooks/decide_between_candidates.md`](playbooks/decide_between_candidates.md) §3 |
 | A checker flag or measurement you need to explain: candidate causes, the experiment that separates them, the repair | [`symptoms/README.md`](symptoms/README.md), then the file for the stage |
-| Errors no check can see (velocity model on average: its datum, layers or nodes, how to constrain the near surface without a regional model, and how to build a minimum 1-D model from the data safely; magnitude calibration level; events in a mainshock's coda) — read before choosing a velocity model and before computing magnitudes | [`symptoms/not_visible.md`](symptoms/not_visible.md) |
+| Errors no check can see (velocity model on average: its datum, layers or nodes, how to constrain the near surface without a regional model, and how to build a minimum 1-D model from the data safely; the horizontal frame set by station corrections and relocation; magnitude calibration level; events in a mainshock's coda) — read before choosing a velocity model and before computing magnitudes | [`symptoms/not_visible.md`](symptoms/not_visible.md) |
 | Local magnitudes: formulas, units, calibration | [`../../magnitude/README.md`](../../magnitude/README.md) |
 
 Three rules hold throughout:
