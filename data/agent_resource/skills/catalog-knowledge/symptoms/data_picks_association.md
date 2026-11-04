@@ -57,6 +57,10 @@
 
 ## Detection beyond picking (template matching, matched filtering)
 
+Most of a sequence catalog's completeness comes from template matching, not from the picker. In offline tests on six recorded sequences, analyst catalogs built with template matching held 1.4–11 times the events of their own picker-based catalogs; without the template-matching detections they kept 8–56 % of their events and recovered 0.72–0.98 of what an independent catalog recovers of another, against 0.99–1.85 with them. A template-matching run that is used only as a cross-check adds nothing to the catalog: once the detections pass the checks below, merge them (deduplicated against the picked events, with their own magnitudes and locations) into the submitted catalog.
+
+What the threshold costs: in the same tests the null-test false fraction was 3.5–11 % at 9 × MAD and 0.5–1.5 % at 9.5 × MAD; raising the threshold from the lowest passing value by half a MAD unit cost up to 20 % of the template-matching detections, and a threshold near 16 × MAD lost 36–79 % of all events.
+
 Before running template matching on the full data:
 
 - **Null test:** run the same templates on time-reversed or time-shifted data; detections there are false. Set the threshold so the false rate is below 1–2 % of detections. Published thresholds are 8–15 × MAD; the false rate depends on the number of templates, channels and the bandwidth, so a threshold does not transfer between setups. The false rate falls steeply with the threshold (from most detections to about 1 % within one or two MAD units), and so does the number of real detections above it: a threshold set well above the point where the null test passes can give up half or more of the real events. Run the null test over a range of thresholds and keep the lowest one that passes, rather than a high value chosen to be safe.

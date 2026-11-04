@@ -224,6 +224,7 @@ Kaikōura 2016
 4. **知识在流程和约定上起作用。** 试水中知识变体从原图数字化模型、查明基准面，时间和深度都通过；只有 checker 的变体没取到模型数值、自拟了一个过慢的模型。
 5. **工具的约定本身是误差来源。** HypoInverse CRH 模型忽略台站高程、NonLinLoc 深度搜索从参考高程开始、hypoDD 和 GrowClust 把台站放在模型深度 0，都会造成系统偏差；前两项已改接口默认值。
 6. **水平偏移来自台站延迟和最终目录的框架，不来自拾取。** Kaikōura、Magna、Maple 上 10 个一维候选模型的水平偏移都在 1.1–2.9 km（门槛 1 km）。逐项替换：换成专家拾取最多改变 0.26 km；加上专家的台站延迟后，Kaikōura、Maple 降到 0.2–0.5 km；Magna、Ridgecrest 的最终目录框架来自双差重定位，绝对定位复现不了。另外，Kaikōura、Magna 的最终目录自身离绝对定位参考约 1–1.4 km，与门槛相当（[09](progress/checker_validation/09_horizontal_shift.md)；评分口径见 §6.5 第 5 条）。
+7. **检测差距主要是没有用模板匹配。** 最终目录去掉模板匹配事件后只剩 8–56 % 的事件，归一化召回从 0.99–1.85 降到 0.72–0.98；六个 tools 运行中五个没把模板匹配检测加进目录（三个未运行，Maple 只做试验，Ridgecrest 跑了全量只作核对）；门槛本身只在 Magna 造成明显损失（16.3，保留 55 % 对 80 %）。这是论点 2"工具必要但不充分"的直接证据（[10](progress/checker_validation/10_template_threshold.md)）。
 
 
 
@@ -231,7 +232,7 @@ Kaikōura 2016
 
 **已完成：** 六个案例的数据、参考目录、上限和 human-in-loop 最终目录；S0、S1 正式运行和评分；组件替换和专家阶梯；评分方法 v2 和两项修正；checker 1.0–1.2 和 1.3 开发版及其检验；知识 skill（小批量协议、方案决定、症状手册、checker 看不到的问题、震级资源）；B 层后端消融；统一测试试水；运行环境写保护、泄漏扫描两层。human-in-loop 最终目录的互相关重定位检验（2026-11-04）：只在 Kaikōura 采用（r9），其余五个案例保留原位置并标注网格精度，基线、分数和图已按新的最终目录重算；B 层运行进入所有案例的汇总和分数表。不提供模型时从数据建最小一维模型的离线检验（2026-11-05 记录，[08](progress/checker_validation/08_velocity_from_data.md)）：四个案例有用、一个无变化、Magna 出错，写入知识 skill（带保护条件）和设计文档 §11。
 
-**进行中：** 无。水平偏移归因已完成（2026-11-05，[09](progress/checker_validation/09_horizontal_shift.md)）；评分口径待定，见 §6.5 第 5 条。
+**进行中：** 无。模板匹配门槛与召回的定量分析已完成（2026-11-05，[10](progress/checker_validation/10_template_threshold.md)），知识 skill 已补充（在 checker-v1.3 标签之后，下一轮运行前需决定是否并入冻结版本）。水平偏移归因已完成（2026-11-05，[09](progress/checker_validation/09_horizontal_shift.md)）；评分口径待定，见 §6.5 第 5 条。
 
 **未开始：**
 
