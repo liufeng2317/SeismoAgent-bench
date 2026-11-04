@@ -232,7 +232,7 @@ Kaikōura 2016
 
 **已完成：** 六个案例的数据、参考目录、上限和 human-in-loop 最终目录；S0、S1 正式运行和评分；组件替换和专家阶梯；评分方法 v2 和两项修正；checker 1.0–1.2 和 1.3 开发版及其检验；知识 skill（小批量协议、方案决定、症状手册、checker 看不到的问题、震级资源）；B 层后端消融；统一测试试水；运行环境写保护、泄漏扫描两层。human-in-loop 最终目录的互相关重定位检验（2026-11-04）：只在 Kaikōura 采用（r9），其余五个案例保留原位置并标注网格精度，基线、分数和图已按新的最终目录重算；B 层运行进入所有案例的汇总和分数表。不提供模型时从数据建最小一维模型的离线检验（2026-11-05 记录，[08](progress/checker_validation/08_velocity_from_data.md)）：四个案例有用、一个无变化、Magna 出错，写入知识 skill（带保护条件）和设计文档 §11。
 
-**进行中：** 无。模板匹配门槛与召回的定量分析已完成（2026-11-05，[10](progress/checker_validation/10_template_threshold.md)），知识 skill 已补充（在 checker-v1.3 标签之后，下一轮运行前需决定是否并入冻结版本）。水平偏移归因已完成（2026-11-05，[09](progress/checker_validation/09_horizontal_shift.md)）；评分口径待定，见 §6.5 第 5 条。
+**进行中：** 无。模板匹配门槛与召回的定量分析已完成（2026-11-05，[10](progress/checker_validation/10_template_threshold.md)），知识 skill 已补充，并入 checker-v1.3（标签已移到这一提交，此前没有运行用过它）。水平偏移归因已完成（2026-11-05，[09](progress/checker_validation/09_horizontal_shift.md)）；评分口径待定，见 §6.5 第 5 条。
 
 **未开始：**
 
