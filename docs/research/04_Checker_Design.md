@@ -1,6 +1,6 @@
 # Checker 设计文档
 
-状态（2026-11-04）：现行为 1.3 开发版，在 1.2（标签 `checker-v1.2`）之上加了 Wadati 偏差的判定和区域接口；B 层后端运行用的是 1.0，统一测试试水用的是 1.2（§13）。本文写给研究者，只写 checker 现在是什么、为什么这样设计、得到了哪些经验；每一轮检验的方法、数据和读数记在 [`progress/checker_validation/`](progress/checker_validation/README.md)。给 Agent 看的工具说明是 `seismotools/checker/README.md`，只说测什么和怎么用，不出现原因、修复方法或案例数据。研究设计中的位置见 [`00_Research_Plan.md`](00_Research_Plan.md) §2.4–2.5；经验来源见 [`01_Expert_Experience_and_Checker.md`](01_Expert_Experience_and_Checker.md) §3。
+状态（2026-11-05）：现行为 1.3（标签 `checker-v1.3`，与知识 skill 一起冻结），在 1.2 之上加了 Wadati 偏差的判定和区域接口；B 层后端运行用的是 1.0，统一测试试水用的是 1.2，下一轮统一测试用 1.3（§13）。本文写给研究者，只写 checker 现在是什么、为什么这样设计、得到了哪些经验；每一轮检验的方法、数据和读数记在 [`progress/checker_validation/`](progress/checker_validation/README.md)。给 Agent 看的工具说明是 `seismotools/checker/README.md`，只说测什么和怎么用，不出现原因、修复方法或案例数据。研究设计中的位置见 [`00_Research_Plan.md`](00_Research_Plan.md) §2.4–2.5；经验来源见 [`01_Expert_Experience_and_Checker.md`](01_Expert_Experience_and_Checker.md) §3。
 
 ## 1. 定位与原则
 
@@ -216,14 +216,13 @@ hypoDD 和 GrowClust 都不读台站高程，所有台站在模型深度 0：目
 | 1.0 | 2026-11-01（c620ee2，标签 `checker-v1.0`） | 六个阶段的检查和图、报警/输入说明/测量值三类报告、`compare.py`、`pilot.py`、`scope` 和 `--pilot`、归因诊断、给 Agent 的 README 和 skill、处置合同和评分端核对 | B 层六个案例 |
 | 1.1 | 2026-11-03（标签 `checker-v1.1`） | 检查不变；README 写明自带模型和公式只作对照；知识 skill 的基准面、常速层与梯度、近地表、定位程序差异，以及三个诱导错误改动的报警的手册条目；合成恢复测试未合并（不适合作误差上界） | — |
 | 1.2 | 2026-11-03（标签 `checker-v1.2`） | 删去 8 项不能区分对错的检查、标准 b 值并入 `b_positive`（§10 表）；`relocated_share` 改为只报告；README 写明检查不是选择标准 | 统一测试试水（Kīlauea） |
-| 1.3 开发版 | 2026-11-03 至 11-04 | `wadati_origin_offset` 改为判定（1.5 s）；`region.py` 和只报告的 `events_beyond_stations` | 下一轮统一测试 |
+| 1.3 | 2026-11-05（标签 `checker-v1.3`，含知识 skill） | `wadati_origin_offset` 改为判定（1.5 s）；`region.py` 和只报告的 `events_beyond_stations`；知识 skill 新增从数据建最小一维模型、水平框架两节。冻结前通过合成回归测试和端到端脚本运行（`workflows/development/smoke_end_to_end/`：运行包、契约、评分端重跑与处置核对、泄漏扫描；Kīlauea `backend_knowledge`，分数与源运行一致） | 下一轮统一测试 |
 
 **同期的相关修改（不在 checker 内）：** HypoInverse 接口 v2 默认 CRE 模型；NonLinLoc 接口深度搜索默认从台站平均高程开始；hypoDD、GrowClust 的深度基准写入文档；运行环境只允许在运行目录下的虚拟环境装包；泄漏扫描分两层；评分的震级斜率至少 30 对、`inside_region` 按台站覆盖判定；知识 skill 的近地表方法、从数据建最小一维模型、震级压缩、模型数值必须有来源、不用台站延迟吸收共同偏移、模板匹配门槛。
 
 **评估过但没有加的检查：** 合成恢复测试（一维扰动给出的范围在 Magna、Maple 上都不包含真实偏差）；尾波漏检扫描（主震后几分钟内 STA/LTA 无法触发）；按最小 |S−P 深度偏差| 在换模型时排序（判错增多）；复算斜率作判定（与评分不一致）；模板匹配阶段的检查（Agent 的门槛都很保守，问题是漏检，从产品看不出）。
 
 **待办：**
-1. 冻结 1.3（README、metadata、标签），作为下一轮统一测试的版本。
-2. 下一轮统一测试：先用最少的运行回答"新知识和工具修复是否有效"（例如 Maple 一次 checker + 知识），再决定规模。
-3. S2c、S3 分析中记录每次修改是真修复还是表面处理；用不参与校准的保留案例检验门槛。
-4. 尚未实现：波形级数据质控（噪声模型、尖峰、削波）、相对定位健康度。
+1. 下一轮统一测试：先用最少的运行回答"新知识和工具修复是否有效"（例如 Maple 一次 checker + 知识），再决定规模。
+2. S2c、S3 分析中记录每次修改是真修复还是表面处理；用不参与校准的保留案例检验门槛。
+3. 尚未实现：波形级数据质控（噪声模型、尖峰、削波）、相对定位健康度。

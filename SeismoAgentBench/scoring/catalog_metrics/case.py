@@ -284,7 +284,8 @@ def score_baseline(task_dir: Path, *, write: bool = True) -> dict:
     return report
 
 
-RUN_ROOTS = ("runs", "runs_pilot")  # runs_pilot: pre-2026-10-28 prompts, scorable but outside the summary
+RUN_ROOTS = ("runs", "runs_pilot", "runs_smoke")  # runs_pilot: pre-2026-10-28 prompts; runs_smoke: scripted
+# end-to-end smoke tests (workflows/development/smoke_end_to_end); both scorable but outside the summary
 
 
 def run_layout(task_dir: Path, run_dir: Path) -> dict:

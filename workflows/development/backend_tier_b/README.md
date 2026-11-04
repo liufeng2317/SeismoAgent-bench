@@ -21,7 +21,7 @@ AGENT=claude VARIANT=backend_knowledge bash run.sh
 
 Scoring is the same as for every run (`python -m SeismoAgentBench evaluate --run-dir <run>`); the two checker arms add the checker audit (`docs/research/03_Scoring_Method.md` §2.7a). Detection metrics equal those of the formal run by construction; compare location, time and magnitude criteria with the formal `tools` run and between arms.
 
-The checker used is version 1.0 (git tag `checker-v1.0`).
+The checker used in the first batches is version 1.0 (git tag `checker-v1.0`); the trial batch of 2026-11-03 used 1.2; runs from 2026-11-05 use 1.3 (git tag `checker-v1.3`, frozen together with the catalog-knowledge skill).
 
 ## Run log
 
