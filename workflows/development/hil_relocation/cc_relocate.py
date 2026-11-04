@@ -19,7 +19,8 @@ every event with waveform cross-correlation differential times:
             on a coordinate shared with another event
   export    a new round: accepted relocations replace the positions (location_source ``<source>_cc``); a relocation
             is accepted if it moved < 3 km horizontally, its origin changed < 1 s and its depth lies in the model;
-            Match&Locate events left on the grid get location_precision_h_km / _z_km of half the grid step
+            Match&Locate events left on the grid get location_precision_h_km / _z_km of half the grid step;
+            ``--label-only`` keeps every position and adds only the precision (relocation not adopted)
 
 Usage: cc_relocate.py CASE --step all|inputs|ccdt|growclust|hypodd|evaluate|export [--workers 32]
 Case settings: cases/<case>.yaml (paths relative to workflows/tasks/<case>/).
@@ -414,11 +415,13 @@ def _evaluate(cfg: dict, case, m: pd.DataFrame) -> dict:
     return res
 
 
-def step_export(cfg: dict, task: Path, out: Path) -> dict:
+def step_export(cfg: dict, task: Path, out: Path, label_only: bool = False) -> dict:
+    """label_only: keep every position (the relocation was not adopted, docs/research/progress/
+    2026-11-04_hil_relocation.md) and only add the grid precision of the Match&Locate events."""
     f = pd.read_csv(task / cfg["final"], low_memory=False)
     m = relocation(cfg, out).set_index("event_id")
     ok = m.index[m.status.eq("relocated")]
-    sel = f.event_id.isin(ok)
+    sel = f.event_id.isin(ok) & (not label_only)
     idx = f.loc[sel, "event_id"]
     f.loc[sel, "latitude"] = m.loc[idx, "la"].to_numpy()
     f.loc[sel, "longitude"] = m.loc[idx, "lo"].to_numpy()
@@ -428,11 +431,11 @@ def step_export(cfg: dict, task: Path, out: Path) -> dict:
     grid = f.location_source.eq("ml")
     f["location_precision_h_km"] = np.where(grid, cfg["grid"]["step_km"] / 2, np.nan)
     f["location_precision_z_km"] = np.where(grid, cfg["grid"]["step_depth_km"] / 2, np.nan)
-    f["relocation_status"] = f.event_id.map(m.status).fillna("not_in_inputs")
+    f["relocation_status"] = "not_applied" if label_only else f.event_id.map(m.status).fillna("not_in_inputs")
     dest = task / "expert/export" / cfg["new_round"] / "60_catalog"
     dest.mkdir(parents=True, exist_ok=True)
     f.to_csv(dest / "catalog_events.csv", index=False)
-    res = {"events": int(len(f)), "relocated": int(sel.sum()), "left_on_grid": int(grid.sum()),
+    res = {"events": int(len(f)), "label_only": label_only, "relocated": int(sel.sum()), "left_on_grid": int(grid.sum()),
            "catalog": str((dest / "catalog_events.csv").relative_to(task))}
     (out / "export.json").write_text(json.dumps(res, indent=1))
     return res
@@ -446,6 +449,7 @@ def main() -> int:
     ap.add_argument("--ngoodmin", type=int, default=None, help="GrowClust ngoodmin (default: case config, else 4)")
     ap.add_argument("--run-name", default="growclust", help="GrowClust or hypoDD output folder written, evaluated and exported")
     ap.add_argument("--min-cc", type=float, default=None, help="ccdt and GrowClust minimum CC (default: case config, else 0.6)")
+    ap.add_argument("--label-only", action="store_true", help="export: keep the positions, add the grid precision only")
     ap.add_argument("--tag", default="", help="variant: separate working folder 68_cc_relocation_<tag>")
     a = ap.parse_args()
     cfg, task, out = load(a.case, a.tag)
@@ -458,7 +462,7 @@ def main() -> int:
         r = {"inputs": lambda: step_inputs(cfg, task, out), "ccdt": lambda: step_ccdt(cfg, out, a.workers),
              "growclust": lambda: step_growclust(cfg, out, a.ngoodmin, a.run_name),
              "hypodd": lambda: step_hypodd(cfg, out, a.run_name), "evaluate": lambda: step_evaluate(cfg, task, out),
-             "export": lambda: step_export(cfg, task, out)}[s]()
+             "export": lambda: step_export(cfg, task, out, a.label_only)}[s]()
         print(s, json.dumps(r, default=str)[:1500], flush=True)
     return 0
 

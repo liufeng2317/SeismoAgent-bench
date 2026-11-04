@@ -27,7 +27,7 @@
   "recall_ref_tan": 0.4659,
   "recall_ref_chamberlain": 0.6667,
   "recall_ref_geonet": 0.8901,
-  "union_support": 0.7281,
+  "union_support": 0.7278,
   "epi_median_km": 4.3202,
   "shift_km": 2.2141,
   "scatter_median_km": 4.43,
@@ -39,25 +39,25 @@
   "depth_band_share": 0.1787,
   "off_structure_fraction": 0.0492,
   "off_structure_after_shift": 0.0507,
-  "recall_final": 0.4338,
-  "precision_final": 0.6428,
+  "recall_final": 0.433,
+  "precision_final": 0.6416,
   "event_ratio_final": 0.6822,
-  "shift_final_km": 3.7043,
-  "scatter_final_km": 3.6936,
-  "dz_final_km": 0.54,
-  "dz_mad_final_km": 4.2169,
-  "dt_final_s": 0.6618,
-  "time_bias_final_s": 0.6346,
-  "time_mad_final_s": 0.4383,
+  "shift_final_km": 3.6898,
+  "scatter_final_km": 3.8031,
+  "dz_final_km": 0.859,
+  "dz_mad_final_km": 4.2655,
+  "dt_final_s": 0.672,
+  "time_bias_final_s": 0.6393,
+  "time_mad_final_s": 0.4396,
   "recall_M2": 0.8807,
-  "precision_M2": 0.8618,
-  "f1_M2": 0.8711,
+  "precision_M2": 0.8598,
+  "f1_M2": 0.8701,
   "epi_mean_M2": 5.4004,
   "dt_mean_M2": 0.9277,
   "dmag_mean_M2": -0.6243,
   "recall_M3": 0.838,
-  "precision_M3": 0.8119,
-  "f1_M3": 0.8247,
+  "precision_M3": 0.8069,
+  "f1_M3": 0.8222,
   "epi_mean_M3": 6.0984,
   "dt_mean_M3": 0.4426,
   "dmag_mean_M3": -0.5567,
@@ -76,13 +76,15 @@
   "dmag_median": -0.6,
   "dmag_std": 0.2336,
   "dmag_slope_per_unit": -0.0108,
+  "dmag_pairs": 1137,
   "b_difference": -0.242,
   "dt_mean_s": 1.0901,
   "dt_std_s": 0.825,
   "recall_after_large": 0.6864,
   "recall_other": 0.673,
   "audited_false_rate": null,
-  "out_of_mask_fraction": 0.0251
+  "out_of_mask_fraction": 0.0251,
+  "out_of_coverage_fraction": 0.0161
  },
  "trust": {
   "trusted": false,
@@ -104,10 +106,10 @@
     "checks": {
      "inside_region": {
       "aspect": "accuracy",
-      "value": 0.0251,
+      "value": 0.0161,
       "op": "<=",
-      "threshold": 0.1,
-      "final": 0.0372,
+      "threshold": 0.05,
+      "final": 0.0112,
       "verdict": "pass"
      },
      "false_events": {
@@ -125,7 +127,7 @@
     "checks": {
      "time_bias": {
       "aspect": "accuracy",
-      "value": 0.6346,
+      "value": 0.6393,
       "op": "abs<=",
       "threshold": 0.3,
       "final": null,
@@ -133,7 +135,7 @@
      },
      "time_spread": {
       "aspect": "stability",
-      "value": 0.4383,
+      "value": 0.4396,
       "op": "<=",
       "threshold": 0.3,
       "final": null,
@@ -154,7 +156,7 @@
     "checks": {
      "horizontal_shift": {
       "aspect": "accuracy",
-      "value": 3.7043,
+      "value": 3.6898,
       "op": "<=",
       "threshold": 1.0,
       "final": null,
@@ -162,7 +164,7 @@
      },
      "depth_bias": {
       "aspect": "accuracy",
-      "value": 0.54,
+      "value": 0.859,
       "op": "abs<=",
       "threshold": 1.0,
       "final": null,
@@ -170,10 +172,10 @@
      },
      "horizontal_scatter": {
       "aspect": "stability",
-      "value": 3.6936,
+      "value": 3.8031,
       "op": "<=",
-      "threshold": 2.7846,
-      "final": 2.7846,
+      "threshold": 3.0586,
+      "final": 3.0586,
       "verdict": "fail"
      },
      "off_structure": {
@@ -189,7 +191,7 @@
       "value": 0.1253,
       "op": "<=",
       "threshold": 0.05,
-      "final": 0.0103,
+      "final": 0.0081,
       "verdict": "fail"
      }
     }
@@ -209,8 +211,8 @@
       "aspect": "stability",
       "value": 0.2336,
       "op": "<=",
-      "threshold": 0.5119,
-      "final": 0.4119,
+      "threshold": 0.5134,
+      "final": 0.4134,
       "verdict": "pass"
      },
      "magnitude_scale": {
@@ -218,7 +220,7 @@
       "value": -0.0108,
       "op": "abs<=",
       "threshold": 0.2,
-      "final": -0.0338,
+      "final": -0.0324,
       "verdict": "pass"
      },
      "large_events_present": {
@@ -237,7 +239,7 @@
   "completeness": {
    "recall_norm": 0.9597,
    "recall_tight": 0.0757,
-   "recall_final": 0.4338,
+   "recall_final": 0.433,
    "event_ratio_final": 0.6822
   }
  },
@@ -247,9 +249,12 @@
   "turns": 14
  },
  "leakage_flag": false,
+ "leakage_review": [
+  "(scedc\\.caltech\\.edu|ncedc\\.org|quake\\.utah\\.edu|ou\\.edu/ogs|geonet\\.org\\.nz|zenodo\\.org|datadryad\\.org|sciencebase\\.gov|igppweb\\.ucsd\\.edu/~shearer)/"
+ ],
  "audit": {
   "sampled": 50,
-  "unsupported": 2300,
+  "unsupported": 2304,
   "labels": null
  }
 }

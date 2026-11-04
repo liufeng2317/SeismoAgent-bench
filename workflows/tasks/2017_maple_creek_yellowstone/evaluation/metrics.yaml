@@ -21,7 +21,7 @@ pick_reference:                     # L5 (§5): reference phase picks, relative 
   format: shelly_phase_csv
   path: data/catalogs/SHELLY2019_GL081607/raw/Yellowstone_2017_correlation_phase_arrivals.csv
 expert:
-  final: {path: expert/export/r11/60_catalog/catalog_events.csv, time_column: origin_time_utc,
+  final: {path: expert/export/r12/60_catalog/catalog_events.csv, time_column: origin_time_utc,
           depth_column: depth_bsl_km, depth_datum: sea_level,
           picks: expert/export/r9/03_associate_gamma/full/picks.csv}
   blind: {path: expert/export/r1/04_locate_nonlinloc/full/events.csv, time_column: origin_time,

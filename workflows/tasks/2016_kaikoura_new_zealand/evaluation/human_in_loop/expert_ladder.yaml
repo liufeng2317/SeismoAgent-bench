@@ -64,6 +64,13 @@ steps:
   depth_column: depth_bsl_km
   depth_datum: sea_level
 
+- round: r9
+  step: CC relocation (GrowClust)
+  kind: location
+  path: expert/export/r9/60_catalog/catalog_events.csv
+  time_column: origin_time_utc
+  depth_column: depth_bsl_km
+  depth_datum: sea_level
 # Component swap (catalog_metrics swap): expert model and locator setup of this round.
 swap:
   picks_round: r6

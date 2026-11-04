@@ -27,7 +27,7 @@
   "recall_ref_tan": 0.0524,
   "recall_ref_chamberlain": 0.0905,
   "recall_ref_geonet": 0.2153,
-  "union_support": 0.4328,
+  "union_support": 0.4305,
   "epi_median_km": 6.1609,
   "shift_km": 1.469,
   "scatter_median_km": 5.7645,
@@ -39,25 +39,25 @@
   "depth_band_share": 0.5166,
   "off_structure_fraction": 0.0715,
   "off_structure_after_shift": 0.073,
-  "recall_final": 0.0414,
-  "precision_final": 0.3926,
+  "recall_final": 0.0411,
+  "precision_final": 0.3903,
   "event_ratio_final": 0.1071,
-  "shift_final_km": 2.7271,
-  "scatter_final_km": 4.4423,
-  "dz_final_km": 0.0625,
-  "dz_mad_final_km": 3.2669,
-  "dt_final_s": 2.5661,
-  "time_bias_final_s": 2.5646,
-  "time_mad_final_s": 0.3961,
+  "shift_final_km": 2.5888,
+  "scatter_final_km": 4.4499,
+  "dz_final_km": -0.327,
+  "dz_mad_final_km": 3.1797,
+  "dt_final_s": 2.575,
+  "time_bias_final_s": 2.5745,
+  "time_mad_final_s": 0.396,
   "recall_M2": 0.2143,
-  "precision_M2": 0.3427,
-  "f1_M2": 0.2637,
+  "precision_M2": 0.3399,
+  "f1_M2": 0.2629,
   "epi_mean_M2": 5.9228,
   "dt_mean_M2": 2.6642,
   "dmag_mean_M2": -0.2918,
   "recall_M3": 0.1549,
-  "precision_M3": 0.1422,
-  "f1_M3": 0.1483,
+  "precision_M3": 0.1471,
+  "f1_M3": 0.1509,
   "epi_mean_M3": 6.7678,
   "dt_mean_M3": 2.3352,
   "dmag_mean_M3": -0.3427,
@@ -76,13 +76,15 @@
   "dmag_median": -0.26,
   "dmag_std": 0.1841,
   "dmag_slope_per_unit": -0.1511,
+  "dmag_pairs": 326,
   "b_difference": -0.273,
   "dt_mean_s": 2.796,
   "dt_std_s": 0.6379,
   "recall_after_large": 0.0727,
   "recall_other": 0.0946,
   "audited_false_rate": null,
-  "out_of_mask_fraction": 0.0761
+  "out_of_mask_fraction": 0.0761,
+  "out_of_coverage_fraction": 0.02
  },
  "trust": {
   "trusted": false,
@@ -105,10 +107,10 @@
     "checks": {
      "inside_region": {
       "aspect": "accuracy",
-      "value": 0.0761,
+      "value": 0.02,
       "op": "<=",
-      "threshold": 0.1,
-      "final": 0.0372,
+      "threshold": 0.05,
+      "final": 0.0112,
       "verdict": "pass"
      },
      "false_events": {
@@ -126,7 +128,7 @@
     "checks": {
      "time_bias": {
       "aspect": "accuracy",
-      "value": 2.5646,
+      "value": 2.5745,
       "op": "abs<=",
       "threshold": 0.3,
       "final": null,
@@ -134,7 +136,7 @@
      },
      "time_spread": {
       "aspect": "stability",
-      "value": 0.3961,
+      "value": 0.396,
       "op": "<=",
       "threshold": 0.3,
       "final": null,
@@ -155,7 +157,7 @@
     "checks": {
      "horizontal_shift": {
       "aspect": "accuracy",
-      "value": 2.7271,
+      "value": 2.5888,
       "op": "<=",
       "threshold": 1.0,
       "final": null,
@@ -163,7 +165,7 @@
      },
      "depth_bias": {
       "aspect": "accuracy",
-      "value": 0.0625,
+      "value": -0.327,
       "op": "abs<=",
       "threshold": 1.0,
       "final": null,
@@ -171,10 +173,10 @@
      },
      "horizontal_scatter": {
       "aspect": "stability",
-      "value": 4.4423,
+      "value": 4.4499,
       "op": "<=",
-      "threshold": 2.7846,
-      "final": 2.7846,
+      "threshold": 3.0586,
+      "final": 3.0586,
       "verdict": "fail"
      },
      "off_structure": {
@@ -190,7 +192,7 @@
       "value": 0.5007,
       "op": "<=",
       "threshold": 0.05,
-      "final": 0.0103,
+      "final": 0.0081,
       "verdict": "fail"
      }
     }
@@ -210,8 +212,8 @@
       "aspect": "stability",
       "value": 0.1841,
       "op": "<=",
-      "threshold": 0.5119,
-      "final": 0.4119,
+      "threshold": 0.5134,
+      "final": 0.4134,
       "verdict": "pass"
      },
      "magnitude_scale": {
@@ -219,7 +221,7 @@
       "value": -0.1511,
       "op": "abs<=",
       "threshold": 0.2,
-      "final": -0.0338,
+      "final": -0.0324,
       "verdict": "pass"
      },
      "large_events_present": {
@@ -238,7 +240,7 @@
   "completeness": {
    "recall_norm": 0.1303,
    "recall_tight": 0.0,
-   "recall_final": 0.0414,
+   "recall_final": 0.0411,
    "event_ratio_final": 0.1071
   }
  },
@@ -248,9 +250,10 @@
   "turns": 218
  },
  "leakage_flag": false,
+ "leakage_review": [],
  "audit": {
   "sampled": 50,
-  "unsupported": 768,
+  "unsupported": 770,
   "labels": null
  }
 }

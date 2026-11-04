@@ -32,10 +32,26 @@
 2. **hypoDD 在 Prague 上没有改变结论。** 加入拾取时差后，被移动的事件更多（2,759 个），网格降得更多（51 %），双重定位事件对的相对误差也比 GrowClust 小（Cochran 0.41 对 0.46），但仍比不重定位差（0.32）。另外，hypoDD 把拾取事件整体向北移了约 0.7 km：只用一个 Vp/Vs 比值，也不考虑台站高程。Ridgecrest 第 62 步与 Shelly 的绝对吻合度改善（0.62 → 0.46 km），也是这种框架平移造成的（见 Ridgecrest expert PLAN.md）。
 3. **Kaikōura 是例外。** 它的格距大（0.5 km），格点位置在一维模型下误差也大，重定位明显改善了相对结构。
 
-## 建议（待决定）
+## 决定（2026-11-04，已执行）
 
-- **Kaikōura**：采用 GrowClust 重定位作为新的最终目录（第 r9 轮，已导出前的结果在 `expert/export/r9/68_cc_relocation`）。
-- **其他五个案例**：保留原位置（Maple 已导出的 r12 不采用）。在最终目录中给仍在格点上的检测事件标注网格精度（`location_precision_h_km` / `_z_km` = 半个格距），并在图注中说明网格的来源和大小。
-- 待定：是否对 Prague、Maple 的 NonLinLoc 八叉树格子做同样的标注。
+新的最终目录与评分基准（各案例 `evaluation/metrics.yaml`）：
+
+| 案例 | 原最终目录 | 新最终目录 | 位置 |
+|---|---|---|---|
+| Kaikōura | r8 | r9 | 7,913 个事件采用 GrowClust 重定位（`location_source` 加后缀 `_cc`），其余保留 |
+| Prague | r7 | r8 | 不变，只加标注 |
+| Maple | r11 | r12 | 不变，只加标注；先前导出的重定位版本改名为 `r12/60_catalog_relocated_not_adopted` |
+| Kīlauea | r9 | r10 | 不变，只加标注 |
+| Ridgecrest | 57_coda_duplicates | 68_cc_relocation | 不变，只加标注 |
+| Magna | r11 | r12 | 不变，只加标注 |
+
+- 仍在格点上的检测事件（`location_source` = `ml`）标注 `location_precision_h_km` / `location_precision_z_km` = 半个格距。只标注、不移动位置的导出用 `cc_relocate.py CASE --step export --label-only`；所有事件的 `relocation_status` 为 `not_applied`。
+- 五个只加标注的案例重算后，基线与原来完全相同（时间戳和路径除外）。
+- Kaikōura 基线的变化（相对于 Chamberlain）：
+  - 变好：深度偏差 −0.87 → −0.32 km，时间偏差中位数 0.62 → 0.49 s；
+  - 变差：水平偏移 1.13 → 1.37 km，水平离散 2.78 → 3.06 km；
+  - 几乎不变：找回率 0.813 → 0.813。
+  - 阶梯（`expert_ladder.yaml`）加入 r9 一步。
+- 待定：是否对 Prague、Maple 的 NonLinLoc 八叉树格子也做同样的标注。
 
 可信度的依据是相对误差，不是图面上的平滑程度。人为加入抖动只会掩盖网格，不能改善精度，所以不做。

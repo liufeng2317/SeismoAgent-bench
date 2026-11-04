@@ -19,7 +19,7 @@ references:
   awr_hypocenters: {roles: D, depth_datum: surface}       # long-term GaMMA
   official_earthquake: {roles: DLM, depth_datum: surface} # ComCat (SCSN) operational
 expert:
-  final: {path: expert/export/57_coda_duplicates/60_catalog/catalog_events.csv, time_column: origin_time_utc,
+  final: {path: expert/export/68_cc_relocation/60_catalog/catalog_events.csv, time_column: origin_time_utc,
           depth_column: depth_bsl_km, depth_datum: sea_level}
   blind: {path: expert/export/01_baseline/04_locate_nonlinloc/full/events.csv, time_column: origin_time,
           depth_column: depth_below_sea_level_km, depth_datum: sea_level, keep: {status: LOCATED}}

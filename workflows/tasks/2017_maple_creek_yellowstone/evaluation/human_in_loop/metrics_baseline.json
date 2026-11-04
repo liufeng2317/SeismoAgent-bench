@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "e6d4e4e4c22851fc36cb177821536ad6151058a2",
- "scorer_dirty": true,
- "generated_utc": "2026-11-03T19:37:24+00:00",
+ "scorer_commit": "0e402ea030bfb6e5cb0418bb7af14877d71764f3",
+ "scorer_dirty": false,
+ "generated_utc": "2026-11-04T07:06:22+00:00",
  "task": "2017_maple_creek_yellowstone",
  "references": {
   "comcat": {
@@ -22,7 +22,7 @@
  },
  "expert": {
   "final": {
-   "path": "expert/export/r11/60_catalog/catalog_events.csv",
+   "path": "expert/export/r12/60_catalog/catalog_events.csv",
    "events": 12422,
    "out_of_mask_fraction": 0.0141,
    "out_of_coverage_fraction": 0.0

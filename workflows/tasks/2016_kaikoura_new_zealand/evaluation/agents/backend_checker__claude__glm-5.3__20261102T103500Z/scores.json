@@ -1,0 +1,255 @@
+{
+ "run": {
+  "variant": "backend_checker",
+  "harness": "claude",
+  "model": "glm-5.3",
+  "run_id": "20261102T103500Z",
+  "path": "runs/backend_checker/claude/glm-5.3/20261102T103500Z"
+ },
+ "formal_state": "scored",
+ "run_state": "scored",
+ "completion": {
+  "completed": true,
+  "problems": [],
+  "contract": "runs/backend_checker/claude/glm-5.3/20261102T103500Z/control/output_contract.json",
+  "consistency": {
+   "pick_event_ids_exist": 1.0,
+   "pick_counts_agree": 1.0,
+   "coordinates_valid": 1.0
+  }
+ },
+ "metrics_version": 2,
+ "headline": {
+  "recall": 0.6967,
+  "ceiling": 0.6947,
+  "recall_norm": 1.0029,
+  "recall_tight": 0.2157,
+  "recall_ref_tan": 0.4908,
+  "recall_ref_chamberlain": 0.6967,
+  "recall_ref_geonet": 0.9166,
+  "union_support": 0.7517,
+  "epi_median_km": 2.962,
+  "shift_km": 2.0503,
+  "scatter_median_km": 3.3473,
+  "epi_gt5km": 0.313,
+  "dz_median_km": 4.888,
+  "depth_datum_known": true,
+  "dt_median_s": 0.3299,
+  "depth_mode_share": 0.0458,
+  "depth_band_share": 0.127,
+  "off_structure_fraction": 0.0428,
+  "off_structure_after_shift": 0.0445,
+  "recall_final": 0.4507,
+  "precision_final": 0.6674,
+  "event_ratio_final": 0.6828,
+  "shift_final_km": 3.3549,
+  "scatter_final_km": 2.6021,
+  "dz_final_km": 3.336,
+  "dz_mad_final_km": 2.439,
+  "dt_final_s": 0.6,
+  "time_bias_final_s": 0.5805,
+  "time_mad_final_s": 0.3403,
+  "recall_M2": 0.9156,
+  "precision_M2": 0.7505,
+  "f1_M2": 0.8249,
+  "epi_mean_M2": 4.8521,
+  "dt_mean_M2": 0.8591,
+  "dmag_mean_M2": -0.2459,
+  "recall_M3": 0.9296,
+  "precision_M3": 0.7725,
+  "f1_M3": 0.8438,
+  "epi_mean_M3": 5.6556,
+  "dt_mean_M3": 0.1725,
+  "dmag_mean_M3": -0.2364,
+  "recall_M4": 1.0,
+  "precision_M4": 0.7368,
+  "f1_M4": 0.8485,
+  "epi_mean_M4": 4.614,
+  "dt_mean_M4": 0.1994,
+  "dmag_mean_M4": -0.21,
+  "recall_M5": 1.0,
+  "precision_M5": 1.0,
+  "f1_M5": 1.0,
+  "epi_mean_M5": 5.5156,
+  "dt_mean_M5": 0.2257,
+  "dmag_mean_M5": -0.12,
+  "dmag_median": -0.21,
+  "dmag_std": 0.1814,
+  "dmag_slope_per_unit": -0.1448,
+  "dmag_pairs": 1383,
+  "b_difference": -0.124,
+  "dt_mean_s": 1.0401,
+  "dt_std_s": 0.7849,
+  "recall_after_large": 0.7045,
+  "recall_other": 0.7029,
+  "audited_false_rate": null,
+  "out_of_mask_fraction": 0.0352,
+  "out_of_coverage_fraction": 0.0165
+ },
+ "trust": {
+  "trusted": false,
+  "failed": [
+   "time_bias",
+   "time_spread",
+   "horizontal_shift",
+   "depth_bias"
+  ],
+  "pending": [
+   "false_events"
+  ],
+  "dimensions": {
+   "reality": {
+    "verdict": "pending",
+    "checks": {
+     "inside_region": {
+      "aspect": "accuracy",
+      "value": 0.0165,
+      "op": "<=",
+      "threshold": 0.05,
+      "final": 0.0112,
+      "verdict": "pass"
+     },
+     "false_events": {
+      "aspect": "accuracy",
+      "value": null,
+      "op": "<=",
+      "threshold": 0.02,
+      "final": null,
+      "verdict": "pending"
+     }
+    }
+   },
+   "time": {
+    "verdict": "fail",
+    "checks": {
+     "time_bias": {
+      "aspect": "accuracy",
+      "value": 0.5805,
+      "op": "abs<=",
+      "threshold": 0.3,
+      "final": null,
+      "verdict": "fail"
+     },
+     "time_spread": {
+      "aspect": "stability",
+      "value": 0.3403,
+      "op": "<=",
+      "threshold": 0.3,
+      "final": null,
+      "verdict": "fail"
+     },
+     "after_large_events": {
+      "aspect": "stability",
+      "value": 1.0023,
+      "op": ">=",
+      "threshold": 0.807,
+      "final": 1.0088,
+      "verdict": "pass"
+     }
+    }
+   },
+   "space": {
+    "verdict": "fail",
+    "checks": {
+     "horizontal_shift": {
+      "aspect": "accuracy",
+      "value": 3.3549,
+      "op": "<=",
+      "threshold": 1.0,
+      "final": null,
+      "verdict": "fail"
+     },
+     "depth_bias": {
+      "aspect": "accuracy",
+      "value": 3.336,
+      "op": "abs<=",
+      "threshold": 1.0,
+      "final": null,
+      "verdict": "fail"
+     },
+     "horizontal_scatter": {
+      "aspect": "stability",
+      "value": 2.6021,
+      "op": "<=",
+      "threshold": 3.0586,
+      "final": 3.0586,
+      "verdict": "pass"
+     },
+     "off_structure": {
+      "aspect": "stability",
+      "value": 0.0428,
+      "op": "<=",
+      "threshold": 0.05,
+      "final": 0.0081,
+      "verdict": "pass"
+     },
+     "depth_pileup": {
+      "aspect": "stability",
+      "value": 0.0458,
+      "op": "<=",
+      "threshold": 0.05,
+      "final": 0.0081,
+      "verdict": "pass"
+     }
+    }
+   },
+   "strength": {
+    "verdict": "pass",
+    "checks": {
+     "magnitude_offset": {
+      "aspect": "accuracy",
+      "value": -0.21,
+      "op": "abs<=",
+      "threshold": 0.32,
+      "final": -0.12,
+      "verdict": "pass"
+     },
+     "magnitude_spread": {
+      "aspect": "stability",
+      "value": 0.1814,
+      "op": "<=",
+      "threshold": 0.5134,
+      "final": 0.4134,
+      "verdict": "pass"
+     },
+     "magnitude_scale": {
+      "aspect": "stability",
+      "value": -0.1448,
+      "op": "abs<=",
+      "threshold": 0.2,
+      "final": -0.0324,
+      "verdict": "pass"
+     },
+     "large_events_present": {
+      "aspect": "accuracy",
+      "value": {
+       "recall_M4": 1.0,
+       "recall_M5": 1.0
+      },
+      "op": "all ==",
+      "threshold": 1.0,
+      "verdict": "pass"
+     }
+    }
+   }
+  },
+  "completeness": {
+   "recall_norm": 1.0029,
+   "recall_tight": 0.2157,
+   "recall_final": 0.4507,
+   "event_ratio_final": 0.6828
+  }
+ },
+ "process": {
+  "cost_usd": 34.69819499999999,
+  "elapsed_s": 10741.1,
+  "turns": 552
+ },
+ "leakage_flag": false,
+ "leakage_review": [],
+ "audit": {
+  "sampled": 50,
+  "unsupported": 2104,
+  "labels": null
+ }
+}
