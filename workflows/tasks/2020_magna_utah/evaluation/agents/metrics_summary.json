@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "6a6a9f977c502b940beec34d8fb96c7f6cc84a19",
- "scorer_dirty": false,
- "generated_utc": "2026-11-04T15:23:08+00:00",
+ "scorer_commit": "bb1fde88f5fe9e31576ff216bbba8ac5cee2e17a",
+ "scorer_dirty": true,
+ "generated_utc": "2026-11-05T05:26:50+00:00",
  "task": "2020_magna_utah",
  "configurations": [
   {
@@ -26,6 +26,7 @@
      "b_difference": 0.203,
      "depth_band_share": 0.3801,
      "depth_mode_share": 0.008,
+     "depth_pairs": 2544,
      "dmag_mean_M2": 0.4665,
      "dmag_mean_M3": 0.4214,
      "dmag_mean_M4": 0.2825,
@@ -35,6 +36,7 @@
      "dmag_slope_per_unit": -0.2001,
      "dmag_std": 0.352,
      "dt_final_s": 0.16,
+     "dt_mad_s": 0.0468,
      "dt_mean_M2": 0.2873,
      "dt_mean_M3": 0.3074,
      "dt_mean_M4": 0.246,
@@ -56,6 +58,7 @@
      "f1_M3": 0.9855,
      "f1_M4": 1.0,
      "f1_M5": 1.0,
+     "location_pairs": 2544,
      "off_structure_after_shift": 0.0022,
      "off_structure_fraction": 0.0032,
      "out_of_coverage_fraction": 0.0,
@@ -110,6 +113,12 @@
      "max": 0.008,
      "n": 1
     },
+    "depth_pairs": {
+     "mean": 2544.0,
+     "min": 2544.0,
+     "max": 2544.0,
+     "n": 1
+    },
     "dmag_mean_M2": {
      "mean": 0.4665,
      "min": 0.4665,
@@ -162,6 +171,12 @@
      "mean": 0.16,
      "min": 0.16,
      "max": 0.16,
+     "n": 1
+    },
+    "dt_mad_s": {
+     "mean": 0.0468,
+     "min": 0.0468,
+     "max": 0.0468,
      "n": 1
     },
     "dt_mean_M2": {
@@ -288,6 +303,12 @@
      "mean": 1.0,
      "min": 1.0,
      "max": 1.0,
+     "n": 1
+    },
+    "location_pairs": {
+     "mean": 2544.0,
+     "min": 2544.0,
+     "max": 2544.0,
      "n": 1
     },
     "off_structure_after_shift": {
@@ -523,13 +544,13 @@
      "trusted": false,
      "trust_failed": [
       "time_bias",
-      "horizontal_shift",
       "magnitude_offset",
       "magnitude_spread"
      ],
      "b_difference": 0.041,
      "depth_band_share": 0.2029,
      "depth_mode_share": 0.0141,
+     "depth_pairs": 2546,
      "dmag_mean_M2": 0.4153,
      "dmag_mean_M3": 0.357,
      "dmag_mean_M4": 0.2025,
@@ -539,6 +560,7 @@
      "dmag_slope_per_unit": -0.1794,
      "dmag_std": 0.3085,
      "dt_final_s": 0.342,
+     "dt_mad_s": 0.128,
      "dt_mean_M2": 0.5699,
      "dt_mean_M3": 0.5658,
      "dt_mean_M4": 0.52,
@@ -560,6 +582,7 @@
      "f1_M3": 0.9151,
      "f1_M4": 1.0,
      "f1_M5": 1.0,
+     "location_pairs": 2546,
      "off_structure_after_shift": 0.0144,
      "off_structure_fraction": 0.0194,
      "out_of_coverage_fraction": 0.001,
@@ -614,6 +637,12 @@
      "max": 0.0141,
      "n": 1
     },
+    "depth_pairs": {
+     "mean": 2546.0,
+     "min": 2546.0,
+     "max": 2546.0,
+     "n": 1
+    },
     "dmag_mean_M2": {
      "mean": 0.4153,
      "min": 0.4153,
@@ -666,6 +695,12 @@
      "mean": 0.342,
      "min": 0.342,
      "max": 0.342,
+     "n": 1
+    },
+    "dt_mad_s": {
+     "mean": 0.128,
+     "min": 0.128,
+     "max": 0.128,
      "n": 1
     },
     "dt_mean_M2": {
@@ -792,6 +827,12 @@
      "mean": 1.0,
      "min": 1.0,
      "max": 1.0,
+     "n": 1
+    },
+    "location_pairs": {
+     "mean": 2546.0,
+     "min": 2546.0,
+     "max": 2546.0,
      "n": 1
     },
     "off_structure_after_shift": {
@@ -1028,12 +1069,12 @@
      "trust_failed": [
       "time_bias",
       "horizontal_shift",
-      "horizontal_scatter",
       "magnitude_offset"
      ],
      "b_difference": 0.066,
      "depth_band_share": 0.2646,
      "depth_mode_share": 0.0136,
+     "depth_pairs": 2673,
      "dmag_mean_M2": 0.3168,
      "dmag_mean_M3": 0.2556,
      "dmag_mean_M4": 0.0778,
@@ -1043,6 +1084,7 @@
      "dmag_slope_per_unit": -0.1219,
      "dmag_std": 0.1947,
      "dt_final_s": 0.3835,
+     "dt_mad_s": 0.1324,
      "dt_mean_M2": 0.6799,
      "dt_mean_M3": 0.6731,
      "dt_mean_M4": 0.646,
@@ -1064,6 +1106,7 @@
      "f1_M3": 0.9855,
      "f1_M4": 1.0,
      "f1_M5": 1.0,
+     "location_pairs": 2683,
      "off_structure_after_shift": 0.0056,
      "off_structure_fraction": 0.0073,
      "out_of_coverage_fraction": 0.0013,
@@ -1118,6 +1161,12 @@
      "max": 0.0136,
      "n": 1
     },
+    "depth_pairs": {
+     "mean": 2673.0,
+     "min": 2673.0,
+     "max": 2673.0,
+     "n": 1
+    },
     "dmag_mean_M2": {
      "mean": 0.3168,
      "min": 0.3168,
@@ -1170,6 +1219,12 @@
      "mean": 0.3835,
      "min": 0.3835,
      "max": 0.3835,
+     "n": 1
+    },
+    "dt_mad_s": {
+     "mean": 0.1324,
+     "min": 0.1324,
+     "max": 0.1324,
      "n": 1
     },
     "dt_mean_M2": {
@@ -1296,6 +1351,12 @@
      "mean": 1.0,
      "min": 1.0,
      "max": 1.0,
+     "n": 1
+    },
+    "location_pairs": {
+     "mean": 2683.0,
+     "min": 2683.0,
+     "max": 2683.0,
      "n": 1
     },
     "off_structure_after_shift": {
@@ -1605,6 +1666,7 @@
      "b_difference": 0.171,
      "depth_band_share": 0.3651,
      "depth_mode_share": 0.0199,
+     "depth_pairs": 2534,
      "dmag_mean_M2": 0.5316,
      "dmag_mean_M3": 0.5288,
      "dmag_mean_M4": 0.342,
@@ -1614,6 +1676,7 @@
      "dmag_slope_per_unit": -0.1551,
      "dmag_std": 0.2037,
      "dt_final_s": 0.197,
+     "dt_mad_s": 0.055,
      "dt_mean_M2": -0.1326,
      "dt_mean_M3": -0.1419,
      "dt_mean_M4": -0.1608,
@@ -1635,6 +1698,7 @@
      "f1_M3": 0.9855,
      "f1_M4": 1.0,
      "f1_M5": 1.0,
+     "location_pairs": 2534,
      "off_structure_after_shift": 0.0032,
      "off_structure_fraction": 0.0035,
      "out_of_coverage_fraction": 0.0,
@@ -1695,6 +1759,12 @@
      "max": 0.0199,
      "n": 1
     },
+    "depth_pairs": {
+     "mean": 2534.0,
+     "min": 2534.0,
+     "max": 2534.0,
+     "n": 1
+    },
     "dmag_mean_M2": {
      "mean": 0.5316,
      "min": 0.5316,
@@ -1747,6 +1817,12 @@
      "mean": 0.197,
      "min": 0.197,
      "max": 0.197,
+     "n": 1
+    },
+    "dt_mad_s": {
+     "mean": 0.055,
+     "min": 0.055,
+     "max": 0.055,
      "n": 1
     },
     "dt_mean_M2": {
@@ -1873,6 +1949,12 @@
      "mean": 1.0,
      "min": 1.0,
      "max": 1.0,
+     "n": 1
+    },
+    "location_pairs": {
+     "mean": 2534.0,
+     "min": 2534.0,
+     "max": 2534.0,
      "n": 1
     },
     "off_structure_after_shift": {

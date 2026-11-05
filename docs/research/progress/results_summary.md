@@ -4,33 +4,34 @@
 
 ## 1. 当前结果汇总（2026-11-04 至 11-05）
 
-所有判定都按当前评分口径（指标 v2，加 2026-11-04 的两项修正）重新计算。每个配置大多只有一次运行，结论都是初步的。
+所有判定都按当前评分口径重新计算（指标 v2，加 2026-11-04 的两项修正；2026-11-05 起时间和空间相对主要绝对定位参考计算，门槛按可达结果自身的偏差放宽，配对少于 30 对不判，见[指标 §13](../../framework/02_Catalog_Metrics.md)）。每个配置大多只有一次运行，结论都是初步的。
 
 ### 1.1 S0 和 S1：正式运行（2026-10-28 至 10-29）
 
 
-| 案例（分级）          | S0 `min`：不通过的可信标准 | S1 `tools`：不通过的可信标准               | S1 找回最终目录事件的比例 |
-| --------------- | ----------------- | --------------------------------- | -------------- |
-| Prague（基础）      | 未完成               | 2：深度偏差、震级偏差                       | 46 %           |
-| Magna（基础）       | 未完成               | 3：深度偏差、水平偏移、震级偏差                  | 51 %           |
-| Maple Creek（中等） | 12 项              | 5：时间偏差、深度偏差、水平离散、偏离构造、震级标度        | 22 %           |
-| Kīlauea（中等）     | 5 项               | 1：时间偏差（−0.36 s）                   | 37 %           |
-| Ridgecrest（困难）  | 6 项               | 5：深度偏差、深度堆积、大事件、偏离构造、震级偏差         | 39 %           |
-| Kaikōura（困难）    | 8 项               | 7：时间、时间离散、水平偏移、水平离散、深度堆积、大事件、震级偏差 | 43 %           |
+| 案例（分级） | S0 `min`：不通过的可信标准 | S1 `tools`：不通过的可信标准 | S1 找回最终目录事件的比例 |
+|---|---|---|---|
+| Prague（基础） | 未完成 | 2：深度偏差、震级偏差 | 46 % |
+| Magna（基础） | 未完成 | 3：水平偏移、深度偏差、震级偏差 | 51 % |
+| Maple Creek（中等） | 12 项 | 4：时间偏差、水平离散、偏离构造、震级标度 | 22 % |
+| Kīlauea（中等） | 5 项 | 2：时间偏差、深度偏差 | 37 % |
+| Ridgecrest（困难） | 6 项 | 6：时间偏差、深度偏差、偏离构造、深度堆积、震级偏差、大事件 | 39 % |
+| Kaikōura（困难） | 4 项（另有 5 项因与 Lanza 只配上 22 对而不判） | 6：水平偏移、深度偏差、水平离散、深度堆积、震级偏差、大事件 | 43 % |
 
+改为相对参考计算后，S1 不通过的总数不变（23 项），但内容有变化：Maple 的深度偏差通过了（相对 ComCat −0.07 km；可达结果本身比 ComCat 深 1.46 km，原来对可达结果计算时是 −2.18 km）；Kīlauea 增加了深度偏差（相对 Shelly +1.01 km，刚过 1 km 门槛），Ridgecrest 增加了时间偏差（相对 Shelly +0.33 s，刚过 0.3 s）；Kaikōura 的时间偏差和时间离散通过了（门槛按可达结果自身相对 Lanza 的 0.49 s 放宽），但深度偏差不通过（相对 Lanza +2.6 km，相对可达结果只有 +0.9 km）。
 
 工具让六个案例都能完成，且不通过项大幅减少；但没有一个运行达到可信标准，找回的事件只有最终目录的 22–51 %（检测差距主要来自 human-in-loop 用的模板匹配）。
 
 **图（由** `python -m SeismoAgentBench.scoring.catalog_metrics.overview_figures` **生成，**`assets/results_overview/`**）。** 每个案例比较五个目录：最强参考目录、官方目录、S0 `min`、S1 `tools`、human-in-loop 最终目录，都按评分区域裁剪；颜色在所有图中固定对应目录。最强参考和官方目录分别是：Prague 为 Cochran、ComCat；Magna 为 Pang、UUSS；Maple Creek 为 Shelly（只有发震时刻，空间图不画）、ComCat；Kīlauea 为 Shelly、ComCat；Ridgecrest 为 Shelly、SCSN；Kaikōura 为 Chamberlain、GeoNet。
 
-**判据总览。** 每格是该判据的数值除以门槛（门槛由最终目录给出）：蓝色通过、红色超出，格内标 ✓ 或 ✗ 和数值；"–"表示不适用（最终目录与自身比较的项、参考目录没有的量）或配对太少。Ridgecrest 的最终目录本身也漏了主震尾波中的几个 M ≥ 4 事件，所以"大事件"一行全部不通过。
+**判据总览。** 每格是该判据的数值除以门槛（时间和空间相对主要绝对定位参考，门槛按可达结果自身的偏差放宽）：蓝色通过、红色超出，格内标 ✓ 或 ✗ 和数值；"–"表示不适用（最终目录与自身比较的项、参考目录没有的量）或配对太少。Ridgecrest 的最终目录本身也漏了主震尾波中的几个 M ≥ 4 事件，所以"大事件"一行全部不通过。
 
 ![判据热力图](../assets/results_overview/criteria_heatmap.png)
 
 读图要点：
 
-- S1 的红格集中在时间偏差（Maple、Kīlauea、Kaikōura）、深度偏差（Prague、Magna、Maple、Ridgecrest）、深度堆积（Ridgecrest、Kaikōura）和震级偏差（Prague、Magna、Ridgecrest、Kaikōura）；水平偏移在 Magna、Kaikōura 不通过。
-- 参考目录相对最终目录也有不通过的判据（例如 Kaikōura GeoNet 的深度偏差和水平离散、Kīlauea ComCat 的深度偏差），说明判据的门槛并不宽松。
+- S1 的红格集中在时间偏差（Maple、Kīlauea、Ridgecrest）、深度偏差（Prague、Magna、Kīlauea、Ridgecrest、Kaikōura）、深度堆积（Ridgecrest、Kaikōura）和震级偏差（Prague、Magna、Ridgecrest、Kaikōura）；水平偏移在 Magna、Kaikōura 不通过。
+- 主要定位参考与自身比较的格子没有意义（偏差为零）；官方目录相对主要定位参考也有不通过的判据（例如 Kaikōura GeoNet、Kīlauea ComCat 的深度偏差），说明判据的门槛并不宽松。
 
 **各案例的空间分布和检测。** 空间图：上排震中，下排沿最终目录震中主轴的深度剖面，同一案例所有子图坐标范围相同。检测图：左侧各目录的时间—震级，右侧累计事件数、累计震级—频度分布（圆点为 Mc，最大曲率 + 0.2）、深度分布。
 
@@ -101,20 +102,19 @@ Kaikōura 2016
 三个变体共用 S1 运行的拾取和关联，只做定位、相对定位和震级：`backend`（只有工具）、`backend_checker`（加 checker）、`backend_knowledge`（加 checker 和知识）。
 
 
-| 案例          | S1 tools | backend | backend_checker | backend_knowledge |
-| ----------- | -------- | ------- | --------------- | ----------------- |
-| Prague      | 2        | 4       | 1               | 1                 |
-| Magna       | 3        | 4       | 4               | 4                 |
-| Maple Creek | 5        | 6       | 4               | 5                 |
-| Kīlauea     | 1        | 1       | 3               | 2                 |
-| Ridgecrest  | 5        | 5       | 3               | 3                 |
-| Kaikōura    | 7        | 4       | 4               | 5                 |
-| **合计**      | 23       | 24      | **19**          | 20                |
+| 案例 | S1 tools | backend | backend_checker | backend_knowledge |
+|---|---|---|---|---|
+| Prague | 2 | 4 | 2 | 1 |
+| Magna | 3 | 4 | 3 | 3 |
+| Maple Creek | 4 | 8 | 5 | 3 |
+| Kīlauea | 2 | 2 | 2 | 2 |
+| Ridgecrest | 6 | 4 | 3 | 3 |
+| Kaikōura | 6 | 2 | 3 | 4 |
+| **合计** | 23 | 24 | 18 | **16** |
 
+统一测试试水（Kīlauea，checker 1.2，更新后的知识，2026-11-03）：`backend` 2 项、`backend_checker` 3 项、`backend_knowledge` **1 项**（相对 Shelly 时间偏差 +0.20 s、深度偏差 +0.68 km，只剩深度堆积；该项随后由 NonLinLoc 接口修正离线消除）。
 
-统一测试试水（Kīlauea，checker 1.2，更新后的知识，2026-11-03）：`backend` 3 项、`backend_checker` 4 项、`backend_knowledge` **1 项**（时间偏差 +0.08 s、深度偏差 −0.07 km，只剩深度堆积；该项随后由 NonLinLoc 接口修正离线消除）。
-
-（表中数字按当前评分规则重判，2026-11-05；Kaikōura `backend_knowledge` 由 6 项变为 5 项，来自 `inside_region` 改按台站覆盖判定。）
+（表中数字按 2026-11-05 的评分规则重判：时间和空间相对主要绝对定位参考。改动前三个变体合计为 24、19、20。）
 
 **图（由** `python -m SeismoAgentBench.scoring.catalog_metrics.checker_effect_figures` **生成，**`assets/checker_effect/`**）。**
 
@@ -124,8 +124,8 @@ Kaikōura 2016
 
 读法：
 - **checker 稳定挡住了实现类错误。** 只有工具的 `backend` 在 Prague、Kīlauea、Ridgecrest 犯了震级单位或响应错误（偏差 −1.4、−0.99、−0.98）；两个带 checker 的变体在这三个案例上都没有犯（汇总图第二栏）。Magna 的震级偏差（+0.5–0.7）在所有变体都存在，属于定标，不是实现错误，checker 也不该看到。
-- **速度模型类偏差没有改善，有时更差。** 时间和深度偏差（汇总图第三、四栏）在三个变体之间没有一致方向：Kīlauea 第二批的 checker 变体时间偏差 −1.7 s，Kaikōura 的 checker 变体深度偏差 +3.3 km，都比只有工具时差；这类偏差来自近地表速度和基准面，没有参考就看不到（§4.3 第 1、2 条）。
-- **总体是小幅净改善，样本很小。** 不通过总数 24 → 19（checker）→ 20（checker + 知识）；相对 `backend`，checker 变体 3 个案例更好、2 个持平、1 个更差，知识变体 3 个更好、1 个持平、2 个更差。每格只有一次运行，同一变体两批之间（Kīlauea）就相差 1–2 项。
+- **速度模型类偏差没有一致改善。** 时间和深度偏差（相对参考，汇总图第三、四栏）在三个变体之间方向不一：checker 变体在 Prague、Magna、Ridgecrest 把深度偏差降到 1 km 以内，但 Kīlauea 第二批的 checker 变体时间偏差 1.8 s、深度偏差 3.7 km，Kaikōura 的 checker 变体深度偏差 4.9 km，都比只有工具时差；Maple 的知识变体时间偏差 1.1 s。这类偏差来自近地表速度和基准面，没有参考就看不到（§1.3 第 1、2 条）。
+- **总体是净改善，样本很小。** 不通过总数 24 → 18（checker）→ 16（checker + 知识）；相对 `backend`，两个变体都是 4 个案例更好、1 个持平（Kīlauea）、1 个更差（Kaikōura）。每格只有一次运行，同一变体两批之间（Kīlauea）就相差 0–1 项。
 - **这些运行用的是 checker 1.0（Kīlauea 第二批 1.2）和更新前的知识。** 1.3 和之后补充的知识（近地表、从数据建模型、水平框架、模板匹配）还没有经过 Agent 运行检验；完整流程的 S3 也还没有运行。
 
 ### 1.3 主要发现（细节见 `[02_Checker_Design.md](../02_Checker_Design.md)` §11）

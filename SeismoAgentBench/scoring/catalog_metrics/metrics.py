@@ -121,7 +121,7 @@ def location(cand: Population, ref: Population, pairs, center) -> dict:
            "epi_gt2km": _num((epi > 2).mean()), "epi_gt5km": _num((epi > 5).mean()),
            "shift_east_km": _num(shift[0]), "shift_north_km": _num(shift[1]), "shift_km": _num(np.hypot(*shift)),
            "scatter_median_km": _median(scatter), "scatter_p90_km": _p90(scatter),
-           "dt_median_s": _median(pairs.dt_s)}
+           "dt_median_s": _median(pairs.dt_s), "dt_mad_s": _mad(pairs.dt_s)}
     # Equal-count periods by origin time: a problem confined to part of the sequence
     # (early aftershocks, before/after a mainshock) does not move the overall median.
     t = cand.events.time.to_numpy()[pairs.a]

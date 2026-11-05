@@ -1,11 +1,17 @@
-"""Trusted-catalog verdict (docs/framework/02_Catalog_Metrics.md §7a, v2).
+"""Trusted-catalog verdict (docs/framework/02_Catalog_Metrics.md §7a, v2; reference-based time and space since
+2026-11-05).
 
-Does a run's catalog reach the standard of a trusted catalog? Judged on four
-dimensions, each read against the human-in-loop final of the same case:
+Does a run's catalog reach the standard of a trusted catalog? Judged on four dimensions:
 
-- ``reality``: the events are real (inside the region, few false events);
-- ``time``, ``space``, ``strength``: each split into *accuracy* (a systematic
-  offset from the final) and *stability* (spread and consistency).
+- ``reality``: the events are real (inside the station coverage, few false events);
+- ``time``, ``space``: *accuracy* (a systematic offset) and *stability* (spread), measured on the pairs matched
+  with the case's primary absolute-location (L) reference, a published high-precision catalog; at least
+  ``LOCATION_MIN_PAIRS`` pairs, else ``insufficient`` (not judged);
+- ``strength``: the same against the magnitude authority (the official catalog).
+
+The human-in-loop catalog is the attainable result, not the standard: where it itself differs from the reference
+by more than an absolute threshold, the threshold is relaxed to its value, so that a run is not failed for a
+difference the attainable result also has.
 
 Completeness (how many of the final's events the run recovers) is reported
 next to the verdict, not judged: an incomplete catalog of accurate events
@@ -47,13 +53,12 @@ CRITERIA: list[Criterion] = [
     # many events inside were detected, so the margin scales with the final's share.
     ("reality", "accuracy", "inside_region", _key("out_of_coverage_fraction"), "<=", lambda f: max(0.05, 1.5 * f), True),
     ("reality", "accuracy", "false_events", _key("audited_false_rate"), "<=", lambda f: 0.02, False),
-    ("time", "accuracy", "time_bias", _key("time_bias_final_s"), "abs<=", lambda f: 0.3, False),
-    ("time", "stability", "time_spread", _key("time_mad_final_s"), "<=", lambda f: 0.3, False),
+    ("time", "accuracy", "time_bias", _key("dt_median_s"), "abs<=", lambda f: max(0.3, abs(f)), False),
+    ("time", "stability", "time_spread", _key("dt_mad_s"), "<=", lambda f: max(0.3, f), False),
     ("time", "stability", "after_large_events", _after_large_ratio, ">=", lambda f: 0.8 * f, True),
-    ("space", "accuracy", "horizontal_shift", _key("shift_final_km"), "<=", lambda f: 1.0, False),
-    ("space", "accuracy", "depth_bias", _key("dz_final_km"), "abs<=", lambda f: 1.0, False),
-    ("space", "stability", "horizontal_scatter", _key("scatter_final_km"), "<=",
-     lambda f: max(1.0, f), True),  # threshold from the final's own scatter about the primary reference
+    ("space", "accuracy", "horizontal_shift", _key("shift_km"), "<=", lambda f: max(1.0, f), False),
+    ("space", "accuracy", "depth_bias", _key("dz_median_km"), "abs<=", lambda f: max(1.0, abs(f)), False),
+    ("space", "stability", "horizontal_scatter", _key("scatter_median_km"), "<=", lambda f: max(1.0, f), False),
     ("space", "stability", "off_structure", _key("off_structure_fraction"), "<=", lambda f: max(0.05, 3 * f), True),
     ("space", "stability", "depth_pileup", _key("depth_mode_share"), "<=", lambda f: max(0.05, f + 0.02), True),
     ("strength", "accuracy", "magnitude_offset", _key("dmag_median"), "abs<=", lambda f: abs(f) + 0.2, True),
@@ -64,14 +69,18 @@ CRITERIA: list[Criterion] = [
 # Headline key each criterion reads (after_large_events is the ratio recall_after_large / recall_other).
 CRITERION_METRIC = {
     "inside_region": "out_of_coverage_fraction", "false_events": "audited_false_rate",
-    "time_bias": "time_bias_final_s", "time_spread": "time_mad_final_s", "after_large_events": "after_large",
-    "horizontal_shift": "shift_final_km", "depth_bias": "dz_final_km", "horizontal_scatter": "scatter_final_km",
+    "time_bias": "dt_median_s", "time_spread": "dt_mad_s", "after_large_events": "after_large",
+    "horizontal_shift": "shift_km", "depth_bias": "dz_median_km", "horizontal_scatter": "scatter_median_km",
     "off_structure": "off_structure_fraction", "depth_pileup": "depth_mode_share",
     "magnitude_offset": "dmag_median", "magnitude_spread": "dmag_std", "magnitude_scale": "dmag_slope_per_unit",
     "large_events_present": "recall_M4",
 }
 # The final's value that sets a threshold, where it is not the same headline key.
-FINAL_SOURCE = {"horizontal_scatter": "scatter_median_km"}
+FINAL_SOURCE: dict[str, str] = {}
+# Criteria measured on the pairs matched with the primary L reference, and the pair count each needs.
+LOCATION_MIN_PAIRS = 30
+PAIRS_KEY = {"time_bias": "location_pairs", "time_spread": "location_pairs", "horizontal_shift": "location_pairs",
+             "horizontal_scatter": "location_pairs", "depth_bias": "depth_pairs"}
 
 
 def _passes(value: float, op: str, threshold: float) -> bool:
@@ -110,7 +119,9 @@ def trust_verdict(headline: Mapping[str, Any], final: Mapping[str, Any] | None, 
             continue  # the final has no value: the criterion does not apply to this case
         threshold = round(rule(reference if reference is not None else 0.0), 4)
         value = getter(headline)
-        if value is None and name == "magnitude_scale" and (headline.get("dmag_pairs") or 0) >= 5:
+        if name in PAIRS_KEY and (headline.get(PAIRS_KEY[name]) or 0) < LOCATION_MIN_PAIRS:
+            verdict = "insufficient"  # too few pairs with the reference to judge an offset or a spread
+        elif value is None and name == "magnitude_scale" and (headline.get("dmag_pairs") or 0) >= 5:
             verdict = "insufficient"  # magnitudes exist but too few pairs for a slope (SLOPE_MIN_PAIRS)
         elif value is None:
             verdict = "pending" if name == "false_events" else "fail"

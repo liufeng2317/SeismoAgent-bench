@@ -138,8 +138,8 @@ def summary(data: dict, out: Path) -> None:
     x = {a: i for i, a in enumerate(arms)}
     panels = [("failed criteria", lambda r: len(r[3]), None),
               ("|magnitude offset| (units / response)", lambda r: abs(r[4].get("dmag_median")) if r[4].get("dmag_median") is not None else None, 0.2),
-              ("|origin-time bias| vs final (s)", lambda r: abs(r[4].get("time_bias_final_s")) if r[4].get("time_bias_final_s") is not None else None, 0.3),
-              ("|depth bias| vs final (km)", lambda r: abs(r[4].get("dz_final_km")) if r[4].get("dz_final_km") is not None else None, 1.0)]
+              ("|origin-time bias| vs reference (s)", lambda r: abs(r[4].get("dt_median_s")) if r[4].get("dt_median_s") is not None else None, 0.3),
+              ("|depth bias| vs reference (km)", lambda r: abs(r[4].get("dz_median_km")) if r[4].get("dz_median_km") is not None else None, 1.0)]
     markers = ["o", "s", "^", "D", "v", "P"]
     for ax, (title, f, thr) in zip(axes, panels):
         for k, (case, rows) in enumerate(data.items()):

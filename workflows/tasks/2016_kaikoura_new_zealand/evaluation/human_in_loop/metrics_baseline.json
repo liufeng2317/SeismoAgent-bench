@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "0e402ea030bfb6e5cb0418bb7af14877d71764f3",
- "scorer_dirty": false,
- "generated_utc": "2026-11-04T07:06:11+00:00",
+ "scorer_commit": "bb1fde88f5fe9e31576ff216bbba8ac5cee2e17a",
+ "scorer_dirty": true,
+ "generated_utc": "2026-11-05T05:17:08+00:00",
  "task": "2016_kaikoura_new_zealand",
  "references": {
   "tan": {
@@ -97,6 +97,7 @@
       "scatter_median_km": 1.556,
       "scatter_p90_km": 3.2618,
       "dt_median_s": 0.23,
+      "dt_mad_s": 0.15,
       "epi_median_by_period_km": [
        1.7304,
        1.4881,
@@ -343,6 +344,7 @@
      "scatter_median_km": 2.7807,
      "scatter_p90_km": 7.3034,
      "dt_median_s": 0.455,
+     "dt_mad_s": 0.2515,
      "epi_median_by_period_km": [
       3.358,
       3.2022,
@@ -1115,6 +1117,7 @@
      "scatter_median_km": 3.0586,
      "scatter_p90_km": 6.84,
      "dt_median_s": 0.4876,
+     "dt_mad_s": 0.2406,
      "epi_median_by_period_km": [
       2.8581,
       3.3879,
@@ -1675,6 +1678,7 @@
       "scatter_median_km": 1.0418,
       "scatter_p90_km": 2.4039,
       "dt_median_s": 0.6345,
+      "dt_mad_s": 0.2785,
       "epi_median_by_period_km": [
        1.0344,
        0.9911,
@@ -1823,6 +1827,7 @@
      "scatter_median_km": 2.056,
      "scatter_p90_km": 6.116,
      "dt_median_s": 0.39,
+     "dt_mad_s": 0.23,
      "epi_median_by_period_km": [
       3.421,
       3.1284,
@@ -2355,6 +2360,7 @@
       "scatter_median_km": 2.5563,
       "scatter_p90_km": 4.6125,
       "dt_median_s": 0.36,
+      "dt_mad_s": 0.18,
       "epi_median_by_period_km": [
        3.3115,
        3.1261,
@@ -2513,6 +2519,7 @@
      "scatter_median_km": 3.1856,
      "scatter_p90_km": 8.5203,
      "dt_median_s": 0.411,
+     "dt_mad_s": 0.259,
      "epi_median_by_period_km": [
       2.9303,
       3.0876,
@@ -2701,6 +2708,7 @@
       "scatter_median_km": 3.0586,
       "scatter_p90_km": 6.84,
       "dt_median_s": 0.4876,
+      "dt_mad_s": 0.2406,
       "epi_median_by_period_km": [
        2.8581,
        3.3879,
@@ -3385,6 +3393,9 @@
     "dz_median_km": -0.319,
     "depth_datum_known": true,
     "dt_median_s": 0.4876,
+    "dt_mad_s": 0.2406,
+    "location_pairs": 120,
+    "depth_pairs": 120,
     "depth_mode_share": 0.0081,
     "depth_band_share": 0.1234,
     "off_structure_fraction": 0.0081,
@@ -3560,6 +3571,7 @@
       "scatter_median_km": 2.9402,
       "scatter_p90_km": 10.6785,
       "dt_median_s": 0.4984,
+      "dt_mad_s": 0.2297,
       "epi_median_by_period_km": [
        3.8679,
        4.7519,
@@ -3794,6 +3806,7 @@
      "scatter_median_km": 1.9329,
      "scatter_p90_km": 5.1193,
      "dt_median_s": 0.2173,
+     "dt_mad_s": 0.1393,
      "epi_median_by_period_km": [
       2.4591,
       2.2746,
@@ -4238,6 +4251,9 @@
     "dz_median_km": -0.0946,
     "depth_datum_known": true,
     "dt_median_s": 0.4984,
+    "dt_mad_s": 0.2297,
+    "location_pairs": 101,
+    "depth_pairs": 101,
     "depth_mode_share": 0.0189,
     "depth_band_share": 0.0946,
     "off_structure_fraction": 0.0132,

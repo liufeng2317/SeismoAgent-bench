@@ -37,6 +37,9 @@
   "dz_median_km": -2.3512,
   "depth_datum_known": true,
   "dt_median_s": 0.3311,
+  "dt_mad_s": 0.146,
+  "location_pairs": 5747,
+  "depth_pairs": 5747,
   "depth_mode_share": 0.3649,
   "depth_band_share": 0.4515,
   "off_structure_fraction": 0.1707,
@@ -78,6 +81,7 @@
   "dmag_median": -1.21,
   "dmag_std": 0.1969,
   "dmag_slope_per_unit": -0.0285,
+  "dmag_pairs": 5099,
   "b_difference": -0.021,
   "dt_mean_s": 0.3286,
   "dt_std_s": 0.3147,
@@ -85,12 +89,12 @@
   "recall_other": 0.7519,
   "audited_false_rate": null,
   "out_of_mask_fraction": 0.1202,
-  "dmag_pairs": 5099,
   "out_of_coverage_fraction": 0.0
  },
  "trust": {
   "trusted": false,
   "failed": [
+   "time_bias",
    "depth_bias",
    "off_structure",
    "depth_pileup",
@@ -123,22 +127,22 @@
     }
    },
    "time": {
-    "verdict": "pass",
+    "verdict": "fail",
     "checks": {
      "time_bias": {
       "aspect": "accuracy",
-      "value": 0.0486,
+      "value": 0.3311,
       "op": "abs<=",
       "threshold": 0.3,
-      "final": null,
-      "verdict": "pass"
+      "final": 0.26,
+      "verdict": "fail"
      },
      "time_spread": {
       "aspect": "stability",
-      "value": 0.1246,
+      "value": 0.146,
       "op": "<=",
       "threshold": 0.3,
-      "final": null,
+      "final": 0.08,
       "verdict": "pass"
      },
      "after_large_events": {
@@ -156,23 +160,23 @@
     "checks": {
      "horizontal_shift": {
       "aspect": "accuracy",
-      "value": 0.5852,
+      "value": 0.2041,
       "op": "<=",
       "threshold": 1.0,
-      "final": null,
+      "final": 0.369,
       "verdict": "pass"
      },
      "depth_bias": {
       "aspect": "accuracy",
-      "value": -2.3122,
+      "value": -2.3512,
       "op": "abs<=",
       "threshold": 1.0,
-      "final": null,
+      "final": -0.1005,
       "verdict": "fail"
      },
      "horizontal_scatter": {
       "aspect": "stability",
-      "value": 0.8326,
+      "value": 0.7408,
       "op": "<=",
       "threshold": 1.0,
       "final": 0.2058,

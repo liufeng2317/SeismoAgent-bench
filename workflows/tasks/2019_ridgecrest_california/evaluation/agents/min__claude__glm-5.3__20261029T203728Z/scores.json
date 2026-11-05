@@ -37,6 +37,9 @@
   "dz_median_km": -1.272,
   "depth_datum_known": true,
   "dt_median_s": 0.516,
+  "dt_mad_s": 0.129,
+  "location_pairs": 5034,
+  "depth_pairs": 5034,
   "depth_mode_share": 0.0117,
   "depth_band_share": 0.242,
   "off_structure_fraction": 0.0964,
@@ -78,6 +81,7 @@
   "dmag_median": 0.3,
   "dmag_std": 0.3106,
   "dmag_slope_per_unit": -0.1136,
+  "dmag_pairs": 3866,
   "b_difference": -0.054,
   "dt_mean_s": 0.5284,
   "dt_std_s": 0.2732,
@@ -85,13 +89,12 @@
   "recall_other": 0.6709,
   "audited_false_rate": null,
   "out_of_mask_fraction": 0.2089,
-  "dmag_pairs": 3866,
   "out_of_coverage_fraction": 0.0023
  },
  "trust": {
   "trusted": false,
   "failed": [
-   "horizontal_shift",
+   "time_bias",
    "depth_bias",
    "off_structure",
    "magnitude_offset",
@@ -124,22 +127,22 @@
     }
    },
    "time": {
-    "verdict": "pass",
+    "verdict": "fail",
     "checks": {
      "time_bias": {
       "aspect": "accuracy",
-      "value": 0.25,
+      "value": 0.516,
       "op": "abs<=",
       "threshold": 0.3,
-      "final": null,
-      "verdict": "pass"
+      "final": 0.26,
+      "verdict": "fail"
      },
      "time_spread": {
       "aspect": "stability",
-      "value": 0.076,
+      "value": 0.129,
       "op": "<=",
       "threshold": 0.3,
-      "final": null,
+      "final": 0.08,
       "verdict": "pass"
      },
      "after_large_events": {
@@ -157,23 +160,23 @@
     "checks": {
      "horizontal_shift": {
       "aspect": "accuracy",
-      "value": 1.0113,
+      "value": 0.63,
       "op": "<=",
       "threshold": 1.0,
-      "final": null,
-      "verdict": "fail"
+      "final": 0.369,
+      "verdict": "pass"
      },
      "depth_bias": {
       "aspect": "accuracy",
-      "value": -1.3702,
+      "value": -1.272,
       "op": "abs<=",
       "threshold": 1.0,
-      "final": null,
+      "final": -0.1005,
       "verdict": "fail"
      },
      "horizontal_scatter": {
       "aspect": "stability",
-      "value": 0.5998,
+      "value": 0.4996,
       "op": "<=",
       "threshold": 1.0,
       "final": 0.2058,

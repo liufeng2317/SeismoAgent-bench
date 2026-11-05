@@ -35,6 +35,9 @@
   "dz_median_km": 2.121,
   "depth_datum_known": true,
   "dt_median_s": 0.225,
+  "dt_mad_s": 0.15,
+  "location_pairs": 114,
+  "depth_pairs": 113,
   "depth_mode_share": 0.0066,
   "depth_band_share": 0.1133,
   "off_structure_fraction": 0.053,
@@ -89,10 +92,9 @@
  "trust": {
   "trusted": false,
   "failed": [
-   "time_bias",
-   "time_spread",
    "horizontal_shift",
    "depth_bias",
+   "horizontal_scatter",
    "off_structure"
   ],
   "pending": [
@@ -121,23 +123,23 @@
     }
    },
    "time": {
-    "verdict": "fail",
+    "verdict": "pass",
     "checks": {
      "time_bias": {
       "aspect": "accuracy",
-      "value": 0.48,
+      "value": 0.225,
       "op": "abs<=",
-      "threshold": 0.3,
-      "final": null,
-      "verdict": "fail"
+      "threshold": 0.4876,
+      "final": 0.4876,
+      "verdict": "pass"
      },
      "time_spread": {
       "aspect": "stability",
-      "value": 0.307,
+      "value": 0.15,
       "op": "<=",
       "threshold": 0.3,
-      "final": null,
-      "verdict": "fail"
+      "final": 0.2406,
+      "verdict": "pass"
      },
      "after_large_events": {
       "aspect": "stability",
@@ -154,27 +156,27 @@
     "checks": {
      "horizontal_shift": {
       "aspect": "accuracy",
-      "value": 3.4501,
+      "value": 2.7893,
       "op": "<=",
-      "threshold": 1.0,
-      "final": null,
+      "threshold": 1.3663,
+      "final": 1.3663,
       "verdict": "fail"
      },
      "depth_bias": {
       "aspect": "accuracy",
-      "value": 1.9091,
+      "value": 2.121,
       "op": "abs<=",
       "threshold": 1.0,
-      "final": null,
+      "final": -0.319,
       "verdict": "fail"
      },
      "horizontal_scatter": {
       "aspect": "stability",
-      "value": 2.9911,
+      "value": 3.348,
       "op": "<=",
       "threshold": 3.0586,
       "final": 3.0586,
-      "verdict": "pass"
+      "verdict": "fail"
      },
      "off_structure": {
       "aspect": "stability",

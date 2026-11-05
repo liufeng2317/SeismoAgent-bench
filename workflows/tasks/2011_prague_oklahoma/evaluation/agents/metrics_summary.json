@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "6a6a9f977c502b940beec34d8fb96c7f6cc84a19",
- "scorer_dirty": false,
- "generated_utc": "2026-11-04T15:23:08+00:00",
+ "scorer_commit": "bb1fde88f5fe9e31576ff216bbba8ac5cee2e17a",
+ "scorer_dirty": true,
+ "generated_utc": "2026-11-05T05:25:54+00:00",
  "task": "2011_prague_oklahoma",
  "configurations": [
   {
@@ -26,6 +26,7 @@
      "b_difference": 0.281,
      "depth_band_share": 0.2287,
      "depth_mode_share": 0.0242,
+     "depth_pairs": 1440,
      "dmag_mean_M2": -1.6883,
      "dmag_mean_M3": -1.545,
      "dmag_median": -1.43,
@@ -33,6 +34,7 @@
      "dmag_slope_per_unit": -0.425,
      "dmag_std": 0.4813,
      "dt_final_s": 0.1168,
+     "dt_mad_s": 0.0369,
      "dt_mean_M2": -0.1473,
      "dt_mean_M3": -0.0521,
      "dt_mean_s": -0.0592,
@@ -48,6 +50,7 @@
      "event_ratio_final": 0.4828,
      "f1_M2": 0.9916,
      "f1_M3": 1.0,
+     "location_pairs": 1440,
      "off_structure_after_shift": 0.0168,
      "off_structure_fraction": 0.0156,
      "out_of_coverage_fraction": 0.0,
@@ -93,6 +96,12 @@
      "max": 0.0242,
      "n": 1
     },
+    "depth_pairs": {
+     "mean": 1440.0,
+     "min": 1440.0,
+     "max": 1440.0,
+     "n": 1
+    },
     "dmag_mean_M2": {
      "mean": -1.6883,
      "min": -1.6883,
@@ -133,6 +142,12 @@
      "mean": 0.1168,
      "min": 0.1168,
      "max": 0.1168,
+     "n": 1
+    },
+    "dt_mad_s": {
+     "mean": 0.0369,
+     "min": 0.0369,
+     "max": 0.0369,
      "n": 1
     },
     "dt_mean_M2": {
@@ -223,6 +238,12 @@
      "mean": 1.0,
      "min": 1.0,
      "max": 1.0,
+     "n": 1
+    },
+    "location_pairs": {
+     "mean": 1440.0,
+     "min": 1440.0,
+     "max": 1440.0,
      "n": 1
     },
     "off_structure_after_shift": {
@@ -403,11 +424,13 @@
      "completed": true,
      "trusted": false,
      "trust_failed": [
+      "time_bias",
       "magnitude_scale"
      ],
      "b_difference": 0.332,
      "depth_band_share": 0.2517,
      "depth_mode_share": 0.0078,
+     "depth_pairs": 1434,
      "dmag_mean_M2": -0.4061,
      "dmag_mean_M3": -0.425,
      "dmag_median": -0.07,
@@ -415,6 +438,7 @@
      "dmag_slope_per_unit": -0.3445,
      "dmag_std": 0.371,
      "dt_final_s": 0.2989,
+     "dt_mad_s": 0.085,
      "dt_mean_M2": 0.3779,
      "dt_mean_M3": 0.443,
      "dt_mean_s": 0.3303,
@@ -430,6 +454,7 @@
      "event_ratio_final": 0.4846,
      "f1_M2": 0.9831,
      "f1_M3": 1.0,
+     "location_pairs": 1449,
      "off_structure_after_shift": 0.0229,
      "off_structure_fraction": 0.0238,
      "out_of_coverage_fraction": 0.0,
@@ -475,6 +500,12 @@
      "max": 0.0078,
      "n": 1
     },
+    "depth_pairs": {
+     "mean": 1434.0,
+     "min": 1434.0,
+     "max": 1434.0,
+     "n": 1
+    },
     "dmag_mean_M2": {
      "mean": -0.4061,
      "min": -0.4061,
@@ -515,6 +546,12 @@
      "mean": 0.2989,
      "min": 0.2989,
      "max": 0.2989,
+     "n": 1
+    },
+    "dt_mad_s": {
+     "mean": 0.085,
+     "min": 0.085,
+     "max": 0.085,
      "n": 1
     },
     "dt_mean_M2": {
@@ -605,6 +642,12 @@
      "mean": 1.0,
      "min": 1.0,
      "max": 1.0,
+     "n": 1
+    },
+    "location_pairs": {
+     "mean": 1449.0,
+     "min": 1449.0,
+     "max": 1449.0,
      "n": 1
     },
     "off_structure_after_shift": {
@@ -790,6 +833,7 @@
      "b_difference": 0.278,
      "depth_band_share": 0.215,
      "depth_mode_share": 0.0115,
+     "depth_pairs": 1447,
      "dmag_mean_M2": -0.4167,
      "dmag_mean_M3": -0.43,
      "dmag_median": -0.11,
@@ -797,6 +841,7 @@
      "dmag_slope_per_unit": -0.3316,
      "dmag_std": 0.3898,
      "dt_final_s": 0.1639,
+     "dt_mad_s": 0.0365,
      "dt_mean_M2": 0.2072,
      "dt_mean_M3": 0.2965,
      "dt_mean_s": 0.2181,
@@ -812,6 +857,7 @@
      "event_ratio_final": 0.4872,
      "f1_M2": 0.9831,
      "f1_M3": 1.0,
+     "location_pairs": 1447,
      "off_structure_after_shift": 0.013,
      "off_structure_fraction": 0.0124,
      "out_of_coverage_fraction": 0.0,
@@ -857,6 +903,12 @@
      "max": 0.0115,
      "n": 1
     },
+    "depth_pairs": {
+     "mean": 1447.0,
+     "min": 1447.0,
+     "max": 1447.0,
+     "n": 1
+    },
     "dmag_mean_M2": {
      "mean": -0.4167,
      "min": -0.4167,
@@ -897,6 +949,12 @@
      "mean": 0.1639,
      "min": 0.1639,
      "max": 0.1639,
+     "n": 1
+    },
+    "dt_mad_s": {
+     "mean": 0.0365,
+     "min": 0.0365,
+     "max": 0.0365,
      "n": 1
     },
     "dt_mean_M2": {
@@ -987,6 +1045,12 @@
      "mean": 1.0,
      "min": 1.0,
      "max": 1.0,
+     "n": 1
+    },
+    "location_pairs": {
+     "mean": 1447.0,
+     "min": 1447.0,
+     "max": 1447.0,
      "n": 1
     },
     "off_structure_after_shift": {
@@ -1241,6 +1305,7 @@
      "b_difference": 0.262,
      "depth_band_share": 0.225,
      "depth_mode_share": 0.0177,
+     "depth_pairs": 1477,
      "dmag_mean_M2": -2.9976,
      "dmag_mean_M3": -2.995,
      "dmag_median": -2.77,
@@ -1248,6 +1313,7 @@
      "dmag_slope_per_unit": -0.2751,
      "dmag_std": 0.3741,
      "dt_final_s": 0.0768,
+     "dt_mad_s": 0.058,
      "dt_mean_M2": 0.0612,
      "dt_mean_M3": 0.1615,
      "dt_mean_s": 0.1169,
@@ -1263,6 +1329,7 @@
      "event_ratio_final": 0.5011,
      "f1_M2": 0.9717,
      "f1_M3": 1.0,
+     "location_pairs": 1477,
      "off_structure_after_shift": 0.0203,
      "off_structure_fraction": 0.0203,
      "out_of_coverage_fraction": 0.0,
@@ -1314,6 +1381,12 @@
      "max": 0.0177,
      "n": 1
     },
+    "depth_pairs": {
+     "mean": 1477.0,
+     "min": 1477.0,
+     "max": 1477.0,
+     "n": 1
+    },
     "dmag_mean_M2": {
      "mean": -2.9976,
      "min": -2.9976,
@@ -1354,6 +1427,12 @@
      "mean": 0.0768,
      "min": 0.0768,
      "max": 0.0768,
+     "n": 1
+    },
+    "dt_mad_s": {
+     "mean": 0.058,
+     "min": 0.058,
+     "max": 0.058,
      "n": 1
     },
     "dt_mean_M2": {
@@ -1444,6 +1523,12 @@
      "mean": 1.0,
      "min": 1.0,
      "max": 1.0,
+     "n": 1
+    },
+    "location_pairs": {
+     "mean": 1477.0,
+     "min": 1477.0,
+     "max": 1477.0,
      "n": 1
     },
     "off_structure_after_shift": {

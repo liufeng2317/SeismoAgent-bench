@@ -216,9 +216,10 @@ class MetricTest(unittest.TestCase):
         final = {"out_of_mask_fraction": 0.0, "scatter_median_km": 1.5, "off_structure_fraction": 0.01,
                  "depth_mode_share": 0.01, "dmag_median": -0.25, "dmag_std": 0.3, "dmag_slope_per_unit": -0.05,
                  "recall_after_large": 0.8, "recall_other": 0.9, "recall_M4": 1.0}
-        good = {"out_of_mask_fraction": 0.05, "audited_false_rate": None, "time_bias_final_s": 0.1,
-                "time_mad_final_s": 0.05, "recall_after_large": 0.7, "recall_other": 0.9, "shift_final_km": 0.4,
-                "dz_final_km": -0.5, "scatter_final_km": 1.2, "off_structure_fraction": 0.02,
+        good = {"out_of_mask_fraction": 0.05, "audited_false_rate": None, "dt_median_s": 0.1,
+                "dt_mad_s": 0.05, "recall_after_large": 0.7, "recall_other": 0.9, "shift_km": 0.4,
+                "dz_median_km": -0.5, "scatter_median_km": 1.2, "location_pairs": 200, "depth_pairs": 200,
+                "off_structure_fraction": 0.02,
                 "depth_mode_share": 0.03, "dmag_median": -0.4, "dmag_std": 0.35, "dmag_slope_per_unit": -0.2,
                 "recall_M4": 1.0, "recall_final": 0.3}
         out = trust_verdict(good, final, True)
@@ -227,10 +228,18 @@ class MetricTest(unittest.TestCase):
         self.assertEqual(out["dimensions"]["space"]["checks"]["horizontal_scatter"]["threshold"], 1.5)
         self.assertEqual(out["completeness"]["recall_final"], 0.3)  # reported, not judged
         self.assertTrue(trust_verdict({**good, "audited_false_rate": 0.01}, final, True)["trusted"])
-        biased = {**good, "audited_false_rate": 0.01, "time_bias_final_s": 1.0, "dz_final_km": -2.2}
+        biased = {**good, "audited_false_rate": 0.01, "dt_median_s": 1.0, "dz_median_km": -2.2}
         out = trust_verdict(biased, final, True)
         self.assertFalse(out["trusted"])
         self.assertEqual(sorted(out["failed"]), ["depth_bias", "time_bias"])
+        # time and space against the reference need enough pairs; with too few they are not judged
+        few = trust_verdict({**biased, "location_pairs": 12, "depth_pairs": 12}, final, True)
+        self.assertEqual(few["dimensions"]["time"]["checks"]["time_bias"]["verdict"], "insufficient")
+        self.assertNotIn("depth_bias", few["failed"])
+        # an offset the attainable result itself has relaxes the threshold
+        relaxed = trust_verdict({**good, "audited_false_rate": 0.01, "shift_km": 1.3}, {**final, "shift_km": 1.4}, True)
+        self.assertEqual(relaxed["dimensions"]["space"]["checks"]["horizontal_shift"]["threshold"], 1.4)
+        self.assertTrue(relaxed["trusted"])
         self.assertEqual(out["dimensions"]["strength"]["verdict"], "pass")
         self.assertFalse(trust_verdict({}, final, False)["trusted"])
 

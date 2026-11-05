@@ -210,7 +210,7 @@ Rows: each Agent configuration, *expert (final)* (the upper bound), and each ref
 
 ## 7a. Trusted-catalog standard (v2)
 
-Does a run's catalog reach the standard of a trusted catalog? The verdict is read on four dimensions against the human-in-loop final of the same case (`trust.py`; per run in `metrics.json` → `trust`, per configuration `trusted_runs` in the summary). First, the events must be real; then time, space and strength are each judged on **accuracy** (a systematic offset from the final) and **stability** (spread and consistency). A run is trusted when all four dimensions pass; the verdict also lists each dimension, so the profile shows where a catalog fails.
+Does a run's catalog reach the standard of a trusted catalog? The verdict is read on four dimensions (`trust.py`; per run in `metrics.json` → `trust`, per configuration `trusted_runs` in the summary). First, the events must be real; then time, space and strength are each judged on **accuracy** (a systematic offset) and **stability** (spread and consistency). Since 2026-11-05 (§13) time and space are measured on the pairs matched with the case's primary absolute-location (L) reference, a published high-precision catalog, and strength against the magnitude authority (the official catalog); the human-in-loop final is the attainable result, not the standard: it relaxes a threshold that it itself would fail. A run is trusted when all four dimensions pass; the verdict also lists each dimension, so the profile shows where a catalog fails.
 
 **Completeness is reported next to the verdict, not judged**: `recall_norm`, `recall_tight`, `recall_final`, `event_ratio_final`. An incomplete catalog of accurate events can be trusted — an operational catalog is the usual example — and the gap in completeness is read separately against the final.
 
@@ -218,12 +218,12 @@ Does a run's catalog reach the standard of a trusted catalog? The verdict is rea
 |---|---|---|---|---|
 | reality | | events inside the station coverage | `out_of_coverage_fraction` | ≤ max(0.05, 1.5 × final) |
 | reality | | few false events | `audited_false_rate` | ≤ 0.02; *pending* until the blind review is labelled |
-| time | accuracy | origin-time bias | `time_bias_final_s` (median signed candidate − final) | \|value\| ≤ 0.3 s |
-| time | stability | origin-time spread | `time_mad_final_s` | ≤ 0.3 s |
+| time | accuracy | origin-time bias | `dt_median_s` (median signed candidate − primary L reference) | \|value\| ≤ max(0.3 s, \|final\|); at least 30 pairs (`location_pairs`), else `insufficient` |
+| time | stability | origin-time spread | `dt_mad_s` (MAD of the same differences) | ≤ max(0.3 s, final); at least 30 pairs |
 | time | stability | detection after large events | `recall_after_large / recall_other` | ≥ 0.8 × final |
-| space | accuracy | horizontal shift | `shift_final_km` | ≤ 1.0 km |
-| space | accuracy | depth bias | `dz_final_km` | \|value\| ≤ 1.0 km |
-| space | stability | horizontal scatter | `scatter_final_km` | ≤ max(1.0 km, the final's own scatter about the primary reference) |
+| space | accuracy | horizontal shift | `shift_km` (median offset from the primary L reference) | ≤ max(1.0 km, final); at least 30 pairs |
+| space | accuracy | depth bias | `dz_median_km` (median depth difference from the primary L reference) | \|value\| ≤ max(1.0 km, \|final\|); at least 30 depth pairs (`depth_pairs`) |
+| space | stability | horizontal scatter | `scatter_median_km` (scatter about the shift) | ≤ max(1.0 km, final); at least 30 pairs |
 | space | stability | events on the known structure | `off_structure_fraction` | ≤ max(0.05, 3 × final) |
 | space | stability | no depth pile-up | `depth_mode_share` | ≤ max(0.05, final + 0.02) |
 | strength | accuracy | magnitude offset | `dmag_median` (vs the magnitude authority) | \|value\| ≤ \|final\| + 0.2 |
@@ -231,7 +231,7 @@ Does a run's catalog reach the standard of a trusted catalog? The verdict is rea
 | strength | stability | magnitude spread | `dmag_std` | ≤ max(0.3, final + 0.1) |
 | strength | stability | no compressed scale | `dmag_slope_per_unit` | \|value\| ≤ max(0.2, \|final\| + 0.1); `insufficient` (not judged) when the run has magnitudes but fewer than 30 pairs |
 
-Thresholds are absolute, relaxed to the final's own value plus a margin where the final itself would fail them; criteria measured against the final use absolute thresholds. A criterion whose metric the final lacks does not apply; a metric the run lacks fails it. A dimension is *pending* when only the audit is open; `trusted` is true when all dimensions pass, false when any fails, null while only the audit is pending. A failed run is not trusted.
+Thresholds are absolute, relaxed to the final's own value (plus a margin where stated) where the final itself would fail them; the final's value for a reference-based criterion is its own offset from the same reference. The comparison with the final (`time_bias_final_s`, `shift_final_km`, `dz_final_km`, `scatter_final_km`) is still reported, not judged. A criterion whose metric the final lacks does not apply; a metric the run lacks fails it. A dimension is *pending* when only the audit is open; `trusted` is true when all dimensions pass, false when any fails, null while only the audit is pending. A failed run is not trusted.
 
 ## 8. Output conventions fixed for scoring
 
@@ -322,3 +322,16 @@ Revision on the same day, before any conclusion rested on it: the first v2 draft
 Audit samples are drawn once. The labelled reviews of Prague `tools` and Magna `tools` keep their v1 samples, drawn from the events v1 left unsupported; v2's tighter gates leave more events unsupported, so those samples cover a subset of the v2 unsupported events. The unlabelled Maple Creek samples were redrawn under v2; Kīlauea's were first drawn under v2.
 
 v1 scores remain in git history (last v1 state: commit 9a7c066; v2 definition fe5ffe9, re-scored outputs 68dfa28) and in each run's `evaluation/metrics_v1.json`.
+
+## 13. Time and space against the references (2026-11-05)
+
+Decided before the formal runs (register `docs/research/01_Register.md` §5, items 1 and 2). Until this date time and space were judged against the human-in-loop final. The research plans define the accuracy standard as the published high-precision catalogs and the official catalogs, and the final as the attainable result; the final also sits 0.95–1.37 km from the absolute-location reference in Magna and Kaikōura, so a run closer to the reference than the final could fail (`docs/research/progress/records/07_scoring_questions.md` item 3).
+
+| Change | Section |
+|---|---|
+| Origin-time bias and spread, horizontal shift and scatter, depth bias measured on the pairs with the primary L reference (`dt_median_s`, `dt_mad_s`, `shift_km`, `scatter_median_km`, `dz_median_km`); the comparison with the final is reported only | §7a |
+| Threshold `max(absolute value, the final's own offset from the same reference)` | §7a |
+| At least 30 matched pairs (`location_pairs`; `depth_pairs` for depth), else `insufficient` (not judged) | §7a |
+| Headline adds `dt_mad_s`, `location_pairs`, `depth_pairs` | §5 |
+
+All baselines, ladders and runs were re-scored with this definition on the same day.

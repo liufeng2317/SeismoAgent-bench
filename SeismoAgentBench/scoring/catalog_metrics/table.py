@@ -194,14 +194,15 @@ def build(tasks_root: Path) -> str:
                       [("outside region", "out_of_mask_fraction", _pct), ("union_support", "union_support", _fmt),
                        ("precision_final", "precision_final", _fmt), ("audited false rate", "audited_false_rate", _pct)])
     out += _dimension(cases, "5. Time",
-                      "Against the final: median signed origin-time difference and its MAD (seconds). Against the primary location reference: median |Δt|. Detection after large events: recall within 1 h after M ≥ 4 relative to all other times.",
-                      [("bias vs final (s)", "time_bias_final_s", _fmt), ("MAD vs final (s)", "time_mad_final_s", _fmt),
-                       ("\\|Δt\\| vs ref (s)", "dt_median_s", _fmt), ("after large / other", "after_large", _fmt)])
+                      "Judged against the primary absolute-location reference: median signed origin-time difference and its MAD (seconds), on the matched pairs (at least 30, else not judged). Against the human-in-loop final, for comparison: the same two. Detection after large events: recall within 1 h after M ≥ 4 relative to all other times.",
+                      [("bias vs ref (s)", "dt_median_s", _fmt), ("MAD vs ref (s)", "dt_mad_s", _fmt),
+                       ("bias vs final (s)", "time_bias_final_s", _fmt), ("MAD vs final (s)", "time_mad_final_s", _fmt),
+                       ("after large / other", "after_large", _fmt)])
     out += _dimension(cases, "6. Space",
-                      "Against the final: common horizontal shift, scatter about it, median depth difference (km, positive = deeper). Against the primary location reference: shift, scatter and depth difference. Structure: share of epicentres > r_off from every structure reference. Depth pile-up: largest share at one depth value.",
-                      [("shift vs final", "shift_final_km", _fmt), ("scatter vs final", "scatter_final_km", _fmt),
-                       ("dz vs final", "dz_final_km", _fmt), ("shift vs ref", "shift_km", _fmt),
-                       ("scatter vs ref", "scatter_median_km", _fmt), ("dz vs ref", "dz_median_km", _fmt),
+                      "Judged against the primary absolute-location reference: common horizontal shift, scatter about it, median depth difference (km, positive = deeper), on the matched pairs (at least 30, else not judged). Against the human-in-loop final, for comparison: the same three. Structure: share of epicentres > r_off from every structure reference. Depth pile-up: largest share at one depth value.",
+                      [("shift vs ref", "shift_km", _fmt), ("scatter vs ref", "scatter_median_km", _fmt),
+                       ("dz vs ref", "dz_median_km", _fmt), ("shift vs final", "shift_final_km", _fmt),
+                       ("scatter vs final", "scatter_final_km", _fmt), ("dz vs final", "dz_final_km", _fmt),
                        ("off structure", "off_structure_fraction", _pct), ("depth pile-up", "depth_mode_share", _pct)])
     out += _dimension(cases, "7. Strength",
                       "Against the magnitude authority (the operational catalog; Cochran for Prague): median and spread of the magnitude difference, its slope against magnitude (negative = compressed scale), b-value difference, recall of M ≥ 4 events.",
@@ -261,19 +262,19 @@ def build_overview(tasks_root: Path, output_dir: Path) -> str:
             else:
                 state = "completed" if r.extra.get("completed") else (r.extra.get("state") or "—")
                 row = [name, r.extra.get("variant") or "—", state, _verdict_word(r),
-                       r.cell("recall_final"), r.cell("time_bias_final_s"), r.cell("dz_final_km"), r.cell("shift_final_km"),
-                       r.cell("scatter_final_km"), r.cell("dmag_median"), r.cell("depth_mode_share"),
+                       r.cell("recall_final"), r.cell("dt_median_s"), r.cell("dz_median_km"), r.cell("shift_km"),
+                       r.cell("scatter_median_km"), r.cell("dmag_median"), r.cell("depth_mode_share"),
                        ", ".join((r.trust or {}).get("failed") or []) or "—", " · ".join(links) or "—"]
             (other if r.extra.get("rescue") else runs).append(row)
         other += [[name, e["run"], "excluded", e["reason"]] for e in excl]
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     out = ["# Results overview", "",
-           f"Generated {now} by `python -m SeismoAgentBench.scoring.catalog_metrics table` together with [`SCORE_TABLE.md`](SCORE_TABLE.md) (every metric, by dimension); do not edit by hand. A run is judged against the human-in-loop final of its case (catalog metrics v{METRICS_VERSION}, trusted-catalog standard §7a of `docs/framework/02_Catalog_Metrics.md`).",
+           f"Generated {now} by `python -m SeismoAgentBench.scoring.catalog_metrics table` together with [`SCORE_TABLE.md`](SCORE_TABLE.md) (every metric, by dimension); do not edit by hand. Time and space are judged against the case's primary absolute-location reference (a published high-precision catalog), magnitudes against the official catalog; the human-in-loop final is the attainable result and relaxes a threshold it would itself fail (catalog metrics v{METRICS_VERSION}, trusted-catalog standard §7a of `docs/framework/02_Catalog_Metrics.md`).",
            "", "## 1. Cases × configurations", "",
            "Latest formal run per cell: verdict · number of failed trusted-catalog criteria · recall against the final.", ""]
     out += _table(["Tier", "Case"] + list(VARIANTS), matrix) + [""]
     out += ["## 2. Runs", "",
-            "Values against the human-in-loop final; ✗ marks a value that fails its criterion. Δt origin time (s), Δz depth (km), shift = median horizontal offset (km), scatter = spread about it (km), Δmag against the primary magnitude reference, depth pile = share in the densest 1-km slice. Figures: the scorer's standard spatial comparison (reference, final, run on one extent) and offset diagnostics.", ""]
+            "Δt, Δz, shift and scatter against the primary absolute-location reference, recall against the human-in-loop final; ✗ marks a value that fails its criterion. Δt origin time (s), Δz depth (km), shift = median horizontal offset (km), scatter = spread about it (km), Δmag against the primary magnitude reference, depth pile = share in the densest 1-km slice. Figures: the scorer's standard spatial comparison (reference, final, run on one extent) and offset diagnostics.", ""]
     out += _table(["Case", "Config", "State", "Verdict", "Recall", "Δt", "Δz", "Shift", "Scatter", "Δmag", "Depth pile", "Failed criteria", "Figures"], runs) + [""]
     if other:
         out += ["## 3. Not formal results", "", "Reference-only rescues (outputs recovered outside work/) and runs excluded for a harness defect.", ""]

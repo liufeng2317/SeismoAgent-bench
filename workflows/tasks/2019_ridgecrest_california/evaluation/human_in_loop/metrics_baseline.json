@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "0e402ea030bfb6e5cb0418bb7af14877d71764f3",
- "scorer_dirty": false,
- "generated_utc": "2026-11-04T07:06:20+00:00",
+ "scorer_commit": "bb1fde88f5fe9e31576ff216bbba8ac5cee2e17a",
+ "scorer_dirty": true,
+ "generated_utc": "2026-11-05T05:17:16+00:00",
  "task": "2019_ridgecrest_california",
  "references": {
   "shelly": {
@@ -205,6 +205,7 @@
       "scatter_median_km": 0.1965,
       "scatter_p90_km": 0.5778,
       "dt_median_s": 0.14,
+      "dt_mad_s": 0.07,
       "epi_median_by_period_km": [
        0.2687,
        0.2707,
@@ -322,6 +323,7 @@
       "scatter_median_km": 0.3083,
       "scatter_p90_km": 0.7885,
       "dt_median_s": 0.091,
+      "dt_mad_s": 0.062,
       "epi_median_by_period_km": [
        0.4523,
        0.464,
@@ -535,6 +537,7 @@
       "scatter_median_km": 0.3656,
       "scatter_p90_km": 1.162,
       "dt_median_s": 0.1,
+      "dt_mad_s": 0.07,
       "epi_median_by_period_km": [
        0.3786,
        0.3514,
@@ -606,6 +609,7 @@
      "scatter_median_km": 0.2058,
      "scatter_p90_km": 0.7132,
      "dt_median_s": 0.26,
+     "dt_mad_s": 0.08,
      "epi_median_by_period_km": [
       0.4003,
       0.414,
@@ -1888,6 +1892,7 @@
       "scatter_median_km": 0.1965,
       "scatter_p90_km": 0.5778,
       "dt_median_s": 0.14,
+      "dt_mad_s": 0.07,
       "epi_median_by_period_km": [
        0.2687,
        0.2707,
@@ -2017,6 +2022,7 @@
       "scatter_median_km": 0.3237,
       "scatter_p90_km": 0.7816,
       "dt_median_s": 0.126,
+      "dt_mad_s": 0.045,
       "epi_median_by_period_km": [
        0.3193,
        0.3298,
@@ -2230,6 +2236,7 @@
       "scatter_median_km": 0.3524,
       "scatter_p90_km": 0.9933,
       "dt_median_s": 0.11,
+      "dt_mad_s": 0.04,
       "epi_median_by_period_km": [
        0.3955,
        0.3655,
@@ -2301,6 +2308,7 @@
      "scatter_median_km": 0.2656,
      "scatter_p90_km": 0.8688,
      "dt_median_s": 0.38,
+     "dt_mad_s": 0.04,
      "epi_median_by_period_km": [
       0.4669,
       0.478,
@@ -3717,6 +3725,7 @@
       "scatter_median_km": 0.3083,
       "scatter_p90_km": 0.7885,
       "dt_median_s": 0.091,
+      "dt_mad_s": 0.062,
       "epi_median_by_period_km": [
        0.4523,
        0.464,
@@ -3856,6 +3865,7 @@
       "scatter_median_km": 0.3237,
       "scatter_p90_km": 0.7816,
       "dt_median_s": 0.126,
+      "dt_mad_s": 0.045,
       "epi_median_by_period_km": [
        0.3193,
        0.3298,
@@ -4069,6 +4079,7 @@
       "scatter_median_km": 0.4525,
       "scatter_p90_km": 1.1068,
       "dt_median_s": 0.051,
+      "dt_mad_s": 0.032,
       "epi_median_by_period_km": [
        0.5557,
        0.5041,
@@ -4140,6 +4151,7 @@
      "scatter_median_km": 0.3739,
      "scatter_p90_km": 1.0274,
      "dt_median_s": 0.252,
+     "dt_mad_s": 0.053,
      "epi_median_by_period_km": [
       0.6678,
       0.7437,
@@ -5210,6 +5222,7 @@
       "scatter_median_km": 0.3905,
       "scatter_p90_km": 0.8737,
       "dt_median_s": 0.283,
+      "dt_mad_s": 0.083,
       "epi_median_by_period_km": [
        0.4643,
        0.5644,
@@ -5349,6 +5362,7 @@
       "scatter_median_km": 0.4238,
       "scatter_p90_km": 0.8432,
       "dt_median_s": 0.166,
+      "dt_mad_s": 0.043,
       "epi_median_by_period_km": [
        0.5496,
        0.5805,
@@ -5466,6 +5480,7 @@
       "scatter_median_km": 0.3507,
       "scatter_p90_km": 1.1231,
       "dt_median_s": 0.294,
+      "dt_mad_s": 0.051,
       "epi_median_by_period_km": [
        0.4279,
        0.4723,
@@ -5598,6 +5613,7 @@
       "scatter_median_km": 0.548,
       "scatter_p90_km": 1.1903,
       "dt_median_s": 0.271,
+      "dt_mad_s": 0.051,
       "epi_median_by_period_km": [
        0.6304,
        0.5899,
@@ -5669,6 +5685,7 @@
      "scatter_median_km": 0.5003,
      "scatter_p90_km": 1.1162,
      "dt_median_s": 0.5355,
+     "dt_mad_s": 0.0525,
      "epi_median_by_period_km": [
       0.835,
       0.8866,
@@ -6765,6 +6782,7 @@
       "scatter_median_km": 0.3656,
       "scatter_p90_km": 1.162,
       "dt_median_s": 0.1,
+      "dt_mad_s": 0.07,
       "epi_median_by_period_km": [
        0.3786,
        0.3514,
@@ -6904,6 +6922,7 @@
       "scatter_median_km": 0.3524,
       "scatter_p90_km": 0.9933,
       "dt_median_s": 0.11,
+      "dt_mad_s": 0.04,
       "epi_median_by_period_km": [
        0.3955,
        0.3655,
@@ -7021,6 +7040,7 @@
       "scatter_median_km": 0.4525,
       "scatter_p90_km": 1.1068,
       "dt_median_s": 0.051,
+      "dt_mad_s": 0.032,
       "epi_median_by_period_km": [
        0.5557,
        0.5041,
@@ -7166,6 +7186,7 @@
      "scatter_median_km": 0.4181,
      "scatter_p90_km": 1.4344,
      "dt_median_s": 0.27,
+     "dt_mad_s": 0.05,
      "epi_median_by_period_km": [
       0.5127,
       0.5837,
@@ -7333,6 +7354,7 @@
       "scatter_median_km": 0.2058,
       "scatter_p90_km": 0.7132,
       "dt_median_s": 0.26,
+      "dt_mad_s": 0.08,
       "epi_median_by_period_km": [
        0.4003,
        0.414,
@@ -7472,6 +7494,7 @@
       "scatter_median_km": 0.2656,
       "scatter_p90_km": 0.8688,
       "dt_median_s": 0.38,
+      "dt_mad_s": 0.04,
       "epi_median_by_period_km": [
        0.4669,
        0.478,
@@ -7589,6 +7612,7 @@
       "scatter_median_km": 0.3739,
       "scatter_p90_km": 1.0274,
       "dt_median_s": 0.252,
+      "dt_mad_s": 0.053,
       "epi_median_by_period_km": [
        0.6678,
        0.7437,
@@ -7802,6 +7826,7 @@
       "scatter_median_km": 0.4181,
       "scatter_p90_km": 1.4344,
       "dt_median_s": 0.27,
+      "dt_mad_s": 0.05,
       "epi_median_by_period_km": [
        0.5127,
        0.5837,
@@ -9196,6 +9221,9 @@
     "dz_median_km": -0.1005,
     "depth_datum_known": true,
     "dt_median_s": 0.26,
+    "dt_mad_s": 0.08,
+    "location_pairs": 6880,
+    "depth_pairs": 6850,
     "depth_mode_share": 0.0053,
     "depth_band_share": 0.1614,
     "off_structure_fraction": 0.0052,
@@ -9354,6 +9382,7 @@
       "scatter_median_km": 0.7548,
       "scatter_p90_km": 2.1411,
       "dt_median_s": 0.1902,
+      "dt_mad_s": 0.1108,
       "epi_median_by_period_km": [
        0.6664,
        0.7455,
@@ -9487,6 +9516,7 @@
       "scatter_median_km": 0.6859,
       "scatter_p90_km": 1.7107,
       "dt_median_s": 0.251,
+      "dt_mad_s": 0.1151,
       "epi_median_by_period_km": [
        0.6761,
        0.7376,
@@ -9604,6 +9634,7 @@
       "scatter_median_km": 0.7096,
       "scatter_p90_km": 2.1901,
       "dt_median_s": 0.157,
+      "dt_mad_s": 0.0917,
       "epi_median_by_period_km": [
        0.8687,
        0.8954,
@@ -9817,6 +9848,7 @@
       "scatter_median_km": 0.6893,
       "scatter_p90_km": 1.9309,
       "dt_median_s": 0.1682,
+      "dt_mad_s": 0.0943,
       "epi_median_by_period_km": [
        0.6614,
        0.6925,
@@ -9882,6 +9914,7 @@
      "scatter_median_km": 0.8457,
      "scatter_p90_km": 2.2646,
      "dt_median_s": 0.1358,
+     "dt_mad_s": 0.0914,
      "epi_median_by_period_km": [
       0.9467,
       1.075,
@@ -11223,6 +11256,9 @@
     "dz_median_km": -1.2329,
     "depth_datum_known": true,
     "dt_median_s": 0.1902,
+    "dt_mad_s": 0.1108,
+    "location_pairs": 5715,
+    "depth_pairs": 5715,
     "depth_mode_share": 0.1607,
     "depth_band_share": 0.2583,
     "off_structure_fraction": 0.0825,

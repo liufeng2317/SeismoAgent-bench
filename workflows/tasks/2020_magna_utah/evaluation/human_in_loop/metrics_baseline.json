@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "0e402ea030bfb6e5cb0418bb7af14877d71764f3",
- "scorer_dirty": false,
- "generated_utc": "2026-11-04T07:06:17+00:00",
+ "scorer_commit": "bb1fde88f5fe9e31576ff216bbba8ac5cee2e17a",
+ "scorer_dirty": true,
+ "generated_utc": "2026-11-05T05:17:14+00:00",
  "task": "2020_magna_utah",
  "references": {
   "pang": {
@@ -276,6 +276,7 @@
       "scatter_median_km": 0.4517,
       "scatter_p90_km": 1.0444,
       "dt_median_s": 0.071,
+      "dt_mad_s": 0.048,
       "epi_median_by_period_km": [
        0.4807,
        0.4695,
@@ -347,6 +348,7 @@
      "scatter_median_km": 0.474,
      "scatter_p90_km": 1.4165,
      "dt_median_s": 0.126,
+     "dt_mad_s": 0.073,
      "epi_median_by_period_km": [
       1.0817,
       1.0714,
@@ -777,6 +779,7 @@
       "scatter_median_km": 0.8633,
       "scatter_p90_km": 2.1291,
       "dt_median_s": 0.132,
+      "dt_mad_s": 0.075,
       "epi_median_by_period_km": [
        1.2869,
        1.3411,
@@ -916,6 +919,7 @@
       "scatter_median_km": 0.7635,
       "scatter_p90_km": 1.736,
       "dt_median_s": 0.14,
+      "dt_mad_s": 0.08,
       "epi_median_by_period_km": [
        1.3447,
        1.4239,
@@ -987,6 +991,7 @@
      "scatter_median_km": 0.9603,
      "scatter_p90_km": 2.2697,
      "dt_median_s": 0.192,
+     "dt_mad_s": 0.102,
      "epi_median_by_period_km": [
       1.0556,
       1.0951,
@@ -1489,6 +1494,7 @@
       "scatter_median_km": 0.4517,
       "scatter_p90_km": 1.0444,
       "dt_median_s": 0.071,
+      "dt_mad_s": 0.048,
       "epi_median_by_period_km": [
        0.4807,
        0.4695,
@@ -1676,6 +1682,7 @@
      "scatter_median_km": 0.5732,
      "scatter_p90_km": 1.4792,
      "dt_median_s": 0.1,
+     "dt_mad_s": 0.06,
      "epi_median_by_period_km": [
       1.2314,
       1.2197,
@@ -1854,6 +1861,7 @@
       "scatter_median_km": 0.474,
       "scatter_p90_km": 1.4165,
       "dt_median_s": 0.126,
+      "dt_mad_s": 0.073,
       "epi_median_by_period_km": [
        1.0817,
        1.0714,
@@ -2104,6 +2112,7 @@
       "scatter_median_km": 0.5732,
       "scatter_p90_km": 1.4792,
       "dt_median_s": 0.1,
+      "dt_mad_s": 0.06,
       "epi_median_by_period_km": [
        1.2314,
        1.2197,
@@ -2527,6 +2536,9 @@
     "dz_median_km": 0.0905,
     "depth_datum_known": true,
     "dt_median_s": 0.126,
+    "dt_mad_s": 0.073,
+    "location_pairs": 3326,
+    "depth_pairs": 3326,
     "depth_mode_share": 0.0115,
     "depth_band_share": 0.3359,
     "off_structure_fraction": 0.0031,
@@ -2736,6 +2748,7 @@
       "scatter_median_km": 0.8227,
       "scatter_p90_km": 1.7091,
       "dt_median_s": 0.3382,
+      "dt_mad_s": 0.1082,
       "epi_median_by_period_km": [
        1.3503,
        1.1967,
@@ -2980,6 +2993,7 @@
       "scatter_median_km": 0.7648,
       "scatter_p90_km": 1.5997,
       "dt_median_s": 0.3348,
+      "dt_mad_s": 0.1215,
       "epi_median_by_period_km": [
        1.31,
        1.2654,
@@ -3045,6 +3059,7 @@
      "scatter_median_km": 0.7418,
      "scatter_p90_km": 1.6726,
      "dt_median_s": 0.2474,
+     "dt_mad_s": 0.1253,
      "epi_median_by_period_km": [
       1.5697,
       1.4321,
@@ -3415,6 +3430,9 @@
     "dz_median_km": 0.4075,
     "depth_datum_known": true,
     "dt_median_s": 0.3382,
+    "dt_mad_s": 0.1082,
+    "location_pairs": 2006,
+    "depth_pairs": 2006,
     "depth_mode_share": 0.0178,
     "depth_band_share": 0.2756,
     "off_structure_fraction": 0.0044,

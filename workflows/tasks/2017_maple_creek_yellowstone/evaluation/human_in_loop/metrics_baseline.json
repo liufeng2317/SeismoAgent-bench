@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "0e402ea030bfb6e5cb0418bb7af14877d71764f3",
- "scorer_dirty": false,
- "generated_utc": "2026-11-04T07:06:22+00:00",
+ "scorer_commit": "bb1fde88f5fe9e31576ff216bbba8ac5cee2e17a",
+ "scorer_dirty": true,
+ "generated_utc": "2026-11-05T05:17:18+00:00",
  "task": "2017_maple_creek_yellowstone",
  "references": {
   "comcat": {
@@ -177,6 +177,7 @@
      "scatter_median_km": 0.6527,
      "scatter_p90_km": 1.6508,
      "dt_median_s": 0.0885,
+     "dt_mad_s": 0.0602,
      "epi_median_by_period_km": [
       1.0855,
       0.7091,
@@ -327,6 +328,7 @@
      "scatter_median_km": null,
      "scatter_p90_km": null,
      "dt_median_s": 0.1176,
+     "dt_mad_s": 0.0793,
      "epi_median_by_period_km": [
       null,
       null,
@@ -692,6 +694,7 @@
       "scatter_median_km": 0.6527,
       "scatter_p90_km": 1.6508,
       "dt_median_s": 0.0885,
+      "dt_mad_s": 0.0602,
       "epi_median_by_period_km": [
        1.0855,
        0.7091,
@@ -1165,6 +1168,9 @@
     "dz_median_km": 1.4631,
     "depth_datum_known": true,
     "dt_median_s": 0.0885,
+    "dt_mad_s": 0.0602,
+    "location_pairs": 614,
+    "depth_pairs": 614,
     "depth_mode_share": 0.0366,
     "depth_band_share": 0.4499,
     "off_structure_fraction": 0.0028,
@@ -1323,6 +1329,7 @@
       "scatter_median_km": 0.9898,
       "scatter_p90_km": 2.1917,
       "dt_median_s": 0.4711,
+      "dt_mad_s": 0.1253,
       "epi_median_by_period_km": [
        1.4167,
        1.1639,
@@ -1485,6 +1492,7 @@
      "scatter_median_km": 0.6492,
      "scatter_p90_km": 1.9542,
      "dt_median_s": 0.4837,
+     "dt_mad_s": 0.0565,
      "epi_median_by_period_km": [
       0.9752,
       0.9336,
@@ -1812,6 +1820,9 @@
     "dz_median_km": 0.8863,
     "depth_datum_known": true,
     "dt_median_s": 0.4711,
+    "dt_mad_s": 0.1253,
+    "location_pairs": 581,
+    "depth_pairs": 581,
     "depth_mode_share": 0.0321,
     "depth_band_share": 0.4469,
     "off_structure_fraction": 0.0335,
