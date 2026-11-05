@@ -28,7 +28,7 @@
 | B2 | 写知识 skill：小批量协议、候选取舍、症状手册、检查看不到的误差、震级资源 | `data/agent_resource/` | ✅ | 随 1.3 冻结 |
 | B3 | 把 checker 从工具库中分出，只给 checker 阶段 | 顶层 `seismo_checker/`、`CHECKER_PATH` | ✅ | 2026-11-05 |
 | B4 | 搭建完整流程的 S2c、S3 任务包 | 各案例 `prompt_checker.md`、`prompt_knowledge.md` 等 | ✅ | 2026-11-05，已过端到端测试 |
-| B5 | E1 checker 的可靠性：可达结果上的误报、误差已知目录上的检出、合成植入错误的检出 | 图 3、可靠性表 | 🟡 | 1.0 已检验（[01](progress/records/01_first_validation.md)）；合成回归测试每次改动都跑；用 1.3 重做并整理成图表未做 |
+| B5 | E1 checker 的可靠性：可达结果上的误报、误差已知目录上的检出、合成植入错误的检出 | 图 3、可靠性表 | ✅ | 1.3 预实验版（[14](progress/records/14_e1_reliability.md)，2026-11-05）；正式运行后复核 |
 | B6 | E2 后端消融：拾取和关联固定，比较"只有工具 / + checker / + checker 和知识" | 图 4 | 🟡 | 用 1.0、1.2 做过预实验（[04](progress/records/04_tier_b_backend.md)）；1.3 未做 |
 | B7 | 离线确定边界：哪些误差只靠自身数据看不到 | 检验记录、知识 skill 条目 | ✅ | 近地表、从数据建模型、水平偏移、模板匹配（[05](progress/records/05_near_surface_magnitude_matching.md)、[08](progress/records/08_velocity_from_data.md)、[09](progress/records/09_horizontal_shift.md)、[10](progress/records/10_template_threshold.md)） |
 | B8 | 冻结正式实验方案（§4） | 冻结的提交号 | ⬜ | §5 已决定，C5 已完成；可以冻结 |
