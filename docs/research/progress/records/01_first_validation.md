@@ -4,7 +4,7 @@
 
 ## 检验方法与结果（2026-10-30）
 
-**方法：** `workflows/development/tools_case_validation/validate_checker.py` 在两类目录上运行 checker：每个案例 human-in-loop 的定位轮次（组件替换所用轮次的拾取、关联和定位结果，应当基本干净，衡量误报），以及每个已完成的正式 Agent 运行（相对 final 的误差已知，见 [`progress/SCORE_TABLE.md`](../SCORE_TABLE.md)，衡量检出）。`--stages` 按阶段运行（数据阶段每个案例只跑一次，因为同一案例的运行输入相同），结果写入被忽略的 `outputs/checker_stages*`。可视化不参与检验，但会对代表目录生成，人工检查图是否清楚、样本选得是否有代表性。
+**方法：** `workflows/development/tools_case_validation/validate_checker.py` 在两类目录上运行 checker：每个案例 human-in-loop 的定位轮次（组件替换所用轮次的拾取、关联和定位结果，应当基本干净，衡量误报），以及每个已完成的正式 Agent 运行（相对 final 的误差已知，见 [`progress/scores/SCORE_TABLE.md`](../scores/SCORE_TABLE.md)，衡量检出）。`--stages` 按阶段运行（数据阶段每个案例只跑一次，因为同一案例的运行输入相同），结果写入被忽略的 `outputs/checker_stages*`。可视化不参与检验，但会对代表目录生成，人工检查图是否清楚、样本选得是否有代表性。
 
 **合成回归测试：** `seismo_checker/examples/smoke/run.sh` 生成 10 个台站、80 个事件、2 小时 50 Hz 的合成数据（含平坦速度响应的 StationXML），运行 14 个场景：每个阶段的干净输入不报警；混合采样率、预处理时移 0.3 s、拾取整体早 2.5 s、10 % 重复拾取、40 % 事件压在同一深度、震级偏 −3、重定位整体加深 2 km、重定位压到 4 个点、震级按 nm/mm 混用偏 −2.68（与复算一致的目录不报警），各自由预期的检查报警（其他阶段对同一错误的连带报警单独列出并允许）。全部通过，约 5 分钟。写测试时发现并修正了三个问题：S−P 很短时 S 的 AIC 搜索找到 P 初动；完全压缩的簇厚度为 0 时比值变成 NaN 而不报警；稀疏目录中泊松涨落被当成分层条带。
 
@@ -40,7 +40,7 @@
 
 ## 有效性分类（2026-10-31）
 
-**依据：** 最终版 checker（震级阶段，含拾取波形检查和震级复算）在 17 个目录上的结果：11 个 Agent 运行（第一轮正式运行全部，含 Ridgecrest、Kaikōura 的 min 和 tools）和 6 个 human-in-loop 目录（输出 `outputs/checker_v3`），逐项对照每个运行未通过的可信标准（[`progress/RESULTS_OVERVIEW.md`](../RESULTS_OVERVIEW.md)）。
+**依据：** 最终版 checker（震级阶段，含拾取波形检查和震级复算）在 17 个目录上的结果：11 个 Agent 运行（第一轮正式运行全部，含 Ridgecrest、Kaikōura 的 min 和 tools）和 6 个 human-in-loop 目录（输出 `outputs/checker_v3`），逐项对照每个运行未通过的可信标准（[`progress/scores/RESULTS_OVERVIEW.md`](../scores/RESULTS_OVERVIEW.md)）。
 
 **有效：报的是真问题，在接近 final 质量的目录上不误报。**
 

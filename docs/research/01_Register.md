@@ -4,7 +4,7 @@
 
 **最后更新：** 2026-11-05　**状态：** ✅ 完成　🟡 部分完成或只有预实验　⏳ 进行中　⬜ 未开始
 
-两条研究线：[计划 B：把地震学家的经验变成自动检验](./00_B_Research_Plan_Checker.md)（主线）；[计划 A：Agent 构建地震目录的基准](./00_A_Research_Plan_Benchmark.md)（备选）。预实验的结果见 [`progress/2026-11-05_results_summary.md`](./progress/2026-11-05_results_summary.md)。
+两条研究线：[计划 B：把地震学家的经验变成自动检验](./00_B_Research_Plan_Checker.md)（主线）；[计划 A：Agent 构建地震目录的基准](./00_A_Research_Plan_Benchmark.md)（备选）。预实验的结果见 [`progress/results_summary.md`](progress/results_summary.md)。
 
 ## 1. 共用基础
 
@@ -12,7 +12,7 @@
 |---|---|---|---|---|
 | C1 | 六个案例的波形和台站元数据：下载、补缺、整理成统一的输入 | 每个案例的任务包 `workflows/tasks/<case>/` | ✅ | Prague、Magna、Maple Creek、Kīlauea、Ridgecrest、Kaikōura |
 | C2 | 每个案例整理已发表的高精度目录和官方目录，规定各自承担的评估角色 | `evaluation/metrics.yaml` 中的参考目录和角色 | ✅ | |
-| C3 | 用工具加专家经验（human-in-loop）得到每个案例的可达结果 | 可达结果目录、专家阶梯 | ✅ | 2026-11-04 互相关重定位检验后定稿（[记录](progress/analyses/2026-11-04_hil_relocation.md)） |
+| C3 | 用工具加专家经验（human-in-loop）得到每个案例的可达结果 | 可达结果目录、专家阶梯 | ✅ | 2026-11-04 互相关重定位检验后定稿（[记录](progress/records/11_hil_relocation.md)） |
 | C4 | 评分方法：事件配对、偶然匹配校正、可信目录标准、完整性 | 评分器、[`03_Scoring_Method.md`](../framework/03_Scoring_Method.md) | ✅ | 指标 v2 及 2026-11-04 两项修正 |
 | C5 | 时间和空间判据改为相对已发表或官方目录计算（与研究计划一致），重算基线和已有分数 | 新版评分器 | ⬜ | 待决定（§5 第 1 项） |
 | C6 | 验证工具库：每个工具在各案例上的用法和结果 | `seismotools/`、`workflows/development/tools_case_validation/` | ✅ | HypoInverse、NonLinLoc 的深度基准约定已修正 |
@@ -28,14 +28,14 @@
 | B2 | 写知识 skill：小批量协议、候选取舍、症状手册、检查看不到的误差、震级资源 | `data/agent_resource/` | ✅ | 随 1.3 冻结 |
 | B3 | 把 checker 从工具库中分出，只给 checker 阶段 | 顶层 `seismo_checker/`、`CHECKER_PATH` | ✅ | 2026-11-05 |
 | B4 | 搭建完整流程的 S2c、S3 任务包 | 各案例 `prompt_checker.md`、`prompt_knowledge.md` 等 | ✅ | 2026-11-05，已过端到端测试 |
-| B5 | E1 checker 的可靠性：可达结果上的误报、误差已知目录上的检出、合成植入错误的检出 | 图 3、可靠性表 | 🟡 | 1.0 已检验（[01](./progress/checker_validation/01_first_validation.md)）；合成回归测试每次改动都跑；用 1.3 重做并整理成图表未做 |
-| B6 | E2 后端消融：拾取和关联固定，比较"只有工具 / + checker / + checker 和知识" | 图 4 | 🟡 | 用 1.0、1.2 做过预实验（[04](./progress/checker_validation/04_tier_b_backend.md)）；1.3 未做 |
-| B7 | 离线确定边界：哪些误差只靠自身数据看不到 | 检验记录、知识 skill 条目 | ✅ | 近地表、从数据建模型、水平偏移、模板匹配（[05](./progress/checker_validation/05_near_surface_magnitude_matching.md)、[08](./progress/checker_validation/08_velocity_from_data.md)、[09](./progress/checker_validation/09_horizontal_shift.md)、[10](./progress/checker_validation/10_template_threshold.md)） |
+| B5 | E1 checker 的可靠性：可达结果上的误报、误差已知目录上的检出、合成植入错误的检出 | 图 3、可靠性表 | 🟡 | 1.0 已检验（[01](progress/records/01_first_validation.md)）；合成回归测试每次改动都跑；用 1.3 重做并整理成图表未做 |
+| B6 | E2 后端消融：拾取和关联固定，比较"只有工具 / + checker / + checker 和知识" | 图 4 | 🟡 | 用 1.0、1.2 做过预实验（[04](progress/records/04_tier_b_backend.md)）；1.3 未做 |
+| B7 | 离线确定边界：哪些误差只靠自身数据看不到 | 检验记录、知识 skill 条目 | ✅ | 近地表、从数据建模型、水平偏移、模板匹配（[05](progress/records/05_near_surface_magnitude_matching.md)、[08](progress/records/08_velocity_from_data.md)、[09](progress/records/09_horizontal_shift.md)、[10](progress/records/10_template_threshold.md)） |
 | B8 | 冻结正式实验方案（§4） | 冻结的提交号 | ⬜ | 先完成 §5 的决定 |
 | B9 | E3 主实验：用现在的工具重跑 S1，每个案例 2 次 | 12 次运行及评分 | ⬜ | 先跑 Maple、Kīlauea |
 | B10 | E3 主实验：S3，每个案例 2 次 | 12 次运行及评分 | ⬜ | 与 B9 同时进行 |
 | B11 | S2c 消融（按需） | 每个案例 1 次 | ⬜ | 视 §5 第 4 项 |
-| B12 | E4 处置分析：报警、真修复、表面修复、证据不足的理由；checker 的使用时间线 | 图 6、处置统计 | 🟡 | 后端预实验已逐运行审计（[backend_audit](./progress/backend_audit/README.md)）；正式运行后做 |
+| B12 | E4 处置分析：报警、真修复、表面修复、证据不足的理由；checker 的使用时间线 | 图 6、处置统计 | 🟡 | 后端预实验已逐运行审计（[backend_audit](progress/records/backend_audit/README.md)）；正式运行后做 |
 | B13 | 规则来源表：每条检查和知识条目来自哪个案例 | 表格（冻结时登记） | ⬜ | 用于按"规则来源 / 非来源案例"分开报告 |
 | B14 | human-in-loop 干预编码：把专家流程的每项干预归为执行、方法选择、无参考诊断、依赖参考的诊断 | 编码表、图 8 的一部分 | ⬜ | |
 | B15 | 差距弥合和高精度判断的计算 | 图 5 | ⬜ | 依赖 C5、B9、B10 |

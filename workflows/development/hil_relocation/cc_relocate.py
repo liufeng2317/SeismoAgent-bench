@@ -3,7 +3,7 @@
 
 Most events of the human-in-loop finals are Match&Locate detections placed on their template's search grid
 (0.25 km horizontal, 0.5 km depth) and never relocated, and some finals keep unrelocated NonLinLoc cells; the
-catalogs look gridded (docs/research/progress/checker_validation and progress/2026-11-05_results_summary.md §1.1). This relocates
+catalogs look gridded (docs/research/progress/records and progress/results_summary.md §1.1). This relocates
 every event with waveform cross-correlation differential times:
 
   inputs    events of the final (depth below the model datum); arrivals: the event's own located picks for picked

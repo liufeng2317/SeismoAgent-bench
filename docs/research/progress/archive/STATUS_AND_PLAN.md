@@ -13,7 +13,7 @@ Living document: what is done, what runs, what comes next. The design is defined
 
 ### Scored runs (metrics v2)
 
-Every number for every case and run, by dimension: [`SCORE_TABLE.md`](../SCORE_TABLE.md); how each is computed: [`../03_Scoring_Method.md`](../../../framework/03_Scoring_Method.md).
+Every number for every case and run, by dimension: [`SCORE_TABLE.md`](../scores/SCORE_TABLE.md); how each is computed: [`../03_Scoring_Method.md`](../../../framework/03_Scoring_Method.md).
 
 Trusted-catalog verdict per dimension (✓ pass, ✗ fail, … audit pending) and completeness: recall_norm against the primary detection reference (final in brackets) and the share of the final's events the run recovers. No run reaches the trusted-catalog standard yet.
 

@@ -1,6 +1,6 @@
 # 评分方法
 
-本文按评分器的工作顺序，说明一个目录如何评分：从 Agent 提交的文件，到可信目录判定。本文可以单独阅读，也用作论文的评估一节。正式定义及全部门槛见 [`02_Catalog_Metrics.md`](02_Catalog_Metrics.md)（目录指标 v2）；每个案例、每次运行的当前数值见 [`progress/SCORE_TABLE.md`](../research/progress/SCORE_TABLE.md)。
+本文按评分器的工作顺序，说明一个目录如何评分：从 Agent 提交的文件，到可信目录判定。本文可以单独阅读，也用作论文的评估一节。正式定义及全部门槛见 [`02_Catalog_Metrics.md`](02_Catalog_Metrics.md)（目录指标 v2）；每个案例、每次运行的当前数值见 [`progress/scores/SCORE_TABLE.md`](../research/progress/scores/SCORE_TABLE.md)。
 
 ## 1. 评什么，以什么为参照
 
@@ -104,7 +104,7 @@ python -m SeismoAgentBench.scoring.catalog_metrics baseline --task-dir workflows
 python -m SeismoAgentBench evaluate --run-dir <run>                                            # one run: contract + catalog metrics
 python -m SeismoAgentBench.scoring.catalog_metrics swap --task-dir workflows/tasks/<case> --run-dir <run>
 python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir workflows/tasks/<case>    # per-configuration summary and exports
-python -m SeismoAgentBench.scoring.catalog_metrics table                                       # docs/research/progress/SCORE_TABLE.md
+python -m SeismoAgentBench.scoring.catalog_metrics table                                       # docs/research/progress/scores/SCORE_TABLE.md
 ```
 
 必须先对基线评分，再对运行评分，因为判定要从基线中读取最终目录自身的值。评分表只由已跟踪的导出文件生成；每评分一个运行后都要重新生成。

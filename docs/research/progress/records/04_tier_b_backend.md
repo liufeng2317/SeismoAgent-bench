@@ -1,6 +1,6 @@
 # 后端任务（B 层）结果（2026-11-01 至 11-03，6 个案例）
 
-从设计文档 [`../../02_Checker_Design.md`](../../02_Checker_Design.md) 迁出（2026-11-04）。逐运行的决策审计和单因素归因在 [`../backend_audit/`](../backend_audit/README.md)。
+从设计文档 [`../../02_Checker_Design.md`](../../02_Checker_Design.md) 迁出（2026-11-04）。逐运行的决策审计和单因素归因在 [`../backend_audit/`](backend_audit/README.md)。
 
 
 设计见 [`workflows/development/backend_tier_b/README.md`](../../../../workflows/development/backend_tier_b/README.md)：三个变体共用正式 tools 运行的拾取和关联，只做定位、相对定位和震级；`backend` 只有工具（看不到 checker），`backend_checker` 加 checker skill 和处置合同，`backend_knowledge` 再加知识 skill 和震级资源。每个变体每个案例只跑一次，结论是初步的。Ridgecrest、Kaikōura 在后台继续。
@@ -22,7 +22,7 @@
 3. **知识 skill 的流程被认真执行，但修不了先验模型。** Maple 知识变体：小批量发现台阶界面堆积后改用梯度、对堆积做 0.5/0.25/0.1 km 网格对照实验并改用 0.1 km、采纳前写下规则并用 `compare.py` 确认、HypoInverse 独立交叉验证并正确识别 +1.7 km 是基准面差异、无法约束的 10 个事件不发坐标并用 Wadati 估计发震时刻。但速度模型是它凭已有知识选的已发表黄石最小一维模型，结果深度 −2.50 km、时间 +1.18 s，与正式运行相同。改进方向：知识资源需要提供区域速度模型（像震级定标库一样，附基准面、层的表示方式和适用范围），知识替换实验已显示区域模型的梯度版本可把 Maple 深度偏差降到 −1.28 km（[02_replay_compare_pilot.md](02_replay_compare_pilot.md)）。
 4. **合成恢复测试不适合作误差上界（已从 1.1 中去掉，代码留在 `checker-1.1` 分支历史中）。** 以目录位置为真值、在一维备选模型（速度 ±5 %、Vp/Vs ±0.05、台阶/梯度互换、层顶 ±0.5 km、浅部 2 km ±20 %、低速表层、CRUST1.0、LITHO1.0）中正演再用原模型定位：Prague（实际 0.00 km）、Kīlauea（−0.06）落在给出的范围内，但 Magna（−1.59、−0.88、−3.05）和 Maple（−3.25、−1.28）都在范围之外。实际大偏差来自三维结构、台站项、系统性拾取误差和定位假象，一维扰动模拟不出。连"同一模型、仅拾取噪声"一项也没有合并，以免被当作误差估计。
 
-**决策审计与单因素归因（[`progress/backend_audit/`](../backend_audit/README.md)）。** 逐个运行审计决定、重新评分中间目录、正演合成走时，并用同一批拾取只换一个因素重定位：
+**决策审计与单因素归因（[`progress/records/backend_audit/`](backend_audit/README.md)）。** 逐个运行审计决定、重新评分中间目录、正演合成走时，并用同一批拾取只换一个因素重定位：
 
 - 时间和深度偏差几乎完全由近地表速度和基准面决定：Kīlauea knowledge 把区域模型顶面放在海平面（只改这一项复现 −0.37 s）；Magna 两个 checker 变体采用 checker 自带的 CRUST1.0（复现 +0.35 s）；Maple knowledge 用的已发表模型近地表太快（复现 +1.27 s）。Maple、Magna 单靠换模型无法同时通过时间和深度判据。
 - 不带 checker 的 `backend` 在 6 个案例中有 3 个犯了震级响应/单位错误（−1.43、−0.99、−0.98），带 checker 的两个变体 12 次运行 0 次——起作用的是 checker 与知识资源中的正确参考计算链，Agent 照用了它。

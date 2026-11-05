@@ -491,7 +491,7 @@ def magnitude_detection(d: Data, c: dict) -> Check:
 
 
 # Checks that measure correctly but did not separate correct from faulty catalogs in validation
-# (docs/research/02_Checker_Design.md §10, docs/research/progress/checker_validation/): reported, never flagged. The reasons are shown to the Agent,
+# (docs/research/02_Checker_Design.md §10, docs/research/progress/records/): reported, never flagged. The reasons are shown to the Agent,
 # so they stay general and name no case.
 REPORT_ONLY = {
     "travel_time_intercept": "velocity structure alone can give intercepts near a second in correct catalogs",

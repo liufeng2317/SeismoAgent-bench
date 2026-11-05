@@ -1,4 +1,4 @@
-# Single-factor attribution of the back-end audit (docs/research/progress/backend_audit/): the formal tools run's
+# Single-factor attribution of the back-end audit (docs/research/progress/records/backend_audit/): the formal tools run's
 # picks (the back-end arms' fixed front end), located the expert's way (EDT_OT_WT, reference elevation at the
 # stated datum), changing only the velocity model or its datum. Compare with velocity_swaps.yaml.
 defaults:

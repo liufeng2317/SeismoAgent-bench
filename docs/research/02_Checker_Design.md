@@ -1,6 +1,6 @@
 # Checker 设计文档
 
-状态（2026-11-05）：现行为 1.3（标签 `checker-v1.3`，与知识 skill 一起冻结），在 1.2 之上加了 Wadati 偏差的判定和区域接口；B 层后端运行用的是 1.0，统一测试试水用的是 1.2，下一轮统一测试用 1.3（§13）。本文写给研究者，只写 checker 现在是什么、为什么这样设计、得到了哪些经验；每一轮检验的方法、数据和读数记在 [`progress/checker_validation/`](progress/checker_validation/README.md)。给 Agent 看的工具说明是 `seismo_checker/README.md`，只说测什么和怎么用，不出现原因、修复方法或案例数据。研究设计见 [`00_B_Research_Plan_Checker.md`](00_B_Research_Plan_Checker.md) §3–§4（阶段划分见 [`00_A_Research_Plan_Benchmark.md`](00_A_Research_Plan_Benchmark.md) §3）；经验来源见 [`progress/expert_experience_evidence.md`](progress/analyses/expert_experience_evidence.md) §2。
+状态（2026-11-05）：现行为 1.3（标签 `checker-v1.3`，与知识 skill 一起冻结），在 1.2 之上加了 Wadati 偏差的判定和区域接口；B 层后端运行用的是 1.0，统一测试试水用的是 1.2，下一轮统一测试用 1.3（§13）。本文写给研究者，只写 checker 现在是什么、为什么这样设计、得到了哪些经验；每一轮检验的方法、数据和读数记在 [`progress/records/`](progress/records/README.md)。给 Agent 看的工具说明是 `seismo_checker/README.md`，只说测什么和怎么用，不出现原因、修复方法或案例数据。研究设计见 [`00_B_Research_Plan_Checker.md`](00_B_Research_Plan_Checker.md) §3–§4（阶段划分见 [`00_A_Research_Plan_Benchmark.md`](00_A_Research_Plan_Benchmark.md) §3）；经验来源见 [`progress/expert_experience_evidence.md`](progress/records/00_expert_experience_evidence.md) §2。
 
 ## 1. 定位与原则
 
@@ -129,7 +129,7 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 | `relocation_thinning` | 每个事件 20 个最近邻最小主轴标准差的中位数，前 ÷ 后 | ≤ 5 | 判定（population） | 合成"压到 4 个点"（模仿模板到时做双差）查出 |
 | `relocated_share` | 位置有变化的事件占重定位前已定位、且拾取 ≥ 8 个事件的比例 | — | 只报告（1.2） | 小事件常无法连接；它曾诱导 Agent 放宽连接门槛、使目录离散（§11 第 4 条） |
 
-hypoDD 和 GrowClust 都不读台站高程，所有台站在模型深度 0：目录深度以海平面为基准、台站在其上 1–3 km 时，要先把深度和模型换算到台站高程再换回（工具 README 和知识 skill 已写明；合成检验见 [`06`](progress/checker_validation/06_trial_and_tool_fixes.md)）。
+hypoDD 和 GrowClust 都不读台站高程，所有台站在模型深度 0：目录深度以海平面为基准、台站在其上 1–3 km 时，要先把深度和模型换算到台站高程再换回（工具 README 和知识 skill 已写明；合成检验见 [`06`](progress/records/06_trial_and_tool_fixes.md)）。
 
 **可视化：** `relocation_comparison.png`（前后并排的震中图和两个方向的剖面、位移矢量、位移和深度变化直方图）。
 
@@ -153,7 +153,7 @@ hypoDD 和 GrowClust 都不读台站高程，所有台站在模型深度 0：目
 
 ## 10. 有效性与边界
 
-**检验方法。** 在两类目录上运行 checker：每个案例 human-in-loop 的定位轮次（应当基本干净，衡量误报）和已完成的正式 Agent 运行（相对最终目录的误差已知，衡量检出）；合成回归测试（`seismo_checker/examples/smoke/run.sh`，14 个场景，每个阶段的干净输入不报警、每种植入错误由预期的检查报警，约 5 分钟）；离线重放（同一批拾取只换一个因素，判断 checker 和 `compare.py` 的结论是否正确）。各轮检验见 [`progress/checker_validation/`](progress/checker_validation/README.md)。
+**检验方法。** 在两类目录上运行 checker：每个案例 human-in-loop 的定位轮次（应当基本干净，衡量误报）和已完成的正式 Agent 运行（相对最终目录的误差已知，衡量检出）；合成回归测试（`seismo_checker/examples/smoke/run.sh`，14 个场景，每个阶段的干净输入不报警、每种植入错误由预期的检查报警，约 5 分钟）；离线重放（同一批拾取只换一个因素，判断 checker 和 `compare.py` 的结论是否正确）。各轮检验见 [`progress/records/`](progress/records/README.md)。
 
 **能可靠查出的（A 层：错误有结构，数据冗余足以判断）：**
 - 震级的单位、常数和仪器响应错误（复算、范围、检测距离、大事件震级）；
@@ -187,20 +187,20 @@ hypoDD 和 GrowClust 都不读台站高程，所有台站在模型深度 0：目
 
 ## 11. 主要经验
 
-1. **checker 稳定挡住了 A 层错误，但起作用的常是工具里正确的参考计算。** B 层中不带 checker 的变体 6 个案例有 3 个犯了震级响应或单位错误，带 checker 的两个变体 12 次运行 0 次；Agent 照用了 checker 的复算代码或知识资源里的参考实现，而不是被报警纠正（[`04`](progress/checker_validation/04_tier_b_backend.md)）。正确的参考实现本身就是有效的知识载体。
-2. **时间和深度偏差主要来自速度模型的近地表和基准面，这是 checker 的边界。** 单因素重定位复现了 B 层运行的主要偏差：模型顶面放在海平面（Kīlauea −0.37 s）、采用通用模型（Magna +0.35 s）、近地表太快的已发表模型（Maple +1.27 s）。不给区域模型时，数据只给方向不给水平：表层越慢越厚，Wadati 偏差越正，相关 −0.87 至 −1.00，但正确模型处的值因案例而异；三个案例里任何低速表层都修不好（[`05`](progress/checker_validation/05_near_surface_magnitude_matching.md)）。
-3. **检查和测量值不是选择标准。** 按最小的 Wadati 偏差、RMS、最浅深度比例、截距或 S−P 深度偏差挑速度模型，每一种都至少在一个案例上选错；B 层 Kaikōura 的 Agent 正是按 S−P 深度、截距和 Wadati 在通用模型中选了 iasp91，深度偏 +3.0 km（[`04`](progress/checker_validation/04_tier_b_backend.md)、[`05`](progress/checker_validation/05_near_surface_magnitude_matching.md)）。README 和知识 skill 都写明了这一点。
-4. **报警会诱导表面修复。** B 层有 4 次报警驱动的改动使结果变差：深度分层报警后台阶改梯度；S−P 深度报警后去掉台站校正、改 Vp/Vs；为提高移动比例放宽连接；`compare.py` 选中离散更大的参数。试水中，Agent 把正确的 S−P 深度报警解释为"拾取提前 1.7 s"，用同号的台站延迟吸收（[`06`](progress/checker_validation/06_trial_and_tool_fixes.md)）。对策是症状手册写明哪些改动不该做，并把只会诱导修改的检查降为只报告。
-5. **处置完整不等于处置正确。** 评分端的核对只能查每个报警有没有处置、`fixed` 是否属实、`justified` 有没有证据，判断不了理由是否成立；后者靠评分和决策审计。审计时要先确认偏差出在哪一步（Kaikōura 的例子一开始被归错，[`04`](progress/checker_validation/04_tier_b_backend.md)）。
-6. **小批量预测移动，不预测采纳结论。** 代表性小批量能推出目录会怎样移动（深度差 ≤ 0.3 km），但堆积、分层只在全量的弱事件里形成，比较结论推不到全量；记录最好的事件连移动方向都会反（[`02`](progress/checker_validation/02_replay_compare_pilot.md)）。由此有了 `scope` 和"小批量验证、全量判定"的协议。
-7. **定位程序的深度基准约定是隐蔽的系统误差源，修工具比教 Agent 可靠。** HypoInverse CRH 模型忽略台站高程（Maple 时间偏差 +0.56 s，CRE 后 −0.08 s）；NonLinLoc 接口的深度搜索默认从参考高程开始，浅部事件被压在搜索顶面；hypoDD 和 GrowClust 把所有台站放在模型深度 0（合成数据上相对误差大 5 倍）。前两项改了接口默认值，第三项写进文档（[`06`](progress/checker_validation/06_trial_and_tool_fixes.md)）。
-8. **checker 单独使用不如和知识结合。** 试水中，只有 checker 的 Agent 没取到已发表模型的数值，自拟了一个过慢的模型，结果最差（4 项不通过）；有知识的 Agent 从原图数字化同一模型、查明基准面，只剩 1 项（[`06`](progress/checker_validation/06_trial_and_tool_fixes.md)）。后续主实验用 checker + 知识，checker 单独版本只在需要消融时跑。
-9. **震级压缩来自测量方式和定标。** 只保留信噪比高的记录使小事件偏大 0.1–0.25、斜率陡 0.01–0.17；密集序列中的长窗也会压缩；剩下 0.04–0.12 是定标（C 层）。复算斜率不能升级为判定：标准复算本身也有压缩，而且 Agent 常直接沿用复算代码（[`05`](progress/checker_validation/05_near_surface_magnitude_matching.md)）。
-10. **评分口径本身也要检验。** 区域外事件比例把台网内真实的区域地震算作错误（提示词不写区域），改为按台站覆盖判定；震级斜率从 12 对算出也被判不通过，改为至少 30 对（[`07`](progress/checker_validation/07_scoring_questions.md)）。
+1. **checker 稳定挡住了 A 层错误，但起作用的常是工具里正确的参考计算。** B 层中不带 checker 的变体 6 个案例有 3 个犯了震级响应或单位错误，带 checker 的两个变体 12 次运行 0 次；Agent 照用了 checker 的复算代码或知识资源里的参考实现，而不是被报警纠正（[`04`](progress/records/04_tier_b_backend.md)）。正确的参考实现本身就是有效的知识载体。
+2. **时间和深度偏差主要来自速度模型的近地表和基准面，这是 checker 的边界。** 单因素重定位复现了 B 层运行的主要偏差：模型顶面放在海平面（Kīlauea −0.37 s）、采用通用模型（Magna +0.35 s）、近地表太快的已发表模型（Maple +1.27 s）。不给区域模型时，数据只给方向不给水平：表层越慢越厚，Wadati 偏差越正，相关 −0.87 至 −1.00，但正确模型处的值因案例而异；三个案例里任何低速表层都修不好（[`05`](progress/records/05_near_surface_magnitude_matching.md)）。
+3. **检查和测量值不是选择标准。** 按最小的 Wadati 偏差、RMS、最浅深度比例、截距或 S−P 深度偏差挑速度模型，每一种都至少在一个案例上选错；B 层 Kaikōura 的 Agent 正是按 S−P 深度、截距和 Wadati 在通用模型中选了 iasp91，深度偏 +3.0 km（[`04`](progress/records/04_tier_b_backend.md)、[`05`](progress/records/05_near_surface_magnitude_matching.md)）。README 和知识 skill 都写明了这一点。
+4. **报警会诱导表面修复。** B 层有 4 次报警驱动的改动使结果变差：深度分层报警后台阶改梯度；S−P 深度报警后去掉台站校正、改 Vp/Vs；为提高移动比例放宽连接；`compare.py` 选中离散更大的参数。试水中，Agent 把正确的 S−P 深度报警解释为"拾取提前 1.7 s"，用同号的台站延迟吸收（[`06`](progress/records/06_trial_and_tool_fixes.md)）。对策是症状手册写明哪些改动不该做，并把只会诱导修改的检查降为只报告。
+5. **处置完整不等于处置正确。** 评分端的核对只能查每个报警有没有处置、`fixed` 是否属实、`justified` 有没有证据，判断不了理由是否成立；后者靠评分和决策审计。审计时要先确认偏差出在哪一步（Kaikōura 的例子一开始被归错，[`04`](progress/records/04_tier_b_backend.md)）。
+6. **小批量预测移动，不预测采纳结论。** 代表性小批量能推出目录会怎样移动（深度差 ≤ 0.3 km），但堆积、分层只在全量的弱事件里形成，比较结论推不到全量；记录最好的事件连移动方向都会反（[`02`](progress/records/02_replay_compare_pilot.md)）。由此有了 `scope` 和"小批量验证、全量判定"的协议。
+7. **定位程序的深度基准约定是隐蔽的系统误差源，修工具比教 Agent 可靠。** HypoInverse CRH 模型忽略台站高程（Maple 时间偏差 +0.56 s，CRE 后 −0.08 s）；NonLinLoc 接口的深度搜索默认从参考高程开始，浅部事件被压在搜索顶面；hypoDD 和 GrowClust 把所有台站放在模型深度 0（合成数据上相对误差大 5 倍）。前两项改了接口默认值，第三项写进文档（[`06`](progress/records/06_trial_and_tool_fixes.md)）。
+8. **checker 单独使用不如和知识结合。** 试水中，只有 checker 的 Agent 没取到已发表模型的数值，自拟了一个过慢的模型，结果最差（4 项不通过）；有知识的 Agent 从原图数字化同一模型、查明基准面，只剩 1 项（[`06`](progress/records/06_trial_and_tool_fixes.md)）。后续主实验用 checker + 知识，checker 单独版本只在需要消融时跑。
+9. **震级压缩来自测量方式和定标。** 只保留信噪比高的记录使小事件偏大 0.1–0.25、斜率陡 0.01–0.17；密集序列中的长窗也会压缩；剩下 0.04–0.12 是定标（C 层）。复算斜率不能升级为判定：标准复算本身也有压缩，而且 Agent 常直接沿用复算代码（[`05`](progress/records/05_near_surface_magnitude_matching.md)）。
+10. **评分口径本身也要检验。** 区域外事件比例把台网内真实的区域地震算作错误（提示词不写区域），改为按台站覆盖判定；震级斜率从 12 对算出也被判不通过，改为至少 30 对（[`07`](progress/records/07_scoring_questions.md)）。
 11. **运行有效性要靠基础设施保证。** Agent 曾向共享评测环境装包，改为只能装进运行目录下的虚拟环境，并记录运行前后的环境指纹；Agent 多按 URL 而不是 DOI 访问文献，泄漏扫描分为扣留产品（命中即排除）和待审访问（人工核对）两层。
-12. **从数据建模型是可用的方法，但会失效，且失效时数据不报警。** 不给区域模型时，整列缩放加台站校正、按残差选，在 Kīlauea、Kaikōura、Maple、Prague 改善了时间或深度，在 Ridgecrest 没变化，在 Magna 使深度偏深 1.9–6.6 km；台站校正和深度一起漂移，阻尼不能阻止。唯一的无参考警示是残差最小值落在合理速度范围之外（只见于 Magna），样本太少，不能作为检查；写进知识 skill，作为带保护条件的建模方法，并要求报告残差附近各模型的深度范围（[`08`](progress/checker_validation/08_velocity_from_data.md)）。
-13. **水平偏移来自台站延迟和最终目录的框架，不来自前端。** 逐项替换显示，换成专家拾取最多改变 0.26 km、限定台站组合不到 0.04 km；Kaikōura、Maple 加上台站延迟后偏移从 1.5–3.0 km 降到 0.2–0.5 km；Magna、Ridgecrest 的最终目录框架来自双差重定位，单靠绝对定位复现不了（差 2.3、0.85 km）。整批平移在没有参考时看不出来，所以只写进知识，不加检查（[`09`](progress/checker_validation/09_horizontal_shift.md)）。
-14. **检测差距主要是没有用模板匹配，不是门槛。** 去掉模板匹配，最终目录只剩 8–56 % 的事件、归一化召回 0.72–0.98（有模板匹配时 0.99–1.85）；六个 tools 运行中五个没把模板匹配检测加进目录（Ridgecrest 跑了全量只作核对）。零假设检验在六个案例上都给出 9.5；门槛从 9.5 提到 10 代价很小，提到 16.3 丢掉 36–79 % 的事件。漏检在产品里看不出，只写进知识（[`10`](progress/checker_validation/10_template_threshold.md)）。
+12. **从数据建模型是可用的方法，但会失效，且失效时数据不报警。** 不给区域模型时，整列缩放加台站校正、按残差选，在 Kīlauea、Kaikōura、Maple、Prague 改善了时间或深度，在 Ridgecrest 没变化，在 Magna 使深度偏深 1.9–6.6 km；台站校正和深度一起漂移，阻尼不能阻止。唯一的无参考警示是残差最小值落在合理速度范围之外（只见于 Magna），样本太少，不能作为检查；写进知识 skill，作为带保护条件的建模方法，并要求报告残差附近各模型的深度范围（[`08`](progress/records/08_velocity_from_data.md)）。
+13. **水平偏移来自台站延迟和最终目录的框架，不来自前端。** 逐项替换显示，换成专家拾取最多改变 0.26 km、限定台站组合不到 0.04 km；Kaikōura、Maple 加上台站延迟后偏移从 1.5–3.0 km 降到 0.2–0.5 km；Magna、Ridgecrest 的最终目录框架来自双差重定位，单靠绝对定位复现不了（差 2.3、0.85 km）。整批平移在没有参考时看不出来，所以只写进知识，不加检查（[`09`](progress/records/09_horizontal_shift.md)）。
+14. **检测差距主要是没有用模板匹配，不是门槛。** 去掉模板匹配，最终目录只剩 8–56 % 的事件、归一化召回 0.72–0.98（有模板匹配时 0.99–1.85）；六个 tools 运行中五个没把模板匹配检测加进目录（Ridgecrest 跑了全量只作核对）。零假设检验在六个案例上都给出 9.5；门槛从 9.5 提到 10 代价很小，提到 16.3 丢掉 36–79 % 的事件。漏检在产品里看不出，只写进知识（[`10`](progress/records/10_template_threshold.md)）。
 
 ## 12. 在实验中的用法
 
@@ -223,7 +223,7 @@ hypoDD 和 GrowClust 都不读台站高程，所有台站在模型深度 0：目
 
 **同期的相关修改（不在 checker 内）：** HypoInverse 接口 v2 默认 CRE 模型；NonLinLoc 接口深度搜索默认从台站平均高程开始；hypoDD、GrowClust 的深度基准写入文档；运行环境只允许在运行目录下的虚拟环境装包；泄漏扫描分两层；评分的震级斜率至少 30 对、`inside_region` 按台站覆盖判定；知识 skill 的近地表方法、从数据建最小一维模型、震级压缩、模型数值必须有来源、不用台站延迟吸收共同偏移、模板匹配门槛。
 
-**评估过但没有加的检查：** 合成恢复测试（一维扰动给出的范围在 Magna、Maple 上都不包含真实偏差）；尾波漏检扫描（主震后几分钟内 STA/LTA 无法触发）；按最小 |S−P 深度偏差| 在换模型时排序（判错增多）；复算斜率作判定（与评分不一致）；模板匹配阶段的检查（问题是漏检和不用，从产品看不出；[`10`](progress/checker_validation/10_template_threshold.md) 量化了门槛和不用的代价）。
+**评估过但没有加的检查：** 合成恢复测试（一维扰动给出的范围在 Magna、Maple 上都不包含真实偏差）；尾波漏检扫描（主震后几分钟内 STA/LTA 无法触发）；按最小 |S−P 深度偏差| 在换模型时排序（判错增多）；复算斜率作判定（与评分不一致）；模板匹配阶段的检查（问题是漏检和不用，从产品看不出；[`10`](progress/records/10_template_threshold.md) 量化了门槛和不用的代价）。
 
 **待办：**
 1. 下一轮统一测试：先用最少的运行回答"新知识和工具修复是否有效"（例如 Maple 一次 checker + 知识），再决定规模。

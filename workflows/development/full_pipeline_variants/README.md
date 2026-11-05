@@ -1,6 +1,6 @@
 # Full-pipeline checker arms (S2c, S3)
 
-The formal comparison runs the whole pipeline: picking, association, template matching, location, relocation and magnitudes (decided 2026-11-05; the detection gap sits in the front end, which the back-end tier keeps fixed, `docs/research/progress/checker_validation/10_template_threshold.md`). `build_full_variants.py` builds two arms of every case from its tools arm:
+The formal comparison runs the whole pipeline: picking, association, template matching, location, relocation and magnitudes (decided 2026-11-05; the detection gap sits in the front end, which the back-end tier keeps fixed, `docs/research/progress/records/10_template_threshold.md`). `build_full_variants.py` builds two arms of every case from its tools arm:
 
 | Arm | Stage | Adds over the arm above | Contract | Use |
 |---|---|---|---|---|
