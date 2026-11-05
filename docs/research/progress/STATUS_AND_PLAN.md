@@ -1,13 +1,13 @@
 # Status and work plan
 
-Living document: what is done, what runs, what comes next. The design is defined in the [research plan](../00_Research_Plan_Benchmark.md); the paper's claims are in the [paper outline](../02_Paper_Outline.md). Weekly summaries are kept next to this file (`YYYY-MM-DD_progress_summary.md`).
+Living document: what is done, what runs, what comes next. The design is defined in the [research plan](../00_A_Research_Plan_Benchmark.md); the paper's claims are in the [paper outline](../01_Register.md). Weekly summaries are kept next to this file (`YYYY-MM-DD_progress_summary.md`).
 
 ## 1. Status (2026-10-30)
 
 - **Metrics v2** (2026-10-30, [`02_Catalog_Metrics.md`](../../framework/02_Catalog_Metrics.md) §12). The Maple Creek runs showed that v1's headline hid a scattered `min` catalog and a biased `tools` catalog. v2 sets primary gates at 2 s / 5 km (Kaikōura 4 s / 15 km), corrects every match for chance, compares every catalog directly with the human-in-loop final, adds tight-gate recall, origin time and out-of-region share to the headline, and gives each run a trusted-catalog verdict on four dimensions — event reality, time, space, strength — with completeness against the final reported apart (§7a). All baselines, ladders, runs and swaps were re-scored; single scoring path `python -m SeismoAgentBench evaluate` (catalog-metrics@1).
 - **Human-in-loop baselines.** Final and blind rows in each `evaluation/human_in_loop/metrics_baseline.json` (v2); Agent runs are compared with the final only; expert ladder re-scored per case.
-- **Zero-cost analyses.** Expert ladder and component swap — [`01_Research_Plan_Checker.md`](../01_Research_Plan_Checker.md).
-- **Agent stages.** S0 `min` and S1 `tools` implemented; S2 `knowledge` and S3 `checker` designed ([research plan](../00_Research_Plan_Benchmark.md) §3 and the [checker plan](../01_Research_Plan_Checker.md) §3), not implemented.
+- **Zero-cost analyses.** Expert ladder and component swap — [`00_B_Research_Plan_Checker.md`](../00_B_Research_Plan_Checker.md).
+- **Agent stages.** S0 `min` and S1 `tools` implemented; S2 `knowledge` and S3 `checker` designed ([research plan](../00_A_Research_Plan_Benchmark.md) §3 and the [checker plan](../00_B_Research_Plan_Checker.md) §3), not implemented.
 - **Formal runs** (Claude Code × GLM-5.3, one per case and stage): Prague, Magna, Maple Creek and Kīlauea S0/S1 scored; Kaikōura `min` running; Kaikōura `tools` re-launched 2026-10-29 18:39 UTC after the first attempt was excluded (harness defect: the prompt sat on the Claude process's argv and the Agent's `kill -9` by pattern matched its own session; the runner now passes the prompt on stdin; metrics §11); Ridgecrest queued, with the fixed runner. The four earlier Ridgecrest/Magna runs predate the output conventions and remain development runs.
 - **Framework.** Task definitions, input mapping, Agent execution through adapters, run records and the external scorer are documented in [`docs/framework/`](../../framework/).
 
@@ -34,7 +34,7 @@ Component swap (Agent picks, expert locator): the back-end errors largely disapp
 
 | Phase | Work | Runs | Estimate |
 |---|---|---:|---|
-| A (now) | finish S0/S1 on six cases (Prague, Magna, Maple Creek, Kīlauea scored; Kaikōura running; then Ridgecrest); swap, blind audit (labels for Maple Creek and Kīlauea), second-rater check. In parallel without compute: tier table (research plan §2.2), intervention coding (`01_Research_Plan_Checker.md` §7) | 4 left | ~1 week, single queue, 5–8 h per run |
+| A (now) | finish S0/S1 on six cases (Prague, Magna, Maple Creek, Kīlauea scored; Kaikōura running; then Ridgecrest); swap, blind audit (labels for Maple Creek and Kīlauea), second-rater check. In parallel without compute: tier table (research plan §2.2), intervention coding (`00_B_Research_Plan_Checker.md` §7) | 4 left | ~1 week, single queue, 5–8 h per run |
 | B | build the checker CLI (symptoms only) and validate it on the human-in-loop catalogs and the scored S0/S1 runs before freezing its thresholds; the knowledge skill; skill delivery in the runner; checker contract and scorer verification; debug on a pilot run (not counted) | 0 formal | 4–6 days |
 | C | first S2c `checker` (tools + checker, no knowledge) on six cases, then S2 `knowledge` and S3 `knowledge_checker`; S1 repeats on Prague and Magna; second model S1/S3 on three cases | ~30 | ~9–10 days single queue |
 | D | analysis, figures, writing | — | — |

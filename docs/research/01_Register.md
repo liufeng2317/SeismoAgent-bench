@@ -1,6 +1,6 @@
 # 论文大纲
 
-状态：大纲于 2026-10-29 确定；2026-11-04 改为中文，并加入当前结果汇总（§4）、进度（§5）和预注册分析计划（§6）。本文写论文要回答的问题、每个论点需要的证据、章节和图的安排。所依赖的设计（案例分级、Agent 阶段、知识和 checker 的形式、对照）定义在[研究计划](./00_Research_Plan_Benchmark.md)；状态和工作计划在 `[progress/STATUS_AND_PLAN.md](./progress/STATUS_AND_PLAN.md)`；checker 的设计和检验在 `[04_Checker_Design.md](./04_Checker_Design.md)` 和 `[progress/checker_validation/](./progress/checker_validation/README.md)`。
+状态：大纲于 2026-10-29 确定；2026-11-04 改为中文，并加入当前结果汇总（§4）、进度（§5）和预注册分析计划（§6）。本文写论文要回答的问题、每个论点需要的证据、章节和图的安排。所依赖的设计（案例分级、Agent 阶段、知识和 checker 的形式、对照）定义在[研究计划](./00_A_Research_Plan_Benchmark.md)；状态和工作计划在 `[progress/STATUS_AND_PLAN.md](./progress/STATUS_AND_PLAN.md)`；checker 的设计和检验在 `[04_Checker_Design.md](./04_Checker_Design.md)` 和 `[progress/checker_validation/](./progress/checker_validation/README.md)`。
 
 ## 1. 目标与核心问题
 
@@ -8,11 +8,11 @@
 
 论文分四部分回答：
 
-1. **分级案例。** 六个案例，从基础到困难，覆盖诱发地震、震群、火山、中强和大型主震–余震序列，以及复杂多断层环境（[研究计划](./00_Research_Plan_Benchmark.md) §2）。
+1. **分级案例。** 六个案例，从基础到困难，覆盖诱发地震、震群、火山、中强和大型主震–余震序列，以及复杂多断层环境（[研究计划](./00_A_Research_Plan_Benchmark.md) §2）。
 2. **工具。** 经过验证的工具库给通用 Agent 带来什么（S0 → S1）。
 3. **知识。** 事先给出、与案例无关的专家知识在工具之上还能带来什么（S1 → S2）。
 4. **改进 Agent 目录。**
-  - *human-in-loop 迭代*：human-in-loop 最终目录是上限；对每次人工干预编码，说明哪些可以自动化（`[01_Research_Plan_Checker.md](./01_Research_Plan_Checker.md)` §7）。
+  - *human-in-loop 迭代*：human-in-loop 最终目录是上限；对每次人工干预编码，说明哪些可以自动化（`[00_B_Research_Plan_Checker.md](./00_B_Research_Plan_Checker.md)` §7）。
   - *把专家经验变成自动检验*：在 Agent 自己的产物上运行不依赖参考目录的 checker，要求 Agent 回到上游修复（S2 → S3），并度量它弥合了 S1 到最终目录之间多少差距。
 
 

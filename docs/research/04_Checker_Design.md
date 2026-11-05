@@ -1,6 +1,6 @@
 # Checker 设计文档
 
-状态（2026-11-05）：现行为 1.3（标签 `checker-v1.3`，与知识 skill 一起冻结），在 1.2 之上加了 Wadati 偏差的判定和区域接口；B 层后端运行用的是 1.0，统一测试试水用的是 1.2，下一轮统一测试用 1.3（§13）。本文写给研究者，只写 checker 现在是什么、为什么这样设计、得到了哪些经验；每一轮检验的方法、数据和读数记在 [`progress/checker_validation/`](progress/checker_validation/README.md)。给 Agent 看的工具说明是 `seismo_checker/README.md`，只说测什么和怎么用，不出现原因、修复方法或案例数据。研究设计见 [`01_Research_Plan_Checker.md`](01_Research_Plan_Checker.md) §3–§4（阶段划分见 [`00_Research_Plan_Benchmark.md`](00_Research_Plan_Benchmark.md) §3）；经验来源见 [`progress/expert_experience_evidence.md`](progress/expert_experience_evidence.md) §2。
+状态（2026-11-05）：现行为 1.3（标签 `checker-v1.3`，与知识 skill 一起冻结），在 1.2 之上加了 Wadati 偏差的判定和区域接口；B 层后端运行用的是 1.0，统一测试试水用的是 1.2，下一轮统一测试用 1.3（§13）。本文写给研究者，只写 checker 现在是什么、为什么这样设计、得到了哪些经验；每一轮检验的方法、数据和读数记在 [`progress/checker_validation/`](progress/checker_validation/README.md)。给 Agent 看的工具说明是 `seismo_checker/README.md`，只说测什么和怎么用，不出现原因、修复方法或案例数据。研究设计见 [`00_B_Research_Plan_Checker.md`](00_B_Research_Plan_Checker.md) §3–§4（阶段划分见 [`00_A_Research_Plan_Benchmark.md`](00_A_Research_Plan_Benchmark.md) §3）；经验来源见 [`progress/expert_experience_evidence.md`](progress/expert_experience_evidence.md) §2。
 
 ## 1. 定位与原则
 
@@ -183,7 +183,7 @@ hypoDD 和 GrowClust 都不读台站高程，所有台站在模型深度 0：目
 | `rate_after_largest` | 从未报警，数值无意义 |
 | `b_value` | 并入 `b_positive` 的细节（final 自己低于原门槛） |
 
-**循环性：** 检查规则和门槛都是在这六个案例上总结和校准的（例如 Wadati 偏差的 1.5 s 门槛来自试水运行）。报告 S2c、S3 结果时，按"规则来源于该案例 / 不来源于该案例"分开统计（[`01_Research_Plan_Checker.md`](01_Research_Plan_Checker.md) §4），并用不参与校准的保留案例检验门槛。
+**循环性：** 检查规则和门槛都是在这六个案例上总结和校准的（例如 Wadati 偏差的 1.5 s 门槛来自试水运行）。报告 S2c、S3 结果时，按"规则来源于该案例 / 不来源于该案例"分开统计（[`00_B_Research_Plan_Checker.md`](00_B_Research_Plan_Checker.md) §4），并用不参与校准的保留案例检验门槛。
 
 ## 11. 主要经验
 

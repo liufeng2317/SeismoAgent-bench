@@ -2,7 +2,7 @@
 
 The six Phase I cases: their role, difficulty tier, frozen evaluation window and primary references. This is the one place for these facts; per-case data and literature are in [`01_Case_Data_Inventory.md`](01_Case_Data_Inventory.md), candidate cases beyond these six in [`02_Case_Pool.md`](02_Case_Pool.md), and what each case record must contain in [`preparation/01_Case_Record_Standard.md`](preparation/01_Case_Record_Standard.md).
 
-Sources: evaluation windows are half-open UTC intervals in each task's `workflows/tasks/<case>/expert/00_config/validation.yaml`; primary references and their roles are in `workflows/tasks/<case>/evaluation/metrics.yaml` and [`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md) §3; difficulty tiers are defined in the [research plan](../research/00_Research_Plan_Benchmark.md) §2.
+Sources: evaluation windows are half-open UTC intervals in each task's `workflows/tasks/<case>/expert/00_config/validation.yaml`; primary references and their roles are in `workflows/tasks/<case>/evaluation/metrics.yaml` and [`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md) §3; difficulty tiers are defined in the [research plan](../research/00_A_Research_Plan_Benchmark.md) §2.
 
 | Case ID | Case | Regime | Difficulty tier | Evaluation window (UTC) | Primary detection reference | Primary location reference | Main role | Case analysis |
 |---|---|---|---|---|---|---|---|---|

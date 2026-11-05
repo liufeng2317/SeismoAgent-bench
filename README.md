@@ -70,7 +70,7 @@ The central question is:
 | S3 `checker` | a reference-free checker and repair playbook | designed |
 | upper bound | the human-in-loop final catalog | done for all six cases |
 
-Every run is scored with catalog metrics v2: detection, location, structure and magnitude against several references and directly against the human-in-loop final, plus a trusted-catalog verdict on event reality, time, space and strength (accuracy and stability), with completeness reported apart. Design: [`docs/research/00_Research_Plan_Benchmark.md`](docs/research/00_Research_Plan_Benchmark.md); metrics: [`docs/framework/02_Catalog_Metrics.md`](docs/framework/02_Catalog_Metrics.md).
+Every run is scored with catalog metrics v2: detection, location, structure and magnitude against several references and directly against the human-in-loop final, plus a trusted-catalog verdict on event reality, time, space and strength (accuracy and stability), with completeness reported apart. Design: [`docs/research/00_A_Research_Plan_Benchmark.md`](docs/research/00_A_Research_Plan_Benchmark.md); metrics: [`docs/framework/02_Catalog_Metrics.md`](docs/framework/02_Catalog_Metrics.md).
 
 ## Phase I cases
 
@@ -163,9 +163,9 @@ Phase I has six cases with archived references, extraction records, catalog audi
 ## Documentation
 
 - [Documentation index](docs/README.md)
-- [Research plan](docs/research/00_Research_Plan_Benchmark.md)
-- [Expert experience and checker](docs/research/01_Research_Plan_Checker.md)
-- [Paper outline](docs/research/02_Paper_Outline.md)
+- [Research plan](docs/research/00_A_Research_Plan_Benchmark.md)
+- [Expert experience and checker](docs/research/00_B_Research_Plan_Checker.md)
+- [Paper outline](docs/research/01_Register.md)
 - [Status and work plan](docs/research/progress/STATUS_AND_PLAN.md)
 - [Case registry](docs/data/00_Case_Registry.md)
 - [Candidate case pool](docs/data/02_Case_Pool.md)
