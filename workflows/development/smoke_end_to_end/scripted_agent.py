@@ -23,7 +23,7 @@ from pathlib import Path
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--source-run", type=Path, required=True, help="completed run directory whose products are submitted")
-    ap.add_argument("--checker", type=Path, required=True, help="seismotools/checker")
+    ap.add_argument("--checker", type=Path, required=True, help="seismo_checker")
     a = ap.parse_args()
     inp, out = Path(os.environ["BENCH_INPUT"]), Path(os.environ["BENCH_OUTPUT"])
     (out / "smoke").mkdir(parents=True, exist_ok=True)

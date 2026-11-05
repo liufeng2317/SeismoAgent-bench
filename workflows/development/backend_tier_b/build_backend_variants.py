@@ -27,8 +27,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[3]
 TASKS = ROOT / "workflows/tasks"
 TOOLS = ROOT / "seismotools"
-# the backend arm sees the tools without the checker (one factor per arm): a view with every tool but the checker
-TOOLS_WITHOUT_CHECKER = Path(__file__).resolve().parent / "tool_views/without_checker"
+CHECKER = ROOT / "seismo_checker"  # the catalog checker, not part of seismotools (moved 2026-11-05)
 RESOURCE = ROOT / "data/agent_resource"
 FRONT_END_RUNS = {  # the formal tools run whose front end is reused
     "2011_prague_oklahoma": "tools/claude/glm-5.3/20261028T043719Z",
@@ -51,12 +50,12 @@ The tools base directory is TOOLS_BASE_PATH=`{tools}/`. The supplied implementat
 
 CHECKER_SECTION = """### Catalog checker
 
-A reference-free catalog checker is provided at `TOOLS_BASE_PATH/checker/`. Read the skill `input/catalog-checker/SKILL.md` before you start: it says what the checker measures, when to run it, and what the output contract requires (the checker report on the submitted products and a disposition for every flag).
+A reference-free catalog checker is provided at CHECKER_PATH=`{checker}/`. Read the skill `input/catalog-checker/SKILL.md` before you start: it says what the checker measures, when to run it, and what the output contract requires (the checker report on the submitted products and a disposition for every flag).
 """
 
 KNOWLEDGE_SECTION = """### Catalog checker and knowledge
 
-A reference-free catalog checker is provided at `TOOLS_BASE_PATH/checker/`. Two skills are under `input/agent_resource/skills/`; read each `SKILL.md` before you start and the files it points to when they apply:
+A reference-free catalog checker is provided at CHECKER_PATH=`{checker}/`. Two skills are under `input/agent_resource/skills/`; read each `SKILL.md` before you start and the files it points to when they apply:
 
 - `catalog-checker/SKILL.md`: what the checker measures, when to run it, and what the output contract requires (the checker report on the submitted products and a disposition for every flag);
 - `catalog-knowledge/SKILL.md`: how to test on a pilot batch before the full run, how to decide between two candidate products, what each checker symptom can mean and which experiment separates the causes, and which errors no check can see.
@@ -119,11 +118,11 @@ def prompt(case: str, arm: str) -> str:
             f"Process the half-open window `{window}`; the catalog reports events with origin time inside it.", "",
             "The picks are fixed: do not add picks or change pick times. You may reject picks (status `rejected`, kept in the file) and "
             "reject events (status `rejected`); every submitted pick keeps its `pick_id`, and every event keeps its `event_id`.", "",
-            TOOLS_SECTION.format(tools=TOOLS_WITHOUT_CHECKER if arm == "backend" else TOOLS)]
+            TOOLS_SECTION.format(tools=TOOLS)]
     if arm == "backend_checker":
-        text.append(CHECKER_SECTION)
+        text.append(CHECKER_SECTION.format(checker=CHECKER))
     if arm == "backend_knowledge":
-        text.append(KNOWLEDGE_SECTION)
+        text.append(KNOWLEDGE_SECTION.format(checker=CHECKER))
     out = outputs.rstrip()
     if arm != "backend":
         out = out.replace("Write the following machine-readable files under the output directory.",

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the catalog checker (seismotools/checker) on human-in-loop catalogs and scored Agent runs.
+"""Validate the catalog checker (seismo_checker) on human-in-loop catalogs and scored Agent runs.
 
 For each case it runs the checker on
 - the human-in-loop located catalog of the picks round used for the component
@@ -26,7 +26,7 @@ import pandas as pd
 import yaml
 
 ROOT = Path(__file__).resolve().parents[3]
-CHECKER = ROOT / "seismotools/checker/interface/run.py"
+CHECKER = ROOT / "seismo_checker/interface/run.py"
 OUT = Path(__file__).resolve().parent / "outputs/checker"
 CASES = ["2011_prague_oklahoma", "2020_magna_utah", "2017_maple_creek_yellowstone", "2018_kilauea_hawaii",
          "2019_ridgecrest_california", "2016_kaikoura_new_zealand"]

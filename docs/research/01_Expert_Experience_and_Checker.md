@@ -125,7 +125,7 @@ Checks that did **not** work and should not be in a checker: an RMS onset test f
 
 1. The checker must be reference-free and case-agnostic (rules and ranges, no case-specific numbers), and its use logged, so a checker arm does not become a leakage channel.
 2. The checker was learned on these six cases. Report checker-arm results separately for the cases a rule came from and the others, or hold out cases when writing it, so the gain is not circular.
-3. The checker's form must not change the Agent: diagnostics are a deterministic tool in `seismotools/checker/`, the knowledge and the playbook are an Agent Skill, and the contract requires the checker report with a disposition per flag. No custom loop and no subagent ([research plan](./00_Research_Plan.md) §2.5).
+3. The checker's form must not change the Agent: diagnostics are a deterministic tool in `seismo_checker/`, the knowledge and the playbook are an Agent Skill, and the contract requires the checker report with a disposition per flag. No custom loop and no subagent ([research plan](./00_Research_Plan.md) §2.5).
 4. Some expert gains are reference-informed (Ridgecrest layered frame from Shelly's model; Magna ML recalibration against UUSS). Agent runs are compared with the final (the upper bound), and the ladder separates these steps from what an Agent could have known.
 5. Every run gets the component swap: front-end versus back-end attribution is the most direct test of what a checker would have fixed.
 

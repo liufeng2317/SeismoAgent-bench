@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
-CHECKER = ROOT / "seismotools/checker/interface/run.py"
+CHECKER = ROOT / "seismo_checker/interface/run.py"
 REPORT = "checker/final/checker_report.json"
 DISPOSITIONS = "checker/dispositions.json"
 
@@ -43,7 +43,7 @@ def _sha256(path: Path) -> str | None:
 
 def checker_version() -> str | None:
     try:
-        return subprocess.run(["git", "-C", str(ROOT), "log", "-1", "--format=%H", "--", "seismotools/checker"],
+        return subprocess.run(["git", "-C", str(ROOT), "log", "-1", "--format=%H", "--", "seismo_checker"],
                               capture_output=True, text=True, check=True).stdout.strip() or None
     except (OSError, subprocess.CalledProcessError):
         return None

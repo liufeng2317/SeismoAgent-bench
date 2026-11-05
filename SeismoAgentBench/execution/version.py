@@ -53,6 +53,7 @@ def probe_executable_version(
 
 
 SEISMOTOOLS = Path(__file__).resolve().parents[2] / "seismotools"
+SEISMO_CHECKER = Path(__file__).resolve().parents[2] / "seismo_checker"  # the catalog checker (not part of seismotools)
 
 
 def tools_snapshot(tools_dir: Path = SEISMOTOOLS, *, timeout: float = 10.0) -> dict[str, object]:

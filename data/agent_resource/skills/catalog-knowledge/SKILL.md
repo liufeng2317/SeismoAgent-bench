@@ -5,7 +5,7 @@ description: Procedural knowledge for building an earthquake catalog from contin
 
 # Catalog knowledge
 
-This skill holds what an analyst knows before looking at the data: how to organise the work so that long computations are not wasted, and how to turn checker symptoms into decisions. It complements the tools in `seismotools/` (the checker is `seismotools/checker/interface/run.py`, with `compare.py` and `pilot.py` beside it). Read only the file you need.
+This skill holds what an analyst knows before looking at the data: how to organise the work so that long computations are not wasted, and how to turn checker symptoms into decisions. It complements the tools in `TOOLS_BASE_PATH` and the checker in `CHECKER_PATH` (`interface/run.py`, with `compare.py` and `pilot.py` beside it). Read only the file you need.
 
 | When | Read |
 |---|---|

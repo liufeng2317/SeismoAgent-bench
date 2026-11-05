@@ -4,7 +4,7 @@ Picking, association, location, relocation and template matching over weeks of c
 
 ## 1. Pilot level: is the code right, and what will a change do?
 
-Choose the batch with `seismotools/checker/interface/pilot.py`, not by hand:
+Choose the batch with `CHECKER_PATH/interface/pilot.py`, not by hand:
 
 - before any catalog exists (picking and association settings): `pilot.py windows --waveforms ... --stations ... [--picks first_pass_picks.csv] --extract`;
 - once a first catalog exists (velocity model, locator, relocation, magnitude code): `pilot.py events --catalog ... --picks ...`.

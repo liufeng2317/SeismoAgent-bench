@@ -40,11 +40,11 @@ def _validate_declared_schema(item: Mapping[str, Any], path: Path) -> None:
         missing = sorted(required - fields)
         if missing:
             raise ValueError(f"missing CSV columns: {', '.join(missing)}")
-    elif name == "seismotools-checker-report" and version == 1:
+    elif name in ("seismo-checker-report", "seismotools-checker-report") and version == 1:  # old name: runs before 2026-11-05
         # structure only; the checker audit (catalog_metrics/checker_audit.py) re-runs the checker and judges the content
         value = json.loads(path.read_text(encoding="utf-8"))
         if not isinstance(value, dict) or not isinstance(value.get("flags"), list) or "report_version" not in value:
-            raise ValueError("expected a checker_report.json written by seismotools/checker (report_version and a flags list)")
+            raise ValueError("expected a checker_report.json written by seismo_checker (report_version and a flags list)")
     elif name == "checker-dispositions" and version == 1:
         # structure only; whether each flag is disposed of, and how, is reported by the checker audit
         value = json.loads(path.read_text(encoding="utf-8"))

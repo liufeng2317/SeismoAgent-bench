@@ -14,7 +14,7 @@
 
 Four sources were read in full: Küperkoch, Meier & Diehl, NMSOP-2 Ch. 16; Münchmeyer et al. 2022; Stehly et al. 2007; and the metric code of MUSTANG/ISPAQ (nine metric functions). Ten sources were read in part: Hable et al. 2018, Naranjo et al. 2024, Lin, Shearer & Hauksson 2008, Hutton et al. 2010, Mousavi et al. 2020 (EQTransformer), Zhu & Beroza (PhaseNet preprint), Woollam et al. (Durrës preprint), Liu & Tan (Blanco OBS preprint), Bornstein et al. (PickBlue preprint) and Zhao et al. 2025. Lin & Shearer 2007 was skimmed. About 15 further sources are [A] or [S]. Numbers from [A] or [S] sources are marked as such in the tables, and §5 lists them for the user to download.
 
-**Our checker, as of this date** (`seismotools/checker/source/catalog_checker`).
+**Our checker, as of this date** (`seismo_checker/source/catalog_checker`).
 - Data stage: stations_with_data, daily_station_count (low-day fraction 0.5), network_geometry, channel_sample_rates, data_gaps (channel-day coverage at least 0.9; at most 5 % of channel-days below that), processing_time_shift (|median lag| of processed vs zero-phase-filtered raw at most 0.1 s), and representative energetic windows.
 - Picks stage: silent_stations (at most 10 %), station_day_gaps (at most 5 %), duplicate_picks (same station and phase within 0.3 s; at most 2 %), s_to_p_ratio (at least 0.3), pick_onset_offset (AIC onset vs pick, P only, at most 0.2 s, on picks with onset SNR of at least 3), pick_snr (report-only, low at 2), station residual outliers (0.5 s, at least 20 picks; report-only) and azimuthal residual pattern (0.25 s; report-only).
 

@@ -20,9 +20,9 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[3]
-CHECKER = ROOT / "seismotools/checker/interface/run.py"
+CHECKER = ROOT / "seismo_checker/interface/run.py"
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "seismotools/checker/source"))
+sys.path.insert(0, str(ROOT / "seismo_checker/source"))
 
 from SeismoAgentBench.scoring.catalog_metrics.case import SEA_LEVEL_MARKER, final_headline, headline, load_case  # noqa: E402
 from SeismoAgentBench.scoring.catalog_metrics.metrics import ceilings, score_population  # noqa: E402
@@ -231,7 +231,7 @@ def pilot_events(run: Run, rule: str, n: int, seed: int = 0) -> list[str]:
         return list(ev.sort_values(["n", "time"], ascending=[False, True]).event_id[:n])
     if rule == "random":
         return list(ev.event_id.sample(n, random_state=seed))
-    if rule == "composite":  # seismotools/checker pilot.py: representative + busiest hour + largest events
+    if rule == "composite":  # seismo_checker pilot.py: representative + busiest hour + largest events
         from catalog_checker.pilot import select_events
         parts = select_events(d.events, d.picks, {"events": n, "seed": seed})
         return parts["representative"] + parts["busiest"] + parts["largest"]

@@ -35,7 +35,7 @@ Start every location problem by reading `depth_constraint` in the checker report
 
 **`isolated_events` — events far from all others.** Tier B: false associations (check their picks: few picks, picks from distant stations only), events outside the network with poor geometry (gap > 180°), or real isolated seismicity. Large events must not be removed by a location-quality rule: the largest events are often isolated early in a sequence and have the worst geometry for their first picks.
 
-**`events_beyond_stations` (reported) — events outside the station coverage.** `seismotools/checker/interface/region.py` lists them (and, with `--region`, the events outside a study region given in the task). Beyond the network an event is seen from one side only: its distance and depth trade off and errors are large. In recorded catalogs, events more than about 10 km outside the station hull almost never belonged to the sequence studied. Real seismicity can lie outside; locations there have large, elongated errors in the direction away from the network. Report them with their errors; do not shift them.
+**`events_beyond_stations` (reported) — events outside the station coverage.** `CHECKER_PATH/interface/region.py` lists them (and, with `--region`, the events outside a study region given in the task). Beyond the network an event is seen from one side only: its distance and depth trade off and errors are large. In recorded catalogs, events more than about 10 km outside the station hull almost never belonged to the sequence studied. Real seismicity can lie outside; locations there have large, elongated errors in the direction away from the network. Report them with their errors; do not shift them.
 
 ## Relative relocation (double difference, cluster-based)
 

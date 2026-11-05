@@ -52,7 +52,7 @@
       "kind": "checker_report",
       "required": true,
       "schema": {
-        "name": "seismotools-checker-report",
+        "name": "seismo-checker-report",
         "version": 1
       }
     },

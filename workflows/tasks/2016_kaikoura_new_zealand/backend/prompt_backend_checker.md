@@ -20,7 +20,7 @@ The tools base directory is TOOLS_BASE_PATH=`/liufeng1afs/project/03_LLM/Science
 
 ### Catalog checker
 
-A reference-free catalog checker is provided at `TOOLS_BASE_PATH/checker/`. Read the skill `input/catalog-checker/SKILL.md` before you start: it says what the checker measures, when to run it, and what the output contract requires (the checker report on the submitted products and a disposition for every flag).
+A reference-free catalog checker is provided at CHECKER_PATH=`/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismo_checker/`. Read the skill `input/catalog-checker/SKILL.md` before you start: it says what the checker measures, when to run it, and what the output contract requires (the checker report on the submitted products and a disposition for every flag).
 
 ### Required outputs
 

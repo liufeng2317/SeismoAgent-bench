@@ -284,7 +284,7 @@ footer { font-size: 12px; color: var(--muted); }
     <div class="panel">
       <h3>两层，都是放进环境的文件</h3>
       <ul>
-        <li><b>诊断</b>：确定性的命令行工具 <span class="mono">seismotools/checker/</span>，读 Agent 自己的拾取和目录，输出 <span class="mono">checker_report.json</span>。里面没有 LLM，不会把异常解释掉。</li>
+        <li><b>诊断</b>：确定性的命令行工具 <span class="mono">seismo_checker/</span>，读 Agent 自己的拾取和目录，输出 <span class="mono">checker_report.json</span>。里面没有 LLM，不会把异常解释掉。</li>
         <li><b>知识和修复经验</b>：Agent Skill（<span class="mono">SKILL.md</span> + 参考文件）。不支持 skill 的 Agent 从 prompt 链接同样的文件。</li>
         <li><b>唯一的强制</b>：输出约定要求附报告和处置；评分时重跑 checker 核对。不写自定义循环。</li>
       </ul>

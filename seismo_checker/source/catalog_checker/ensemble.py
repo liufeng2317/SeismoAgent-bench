@@ -24,7 +24,7 @@ import pandas as pd
 from .checks import Check, Data, _skip
 from .velocity import regional_models, with_vpvs
 
-LOCATE = Path(__file__).resolve().parents[3] / "nonlinloc/interface/locate.py"
+LOCATE = Path(__file__).resolve().parents[3] / "seismotools/nonlinloc/interface/locate.py"  # the shared tool library
 ENSEMBLE_DEFAULTS = {"ensemble_events": 100, "ensemble_min_phases": 8, "ensemble_min_s": 2,
                      "ensemble_depth_margin_km": 1.0, "ensemble_time_margin_s": 0.3,
                      "ensemble_outside_share_max": 0.5, "ensemble_workers": 8, "ensemble_timeout_s": 3600}

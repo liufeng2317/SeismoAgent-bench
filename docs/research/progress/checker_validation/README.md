@@ -15,4 +15,4 @@
 | [`09_horizontal_shift.md`](09_horizontal_shift.md) | 2026-11-05 | 水平偏移的逐项替换：拾取和台站组合几乎不贡献；Kaikōura、Maple 来自台站延迟，Magna、Ridgecrest 来自最终目录的双差框架；只写进知识，不加检查（评分口径问题在 07 第 3 条） |
 | [`10_template_threshold.md`](10_template_threshold.md) | 2026-11-05 | 模板匹配的门槛、误检与召回：零假设检验在六个案例都给出 9.5；去掉模板匹配，最终目录只剩 8–56 % 的事件；五个 tools 运行没有把模板匹配检测加进目录 |
 
-检验用到的工具：`workflows/development/tools_case_validation/validate_checker.py`（在 human-in-loop 轮次和正式运行上跑 checker）、`seismotools/checker/examples/smoke/run.sh`（合成回归测试）、`workflows/development/replay/`（离线重放和诊断脚本）、`workflows/development/backend_tier_b/`（B 层后端任务）、`workflows/development/scoring_migrations/`（评分规则改动后对已存分数重判）。输出目录都不纳入版本库。
+检验用到的工具：`workflows/development/tools_case_validation/validate_checker.py`（在 human-in-loop 轮次和正式运行上跑 checker）、`seismo_checker/examples/smoke/run.sh`（合成回归测试）、`workflows/development/replay/`（离线重放和诊断脚本）、`workflows/development/backend_tier_b/`（B 层后端任务）、`workflows/development/scoring_migrations/`（评分规则改动后对已存分数重判）。输出目录都不纳入版本库。

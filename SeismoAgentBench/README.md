@@ -25,6 +25,7 @@ SeismoAgentBench/
 | `workflows/data_preparation/` | 下载、解析、抽取和目录审计的批处理入口 |
 | `data/<case>/` | 资料、来源证据、案例专属脚本与生成的核验结果 |
 | `seismotools/` | 提供给 Agent 和 expert 流程的专业地震工具 |
+| `seismo_checker/` | 无参考的目录检查器（本项目的贡献，不属于 seismotools；只提供给 checker 阶段） |
 | 根目录 `tests/` | 按功能域维护的回归测试，规则见 [tests/AGENTS.md](../tests/AGENTS.md) |
 
 根包和子包的 `__init__.py` 不在导入时加载数据或执行核验；专业逻辑按领域建模块，不预先创建空模块。

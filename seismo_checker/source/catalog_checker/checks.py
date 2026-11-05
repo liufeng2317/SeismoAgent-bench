@@ -117,7 +117,7 @@ def events_beyond_stations(d: Data, c: dict) -> Check:
     beyond = dist > c["coverage_buffer_km"]
     return Check("events_beyond_stations", "reality", float(beyond.mean()), "share", expected, len(e), False, None,
                  {"events_beyond": int(beyond.sum()), "median_km_outside_of_those": round(float(np.median(dist[beyond])), 1) if beyond.any() else None,
-                  "aperture_km": cov["aperture_km"], "note": "seismotools/checker/interface/region.py lists the events and writes the coverage"})
+                  "aperture_km": cov["aperture_km"], "note": "interface/region.py of the checker lists the events and writes the coverage"})
 
 
 def isolated_events(d: Data, c: dict) -> Check:

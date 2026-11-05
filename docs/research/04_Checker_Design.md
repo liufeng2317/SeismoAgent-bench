@@ -1,6 +1,6 @@
 # Checker 设计文档
 
-状态（2026-11-05）：现行为 1.3（标签 `checker-v1.3`，与知识 skill 一起冻结），在 1.2 之上加了 Wadati 偏差的判定和区域接口；B 层后端运行用的是 1.0，统一测试试水用的是 1.2，下一轮统一测试用 1.3（§13）。本文写给研究者，只写 checker 现在是什么、为什么这样设计、得到了哪些经验；每一轮检验的方法、数据和读数记在 [`progress/checker_validation/`](progress/checker_validation/README.md)。给 Agent 看的工具说明是 `seismotools/checker/README.md`，只说测什么和怎么用，不出现原因、修复方法或案例数据。研究设计中的位置见 [`00_Research_Plan.md`](00_Research_Plan.md) §2.4–2.5；经验来源见 [`01_Expert_Experience_and_Checker.md`](01_Expert_Experience_and_Checker.md) §3。
+状态（2026-11-05）：现行为 1.3（标签 `checker-v1.3`，与知识 skill 一起冻结），在 1.2 之上加了 Wadati 偏差的判定和区域接口；B 层后端运行用的是 1.0，统一测试试水用的是 1.2，下一轮统一测试用 1.3（§13）。本文写给研究者，只写 checker 现在是什么、为什么这样设计、得到了哪些经验；每一轮检验的方法、数据和读数记在 [`progress/checker_validation/`](progress/checker_validation/README.md)。给 Agent 看的工具说明是 `seismo_checker/README.md`，只说测什么和怎么用，不出现原因、修复方法或案例数据。研究设计中的位置见 [`00_Research_Plan.md`](00_Research_Plan.md) §2.4–2.5；经验来源见 [`01_Expert_Experience_and_Checker.md`](01_Expert_Experience_and_Checker.md) §3。
 
 ## 1. 定位与原则
 
@@ -35,7 +35,7 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 
 `--stage all` 运行给定输入允许的全部检查。每个阶段同时运行它之前各阶段中用已有输入就能做的检查；两个耗时的部分只在各自阶段运行：代表时窗扫描只在 data（和 all）；模型组默认关闭，只在 location（或 all）阶段加 `--model-ensemble` 时运行（每个目录 10–45 分钟，只报告）。提交时，输出约定要求附上对最终目录运行全部阶段的报告和每个报警的处置记录。模板匹配新增的事件进入第 3–4 阶段的检查；专门针对模板检测的检查评估后没有加（§13）。
 
-配套工具（都在 `seismotools/checker/interface/`）：
+配套工具（都在 `seismo_checker/interface/`）：
 
 | 工具 | 用途 |
 |---|---|
@@ -112,7 +112,7 @@ checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 
 | `station_delays` | 每台 P、S 中位残差及其比值 δS/δP（时钟型约 1，路径型约 Vp/Vs） | — | 只报告（归因） | human-in-loop 目录也有 0–5 个时钟型台站 |
 | `model_ensemble_depth`、`model_ensemble_time` | 默认关闭。100 个记录最好的事件用 6 个通用模型重新定位，报告目录相对整组解的位置和各模型间的离散 | — | 只报告 | 通用模型间深度差 3–19 km、时间差 0.25–1.3 s，大于大多数真实误差；作为对模型敏感程度的信息 |
 
-通用模型的来源和区域提取方法见 `seismotools/checker/runtime/velocity_models/README.md`：取台站和事件中心所在格点的剖面，按到各自固体地表的深度做慢度平均。
+通用模型的来源和区域提取方法见 `seismo_checker/runtime/velocity_models/README.md`：取台站和事件中心所在格点的剖面，按到各自固体地表的深度做慢度平均。
 
 **可视化：** `checker_diagnostics.png`（震中图、深度直方图、P 走时–震源距图、Wadati 发震时刻差直方图）；`location_sections.png`（东西和南北深度剖面、台站中位 P 残差地图）；`location_model_ensemble.png`（开启模型组时）。
 
@@ -153,7 +153,7 @@ hypoDD 和 GrowClust 都不读台站高程，所有台站在模型深度 0：目
 
 ## 10. 有效性与边界
 
-**检验方法。** 在两类目录上运行 checker：每个案例 human-in-loop 的定位轮次（应当基本干净，衡量误报）和已完成的正式 Agent 运行（相对最终目录的误差已知，衡量检出）；合成回归测试（`seismotools/checker/examples/smoke/run.sh`，14 个场景，每个阶段的干净输入不报警、每种植入错误由预期的检查报警，约 5 分钟）；离线重放（同一批拾取只换一个因素，判断 checker 和 `compare.py` 的结论是否正确）。各轮检验见 [`progress/checker_validation/`](progress/checker_validation/README.md)。
+**检验方法。** 在两类目录上运行 checker：每个案例 human-in-loop 的定位轮次（应当基本干净，衡量误报）和已完成的正式 Agent 运行（相对最终目录的误差已知，衡量检出）；合成回归测试（`seismo_checker/examples/smoke/run.sh`，14 个场景，每个阶段的干净输入不报警、每种植入错误由预期的检查报警，约 5 分钟）；离线重放（同一批拾取只换一个因素，判断 checker 和 `compare.py` 的结论是否正确）。各轮检验见 [`progress/checker_validation/`](progress/checker_validation/README.md)。
 
 **能可靠查出的（A 层：错误有结构，数据冗余足以判断）：**
 - 震级的单位、常数和仪器响应错误（复算、范围、检测距离、大事件震级）；
@@ -204,7 +204,7 @@ hypoDD 和 GrowClust 都不读台站高程，所有台站在模型深度 0：目
 
 ## 12. 在实验中的用法
 
-- **S2c（工具 + checker）：** checker skill（`data/agent_resource/skills/catalog-checker/SKILL.md`）说明工具存在、每个阶段测什么、何时运行，以及合同：提交 `work/checker/final/checker_report.json`（在提交的目录上运行）和 `work/checker/dispositions.json`（每个报警一条 `fixed`：改了什么、报警出现在哪份报告；或 `justified`：证据）。工具说明在 `seismotools/checker/README.md`，包括 `compare.py`、`pilot.py`、`region.py`；不提供原因或修复方法。合同文件为各案例的 `output_contract_checker.json`（后端变体在 `tasks/<case>/backend/`）。
+- **S2c（工具 + checker）：** checker skill（`data/agent_resource/skills/catalog-checker/SKILL.md`）说明工具存在、每个阶段测什么、何时运行，以及合同：提交 `work/checker/final/checker_report.json`（在提交的目录上运行）和 `work/checker/dispositions.json`（每个报警一条 `fixed`：改了什么、报警出现在哪份报告；或 `justified`：证据）。工具说明在 `seismo_checker/README.md`，包括 `compare.py`、`pilot.py`、`region.py`；不提供原因或修复方法。合同文件为各案例的 `output_contract_checker.json`（后端变体在 `tasks/<case>/backend/`）。
 - **S3（工具 + 知识 + checker）：** 另有知识 skill（`data/agent_resource/skills/catalog-knowledge/`）：小批量协议、两个候选间的决定与对照实验、按 A/B/C 三层的症状手册、checker 看不到的问题（速度模型的基准面、常速层与梯度、不用区域模型时如何约束近地表、定位程序的深度基准；震级定标和压缩；主震尾波），以及震级资源（`data/agent_resource/magnitude/`）。所有案例都不提供具体速度模型（2026-11-03 决定）。
 - **消融：** 只做 checker 对比 checker + 知识，且只在需要回答具体问题时、用能回答问题的最少运行；B 层已有的 `backend` 和 `backend_checker` 运行作为基线复用。
 - **评分：** `SeismoAgentBench/scoring/catalog_metrics/checker_audit.py` 用运行时的 checker 版本在提交的文件上重跑，核对报告是否针对提交文件（SHA-256）、报警是否一致、每个报警有无处置、`fixed` 是否属实、`justified` 有无证据，并统计 Agent 运行 checker 的次数；处置记录的列表和以 `flag_id` 为键的对象两种写法都能读（`03_Scoring_Method.md` §2.7a）。
@@ -218,6 +218,8 @@ hypoDD 和 GrowClust 都不读台站高程，所有台站在模型深度 0：目
 | 1.1 | 2026-11-03（标签 `checker-v1.1`） | 检查不变；README 写明自带模型和公式只作对照；知识 skill 的基准面、常速层与梯度、近地表、定位程序差异，以及三个诱导错误改动的报警的手册条目；合成恢复测试未合并（不适合作误差上界） | — |
 | 1.2 | 2026-11-03（标签 `checker-v1.2`） | 删去 8 项不能区分对错的检查、标准 b 值并入 `b_positive`（§10 表）；`relocated_share` 改为只报告；README 写明检查不是选择标准 | 统一测试试水（Kīlauea） |
 | 1.3 | 2026-11-05（标签 `checker-v1.3`，含知识 skill） | `wadati_origin_offset` 改为判定（1.5 s）；`region.py` 和只报告的 `events_beyond_stations`；知识 skill 新增从数据建最小一维模型、水平框架两节。冻结前通过合成回归测试和端到端脚本运行（`workflows/development/smoke_end_to_end/`：运行包、契约、评分端重跑与处置核对、泄漏扫描；Kīlauea `backend_knowledge`，分数与源运行一致） | 下一轮统一测试 |
+
+**位置（2026-11-05）：** checker 从 `seismotools/checker` 移到顶层的 `seismo_checker/`。它是本项目的贡献，不属于提供给 tools 阶段的工具库；放在 `seismotools/` 里时，tools 阶段的 Agent 能看到它（B 层第一批就发生过），S1 与 S2c、S3 之间就不只差一个因素。现在只有 checker 阶段在提示词里得到 `CHECKER_PATH`；运行记录（`record/provenance.json`）分别记下 `seismotools` 和 `seismo_checker` 的提交；输出契约中的报告类型改名为 `seismo-checker-report`（评分器仍接受旧名）。检查本身不变，搬迁后合成回归测试和端到端脚本运行都通过，标签 `checker-v1.3` 移到搬迁后的提交（此前没有运行用过它）。
 
 **同期的相关修改（不在 checker 内）：** HypoInverse 接口 v2 默认 CRE 模型；NonLinLoc 接口深度搜索默认从台站平均高程开始；hypoDD、GrowClust 的深度基准写入文档；运行环境只允许在运行目录下的虚拟环境装包；泄漏扫描分两层；评分的震级斜率至少 30 对、`inside_region` 按台站覆盖判定；知识 skill 的近地表方法、从数据建最小一维模型、震级压缩、模型数值必须有来源、不用台站延迟吸收共同偏移、模板匹配门槛。
 

@@ -5,9 +5,9 @@ The checker measures the products of an earthquake-catalog workflow stage by sta
 ## Commands
 
 ```bash
-python seismotools/checker/interface/run.py --stage <stage> --stations <StationXML file or folder> --output-dir <dir> [inputs]
-python seismotools/checker/interface/compare.py --before <dir>/checker_report.json --after <dir2>/checker_report.json --change <kind>
-python seismotools/checker/interface/pilot.py events|windows ...
+python CHECKER_PATH/interface/run.py --stage <stage> --stations <StationXML file or folder> --output-dir <dir> [inputs]
+python CHECKER_PATH/interface/compare.py --before <dir>/checker_report.json --after <dir2>/checker_report.json --change <kind>
+python CHECKER_PATH/interface/pilot.py events|windows ...
 ```
 
 | Stage | Inputs | Also runs |

@@ -17,6 +17,6 @@ cd "$ROOT"
 "$PYTHON" -m SeismoAgentBench run-agent --task "$TASK/backend/task_$VARIANT.json" --input "$TASK/backend/input_$VARIANT.json" \
   --agent-name "scripted-smoke" --agent-version 1 --run-root "$RUN_ROOT" --run-id "$RUN_ID" --timeout 7200 \
   -- "$PYTHON" -I "$ROOT/workflows/development/smoke_end_to_end/scripted_agent.py" \
-     --source-run "$SOURCE" --checker "$ROOT/seismotools/checker"
+     --source-run "$SOURCE" --checker "$ROOT/seismo_checker"
 "$SCORE_PYTHON" -m SeismoAgentBench.scoring.catalog_metrics run --task-dir "$TASK" --run-dir "$RUN_ROOT/$RUN_ID"
 echo "run: $RUN_ROOT/$RUN_ID"

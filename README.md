@@ -22,6 +22,8 @@ Formal runs are launched by each case's `workflows/tasks/<case>/run.sh`, which r
 
 [seismotools/](seismotools/README.md) contains copied PhaseNet/DPP/EQTransformer models, GaMMA, NonLinLoc and hypoDD sources, local weight identities, usage documentation and validation/build commands. It is the validated tool library offered to Agents in the `tools` stage and used by the human-in-loop workflow; case data and experiment scripts stay separate, and every run records the tool commit it saw.
 
+[seismo_checker/](seismo_checker/README.md) is the reference-free catalog checker, this project's own contribution. It is kept outside `seismotools/` so that the `tools` stage cannot see it; the checker stages (S2c, S3) get its path, and every run records its commit.
+
 ## What this project does
 
 - Curates six information-rich seismic benchmark cases.
