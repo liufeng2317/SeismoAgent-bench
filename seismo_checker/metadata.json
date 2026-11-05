@@ -19,6 +19,6 @@
   "source": "source/catalog_checker",
   "runtime": "runtime/velocity_models",
   "validation": "examples/smoke/run.sh",
-  "status": "frozen 2026-11-05 (git tag checker-v1.3, together with the catalog-knowledge skill in data/agent_resource; moved the same day from seismotools/checker to the top-level seismo_checker/, checks unchanged): wadati_origin_offset judged at |median| > 1.5 s; region.py (station coverage, given region) and events_beyond_stations (reported). Synthetic smoke test and an end-to-end scripted run passed (workflows/development/smoke_end_to_end). Later changes get a new version, recorded in docs/research/04_Checker_Design.md §13",
+  "status": "frozen 2026-11-05 (git tag checker-v1.3, together with the catalog-knowledge skill in data/agent_resource; moved the same day from seismotools/checker to the top-level seismo_checker/, checks unchanged): wadati_origin_offset judged at |median| > 1.5 s; region.py (station coverage, given region) and events_beyond_stations (reported). Synthetic smoke test and an end-to-end scripted run passed (workflows/development/smoke_end_to_end). Later changes get a new version, recorded in docs/research/02_Checker_Design.md §13",
   "version": "1.3"
 }

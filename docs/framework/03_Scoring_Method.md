@@ -1,6 +1,6 @@
 # 评分方法
 
-本文按评分器的工作顺序，说明一个目录如何评分：从 Agent 提交的文件，到可信目录判定。本文可以单独阅读，也用作论文的评估一节。正式定义及全部门槛见 [`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md)（目录指标 v2）；每个案例、每次运行的当前数值见 [`progress/SCORE_TABLE.md`](progress/SCORE_TABLE.md)。
+本文按评分器的工作顺序，说明一个目录如何评分：从 Agent 提交的文件，到可信目录判定。本文可以单独阅读，也用作论文的评估一节。正式定义及全部门槛见 [`02_Catalog_Metrics.md`](02_Catalog_Metrics.md)（目录指标 v2）；每个案例、每次运行的当前数值见 [`progress/SCORE_TABLE.md`](../research/progress/SCORE_TABLE.md)。
 
 ## 1. 评什么，以什么为参照
 
@@ -8,7 +8,7 @@
 
 目录与三类参照比较，从不与单一的“真值”比较：
 
-- **参考目录。** 每个案例有若干已发表的目录，每个目录只用于它能支撑的角色：D 检测、L 绝对定位、S 构造、M 震级、P 震相拾取。每个案例有一个 D 参考和一个 L 参考作为*主要参考*，用于核心数值；一个业务目录作为*震级权威目录*。各案例的角色见 [`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md) §3；主要参考见 [`00_Case_Registry.md`](../data/00_Case_Registry.md)。
+- **参考目录。** 每个案例有若干已发表的目录，每个目录只用于它能支撑的角色：D 检测、L 绝对定位、S 构造、M 震级、P 震相拾取。每个案例有一个 D 参考和一个 L 参考作为*主要参考*，用于核心数值；一个业务目录作为*震级权威目录*。各案例的角色见 [`02_Catalog_Metrics.md`](02_Catalog_Metrics.md) §3；主要参考见 [`00_Case_Registry.md`](../data/00_Case_Registry.md)。
 - **参考目录上限。** 参考目录之间不能完全互相召回。一个参考目录的上限，是任一其他参考目录在它上面达到的最高召回率（Prague 0.51，Magna 0.68，Kīlauea 0.49，Ridgecrest 0.64，Kaikōura 0.69；Maple Creek 0.98，这里 ComCat 只含 626 个较大事件）。检测结果相对于该上限解读。
 - **human-in-loop 最终目录。** 这是我们在参考目录可见的情况下，手动引导 Agent 工作流构建的目录，每个案例 7–11 轮。它是与 Agent 比较的上界，每个目录也直接与它匹配。
 
@@ -42,7 +42,7 @@
 
 ### 2.5 测量量
 
-每次匹配比较在五个维度上给出数值（完整列表见 [`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md) §5）：
+每次匹配比较在五个维度上给出数值（完整列表见 [`02_Catalog_Metrics.md`](02_Catalog_Metrics.md) §5）：
 
 | 维度 | 主要测量量 | 参照 |
 |---|---|---|
@@ -95,7 +95,7 @@ Agent 使用了工具库，提交了 3,957 个事件。在评估集合内，其�
 - **判定：** 不可信。
 - **组件替换。** 使用 human-in-loop 定位程序，相同的拾取得到的结果与最终目录相比：深度差 −0.31 km，|Δt| 0.09 s，偏移 0.15 km。偏晚、偏浅的解来自后端对速度模型和定位程序的选择。拾取本身是可靠的，这正是 checker 或编码的专家知识应当捕捉的那类误差。
 
-在指标 v1 下，同一运行的 `recall_norm` 为 1.12，最终目录为 1.15，并通过了草案中的可用性判据；[`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md) §12 记录了 v2 取代 v1 的原因。
+在指标 v1 下，同一运行的 `recall_norm` 为 1.12，最终目录为 1.15，并通过了草案中的可用性判据；[`02_Catalog_Metrics.md`](02_Catalog_Metrics.md) §12 记录了 v2 取代 v1 的原因。
 
 ## 4. 复现评分
 

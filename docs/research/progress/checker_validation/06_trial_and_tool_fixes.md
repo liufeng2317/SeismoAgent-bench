@@ -1,6 +1,6 @@
 # 统一测试试水批次与之后的离线修复（2026-11-03 至 11-04）
 
-从设计文档 [`../../04_Checker_Design.md`](../../04_Checker_Design.md) 迁出（2026-11-04）。Kīlauea 三个后端变体（checker 1.2）的结果，以及试水之后不跑 Agent、只做离线检验的修改。
+从设计文档 [`../../02_Checker_Design.md`](../../02_Checker_Design.md) 迁出（2026-11-04）。Kīlauea 三个后端变体（checker 1.2）的结果，以及试水之后不跑 Agent、只做离线检验的修改。
 
 
 改动后先只跑一批（Kīlauea × 三个后端变体，各 1 次），检验新的环境策略（`run_local`）、checker 1.2 和更新后的知识 skill。三个运行都没有修改共享环境（`environment_integrity` 未变），扣留模式无命中；待审清单记录了查找速度模型时的访问（Klein 1981、Lin & Amelung 2014、Lin & Shearer 2021 等），人工核对未使用其中的地震位置。

@@ -1,6 +1,6 @@
 # 评分口径的决定与待定事项（2026-11-04 起）
 
-从设计文档 [`../../04_Checker_Design.md`](../../04_Checker_Design.md) 迁出（2026-11-04）。评分规则的定义见 [`../../../framework/02_Catalog_Metrics.md`](../../../framework/02_Catalog_Metrics.md)。
+从设计文档 [`../../02_Checker_Design.md`](../../02_Checker_Design.md) 迁出（2026-11-04）。评分规则的定义见 [`../../../framework/02_Catalog_Metrics.md`](../../../framework/02_Catalog_Metrics.md)。
 
 
 1. **震级标度的最少配对数（已定，2026-11-04）。** 评分器的震级三项原来只要求 ≥ 5 对。[06_trial_and_tool_fixes.md](06_trial_and_tool_fixes.md) 的 `backend_checker` 因时间偏差 1.7 s 只配上 12 对，斜率 −0.70 判为不通过，但它的震级与 knowledge 运行同法（斜率 −0.08）。改为斜率要求 ≥ 30 对，不足时判为 `insufficient`（不判），用 `workflows/development/scoring_migrations/magnitude_slope_min_pairs.py` 对已存分数重判：只有这一个运行改变（5 项 → 4 项）。

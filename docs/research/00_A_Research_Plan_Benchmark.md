@@ -126,7 +126,7 @@
 
 **成本也要报告：** 每次运行的墙钟时间、token 用量、工具调用次数，用来回答"用 Agent 是否划算"。
 
-完整定义见 [`03_Scoring_Method.md`](./03_Scoring_Method.md) 和 [`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md)。
+完整定义见 [`03_Scoring_Method.md`](../framework/03_Scoring_Method.md) 和 [`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md)。
 
 ### 4.3 有效性
 

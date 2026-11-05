@@ -4,8 +4,8 @@ Files are named `NN_Title_Case.md`, numbered in reading order within each folder
 
 | Folder | Holds | Start with |
 |---|---|---|
-| [`research/`](research/) | the research: questions and benchmark design, expert-experience evidence and the checker, the paper outline, the scoring method, status, work plan and the complete score table, a one-page Chinese overview (`research_map.html`), dated progress summaries | [`research/README.md`](research/README.md) |
-| [`framework/`](framework/) | the reusable benchmark framework: workflow, run layout and records, catalog metrics with the trusted-catalog standard, development process | [`framework/README.md`](framework/README.md) |
+| [`research/`](research/) | the research: questions and benchmark design, expert-experience evidence and the checker, the register (work items and status, the experiment plan to be frozen), the checker design, results and validation records, the complete score table, a one-page Chinese overview (`research_map.html`), dated progress summaries | [`research/README.md`](research/README.md) |
+| [`framework/`](framework/) | the reusable benchmark framework: workflow, run layout and records, catalog metrics with the trusted-catalog standard, the scoring method walk-through, development process | [`framework/README.md`](framework/README.md) |
 | [`data/`](data/) | the cases and their data: case registry (tiers, frozen windows, primary references), case data inventory, candidate case pool; `preparation/` holds the case record standard, the extraction contract, the MinerU parsing audit and the data-preparation schemas | [`data/00_Case_Registry.md`](data/00_Case_Registry.md) |
 | [`archive/`](archive/) | records that are no longer maintained: the 2026-09-24 repository cleanup, the September 2026 framework implementation logs, external GeoDataBench Codex notes | — |
 

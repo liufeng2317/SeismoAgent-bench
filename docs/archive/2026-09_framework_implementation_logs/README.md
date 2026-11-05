@@ -1,6 +1,6 @@
 # Framework implementation logs (archived, September 2026)
 
-History only. These are the stage records written while the benchmark framework was built (2026-09-29 to 2026-09-30, Codex era). They are superseded: the current framework is described in [`docs/framework/`](../../framework/), and since October 2026 each change is recorded in its commit message ([`03_Development_Process.md`](../../framework/03_Development_Process.md)). Records may describe behaviour, file names or harnesses that no longer exist (for example a flat run layout, `main.py` task entry points, or "no Claude adapter").
+History only. These are the stage records written while the benchmark framework was built (2026-09-29 to 2026-09-30, Codex era). They are superseded: the current framework is described in [`docs/framework/`](../../framework/), and since October 2026 each change is recorded in its commit message ([`04_Development_Process.md`](../../framework/04_Development_Process.md)). Records may describe behaviour, file names or harnesses that no longer exist (for example a flat run layout, `main.py` task entry points, or "no Claude adapter").
 
 Numbering: there is no stage 35, and stage 81 has two records.
 

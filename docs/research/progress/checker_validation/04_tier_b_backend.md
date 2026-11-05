@@ -1,6 +1,6 @@
 # 后端任务（B 层）结果（2026-11-01 至 11-03，6 个案例）
 
-从设计文档 [`../../04_Checker_Design.md`](../../04_Checker_Design.md) 迁出（2026-11-04）。逐运行的决策审计和单因素归因在 [`../backend_audit/`](../backend_audit/README.md)。
+从设计文档 [`../../02_Checker_Design.md`](../../02_Checker_Design.md) 迁出（2026-11-04）。逐运行的决策审计和单因素归因在 [`../backend_audit/`](../backend_audit/README.md)。
 
 
 设计见 [`workflows/development/backend_tier_b/README.md`](../../../../workflows/development/backend_tier_b/README.md)：三个变体共用正式 tools 运行的拾取和关联，只做定位、相对定位和震级；`backend` 只有工具（看不到 checker），`backend_checker` 加 checker skill 和处置合同，`backend_knowledge` 再加知识 skill 和震级资源。每个变体每个案例只跑一次，结论是初步的。Ridgecrest、Kaikōura 在后台继续。

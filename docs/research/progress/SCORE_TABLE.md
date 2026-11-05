@@ -1,6 +1,6 @@
 # Score table
 
-Generated 2026-11-04 15:23 UTC by `python -m SeismoAgentBench.scoring.catalog_metrics table` from the tracked score files (catalog metrics v2); do not edit by hand. How each number is computed: [`../03_Scoring_Method.md`](../03_Scoring_Method.md); definitions: [`docs/framework/02_Catalog_Metrics.md`](../../framework/02_Catalog_Metrics.md).
+Generated 2026-11-04 15:23 UTC by `python -m SeismoAgentBench.scoring.catalog_metrics table` from the tracked score files (catalog metrics v2); do not edit by hand. How each number is computed: [`03_Scoring_Method.md`](../../framework/03_Scoring_Method.md); definitions: [`docs/framework/02_Catalog_Metrics.md`](../../framework/02_Catalog_Metrics.md).
 
 Rows are grouped by case in tier order; the first row of each case is the human-in-loop final, the upper bound every run is compared with (it has no values *against the final*). ✗ marks a value that fails a trusted-catalog criterion (§7a); ✓ / ✗ / … in the verdict table are pass / fail / pending (blind audit not labelled). Each configuration has one run so far.
 
