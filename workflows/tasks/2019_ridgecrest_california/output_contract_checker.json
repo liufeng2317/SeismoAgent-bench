@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "artifacts": [
+    {
+      "id": "picks",
+      "path": "picks.csv",
+      "kind": "picks",
+      "required": true,
+      "schema": {
+        "name": "csv-columns",
+        "version": 1,
+        "required_columns": [
+          "pick_id",
+          "event_id",
+          "station_id",
+          "channel_id",
+          "phase",
+          "time_utc",
+          "probability",
+          "uncertainty_s",
+          "method",
+          "status"
+        ]
+      }
+    },
+    {
+      "id": "catalog",
+      "path": "catalog.csv",
+      "kind": "csv",
+      "required": true,
+      "schema": {
+        "name": "csv-columns",
+        "version": 1,
+        "required_columns": [
+          "event_id",
+          "origin_time_utc",
+          "latitude",
+          "longitude",
+          "depth_km",
+          "magnitude",
+          "magnitude_type",
+          "n_picks",
+          "n_p_picks",
+          "n_s_picks",
+          "status"
+        ]
+      }
+    },
+    {
+      "id": "checker_report",
+      "path": "checker/final/checker_report.json",
+      "kind": "checker_report",
+      "required": true,
+      "schema": {
+        "name": "seismo-checker-report",
+        "version": 1
+      }
+    },
+    {
+      "id": "checker_dispositions",
+      "path": "checker/dispositions.json",
+      "kind": "checker_dispositions",
+      "required": true,
+      "schema": {
+        "name": "checker-dispositions",
+        "version": 1
+      }
+    }
+  ]
+}

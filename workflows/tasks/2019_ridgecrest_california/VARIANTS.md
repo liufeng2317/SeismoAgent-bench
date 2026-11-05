@@ -19,6 +19,8 @@ The expert level in Q1 is not a prompt variant: it is the result of the `expert/
 |---|---|---|---|---|---|---|
 | `min` | `task_min.json` | — (control arm) | minimal | stated window | unspecified | min |
 | `tools` | `task_tools.json` | + `### Tools`: local PhaseNet; GaMMA / PyOcto / REAL; NonLinLoc / HypoInverse; hypoDD / GrowClust / ccdt; Match&Locate (picking; association; location; relocation; template matching) with validated usage docs | minimal | stated window | local provided | min |
+| `checker` | `task_checker.json` | + the catalog checker (`CHECKER_PATH`, outside seismotools), the catalog-checker skill and the checker contract (S2c; run only for an ablation) | minimal | stated window | local provided | checker |
+| `knowledge` | `task_knowledge.json` | + the catalog-knowledge skill and the magnitude resource (S3, main experiment) | minimal | stated window | local provided | checker |
 | `guided` | `task_guided.json` | + expert scaffolding: fixed three-day window, pipeline stages, QC gates, tuning discipline, report | expert-scaffolded | fixed window | neutral public | default |
 
 Contracts: `output_contract_min.json` (picks + catalog) and `output_contract.json` (picks + catalog + report.md).

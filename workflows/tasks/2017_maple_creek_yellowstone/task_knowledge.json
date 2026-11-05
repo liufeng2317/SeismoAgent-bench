@@ -1,0 +1,54 @@
+{
+  "task_id": "maple_2017_catalog_knowledge",
+  "version": "1",
+  "title": "Maple Creek 2017 earthquake-catalog construction (minimal instructions, expert tools, catalog checker and knowledge)",
+  "summary": "As the checker arm, plus the catalog-knowledge skill (pilot protocol, deciding between candidates, symptom playbook, errors no check sees) and the magnitude resource. Isolates the value of procedural knowledge over the whole pipeline (S3).",
+  "task_prompt_file": "prompt_knowledge.md",
+  "output_contract": "output_contract_checker.json",
+  "category": "seismology",
+  "software": [
+    "Python",
+    "ObsPy",
+    "PhaseNet",
+    "GaMMA",
+    "PyOcto",
+    "REAL",
+    "NonLinLoc",
+    "HypoInverse",
+    "hypoDD",
+    "GrowClust"
+  ],
+  "taxonomy": {
+    "domain": "seismology",
+    "task_type": "catalog_construction",
+    "guidance": "minimal",
+    "scope": "unspecified",
+    "tool_policy": "local_provided"
+  },
+  "input_requirements": [
+    {
+      "id": "waveform_data",
+      "data_type": "waveform",
+      "format": "MiniSEED",
+      "required": true
+    },
+    {
+      "id": "station_metadata",
+      "data_type": "station_metadata",
+      "format": "StationXML",
+      "required": true
+    }
+  ],
+  "evaluation": {
+    "scorers": [
+      {
+        "name": "artifact-contract",
+        "version": "1"
+      },
+      {
+        "name": "catalog-metrics",
+        "version": "1"
+      }
+    ]
+  }
+}

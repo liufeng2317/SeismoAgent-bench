@@ -11,7 +11,7 @@ TASK_FILE="$TASK_DIR/task_${VARIANT}.json"
 # Development arms keep their files in a subfolder (the back-end arms in backend/).
 if [ ! -f "$TASK_FILE" ] && [ -f "$TASK_DIR/backend/task_${VARIANT}.json" ]; then TASK_FILE="$TASK_DIR/backend/task_${VARIANT}.json"; fi
 if [ ! -f "$TASK_FILE" ]; then
-  echo "VARIANT must be the stem of an existing task_<variant>.json (min, tools, guided)" >&2
+  echo "VARIANT must be the stem of an existing task_<variant>.json (min, tools, checker, knowledge, guided, backend*)" >&2
   exit 2
 fi
 # A variant may bring its own input manifest (input_<variant>.json), e.g. the back-end arms add the fixed front end.
@@ -37,7 +37,7 @@ RUN_ID="${RUN_ID:-$(date -u +%Y%m%dT%H%M%SZ)}"
 # The tools variant drives multi-hour science stages (picking, association,
 # location); it gets a 48 h budget by default while other variants keep 24 h.
 case "$VARIANT" in
-  tools) DEFAULT_TIMEOUT=172800 ;;
+  tools|checker|knowledge) DEFAULT_TIMEOUT=172800 ;;  # full pipeline: 48 h
   backend*) DEFAULT_TIMEOUT=43200 ;;  # back end only (tier B): 12 h
   *) DEFAULT_TIMEOUT=86400 ;;
 esac
