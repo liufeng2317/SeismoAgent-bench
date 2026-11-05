@@ -6,7 +6,7 @@ import tempfile
 import threading
 import time
 import unittest
-from tests.task_helpers import write_task_package
+from tests.task_helpers import write_input_manifest, write_task_package
 
 from SeismoAgentBench.execution import ExecutionError, run_command
 from SeismoAgentBench.execution import runner as runner_module
@@ -35,7 +35,7 @@ class RunnerTests(unittest.TestCase):
         self.task = Path(self.tmp.name) / "task.json"
         self.manifest = Path(self.tmp.name) / "manifest.json"
         write_task_package(self.task, TASK, "Test execution records.")
-        self.manifest.write_text(json.dumps(MANIFEST), encoding="utf-8")
+        write_input_manifest(self.manifest, MANIFEST)
 
     def tearDown(self):
         self.tmp.cleanup()

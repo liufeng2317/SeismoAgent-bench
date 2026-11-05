@@ -4,7 +4,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from tests.task_helpers import write_task_package
+from tests.task_helpers import write_input_manifest, write_task_package
 
 
 TASK = {
@@ -29,7 +29,7 @@ class CliTests(unittest.TestCase):
             manifest = base / "manifest.json"
             root = base / "runs"
             write_task_package(task, TASK, "Run a synthetic CLI task.")
-            manifest.write_text(json.dumps(MANIFEST), encoding="utf-8")
+            write_input_manifest(manifest, MANIFEST)
             code = "import json,os; open(os.path.join(os.environ['BENCH_OUTPUT'],'result.json'),'w').write(json.dumps({'ok': True}))"
             command = [sys.executable, "-m", "SeismoAgentBench", "run-agent", "--task", str(task),
                        "--manifest", str(manifest), "--agent-name", "cli-agent", "--agent-version", "1",
@@ -52,7 +52,7 @@ class CliTests(unittest.TestCase):
             manifest = base / "manifest.json"
             root = base / "runs"
             write_task_package(task, TASK, "Run a synthetic CLI task.")
-            manifest.write_text(json.dumps(MANIFEST), encoding="utf-8")
+            write_input_manifest(manifest, MANIFEST)
             command = [sys.executable, "-m", "SeismoAgentBench", "run-agent", "--task", str(task),
                        "--manifest", str(manifest), "--agent-name", "cli-agent", "--agent-version", "1",
                        "--run-root", str(root), "--run-id", "run-002", "--", sys.executable, "-c", "raise SystemExit(4)"]

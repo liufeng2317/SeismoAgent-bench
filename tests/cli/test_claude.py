@@ -4,7 +4,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from tests.task_helpers import write_task_package
+from tests.task_helpers import write_input_manifest, write_task_package
 
 SECRET = "secret-token-do-not-record"
 
@@ -24,11 +24,11 @@ class ClaudeCliTests(unittest.TestCase):
                 "evaluation": {"scorers": [{"name": "artifact-contract", "version": "1"}]},
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
             }, "smoke")
-            manifest.write_text(json.dumps({
+            write_input_manifest(manifest, {
                 "schema_version": 1, "case_id": "synthetic", "entries": [
                     {"id": "metadata", "path": "/tmp/metadata.json", "type": "file", "notes": "metadata"}
                 ],
-            }), encoding="utf-8")
+            })
             # The fake agent fails unless the env-file credentials reached it.
             fake.write_text(
                 "#!" + sys.executable + "\n"

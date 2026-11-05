@@ -4,7 +4,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from tests.task_helpers import write_task_package
+from tests.task_helpers import write_input_manifest, write_task_package
 
 
 class CodexCliTests(unittest.TestCase):
@@ -21,9 +21,8 @@ class CodexCliTests(unittest.TestCase):
                 "input_requirements": [{"id": "metadata", "data_type": "metadata", "required": True}],
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
             }, "smoke")
-            manifest.write_text(json.dumps({"schema_version": 1, "case_id": "synthetic",
-                "entries": [{"id": "metadata", "path": "/tmp/metadata.json", "type": "file"}]}),
-                encoding="utf-8")
+            write_input_manifest(manifest, {"schema_version": 1, "case_id": "synthetic",
+                "entries": [{"id": "metadata", "path": "/tmp/metadata.json", "type": "file"}]})
             fake.write_text(
                 "#!" + sys.executable + "\n"
                 "import json, os, pathlib\n"
@@ -66,11 +65,11 @@ class CodexCliTests(unittest.TestCase):
                 "evaluation": {"scorers": [{"name": "artifact-contract", "version": "1"}]},
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
             }, "smoke")
-            manifest.write_text(json.dumps({
+            write_input_manifest(manifest, {
                 "schema_version": 1, "case_id": "synthetic", "entries": [
                     {"id": "metadata", "path": "/tmp/metadata.json", "type": "file", "notes": "metadata"}
                 ],
-            }), encoding="utf-8")
+            })
             fake.write_text(
                 "#!" + sys.executable + "\n"
                 "import json, os, pathlib\n"
@@ -122,11 +121,11 @@ class CodexCliTests(unittest.TestCase):
                 "evaluation": {"scorers": [{"name": "artifact-contract", "version": "1"}]},
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
             }, "smoke")
-            manifest.write_text(json.dumps({
+            write_input_manifest(manifest, {
                 "schema_version": 1, "case_id": "synthetic", "entries": [
                     {"id": "metadata", "path": "/tmp/metadata.json", "type": "file", "notes": "metadata"}
                 ],
-            }), encoding="utf-8")
+            })
             fake.write_text(
                 "#!" + sys.executable + "\n"
                 "import json, os, pathlib\n"
@@ -162,11 +161,11 @@ class CodexCliTests(unittest.TestCase):
                 "evaluation": {"scorers": [{"name": "artifact-contract", "version": "1"}]},
                 "output_artifacts": [{"id": "result", "path": "result.json", "kind": "json", "required": True}],
             }, "smoke")
-            manifest.write_text(json.dumps({
+            write_input_manifest(manifest, {
                 "schema_version": 1, "case_id": "synthetic", "entries": [
                     {"id": "metadata", "path": "/tmp/metadata.json", "type": "file", "notes": "metadata"}
                 ],
-            }), encoding="utf-8")
+            })
             fake.write_text(
                 "#!" + sys.executable + "\n"
                 "import json, os, pathlib\n"

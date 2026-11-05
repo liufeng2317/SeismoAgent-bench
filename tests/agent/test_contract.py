@@ -6,7 +6,7 @@ import unittest
 
 from SeismoAgentBench.agent import AgentError, AgentSpec, run_agent
 from SeismoAgentBench.workflow import evaluate_run
-from tests.task_helpers import write_task_package
+from tests.task_helpers import write_input_manifest, write_task_package
 
 
 TASK = {
@@ -38,7 +38,7 @@ class AgentContractTests(unittest.TestCase):
             task = base / "task.json"
             manifest = base / "manifest.json"
             write_task_package(task, TASK, "Run a synthetic agent.")
-            manifest.write_text(json.dumps(MANIFEST), encoding="utf-8")
+            write_input_manifest(manifest, MANIFEST)
             code = "import json,os; open(os.path.join(os.environ['BENCH_OUTPUT'],'result.json'),'w').write(json.dumps({'agent': True}))"
             spec = AgentSpec.from_command("synthetic-agent", "0.1", [sys.executable, "-c", code])
             result = run_agent(task, manifest, spec, root, "run-001", timeout=10)

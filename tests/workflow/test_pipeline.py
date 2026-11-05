@@ -7,7 +7,7 @@ from unittest.mock import patch
 
 from SeismoAgentBench.scoring import ScoreError
 from SeismoAgentBench.workflow import evaluate_run, run_task
-from tests.task_helpers import write_task_package
+from tests.task_helpers import write_input_manifest, write_task_package
 
 
 TASK = {
@@ -33,7 +33,7 @@ class PipelineTests(unittest.TestCase):
         self.task = base / "task.json"
         self.manifest = base / "manifest.json"
         write_task_package(self.task, TASK, "Run a synthetic end-to-end task.")
-        self.manifest.write_text(json.dumps(MANIFEST), encoding="utf-8")
+        write_input_manifest(self.manifest, MANIFEST)
 
     def tearDown(self):
         self.tmp.cleanup()

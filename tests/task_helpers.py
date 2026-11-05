@@ -20,3 +20,23 @@ def write_task_package(path: Path, task: dict[str, Any], prompt: str) -> None:
         json.dumps({"schema_version": 1, "artifacts": artifacts or []}),
         encoding="utf-8",
     )
+
+
+def write_input_manifest(path: Path, manifest: dict[str, Any]) -> None:
+    """Write an input manifest whose entries exist: each declared file or folder is created beside the manifest.
+
+    The runner refuses a manifest entry that does not exist, so a fixed path such as /tmp/metadata.json would
+    make the tests depend on the machine they run on.
+    """
+    path.parent.mkdir(parents=True, exist_ok=True)
+    entries = []
+    for entry in manifest.get("entries", []):
+        target = path.parent / "inputs" / Path(entry["path"]).name
+        if entry.get("type") == "folder":
+            target.mkdir(parents=True, exist_ok=True)
+        else:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            if not target.exists():
+                target.write_text("{}", encoding="utf-8")
+        entries.append({**entry, "path": str(target)})
+    path.write_text(json.dumps({**manifest, "entries": entries}), encoding="utf-8")
