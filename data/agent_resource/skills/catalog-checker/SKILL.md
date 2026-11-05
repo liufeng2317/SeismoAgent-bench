@@ -5,7 +5,7 @@ description: The reference-free catalog checker (seismo_checker, at CHECKER_PATH
 
 # Catalog checker
 
-The checker (`CHECKER_PATH`, given in the task) measures your products stage by stage — data, picks, association, location, relocation, magnitudes — against case-agnostic expected ranges, without any reference catalog, and reports symptoms: what was measured and how far it is out of range. It does not say why or what to change. Full description of every check, its inputs and its output: `checker/README.md` under the tools base directory given in the task (`TOOLS_BASE_PATH/checker/README.md`).
+The checker (`CHECKER_PATH`, given in the task) measures your products stage by stage — data, picks, association, location, relocation, magnitudes — against case-agnostic expected ranges, without any reference catalog, and reports symptoms: what was measured and how far it is out of range. It does not say why or what to change. Full description of every check, its inputs and its output: `CHECKER_PATH/README.md`.
 
 ## When to run it
 

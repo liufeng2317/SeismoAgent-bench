@@ -61,6 +61,8 @@ Dimensions: `data` (input), `reality` (are the events real and complete), `time`
 | association | `events_with_few_picks` | events with fewer than 4 P picks | yes |
 | location | `isolated_events` | events far from all others | yes |
 | location | `events_beyond_stations` | located events more than 10 km outside the hull of the stations (details: count, aperture) | reported |
+| location | `location_uncertainty` | the locator's horizontal and depth uncertainties (optional catalog columns `horizontal_uncertainty_km`, `depth_uncertainty_km`): distribution, and the events above 3 times the median horizontal uncertainty | reported |
+| location | `station_residual_spread` | the locator's residuals (optional picks column `residual_s`) per station and phase with at least 10 picks: median and spread (MAD); station-phases whose spread exceeds max(0.2 s, 3 times the network median) | reported |
 | location | `wadati_origin_spread`, `wadati_origin_offset` | origin times from each event's own S−P times against the catalog origin times (spread; median offset, flagged only beyond 1.5 s) | yes |
 | location | `travel_time_intercept`, `station_residual_outliers`, `station_residual_azimuth` | P travel times against distance; residuals by station and azimuth | reported |
 | location | `depth_single_value`, `depth_at_edges`, `depth_layers` | events at one depth, at the shallowest or deepest depth, in thin depth slices | yes |
