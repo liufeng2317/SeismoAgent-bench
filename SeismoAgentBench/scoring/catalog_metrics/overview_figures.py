@@ -1,4 +1,4 @@
-"""Summary figures of the S0 / S1 results for the paper outline (docs/research/01_Register.md §4.1).
+"""Summary figures of the S0 / S1 results for the paper outline (docs/research/progress/2026-11-05_results_summary.md §1.1).
 
 For each case: the strongest reference catalog, the official catalog, the S0 ``min`` run, the S1 ``tools`` run and
 the human-in-loop final, all cut to the case's scoring mask exactly as the scorer does.
