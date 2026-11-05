@@ -1,6 +1,6 @@
 # Checker 设计文档
 
-状态（2026-11-05）：现行为 1.3（标签 `checker-v1.3`，与知识 skill 一起冻结），在 1.2 之上加了 Wadati 偏差的判定和区域接口；B 层后端运行用的是 1.0，统一测试试水用的是 1.2，下一轮统一测试用 1.3（§13）。本文写给研究者，只写 checker 现在是什么、为什么这样设计、得到了哪些经验；每一轮检验的方法、数据和读数记在 [`progress/checker_validation/`](progress/checker_validation/README.md)。给 Agent 看的工具说明是 `seismo_checker/README.md`，只说测什么和怎么用，不出现原因、修复方法或案例数据。研究设计见 [`00_B_Research_Plan_Checker.md`](00_B_Research_Plan_Checker.md) §3–§4（阶段划分见 [`00_A_Research_Plan_Benchmark.md`](00_A_Research_Plan_Benchmark.md) §3）；经验来源见 [`progress/expert_experience_evidence.md`](progress/expert_experience_evidence.md) §2。
+状态（2026-11-05）：现行为 1.3（标签 `checker-v1.3`，与知识 skill 一起冻结），在 1.2 之上加了 Wadati 偏差的判定和区域接口；B 层后端运行用的是 1.0，统一测试试水用的是 1.2，下一轮统一测试用 1.3（§13）。本文写给研究者，只写 checker 现在是什么、为什么这样设计、得到了哪些经验；每一轮检验的方法、数据和读数记在 [`progress/checker_validation/`](progress/checker_validation/README.md)。给 Agent 看的工具说明是 `seismo_checker/README.md`，只说测什么和怎么用，不出现原因、修复方法或案例数据。研究设计见 [`00_B_Research_Plan_Checker.md`](00_B_Research_Plan_Checker.md) §3–§4（阶段划分见 [`00_A_Research_Plan_Benchmark.md`](00_A_Research_Plan_Benchmark.md) §3）；经验来源见 [`progress/expert_experience_evidence.md`](progress/analyses/expert_experience_evidence.md) §2。
 
 ## 1. 定位与原则
 

@@ -1,19 +1,19 @@
 # Status and work plan
 
-Living document: what is done, what runs, what comes next. The design is defined in the [research plan](../00_A_Research_Plan_Benchmark.md); the paper's claims are in the [paper outline](../01_Register.md). Weekly summaries are kept next to this file (`YYYY-MM-DD_progress_summary.md`).
+Living document: what is done, what runs, what comes next. The design is defined in the [research plan](../../00_A_Research_Plan_Benchmark.md); the paper's claims are in the [paper outline](../../01_Register.md). Weekly summaries are kept next to this file (`YYYY-MM-DD_progress_summary.md`).
 
 ## 1. Status (2026-10-30)
 
-- **Metrics v2** (2026-10-30, [`02_Catalog_Metrics.md`](../../framework/02_Catalog_Metrics.md) §12). The Maple Creek runs showed that v1's headline hid a scattered `min` catalog and a biased `tools` catalog. v2 sets primary gates at 2 s / 5 km (Kaikōura 4 s / 15 km), corrects every match for chance, compares every catalog directly with the human-in-loop final, adds tight-gate recall, origin time and out-of-region share to the headline, and gives each run a trusted-catalog verdict on four dimensions — event reality, time, space, strength — with completeness against the final reported apart (§7a). All baselines, ladders, runs and swaps were re-scored; single scoring path `python -m SeismoAgentBench evaluate` (catalog-metrics@1).
+- **Metrics v2** (2026-10-30, [`02_Catalog_Metrics.md`](../../../framework/02_Catalog_Metrics.md) §12). The Maple Creek runs showed that v1's headline hid a scattered `min` catalog and a biased `tools` catalog. v2 sets primary gates at 2 s / 5 km (Kaikōura 4 s / 15 km), corrects every match for chance, compares every catalog directly with the human-in-loop final, adds tight-gate recall, origin time and out-of-region share to the headline, and gives each run a trusted-catalog verdict on four dimensions — event reality, time, space, strength — with completeness against the final reported apart (§7a). All baselines, ladders, runs and swaps were re-scored; single scoring path `python -m SeismoAgentBench evaluate` (catalog-metrics@1).
 - **Human-in-loop baselines.** Final and blind rows in each `evaluation/human_in_loop/metrics_baseline.json` (v2); Agent runs are compared with the final only; expert ladder re-scored per case.
-- **Zero-cost analyses.** Expert ladder and component swap — [`00_B_Research_Plan_Checker.md`](../00_B_Research_Plan_Checker.md).
-- **Agent stages.** S0 `min` and S1 `tools` implemented; S2 `knowledge` and S3 `checker` designed ([research plan](../00_A_Research_Plan_Benchmark.md) §3 and the [checker plan](../00_B_Research_Plan_Checker.md) §3), not implemented.
+- **Zero-cost analyses.** Expert ladder and component swap — [`00_B_Research_Plan_Checker.md`](../../00_B_Research_Plan_Checker.md).
+- **Agent stages.** S0 `min` and S1 `tools` implemented; S2 `knowledge` and S3 `checker` designed ([research plan](../../00_A_Research_Plan_Benchmark.md) §3 and the [checker plan](../../00_B_Research_Plan_Checker.md) §3), not implemented.
 - **Formal runs** (Claude Code × GLM-5.3, one per case and stage): Prague, Magna, Maple Creek and Kīlauea S0/S1 scored; Kaikōura `min` running; Kaikōura `tools` re-launched 2026-10-29 18:39 UTC after the first attempt was excluded (harness defect: the prompt sat on the Claude process's argv and the Agent's `kill -9` by pattern matched its own session; the runner now passes the prompt on stdin; metrics §11); Ridgecrest queued, with the fixed runner. The four earlier Ridgecrest/Magna runs predate the output conventions and remain development runs.
-- **Framework.** Task definitions, input mapping, Agent execution through adapters, run records and the external scorer are documented in [`docs/framework/`](../../framework/).
+- **Framework.** Task definitions, input mapping, Agent execution through adapters, run records and the external scorer are documented in [`docs/framework/`](../../../framework).
 
 ### Scored runs (metrics v2)
 
-Every number for every case and run, by dimension: [`SCORE_TABLE.md`](SCORE_TABLE.md); how each is computed: [`../03_Scoring_Method.md`](../03_Scoring_Method.md).
+Every number for every case and run, by dimension: [`SCORE_TABLE.md`](../SCORE_TABLE.md); how each is computed: [`../03_Scoring_Method.md`](../../03_Scoring_Method.md).
 
 Trusted-catalog verdict per dimension (✓ pass, ✗ fail, … audit pending) and completeness: recall_norm against the primary detection reference (final in brackets) and the share of the final's events the run recovers. No run reaches the trusted-catalog standard yet.
 
@@ -41,7 +41,7 @@ Component swap (Agent picks, expert locator): the back-end errors largely disapp
 
 ## 3. Trusted-catalog standard
 
-Fixed with metrics v2 on 2026-10-30: [`02_Catalog_Metrics.md`](../../framework/02_Catalog_Metrics.md) §7a. Event reality, then time, space and strength, each judged on accuracy (offset from the final) and stability (spread and consistency); completeness against the final is reported apart. The scorer writes the verdict into every run's `metrics.json` (`trust`) and the per-configuration `trusted_runs` into `metrics_summary.json`.
+Fixed with metrics v2 on 2026-10-30: [`02_Catalog_Metrics.md`](../../../framework/02_Catalog_Metrics.md) §7a. Event reality, then time, space and strength, each judged on accuracy (offset from the final) and stability (spread and consistency); completeness against the final is reported apart. The scorer writes the verdict into every run's `metrics.json` (`trust`) and the per-configuration `trusted_runs` into `metrics_summary.json`.
 
 ## 4. Open items
 

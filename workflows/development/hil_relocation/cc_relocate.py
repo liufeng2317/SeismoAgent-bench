@@ -417,7 +417,7 @@ def _evaluate(cfg: dict, case, m: pd.DataFrame) -> dict:
 
 def step_export(cfg: dict, task: Path, out: Path, label_only: bool = False) -> dict:
     """label_only: keep every position (the relocation was not adopted, docs/research/progress/
-    2026-11-04_hil_relocation.md) and only add the grid precision of the Match&Locate events."""
+    analyses/2026-11-04_hil_relocation.md) and only add the grid precision of the Match&Locate events."""
     f = pd.read_csv(task / cfg["final"], low_memory=False)
     m = relocation(cfg, out).set_index("event_id")
     ok = m.index[m.status.eq("relocated")]

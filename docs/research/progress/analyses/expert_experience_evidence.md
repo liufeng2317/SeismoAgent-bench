@@ -1,6 +1,6 @@
 # 专家经验的证据：参数敏感性、错误选择与 checker 规则的来源（2026-10-28 至 10-31）
 
-从原 `01_Expert_Experience_and_Checker.md` §2–§3 原样迁出（2026-11-05），检查计划见 [`../00_B_Research_Plan_Checker.md`](../00_B_Research_Plan_Checker.md)。数字除注明外为 metrics v1（2026-10-28）；第 2 节的规则表是 checker 最初的设计依据，现行的检查以 [`../04_Checker_Design.md`](../04_Checker_Design.md) 为准。
+从原 `01_Expert_Experience_and_Checker.md` §2–§3 原样迁出（2026-11-05），检查计划见 [`../00_B_Research_Plan_Checker.md`](../../00_B_Research_Plan_Checker.md)。数字除注明外为 metrics v1（2026-10-28）；第 2 节的规则表是 checker 最初的设计依据，现行的检查以 [`../04_Checker_Design.md`](../../04_Checker_Design.md) 为准。
 
 ## 1. 这些选择有多重要
 

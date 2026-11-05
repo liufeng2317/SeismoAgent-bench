@@ -12,7 +12,7 @@
 |---|---|---|---|---|
 | C1 | 六个案例的波形和台站元数据：下载、补缺、整理成统一的输入 | 每个案例的任务包 `workflows/tasks/<case>/` | ✅ | Prague、Magna、Maple Creek、Kīlauea、Ridgecrest、Kaikōura |
 | C2 | 每个案例整理已发表的高精度目录和官方目录，规定各自承担的评估角色 | `evaluation/metrics.yaml` 中的参考目录和角色 | ✅ | |
-| C3 | 用工具加专家经验（human-in-loop）得到每个案例的可达结果 | 可达结果目录、专家阶梯 | ✅ | 2026-11-04 互相关重定位检验后定稿（[记录](./progress/2026-11-04_hil_relocation.md)） |
+| C3 | 用工具加专家经验（human-in-loop）得到每个案例的可达结果 | 可达结果目录、专家阶梯 | ✅ | 2026-11-04 互相关重定位检验后定稿（[记录](progress/analyses/2026-11-04_hil_relocation.md)） |
 | C4 | 评分方法：事件配对、偶然匹配校正、可信目录标准、完整性 | 评分器、[`03_Scoring_Method.md`](./03_Scoring_Method.md) | ✅ | 指标 v2 及 2026-11-04 两项修正 |
 | C5 | 时间和空间判据改为相对已发表或官方目录计算（与研究计划一致），重算基线和已有分数 | 新版评分器 | ⬜ | 待决定（§5 第 1 项） |
 | C6 | 验证工具库：每个工具在各案例上的用法和结果 | `seismotools/`、`workflows/development/tools_case_validation/` | ✅ | HypoInverse、NonLinLoc 的深度基准约定已修正 |

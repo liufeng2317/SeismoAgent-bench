@@ -12,7 +12,7 @@ The benchmark is built around six real, published earthquake and volcanic sequen
 
 The extraction contract for paper methods, catalog schemas, and case-level synthesis is defined in [`docs/data/preparation/02_Extraction_Contract.md`](docs/data/preparation/02_Extraction_Contract.md).
 
-The current status and work plan are tracked in [`docs/research/progress/STATUS_AND_PLAN.md`](docs/research/progress/STATUS_AND_PLAN.md).
+The current status and work plan are tracked in [`docs/research/progress/archive/STATUS_AND_PLAN.md`](docs/research/progress/archive/STATUS_AND_PLAN.md).
 
 ## Evaluation environment
 
@@ -100,7 +100,7 @@ The cases are deliberately different. The goal is not one leaderboard, but a cap
 8. Score against references and the human-in-loop final  metrics v2, per run
 ```
 
-Current status, scored runs and the work plan: [`docs/research/progress/STATUS_AND_PLAN.md`](docs/research/progress/STATUS_AND_PLAN.md).
+Current status, scored runs and the work plan: [`docs/research/progress/archive/STATUS_AND_PLAN.md`](docs/research/progress/archive/STATUS_AND_PLAN.md).
 
 ## Repository map
 
@@ -158,7 +158,7 @@ Reference catalogs are role-specific expert targets, not a single absolute truth
 
 ## Project status
 
-Phase I has six cases with archived references, extraction records, catalog audits, official operational snapshots, frozen windows (2026-10-28) and human-in-loop final catalogs. Formal S0/S1 Agent runs (Claude Code × GLM-5.3) are scored for four cases; Kaikōura and Ridgecrest are running or queued. No run has yet reached the trusted-catalog standard. Next: finish S0/S1, then build the knowledge skill and the checker for S2/S3. Details and open items: [`docs/research/progress/STATUS_AND_PLAN.md`](docs/research/progress/STATUS_AND_PLAN.md).
+Phase I has six cases with archived references, extraction records, catalog audits, official operational snapshots, frozen windows (2026-10-28) and human-in-loop final catalogs. Formal S0/S1 Agent runs (Claude Code × GLM-5.3) are scored for four cases; Kaikōura and Ridgecrest are running or queued. No run has yet reached the trusted-catalog standard. Next: finish S0/S1, then build the knowledge skill and the checker for S2/S3. Details and open items: [`docs/research/progress/archive/STATUS_AND_PLAN.md`](docs/research/progress/archive/STATUS_AND_PLAN.md).
 
 ## Documentation
 
@@ -166,7 +166,7 @@ Phase I has six cases with archived references, extraction records, catalog audi
 - [Research plan](docs/research/00_A_Research_Plan_Benchmark.md)
 - [Expert experience and checker](docs/research/00_B_Research_Plan_Checker.md)
 - [Paper outline](docs/research/01_Register.md)
-- [Status and work plan](docs/research/progress/STATUS_AND_PLAN.md)
+- [Status and work plan](docs/research/progress/archive/STATUS_AND_PLAN.md)
 - [Case registry](docs/data/00_Case_Registry.md)
 - [Candidate case pool](docs/data/02_Case_Pool.md)
 - [Case data inventory](docs/data/01_Case_Data_Inventory.md)
