@@ -36,7 +36,7 @@ event_id,origin_time_utc,latitude,longitude,depth_km,magnitude,magnitude_type,n_
 
 Field conventions:
 
-- UTF-8, comma-separated, the header rows above in exactly this order (followed only by the optional catalog columns below); the empty string for unavailable fields; no units inside cells.
+- UTF-8, comma-separated, the header rows above in exactly this order (followed only by the optional columns below); the empty string for unavailable fields; no units inside cells.
 - `station_id` is `NET.STA` (for example `CI.APL`). `channel_id` is the full SEED channel `NET.STA.LOC.CHA` with an empty location code written as an empty segment (for example `CI.APL..HNE`).
 - `phase` is `P` or `S`. `time_utc` and `origin_time_utc` are ISO 8601 UTC timestamps ending in `Z` or `+00:00`.
 - `probability` is a detector-assigned quality score in [0, 1]; `uncertainty_s` is a pick-time uncertainty in seconds; both may be empty.
@@ -46,6 +46,7 @@ Field conventions:
 - `magnitude` may be empty; `magnitude_type` is a short code such as `ML`, `Md`, `Mw` or `M`.
 - `n_picks`, `n_p_picks` and `n_s_picks` count the non-rejected `picks.csv` rows of the event.
 - `catalog.csv` may add, after the columns above, `horizontal_uncertainty_km`, `depth_uncertainty_km` and `origin_time_uncertainty_s` (1σ; may be empty).
+- `picks.csv` may add, after the columns above, `residual_s`: the locator's arrival-time residual (observed minus predicted, seconds; may be empty). When the locator reports uncertainties and residuals, copy them into these optional columns.
 
 ### Validity conditions
 
