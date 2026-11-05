@@ -1,6 +1,6 @@
 # Candidate case pool
 
-Candidate earthquake sequences and swarms for the benchmark, grouped by priority: Tier A is the Phase I set now in use, Tiers B and C are expansion and watchlist candidates. The priority tiers here are about readiness and value as a case; the difficulty tiers of the Phase I cases are defined in the [research plan](../research/00_Research_Plan.md) §2.2. Source verification: 2026-09-18 (moved from the research plan v0.2, Part II, on 2026-10-29).
+Candidate earthquake sequences and swarms for the benchmark, grouped by priority: Tier A is the Phase I set now in use, Tiers B and C are expansion and watchlist candidates. The priority tiers here are about readiness and value as a case; the difficulty tiers of the Phase I cases are defined in the [research plan](../research/00_Research_Plan_Benchmark.md) §2. Source verification: 2026-09-18 (moved from the research plan v0.2, Part II, on 2026-10-29).
 
 ## 1. Purpose of the candidate pool
 

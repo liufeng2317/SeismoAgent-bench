@@ -32,4 +32,4 @@
 
 **下一步：** README 和 skill 修改已合并（checker 1.1）；速度模型资源的做法已改为不提供任何具体模型，只给用法知识和约束近地表的方法（2026-11-03 决定，[05_near_surface_magnitude_matching.md](05_near_surface_magnitude_matching.md)）；之后在 Kīlauea、Maple 上每个变体重复 2–3 次（等所有问题解决后统一跑）。
 
-**循环性：** 检查规则和门槛都是在这六个案例上总结和校准的。报告 S2c、S3 结果时，按"规则来源于该案例 / 不来源于该案例"分开统计（[`00_Research_Plan.md`](../../00_Research_Plan.md) §2.5），并在冻结前固定所有门槛。
+**循环性：** 检查规则和门槛都是在这六个案例上总结和校准的。报告 S2c、S3 结果时，按"规则来源于该案例 / 不来源于该案例"分开统计（[`01_Research_Plan_Checker.md`](../../01_Research_Plan_Checker.md) §4），并在冻结前固定所有门槛。

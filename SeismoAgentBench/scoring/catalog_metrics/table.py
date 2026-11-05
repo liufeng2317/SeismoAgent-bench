@@ -25,7 +25,7 @@ from .matching import PRIMARY_GATES
 from .summary import SUMMARY_FILE
 from .trust import CRITERION_METRIC
 
-# Case order follows the difficulty tiers (docs/research/00_Research_Plan.md §2.2).
+# Case order follows the difficulty tiers (docs/research/00_Research_Plan_Benchmark.md §2).
 CASES = [
     ("2011_prague_oklahoma", "Prague 2011", "basic"),
     ("2020_magna_utah", "Magna 2020", "basic"),
@@ -221,7 +221,7 @@ def build(tasks_root: Path) -> str:
 
 
 OVERVIEW_FILE = "RESULTS_OVERVIEW.md"
-VARIANTS = ("min", "tools")  # configuration ladder columns (docs/research/00_Research_Plan.md §2.4); later stages add columns
+VARIANTS = ("min", "tools")  # configuration ladder columns (docs/research/00_Research_Plan_Benchmark.md §3); later stages add columns
 
 
 def _verdict_word(r: Row) -> str:

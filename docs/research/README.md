@@ -4,8 +4,8 @@ Reading order:
 
 | Document | Holds | Changes when |
 |---|---|---|
-| [`00_Research_Plan.md`](00_Research_Plan.md) | the benchmark design, defined once: core questions, case tiers, Agent stages S0–S3, form of the knowledge and the checker, controls, leakage rules, reference principles, expected outputs | the design changes |
-| [`01_Expert_Experience_and_Checker.md`](01_Expert_Experience_and_Checker.md) | evidence that expert catalogs need experience (expert ladder, out-of-range choices, component swap), the reference-free checker rules, human-in-loop intervention coding | new evidence or checker rules |
+| [`00_Research_Plan_Benchmark.md`](00_Research_Plan_Benchmark.md) | research plan A, the fallback line: a benchmark of how far Agents build earthquake catalogs on their own (question, cases and tiers, Agent stages, scoring, validity, outputs, status) (Chinese) | the benchmark design changes |
+| [`01_Research_Plan_Checker.md`](01_Research_Plan_Checker.md) | research plan B, the main line: expert experience written as a reference-free checker and knowledge skill (question, grounds, design, how it is tested, status, risks) (Chinese); the evidence tables are in [`progress/expert_experience_evidence.md`](progress/expert_experience_evidence.md) | the checker plan changes |
 | [`02_Paper_Outline.md`](02_Paper_Outline.md) | the paper's question, claims with the evidence each needs, sections and figures, a summary of current results, progress, and the pre-registered analysis plan (Chinese) | the paper plan changes, results come in, or the analysis plan is frozen |
 | [`03_Scoring_Method.md`](03_Scoring_Method.md) | how a catalog is scored, step by step, from completion to the trusted-catalog verdict, with a worked example; the evaluation section of the paper | the metrics change |
 | [`04_Checker_Design.md`](04_Checker_Design.md) | the reference-free checker as it stands: principles, every check with its computation, threshold and the evidence behind it, what it can and cannot see, lessons, versions (Chinese) | the checker changes |

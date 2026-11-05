@@ -1,4 +1,4 @@
-# Knowledge swaps on the formal tools runs (docs/research/01_Expert_Experience_and_Checker.md §2.4), replayed:
+# Knowledge swaps on the formal tools runs (docs/research/progress/expert_experience_evidence.md §1.4), replayed:
 # the run's own picks relocated with the published regional model, used the expert's way.
 # change: velocity_model, so compare does not count depth_layers. Pilots: the same relocation on 300 events.
 defaults:
