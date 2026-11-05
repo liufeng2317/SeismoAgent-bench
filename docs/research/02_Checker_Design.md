@@ -1,10 +1,92 @@
 # Checker 设计文档
 
-状态（2026-11-05）：现行为 1.3（标签 `checker-v1.3`，与知识 skill 一起冻结），在 1.2 之上加了 Wadati 偏差的判定和区域接口；B 层后端运行用的是 1.0，统一测试试水用的是 1.2，下一轮统一测试用 1.3（§13）。本文写给研究者，只写 checker 现在是什么、为什么这样设计、得到了哪些经验；每一轮检验的方法、数据和读数记在 [`progress/records/`](progress/records/README.md)。给 Agent 看的工具说明是 `seismo_checker/README.md`，只说测什么和怎么用，不出现原因、修复方法或案例数据。研究设计见 [`00_B_Research_Plan_Checker.md`](00_B_Research_Plan_Checker.md) §3–§4（阶段划分见 [`00_A_Research_Plan_Benchmark.md`](00_A_Research_Plan_Benchmark.md) §3）；经验来源见 [`progress/expert_experience_evidence.md`](progress/records/00_expert_experience_evidence.md) §2。
+状态（2026-11-05）：现行为 1.3（标签 `checker-v1.3`，与知识 skill 一起冻结，2026-11-05 随计划 B 的正式实验方案冻结，标签 `prereg-b-2026-11-05`），在 1.2 之上加了 Wadati 偏差的判定和区域接口；B 层后端运行用的是 1.0，统一测试试水用的是 1.2，下一轮统一测试用 1.3（§13）。本文写给研究者，只写 checker 现在是什么、为什么这样设计、得到了哪些经验；每一轮检验的方法、数据和读数记在 [`progress/records/`](progress/records/README.md)。给 Agent 看的工具说明是 `seismo_checker/README.md`，只说测什么和怎么用，不出现原因、修复方法或案例数据。研究设计见 [`00_B_Research_Plan_Checker.md`](00_B_Research_Plan_Checker.md) §3–§4（阶段划分见 [`00_A_Research_Plan_Benchmark.md`](00_A_Research_Plan_Benchmark.md) §3）；经验来源见 [`progress/records/00_expert_experience_evidence.md`](progress/records/00_expert_experience_evidence.md) §2。
+
+## 0. 检查清单与现状（2026-11-05，1.3）
+
+一页看清每项检查做到了哪一步、有没有用。证据来自三处：E1 可靠性检验（1.3 按输出约定运行于 6 个 human-in-loop 定位目录和 31 次已完成的运行，[14](progress/records/14_e1_reliability.md)）、合成回归测试（14 个场景）和此前各轮检验（[records](progress/records/README.md)）。每项检查来自哪个案例见规则来源表 [12](progress/records/12_rule_origins.md)。
+
+**状态的含义：**
+- **有效：** 判定；在真实运行上查出过真实错误，干净目录上基本不报警。
+- **安全检查：** 判定；至今没有在真实运行上触发（或只在合成数据上验证过），保留以防极端错误，代价很小。
+- **只报告：** 不判定；数值有用，但单独不能说明对错（理由已验证），作为信息或归因线索。
+- **已删除：** 验证后发现分不开对错，1.2 删去或合并。
+- **未采用 / 未实现：** 评估过但没有加；或设计了还没做。
+
+### 0.1 现行的 40 项检查
+
+E1 列：human-in-loop 目录上的报警数 / 31 次运行中的报警数。
+
+| 阶段 | 检查 | 类别 | 状态 | E1 | 主要证据 |
+|---|---|---|---|---|---|
+| 数据 | `processing_time_shift` | 判定 | 安全检查 | 0 / —（需要预处理后的记录） | 合成 0.3 s 时移查出；真实运行未提交预处理记录 |
+| 数据 | `stations_with_data`、`daily_station_count`、`network_geometry`、`channel_sample_rates`、`data_gaps` | 输入说明 | 只报告 | 0 / 0 | 描述输入数据；Maple 数据缺口 8.6 % |
+| 拾取 | `silent_stations` | 判定 | 有效 | 1 / 11 | 只有垂直分量的台站被漏用（Maple、Kīlauea）；human-in-loop 1 次（Ridgecrest 早期轮次） |
+| 拾取 | `duplicate_picks` | 判定 | 有效 | 0 / 1 | Maple min 11 % 重复拾取 |
+| 拾取 | `pick_onset_offset`（P） | 判定 | 有效 | 0 / 0 | Prague min 拾取整体早 2.5 s（该运行未完成，不在 E1 中）；合成查出 |
+| 拾取 | `station_day_gaps`、`s_to_p_ratio` | 判定 | 安全检查 | 0 / 0 | 从未触发 |
+| 关联 | `events_with_few_picks` | 判定 | 有效 | 0 / 10 | 约束不足的事件多（Prague、Maple）；衡量约束程度，不是定位对错 |
+| 关联 | `associated_share`、`association_busy_hours`、`duplicate_events` | 判定 | 安全检查 | 0 / 0 | 从未触发；`duplicate_events` 的共用拾取细节区分过 Maple min 的重复录入 |
+| 绝对定位 | `depth_single_value`、`depth_at_edges` | 判定 | 有效 | 3 / 8、1 / 5 | 深度堆积 7/7 查出；human-in-loop 的报警是早期轮次的真问题 |
+| 绝对定位 | `depth_layers` | 判定 | 有效 | 1 / 10 | 台阶界面和网格上的条带；比评分判据敏感（判据通过时也会报） |
+| 绝对定位 | `wadati_origin_spread` | 判定 | 有效 | 0 / 5 | 发震时刻离散大的运行 |
+| 绝对定位 | `wadati_origin_offset` | 判定 | 有效（只抓严重的） | 0 / 1 | 整体时间偏差 > 1.5 s（试水运行 +2.47 s；Kīlauea 一次 +1.8 s）；0.3–1.5 s 的偏差看不到 |
+| 绝对定位 | `sp_depth_offset` | 判定 | 有效（只抓大的） | 0 / 5 | 超过 1.5 km 时方向可靠；门槛以下方向常相反 |
+| 绝对定位 | `isolated_events` | 判定 | 有效（population） | 0 / 2 | 对应"偏离构造"不通过 |
+| 绝对定位 | `events_beyond_stations` | 只报告 | 只报告 | 0 / 0 | 局部台网外可以有真实地震 |
+| 绝对定位 | `travel_time_intercept`、`station_residual_outliers`、`station_residual_azimuth` | 只报告 | 只报告 | 0 / 0 | 三维结构使正确目录也偏离 |
+| 绝对定位 | `depth_constraint`、`pile_against_setup`、`station_delays` | 只报告 | 只报告（归因） | 0 / 0 | 堆积的原因、时钟型与路径型台站延迟 |
+| 绝对定位 | `model_ensemble_depth`、`model_ensemble_time` | 只报告 | 只报告（默认关闭） | — | 通用模型之间差得比真实误差还大 |
+| 相对定位 | `relocation_shift` | 判定 | 有效 | — | Kīlauea 把重定位输入当输出（整体 1.07 km）查出；合成整体加深查出 |
+| 相对定位 | `relocation_large_moves` | 判定 | 安全检查 | — | 未在真实运行上触发 |
+| 相对定位 | `relocation_thinning` | 判定 | 安全检查 | — | 只在合成数据上验证（模板到时进 dt.ct 造成的收缩） |
+| 相对定位 | `relocated_share` | 只报告（1.2 起） | 只报告 | — | 判定时诱导 Agent 放宽连接、使目录离散 |
+| 震级 | `magnitude_recompute` | 判定 | 有效（最可靠） | 0 / 6 | 单位和响应错误：Prague −2.60、Kīlauea −2.29、Ridgecrest −1.18；定标差异正确地不报 |
+| 震级 | `largest_events_magnitude` | 判定 | 有效 | 0 / 8 | 大事件震级偏低或缺失 |
+| 震级 | `magnitude_range`、`magnitude_detection` | 判定 | 有效（没有波形时的备用） | 0 / 1、0 / 5 | 单位错误；`magnitude_detection` 查不出定标差异 |
+| 震级 | `b_positive` | 只报告 | 只报告 | 0 / 0 | 与标准 b 值一起读 |
+
+相对定位的检查在 E1 中没有运行（提交的目录不带重定位前目录），证据来自合成测试和此前的运行。
+
+**合计：** 有效 16 项，安全检查 8 项，只报告 16 项（含 5 项输入说明）。
+
+### 0.2 验证后删去的检查（1.2）
+
+| 检查 | 删去原因 |
+|---|---|
+| `pick_snr` | 干净目录也有 30–64 % 低信噪比拾取；比例移入 `pick_onset_offset` 的细节 |
+| `event_travel_time_fit` | human-in-loop 1.4–18 %、Agent 运行 0.7–8.6 %，分不开 |
+| `events_outside_network` | 局部台网外有真实地震；1.3 由只报告的 `events_beyond_stations` 代替 |
+| `azimuthal_gap` | 并入 `depth_constraint` |
+| `station_time_steps`、`wadati_events` | human-in-loop 目录也有，分不开 |
+| `day_night_ratio` | 需要 ≥ 14 天数据 |
+| `rate_after_largest` | 从未报警，数值无意义 |
+| `b_value` | 并入 `b_positive` 的细节 |
+
+### 0.3 评估过但没有采用
+
+| 想法 | 不采用的原因 | 记录 |
+|---|---|---|
+| 合成恢复测试（扰动一维模型给误差上界） | 给出的范围在 Magna、Maple 上不包含真实偏差 | [04](progress/records/04_tier_b_backend.md) |
+| 主震尾波漏检扫描 | 主震后几分钟内 STA/LTA 触发不了 | [03](progress/records/03_attribution_and_thresholds.md) |
+| 换模型时按 \|S−P 深度偏差\| 排序 | 判错增多 | [05](progress/records/05_near_surface_magnitude_matching.md) |
+| 复算的震级斜率作判定 | 标准复算本身也有压缩，与评分不一致 | [05](progress/records/05_near_surface_magnitude_matching.md) |
+| 模板匹配阶段的检查 | 问题是漏检和不用模板匹配，从产品看不出；写进知识 | [10](progress/records/10_template_threshold.md) |
+| 用测量值挑速度模型（Wadati、RMS、截距、S−P、最浅比例） | 每一种都至少在一个案例上选错 | [05](progress/records/05_near_surface_magnitude_matching.md)、[08](progress/records/08_velocity_from_data.md) |
+
+### 0.4 未实现
+
+- 波形级数据质控：噪声模型、尖峰、削波。
+- 相对定位的健康度：连接图、每个事件的约束。
+
+### 0.5 一句话总结
+
+checker 能可靠挡住 Agent 自身数据看得到的错误（震级单位和响应、深度堆积和分层、漏用台站、重复拾取、严重的时间错误、相对定位的整体平移），E1 中这类错误几乎全部报出；对所有台站或事件共有的偏差（速度模型和近地表造成的时间和深度偏差、水平偏移、震级定标）基本看不到，这部分交给知识 skill。
+
 
 ## 1. 定位与原则
 
-checker 是 seismotools 里的一个确定性命令行工具，在 S2c（工具 + checker）和 S3（工具 + 知识 + checker）中提供给 Agent。它回答：**只看 Agent 自己的数据和产物，当前这一步有哪些可测量的异常？**
+checker 是独立于工具库 `seismotools/` 的确定性命令行工具（`seismo_checker/`，tools 阶段看不到它），在 S2c（工具 + checker）和 S3（工具 + 知识 + checker）中提供给 Agent。它回答：**只看 Agent 自己的数据和产物，当前这一步有哪些可测量的异常？**
 
 | 原则 | 含义 |
 |---|---|
@@ -166,7 +248,7 @@ hypoDD 和 GrowClust 都不读台站高程，所有台站在模型深度 0：目
 
 **看不到的（C 层：所有台站或事件共有的误差，被发震时刻、台站校正、震级常数吸收）：** 速度模型整体偏快或偏慢、近地表和基准面造成的发震时刻与深度整体偏差（0.3–1.5 s 量级）；震级定标的绝对水平（0.1–0.4 级）；主震尾波中的漏检；模板匹配门槛过高造成的漏检。这些留给知识 skill 的"checker 看不到的问题"和不确定度报告。
 
-**对可信标准的覆盖（第一轮正式运行和 B 层运行）：** 深度堆积全部查出；震级实现错误全部查出，区域定标差异查不出；发震时刻离散查出，整体偏差只查出严重的；深度偏差部分查出；水平偏移、水平离散、偏离构造基本查不出；大事件漏检查不出，大事件震级偏低查出。
+**对可信标准的覆盖（第一轮正式运行和 B 层运行；1.3 的 E1 结果见 §0）：** 深度堆积全部查出；震级实现错误全部查出，区域定标差异查不出；发震时刻离散查出，整体偏差只查出严重的；深度偏差部分查出；水平偏移、水平离散、偏离构造基本查不出；大事件漏检查不出，大事件震级偏低查出。
 
 **只报告的项目和原因（给 Agent 看的是通用说明）：** 走时截距、台站残差和方位项（结构使正确目录也偏离）；台站覆盖外的事件（局部台网之外可以有真实地震）；模型组（通用模型之间差得比误差还大）；深度约束、堆积与定位设置、台站延迟（归因信息）；发生移动的比例（会诱导放宽连接）；b-positive（与标准 b 一起读）；S 拾取–初动偏差（AIC 在 P 尾波中不可靠）。
 
