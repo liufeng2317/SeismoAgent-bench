@@ -16,6 +16,7 @@
 | [`09_horizontal_shift.md`](09_horizontal_shift.md) | 2026-11-05 | 水平偏移的逐项替换：拾取和台站组合几乎不贡献；Kaikōura、Maple 来自台站延迟，Magna、Ridgecrest 来自最终目录的双差框架；只写进知识，不加检查（评分口径问题在 07 第 3 条） |
 | [`10_template_threshold.md`](10_template_threshold.md) | 2026-11-05 | 模板匹配的门槛、误检与召回：零假设检验在六个案例都给出 9.5；去掉模板匹配，最终目录只剩 8–56 % 的事件；五个 tools 运行没有把模板匹配检测加进目录 |
 | [`11_hil_relocation.md`](11_hil_relocation.md) | 2026-11-04 | 可达结果的互相关重定位：只在 Kaikōura 采用，其余案例保留原位置并标注网格精度 |
+| [`12_rule_origins.md`](12_rule_origins.md) | 2026-11-05 | 规则来源表（注册表 B13）：每项检查（40 项现行、8 项已删）和每条知识条目（117 条）来自哪个案例；用于按规则来源分开报告 |
 | [`13_hil_interventions.md`](13_hil_interventions.md) | 2026-11-05 | human-in-loop 干预编码（注册表 B14）：82 项干预分四类；阶梯收益主要来自方法选择，但多数方法选择的触发或取舍依赖参考，S3 可及的份额是一个范围（召回 42–98 %，位置离散 29–99 %） |
 | [`backend_audit/`](backend_audit/README.md) | 2026-11-02 | 后端消融的逐运行决策审计（04 的细节） |
 
