@@ -14,7 +14,7 @@
 | C2 | 每个案例整理已发表的高精度目录和官方目录，规定各自承担的评估角色 | `evaluation/metrics.yaml` 中的参考目录和角色 | ✅ | |
 | C3 | 用工具加专家经验（human-in-loop）得到每个案例的可达结果 | 可达结果目录、专家阶梯 | ✅ | 2026-11-04 互相关重定位检验后定稿（[记录](progress/records/11_hil_relocation.md)） |
 | C4 | 评分方法：事件配对、偶然匹配校正、可信目录标准、完整性 | 评分器、[`03_Scoring_Method.md`](../framework/03_Scoring_Method.md) | ✅ | 指标 v2 及 2026-11-04 两项修正 |
-| C5 | 时间和空间判据改为相对已发表或官方目录计算（与研究计划一致），重算基线和已有分数 | 新版评分器 | ⏳ | 评分器已改（[指标 §13](../framework/02_Catalog_Metrics.md)），重算进行中（2026-11-05） |
+| C5 | 时间和空间判据改为相对已发表或官方目录计算（与研究计划一致），重算基线和已有分数 | 新版评分器 | ✅ | 2026-11-05（[指标 §13](../framework/02_Catalog_Metrics.md)）；基线、阶梯、全部运行、分数表和图已重算 |
 | C6 | 验证工具库：每个工具在各案例上的用法和结果 | `seismotools/`、`workflows/development/tools_case_validation/` | ✅ | HypoInverse、NonLinLoc 的深度基准约定已修正 |
 | C7 | 运行框架：任务包生成、运行记录（含工具库和 checker 的版本）、共享环境写保护、泄漏扫描 | `SeismoAgentBench/` 运行器 | ✅ | |
 | C8 | 测试：单元测试、无模型的端到端测试 | `tests/`、`workflows/development/smoke_end_to_end/` | ✅ | 148 个单元测试通过；端到端测试在后端和完整流程任务包上通过 |
@@ -31,7 +31,7 @@
 | B5 | E1 checker 的可靠性：可达结果上的误报、误差已知目录上的检出、合成植入错误的检出 | 图 3、可靠性表 | 🟡 | 1.0 已检验（[01](progress/records/01_first_validation.md)）；合成回归测试每次改动都跑；用 1.3 重做并整理成图表未做 |
 | B6 | E2 后端消融：拾取和关联固定，比较"只有工具 / + checker / + checker 和知识" | 图 4 | 🟡 | 用 1.0、1.2 做过预实验（[04](progress/records/04_tier_b_backend.md)）；1.3 未做 |
 | B7 | 离线确定边界：哪些误差只靠自身数据看不到 | 检验记录、知识 skill 条目 | ✅ | 近地表、从数据建模型、水平偏移、模板匹配（[05](progress/records/05_near_surface_magnitude_matching.md)、[08](progress/records/08_velocity_from_data.md)、[09](progress/records/09_horizontal_shift.md)、[10](progress/records/10_template_threshold.md)） |
-| B8 | 冻结正式实验方案（§4） | 冻结的提交号 | ⬜ | §5 已决定；待 C5 完成 |
+| B8 | 冻结正式实验方案（§4） | 冻结的提交号 | ⬜ | §5 已决定，C5 已完成；可以冻结 |
 | B9 | E3 主实验：用现在的工具重跑 S1，每个案例 2 次 | 12 次运行及评分 | ⬜ | 先跑 Maple、Kīlauea |
 | B10 | E3 主实验：S3，每个案例 2 次 | 12 次运行及评分 | ⬜ | 与 B9 同时进行 |
 | B11 | S2c 消融（按需） | 每个案例 1 次 | ⬜ | 只在 S3 有效果时运行（§5 第 4 项） |
