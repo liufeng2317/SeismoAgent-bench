@@ -1,103 +1,103 @@
-# Scoring method
+# 评分方法
 
-How a catalog is scored, from the files an Agent hands in to the trusted-catalog verdict, in the order the scorer works. Written to be read on its own and to serve as the evaluation section of the paper. The formal definitions, with every threshold, are in [`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md) (catalog metrics v2); the current numbers for every case and run are in [`progress/SCORE_TABLE.md`](progress/SCORE_TABLE.md).
+本文按评分器的工作顺序，说明一个目录如何评分：从 Agent 提交的文件，到可信目录判定。本文可以单独阅读，也用作论文的评估一节。正式定义及全部门槛见 [`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md)（目录指标 v2）；每个案例、每次运行的当前数值见 [`progress/SCORE_TABLE.md`](progress/SCORE_TABLE.md)。
 
-## 1. What is scored, and against what
+## 1. 评什么，以什么为参照
 
-Each run must leave two files in its work folder: `catalog.csv` (one row per event: origin time, latitude, longitude, depth below sea level, magnitude, pick counts, status) and `picks.csv` (one row per phase pick, linked to an event). Rows marked `rejected` are not scored.
+每次运行必须在其工作目录中留下两个文件：`catalog.csv`（每个事件一行：发震时刻、纬度、经度、海平面以下深度、震级、拾取数、状态）和 `picks.csv`（每个震相拾取一行，关联到一个事件）。标记为 `rejected` 的行不参与评分。
 
-A catalog is compared with three kinds of yardstick, never with a single "truth":
+目录与三类参照比较，从不与单一的“真值”比较：
 
-- **Reference catalogs.** Each case has several published catalogs, each used only for the roles it supports: D detection, L absolute location, S structure, M magnitude, P phase picks. One D reference and one L reference per case are *primary* and feed the headline numbers; one operational catalog is the *magnitude authority*. Roles per case: [`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md) §3; primaries: [`00_Case_Registry.md`](../data/00_Case_Registry.md).
-- **The reference ceiling.** References do not recover each other fully. The ceiling of a reference is the best recall any other reference reaches on it (Prague 0.51, Magna 0.68, Kīlauea 0.49, Ridgecrest 0.64, Kaikōura 0.69; Maple Creek 0.98, where ComCat holds only 626 larger events). Detection is read relative to it.
-- **The human-in-loop final.** The catalog we built by steering an Agent workflow by hand, with the references in view, for 7–11 rounds per case. It is the upper bound an Agent is compared with, and every catalog is also matched to it directly.
+- **参考目录。** 每个案例有若干已发表的目录，每个目录只用于它能支撑的角色：D 检测、L 绝对定位、S 构造、M 震级、P 震相拾取。每个案例有一个 D 参考和一个 L 参考作为*主要参考*，用于核心数值；一个业务目录作为*震级权威目录*。各案例的角色见 [`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md) §3；主要参考见 [`00_Case_Registry.md`](../data/00_Case_Registry.md)。
+- **参考目录上限。** 参考目录之间不能完全互相召回。一个参考目录的上限，是任一其他参考目录在它上面达到的最高召回率（Prague 0.51，Magna 0.68，Kīlauea 0.49，Ridgecrest 0.64，Kaikōura 0.69；Maple Creek 0.98，这里 ComCat 只含 626 个较大事件）。检测结果相对于该上限解读。
+- **human-in-loop 最终目录。** 这是我们在参考目录可见的情况下，手动引导 Agent 工作流构建的目录，每个案例 7–11 轮。它是与 Agent 比较的上界，每个目录也直接与它匹配。
 
-There is no composite score. The output per run is a profile: a verdict per dimension, the numbers behind it, and completeness reported apart.
+没有综合得分。每次运行的输出是一个画像：每个维度一个判定、判定背后的数值，以及单独报告的完整性。
 
-## 2. Step by step
+## 2. 逐步说明
 
-### 2.1 Completion
+### 2.1 完成情况
 
-The run is first checked against its output contract: both files present with the required columns, internal consistency (every pick's event exists, pick counts agree, coordinates valid). A run without a valid catalog is *not completed*: its detection metrics count as zero in every average, and it is not trusted.
+首先按输出约定检查运行：两个文件都存在且包含所需列，内部一致（每个拾取对应的事件存在，拾取数一致，坐标有效）。没有有效目录的运行记为*未完成*：其检测指标在所有平均中计为零，且不可信。
 
-### 2.2 Evaluation cohort
+### 2.2 评估集合
 
-Each case has a fixed cohort mask: a half-open time window, a region box and depth bounds (`workflows/tasks/<case>/expert/00_config/validation.yaml`). The same mask is applied to the references, the final and the Agent's catalog. Agent rows outside it are not scored further, but their share is reported as `out_of_mask_fraction` and judged under event reality (§2.6). They are not counted as false events, because the task states the time window but not the region, so an out-of-region event may be a real regional earthquake.
+每个案例有一个固定的评估集合区域 (mask)：一个左闭右开的时间窗、一个区域框和深度范围（`workflows/tasks/<case>/expert/00_config/validation.yaml`）。同一区域同样应用于参考目录、最终目录和 Agent 的目录。Agent 目录中位于该区域外的行不再进一步评分，但其占比报告为 `out_of_mask_fraction`，并在事件真实性下判定（§2.6）。这些行不计为假事件，因为任务给出了时间窗而没有给出区域，所以区域外的事件可能是真实的区域地震。
 
-### 2.3 Event matching
+### 2.3 事件匹配
 
-Two catalogs are compared event by event with a one-to-one greedy matcher: every candidate pair within the gates is ranked by epicentral distance, then by time difference, and each event is used at most once.
+两个目录用一对一贪心匹配器逐事件比较：门限内的所有候选对先按震中距排序，再按时间差排序，每个事件最多使用一次。
 
-- **Primary gates:** |Δt| ≤ 2 s and epicentral distance ≤ 5 km. Kaikōura uses 4 s / 15 km, because its 260-km network and the offset between 1-D and 3-D location frames leave even the final's epicentres 1.9 km scattered about the references.
-- **Sensitivity gates:** 4 s / 15 km (wider) and 1 s / 3 km (tighter), reported next to the primary result. The tight result is `recall_tight`.
-- **Reference-specific gates:** a reference with coarse origin times keeps its own gates (Isken & Mooney at Prague: 60 s / 5 km); a time-only reference (Shelly at Maple Creek) is matched on |Δt| ≤ 1 s alone.
+- **主要门限：** |Δt| ≤ 2 s 且震中距 ≤ 5 km。Kaikōura 使用 4 s / 15 km，因为其 260-km 台网以及 1-D 与 3-D 定位框架之间的偏差，使得即使是最终目录的震中，相对参考目录也有 1.9 km 的离散。
+- **敏感性门限：** 4 s / 15 km（更宽）和 1 s / 3 km（更紧），与主要结果并列报告。紧门限结果为 `recall_tight`。
+- **参考目录专用门限：** 发震时刻较粗的参考目录保留其自身门限（Prague 的 Isken & Mooney：60 s / 5 km）；只有时间的参考目录（Maple Creek 的 Shelly）只按 |Δt| ≤ 1 s 匹配。
 
-### 2.4 Chance correction
+### 2.4 机会校正
 
-In a dense sequence, events can fall inside the gates by coincidence. The scorer therefore repeats every match against the reference shifted by 60 s; the matches it still finds measure the coincidence rate p at the sequence's own event density. An observed match rate m is m = r + (1 − r) p for a true rate r, because a coincidence only adds a match where no true one exists, so
+在密集序列中，事件可能偶然落入门限。因此评分器把每次匹配都针对平移 60 s 后的参考目录重复一次；此时仍能找到的匹配，度量了该序列自身事件密度下的偶然匹配率 p。设真实匹配率为 r，则观测匹配率 m 为 m = r + (1 − r) p，因为偶然匹配只在不存在真实匹配的地方增加匹配，所以
 
-> r = (m − p) / (1 − p), clipped at 0.
+> r = (m − p) / (1 − p)，下限截断为 0。
 
-This correction is applied to every recall, to the support of a catalog's events by the references, and to the comparison with the final. Without it, a catalog of random events inside a compact swarm can reach a high raw recall (Maple Creek `min`: 0.91 at 4 s / 15 km, 0.05 at 1 s / 3 km).
+该校正应用于每个召回率、参考目录对目录事件的支持度，以及与最终目录的比较。没有该校正时，紧凑震群内的随机事件目录也能达到很高的原始召回率（Maple Creek `min`：4 s / 15 km 下为 0.91，1 s / 3 km 下为 0.05）。
 
-### 2.5 Measurements
+### 2.5 测量量
 
-Each matched comparison yields numbers in five dimensions (full list: [`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md) §5):
+每次匹配比较在五个维度上给出数值（完整列表见 [`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md) §5）：
 
-| Dimension | Main measurements | Read against |
+| 维度 | 主要测量量 | 参照 |
 |---|---|---|
-| Detection | chance-corrected recall of each D reference; `recall_norm` = recall of the primary D reference ÷ its ceiling; `recall_tight`; F1 per magnitude class (M ≥ 2, 3, 4, 5 by the magnitude authority) | the ceiling and the final |
-| Event reality | `out_of_mask_fraction`; `union_support` (share of the catalog's events matched by any D reference or the final); `precision_final`; the blind-audit false-event rate | the final |
-| Time | origin-time difference to the final (median signed bias and its spread); median \|Δt\| to the primary L reference; recall within 1 h after M ≥ 4 events relative to all other times | the final |
-| Space | horizontal offset to the final split into a common **shift** and the **scatter** about it; depth difference to the final; the same against the primary L reference; share of epicentres away from every known structure; largest share of events at one depth (fixed-depth or grid-edge pile-ups) | the final |
-| Strength | magnitude difference to the magnitude authority: median, spread, and slope against magnitude (a negative slope means large events are compressed); b-value difference; recall of M ≥ 4 events | the final's own values |
+| 检测 | 每个 D 参考的机会校正召回率；`recall_norm` = 主要 D 参考的召回率 ÷ 其上限；`recall_tight`；各震级档的 F1（按震级权威目录划分 M ≥ 2、3、4、5） | 上限和最终目录 |
+| 事件真实性 | `out_of_mask_fraction`；`union_support`（目录事件中被任一 D 参考或最终目录匹配的占比）；`precision_final`；盲审假事件率 | 最终目录 |
+| 时间 | 与最终目录的发震时刻差（带符号偏差的中位数及其离散）；与主要 L 参考的 \|Δt\| 中位数；M ≥ 4 事件后 1 h 内的召回率相对于其他所有时段的召回率 | 最终目录 |
+| 空间 | 相对最终目录的水平偏差，分解为共同的**偏移**和围绕它的**离散**；与最终目录的深度差；相对主要 L 参考的同样量；远离所有已知构造的震中占比；单一深度上事件的最大占比（固定深度或网格边缘的堆积） | 最终目录 |
+| 强度 | 相对震级权威目录的震级差：中位数、离散，以及对震级的斜率（负斜率表示大事件被压缩）；b 值差；M ≥ 4 事件的召回率 | 最终目录自身的值 |
 
-Phase picks are scored where manual or correlation picks exist (Magna, Maple Creek): share recovered within 0.5 s and residual MAD.
+在有人工拾取或互相关拾取的案例（Magna、Maple Creek）中对震相拾取评分：0.5 s 内恢复的占比和残差 MAD。
 
-### 2.6 Trusted-catalog verdict
+### 2.6 可信目录判定
 
-The verdict answers whether the catalog can be trusted for science, in four steps. Each step passes when all its criteria pass:
+判定回答该目录能否被信任用于科学研究，分四步。每一步在其所有判据都通过时通过：
 
-1. **Event reality** — few events outside the region (≤ max(10 %, final + 5 %)); few false events in the blind audit (≤ 2 %, *pending* until labelled).
-2. **Time** — accuracy: origin times within 0.3 s of the final in the median; stability: their spread ≤ 0.3 s, and detection does not collapse after large events (≥ 0.8 × the final's ratio).
-3. **Space** — accuracy: horizontal shift ≤ 1 km and depth difference ≤ 1 km from the final; stability: scatter ≤ max(1 km, the final's own scatter about the reference), events on the known structure (off-structure share ≤ max(5 %, 3 × final)), no depth pile-up (≤ max(5 %, final + 2 %)).
-4. **Strength** — accuracy: magnitude offset ≤ the final's offset + 0.2, and every M ≥ 4 (and M ≥ 5) event present; stability: magnitude spread ≤ max(0.3, final + 0.1), no compressed scale (|slope| ≤ max(0.2, |final| + 0.1)).
+1. **事件真实性** — 区域外事件少（≤ max(10 %, final + 5 %)）；盲审中假事件少（≤ 2 %，标注完成前为*待定*）。
+2. **时间** — 准确性：发震时刻与最终目录之差的中位数在 0.3 s 以内；稳定性：其离散 ≤ 0.3 s，且大事件后检测不崩溃（≥ 0.8 × 最终目录的比值）。
+3. **空间** — 准确性：相对最终目录的水平偏移 ≤ 1 km，深度差 ≤ 1 km；稳定性：离散 ≤ max(1 km, 最终目录自身相对参考目录的离散)，事件位于已知构造上（偏离构造占比 ≤ max(5 %, 3 × final)），无深度堆积（≤ max(5 %, final + 2 %)）。
+4. **强度** — 准确性：震级偏差 ≤ 最终目录的偏差 + 0.2，且每个 M ≥ 4（及 M ≥ 5）事件都存在；稳定性：震级离散 ≤ max(0.3, final + 0.1)，震级标度未被压缩（|slope| ≤ max(0.2, |final| + 0.1)）。
 
-A catalog is **trusted** when all four steps pass; it is *pending* while only the audit is open. Thresholds are absolute and are relaxed to the final's own value plus a margin wherever the final itself would fail them, so the final always passes. The thresholds were fixed before the verdicts were read and have not been tuned to them.
+四步全部通过时，目录为**可信**；仅剩盲审未完成时为*待定*。门槛为绝对值；凡是最终目录自身会不通过的门槛，都放宽为最终目录自身的值加一个余量，因此最终目录总是通过。门槛在查看判定之前就已确定，没有针对判定结果调整。
 
-**Completeness is reported, not judged.** `recall_norm`, `recall_tight`, the share of the final's events recovered (`recall_final`) and the event ratio to the final stand next to the verdict. A catalog that is accurate but incomplete, like an operational catalog, can still be trusted; how much of the final it recovers is a separate result.
+**完整性只报告，不判定。** `recall_norm`、`recall_tight`、最终目录事件被恢复的占比（`recall_final`）以及相对最终目录的事件数比值，与判定并列给出。一个准确但不完整的目录（如业务目录）仍可以是可信的；它恢复了最终目录的多少，是另一项结果。
 
-### 2.7 Diagnostics
+### 2.7 诊断
 
-Three analyses explain the numbers without changing them:
+三项分析解释这些数值，但不改变它们：
 
-- **Blind audit.** From the events no reference or the final supports, 50 are drawn (stratified by pick count, fixed seed) and shown as waveform plots with predicted arrivals but no reference information. A reviewer labels each one earthquake, not an earthquake or undecidable; a second reviewer checks 10. The false-event rate is (1 − `union_support`) × the share labelled "not an earthquake".
-- **Component swap.** The Agent's own picks and associations are relocated with the human-in-loop velocity model and locator. Errors that disappear came from the back end (model, locator); errors that remain came from the front end (picking, association).
-- **Expert ladder.** Every adopted human-in-loop round is scored the same way, so the step that closed each part of the gap to the final is visible.
+- **盲审。** 从没有任何参考目录或最终目录支持的事件中抽取 50 个（按拾取数分层，固定随机种子），以波形图展示，标出预测到时，但不提供任何参考信息。一名审阅者把每个事件标注为地震、非地震或无法判定；第二名审阅者复核其中 10 个。假事件率为 (1 − `union_support`) × 标注为“非地震”的占比。
+- **组件替换。** 用 human-in-loop 的速度模型和定位程序，对 Agent 自己的拾取和关联重新定位。消失的误差来自后端（模型、定位程序）；保留下来的误差来自前端（拾取、关联）。
+- **专家阶梯。** 每个被采用的 human-in-loop 轮次都以同样方式评分，因此可以看出与最终目录之间差距的每一部分是由哪一步弥合的。
 
-### 2.7a Checker contract (configurations with the checker)
+### 2.7a checker 约定（含 checker 的配置）
 
-Where the output contract includes the checker items (`output_contract_checker.json`: `work/checker/final/checker_report.json` and `work/checker/dispositions.json`), the score adds a `checker` section (`checker_audit.py`). The scorer re-runs the same checker (its commit is recorded) on the submitted files with the stage and inputs of the submitted report, and records: whether the submitted report was made on the submitted `catalog.csv` and `picks.csv` (input SHA-256); whether its flags agree with the re-run; for every flag of the re-run whether it has a disposition, flagging `fixed` entries whose flag is still raised and `justified` entries without evidence; `fixed` entries for flags no longer raised, verified against the earlier report they name; and how many checker reports the Agent kept under `work/checker/`. `complete` is true when the report is on the submission, the flags agree and no entry has a problem. The audit does not judge whether a justification is right: that is read against the scores, and changes made only to pass a check are classified in the S2c analysis. A failing audit never fails the catalog score.
+当输出约定包含 checker 条目时（`output_contract_checker.json`：`work/checker/final/checker_report.json` 和 `work/checker/dispositions.json`），评分会增加一个 `checker` 部分（`checker_audit.py`）。评分器使用所提交报告的阶段和输入，在所提交的文件上重新运行同一个 checker（记录其 commit），并记录以下内容：所提交的报告是否基于所提交的 `catalog.csv` 和 `picks.csv` 生成（输入 SHA-256）；其报警是否与重新运行的结果一致；对重新运行中的每个报警，是否有处置，并标出报警仍然存在的 `fixed` 条目和没有证据的 `justified` 条目；针对已不再出现的报警的 `fixed` 条目，按其指明的较早报告核验；以及 Agent 在 `work/checker/` 下保留了多少份 checker 报告。当报告基于所提交的文件、报警一致且没有条目存在问题时，`complete` 为 true。该审计不判断某个理由是否正确：这一点对照得分来解读，仅为通过检查而做的修改在 S2c 分析中归类。checker 审计不通过，绝不会使目录评分不通过。
 
-### 2.8 Across runs
+### 2.8 跨运行汇总
 
-Each configuration (case × stage × harness × model) is meant to run at least twice. Detection metrics average over all launched runs, with a failed run counted as zero; other metrics average over completed runs and are shown with the completion rate. A run whose transcript shows access to the withheld references is flagged and left out of the means. A run stopped by a defect of the test harness rather than by the Agent carries an `EXCLUDED.md` marker, is left out, and is repeated.
+每个配置（案例 × 阶段 × harness × 模型）计划至少运行两次。检测指标对所有已启动的运行取平均，失败的运行计为零；其他指标对已完成的运行取平均，并与完成率一起给出。转录记录显示访问了扣留参考目录的运行会被报警，并排除在均值之外。因测试 harness 的缺陷而非 Agent 原因而停止的运行带有 `EXCLUDED.md` 标记，被排除，并重新运行。
 
-## 3. Worked example: Maple Creek, `tools` run
+## 3. 实例：Maple Creek，`tools` 运行
 
-The Agent used the tool library and handed in 3,957 events. In the cohort its catalog has 3,411 events; the final has 12,422.
+Agent 使用了工具库，提交了 3,957 个事件。在评估集合内，其目录有 3,411 个事件；最终目录有 12,422 个。
 
-- **Completeness (not judged).** `recall_norm` 0.96 (final 0.99): against ComCat's 626 larger events the run looks nearly complete. At 1 s / 3 km, `recall_tight` falls to 0.43 (final 0.95), and the run recovers 22 % of the final's events. The small events, which template matching would add, are missing.
-- **Event reality: fails.** 12.7 % of its events are outside the region (limit 10 %); the blind audit is still to be labelled.
-- **Time: fails.** Origin times are 1.15 s later than the final's in the median (limit 0.3 s); their spread is small (0.16 s), so the error is systematic, not noise.
-- **Space: fails.** The depth is 2.18 km shallower than the final (limit 1 km); the scatter about the final is 1.90 km (limit 1 km); 11.8 % of epicentres lie off the known structure (limit 5 %). The horizontal shift (0.91 km) and the depth pile-up (3.8 %) pass.
-- **Strength: fails, narrowly.** The magnitude offset (0.19) and spread (0.37) pass; the slope against magnitude is −0.44 against a limit of 0.41, a slightly compressed scale.
-- **Verdict:** not trusted.
-- **Component swap.** With the human-in-loop locator, the same picks give a depth difference of −0.31 km, |Δt| of 0.09 s and a shift of 0.15 km from the final. The late, shallow solutions were a back-end choice of velocity model and locator. The picks themselves were sound, which is the kind of error a checker or encoded expert knowledge is meant to catch.
+- **完整性（不判定）。** `recall_norm` 0.96（最终目录 0.99）：对照 ComCat 的 626 个较大事件，该运行看起来几乎完整。在 1 s / 3 km 下，`recall_tight` 降至 0.43（最终目录 0.95），该运行只恢复了最终目录 22 % 的事件。缺失的是小事件，而这些小事件本可由模板匹配补上。
+- **事件真实性：不通过。** 12.7 % 的事件位于区域外（门槛 10 %）；盲审尚待标注。
+- **时间：不通过。** 发震时刻的中位数比最终目录晚 1.15 s（门槛 0.3 s）；其离散很小（0.16 s），因此误差是系统性的，不是噪声。
+- **空间：不通过。** 深度比最终目录浅 2.18 km（门槛 1 km）；相对最终目录的离散为 1.90 km（门槛 1 km）；11.8 % 的震中偏离已知构造（门槛 5 %）。水平偏移（0.91 km）和深度堆积（3.8 %）通过。
+- **强度：不通过，差距很小。** 震级偏差（0.19）和离散（0.37）通过；对震级的斜率为 −0.44，门槛为 0.41，震级标度略有压缩。
+- **判定：** 不可信。
+- **组件替换。** 使用 human-in-loop 定位程序，相同的拾取得到的结果与最终目录相比：深度差 −0.31 km，|Δt| 0.09 s，偏移 0.15 km。偏晚、偏浅的解来自后端对速度模型和定位程序的选择。拾取本身是可靠的，这正是 checker 或编码的专家知识应当捕捉的那类误差。
 
-Under metrics v1 the same run scored `recall_norm` 1.12 against the final's 1.15 and passed the draft usability criteria; [`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md) §12 records why v2 replaced v1.
+在指标 v1 下，同一运行的 `recall_norm` 为 1.12，最终目录为 1.15，并通过了草案中的可用性判据；[`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md) §12 记录了 v2 取代 v1 的原因。
 
-## 4. Reproducing the scores
+## 4. 复现评分
 
 ```bash
 python -m SeismoAgentBench.scoring.catalog_metrics baseline --task-dir workflows/tasks/<case>   # references, ceilings, final
@@ -107,4 +107,4 @@ python -m SeismoAgentBench.scoring.catalog_metrics summary --task-dir workflows/
 python -m SeismoAgentBench.scoring.catalog_metrics table                                       # docs/research/progress/SCORE_TABLE.md
 ```
 
-The baseline must be scored before runs, because the verdict reads the final's own values from it. The score table is generated from the tracked exports only; regenerate it after every scored run.
+必须先对基线评分，再对运行评分，因为判定要从基线中读取最终目录自身的值。评分表只由已跟踪的导出文件生成；每评分一个运行后都要重新生成。

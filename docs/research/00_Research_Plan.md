@@ -1,40 +1,40 @@
-# SeismoAgentBench research plan
+# SeismoAgentBench 研究计划
 
-**Formal name:** Agentic Seismic Catalog Benchmark  
-**Short project name:** SeismoAgentBench  
-**Repository/CLI slug:** `seismoagent-bench`  
-**Short abbreviation:** SABench
+**正式名称：** Agentic Seismic Catalog Benchmark  
+**项目简称：** SeismoAgentBench  
+**仓库/CLI slug：** `seismoagent-bench`  
+**缩写：** SABench
 
-`SeismoAgentBench` is the canonical project name. The hyphenated `seismoagent-bench` form is reserved for repository names, command-line commands, URLs, and other contexts where lowercase slugs are preferred.
+`SeismoAgentBench` 是项目的标准名称。带连字符的 `seismoagent-bench` 形式只用于仓库名、命令行命令、URL 以及其他偏好小写 slug 的场合。
 
-This document is the single place where the benchmark design is defined: questions, cases and tiers, Agent stages, the form of the knowledge and the checker, controls, leakage rules and reference principles. The paper built on it is outlined in [`02_Paper_Outline.md`](./02_Paper_Outline.md); progress and the work plan are in [`progress/STATUS_AND_PLAN.md`](./progress/STATUS_AND_PLAN.md). The candidate case pool, the case registry and the information-collection standard are in [`docs/data/`](../data/).
+本文档是定义基准设计的唯一位置：问题、案例与层级、Agent 阶段、知识与 checker 的形式、对照、泄漏规则和参考原则。基于本文档的论文大纲见 [`02_Paper_Outline.md`](./02_Paper_Outline.md)；进展和工作计划见 [`progress/STATUS_AND_PLAN.md`](./progress/STATUS_AND_PLAN.md)。候选案例池、案例登记表和信息收集标准见 [`docs/data/`](../data/)。
 
-**Version:** v0.3 (2026-10-29; v0.2 2026-09-18)  
-**Phase I cases:** Prague (2011), Magna (2020), Maple Creek (2017), Kīlauea (2018), Ridgecrest (2019), Kaikōura (2016)
+**版本：** v0.3（2026-10-29；v0.2 2026-09-18）  
+**第一阶段案例：** Prague（2011）、Magna（2020）、Maple Creek（2017）、Kīlauea（2018）、Ridgecrest（2019）、Kaikōura（2016）
 
-> **Interpretation rule:** Reference catalogs in this benchmark are **expert reference catalogs / high-quality target catalogs**, not absolute ground truth. A catalog may be an excellent target for detection completeness or relative relocation while remaining unsuitable as an absolute-location truth set.
+> **解释规则：** 本基准中的参考目录是**专家参考目录 / 高质量目标目录**，不是绝对真值。一个目录可以是检测完整性或相对定位的优秀目标，同时仍不适合作为绝对定位的真值集。
 
 ---
 
-## 1. Motivation and core questions
+## 1. 动机与核心问题
 
-Agentic AI systems are rapidly evolving from language-generation tools into systems capable of long-horizon planning, coding, tool use, execution, debugging, and iterative problem solving. General-purpose agents have demonstrated increasingly strong capabilities on complex software-engineering tasks, while domain-specific scientific agents have begun to execute multi-step scientific workflows in areas such as seismic monitoring and earthquake analysis.
+Agentic AI 系统正迅速从语言生成工具演变为能够进行长程规划、编程、工具使用、执行、调试和迭代求解问题的系统。通用 Agent 在复杂软件工程任务上表现出越来越强的能力，而领域专用的科学 Agent 已开始在地震监测和地震分析等领域执行多步科学工作流。
 
-However, for a **specific, complete, and objectively testable scientific task** such as earthquake catalog construction, the actual capability boundary of current Agents remains unclear.
+然而，对于地震目录构建这样**具体、完整且可客观检验的科学任务**，当前 Agent 的实际能力边界仍不清楚。
 
-Several fundamental questions remain open:
+若干基本问题仍未解决：
 
-- Can an Agent construct a scientifically usable earthquake catalog directly from seismic observations with minimal expert intervention?
-- How much domain knowledge, workflow prescription, parameter guidance, or human debugging is still required?
-- Can an Agent-generated catalog approach the quality of catalogs carefully constructed by domain experts?
-- Or should current Agent-generated catalogs primarily be regarded as preliminary products that still require substantial expert refinement?
+- Agent 能否在最少专家干预下，直接从地震观测构建科学上可用的地震目录？
+- 仍需要多少领域知识、工作流规定、参数指导或人工调试？
+- Agent 生成的目录能否接近领域专家精心构建的目录的质量？
+- 抑或当前 Agent 生成的目录主要应被视为仍需专家大量完善的初步产品？
 
-These questions are critical for determining how Agentic systems should be used in future seismic monitoring. Before large-scale deployment, we need a controlled benchmark that can determine **what current Agents can do independently, what level of scientific product they can produce, and where expert support remains necessary**.
+这些问题对于确定 Agentic 系统在未来地震监测中应如何使用至关重要。在大规模部署之前，我们需要一个受控的基准，来确定**当前 Agent 能独立做什么，能产出什么水平的科学产品，以及哪些地方仍需要专家支持**。
 
-> **Core benchmark question:**  
-> **How independently, and to what level of scientific quality, can current Agents construct earthquake catalogs from seismic observations?**
+> **核心基准问题：**  
+> **当前 Agent 能以多高的独立程度、达到什么科学质量水平，从地震观测构建地震目录？**
 
-The benchmark therefore focuses on the relationship among three quantities:
+因此，本基准关注三个量之间的关系：
 
 ```mermaid
 flowchart LR
@@ -42,7 +42,7 @@ flowchart LR
     E <--> Q["Catalog Quality"]
 ```
 
-It evaluates the complete Agent-controlled seismic-monitoring workflow rather than a single picker, associator, locator, or relocation algorithm:
+它评估完整的、由 Agent 控制的地震监测工作流，而不是单个拾取器、关联器、定位器或相对定位算法：
 
 ```mermaid
 flowchart LR
@@ -53,86 +53,86 @@ flowchart LR
     R --> C["Earthquake catalog"]
 ```
 
-The resulting catalog is then compared with high-quality expert reference products that are withheld from the Agent during the benchmark.
+然后将所得目录与高质量的专家参考产品比较；这些产品在基准测试期间对 Agent 扣留。
 
-The benchmark is intended to provide the empirical basis for later reliability-aware and self-improving systems. With hidden expert references, we can determine when the Agent actually succeeds or fails; later, when those references are unavailable, we can test whether the Agent itself can recognize that reliability.
+本基准旨在为之后具备可靠性意识和自我改进能力的系统提供实证基础。有了隐藏的专家参考，我们可以确定 Agent 何时真正成功或失败；之后在这些参考不可用时，我们可以检验 Agent 自己能否识别这种可靠性。
 
 ---
 
-## 2. Benchmark design
+## 2. 基准设计
 
-### 2.1 Compact, high-information cases
+### 2.1 紧凑、高信息量的案例
 
-The benchmark should favor **short-duration, information-rich seismic sequences** rather than multi-year continuous catalogs.
+本基准应优先选择**持续时间短、信息丰富的地震序列**，而不是多年的连续目录。
 
-A preferred benchmark case should contain:
+理想的基准案例应包含：
 
-- **3–7 days** of continuous waveform data;
-- generally **no more than 14 days** unless scientifically necessary;
-- a manageable number of stations;
-- a sufficiently dense event population to stress the workflow;
-- one or more high-quality published reference catalogs that can be subset to the same temporal and spatial window.
+- **3–7 天**的连续波形数据；
+- 除非科学上必要，一般**不超过 14 天**；
+- 数量可控的台站；
+- 足够密集的事件总体，以对工作流形成压力；
+- 一个或多个可截取到相同时间和空间窗口的高质量已发表参考目录。
 
-This design keeps waveform downloading, preprocessing, repeated Agent runs, controlled ablations, and manual inspection computationally feasible.
+这种设计使波形下载、预处理、重复的 Agent 运行、受控消融和人工检查在计算上可行。
 
-The goal is to benchmark **scientific capability**, rather than storage capacity or data-transfer bandwidth.
+目标是对**科学能力**做基准测试，而不是对存储容量或数据传输带宽。
 
-### 2.2 Scientific regimes and difficulty tiers
+### 2.2 科学情形与难度层级
 
-The case set should include different monitoring conditions, such as:
+案例集应包含不同的监测条件，例如：
 
-- mainshock–aftershock sequences;
-- earthquake swarms;
-- volcanic seismicity;
-- induced or triggered seismicity;
-- dense permanent networks;
-- temporary near-source deployments;
-- changing network geometries;
-- simple and complex fault systems.
+- 主震–余震序列；
+- 震群；
+- 火山地震活动；
+- 诱发或触发地震活动；
+- 密集的永久台网；
+- 临时近源布设；
+- 变化的台网几何；
+- 简单和复杂的断层系统。
 
-The objective is **diversity of scientific difficulty**, not geographic diversity for its own sake.
+目标是**科学难度的多样性**，而不是为地理多样性本身而追求地理多样性。
 
-The six Phase I cases form three difficulty tiers (2026-10-29). Tiers are assigned from features known before any run; the expert's experience has to confirm the order. Events per day are from the human-in-loop final.
+六个第一阶段案例构成三个难度层级（2026-10-29）。层级根据任何运行之前已知的特征指定；专家的经验必须确认这一顺序。每天事件数取自 human-in-loop 最终目录。
 
-| Tier | Case | Regime | Stations | Window | Final events/day | Main difficulty |
+| 层级 | 案例 | 情形 | 台站数 | 窗口 | 最终目录事件数/天 | 主要难点 |
 |---|---|---|---:|---|---:|---|
-| Basic | Prague 2011 | induced, aftershocks of Mw 5.7 (mainshock before window) | 23 | 8 d | ~850 | compact network, 1-D layered model; changing deployment |
-| Basic | Magna 2020 | moderate mainshock–aftershock, Mw 5.7 in window | 47 | 8 d | ~680 | basin velocity structure, depth control |
-| Intermediate | Maple Creek 2017 | Yellowstone swarm, max Mw 4.4 | 27 | 8 d | ~1,550 | vertical-only sites; high rate of small events; magnitude of the largest events |
-| Intermediate | Kīlauea 2018 | volcanic summit collapse, Mw 6.9 in window | 25 | 8 d | ~650 | 3-D structure, template families mislocate; Mw 6.9 coda |
-| Hard | Ridgecrest 2019 | M6.4 and M7.1 sequence | 42 | 3 d | ~6,000 | mainshock coda, extreme association density, large-event QC |
-| Hard | Kaikōura 2016 | multi-fault aftershocks of Mw 7.8 | 53 | 8 d | ~1,600 | 260-km network, 3-D structure, 1-D vs 3-D frame offset (expert scatter 2.78 km) |
+| 基础 | Prague 2011 | 诱发，Mw 5.7 的余震（主震在窗口之前） | 23 | 8 d | ~850 | 紧凑台网，1-D 分层模型；布设变化 |
+| 基础 | Magna 2020 | 中等规模主震–余震，Mw 5.7 在窗口内 | 47 | 8 d | ~680 | 盆地速度结构，深度控制 |
+| 中等 | Maple Creek 2017 | 黄石震群，最大 Mw 4.4 | 27 | 8 d | ~1,550 | 仅垂直分量台站；小事件发生率高；最大事件的震级 |
+| 中等 | Kīlauea 2018 | 火山山顶塌陷，Mw 6.9 在窗口内 | 25 | 8 d | ~650 | 3-D 结构，模板族定位错误；Mw 6.9 尾波 |
+| 困难 | Ridgecrest 2019 | M6.4 和 M7.1 序列 | 42 | 3 d | ~6,000 | 主震尾波，极高的关联密度，大事件 QC |
+| 困难 | Kaikōura 2016 | Mw 7.8 的多断层余震 | 53 | 8 d | ~1,600 | 260-km 台网，3-D 结构，1-D 与 3-D 框架偏移（专家离散 2.78 km） |
 
-To tabulate in Phase A (`evaluation/tiers.json`): network aperture and median inter-station distance, largest magnitude inside the window, event rate, structural complexity (1-D adequate or not), station defects; expert difficulty: human-in-loop rounds, blind → final change per dimension, reference-to-reference ceiling. Kīlauea (Mw 6.9 inside the window) is the case most likely to move tier; a move is recorded with its reason, not hidden.
+在 A 阶段列表整理（`evaluation/tiers.json`）：台网孔径和台站间距中位数、窗口内最大震级、事件发生率、结构复杂度（1-D 是否足够）、台站缺陷；专家难度：human-in-loop 轮数、每个维度从盲轮 → 最终目录的变化、参考目录之间的上限。Kīlauea（窗口内有 Mw 6.9）是最可能变更层级的案例；层级变更连同原因一起记录，不隐藏。
 
-### 2.3 Two experimental dimensions
+### 2.3 两个实验维度
 
-The benchmark should explicitly control both:
+本基准应明确控制以下两者：
 
-1. **what observational information the Agent receives**; and
-2. **how much scientific guidance the Agent receives**.
+1. **Agent 接收哪些观测信息**；以及
+2. **Agent 接收多少科学指导**。
 
-#### Observational input conditions
+#### 观测输入条件
 
-| Input condition | Agent receives | Main capability tested |
+| 输入条件 | Agent 接收 | 主要检验的能力 |
 |---|---|---|
-| **Raw-waveform condition** | Continuous waveforms + station metadata + general regional context | Full catalog construction from observations |
-| **Routine-catalog-assisted condition** | Waveforms + station metadata + operational catalog | Catalog enhancement, refinement, and relocation |
-| **Phase-assisted condition** | Waveforms + metadata + routine phase picks | Location, relocation, and higher-level workflow reasoning |
+| **原始波形条件** | 连续波形 + 台站元数据 + 一般区域背景信息 | 从观测完整构建目录 |
+| **常规目录辅助条件** | 波形 + 台站元数据 + 业务目录 | 目录增强、完善和相对定位 |
+| **震相辅助条件** | 波形 + 元数据 + 常规震相拾取 | 定位、相对定位和更高层次的工作流推理 |
 
-These should be treated as different benchmark tasks rather than merged into one score.
+这些应作为不同的基准任务处理，而不是合并为一个分数。
 
-#### Scientific-guidance settings
+#### 科学指导设置
 
-| Guidance setting | Agent access | Main capability tested |
+| 指导设置 | Agent 可访问 | 主要检验的能力 |
 |---|---|---|
-| **Closed-reference** | Generic tools and scientific knowledge, but no target paper, target catalog, or target-specific workflow details | Independent workflow construction |
-| **Open-literature** | Papers, software documentation, and public method descriptions are accessible; target catalog remains hidden | Scientific retrieval, adaptation, and workflow reuse |
-| **Expert-guided control** | Expert workflow, parameter guidance, or target-specific scientific decisions are supplied | Upper-control performance with strong expert support |
+| **封闭参考** | 通用工具和科学知识，但没有目标论文、目标目录或目标特定的工作流细节 | 独立构建工作流 |
+| **开放文献** | 可访问论文、软件文档和公开的方法描述；目标目录保持隐藏 | 科学检索、适配和工作流复用 |
+| **专家指导对照** | 提供专家工作流、参数指导或目标特定的科学决策 | 强专家支持下的上限对照表现 |
 
-These conditions make it possible to separate:
+这些条件使我们能够区分：
 
-the Agent's own scientific capability from performance contributed by expert workflow prescription.
+Agent 自身的科学能力与专家工作流规定所贡献的表现。
 
 ```mermaid
 flowchart LR
@@ -140,156 +140,156 @@ flowchart LR
     E["Expert Workflow Prescription"] --> P
 ```
 
-The Agent stages below all use the raw-waveform, closed-reference condition; the other conditions are kept for later tasks.
+下面的 Agent 阶段都使用原始波形、封闭参考条件；其他条件留给之后的任务。
 
-### 2.4 Agent capability stages (revised 2026-10-29)
+### 2.4 Agent 能力阶段（2026-10-29 修订）
 
-Within the closed-reference, raw-waveform task the Agent arms form a ladder in which each stage adds exactly one factor. The Agent, its harness, the model and the output contract stay the same, except that S3 adds the checker report to the contract (§2.5). The evidence that expert results need experience is in [`01_Expert_Experience_and_Checker.md`](./01_Expert_Experience_and_Checker.md).
+在封闭参考、原始波形任务中，各 Agent 变体构成一个阶梯，每个阶段恰好增加一个因素。Agent、其 harness、模型和输出约定保持不变，只是 S3 在约定中加入 checker 报告（§2.5）。专家结果需要经验的证据见 [`01_Expert_Experience_and_Checker.md`](./01_Expert_Experience_and_Checker.md)。
 
-| Stage | Arm | Agent additionally gets | Question | Status |
+| 阶段 | 变体 | Agent 额外获得 | 问题 | 状态 |
 |---|---|---|---|---|
-| S0 | `min` | task, data, output contract | Can a general Agent build a trusted catalog on its own? | implemented |
-| S1 | `tools` | validated tool library `seismotools` with usage docs | What do tools add? | implemented |
-| S2 | `knowledge` | tools + case-agnostic expert knowledge given up front (§2.5) | What does knowledge add on top of tools? | not implemented |
-| S2c | `checker` | tools + reference-free checker, no knowledge (§2.5) | Does knowing *that* something is wrong let the Agent find and repair it? | not implemented; run first (2026-10-30) |
-| S3 | `knowledge_checker` | tools + knowledge + checker (§2.5) | Does knowledge plus automated validation close the gap to the expert? | not implemented; run after S2c |
-| — | human-in-loop final | — | upper bound | done (all six) |
+| S0 | `min` | 任务、数据、输出约定 | 通用 Agent 能否独立构建可信目录？ | 已实现 |
+| S1 | `tools` | 带使用文档的已验证工具库 `seismotools` | 工具带来什么？ | 已实现 |
+| S2 | `knowledge` | 工具 + 预先提供的与案例无关的专家知识（§2.5） | 在工具之上，知识带来什么？ | 未实现 |
+| S2c | `checker` | 工具 + 不依赖参考的 checker，无知识（§2.5） | 知道*存在*问题，能否让 Agent 找到并修复它？ | 未实现；先运行（2026-10-30） |
+| S3 | `knowledge_checker` | 工具 + 知识 + checker（§2.5） | 知识加自动验证能否弥合与专家的差距？ | 未实现；在 S2c 之后运行 |
+| — | human-in-loop 最终目录 | — | 上界 | 已完成（全部六个） |
 
-Decided 2026-10-30: both components are built, and the `checker` arm (S2c: tools + checker, no knowledge) runs before S3. Compared with S1 it isolates the effect of automated validation; S2 versus S3 and S2c versus S3 then separate knowing how to do it from knowing that it went wrong.
+2026-10-30 决定：两个组件都构建，`checker` 变体（S2c：工具 + checker，无知识）在 S3 之前运行。与 S1 相比，它分离出自动验证的效果；S2 对 S3 以及 S2c 对 S3 则把知道如何做与知道出了错区分开。
 
-**Yardstick.** The human-in-loop final is the single yardstick and the upper bound. It used the references during its iteration, so part of it is out of an Agent's reach; that part is attributed with the expert ladder and the intervention coding ([`01_Expert_Experience_and_Checker.md`](./01_Expert_Experience_and_Checker.md) §5). The first-round blind catalog is not a yardstick: it used no template matching.
+**衡量标准。** human-in-loop 最终目录是唯一的衡量标准，也是上界。它在迭代过程中使用了参考目录，因此其中一部分超出 Agent 能力所及；这部分用专家阶梯和干预编码进行归因（[`01_Expert_Experience_and_Checker.md`](./01_Expert_Experience_and_Checker.md) §5）。第一轮盲轮目录不是衡量标准：它没有使用模板匹配。
 
-**Headline number.** Gap closure per dimension, `(S_k − S1) / (final − S1)`, for detection `recall_norm`, `shift`, `dz_median` and the magnitude offset, reported by tier.
+**核心数字。** 每个维度的差距弥合 `(S_k − S1) / (final − S1)`，针对检测 `recall_norm`、`shift`、`dz_median` 和震级偏移，按层级报告。
 
-The `guided` arm (expert scaffolding, fixed window, `report.md` contract) varies how prescriptive the task statement is and also changes the window and contract; it is not on this ladder and stays optional.
+`guided` 变体（专家脚手架、固定窗口、`report.md` 约定）改变任务说明的规定程度，同时也改变窗口和约定；它不在这个阶梯上，仍为可选。
 
-### 2.5 Form of the knowledge and the checker
+### 2.5 知识与 checker 的形式
 
-**Principle.** The paper claims something about *general-purpose* Agents. So the Agent, its loop and the model are never modified. Every stage only adds files to the Agent's environment, the same way S1 adds tools. No custom agent loop, no harness-side retries, and no custom subagent.
+**原则。** 论文的主张针对*通用* Agent。因此 Agent、其循环和模型从不修改。每个阶段只向 Agent 的环境添加文件，方式与 S1 添加工具相同。没有自定义 agent 循环，没有 harness 端的重试，也没有自定义 subagent。
 
-#### Two layers
+#### 两层
 
-| Layer | Form | Why this form |
+| 层 | 形式 | 为什么采用这种形式 |
 |---|---|---|
-| Diagnostics | a deterministic program in `seismo_checker/` (CLI) that reads the Agent's picks, events, catalog and the station metadata and writes `checker_report.json` plus figures; rules and ranges only, no case numbers, no references. It reports **symptoms only** (what is measured and where it falls outside the expected range), never a cause or a repair: deciding what a symptom means and what to change is the Agent's job (decided 2026-10-30) | same status as every other tool; no LLM inside, so it cannot rationalise a symptom away; identical for any Agent |
-| Knowledge | an Agent Skill (`SKILL.md` + reference files): method choices, safe parameter ranges, known pitfalls; in S3 also the symptom → likely cause → upstream repair table of [`01_Expert_Experience_and_Checker.md`](./01_Expert_Experience_and_Checker.md) §3 | an open format that general Agents load natively (Claude Code skills; Codex skills); progressive disclosure keeps it out of context until relevant |
+| 诊断 | `seismo_checker/` 中的确定性程序（CLI），读取 Agent 的拾取、事件、目录和台站元数据，写出 `checker_report.json` 和图件；只有规则和范围，不含案例数值，不含参考。它**只报告症状**（测量了什么，以及在哪里超出预期范围），从不给出原因或修复：判断一个症状意味着什么、应当改什么，是 Agent 的工作（2026-10-30 决定） | 与其他所有工具地位相同；内部没有 LLM，因此不会把症状合理化掉；对任何 Agent 都相同 |
+| 知识 | 一个 Agent Skill（`SKILL.md` + 参考文件）：方法选择、安全的参数范围、已知陷阱；在 S3 中还包括 [`01_Expert_Experience_and_Checker.md`](./01_Expert_Experience_and_Checker.md) §3 的症状 → 可能原因 → 上游修复表 | 通用 Agent 原生加载的开放格式（Claude Code skills；Codex skills）；渐进式披露使其在相关之前不进入上下文 |
 
-**Delivery.** The skill is installed in the Agent's runtime skill directory. An Agent without skill support gets the same files linked from the prompt, as `prompt_tools.md` does for the tools. The S2 and S3 prompts add one line naming the skill, just as S1 adds the tools section.
+**交付方式。** skill 安装在 Agent 运行时的 skill 目录中。不支持 skill 的 Agent 通过提示词中的链接获得相同的文件，就像 `prompt_tools.md` 对工具的做法。S2 和 S3 的提示词增加一行，写明该 skill 的名称，正如 S1 增加工具一节。
 
-#### S2 — knowledge
+#### S2 — 知识
 
-The skill holds what an expert knows before looking at any data:
+该 skill 包含专家在查看任何数据之前已经知道的内容：
 
-- the pipeline and when template matching and double-difference relocation are expected to add events or precision;
-- velocity-model and locator choices, and grid bounds;
-- magnitude: units, direct versus chained ML, large-event handling;
-- pitfalls observed in the runs and the ladder, e.g. never fix depth silently, check the magnitude scale, apply the PhaseNet blinding offset, do not let station terms absorb a frame shift.
+- 处理流程，以及模板匹配和双差相对定位预期在什么情况下增加事件或提高精度；
+- 速度模型和定位器的选择，以及网格边界；
+- 震级：单位、直接 ML 与链式 ML、大事件的处理；
+- 在运行和阶梯中观察到的陷阱，例如：绝不静默固定深度，检查震级标度，应用 PhaseNet 盲区偏移，不让台站项吸收框架偏移。
 
-#### S2c and S3 — checker
+#### S2c 和 S3 — checker
 
-In S2c the checker skill only says that the tool exists, what it measures and that its report and a disposition per flag are part of the output; it gives no causes and no repairs. In S3 the knowledge skill adds the symptom → likely cause → upstream repair playbook. In both arms the contract adds two items:
+在 S2c 中，checker skill 只说明该工具存在、它测量什么，以及它的报告和每个报警的处置是输出的一部分；它不给出原因，也不给出修复。在 S3 中，知识 skill 增加症状 → 可能原因 → 上游修复的操作手册。在这两个变体中，约定都增加两项：
 
-- `checker_report.json`, produced by the checker on the submitted catalog;
-- one disposition per flag: `fixed` (with what changed) or `justified` (with evidence).
+- `checker_report.json`，由 checker 在提交的目录上生成；
+- 每个报警一个处置：`fixed`（说明改了什么）或 `justified`（附证据）。
 
-The scorer re-runs the checker on the submitted files and verifies the report. This is the only enforcement, and it is a contract item, not a loop. Whether and how often the Agent runs the checker before submission is logged from the transcript and is itself a result.
+评分程序在提交的文件上重新运行 checker 并核对报告。这是唯一的强制手段，它是一个约定项，不是一个循环。Agent 在提交前是否运行 checker、运行几次，从对话记录中统计，这本身也是一个结果。
 
-#### Why not a subagent
+#### 为什么不用 subagent
 
-- **Not portable.** Subagent definitions are harness-specific, so the "general Agent" claim would hold for one harness only.
-- **Adds a confound.** A reviewing subagent is a second LLM context: extra compute and a second opinion. A gain could come from the multi-agent architecture rather than from the knowledge.
-- **Wrong fix for the observed failure.** The Agent's main failure was rationalisation: Prague tools explained ML −8 as "ultra-quiet array microseismicity". A deterministic flag that must be dispositioned addresses that directly; another LLM's opinion may not.
+- **不可移植。** subagent 的定义依赖具体 harness，因此“通用 Agent”的主张只对一个 harness 成立。
+- **引入混杂因素。** 审查用的 subagent 是第二个 LLM 上下文：额外的计算和第二种意见。增益可能来自多 agent 架构，而不是来自知识。
+- **针对观察到的失败是错误的修复。** Agent 的主要失败是合理化：Prague tools 把 ML −8 解释为“超安静台阵的微地震活动”。一个必须处置的确定性报警直接针对这一点；另一个 LLM 的意见未必能做到。
 
-An independent reviewer — a fresh session of the same general Agent given the checker skill — is a possible later ablation. It is not part of the ladder.
+独立审查者（同一通用 Agent 的一个新会话，配备 checker skill）是之后可能的消融。它不属于阶梯。
 
-#### Constraints
+#### 约束
 
-- **Leakage.** Rules are case-agnostic and reference-free, and every use is logged.
-- **Circularity.** Each rule records the case(s) it was learned from (`01_Expert_Experience_and_Checker.md` §3, *Evidence*). Results are reported both for cases a rule came from and for the others (§2.6).
+- **泄漏。** 规则与案例无关且不依赖参考，每次使用都有记录。
+- **循环性。** 每条规则记录它是从哪个（些）案例学来的（`01_Expert_Experience_and_Checker.md` §3，*Evidence*）。结果分别针对规则来源的案例和其他案例报告（§2.6）。
 
-### 2.6 Controls
+### 2.6 对照
 
-- **Repeats.** Metrics v1 §6 asks for at least two runs per configuration. First pass: one run per case × stage. Second runs go first to S1 and S3 (the headline contrast), starting with Prague and Magna S1, to measure run-to-run spread before deciding the rest.
-- **Second model.** Run S1 and S3 on three cases (one per tier) with a second model, so the conclusion is about agentic methods rather than one model (GLM-5.3 in Claude Code so far).
-- **Held-out generalisation (optional).** One case from Tier B of the candidate pool ([`02_Case_Pool.md`](../data/02_Case_Pool.md) §3; e.g. South Napa 2014 or Westmorland 2020) with references and ceiling but no human-in-loop final, run under S1 and S3. Neither the knowledge nor the checker rules were learned from it.
-- **Analyses for every run:** catalog metrics v2 with the trusted-catalog verdict, component swap, blind audit. The second rater spot-checks 10 per run.
+- **重复。** 指标 v1 §6 要求每个配置至少运行两次。第一轮：每个案例 × 阶段运行一次。第二次运行先给 S1 和 S3（核心对比），从 Prague 和 Magna 的 S1 开始，先测量运行间离散，再决定其余部分。
+- **第二个模型。** 在三个案例（每个层级一个）上用第二个模型运行 S1 和 S3，使结论针对 agentic 方法而不是单个模型（目前为 Claude Code 中的 GLM-5.3）。
+- **保留案例泛化（可选）。** 从候选池的 B 层中取一个案例（[`02_Case_Pool.md`](../data/02_Case_Pool.md) §3；例如 South Napa 2014 或 Westmorland 2020），有参考目录和上限，但没有 human-in-loop 最终目录，在 S1 和 S3 下运行。知识和 checker 规则都不是从它学来的。
+- **每次运行的分析：** 目录指标 v2 及可信目录标准判定、组件替换、盲审。第二评审人每次运行抽查 10 个。
 
-### 2.7 Target leakage control
+### 2.7 目标泄漏控制
 
-Target leakage is a major methodological risk.
+目标泄漏是一个主要的方法学风险。
 
-If an Agent accesses the target catalog, exact event tables, target-specific parameters, or published expert decisions during a nominally autonomous run, the experiment may measure reproduction rather than autonomous scientific reasoning.
+如果 Agent 在名义上自主的运行中访问了目标目录、确切的事件表、目标特定的参数或已发表的专家决策，实验测量的可能是复现，而不是自主的科学推理。
 
-Therefore:
+因此：
 
-- target reference catalogs should remain hidden in all benchmark conditions;
-- closed-reference runs should block target-specific publications and supplementary material;
-- open-literature runs should record whether the Agent retrieved the target paper or a closely related workflow;
-- all accessible resources should be logged as part of the benchmark record.
-
----
-
-## 3. Reference catalogs and evaluation
-
-### 3.1 Reference hierarchy
-
-A single earthquake sequence may have several high-quality catalogs. The benchmark should not automatically select the largest or newest catalog.
-
-For each case, reference products should be organized as:
-
-| Reference level | Role |
-|---|---|
-| **Primary reference** | Preferred high-quality target for the principal benchmark dimension |
-| **Secondary reference** | Complementary high-quality catalog based on different data, methods, or scientific emphasis |
-| **Baseline / auxiliary reference** | Routine operational catalog, phase-arrival dataset, structural product, or other supporting information |
-
-The primary reference should be selected using:
-
-- construction quality;
-- expert/scientific acceptance;
-- method transparency;
-- data accessibility;
-- uncertainty and QC information;
-- overlap with the compact benchmark window;
-- suitability for the intended evaluation dimension;
-- independence from the Agent workflow.
-
-> **The catalog with the most events is not necessarily the best benchmark target.**
-
-### 3.2 Reference quality and case-level evaluation
-
-Reference catalogs are not absolute ground truth. Each case may contain multiple reference products with different quality, scope, and scientific roles. The quality hierarchy and required case-level reference record are defined in [`00_Case_Registry.md`](../data/00_Case_Registry.md); the benchmark design uses those records when selecting targets and assigning metrics.
-
-### 3.3 Reference independence and multi-role evaluation
-
-Reference quality, evaluation role, and methodological independence must be kept separate. A case may use several products for detection, phase timing, association, absolute location, relative relocation, completeness, and uncertainty; no single catalog should be treated as complete truth for every dimension. The detailed quality tiers, scope fields, and allowed metrics are specified in [`00_Case_Registry.md`](../data/00_Case_Registry.md).
-
-### 3.4 Metrics and the trusted-catalog standard
-
-Every run is scored with the pre-registered catalog metrics, v2 since 2026-10-30 ([`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md)): a capability profile per case and stage, no composite score, read next to the run's map and depth section. The trusted-catalog verdict (metrics §7a) answers the core question per case and stage: are the events real, and are their times, locations and magnitudes accurate and stable against the human-in-loop final? Completeness against the final is reported beside it, not folded into it.
+- 目标参考目录在所有基准条件下都应保持隐藏；
+- 封闭参考运行应屏蔽目标特定的出版物和补充材料；
+- 开放文献运行应记录 Agent 是否检索到了目标论文或密切相关的工作流；
+- 所有可访问的资源都应作为基准记录的一部分记录下来。
 
 ---
 
-## 4. Expected benchmark outputs
+## 3. 参考目录与评估
 
-The benchmark should not produce only a single leaderboard score.
+### 3.1 参考层级
 
-Its primary output should be a **capability map** describing what current Agents can achieve, under which conditions, and with how much expert assistance.
+同一个地震序列可能有多个高质量目录。本基准不应自动选择最大或最新的目录。
 
-Each Agent configuration should be characterized along several dimensions:
+对每个案例，参考产品应组织为：
 
-| Dimension | Main question |
+| 参考级别 | 作用 |
 |---|---|
-| **Task completion** | Did the Agent complete the full scientific workflow successfully? |
-| **Catalog quality** | How closely does the result approach the relevant expert references? |
-| **Scientific autonomy** | Which scientific decisions were made independently by the Agent? |
-| **Expert assistance** | What domain knowledge, workflow prescription, or human intervention was required? |
-| **Workflow bottlenecks** | Which processing stages or scientific decisions most often limited performance? |
-| **Failure modes** | How and why did the workflow fail when it failed? |
-| **Computational cost** | How much execution, retrying, and tool use was required? |
-| **Case dependence** | How does behavior change across different seismic regimes? |
+| **主要参考** | 针对主要基准维度的首选高质量目标 |
+| **次要参考** | 基于不同数据、方法或科学侧重的互补高质量目录 |
+| **基线 / 辅助参考** | 常规业务目录、震相到时数据集、结构产品或其他支持信息 |
 
-Conceptually, the benchmark should characterize:
+主要参考的选择依据：
+
+- 构建质量；
+- 专家/科学界的认可；
+- 方法透明度；
+- 数据可获取性；
+- 不确定性和 QC 信息；
+- 与紧凑基准窗口的重叠；
+- 对预期评估维度的适用性；
+- 独立于 Agent 工作流。
+
+> **事件最多的目录不一定是最好的基准目标。**
+
+### 3.2 参考质量与案例级评估
+
+参考目录不是绝对真值。每个案例可能包含多个质量、范围和科学作用各不相同的参考产品。质量层级和所需的案例级参考记录定义在 [`00_Case_Registry.md`](../data/00_Case_Registry.md) 中；基准设计在选择目标和分配指标时使用这些记录。
+
+### 3.3 参考独立性与多角色评估
+
+参考质量、评估角色和方法独立性必须分开。一个案例可以将多个产品分别用于检测、震相到时、关联、绝对定位、相对定位、完整性和不确定性；不应把任何单一目录当作在每个维度上都完整的真值。详细的质量层级、范围字段和允许使用的指标在 [`00_Case_Registry.md`](../data/00_Case_Registry.md) 中规定。
+
+### 3.4 指标与可信目录标准
+
+每次运行都用预注册的目录指标评分，自 2026-10-30 起为 v2（[`02_Catalog_Metrics.md`](../framework/02_Catalog_Metrics.md)）：每个案例和阶段一个能力剖面，没有综合分数，与该运行的地图和深度剖面一起阅读。可信目录标准的判定（指标 §7a）针对每个案例和阶段回答核心问题：事件是否真实，其时间、位置和震级相对 human-in-loop 最终目录是否准确且稳定？相对最终目录的完整性在旁边报告，不并入判定。
+
+---
+
+## 4. 预期的基准产出
+
+本基准不应只产出单一的排行榜分数。
+
+其主要产出应是一张**能力图谱**，描述当前 Agent 能实现什么、在什么条件下实现、需要多少专家协助。
+
+每个 Agent 配置应从若干维度刻画：
+
+| 维度 | 主要问题 |
+|---|---|
+| **任务完成** | Agent 是否成功完成了完整的科学工作流？ |
+| **目录质量** | 结果与相关专家参考的接近程度如何？ |
+| **科学自主性** | 哪些科学决策是 Agent 独立做出的？ |
+| **专家协助** | 需要哪些领域知识、工作流规定或人工干预？ |
+| **工作流瓶颈** | 哪些处理阶段或科学决策最常限制表现？ |
+| **失败模式** | 工作流失败时，是如何失败的，为什么失败？ |
+| **计算成本** | 需要多少执行、重试和工具使用？ |
+| **案例依赖性** | 行为在不同地震情形之间如何变化？ |
+
+从概念上讲，本基准应刻画：
 
 ```mermaid
 flowchart LR
@@ -298,19 +298,19 @@ flowchart LR
     S["Seismic Regime"] --> Q
 ```
 
-The objective is to determine whether current Agentic systems are best viewed as:
+目标是确定当前 Agentic 系统最适合被视为：
 
-- autonomous earthquake-catalog constructors;
-- expert-level workflow assistants;
-- preliminary-catalog generators;
-- or systems whose appropriate role depends strongly on the scientific setting.
+- 自主的地震目录构建者；
+- 专家级的工作流助手；
+- 初步目录生成器；
+- 或其合适角色强烈依赖科学情境的系统。
 
-A useful benchmark conclusion may therefore take the form:
+因此，一个有用的基准结论可能采取如下形式：
 
-> Under a curated tool-and-knowledge environment, the Agent approaches expert-reference quality for selected catalog dimensions in dense regional networks, but still requires expert support for specific scientific decisions in more complex settings.
+> 在经过整理的工具与知识环境下，Agent 在密集区域台网中的选定目录维度上接近专家参考的质量，但在更复杂的情境中，特定的科学决策仍需要专家支持。
 
-Such a capability profile is more informative for scientific deployment than a single aggregate score.
+对科学部署而言，这样的能力剖面比单一的综合分数更有信息量。
 
-Ultimately, the benchmark should establish:
+最终，本基准应当确立：
 
-> **What can current Agents do independently, what still requires expert support, and what level of earthquake catalog can be trusted as a scientific product?**
+> **当前 Agent 能独立做什么，什么仍需要专家支持，什么水平的地震目录可以作为科学产品被信任？**

@@ -1,147 +1,147 @@
-# Expert experience, parameter sensitivity and the self-improving checker
+# 专家经验、参数敏感性与自我改进的 checker
 
-Status: working summary, 2026-10-28; revised 2026-10-29. The Agent stages and the form of the checker are defined in the [research plan](./00_Research_Plan.md) §2.4–2.5; this document holds the evidence, the checker rules and the intervention coding. Numbers are metrics v1 (2026-10-28) unless a source is named; v2 (2026-10-30, `docs/framework/02_Catalog_Metrics.md` §12) tightens the gates and compares every catalog with the final, which changes some values but none of the conclusions here.
+状态：工作总结，2026-10-28；2026-10-29 修订。Agent 各阶段和 checker 的形式在[研究计划](./00_Research_Plan.md) §2.4–2.5 中定义；本文档收录证据、checker 规则和干预编码。除非注明来源，数字均为 metrics v1（2026-10-28）；v2（2026-10-30，`docs/framework/02_Catalog_Metrics.md` §12）收紧了门限，并将每个目录与最终目录比较，这改变了部分数值，但不改变本文的任何结论。
 
-## 1. Thesis
+## 1. 论点
 
-An expert-quality earthquake catalog is not the output of a fixed tool chain. It comes from a loop of *run → diagnose → repair upstream → rerun*, and the knowledge that drives the loop is experience:
+专家质量的地震目录不是一条固定工具链的输出。它来自一个 *运行 → 诊断 → 修复上游 → 重新运行* 的循环，而驱动这一循环的知识是经验：
 
-1. **parameter and method strategies** — which choices matter at each stage and which ranges are safe;
-2. **diagnosis** — when a stage's result looks wrong, which upstream choice most likely caused it;
-3. **repair** — what to change upstream, and how to confirm the change helped without the hidden references.
+1. **参数与方法策略**——每个阶段哪些选择重要，哪些范围是安全的；
+2. **诊断**——当某一阶段的结果看起来不对时，最可能是哪个上游选择造成的；
+3. **修复**——在上游改什么，以及如何在没有隐藏参考目录的情况下确认改动有效。
 
-This experience can be written down as a reference-free **checker**: a set of internal diagnostics with a symptom → cause → repair playbook, which an Agent could call to improve its own catalog.
+这些经验可以写成一个无需参考目录的 **checker**：一组内部诊断，配有 症状 → 原因 → 修复 的操作手册，Agent 可以调用它来改进自己的目录。
 
-The benchmark's central question follows: **does a general-purpose Agent, given no such checker, produce a catalog usable for scientific discovery — and how much of the gap to the expert does the checker close?**
+由此得出基准的核心问题：**一个通用 Agent 在没有这种 checker 的情况下，能否产出可用于科学发现的目录——以及 checker 能弥合它与专家之间差距的多少？**
 
-## 2. How much the choices matter
+## 2. 这些选择有多重要
 
-### 2.1 Within the range an expert would consider: modest for detection, large for location and magnitude
+### 2.1 在专家会考虑的范围内：对检测影响有限，对定位和震级影响大
 
-Expert ladder (`evaluation/human_in_loop/expert_ladder.json`; each row one adopted round, one change):
+专家阶梯（`evaluation/human_in_loop/expert_ladder.json`；每行是一个被采纳的轮次、一项改动）：
 
-| Stage | Change (case) | Effect |
+| 阶段 | 改动（案例） | 效果 |
 |---|---|---|
-| association | GaMMA DBSCAN window 10 → 15 s (Kaikōura) | recall_norm 0.81 → 0.88; F1 M2+ 0.85 → 0.94; shift 2.38 → 1.14 km |
-| picking | PhaseNet threshold 0.3 → 0.2 (Magna) | recall_norm 0.74 → 0.79 |
-| picking | vertical-only sites handled (Maple, r3–r4) | recall_norm 1.09 → 1.12 |
-| association | method GaMMA / PyOcto / REAL (Prague stage 70) | recall ±1–2 points |
-| location | station delays (Kaikōura; Maple) | scatter 2.94 → 2.35 km; 0.83 → 0.69 km, shift 0.86 → 0.46 km |
-| location | NLL GAU → EDT (Prague; Kīlauea) | scatter 0.41 → 0.31 km, p90 1.33 → 0.84 km; 0.76 → 0.67 km |
-| location | double difference with Match&Locate (Ridgecrest; Magna) | scatter 0.82 → 0.42 km; 0.91 → 0.47 km |
-| location | published layered frame (Ridgecrest) | scatter 0.39 → 0.22 km, shift 0.46 → 0.37 km |
-| magnitude | ML distance recalibration, station corrections (Magna) | dmag spread 0.21 → 0.13, slope −0.24 → −0.05 |
-| magnitude | direct ML for large events (Maple; Magna) | M4+ offset −0.90 → −0.21; M5.7 4.72 → 5.46 |
+| 关联 | GaMMA DBSCAN 窗口 10 → 15 s（Kaikōura） | recall_norm 0.81 → 0.88；F1 M2+ 0.85 → 0.94；偏移 2.38 → 1.14 km |
+| 拾取 | PhaseNet 门槛 0.3 → 0.2（Magna） | recall_norm 0.74 → 0.79 |
+| 拾取 | 处理仅有垂直分量的台站（Maple，r3–r4） | recall_norm 1.09 → 1.12 |
+| 关联 | 方法 GaMMA / PyOcto / REAL（Prague 阶段 70） | 召回率 ±1–2 个百分点 |
+| 定位 | 台站延迟（Kaikōura；Maple） | 离散度 2.94 → 2.35 km；0.83 → 0.69 km，偏移 0.86 → 0.46 km |
+| 定位 | NLL GAU → EDT（Prague；Kīlauea） | 离散度 0.41 → 0.31 km，p90 1.33 → 0.84 km；0.76 → 0.67 km |
+| 定位 | 双差结合 Match&Locate（Ridgecrest；Magna） | 离散度 0.82 → 0.42 km；0.91 → 0.47 km |
+| 定位 | 已发表的分层框架（Ridgecrest） | 离散度 0.39 → 0.22 km，偏移 0.46 → 0.37 km |
+| 震级 | ML 距离重新标定、台站校正（Magna） | dmag 离散 0.21 → 0.13，斜率 −0.24 → −0.05 |
+| 震级 | 大事件直接计算 ML（Maple；Magna） | M4+ 偏差 −0.90 → −0.21；M5.7 4.72 → 5.46 |
 
-Detection parameters move the normalised recall by ≤ 0.07; a change of *method* — template matching — moves it by 0.2–0.6 in every case (Prague 1.17 → 1.81, Magna 0.79 → 1.16, Kīlauea 0.93 → 1.15, Kaikōura 0.88 → 1.17, Ridgecrest 1.20 → 1.40). Location and magnitude choices change precision by 20–50 %.
+检测参数使归一化召回的变化 ≤ 0.07；而*方法*的改变——模板匹配——在每个案例中都使其变化 0.2–0.6（Prague 1.17 → 1.81，Magna 0.79 → 1.16，Kīlauea 0.93 → 1.15，Kaikōura 0.88 → 1.17，Ridgecrest 1.20 → 1.40）。定位和震级的选择使精度变化 20–50 %。
 
-### 2.2 Outside that range: an order of magnitude larger
+### 2.2 超出该范围：大一个数量级
 
-| Wrong choice | Effect | Source |
+| 错误选择 | 效果 | 来源 |
 |---|---|---|
-| Agent's own velocity model / locator (Ridgecrest tools, min) | depth +8 to +9 km, origin time −0.6 / +0.5 s; relocating the same picks with the expert locator gives −1.0 / −1.5 km | component swap, `runs_pilot/*/evaluation/swap/` (pilot runs, pre-2026-10-28 prompts) |
-| Agent fixes depth at 10 km (Magna min) | 42 % of events at one depth; 2 % after expert relocation | swap |
-| Agent magnitude scale (Ridgecrest min, Magna min) | −0.99 and +0.57 offsets, b 0.38 vs 0.60 | metrics v1 strength |
-| Grid bound at the surface (Ridgecrest blind) | 16 % of events at the grid top; the mainshocks among them | ladder, stage 66 |
-| Velocity interface (Prague) | 9–12 % of events at 2.00 km, the 2.25-km Keranen interface | depth profile |
-| Linear ramp between layer tops (Maple, Magna) | origins +0.47 s late against the published layered model | Maple r2, Magna r9 |
-| Step layering without re-tuning the basin layer (Magna r9) | every location statistic worse (dZ −0.08 → −0.74 km) | Magna PLAN r9, rejected |
-| EDT where the model was calibrated under GAU (Magna) | epicentres +0.4 km | stage-04 EDT test |
-| One mislocated template (Kīlauea r5) | its 160 detections ~6 km off | Kīlauea PLAN r5, rejected |
-| Template-derived arrivals in dt.ct (Ridgecrest) | DD collapses detections onto templates (fake 0.05 km thickness) | Ridgecrest PLAN stage 62 |
-| Bulk QC rule applied to large events (Ridgecrest) | M7.1, M6.4, M5.4 lost from every later round | stage 66 |
-| Chained relative magnitudes (all cases) | large events compressed (direct − chain +0.36 at M2–3, +0.74 for M5.7); spread doubles at Kīlauea | stage 65 |
-| Coda of large events in Match&Locate (Ridgecrest) | 629 ghost detections, inflated M2–3 | stage 67 review |
+| Agent 自己的速度模型 / 定位器（Ridgecrest tools、min） | 深度 +8 至 +9 km，发震时刻 −0.6 / +0.5 s；用专家定位器对同一批拾取重新定位得到 −1.0 / −1.5 km | 组件替换，`runs_pilot/*/evaluation/swap/`（小批量运行，2026-10-28 之前的提示词） |
+| Agent 将深度固定为 10 km（Magna min） | 42 % 的事件位于同一深度；专家重新定位后为 2 % | 组件替换 |
+| Agent 的震级标度（Ridgecrest min、Magna min） | 偏差 −0.99 和 +0.57，b 0.38 对 0.60 | metrics v1 强度 |
+| 网格边界设在地表（Ridgecrest 盲轮） | 16 % 的事件位于网格顶部，其中包括主震 | 阶梯，阶段 66 |
+| 速度界面（Prague） | 9–12 % 的事件位于 2.00 km，即 Keranen 的 2.25-km 界面 | 深度剖面 |
+| 层顶之间的线性渐变（Maple、Magna） | 相对已发表的分层模型，发震时刻晚 +0.47 s | Maple r2，Magna r9 |
+| 阶跃分层但未重新调整盆地层（Magna r9） | 所有定位统计量都变差（dZ −0.08 → −0.74 km） | Magna PLAN r9，被否决 |
+| 在模型按 GAU 标定的情况下使用 EDT（Magna） | 震中 +0.4 km | 阶段 04 EDT 测试 |
+| 一个定位错误的模板（Kīlauea r5） | 其 160 个检测偏离约 6 km | Kīlauea PLAN r5，被否决 |
+| dt.ct 中使用模板推导的到时（Ridgecrest） | DD 将检测压缩到模板上（虚假的 0.05 km 厚度） | Ridgecrest PLAN 阶段 62 |
+| 将批量质控规则用于大事件（Ridgecrest） | M7.1、M6.4、M5.4 在之后每一轮中都丢失 | 阶段 66 |
+| 串联的相对震级（所有案例） | 大事件被压缩（直接 − 串联：M2–3 为 +0.36，M5.7 为 +0.74）；Kīlauea 的离散翻倍 | 阶段 65 |
+| Match&Locate 中的大事件尾波（Ridgecrest） | 629 个幽灵检测，M2–3 被虚增 | 阶段 67 审查 |
 
-Choices also **interact**: the Magna basin layer was tuned under a linear ramp, so the physically more faithful step layering made results worse until re-tuned; EDT helped five cases and hurt Magna for the same reason.
+选择之间还会**相互作用**：Magna 盆地层是在线性渐变下调整的，因此物理上更真实的阶跃分层在重新调整之前反而使结果变差；EDT 改善了五个案例，而出于同样的原因使 Magna 变差。
 
-### 2.3 Where Agent errors actually sit (component swap)
+### 2.3 Agent 的误差实际在哪里（组件替换）
 
-Relocating an Agent's own picks and associations with the expert's model and locator (no station delays):
+用专家的模型和定位器（无台站延迟）对 Agent 自己的拾取和关联重新定位：
 
-| Run | Agent's own locations | Expert locator, Agent's picks | Human-in-loop final |
+| 运行 | Agent 自己的定位 | 专家定位器、Agent 的拾取 | human-in-loop 最终目录 |
 |---|---|---|---|
-| Ridgecrest tools | scatter 1.04 km, dZ +8.1 km, off-structure 14 % | 0.80 km, −1.0 km, 8 % | 0.21 km, −0.09 km, 0.5 % |
-| Ridgecrest min | 3.27 km, +9.1 km, 44 % | 1.75 km, −1.5 km, 33 % | 0.21 km, −0.09 km, 0.5 % |
-| Magna min | 1.03 km, fixed depth 42 %, off 4 % | 1.00 km, 2 %, 0.4 % | 0.48 km, 1 %, 0.3 % |
-| Magna tools (formal, 2026-10-28) | shift 2.50 km, scatter 0.38 km, dZ −1.72 km | shift 1.63 km, 1.12 km, −0.76 km | shift 0.95 km, 0.48 km, +0.09 km |
+| Ridgecrest tools | 离散度 1.04 km，dZ +8.1 km，偏离构造 14 % | 0.80 km，−1.0 km，8 % | 0.21 km，−0.09 km，0.5 % |
+| Ridgecrest min | 3.27 km，+9.1 km，44 % | 1.75 km，−1.5 km，33 % | 0.21 km，−0.09 km，0.5 % |
+| Magna min | 1.03 km，固定深度 42 %，偏离 4 % | 1.00 km，2 %，0.4 % | 0.48 km，1 %，0.3 % |
+| Magna tools（正式，2026-10-28） | 偏移 2.50 km，离散度 0.38 km，dZ −1.72 km | 偏移 1.63 km，1.12 km，−0.76 km | 偏移 0.95 km，0.48 km，+0.09 km |
 
-With tools, relocating the Agent's picks with the expert's model and locator removes most of its depth error, so its large errors are back-end *choices*. The remaining distance to the final (Ridgecrest scatter 0.80 vs 0.21 km, off-structure 8 % vs 0.5 %) is what the expert's later steps add — station delays, template matching, double difference, the layered frame — and is attributed with the ladder. Without tools, both ends fail. (Ridgecrest and Magna min are pilot runs; the human-in-loop final is the upper bound, see `02_Catalog_Metrics.md` §11.) These are exactly the errors a checker can see without references (depth pile-ups, origin-time–depth coupling, fixed depths, magnitude-scale sanity).
+有工具时，用专家的模型和定位器对 Agent 的拾取重新定位就消除了其大部分深度误差，因此其大误差来自后端*选择*。与最终目录之间剩余的差距（Ridgecrest 离散度 0.80 对 0.21 km，偏离构造 8 % 对 0.5 %）是专家后续步骤带来的——台站延迟、模板匹配、双差、分层框架——并由阶梯进行归因。没有工具时，前后两端都失败。（Ridgecrest 和 Magna min 是小批量运行；human-in-loop 最终目录是上限，见 `02_Catalog_Metrics.md` §11。）这些正是 checker 无需参考目录就能看到的误差（深度堆积、发震时刻–深度耦合、固定深度、震级标度合理性）。
 
-### 2.4 Knowledge swaps on the formal runs (2026-10-31)
+### 2.4 正式运行上的知识替换（2026-10-31）
 
-Two swaps on the formal `tools` runs (claude × glm-5.3) isolate what knowledge, rather than tools, would change. Everything else (picks, associations, event IDs) stays the Agent's own; scores use the same scorer and trusted-catalog verdict.
+在正式 `tools` 运行（claude × glm-5.3）上做的两项替换，分离出知识（而非工具）会带来的改变。其余一切（拾取、关联、事件 ID）都保留 Agent 自己的；评分使用同一评分器和可信目录判定。
 
-**Velocity model.** All events relocated with the Agent's picks and the published regional model the expert used, applied the expert's way (reference elevation at the model datum, depth search 0–20 km below it, NonLinLoc EDT_OT_WT; no station delays, no expert tuning). Relocations that fail keep the Agent's solution.
+**速度模型。** 所有事件都用 Agent 的拾取和专家所用的已发表区域模型重新定位，并按专家的方式使用（参考高程设在模型基准面，深度搜索为其下 0–20 km，NonLinLoc EDT_OT_WT；无台站延迟，无专家调参）。重新定位失败的事件保留 Agent 的解。
 
-| Run | Model | Agent's own: dt / dZ | Swapped: dt / dZ | Failed criteria |
+| 运行 | 模型 | Agent 自己的：dt / dZ | 替换后：dt / dZ | 不通过的判据 |
 |---|---|---|---|---|
-| Kīlauea tools | HVO Klein (linear) | −0.36 s / +0.45 km | 0.00 s / −0.06 km | 1 → **0** (audit pending) |
-| Prague tools | Keranen et al. (2013) | +0.06 s / +1.10 km | +0.01 s / −0.00 km | 2 → 2 (depth fixed; magnitude left; inside-region 10.4 % at the 10 % limit) |
-| Magna tools | Bjarnason & Pechmann (1989), published | −0.19 s / −1.94 km | +0.13 s / −1.59 km | 3 → 5 (10 % pinned at the search top; the expert's model adds a 2-km basin-fill layer) |
-| Maple tools | UUSS Yellowstone 1-D | +1.15 s / −2.18 km | +0.55 s / −3.25 km | 6 → 8 (21 % piled at the model's 2.8→5.2 km/s interface) |
-| Ridgecrest tools | LITHO1.0 (the expert's model comes from a target paper) | +0.05 s / −2.31 km, 36 % pinned | −0.32 s / +2.31 km, 3 % pinned | 6 → 8 |
+| Kīlauea tools | HVO Klein（线性） | −0.36 s / +0.45 km | 0.00 s / −0.06 km | 1 → **0**（审核待完成） |
+| Prague tools | Keranen et al. (2013) | +0.06 s / +1.10 km | +0.01 s / −0.00 km | 2 → 2（深度已修正；震级仍未解决；inside-region 10.4 %，恰在 10 % 限值处） |
+| Magna tools | Bjarnason & Pechmann (1989)，已发表 | −0.19 s / −1.94 km | +0.13 s / −1.59 km | 3 → 5（10 % 被钉在搜索顶部；专家的模型额外加了一个 2-km 盆地充填层） |
+| Maple tools | UUSS Yellowstone 1-D | +1.15 s / −2.18 km | +0.55 s / −3.25 km | 6 → 8（21 % 堆积在模型的 2.8→5.2 km/s 界面） |
+| Ridgecrest tools | LITHO1.0（专家的模型来自一篇目标论文） | +0.05 s / −2.31 km，36 % 被钉住 | −0.32 s / +2.31 km，3 % 被钉住 | 6 → 8 |
 
-A first pass with a generic set-up (reference elevation at the highest station, no depth bound) gave the same Kīlauea and Prague gains but made Magna and Maple worse for a different reason (events above the datum): using a model the right way matters as much as choosing it. Which model fits best cannot be read from the travel-time residual: on 100-event samples the lowest-residual generic model was also the least biased only for Prague; at Kīlauea and Maple a generic model fitted better than the regional model and was far more biased.
+第一轮使用通用设置（参考高程设在最高台站，无深度边界），得到同样的 Kīlauea 和 Prague 收益，但出于另一个原因（事件位于基准面之上）使 Magna 和 Maple 变差：正确地使用模型与选择模型同样重要。哪个模型拟合最好无法从走时残差中读出：在 100 个事件的样本上，残差最低的通用模型仅在 Prague 同时也是偏差最小的；在 Kīlauea 和 Maple，某个通用模型比区域模型拟合得更好，偏差却大得多。
 
-**Magnitude.** A reference implementation of the IASPEI standard ML (`data/agent_resource/magnitude/`) recomputed 30 events per run from the waveforms:
+**震级。** IASPEI 标准 ML 的一个参考实现（`data/agent_resource/magnitude/`）从波形为每个运行重新计算了 30 个事件：
 
-| Run | Offset to the reference catalog | Catalog − recomputed standard ML | Cause |
+| 运行 | 相对参考目录的偏差 | 目录 − 重新计算的标准 ML | 原因 |
 |---|---|---|---|
-| Prague tools | −2.77 | −2.60 (spread 0.05) | WA-record amplitude in mm used with the constant for nm (−2.68) |
-| Kīlauea min | −2.43 | −2.29 (0.14) | same |
-| Ridgecrest tools | −1.21 | −1.18 (0.10) | ObsPy's one-zero (velocity-input) WA response applied to displacement |
-| Magna tools | +0.67 | +0.19 (0.11) | implementation sound; the rest is regional calibration |
+| Prague tools | −2.77 | −2.60（离散 0.05） | 以 mm 为单位的 WA 记录振幅与适用于 nm 的常数（−2.68）一起使用 |
+| Kīlauea min | −2.43 | −2.29（0.14） | 同上 |
+| Ridgecrest tools | −1.21 | −1.18（0.10） | 将 ObsPy 的单零点（速度输入）WA 响应用于位移 |
+| Magna tools | +0.67 | +0.19（0.11） | 实现无误；其余来自区域标定 |
 
-**Reading.** The two largest error sources that keep runs from a trusted catalog are knowledge, not tools: the regional velocity model and how to use it, and the units of the magnitude relation. Both have standard, citable sources (regional models; IASPEI/NMSOP-2 for magnitudes) and both can be checked against the Agent's own data (the checker's depth pile-up, S−P depth and magnitude recomputation). Where the regional structure is not in a published model (a basin layer) or the model is only in a target paper, the knowledge is harder to obtain and the gain smaller.
+**解读。** 使运行达不到可信目录的两个最大误差来源是知识而非工具：区域速度模型及其用法，以及震级关系式的单位。两者都有标准、可引用的来源（区域模型；震级用 IASPEI/NMSOP-2），并且都可以用 Agent 自己的数据检验（checker 的深度堆积、S−P 深度和震级重算）。若区域结构不在已发表的模型中（盆地层），或模型只存在于目标论文中，这种知识就更难获得，收益也更小。
 
-### 2.5 Summary
+### 2.5 小结
 
-- Within an expert's working range, parameters change detection little and precision moderately; the big detection gain needs a different method.
-- Outside it, single choices produce errors 5–10× the expert's (depth, frame, magnitude scale) and are invisible in a recall number.
-- The expert reached the final catalog by detecting such failures in intermediate results and repairing upstream; several of those repairs were only found because the evaluation looked at the right diagnostic (depth profile, magnitude by class, event lists of large events).
+- 在专家的工作范围内，参数对检测的改变很小，对精度的改变中等；检测上的大幅收益需要换一种方法。
+- 超出这个范围，单个选择就会产生专家误差 5–10× 的误差（深度、框架、震级标度），而且在召回率数字中看不出来。
+- 专家通过在中间结果中发现这类失败并修复上游，才得到最终目录；其中有几项修复之所以被发现，只是因为评估看了正确的诊断（深度剖面、按类别的震级、大事件的事件列表）。
 
-## 3. The checker: stage diagnostics, likely causes, upstream repairs
+## 3. checker：阶段诊断、可能原因、上游修复
 
-Every check below uses only the Agent's own data and products (no reference catalog). "Evidence" names where the rule was learned.
+下面的每项检查只使用 Agent 自己的数据和产品（不使用参考目录）。“证据”一列注明该规则是从哪里学到的。
 
-| Stage | Reference-free check | Symptom | Most likely cause | Upstream repair | Evidence |
+| 阶段 | 无参考检查 | 症状 | 最可能的原因 | 上游修复 | 证据 |
 |---|---|---|---|---|---|
-| inventory | channel families, sample rates, vertical-only sites, clipping | stations without horizontals; plateaus | sensor type, saturation | P-only handling or Z copy; exclude clipped traces | Maple r3–r4; stage 65 |
-| picking | picks per station vs distance; P/S ratio; pick − onset offset on large events | near stations missing; late picks on mainshocks | threshold; probability-peak vs onset | lower threshold; onset-based times for large events | Magna r5; Ridgecrest mainshock audit |
-| association | events per hour vs pick rate; duplicate origins within seconds; picks per event | split or merged events | time window (DBSCAN eps), region bounds | widen window; restrict bounds to the source region | Kaikōura r3; Kīlauea r2 |
-| location | **depth profile**: share at one value / at the grid bounds / at a model interface | pile-ups (fixed depth, grid top, 2.00 km) | grid bounds, model interface, depth not resolved | widen the grid; depth prior or flag; never fix depth silently | Prague, Ridgecrest blind, Magna r8, Agent runs |
-| location | **origin time vs depth** coupling; residual mean per station | origins early with deep events; station residual bias | velocity model too fast/slow; datum; missing station terms | change model or representation (step vs linear); station delays | Ridgecrest tools (swap); Maple r2/r5 |
-| location | **locator spread** (GAU, EDT, HypoInverse on the same picks) | events whose solutions disagree | outlier picks, poor geometry | EDT; flag high-spread events | Prague stage 70 (ρ 0.59 with error) |
-| location | gap, σx, RMS, CC links to neighbours | isolated off-trend events | weak geometry, wrong association | location-quality rule — but exempt large events | Ridgecrest r08, stage 66 |
-| relative relocation | thickness of DD clusters; source of dt | implausibly thin clusters | template-derived arrivals in dt.ct | picks-only dt.ct plus CC | Ridgecrest stage 62 |
-| detection beyond picking | null run (shifted data) false rate; detections per template; CC near larger events | false rate > 1–2 %; template families offset; ghosts in coda | threshold, mislocated template, coda | raise N×MAD; quality-filter templates; remove low-CC detections near larger events | Magna/Prague null runs; Kīlauea r5; stage 67 |
-| magnitude | direct ML on a subset vs chained ML; slope vs magnitude; b-value and Mc plausibility | large events compressed; b far from ~1 | relative chains, clipping, calibration | direct ML for large events; distance and station terms; flag saturation | stage 65; Magna r2–r3 |
-| QC / completeness | largest events present; per-period counts | mainshocks or aftershock bursts missing | bulk rule deleting large events | restore depth-bound large events, keep flags | stage 66 |
+| 台站清单 | 通道族、采样率、仅垂直分量台站、削波 | 台站缺少水平分量；平顶 | 传感器类型、饱和 | 仅 P 处理或复制 Z 分量；排除削波道 | Maple r3–r4；阶段 65 |
+| 拾取 | 每台站拾取数随距离的变化；P/S 比；大事件上拾取 − 初动偏移 | 近台缺失；主震拾取偏晚 | 门槛；概率峰值与初动之差 | 降低门槛；大事件使用基于初动的时刻 | Magna r5；Ridgecrest 主震审查 |
+| 关联 | 每小时事件数与拾取率对比；几秒内的重复发震；每事件拾取数 | 事件被拆分或合并 | 时间窗口（DBSCAN eps）、区域边界 | 加宽窗口；将边界限制在震源区 | Kaikōura r3；Kīlauea r2 |
+| 定位 | **深度剖面**：位于单一值 / 网格边界 / 模型界面处的比例 | 堆积（固定深度、网格顶部、2.00 km） | 网格边界、模型界面、深度无法分辨 | 扩大网格；使用深度先验或报警；绝不默默固定深度 | Prague、Ridgecrest 盲轮、Magna r8、Agent 运行 |
+| 定位 | **发震时刻与深度**耦合；每台站残差均值 | 深事件的发震时刻偏早；台站残差偏差 | 速度模型偏快/偏慢；基准面；缺少台站项 | 更换模型或表示方式（阶跃与线性）；台站延迟 | Ridgecrest tools（组件替换）；Maple r2/r5 |
+| 定位 | **定位器间离散**（同一批拾取上的 GAU、EDT、HypoInverse） | 各解不一致的事件 | 离群拾取、几何条件差 | EDT；对高离散事件报警 | Prague 阶段 70（与误差的 ρ 0.59） |
+| 定位 | 方位间隙、σx、RMS、与邻近事件的 CC 连接 | 偏离趋势的孤立事件 | 几何条件弱、关联错误 | 定位质量规则——但豁免大事件 | Ridgecrest r08，阶段 66 |
+| 相对定位 | DD 簇的厚度；dt 的来源 | 不合理地薄的簇 | dt.ct 中使用模板推导的到时 | 仅基于拾取的 dt.ct 加 CC | Ridgecrest 阶段 62 |
+| 拾取之外的检测 | 空运行（时移数据）的误检率；每个模板的检测数；较大事件附近的 CC | 误检率 > 1–2 %；模板族偏移；尾波中的幽灵检测 | 门槛、定位错误的模板、尾波 | 提高 N×MAD；按质量筛选模板；移除较大事件附近的低 CC 检测 | Magna/Prague 空运行；Kīlauea r5；阶段 67 |
+| 震级 | 子集上直接 ML 与串联 ML 对比；斜率随震级变化；b 值和 Mc 的合理性 | 大事件被压缩；b 远离 ~1 | 相对串联、削波、标定 | 大事件直接计算 ML；距离项和台站项；对饱和报警 | 阶段 65；Magna r2–r3 |
+| 质控 / 完整性 | 最大事件是否存在；分时段计数 | 主震或余震爆发缺失 | 批量规则删除了大事件 | 恢复深度受限的大事件，保留报警 | 阶段 66 |
 
-Checks that did **not** work and should not be in a checker: an RMS onset test for coda ghosts (39 % of real M2–3 detections fail it in dense coda); RMS-based location rules (too blunt; high-RMS templates still detect well).
+**未能**奏效、不应放入 checker 的检查：针对尾波幽灵的 RMS 初动检验（在密集尾波中，39 % 的真实 M2–3 检测不能通过）；基于 RMS 的定位规则（过于粗糙；高 RMS 的模板仍然检测效果良好）。
 
-## 4. Implications for the evaluation design
+## 4. 对评估设计的启示
 
-1. The checker must be reference-free and case-agnostic (rules and ranges, no case-specific numbers), and its use logged, so a checker arm does not become a leakage channel.
-2. The checker was learned on these six cases. Report checker-arm results separately for the cases a rule came from and the others, or hold out cases when writing it, so the gain is not circular.
-3. The checker's form must not change the Agent: diagnostics are a deterministic tool in `seismo_checker/`, the knowledge and the playbook are an Agent Skill, and the contract requires the checker report with a disposition per flag. No custom loop and no subagent ([research plan](./00_Research_Plan.md) §2.5).
-4. Some expert gains are reference-informed (Ridgecrest layered frame from Shelly's model; Magna ML recalibration against UUSS). Agent runs are compared with the final (the upper bound), and the ladder separates these steps from what an Agent could have known.
-5. Every run gets the component swap: front-end versus back-end attribution is the most direct test of what a checker would have fixed.
+1. checker 必须无需参考目录且与案例无关（规则和范围，不含针对具体案例的数字），并记录其使用情况，以免 checker 变体成为泄漏通道。
+2. checker 是在这六个案例上学到的。对规则来源的案例和其他案例分别报告 checker 变体的结果，或在编写时留出案例，以免收益成为循环论证。
+3. checker 的形式不得改变 Agent：诊断是 `seismo_checker/` 中的确定性工具，知识和操作手册是一个 Agent Skill，契约要求 checker 报告对每个报警给出处置。不使用自定义循环，也不使用 subagent（[研究计划](./00_Research_Plan.md) §2.5）。
+4. 部分专家收益依赖参考目录（Ridgecrest 分层框架来自 Shelly 的模型；Magna ML 依据 UUSS 重新标定）。Agent 运行与最终目录（上限）比较，阶梯将这些步骤与 Agent 本可以知道的内容区分开。
+5. 每个运行都做组件替换：前端与后端的归因是对 checker 能修复什么的最直接检验。
 
-## 5. Human-in-loop interventions
+## 5. human-in-loop 干预
 
-The human-in-loop final is the upper bound, but it was reached with references in view. Coding what the human did in each round shows which part of the final an Agent could reach on its own, and through which stage. Status: planned for Phase A ([`progress/STATUS_AND_PLAN.md`](./progress/STATUS_AND_PLAN.md)), no compute.
+human-in-loop 最终目录是上限，但它是在能看到参考目录的情况下得到的。对人在每一轮所做的事情进行编码，可以显示最终目录中哪一部分 Agent 能够自己达到，以及通过哪个阶段达到。状态：计划在 Phase A 进行（[`progress/STATUS_AND_PLAN.md`](./progress/STATUS_AND_PLAN.md)），无需计算。
 
-Code every intervention in the six `expert/PLAN.md` histories and the ladder (`evaluation/human_in_loop/expert_ladder.json`) into one of four classes:
+将六个 `expert/PLAN.md` 历史和阶梯（`evaluation/human_in_loop/expert_ladder.json`）中的每项干预编码为以下四类之一：
 
-| Class | Example | Automatable by |
+| 类别 | 示例 | 可由什么自动化 |
 |---|---|---|
-| execution / tool | fix a tool call, resampling, file handling | tools (S1) |
-| method choice | add template matching, EDT, direct ML | knowledge (S2) |
-| reference-free diagnosis | depth pile-up, origin-time–depth coupling, coda ghosts | checker (S3) |
-| reference-informed diagnosis | Ridgecrest layered frame from Shelly; Magna ML calibration against UUSS | not automatable without references |
+| 执行 / 工具 | 修复工具调用、重采样、文件处理 | 工具（S1） |
+| 方法选择 | 加入模板匹配、EDT、直接 ML | 知识（S2） |
+| 无参考诊断 | 深度堆积、发震时刻–深度耦合、尾波幽灵 | checker（S3） |
+| 依赖参考的诊断 | Ridgecrest 分层框架来自 Shelly；Magna ML 依据 UUSS 标定 | 没有参考目录则无法自动化 |
 
-The share of each class, weighted by its ladder effect, predicts the largest gap closure S3 can achieve. The last class is the part of the final no Agent can reach without references.
+按阶梯效应加权后各类的占比，预测了 S3 所能实现的最大差距弥合。最后一类是最终目录中任何 Agent 在没有参考目录时都无法达到的部分。
 
-The stage ladder these classes map onto changed on 2026-10-29: S2 was "checker, symptoms only" and S3 "checker + playbook". That ladder had no stage for knowledge without a checker, so the question "does knowledge matter?" had no contrast. "Diagnosis versus repair knowledge" is now the optional `tools + checker` arm.
+这些类别所对应的阶段阶梯在 2026-10-29 发生了变化：S2 原为“checker，仅症状”，S3 原为“checker + 操作手册”。那个阶梯没有“有知识、无 checker”的阶段，因此“知识是否重要？”这个问题没有对照。“诊断知识与修复知识的对比”现在是可选的 `tools + checker` 变体。
