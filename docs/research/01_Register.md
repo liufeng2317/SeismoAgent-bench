@@ -31,7 +31,7 @@
 | B5 | E1 checker 的可靠性：可达结果上的误报、误差已知目录上的检出、合成植入错误的检出 | 图 3、可靠性表 | ✅ | 1.3 预实验版（[14](progress/records/14_e1_reliability.md)，2026-11-05）；正式运行后复核 |
 | B6 | E2 后端消融：拾取和关联固定，比较"只有工具 / + checker / + checker 和知识" | 图 4 | 🟡 | 用 1.0、1.2 做过预实验（[04](progress/records/04_tier_b_backend.md)）；1.3 未做 |
 | B7 | 离线确定边界：哪些误差只靠自身数据看不到 | 检验记录、知识 skill 条目 | ✅ | 近地表、从数据建模型、水平偏移、模板匹配（[05](progress/records/05_near_surface_magnitude_matching.md)、[08](progress/records/08_velocity_from_data.md)、[09](progress/records/09_horizontal_shift.md)、[10](progress/records/10_template_threshold.md)） |
-| B8 | 冻结正式实验方案（§4） | 冻结的提交号 | ⬜ | §5 已决定，C5 已完成；可以冻结 |
+| B8 | 冻结正式实验方案（§4） | 冻结的提交号 | ✅ | 2026-11-05，提交 `5327df0`，标签 `prereg-b-2026-11-05` |
 | B9 | E3 主实验：用现在的工具重跑 S1，每个案例 2 次 | 12 次运行及评分 | ⬜ | 先跑 Maple、Kīlauea |
 | B10 | E3 主实验：S3，每个案例 2 次 | 12 次运行及评分 | ⬜ | 与 B9 同时进行 |
 | B11 | S2c 消融（按需） | 每个案例 1 次 | ⬜ | 只在 S3 有效果时运行（§5 第 4 项） |
@@ -56,7 +56,9 @@
 | A8 | 复用：数据包、评分程序、后端轨道和精简轨道 | 发布包 | 🟡 | 后端轨道已有（B 层任务包） |
 | A9 | 登记 H-A1–H-A5（A1–A3 确定后） | 本表 §4 的附登记 | ⬜ | |
 
-## 4. 正式实验方案（计划 B，待冻结）
+## 4. 正式实验方案（计划 B，已冻结）
+
+**冻结：** 2026-11-05，冻结内容为提交 `5327df0`，本地标签 `prereg-b-2026-11-05`（指向记录本次冻结的提交）；`checker-v1.3` 移到同一内容（`seismo_checker/` 与原标签相比只差两处指向设计文档路径的文字）。之后的任何改动只能记在 §6 偏离记录中。
 
 **设计**
 
@@ -67,7 +69,7 @@
 | 主比较 | S1 `tools`（工具库）对 S3 `knowledge`（S1 + checker + checker skill + 知识 skill + 震级资源 + checker 输出约定），每个案例各 2 次，共 24 次 |
 | 消融（按需） | S2c `checker`：S1 + checker 和 checker skill，无知识 |
 | 任务 | 完整流程，从连续波形到目录和拾取；时间预算 48 小时；提示词不写研究区域 |
-| 冻结的材料 | 评分器、各案例评分配置和可达结果、`checker-v1.3`、`seismotools/` 的提交号、各案例提示词和输出约定、Agent 运行配置 |
+| 冻结的材料 | 提交 `5327df0` 中的：评分器（`SeismoAgentBench/scoring/`）、各案例 `evaluation/metrics.yaml` 和基线、可达结果；`seismo_checker/` 和 `data/agent_resource/`（标签 `checker-v1.3`）；`seismotools/`；各案例 `prompt_tools.md`、`prompt_knowledge.md`、`prompt_checker.md`、输出约定和 `run.sh`；Agent 运行配置 `SeismoAgentBench/configs/agents/claude.yaml` |
 
 **评估：** 精度标准为已发表的高精度目录和官方目录；可达结果用于计算差距弥合率 (S3 − S1) / (可达结果 − S1)；可信目录标准见[计划 A §4.2](./00_A_Research_Plan_Benchmark.md)；高精度按[计划 B §4.1](./00_B_Research_Plan_Checker.md)；评分端重跑 checker 核对报告和处置。
 
