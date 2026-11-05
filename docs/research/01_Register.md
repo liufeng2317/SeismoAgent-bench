@@ -32,8 +32,8 @@
 | B6 | E2 后端消融：拾取和关联固定，比较"只有工具 / + checker / + checker 和知识" | 图 4 | 🟡 | 用 1.0、1.2 做过预实验（[04](progress/records/04_tier_b_backend.md)）；1.3 未做 |
 | B7 | 离线确定边界：哪些误差只靠自身数据看不到 | 检验记录、知识 skill 条目 | ✅ | 近地表、从数据建模型、水平偏移、模板匹配（[05](progress/records/05_near_surface_magnitude_matching.md)、[08](progress/records/08_velocity_from_data.md)、[09](progress/records/09_horizontal_shift.md)、[10](progress/records/10_template_threshold.md)） |
 | B8 | 冻结正式实验方案（§4） | 冻结的提交号 | ✅ | 2026-11-05，提交 `5327df0`，标签 `prereg-b-2026-11-05`；2026-11-06 加入 checker 1.4 后重新冻结，提交 `f59d824`，标签 `prereg-b-2026-11-06` |
-| B9 | E3 主实验：用现在的工具重跑 S1，每个案例 2 次 | 12 次运行及评分 | ⬜ | 先跑 Maple、Kīlauea |
-| B10 | E3 主实验：S3，每个案例 2 次 | 12 次运行及评分 | ⬜ | 与 B9 同时进行 |
+| B9 | E3 主实验：用现在的工具重跑 S1，每个案例 2 次 | 12 次运行及评分 | 🟡 | 2026-11-06 开始，一次只跑一个：Maple S1 → Maple S3 → Kīlauea S1 → Kīlauea S3，再按同样顺序跑第二轮；其余四个案例随后 |
+| B10 | E3 主实验：S3，每个案例 2 次 | 12 次运行及评分 | 🟡 | 与 B9 交替进行（见 B9） |
 | B11 | S2c 消融（按需） | 每个案例 1 次 | ⬜ | 只在 S3 有效果时运行（§5 第 4 项） |
 | B12 | E4 处置分析：报警、真修复、表面修复、证据不足的理由；checker 的使用时间线 | 图 6、处置统计 | 🟡 | 后端预实验已逐运行审计（[backend_audit](progress/records/backend_audit/README.md)）；正式运行后做 |
 | B13 | 规则来源表：每条检查和知识条目来自哪个案例 | 表格（冻结时登记） | ✅ | [12](./progress/records/12_rule_origins.md)（2026-11-05）；4 项检查、3 条知识的来源未能确定 |
