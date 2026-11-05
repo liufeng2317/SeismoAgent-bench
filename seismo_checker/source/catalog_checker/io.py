@@ -32,6 +32,9 @@ def read_catalog(path: Path) -> pd.DataFrame:
     out = pd.DataFrame({"event_id": raw["event_id"].astype(str), "time": _seconds(raw["origin_time_utc"])})
     for col in ("latitude", "longitude", "depth_km", "magnitude"):
         out[col] = pd.to_numeric(raw[col], errors="coerce") if col in raw else np.nan
+    for col in ("horizontal_uncertainty_km", "depth_uncertainty_km"):  # optional: the locator's 1-sigma uncertainty
+        if col in raw:
+            out[col] = pd.to_numeric(raw[col], errors="coerce")
     return out[np.isfinite(out.time)].reset_index(drop=True)
 
 
@@ -44,6 +47,8 @@ def read_picks(path: Path) -> pd.DataFrame:
                         "phase": raw["phase"].astype(str).str.strip().str.upper().str[0],
                         "time": _seconds(raw["time_utc"])})
     out["probability"] = pd.to_numeric(raw["probability"], errors="coerce").to_numpy() if "probability" in raw else np.nan
+    if "residual_s" in raw:  # optional: the locator's arrival-time residual (observed - predicted)
+        out["residual_s"] = pd.to_numeric(raw["residual_s"], errors="coerce").to_numpy()
     return out[np.isfinite(out.time) & out.phase.isin(["P", "S"])].reset_index(drop=True)
 
 

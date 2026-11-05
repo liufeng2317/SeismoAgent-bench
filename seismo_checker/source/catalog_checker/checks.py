@@ -19,6 +19,7 @@ from .io import local_km
 DEFAULTS: dict[str, Any] = {
     "outside_network_factor": 1.25, "outside_network_share_max": 0.10,
     "isolated_nn_factor": 5.0, "isolated_floor_km": 2.0, "isolated_share_max": 0.10, "coverage_buffer_km": 10.0,
+    "uncertainty_factor": 3.0, "residual_min_picks": 10, "residual_spread_factor": 3.0, "residual_spread_floor_s": 0.2,
     "duplicate_dt_s": 1.5, "duplicate_km": 3.0, "duplicate_share_max": 0.02,
     "min_p_picks": 4, "few_picks_share_max": 0.20,
     "wadati_min_pairs": 4, "wadati_vpvs": [1.4, 2.2], "wadati_min_events": 20, "wadati_offset_max_s": 1.5,
@@ -118,6 +119,53 @@ def events_beyond_stations(d: Data, c: dict) -> Check:
     return Check("events_beyond_stations", "reality", float(beyond.mean()), "share", expected, len(e), False, None,
                  {"events_beyond": int(beyond.sum()), "median_km_outside_of_those": round(float(np.median(dist[beyond])), 1) if beyond.any() else None,
                   "aperture_km": cov["aperture_km"], "note": "interface/region.py of the checker lists the events and writes the coverage"})
+
+
+def location_uncertainty(d: Data, c: dict) -> Check:
+    """Share of events whose horizontal uncertainty (the locator's, optional catalog column) exceeds k x the median."""
+    expected = f"share of events with horizontal uncertainty above {c['uncertainty_factor']:g}x the catalog median"
+    e = d.events
+    if "horizontal_uncertainty_km" not in e:
+        return _skip("location_uncertainty", "space", "share", expected, 0, "the catalog has no horizontal_uncertainty_km column")
+    sh = e.horizontal_uncertainty_km
+    ok = np.isfinite(sh.to_numpy(dtype=float)) & (sh.to_numpy(dtype=float) > 0)
+    if ok.sum() < 20:
+        return _skip("location_uncertainty", "space", "share", expected, int(ok.sum()), "fewer than 20 events with an uncertainty")
+    v = sh[ok].astype(float)
+    med = float(v.median())
+    high = v > c["uncertainty_factor"] * med
+    worst = e.loc[v.sort_values(ascending=False).index[:50], "event_id"].tolist()
+    det = {"median_km": round(med, 3), "p90_km": round(float(v.quantile(0.9)), 3), "events_above": int(high.sum()),
+           "largest_uncertainty_events": worst}
+    if "depth_uncertainty_km" in e:
+        z = e.depth_uncertainty_km.astype(float)
+        z = z[np.isfinite(z) & (z > 0)]
+        if len(z):
+            det.update({"depth_median_km": round(float(z.median()), 3), "depth_p90_km": round(float(z.quantile(0.9)), 3)})
+    return Check("location_uncertainty", "space", float(high.mean()), "share", expected, int(ok.sum()), False, None, det)
+
+
+def station_residual_spread(d: Data, c: dict) -> Check:
+    """Per station and phase, median and spread (MAD) of the locator's residuals (optional picks column)."""
+    expected = (f"station-phases whose residual MAD exceeds max({c['residual_spread_floor_s']:g} s, "
+                f"{c['residual_spread_factor']:g}x the network median MAD)")
+    p = d.all_picks
+    if "residual_s" not in p:
+        return _skip("station_residual_spread", "space", "share", expected, 0, "the picks have no residual_s column")
+    p = p[(p.event_id != "") & np.isfinite(p.residual_s.to_numpy(dtype=float))]
+    g = p.groupby(["station_id", "phase"]).residual_s
+    s = pd.DataFrame({"n": g.size(), "median_s": g.median(),
+                      "mad_s": g.apply(lambda x: float(np.median(np.abs(x - np.median(x)))))}).reset_index()
+    s = s[s.n >= c["residual_min_picks"]]
+    if len(s) < 3:
+        return _skip("station_residual_spread", "space", "share", expected, len(s), "fewer than 3 station-phases with enough residuals")
+    net = float(s.mad_s.median())
+    limit = max(c["residual_spread_floor_s"], c["residual_spread_factor"] * net)
+    wide = s[s.mad_s > limit]
+    return Check("station_residual_spread", "space", float(len(wide) / len(s)), "share", expected, len(s), False, None,
+                 {"network_median_mad_s": round(net, 3), "limit_s": round(limit, 3),
+                  "wide_station_phases": wide.round(3).to_dict(orient="records"),
+                  "per_station": s.round(3).to_dict(orient="records")})
 
 
 def isolated_events(d: Data, c: dict) -> Check:
@@ -505,6 +553,8 @@ REPORT_ONLY = {
     "station_delays": "station residuals also carry 3-D structure; the P/S ratio of a delay helps to tell a clock from a path",
     "b_positive": "b from positive magnitude differences, with the standard b-value in its details: a standard b much lower than b-positive points to incompleteness, not to physics",
     "relocated_share": "small events with few links are often left unrelocated in correct relocations; loosening the linking thresholds to raise the share scatters the catalog",
+    "location_uncertainty": "the locator's uncertainty ranks events by how well they are constrained, but its size leaves out the velocity model's error; use it to find poorly constrained events, not as the catalog's error",
+    "station_residual_spread": "a station whose residuals scatter more than the others may have a timing, metadata or picking problem, or record along a different path; removing it changes the network geometry, so compare locations with and without it before deciding",
 }
 # Checks that describe the input data rather than the Agent's products: reported as input notes when out
 # of range; they need no disposition, since the Agent cannot change its input.
@@ -570,7 +620,7 @@ def run_checks(d: Data, config: dict | None = None, stage: str = "all") -> tuple
     if upto >= STAGES.index("association"):
         checks += association_checks(d, c) + [duplicate_events(d, c), few_picks(d, c)]
     if upto >= STAGES.index("location"):
-        checks += [isolated_events(d, c), events_beyond_stations(d, c)]
+        checks += [isolated_events(d, c), events_beyond_stations(d, c), location_uncertainty(d, c), station_residual_spread(d, c)]
         wad_offset, wad_spread, w = wadati_origin(d, c)
         tt_check, fit = travel_time_fit(d, c)
         checks += [wad_offset, wad_spread, tt_check]
