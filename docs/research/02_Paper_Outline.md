@@ -210,11 +210,25 @@ Kaikōura 2016
 | Maple Creek | 5        | 6       | 4               | 5                 |
 | Kīlauea     | 1        | 1       | 3               | 2                 |
 | Ridgecrest  | 5        | 5       | 3               | 3                 |
-| Kaikōura    | 7        | 4       | 4               | 6                 |
-| **合计**      | 23       | 24      | **19**          | 21                |
+| Kaikōura    | 7        | 4       | 4               | 5                 |
+| **合计**      | 23       | 24      | **19**          | 20                |
 
 
 统一测试试水（Kīlauea，checker 1.2，更新后的知识，2026-11-03）：`backend` 3 项、`backend_checker` 4 项、`backend_knowledge` **1 项**（时间偏差 +0.08 s、深度偏差 −0.07 km，只剩深度堆积；该项随后由 NonLinLoc 接口修正离线消除）。
+
+（表中数字按当前评分规则重判，2026-11-05；Kaikōura `backend_knowledge` 由 6 项变为 5 项，来自 `inside_region` 改按台站覆盖判定。）
+
+**图（由** `python -m SeismoAgentBench.scoring.catalog_metrics.checker_effect_figures` **生成，**`assets/checker_effect/`**）。**
+
+![checker 作用：各判据](assets/checker_effect/checker_effect_heatmap.png)
+
+![checker 作用：汇总](assets/checker_effect/checker_effect_summary.png)
+
+读法：
+- **checker 稳定挡住了实现类错误。** 只有工具的 `backend` 在 Prague、Kīlauea、Ridgecrest 犯了震级单位或响应错误（偏差 −1.4、−0.99、−0.98）；两个带 checker 的变体在这三个案例上都没有犯（汇总图第二栏）。Magna 的震级偏差（+0.5–0.7）在所有变体都存在，属于定标，不是实现错误，checker 也不该看到。
+- **速度模型类偏差没有改善，有时更差。** 时间和深度偏差（汇总图第三、四栏）在三个变体之间没有一致方向：Kīlauea 第二批的 checker 变体时间偏差 −1.7 s，Kaikōura 的 checker 变体深度偏差 +3.3 km，都比只有工具时差；这类偏差来自近地表速度和基准面，没有参考就看不到（§4.3 第 1、2 条）。
+- **总体是小幅净改善，样本很小。** 不通过总数 24 → 19（checker）→ 20（checker + 知识）；相对 `backend`，checker 变体 3 个案例更好、2 个持平、1 个更差，知识变体 3 个更好、1 个持平、2 个更差。每格只有一次运行，同一变体两批之间（Kīlauea）就相差 1–2 项。
+- **这些运行用的是 checker 1.0（Kīlauea 第二批 1.2）和更新前的知识。** 1.3 和之后补充的知识（近地表、从数据建模型、水平框架、模板匹配）还没有经过 Agent 运行检验；完整流程的 S3 也还没有运行。
 
 ### 4.3 主要发现（细节见 `[04_Checker_Design.md](./04_Checker_Design.md)` §11）
 
