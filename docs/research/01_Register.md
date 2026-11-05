@@ -24,11 +24,11 @@
 
 | 编号 | 要做什么 | 产出 | 状态 | 说明 |
 |---|---|---|---|---|
-| B1 | 把专家诊断经验写成六个阶段（数据、拾取、关联、绝对定位、相对定位、震级）的无参考检查，只报症状 | `seismo_checker/` | ✅ | 版本 1.3，标签 `checker-v1.3`（本地） |
-| B2 | 写知识 skill：小批量协议、候选取舍、症状手册、检查看不到的误差、震级资源 | `data/agent_resource/` | ✅ | 随 1.3 冻结 |
+| B1 | 把专家诊断经验写成六个阶段（数据、拾取、关联、绝对定位、相对定位、震级）的无参考检查，只报症状 | `seismo_checker/` | ✅ | 版本 1.4，标签 `checker-v1.4`（本地；1.3 加两项只报告的定位程序诊断，§6） |
+| B2 | 写知识 skill：小批量协议、候选取舍、症状手册、检查看不到的误差、震级资源 | `data/agent_resource/` | ✅ | 随 1.4 冻结 |
 | B3 | 把 checker 从工具库中分出，只给 checker 阶段 | 顶层 `seismo_checker/`、`CHECKER_PATH` | ✅ | 2026-11-05 |
 | B4 | 搭建完整流程的 S2c、S3 任务包 | 各案例 `prompt_checker.md`、`prompt_knowledge.md` 等 | ✅ | 2026-11-05，已过端到端测试 |
-| B5 | E1 checker 的可靠性：可达结果上的误报、误差已知目录上的检出、合成植入错误的检出 | 图 3、可靠性表 | ✅ | 1.3 预实验版（[14](progress/records/14_e1_reliability.md)，2026-11-05）；正式运行后复核 |
+| B5 | E1 checker 的可靠性：可达结果上的误报、误差已知目录上的检出、合成植入错误的检出 | 图 3、可靠性表 | ✅ | 1.3 预实验版（[14](progress/records/14_e1_reliability.md)，2026-11-05；1.4 只多两项只报告的检查，报警不变）；正式运行后复核 |
 | B6 | E2 后端消融：拾取和关联固定，比较"只有工具 / + checker / + checker 和知识" | 图 4 | 🟡 | 用 1.0、1.2 做过预实验（[04](progress/records/04_tier_b_backend.md)）；1.3 未做 |
 | B7 | 离线确定边界：哪些误差只靠自身数据看不到 | 检验记录、知识 skill 条目 | ✅ | 近地表、从数据建模型、水平偏移、模板匹配（[05](progress/records/05_near_surface_magnitude_matching.md)、[08](progress/records/08_velocity_from_data.md)、[09](progress/records/09_horizontal_shift.md)、[10](progress/records/10_template_threshold.md)） |
 | B8 | 冻结正式实验方案（§4） | 冻结的提交号 | ✅ | 2026-11-05，提交 `5327df0`，标签 `prereg-b-2026-11-05` |
@@ -69,7 +69,7 @@
 | 主比较 | S1 `tools`（工具库）对 S3 `knowledge`（S1 + checker + checker skill + 知识 skill + 震级资源 + checker 输出约定），每个案例各 2 次，共 24 次 |
 | 消融（按需） | S2c `checker`：S1 + checker 和 checker skill，无知识 |
 | 任务 | 完整流程，从连续波形到目录和拾取；时间预算 48 小时；提示词不写研究区域 |
-| 冻结的材料 | 提交 `5327df0` 中的：评分器（`SeismoAgentBench/scoring/`）、各案例 `evaluation/metrics.yaml` 和基线、可达结果；`seismo_checker/` 和 `data/agent_resource/`（标签 `checker-v1.3`）；`seismotools/`；各案例 `prompt_tools.md`、`prompt_knowledge.md`、`prompt_checker.md`、输出约定和 `run.sh`；Agent 运行配置 `SeismoAgentBench/configs/agents/claude.yaml` |
+| 冻结的材料 | 冻结提交中的：评分器（`SeismoAgentBench/scoring/`）、各案例 `evaluation/metrics.yaml` 和基线、可达结果；`seismo_checker/` 和 `data/agent_resource/`（标签 `checker-v1.4`）；`seismotools/`；各案例 `prompt_tools.md`、`prompt_knowledge.md`、`prompt_checker.md`、输出约定和 `run.sh`；Agent 运行配置 `SeismoAgentBench/configs/agents/claude.yaml` |
 
 **评估：** 精度标准为已发表的高精度目录和官方目录；可达结果用于计算差距弥合率 (S3 − S1) / (可达结果 − S1)；可信目录标准见[计划 A §4.2](./00_A_Research_Plan_Benchmark.md)；高精度按[计划 B §4.1](./00_B_Research_Plan_Checker.md)；评分端重跑 checker 核对报告和处置。
 
@@ -107,4 +107,4 @@
 
 | 日期 | 改动 | 原因 | 影响 |
 |---|---|---|---|
-| | | | |
+| 2026-11-06 | checker 1.3 → 1.4：只报告的 `location_uncertainty`（定位程序的水平、深度不确定度）和 `station_residual_spread`（定位程序残差的台站离散）；输出约定的拾取文件加可选 `residual_s`，并提示把定位程序给出的不确定度和残差填进可选列（48 个提示词）；知识 skill 新增"定位程序的不确定度和残差"一节；checker skill 中 README 路径改为 `CHECKER_PATH/README.md`（搬迁遗留的错误路径） | 导师建议；离线检验（[15](./progress/records/15_locator_diagnostics.md)）显示水平不确定度能排出坏事件、RMS 不能、台站筛选因案例而异，所以只报告并写进知识 | 正式运行尚未开始，没有运行受影响；判定的检查、门槛、评分器和评分标准都没有变；E1（B5）用的是 1.3，新增的两项不报警，结论不变。重新冻结（§4） |

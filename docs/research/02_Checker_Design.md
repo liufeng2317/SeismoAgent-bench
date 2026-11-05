@@ -1,10 +1,10 @@
 # Checker 设计文档
 
-状态（2026-11-05）：现行为 1.3（标签 `checker-v1.3`，与知识 skill 一起冻结，2026-11-05 随计划 B 的正式实验方案冻结，标签 `prereg-b-2026-11-05`），在 1.2 之上加了 Wadati 偏差的判定和区域接口；B 层后端运行用的是 1.0，统一测试试水用的是 1.2，下一轮统一测试用 1.3（§13）。本文写给研究者，只写 checker 现在是什么、为什么这样设计、得到了哪些经验；每一轮检验的方法、数据和读数记在 [`progress/records/`](progress/records/README.md)。给 Agent 看的工具说明是 `seismo_checker/README.md`，只说测什么和怎么用，不出现原因、修复方法或案例数据。研究设计见 [`00_B_Research_Plan_Checker.md`](00_B_Research_Plan_Checker.md) §3–§4（阶段划分见 [`00_A_Research_Plan_Benchmark.md`](00_A_Research_Plan_Benchmark.md) §3）；经验来源见 [`progress/records/00_expert_experience_evidence.md`](progress/records/00_expert_experience_evidence.md) §2。
+状态（2026-11-06）：现行为 1.4（标签 `checker-v1.4`，与知识 skill 一起冻结，随计划 B 的正式实验方案重新冻结，标签 `prereg-b-2026-11-06`），在 1.3 之上加了两项只报告的定位程序诊断（不确定度、台站残差离散）；1.3 在 1.2 之上加了 Wadati 偏差的判定和区域接口。B 层后端运行用的是 1.0，统一测试试水用的是 1.2，正式运行用 1.4（§13）。本文写给研究者，只写 checker 现在是什么、为什么这样设计、得到了哪些经验；每一轮检验的方法、数据和读数记在 [`progress/records/`](progress/records/README.md)。给 Agent 看的工具说明是 `seismo_checker/README.md`，只说测什么和怎么用，不出现原因、修复方法或案例数据。研究设计见 [`00_B_Research_Plan_Checker.md`](00_B_Research_Plan_Checker.md) §3–§4（阶段划分见 [`00_A_Research_Plan_Benchmark.md`](00_A_Research_Plan_Benchmark.md) §3）；经验来源见 [`progress/records/00_expert_experience_evidence.md`](progress/records/00_expert_experience_evidence.md) §2。
 
-## 0. 检查清单与现状（2026-11-05，1.3）
+## 0. 检查清单与现状（2026-11-06，1.4）
 
-一页看清每项检查做到了哪一步、有没有用。证据来自三处：E1 可靠性检验（1.3 按输出约定运行于 6 个 human-in-loop 定位目录和 31 次已完成的运行，[14](progress/records/14_e1_reliability.md)）、合成回归测试（14 个场景）和此前各轮检验（[records](progress/records/README.md)）。每项检查来自哪个案例见规则来源表 [12](progress/records/12_rule_origins.md)。
+一页看清每项检查做到了哪一步、有没有用。证据来自三处：E1 可靠性检验（1.3 按输出约定运行于 6 个 human-in-loop 定位目录和 31 次已完成的运行，[14](progress/records/14_e1_reliability.md)）、合成回归测试（14 个场景）和此前各轮检验（[records](progress/records/README.md)）。每项检查来自哪个案例见规则来源表 [12](progress/records/12_rule_origins.md)；1.4 新增的两项来自定位程序诊断的离线检验 [15](progress/records/15_locator_diagnostics.md)。
 
 **状态的含义：**
 - **有效：** 判定；在真实运行上查出过真实错误，干净目录上基本不报警。
@@ -13,7 +13,7 @@
 - **已删除：** 验证后发现分不开对错，1.2 删去或合并。
 - **未采用 / 未实现：** 评估过但没有加；或设计了还没做。
 
-### 0.1 现行的 40 项检查
+### 0.1 现行的 42 项检查
 
 E1 列：human-in-loop 目录上的报警数 / 31 次运行中的报警数。
 
@@ -34,6 +34,8 @@ E1 列：human-in-loop 目录上的报警数 / 31 次运行中的报警数。
 | 绝对定位 | `sp_depth_offset` | 判定 | 有效（只抓大的） | 0 / 5 | 超过 1.5 km 时方向可靠；门槛以下方向常相反 |
 | 绝对定位 | `isolated_events` | 判定 | 有效（population） | 0 / 2 | 对应"偏离构造"不通过 |
 | 绝对定位 | `events_beyond_stations` | 只报告 | 只报告 | 0 / 0 | 局部台网外可以有真实地震 |
+| 绝对定位 | `location_uncertainty`（1.4） | 只报告 | 只报告（排序） | —（1.4 新增） | 定位程序的水平不确定度识别坏事件 AUC 0.62–0.98，去掉最大的 10 % 坏事件比例多数减半；但绝对值不含速度模型误差，看不到整体偏差 |
+| 绝对定位 | `station_residual_spread`（1.4） | 只报告 | 只报告（提示） | —（1.4 新增） | 定位程序残差离散大的台站：去掉后水平离散只在 Magna 明显改善，深度可能变差；只提示"值得查" |
 | 绝对定位 | `travel_time_intercept`、`station_residual_outliers`、`station_residual_azimuth` | 只报告 | 只报告 | 0 / 0 | 三维结构使正确目录也偏离 |
 | 绝对定位 | `depth_constraint`、`pile_against_setup`、`station_delays` | 只报告 | 只报告（归因） | 0 / 0 | 堆积的原因、时钟型与路径型台站延迟 |
 | 绝对定位 | `model_ensemble_depth`、`model_ensemble_time` | 只报告 | 只报告（默认关闭） | — | 通用模型之间差得比真实误差还大 |
@@ -48,7 +50,7 @@ E1 列：human-in-loop 目录上的报警数 / 31 次运行中的报警数。
 
 相对定位的检查在 E1 中没有运行（提交的目录不带重定位前目录），证据来自合成测试和此前的运行。
 
-**合计：** 有效 16 项，安全检查 8 项，只报告 16 项（含 5 项输入说明）。
+**合计：** 有效 16 项，安全检查 8 项，只报告 18 项（含 5 项输入说明；1.4 新增 2 项，需要提交的目录带不确定度列、拾取带 `residual_s` 列，没有时跳过）。
 
 ### 0.2 验证后删去的检查（1.2）
 
@@ -73,6 +75,8 @@ E1 列：human-in-loop 目录上的报警数 / 31 次运行中的报警数。
 | 复算的震级斜率作判定 | 标准复算本身也有压缩，与评分不一致 | [05](progress/records/05_near_surface_magnitude_matching.md) |
 | 模板匹配阶段的检查 | 问题是漏检和不用模板匹配，从产品看不出；写进知识 | [10](progress/records/10_template_threshold.md) |
 | 用测量值挑速度模型（Wadati、RMS、截距、S−P、最浅比例） | 每一种都至少在一个案例上选错 | [05](progress/records/05_near_surface_magnitude_matching.md)、[08](progress/records/08_velocity_from_data.md) |
+| 用事件 RMS 判断定位好坏 | 10 个组合中 6 个 AUC 低于 0.5：震相多、约束好的事件 RMS 反而大 | [15](progress/records/15_locator_diagnostics.md) |
+| 按定位残差离散判定或自动剔除台站 | 被标记的台站少，剔除的效果因案例而异，深度有时变差；改为只报告，知识写明先查元数据、时钟和拾取，再做有无对照 | [15](progress/records/15_locator_diagnostics.md) |
 
 ### 0.4 未实现
 
@@ -192,6 +196,8 @@ checker 是独立于工具库 `seismotools/` 的确定性命令行工具（`seis
 | `depth_constraint` | 每个事件的台站几何（方位空隙、二次空隙、最近台站）、1.4 倍深度内有无 S 拾取、最常见深度上事件的组成 | — | 只报告（归因） | 描述数据能约束什么；无约束事件的堆积指向定位设置，整数深度指向固定或试探深度 |
 | `pile_against_setup` | 配合 `--location-setup`：最常见深度到声明的界面、搜索边界、网格节点、试探深度的距离 | — | 只报告（归因） | 例如 Prague 台阶模型的堆积显示为"距界面 0.22 km、在网格节点上" |
 | `station_delays` | 每台 P、S 中位残差及其比值 δS/δP（时钟型约 1，路径型约 Vp/Vs） | — | 只报告（归因） | human-in-loop 目录也有 0–5 个时钟型台站 |
+| `location_uncertainty` | 目录可选列 `horizontal_uncertainty_km`、`depth_uncertainty_km`（定位程序给出的 1σ）：分布（中位数、90 % 分位）；水平不确定度超过全目录中位数 3 倍的事件比例及最大的 50 个事件 | — | 只报告（1.4） | 离线检验（6 个案例 × 通用和区域模型，NonLinLoc）：σh 识别坏事件 AUC 0.62–0.98；绝对值低估真实误差，看不到整体偏差 |
+| `station_residual_spread` | 拾取可选列 `residual_s`（定位程序的残差）：每台站每震相（≥ 10 个拾取）的中位数和 MAD；MAD > max(0.2 s, 3 倍全台网中位 MAD) 的台站列出 | — | 只报告（1.4） | 与上面基于走时直线的 `station_residual_outliers` 不同，用的是定位程序自己的残差；剔除的效果因案例而异 |
 | `model_ensemble_depth`、`model_ensemble_time` | 默认关闭。100 个记录最好的事件用 6 个通用模型重新定位，报告目录相对整组解的位置和各模型间的离散 | — | 只报告 | 通用模型间深度差 3–19 km、时间差 0.25–1.3 s，大于大多数真实误差；作为对模型敏感程度的信息 |
 
 通用模型的来源和区域提取方法见 `seismo_checker/runtime/velocity_models/README.md`：取台站和事件中心所在格点的剖面，按到各自固体地表的深度做慢度平均。
@@ -299,7 +305,8 @@ hypoDD 和 GrowClust 都不读台站高程，所有台站在模型深度 0：目
 | 1.0 | 2026-11-01（c620ee2，标签 `checker-v1.0`） | 六个阶段的检查和图、报警/输入说明/测量值三类报告、`compare.py`、`pilot.py`、`scope` 和 `--pilot`、归因诊断、给 Agent 的 README 和 skill、处置合同和评分端核对 | B 层六个案例 |
 | 1.1 | 2026-11-03（标签 `checker-v1.1`） | 检查不变；README 写明自带模型和公式只作对照；知识 skill 的基准面、常速层与梯度、近地表、定位程序差异，以及三个诱导错误改动的报警的手册条目；合成恢复测试未合并（不适合作误差上界） | — |
 | 1.2 | 2026-11-03（标签 `checker-v1.2`） | 删去 8 项不能区分对错的检查、标准 b 值并入 `b_positive`（§10 表）；`relocated_share` 改为只报告；README 写明检查不是选择标准 | 统一测试试水（Kīlauea） |
-| 1.3 | 2026-11-05（标签 `checker-v1.3`，含知识 skill） | `wadati_origin_offset` 改为判定（1.5 s）；`region.py` 和只报告的 `events_beyond_stations`；知识 skill 新增从数据建最小一维模型、水平框架两节。冻结前通过合成回归测试和端到端脚本运行（`workflows/development/smoke_end_to_end/`：运行包、契约、评分端重跑与处置核对、泄漏扫描；Kīlauea `backend_knowledge`，分数与源运行一致） | 下一轮统一测试 |
+| 1.3 | 2026-11-05（标签 `checker-v1.3`，含知识 skill） | `wadati_origin_offset` 改为判定（1.5 s）；`region.py` 和只报告的 `events_beyond_stations`；知识 skill 新增从数据建最小一维模型、水平框架两节。冻结前通过合成回归测试和端到端脚本运行（`workflows/development/smoke_end_to_end/`：运行包、契约、评分端重跑与处置核对、泄漏扫描；Kīlauea `backend_knowledge`，分数与源运行一致） | E1（[14](progress/records/14_e1_reliability.md)）；正式运行前被 1.4 代替 |
+| 1.4 | 2026-11-06（标签 `checker-v1.4`，含知识 skill） | 导师建议的定位程序诊断（[15](progress/records/15_locator_diagnostics.md)）：只报告的 `location_uncertainty`、`station_residual_spread`；输出约定的拾取文件加可选 `residual_s`，提示把定位程序的不确定度和残差填进可选列（48 个提示词）；知识 skill 新增"定位程序的不确定度和残差"一节（用 σh 找约束差的事件、不用 RMS 判断、台站先查后做有无对照）；checker skill 中 README 的路径改为 `CHECKER_PATH/README.md`（搬迁遗留）。已有检查不变；合成回归测试、单元测试和端到端脚本运行（Maple `knowledge`）通过 | 正式运行（B9–B12） |
 
 **位置（2026-11-05）：** checker 从 `seismotools/checker` 移到顶层的 `seismo_checker/`。它是本项目的贡献，不属于提供给 tools 阶段的工具库；放在 `seismotools/` 里时，tools 阶段的 Agent 能看到它（B 层第一批就发生过），S1 与 S2c、S3 之间就不只差一个因素。现在只有 checker 阶段在提示词里得到 `CHECKER_PATH`；运行记录（`record/provenance.json`）分别记下 `seismotools` 和 `seismo_checker` 的提交；输出契约中的报告类型改名为 `seismo-checker-report`（评分器仍接受旧名）。检查本身不变，搬迁后合成回归测试和端到端脚本运行都通过，标签 `checker-v1.3` 移到搬迁后的提交（此前没有运行用过它）。
 
