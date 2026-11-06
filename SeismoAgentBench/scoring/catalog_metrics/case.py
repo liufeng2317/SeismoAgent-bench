@@ -36,6 +36,19 @@ CONFIG_FILE = "metrics.yaml"
 ADAPTER_FILE = "metrics_adapter.py"
 RUN_SCORE_FILE = "metrics.json"
 BASELINE_FILE = "metrics_baseline.json"
+# Development loop (2026-11-07): variants named dev_* process a short window around the mainshock
+# (metrics.yaml development_window); references, the human-in-loop catalogs and the candidate are cut to it,
+# and the trust thresholds read the final's baseline over the same window.
+DEV_PREFIX = "dev_"
+WINDOWS = ("full", "development")
+
+
+def baseline_file(window: str = "full") -> str:
+    return BASELINE_FILE if window == "full" else f"metrics_baseline_{window}.json"
+
+
+def run_window(variant: str) -> str:
+    return "development" if variant.startswith(DEV_PREFIX) else "full"
 # Task evaluation layout: human_in_loop/ (references + the human-in-loop agent
 # yardsticks, i.e. the "expert" rows, and its ladder), agents/ (per-run scores
 # and figures, summary), comparison/ (all together).
@@ -54,6 +67,7 @@ class Case:
     center: tuple
     refs: dict
     expert: dict
+    window: str = "full"
 
     @property
     def primary(self) -> dict:
@@ -81,9 +95,10 @@ def _population(key: str, frame: pd.DataFrame, spec: dict, config: dict) -> Popu
                       primary_gates=tuple(config["primary_gates"]) if config.get("primary_gates") else None)
 
 
-def _mask(config: dict) -> dict:
+def _mask(config: dict, window: str = "full") -> dict:
     m = config["mask"]
-    start, end = epoch_seconds([m["start_utc"], m["end_utc"]])
+    w = m if window == "full" else config[f"{window}_window"]
+    start, end = epoch_seconds([w["start_utc"], w["end_utc"]])
     return {"start": start, "end": end, "latitude": m["latitude"], "longitude": m["longitude"],
             "depth_bsl_km": m["depth_bsl_km"]}
 
@@ -140,19 +155,25 @@ def _expert(key: str, spec: dict, case_cfg: dict, task_dir: Path, mask: dict) ->
     return pop
 
 
-def load_case(task_dir: Path) -> Case:
+def load_case(task_dir: Path, window: str = "full") -> Case:
+    if window not in WINDOWS:
+        raise ValueError(f"unknown window {window!r}")
     task_dir = task_dir.resolve()
     config = yaml.safe_load((task_dir / "evaluation" / CONFIG_FILE).read_text(encoding="utf-8"))
     if config.get("metrics_version") != METRICS_VERSION:
         raise ValueError(f"{CONFIG_FILE}: metrics_version {config.get('metrics_version')} != {METRICS_VERSION}")
-    mask = _mask(config)
+    mask = _mask(config, window)
     frames = _references(task_dir, config)
     if set(frames) != set(config["references"]):
         raise ValueError(f"adapter references {sorted(frames)} != config {sorted(config['references'])}")
     refs = {k: _population(k, frames[k], config["references"][k], config) for k in config["references"]}
+    if window != "full":  # the loaders apply the full-window mask and its count gates; cut to the window here
+        for r in refs.values():
+            t = r.events.time.to_numpy(dtype=float)
+            r.events = r.events[(t >= mask["start"]) & (t < mask["end"])].reset_index(drop=True)
     expert = {k: _expert(f"expert_{k}", spec, config, task_dir, mask) for k, spec in config["expert"].items()}
     center = (float(np.mean(config["mask"]["longitude"])), float(np.mean(config["mask"]["latitude"])))
-    return Case(task_dir, config, mask, center, refs, expert)
+    return Case(task_dir, config, mask, center, refs, expert, window)
 
 
 def _strip(score: dict) -> dict:
@@ -254,9 +275,9 @@ def _references_record(case: Case) -> dict:
             for k, r in case.refs.items()}
 
 
-def score_baseline(task_dir: Path, *, write: bool = True) -> dict:
+def score_baseline(task_dir: Path, *, write: bool = True, window: str = "full") -> dict:
     """Ceilings plus reference, expert-final and expert-blind rows (§4, §7)."""
-    case = load_case(task_dir)
+    case = load_case(task_dir, window)
     ceiling = ceilings(case.refs)
     rows = {}
     final = case.expert.get("final")
@@ -277,9 +298,10 @@ def score_baseline(task_dir: Path, *, write: bool = True) -> dict:
             score["headline"].update(_picks_headline(score["picks"]))
         rows[pop.key] = score
     report = {**_scorer_record(), "task": case.task_dir.name, "references": _references_record(case),
-              "expert": {k: v.notes for k, v in case.expert.items()}, "ceilings": ceiling, "rows": rows}
+              "expert": {k: v.notes for k, v in case.expert.items()}, "ceilings": ceiling, "rows": rows,
+              "window": {"name": window, "start": case.mask["start"], "end": case.mask["end"]}}
     if write:
-        out = case.task_dir / EXPERT_DIR / BASELINE_FILE
+        out = case.task_dir / EXPERT_DIR / baseline_file(window)
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
     return report
@@ -299,9 +321,9 @@ def run_layout(task_dir: Path, run_dir: Path) -> dict:
 
 def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
     """Score one run; a run without a contract-valid catalog is scored as failed (§6)."""
-    case = load_case(task_dir)
     run_dir = run_dir.resolve()
-    layout = run_layout(case.task_dir, run_dir)
+    layout = run_layout(task_dir, run_dir)
+    case = load_case(task_dir, run_window(layout["variant"]))
     work = run_dir / "work"
     contract_path = run_dir / "control" / "output_contract.json"
     if not contract_path.is_file():  # runs older than the control snapshot (retired base variant)
@@ -310,6 +332,7 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
     status = contract_status(work, contract)
     status["contract"] = str(contract_path.relative_to(case.task_dir))
     report = {**_scorer_record(), "task": case.task_dir.name, "run": layout, "completion": status,
+              "window": {"name": case.window, "start": case.mask["start"], "end": case.mask["end"]},
               "process": process_metrics(run_dir, case.config.get("leakage_patterns", []),
                                          case.config.get("leakage_review_patterns", []))}
     out_dir = run_dir / "evaluation"
@@ -374,7 +397,7 @@ def score_run(task_dir: Path, run_dir: Path, *, write: bool = True) -> dict:
 
 def final_headline(case: Case) -> dict | None:
     """The human-in-loop final's headline from the scored baseline (score ``baseline`` first)."""
-    path = case.task_dir / EXPERT_DIR / BASELINE_FILE
+    path = case.task_dir / EXPERT_DIR / baseline_file(case.window)
     if not path.is_file():
         return None
     baseline = json.loads(path.read_text(encoding="utf-8"))

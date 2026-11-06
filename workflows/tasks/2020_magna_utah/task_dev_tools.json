@@ -1,0 +1,54 @@
+{
+  "task_id": "magna_2020_catalog_tools_dev",
+  "version": "1",
+  "title": "Magna 2020 earthquake-catalog construction (minimal instructions with expert tools) - development window",
+  "summary": "Tools arm of the experiment: identical to the minimal-instruction baseline except that the local seismotools library (PhaseNet; GaMMA, PyOcto, REAL; NonLinLoc, HypoInverse; hypoDD, GrowClust, ccdt) is exposed with its validated usage documentation. Isolates the value of expert tools. Development loop: one day around the mainshock (2020-03-18T11:09:00Z to 2020-03-19T11:09:00Z).",
+  "task_prompt_file": "prompt_dev_tools.md",
+  "output_contract": "output_contract_min.json",
+  "category": "seismology",
+  "software": [
+    "Python",
+    "ObsPy",
+    "PhaseNet",
+    "GaMMA",
+    "PyOcto",
+    "REAL",
+    "NonLinLoc",
+    "HypoInverse",
+    "hypoDD",
+    "GrowClust"
+  ],
+  "taxonomy": {
+    "domain": "seismology",
+    "task_type": "catalog_construction",
+    "guidance": "minimal",
+    "scope": "unspecified",
+    "tool_policy": "local_provided"
+  },
+  "input_requirements": [
+    {
+      "id": "waveform_data",
+      "data_type": "waveform",
+      "format": "MiniSEED",
+      "required": true
+    },
+    {
+      "id": "station_metadata",
+      "data_type": "station_metadata",
+      "format": "StationXML",
+      "required": true
+    }
+  ],
+  "evaluation": {
+    "scorers": [
+      {
+        "name": "artifact-contract",
+        "version": "1"
+      },
+      {
+        "name": "catalog-metrics",
+        "version": "1"
+      }
+    ]
+  }
+}

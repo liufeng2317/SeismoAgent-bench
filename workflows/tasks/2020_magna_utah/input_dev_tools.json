@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "case_id": "2020_magna_utah",
+  "description": "Read-only Magna 2020 waveform and station metadata root for the catalog-construction task. Development window 2020-03-18T11:09:00Z to 2020-03-19T11:09:00Z.",
+  "entries": [
+    {
+      "id": "waveform_data_root",
+      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2020_magna_utah/waveforms",
+      "type": "folder",
+      "notes": "Explore the data/ and stations/ subdirectories. The source files are not copied into the run."
+    }
+  ]
+}

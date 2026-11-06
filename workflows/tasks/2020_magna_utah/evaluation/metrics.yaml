@@ -8,6 +8,10 @@ mask:                               # expert/00_config/validation.yaml (sea-leve
   latitude: [40.69, 40.84]
   longitude: [-112.14, -111.94]
   depth_bsl_km: [-1.3, 13.1]
+development_window:                 # fast development loop (dev_* variants, 2026-11-07): mainshock -2 h to +22 h
+  start_utc: '2020-03-18T11:09:00Z'
+  end_utc: '2020-03-19T11:09:00Z'
+  anchor: 'Mw 5.7 2020-03-18T13:09:31.53Z (ComCat uu60363602)'
 surface_elevation_km: 1.48          # expert association.yaml reference_elevation_km
 off_structure_km: 1.0
 primary: {detection: pang, location: pang, magnitude: uuss}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "case_id": "2011_prague_oklahoma",
+  "description": "Read-only Prague 2011 waveform and station metadata root for the catalog-construction task. Full-pipeline arm knowledge. Development window 2011-11-14T03:31:00Z to 2011-11-15T03:31:00Z.",
+  "entries": [
+    {
+      "id": "waveform_data_root",
+      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2011_prague_oklahoma/waveforms",
+      "type": "folder",
+      "notes": "Explore the data/ and stations/ subdirectories. The source files are not copied into the run."
+    },
+    {
+      "id": "agent_resource",
+      "path": "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/data/agent_resource",
+      "type": "folder",
+      "notes": "Skills (catalog-checker, catalog-knowledge) and the magnitude resource."
+    }
+  ]
+}

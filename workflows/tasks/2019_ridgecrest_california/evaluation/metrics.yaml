@@ -8,6 +8,10 @@ mask:                               # analysis/processing.yaml candidate window 
   latitude: [35.45, 36.05]
   longitude: [-117.90, -117.20]
   depth_bsl_km: [-0.7, 19.3]        # [0, 20] below the nominal 0.7-km surface
+development_window:                 # fast development loop (dev_* variants, 2026-11-07): mainshock -2 h to +22 h
+  start_utc: '2019-07-06T01:19:00Z'
+  end_utc: '2019-07-07T00:00:00Z'
+  anchor: 'Mw 7.1 2019-07-06T03:19:53Z; end cut at the end of the data window'
 surface_elevation_km: 0.7           # expert association.yaml reference_elevation_km
 off_structure_km: 1.0
 primary: {detection: shelly, location: shelly, magnitude: official_earthquake}

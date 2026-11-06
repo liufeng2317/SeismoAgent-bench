@@ -8,6 +8,10 @@ mask:                               # expert/00_config/validation.yaml, depth co
   latitude: [44.70, 44.84]
   longitude: [-111.13, -110.93]
   depth_bsl_km: [-5.3, 17.7]        # [-3, 20] below the 2.3-km surface
+development_window:                 # fast development loop (dev_* variants, 2026-11-07): mainshock -2 h to +22 h
+  start_utc: '2017-06-15T22:48:00Z'
+  end_utc: '2017-06-16T22:48:00Z'
+  anchor: 'Mw 4.4 2017-06-16T00:48:46.94Z (ComCat uu60203137)'
 surface_elevation_km: 2.3           # expert association.yaml reference_elevation_km
 off_structure_km: 1.0
 # Shelly has no ceiling (no other complete detection catalog), so the normalised

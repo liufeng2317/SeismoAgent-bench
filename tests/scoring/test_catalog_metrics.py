@@ -297,3 +297,19 @@ class StationCoverageTests(unittest.TestCase):
         lat = [40.0, 40.0, 40.0, float("nan")]
         lon = [-112.0, -112.0 + 25 / k, -112.0 + 35 / k, -112.0]
         self.assertEqual(outside_coverage(lat, lon, cov).tolist(), [False, False, True, False])
+
+
+class DevelopmentWindowTests(unittest.TestCase):
+    def test_dev_variants_use_the_development_window_and_its_own_baseline(self):
+        from SeismoAgentBench.scoring.catalog_metrics.case import _mask, baseline_file, run_window
+        self.assertEqual(run_window("dev_knowledge"), "development")
+        self.assertEqual(run_window("knowledge"), "full")
+        self.assertEqual(baseline_file("full"), "metrics_baseline.json")
+        self.assertEqual(baseline_file("development"), "metrics_baseline_development.json")
+        config = {"mask": {"start_utc": "2020-01-01T00:00:00Z", "end_utc": "2020-01-09T00:00:00Z",
+                           "latitude": [0, 1], "longitude": [0, 1], "depth_bsl_km": [-3, 20]},
+                  "development_window": {"start_utc": "2020-01-03T22:00:00Z", "end_utc": "2020-01-04T22:00:00Z"}}
+        full, dev = _mask(config), _mask(config, "development")
+        self.assertEqual(dev["end"] - dev["start"], 86400)
+        self.assertGreater(dev["start"], full["start"])
+        self.assertEqual(dev["latitude"], full["latitude"])

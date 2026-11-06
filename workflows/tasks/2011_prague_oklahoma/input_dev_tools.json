@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "case_id": "2011_prague_oklahoma",
+  "description": "Read-only Prague 2011 waveform and station metadata root for the catalog-construction task. Development window 2011-11-14T03:31:00Z to 2011-11-15T03:31:00Z.",
+  "entries": [
+    {
+      "id": "waveform_data_root",
+      "path": "/ai4earthafs/liufeng/ScienceDiscovery/SeismoAgentBench/data/2011_prague_oklahoma/waveforms",
+      "type": "folder",
+      "notes": "Explore the data/ and stations/ subdirectories. The source files are not copied into the run."
+    }
+  ]
+}

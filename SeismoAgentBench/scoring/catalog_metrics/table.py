@@ -20,7 +20,7 @@ from typing import Any, Callable
 from . import METRICS_VERSION
 import yaml
 
-from .case import AGENTS_DIR, BASELINE_FILE, CONFIG_FILE, EXPERT_DIR
+from .case import AGENTS_DIR, BASELINE_FILE, CONFIG_FILE, DEV_PREFIX, EXPERT_DIR
 from .matching import PRIMARY_GATES
 from .summary import SUMMARY_FILE
 from .trust import CRITERION_METRIC
@@ -93,6 +93,8 @@ def _case_rows(task: Path) -> tuple[list[Row], dict | None, list]:
     for scores in sorted((task / AGENTS_DIR).glob("*__*__*__*/scores.json")):
         s = _load(scores)
         run = s["run"]
+        if run["variant"].startswith(DEV_PREFIX):  # development-window runs are not comparable with the full window
+            continue
         label = f"{run['variant']} ({run['harness']} × {run['model']}, {run['run_id']})"
         rows.append(Row(label, s.get("headline") or {}, s.get("trust"),
                         {"key": scores.parent.name, "variant": run["variant"],

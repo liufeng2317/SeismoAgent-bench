@@ -40,6 +40,7 @@ RUN_ID="${RUN_ID:-$(date -u +%Y%m%dT%H%M%SZ)}"
 case "$VARIANT" in
   tools|checker|knowledge) DEFAULT_TIMEOUT=172800 ;;  # full pipeline: 48 h
   backend*) DEFAULT_TIMEOUT=43200 ;;  # back end only (tier B): 12 h
+  dev_*) DEFAULT_TIMEOUT=43200 ;;  # development window (one day around the mainshock): 12 h
   *) DEFAULT_TIMEOUT=86400 ;;
 esac
 TIMEOUT="${TIMEOUT:-$DEFAULT_TIMEOUT}"

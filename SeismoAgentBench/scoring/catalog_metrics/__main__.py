@@ -28,6 +28,8 @@ def main(argv=None) -> int:
     parser.add_argument("--output", type=Path, default=Path("docs/research/progress/scores/SCORE_TABLE.md"), help="table: output file")
     parser.add_argument("--run-dir", type=Path, help="runs/<variant>/<harness>/<model>/<run_id> (command run)")
     parser.add_argument("--rescore", action="store_true", help="summary: rescore every run first")
+    parser.add_argument("--window", choices=("full", "development"), default="full",
+                        help="baseline: the full window or the development window (dev_* runs) of metrics.yaml")
     args = parser.parse_args(argv)
     if args.command == "table":
         print(write_table(args.tasks_root, args.output))
@@ -35,7 +37,7 @@ def main(argv=None) -> int:
     if args.task_dir is None:
         parser.error(f"{args.command} needs --task-dir")
     if args.command == "baseline":
-        report = score_baseline(args.task_dir)
+        report = score_baseline(args.task_dir, window=args.window)
         summary = {k: v.get("headline") for k, v in report["rows"].items() if "headline" in v}
         summary["ceilings"] = {k: v["value"] for k, v in report["ceilings"].items()}
     elif args.command == "summary":
