@@ -20,6 +20,7 @@
 | [`13_hil_interventions.md`](13_hil_interventions.md) | 2026-11-05 | human-in-loop 干预编码（注册表 B14）：82 项干预分四类；阶梯收益主要来自方法选择，但多数方法选择的触发或取舍依赖参考，S3 可及的份额是一个范围（召回 42–98 %，位置离散 29–99 %） |
 | [`14_e1_reliability.md`](14_e1_reliability.md) | 2026-11-05 | E1（注册表 B5）：checker 1.3 在 6 个 human-in-loop 目录和 31 次运行上的误报与检出；震级单位或响应错误 6/6、深度堆积 7/7 报出，发震时刻偏差 1/15、水平偏移 0/7 |
 | [`15_locator_diagnostics.md`](15_locator_diagnostics.md) | 2026-11-05 | 定位程序的残差和不确定度（导师建议）：事件水平不确定度识别坏事件的 AUC 0.62–0.98，去掉最不确定的 10 % 后坏事件比例多数减半；RMS 无用；按台站残差离散筛选台站作用小且因案例而异；据此加入 checker 1.4（两项只报告） |
+| [`16_maple_s3_vertical_only_picks.md`](16_maple_s3_vertical_only_picks.md) | 2026-11-07 | Maple 第一次 S3 运行四分之一定位偏差超过 5 km 的原因：为回应 `silent_stations` 报警加入了 8 个只有垂直分量台站的 DPPPicker 拾取（阈值 0.3，46 % 残差超过 0.5 s）；去掉它们后超过 5 km 的比例从 30 % 降到 5.9 %。速度模型的改动本身是对的 |
 | [`backend_audit/`](backend_audit/README.md) | 2026-11-02 | 后端消融的逐运行决策审计（04 的细节） |
 
 检验用到的工具：`workflows/development/tools_case_validation/validate_checker.py`（在 human-in-loop 轮次和正式运行上跑 checker）、`seismo_checker/examples/smoke/run.sh`（合成回归测试）、`workflows/development/replay/`（离线重放和诊断脚本）、`workflows/development/backend_tier_b/`（B 层后端任务）、`workflows/development/scoring_migrations/`（评分规则改动后对已存分数重判）。输出目录都不纳入版本库。
