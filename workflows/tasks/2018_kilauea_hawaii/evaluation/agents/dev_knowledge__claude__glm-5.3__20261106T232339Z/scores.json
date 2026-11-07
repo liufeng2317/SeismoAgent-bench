@@ -47,5 +47,244 @@
  "leakage_review": [
   "(scedc\\.caltech\\.edu|ncedc\\.org|quake\\.utah\\.edu|ou\\.edu/ogs|geonet\\.org\\.nz|zenodo\\.org|datadryad\\.org|sciencebase\\.gov|igppweb\\.ucsd\\.edu/~shearer)/",
   "https?://[^\\s\"]*(kilauea|k%C4%ABlauea|k\u012blauea)"
- ]
+ ],
+ "rescue_reference_only": {
+  "note": "outputs recovered outside work/ after the session ended; not a formal result (see rescue/README.md)",
+  "completion": {
+   "completed": true,
+   "problems": [],
+   "contract": "runs_smoke/dev_knowledge/rescue/none/20261106T232339Z/control/output_contract.json",
+   "consistency": {
+    "pick_event_ids_exist": 0.9826,
+    "pick_counts_agree": 1.0,
+    "coordinates_valid": 1.0
+   }
+  },
+  "metrics_version": 2,
+  "headline": {
+   "recall": 0.6585,
+   "ceiling": 0.6616,
+   "recall_norm": 0.9953,
+   "recall_tight": 0.6298,
+   "recall_ref_shelly": 0.6585,
+   "recall_ref_wei": 0.5393,
+   "recall_ref_matoza": 0.8491,
+   "recall_ref_comcat": 0.8991,
+   "union_support": 0.8436,
+   "epi_median_km": 1.0163,
+   "shift_km": 0.433,
+   "scatter_median_km": 0.9839,
+   "epi_gt5km": 0.0,
+   "dz_median_km": 0.7637,
+   "depth_datum_known": true,
+   "dt_median_s": 0.2849,
+   "dt_mad_s": 0.1548,
+   "location_pairs": 366,
+   "depth_pairs": 366,
+   "depth_mode_share": 0.0252,
+   "depth_band_share": 0.2016,
+   "off_structure_fraction": 0.0309,
+   "off_structure_after_shift": 0.0333,
+   "recall_final": 0.3813,
+   "precision_final": 0.8291,
+   "event_ratio_final": 0.4724,
+   "shift_final_km": 0.1453,
+   "scatter_final_km": 1.0805,
+   "dz_final_km": 0.3376,
+   "dz_mad_final_km": 0.8643,
+   "dt_final_s": 0.3626,
+   "time_bias_final_s": -0.3593,
+   "time_mad_final_s": 0.1521,
+   "recall_M2": 0.875,
+   "precision_M2": 0.8269,
+   "f1_M2": 0.8503,
+   "epi_mean_M2": 1.6804,
+   "dt_mean_M2": -0.4051,
+   "dmag_mean_M2": -0.0472,
+   "recall_M3": 0.9231,
+   "precision_M3": 0.8438,
+   "f1_M3": 0.8816,
+   "epi_mean_M3": 1.715,
+   "dt_mean_M3": -0.4519,
+   "dmag_mean_M3": 0.0608,
+   "recall_M4": 1.0,
+   "precision_M4": 0.8182,
+   "f1_M4": 0.9,
+   "epi_mean_M4": 1.9835,
+   "dt_mean_M4": -0.4549,
+   "dmag_mean_M4": 0.08,
+   "dmag_median": -0.04,
+   "dmag_std": 0.3298,
+   "dmag_slope_per_unit": -0.0152,
+   "dmag_pairs": 209,
+   "b_difference": 0.027,
+   "dt_mean_s": -0.2089,
+   "dt_std_s": 0.3846,
+   "recall_after_large": 0.6768,
+   "recall_other": 0.6674,
+   "audited_false_rate": null,
+   "out_of_mask_fraction": 0.309,
+   "out_of_coverage_fraction": 0.1438
+  },
+  "trust": {
+   "trusted": null,
+   "failed": [],
+   "pending": [
+    "false_events"
+   ],
+   "dimensions": {
+    "reality": {
+     "verdict": "pending",
+     "checks": {
+      "inside_region": {
+       "aspect": "accuracy",
+       "value": 0.1438,
+       "op": "<=",
+       "threshold": 0.3762,
+       "final": 0.2508,
+       "verdict": "pass"
+      },
+      "false_events": {
+       "aspect": "accuracy",
+       "value": null,
+       "op": "<=",
+       "threshold": 0.02,
+       "final": null,
+       "verdict": "pending"
+      }
+     }
+    },
+    "time": {
+     "verdict": "pass",
+     "checks": {
+      "time_bias": {
+       "aspect": "accuracy",
+       "value": 0.2849,
+       "op": "abs<=",
+       "threshold": 0.3,
+       "final": 0.2307,
+       "verdict": "pass"
+      },
+      "time_spread": {
+       "aspect": "stability",
+       "value": 0.1548,
+       "op": "<=",
+       "threshold": 0.3,
+       "final": 0.1123,
+       "verdict": "pass"
+      },
+      "after_large_events": {
+       "aspect": "stability",
+       "value": 1.0141,
+       "op": ">=",
+       "threshold": 0.8375,
+       "final": 1.0469,
+       "verdict": "pass"
+      }
+     }
+    },
+    "space": {
+     "verdict": "pass",
+     "checks": {
+      "horizontal_shift": {
+       "aspect": "accuracy",
+       "value": 0.433,
+       "op": "<=",
+       "threshold": 1.1888,
+       "final": 1.1888,
+       "verdict": "pass"
+      },
+      "depth_bias": {
+       "aspect": "accuracy",
+       "value": 0.7637,
+       "op": "abs<=",
+       "threshold": 1.0,
+       "final": 0.3058,
+       "verdict": "pass"
+      },
+      "horizontal_scatter": {
+       "aspect": "stability",
+       "value": 0.9839,
+       "op": "<=",
+       "threshold": 1.0,
+       "final": 0.7175,
+       "verdict": "pass"
+      },
+      "off_structure": {
+       "aspect": "stability",
+       "value": 0.0309,
+       "op": "<=",
+       "threshold": 0.05,
+       "final": 0.0127,
+       "verdict": "pass"
+      },
+      "depth_pileup": {
+       "aspect": "stability",
+       "value": 0.0252,
+       "op": "<=",
+       "threshold": 0.05,
+       "final": 0.0238,
+       "verdict": "pass"
+      }
+     }
+    },
+    "strength": {
+     "verdict": "pass",
+     "checks": {
+      "magnitude_offset": {
+       "aspect": "accuracy",
+       "value": -0.04,
+       "op": "abs<=",
+       "threshold": 0.4555,
+       "final": -0.2555,
+       "verdict": "pass"
+      },
+      "magnitude_spread": {
+       "aspect": "stability",
+       "value": 0.3298,
+       "op": "<=",
+       "threshold": 0.5703,
+       "final": 0.4703,
+       "verdict": "pass"
+      },
+      "magnitude_scale": {
+       "aspect": "stability",
+       "value": -0.0152,
+       "op": "abs<=",
+       "threshold": 0.2,
+       "final": -0.0165,
+       "verdict": "pass"
+      },
+      "large_events_present": {
+       "aspect": "accuracy",
+       "value": {
+        "recall_M4": 1.0
+       },
+       "op": "all ==",
+       "threshold": 1.0,
+       "verdict": "pass"
+      }
+     }
+    }
+   },
+   "completeness": {
+    "recall_norm": 0.9953,
+    "recall_tight": 0.6298,
+    "recall_final": 0.3813,
+    "event_ratio_final": 0.4724
+   }
+  },
+  "process": {
+   "cost_usd": 27.29872700000001,
+   "elapsed_s": 18977.9,
+   "turns": 361
+  },
+  "leakage_flag": null,
+  "leakage_review": [],
+  "audit": {
+   "sampled": 50,
+   "unsupported": 181,
+   "labels": null
+  }
+ }
 }

@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "fb700ec2530e21b8ee34ccff7aebaa3d1df72d28",
+ "scorer_commit": "0dd6e506bda782af98132fa0287c6c3ff996627e",
  "scorer_dirty": false,
- "generated_utc": "2026-11-07T04:50:10+00:00",
+ "generated_utc": "2026-11-07T22:32:36+00:00",
  "task": "2018_kilauea_hawaii",
  "configurations": [
   {
@@ -1596,9 +1596,9 @@
    "variant": "dev_knowledge",
    "harness": "claude",
    "model": "glm-5.3",
-   "launched": 1,
+   "launched": 2,
    "leakage_flagged": [],
-   "completion_rate": 0.0,
+   "completion_rate": 0.5,
    "runs": [
     {
      "run_id": "20261106T232339Z",
@@ -1607,56 +1607,517 @@
      "trust_failed": [
       "completed"
      ],
+     "b_difference": null,
+     "depth_band_share": null,
+     "depth_mode_share": null,
+     "depth_pairs": null,
+     "dmag_mean_M2": null,
+     "dmag_mean_M3": null,
+     "dmag_mean_M4": null,
+     "dmag_median": null,
+     "dmag_pairs": null,
+     "dmag_slope_per_unit": null,
+     "dmag_std": null,
+     "dt_final_s": null,
+     "dt_mad_s": null,
+     "dt_mean_M2": null,
+     "dt_mean_M3": null,
+     "dt_mean_M4": null,
+     "dt_mean_s": null,
+     "dt_median_s": null,
+     "dt_std_s": null,
+     "dz_final_km": null,
+     "dz_mad_final_km": null,
+     "dz_median_km": null,
+     "epi_gt5km": null,
+     "epi_mean_M2": null,
+     "epi_mean_M3": null,
+     "epi_mean_M4": null,
+     "epi_median_km": null,
+     "event_ratio_final": null,
+     "f1_M2": null,
+     "f1_M3": null,
+     "f1_M4": null,
+     "location_pairs": null,
+     "off_structure_after_shift": null,
+     "off_structure_fraction": null,
+     "out_of_coverage_fraction": null,
+     "out_of_mask_fraction": null,
+     "precision_M2": null,
+     "precision_M3": null,
+     "precision_M4": null,
+     "precision_final": null,
      "recall": 0.0,
+     "recall_M2": null,
+     "recall_M3": null,
+     "recall_M4": null,
+     "recall_after_large": null,
      "recall_final": 0.0,
      "recall_norm": 0.0,
-     "recall_tight": 0.0
+     "recall_other": null,
+     "recall_ref_comcat": null,
+     "recall_ref_matoza": null,
+     "recall_ref_shelly": null,
+     "recall_ref_wei": null,
+     "recall_tight": 0.0,
+     "scatter_final_km": null,
+     "scatter_median_km": null,
+     "shift_final_km": null,
+     "shift_km": null,
+     "time_bias_final_s": null,
+     "time_mad_final_s": null,
+     "union_support": null
+    },
+    {
+     "run_id": "20261107T125149Z",
+     "completed": true,
+     "trusted": false,
+     "trust_failed": [
+      "time_bias",
+      "depth_pileup"
+     ],
+     "b_difference": -0.002,
+     "depth_band_share": 0.4011,
+     "depth_mode_share": 0.0579,
+     "depth_pairs": 382,
+     "dmag_mean_M2": -0.1424,
+     "dmag_mean_M3": 0.0082,
+     "dmag_mean_M4": 0.115,
+     "dmag_median": -0.12,
+     "dmag_pairs": 201,
+     "dmag_slope_per_unit": -0.0686,
+     "dmag_std": 0.3137,
+     "dt_final_s": 0.1275,
+     "dt_mad_s": 0.1544,
+     "dt_mean_M2": 0.0423,
+     "dt_mean_M3": -0.0068,
+     "dt_mean_M4": -0.0952,
+     "dt_mean_s": 0.3075,
+     "dt_median_s": 0.3814,
+     "dt_std_s": 0.3424,
+     "dz_final_km": -0.6022,
+     "dz_mad_final_km": 0.677,
+     "dz_median_km": -0.399,
+     "epi_gt5km": 0.0,
+     "epi_mean_M2": 1.1097,
+     "epi_mean_M3": 1.031,
+     "epi_mean_M4": 1.4564,
+     "epi_median_km": 1.0308,
+     "event_ratio_final": 0.4777,
+     "f1_M2": 0.8692,
+     "f1_M3": 0.8616,
+     "f1_M4": 0.8889,
+     "location_pairs": 382,
+     "off_structure_after_shift": 0.0241,
+     "off_structure_fraction": 0.0161,
+     "out_of_coverage_fraction": 0.2866,
+     "out_of_mask_fraction": 0.4386,
+     "precision_M2": 0.8635,
+     "precision_M3": 0.8776,
+     "precision_M4": 0.8,
+     "precision_final": 0.8668,
+     "recall": 0.6893,
+     "recall_M2": 0.875,
+     "recall_M3": 0.8462,
+     "recall_M4": 1.0,
+     "recall_after_large": 0.7071,
+     "recall_final": 0.4025,
+     "recall_norm": 1.0419,
+     "recall_other": 0.6964,
+     "recall_ref_comcat": 0.8943,
+     "recall_ref_matoza": 0.8608,
+     "recall_ref_shelly": 0.6893,
+     "recall_ref_wei": 0.5827,
+     "recall_tight": 0.658,
+     "scatter_final_km": 0.6033,
+     "scatter_median_km": 0.6638,
+     "shift_final_km": 0.3502,
+     "shift_km": 0.8643,
+     "time_bias_final_s": 0.1047,
+     "time_mad_final_s": 0.0894,
+     "union_support": 0.8836
     }
    ],
    "metrics": {
-    "recall": {
+    "b_difference": {
+     "mean": -0.002,
+     "min": -0.002,
+     "max": -0.002,
+     "n": 1
+    },
+    "depth_band_share": {
+     "mean": 0.4011,
+     "min": 0.4011,
+     "max": 0.4011,
+     "n": 1
+    },
+    "depth_mode_share": {
+     "mean": 0.0579,
+     "min": 0.0579,
+     "max": 0.0579,
+     "n": 1
+    },
+    "depth_pairs": {
+     "mean": 382.0,
+     "min": 382.0,
+     "max": 382.0,
+     "n": 1
+    },
+    "dmag_mean_M2": {
+     "mean": -0.1424,
+     "min": -0.1424,
+     "max": -0.1424,
+     "n": 1
+    },
+    "dmag_mean_M3": {
+     "mean": 0.0082,
+     "min": 0.0082,
+     "max": 0.0082,
+     "n": 1
+    },
+    "dmag_mean_M4": {
+     "mean": 0.115,
+     "min": 0.115,
+     "max": 0.115,
+     "n": 1
+    },
+    "dmag_median": {
+     "mean": -0.12,
+     "min": -0.12,
+     "max": -0.12,
+     "n": 1
+    },
+    "dmag_pairs": {
+     "mean": 201.0,
+     "min": 201.0,
+     "max": 201.0,
+     "n": 1
+    },
+    "dmag_slope_per_unit": {
+     "mean": -0.0686,
+     "min": -0.0686,
+     "max": -0.0686,
+     "n": 1
+    },
+    "dmag_std": {
+     "mean": 0.3137,
+     "min": 0.3137,
+     "max": 0.3137,
+     "n": 1
+    },
+    "dt_final_s": {
+     "mean": 0.1275,
+     "min": 0.1275,
+     "max": 0.1275,
+     "n": 1
+    },
+    "dt_mad_s": {
+     "mean": 0.1544,
+     "min": 0.1544,
+     "max": 0.1544,
+     "n": 1
+    },
+    "dt_mean_M2": {
+     "mean": 0.0423,
+     "min": 0.0423,
+     "max": 0.0423,
+     "n": 1
+    },
+    "dt_mean_M3": {
+     "mean": -0.0068,
+     "min": -0.0068,
+     "max": -0.0068,
+     "n": 1
+    },
+    "dt_mean_M4": {
+     "mean": -0.0952,
+     "min": -0.0952,
+     "max": -0.0952,
+     "n": 1
+    },
+    "dt_mean_s": {
+     "mean": 0.3075,
+     "min": 0.3075,
+     "max": 0.3075,
+     "n": 1
+    },
+    "dt_median_s": {
+     "mean": 0.3814,
+     "min": 0.3814,
+     "max": 0.3814,
+     "n": 1
+    },
+    "dt_std_s": {
+     "mean": 0.3424,
+     "min": 0.3424,
+     "max": 0.3424,
+     "n": 1
+    },
+    "dz_final_km": {
+     "mean": -0.6022,
+     "min": -0.6022,
+     "max": -0.6022,
+     "n": 1
+    },
+    "dz_mad_final_km": {
+     "mean": 0.677,
+     "min": 0.677,
+     "max": 0.677,
+     "n": 1
+    },
+    "dz_median_km": {
+     "mean": -0.399,
+     "min": -0.399,
+     "max": -0.399,
+     "n": 1
+    },
+    "epi_gt5km": {
      "mean": 0.0,
      "min": 0.0,
      "max": 0.0,
      "n": 1
+    },
+    "epi_mean_M2": {
+     "mean": 1.1097,
+     "min": 1.1097,
+     "max": 1.1097,
+     "n": 1
+    },
+    "epi_mean_M3": {
+     "mean": 1.031,
+     "min": 1.031,
+     "max": 1.031,
+     "n": 1
+    },
+    "epi_mean_M4": {
+     "mean": 1.4564,
+     "min": 1.4564,
+     "max": 1.4564,
+     "n": 1
+    },
+    "epi_median_km": {
+     "mean": 1.0308,
+     "min": 1.0308,
+     "max": 1.0308,
+     "n": 1
+    },
+    "event_ratio_final": {
+     "mean": 0.4777,
+     "min": 0.4777,
+     "max": 0.4777,
+     "n": 1
+    },
+    "f1_M2": {
+     "mean": 0.4346,
+     "min": 0.0,
+     "max": 0.8692,
+     "n": 2
+    },
+    "f1_M3": {
+     "mean": 0.4308,
+     "min": 0.0,
+     "max": 0.8616,
+     "n": 2
+    },
+    "f1_M4": {
+     "mean": 0.4445,
+     "min": 0.0,
+     "max": 0.8889,
+     "n": 2
+    },
+    "location_pairs": {
+     "mean": 382.0,
+     "min": 382.0,
+     "max": 382.0,
+     "n": 1
+    },
+    "off_structure_after_shift": {
+     "mean": 0.0241,
+     "min": 0.0241,
+     "max": 0.0241,
+     "n": 1
+    },
+    "off_structure_fraction": {
+     "mean": 0.0161,
+     "min": 0.0161,
+     "max": 0.0161,
+     "n": 1
+    },
+    "out_of_coverage_fraction": {
+     "mean": 0.2866,
+     "min": 0.2866,
+     "max": 0.2866,
+     "n": 1
+    },
+    "out_of_mask_fraction": {
+     "mean": 0.4386,
+     "min": 0.4386,
+     "max": 0.4386,
+     "n": 1
+    },
+    "precision_M2": {
+     "mean": 0.8635,
+     "min": 0.8635,
+     "max": 0.8635,
+     "n": 1
+    },
+    "precision_M3": {
+     "mean": 0.8776,
+     "min": 0.8776,
+     "max": 0.8776,
+     "n": 1
+    },
+    "precision_M4": {
+     "mean": 0.8,
+     "min": 0.8,
+     "max": 0.8,
+     "n": 1
+    },
+    "precision_final": {
+     "mean": 0.8668,
+     "min": 0.8668,
+     "max": 0.8668,
+     "n": 1
+    },
+    "recall": {
+     "mean": 0.3447,
+     "min": 0.0,
+     "max": 0.6893,
+     "n": 2
+    },
+    "recall_M2": {
+     "mean": 0.4375,
+     "min": 0.0,
+     "max": 0.875,
+     "n": 2
+    },
+    "recall_M3": {
+     "mean": 0.4231,
+     "min": 0.0,
+     "max": 0.8462,
+     "n": 2
+    },
+    "recall_M4": {
+     "mean": 0.5,
+     "min": 0.0,
+     "max": 1.0,
+     "n": 2
+    },
+    "recall_after_large": {
+     "mean": 0.3535,
+     "min": 0.0,
+     "max": 0.7071,
+     "n": 2
     },
     "recall_final": {
-     "mean": 0.0,
+     "mean": 0.2013,
      "min": 0.0,
-     "max": 0.0,
-     "n": 1
+     "max": 0.4025,
+     "n": 2
     },
     "recall_norm": {
-     "mean": 0.0,
+     "mean": 0.521,
      "min": 0.0,
-     "max": 0.0,
-     "n": 1
+     "max": 1.0419,
+     "n": 2
+    },
+    "recall_other": {
+     "mean": 0.3482,
+     "min": 0.0,
+     "max": 0.6964,
+     "n": 2
+    },
+    "recall_ref_comcat": {
+     "mean": 0.4471,
+     "min": 0.0,
+     "max": 0.8943,
+     "n": 2
+    },
+    "recall_ref_matoza": {
+     "mean": 0.4304,
+     "min": 0.0,
+     "max": 0.8608,
+     "n": 2
+    },
+    "recall_ref_shelly": {
+     "mean": 0.3447,
+     "min": 0.0,
+     "max": 0.6893,
+     "n": 2
+    },
+    "recall_ref_wei": {
+     "mean": 0.2913,
+     "min": 0.0,
+     "max": 0.5827,
+     "n": 2
     },
     "recall_tight": {
-     "mean": 0.0,
+     "mean": 0.329,
      "min": 0.0,
-     "max": 0.0,
+     "max": 0.658,
+     "n": 2
+    },
+    "scatter_final_km": {
+     "mean": 0.6033,
+     "min": 0.6033,
+     "max": 0.6033,
+     "n": 1
+    },
+    "scatter_median_km": {
+     "mean": 0.6638,
+     "min": 0.6638,
+     "max": 0.6638,
+     "n": 1
+    },
+    "shift_final_km": {
+     "mean": 0.3502,
+     "min": 0.3502,
+     "max": 0.3502,
+     "n": 1
+    },
+    "shift_km": {
+     "mean": 0.8643,
+     "min": 0.8643,
+     "max": 0.8643,
+     "n": 1
+    },
+    "time_bias_final_s": {
+     "mean": 0.1047,
+     "min": 0.1047,
+     "max": 0.1047,
+     "n": 1
+    },
+    "time_mad_final_s": {
+     "mean": 0.0894,
+     "min": 0.0894,
+     "max": 0.0894,
+     "n": 1
+    },
+    "union_support": {
+     "mean": 0.8836,
+     "min": 0.8836,
+     "max": 0.8836,
      "n": 1
     }
    },
    "trusted_runs": 0,
    "cost_usd": {
-    "mean": 27.2987,
-    "min": 27.2987,
+    "mean": 24.6044,
+    "min": 21.91,
     "max": 27.2987,
-    "n": 1
+    "n": 2
    },
    "elapsed_s": {
-    "mean": 18977.9,
+    "mean": 22429.9,
     "min": 18977.9,
-    "max": 18977.9,
-    "n": 1
+    "max": 25881.9,
+    "n": 2
    },
    "turns": {
-    "mean": 361.0,
-    "min": 361.0,
+    "mean": 348.5,
+    "min": 336.0,
     "max": 361.0,
-    "n": 1
+    "n": 2
    }
   },
   {
