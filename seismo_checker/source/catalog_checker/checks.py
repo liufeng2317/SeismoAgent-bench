@@ -148,7 +148,7 @@ def location_uncertainty(d: Data, c: dict) -> Check:
 def station_residual_spread(d: Data, c: dict) -> Check:
     """Per station and phase, median and spread (MAD) of the locator's residuals (optional picks column)."""
     expected = (f"station-phases whose residual MAD exceeds max({c['residual_spread_floor_s']:g} s, "
-                f"{c['residual_spread_factor']:g}x the network median MAD)")
+                f"{c['residual_spread_factor']:g}x the median MAD of the stations with S picks)")
     p = d.all_picks
     if "residual_s" not in p:
         return _skip("station_residual_spread", "space", "share", expected, 0, "the picks have no residual_s column")
@@ -159,11 +159,21 @@ def station_residual_spread(d: Data, c: dict) -> Check:
     s = s[s.n >= c["residual_min_picks"]]
     if len(s) < 3:
         return _skip("station_residual_spread", "space", "share", expected, len(s), "fewer than 3 station-phases with enough residuals")
-    net = float(s.mad_s.median())
+    # The yardstick is the stations with S picks (three-component): a group of noisy single-component stations
+    # would otherwise raise the network median and hide itself.
+    with_s = set(s.station_id[s.phase == "S"])
+    base = s[s.station_id.isin(with_s)]
+    reference = "stations with S picks" if len(base) >= 3 else "all stations"
+    net = float((base if len(base) >= 3 else s).mad_s.median())
     limit = max(c["residual_spread_floor_s"], c["residual_spread_factor"] * net)
     wide = s[s.mad_s > limit]
     return Check("station_residual_spread", "space", float(len(wide) / len(s)), "share", expected, len(s), False, None,
-                 {"network_median_mad_s": round(net, 3), "limit_s": round(limit, 3),
+                 {"reference": reference, "reference_median_mad_s": round(net, 3), "network_median_mad_s": round(float(s.mad_s.median()), 3),
+                  "limit_s": round(limit, 3),
+                  # stations with P picks only (single-component or P-only pickers), as a group against the yardstick
+                  "p_only_stations": int(s[~s.station_id.isin(with_s)].station_id.nunique()),
+                  "p_only_median_mad_s": (round(float(s[~s.station_id.isin(with_s)].mad_s.median()), 3)
+                                          if (~s.station_id.isin(with_s)).any() else None),
                   "wide_station_phases": wide.round(3).to_dict(orient="records"),
                   "per_station": s.round(3).to_dict(orient="records")})
 

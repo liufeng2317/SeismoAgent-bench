@@ -33,7 +33,7 @@ Run the experiment on the events concerned (for a pile-up: the events in the pil
 - Explanations: (a) a representation artefact: with step layers, poorly constrained events collect at a layer interface; with a coarse travel-time grid (e.g. 0.5 km) the pile sits at the grid node next to the interface, so it may look as if it were not on an interface; (b) the model is wrong for these events.
 - Experiment: relocate the piled events with the same model as a linear gradient between its nodes (`velocity_layering: linear`, or densified nodes), and separately with a finer travel-time grid (0.1 km).
 - Reading: if the pile disperses with the linear model, or moves onto the interface with the finer grid, it is (a). Then build both full candidates — the linear representation, and the step model judged without this check — and compare each with the current product: the representation also changes origin times and the share of events that leave the region, and which representation is better differs from model to model. If the pile stays where it was with both, it is (b).
-- Check the piled events' quality too (number of phases, azimuthal gap, RMS): piles made of poorly constrained events point to (a); well-recorded events in a pile point to (b).
+- Check the piled events' quality too (number of phases, azimuthal gap, horizontal and depth uncertainty, S within 1.4 focal depths; not RMS, which does not rank location quality): piles made of poorly constrained events point to (a); well-recorded events in a pile point to (b).
 
 **A pile-up at the shallowest depth or at the top of the search region.**
 - Explanations: the reference elevation is not the model's datum (events are pushed above it); the depth search starts at the wrong level; the near-surface velocity is too fast (a slow surface layer such as basin fill is missing).
@@ -41,7 +41,7 @@ Run the experiment on the events concerned (for a pile-up: the events in the pil
 - Reading: a pile that goes away with the right datum was a usage error. A pile that remains while S−P depths say the events are deeper points to the near-surface velocity.
 
 **S−P depths improve but pile-ups or layers worsen** (the candidate model moves depths the right way on average but cannot fit some events).
-- Experiment: as above for the pile; also look at RMS per event and residuals per station for the piled events.
+- Experiment: as above for the pile; also look at the uncertainty and the S−P depths of the piled events (not their RMS).
 - Reading: if the pile is a representation artefact, adopt the candidate in its linear form. If not, neither model is right: look for a model with the missing structure.
 
 **Origin-time scatter (Wadati spread) worsens with a new model.**
