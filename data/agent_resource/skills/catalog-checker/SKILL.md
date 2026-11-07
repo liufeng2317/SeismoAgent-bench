@@ -13,15 +13,15 @@ Run the checker on each stage's products as soon as they exist (`--stage data`, 
 
 ## What the output contract requires
 
-Two items are added to the submission:
+Two items are added to the submission. All paths here are relative to the output directory `$BENCH_OUTPUT`, the same directory as `catalog.csv` and `picks.csv` (not a `work/` subdirectory of it):
 
-1. `work/checker/final/checker_report.json`: the checker run with `--stage all` (or the latest stage you produced) on the submitted `catalog.csv` and `picks.csv`, with `--waveforms` and the StationXML you were given, and `--catalog-before` if you relocated. The scorer re-runs the checker on the submitted files and verifies this report.
-2. `work/checker/dispositions.json`: one entry for every entry in that report's `flags`:
+1. `checker/final/checker_report.json`: the checker run with `--stage all` (or the latest stage you produced) on the submitted `catalog.csv` and `picks.csv`, with `--waveforms` and the StationXML you were given, and `--catalog-before` if you relocated. The scorer re-runs the checker on the submitted files and verifies this report.
+2. `checker/dispositions.json`: one entry for every entry in that report's `flags`:
 
 ```json
 [
   {"flag_id": "space.depth_single_value", "disposition": "fixed",
-   "what_changed": "what you changed and in which step", "report_before": "work/checker/<run>/checker_report.json"},
+   "what_changed": "what you changed and in which step", "report_before": "checker/<run>/checker_report.json"},
   {"flag_id": "strength.magnitude_recompute", "disposition": "justified",
    "evidence": "the measurement or experiment that shows the flagged property is not an error, with file paths"}
 ]
@@ -35,4 +35,4 @@ Two items are added to the submission:
 ## Rules
 
 - Do not change a product only to make a check pass (shifting depths, deleting events, rescaling magnitudes without a reason). The evaluation reads your record of changes and counts such changes separately from real fixes.
-- Keep every checker report you produce (`work/checker/<stage or step>/`); they are part of the record.
+- Keep every checker report you produce (`$BENCH_OUTPUT/checker/<stage or step>/`); they are part of the record.
