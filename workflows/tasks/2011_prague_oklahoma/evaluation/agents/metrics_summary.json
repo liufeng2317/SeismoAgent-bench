@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "bb1fde88f5fe9e31576ff216bbba8ac5cee2e17a",
- "scorer_dirty": true,
- "generated_utc": "2026-11-05T05:25:54+00:00",
+ "scorer_commit": "4ef4492135a29904df9854ea8f0230b230735957",
+ "scorer_dirty": false,
+ "generated_utc": "2026-11-07T04:53:41+00:00",
  "task": "2011_prague_oklahoma",
  "configurations": [
   {
@@ -1215,6 +1215,410 @@
     "mean": 189.0,
     "min": 189.0,
     "max": 189.0,
+    "n": 1
+   }
+  },
+  {
+   "variant": "dev_knowledge",
+   "harness": "claude",
+   "model": "glm-5.3",
+   "launched": 1,
+   "leakage_flagged": [],
+   "completion_rate": 1.0,
+   "runs": [
+    {
+     "run_id": "20261106T182429Z",
+     "completed": true,
+     "trusted": false,
+     "trust_failed": [
+      "after_large_events",
+      "off_structure"
+     ],
+     "b_difference": 0.221,
+     "depth_band_share": 0.2646,
+     "depth_mode_share": 0.0238,
+     "depth_pairs": 188,
+     "dmag_mean_M2": -0.3692,
+     "dmag_mean_M3": 0.0883,
+     "dmag_median": -0.4181,
+     "dmag_pairs": 188,
+     "dmag_slope_per_unit": -0.1852,
+     "dmag_std": 0.3441,
+     "dt_final_s": 0.069,
+     "dt_mad_s": 0.0455,
+     "dt_mean_M2": 0.0707,
+     "dt_mean_M3": -0.016,
+     "dt_mean_s": 0.1064,
+     "dt_median_s": 0.1195,
+     "dt_std_s": 0.1352,
+     "dz_final_km": -0.5159,
+     "dz_mad_final_km": 0.2641,
+     "dz_median_km": -0.264,
+     "epi_gt5km": 0.0,
+     "epi_mean_M2": 0.6838,
+     "epi_mean_M3": 0.6037,
+     "epi_median_km": 0.2568,
+     "event_ratio_final": 0.4527,
+     "f1_M2": 0.9091,
+     "f1_M3": 1.0,
+     "location_pairs": 188,
+     "off_structure_after_shift": 0.0503,
+     "off_structure_fraction": 0.0503,
+     "out_of_coverage_fraction": 0.0,
+     "out_of_mask_fraction": 0.0825,
+     "precision_M2": 1.0,
+     "precision_M3": 1.0,
+     "precision_final": 0.9566,
+     "recall": 0.6801,
+     "recall_M2": 0.8333,
+     "recall_M3": 1.0,
+     "recall_after_large": 0.4667,
+     "recall_final": 0.4274,
+     "recall_norm": 1.3406,
+     "recall_other": 0.6962,
+     "recall_ref_cochran": 0.6801,
+     "recall_ref_mcmahon": 0.7727,
+     "recall_tight": 0.6606,
+     "scatter_final_km": 0.2131,
+     "scatter_median_km": 0.1475,
+     "shift_final_km": 0.2618,
+     "shift_km": 0.2012,
+     "time_bias_final_s": 0.0619,
+     "time_mad_final_s": 0.0355,
+     "union_support": 0.9648
+    }
+   ],
+   "metrics": {
+    "b_difference": {
+     "mean": 0.221,
+     "min": 0.221,
+     "max": 0.221,
+     "n": 1
+    },
+    "depth_band_share": {
+     "mean": 0.2646,
+     "min": 0.2646,
+     "max": 0.2646,
+     "n": 1
+    },
+    "depth_mode_share": {
+     "mean": 0.0238,
+     "min": 0.0238,
+     "max": 0.0238,
+     "n": 1
+    },
+    "depth_pairs": {
+     "mean": 188.0,
+     "min": 188.0,
+     "max": 188.0,
+     "n": 1
+    },
+    "dmag_mean_M2": {
+     "mean": -0.3692,
+     "min": -0.3692,
+     "max": -0.3692,
+     "n": 1
+    },
+    "dmag_mean_M3": {
+     "mean": 0.0883,
+     "min": 0.0883,
+     "max": 0.0883,
+     "n": 1
+    },
+    "dmag_median": {
+     "mean": -0.4181,
+     "min": -0.4181,
+     "max": -0.4181,
+     "n": 1
+    },
+    "dmag_pairs": {
+     "mean": 188.0,
+     "min": 188.0,
+     "max": 188.0,
+     "n": 1
+    },
+    "dmag_slope_per_unit": {
+     "mean": -0.1852,
+     "min": -0.1852,
+     "max": -0.1852,
+     "n": 1
+    },
+    "dmag_std": {
+     "mean": 0.3441,
+     "min": 0.3441,
+     "max": 0.3441,
+     "n": 1
+    },
+    "dt_final_s": {
+     "mean": 0.069,
+     "min": 0.069,
+     "max": 0.069,
+     "n": 1
+    },
+    "dt_mad_s": {
+     "mean": 0.0455,
+     "min": 0.0455,
+     "max": 0.0455,
+     "n": 1
+    },
+    "dt_mean_M2": {
+     "mean": 0.0707,
+     "min": 0.0707,
+     "max": 0.0707,
+     "n": 1
+    },
+    "dt_mean_M3": {
+     "mean": -0.016,
+     "min": -0.016,
+     "max": -0.016,
+     "n": 1
+    },
+    "dt_mean_s": {
+     "mean": 0.1064,
+     "min": 0.1064,
+     "max": 0.1064,
+     "n": 1
+    },
+    "dt_median_s": {
+     "mean": 0.1195,
+     "min": 0.1195,
+     "max": 0.1195,
+     "n": 1
+    },
+    "dt_std_s": {
+     "mean": 0.1352,
+     "min": 0.1352,
+     "max": 0.1352,
+     "n": 1
+    },
+    "dz_final_km": {
+     "mean": -0.5159,
+     "min": -0.5159,
+     "max": -0.5159,
+     "n": 1
+    },
+    "dz_mad_final_km": {
+     "mean": 0.2641,
+     "min": 0.2641,
+     "max": 0.2641,
+     "n": 1
+    },
+    "dz_median_km": {
+     "mean": -0.264,
+     "min": -0.264,
+     "max": -0.264,
+     "n": 1
+    },
+    "epi_gt5km": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 1
+    },
+    "epi_mean_M2": {
+     "mean": 0.6838,
+     "min": 0.6838,
+     "max": 0.6838,
+     "n": 1
+    },
+    "epi_mean_M3": {
+     "mean": 0.6037,
+     "min": 0.6037,
+     "max": 0.6037,
+     "n": 1
+    },
+    "epi_median_km": {
+     "mean": 0.2568,
+     "min": 0.2568,
+     "max": 0.2568,
+     "n": 1
+    },
+    "event_ratio_final": {
+     "mean": 0.4527,
+     "min": 0.4527,
+     "max": 0.4527,
+     "n": 1
+    },
+    "f1_M2": {
+     "mean": 0.9091,
+     "min": 0.9091,
+     "max": 0.9091,
+     "n": 1
+    },
+    "f1_M3": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "location_pairs": {
+     "mean": 188.0,
+     "min": 188.0,
+     "max": 188.0,
+     "n": 1
+    },
+    "off_structure_after_shift": {
+     "mean": 0.0503,
+     "min": 0.0503,
+     "max": 0.0503,
+     "n": 1
+    },
+    "off_structure_fraction": {
+     "mean": 0.0503,
+     "min": 0.0503,
+     "max": 0.0503,
+     "n": 1
+    },
+    "out_of_coverage_fraction": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 1
+    },
+    "out_of_mask_fraction": {
+     "mean": 0.0825,
+     "min": 0.0825,
+     "max": 0.0825,
+     "n": 1
+    },
+    "precision_M2": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "precision_M3": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "precision_final": {
+     "mean": 0.9566,
+     "min": 0.9566,
+     "max": 0.9566,
+     "n": 1
+    },
+    "recall": {
+     "mean": 0.6801,
+     "min": 0.6801,
+     "max": 0.6801,
+     "n": 1
+    },
+    "recall_M2": {
+     "mean": 0.8333,
+     "min": 0.8333,
+     "max": 0.8333,
+     "n": 1
+    },
+    "recall_M3": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "recall_after_large": {
+     "mean": 0.4667,
+     "min": 0.4667,
+     "max": 0.4667,
+     "n": 1
+    },
+    "recall_final": {
+     "mean": 0.4274,
+     "min": 0.4274,
+     "max": 0.4274,
+     "n": 1
+    },
+    "recall_norm": {
+     "mean": 1.3406,
+     "min": 1.3406,
+     "max": 1.3406,
+     "n": 1
+    },
+    "recall_other": {
+     "mean": 0.6962,
+     "min": 0.6962,
+     "max": 0.6962,
+     "n": 1
+    },
+    "recall_ref_cochran": {
+     "mean": 0.6801,
+     "min": 0.6801,
+     "max": 0.6801,
+     "n": 1
+    },
+    "recall_ref_mcmahon": {
+     "mean": 0.7727,
+     "min": 0.7727,
+     "max": 0.7727,
+     "n": 1
+    },
+    "recall_tight": {
+     "mean": 0.6606,
+     "min": 0.6606,
+     "max": 0.6606,
+     "n": 1
+    },
+    "scatter_final_km": {
+     "mean": 0.2131,
+     "min": 0.2131,
+     "max": 0.2131,
+     "n": 1
+    },
+    "scatter_median_km": {
+     "mean": 0.1475,
+     "min": 0.1475,
+     "max": 0.1475,
+     "n": 1
+    },
+    "shift_final_km": {
+     "mean": 0.2618,
+     "min": 0.2618,
+     "max": 0.2618,
+     "n": 1
+    },
+    "shift_km": {
+     "mean": 0.2012,
+     "min": 0.2012,
+     "max": 0.2012,
+     "n": 1
+    },
+    "time_bias_final_s": {
+     "mean": 0.0619,
+     "min": 0.0619,
+     "max": 0.0619,
+     "n": 1
+    },
+    "time_mad_final_s": {
+     "mean": 0.0355,
+     "min": 0.0355,
+     "max": 0.0355,
+     "n": 1
+    },
+    "union_support": {
+     "mean": 0.9648,
+     "min": 0.9648,
+     "max": 0.9648,
+     "n": 1
+    }
+   },
+   "trusted_runs": 0,
+   "cost_usd": {
+    "mean": 32.2646,
+    "min": 32.2646,
+    "max": 32.2646,
+    "n": 1
+   },
+   "elapsed_s": {
+    "mean": 17849.8,
+    "min": 17849.8,
+    "max": 17849.8,
+    "n": 1
+   },
+   "turns": {
+    "mean": 326.0,
+    "min": 326.0,
+    "max": 326.0,
     "n": 1
    }
   },

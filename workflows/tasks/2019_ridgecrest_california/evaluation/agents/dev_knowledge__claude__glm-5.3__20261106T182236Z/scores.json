@@ -1,0 +1,49 @@
+{
+ "run": {
+  "variant": "dev_knowledge",
+  "harness": "claude",
+  "model": "glm-5.3",
+  "run_id": "20261106T182236Z",
+  "path": "runs/dev_knowledge/claude/glm-5.3/20261106T182236Z"
+ },
+ "formal_state": null,
+ "run_state": "completed",
+ "completion": {
+  "completed": false,
+  "problems": [
+   "picks.csv: missing",
+   "catalog.csv: missing",
+   "checker/final/checker_report.json: missing",
+   "checker/dispositions.json: missing"
+  ],
+  "contract": "runs/dev_knowledge/claude/glm-5.3/20261106T182236Z/control/output_contract.json"
+ },
+ "metrics_version": 2,
+ "headline": {
+  "recall": 0.0,
+  "recall_norm": 0.0,
+  "recall_tight": 0.0,
+  "recall_final": 0.0
+ },
+ "trust": {
+  "trusted": false,
+  "failed": [
+   "completed"
+  ],
+  "pending": [],
+  "dimensions": {},
+  "completeness": {
+   "recall_norm": 0.0,
+   "recall_tight": 0.0,
+   "recall_final": 0.0,
+   "event_ratio_final": null
+  }
+ },
+ "process": {
+  "cost_usd": 16.729682,
+  "elapsed_s": 23122.5,
+  "turns": 285
+ },
+ "leakage_flag": false,
+ "leakage_review": []
+}

@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "bb1fde88f5fe9e31576ff216bbba8ac5cee2e17a",
- "scorer_dirty": true,
- "generated_utc": "2026-11-05T05:29:16+00:00",
+ "scorer_commit": "fb700ec2530e21b8ee34ccff7aebaa3d1df72d28",
+ "scorer_dirty": false,
+ "generated_utc": "2026-11-07T04:50:12+00:00",
  "task": "2019_ridgecrest_california",
  "configurations": [
   {
@@ -1537,6 +1537,73 @@
    }
   },
   {
+   "variant": "dev_knowledge",
+   "harness": "claude",
+   "model": "glm-5.3",
+   "launched": 1,
+   "leakage_flagged": [],
+   "completion_rate": 0.0,
+   "runs": [
+    {
+     "run_id": "20261106T182236Z",
+     "completed": false,
+     "trusted": false,
+     "trust_failed": [
+      "completed"
+     ],
+     "recall": 0.0,
+     "recall_final": 0.0,
+     "recall_norm": 0.0,
+     "recall_tight": 0.0
+    }
+   ],
+   "metrics": {
+    "recall": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 1
+    },
+    "recall_final": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 1
+    },
+    "recall_norm": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 1
+    },
+    "recall_tight": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 1
+    }
+   },
+   "trusted_runs": 0,
+   "cost_usd": {
+    "mean": 16.7297,
+    "min": 16.7297,
+    "max": 16.7297,
+    "n": 1
+   },
+   "elapsed_s": {
+    "mean": 23122.5,
+    "min": 23122.5,
+    "max": 23122.5,
+    "n": 1
+   },
+   "turns": {
+    "mean": 285.0,
+    "min": 285.0,
+    "max": 285.0,
+    "n": 1
+   }
+  },
+  {
    "variant": "min",
    "harness": "claude",
    "model": "glm-5.3",
@@ -2563,5 +2630,10 @@
    }
   }
  ],
- "excluded_runs": []
+ "excluded_runs": [
+  {
+   "run": "runs/dev_knowledge/claude/glm-5.3/20261106T162709Z",
+   "reason": "# Excluded\n\nStopped by the model provider, not by the Agent: the API returned HTTP 429 [1310] \"weekly/monthly usage limit reached, reset 2026-11-09 02:52:59 (Beijing)\" (record/execution.log, 2026-11-06T17:33:39 UTC) while three runs were running. To be repeated after the reset."
+  }
+ ]
 }

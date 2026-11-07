@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "bb1fde88f5fe9e31576ff216bbba8ac5cee2e17a",
- "scorer_dirty": true,
- "generated_utc": "2026-11-05T05:26:50+00:00",
+ "scorer_commit": "4ef4492135a29904df9854ea8f0230b230735957",
+ "scorer_dirty": false,
+ "generated_utc": "2026-11-07T04:54:05+00:00",
  "task": "2020_magna_utah",
  "configurations": [
   {
@@ -1579,6 +1579,531 @@
    }
   },
   {
+   "variant": "dev_knowledge",
+   "harness": "claude",
+   "model": "glm-5.3",
+   "launched": 1,
+   "leakage_flagged": [],
+   "completion_rate": 1.0,
+   "runs": [
+    {
+     "run_id": "20261106T182043Z",
+     "completed": true,
+     "trusted": false,
+     "trust_failed": [
+      "time_bias",
+      "horizontal_shift",
+      "depth_bias",
+      "magnitude_offset"
+     ],
+     "b_difference": -0.082,
+     "depth_band_share": 0.4536,
+     "depth_mode_share": 0.0397,
+     "depth_pairs": 1364,
+     "dmag_mean_M2": 0.3413,
+     "dmag_mean_M3": 0.0979,
+     "dmag_mean_M4": -0.122,
+     "dmag_mean_M5": -0.24,
+     "dmag_median": 0.3,
+     "dmag_pairs": 702,
+     "dmag_slope_per_unit": 0.009,
+     "dmag_std": 0.3106,
+     "dt_final_s": 0.2368,
+     "dt_mad_s": 0.0622,
+     "dt_mean_M2": 0.2388,
+     "dt_mean_M3": 0.2196,
+     "dt_mean_M4": 0.1578,
+     "dt_mean_M5": 0.3188,
+     "dt_mean_s": 0.2891,
+     "dt_median_s": 0.3069,
+     "dt_std_s": 0.1979,
+     "dz_final_km": -1.903,
+     "dz_mad_final_km": 0.707,
+     "dz_median_km": -1.75,
+     "epi_gt5km": 0.0,
+     "epi_mean_M2": 2.2386,
+     "epi_mean_M3": 1.8617,
+     "epi_mean_M4": 1.7085,
+     "epi_mean_M5": 2.1706,
+     "epi_median_km": 2.3397,
+     "event_ratio_final": 0.6003,
+     "f1_M2": 0.9713,
+     "f1_M3": 0.9831,
+     "f1_M4": 1.0,
+     "f1_M5": 1.0,
+     "location_pairs": 1364,
+     "off_structure_after_shift": 0.0099,
+     "off_structure_fraction": 0.0099,
+     "out_of_coverage_fraction": 0.0097,
+     "out_of_mask_fraction": 0.1237,
+     "pick_recall_P": 0.8968,
+     "pick_recall_S": 0.8622,
+     "pick_residual_mad_P_s": 0.03,
+     "pick_residual_mad_S_s": 0.05,
+     "precision_M2": 0.9522,
+     "precision_M3": 1.0,
+     "precision_M4": 1.0,
+     "precision_M5": 1.0,
+     "precision_final": 0.9043,
+     "recall": 0.5762,
+     "recall_M2": 0.9912,
+     "recall_M3": 0.9667,
+     "recall_M4": 1.0,
+     "recall_M5": 1.0,
+     "recall_after_large": 0.7699,
+     "recall_final": 0.5014,
+     "recall_norm": 1.0347,
+     "recall_other": 0.5693,
+     "recall_ref_baker": 0.767,
+     "recall_ref_pang": 0.5762,
+     "recall_ref_uuss": 0.9324,
+     "recall_tight": 0.5769,
+     "scatter_final_km": 0.4264,
+     "scatter_median_km": 0.2809,
+     "shift_final_km": 2.2776,
+     "shift_km": 2.3149,
+     "time_bias_final_s": 0.2299,
+     "time_mad_final_s": 0.0741,
+     "union_support": 0.9303
+    }
+   ],
+   "metrics": {
+    "b_difference": {
+     "mean": -0.082,
+     "min": -0.082,
+     "max": -0.082,
+     "n": 1
+    },
+    "depth_band_share": {
+     "mean": 0.4536,
+     "min": 0.4536,
+     "max": 0.4536,
+     "n": 1
+    },
+    "depth_mode_share": {
+     "mean": 0.0397,
+     "min": 0.0397,
+     "max": 0.0397,
+     "n": 1
+    },
+    "depth_pairs": {
+     "mean": 1364.0,
+     "min": 1364.0,
+     "max": 1364.0,
+     "n": 1
+    },
+    "dmag_mean_M2": {
+     "mean": 0.3413,
+     "min": 0.3413,
+     "max": 0.3413,
+     "n": 1
+    },
+    "dmag_mean_M3": {
+     "mean": 0.0979,
+     "min": 0.0979,
+     "max": 0.0979,
+     "n": 1
+    },
+    "dmag_mean_M4": {
+     "mean": -0.122,
+     "min": -0.122,
+     "max": -0.122,
+     "n": 1
+    },
+    "dmag_mean_M5": {
+     "mean": -0.24,
+     "min": -0.24,
+     "max": -0.24,
+     "n": 1
+    },
+    "dmag_median": {
+     "mean": 0.3,
+     "min": 0.3,
+     "max": 0.3,
+     "n": 1
+    },
+    "dmag_pairs": {
+     "mean": 702.0,
+     "min": 702.0,
+     "max": 702.0,
+     "n": 1
+    },
+    "dmag_slope_per_unit": {
+     "mean": 0.009,
+     "min": 0.009,
+     "max": 0.009,
+     "n": 1
+    },
+    "dmag_std": {
+     "mean": 0.3106,
+     "min": 0.3106,
+     "max": 0.3106,
+     "n": 1
+    },
+    "dt_final_s": {
+     "mean": 0.2368,
+     "min": 0.2368,
+     "max": 0.2368,
+     "n": 1
+    },
+    "dt_mad_s": {
+     "mean": 0.0622,
+     "min": 0.0622,
+     "max": 0.0622,
+     "n": 1
+    },
+    "dt_mean_M2": {
+     "mean": 0.2388,
+     "min": 0.2388,
+     "max": 0.2388,
+     "n": 1
+    },
+    "dt_mean_M3": {
+     "mean": 0.2196,
+     "min": 0.2196,
+     "max": 0.2196,
+     "n": 1
+    },
+    "dt_mean_M4": {
+     "mean": 0.1578,
+     "min": 0.1578,
+     "max": 0.1578,
+     "n": 1
+    },
+    "dt_mean_M5": {
+     "mean": 0.3188,
+     "min": 0.3188,
+     "max": 0.3188,
+     "n": 1
+    },
+    "dt_mean_s": {
+     "mean": 0.2891,
+     "min": 0.2891,
+     "max": 0.2891,
+     "n": 1
+    },
+    "dt_median_s": {
+     "mean": 0.3069,
+     "min": 0.3069,
+     "max": 0.3069,
+     "n": 1
+    },
+    "dt_std_s": {
+     "mean": 0.1979,
+     "min": 0.1979,
+     "max": 0.1979,
+     "n": 1
+    },
+    "dz_final_km": {
+     "mean": -1.903,
+     "min": -1.903,
+     "max": -1.903,
+     "n": 1
+    },
+    "dz_mad_final_km": {
+     "mean": 0.707,
+     "min": 0.707,
+     "max": 0.707,
+     "n": 1
+    },
+    "dz_median_km": {
+     "mean": -1.75,
+     "min": -1.75,
+     "max": -1.75,
+     "n": 1
+    },
+    "epi_gt5km": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 1
+    },
+    "epi_mean_M2": {
+     "mean": 2.2386,
+     "min": 2.2386,
+     "max": 2.2386,
+     "n": 1
+    },
+    "epi_mean_M3": {
+     "mean": 1.8617,
+     "min": 1.8617,
+     "max": 1.8617,
+     "n": 1
+    },
+    "epi_mean_M4": {
+     "mean": 1.7085,
+     "min": 1.7085,
+     "max": 1.7085,
+     "n": 1
+    },
+    "epi_mean_M5": {
+     "mean": 2.1706,
+     "min": 2.1706,
+     "max": 2.1706,
+     "n": 1
+    },
+    "epi_median_km": {
+     "mean": 2.3397,
+     "min": 2.3397,
+     "max": 2.3397,
+     "n": 1
+    },
+    "event_ratio_final": {
+     "mean": 0.6003,
+     "min": 0.6003,
+     "max": 0.6003,
+     "n": 1
+    },
+    "f1_M2": {
+     "mean": 0.9713,
+     "min": 0.9713,
+     "max": 0.9713,
+     "n": 1
+    },
+    "f1_M3": {
+     "mean": 0.9831,
+     "min": 0.9831,
+     "max": 0.9831,
+     "n": 1
+    },
+    "f1_M4": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "f1_M5": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "location_pairs": {
+     "mean": 1364.0,
+     "min": 1364.0,
+     "max": 1364.0,
+     "n": 1
+    },
+    "off_structure_after_shift": {
+     "mean": 0.0099,
+     "min": 0.0099,
+     "max": 0.0099,
+     "n": 1
+    },
+    "off_structure_fraction": {
+     "mean": 0.0099,
+     "min": 0.0099,
+     "max": 0.0099,
+     "n": 1
+    },
+    "out_of_coverage_fraction": {
+     "mean": 0.0097,
+     "min": 0.0097,
+     "max": 0.0097,
+     "n": 1
+    },
+    "out_of_mask_fraction": {
+     "mean": 0.1237,
+     "min": 0.1237,
+     "max": 0.1237,
+     "n": 1
+    },
+    "pick_recall_P": {
+     "mean": 0.8968,
+     "min": 0.8968,
+     "max": 0.8968,
+     "n": 1
+    },
+    "pick_recall_S": {
+     "mean": 0.8622,
+     "min": 0.8622,
+     "max": 0.8622,
+     "n": 1
+    },
+    "pick_residual_mad_P_s": {
+     "mean": 0.03,
+     "min": 0.03,
+     "max": 0.03,
+     "n": 1
+    },
+    "pick_residual_mad_S_s": {
+     "mean": 0.05,
+     "min": 0.05,
+     "max": 0.05,
+     "n": 1
+    },
+    "precision_M2": {
+     "mean": 0.9522,
+     "min": 0.9522,
+     "max": 0.9522,
+     "n": 1
+    },
+    "precision_M3": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "precision_M4": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "precision_M5": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "precision_final": {
+     "mean": 0.9043,
+     "min": 0.9043,
+     "max": 0.9043,
+     "n": 1
+    },
+    "recall": {
+     "mean": 0.5762,
+     "min": 0.5762,
+     "max": 0.5762,
+     "n": 1
+    },
+    "recall_M2": {
+     "mean": 0.9912,
+     "min": 0.9912,
+     "max": 0.9912,
+     "n": 1
+    },
+    "recall_M3": {
+     "mean": 0.9667,
+     "min": 0.9667,
+     "max": 0.9667,
+     "n": 1
+    },
+    "recall_M4": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "recall_M5": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "recall_after_large": {
+     "mean": 0.7699,
+     "min": 0.7699,
+     "max": 0.7699,
+     "n": 1
+    },
+    "recall_final": {
+     "mean": 0.5014,
+     "min": 0.5014,
+     "max": 0.5014,
+     "n": 1
+    },
+    "recall_norm": {
+     "mean": 1.0347,
+     "min": 1.0347,
+     "max": 1.0347,
+     "n": 1
+    },
+    "recall_other": {
+     "mean": 0.5693,
+     "min": 0.5693,
+     "max": 0.5693,
+     "n": 1
+    },
+    "recall_ref_baker": {
+     "mean": 0.767,
+     "min": 0.767,
+     "max": 0.767,
+     "n": 1
+    },
+    "recall_ref_pang": {
+     "mean": 0.5762,
+     "min": 0.5762,
+     "max": 0.5762,
+     "n": 1
+    },
+    "recall_ref_uuss": {
+     "mean": 0.9324,
+     "min": 0.9324,
+     "max": 0.9324,
+     "n": 1
+    },
+    "recall_tight": {
+     "mean": 0.5769,
+     "min": 0.5769,
+     "max": 0.5769,
+     "n": 1
+    },
+    "scatter_final_km": {
+     "mean": 0.4264,
+     "min": 0.4264,
+     "max": 0.4264,
+     "n": 1
+    },
+    "scatter_median_km": {
+     "mean": 0.2809,
+     "min": 0.2809,
+     "max": 0.2809,
+     "n": 1
+    },
+    "shift_final_km": {
+     "mean": 2.2776,
+     "min": 2.2776,
+     "max": 2.2776,
+     "n": 1
+    },
+    "shift_km": {
+     "mean": 2.3149,
+     "min": 2.3149,
+     "max": 2.3149,
+     "n": 1
+    },
+    "time_bias_final_s": {
+     "mean": 0.2299,
+     "min": 0.2299,
+     "max": 0.2299,
+     "n": 1
+    },
+    "time_mad_final_s": {
+     "mean": 0.0741,
+     "min": 0.0741,
+     "max": 0.0741,
+     "n": 1
+    },
+    "union_support": {
+     "mean": 0.9303,
+     "min": 0.9303,
+     "max": 0.9303,
+     "n": 1
+    }
+   },
+   "trusted_runs": 0,
+   "cost_usd": {
+    "mean": 24.3642,
+    "min": 24.3642,
+    "max": 24.3642,
+    "n": 1
+   },
+   "elapsed_s": {
+    "mean": 12245.8,
+    "min": 12245.8,
+    "max": 12245.8,
+    "n": 1
+   },
+   "turns": {
+    "mean": 364.0,
+    "min": 364.0,
+    "max": 364.0,
+    "n": 1
+   }
+  },
+  {
    "variant": "min",
    "harness": "claude",
    "model": "glm-5.3",
@@ -2189,6 +2714,10 @@
   {
    "run": "runs/backend_knowledge/claude/glm-5.3/20261031T185724Z",
    "reason": "# Excluded\n\nStopped by the model provider, not by the Agent: the API returned HTTP 429 \"5-hour usage limit reached\" (record/execution.log, 2026-10-31 around 20:20 UTC) while nine back-end runs were running at once. Repeated after the quota reset with at most three concurrent runs. In this batch the `backend` arm could also see the catalog checker in the tools directory (the Prague run used it), so the batch would not have isolated the checker factor; the repeat gives that arm a tools view without the checker."
+  },
+  {
+   "run": "runs/dev_knowledge/claude/glm-5.3/20261106T162501Z",
+   "reason": "# Excluded\n\nStopped by the model provider, not by the Agent: the API returned HTTP 429 [1310] \"weekly/monthly usage limit reached, reset 2026-11-09 02:52:59 (Beijing)\" (record/execution.log, 2026-11-06T17:31:52 UTC) while three runs were running. To be repeated after the reset."
   }
  ]
 }

@@ -1,0 +1,261 @@
+{
+ "run": {
+  "variant": "dev_knowledge",
+  "harness": "claude",
+  "model": "glm-5.3",
+  "run_id": "20261106T214922Z",
+  "path": "runs/dev_knowledge/claude/glm-5.3/20261106T214922Z"
+ },
+ "formal_state": null,
+ "run_state": "completed",
+ "completion": {
+  "completed": true,
+  "problems": [],
+  "contract": "runs/dev_knowledge/claude/glm-5.3/20261106T214922Z/control/output_contract.json",
+  "consistency": {
+   "pick_event_ids_exist": 0.988,
+   "pick_counts_agree": 1.0,
+   "coordinates_valid": 1.0
+  }
+ },
+ "metrics_version": 2,
+ "headline": {
+  "recall": 0.7462,
+  "ceiling": 0.7719,
+  "recall_norm": 0.9667,
+  "recall_tight": 0.1527,
+  "recall_ref_tan": 0.5208,
+  "recall_ref_chamberlain": 0.7462,
+  "recall_ref_geonet": 0.8532,
+  "union_support": 0.7084,
+  "epi_median_km": 3.4598,
+  "shift_km": 2.5886,
+  "scatter_median_km": 3.3264,
+  "epi_gt5km": 0.3333,
+  "dz_median_km": 3.0014,
+  "depth_datum_known": true,
+  "dt_median_s": 0.234,
+  "dt_mad_s": 0.1193,
+  "location_pairs": 15,
+  "depth_pairs": 15,
+  "depth_mode_share": 0.106,
+  "depth_band_share": 0.1562,
+  "off_structure_fraction": 0.142,
+  "off_structure_after_shift": 0.1401,
+  "recall_final": 0.4282,
+  "precision_final": 0.6164,
+  "event_ratio_final": 0.7079,
+  "shift_final_km": 3.9307,
+  "scatter_final_km": 3.19,
+  "dz_final_km": 0.4999,
+  "dz_mad_final_km": 3.7468,
+  "dt_final_s": 0.4859,
+  "time_bias_final_s": 0.4421,
+  "time_mad_final_s": 0.4004,
+  "recall_M2": 0.8436,
+  "precision_M2": 0.6836,
+  "f1_M2": 0.7552,
+  "epi_mean_M2": 5.1629,
+  "dt_mean_M2": 0.6935,
+  "dmag_mean_M2": -0.4517,
+  "recall_M3": 0.8333,
+  "precision_M3": 0.9,
+  "f1_M3": 0.8654,
+  "epi_mean_M3": 5.7411,
+  "dt_mean_M3": 0.0421,
+  "dmag_mean_M3": -0.6173,
+  "recall_M4": 1.0,
+  "precision_M4": 1.0,
+  "f1_M4": 1.0,
+  "epi_mean_M4": 5.9035,
+  "dt_mean_M4": -0.152,
+  "dmag_mean_M4": -0.49,
+  "recall_M5": 1.0,
+  "precision_M5": 1.0,
+  "f1_M5": 1.0,
+  "epi_mean_M5": 2.7321,
+  "dt_mean_M5": 0.331,
+  "dmag_mean_M5": -0.755,
+  "dmag_median": -0.37,
+  "dmag_std": 0.2407,
+  "dmag_slope_per_unit": -0.2171,
+  "dmag_pairs": 198,
+  "b_difference": 0.187,
+  "dt_mean_s": 0.932,
+  "dt_std_s": 0.7368,
+  "recall_after_large": 0.7403,
+  "recall_other": 0.763,
+  "audited_false_rate": null,
+  "out_of_mask_fraction": 0.0901,
+  "out_of_coverage_fraction": 0.0713
+ },
+ "trust": {
+  "trusted": false,
+  "failed": [
+   "inside_region",
+   "off_structure",
+   "depth_pileup",
+   "magnitude_offset",
+   "magnitude_scale"
+  ],
+  "pending": [
+   "false_events"
+  ],
+  "dimensions": {
+   "reality": {
+    "verdict": "fail",
+    "checks": {
+     "inside_region": {
+      "aspect": "accuracy",
+      "value": 0.0713,
+      "op": "<=",
+      "threshold": 0.05,
+      "final": 0.0112,
+      "verdict": "fail"
+     },
+     "false_events": {
+      "aspect": "accuracy",
+      "value": null,
+      "op": "<=",
+      "threshold": 0.02,
+      "final": null,
+      "verdict": "pending"
+     }
+    }
+   },
+   "time": {
+    "verdict": "pass",
+    "checks": {
+     "time_bias": {
+      "aspect": "accuracy",
+      "value": 0.234,
+      "op": "abs<=",
+      "threshold": 0.3,
+      "final": 0.2827,
+      "verdict": "insufficient"
+     },
+     "time_spread": {
+      "aspect": "stability",
+      "value": 0.1193,
+      "op": "<=",
+      "threshold": 0.3,
+      "final": 0.1157,
+      "verdict": "insufficient"
+     },
+     "after_large_events": {
+      "aspect": "stability",
+      "value": 0.9702,
+      "op": ">=",
+      "threshold": 0.8066,
+      "final": 1.0082,
+      "verdict": "pass"
+     }
+    }
+   },
+   "space": {
+    "verdict": "fail",
+    "checks": {
+     "horizontal_shift": {
+      "aspect": "accuracy",
+      "value": 2.5886,
+      "op": "<=",
+      "threshold": 2.1944,
+      "final": 2.1944,
+      "verdict": "insufficient"
+     },
+     "depth_bias": {
+      "aspect": "accuracy",
+      "value": 3.0014,
+      "op": "abs<=",
+      "threshold": 1.177,
+      "final": 1.177,
+      "verdict": "insufficient"
+     },
+     "horizontal_scatter": {
+      "aspect": "stability",
+      "value": 3.3264,
+      "op": "<=",
+      "threshold": 2.4633,
+      "final": 2.4633,
+      "verdict": "insufficient"
+     },
+     "off_structure": {
+      "aspect": "stability",
+      "value": 0.142,
+      "op": "<=",
+      "threshold": 0.0777,
+      "final": 0.0259,
+      "verdict": "fail"
+     },
+     "depth_pileup": {
+      "aspect": "stability",
+      "value": 0.106,
+      "op": "<=",
+      "threshold": 0.05,
+      "final": 0.0105,
+      "verdict": "fail"
+     }
+    }
+   },
+   "strength": {
+    "verdict": "fail",
+    "checks": {
+     "magnitude_offset": {
+      "aspect": "accuracy",
+      "value": -0.37,
+      "op": "abs<=",
+      "threshold": 0.2805,
+      "final": -0.0805,
+      "verdict": "fail"
+     },
+     "magnitude_spread": {
+      "aspect": "stability",
+      "value": 0.2407,
+      "op": "<=",
+      "threshold": 0.46,
+      "final": 0.36,
+      "verdict": "pass"
+     },
+     "magnitude_scale": {
+      "aspect": "stability",
+      "value": -0.2171,
+      "op": "abs<=",
+      "threshold": 0.2,
+      "final": -0.0107,
+      "verdict": "fail"
+     },
+     "large_events_present": {
+      "aspect": "accuracy",
+      "value": {
+       "recall_M4": 1.0,
+       "recall_M5": 1.0
+      },
+      "op": "all ==",
+      "threshold": 1.0,
+      "verdict": "pass"
+     }
+    }
+   }
+  },
+  "completeness": {
+   "recall_norm": 0.9667,
+   "recall_tight": 0.1527,
+   "recall_final": 0.4282,
+   "event_ratio_final": 0.7079
+  }
+ },
+ "process": {
+  "cost_usd": 43.323305000000005,
+  "elapsed_s": 14876.8,
+  "turns": 250
+ },
+ "leakage_flag": false,
+ "leakage_review": [
+  "(scedc\\.caltech\\.edu|ncedc\\.org|quake\\.utah\\.edu|ou\\.edu/ogs|geonet\\.org\\.nz|zenodo\\.org|datadryad\\.org|sciencebase\\.gov|igppweb\\.ucsd\\.edu/~shearer)/"
+ ],
+ "audit": {
+  "sampled": 50,
+  "unsupported": 422,
+  "labels": null
+ }
+}

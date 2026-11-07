@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "bb1fde88f5fe9e31576ff216bbba8ac5cee2e17a",
- "scorer_dirty": true,
- "generated_utc": "2026-11-05T05:32:24+00:00",
+ "scorer_commit": "fb700ec2530e21b8ee34ccff7aebaa3d1df72d28",
+ "scorer_dirty": false,
+ "generated_utc": "2026-11-07T04:50:10+00:00",
  "task": "2018_kilauea_hawaii",
  "configurations": [
   {
@@ -1593,6 +1593,73 @@
    }
   },
   {
+   "variant": "dev_knowledge",
+   "harness": "claude",
+   "model": "glm-5.3",
+   "launched": 1,
+   "leakage_flagged": [],
+   "completion_rate": 0.0,
+   "runs": [
+    {
+     "run_id": "20261106T232339Z",
+     "completed": false,
+     "trusted": false,
+     "trust_failed": [
+      "completed"
+     ],
+     "recall": 0.0,
+     "recall_final": 0.0,
+     "recall_norm": 0.0,
+     "recall_tight": 0.0
+    }
+   ],
+   "metrics": {
+    "recall": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 1
+    },
+    "recall_final": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 1
+    },
+    "recall_norm": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 1
+    },
+    "recall_tight": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 1
+    }
+   },
+   "trusted_runs": 0,
+   "cost_usd": {
+    "mean": 27.2987,
+    "min": 27.2987,
+    "max": 27.2987,
+    "n": 1
+   },
+   "elapsed_s": {
+    "mean": 18977.9,
+    "min": 18977.9,
+    "max": 18977.9,
+    "n": 1
+   },
+   "turns": {
+    "mean": 361.0,
+    "min": 361.0,
+    "max": 361.0,
+    "n": 1
+   }
+  },
+  {
    "variant": "min",
    "harness": "claude",
    "model": "glm-5.3",
@@ -2521,6 +2588,10 @@
   {
    "run": "runs/backend_knowledge/claude/glm-5.3/20261031T185621Z",
    "reason": "# Excluded\n\nStopped by the model provider, not by the Agent: the API returned HTTP 429 \"5-hour usage limit reached\" (record/execution.log, 2026-10-31 around 20:20 UTC) while nine back-end runs were running at once. Repeated after the quota reset with at most three concurrent runs. In this batch the `backend` arm could also see the catalog checker in the tools directory (the Prague run used it), so the batch would not have isolated the checker factor; the repeat gives that arm a tools view without the checker."
+  },
+  {
+   "run": "runs/tools/claude/glm-5.3/20261106T152626Z",
+   "reason": "# Excluded\n\nStopped by the model provider, not by the Agent: the API returned HTTP 429 [1310] \"weekly/monthly usage limit reached, reset 2026-11-09 02:52:59 (Beijing)\" (record/execution.log, 2026-11-06T17:34:25 UTC) while three runs were running. To be repeated after the reset."
   }
  ]
 }
