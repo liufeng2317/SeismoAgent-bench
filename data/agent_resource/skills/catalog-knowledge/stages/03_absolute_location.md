@@ -11,7 +11,7 @@ Gate: `run.py --stage location --catalog catalog.csv --picks picks.csv --station
 **Velocity model.** Read `../reference/not_visible.md` before choosing.
 - *Default:* a published 1-D model of the region, with only values you read in a source (table, text, or a figure digitised with its axes checked). Name the source.
 - *Not:* a model rebuilt from memory or a verbal description must not carry the published model's name.
-- *No regional model obtainable:* a generic column (CRUST1.0 at the stations) with the near-surface procedure of `not_visible.md`; say so.
+- *No regional model obtainable:* a generic column (CRUST1.0 at the stations) with the near-surface procedure of `../reference/not_visible.md`; say so.
 - *Use it as built:* a stack of constant layers stays layered; a node model stays a gradient. Compare the other representation only as a candidate.
 
 **Datum and depth search.** Find what the model's depths are measured from (sea level, mean station elevation, surface); use it as the reference elevation and start the depth search there (at the stations' mean level when the model's top is the surface). Report depths in km below sea level. A HypoInverse CRH model puts stations at the model's top; CRE models and NonLinLoc honour station elevations; relative relocators put every station at depth 0. Convert before comparing.
@@ -27,7 +27,7 @@ Gate: `run.py --stage location --catalog catalog.csv --picks picks.csv --station
 **S−P depth flag** (`sp_depth_offset`: depths implied by S−P times at stations closer than the source against catalog depths).
 - *Applies:* above its limit (1.5 km). Below it the sign is not reliable: velocity structure alone moves it by about 1 km.
 - *Direction:* above the limit the direction has been right every time it was checked against a published catalog (three runs, 1.7–2.7 km). Correct the catalog in that direction.
-- *How:* look for the cause in this order: (1) datum: an offset equal to the station elevation or the model datum; (2) near-surface velocity: a slow surface layer missing (basin fill, sediments, volcanic deposits), candidates built from the geology (`not_visible.md`); (3) S picks of a few stations: the offset comes from those stations only. Relocate with each candidate.
+- *How:* look for the cause in this order: (1) datum: an offset equal to the station elevation or the model datum; (2) near-surface velocity: a slow surface layer missing (basin fill, sediments, volcanic deposits), candidates built from the geology (`../reference/not_visible.md`); (3) S picks of a few stations: the offset comes from those stations only. Relocate with each candidate.
 - *Judge by:* the geology and `compare.py` on the full products; check that depths moved the flagged way. The flag gives the direction, not the size: do not choose the candidate that brings the offset to zero.
 - *Not:* do not dismiss the flag because a candidate fits the picks worse; do not absorb it with station delays (delays of one sign on each side of a fault or basin edge are path terms and cannot explain a catalog-wide depth offset); do not scale Vp/Vs only to remove it (next rule).
 - *Example:* a catalog flagged 2.7 km too shallow was 1.8 km too shallow against the published catalog. Scaling Vs until the offset fell to 0.2 km moved the depths 2.9 km, leaving them 1.2 km too deep.
@@ -53,13 +53,13 @@ Read `depth_constraint` first (share with an S within 1.4 focal depths, geometry
 | top or bottom of the search; unconstrained events | the search bounds, or a flat depth likelihood | the value is a bound in `pile_against_setup` | search from the model datum; expectation hypocentres (above) |
 | shallowest depth; S−P depths deeper | near surface too fast, or wrong datum | relocate the pile with the right datum, then with a slow surface layer if the geology has one | the set-up that removes the pile without moving constrained events |
 | at a layer interface (within one grid spacing); poorly constrained events | step representation traps events; a coarse grid moves the pile to the node next to the interface | relocate the pile plus 200 random events as a linear gradient between the nodes, and with a 0.1 km grid: an artefact disperses with the gradient and moves onto the interface with the fine grid | build both full candidates and compare (`../reference/pilot_and_compare.md` §3) |
-| not round, not at a set-up feature; constrained events | the model, or real structure | relocate with other models (`--model-ensemble` measures the sensitivity); compare with S−P depths | see `not_visible.md`; real seismicity can concentrate at one depth when S−P depths confirm it |
+| not round, not at a set-up feature; constrained events | the model, or real structure | relocate with other models (`--model-ensemble` measures the sensitivity); compare with S−P depths | see `../reference/not_visible.md`; real seismicity can concentrate at one depth when S−P depths confirm it |
 
 `depth_layers` (thin slices with many more events than their neighbours) has the causes of interface piles; a correct layered model forms slices at its interfaces too, so this check alone cannot rank two models.
 
 ### Origin times
 
-`wadati_origin_spread`: wrong S picks, a model Vp/Vs unlike the data's, or unstable locations (rule above). `wadati_origin_offset` flags only beyond 1.5 s; an origin-time offset shared by all events is not visible to any check (`not_visible.md`).
+`wadati_origin_spread`: wrong S picks, a model Vp/Vs unlike the data's, or unstable locations (rule above). `wadati_origin_offset` flags only beyond 1.5 s; an origin-time offset shared by all events is not visible to any check (`../reference/not_visible.md`).
 
 ### Horizontal structure
 

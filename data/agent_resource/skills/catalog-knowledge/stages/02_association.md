@@ -5,7 +5,7 @@ Gate: `run.py --stage association --catalog events.csv --picks picks.csv` (locat
 ## Decisions
 
 **Association settings.**
-- *Do:* tune the minimum picks and stations per event, the time window and the velocity on the pilot's busiest windows (`reference/pilot_and_compare.md`). Common minima: at least 4 P and 7 picks in total, or at least 4 stations with both P and S.
+- *Do:* tune the minimum picks and stations per event, the time window and the velocity on the pilot's busiest windows (`../reference/pilot_and_compare.md`). Common minima: at least 4 P and 7 picks in total, or at least 4 stations with both P and S.
 - *Not:* do not lower the minima to raise the number of events; events built from coincident noise picks are false. Keep few-pick events in a separate list rather than deleting them silently.
 
 **A low share of associated picks.**
