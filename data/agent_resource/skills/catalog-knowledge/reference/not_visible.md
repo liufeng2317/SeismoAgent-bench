@@ -1,5 +1,14 @@
 # What no check sees
 
+## Contents
+- The velocity model
+- Constraining the near surface without a regional model
+- Building a minimum 1-D model from the data
+- The horizontal frame: station corrections and relocation
+- The absolute level of the magnitude scale
+- Events hidden in a mainshock's coda
+- Timing common to all stations, and constant station delays
+
 Some errors are shared by every station or every event. Origin times, station terms and the magnitude constant absorb them, so the catalog stays internally consistent and every check passes. They are often the largest errors left in a careful catalog. Handle them with knowledge, before any symptom, and report them as uncertainties.
 
 ## The velocity model
@@ -13,7 +22,7 @@ What to do:
    - **Layers or nodes.** A minimum 1-D model is a stack of constant-velocity layers; interpolating it as a gradient between its layer tops makes the near surface much faster than the model. Use the representation the model was built in, and compare the other one only as an alternative.
    - **The near surface.** Generic models (CRUST1.0, LITHO1.0, global 1-D) and many regional models have 5–6 km/s just below the stations. Sediments, basin fill and volcanic deposits are often 2–4 km/s over the top 1–3 km. A near surface that is too fast makes origin times late and moves depths; it is the most common cause of a shared origin-time bias. Where the geology has such a layer, build candidates with it (next section).
    Locators differ too: a HypoInverse CRH model ignores station elevations (stations sit at the model's top), while CRE models and NonLinLoc honour them; the same model can give different origin times in the two. Check which one a locator interface uses and what its depths are measured from before comparing locators. Relative relocators (hypoDD, GrowClust) put every station at the model's depth 0 too: give them depths and a model measured from the station level, and convert back.
-2. **Compare representations, not only models.** The same model as steps and as a linear gradient between nodes can differ as much as two different models. Try both on the full catalog and compare them with `compare.py` (`../playbooks/decide_between_candidates.md`).
+2. **Compare representations, not only models.** The same model as steps and as a linear gradient between nodes can differ as much as two different models. Try both on the full catalog and compare them with `compare.py` (`pilot_and_compare.md` §3).
 3. **Do not choose by residual.** A model that fits the picks better (lower RMS) is not shown to place events better; a model with more freedom fits better by construction, and a model with a too-fast near surface can fit better than a correct one. Building a minimum 1-D model from the data is the one place where the residual is the criterion, and it needs the safeguards in the section on it below.
    The same holds for the other reference-free measures (Wadati origin offset, travel-time intercept, S−P depths, share at the shallowest depth): see the next section for what they can and cannot tell.
 4. **Report the sensitivity.** Relocating with other plausible models (checker `--model-ensemble`) gives how far depths and origin times depend on the model. Report it as an uncertainty; it does not tell which model is right.
@@ -52,9 +61,7 @@ A magnitude scale whose distance correction or constant does not suit the region
 
 ## Events hidden in a mainshock's coda
 
-In the first minutes after a large event every station is saturated with its coda. Pickers, associators and simple energy scans miss aftershocks there, including events of magnitude 4 and more after a magnitude-7 mainshock. No reference-free check finds them: nothing triggers.
-
-What to do: after the largest events, reprocess the first tens of minutes with methods made for it — template matching with templates of the sequence, a picker with a lower threshold on high-frequency records, far stations whose coda is weaker — and mark the period as incomplete in the catalog with its estimated completeness Mc(M, t) = M − 4.5 − 0.75 log10(t / 1 day).
+No reference-free check finds aftershocks hidden in the first minutes of a large event's coda: nothing triggers. See `../stages/04_template_matching.md` for how to recover part of them and how to mark the period as incomplete.
 
 ## Timing common to all stations, and constant station delays
 

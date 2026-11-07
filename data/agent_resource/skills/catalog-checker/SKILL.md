@@ -32,6 +32,8 @@ Two items are added to the submission. All paths here are relative to the output
 
 `input_notes` (properties of the input data) and `measurements` (reported without a verdict) need no disposition.
 
+Before ending the run, check the submission: `python scripts/check_submission.py --output-dir $BENCH_OUTPUT` (in this skill's folder). It verifies what the scorer verifies: the files are at the top of the output directory with the required columns, the final report was made from the submitted files, and every flag has a disposition with evidence. Fix everything it reports.
+
 ## Rules
 
 - Do not change a product only to make a check pass (shifting depths, deleting events, rescaling magnitudes without a reason). The evaluation reads your record of changes and counts such changes separately from real fixes.

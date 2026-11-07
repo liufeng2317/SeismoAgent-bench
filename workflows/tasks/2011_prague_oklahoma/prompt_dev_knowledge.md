@@ -25,7 +25,7 @@ PhaseNet usage must follow the validated example at `TOOLS_BASE_PATH/phase_picki
 A reference-free catalog checker is provided at CHECKER_PATH=`/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/seismo_checker/`. Two skills are under `input/agent_resource/skills/`; read each `SKILL.md` before you start and the files it points to when they apply:
 
 - `catalog-checker/SKILL.md`: what the checker measures, when to run it, and what the output contract requires (the checker report on the submitted products and a disposition for every flag);
-- `catalog-knowledge/SKILL.md`: how to test on a pilot batch before the full run, how to decide between two candidate products, what each checker symptom can mean and which experiment separates the causes, and which errors no check can see.
+- `catalog-knowledge/SKILL.md`: the workflow stage by stage (what to do by default, which checker stage gates each step and what must hold before moving on, when to deviate), the decision rules of each stage, scripts for the error-prone steps, and the errors no check can see.
 
 `input/agent_resource/magnitude/` holds the local-magnitude formulas with their units, a reference implementation and a library of regional calibrations.
 
