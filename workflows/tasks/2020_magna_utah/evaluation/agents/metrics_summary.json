@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "4ef4492135a29904df9854ea8f0230b230735957",
+ "scorer_commit": "680648a6b07c41c0c0e1249b1d5238ea2bc896a0",
  "scorer_dirty": false,
- "generated_utc": "2026-11-07T04:54:05+00:00",
+ "generated_utc": "2026-11-07T15:13:58+00:00",
  "task": "2020_magna_utah",
  "configurations": [
   {
@@ -1582,7 +1582,7 @@
    "variant": "dev_knowledge",
    "harness": "claude",
    "model": "glm-5.3",
-   "launched": 1,
+   "launched": 2,
    "leakage_flagged": [],
    "completion_rate": 1.0,
    "runs": [
@@ -1665,442 +1665,523 @@
      "time_bias_final_s": 0.2299,
      "time_mad_final_s": 0.0741,
      "union_support": 0.9303
+    },
+    {
+     "run_id": "20261107T071045Z",
+     "completed": true,
+     "trusted": false,
+     "trust_failed": [
+      "inside_region",
+      "time_bias",
+      "depth_bias",
+      "magnitude_offset",
+      "large_events_present"
+     ],
+     "b_difference": 0.127,
+     "depth_band_share": 0.3414,
+     "depth_mode_share": 0.0214,
+     "depth_pairs": 894,
+     "dmag_mean_M2": 0.3117,
+     "dmag_mean_M3": 0.1957,
+     "dmag_mean_M4": -0.0575,
+     "dmag_mean_M5": -0.23,
+     "dmag_median": 0.44,
+     "dmag_pairs": 549,
+     "dmag_slope_per_unit": -0.1057,
+     "dmag_std": 0.2027,
+     "dt_final_s": 0.434,
+     "dt_mad_s": 0.1361,
+     "dt_mean_M2": 0.5537,
+     "dt_mean_M3": 0.5583,
+     "dt_mean_M4": 0.4878,
+     "dt_mean_M5": 0.5368,
+     "dt_mean_s": 0.4411,
+     "dt_median_s": 0.4843,
+     "dt_std_s": 0.2937,
+     "dz_final_km": 0.925,
+     "dz_mad_final_km": 0.887,
+     "dz_median_km": 1.18,
+     "epi_gt5km": 0.0,
+     "epi_mean_M2": 1.46,
+     "epi_mean_M3": 1.2831,
+     "epi_mean_M4": 0.9429,
+     "epi_mean_M5": 1.566,
+     "epi_median_km": 1.0693,
+     "event_ratio_final": 0.3598,
+     "f1_M2": 0.9015,
+     "f1_M3": 0.83,
+     "f1_M4": 0.8889,
+     "f1_M5": 1.0,
+     "location_pairs": 894,
+     "off_structure_after_shift": 0.0467,
+     "off_structure_fraction": 0.0477,
+     "out_of_coverage_fraction": 0.0505,
+     "out_of_mask_fraction": 0.2683,
+     "pick_recall_P": 0.8892,
+     "pick_recall_S": 0.8533,
+     "pick_residual_mad_P_s": 0.03,
+     "pick_residual_mad_S_s": 0.05,
+     "precision_M2": 0.9386,
+     "precision_M3": 0.9048,
+     "precision_M4": 1.0,
+     "precision_M5": 1.0,
+     "precision_final": 0.9115,
+     "recall": 0.3689,
+     "recall_M2": 0.8673,
+     "recall_M3": 0.7667,
+     "recall_M4": 0.8,
+     "recall_M5": 1.0,
+     "recall_after_large": 0.4903,
+     "recall_final": 0.2913,
+     "recall_norm": 0.6624,
+     "recall_other": 0.3769,
+     "recall_ref_baker": 0.5402,
+     "recall_ref_pang": 0.3689,
+     "recall_ref_uuss": 0.7887,
+     "recall_tight": 0.3677,
+     "scatter_final_km": 0.8296,
+     "scatter_median_km": 0.7589,
+     "shift_final_km": 1.3057,
+     "shift_km": 0.7861,
+     "time_bias_final_s": 0.426,
+     "time_mad_final_s": 0.1841,
+     "union_support": 0.9276
     }
    ],
    "metrics": {
     "b_difference": {
-     "mean": -0.082,
+     "mean": 0.0225,
      "min": -0.082,
-     "max": -0.082,
-     "n": 1
+     "max": 0.127,
+     "n": 2
     },
     "depth_band_share": {
-     "mean": 0.4536,
-     "min": 0.4536,
+     "mean": 0.3975,
+     "min": 0.3414,
      "max": 0.4536,
-     "n": 1
+     "n": 2
     },
     "depth_mode_share": {
-     "mean": 0.0397,
-     "min": 0.0397,
+     "mean": 0.0306,
+     "min": 0.0214,
      "max": 0.0397,
-     "n": 1
+     "n": 2
     },
     "depth_pairs": {
-     "mean": 1364.0,
-     "min": 1364.0,
+     "mean": 1129.0,
+     "min": 894.0,
      "max": 1364.0,
-     "n": 1
+     "n": 2
     },
     "dmag_mean_M2": {
-     "mean": 0.3413,
-     "min": 0.3413,
+     "mean": 0.3265,
+     "min": 0.3117,
      "max": 0.3413,
-     "n": 1
+     "n": 2
     },
     "dmag_mean_M3": {
-     "mean": 0.0979,
+     "mean": 0.1468,
      "min": 0.0979,
-     "max": 0.0979,
-     "n": 1
+     "max": 0.1957,
+     "n": 2
     },
     "dmag_mean_M4": {
-     "mean": -0.122,
+     "mean": -0.0897,
      "min": -0.122,
-     "max": -0.122,
-     "n": 1
+     "max": -0.0575,
+     "n": 2
     },
     "dmag_mean_M5": {
-     "mean": -0.24,
+     "mean": -0.235,
      "min": -0.24,
-     "max": -0.24,
-     "n": 1
+     "max": -0.23,
+     "n": 2
     },
     "dmag_median": {
-     "mean": 0.3,
+     "mean": 0.37,
      "min": 0.3,
-     "max": 0.3,
-     "n": 1
+     "max": 0.44,
+     "n": 2
     },
     "dmag_pairs": {
-     "mean": 702.0,
-     "min": 702.0,
+     "mean": 625.5,
+     "min": 549.0,
      "max": 702.0,
-     "n": 1
+     "n": 2
     },
     "dmag_slope_per_unit": {
-     "mean": 0.009,
-     "min": 0.009,
+     "mean": -0.0484,
+     "min": -0.1057,
      "max": 0.009,
-     "n": 1
+     "n": 2
     },
     "dmag_std": {
-     "mean": 0.3106,
-     "min": 0.3106,
+     "mean": 0.2566,
+     "min": 0.2027,
      "max": 0.3106,
-     "n": 1
+     "n": 2
     },
     "dt_final_s": {
-     "mean": 0.2368,
+     "mean": 0.3354,
      "min": 0.2368,
-     "max": 0.2368,
-     "n": 1
+     "max": 0.434,
+     "n": 2
     },
     "dt_mad_s": {
-     "mean": 0.0622,
+     "mean": 0.0992,
      "min": 0.0622,
-     "max": 0.0622,
-     "n": 1
+     "max": 0.1361,
+     "n": 2
     },
     "dt_mean_M2": {
-     "mean": 0.2388,
+     "mean": 0.3962,
      "min": 0.2388,
-     "max": 0.2388,
-     "n": 1
+     "max": 0.5537,
+     "n": 2
     },
     "dt_mean_M3": {
-     "mean": 0.2196,
+     "mean": 0.389,
      "min": 0.2196,
-     "max": 0.2196,
-     "n": 1
+     "max": 0.5583,
+     "n": 2
     },
     "dt_mean_M4": {
-     "mean": 0.1578,
+     "mean": 0.3228,
      "min": 0.1578,
-     "max": 0.1578,
-     "n": 1
+     "max": 0.4878,
+     "n": 2
     },
     "dt_mean_M5": {
-     "mean": 0.3188,
+     "mean": 0.4278,
      "min": 0.3188,
-     "max": 0.3188,
-     "n": 1
+     "max": 0.5368,
+     "n": 2
     },
     "dt_mean_s": {
-     "mean": 0.2891,
+     "mean": 0.3651,
      "min": 0.2891,
-     "max": 0.2891,
-     "n": 1
+     "max": 0.4411,
+     "n": 2
     },
     "dt_median_s": {
-     "mean": 0.3069,
+     "mean": 0.3956,
      "min": 0.3069,
-     "max": 0.3069,
-     "n": 1
+     "max": 0.4843,
+     "n": 2
     },
     "dt_std_s": {
-     "mean": 0.1979,
+     "mean": 0.2458,
      "min": 0.1979,
-     "max": 0.1979,
-     "n": 1
+     "max": 0.2937,
+     "n": 2
     },
     "dz_final_km": {
-     "mean": -1.903,
+     "mean": -0.489,
      "min": -1.903,
-     "max": -1.903,
-     "n": 1
+     "max": 0.925,
+     "n": 2
     },
     "dz_mad_final_km": {
-     "mean": 0.707,
+     "mean": 0.797,
      "min": 0.707,
-     "max": 0.707,
-     "n": 1
+     "max": 0.887,
+     "n": 2
     },
     "dz_median_km": {
-     "mean": -1.75,
+     "mean": -0.285,
      "min": -1.75,
-     "max": -1.75,
-     "n": 1
+     "max": 1.18,
+     "n": 2
     },
     "epi_gt5km": {
      "mean": 0.0,
      "min": 0.0,
      "max": 0.0,
-     "n": 1
+     "n": 2
     },
     "epi_mean_M2": {
-     "mean": 2.2386,
-     "min": 2.2386,
+     "mean": 1.8493,
+     "min": 1.46,
      "max": 2.2386,
-     "n": 1
+     "n": 2
     },
     "epi_mean_M3": {
-     "mean": 1.8617,
-     "min": 1.8617,
+     "mean": 1.5724,
+     "min": 1.2831,
      "max": 1.8617,
-     "n": 1
+     "n": 2
     },
     "epi_mean_M4": {
-     "mean": 1.7085,
-     "min": 1.7085,
+     "mean": 1.3257,
+     "min": 0.9429,
      "max": 1.7085,
-     "n": 1
+     "n": 2
     },
     "epi_mean_M5": {
-     "mean": 2.1706,
-     "min": 2.1706,
+     "mean": 1.8683,
+     "min": 1.566,
      "max": 2.1706,
-     "n": 1
+     "n": 2
     },
     "epi_median_km": {
-     "mean": 2.3397,
-     "min": 2.3397,
+     "mean": 1.7045,
+     "min": 1.0693,
      "max": 2.3397,
-     "n": 1
+     "n": 2
     },
     "event_ratio_final": {
-     "mean": 0.6003,
-     "min": 0.6003,
+     "mean": 0.48,
+     "min": 0.3598,
      "max": 0.6003,
-     "n": 1
+     "n": 2
     },
     "f1_M2": {
-     "mean": 0.9713,
-     "min": 0.9713,
+     "mean": 0.9364,
+     "min": 0.9015,
      "max": 0.9713,
-     "n": 1
+     "n": 2
     },
     "f1_M3": {
-     "mean": 0.9831,
-     "min": 0.9831,
+     "mean": 0.9065,
+     "min": 0.83,
      "max": 0.9831,
-     "n": 1
+     "n": 2
     },
     "f1_M4": {
-     "mean": 1.0,
-     "min": 1.0,
+     "mean": 0.9445,
+     "min": 0.8889,
      "max": 1.0,
-     "n": 1
+     "n": 2
     },
     "f1_M5": {
      "mean": 1.0,
      "min": 1.0,
      "max": 1.0,
-     "n": 1
+     "n": 2
     },
     "location_pairs": {
-     "mean": 1364.0,
-     "min": 1364.0,
+     "mean": 1129.0,
+     "min": 894.0,
      "max": 1364.0,
-     "n": 1
+     "n": 2
     },
     "off_structure_after_shift": {
-     "mean": 0.0099,
+     "mean": 0.0283,
      "min": 0.0099,
-     "max": 0.0099,
-     "n": 1
+     "max": 0.0467,
+     "n": 2
     },
     "off_structure_fraction": {
-     "mean": 0.0099,
+     "mean": 0.0288,
      "min": 0.0099,
-     "max": 0.0099,
-     "n": 1
+     "max": 0.0477,
+     "n": 2
     },
     "out_of_coverage_fraction": {
-     "mean": 0.0097,
+     "mean": 0.0301,
      "min": 0.0097,
-     "max": 0.0097,
-     "n": 1
+     "max": 0.0505,
+     "n": 2
     },
     "out_of_mask_fraction": {
-     "mean": 0.1237,
+     "mean": 0.196,
      "min": 0.1237,
-     "max": 0.1237,
-     "n": 1
+     "max": 0.2683,
+     "n": 2
     },
     "pick_recall_P": {
-     "mean": 0.8968,
-     "min": 0.8968,
+     "mean": 0.893,
+     "min": 0.8892,
      "max": 0.8968,
-     "n": 1
+     "n": 2
     },
     "pick_recall_S": {
-     "mean": 0.8622,
-     "min": 0.8622,
+     "mean": 0.8578,
+     "min": 0.8533,
      "max": 0.8622,
-     "n": 1
+     "n": 2
     },
     "pick_residual_mad_P_s": {
      "mean": 0.03,
      "min": 0.03,
      "max": 0.03,
-     "n": 1
+     "n": 2
     },
     "pick_residual_mad_S_s": {
      "mean": 0.05,
      "min": 0.05,
      "max": 0.05,
-     "n": 1
+     "n": 2
     },
     "precision_M2": {
-     "mean": 0.9522,
-     "min": 0.9522,
+     "mean": 0.9454,
+     "min": 0.9386,
      "max": 0.9522,
-     "n": 1
+     "n": 2
     },
     "precision_M3": {
-     "mean": 1.0,
-     "min": 1.0,
+     "mean": 0.9524,
+     "min": 0.9048,
      "max": 1.0,
-     "n": 1
+     "n": 2
     },
     "precision_M4": {
      "mean": 1.0,
      "min": 1.0,
      "max": 1.0,
-     "n": 1
+     "n": 2
     },
     "precision_M5": {
      "mean": 1.0,
      "min": 1.0,
      "max": 1.0,
-     "n": 1
+     "n": 2
     },
     "precision_final": {
-     "mean": 0.9043,
+     "mean": 0.9079,
      "min": 0.9043,
-     "max": 0.9043,
-     "n": 1
+     "max": 0.9115,
+     "n": 2
     },
     "recall": {
-     "mean": 0.5762,
-     "min": 0.5762,
+     "mean": 0.4726,
+     "min": 0.3689,
      "max": 0.5762,
-     "n": 1
+     "n": 2
     },
     "recall_M2": {
-     "mean": 0.9912,
-     "min": 0.9912,
+     "mean": 0.9292,
+     "min": 0.8673,
      "max": 0.9912,
-     "n": 1
+     "n": 2
     },
     "recall_M3": {
-     "mean": 0.9667,
-     "min": 0.9667,
+     "mean": 0.8667,
+     "min": 0.7667,
      "max": 0.9667,
-     "n": 1
+     "n": 2
     },
     "recall_M4": {
-     "mean": 1.0,
-     "min": 1.0,
+     "mean": 0.9,
+     "min": 0.8,
      "max": 1.0,
-     "n": 1
+     "n": 2
     },
     "recall_M5": {
      "mean": 1.0,
      "min": 1.0,
      "max": 1.0,
-     "n": 1
+     "n": 2
     },
     "recall_after_large": {
-     "mean": 0.7699,
-     "min": 0.7699,
+     "mean": 0.6301,
+     "min": 0.4903,
      "max": 0.7699,
-     "n": 1
+     "n": 2
     },
     "recall_final": {
-     "mean": 0.5014,
-     "min": 0.5014,
+     "mean": 0.3963,
+     "min": 0.2913,
      "max": 0.5014,
-     "n": 1
+     "n": 2
     },
     "recall_norm": {
-     "mean": 1.0347,
-     "min": 1.0347,
+     "mean": 0.8485,
+     "min": 0.6624,
      "max": 1.0347,
-     "n": 1
+     "n": 2
     },
     "recall_other": {
-     "mean": 0.5693,
-     "min": 0.5693,
+     "mean": 0.4731,
+     "min": 0.3769,
      "max": 0.5693,
-     "n": 1
+     "n": 2
     },
     "recall_ref_baker": {
-     "mean": 0.767,
-     "min": 0.767,
+     "mean": 0.6536,
+     "min": 0.5402,
      "max": 0.767,
-     "n": 1
+     "n": 2
     },
     "recall_ref_pang": {
-     "mean": 0.5762,
-     "min": 0.5762,
+     "mean": 0.4726,
+     "min": 0.3689,
      "max": 0.5762,
-     "n": 1
+     "n": 2
     },
     "recall_ref_uuss": {
-     "mean": 0.9324,
-     "min": 0.9324,
+     "mean": 0.8605,
+     "min": 0.7887,
      "max": 0.9324,
-     "n": 1
+     "n": 2
     },
     "recall_tight": {
-     "mean": 0.5769,
-     "min": 0.5769,
+     "mean": 0.4723,
+     "min": 0.3677,
      "max": 0.5769,
-     "n": 1
+     "n": 2
     },
     "scatter_final_km": {
-     "mean": 0.4264,
+     "mean": 0.628,
      "min": 0.4264,
-     "max": 0.4264,
-     "n": 1
+     "max": 0.8296,
+     "n": 2
     },
     "scatter_median_km": {
-     "mean": 0.2809,
+     "mean": 0.5199,
      "min": 0.2809,
-     "max": 0.2809,
-     "n": 1
+     "max": 0.7589,
+     "n": 2
     },
     "shift_final_km": {
-     "mean": 2.2776,
-     "min": 2.2776,
+     "mean": 1.7917,
+     "min": 1.3057,
      "max": 2.2776,
-     "n": 1
+     "n": 2
     },
     "shift_km": {
-     "mean": 2.3149,
-     "min": 2.3149,
+     "mean": 1.5505,
+     "min": 0.7861,
      "max": 2.3149,
-     "n": 1
+     "n": 2
     },
     "time_bias_final_s": {
-     "mean": 0.2299,
+     "mean": 0.3279,
      "min": 0.2299,
-     "max": 0.2299,
-     "n": 1
+     "max": 0.426,
+     "n": 2
     },
     "time_mad_final_s": {
-     "mean": 0.0741,
+     "mean": 0.1291,
      "min": 0.0741,
-     "max": 0.0741,
-     "n": 1
+     "max": 0.1841,
+     "n": 2
     },
     "union_support": {
-     "mean": 0.9303,
-     "min": 0.9303,
+     "mean": 0.9289,
+     "min": 0.9276,
      "max": 0.9303,
-     "n": 1
+     "n": 2
     }
    },
    "trusted_runs": 0,
    "cost_usd": {
-    "mean": 24.3642,
-    "min": 24.3642,
+    "mean": 19.3255,
+    "min": 14.2868,
     "max": 24.3642,
-    "n": 1
+    "n": 2
    },
    "elapsed_s": {
-    "mean": 12245.8,
-    "min": 12245.8,
+    "mean": 11541.75,
+    "min": 10837.7,
     "max": 12245.8,
-    "n": 1
+    "n": 2
    },
    "turns": {
-    "mean": 364.0,
-    "min": 364.0,
+    "mean": 294.5,
+    "min": 225.0,
     "max": 364.0,
-    "n": 1
+    "n": 2
    }
   },
   {
