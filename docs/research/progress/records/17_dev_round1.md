@@ -31,3 +31,5 @@ Kīlauea and Ridgecrest wrote catalog, picks and checker report into `$BENCH_OUT
 - Contract wording: done (finding 1).
 
 Open, not yet a candidate: the out-of-coverage events of Kaikōura (the prompt does not give the study region by design), the M4 recall after the Ridgecrest mainshock (coda), and the origin-time bias of Maple Creek (velocity model, layer C).
+
+**已执行（2026-11-07）：** 前三项改动进入开发版 1.5（提交 eef2917）；`station_residual_spread` 在本轮六次运行上离线重算：Maple 列出 8 个垂直分量台站中的 6 个（原来 2 个），只有 P 拾取的台站组中位离散 0.30 s、基准 0.09 s；其余五次各列出 0–2 个台站，与原来相同。
