@@ -1,6 +1,6 @@
 # 知识 skill 重写方案
 
-状态（2026-11-07）：方案，待审。本文写给研究者，说明为什么要重写给 Agent 的知识 skill、重写成什么样、怎么检验。checker 本身的设计见 [`02_Checker_Design.md`](02_Checker_Design.md)；开发循环的两轮结果见 [`progress/records/17_dev_round1.md`](progress/records/17_dev_round1.md) 和第二轮记录（待写）。
+状态（2026-11-08）：已按本方案实现为 2.0（分支 `skill-2.0`，第 3–5、9 节；第 7 节的决策点评测待建），待第三轮开发检验。本文写给研究者，说明为什么要重写给 Agent 的知识 skill、重写成什么样、怎么检验。checker 本身的设计见 [`02_Checker_Design.md`](02_Checker_Design.md)；开发循环的两轮结果见 [`progress/records/17_dev_round1.md`](progress/records/17_dev_round1.md) 和第二轮记录（待写）。
 
 ## 1. 为什么要重写
 

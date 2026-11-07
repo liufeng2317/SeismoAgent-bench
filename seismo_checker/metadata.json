@@ -19,6 +19,6 @@
   "source": "source/catalog_checker",
   "runtime": "runtime/velocity_models",
   "validation": "examples/smoke/run.sh",
-  "status": "development (2026-11-07, not frozen; formal runs paused, development loop over one day around the mainshock): 1.4 plus station_residual_spread judged against the stations with S picks with the P-only group's spread, and knowledge revisions from development round 1 (docs/research/progress/records/17_dev_round1.md). 1.4 was frozen 2026-11-06 (tag checker-v1.4). Later changes get a new version, recorded in docs/research/02_Checker_Design.md §13",
-  "version": "1.5"
+  "status": "development (2026-11-08, not frozen): the knowledge skill rewritten as a staged workflow with checker gates, decision rules with applicability limits, and scripts (docs/research/03_Skill_Design.md); events_with_few_picks counts only events with picks. 1.5 (tag checker-v1.5) was the documentation-style skill of development round 2. Later changes get a new version, recorded in docs/research/02_Checker_Design.md §13",
+  "version": "2.0"
 }
