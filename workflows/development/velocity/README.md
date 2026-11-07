@@ -1,0 +1,3 @@
+# Velocity-model development tools
+
+- `depth_time_check.py`: near-station S−P depths (K from stations farther than twice the focal depth), near-station Wadati Vp/Vs, and the range over candidate-model catalogs. Tested on twelve runs with known depth bias (2026-11-08, record 20): the S−P depth offset followed the true bias only where the catalog was more than 1.5 km too shallow (Magna, two runs); elsewhere it was about +1 km high overall and changed strongly with depth, because K from distant stations includes refracted paths and the near-station selection uses the catalog's own depth. Not given to the Agent.
