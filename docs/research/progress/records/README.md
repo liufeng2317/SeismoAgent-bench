@@ -24,6 +24,7 @@
 | [`17_dev_round1.md`](17_dev_round1.md) | 2026-11-07 | 开发循环第一轮（1.4，主震前后一天）：Prague 2、Magna 4、Maple 6、Kīlauea 0、Ridgecrest 2、Kaikōura 5 项不通过；两次运行因 checker skill 的路径写法把产品写进 `work/work/`（已修复）；正确的报警被残差拟合否定（Magna）、可以修复的深度堆积被说成调参（Kaikōura）；1.5 的候选改动 |
 | [`18_threshold_separation.md`](18_threshold_separation.md) | 2026-11-08 | 判定门槛的区分度：只有震级复算（单位或响应错误）和单一深度值堆积真正分得开；S−P 深度的门槛是方向可靠的界线（超过时 6/6 正确，低于时 35 %）；Wadati、深度分层和边缘、大事件和检测震级 AUC 0.50–0.76；拾取过少和无拾取台站反映约束和配置 |
 | [`19_run_audit.md`](19_run_audit.md) | 2026-11-08 | 运行审计与过程指标：做了重定位的运行偏离构造或离散不通过 44 %（没做 67 %），并入模板匹配的大事件相关不通过 17 %（没有 39 %）；S3 模板匹配 40 %（S1 14 %），重定位 40 %（S1 86 %），checker 循环挤掉了标准步骤 |
+| [`20_independent_depth_check.md`](20_independent_depth_check.md) | 2026-11-08 | 近台 S−P 深度作为和模型无关的深度核对：12 次运行中只有目录偏浅超过 1.5 km 的两次方向正确，其余整体偏正约 1 km 且随深度变化（K 取自远台、近台筛选循环），不给 Agent |
 | [`backend_audit/`](backend_audit/README.md) | 2026-11-02 | 后端消融的逐运行决策审计（04 的细节） |
 
 检验用到的工具：`workflows/development/tools_case_validation/validate_checker.py`（在 human-in-loop 轮次和正式运行上跑 checker）、`seismo_checker/examples/smoke/run.sh`（合成回归测试）、`workflows/development/replay/`（离线重放和诊断脚本）、`workflows/development/backend_tier_b/`（B 层后端任务）、`workflows/development/scoring_migrations/`（评分规则改动后对已存分数重判）。输出目录都不纳入版本库。
