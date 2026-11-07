@@ -45,5 +45,255 @@
   "turns": 285
  },
  "leakage_flag": false,
- "leakage_review": []
+ "leakage_review": [],
+ "rescue_reference_only": {
+  "note": "outputs recovered outside work/ after the session ended; not a formal result (see rescue/README.md)",
+  "completion": {
+   "completed": true,
+   "problems": [],
+   "contract": "runs_smoke/dev_knowledge/rescue/none/20261106T182236Z/control/output_contract.json",
+   "consistency": {
+    "pick_event_ids_exist": 1.0,
+    "pick_counts_agree": 0.9924,
+    "coordinates_valid": 1.0
+   }
+  },
+  "metrics_version": 2,
+  "headline": {
+   "recall": 0.7189,
+   "ceiling": 0.6732,
+   "recall_norm": 1.0679,
+   "recall_tight": 0.6934,
+   "recall_ref_shelly": 0.7189,
+   "recall_ref_liu": 0.8802,
+   "recall_ref_ross_relocated": 0.685,
+   "recall_ref_awr_hypocenters": 0.8421,
+   "recall_ref_official_earthquake": 0.6964,
+   "union_support": 0.9247,
+   "epi_median_km": 0.8028,
+   "shift_km": 0.4237,
+   "scatter_median_km": 0.6686,
+   "epi_gt5km": 0.0,
+   "dz_median_km": 1.258,
+   "depth_datum_known": true,
+   "dt_median_s": 0.1104,
+   "dt_mad_s": 0.0727,
+   "location_pairs": 2359,
+   "depth_pairs": 2359,
+   "depth_mode_share": 0.0379,
+   "depth_band_share": 0.2326,
+   "off_structure_fraction": 0.0333,
+   "off_structure_after_shift": 0.033,
+   "recall_final": 0.3722,
+   "precision_final": 0.8243,
+   "event_ratio_final": 0.4739,
+   "shift_final_km": 0.7648,
+   "scatter_final_km": 0.6843,
+   "dz_final_km": 1.457,
+   "dz_mad_final_km": 0.922,
+   "dt_final_s": 0.2677,
+   "time_bias_final_s": -0.2651,
+   "time_mad_final_s": 0.0755,
+   "recall_M2": 0.7666,
+   "precision_M2": 0.9582,
+   "f1_M2": 0.8518,
+   "epi_mean_M2": 0.8996,
+   "dt_mean_M2": 0.0025,
+   "dmag_mean_M2": -0.0768,
+   "recall_M3": 0.7496,
+   "precision_M3": 0.9742,
+   "f1_M3": 0.8473,
+   "epi_mean_M3": 0.8377,
+   "dt_mean_M3": -0.0022,
+   "dmag_mean_M3": -0.0314,
+   "recall_M4": 0.8382,
+   "precision_M4": 0.9778,
+   "f1_M4": 0.9026,
+   "epi_mean_M4": 0.8655,
+   "dt_mean_M4": -0.0069,
+   "dmag_mean_M4": 0.0716,
+   "recall_M5": 1.0,
+   "precision_M5": 1.0,
+   "f1_M5": 1.0,
+   "epi_mean_M5": 1.2201,
+   "dt_mean_M5": -0.0143,
+   "dmag_mean_M5": -0.5233,
+   "dmag_median": -0.08,
+   "dmag_std": 0.1544,
+   "dmag_slope_per_unit": 0.0048,
+   "dmag_pairs": 2242,
+   "b_difference": 0.029,
+   "dt_mean_s": -0.015,
+   "dt_std_s": 0.2586,
+   "recall_after_large": 0.7436,
+   "recall_other": 0.7169,
+   "audited_false_rate": null,
+   "out_of_mask_fraction": 0.0314,
+   "out_of_coverage_fraction": 0.0
+  },
+  "trust": {
+   "trusted": false,
+   "failed": [
+    "depth_bias",
+    "large_events_present"
+   ],
+   "pending": [
+    "false_events"
+   ],
+   "dimensions": {
+    "reality": {
+     "verdict": "pending",
+     "checks": {
+      "inside_region": {
+       "aspect": "accuracy",
+       "value": 0.0,
+       "op": "<=",
+       "threshold": 0.05,
+       "final": 0.0,
+       "verdict": "pass"
+      },
+      "false_events": {
+       "aspect": "accuracy",
+       "value": null,
+       "op": "<=",
+       "threshold": 0.02,
+       "final": null,
+       "verdict": "pending"
+      }
+     }
+    },
+    "time": {
+     "verdict": "pass",
+     "checks": {
+      "time_bias": {
+       "aspect": "accuracy",
+       "value": 0.1104,
+       "op": "abs<=",
+       "threshold": 0.3,
+       "final": 0.24,
+       "verdict": "pass"
+      },
+      "time_spread": {
+       "aspect": "stability",
+       "value": 0.0727,
+       "op": "<=",
+       "threshold": 0.3,
+       "final": 0.08,
+       "verdict": "pass"
+      },
+      "after_large_events": {
+       "aspect": "stability",
+       "value": 1.0372,
+       "op": ">=",
+       "threshold": 0.7991,
+       "final": 0.9988,
+       "verdict": "pass"
+      }
+     }
+    },
+    "space": {
+     "verdict": "fail",
+     "checks": {
+      "horizontal_shift": {
+       "aspect": "accuracy",
+       "value": 0.4237,
+       "op": "<=",
+       "threshold": 1.0,
+       "final": 0.3998,
+       "verdict": "pass"
+      },
+      "depth_bias": {
+       "aspect": "accuracy",
+       "value": 1.258,
+       "op": "abs<=",
+       "threshold": 1.0,
+       "final": -0.3081,
+       "verdict": "fail"
+      },
+      "horizontal_scatter": {
+       "aspect": "stability",
+       "value": 0.6686,
+       "op": "<=",
+       "threshold": 1.0,
+       "final": 0.195,
+       "verdict": "pass"
+      },
+      "off_structure": {
+       "aspect": "stability",
+       "value": 0.0333,
+       "op": "<=",
+       "threshold": 0.05,
+       "final": 0.0125,
+       "verdict": "pass"
+      },
+      "depth_pileup": {
+       "aspect": "stability",
+       "value": 0.0379,
+       "op": "<=",
+       "threshold": 0.05,
+       "final": 0.0065,
+       "verdict": "pass"
+      }
+     }
+    },
+    "strength": {
+     "verdict": "fail",
+     "checks": {
+      "magnitude_offset": {
+       "aspect": "accuracy",
+       "value": -0.08,
+       "op": "abs<=",
+       "threshold": 0.2815,
+       "final": -0.0815,
+       "verdict": "pass"
+      },
+      "magnitude_spread": {
+       "aspect": "stability",
+       "value": 0.1544,
+       "op": "<=",
+       "threshold": 0.3,
+       "final": 0.1747,
+       "verdict": "pass"
+      },
+      "magnitude_scale": {
+       "aspect": "stability",
+       "value": 0.0048,
+       "op": "abs<=",
+       "threshold": 0.2,
+       "final": 0.0285,
+       "verdict": "pass"
+      },
+      "large_events_present": {
+       "aspect": "accuracy",
+       "value": {
+        "recall_M4": 0.8382,
+        "recall_M5": 1.0
+       },
+       "op": "all ==",
+       "threshold": 1.0,
+       "verdict": "fail"
+      }
+     }
+    }
+   },
+   "completeness": {
+    "recall_norm": 1.0679,
+    "recall_tight": 0.6934,
+    "recall_final": 0.3722,
+    "event_ratio_final": 0.4739
+   }
+  },
+  "process": {
+   "cost_usd": 16.729682,
+   "elapsed_s": 23122.5,
+   "turns": 285
+  },
+  "leakage_flag": null,
+  "leakage_review": [],
+  "audit": {
+   "sampled": 50,
+   "unsupported": 233,
+   "labels": null
+  }
+ }
 }

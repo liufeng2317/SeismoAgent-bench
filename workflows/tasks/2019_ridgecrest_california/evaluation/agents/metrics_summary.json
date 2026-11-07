@@ -1,8 +1,8 @@
 {
  "metrics_version": 2,
- "scorer_commit": "fb700ec2530e21b8ee34ccff7aebaa3d1df72d28",
+ "scorer_commit": "3c2cfbffb946a5e4d9ad439bfc5c1b527a726370",
  "scorer_dirty": false,
- "generated_utc": "2026-11-07T04:50:12+00:00",
+ "generated_utc": "2026-11-07T20:13:52+00:00",
  "task": "2019_ridgecrest_california",
  "configurations": [
   {
@@ -1540,9 +1540,9 @@
    "variant": "dev_knowledge",
    "harness": "claude",
    "model": "glm-5.3",
-   "launched": 1,
+   "launched": 2,
    "leakage_flagged": [],
-   "completion_rate": 0.0,
+   "completion_rate": 0.5,
    "runs": [
     {
      "run_id": "20261106T182236Z",
@@ -1551,56 +1551,574 @@
      "trust_failed": [
       "completed"
      ],
+     "b_difference": null,
+     "depth_band_share": null,
+     "depth_mode_share": null,
+     "depth_pairs": null,
+     "dmag_mean_M2": null,
+     "dmag_mean_M3": null,
+     "dmag_mean_M4": null,
+     "dmag_mean_M5": null,
+     "dmag_median": null,
+     "dmag_pairs": null,
+     "dmag_slope_per_unit": null,
+     "dmag_std": null,
+     "dt_final_s": null,
+     "dt_mad_s": null,
+     "dt_mean_M2": null,
+     "dt_mean_M3": null,
+     "dt_mean_M4": null,
+     "dt_mean_M5": null,
+     "dt_mean_s": null,
+     "dt_median_s": null,
+     "dt_std_s": null,
+     "dz_final_km": null,
+     "dz_mad_final_km": null,
+     "dz_median_km": null,
+     "epi_gt5km": null,
+     "epi_mean_M2": null,
+     "epi_mean_M3": null,
+     "epi_mean_M4": null,
+     "epi_mean_M5": null,
+     "epi_median_km": null,
+     "event_ratio_final": null,
+     "f1_M2": null,
+     "f1_M3": null,
+     "f1_M4": null,
+     "f1_M5": null,
+     "location_pairs": null,
+     "off_structure_after_shift": null,
+     "off_structure_fraction": null,
+     "out_of_coverage_fraction": null,
+     "out_of_mask_fraction": null,
+     "precision_M2": null,
+     "precision_M3": null,
+     "precision_M4": null,
+     "precision_M5": null,
+     "precision_final": null,
      "recall": 0.0,
+     "recall_M2": null,
+     "recall_M3": null,
+     "recall_M4": null,
+     "recall_M5": null,
+     "recall_after_large": null,
      "recall_final": 0.0,
      "recall_norm": 0.0,
-     "recall_tight": 0.0
+     "recall_other": null,
+     "recall_ref_awr_hypocenters": null,
+     "recall_ref_liu": null,
+     "recall_ref_official_earthquake": null,
+     "recall_ref_ross_relocated": null,
+     "recall_ref_shelly": null,
+     "recall_tight": 0.0,
+     "scatter_final_km": null,
+     "scatter_median_km": null,
+     "shift_final_km": null,
+     "shift_km": null,
+     "time_bias_final_s": null,
+     "time_mad_final_s": null,
+     "union_support": null
+    },
+    {
+     "run_id": "20261107T101511Z",
+     "completed": true,
+     "trusted": false,
+     "trust_failed": [
+      "depth_bias",
+      "off_structure",
+      "large_events_present"
+     ],
+     "b_difference": 0.014,
+     "depth_band_share": 0.2111,
+     "depth_mode_share": 0.0041,
+     "depth_pairs": 2118,
+     "dmag_mean_M2": -0.0791,
+     "dmag_mean_M3": -0.0217,
+     "dmag_mean_M4": 0.0874,
+     "dmag_mean_M5": -0.4571,
+     "dmag_median": -0.0771,
+     "dmag_pairs": 2046,
+     "dmag_slope_per_unit": 0.0385,
+     "dmag_std": 0.269,
+     "dt_final_s": 0.2,
+     "dt_mad_s": 0.08,
+     "dt_mean_M2": 0.0442,
+     "dt_mean_M3": 0.0462,
+     "dt_mean_M4": 0.0384,
+     "dt_mean_M5": 0.0567,
+     "dt_mean_s": 0.0464,
+     "dt_median_s": 0.11,
+     "dt_std_s": 0.2721,
+     "dz_final_km": 1.4093,
+     "dz_mad_final_km": 0.738,
+     "dz_median_km": 1.1285,
+     "epi_gt5km": 0.0,
+     "epi_mean_M2": 0.8324,
+     "epi_mean_M3": 0.7971,
+     "epi_mean_M4": 0.9685,
+     "epi_mean_M5": 0.7145,
+     "epi_median_km": 0.6267,
+     "event_ratio_final": 0.5626,
+     "f1_M2": 0.7473,
+     "f1_M3": 0.759,
+     "f1_M4": 0.8429,
+     "f1_M5": 1.0,
+     "location_pairs": 2118,
+     "off_structure_after_shift": 0.1348,
+     "off_structure_fraction": 0.1399,
+     "out_of_coverage_fraction": 0.0,
+     "out_of_mask_fraction": 0.1907,
+     "precision_M2": 0.774,
+     "precision_M3": 0.7795,
+     "precision_M4": 0.8476,
+     "precision_M5": 1.0,
+     "precision_final": 0.6246,
+     "recall": 0.642,
+     "recall_M2": 0.7223,
+     "recall_M3": 0.7395,
+     "recall_M4": 0.8382,
+     "recall_M5": 1.0,
+     "recall_after_large": 0.6588,
+     "recall_final": 0.3405,
+     "recall_norm": 0.9537,
+     "recall_other": 0.652,
+     "recall_ref_awr_hypocenters": 0.7637,
+     "recall_ref_liu": 0.773,
+     "recall_ref_official_earthquake": 0.6331,
+     "recall_ref_ross_relocated": 0.6308,
+     "recall_ref_shelly": 0.642,
+     "recall_tight": 0.6201,
+     "scatter_final_km": 0.4247,
+     "scatter_median_km": 0.3671,
+     "shift_final_km": 0.861,
+     "shift_km": 0.4895,
+     "time_bias_final_s": -0.2,
+     "time_mad_final_s": 0.06,
+     "union_support": 0.6994
     }
    ],
    "metrics": {
-    "recall": {
+    "b_difference": {
+     "mean": 0.014,
+     "min": 0.014,
+     "max": 0.014,
+     "n": 1
+    },
+    "depth_band_share": {
+     "mean": 0.2111,
+     "min": 0.2111,
+     "max": 0.2111,
+     "n": 1
+    },
+    "depth_mode_share": {
+     "mean": 0.0041,
+     "min": 0.0041,
+     "max": 0.0041,
+     "n": 1
+    },
+    "depth_pairs": {
+     "mean": 2118.0,
+     "min": 2118.0,
+     "max": 2118.0,
+     "n": 1
+    },
+    "dmag_mean_M2": {
+     "mean": -0.0791,
+     "min": -0.0791,
+     "max": -0.0791,
+     "n": 1
+    },
+    "dmag_mean_M3": {
+     "mean": -0.0217,
+     "min": -0.0217,
+     "max": -0.0217,
+     "n": 1
+    },
+    "dmag_mean_M4": {
+     "mean": 0.0874,
+     "min": 0.0874,
+     "max": 0.0874,
+     "n": 1
+    },
+    "dmag_mean_M5": {
+     "mean": -0.4571,
+     "min": -0.4571,
+     "max": -0.4571,
+     "n": 1
+    },
+    "dmag_median": {
+     "mean": -0.0771,
+     "min": -0.0771,
+     "max": -0.0771,
+     "n": 1
+    },
+    "dmag_pairs": {
+     "mean": 2046.0,
+     "min": 2046.0,
+     "max": 2046.0,
+     "n": 1
+    },
+    "dmag_slope_per_unit": {
+     "mean": 0.0385,
+     "min": 0.0385,
+     "max": 0.0385,
+     "n": 1
+    },
+    "dmag_std": {
+     "mean": 0.269,
+     "min": 0.269,
+     "max": 0.269,
+     "n": 1
+    },
+    "dt_final_s": {
+     "mean": 0.2,
+     "min": 0.2,
+     "max": 0.2,
+     "n": 1
+    },
+    "dt_mad_s": {
+     "mean": 0.08,
+     "min": 0.08,
+     "max": 0.08,
+     "n": 1
+    },
+    "dt_mean_M2": {
+     "mean": 0.0442,
+     "min": 0.0442,
+     "max": 0.0442,
+     "n": 1
+    },
+    "dt_mean_M3": {
+     "mean": 0.0462,
+     "min": 0.0462,
+     "max": 0.0462,
+     "n": 1
+    },
+    "dt_mean_M4": {
+     "mean": 0.0384,
+     "min": 0.0384,
+     "max": 0.0384,
+     "n": 1
+    },
+    "dt_mean_M5": {
+     "mean": 0.0567,
+     "min": 0.0567,
+     "max": 0.0567,
+     "n": 1
+    },
+    "dt_mean_s": {
+     "mean": 0.0464,
+     "min": 0.0464,
+     "max": 0.0464,
+     "n": 1
+    },
+    "dt_median_s": {
+     "mean": 0.11,
+     "min": 0.11,
+     "max": 0.11,
+     "n": 1
+    },
+    "dt_std_s": {
+     "mean": 0.2721,
+     "min": 0.2721,
+     "max": 0.2721,
+     "n": 1
+    },
+    "dz_final_km": {
+     "mean": 1.4093,
+     "min": 1.4093,
+     "max": 1.4093,
+     "n": 1
+    },
+    "dz_mad_final_km": {
+     "mean": 0.738,
+     "min": 0.738,
+     "max": 0.738,
+     "n": 1
+    },
+    "dz_median_km": {
+     "mean": 1.1285,
+     "min": 1.1285,
+     "max": 1.1285,
+     "n": 1
+    },
+    "epi_gt5km": {
      "mean": 0.0,
      "min": 0.0,
      "max": 0.0,
      "n": 1
+    },
+    "epi_mean_M2": {
+     "mean": 0.8324,
+     "min": 0.8324,
+     "max": 0.8324,
+     "n": 1
+    },
+    "epi_mean_M3": {
+     "mean": 0.7971,
+     "min": 0.7971,
+     "max": 0.7971,
+     "n": 1
+    },
+    "epi_mean_M4": {
+     "mean": 0.9685,
+     "min": 0.9685,
+     "max": 0.9685,
+     "n": 1
+    },
+    "epi_mean_M5": {
+     "mean": 0.7145,
+     "min": 0.7145,
+     "max": 0.7145,
+     "n": 1
+    },
+    "epi_median_km": {
+     "mean": 0.6267,
+     "min": 0.6267,
+     "max": 0.6267,
+     "n": 1
+    },
+    "event_ratio_final": {
+     "mean": 0.5626,
+     "min": 0.5626,
+     "max": 0.5626,
+     "n": 1
+    },
+    "f1_M2": {
+     "mean": 0.3736,
+     "min": 0.0,
+     "max": 0.7473,
+     "n": 2
+    },
+    "f1_M3": {
+     "mean": 0.3795,
+     "min": 0.0,
+     "max": 0.759,
+     "n": 2
+    },
+    "f1_M4": {
+     "mean": 0.4214,
+     "min": 0.0,
+     "max": 0.8429,
+     "n": 2
+    },
+    "f1_M5": {
+     "mean": 0.5,
+     "min": 0.0,
+     "max": 1.0,
+     "n": 2
+    },
+    "location_pairs": {
+     "mean": 2118.0,
+     "min": 2118.0,
+     "max": 2118.0,
+     "n": 1
+    },
+    "off_structure_after_shift": {
+     "mean": 0.1348,
+     "min": 0.1348,
+     "max": 0.1348,
+     "n": 1
+    },
+    "off_structure_fraction": {
+     "mean": 0.1399,
+     "min": 0.1399,
+     "max": 0.1399,
+     "n": 1
+    },
+    "out_of_coverage_fraction": {
+     "mean": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 1
+    },
+    "out_of_mask_fraction": {
+     "mean": 0.1907,
+     "min": 0.1907,
+     "max": 0.1907,
+     "n": 1
+    },
+    "precision_M2": {
+     "mean": 0.774,
+     "min": 0.774,
+     "max": 0.774,
+     "n": 1
+    },
+    "precision_M3": {
+     "mean": 0.7795,
+     "min": 0.7795,
+     "max": 0.7795,
+     "n": 1
+    },
+    "precision_M4": {
+     "mean": 0.8476,
+     "min": 0.8476,
+     "max": 0.8476,
+     "n": 1
+    },
+    "precision_M5": {
+     "mean": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "n": 1
+    },
+    "precision_final": {
+     "mean": 0.6246,
+     "min": 0.6246,
+     "max": 0.6246,
+     "n": 1
+    },
+    "recall": {
+     "mean": 0.321,
+     "min": 0.0,
+     "max": 0.642,
+     "n": 2
+    },
+    "recall_M2": {
+     "mean": 0.3612,
+     "min": 0.0,
+     "max": 0.7223,
+     "n": 2
+    },
+    "recall_M3": {
+     "mean": 0.3698,
+     "min": 0.0,
+     "max": 0.7395,
+     "n": 2
+    },
+    "recall_M4": {
+     "mean": 0.4191,
+     "min": 0.0,
+     "max": 0.8382,
+     "n": 2
+    },
+    "recall_M5": {
+     "mean": 0.5,
+     "min": 0.0,
+     "max": 1.0,
+     "n": 2
+    },
+    "recall_after_large": {
+     "mean": 0.3294,
+     "min": 0.0,
+     "max": 0.6588,
+     "n": 2
     },
     "recall_final": {
-     "mean": 0.0,
+     "mean": 0.1703,
      "min": 0.0,
-     "max": 0.0,
-     "n": 1
+     "max": 0.3405,
+     "n": 2
     },
     "recall_norm": {
-     "mean": 0.0,
+     "mean": 0.4768,
      "min": 0.0,
-     "max": 0.0,
-     "n": 1
+     "max": 0.9537,
+     "n": 2
+    },
+    "recall_other": {
+     "mean": 0.326,
+     "min": 0.0,
+     "max": 0.652,
+     "n": 2
+    },
+    "recall_ref_awr_hypocenters": {
+     "mean": 0.3819,
+     "min": 0.0,
+     "max": 0.7637,
+     "n": 2
+    },
+    "recall_ref_liu": {
+     "mean": 0.3865,
+     "min": 0.0,
+     "max": 0.773,
+     "n": 2
+    },
+    "recall_ref_official_earthquake": {
+     "mean": 0.3165,
+     "min": 0.0,
+     "max": 0.6331,
+     "n": 2
+    },
+    "recall_ref_ross_relocated": {
+     "mean": 0.3154,
+     "min": 0.0,
+     "max": 0.6308,
+     "n": 2
+    },
+    "recall_ref_shelly": {
+     "mean": 0.321,
+     "min": 0.0,
+     "max": 0.642,
+     "n": 2
     },
     "recall_tight": {
-     "mean": 0.0,
+     "mean": 0.31,
      "min": 0.0,
-     "max": 0.0,
+     "max": 0.6201,
+     "n": 2
+    },
+    "scatter_final_km": {
+     "mean": 0.4247,
+     "min": 0.4247,
+     "max": 0.4247,
+     "n": 1
+    },
+    "scatter_median_km": {
+     "mean": 0.3671,
+     "min": 0.3671,
+     "max": 0.3671,
+     "n": 1
+    },
+    "shift_final_km": {
+     "mean": 0.861,
+     "min": 0.861,
+     "max": 0.861,
+     "n": 1
+    },
+    "shift_km": {
+     "mean": 0.4895,
+     "min": 0.4895,
+     "max": 0.4895,
+     "n": 1
+    },
+    "time_bias_final_s": {
+     "mean": -0.2,
+     "min": -0.2,
+     "max": -0.2,
+     "n": 1
+    },
+    "time_mad_final_s": {
+     "mean": 0.06,
+     "min": 0.06,
+     "max": 0.06,
+     "n": 1
+    },
+    "union_support": {
+     "mean": 0.6994,
+     "min": 0.6994,
+     "max": 0.6994,
      "n": 1
     }
    },
    "trusted_runs": 0,
    "cost_usd": {
-    "mean": 16.7297,
-    "min": 16.7297,
+    "mean": 16.4784,
+    "min": 16.2272,
     "max": 16.7297,
-    "n": 1
+    "n": 2
    },
    "elapsed_s": {
-    "mean": 23122.5,
-    "min": 23122.5,
+    "mean": 21784.25,
+    "min": 20446.0,
     "max": 23122.5,
-    "n": 1
+    "n": 2
    },
    "turns": {
-    "mean": 285.0,
-    "min": 285.0,
+    "mean": 272.0,
+    "min": 259.0,
     "max": 285.0,
-    "n": 1
+    "n": 2
    }
   },
   {
