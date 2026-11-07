@@ -4,7 +4,7 @@
 
 ## 组织方式
 
-- 按稳定功能域分组，不逐案例、逐函数、逐配置字段复制测试文件。当前功能域：`agent/`、`cli/`、`execution/`、`reporting/`、`scoring/`（含地震目录指标）、`source_prepare/`、`task/`、`workflow/`。
+- 按稳定功能域分组，不逐案例、逐函数、逐配置字段复制测试文件。当前功能域：`agent/`、`cli/`、`execution/`、`reporting/`、`scoring/`（含地震目录指标）、`skills/`（给 Agent 的 skill 中的脚本）、`source_prepare/`、`task/`、`workflow/`。
 - `source_prepare/test_registry.py` 只覆盖来源元数据注册和路径边界；完整目录、波形和原生解析核验不属于默认回归套件。
 - 共用代码直接从代码包导入；只有不在包中的入口脚本才按文件路径加载。不把共享函数测试挂在某一个真实案例名下。
 - 不在 `workflows/data_preparation/` 或 `data/` 下继续散放 `test_*.py`。新专业功能确有测试需求时，再建立相应功能域，避免提前创建空层级。
