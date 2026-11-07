@@ -58,7 +58,7 @@ Dimensions: `data` (input), `reality` (are the events real and complete), `time`
 | picks | `pick_onset_offset` | P picks against the AIC onset on a sample of clear picks (S reported; details: share of picks with a low amplitude ratio across the pick) | yes |
 | association | `associated_share`, `association_busy_hours` | share of picks in events, overall and in the busiest hours | yes |
 | association | `duplicate_events` | events within 1.5 s and 3 km of another (details: pairs sharing picks) | yes |
-| association | `events_with_few_picks` | events with fewer than 4 P picks | yes |
+| association | `events_with_few_picks` | events with picks that have fewer than 4 P picks; events without any pick (template-matching detections) are counted apart (`events_without_picks`) | yes |
 | location | `isolated_events` | events far from all others | yes |
 | location | `events_beyond_stations` | located events more than 10 km outside the hull of the stations (details: count, aperture) | reported |
 | location | `location_uncertainty` | the locator's horizontal and depth uncertainties (optional catalog columns `horizontal_uncertainty_km`, `depth_uncertainty_km`): distribution, and the events above 3 times the median horizontal uncertainty | reported |

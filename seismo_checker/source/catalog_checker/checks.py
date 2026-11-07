@@ -220,16 +220,22 @@ def _pick_overlap(d: Data, c: dict) -> dict:
 
 
 def few_picks(d: Data, c: dict) -> Check:
-    n_p = d.picks[d.picks.phase == "P"].groupby("event_id").size().reindex(d.events.event_id, fill_value=0)
-    expected = (f"share ≤ {c['few_picks_share_max']:.0%} of events with fewer than {c['min_p_picks']} P picks "
-                "(a measure of how well events are constrained, not of whether they are located correctly)")
+    # Events without any pick (detections by template matching, located through their template) are not
+    # counted: they have no picks by construction, and counting them would penalise adding them to a catalog.
+    with_picks = set(d.all_picks.event_id[d.all_picks.event_id != ""])
+    events = d.events.event_id[d.events.event_id.isin(with_picks)]
+    without = int(len(d.events) - len(events))
+    n_p = d.picks[d.picks.phase == "P"].groupby("event_id").size().reindex(events, fill_value=0)
+    expected = (f"share ≤ {c['few_picks_share_max']:.0%} of events with picks that have fewer than {c['min_p_picks']} P picks "
+                "(a measure of how well events are constrained, not of whether they are located correctly; "
+                "events without any pick, such as template-matching detections, are counted apart)")
     if not len(n_p):
-        return _skip("events_with_few_picks", "reality", "share", expected, 0, "no events")
+        return _skip("events_with_few_picks", "reality", "share", expected, 0, "no events with picks")
     share = float((n_p < c["min_p_picks"]).mean())
     flag = share > c["few_picks_share_max"]
     return Check("events_with_few_picks", "reality", share, "share", expected, len(n_p), flag,
-                 f"{share:.1%} of events have fewer than {c['min_p_picks']} associated P picks at known stations." if flag else None,
-                 {"median_p_picks": float(np.median(n_p))})
+                 f"{share:.1%} of events with picks have fewer than {c['min_p_picks']} associated P picks at known stations." if flag else None,
+                 {"median_p_picks": float(np.median(n_p)), "events_without_picks": without})
 
 
 # ------------------------------------------------------------------ time
