@@ -35,7 +35,7 @@ Catalog progress:
 
 ## Principles
 
-1. **A flag is a symptom, not a verdict.** It says a product is outside an expected range, not why. Find the cause with an experiment, or report the flag with the evidence that it is not an error. Never change a product only to make a check pass.
+1. **A flag is a symptom, not a verdict, and flags differ in how much they tell.** Some flags reliably mean an error (fix them); others are weak (investigate once and report). `reference/flag_reliability.md` says which is which. Never change a product only to make a check pass.
 2. **A flag gives a direction, not a correction.** Do not adopt a change because it brings a checker measurement to its expected value: several wrong changes do that too. Judge a change by independent evidence (geology, near-station S−P times, independent catalogs or events) and by `compare.py` on the full products.
 3. **Write the adoption rule before the experiment**, then keep it. If you break it, say why in the record.
 4. **Prepare on a pilot, decide on the full run** (`reference/pilot_and_compare.md`).
@@ -45,6 +45,7 @@ Catalog progress:
 ## Where things are
 
 - Stage files: `stages/01_picks.md` … `stages/07_submission.md`, each with the decision rules and the flags of that stage.
+- `reference/flag_reliability.md`: how much each flag tells you and how to act on it.
 - `reference/pilot_and_compare.md`: pilot batches, `compare.py`, experiments that separate the causes of a symptom.
 - `reference/not_visible.md`: errors no check sees (the velocity model on average, the near surface, building a 1-D model from the data, the horizontal frame, the magnitude level, timing). Read it before choosing a velocity model.
 - `scripts/`: `compare_pick_groups.py`, `expectation_hypocentres.py`, `drop_beyond_network.py` (run with `--help`).
