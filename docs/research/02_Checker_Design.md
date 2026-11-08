@@ -294,7 +294,7 @@ hypoDD 和 GrowClust 都不读台站高程，所有台站在模型深度 0：目
 
 - **S2c（工具 + checker）：** checker skill（`data/agent_resource/skills/catalog-checker/SKILL.md`）说明工具存在、每个阶段测什么、何时运行，以及合同：提交 `work/checker/final/checker_report.json`（在提交的目录上运行）和 `work/checker/dispositions.json`（每个报警一条 `fixed`：改了什么、报警出现在哪份报告；或 `justified`：证据）。工具说明在 `seismo_checker/README.md`，包括 `compare.py`、`pilot.py`、`region.py`；不提供原因或修复方法。合同文件为各案例的 `output_contract_checker.json`（后端变体在 `tasks/<case>/backend/`）。
 - **S3（工具 + 知识 + checker）：** 另有知识 skill（`data/agent_resource/skills/catalog-knowledge/`）：小批量协议、两个候选间的决定与对照实验、按 A/B/C 三层的症状手册、checker 看不到的问题（速度模型的基准面、常速层与梯度、不用区域模型时如何约束近地表、定位程序的深度基准；震级定标和压缩；主震尾波），以及震级资源（`data/agent_resource/magnitude/`）。所有案例都不提供具体速度模型（2026-11-03 决定）。
-- **消融：** 只做 checker 对比 checker + 知识，且只在需要回答具体问题时、用能回答问题的最少运行；B 层已有的 `backend` 和 `backend_checker` 运行作为基线复用。
+- **消融（2026-11-08 取消）：** checker 与知识作为一套整体评估，不再单独运行只有 checker 的 S2c；此前的结论：B 层已有的 `backend` 和 `backend_checker` 运行作为基线复用。
 - **评分：** `SeismoAgentBench/scoring/catalog_metrics/checker_audit.py` 用运行时的 checker 版本在提交的文件上重跑，核对报告是否针对提交文件（SHA-256）、报警是否一致、每个报警有无处置、`fixed` 是否属实、`justified` 有无证据，并统计 Agent 运行 checker 的次数；处置记录的列表和以 `flag_id` 为键的对象两种写法都能读（`03_Scoring_Method.md` §2.7a）。
 - **迭代：** A 层离线重放（`workflows/development/replay/`），B 层后端任务（`workflows/development/backend_tier_b/`），C 层完整正式运行。改动后只做冒烟测试和离线检验，攒到一起再统一跑 Agent。
 

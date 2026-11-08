@@ -34,7 +34,7 @@
 | B8 | 冻结正式实验方案（§4） | 冻结的提交号 | ✅ | 2026-11-05，提交 `5327df0`，标签 `prereg-b-2026-11-05`；2026-11-06 加入 checker 1.4 后重新冻结，提交 `f59d824`，标签 `prereg-b-2026-11-06` |
 | B9 | E3 主实验：用现在的工具重跑 S1，每个案例 2 次 | 12 次运行及评分 | ⏸ | 2026-11-06 开始，2026-11-07 暂停（§6）：Maple 已完成 1 次（试跑，6 项不通过），Kīlauea 1 次在跑；S1 不受 checker 和知识改动影响，这些运行在工具库和提示词不变时仍可计入 |
 | B10 | E3 主实验：S3，每个案例 2 次 | 12 次运行及评分 | ⏸ | 2026-11-07 暂停（§6）：Maple 1 次（checker 1.4，试跑，4 项不通过）；正式运行在开发循环收敛、重新冻结之后进行 |
-| B11 | S2c 消融（按需） | 每个案例 1 次 | ⬜ | 只在 S3 有效果时运行（§5 第 4 项） |
+| B11 | S2c 消融（按需） | 每个案例 1 次 | ✖ | 2026-11-08 取消：checker 与知识（含速度模型资源库）作为一套整体评估，不单独拆分（§6） |
 | B12 | E4 处置分析：报警、真修复、表面修复、证据不足的理由；checker 的使用时间线 | 图 6、处置统计 | 🟡 | 后端预实验已逐运行审计（[backend_audit](progress/records/backend_audit/README.md)）；正式运行后做 |
 | B13 | 规则来源表：每条检查和知识条目来自哪个案例 | 表格（冻结时登记） | ✅ | [12](./progress/records/12_rule_origins.md)（2026-11-05）；4 项检查、3 条知识的来源未能确定 |
 | B14 | human-in-loop 干预编码：把专家流程的每项干预归为执行、方法选择、无参考诊断、依赖参考的诊断 | 编码表、图 8 的一部分 | ✅ | [13](./progress/records/13_hil_interventions.md)（2026-11-05）；存疑项有乐观、悲观两种口径 |
@@ -67,7 +67,7 @@
 | 案例 | 现有六个案例；评估窗口和区域见各案例 `evaluation/metrics.yaml` |
 | Agent | Claude Code × GLM-5.3（`SeismoAgentBench/configs/agents/claude.yaml`） |
 | 主比较 | S1 `tools`（工具库）对 S3 `knowledge`（S1 + checker + checker skill + 知识 skill + 震级资源 + checker 输出约定），每个案例各 2 次，共 24 次 |
-| 消融（按需） | S2c `checker`：S1 + checker 和 checker skill，无知识 |
+| 消融（按需） | ~~S2c `checker`：S1 + checker 和 checker skill，无知识~~（2026-11-08 取消，checker 与知识作为一套） |
 | 任务 | 完整流程，从连续波形到目录和拾取；时间预算 48 小时；提示词不写研究区域 |
 | 冻结的材料 | 冻结提交中的：评分器（`SeismoAgentBench/scoring/`）、各案例 `evaluation/metrics.yaml` 和基线、可达结果；`seismo_checker/` 和 `data/agent_resource/`（标签 `checker-v1.4`）；`seismotools/`；各案例 `prompt_tools.md`、`prompt_knowledge.md`、`prompt_checker.md`、输出约定和 `run.sh`；Agent 运行配置 `SeismoAgentBench/configs/agents/claude.yaml` |
 
@@ -111,3 +111,4 @@
 | 2026-11-07 | 正式运行暂停；新增开发循环：`dev_tools`、`dev_knowledge` 两臂，只处理主震前 2 小时到后 22 小时（Prague 以窗口内最大事件为锚点，Ridgecrest 截到数据末端），最多 3 个同时运行；评分对 `dev_*` 变体把参考目录和可达结果截到同一窗口，阈值读窗口内的可达结果（[`workflows/development/dev_window/`](../../workflows/development/dev_window/README.md)）。已完成的 Maple S1、S3 两次和在跑的 Kīlauea S1 记为试跑 | 全量窗口一次 6–17 小时，一次只跑一个时一轮正式设计约一周，无法在轮次之间改进 checker 和知识；Maple S3 一次运行就暴露了两个问题（为消除深度堆积换模型表示后约四分之一事件水平偏差超过 5 km、文献模型带来约 +1 s 的发震时刻偏差），这类问题用短窗口和离线重放就能检验 | 冻结的 1.4 不再是正式版本：开发循环结束后重新冻结（新标签），正式 24 次全部在新冻结下运行；S1 的运行在工具库和提示词不变时可以保留。Kaikōura 的主要定位参考在窗口内只有 17 对，开发循环中其时间和空间判据为 insufficient |
 | 2026-11-07 | 开发版 1.5：checker skill 交付路径改为相对输出目录；`station_residual_spread` 以有 S 拾取的台站为基准；知识 skill 修改 `sp_depth_offset`、网格边缘堆积、加入新拾取、取舍手册四处（[17](./progress/records/17_dev_round1.md)） | 开发循环第一轮的发现：路径写法使两次运行把产品写进 `work/work/`；正确的 S−P 深度报警被残差否定；可修复的深度堆积被说成调参；补进的噪声拾取拉偏定位 | 只用于开发循环；正式实验在开发结束、重新冻结后进行 |
 | 2026-11-08 | 开发版 2.0：知识 skill 重写为分阶段流程（带 checker 闸门的清单、每阶段决策规则、脚本），`events_with_few_picks` 不再统计没有拾取的模板检测事件，台网外事件剔除（[`03_Skill_Design.md`](./03_Skill_Design.md)） | 第二轮：逐条修补在一处改善、另一处出新问题（Magna 以报警归零为标准、漏做模板匹配；Ridgecrest 漏做重定位）；前沿工作表明流程式 skill 明显优于说明书式 | 只用于开发循环；1.5 保留标签 `checker-v1.5` 作对照 |
+| 2026-11-08 | checker 与知识（含区域速度模型资源库 `data/agent_resource/velocity_models/`）作为一套整体，只给 S3；取消 S2c 消融；资源库收录发表的区域一维模型（46 个，含犹他大学台网的日常定位模型），排除各案例的目标论文和关于这些序列的论文 | 用户决定；C 层误差（速度模型）是剩余错误的主要来源，专家用区域模型起步 | 主比较仍为 S1 对 S3；S3 的内容增加了资源库。资源库在第三轮结束后放入 |
