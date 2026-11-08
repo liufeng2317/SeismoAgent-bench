@@ -15,7 +15,6 @@ catalogs and workflow outputs are stored outside this directory.
 | REAL | Pick association (pick counting on a grid around the initiating station) | `real/interface/run.py` |
 | NonLinLoc | Absolute location and travel-time grids (methods GAU_ANALYTIC / EDT / EDT_OT_WT) | `nonlinloc/interface/run.py` (one event), `locate.py` (catalog) |
 | HypoInverse | Absolute location, linearised with distance/residual weighting (USGS network locator) | `hypoinverse/interface/run.py` |
-| VELEST | Minimum 1-D velocity model: joint inversion of hypocentres, layered P/S velocities and station corrections | `velest/interface/run.py` |
 | hypoDD | Relative relocation from catalog and/or cross-correlation times | `hypodd/interface/run.py` |
 | GrowClust | Relative relocation, L1 hierarchical cluster growth on cross-correlation times | `growclust/interface/run.py` |
 | MatchLocate2 | Template detection with grid-search location (Match&Locate; matched filter as the zero-grid case) | `match_and_locate/interface/prepare.py` then `run.py` |
