@@ -1,0 +1,11 @@
+{
+  "tool": "VELEST",
+  "native_programs": ["velest"],
+  "interface_version": 1,
+  "source": "fetched at build time (support/build_native.py: VELEST_REPOSITORY at VELEST_COMMIT); not copied into this project because the repository states no license",
+  "native_runtime": "runtime/bin/",
+  "standard_entrypoint": "interface/run.py",
+  "other_entrypoints": ["interface/stability.py"],
+  "modes": ["simultaneous"],
+  "validation": "examples/smoke/run.sh (the program's own example reproduces its reference hypocenters and station corrections)"
+}

@@ -8,7 +8,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-TOOLS = ['nonlinloc', 'hypodd', 'match_and_locate', 'pyocto', 'real', 'growclust', 'hypoinverse']
+TOOLS = ['nonlinloc', 'hypodd', 'match_and_locate', 'pyocto', 'real', 'growclust', 'hypoinverse', 'velest']
 # MatchLocate2 is plain C + OpenMP. -ffp-contract=off keeps floating-point
 # results independent of FMA availability (aarch64 contracts by default).
 MATCHLOCATE_CFLAGS = ['-O2', '-std=gnu99', '-fopenmp', '-ffp-contract=off', '-w']
@@ -100,6 +100,27 @@ def build_hypoinverse(folder, log):
     return ['hyp1.40']
 
 
+# VELEST 3.x (Kissling, ETH Zurich) as revised to compile with gfortran. The repository states no license, so the
+# source is not copied into this project: it is fetched at a fixed commit into runtime/build at build time.
+VELEST_REPOSITORY = 'https://github.com/sean0921/velest_revised'
+VELEST_COMMIT = '6abbeff39406ccc1077e8603e0f4767d15e40242'
+VELEST_FFLAGS = ['-O2', '-std=legacy', '-ffixed-line-length-none', '-fno-automatic', '-w']
+
+
+def build_velest(folder, log):
+    """Fetch the pinned VELEST source and compile velest.f (with vel_com.f) into runtime/bin/velest."""
+    build = folder / 'runtime' / 'build'
+    if build.exists():
+        shutil.rmtree(build)
+    build.mkdir(parents=True)
+    run_logged(['git', 'clone', '-q', VELEST_REPOSITORY, build / 'upstream'], build, log)
+    run_logged(['git', 'checkout', '-q', VELEST_COMMIT], build / 'upstream', log)
+    run_logged(['gfortran', *VELEST_FFLAGS, '-o', 'velest', 'velest.f'], build / 'upstream', log)
+    (folder / 'runtime' / 'bin').mkdir(parents=True, exist_ok=True)
+    shutil.copy2(build / 'upstream' / 'velest', folder / 'runtime' / 'bin' / 'velest')
+    return ['velest']
+
+
 def build_match_and_locate(folder, log):
     """Patch a pristine copy of the upstream src/ and compile it.
 
@@ -117,7 +138,7 @@ def build_match_and_locate(folder, log):
     return list(MATCHLOCATE_PROGRAMS)
 
 
-BUILDERS = {'match_and_locate': build_match_and_locate, 'pyocto': build_pyocto, 'real': build_real, 'growclust': build_growclust, 'hypoinverse': build_hypoinverse}
+BUILDERS = {'match_and_locate': build_match_and_locate, 'pyocto': build_pyocto, 'real': build_real, 'growclust': build_growclust, 'hypoinverse': build_hypoinverse, 'velest': build_velest}
 
 
 def main():
