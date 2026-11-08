@@ -143,9 +143,9 @@ def main() -> int:
     ref_elev = float(st.elevation_m.mean()) / 1000.0
     region = {"latitude": c.config["mask"]["latitude"], "longitude": c.config["mask"]["longitude"]}
     res["relocations"] = {}
-    if lib:  # the regional model alone
-        loc = H.locate(pk, st, rows_bsl(lib[0]), ref_elev, region, out / "nll_regional", a.workers)
-        res["relocations"][f"{lib[0]['id']} (no VELEST, no station corrections)"] = score(from_loc(loc), c)
+    for m in lib:  # each regional model alone
+        loc = H.locate(pk, st, rows_bsl(m), ref_elev, region, out / f"nll_regional_{m['id']}", a.workers)
+        res["relocations"][f"{m['id']} (no VELEST, no station corrections)"] = score(from_loc(loc), c)
     finals = {}
     for name, rows in starts.items():
         d = out / f"velest_{name}"
