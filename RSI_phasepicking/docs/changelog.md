@@ -1,5 +1,6 @@
 # 修订记录
 
+- 2026-11-13：b2 完成：共享评分模块 `scripts/scoring.py`、四张评分图；拾取检测、AIC 精修、网络触发和波形图全部改用因果滤波（零相位滤波使 M4 事件的 P 早约 1 s），B0 的 P 平均绝对误差从 0.076 s 降到 0.026 s，三种方法在新流水线上重跑。
 - 2026-11-13：b1 完成：共享模块 `scripts/pipeline.py`、`pickers.py`、`viz.py` 和 `b_baseline/b1_pipeline.py`；B0、B1、B8 在第一批 40 个事件上走通；design 5.1 更新事件窗规则、B0 的 S 拾取方法（弃用 `ar_pick`）和关联门槛。
 - 2026-11-13：研究问题改为递进的 Q1–Q4（持续提升 → RSI 可行 → 上限对比 DL → OOD 专家），原 H1c、H4 降为辅助问题 S1、S2；design 和 registry 中的引用同步替换。
 - 2026-11-13：基线改为三层（基础 STA/LTA + AIC、DL 强基线、agent + 强基线）；H1 改为“只用经典工具的 agent 离 DL 天花板多近”，新增 H1b（agent + 强基线在 OOD 上的改进），原 H1b 改为 H1c；design 5.1、5.2、5.3、5.10 和第 4 节、registry 的 b、c、d 同步修改；新增强基线 B-ens（DL 集成），原 B6 改为 B0。

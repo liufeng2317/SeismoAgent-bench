@@ -2,9 +2,9 @@
   "status": "success",
   "interface_version": 1,
   "tool": "pyocto",
-  "picks": 2048,
+  "picks": 2000,
   "events": 39,
-  "assigned_picks": 1689,
+  "assigned_picks": 1830,
   "travel_time_table": {
     "delta_km": 0.25,
     "max_distance_km": 177.28326487238536,

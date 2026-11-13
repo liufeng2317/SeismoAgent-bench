@@ -118,7 +118,7 @@ def event_window(chosen, cfg=None):
     t1 = max(c["Z"].stats.endtime for c in chosen.values())
     for sid, c in chosen.items():
         tr = c["Z"].copy().detrend("demean").taper(0.02)
-        tr.filter("bandpass", freqmin=cfg["freqmin"], freqmax=cfg["freqmax"], zerophase=True)
+        tr.filter("bandpass", freqmin=cfg["freqmin"], freqmax=cfg["freqmax"], zerophase=False)  # causal
         fs = tr.stats.sampling_rate
         cft = recursive_sta_lta(tr.data, int(cfg["sta_s"] * fs), int(cfg["lta_s"] * fs))
         cft[: int(cfg["skip_start_s"] * fs)] = 0  # tapered start, LTA not yet stable

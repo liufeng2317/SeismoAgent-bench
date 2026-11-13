@@ -27,6 +27,15 @@ CLASSIC_DEFAULTS = dict(
 )
 
 
+def aic_onset(x, edge=0.1):
+    """Index of the AIC minimum, or None when it sits within `edge` (fraction of
+    the window) of either end: refinement failed and the trigger is kept."""
+    a = aic(x)
+    k = int(np.argmin(a))
+    m = max(2, int(edge * len(x)))
+    return None if (k < m or k > len(x) - m) else k
+
+
 def aic(x):
     """Maeda (1985) AIC; the onset is at the minimum."""
     n = len(x)
@@ -39,9 +48,20 @@ def aic(x):
 
 
 def _prep(tr, cfg, window):
+    """Causal band-pass for detection. A zero-phase filter rings ahead of strong
+    impulsive onsets and made STA/LTA trigger ~1 s early on M4 events."""
     tr = tr.copy().trim(window["start"] - 5, window["end"])
     tr.detrend("demean").taper(0.02)
-    tr.filter("bandpass", freqmin=cfg["freqmin"], freqmax=cfg["freqmax"], zerophase=True)
+    tr.filter("bandpass", freqmin=cfg["freqmin"], freqmax=cfg["freqmax"], zerophase=False)
+    return tr
+
+
+def _prep_onset(tr, cfg, window):
+    """Causal high-pass only, for timing the onset: a zero-phase filter spreads
+    energy ahead of an impulsive onset (up to ~1/freqmin s) and pulls AIC early."""
+    tr = tr.copy().trim(window["start"] - 5, window["end"])
+    tr.detrend("demean").taper(0.02)
+    tr.filter("highpass", freq=cfg["freqmin"], corners=2, zerophase=False)
     return tr
 
 
@@ -53,8 +73,10 @@ def _snr(data, i, fs, cfg):
     return float(np.sqrt(np.mean(sig ** 2)) / (np.sqrt(np.mean(noise ** 2)) + 1e-20))
 
 
-def classic_p(tr, window, cfg):
-    """Largest STA/LTA trigger in the window, refined by AIC. Returns (time, snr) or None."""
+def classic_p(tr, window, cfg, onset_tr=None):
+    """Largest STA/LTA trigger in the window (on tr, causal band-pass), refined
+    by AIC on onset_tr (causal high-pass; defaults to tr). Returns (time, snr) or None."""
+    on_data = (onset_tr if onset_tr is not None else tr).data
     fs = tr.stats.sampling_rate
     cft = recursive_sta_lta(tr.data, int(cfg["sta_s"] * fs), int(cfg["lta_s"] * fs))
     cft[: int(cfg["lta_s"] * fs)] = 0
@@ -64,13 +86,15 @@ def classic_p(tr, window, cfg):
         return None
     a, b = max(on, key=lambda ab: cft[ab[0]: ab[1] + 1].max())
     i0, i1 = max(0, a - int(cfg["aic_before_s"] * fs)), min(len(tr.data), a + int(cfg["aic_after_s"] * fs))
-    k = i0 + int(np.argmin(aic(tr.data[i0:i1])))
+    k = aic_onset(on_data[i0:i1])
+    k = a if k is None else i0 + k
     return tr.stats.starttime + k / fs, _snr(tr.data, k, fs, cfg)
 
 
-def classic_s(n, e, tp, cfg):
-    """Largest STA/LTA peak of the horizontal amplitude after P, refined by AIC on
-    the larger horizontal. n, e: filtered traces. Returns (time, snr) or None."""
+def classic_s(n, e, tp, cfg, onset=None):
+    """Largest STA/LTA peak of the horizontal amplitude after P (n, e causal
+    band-pass), refined by AIC on the larger horizontal of onset = (n, e) causal
+    high-passed (defaults to n, e). Returns (time, snr) or None."""
     fs = n.stats.sampling_rate
     t0 = max(n.stats.starttime, e.stats.starttime)
     k = min(len(n.data) - int((t0 - n.stats.starttime) * fs), len(e.data) - int((t0 - e.stats.starttime) * fs))
@@ -85,11 +109,15 @@ def classic_s(n, e, tp, cfg):
     j = lo + int(np.argmax(cft[lo:hi]))
     if cft[j] < cfg["thr_on"] * 0.5:  # S rides on the P coda: half the P threshold
         return None
-    comp = hn if np.abs(hn[j - lo:j]).max(initial=0) >= np.abs(he[j - lo:j]).max(initial=0) else he
+    on = onset if onset is not None else (n, e)
+    cn = on[0].data[int((t0 - on[0].stats.starttime) * fs):][:k]
+    ce = on[1].data[int((t0 - on[1].stats.starttime) * fs):][:k]
+    comp = cn if np.abs(hn[j - lo:j]).max(initial=0) >= np.abs(he[j - lo:j]).max(initial=0) else ce
     i0, i1 = max(lo, j - int(cfg["s_aic_before_s"] * fs)), min(len(comp), j + int(cfg["s_aic_after_s"] * fs))
     if i1 - i0 < 10:
         return None
-    m = i0 + int(np.argmin(aic(comp[i0:i1])))
+    m = aic_onset(comp[i0:i1])
+    m = j if m is None else i0 + m
     return t0 + m / fs, _snr(comp, m, fs, cfg)
 
 
@@ -98,14 +126,15 @@ def pick_classic(chosen, window, cfg=None):
     rows = []
     for sid, c in chosen.items():
         z = _prep(c["Z"], cfg, window)
-        p = classic_p(z, window, cfg)
+        p = classic_p(z, window, cfg, onset_tr=_prep_onset(c["Z"], cfg, window))
         if p is None or p[1] < cfg["snr_min"]:
             continue
         tp, snr_p = p
         rows.append(dict(station=sid, phase="P", time_utc=str(tp), score=snr_p, method="B0"))
         if c["N"] is None or c["E"] is None:
             continue
-        s = classic_s(_prep(c["N"], cfg, window), _prep(c["E"], cfg, window), tp, cfg)
+        s = classic_s(_prep(c["N"], cfg, window), _prep(c["E"], cfg, window), tp, cfg,
+                      onset=(_prep_onset(c["N"], cfg, window), _prep_onset(c["E"], cfg, window)))
         if s is not None and s[1] >= cfg["snr_min"] * 0.67:  # a looser ratio on the P coda
             rows.append(dict(station=sid, phase="S", time_utc=str(s[0]), score=s[1], method="B0"))
     return pd.DataFrame(rows, columns=["station", "phase", "time_utc", "score", "method"])
