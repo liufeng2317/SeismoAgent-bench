@@ -13,6 +13,3 @@ results/_process/
 # scripts/a_data_labels/a1_4_download_waveforms.py.
 data/waveforms/raw/socal_*/
 data/stations/raw/*_response.xml
-
-# Model weights stay local (as in seismotools); the metadata JSON is tracked.
-data/models/**/*.pt.v*

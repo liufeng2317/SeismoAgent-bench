@@ -13,7 +13,7 @@
 | `stations/raw/scedc_{CI,AZ}_stations.txt` | 2020 年以来运行过的 CI、AZ 台站（台站级） | SCEDC FDSN station 服务，2026-11-13 获取；`a1_1_download_events.py` | 72 KB | 进 git |
 | `waveforms/raw/socal_r2/` | 第一批 40 个 R2 事件的事件窗波形（发震时刻前 120 s 至后 240 s，30 个台站，HH/EH/HN，所有位置码），每个事件一个 MiniSEED | SCEDC FDSN dataselect，2026-11-13 获取；`scripts/a_data_labels/a1_4_download_waveforms.py` | 336 MB | 不进 git |
 | `stations/raw/socal_r2_response.xml` | 这 30 个台站 HH/EH/HN 通道的 StationXML（含仪器响应，2020 年起） | SCEDC FDSN station 服务，2026-11-13 获取；同上 | 7.5 MB | 不进 git |
-| `models/phasenet/scedc.{pt,json}.v2` | PhaseNet 的 SCEDC 权重（SeisBench `PhaseNet.from_pretrained("scedc")`，版本 2）；自带阈值 P 0.409、S 0.404，分量顺序 ZNE，峰值归一化，两端各屏蔽 250 个采样 | SeisBench 主仓库，2026-11-13 下载（SeisBench 0.9.0）；`.pt` 的 SHA-256 `c71b8857cde02cd4d0ab6e3d5e429b16ae82cfd9e39928bef9ec229a4a64502c` | 1.1 MB | json 进 git，`.pt` 不进 git |
+| `models/seisbench/models` | SeisBench 预训练权重库（`v3/<模型>/<权重名>.{pt,json}.v*`，含 PhaseNet 的 `scedc`、`original`、`jma`、`jma_wc`、`phasenet_sn` 等，以及 EQTransformer、GPD 等）；基线用 PhaseNet `scedc` v2：阈值 P 0.409、S 0.404，分量顺序 ZNE，峰值归一化，两端各屏蔽 250 个采样 | TRACE-2.0 的权重库（2026-11-13 建立链接）；其中 `phasenet/scedc.pt.v2` 与当天从 SeisBench 主仓库下载的文件逐字节相同，SHA-256 `c71b8857cde02cd4d0ab6e3d5e429b16ae82cfd9e39928bef9ec229a4a64502c` | 链接 | `/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/TRACE-2.0/seismoagent/library/ai_module/phase_picking/pretrained` |
 
 ## 计划获取（获取后移到上表）
 
