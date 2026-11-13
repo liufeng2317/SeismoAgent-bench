@@ -10,7 +10,7 @@ summary.json. The catalog origin is used only to check and plot, never by a part
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # scripts/, for shared modules
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # scripts/, for paths.py; part-b modules sit beside this file
 import argparse
 import json
 import shutil

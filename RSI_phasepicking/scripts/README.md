@@ -13,6 +13,8 @@
 
 文件夹在用到时再建。
 
-- 共用代码放在 `scripts/` 顶层（`paths.py`，以后的 `common.py`；不要再建同名文件夹）。各部分的脚本启动时把 `scripts/` 加进导入路径，`data/` 和 `results/` 下的路径只经由 `paths.py` 读取，不写死。
+- `scripts/` 顶层只放各部分共用的路径配置 `paths.py`。各部分的脚本启动时把 `scripts/` 加进导入路径，`data/` 和 `results/` 下的路径只经由 `paths.py` 读取，不写死。
+- 某一部分专用的模块放在该部分的文件夹里，与使用它的脚本同目录：b 部分的 `pipeline.py`（事件窗、选通道、关联、定位）、`pickers.py`（拾取器）、`scoring.py`（评分）、`viz.py`（作图）都在 `b_baseline/`。
+- 以后框架要复用的代码，会迁到与 `docs/` 同层的独立包文件夹；迁移前不放到 `scripts/` 顶层。
 - 默认参数就是最终运行的参数；每次运行用独立的输出目录，目录已存在时拒绝写入。
 - 调研阶段的临时分析脚本留在 `docs/brain_storm/deep_research/scripts/`，不在这里。

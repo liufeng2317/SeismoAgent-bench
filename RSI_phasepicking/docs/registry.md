@@ -26,7 +26,7 @@
 | 编号 | 做什么 | 完成标准 | 状态 | 结果在哪里 |
 |---|---|---|---|---|
 | b1 | 打通主流水线（design 5.1）：事件窗 → STA/LTA + AIC（基础 B0）→ PyOcto → Hypoinverse + HK 一维模型，再在同一流水线换入 PhaseNet（强基线 B1）；用第一批 40 个 R2 事件 | 每个环节有输出；抽查 20 个事件的拾取图；记录所有固定参数（阈值、窗口、模型、台站框） | 完成：B0、B1、B8 走通全流程，40 个事件全部定位 | `results/b_baseline/b1_pipeline/` |
-| b2 | 写评分程序并检验；确定拾取匹配窗口 | 单元测试通过（人工构造的偏差、漏拾、误拾）；B8 定位与目录位置之差的分布合理 | 完成：`scripts/scoring.py` 和 `b_baseline/b2_scoring.py`；匹配容差 P ±0.5 s、S ±1.0 s | `results/b_baseline/b2_scoring/` |
+| b2 | 写评分程序并检验；确定拾取匹配窗口 | 单元测试通过（人工构造的偏差、漏拾、误拾）；B8 定位与目录位置之差的分布合理 | 完成：`scripts/b_baseline/scoring.py` 和 `b2_scoring.py`；匹配容差 P ±0.5 s、S ±1.0 s | `results/b_baseline/b2_scoring/` |
 | b3 | 在各数据集上跑核心基线 B0、B8、B1、R0、R1 | 每个数据集每组都有拾取和定位结果；B1 与 manual 标签的一致性与公开报告的水平同一量级 | 未开始 | `results/b_baseline/b3_core_baselines/` |
 
 ## c 预实验
