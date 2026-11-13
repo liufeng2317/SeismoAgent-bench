@@ -1,0 +1,210 @@
+[
+ {
+  "event_id": 38700978,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 39466855,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 39586079,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 39727887,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 39727919,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 39759175,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 39882375,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 39900159,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 39974135,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 40063159,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 40074431,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 40095559,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 40354936,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 40127463,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 40481064,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 39668658,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 40702456,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 40727423,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 40727543,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 40747903,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 40749799,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 40752807,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 40794295,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 40794407,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 40183482,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 40184058,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 41249496,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 41249512,
+  "traces": 168,
+  "missing_stations": [
+   "CI.RHC2"
+  ]
+ },
+ {
+  "event_id": 41254384,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 41254392,
+  "traces": "kept",
+  "missing_stations": null
+ },
+ {
+  "event_id": 41254424,
+  "traces": 174,
+  "missing_stations": []
+ },
+ {
+  "event_id": 41254448,
+  "traces": 174,
+  "missing_stations": []
+ },
+ {
+  "event_id": 41235031,
+  "traces": 170,
+  "missing_stations": [
+   "CI.PDW"
+  ]
+ },
+ {
+  "event_id": 41237751,
+  "traces": 174,
+  "missing_stations": []
+ },
+ {
+  "event_id": 41242495,
+  "traces": 174,
+  "missing_stations": []
+ },
+ {
+  "event_id": 41458472,
+  "traces": 251,
+  "missing_stations": []
+ },
+ {
+  "event_id": 41459168,
+  "traces": 208,
+  "missing_stations": []
+ },
+ {
+  "event_id": 41459312,
+  "traces": 197,
+  "missing_stations": []
+ },
+ {
+  "event_id": 40670922,
+  "traces": 168,
+  "missing_stations": [
+   "CI.CLT"
+  ]
+ },
+ {
+  "event_id": 41540608,
+  "traces": 168,
+  "missing_stations": [
+   "CI.CLT"
+  ]
+ }
+]

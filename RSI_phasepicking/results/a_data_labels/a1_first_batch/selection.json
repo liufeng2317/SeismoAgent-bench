@@ -1,0 +1,34 @@
+{
+ "region": "R2",
+ "centre": [
+  34.25,
+  -117.5
+ ],
+ "stations": 30,
+ "eligible_events": 46,
+ "selected_events": 40,
+ "selected_by_year": {
+  "2020": 2,
+  "2021": 6,
+  "2022": 6,
+  "2023": 2,
+  "2024": 8,
+  "2025": 8,
+  "2026": 8
+ },
+ "selected_mag_range": [
+  3.01,
+  4.34
+ ],
+ "args": {
+  "region": "R2",
+  "station_radius_deg": 0.6,
+  "n_stations": 30,
+  "min_mag": 3.0,
+  "min_manual_p": 8,
+  "min_manual_s": 4,
+  "n_events": 40,
+  "seed": 0,
+  "out": "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/RSI_phasepicking/results/a_data_labels/a1_first_batch"
+ }
+}

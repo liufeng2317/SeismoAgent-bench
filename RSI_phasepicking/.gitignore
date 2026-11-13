@@ -8,3 +8,8 @@ results/**/picks.csv
 
 # Expensive intermediate outputs stay local.
 results/_process/
+
+# Event-window waveforms and full station responses; re-download with
+# scripts/a_data_labels/a1_4_download_waveforms.py.
+data/waveforms/raw/socal_*/
+data/stations/raw/*_response.xml
