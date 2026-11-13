@@ -10,8 +10,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 P_COLOR, S_COLOR, REF_COLOR, GREY = "#2563eb", "#dc2626", "#111827", "#9ca3af"
-METHOD_COLORS = {"B0": "#d97706", "B1": "#7c3aed", "B8": "#111827", "agent": "#059669"}
-METHOD_LABELS = {"B0": "B0 STA/LTA + AIC", "B1": "B1 PhaseNet (SCEDC)", "B8": "B8 analyst picks"}
+from pickers import ANALYST, CLASSIC, METHODS, PHASENET
+
+METHOD_COLORS = {CLASSIC: "#d97706", PHASENET: "#7c3aed", ANALYST: "#111827", "agent": "#059669"}
+METHOD_LABELS = METHODS
 FAMILY_STYLE = {"HH": ("^", "#2563eb"), "EHZ+HN": ("s", "#d97706"), "HN": ("D", "#7c3aed"),
                 "Z only": ("v", GREY), "none": ("x", GREY)}
 
@@ -101,7 +103,7 @@ def fig_channels(stations, channels, events, region, path):
     plt.close(fig)
 
 
-def fig_picks(event_id, chosen, window, picks, ref, dist, path, title_method="B0"):
+def fig_picks(event_id, chosen, window, picks, ref, dist, path, title_method=CLASSIC):
     """Part 3: picks on a distance-ordered record section, with the analyst reference."""
     style()
     trig = window["trigger"]
@@ -154,7 +156,7 @@ def fig_association(event_id, picks_ev, origin_time, dist, path):
     plt.close(fig)
 
 
-def fig_location(loc, path, label="B0"):
+def fig_location(loc, path, label=CLASSIC):
     """Part 5: located epicentres and depths against the catalog."""
     style()
     fig, (a1, a2) = plt.subplots(1, 2, figsize=(11, 5), width_ratios=[1.3, 1])
@@ -181,7 +183,7 @@ def fig_location(loc, path, label="B0"):
     plt.close(fig)
 
 
-def fig_overview(events, picks, path, label="B0"):
+def fig_overview(events, picks, path, label=CLASSIC):
     """The whole run on one line: how many events and picks survive each part."""
     style()
     fig, (a1, a2) = plt.subplots(1, 2, figsize=(10, 3), width_ratios=[1, 1.6])
@@ -253,7 +255,7 @@ def fig_scorecard(card, path):
             for x, y in enumerate(v):
                 ax.text(x, y, f"{y:.2f}" if k != "mae_s" else f"{y:.3f}", ha="center", va="bottom", fontsize=7)
             ax.set_xticks(range(len(methods)))
-            ax.set_xticklabels(methods)
+            ax.set_xticklabels([m.replace("_", "\n", 1) for m in methods], fontsize=7)
             if k != "mae_s":
                 ax.set_ylim(0, 1.08)
             if i == 0:
@@ -309,7 +311,7 @@ def fig_location_shift(shifts, path):
         a1.step(x, np.arange(1, len(x) + 1) / len(x), where="post", color=_mc(m), lw=1.6,
                 label=f"{METHOD_LABELS.get(m, m)}: median {np.median(x):.2f} km")
         a2.hist(d.depth_km, bins=np.arange(-6, 6.5, 0.5), histtype="step", lw=1.6, color=_mc(m),
-                label=f"{m}: median {np.median(d.depth_km):+.2f} km")
+                label=f"{METHOD_LABELS.get(m, m)}: median {np.median(d.depth_km):+.2f} km")
     a1.set_xlabel("Epicentre shift from the analyst-pick location (km)")
     a1.set_ylabel("Share of events")
     a1.legend(fontsize=7, loc="lower right")

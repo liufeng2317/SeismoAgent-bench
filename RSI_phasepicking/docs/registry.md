@@ -2,7 +2,7 @@
 
 按 `design.md` 第 4 节的六个部分和步骤组织。新工作先在这里登记再动手；完成一项改一项状态。状态：未开始 / 进行中 / 完成 / 暂停。
 
-脚本、结果、日志按 design 的六个部分分文件夹（`a_data_labels`、`b_baseline`、`c_pre_experiments`、`d_single_event`、`e_learning`、`f_scale_up`），三处同名；文件名带步骤编号，如 `scripts/a_data_labels/a1_2_candidate_regions.py`，结果在 `results/a_data_labels/a1_events/`。
+脚本、结果、日志按 design 的六个部分分文件夹（`a_data_labels`、`b_baseline`、`c_pre_experiments`、`d_single_event`、`e_learning`、`f_scale_up`），三处同名。**所有名字都是“编号 + 内容”**，只看名字就知道是什么：步骤如 `b1_pick_associate_locate`（脚本 `scripts/b_baseline/b1_pick_associate_locate.py`，结果 `results/b_baseline/b1_pick_associate_locate/`）；方法如 `B0_STALTA_AIC`、`B1_PhaseNet_SCEDC`、`B8_Analyst_Picks`；流水线环节如 `1_event_window`、`4_association_PyOcto`。不用单独的代号（如 `B0`、`b1_pipeline`）作名字。
 
 ## 0 准备
 
@@ -16,51 +16,51 @@
 
 | 编号 | 做什么 | 完成标准 | 状态 | 结果在哪里 |
 |---|---|---|---|---|
-| a1 | 第 1 轮：下载全部事件列表（南加州全区 2020-01 至今、T1、北加州）；按地震活动和台站密度提出 Ridgecrest/Coso 以外的候选区域。第 3 轮：只下选中事件的波形，第一批几十个事件 | 事件列表齐全；候选区域的分布图和统计交用户选定；第一批事件的波形抽查时间和通道无误 | 完成：选定 R2，第一批 40 个事件和 30 个台站，波形已下载 | `results/a_data_labels/a1_events/` |
+| a1 | 第 1 轮：下载全部事件列表（南加州全区 2020-01 至今、T1、北加州）；按地震活动和台站密度提出 Ridgecrest/Coso 以外的候选区域。第 3 轮：只下选中事件的波形，第一批几十个事件 | 事件列表齐全；候选区域的分布图和统计交用户选定；第一批事件的波形抽查时间和通道无误 | 完成：选定 R2，第一批 40 个事件和 30 个台站，波形已下载 | `results/a_data_labels/a1_candidate_regions/` |
 | a2 | 下载候选区域事件的 QuakeML；统计 manual 比例（按年份 × 震级、按台站距离）、权重码、i/e、S/P、每事件拾取数和方位角空隙；剔除 PhaseNet 来源的参考 | 统计表和图齐全；据此定下震级下限、时间窗和入选门槛；每个事件的参考拾取表 | 第一批完成：候选区统计、参考拾取表、波形抽查；其余数据集待做 | `results/a_data_labels/a2_labels/` |
-| a3 | 生成 T3 半合成集和 E 错误注入集 | 各信噪比档、各注入类型样本数达到 design 5.5、5.6 的要求；真值复核通过 | 未开始 | `results/a_data_labels/a3_synthetic/` |
-| a4 | 确认 SCSN 与 NCSN 是否共享人工拾取；扩大分析员间差异的样本 | 有明确结论；样本扩到几百个事件后更新 design 第 3 节的表 | 未开始 | `results/a_data_labels/a4_label_noise/` |
+| a3 | 生成 T3 半合成集和 E 错误注入集 | 各信噪比档、各注入类型样本数达到 design 5.5、5.6 的要求；真值复核通过 | 未开始 | `results/a_data_labels/a3_semisynthetic_and_error_injection/` |
+| a4 | 确认 SCSN 与 NCSN 是否共享人工拾取；扩大分析员间差异的样本 | 有明确结论；样本扩到几百个事件后更新 design 第 3 节的表 | 未开始 | `results/a_data_labels/a4_analyst_label_noise/` |
 
 ## b 基线流水线
 
 | 编号 | 做什么 | 完成标准 | 状态 | 结果在哪里 |
 |---|---|---|---|---|
-| b1 | 打通主流水线（design 5.1）：事件窗 → STA/LTA + AIC（基础 B0）→ PyOcto → Hypoinverse + HK 一维模型，再在同一流水线换入 PhaseNet（强基线 B1）；用第一批 40 个 R2 事件 | 每个环节有输出；抽查 20 个事件的拾取图；记录所有固定参数（阈值、窗口、模型、台站框） | 完成：B0、B1、B8 走通全流程，40 个事件全部定位 | `results/b_baseline/b1_pipeline/` |
-| b2 | 写评分程序并检验；确定拾取匹配窗口 | 单元测试通过（人工构造的偏差、漏拾、误拾）；B8 定位与目录位置之差的分布合理 | 完成：`scripts/b_baseline/scoring.py` 和 `b2_scoring.py`；匹配容差 P ±0.5 s、S ±1.0 s | `results/b_baseline/b2_scoring/` |
-| b3 | 在各数据集上跑核心基线 B0、B8、B1、R0、R1 | 每个数据集每组都有拾取和定位结果；B1 与 manual 标签的一致性与公开报告的水平同一量级 | 未开始 | `results/b_baseline/b3_core_baselines/` |
+| b1 | 打通主流水线（design 5.1）：事件窗 → STA/LTA + AIC（基础 B0）→ PyOcto → Hypoinverse + HK 一维模型，再在同一流水线换入 PhaseNet（强基线 B1）；用第一批 40 个 R2 事件 | 每个环节有输出；抽查 20 个事件的拾取图；记录所有固定参数（阈值、窗口、模型、台站框） | 完成：B0、B1、B8 走通全流程，40 个事件全部定位 | `results/b_baseline/b1_pick_associate_locate/` |
+| b2 | 写评分程序并检验；确定拾取匹配窗口 | 单元测试通过（人工构造的偏差、漏拾、误拾）；B8 定位与目录位置之差的分布合理 | 完成：`scripts/b_baseline/scoring.py` 和 `b2_score_against_analyst.py`；匹配容差 P ±0.5 s、S ±1.0 s | `results/b_baseline/b2_score_against_analyst/` |
+| b3 | 在各数据集上跑核心基线 B0、B8、B1、R0、R1 | 每个数据集每组都有拾取和定位结果；B1 与 manual 标签的一致性与公开报告的水平同一量级 | 未开始 | `results/b_baseline/b3_core_baselines_all_datasets/` |
 
 ## c 预实验
 
 | 编号 | 做什么 | 完成标准 | 状态 | 结果在哪里 |
 |---|---|---|---|---|
-| c1 | 读图校准：窗口宽度 × 刻度 × 候选线（基础模式来自 B0 的 STA/LTA 和 AIC；增强模式另加 B1）× 图宽 × 数值摘要，约 5 个模型，每条件约 100 张图（单轮，可走 Batch） | 误差随“每 token 秒数”变化的曲线；定下放大窗口和绘图参数；判断开源模型能否作分级的第一层 | 未开始（启动前问费用） | `results/c_pre_experiments/c1_readout/` |
-| c2 | 残差能力边界：练习池 VELEST 冻结速度模型和台站校正；E 集上 R0/R1 的检出率 | 各注入类型 × importance 分层的检出率表 | 未开始 | `results/c_pre_experiments/c2_residual_limits/` |
+| c1 | 读图校准：窗口宽度 × 刻度 × 候选线（基础模式来自 B0 的 STA/LTA 和 AIC；增强模式另加 B1）× 图宽 × 数值摘要，约 5 个模型，每条件约 100 张图（单轮，可走 Batch） | 误差随“每 token 秒数”变化的曲线；定下放大窗口和绘图参数；判断开源模型能否作分级的第一层 | 未开始（启动前问费用） | `results/c_pre_experiments/c1_plot_reading_calibration/` |
+| c2 | 残差能力边界：练习池 VELEST 冻结速度模型和台站校正；E 集上 R0/R1 的检出率 | 各注入类型 × importance 分层的检出率表 | 未开始 | `results/c_pre_experiments/c2_residual_detection_limits/` |
 | c3 | 日本失效地图（若选日本）：原版 / `jma` / `phasenet_sn` 走主流水线，在能登、福岛县冲事件上的误差和召回 | 台网 × 震相 × 震级档的误差表；圈出本地重训模型仍明显差的格子 | 未开始（取决于 0.3） | `results/c_pre_experiments/c3_japan_failure_map/` |
 
 ## d 单事件对比
 
 | 编号 | 做什么 | 完成标准 | 状态 | 结果在哪里 |
 |---|---|---|---|---|
-| d1 | 补全强基线和其余基线：B2–B5、B-ens、B7（极性）、R2（用 c2 冻结的台站校正） | 每个数据集每组都有拾取、极性和定位结果 | 未开始 | `results/d_single_event/d1_more_baselines/` |
-| d2 | 搭建 harness：工具、图件、宿主机定位、决策记录、泄漏检查；实现 F-fixed | 在 5 个事件上端到端跑通 | 未开始 | `results/d_single_event/d2_harness/` |
-| d3 | 基础测试集上跑 A0、F-fixed、A-bestofN、A-expert（基础模式），并跑 A0-DL（增强模式）检查同域上不变差 | 各组结果和成本 | 未开始 | `results/d_single_event/d3_single_event/` |
-| d4 | T1 分层 400 个事件 + T3 上跑核心组（每组 3 次重复） | 学习起点与强基线的差距、S1 结果；按事件整群的置信区间 | 未开始（启动前问费用；估计约 4,800 次运行，标准价约 $2.4–3.6k） | `results/d_single_event/d4_h1/` |
+| d1 | 补全强基线和其余基线：B2–B5、B-ens、B7（极性）、R2（用 c2 冻结的台站校正） | 每个数据集每组都有拾取、极性和定位结果 | 未开始 | `results/d_single_event/d1_more_strong_baselines/` |
+| d2 | 搭建 harness：工具、图件、宿主机定位、决策记录、泄漏检查；实现 F-fixed | 在 5 个事件上端到端跑通 | 未开始 | `results/d_single_event/d2_agent_harness/` |
+| d3 | 基础测试集上跑 A0、F-fixed、A-bestofN、A-expert（基础模式），并跑 A0-DL（增强模式）检查同域上不变差 | 各组结果和成本 | 未开始 | `results/d_single_event/d3_single_event_agents/` |
+| d4 | T1 分层 400 个事件 + T3 上跑核心组（每组 3 次重复） | 学习起点与强基线的差距、S1 结果；按事件整群的置信区间 | 未开始（启动前问费用；估计约 4,800 次运行，标准价约 $2.4–3.6k） | `results/d_single_event/d4_agents_vs_baselines_T1/` |
 
 ## e 跨事件学习
 
 | 编号 | 做什么 | 完成标准 | 状态 | 结果在哪里 |
 |---|---|---|---|---|
-| e1 | 开源模型上 10–20 条 50 事件短学习流 | 流间标准差估计；定下正式流数 | 未开始 | `results/e_learning/e1_pilot_streams/` |
-| e2 | 正式学习流（A-label、A-physics、A-placebo 及次要组） | 每组达到定下的流数；门控统计（提议、接受、拒绝原因） | 未开始 | `results/e_learning/e2_learning/` |
-| e3 | 闭源模型方向确认（3 组 × 3 条流） | 与开源模型方向是否一致 | 未开始（启动前问费用；估计约 4,000 次运行，标准价约 $2.0–3.0k） | `results/e_learning/e3_closed_model/` |
-| e4 | 选择集上选最终记忆；整理；测试集评估 | Q1–Q3 结果；物理反馈恢复比例的置信区间 | 未开始（闭源部分估计约 3,600 次运行，标准价约 $1.8–2.7k） | `results/e_learning/e4_selection_test/` |
+| e1 | 开源模型上 10–20 条 50 事件短学习流 | 流间标准差估计；定下正式流数 | 未开始 | `results/e_learning/e1_pilot_learning_streams/` |
+| e2 | 正式学习流（A-label、A-physics、A-placebo 及次要组） | 每组达到定下的流数；门控统计（提议、接受、拒绝原因） | 未开始 | `results/e_learning/e2_learning_streams/` |
+| e3 | 闭源模型方向确认（3 组 × 3 条流） | 与开源模型方向是否一致 | 未开始（启动前问费用；估计约 4,000 次运行，标准价约 $2.0–3.0k） | `results/e_learning/e3_closed_model_check/` |
+| e4 | 选择集上选最终记忆；整理；测试集评估 | Q1–Q3 结果；物理反馈恢复比例的置信区间 | 未开始（闭源部分估计约 3,600 次运行，标准价约 $1.8–2.7k） | `results/e_learning/e4_select_and_test_memory/` |
 
 ## f 扩展
 
 | 编号 | 做什么 | 完成标准 | 状态 | 结果在哪里 |
 |---|---|---|---|---|
-| f1 | T1 全量分级处理 | 整个序列的 agent 目录；成本–性能曲线 | 未开始 | `results/f_scale_up/f1_tiered/` |
-| f2 | 高难场景（日本子场景或火山） | 原版 / 本地重训 / agent / agent+重训初值 四组对比 | 未开始（取决于 0.3） | `results/f_scale_up/f2_hard/` |
+| f1 | T1 全量分级处理 | 整个序列的 agent 目录；成本–性能曲线 | 未开始 | `results/f_scale_up/f1_tiered_full_sequence/` |
+| f2 | 高难场景（日本子场景或火山） | 原版 / 本地重训 / agent / agent+重训初值 四组对比 | 未开始（取决于 0.3） | `results/f_scale_up/f2_ood_picker_expert/` |
 
 ## 待用户决定（0.3）
 

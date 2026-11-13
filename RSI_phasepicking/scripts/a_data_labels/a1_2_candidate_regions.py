@@ -88,7 +88,7 @@ def main():
     ap.add_argument("--n", type=int, default=6, help="number of candidates")
     ap.add_argument("--max-basin-share", type=float, default=0.2,
                     help="largest share of a circle's M>=2.5 events inside basin boxes")
-    ap.add_argument("--out", default=str(RES_A / "a1_events"))
+    ap.add_argument("--out", default=str(RES_A / "a1_candidate_regions"))
     args = ap.parse_args()
     out = pd.io.common.Path(args.out)
     out.mkdir(parents=True, exist_ok=True)

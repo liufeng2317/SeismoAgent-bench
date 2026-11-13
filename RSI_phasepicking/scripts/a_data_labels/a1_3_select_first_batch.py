@@ -37,7 +37,7 @@ def main():
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
 
-    cand = pd.read_csv(RES_A / "a1_events" / "candidate_regions.csv").set_index("candidate")
+    cand = pd.read_csv(RES_A / "a1_candidate_regions" / "candidate_regions.csv").set_index("candidate")
     lat, lon = cand.loc[args.region, ["lat", "lon"]]
     picks = pd.read_csv(RES_A / "a2_labels" / "picks.csv", parse_dates=["time"])
     picks = picks[picks.region == args.region]

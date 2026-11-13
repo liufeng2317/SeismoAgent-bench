@@ -4,12 +4,14 @@
 
 | 部分 | 文件夹 | 例子 |
 |---|---|---|
-| a 数据与标签 | `a_data_labels/` | `a1_1_download_events.py`、`a1_2_candidate_regions.py`、`a2_2_label_stats.py` |
-| b 基线流水线 | `b_baseline/` | `b1_pipeline.py`、`b2_scoring.py`、`b3_core_baselines.py` |
-| c 预实验 | `c_pre_experiments/` | `c1_readout.py`、`c2_residual_limits.py` |
-| d 单事件对比 | `d_single_event/` | `d1_more_baselines.py`、`d2_harness.py`、`d4_h1.py` |
-| e 跨事件学习 | `e_learning/` | `e2_learning.py` |
-| f 扩展 | `f_scale_up/` | `f1_tiered.py` |
+| a 数据与标签 | `a_data_labels/` | `a1_2_candidate_regions.py`、`a1_4_download_waveforms.py`、`a2_3_reference_picks.py` |
+| b 基线流水线 | `b_baseline/` | `b1_pick_associate_locate.py`（拾取 → 关联 → 定位）、`b2_score_against_analyst.py`（对照分析员评分） |
+| c 预实验 | `c_pre_experiments/` | `c1_plot_reading_calibration.py`、`c2_residual_detection_limits.py` |
+| d 单事件对比 | `d_single_event/` | `d1_more_strong_baselines.py`、`d2_agent_harness.py` |
+| e 跨事件学习 | `e_learning/` | `e2_learning_streams.py` |
+| f 扩展 | `f_scale_up/` | `f1_tiered_full_sequence.py` |
+
+**命名规矩**：所有脚本、结果和日志文件夹、方法和流水线环节的名字都是“编号 + 内容”，只看名字就知道是什么，例如 `b1_pick_associate_locate`、`B0_STALTA_AIC`、`4_association_PyOcto`；不用单独的代号（如 `B0`、`b1_pipeline`）。方法名统一定义在 `b_baseline/pickers.py` 的 `METHODS`。
 
 文件夹在用到时再建。
 

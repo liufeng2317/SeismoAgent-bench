@@ -387,7 +387,7 @@ flowchart LR
 
 ### 5.10 实验组
 
-**不用 LLM 的基线**
+**不用 LLM 的基线**（结果文件夹和表格中的方法名为“编号 + 内容”，如 `B0_STALTA_AIC`、`B1_PhaseNet_SCEDC`、`B8_Analyst_Picks`）
 
 | 层 | 组 | 内容 | 回答的问题 |
 |---|---|---|---|

@@ -1,6 +1,6 @@
 """a2: download QuakeML (with arrivals) for the M>=2.5 events of the candidate regions.
 
-Reads results/a_data_labels/a1_events/candidate_regions.csv and the SCEDC event lists; for
+Reads results/a_data_labels/a1_candidate_regions/candidate_regions.csv and the SCEDC event lists; for
 every local earthquake of M>=--min-mag within --radius km of a candidate centre
 (outside the excluded Ridgecrest/Coso box), saves the SCEDC QuakeML as returned
 under data/catalogs/raw/scedc_quakeml/<event_id>.xml. Complete existing files are kept.
@@ -46,7 +46,7 @@ def region_events(min_mag, radius):
     for b in EXCLUDE.values():
         outside &= ~in_box(ev.lat.values, ev.lon.values, b)
     ev = ev[(ev.mag >= min_mag) & outside]
-    cand = pd.read_csv(RES_A / "a1_events" / "candidate_regions.csv")
+    cand = pd.read_csv(RES_A / "a1_candidate_regions" / "candidate_regions.csv")
     parts = []
     for _, r in cand.iterrows():
         sub = ev[dist_km(r.lat, r.lon, ev.lat.values, ev.lon.values) <= radius].copy()

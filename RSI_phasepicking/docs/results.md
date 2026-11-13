@@ -29,7 +29,7 @@
 
 ### a1、a2 第 1 轮：候选区域与标签统计（2026-11-13）
 
-候选区域：50 km 圈，排除与 Ridgecrest/Coso 框重叠的圈、M≥2.5 事件 20% 以上落在深盆地框内的圈，要求圈内 ≥25 个 CI/AZ 台站，候选之间相距 ≥100 km。来源：`results/a_data_labels/a1_events/candidate_regions.csv`。标签统计为 2020-01 至 2026-11-12 全部 M≥2.5 事件（582 个）的 SCEDC QuakeML。来源：`results/a_data_labels/a2_labels/region_summary.csv` 及同目录的分项表。
+候选区域：50 km 圈，排除与 Ridgecrest/Coso 框重叠的圈、M≥2.5 事件 20% 以上落在深盆地框内的圈，要求圈内 ≥25 个 CI/AZ 台站，候选之间相距 ≥100 km。来源：`results/a_data_labels/a1_candidate_regions/candidate_regions.csv`。标签统计为 2020-01 至 2026-11-12 全部 M≥2.5 事件（582 个）的 SCEDC QuakeML。来源：`results/a_data_labels/a2_labels/region_summary.csv` 及同目录的分项表。
 
 | 区域 | 位置 | 事件 | 台站 | 人工 P 比例（剔除 PhaseNet 时段后） | 人工 S 比例 | 最近 5 台人工 P | 每事件人工 P 中位数 | 人工 P 中 impulsive | 方位角空隙中位数 |
 |---|---|---|---|---|---|---|---|---|---|
@@ -59,10 +59,10 @@
 
 | 结果 | 内容 | 来源 |
 |---|---|---|
-| 流水线打通（b1，第一批 40 个 R2 事件） | 三种拾取都走完全流程，40 个事件全部定位。对目录的震中偏移中位数：B8 分析员拾取 0.43 km、B1 PhaseNet 0.50 km、B0 STA/LTA + AIC 0.45 km；深度差中位数 +0.36 / +0.22 / +0.45 km；发震时刻差中位数 −0.005 / +0.02 / +0.01 s；RMS 中位数均约 0.18–0.19 s。B8 复现目录位置到约 0.4 km，说明定位器、模型和台站表基本无误 | `results/b_baseline/b1_pipeline/<B0,B1,B8>/5_location/locations.csv`、`overview.png` |
+| 流水线打通（b1，第一批 40 个 R2 事件） | 三种拾取都走完全流程，40 个事件全部定位。对目录的震中偏移中位数：B8 分析员拾取 0.43 km、B1 PhaseNet 0.50 km、B0 STA/LTA + AIC 0.45 km；深度差中位数 +0.36 / +0.22 / +0.45 km；发震时刻差中位数 −0.005 / +0.02 / +0.01 s；RMS 中位数均约 0.18–0.19 s。B8 复现目录位置到约 0.4 km，说明定位器、模型和台站表基本无误 | `results/b_baseline/b1_pick_associate_locate/<B0_STALTA_AIC, B1_PhaseNet_SCEDC, B8_Analyst_Picks>/5_location_HypoInverse/locations.csv`、`overview.png` |
 | 流水线中修正的问题 | ① 网络触发：只用“5 台”门槛时噪声台站让窗口平均提前约 30 s，改为取重合计数的峰；② ObsPy `ar_pick` 对同一输入重复调用约 8% 返回 S = 0，改为水平分量 STA/LTA + AIC；③ 关联要求 S 时 B0 有 13 个事件关联不上，改为不要求 S；④ 零相位滤波在 M4 事件上使 STA/LTA 提前约 1 s 触发、AIC 拾早（P 平均绝对误差 0.076 s，约 180 个 P 早 0.4–3 s），检测、精修、网络触发和画图全部改为因果滤波后 P 平均绝对误差降到 0.026 s | `docs/design.md` 5.1 |
-| 台站通道 | 按 40 个事件统计，24 个台站主要用 HH，6 个只有 EHZ 加加速度计；不少台站在 2020–2026 年间从短周期升级为宽频带；LUC2 有 10 个事件、PEM 有 7 个事件没有数据 | `results/b_baseline/b1_pipeline/B0/2_channels/` |
-| 拾取评分（b2，对 manual 拾取；匹配容差 P ±0.5 s、S ±1.0 s；括号内为事件 bootstrap 95% 区间见 `scorecard.csv`） | P：B0 召回 0.91、精确 0.99、平均绝对误差 0.026 s、0.1 s 内 0.95；B1 召回 0.89、精确 0.99、0.043 s、0.89。S：B0 召回 0.73、精确 0.98、0.109 s、0.1 s 内 0.68；B1 召回 0.67、精确 0.99、0.115 s、0.64。相对 B8 定位的震中偏移中位数 B0 0.32 km、B1 0.36 km | `results/b_baseline/b2_scoring/` |
+| 台站通道 | 按 40 个事件统计，24 个台站主要用 HH，6 个只有 EHZ 加加速度计；不少台站在 2020–2026 年间从短周期升级为宽频带；LUC2 有 10 个事件、PEM 有 7 个事件没有数据 | `results/b_baseline/b1_pick_associate_locate/B0_STALTA_AIC/2_channel_selection/` |
+| 拾取评分（b2，对 manual 拾取；匹配容差 P ±0.5 s、S ±1.0 s；括号内为事件 bootstrap 95% 区间见 `scorecard.csv`） | P：B0 召回 0.91、精确 0.99、平均绝对误差 0.026 s、0.1 s 内 0.95；B1 召回 0.89、精确 0.99、0.043 s、0.89。S：B0 召回 0.73、精确 0.98、0.109 s、0.1 s 内 0.68；B1 召回 0.67、精确 0.99、0.115 s、0.64。相对 B8 定位的震中偏移中位数 B0 0.32 km、B1 0.36 km | `results/b_baseline/b2_score_against_analyst/` |
 | 由此得到的判断 | 在第一批 M≥3、高信噪比的事件上，正确实现的经典方法与同域 PhaseNet 持平，P 的计时更准；两者的主要不足都在 S（召回 0.67–0.73，缓起 S 的 0.1 s 内比例约 0.6）。这批事件太容易，区分不出方法：Q1–Q3 的学习和对比需要更难的事件（M2–3、低信噪比、缓起、事件重叠）和 OOD 场景 | 同上 |
 | SCSN 定位用的一维模型 | Hutton et al. 2010（BSSA 100(2)）：1932–2008 目录除 Long Beach 序列外都用 Hadley–Kanamori 模型定位，表 5 给出 SCSN 版本（层顶 0/5.5/16/32 km，Vp 5.5/6.3/6.7/7.8 km/s，Vp/Vs 1.73）；文中说该模型适合 Mojave 沙漠和 Transverse Ranges，在深盆地（Imperial Valley、洛杉矶盆地、Ventura 盆地）近似很差，并计划改用三维模型。2010 年以后的日常定位模型未核实 | https://authors.library.caltech.edu/records/bkpgd-rab65 （已读原文 PDF 第 8 页） |
 

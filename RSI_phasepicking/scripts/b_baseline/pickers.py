@@ -3,8 +3,11 @@
     picks = picker(chosen, window, cfg) -> DataFrame[station, phase, time_utc, score, method]
 
 where `chosen` comes from pipeline.select_channels and `window` from
-pipeline.event_window. B0 is classical (no trained model); B1 is PhaseNet with
-the SCEDC weights. The agent will plug in through the same contract.
+pipeline.event_window. Method names are code + content, used for folders,
+tables and figures alike (METHODS below): B0_STALTA_AIC is classical (no
+trained model); B1_PhaseNet_SCEDC is PhaseNet with the SCEDC weights;
+B8_Analyst_Picks are the analyst's manual picks (reference, no picker). The
+agent will plug in through the same contract.
 """
 import numpy as np
 import pandas as pd
@@ -12,6 +15,11 @@ from obspy import Stream
 from obspy.signal.trigger import recursive_sta_lta, trigger_onset
 
 from paths import SEISBENCH_ROOT
+
+# Method names: code (order in docs/design.md 5.10) + what the method is.
+CLASSIC, PHASENET, ANALYST = "B0_STALTA_AIC", "B1_PhaseNet_SCEDC", "B8_Analyst_Picks"
+METHODS = {CLASSIC: "B0 STA/LTA + AIC (classical)", PHASENET: "B1 PhaseNet, SCEDC weights",
+           ANALYST: "B8 analyst manual picks"}
 
 # B0: P by STA/LTA + AIC on the vertical, S by STA/LTA + AIC on the horizontals
 # (design 5.1). ObsPy's AR-AIC ar_pick was dropped: on this machine repeated calls
@@ -130,13 +138,13 @@ def pick_classic(chosen, window, cfg=None):
         if p is None or p[1] < cfg["snr_min"]:
             continue
         tp, snr_p = p
-        rows.append(dict(station=sid, phase="P", time_utc=str(tp), score=snr_p, method="B0"))
+        rows.append(dict(station=sid, phase="P", time_utc=str(tp), score=snr_p, method=CLASSIC))
         if c["N"] is None or c["E"] is None:
             continue
         s = classic_s(_prep(c["N"], cfg, window), _prep(c["E"], cfg, window), tp, cfg,
                       onset=(_prep_onset(c["N"], cfg, window), _prep_onset(c["E"], cfg, window)))
         if s is not None and s[1] >= cfg["snr_min"] * 0.67:  # a looser ratio on the P coda
-            rows.append(dict(station=sid, phase="S", time_utc=str(s[0]), score=s[1], method="B0"))
+            rows.append(dict(station=sid, phase="S", time_utc=str(s[0]), score=s[1], method=CLASSIC))
     return pd.DataFrame(rows, columns=["station", "phase", "time_utc", "score", "method"])
 
 
@@ -172,8 +180,8 @@ def pick_phasenet(chosen, window, cfg=None):
             if c["N"] is None and p.phase == "S":
                 continue
             rows.append(dict(station=sid, phase=p.phase, time_utc=str(p.peak_time), score=float(p.peak_value),
-                             method="B1"))
+                             method=PHASENET))
     return pd.DataFrame(rows, columns=["station", "phase", "time_utc", "score", "method"])
 
 
-PICKERS = {"B0": pick_classic, "B1": pick_phasenet}
+PICKERS = {CLASSIC: pick_classic, PHASENET: pick_phasenet}

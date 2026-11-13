@@ -1,0 +1,8 @@
+{
+ "tolerance_s": {
+  "P": 0.5,
+  "S": 1.0
+ },
+ "methods": "B0_STALTA_AIC,B1_PhaseNet_SCEDC",
+ "bootstrap": 1000
+}

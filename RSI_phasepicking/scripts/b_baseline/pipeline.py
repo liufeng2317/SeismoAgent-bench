@@ -25,7 +25,7 @@ WINDOW_DEFAULTS = dict(freqmin=2.0, freqmax=15.0, sta_s=0.5, lta_s=10.0, thr_on=
 REGION_R2 = dict(latitude=[33.6, 34.9], longitude=[-118.3, -116.7], depth_km=[0.0, 30.0])
 ASSOCIATION_DEFAULTS = dict(region=REGION_R2, reference_elevation_km=0.0, velocity_layering="step",
                             associator=dict(n_picks=8, n_p_picks=4, n_s_picks=0, n_p_and_s_picks=0,
-                                            pick_match_tolerance=1.5))  # no S required: B0 has few S
+                                            pick_match_tolerance=1.5))  # no S required: the classical picker has few S
 LOCATION_DEFAULTS = dict(model_type="CRE", reference_elevation_km=0.0, trial_depth_km=8.0)
 
 

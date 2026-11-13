@@ -1,8 +1,0 @@
-{
- "tolerance_s": {
-  "P": 0.5,
-  "S": 1.0
- },
- "methods": "B0,B1",
- "bootstrap": 1000
-}

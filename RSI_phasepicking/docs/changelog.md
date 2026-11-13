@@ -1,5 +1,6 @@
 # 修订记录
 
+- 2026-11-13：命名改为“编号 + 内容”：方法 `B0_STALTA_AIC`、`B1_PhaseNet_SCEDC`、`B8_Analyst_Picks`；步骤 `b1_pick_associate_locate`、`b2_score_against_analyst`、`a1_candidate_regions`；流水线环节 `1_event_window` … `5_location_HypoInverse`；registry 中未开始的步骤同样改为说明性名字。整理脚本在 `logs/reorganize/`。
 - 2026-11-13：b 部分的模块 `pipeline.py`、`pickers.py`、`scoring.py`、`viz.py` 从 `scripts/` 移到 `scripts/b_baseline/`（`paths.py` 留在 `scripts/`，a 部分也用它）；可复用代码以后迁到与 `docs/` 同层的包文件夹。整理脚本在 `logs/reorganize/`。
 - 2026-11-13：b2 完成：共享评分模块 `scripts/scoring.py`、四张评分图；拾取检测、AIC 精修、网络触发和波形图全部改用因果滤波（零相位滤波使 M4 事件的 P 早约 1 s），B0 的 P 平均绝对误差从 0.076 s 降到 0.026 s，三种方法在新流水线上重跑。
 - 2026-11-13：b1 完成：共享模块 `scripts/pipeline.py`、`pickers.py`、`viz.py` 和 `b_baseline/b1_pipeline.py`；B0、B1、B8 在第一批 40 个事件上走通；design 5.1 更新事件窗规则、B0 的 S 拾取方法（弃用 `ar_pick`）和关联门槛。
