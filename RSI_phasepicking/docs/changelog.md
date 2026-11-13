@@ -1,5 +1,6 @@
 # 修订记录
 
+- 2026-11-13：基线改为三层（基础 STA/LTA + AIC、DL 强基线、agent + 强基线）；H1 改为“只用经典工具的 agent 离 DL 天花板多近”，新增 H1b（agent + 强基线在 OOD 上的改进），原 H1b 改为 H1c；design 5.1、5.2、5.3、5.10 和第 4 节、registry 的 b、c、d 同步修改；新增强基线 B-ens（DL 集成），原 B6 改为 B0。
 - 2026-11-13：权重改为链接 TRACE-2.0 的 SeisBench 预训练权重库（`data/models/seisbench/models`，离线加载），删除单独下载的副本（两者逐字节相同）。
 - 2026-11-13：下载 PhaseNet SCEDC 权重到 `data/models/phasenet/`；design 5.1 写明阈值和短周期台的通道组合（EHZ + HNE + HNN）。
 - 2026-11-13：a1 第 3 轮完成：选定 R2，第一批 40 个事件、30 个台站，下载事件窗波形和仪器响应；a2 生成第一批参考拾取表并抽查波形。

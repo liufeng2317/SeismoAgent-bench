@@ -25,15 +25,15 @@
 
 | 编号 | 做什么 | 完成标准 | 状态 | 结果在哪里 |
 |---|---|---|---|---|
-| b1 | 打通主流水线（design 5.1）：事件窗 → PhaseNet（SCEDC 权重）→ PyOcto → Hypoinverse + HK 一维模型；先用南加州练习池 20–50 个事件 | 每个环节有输出；抽查 20 个事件的拾取图；记录所有固定参数（阈值、窗口、模型、台站框） | 未开始 | `results/b_baseline/b1_pipeline/` |
+| b1 | 打通主流水线（design 5.1）：事件窗 → STA/LTA + AIC（基础 B0）→ PyOcto → Hypoinverse + HK 一维模型，再在同一流水线换入 PhaseNet（强基线 B1）；用第一批 40 个 R2 事件 | 每个环节有输出；抽查 20 个事件的拾取图；记录所有固定参数（阈值、窗口、模型、台站框） | 未开始 | `results/b_baseline/b1_pipeline/` |
 | b2 | 写评分程序并检验；确定拾取匹配窗口 | 单元测试通过（人工构造的偏差、漏拾、误拾）；B8 定位与目录位置之差的分布合理 | 未开始 | `results/b_baseline/b2_scoring/` |
-| b3 | 在各数据集上跑核心基线 B8、B1、B5、R0、R1 | 每个数据集每组都有拾取和定位结果；B1 与 manual 标签的一致性与公开报告的水平同一量级 | 未开始 | `results/b_baseline/b3_core_baselines/` |
+| b3 | 在各数据集上跑核心基线 B0、B8、B1、R0、R1 | 每个数据集每组都有拾取和定位结果；B1 与 manual 标签的一致性与公开报告的水平同一量级 | 未开始 | `results/b_baseline/b3_core_baselines/` |
 
 ## c 预实验
 
 | 编号 | 做什么 | 完成标准 | 状态 | 结果在哪里 |
 |---|---|---|---|---|
-| c1 | 读图校准：窗口宽度 × 刻度 × 候选线（来自 B1、B5）× 图宽 × 数值摘要，约 5 个模型，每条件约 100 张图（单轮，可走 Batch） | 误差随“每 token 秒数”变化的曲线；定下放大窗口和绘图参数；判断开源模型能否作分级的第一层 | 未开始（启动前问费用） | `results/c_pre_experiments/c1_readout/` |
+| c1 | 读图校准：窗口宽度 × 刻度 × 候选线（基础模式来自 B0 的 STA/LTA 和 AIC；增强模式另加 B1）× 图宽 × 数值摘要，约 5 个模型，每条件约 100 张图（单轮，可走 Batch） | 误差随“每 token 秒数”变化的曲线；定下放大窗口和绘图参数；判断开源模型能否作分级的第一层 | 未开始（启动前问费用） | `results/c_pre_experiments/c1_readout/` |
 | c2 | 残差能力边界：练习池 VELEST 冻结速度模型和台站校正；E 集上 R0/R1 的检出率 | 各注入类型 × importance 分层的检出率表 | 未开始 | `results/c_pre_experiments/c2_residual_limits/` |
 | c3 | 日本失效地图（若选日本）：原版 / `jma` / `phasenet_sn` 走主流水线，在能登、福岛县冲事件上的误差和召回 | 台网 × 震相 × 震级档的误差表；圈出本地重训模型仍明显差的格子 | 未开始（取决于 0.3） | `results/c_pre_experiments/c3_japan_failure_map/` |
 
@@ -41,10 +41,10 @@
 
 | 编号 | 做什么 | 完成标准 | 状态 | 结果在哪里 |
 |---|---|---|---|---|
-| d1 | 补全基线：B2–B4b、B6、B7（极性）、R2（用 c2 冻结的台站校正） | 每个数据集每组都有拾取、极性和定位结果 | 未开始 | `results/d_single_event/d1_more_baselines/` |
+| d1 | 补全强基线和其余基线：B2–B5、B-ens、B7（极性）、R2（用 c2 冻结的台站校正） | 每个数据集每组都有拾取、极性和定位结果 | 未开始 | `results/d_single_event/d1_more_baselines/` |
 | d2 | 搭建 harness：工具、图件、宿主机定位、决策记录、泄漏检查；实现 F-fixed | 在 5 个事件上端到端跑通 | 未开始 | `results/d_single_event/d2_harness/` |
-| d3 | 基础测试集上跑 A0、F-fixed、A-bestofN、A-expert | 各组结果和成本 | 未开始 | `results/d_single_event/d3_single_event/` |
-| d4 | T1 分层 400 个事件 + T3 上跑核心组（每组 3 次重复） | H1、H1b 结果；按事件整群的置信区间 | 未开始（启动前问费用；估计约 4,800 次运行，标准价约 $2.4–3.6k） | `results/d_single_event/d4_h1/` |
+| d3 | 基础测试集上跑 A0、F-fixed、A-bestofN、A-expert（基础模式），并跑 A0-DL（增强模式）检查同域上不变差 | 各组结果和成本 | 未开始 | `results/d_single_event/d3_single_event/` |
+| d4 | T1 分层 400 个事件 + T3 上跑核心组（每组 3 次重复） | H1、H1b、H1c 结果；按事件整群的置信区间 | 未开始（启动前问费用；估计约 4,800 次运行，标准价约 $2.4–3.6k） | `results/d_single_event/d4_h1/` |
 
 ## e 跨事件学习
 
