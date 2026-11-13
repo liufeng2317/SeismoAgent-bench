@@ -1,0 +1,10 @@
+# Raw downloads (event lists, QuakeML) are large; re-create them with
+# scripts/a_data_labels/a1_1_download_events.py and a2_1_download_quakeml.py.
+# Small station lists and the waveform symlink stay tracked (see data/README.md).
+data/catalogs/raw/
+
+# Large per-pick tables; regenerate with the scripts that write them.
+results/**/picks.csv
+
+# Expensive intermediate outputs stay local.
+results/_process/

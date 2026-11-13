@@ -1,0 +1,24 @@
+#Network | Station | Latitude | Longitude | Elevation | SiteName | StartTime | EndTime
+AZ|BZN|33.4915|-116.667|1301|Buzz Northerns Place, Anza, CA, USA||
+AZ|CPE|32.8889|-117.1051|150|Camp Elliot, Miramar, CA, USA||
+AZ|CRY|33.5654|-116.7373|1128|Cary Ranch, Anza, CA, USA||
+AZ|CSLB|33.7793|-118.1126|17|Cal State Long Beach, Long Beach, CA, USA||
+AZ|FRD|33.4947|-116.6022|1164|Ford Ranch, Anza, CA, USA||
+AZ|GARR|33.5918|-116.6708|1442|Garrison Ranch, CA, USA||
+AZ|HSSP|33.5847|-116.6641|1388|Hill Street, Anza, CA, USA||
+AZ|KNW|33.7141|-116.7119|1507|Keenwild Fire Station, Mountain Center, CA, USA||
+AZ|LVA2|33.3516|-116.5615|1435|Lost Valley Scout Camp, CA, USA||
+AZ|MONP2|32.892|-116.4223|1875|Monument Peak TA Vault, Mt. Laguna, CA, USA||
+AZ|MTRP|32.8203|-117.0567|200.7|Mission Trails Regional Park, Santee, CA, USA||
+AZ|PFO|33.6117|-116.4594|1259|Pinyon Flats Observatory, CA, USA||
+AZ|RDM|33.63|-116.8478|1365|Red Mountain, Riverside Co, CA, USA||
+AZ|SCI2|32.915|-118.4879|486|San Clemente Island, CA, USA||
+AZ|SETM|33.5097|-116.5615|1216|South East Table Mountain, Anza, CA, USA||
+AZ|SIO5|32.8407|-117.2497|217|Mt. Soledad, La Jolla, CA||
+AZ|SMER|33.4577|-117.1708|355.7|Santa Margarita Ecological Reserve, CA, USA||
+AZ|SND|33.5519|-116.6129|1358|Jim Saunders Place, Anza, CA, USA||
+AZ|TONN|33.1442|-116.1193|53.6|Tonner Ranch, Anza, CA, USA||
+AZ|TRAN|33.4955|-116.5834|1000|Tranquility, Anza, CA, USA||
+AZ|TRO|33.5234|-116.4257|2628|Toro Peak, Riverside Co, CA, USA||
+AZ|TUBB|33.2101|-116.4091|1000|Tubb Canyon, CA, USA||
+AZ|WMC|33.5736|-116.6747|1271|Walmic Ranch, Anza, CA, USA||
