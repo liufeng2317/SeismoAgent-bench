@@ -1,0 +1,25 @@
+{
+ "region": {
+  "latitude": [
+   33.6,
+   34.9
+  ],
+  "longitude": [
+   -118.3,
+   -116.7
+  ],
+  "depth_km": [
+   0.0,
+   30.0
+  ]
+ },
+ "reference_elevation_km": 0.0,
+ "velocity_layering": "step",
+ "associator": {
+  "n_picks": 8,
+  "n_p_picks": 4,
+  "n_s_picks": 0,
+  "n_p_and_s_picks": 0,
+  "pick_match_tolerance": 1.5
+ }
+}

@@ -1,0 +1,27 @@
+200 T 1900 0
+LET 5 2 3 0 0
+H71 1 1 3
+STA 'stations.sta'
+CRE 1 'p.crh' 1.860 T
+CRE 2 's.crh' 1.860 T
+SAL 1 2
+ERR 0.1
+RMS 4 0.1 2 3
+MIN 4
+ZTR 8.00 F
+DI1 1 50 3 6
+DIS 4 15 3.5 7
+WET 1.0 0.5 0.2 0.1
+JUN T
+ERF T
+TOP F
+LST 0 0 0
+KPR 1
+REP F F
+COP 3
+CAR 1
+PHS 'phases.arc'
+PRT 'out.prt'
+SUM 'out.sum'
+ARC 'out.arc'
+LOC

@@ -13,3 +13,6 @@ results/_process/
 # scripts/a_data_labels/a1_4_download_waveforms.py.
 data/waveforms/raw/socal_*/
 data/stations/raw/*_response.xml
+
+# Regenerable association travel-time tables.
+results/**/travel_time_table.bin

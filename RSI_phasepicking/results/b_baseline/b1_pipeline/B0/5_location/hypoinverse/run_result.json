@@ -1,0 +1,26 @@
+{
+  "status": "success",
+  "interface_version": 2,
+  "tool": "HypoInverse",
+  "events_in": 40,
+  "located": 40,
+  "crh_layers": 4,
+  "lvz_clipped": [],
+  "model_type": "CRE",
+  "model_top_elevation_km": 1.86,
+  "time_resolution_s": 0.01,
+  "inputs": {
+    "arrivals": "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/RSI_phasepicking/results/b_baseline/b1_pipeline/B0/5_location/arrivals_in.csv",
+    "stations": "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/RSI_phasepicking/results/b_baseline/b1_pipeline/B0/5_location/stations.csv",
+    "velocity_model": "/liufeng1afs/project/03_LLM/Science_Discovery_Agenet/SeismoAgentBench/RSI_phasepicking/data/models/hk_scsn_1d.txt"
+  },
+  "outputs": [
+    "events.csv",
+    "arrivals.csv",
+    "out.sum",
+    "out.arc",
+    "out.prt",
+    "locate.hyp",
+    "config.json"
+  ]
+}

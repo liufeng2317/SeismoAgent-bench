@@ -16,6 +16,14 @@ RIDGECREST_WAVEFORMS = DATA / "waveforms" / "raw" / "ridgecrest_2019"
 # set seisbench.cache_root to this and load with update=False (offline).
 SEISBENCH_ROOT = DATA / "models" / "seisbench"
 
+MODELS = DATA / "models"
+HK_MODEL = MODELS / "hk_scsn_1d.txt"  # SCSN Hadley-Kanamori model, Hutton et al. 2010 Table 5
+
+# Upstream tools (PyOcto, HypoInverse) of the SeismoAgentBench repository.
+SEISMOTOOLS = ROOT.parent / "seismotools"
+
 # One folder per design part, used alike by scripts/, results/ and logs/.
 PART_A = "a_data_labels"
 RES_A = RESULTS / PART_A
+PART_B = "b_baseline"
+RES_B = RESULTS / PART_B

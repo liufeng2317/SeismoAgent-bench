@@ -1,0 +1,44 @@
+{
+  "model_type": "CRE",
+  "reference_elevation_km": 0.0,
+  "velocity_layering": "step",
+  "linear_sublayer_km": 0.5,
+  "lvz_policy": "error",
+  "trial_depth_km": 8.0,
+  "min_stations": 4,
+  "timing_error_s": 0.1,
+  "residual_weighting": [
+    4,
+    0.1,
+    2,
+    3
+  ],
+  "distance_weighting": [
+    4,
+    15,
+    3.5,
+    7
+  ],
+  "initial_distance_weighting": [
+    1,
+    50,
+    3,
+    6
+  ],
+  "weight_factors": [
+    1.0,
+    0.5,
+    0.2,
+    0.1
+  ],
+  "pick_weight_code": {
+    "P": 0,
+    "S": 1
+  },
+  "uncertainty_codes_s": [
+    0.05,
+    0.1,
+    0.2,
+    0.4
+  ]
+}

@@ -1,0 +1,7 @@
+# SCSN Hadley-Kanamori 1-D model (Hutton et al. 2010, BSSA 100(2), Table 5), Vp/Vs 1.73.
+# Layer tops; depth_km below the model datum (reference_elevation_km in the locator config).
+# depth_km  vp_km_s  vs_km_s
+0.0    5.5    3.179
+5.5    6.3    3.642
+16.0   6.7    3.873
+32.0   7.8    4.509
