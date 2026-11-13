@@ -135,7 +135,7 @@ flowchart LR
 |---|---|---|---|
 | 事件窗 | 多台 STA/LTA 网络触发，触发前 60 s 至触发后 180 s；宿主机按目录匹配事件，只用于评分 | 与试点相同；agent 和基线拿到同样的窗口，不泄露位置和震级 | — |
 | 台站 | 区域框内、窗口内有数据的台站（约 30 个，与试点的台站数相当） | 与试点可比 | — |
-| 拾取 | PhaseNet，SCEDC 权重（SeisBench `scedc`）；阈值取 SeisBench 默认值并固定 | 同域权重是最强、也最公平的 DL 基线；上游只有原始权重（NCEDC 训练），需从 SeisBench 下载 | EQTransformer、GPD、PhaseNO 等在 d1 补 |
+| 拾取 | PhaseNet，SCEDC 权重（SeisBench `scedc` v2，存于 `data/models/phasenet/`）；阈值用权重自带的 P 0.409、S 0.404 并固定。通道：有 HH 三分量的台站用 HH；只有 EHZ 的短周期台用 EHZ + 加速度计 HNE、HNN 拼成三分量（与分析员在这类台站上 P 拾 EHZ、S 拾 HN 的做法一致）；有两套位置码时取有人工拾取的那一套 | 同域权重是最强、也最公平的 DL 基线；上游只有原始权重（NCEDC 训练） | EQTransformer、GPD、PhaseNO 等在 d1 补 |
 | 关联 | PyOcto，用与定位相同的一维模型 | 试点基线也用它；单事件窗内主要用来去掉不属于该事件的拾取 | GaMMA |
 | 定位 | Hypoinverse + SCSN 版 Hadley–Kanamori 一维模型（Hutton et al. 2010 表 5：层顶 0 / 5.5 / 16 / 32 km，Vp 5.5 / 6.3 / 6.7 / 7.8 km/s），Vp/Vs 1.73，第一轮不用台站校正 | Hutton et al. 2010 记载 SCSN 1932–2008 目录用此模型定位（Long Beach 序列除外）；所有组共用。上游的 `UCVM_HK_1D` 是 CVM-S 的分段线性版本，层值不同，不用 | NonLinLoc 只作敏感性检查；台站校正在 c2 冻结后用于 R2 |
 | 日本 | 同一流水线，拾取换成原版和 `jma` 等，速度模型用与 JMA2001 对应的一维模型 | 只替换与地区有关的部分 | 具体模型在 c3 前定下 |
