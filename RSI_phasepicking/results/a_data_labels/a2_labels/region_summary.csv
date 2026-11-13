@@ -1,0 +1,5 @@
+region,events,picks_per_event,P,S,S_per_P,manual_share_P,manual_share_S,manual_share_P_outside_phasenet_period,manual_P_impulsive_share,manual_P_with_polarity,manual_P_per_event_median,events_with_ge10_manual_P,median_azimuthal_gap
+R1,267,198.8,27392,25692,0.94,0.588,0.91,0.594,0.317,0.316,59.0,266,22.0
+R2,159,246.9,20395,18856,0.92,0.635,0.911,0.658,0.31,0.309,81.0,159,17.0
+R3,123,127.7,8704,7007,0.81,0.713,0.916,0.741,0.265,0.264,50.0,120,25.0
+R4,33,162.7,2754,2614,0.95,0.658,0.912,0.659,0.357,0.355,57.0,31,28.0

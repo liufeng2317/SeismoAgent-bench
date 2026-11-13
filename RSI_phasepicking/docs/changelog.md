@@ -1,5 +1,6 @@
 # 修订记录
 
+- 2026-11-13：a1、a2 第 1 轮完成：下载全部事件列表，提出候选区 R1–R4，统计 582 个 M≥2.5 事件的人工拾取比例等（`results.md`）。
 - 2026-11-13：scripts、results、logs 改为按 design 的部分分文件夹（当前只有 `a_data_labels/`）；`paths.py` 增加各部分的结果目录；整理脚本和移动清单在 `logs/reorganize/`；移动后重跑 a1_2，结果与移动前一致。
 - 2026-11-13：基础 baseline 区域改为 Ridgecrest/Coso 以外（由 a1 选定）；测试候选按人工拾取比例而不是模型训练截止划分；第一批波形只取几十个事件；registry a1、a2 细化。
 - 2026-11-13：基线定位模型改为 SCSN 版 Hadley–Kanamori 模型（Hutton et al. 2010 表 5），不用上游的 `UCVM_HK_1D`（CVM-S 版本，层值不同）。
